@@ -1,0 +1,317 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import Layout from '../../../../layouts/Layout.astro';
+import VerseTabs from '../../../../components/VerseTabs.jsx';
+import { query } from '../../../../db.js';
+import booksMeta from '../../../../data/books_meta.json';
+
+// 1. Pre-render pages ONLY for the 8,800+ unique verses that have evidence in SQLite
+export async function getStaticPaths() {
+  const ms = query("SELECT DISTINCT verse_id FROM manuscript_per_verse").map(r => r.verse_id);
+  const ct = query("SELECT DISTINCT verse1 as v FROM contradictions UNION SELECT DISTINCT verse2 FROM contradictions").map(r => r.v);
+  const ap = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
+  
+  const allVerseIds = new Set([...ms, ...ct, ...ap].filter(Boolean));
+  const paths = [];
+
+  allVerseIds.forEach(id => {
+    const parts = id.split('_');
+    if (parts.length === 3) {
+      paths.push({
+        params: {
+          book: parts[0],
+          chapter: parts[1],
+          verse: parts[2]
+        }
+      });
+    }
+  });
+
+  return paths;
+}
+
+const { book, chapter, verse } = Astro.params;
+const verseId = `${book}_${chapter}_${verse}`;
+
+// 2. Find Book Details
+const isNT = booksMeta.nt.some(b => b.id === book);
+const bookMeta = isNT 
+  ? booksMeta.nt.find(b => b.id === book)
+  : booksMeta.ot.find(b => b.id === book);
+
+if (!bookMeta) {
+  return Astro.redirect('/404');
+}
+
+// 3. Load Verse Scripture Text from JSON
+const folder = isNT ? 'esv' : 'lxx2012';
+const filePath = path.join(process.cwd(), 'src/data/scripture', folder, `${book}.json`);
+let verseText = "Scripture text not available.";
+
+try {
+  const fileContent = fs.readFileSync(filePath, 'utf-8');
+  const bookData = JSON.parse(fileContent);
+  const chapterVerses = bookData[chapter] || [];
+  const verseObj = chapterVerses.find(v => Object.keys(v)[0] === verse);
+  if (verseObj) {
+    verseText = verseObj[verse];
+  }
+} catch (err) {
+  console.error(`Failed to read verse scripture text: ${filePath}`, err);
+}
+
+// 4. Query SQLite for evidence
+const manuscripts = query(`
+  SELECT m.image_name, mm.* 
+  FROM manuscript_per_verse m 
+  LEFT JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id 
+  WHERE m.verse_id = :verseId
+`, { verseId });
+
+const contradictions = query(`
+  SELECT * FROM contradictions 
+  WHERE verse1 = :verseId OR verse2 = :verseId
+`, { verseId });
+
+const apologetics = query(`
+  SELECT * FROM apologetics 
+  WHERE verse = :verseId
+`, { verseId });
+
+// Local copied sample images
+const LOCAL_COPIED_IMAGES = [
+  'p4_fragC_recto.jpg',
+  'p4_fragA_recto.jpg',
+  'p5_0001a.jpg',
+  'p10_rom1.jpg',
+  'p17_heb9_recto.jpg',
+  'p17_heb9_verso.jpg'
+];
+
+function formatBookIdToName(id) {
+  if (!id) return '';
+  const bookCode = id.split('_')[0];
+  const found = booksMeta.nt.find(b => b.id === bookCode) || booksMeta.ot.find(b => b.id === bookCode);
+  return found ? found.name : bookCode.toUpperCase();
+}
+
+function formatVerseIdToLabel(id) {
+  if (!id) return '';
+  const parts = id.split('_');
+  return `${formatBookIdToName(id)} ${parts[1]}:${parts[2]}`;
+}
+
+function formatVerseIdToLink(id) {
+  if (!id) return '';
+  const parts = id.split('_');
+  return `/bible/${parts[0]}/${parts[1]}/${parts[2]}`;
+}
+---
+
+<Layout title={`Evidence: ${bookMeta.name} ${chapter}:${verse}`}>
+  <div class="verse-detail-container space-y-6">
+    
+    <!-- Top bar navigation matching layout style -->
+    <div class="flex items-center justify-between select-none">
+      <a href={`/bible/${book}/${chapter}`} class="inline-flex items-center text-xs font-bold text-slate-700 dark:text-slate-300 hover:underline no-underline bg-slate-100 dark:bg-slate-800 px-3.5 py-2 rounded-xl border border-slate-200/20">
+        &larr; {bookMeta.name} {chapter}
+      </a>
+      <span class="text-xs text-slate-400 font-bold uppercase tracking-widest">
+        Evidence Details
+      </span>
+    </div>
+
+    <!-- Quote Box with Literata Scripture Block Font -->
+    <div class="verse-quote-box p-5 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/20 shadow-sm space-y-2">
+      <h2 class="text-sm font-extrabold text-secondary uppercase tracking-wider">
+        {bookMeta.name} {chapter}:{verse}
+      </h2>
+      <p class="verse-block-text text-xl leading-relaxed text-slate-900 dark:text-slate-100 italic font-medium">
+        "{verseText}"
+      </p>
+    </div>
+
+    <!-- Dynamic Static Tabs -->
+    <VerseTabs 
+      client:load 
+      hasManuscripts={manuscripts.length > 0} 
+      hasContradictions={contradictions.length > 0} 
+      hasApologetics={apologetics.length > 0}
+    >
+      <!-- Manuscripts Tab -->
+      <div slot="manuscripts" class="space-y-6">
+        {manuscripts.length > 0 ? (
+          manuscripts.map(ms => {
+            const isLocal = LOCAL_COPIED_IMAGES.includes(ms.image_name);
+            const imgSrc = isLocal 
+              ? `/images/manuscripts/${ms.image_name}`
+              : null;
+
+            return (
+              <div class="p-5 rounded-xl border border-slate-100 dark:border-slate-800/80 bg-white dark:bg-slate-900/40 shadow-sm space-y-4">
+                <!-- Image Frame -->
+                <div class="ms-image-container bg-slate-50 dark:bg-slate-950 rounded-lg overflow-hidden border border-slate-100 dark:border-slate-800 flex items-center justify-center" style="min-height: 200px;">
+                  {imgSrc ? (
+                    <img 
+                      src={imgSrc} 
+                      alt={`Manuscript scan of ${ms.name} for ${bookMeta.name} ${chapter}:${verse}`} 
+                      class="w-full h-auto object-contain block mix-blend-multiply dark:mix-blend-normal"
+                    />
+                  ) : (
+                    <div class="p-6 text-center text-slate-400 text-sm flex flex-col items-center justify-center gap-2 select-none">
+                      <span class="material-symbols-outlined text-[32px] text-slate-300">history_edu</span>
+                      <span class="font-bold text-slate-500">Manuscript Scan Hosted on Cloud</span>
+                      <span class="text-2xs text-slate-400">File: {ms.image_name}</span>
+                    </div>
+                  )}
+                </div>
+
+                <!-- Metadata -->
+                <div class="space-y-3">
+                  <div class="flex justify-between items-start">
+                    <h3 class="text-lg font-extrabold text-primary dark:text-slate-100">
+                      {ms.name || ms.ms_id}
+                    </h3>
+                    <span class="text-2xs font-bold bg-secondary/10 text-secondary px-2.5 py-1 rounded border border-secondary/20 uppercase tracking-wide">
+                      {ms.ms_id}
+                    </span>
+                  </div>
+                  
+                  <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800/50 pt-3">
+                    <div>
+                      <strong class="text-slate-400 block uppercase tracking-widest text-2xs">Date Range</strong> 
+                      <span class="text-slate-800 dark:text-slate-200 font-semibold">{ms.date_range_english || 'Unknown'}</span>
+                    </div>
+                    <div>
+                      <strong class="text-slate-400 block uppercase tracking-widest text-2xs">Current Location</strong> 
+                      <span class="text-slate-800 dark:text-slate-200 font-semibold">{ms.current_location || 'Unknown'}</span>
+                    </div>
+                    <div class="col-span-2 border-t border-slate-100/40 dark:border-slate-800/20 pt-2">
+                      <strong class="text-slate-400 block uppercase tracking-widest text-2xs">Found Location</strong> 
+                      <span class="text-slate-800 dark:text-slate-200 font-semibold">{ms.found_location || 'Unknown'}</span>
+                    </div>
+                  </div>
+
+                  {ms.interesting_info && (
+                    <div class="text-sm border-t border-slate-100 dark:border-slate-800 pt-3 mt-2 text-slate-700 dark:text-slate-300 leading-relaxed">
+                      <strong class="text-xs text-primary dark:text-slate-400 block mb-1">Scribal Context & Details</strong> 
+                      {ms.interesting_info}
+                    </div>
+                  )}
+
+                  {ms.variants && (
+                    <div class="text-sm bg-amber-50/40 dark:bg-amber-950/5 border border-amber-100/40 dark:border-amber-900/20 p-4 rounded-xl mt-3 text-slate-700 dark:text-slate-300 leading-relaxed">
+                      <strong class="text-xs text-amber-700 dark:text-amber-400 block mb-1 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[14px]">warning</span> Textual Variant Analysis
+                      </strong> 
+                      {ms.variants}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <p class="text-slate-500 text-sm italic">No manuscripts mapped for this verse.</p>
+        )}
+      </div>
+
+      <!-- Contradictions Tab -->
+      <div slot="contradictions" class="space-y-6">
+        {contradictions.length > 0 ? (
+          contradictions.map(ct => {
+            const otherVerseId = ct.verse1 === verseId ? ct.verse2 : ct.verse1;
+            const otherVerseLabel = formatVerseIdToLabel(otherVerseId);
+            const otherVerseLink = formatVerseIdToLink(otherVerseId);
+            
+            return (
+              <div class="p-5 rounded-xl border border-red-100 dark:border-red-950/20 bg-red-50/5 dark:bg-red-950/5 shadow-sm space-y-4">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-red-600 dark:text-red-400 select-none">
+                  <span class="material-symbols-outlined text-[14px]">balance</span>
+                  <span>Alleged Contradiction</span>
+                </div>
+                
+                <h3 class="text-lg font-extrabold text-primary dark:text-white">
+                  {ct.title}
+                </h3>
+                
+                {otherVerseId && (
+                  <div class="bg-white dark:bg-slate-900 border border-red-100/50 dark:border-red-950/30 p-3.5 rounded-xl flex justify-between items-center">
+                    <span class="text-xs text-slate-400 font-semibold select-none">Contrasting Link:</span>
+                    <a href={otherVerseLink} class="text-sm font-bold text-red-600 dark:text-red-400 hover:underline no-underline flex items-center gap-1">
+                      <span>{otherVerseLabel}</span> &rarr;
+                    </a>
+                  </div>
+                )}
+
+                <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800/50 pt-4 space-y-4">
+                  <strong class="text-xs text-primary dark:text-slate-400 block mb-1 uppercase tracking-wider">Apologetic Response</strong>
+                  {ct.answer.split('\n\n').map(para => (
+                    <p>{para}</p>
+                  ))}
+                </div>
+                
+                {ct.src && (
+                  <div class="text-xs text-slate-400 pt-2 flex justify-between items-center select-none">
+                    <span>Source Reference: {ct.src}</span>
+                  </div>
+                )}
+              </div>
+            );
+          })
+        ) : (
+          <p class="text-slate-500 text-sm italic">No contradictions mapped for this verse.</p>
+        )}
+      </div>
+
+      <!-- Apologetics Tab -->
+      <div slot="apologetics" class="space-y-6">
+        {apologetics.length > 0 ? (
+          apologetics.map(ap => {
+            return (
+              <div class="p-5 rounded-xl border border-blue-100 dark:border-blue-950/20 bg-blue-50/5 dark:bg-blue-950/5 shadow-sm space-y-4">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 select-none">
+                  <span class="material-symbols-outlined text-[14px]">shield</span>
+                  <span>Apologetics Response</span>
+                </div>
+                
+                <h3 class="text-lg font-extrabold text-primary dark:text-white">
+                  {ap.title}
+                </h3>
+
+                <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800/50 pt-4 space-y-4">
+                  <strong class="text-xs text-primary dark:text-slate-400 block mb-1 uppercase tracking-wider font-extrabold">Exegesis & Context</strong>
+                  {ap.answer.split('\n\n').map(para => (
+                    <p>{para}</p>
+                  ))}
+                </div>
+
+                {ap.src && (
+                  <div class="text-xs text-slate-400 pt-2 border-t border-slate-100 dark:border-slate-800/30 flex justify-between items-center select-none">
+                    <span>Source Reference: {ap.src}</span>
+                  </div>
+                )}
+              </div>
+            );
+          })
+        ) : (
+          <p class="text-slate-500 text-sm italic">No apologetic arguments mapped for this verse.</p>
+        )}
+      </div>
+    </VerseTabs>
+  </div>
+</Layout>
+
+<style is:global>
+	.verse-block-text {
+		font-family: var(--font-display);
+		font-size: 20px;
+		line-height: 1.7;
+		letter-spacing: -0.01em;
+	}
+	.ms-image-container img {
+		max-height: 350px;
+		width: 100%;
+	}
+</style>

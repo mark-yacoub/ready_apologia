@@ -1,0 +1,21 @@
+{
+  "name": "ready-apologia",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "NODE_OPTIONS='--experimental-sqlite' astro dev",
+    "start": "astro dev",
+    "build": "NODE_OPTIONS='--experimental-sqlite' astro build",
+    "preview": "astro preview",
+    "serve": "node scripts/serve.js",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^3.6.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "astro": "^4.15.8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

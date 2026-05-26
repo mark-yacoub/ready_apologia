@@ -1,0 +1,577 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import Layout from '../../../layouts/Layout.astro';
+import { query } from '../../../db.js';
+import booksMeta from '../../../data/books_meta.json';
+
+// 1. Pre-render all chapters for NT and OT books
+export async function getStaticPaths() {
+  const paths = [];
+  
+  booksMeta.nt.forEach(book => {
+    for (let c = 1; c <= book.chapters; c++) {
+      paths.push({ params: { book: book.id, chapter: String(c) } });
+    }
+  });
+  
+  booksMeta.ot.forEach(book => {
+    for (let c = 1; c <= book.chapters; c++) {
+      paths.push({ params: { book: book.id, chapter: String(c) } });
+    }
+  });
+
+  return paths;
+}
+
+const { book, chapter } = Astro.params;
+
+// 2. Find Book Details
+const isNT = booksMeta.nt.some(b => b.id === book);
+const bookMeta = isNT 
+  ? booksMeta.nt.find(b => b.id === book)
+  : booksMeta.ot.find(b => b.id === book);
+
+if (!bookMeta) {
+  return Astro.redirect('/404');
+}
+
+// 3. Load Scripture Content from JSON
+const folder = isNT ? 'esv' : 'lxx2012';
+const filePath = path.join(process.cwd(), 'src/data/scripture', folder, `${book}.json`);
+let chapterVerses = [];
+
+try {
+  const fileContent = fs.readFileSync(filePath, 'utf-8');
+  const bookData = JSON.parse(fileContent);
+  chapterVerses = bookData[chapter] || [];
+} catch (err) {
+  console.error(`Failed to read scripture file: ${filePath}`, err);
+}
+
+// 4. Query SQLite for active evidence
+const prefix = `${book}_${chapter}_%`;
+
+const msVerses = query(
+  "SELECT DISTINCT verse_id FROM manuscript_per_verse WHERE verse_id LIKE :prefix", 
+  { prefix }
+).map(row => row.verse_id);
+
+const ctVerses = query(
+  "SELECT DISTINCT verse1 as v FROM contradictions WHERE verse1 LIKE :prefix UNION SELECT DISTINCT verse2 FROM contradictions WHERE verse2 LIKE :prefix",
+  { prefix }
+).map(row => row.v);
+
+const apVerses = query(
+  "SELECT DISTINCT verse FROM apologetics WHERE verse LIKE :prefix",
+  { prefix }
+).map(row => row.verse);
+
+const evidenceMap = {};
+
+const extractVerseNum = (id) => {
+  if (!id) return null;
+  const parts = id.split('_');
+  return parts[2];
+};
+
+msVerses.forEach(id => {
+  const vNum = extractVerseNum(id);
+  if (vNum) {
+    if (!evidenceMap[vNum]) evidenceMap[vNum] = [];
+    evidenceMap[vNum].push('manuscript');
+  }
+});
+
+ctVerses.forEach(id => {
+  const vNum = extractVerseNum(id);
+  if (vNum) {
+    if (!evidenceMap[vNum]) evidenceMap[vNum] = [];
+    evidenceMap[vNum].push('contradiction');
+  }
+});
+
+apVerses.forEach(id => {
+  const vNum = extractVerseNum(id);
+  if (vNum) {
+    if (!evidenceMap[vNum]) evidenceMap[vNum] = [];
+    evidenceMap[vNum].push('apologetics');
+  }
+});
+
+const currentChapterNum = parseInt(chapter);
+const hasPrev = currentChapterNum > 1;
+const hasNext = currentChapterNum < bookMeta.chapters;
+---
+
+<Layout title={`${bookMeta.name} ${chapter}`}>
+  <div class="chapter-reader-container">
+    
+    <!-- Split Book & Chapter Dropdown Selector -->
+    <header class="reader-header select-none">
+      <div class="selector-hub">
+        <!-- 1. Book Name Selector (Clicking 'John' opens Left Navigation Menu) -->
+        <button class="book-selector-btn book-title" onclick="document.getElementById('nav-toggle-btn').click()">
+          {bookMeta.name}
+        </button>
+        
+        <!-- 2. Chapter Number Selector (Clicking '1' opens inline Chapter Grid dropdown!) -->
+        <div class="chapter-dropdown-wrapper">
+          <button class="chapter-selector-btn" id="chapter-popover-trigger" aria-label="Select Chapter">
+            <span>{chapter}</span>
+            <span class="chevron-down">
+              <svg width="8" height="5" fill="none" stroke="currentColor" viewBox="0 0 10 6" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4" />
+              </svg>
+            </span>
+          </button>
+          
+          <!-- Absolute Positioned Chapter Dropdown Popover -->
+          <div class="chapter-dropdown-popover" id="chapter-dropdown-popover">
+            <div class="popover-grid-scroll">
+              <div class="chapter-popover-grid">
+                {Array.from({ length: bookMeta.chapters }, (_, i) => i + 1).map(c => (
+                  <a 
+                    href={`/bible/${book}/${c}`} 
+                    class={`popover-chap-link ${c === currentChapterNum ? 'active' : ''}`}
+                  >
+                    {c}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Scripture Verses (Tailwind-free flex rows, Badges inline-end AFTER the text) -->
+    <div class="verses-container">
+      {chapterVerses.length > 0 ? (
+        chapterVerses.map(verseObj => {
+          const verseNum = Object.keys(verseObj)[0];
+          const verseText = verseObj[verseNum];
+          
+          const evidenceTypes = evidenceMap[verseNum] || [];
+          const hasEvidence = evidenceTypes.length > 0;
+
+          if (hasEvidence) {
+            return (
+              <a 
+                href={`/bible/${book}/${chapter}/${verseNum}`} 
+                class="verse-row active-verse"
+              >
+                <div class="verse-row-content">
+                  <span class="verse-num">{verseNum}</span>
+                  <div class="verse-body-wrapper">
+                    <p class="verse-text">
+                      {verseText}
+                      
+                      {/* Inline SVGs nested inside the paragraph to sit natively AFTER the text on the same line! */}
+                      <span class="verse-badge-tray-inline">
+                        {evidenceTypes.includes('manuscript') && (
+                          <span class="icon-inline ms-icon" title="Manuscripts available">
+                            <svg viewBox="0 0 24 24" stroke-width="2.5">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                          </span>
+                        )}
+                        {evidenceTypes.includes('contradiction') && (
+                          <span class="icon-inline ct-icon" title="Contradictions available">
+                            <svg viewBox="0 0 24 24" stroke-width="2.5">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7h3.5m5.5 0H18m0 0l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9h-3.5M10 5h4m-2-3v18m-5-3h10" />
+                            </svg>
+                          </span>
+                        )}
+                        {evidenceTypes.includes('apologetics') && (
+                          <span class="icon-inline ap-icon" title="Apologetics defenses available">
+                            <svg viewBox="0 0 24 24" stroke-width="2.5">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                          </span>
+                        )}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </a>
+            );
+          } else {
+            return (
+              <div class="verse-row">
+                <div class="verse-row-content">
+                  <span class="verse-num muted">{verseNum}</span>
+                  <div class="verse-body-wrapper">
+                    <p class="verse-text muted-text">{verseText}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+        })
+      ) : (
+        <div class="empty-state">
+          Scripture content not loaded.
+        </div>
+      )}
+    </div>
+
+    <!-- Pagination Footer -->
+    <div class="pagination-footer select-none">
+      {hasPrev ? (
+        <a 
+          href={`/bible/${book}/${currentChapterNum - 1}`} 
+          class="pager-btn"
+        >
+          &larr; Chapter {currentChapterNum - 1}
+        </a>
+      ) : (
+        <div class="pager-placeholder"></div>
+      )}
+
+      <span class="pager-indicator">
+        {currentChapterNum} / {bookMeta.chapters}
+      </span>
+
+      {hasNext ? (
+        <a 
+          href={`/bible/${book}/${currentChapterNum + 1}`} 
+          class="pager-btn"
+        >
+          Chapter {currentChapterNum + 1} &rarr;
+        </a>
+      ) : (
+        <div class="pager-placeholder"></div>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<!-- Inline Chapter Dropdown Trigger script -->
+<script is:inline>
+  const setupChapterPopover = () => {
+    const trigger = document.getElementById('chapter-popover-trigger');
+    const popover = document.getElementById('chapter-dropdown-popover');
+
+    if (!trigger || !popover) return;
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent immediate backdrop close
+      popover.classList.toggle('open');
+    });
+
+    // Tap outside closes popover
+    document.addEventListener('click', () => {
+      popover.classList.remove('open');
+    });
+
+    // Prevent close if clicking inside grid
+    popover.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  };
+
+  setupChapterPopover();
+  document.addEventListener('astro:after-swap', setupChapterPopover);
+</script>
+
+<style>
+	/* ==========================================
+	   Scripture Reader Core Layout
+	   ========================================== */
+	.chapter-reader-container {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.reader-header {
+		margin-bottom: 20px;
+		display: flex;
+		justify-content: flex-start;
+	}
+
+	/* ============================================================
+	   Split Book & Chapter Selector Layout
+	   ============================================================ */
+	.selector-hub {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-left: -8px; /* Align with left layout margins */
+	}
+
+	/* Book Selector Button ("John") */
+	.book-selector-btn {
+		background: none;
+		border: none;
+		padding: 6px 10px;
+		border-radius: 8px;
+		cursor: pointer;
+		color: var(--color-primary);
+		font-family: var(--font-display);
+		font-size: 28px;
+		font-weight: 800;
+		transition: background-color 0.15s, transform 0.1s;
+	}
+	.book-selector-btn:hover {
+		background-color: var(--color-surface-container-low);
+	}
+	.book-selector-btn:active {
+		transform: scale(0.97);
+	}
+
+	/* Chapter Selector Dropdown Wrapper */
+	.chapter-dropdown-wrapper {
+		position: relative;
+		display: inline-block;
+	}
+
+	.chapter-selector-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		background: none;
+		border: none;
+		padding: 6px 10px;
+		border-radius: 8px;
+		cursor: pointer;
+		color: var(--color-secondary); /* Accent color for chapter */
+		font-family: var(--font-display);
+		font-size: 28px;
+		font-weight: 800;
+		transition: background-color 0.15s, transform 0.1s;
+	}
+	.chapter-selector-btn:hover {
+		background-color: var(--color-surface-container-low);
+	}
+	.chapter-selector-btn:active {
+		transform: scale(0.97);
+	}
+
+	.chevron-down {
+		font-size: 12px;
+		color: var(--color-on-surface-variant);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 6px;
+		opacity: 0.7;
+	}
+	.chevron-down svg {
+		width: 8px;
+		height: 8px;
+		display: block;
+	}
+
+	/* Absolute Chapter Dropdown Popover */
+	.chapter-dropdown-popover {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		z-index: 50;
+		width: 220px;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-outline-variant);
+		border-radius: 12px;
+		box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+		margin-top: 8px;
+		display: none; /* Hidden by default */
+		transform: translateY(-8px);
+		opacity: 0;
+		transition: all 0.2s ease;
+	}
+	.chapter-dropdown-popover.open {
+		display: block;
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+	.popover-grid-scroll {
+		max-height: 180px; /* Scrollable grid if chapters exceed 30 */
+		overflow-y: auto;
+		padding: 10px;
+	}
+
+	.chapter-popover-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 6px;
+	}
+
+	.popover-chap-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 36px;
+		background-color: var(--color-surface-container-low);
+		border: 1px solid var(--color-outline-variant);
+		color: var(--color-on-surface);
+		font-size: 13px;
+		font-weight: 700;
+		border-radius: 6px;
+		transition: all 0.15s ease;
+	}
+	.popover-chap-link:hover {
+		border-color: var(--color-secondary);
+		color: var(--color-secondary);
+		background-color: var(--color-surface-container-lowest);
+	}
+	.popover-chap-link.active {
+		background-color: var(--color-secondary);
+		color: #ffffff;
+		border-color: var(--color-secondary);
+	}
+
+	/* ==========================================
+	   Scripture Reader Verses list
+	   ========================================== */
+	.verses-container {
+		display: flex;
+		flex-direction: column;
+		gap: 2px; /* Extremely tight vertical spacing matching Apple books */
+	}
+
+	.verse-row {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+	}
+	
+	.verse-row-content {
+		display: flex;
+		align-items: flex-start;
+		padding: 4px 10px;
+		border-radius: 6px;
+		border-left: 2px solid transparent;
+		margin-left: -10px;
+		margin-right: -10px;
+		transition: all 0.15s ease;
+	}
+
+	.verse-body-wrapper {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+
+	.verse-text {
+		font-family: var(--font-display);
+		font-size: 17.5px;
+		line-height: 1.65;
+		color: var(--color-on-surface);
+		margin: 0;
+		letter-spacing: -0.01em;
+		text-align: justify; /* clean block-aligned look */
+	}
+	.verse-text.muted-text {
+		color: var(--color-on-surface);
+	}
+
+	.verse-num {
+		font-family: var(--font-body);
+		font-size: 10.5px;
+		font-weight: 800;
+		color: var(--color-on-surface-variant);
+		min-width: 16px;
+		text-align: right;
+		margin-top: 4px; /* Align perfectly to baseline of first word */
+		user-select: none;
+		margin-right: 4px;
+	}
+	.verse-num.muted {
+		opacity: 0.4;
+	}
+
+	/* Active/Evidence Verse Hover highlighting */
+	.verse-row.active-verse:hover .verse-row-content {
+		background-color: var(--color-surface-container-low);
+		border-left: 2px solid var(--color-secondary);
+		padding-left: 14px;
+	}
+
+	/* ============================================================
+	   Inline-End Vector Badges (Flows inline AFTER the text block)
+	   ============================================================ */
+	.verse-badge-tray-inline {
+		display: inline-flex;
+		align-items: center;
+		gap: 3px;
+		margin-left: 6px; /* Spacing separating text end from badges */
+		vertical-align: middle;
+		line-height: 1;
+		flex-shrink: 0;
+	}
+
+	.icon-inline {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 16px;
+		height: 16px;
+		border-radius: 4px;
+		background-color: var(--color-surface-container-low);
+		color: var(--color-secondary);
+		border: 1px solid var(--color-outline-variant);
+		transition: transform 0.15s ease;
+	}
+	.verse-row:hover .icon-inline {
+		transform: scale(1.08);
+		background-color: var(--color-surface-container-lowest);
+		border-color: var(--color-secondary);
+	}
+
+	.icon-inline svg {
+		width: 10px;
+		height: 10px;
+		stroke: currentColor;
+		fill: none;
+	}
+
+	/* ==========================================
+	   Pagination Footer
+	   ========================================== */
+	.pagination-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-top: 1px solid var(--color-outline-variant);
+		padding-top: 18px;
+		margin-top: 32px;
+		padding-bottom: 18px;
+	}
+
+	.pager-btn {
+		padding: 8px 14px;
+		border-radius: 8px;
+		background-color: var(--color-surface-container-low);
+		color: var(--color-on-surface);
+		font-size: 12px;
+		font-weight: 700;
+		text-decoration: none;
+		border: 1px solid var(--color-outline-variant);
+		transition: background-color 0.15s;
+	}
+	.pager-btn:hover {
+		background-color: var(--color-outline-variant);
+	}
+
+	.pager-indicator {
+		font-family: var(--font-body);
+		font-size: 11px;
+		font-weight: 800;
+		color: var(--color-on-surface-variant);
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+	}
+
+	.pager-placeholder {
+		width: 70px;
+	}
+
+	.empty-state {
+		text-align: center;
+		padding: 32px 16px;
+		color: var(--color-on-surface-variant);
+		font-size: 13px;
+	}
+</style>

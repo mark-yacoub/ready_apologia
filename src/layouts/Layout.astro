@@ -1,0 +1,515 @@
+---
+import BottomNav from '../components/BottomNav.jsx';
+import ScriptureNav from '../components/ScriptureNav.jsx';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Ready Apologia - Defending the Faith" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Ready Apologia</title>
+		
+		<!-- Load Google Fonts -->
+		<link href="https://fonts.googleapis.com" rel="preconnect"/>
+		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+		<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+
+		<!-- PWA Manifest & Worker links -->
+		<link rel="manifest" href="/manifest.json" />
+		<meta name="theme-color" content="#18181b" />
+
+		<!-- Register PWA Service Worker -->
+		<script is:inline>
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker.register('/sw.js')
+						.then(reg => console.log('PWA Service Worker registered successfully!'))
+						.catch(err => console.warn('PWA Service Worker registration failed:', err));
+				});
+			}
+		</script>
+	</head>
+	<body class="bg-slate-100 text-slate-900 min-h-screen flex justify-center items-center transition-colors duration-200">
+		
+		<!-- App Bounding Container -->
+		<div class="app-container">
+			
+			<!-- Collapsible Left Navigation Sidebar -->
+			<div id="scripture-nav-overlay"></div>
+			<div id="scripture-nav-sidebar">
+				<ScriptureNav client:load />
+			</div>
+
+			<!-- Content Layout Core -->
+			<div class="content-frame">
+				<!-- Header -->
+				<header class="app-header">
+					<div class="header-left">
+						<!-- Collapsible Nav Burger Button -->
+						<button id="nav-toggle-btn" class="nav-burger-btn" aria-label="Toggle Navigation Menu">
+							<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+							</svg>
+						</button>
+						
+						<!-- Brand Logo Crest + Typography (Brand ID swap on scroll) -->
+						<div class="brand-container">
+							<img src="/assets/logo.png" alt="Ready Apologia Emblem" class="header-shield-logo" />
+							<span class="brand-text" id="header-brand-text" data-original="Ready Apologia">Ready Apologia</span>
+						</div>
+					</div>
+					
+					<div class="header-right-spacer"></div>
+				</header>
+
+				<!-- Main scrollable content window -->
+				<main class="main-content">
+					<slot />
+				</main>
+
+				<!-- Bottom Navigation (Hidden on desktop) -->
+				<BottomNav />
+			</div>
+
+		</div>
+
+		<!-- Navigation Toggles & Dynamic Scroll Header JS Script -->
+		<script is:inline>
+			const setupSidebarToggle = () => {
+				const toggleBtn = document.getElementById('nav-toggle-btn');
+				const sidebar = document.getElementById('scripture-nav-sidebar');
+				const overlay = document.getElementById('scripture-nav-overlay');
+
+				if (!toggleBtn || !sidebar || !overlay) return;
+
+				const openSidebar = () => {
+					sidebar.classList.add('open');
+					overlay.classList.add('show');
+					document.body.style.overflow = 'hidden';
+				};
+
+				const closeSidebar = () => {
+					sidebar.classList.remove('open');
+					overlay.classList.remove('show');
+					document.body.style.overflow = '';
+				};
+
+				sidebar.classList.remove('open');
+				overlay.classList.remove('show');
+
+				// Reset event listeners safely
+				toggleBtn.replaceWith(toggleBtn.cloneNode(true));
+				overlay.replaceWith(overlay.cloneNode(true));
+
+				const newToggleBtn = document.getElementById('nav-toggle-btn');
+				const newOverlay = document.getElementById('scripture-nav-overlay');
+
+				newToggleBtn.addEventListener('click', openSidebar);
+				newOverlay.addEventListener('click', closeSidebar);
+
+				sidebar.addEventListener('click', (e) => {
+					if (e.target.closest('a')) {
+						closeSidebar();
+					}
+				});
+			};
+
+			// Apple-style Dynamic Header Swapping on Scroll
+			const setupScrollHeader = () => {
+				const headerBrand = document.getElementById('header-brand-text');
+				const mainContent = document.querySelector('.main-content');
+				
+				// Select either the big chapter title (e.g. "John 1") or the verse quote box on detail pages
+				const pageTitle = document.querySelector('.book-title') || document.querySelector('.verse-quote-box');
+
+				if (!headerBrand || !mainContent || !pageTitle) return;
+
+				const originalText = headerBrand.getAttribute('data-original');
+
+				const handleScroll = () => {
+					const titleRect = pageTitle.getBoundingClientRect();
+					// If the page title has scrolled past the header threshold (52px height)
+					if (titleRect.bottom < 52) {
+						// Extract the active title from document title (e.g. "John 1" or "Evidence: Hebrews 9:12")
+						const docTitle = document.title.split('|')[0].trim();
+						const cleanTitle = docTitle.replace('Evidence:', '🔍').trim();
+						
+						headerBrand.innerText = cleanTitle;
+						headerBrand.classList.add('chapter-active');
+					} else {
+						headerBrand.innerText = originalText;
+						headerBrand.classList.remove('chapter-active');
+					}
+				};
+
+				mainContent.addEventListener('scroll', handleScroll);
+				
+				// Smooth scroll-to-top on clicking header chapter title
+				headerBrand.addEventListener('click', () => {
+					if (headerBrand.classList.contains('chapter-active')) {
+						mainContent.scrollTo({ top: 0, behavior: 'smooth' });
+					}
+				});
+			};
+
+			// Initialize Layout Listeners
+			setupSidebarToggle();
+			setupScrollHeader();
+
+			// Re-initialize on Astro navigation swaps
+			document.addEventListener('astro:after-swap', () => {
+				setupSidebarToggle();
+				setupScrollHeader();
+			});
+			
+			let resizeTimer;
+			window.addEventListener('resize', () => {
+				clearTimeout(resizeTimer);
+				resizeTimer = setTimeout(setupSidebarToggle, 150);
+			});
+		</script>
+	</body>
+</html>
+
+<style is:global>
+	/* ==========================================
+	   CSS Design Tokens (Responsive Zinc Theme)
+	   ========================================== */
+	:root {
+		--color-primary: #09090b; /* Zinc 950 */
+		--color-secondary: #974543; /* Terracotta Red */
+		--color-background: #f4f4f5; /* Zinc 100 background */
+		
+		--color-surface: #ffffff;
+		--color-on-surface: #09090b;
+		--color-on-surface-variant: #71717a; /* Zinc 500 */
+		--color-outline-variant: #e4e4e7; /* Zinc 200 */
+		
+		--color-surface-container-low: #f4f4f5;
+		--color-surface-container-lowest: #ffffff;
+		
+		--font-display: 'Literata', Georgia, serif;
+		--font-body: 'Public Sans', -apple-system, sans-serif;
+	}
+
+	body {
+		font-family: var(--font-body);
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		background-color: #e4e4e7;
+		overflow: hidden;
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	/* ==========================================
+	   App Bounding Containers (Responsive Grid)
+	   ========================================== */
+	.app-container {
+		width: 100%;
+		max-width: 412px;
+		height: 100vh;
+		height: 100dvh;
+		background-color: var(--color-surface);
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+		overflow: hidden;
+		margin: 0 auto;
+		transition: max-width 0.3s ease;
+	}
+
+	@media (min-width: 768px) {
+		.app-container {
+			max-width: 1100px;
+			flex-direction: row;
+			height: 92vh;
+			border-radius: 20px;
+		}
+	}
+
+	.content-frame {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.main-content {
+		flex: 1;
+		padding: 16px 16px 88px 16px;
+		overflow-y: auto;
+		background-color: var(--color-surface);
+		-webkit-overflow-scrolling: touch;
+	}
+	@media (min-width: 768px) {
+		.main-content {
+			padding: 24px 32px;
+		}
+	}
+
+	/* ==========================================
+	   Header Layout & Dynamic Branding
+	   ========================================== */
+	.app-header {
+		position: sticky;
+		top: 0;
+		z-index: 40;
+		background-color: var(--color-surface);
+		border-bottom: 1px solid var(--color-outline-variant);
+		padding: 0 16px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 52px;
+		flex-shrink: 0;
+	}
+	@media (min-width: 768px) {
+		.app-header {
+			height: 56px;
+		}
+	}
+
+	.header-left {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.nav-burger-btn {
+		padding: 6px;
+		border-radius: 8px;
+		border: none;
+		background: none;
+		color: var(--color-on-surface-variant);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background-color 0.15s;
+	}
+	.nav-burger-btn:hover {
+		background-color: var(--color-surface-container-low);
+	}
+	.nav-burger-btn svg {
+		width: 20px;
+		height: 20px;
+		display: block;
+	}
+	@media (min-width: 768px) {
+		.nav-burger-btn {
+			display: none !important;
+		}
+	}
+
+	.brand-container {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		user-select: none;
+	}
+
+	.header-shield-logo {
+		height: 26px !important;
+		width: auto !important;
+		display: block;
+	}
+
+	.brand-text {
+		font-family: var(--font-body);
+		font-weight: 800;
+		font-size: 15px;
+		letter-spacing: 0.3px;
+		color: var(--color-primary);
+		transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+		cursor: default;
+	}
+	
+	/* Morphing Active State */
+	.brand-text.chapter-active {
+		color: var(--color-secondary) !important; /* Indigo highlighted scroll target */
+		cursor: pointer;
+		font-family: var(--font-display); /* Fades into script font! */
+		font-weight: 700;
+		font-size: 16px;
+	}
+	.brand-text.chapter-active:hover {
+		opacity: 0.75;
+	}
+
+	.header-right-spacer {
+		width: 32px;
+	}
+	@media (min-width: 768px) {
+		.header-right-spacer {
+			display: none;
+		}
+	}
+
+	/* ==========================================
+	   Collapsible & Dockable Sidebar
+	   ========================================== */
+	#scripture-nav-sidebar {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 300px;
+		z-index: 50;
+		background-color: var(--color-surface);
+		border-right: 1px solid var(--color-outline-variant);
+		transform: translateX(-100%);
+		transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+	#scripture-nav-sidebar.open {
+		transform: translateX(0);
+	}
+
+	@media (min-width: 768px) {
+		#scripture-nav-sidebar {
+			position: relative;
+			transform: none !important;
+			width: 280px;
+			flex-shrink: 0;
+			height: 100%;
+			z-index: 30;
+		}
+	}
+
+	#scripture-nav-overlay {
+		position: fixed;
+		inset: 0;
+		background-color: rgba(9, 9, 11, 0.3);
+		z-index: 40;
+		display: none;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+	}
+	#scripture-nav-overlay.show {
+		display: block;
+		opacity: 1;
+	}
+	@media (min-width: 768px) {
+		#scripture-nav-overlay {
+			display: none !important;
+		}
+	}
+
+	/* ==========================================
+	   Bottom Navigation Bar
+	   ========================================== */
+	.bottom-nav {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 72px;
+		background-color: var(--color-surface);
+		border-top: 1px solid var(--color-outline-variant);
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		z-index: 40;
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+	@media (min-width: 768px) {
+		.bottom-nav {
+			display: none !important;
+		}
+	}
+
+	.nav-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		flex: 1;
+		height: 100%;
+		border: none;
+		background: none;
+		color: var(--color-on-surface-variant);
+		cursor: pointer;
+		font-size: 11px;
+		font-weight: 700;
+		transition: all 0.2s ease;
+		position: relative;
+	}
+
+	.nav-icon-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 52px;
+		height: 28px;
+		border-radius: 14px;
+		margin-bottom: 3px;
+		color: inherit;
+		background-color: transparent;
+		transition: all 0.2s ease;
+	}
+	.nav-icon-wrapper svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.nav-item:hover .nav-icon-wrapper {
+		background-color: var(--color-surface-container-low);
+	}
+
+	.nav-item.active {
+		color: var(--color-primary);
+	}
+	.nav-item.active .nav-icon-wrapper {
+		background-color: #e4e4e7;
+		color: #18181b;
+	}
+
+	.nav-item.disabled {
+		opacity: 0.35;
+		cursor: not-allowed;
+	}
+
+	.nav-item .badge {
+		position: absolute;
+		top: 6px;
+		right: 12%;
+		background-color: var(--color-surface-container-low);
+		color: var(--color-on-surface-variant);
+		font-size: 7px;
+		font-weight: 800;
+		padding: 1px 5px;
+		border-radius: 99px;
+		border: 1px solid var(--color-outline-variant);
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+	}
+
+	/* Scrollbar */
+	::-webkit-scrollbar {
+		width: 5px;
+	}
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	::-webkit-scrollbar-thumb {
+		background: var(--color-outline-variant);
+		border-radius: 10px;
+	}
+</style>
