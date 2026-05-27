@@ -1,0 +1,468 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import Layout from '../../../../../layouts/Layout.astro';
+import VerseTabs from '../../../../../components/VerseTabs.jsx';
+import ManuscriptCarousel from '../../../../../components/ManuscriptCarousel.jsx';
+import { query } from '../../../../../db.js';
+import booksMeta from '../../../../../data/books_meta.json';
+
+// 1. Pre-render sub-path page routes only for active evidence tabs (Throttled to Genesis/John for rapid dev speed)
+export async function getStaticPaths() {
+  const ms = query("SELECT DISTINCT verse_id FROM manuscript_per_verse").map(r => r.verse_id);
+  const ct = query("SELECT DISTINCT verse1 as v FROM contradictions UNION SELECT DISTINCT verse2 FROM contradictions").map(r => r.v);
+  const ap = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
+  
+  const allVerseIds = new Set([...ms, ...ct, ...ap].filter(Boolean));
+  const paths = [];
+  const devActiveBooks = ['jn', 'gn'];
+
+  allVerseIds.forEach(id => {
+    const parts = id.split('_');
+    if (parts.length === 3 && devActiveBooks.includes(parts[0])) {
+      const b = parts[0];
+      const c = parts[1];
+      const v = parts[2];
+      
+      // Check what evidence types actually exist in SQLite for this specific verse ID
+      const hasMs = query("SELECT 1 FROM manuscript_per_verse WHERE verse_id = :id LIMIT 1", { id }).length > 0;
+      const hasCt = query("SELECT 1 FROM contradictions WHERE verse1 = :id OR verse2 = :id LIMIT 1", { id }).length > 0;
+      const hasAp = query("SELECT 1 FROM apologetics WHERE verse = :id LIMIT 1", { id }).length > 0;
+      
+      // Generate ONLY the valid sub-path routes!
+      if (hasMs) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'manuscripts' } });
+      if (hasCt) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'contradictions' } });
+      if (hasAp) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'apologetics' } });
+    }
+  });
+
+  return paths;
+}
+
+const { book, chapter, verse, tab } = Astro.params;
+const verseId = `${book}_${chapter}_${verse}`;
+
+// 2. Find Book Details
+const isNT = booksMeta.nt.some(b => b.id === book);
+const bookMeta = isNT 
+  ? booksMeta.nt.find(b => b.id === book)
+  : booksMeta.ot.find(b => b.id === book);
+
+if (!bookMeta) {
+  return Astro.redirect('/404');
+}
+
+// 3. Query active evidence counts (natively in SQLite!)
+const msCount = query("SELECT COUNT(*) as count FROM manuscript_per_verse WHERE verse_id = :verseId", { verseId })[0].count;
+const ctCount = query("SELECT COUNT(*) as count FROM contradictions WHERE verse1 = :verseId OR verse2 = :verseId", { verseId })[0].count;
+const apCount = query("SELECT COUNT(*) as count FROM apologetics WHERE verse = :verseId", { verseId })[0].count;
+
+// 4. Query active evidence data
+let manuscripts = [];
+let contradictions = [];
+let apologetics = [];
+
+if (tab === 'manuscripts') {
+  const rawManuscripts = query(`
+    SELECT m.image_name, mm.* 
+    FROM manuscript_per_verse m 
+    LEFT JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id 
+    WHERE m.verse_id = :verseId
+    ORDER BY mm.earliest_date ASC
+  `, { verseId });
+
+  // Automatic Page/Scan Indexing (Prevents duplicates confusion for P66, etc.)
+  const msCounts = {};
+  rawManuscripts.forEach(ms => {
+    if (ms.ms_id) {
+      msCounts[ms.ms_id] = (msCounts[ms.ms_id] || 0) + 1;
+    }
+  });
+
+  const msTracker = {};
+  manuscripts = rawManuscripts.map(ms => {
+    const total = msCounts[ms.ms_id] || 0;
+    let displayName = ms.name || ms.ms_id;
+    
+    if (total > 1) {
+      msTracker[ms.ms_id] = (msTracker[ms.ms_id] || 0) + 1;
+      displayName = `${ms.name || ms.ms_id} (Scan ${msTracker[ms.ms_id]})`;
+    }
+    
+    return {
+      ...ms,
+      name: displayName
+    };
+  });
+}
+
+if (tab === 'contradictions') {
+  contradictions = query(`
+    SELECT * FROM contradictions 
+    WHERE verse1 = :verseId OR verse2 = :verseId
+  `, { verseId });
+}
+
+if (tab === 'apologetics') {
+  apologetics = query(`
+    SELECT * FROM apologetics 
+    WHERE verse = :verseId
+  `, { verseId });
+}
+
+function formatBookIdToName(id) {
+  if (!id) return '';
+  const bookCode = id.split('_')[0];
+  const found = booksMeta.nt.find(b => b.id === bookCode) || booksMeta.ot.find(b => b.id === bookCode);
+  return found ? found.name : bookCode.toUpperCase();
+}
+
+function formatVerseIdToLabel(id) {
+  if (!id) return '';
+  const parts = id.split('_');
+  return `${formatBookIdToName(id)} ${parts[1]}:${parts[2]}`;
+}
+
+function formatVerseIdToLink(id) {
+  if (!id) return '';
+  const parts = id.split('_');
+  return `/bible/${parts[0]}/${parts[1]}/${parts[2]}/contradictions`; // Route contrast link directly to its contradictions sub-path!
+}
+---
+
+<Layout title={`Evidence: ${bookMeta.name} ${chapter}:${verse}`}>
+  <div class="verse-detail-container">
+    
+    <!-- Top Header Back Navigation -->
+    <header class="detail-header select-none">
+      <a href={`/bible/${book}/${chapter}`} class="back-btn" aria-label="Go back to chapter reader">
+        <span class="back-arrow">
+          <svg width="6" height="10" fill="none" stroke="currentColor" viewBox="0 0 6 10" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 9L1 5l4-4" />
+          </svg>
+        </span>
+        <span>{bookMeta.name} {chapter}</span>
+      </a>
+      
+      <!-- Minimalist Heading showing exactly John 1:1 -->
+      <h2 class="verse-drawer-title">
+        {bookMeta.name} {chapter}:{verse}
+      </h2>
+    </header>
+
+    <!-- Static Segmented Tab switcher anchors -->
+    <VerseTabs 
+      client:load 
+      msCount={msCount}
+      ctCount={ctCount}
+      apCount={apCount}
+      activeTab={tab}
+      book={book}
+      chapter={chapter}
+      verse={verse}
+    >
+      
+      <!-- ACTIVE TAB PANEL CONTENTS -->
+      
+      {tab === 'manuscripts' && (
+        <div slot="manuscripts">
+          <ManuscriptCarousel 
+            client:load 
+            manuscripts={manuscripts} 
+            verseId={verseId} 
+            verseLabel={`${bookMeta.name} ${chapter}:${verse}`} 
+          />
+        </div>
+      )}
+
+      {tab === 'contradictions' && (
+        <div slot="contradictions" class="contradiction-panel-container">
+          {contradictions.length > 0 ? (
+            contradictions.map(ct => {
+              const otherVerseId = ct.verse1 === verseId ? ct.verse2 : ct.verse1;
+              const otherVerseLabel = formatVerseIdToLabel(otherVerseId);
+              const otherVerseLink = formatVerseIdToLink(otherVerseId);
+              
+              return (
+                <div class="evidence-card contradiction-card">
+                  <div class="card-header red-badge select-none">
+                    <span class="card-icon">
+                      <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7h3.5m5.5 0H18m0 0l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9h-3.5M10 5h4m-2-3v18m-5-3h10" />
+                      </svg>
+                    </span>
+                    <span>Alleged Contradiction</span>
+                  </div>
+                  
+                  <h3 class="card-title">{ct.title}</h3>
+                  
+                  {otherVerseId && (
+                    <div class="contrasting-badge-box select-none">
+                      <span class="badge-box-label">Contrasting Link:</span>
+                      <a href={otherVerseLink} class="contrasting-link-pill">
+                        <span>{otherVerseLabel}</span>
+                        <span class="link-arrow">&rarr;</span>
+                      </a>
+                    </div>
+                  )}
+
+                  <div class="card-response-body">
+                    <span class="body-section-label">Apologetic Response</span>
+                    {ct.answer.split('\n\n').map(para => (
+                      <p class="response-paragraph">{para}</p>
+                    ))}
+                  </div>
+                  
+                  {ct.src && (
+                    <div class="card-footer select-none">
+                      <span>Source: {ct.src}</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <p class="empty-tabs-placeholder">No contradictions mapped for this verse.</p>
+          )}
+        </div>
+      )}
+
+      {tab === 'apologetics' && (
+        <div slot="apologetics" class="apologetics-panel-container">
+          {apologetics.length > 0 ? (
+            apologetics.map(ap => {
+              return (
+                <div class="evidence-card apologetics-card">
+                  <div class="card-header blue-badge select-none">
+                    <span class="card-icon">
+                      <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </span>
+                    <span>Apologetics Defense</span>
+                  </div>
+                  
+                  <h3 class="card-title">{ap.title}</h3>
+
+                  <div class="card-response-body">
+                    <span class="body-section-label">Exegesis & Biblical Context</span>
+                    {ap.answer.split('\n\n').map(para => (
+                      <p class="response-paragraph">{para}</p>
+                    ))}
+                  </div>
+
+                  {ap.src && (
+                    <div class="card-footer select-none">
+                      <span>Source Citation: {ap.src}</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <p class="empty-tabs-placeholder">No apologetic defenses mapped for this verse.</p>
+          )}
+        </div>
+      )}
+
+    </VerseTabs>
+  </div>
+</Layout>
+
+<style>
+	/* ==========================================
+	   Tab Sub-Path Detail View CSS
+	   ========================================== */
+	.verse-detail-container {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+
+	/* Header Apple Navigation */
+	.detail-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid var(--color-outline-variant);
+		padding-bottom: 14px;
+	}
+
+	.back-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 6px 12px;
+		background-color: var(--color-surface-container-low);
+		color: var(--color-on-surface-variant);
+		border: 1px solid var(--color-outline-variant);
+		border-radius: 8px;
+		font-size: 11px;
+		font-weight: 700;
+		text-decoration: none;
+		transition: all 0.15s ease;
+	}
+	.back-btn:hover {
+		background-color: var(--color-outline-variant);
+		color: var(--color-primary);
+	}
+	.back-btn:active {
+		transform: scale(0.97);
+	}
+	.back-arrow {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.back-arrow svg {
+		stroke: currentColor;
+		fill: none;
+	}
+
+	.verse-drawer-title {
+		font-family: var(--font-display);
+		font-size: 22px;
+		font-weight: 800;
+		color: var(--color-primary);
+		margin: 0;
+		letter-spacing: -0.01em;
+	}
+
+	/* Panels */
+	.contradiction-panel-container, .apologetics-panel-container {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.evidence-card {
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-outline-variant);
+		border-radius: 14px;
+		padding: 16px;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.card-header {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		padding: 3px 7px;
+		border-radius: 5px;
+		font-size: 9.5px;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		align-self: flex-start;
+	}
+	.card-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.card-icon svg {
+		stroke: currentColor;
+		fill: none;
+	}
+
+	.red-badge {
+		background-color: rgba(151, 69, 67, 0.05);
+		color: var(--color-secondary);
+		border: 1px solid rgba(151, 69, 67, 0.2);
+	}
+	.blue-badge {
+		background-color: rgba(37, 99, 235, 0.05);
+		color: #2563eb;
+		border: 1px solid rgba(37, 99, 235, 0.2);
+	}
+
+	.card-title {
+		font-family: var(--font-body);
+		font-size: 16px;
+		font-weight: 800;
+		color: var(--color-primary);
+		margin: 0;
+		line-height: 1.3;
+	}
+
+	/* Contrasting Cross-Reference Link Pill */
+	.contrasting-badge-box {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 8px 10px;
+		background-color: #fafafa;
+		border: 1px solid var(--color-outline-variant);
+		border-radius: 8px;
+	}
+	.badge-box-label {
+		font-size: 10px;
+		font-weight: 700;
+		color: var(--color-on-surface-variant);
+	}
+	.contrasting-link-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 3px 8px;
+		border-radius: 5px;
+		background-color: rgba(151, 69, 67, 0.08);
+		border: 1px solid rgba(151, 69, 67, 0.2);
+		color: var(--color-secondary);
+		font-size: 11px;
+		font-weight: 800;
+		text-decoration: none;
+		transition: background-color 0.15s;
+	}
+	.contrasting-link-pill:hover {
+		background-color: rgba(151, 69, 67, 0.15);
+	}
+	.link-arrow {
+		font-size: 10px;
+	}
+
+	/* Exegesis response body styling */
+	.card-response-body {
+		border-top: 1px solid var(--color-outline-variant);
+		padding-top: 10px;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.body-section-label {
+		font-size: 9.5px;
+		font-weight: 800;
+		color: var(--color-primary);
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		margin-bottom: 2px;
+	}
+
+	.response-paragraph {
+		font-size: 13px;
+		line-height: 1.55;
+		color: var(--color-on-surface-variant);
+		margin: 0;
+		text-align: justify;
+	}
+
+	.card-footer {
+		border-top: 1px dashed var(--color-outline-variant);
+		padding-top: 8px;
+		font-size: 10px;
+		font-style: italic;
+		color: var(--color-on-surface-variant);
+	}
+
+	.empty-tabs-placeholder {
+		text-align: center;
+		padding: 24px 12px;
+		color: var(--color-on-surface-variant);
+		font-size: 12.5px;
+		font-style: italic;
+	}
+</style>

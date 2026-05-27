@@ -44,12 +44,6 @@ const { title } = Astro.props;
 		<!-- App Bounding Container -->
 		<div class="app-container">
 			
-			<!-- Collapsible Left Navigation Sidebar -->
-			<div id="scripture-nav-overlay"></div>
-			<div id="scripture-nav-sidebar">
-				<ScriptureNav client:load />
-			</div>
-
 			<!-- Content Layout Core -->
 			<div class="content-frame">
 				<!-- Header -->
@@ -81,6 +75,12 @@ const { title } = Astro.props;
 				<BottomNav />
 			</div>
 
+			<!-- Collapsible Left Navigation Sidebar (Sitting on top of everything natively!) -->
+			<div id="scripture-nav-overlay"></div>
+			<div id="scripture-nav-sidebar">
+				<ScriptureNav client:load />
+			</div>
+
 		</div>
 
 		<!-- Navigation Toggles & Dynamic Scroll Header JS Script -->
@@ -104,18 +104,9 @@ const { title } = Astro.props;
 					document.body.style.overflow = '';
 				};
 
-				sidebar.classList.remove('open');
-				overlay.classList.remove('show');
-
-				// Reset event listeners safely
-				toggleBtn.replaceWith(toggleBtn.cloneNode(true));
-				overlay.replaceWith(overlay.cloneNode(true));
-
-				const newToggleBtn = document.getElementById('nav-toggle-btn');
-				const newOverlay = document.getElementById('scripture-nav-overlay');
-
-				newToggleBtn.addEventListener('click', openSidebar);
-				newOverlay.addEventListener('click', closeSidebar);
+				// Bind direct event listeners (Static compilation recreation ensures safe bindings)
+				toggleBtn.addEventListener('click', openSidebar);
+				overlay.addEventListener('click', closeSidebar);
 
 				sidebar.addEventListener('click', (e) => {
 					if (e.target.closest('a')) {
