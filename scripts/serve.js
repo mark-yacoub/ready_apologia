@@ -24,9 +24,17 @@ const MIME_TYPES = {
 const server = http.createServer((req, res) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
 
-  // Safe URL parsing (remove query parameters)
-  const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
-  let filePath = path.join(PUBLIC_DIR, parsedUrl.pathname);
+  // Safe URL parsing with try/catch crash-proofing (handles malformed/double-slashed scanner URLs)
+  let pathname = '/';
+  try {
+    const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost:8080'}`);
+    pathname = parsedUrl.pathname;
+  } catch (err) {
+    console.warn(`⚠️ Malformed URL requested: ${req.url}`);
+    pathname = '/404.html'; // Route immediately to static 404 fallback
+  }
+
+  let filePath = path.join(PUBLIC_DIR, pathname);
 
   // If path is a directory, look for index.html
   if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
