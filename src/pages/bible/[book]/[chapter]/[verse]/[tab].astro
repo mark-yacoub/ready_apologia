@@ -6,6 +6,7 @@ import VerseTabs from '../../../../../components/VerseTabs.jsx';
 import ManuscriptCarousel from '../../../../../components/ManuscriptCarousel.jsx';
 import { query } from '../../../../../db.js';
 import booksMeta from '../../../../../data/books_meta.json';
+import { parseMarkdown } from '../../../../../utils/markdown.js';
 
 // 1. Pre-render sub-path page routes only for active evidence tabs (Throttled to Genesis/John for rapid dev speed)
 export async function getStaticPaths() {
@@ -15,11 +16,10 @@ export async function getStaticPaths() {
   
   const allVerseIds = new Set([...ms, ...ct, ...ap].filter(Boolean));
   const paths = [];
-  const devActiveBooks = ['jn', 'gn'];
 
   allVerseIds.forEach(id => {
     const parts = id.split('_');
-    if (parts.length === 3 && devActiveBooks.includes(parts[0])) {
+    if (parts.length === 3) {
       const b = parts[0];
       const c = parts[1];
       const v = parts[2];
@@ -53,9 +53,9 @@ if (!bookMeta) {
 }
 
 // 3. Query active evidence counts (natively in SQLite!)
-const msCount = query("SELECT COUNT(*) as count FROM manuscript_per_verse WHERE verse_id = :verseId", { verseId })[0].count;
-const ctCount = query("SELECT COUNT(*) as count FROM contradictions WHERE verse1 = :verseId OR verse2 = :verseId", { verseId })[0].count;
-const apCount = query("SELECT COUNT(*) as count FROM apologetics WHERE verse = :verseId", { verseId })[0].count;
+const msCount = query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse WHERE verse_id = :verseId", { verseId })[0].count;
+const ctCount = query("SELECT COUNT(DISTINCT title) as count FROM contradictions WHERE verse1 = :verseId OR verse2 = :verseId", { verseId })[0].count;
+const apCount = query("SELECT COUNT(DISTINCT title) as count FROM apologetics WHERE verse = :verseId", { verseId })[0].count;
 
 // 4. Query active evidence data
 let manuscripts = [];
@@ -98,8 +98,11 @@ if (tab === 'manuscripts') {
 
 if (tab === 'contradictions') {
   contradictions = query(`
-    SELECT * FROM contradictions 
-    WHERE verse1 = :verseId OR verse2 = :verseId
+    SELECT c.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright
+    FROM contradictions c
+    LEFT JOIN apologetics_meta m ON c.src = m.id
+    WHERE c.verse1 = :verseId OR c.verse2 = :verseId
+    GROUP BY c.title
   `, { verseId });
 }
 
@@ -178,51 +181,69 @@ function formatVerseIdToLink(id) {
       {tab === 'contradictions' && (
         <div slot="contradictions" class="contradiction-panel-container">
           {contradictions.length > 0 ? (
-            contradictions.map(ct => {
+            contradictions.map((ct, index) => {
               const otherVerseId = ct.verse1 === verseId ? ct.verse2 : ct.verse1;
               const otherVerseLabel = formatVerseIdToLabel(otherVerseId);
               const otherVerseLink = formatVerseIdToLink(otherVerseId);
               
+              // Determine if details panel is open by default (always open if 1, pre-open 1st if multiple)
+              const isInitiallyOpen = contradictions.length === 1 || index === 0;
+              
               return (
-                <div class="evidence-card contradiction-card">
-                  <div class="card-header red-badge select-none">
-                    <span class="card-icon">
-                      <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7h3.5m5.5 0H18m0 0l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9h-3.5M10 5h4m-2-3v18m-5-3h10" />
+                <details open={isInitiallyOpen} class="contradiction-details-card">
+                  
+                  {/* Interactive Accordion Header Title */}
+                  <summary class="contradiction-summary-header select-none">
+                    <span class="summary-title">{ct.title}</span>
+                    <span class="summary-chevron">
+                      <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
                     </span>
-                    <span>Alleged Contradiction</span>
-                  </div>
-                  
-                  <h3 class="card-title">{ct.title}</h3>
-                  
-                  {otherVerseId && (
-                    <div class="contrasting-badge-box select-none">
-                      <span class="badge-box-label">Contrasting Link:</span>
-                      <a href={otherVerseLink} class="contrasting-link-pill">
-                        <span>{otherVerseLabel}</span>
-                        <span class="link-arrow">&rarr;</span>
-                      </a>
-                    </div>
-                  )}
+                  </summary>
 
-                  <div class="card-response-body">
-                    <span class="body-section-label">Apologetic Response</span>
-                    {ct.answer.split('\n\n').map(para => (
-                      <p class="response-paragraph">{para}</p>
-                    ))}
-                  </div>
-                  
-                  {ct.src && (
-                    <div class="card-footer select-none">
-                      <span>Source: {ct.src}</span>
+                  {/* Collapsible Content Panel */}
+                  <div class="contradiction-card-content">
+                    
+                    {otherVerseId && (
+                      <div class="contrasting-badge-box select-none">
+                        <span class="badge-box-label">Contrasting Link:</span>
+                        <a href={otherVerseLink} class="contrasting-link-pill">
+                          <span>{otherVerseLabel}</span>
+                          <span class="link-arrow">&rarr;</span>
+                        </a>
+                      </div>
+                    )}
+
+                    {/* Rich Markdown body parser */}
+                    <div class="card-response-body select-text">
+                      <div set:html={parseMarkdown(ct.answer)} />
                     </div>
-                  )}
-                </div>
+                    
+                    {/* Subtle Source Meta Credit Footer */}
+                    <div class="card-footer-source-box select-none">
+                      <div class="source-meta-text">
+                        <span class="source-meta-label">Source:</span>
+                        <span class="source-name-text">{ct.meta_name || ct.src}</span>
+                        {ct.meta_copyright && <span class="source-copyright-text">({ct.meta_copyright})</span>}
+                      </div>
+                      {ct.meta_url && (
+                        <a href={ct.meta_url} target="_blank" rel="noopener noreferrer" class="source-visit-pill-btn" title="Visit website page source">
+                          <span>Visit Source</span>
+                          <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+
+                  </div>
+
+                </details>
               );
             })
           ) : (
-            <p class="empty-tabs-placeholder">No contradictions mapped for this verse.</p>
+            <p class="empty-tabs-placeholder">No alleged contradictions mapped for this verse.</p>
           )}
         </div>
       )}
@@ -335,15 +356,171 @@ function formatVerseIdToLink(id) {
 		gap: 12px;
 	}
 
-	.evidence-card {
+	/* Semantic Details/Summary Accordion Cards */
+	.contradiction-details-card {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-outline-variant);
+		border-left: 3px solid transparent; /* Keep left border consistent for alignment */
 		border-radius: 14px;
-		padding: 16px;
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+		overflow: hidden;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+		transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+	}
+	.contradiction-details-card:hover {
+		transform: translateY(-1.5px);
+		box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.03);
+		border-color: var(--color-outline);
+	}
+	.contradiction-details-card[open] {
+		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+		border-color: rgba(151, 69, 67, 0.25);
+		border-left: 3px solid var(--color-secondary); /* 3px terracotta edge accent indicators! */
+	}
+
+	.contradiction-summary-header {
+		padding: 16px;
+		cursor: pointer;
+		font-family: var(--font-body);
+		font-size: 15px;
+		font-weight: 800;
+		color: var(--color-primary);
+		list-style: none; /* Hide default disclosure arrow */
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		transition: background-color 0.15s;
+	}
+	.contradiction-summary-header::-webkit-details-marker {
+		display: none; /* Safari support */
+	}
+	.contradiction-summary-header:hover {
+		background-color: #f9f8f7; /* Soft warm sandstone-cream on hover! */
+	}
+
+	.summary-title {
+		flex: 1;
+		line-height: 1.35;
+		padding-right: 10px;
+	}
+
+	.summary-chevron {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--color-on-surface-variant);
+		transition: transform 0.2s ease;
+	}
+	.contradiction-details-card[open] .summary-chevron {
+		transform: rotate(180deg);
+		color: var(--color-secondary);
+	}
+
+	.contradiction-card-content {
+		padding: 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		border-top: 1px solid var(--color-outline-variant);
+		animation: slideDown 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+	}
+
+	/* Source Meta Credit Footer Layouts */
+	.card-footer-source-box {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-top: 1px dashed var(--color-outline-variant);
+		padding-top: 10px;
+		margin-top: 4px;
+	}
+	.source-meta-text {
+		font-size: 10px;
+		color: var(--color-on-surface-variant);
+		opacity: 0.95;
+	}
+	.source-meta-label {
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.3px;
+		margin-right: 4px;
+	}
+	.source-name-text {
+		font-weight: 700;
+	}
+	.source-copyright-text {
+		font-style: italic;
+		margin-left: 4px;
+		opacity: 0.85;
+	}
+
+	.source-visit-pill-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 3px 8px;
+		border-radius: 5px;
+		background-color: var(--color-surface-container-low);
+		border: 1px solid var(--color-outline-variant);
+		color: var(--color-primary);
+		font-size: 10px;
+		font-weight: 800;
+		text-decoration: none;
+		transition: all 0.15s;
+	}
+	.source-visit-pill-btn:hover {
+		background-color: var(--color-outline-variant);
+		color: var(--color-secondary);
+	}
+	.source-visit-pill-btn svg {
+		stroke: currentColor;
+		fill: none;
+	}
+
+	/* Markdown Inline Links Styling */
+	.card-response-body :global(.exegesis-inline-link) {
+		color: var(--color-secondary) !important;
+		font-weight: 700;
+		text-decoration: none;
+		border-bottom: 1px dashed var(--color-secondary);
+		transition: border-bottom-color 0.15s;
+	}
+	.card-response-body :global(.exegesis-inline-link:hover) {
+		border-bottom-style: solid;
+	}
+
+	/* Markdown Standalone horizontal dividers */
+	.card-response-body :global(.exegesis-divider) {
+		border: none;
+		border-top: 1px solid var(--color-outline-variant);
+		margin: 10px 0;
+		width: 100%;
+		opacity: 0.5;
+	}
+
+	/* Inline Scripture Reference Badges style */
+	.card-response-body :global(.exegesis-scripture-pill) {
+		display: inline-flex;
+		align-items: center;
+		background-color: var(--color-surface-container-low);
+		border: 1px solid var(--color-outline-variant);
+		color: var(--color-primary);
+		font-family: var(--font-body);
+		font-size: 11px;
+		font-weight: 800;
+		padding: 2.5px 6px;
+		border-radius: 5px;
+		margin: 0 3px;
+		vertical-align: middle;
+		user-select: none;
+		letter-spacing: -0.01em;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+	}
+
+	@keyframes slideDown {
+		from { opacity: 0; transform: translateY(-2px); }
+		to { opacity: 1; transform: translateY(0); }
 	}
 
 	.card-header {

@@ -4,6 +4,7 @@ import path from 'node:path';
 import Layout from '../../../layouts/Layout.astro';
 import { query } from '../../../db.js';
 import booksMeta from '../../../data/books_meta.json';
+import { mapLxxToMt } from '../../../utils/scripture_mapper.js';
 
 // 1. Pre-render all chapters for NT and OT books
 export async function getStaticPaths() {
@@ -49,22 +50,23 @@ try {
   console.error(`Failed to read scripture file: ${filePath}`, err);
 }
 
-// 4. Query SQLite for active evidence
-const prefix = `${book}_${chapter}_%`;
+// 4. Query SQLite for active evidence (Utilizing strict substr checks to prevent wildcards chapter stacking bugs!)
+const prefix = `${book}_${chapter}_`;
+const len = prefix.length;
 
 const msVerses = query(
-  "SELECT DISTINCT verse_id FROM manuscript_per_verse WHERE verse_id LIKE :prefix", 
-  { prefix }
+  "SELECT DISTINCT verse_id FROM manuscript_per_verse WHERE substr(verse_id, 1, :len) = :prefix", 
+  { prefix, len }
 ).map(row => row.verse_id);
 
 const ctVerses = query(
-  "SELECT DISTINCT verse1 as v FROM contradictions WHERE verse1 LIKE :prefix UNION SELECT DISTINCT verse2 FROM contradictions WHERE verse2 LIKE :prefix",
-  { prefix }
+  "SELECT DISTINCT verse1 as v FROM contradictions WHERE substr(verse1, 1, :len) = :prefix UNION SELECT DISTINCT verse2 FROM contradictions WHERE substr(verse2, 1, :len) = :prefix",
+  { prefix, len }
 ).map(row => row.v);
 
 const apVerses = query(
-  "SELECT DISTINCT verse FROM apologetics WHERE verse LIKE :prefix",
-  { prefix }
+  "SELECT DISTINCT verse FROM apologetics WHERE substr(verse, 1, :len) = :prefix",
+  { prefix, len }
 ).map(row => row.verse);
 
 const evidenceMap = {};
@@ -152,49 +154,65 @@ const hasNext = currentChapterNum < bookMeta.chapters;
           const verseNum = Object.keys(verseObj)[0];
           const verseText = verseObj[verseNum];
           
-          const evidenceTypes = evidenceMap[verseNum] || [];
+          // Cleanly translate LXX Greek reading verse index back to Hebrew/MT numbering for exact database query checks!
+          const mapping = mapLxxToMt(book, chapter, verseNum);
+          const mtVerseNum = mapping.verse;
+
+          const evidenceTypes = evidenceMap[mtVerseNum] || [];
           const hasEvidence = evidenceTypes.length > 0;
 
           if (hasEvidence) {
             return (
-              <a 
-                href={`/bible/${book}/${chapter}/${verseNum}`} 
-                class="verse-row active-verse"
-              >
+              <div class="verse-row active-verse">
                 <div class="verse-row-content">
                   <span class="verse-num">{verseNum}</span>
                   <div class="verse-body-wrapper">
                     <p class="verse-text">
-                      {verseText}
+                      {/* Tapping the verse text redirects to the mapped standard MT redirect gate */}
+                      <a href={`/bible/${book}/${chapter}/${mtVerseNum}`} class="verse-text-link-wrapper">
+                        {verseText}
+                      </a>
                       
-                      {/* Inline SVGs nested inside the paragraph to sit natively AFTER the text on the same line! */}
+                      {/* Tapping individual badges routes DIRECTLY to their mapped standard MT evidence tab pages! */}
                       <span class="verse-badge-tray-inline">
                         {evidenceTypes.includes('manuscript') && (
-                          <span class="icon-inline ms-icon" title="Manuscripts available">
+                          <a 
+                            href={`/bible/${book}/${chapter}/${mtVerseNum}/manuscripts`} 
+                            class="icon-inline ms-icon" 
+                            title="Manuscripts available"
+                          >
                             <svg viewBox="0 0 24 24" stroke-width="2.5">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                          </span>
+                          </a>
                         )}
                         {evidenceTypes.includes('contradiction') && (
-                          <span class="icon-inline ct-icon" title="Contradictions available">
+                          <a 
+                            href={`/bible/${book}/${chapter}/${mtVerseNum}/contradictions`} 
+                            class="icon-inline ct-icon" 
+                            title="Alleged contradictions available"
+                          >
                             <svg viewBox="0 0 24 24" stroke-width="2.5">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7h3.5m5.5 0H18m0 0l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9h-3.5M10 5h4m-2-3v18m-5-3h10" />
                             </svg>
-                          </span>
+                          </a>
                         )}
                         {evidenceTypes.includes('apologetics') && (
-                          <span class="icon-inline ap-icon" title="Apologetics defenses available">
+                          <a 
+                            href={`/bible/${book}/${chapter}/${mtVerseNum}/apologetics`} 
+                            class="icon-inline ap-icon" 
+                            title="Apologetics defenses available"
+                          >
                             <svg viewBox="0 0 24 24" stroke-width="2.5">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
-                          </span>
+                          </a>
                         )}
                       </span>
                     </p>
                   </div>
                 </div>
-              </a>
+              </div>
             );
           } else {
             return (
@@ -502,6 +520,17 @@ const hasNext = currentChapterNum < bookMeta.chapters;
 		flex-shrink: 0;
 	}
 
+	/* Clickable verse body links */
+	.verse-text-link-wrapper {
+		display: inline;
+		color: inherit;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.verse-text-link-wrapper:hover {
+		color: var(--color-primary);
+	}
+
 	.icon-inline {
 		display: inline-flex;
 		align-items: center;
@@ -512,12 +541,14 @@ const hasNext = currentChapterNum < bookMeta.chapters;
 		background-color: var(--color-surface-container-low);
 		color: var(--color-secondary);
 		border: 1px solid var(--color-outline-variant);
-		transition: transform 0.15s ease;
+		transition: transform 0.15s ease, border-color 0.15s, color 0.15s;
+		text-decoration: none; /* Prune default anchor highlights */
 	}
-	.verse-row:hover .icon-inline {
-		transform: scale(1.08);
-		background-color: var(--color-surface-container-lowest);
-		border-color: var(--color-secondary);
+	.icon-inline:hover {
+		transform: scale(1.2) !important;
+		background-color: var(--color-surface-container-lowest) !important;
+		border-color: var(--color-secondary) !important;
+		color: var(--color-secondary) !important;
 	}
 
 	.icon-inline svg {

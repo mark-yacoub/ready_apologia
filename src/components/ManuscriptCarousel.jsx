@@ -8,6 +8,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel })
   // Dynamic Magnification & Loading States (Ink Mode completely removed!)
   const [zoomScale, setZoomScale] = useState(1); // 1x to 3x magnifier
   const [loadedImages, setLoadedImages] = useState({}); // CDN spinner tracker
+  const [failedImages, setFailedImages] = useState({}); // Broken cloud image 404 tracker
   
   const trackRef = useRef(null);
 
@@ -125,22 +126,44 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel })
                 {/* 1. Manuscript Image Scan Frame (Double tap triggers Zoom Lightbox) */}
                 <div className="ms-image-frame" onClick={() => triggerZoom(imgSrc, ms.image_name)}>
                   
-                  {/* Spinner loading overlay (Removed from DOM once onLoad triggers!) */}
-                  {!isLoaded && (
-                    <div className="ms-skeleton-loader">
-                      <div className="pulse-spinner"></div>
-                      <span className="loader-text">Downloading from cloud...</span>
+                  {/* If image failed to load (404 or timeout), show clean offline warning fallback */}
+                  {failedImages[ms.image_name] ? (
+                    <div className="ms-skeleton-loader ms-error-fallback select-none">
+                      <svg className="fallback-icon warning-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5" style={{ width: '24px', height: '24px', color: 'var(--color-secondary)' }}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      <span className="loader-text bold-warn">Scan Not Available</span>
+                      <span className="loader-text path-info">File: {ms.ms_id}/{ms.image_name}</span>
                     </div>
-                  )}
+                  ) : (
+                    <>
+                      {/* Spinner loading overlay (Removed from DOM once onLoad triggers!) */}
+                      {!isLoaded && (
+                        <div className="ms-skeleton-loader">
+                          <div className="pulse-spinner"></div>
+                          <span className="loader-text">Downloading from cloud...</span>
+                        </div>
+                      )}
 
-                  {/* Image is ALWAYS rendered to ensure browser triggers network loading immediately! */}
-                  <img 
-                    src={imgSrc} 
-                    alt={`Ancient manuscript scan of ${ms.name}`} 
-                    className={`ms-image ${isLoaded ? 'loaded' : 'loading'}`}
-                    onLoad={() => setLoadedImages(prev => ({ ...prev, [ms.image_name]: true }))}
-                    loading="lazy"
-                  />
+                      {/* Image is ALWAYS rendered to ensure browser triggers network loading immediately! */}
+                      <img 
+                        src={imgSrc} 
+                        alt={`Ancient manuscript scan of ${ms.name}`} 
+                        className={`ms-image ${isLoaded ? 'loaded' : 'loading'}`}
+                        ref={(el) => {
+                          if (el && el.complete && !isLoaded) {
+                            // Force instant state update if the browser served it from cache before hydration!
+                            setLoadedImages(prev => ({ ...prev, [ms.image_name]: true }));
+                          }
+                        }}
+                        onLoad={() => setLoadedImages(prev => ({ ...prev, [ms.image_name]: true }))}
+                        onError={() => {
+                          setFailedImages(prev => ({ ...prev, [ms.image_name]: true }));
+                          setLoadedImages(prev => ({ ...prev, [ms.image_name]: true })); // Shut down spinner
+                        }}
+                      />
+                    </>
+                  )}
 
                   {/* Desktop Arrow navigation chevrons */}
                   {activeSlide > 0 && (

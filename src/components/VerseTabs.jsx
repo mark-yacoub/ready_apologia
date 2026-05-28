@@ -16,7 +16,7 @@ export default function VerseTabs({
   // Build the horizontal links track. Switching tabs is now a standard, bookmarkable page link!
   const tabs = [
     { id: 'manuscripts', label: `Manuscripts (${msCount})`, show: msCount > 0 },
-    { id: 'contradictions', label: `Contradictions (${ctCount})`, show: ctCount > 0 },
+    { id: 'contradictions', label: `Alleged Contradictions (${ctCount})`, show: ctCount > 0 },
     { id: 'apologetics', label: `Apologetics (${apCount})`, show: apCount > 0 }
   ].filter(t => t.show);
 

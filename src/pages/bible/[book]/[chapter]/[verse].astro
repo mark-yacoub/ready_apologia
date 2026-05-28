@@ -10,11 +10,10 @@ export async function getStaticPaths() {
   
   const allVerseIds = new Set([...ms, ...ct, ...ap].filter(Boolean));
   const paths = [];
-  const devActiveBooks = ['jn', 'gn'];
 
   allVerseIds.forEach(id => {
     const parts = id.split('_');
-    if (parts.length === 3 && devActiveBooks.includes(parts[0])) {
+    if (parts.length === 3) {
       paths.push({
         params: {
           book: parts[0],
