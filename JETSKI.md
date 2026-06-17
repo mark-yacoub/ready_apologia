@@ -19,18 +19,32 @@ Ready Apologia V1 is designed as a **zero-dependency, offline-first Progressive 
 The project content is driven entirely by a real 8.8MB SQLite database (`data.db`) placed at the repository root.
 
 ### 🔑 Core Tables & Relationships:
-1.  **`manuscripts_meta`**: Contains catalog meta for ancient manuscripts.
+1.  **`manuscripts_meta`**: Contains catalog meta for ancient manuscripts (NT).
     *   Columns: `ms_id` (Primary Key), `name`, `date_range_english`, `current_location`, `found_location`, `interesting_info`, `variants`.
-2.  **`manuscript_per_verse`**: Maps verses to specific manuscript image scans.
-    *   Columns: `verse_id` (Foreign Key, formatted as `jn_1_1`), `ms_id`, `image_name`.
-3.  **`contradictions`**: Alleged Bible contradictions and their exegesis.
+2.  **`manuscripts_meta_ot`**: Contains catalog meta for Old Testament manuscripts.
+    *   Columns: `ms_id`, `name`, `language`, `v11n_type`, `text_type_alignment`, `earliest_date`, etc.
+    *   *UI Rule:* Display ONLY `language` (`ms.language`) in the specs drawer. Ignore scholarly columns like `text_type_alignment`, `djd_volume`, and `biblical_content`. Hide `v11n_type` from the UI.
+3.  **`manuscript_per_verse`**: Maps NT verses to specific manuscript image scans.
+    *   Columns: `verse_id` (`jn_1_1`), `ms_id`, `image_name`.
+4.  **`manuscript_per_verse_ot`**: Maps OT verses to image scans with versification tags.
+    *   Columns: `verse_id` (`jl_2_28` or `jl_3_1`), `ms_id`, `image_name`, `v11n_type` (`'LXX'` vs `'MT'`).
+5.  **`contradictions`**: Alleged Bible contradictions and their exegesis.
     *   Columns: `contradiction_id`, `verse1` (`jn_1_1`), `verse2` (`lk_2_4`), `title`, `answer`, `src`.
-4.  **`apologetics`**: Detailed theological defenses.
+6.  **`apologetics`**: Detailed theological defenses.
     *   Columns: `apologetics_id`, `verse` (`jn_1_1`), `title`, `answer`, `src`.
+
+### 🌐 Cloudflare CDN Routing Rule:
+*   Derive testament (`isNT`) strictly from the static book catalog (`src/data/books_meta.json`). Never deduce testament from the presence of language or ID prefixes.
+*   Network image requests route dynamically to `images/` for NT books (`isNT ? 'images' : 'ot_images'`) and `ot_images/` for OT books.
+
+### ⏳ Historical Date Formatting Rule:
+*   Ancient manuscript dates must be cleanly formatted using `formatDate`: negative integers represent Before Christ (`[number] BC`, e.g., `-150` -> `150 BC`), positive integers represent Anno Domini (`AD [number]`). Never output `~-150 AD`.
 
 ### 📖 Verse ID Convention:
 Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all lowercase).
 *   *Examples:* `jn_1_1` (John 1:1), `gn_1_26` (Genesis 1:26), `heb_9_12` (Hebrews 9:12).
+*   **LXX vs MT Versification Resolution**: All web reader routes (`/bible/[book]/[chapter]/[verse]`) are strictly anchored to Greek Septuagint (`LXX`) numbering. For Old Testament books, database query gates must resolve Masoretic Text (`MT`) numbering equivalents via `mapLxxToMt` / `mapMtToLxx` (`src/utils/scripture_mapper.js`) combining matching rows:
+    `WHERE (verse_id = :lxxId AND v11n_type = 'LXX') OR (verse_id = :mtId AND v11n_type = 'MT')`.
 
 ---
 
@@ -99,6 +113,12 @@ Always use Yarn v1 via Corepack on this repository:
 *   **Run Dev Server:** `corepack yarn dev`
 *   **Build Production Static Files:** `corepack yarn build`
 *   **Run Zero-Dependency Static Preview:** `node scripts/serve.js`
+
+### ⚠️ Terminal Sandbox & Node Execution Quirks:
+1.  **Mandatory SQLite Experimental Flag**: When running `node` or `astro build` directly with Node v22, `NODE_OPTIONS='--experimental-sqlite'` is strictly required.
+2.  **Missing Sandbox `$PATH` Binaries**: In non-interactive terminal subprocesses (`run_command`), standard `node` / `yarn` binaries are missing from `$PATH`. To execute builds autonomously, use the embedded stable Node binary located in VS Code Server:
+    `NODE_OPTIONS='--experimental-sqlite' ~/.vscode-server/cli/servers/*/server/node ./node_modules/astro/astro.js build`
+3.  **Fast Iteration Builds (`src/utils/build_config.js`)**: To avoid 8-minute compilation times across 77k pages during UI dev cycles, restrict `BUILD_BOOKS` in `build_config.js` to a representative slice (`gn`, `ps`, `is`, `jl`, `dt`, `jn`, `rom`). Set to `null` before final release.
 
 ---
 

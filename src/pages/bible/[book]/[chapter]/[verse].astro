@@ -1,14 +1,39 @@
 ---
 import { query } from '../../../../db.js';
 import booksMeta from '../../../../data/books_meta.json';
+import { mapMtToLxx, mapLxxToMt } from '../../../../utils/scripture_mapper.js';
+import { BUILD_BOOKS } from '../../../../utils/build_config.js';
 
-// Pre-render the base verse redirect gates (Genesis & John throttled for dev speed)
+// Pre-render the base verse redirect gates
 export async function getStaticPaths() {
-  const ms = query("SELECT DISTINCT verse_id FROM manuscript_per_verse").map(r => r.verse_id);
-  const ct = query("SELECT DISTINCT verse1 as v FROM contradictions UNION SELECT DISTINCT verse2 FROM contradictions").map(r => r.v);
-  const ap = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
+  const msNt = query("SELECT DISTINCT verse_id FROM manuscript_per_verse").map(r => r.verse_id);
+  const msOtRows = query("SELECT DISTINCT verse_id, v11n_type FROM manuscript_per_verse_ot");
+  const msOt = msOtRows.map(r => {
+    if (r.v11n_type === 'MT') {
+      const p = r.verse_id.split('_');
+      const mapped = mapMtToLxx(p[0], p[1], p[2]);
+      return `${mapped.book}_${mapped.chapter}_${mapped.verse}`;
+    }
+    return r.verse_id;
+  });
+
+  const ctRaw = query("SELECT DISTINCT verse1 as v FROM contradictions UNION SELECT DISTINCT verse2 FROM contradictions").map(r => r.v);
+  const apRaw = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
   
-  const allVerseIds = new Set([...ms, ...ct, ...ap].filter(Boolean));
+  const mapToLxxIfOt = (id) => {
+    if (!id) return null;
+    const p = id.split('_');
+    if (booksMeta.ot.some(b => b.id === p[0])) {
+      const m = mapMtToLxx(p[0], p[1], p[2]);
+      return `${m.book}_${m.chapter}_${m.verse}`;
+    }
+    return id;
+  };
+
+  const ct = ctRaw.map(mapToLxxIfOt);
+  const ap = apRaw.map(mapToLxxIfOt);
+  
+  const allVerseIds = new Set([...msNt, ...msOt, ...ct, ...ap].filter(Boolean));
   const paths = [];
 
   allVerseIds.forEach(id => {
@@ -24,16 +49,23 @@ export async function getStaticPaths() {
     }
   });
 
-  return paths;
+  return BUILD_BOOKS ? paths.filter(p => BUILD_BOOKS.has(p.params.book)) : paths;
 }
 
 const { book, chapter, verse } = Astro.params;
-const verseId = `${book}_${chapter}_${verse}`;
+const lxxId = `${book}_${chapter}_${verse}`;
+const isNT = booksMeta.nt.some(b => b.id === book);
+const mtObj = mapLxxToMt(book, chapter, verse);
+const mtId = `${mtObj.book}_${mtObj.chapter}_${mtObj.verse}`;
+const checkId = isNT ? lxxId : mtId;
 
 // Query SQLite to check what active evidence types exist for this verse ID, in order of priority
-const hasMs = query("SELECT 1 FROM manuscript_per_verse WHERE verse_id = :verseId LIMIT 1", { verseId }).length > 0;
-const hasCt = query("SELECT 1 FROM contradictions WHERE verse1 = :verseId OR verse2 = :verseId LIMIT 1", { verseId }).length > 0;
-const hasAp = query("SELECT 1 FROM apologetics WHERE verse = :verseId LIMIT 1", { verseId }).length > 0;
+const hasMs = isNT
+  ? query("SELECT 1 FROM manuscript_per_verse WHERE verse_id = :lxxId LIMIT 1", { lxxId }).length > 0
+  : query("SELECT 1 FROM manuscript_per_verse_ot WHERE (verse_id = :lxxId AND v11n_type = 'LXX') OR (verse_id = :mtId AND v11n_type = 'MT') LIMIT 1", { lxxId, mtId }).length > 0;
+
+const hasCt = query("SELECT 1 FROM contradictions WHERE verse1 = :checkId OR verse2 = :checkId LIMIT 1", { checkId }).length > 0;
+const hasAp = query("SELECT 1 FROM apologetics WHERE verse = :checkId LIMIT 1", { checkId }).length > 0;
 
 // Determine the first active evidence tab target
 let firstTab = 'manuscripts';

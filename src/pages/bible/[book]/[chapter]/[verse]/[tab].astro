@@ -7,14 +7,39 @@ import ManuscriptCarousel from '../../../../../components/ManuscriptCarousel.jsx
 import { query } from '../../../../../db.js';
 import booksMeta from '../../../../../data/books_meta.json';
 import { parseMarkdown } from '../../../../../utils/markdown.js';
+import { mapMtToLxx, mapLxxToMt } from '../../../../../utils/scripture_mapper.js';
+import { BUILD_BOOKS } from '../../../../../utils/build_config.js';
 
-// 1. Pre-render sub-path page routes only for active evidence tabs (Throttled to Genesis/John for rapid dev speed)
+// 1. Pre-render sub-path page routes
 export async function getStaticPaths() {
-  const ms = query("SELECT DISTINCT verse_id FROM manuscript_per_verse").map(r => r.verse_id);
-  const ct = query("SELECT DISTINCT verse1 as v FROM contradictions UNION SELECT DISTINCT verse2 FROM contradictions").map(r => r.v);
-  const ap = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
+  const msNt = query("SELECT DISTINCT verse_id FROM manuscript_per_verse").map(r => r.verse_id);
+  const msOtRows = query("SELECT DISTINCT verse_id, v11n_type FROM manuscript_per_verse_ot");
+  const msOt = msOtRows.map(r => {
+    if (r.v11n_type === 'MT') {
+      const p = r.verse_id.split('_');
+      const mapped = mapMtToLxx(p[0], p[1], p[2]);
+      return `${mapped.book}_${mapped.chapter}_${mapped.verse}`;
+    }
+    return r.verse_id;
+  });
+
+  const ctRaw = query("SELECT DISTINCT verse1 as v FROM contradictions UNION SELECT DISTINCT verse2 FROM contradictions").map(r => r.v);
+  const apRaw = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
   
-  const allVerseIds = new Set([...ms, ...ct, ...ap].filter(Boolean));
+  const mapToLxxIfOt = (id) => {
+    if (!id) return null;
+    const p = id.split('_');
+    if (booksMeta.ot.some(b => b.id === p[0])) {
+      const m = mapMtToLxx(p[0], p[1], p[2]);
+      return `${m.book}_${m.chapter}_${m.verse}`;
+    }
+    return id;
+  };
+
+  const ct = ctRaw.map(mapToLxxIfOt);
+  const ap = apRaw.map(mapToLxxIfOt);
+  
+  const allVerseIds = new Set([...msNt, ...msOt, ...ct, ...ap].filter(Boolean));
   const paths = [];
 
   allVerseIds.forEach(id => {
@@ -23,20 +48,24 @@ export async function getStaticPaths() {
       const b = parts[0];
       const c = parts[1];
       const v = parts[2];
+      const isNtBook = booksMeta.nt.some(x => x.id === b);
+      const mtObj = mapLxxToMt(b, c, v);
+      const mtId = `${mtObj.book}_${mtObj.chapter}_${mtObj.verse}`;
+      const checkId = isNtBook ? id : mtId;
       
-      // Check what evidence types actually exist in SQLite for this specific verse ID
-      const hasMs = query("SELECT 1 FROM manuscript_per_verse WHERE verse_id = :id LIMIT 1", { id }).length > 0;
-      const hasCt = query("SELECT 1 FROM contradictions WHERE verse1 = :id OR verse2 = :id LIMIT 1", { id }).length > 0;
-      const hasAp = query("SELECT 1 FROM apologetics WHERE verse = :id LIMIT 1", { id }).length > 0;
+      const hasMs = isNtBook
+        ? query("SELECT 1 FROM manuscript_per_verse WHERE verse_id = :id LIMIT 1", { id }).length > 0
+        : query("SELECT 1 FROM manuscript_per_verse_ot WHERE (verse_id = :id AND v11n_type = 'LXX') OR (verse_id = :mtId AND v11n_type = 'MT') LIMIT 1", { id, mtId }).length > 0;
+      const hasCt = query("SELECT 1 FROM contradictions WHERE verse1 = :checkId OR verse2 = :checkId LIMIT 1", { checkId }).length > 0;
+      const hasAp = query("SELECT 1 FROM apologetics WHERE verse = :checkId LIMIT 1", { checkId }).length > 0;
       
-      // Generate ONLY the valid sub-path routes!
       if (hasMs) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'manuscripts' } });
       if (hasCt) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'contradictions' } });
       if (hasAp) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'apologetics' } });
     }
   });
 
-  return paths;
+  return BUILD_BOOKS ? paths.filter(p => BUILD_BOOKS.has(p.params.book)) : paths;
 }
 
 const { book, chapter, verse, tab } = Astro.params;
@@ -52,10 +81,17 @@ if (!bookMeta) {
   return Astro.redirect('/404');
 }
 
-// 3. Query active evidence counts (natively in SQLite!)
-const msCount = query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse WHERE verse_id = :verseId", { verseId })[0].count;
-const ctCount = query("SELECT COUNT(DISTINCT title) as count FROM contradictions WHERE verse1 = :verseId OR verse2 = :verseId", { verseId })[0].count;
-const apCount = query("SELECT COUNT(DISTINCT title) as count FROM apologetics WHERE verse = :verseId", { verseId })[0].count;
+const mtObj = mapLxxToMt(book, chapter, verse);
+const mtId = `${mtObj.book}_${mtObj.chapter}_${mtObj.verse}`;
+const checkId = isNT ? verseId : mtId;
+
+// 3. Query active evidence counts
+const msCount = isNT
+  ? query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse WHERE verse_id = :verseId", { verseId })[0].count
+  : query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse_ot WHERE (verse_id = :lxxId AND v11n_type = 'LXX') OR (verse_id = :mtId AND v11n_type = 'MT')", { lxxId: verseId, mtId })[0].count;
+
+const ctCount = query("SELECT COUNT(DISTINCT title) as count FROM contradictions WHERE verse1 = :checkId OR verse2 = :checkId", { checkId })[0].count;
+const apCount = query("SELECT COUNT(DISTINCT title) as count FROM apologetics WHERE verse = :checkId", { checkId })[0].count;
 
 // 4. Query active evidence data
 let manuscripts = [];
@@ -63,13 +99,20 @@ let contradictions = [];
 let apologetics = [];
 
 if (tab === 'manuscripts') {
-  const rawManuscripts = query(`
+  const rawManuscripts = isNT ? query(`
     SELECT m.image_name, mm.* 
     FROM manuscript_per_verse m 
     LEFT JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id 
     WHERE m.verse_id = :verseId
     ORDER BY mm.earliest_date ASC
-  `, { verseId });
+  `, { verseId }) : query(`
+    SELECT m.image_name, mm.* 
+    FROM manuscript_per_verse_ot m 
+    LEFT JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id 
+    WHERE (m.verse_id = :lxxId AND m.v11n_type = 'LXX') 
+       OR (m.verse_id = :mtId AND m.v11n_type = 'MT')
+    ORDER BY mm.earliest_date ASC
+  `, { lxxId: verseId, mtId });
 
   // Automatic Page/Scan Indexing (Prevents duplicates confusion for P66, etc.)
   const msCounts = {};
@@ -101,9 +144,9 @@ if (tab === 'contradictions') {
     SELECT c.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright
     FROM contradictions c
     LEFT JOIN apologetics_meta m ON c.src = m.id
-    WHERE c.verse1 = :verseId OR c.verse2 = :verseId
+    WHERE c.verse1 = :checkId OR c.verse2 = :checkId
     GROUP BY c.title
-  `, { verseId });
+  `, { checkId });
 }
 
 if (tab === 'apologetics') {
@@ -111,9 +154,9 @@ if (tab === 'apologetics') {
     SELECT a.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright
     FROM apologetics a
     LEFT JOIN apologetics_meta m ON a.src = m.id
-    WHERE a.verse = :verseId
+    WHERE a.verse = :checkId
     GROUP BY a.title
-  `, { verseId });
+  `, { checkId });
 }
 
 function formatBookIdToName(id) {
@@ -125,14 +168,22 @@ function formatBookIdToName(id) {
 
 function formatVerseIdToLabel(id) {
   if (!id) return '';
-  const parts = id.split('_');
-  return `${formatBookIdToName(id)} ${parts[1]}:${parts[2]}`;
+  const p = id.split('_');
+  if (booksMeta.ot.some(b => b.id === p[0])) {
+    const m = mapMtToLxx(p[0], p[1], p[2]);
+    return `${formatBookIdToName(id)} ${m.chapter}:${m.verse}`;
+  }
+  return `${formatBookIdToName(id)} ${p[1]}:${p[2]}`;
 }
 
 function formatVerseIdToLink(id) {
   if (!id) return '';
-  const parts = id.split('_');
-  return `/bible/${parts[0]}/${parts[1]}/${parts[2]}/contradictions`; // Route contrast link directly to its contradictions sub-path!
+  const p = id.split('_');
+  if (booksMeta.ot.some(b => b.id === p[0])) {
+    const m = mapMtToLxx(p[0], p[1], p[2]);
+    return `/bible/${m.book}/${m.chapter}/${m.verse}/contradictions`;
+  }
+  return `/bible/${p[0]}/${p[1]}/${p[2]}/contradictions`;
 }
 ---
 
@@ -177,6 +228,7 @@ function formatVerseIdToLink(id) {
             manuscripts={manuscripts} 
             verseId={verseId} 
             verseLabel={`${bookMeta.name} ${chapter}:${verse}`} 
+            isNT={isNT}
           />
         </div>
       )}
@@ -185,7 +237,7 @@ function formatVerseIdToLink(id) {
         <div slot="contradictions" class="contradiction-panel-container">
           {contradictions.length > 0 ? (
             contradictions.map((ct, index) => {
-              const otherVerseId = ct.verse1 === verseId ? ct.verse2 : ct.verse1;
+              const otherVerseId = ct.verse1 === checkId ? ct.verse2 : ct.verse1;
               const otherVerseLabel = formatVerseIdToLabel(otherVerseId);
               const otherVerseLink = formatVerseIdToLink(otherVerseId);
               

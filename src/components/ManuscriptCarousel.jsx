@@ -1,6 +1,26 @@
 import React, { useState, useRef } from 'react';
 
-export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel }) {
+function getManuscriptTag(ms, isNT) {
+  if (isNT) {
+    return ms.ms_id.startsWith('P') ? 'Papyrus' : 'Codex';
+  }
+  const s = `${ms.ms_id} ${ms.name} ${ms.interesting_info || ''} ${ms.image_name || ''}`.toLowerCase();
+  if (s.includes('codex') || ['A', 'B', 'G', 'Z', 'א'].includes(ms.ms_id)) return 'Codex';
+  if (s.includes('phylactery') || s.includes('phyl')) return 'Phylactery';
+  if (s.includes('mezuzah')) return 'Mezuzah';
+  if (s.includes('scroll')) return 'Scroll';
+  if (s.includes('papyrus') || s.includes('pap') || (ms.name && ms.name.toLowerCase().includes('p.'))) return 'Papyrus';
+  return 'Fragment';
+}
+
+function formatDate(dateVal) {
+  if (dateVal === null || dateVal === undefined || dateVal === '') return 'Unknown';
+  const n = parseInt(dateVal, 10);
+  if (isNaN(n)) return dateVal;
+  return n < 0 ? `${Math.abs(n)} BC` : `AD ${n}`;
+}
+
+export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, isNT }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [fullScreenImg, setFullScreenImg] = useState(null);
   const [zoomFileName, setZoomFileName] = useState('');
@@ -55,7 +75,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel })
     const cleanLabel = verseLabel || 'Scripture Verse';
     const shareData = {
       title: `${ms.name} - Manuscript Evidence`,
-      text: `Check out the ancient manuscript evidence of ${ms.name} (~${ms.earliest_date} AD) proving ${cleanLabel}!`,
+      text: `Check out the ancient manuscript evidence of ${ms.name} (~${formatDate(ms.earliest_date)}) proving ${cleanLabel}!`,
       url: window.location.href
     };
 
@@ -114,7 +134,8 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel })
         ref={trackRef}
       >
         {manuscripts.map((ms, index) => {
-          const imgSrc = `${R2_BASE_URL}/images/${ms.ms_id}/${ms.image_name}`;
+          const rootDir = isNT ? 'images' : 'ot_images';
+          const imgSrc = `${R2_BASE_URL}/${rootDir}/${ms.ms_id}/${ms.image_name}`;
           const isLoaded = loadedImages[ms.image_name];
 
           return (
@@ -198,7 +219,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel })
 
                   {/* Image Tag Type Overlay */}
                   <div className="ms-tag-overlay">
-                    {ms.ms_id.startsWith('P') ? 'Papyrus' : 'Codex'}
+                    {getManuscriptTag(ms, isNT)}
                   </div>
                 </div>
 
@@ -238,9 +259,15 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel })
                   </div>
 
                   <div className="ms-specs-grid">
+                    {!isNT && ms.language && (
+                      <div className="spec-cell">
+                        <span className="spec-label">Language</span>
+                        <span className="spec-value">{ms.language}</span>
+                      </div>
+                    )}
                     <div className="spec-cell">
                       <span className="spec-label">Earliest Date</span>
-                      <span className="spec-value">~{ms.earliest_date} AD ({ms.date_range_english || 'Unknown'})</span>
+                      <span className="spec-value">~{formatDate(ms.earliest_date)} ({ms.date_range_english || 'Unknown'})</span>
                     </div>
                     <div className="spec-cell">
                       <span className="spec-label">Current Location</span>

@@ -5,6 +5,7 @@ import Layout from '../../../layouts/Layout.astro';
 import { query } from '../../../db.js';
 import booksMeta from '../../../data/books_meta.json';
 import { mapLxxToMt } from '../../../utils/scripture_mapper.js';
+import { BUILD_BOOKS } from '../../../utils/build_config.js';
 
 // 1. Pre-render all chapters for NT and OT books
 export async function getStaticPaths() {
@@ -22,7 +23,7 @@ export async function getStaticPaths() {
     }
   });
 
-  return paths;
+  return BUILD_BOOKS ? paths.filter(p => BUILD_BOOKS.has(p.params.book)) : paths;
 }
 
 const { book, chapter } = Astro.params;
@@ -50,54 +51,26 @@ try {
   console.error(`Failed to read scripture file: ${filePath}`, err);
 }
 
-// 4. Query SQLite for active evidence (Utilizing strict substr checks to prevent wildcards chapter stacking bugs!)
-const prefix = `${book}_${chapter}_`;
-const len = prefix.length;
-
-const msVerses = query(
-  "SELECT DISTINCT verse_id FROM manuscript_per_verse WHERE substr(verse_id, 1, :len) = :prefix", 
-  { prefix, len }
-).map(row => row.verse_id);
-
-const ctVerses = query(
-  "SELECT DISTINCT verse1 as v FROM contradictions WHERE substr(verse1, 1, :len) = :prefix UNION SELECT DISTINCT verse2 FROM contradictions WHERE substr(verse2, 1, :len) = :prefix",
-  { prefix, len }
-).map(row => row.v);
-
-const apVerses = query(
-  "SELECT DISTINCT verse FROM apologetics WHERE substr(verse, 1, :len) = :prefix",
-  { prefix, len }
-).map(row => row.verse);
-
+// 4. Populate active evidence per verse
 const evidenceMap = {};
-
-const extractVerseNum = (id) => {
-  if (!id) return null;
-  const parts = id.split('_');
-  return parts[2];
-};
-
-msVerses.forEach(id => {
-  const vNum = extractVerseNum(id);
-  if (vNum) {
-    if (!evidenceMap[vNum]) evidenceMap[vNum] = [];
-    evidenceMap[vNum].push('manuscript');
-  }
-});
-
-ctVerses.forEach(id => {
-  const vNum = extractVerseNum(id);
-  if (vNum) {
-    if (!evidenceMap[vNum]) evidenceMap[vNum] = [];
-    evidenceMap[vNum].push('contradiction');
-  }
-});
-
-apVerses.forEach(id => {
-  const vNum = extractVerseNum(id);
-  if (vNum) {
-    if (!evidenceMap[vNum]) evidenceMap[vNum] = [];
-    evidenceMap[vNum].push('apologetics');
+chapterVerses.forEach(verseObj => {
+  const verseNum = Object.keys(verseObj)[0];
+  const lxxId = `${book}_${chapter}_${verseNum}`;
+  const mtMapping = mapLxxToMt(book, chapter, verseNum);
+  const mtId = `${mtMapping.book}_${mtMapping.chapter}_${mtMapping.verse}`;
+  const checkId = isNT ? lxxId : mtId;
+  
+  const types = [];
+  const hasMs = isNT
+    ? query("SELECT 1 FROM manuscript_per_verse WHERE verse_id = :lxxId LIMIT 1", { lxxId }).length > 0
+    : query("SELECT 1 FROM manuscript_per_verse_ot WHERE (verse_id = :lxxId AND v11n_type = 'LXX') OR (verse_id = :mtId AND v11n_type = 'MT') LIMIT 1", { lxxId, mtId }).length > 0;
+    
+  if (hasMs) types.push('manuscript');
+  if (query("SELECT 1 FROM contradictions WHERE verse1 = :checkId OR verse2 = :checkId LIMIT 1", { checkId }).length > 0) types.push('contradiction');
+  if (query("SELECT 1 FROM apologetics WHERE verse = :checkId LIMIT 1", { checkId }).length > 0) types.push('apologetics');
+  
+  if (types.length > 0) {
+    evidenceMap[verseNum] = types;
   }
 });
 
@@ -154,11 +127,7 @@ const hasNext = currentChapterNum < bookMeta.chapters;
           const verseNum = Object.keys(verseObj)[0];
           const verseText = verseObj[verseNum];
           
-          // Cleanly translate LXX Greek reading verse index back to Hebrew/MT numbering for exact database query checks!
-          const mapping = mapLxxToMt(book, chapter, verseNum);
-          const mtVerseNum = mapping.verse;
-
-          const evidenceTypes = evidenceMap[mtVerseNum] || [];
+          const evidenceTypes = evidenceMap[verseNum] || [];
           const hasEvidence = evidenceTypes.length > 0;
 
           if (hasEvidence) {
@@ -168,16 +137,16 @@ const hasNext = currentChapterNum < bookMeta.chapters;
                   <span class="verse-num">{verseNum}</span>
                   <div class="verse-body-wrapper">
                     <p class="verse-text">
-                      {/* Tapping the verse text redirects to the mapped standard MT redirect gate */}
-                      <a href={`/bible/${book}/${chapter}/${mtVerseNum}`} class="verse-text-link-wrapper">
+                      {/* Tapping the verse text redirects to the evidence redirect gate */}
+                      <a href={`/bible/${book}/${chapter}/${verseNum}`} class="verse-text-link-wrapper">
                         {verseText}
                       </a>
                       
-                      {/* Tapping individual badges routes DIRECTLY to their mapped standard MT evidence tab pages! */}
+                      {/* Tapping individual badges routes DIRECTLY to their evidence tab pages! */}
                       <span class="verse-badge-tray-inline">
                         {evidenceTypes.includes('manuscript') && (
                           <a 
-                            href={`/bible/${book}/${chapter}/${mtVerseNum}/manuscripts`} 
+                            href={`/bible/${book}/${chapter}/${verseNum}/manuscripts`} 
                             class="icon-inline ms-icon" 
                             title="Manuscripts available"
                           >
@@ -188,7 +157,7 @@ const hasNext = currentChapterNum < bookMeta.chapters;
                         )}
                         {evidenceTypes.includes('contradiction') && (
                           <a 
-                            href={`/bible/${book}/${chapter}/${mtVerseNum}/contradictions`} 
+                            href={`/bible/${book}/${chapter}/${verseNum}/contradictions`} 
                             class="icon-inline ct-icon" 
                             title="Alleged contradictions available"
                           >
@@ -199,7 +168,7 @@ const hasNext = currentChapterNum < bookMeta.chapters;
                         )}
                         {evidenceTypes.includes('apologetics') && (
                           <a 
-                            href={`/bible/${book}/${chapter}/${mtVerseNum}/apologetics`} 
+                            href={`/bible/${book}/${chapter}/${verseNum}/apologetics`} 
                             class="icon-inline ap-icon" 
                             title="Apologetics defenses available"
                           >
