@@ -218,8 +218,16 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
                   </button>
 
                   {/* Image Tag Type Overlay */}
-                  <div className="ms-tag-overlay">
-                    {getManuscriptTag(ms, isNT)}
+                  <div className="ms-tags-container">
+                    {isNT ? (
+                      <div className="ms-tag-overlay">{getManuscriptTag(ms, true)}</div>
+                    ) : (
+                      <>
+                        {ms.form && <div className="ms-tag-overlay">{ms.form}</div>}
+                        {ms.material && <div className="ms-tag-overlay material-tag">{ms.material}</div>}
+                        {(!ms.form && !ms.material) && <div className="ms-tag-overlay">{getManuscriptTag(ms, false)}</div>}
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -552,10 +560,16 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
           right: 12px;
         }
 
-        .ms-tag-overlay {
+        .ms-tags-container {
           position: absolute;
           bottom: 10px;
           left: 10px;
+          display: flex;
+          gap: 6px;
+          z-index: 5;
+        }
+
+        .ms-tag-overlay {
           padding: 3px 8px;
           background-color: var(--color-surface);
           border: 1px solid var(--color-outline-variant);
@@ -566,6 +580,10 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
           text-transform: uppercase;
           border-radius: 4px;
           letter-spacing: 0.5px;
+        }
+
+        .material-tag {
+          color: var(--color-primary);
         }
 
         /* 2. Action bar buttons */
