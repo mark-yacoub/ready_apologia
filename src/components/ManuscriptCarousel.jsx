@@ -140,8 +140,23 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
           const imgSrc = `${R2_BASE_URL}/${rootDir}/${ms.ms_id}/${ms.image_name}`;
           const isLoaded = loadedImages[ms.image_name];
 
+          let formStr = '';
+          if (!isNT) {
+            if (ms.form && ms.material) {
+              formStr = `, made as a ${ms.form.toLowerCase()} from ${ms.material.toLowerCase()},`;
+            } else if (ms.form) {
+              formStr = `, made as a ${ms.form.toLowerCase()},`;
+            } else if (ms.material) {
+              formStr = `, made from ${ms.material.toLowerCase()},`;
+            }
+          }
+
+          let altText = `${ms.name || ms.ms_id}${formStr} showing ${verseLabel} from ${ms.date_range_english || 'Unknown'}`;
+          if (ms.found_location) altText += ` found in ${ms.found_location}`;
+          if (ms.current_location) altText += `, currently housed at ${ms.current_location}`;
+
           return (
-            <div key={ms.ms_id} className="carousel-slide">
+            <div key={ms.image_name} className="carousel-slide">
               
               {/* Card Container */}
               <div className={`slide-card ${activeSlide === index ? 'active-card' : 'inactive-card'}`}>
@@ -171,7 +186,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
                       {/* Image is ALWAYS rendered to ensure browser triggers network loading immediately! */}
                       <img 
                         src={imgSrc} 
-                        alt={`Ancient manuscript scan of ${ms.name}`} 
+                        alt={altText} 
                         className={`ms-image ${isLoaded ? 'loaded' : 'loading'}`}
                         ref={(el) => {
                           if (el && el.complete && !isLoaded) {
@@ -240,7 +255,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
                     className="action-btn share-btn"
                     title="Share this manuscript evidence link"
                   >
-                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 10.742l-5.348-2.674m0 0a3 3 0 110-5.348m0 5.348a3 3 0 110 5.348m5.348-2.674l5.348 2.674m0 0a3 3 0 110-5.348m0 5.348a3 3 0 110 5.348" />
                     </svg>
                     <span>Share Evidence</span>
@@ -251,7 +266,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
                     className="action-btn save-btn"
                     title="Save scan directly to device photo gallery"
                   >
-                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                     </svg>
                     <span>Save Scan</span>
@@ -350,7 +365,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
             </div>
 
             <button className="lightbox-close-btn" onClick={() => setFullScreenImg(null)} aria-label="Close modal">
-              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -377,7 +392,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
               className="lightbox-save-btn"
               title="Direct download high-resolution scan to local device gallery"
             >
-              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
               <span>Save Scan to device</span>
@@ -388,7 +403,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
       )}
 
       {/* Core styles block definitions */}
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .carousel-container {
           display: flex;
           flex-direction: column;
@@ -939,7 +954,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
         @keyframes spin {
           to { transform: rotate(360deg); }
         }
-      `}</style>
+      ` }} />
 
     </div>
   );

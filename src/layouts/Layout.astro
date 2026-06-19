@@ -1,26 +1,43 @@
 ---
 import BottomNav from '../components/BottomNav.jsx';
 import ScriptureNav from '../components/ScriptureNav.jsx';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title: string;
+	description?: string;
+	ogImage?: string;
+	schema?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = "Ready Apologia - Defending the Faith", ogImage, schema } = Astro.props;
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
+const fallbackImage = `${site}${base}/favicon.svg`;
+const ogImageUrl = ogImage ? (ogImage.startsWith('http') ? ogImage : `${site}${base}${ogImage}`) : fallbackImage;
+const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 ---
 
 <!doctype html>
 <html lang="en" class="light">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Ready Apologia - Defending the Faith" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Open Graph / Social Media -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={ogUrl} />
+		<meta property="og:title" content={`${title} | Ready Apologia`} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageUrl} />
+
 		<title>{title} | Ready Apologia</title>
-		<ViewTransitions />
+		
+		{schema && <script type="application/ld+json" set:html={schema} />}
+		<ClientRouter />
 		
 		<!-- Load Google Fonts -->
 		<link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -32,7 +49,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 		<meta name="theme-color" content="#18181b" />
 
 		<!-- Register PWA Service Worker -->
-		<script is:inline>
+		<script is:inline define:vars={{ base }}>
 			if ('serviceWorker' in navigator) {
 				window.addEventListener('load', () => {
 					navigator.serviceWorker.register(`${base}/sw.js`)

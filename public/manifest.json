@@ -2,14 +2,14 @@
   "name": "Ready Apologia",
   "short_name": "Ready Apologia",
   "description": "A mobile-first field toolkit for Christian evangelism and apologetics.",
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#ffffff",
   "theme_color": "#18181b",
   "icons": [
     {
-      "src": "/assets/logo.png",
+      "src": "assets/logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

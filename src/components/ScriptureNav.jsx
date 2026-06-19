@@ -10,8 +10,11 @@ export default function ScriptureNav() {
   // Synchronize active scripture route context
   useEffect(() => {
     const syncNavWithUrl = () => {
+      const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       const pathname = window.location.pathname;
-      const parts = pathname.split('/');
+      // Strip base URL if present to ensure reliable splitting
+      const activePath = pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
+      const parts = activePath.split('/');
       
       if (parts[1] === 'bible' && parts[2]) {
         const bookId = parts[2];
@@ -169,7 +172,7 @@ export default function ScriptureNav() {
       </div>
 
       {/* Custom Styling */}
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .nav-sidebar-inner {
           display: flex;
           flex-direction: column;
@@ -429,7 +432,7 @@ export default function ScriptureNav() {
         .animate-fade-in {
           animation: fadeIn 0.2s ease-out forwards;
         }
-      `}</style>
+      ` }} />
     </div>
   );
 }

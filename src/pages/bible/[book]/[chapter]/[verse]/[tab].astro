@@ -1,6 +1,5 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
+
 import Layout from '../../../../../layouts/Layout.astro';
 import VerseTabs from '../../../../../components/VerseTabs.jsx';
 import ManuscriptCarousel from '../../../../../components/ManuscriptCarousel.jsx';
@@ -39,7 +38,11 @@ export async function getStaticPaths() {
   const ct = ctRaw.map(mapToLxxIfOt);
   const ap = apRaw.map(mapToLxxIfOt);
   
-  const allVerseIds = new Set([...msNt, ...msOt, ...ct, ...ap].filter(Boolean));
+  const msSet = new Set([...msNt, ...msOt]);
+  const ctSet = new Set(ct);
+  const apSet = new Set(ap);
+  
+  const allVerseIds = new Set([...msSet, ...ctSet, ...apSet].filter(Boolean));
   const paths = [];
 
   allVerseIds.forEach(id => {
@@ -48,20 +51,10 @@ export async function getStaticPaths() {
       const b = parts[0];
       const c = parts[1];
       const v = parts[2];
-      const isNtBook = booksMeta.nt.some(x => x.id === b);
-      const mtObj = mapLxxToMt(b, c, v);
-      const mtId = `${mtObj.book}_${mtObj.chapter}_${mtObj.verse}`;
-      const checkId = isNtBook ? id : mtId;
       
-      const hasMs = isNtBook
-        ? query("SELECT 1 FROM manuscript_per_verse WHERE verse_id = :id LIMIT 1", { id }).length > 0
-        : query("SELECT 1 FROM manuscript_per_verse_ot WHERE (verse_id = :id AND v11n_type = 'LXX') OR (verse_id = :mtId AND v11n_type = 'MT') LIMIT 1", { id, mtId }).length > 0;
-      const hasCt = query("SELECT 1 FROM contradictions WHERE verse1 = :checkId OR verse2 = :checkId LIMIT 1", { checkId }).length > 0;
-      const hasAp = query("SELECT 1 FROM apologetics WHERE verse = :checkId LIMIT 1", { checkId }).length > 0;
-      
-      if (hasMs) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'manuscripts' } });
-      if (hasCt) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'contradictions' } });
-      if (hasAp) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'apologetics' } });
+      if (msSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'manuscripts' } });
+      if (ctSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'contradictions' } });
+      if (apSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'apologetics' } });
     }
   });
 
@@ -219,9 +212,71 @@ function formatVerseIdToLink(id) {
   return `${base}/bible/${p[0]}/${p[1]}/${p[2]}/contradictions`;
 }
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+// Generate OG Image from the oldest manuscript
+let ogImage = undefined;
+if (isNT) {
+  const earliestMs = query(`
+    SELECT m.ms_id, m.image_name 
+    FROM manuscript_per_verse m
+    JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id
+    WHERE m.verse_id = :verseId
+    ORDER BY mm.earliest_date ASC
+    LIMIT 1
+  `, { verseId });
+  if (earliestMs.length > 0 && earliestMs[0].image_name) {
+    ogImage = `https://pub-219566f197174e27a10f51e5fb2414f6.r2.dev/images/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
+  }
+} else {
+  try {
+    const earliestMsOt = query(`
+      SELECT m.ms_id, m.image_name 
+      FROM manuscript_per_verse_ot m
+      JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id
+      WHERE m.verse_id = :lxxId OR m.verse_id = :mtId
+      ORDER BY mm.earliest_date ASC
+      LIMIT 1
+    `, { lxxId: verseId, mtId });
+    if (earliestMsOt.length > 0 && earliestMsOt[0].image_name) {
+      ogImage = `https://pub-219566f197174e27a10f51e5fb2414f6.r2.dev/ot_images/${earliestMsOt[0].ms_id}/${encodeURIComponent(earliestMsOt[0].image_name)}`;
+    }
+  } catch(e) {}
+}
+
+// Generate SEO Description & JSON-LD Schema
+let seoDescription = `Explore apologetics, alleged contradictions, and ancient manuscript evidence for ${bookMeta.name} ${chapter}:${verse} in Ready Apologia.`;
+let seoSchema = undefined;
+
+const sanitizeHTML = (str) => {
+  if (!str) return "";
+  return str.replace(/<[^>]*>?/gm, '').replace(/"/g, '&quot;'); 
+};
+
+if (tab === 'apologetics' && apologetics && apologetics.length > 0) {
+  seoDescription = `Apologetic defenses for ${bookMeta.name} ${chapter}:${verse}. Topics include: ${sanitizeHTML(apologetics[0].title)}.`;
+  const faqs = apologetics.map(ap => ({
+    "@type": "Question",
+    "name": sanitizeHTML(ap.title),
+    "acceptedAnswer": { "@type": "Answer", "text": sanitizeHTML(ap.answer) }
+  }));
+  seoSchema = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faqs });
+} else if (tab === 'contradictions' && contradictions && contradictions.length > 0) {
+  seoDescription = `Answers to alleged contradictions in ${bookMeta.name} ${chapter}:${verse}. Topics include: ${sanitizeHTML(contradictions[0].title)}.`;
+  const faqs = contradictions.map(ct => ({
+    "@type": "Question",
+    "name": sanitizeHTML(ct.title),
+    "acceptedAnswer": { "@type": "Answer", "text": sanitizeHTML(ct.answer) }
+  }));
+  seoSchema = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faqs });
+}
 ---
 
-<Layout title={`Evidence: ${bookMeta.name} ${chapter}:${verse}`}>
+<Layout 
+  title={`Evidence: ${bookMeta.name} ${chapter}:${verse}`} 
+  description={seoDescription} 
+  ogImage={ogImage} 
+  schema={seoSchema}
+>
   <div class="verse-detail-container">
     
     <!-- Top Header Back Navigation -->
@@ -272,12 +327,13 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       book={book}
       chapter={chapter}
       verse={verse}
-    >
+    />
       
-      <!-- ACTIVE TAB PANEL CONTENTS -->
+    <!-- ACTIVE TAB PANEL CONTENTS -->
+    <div class="tab-panels-window">
       
       {tab === 'manuscripts' && (
-        <div slot="manuscripts">
+        <div>
           <ManuscriptCarousel 
             client:load 
             manuscripts={manuscripts} 
@@ -289,7 +345,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       )}
 
       {tab === 'contradictions' && (
-        <div slot="contradictions" class="contradiction-panel-container">
+        <div class="contradiction-panel-container">
           {contradictions.length > 0 ? (
             contradictions.map((ct, index) => {
               const otherVerseId = ct.verse1 === checkId ? ct.verse2 : ct.verse1;
@@ -381,7 +437,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       )}
 
       {tab === 'apologetics' && (
-        <div slot="apologetics" class="apologetics-panel-container">
+        <div class="apologetics-panel-container">
           {apologetics.length > 0 ? (
             apologetics.map((ap, index) => {
               // Determine if details panel is open by default (always open if 1, pre-open 1st if multiple)
@@ -458,7 +514,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
         </div>
       )}
 
-    </VerseTabs>
+    </div>
   </div>
 </Layout>
 

@@ -8,9 +8,6 @@ export default function VerseTabs({
   book,
   chapter,
   verse,
-  manuscripts,
-  contradictions,
-  apologetics
 }) {
   
   // Build the horizontal links track. Switching tabs is now a standard, bookmarkable page link!
@@ -112,13 +109,6 @@ export default function VerseTabs({
         })}
       </div>
 
-      {/* Displays ONLY the active slot content directly inside the pre-rendered static page! */}
-      <div className="tab-panels-window">
-        {activeTab === 'manuscripts' && manuscripts}
-        {activeTab === 'contradictions' && contradictions}
-        {activeTab === 'apologetics' && apologetics}
-      </div>
-
       {/* Settings Modal Popup */}
       {isEditing && (
         <div className="reorder-modal-backdrop" onClick={() => setIsEditing(false)}>
@@ -171,7 +161,7 @@ export default function VerseTabs({
       )}
 
       {/* Custom Light-Only CSS Styles */}
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .tabs-wrapper {
           display: flex;
           flex-direction: column;
@@ -388,7 +378,7 @@ export default function VerseTabs({
           border-radius: 12px;
           background-color: var(--color-surface-container-low);
         }
-      `}</style>
+      ` }} />
 
     </div>
   );

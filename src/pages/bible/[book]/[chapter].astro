@@ -4,7 +4,7 @@ import path from 'node:path';
 import Layout from '../../../layouts/Layout.astro';
 import { query } from '../../../db.js';
 import booksMeta from '../../../data/books_meta.json';
-import { mapLxxToMt } from '../../../utils/scripture_mapper.js';
+import { mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
 import { BUILD_BOOKS } from '../../../utils/build_config.js';
 
 // 1. Pre-render all chapters for NT and OT books
@@ -53,21 +53,53 @@ try {
 
 // 4. Populate active evidence per verse
 const evidenceMap = {};
+
+const lxxPrefix = `${book}_${chapter}_%`;
+const mtPrefix = isNT ? '' : `${mapLxxToMt(book, chapter, '1').book}_%`; 
+
+const msSet = new Set(
+  isNT 
+    ? query("SELECT verse_id FROM manuscript_per_verse WHERE verse_id LIKE :p", { p: lxxPrefix }).map(r => r.verse_id)
+    : query("SELECT verse_id, v11n_type FROM manuscript_per_verse_ot WHERE verse_id LIKE :lxx OR verse_id LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
+        if (r.v11n_type === 'MT') {
+          const p = r.verse_id.split('_');
+          const m = mapMtToLxx(p[0], p[1], p[2]);
+          return `${m.book}_${m.chapter}_${m.verse}`;
+        }
+        return r.verse_id;
+      })
+);
+
+const ctSet = new Set(
+  query("SELECT verse1 as v FROM contradictions WHERE verse1 LIKE :lxx OR verse1 LIKE :mt UNION SELECT verse2 as v FROM contradictions WHERE verse2 LIKE :lxx OR verse2 LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
+    const p = r.v.split('_');
+    if (!isNT) {
+      const m = mapMtToLxx(p[0], p[1], p[2]);
+      return `${m.book}_${m.chapter}_${m.verse}`;
+    }
+    return r.v;
+  })
+);
+
+const apSet = new Set(
+  query("SELECT verse FROM apologetics WHERE verse LIKE :lxx OR verse LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
+    const p = r.verse.split('_');
+    if (!isNT) {
+      const m = mapMtToLxx(p[0], p[1], p[2]);
+      return `${m.book}_${m.chapter}_${m.verse}`;
+    }
+    return r.verse;
+  })
+);
+
 chapterVerses.forEach(verseObj => {
   const verseNum = Object.keys(verseObj)[0];
   const lxxId = `${book}_${chapter}_${verseNum}`;
-  const mtMapping = mapLxxToMt(book, chapter, verseNum);
-  const mtId = `${mtMapping.book}_${mtMapping.chapter}_${mtMapping.verse}`;
-  const checkId = isNT ? lxxId : mtId;
   
   const types = [];
-  const hasMs = isNT
-    ? query("SELECT 1 FROM manuscript_per_verse WHERE verse_id = :lxxId LIMIT 1", { lxxId }).length > 0
-    : query("SELECT 1 FROM manuscript_per_verse_ot WHERE (verse_id = :lxxId AND v11n_type = 'LXX') OR (verse_id = :mtId AND v11n_type = 'MT') LIMIT 1", { lxxId, mtId }).length > 0;
-    
-  if (hasMs) types.push('manuscript');
-  if (query("SELECT 1 FROM contradictions WHERE verse1 = :checkId OR verse2 = :checkId LIMIT 1", { checkId }).length > 0) types.push('contradiction');
-  if (query("SELECT 1 FROM apologetics WHERE verse = :checkId LIMIT 1", { checkId }).length > 0) types.push('apologetics');
+  if (msSet.has(lxxId)) types.push('manuscript');
+  if (ctSet.has(lxxId)) types.push('contradiction');
+  if (apSet.has(lxxId)) types.push('apologetics');
   
   if (types.length > 0) {
     evidenceMap[verseNum] = types;
@@ -78,9 +110,42 @@ const currentChapterNum = parseInt(chapter);
 const hasPrev = currentChapterNum > 1;
 const hasNext = currentChapterNum < bookMeta.chapters;
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+// Generate OG Image from the oldest manuscript of chapter 1, verse 1 of this book
+let ogImage = undefined;
+const v11Id = `${book}_1_1`;
+if (isNT) {
+  const earliestMs = query(`
+    SELECT m.ms_id, m.image_name 
+    FROM manuscript_per_verse m
+    JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id
+    WHERE m.verse_id = :v11Id
+    ORDER BY mm.earliest_date ASC
+    LIMIT 1
+  `, { v11Id });
+  if (earliestMs.length > 0 && earliestMs[0].image_name) {
+    ogImage = `https://pub-219566f197174e27a10f51e5fb2414f6.r2.dev/images/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
+  }
+} else {
+  try {
+    const mtMappingV11 = mapLxxToMt(book, '1', '1');
+    const mtIdV11 = `${mtMappingV11.book}_${mtMappingV11.chapter}_${mtMappingV11.verse}`;
+    const earliestMsOt = query(`
+      SELECT m.ms_id, m.image_name 
+      FROM manuscript_per_verse_ot m
+      JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id
+      WHERE m.verse_id = :v11Id OR m.verse_id = :mtIdV11
+      ORDER BY mm.earliest_date ASC
+      LIMIT 1
+    `, { v11Id, mtIdV11 });
+    if (earliestMsOt.length > 0 && earliestMsOt[0].image_name) {
+      ogImage = `https://pub-219566f197174e27a10f51e5fb2414f6.r2.dev/ot_images/${earliestMsOt[0].ms_id}/${encodeURIComponent(earliestMsOt[0].image_name)}`;
+    }
+  } catch(e) {}
+}
 ---
 
-<Layout title={`${bookMeta.name} ${chapter}`}>
+<Layout title={`${bookMeta.name} ${chapter}`} ogImage={ogImage}>
   <div class="chapter-reader-container">
     
     <!-- Split Book & Chapter Dropdown Selector -->
