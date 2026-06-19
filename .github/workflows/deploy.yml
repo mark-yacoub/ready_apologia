@@ -13,6 +13,12 @@ permissions:
   pages: write
   id-token: write
 
+# Allow only one concurrent deployment, cancelling any runs currently in progress
+# if a newer push is detected, so we don't waste build minutes on outdated code.
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
