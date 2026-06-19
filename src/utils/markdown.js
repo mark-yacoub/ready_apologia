@@ -34,7 +34,7 @@ export function parseMarkdown(text) {
   html = html.replace(/\*(?!\s)(.*?)(?<!\s)\*/g, '<em>$1</em>');
   
   // 5. Parse Scripture Citations references natively into gorgeous design pills!
-  const scriptureRegex = /\b((?:[123]\s+)?[A-Z][a-z]+\.?\s+\d+:\d+(?:-\d+)?(?:(?:[;,]\s+)(?:\d+:)?\d+(?:-\d+)?)*)\b/g;
+  const scriptureRegex = /\b((?:[123]\s+)?[A-Z][a-z]+\.?\s+\d+:\d+(?:[-–—]\d+)?(?:(?:[;,]\s+)(?:\d+:)?\d+(?:[-–—]\d+)?)*)\b/g;
   html = html.replace(scriptureRegex, '<span class="exegesis-scripture-pill">$1</span>');
   
   // 4. Parse Inline Anchors: [text](url)
@@ -56,7 +56,6 @@ export function parseMarkdown(text) {
     // Don't nest block-level HTML structure tags inside paragraph tags
     if (trimmed.startsWith('<h3') || trimmed.startsWith('<h4') || trimmed.startsWith('<ul')) return trimmed;
 
-    
     return `<p class="response-paragraph">${trimmed.replace(/\n/g, '<br/>')}</p>`;
   }).filter(Boolean).join('\n');
 }
