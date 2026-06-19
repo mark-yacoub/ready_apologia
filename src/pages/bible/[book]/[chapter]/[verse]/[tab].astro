@@ -1,4 +1,6 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 
 import Layout from '../../../../../layouts/Layout.astro';
 import VerseTabs from '../../../../../components/VerseTabs.jsx';
@@ -85,6 +87,23 @@ const msCount = isNT
 
 const ctCount = query("SELECT COUNT(DISTINCT title) as count FROM contradictions WHERE verse1 = :checkId OR verse2 = :checkId", { checkId })[0].count;
 const apCount = query("SELECT COUNT(DISTINCT title) as count FROM apologetics WHERE verse = :checkId", { checkId })[0].count;
+
+// 3.5 Load Verse Text
+const folder = isNT ? 'esv' : 'lxx2012';
+const scriptureFilePath = path.join(process.cwd(), 'src/data/scripture', folder, `${book}.json`);
+let verseText = "";
+
+try {
+  const fileContent = fs.readFileSync(scriptureFilePath, 'utf-8');
+  const bookData = JSON.parse(fileContent);
+  const chapterVerses = bookData[chapter] || [];
+  const verseObj = chapterVerses.find(v => Object.keys(v)[0] === verse);
+  if (verseObj) {
+    verseText = verseObj[verse];
+  }
+} catch (err) {
+  console.error(`Failed to read scripture file: ${scriptureFilePath}`, err);
+}
 
 // 4. Query active evidence data
 let manuscripts = [];
@@ -302,6 +321,12 @@ if (tab === 'apologetics' && apologetics && apologetics.length > 0) {
         </button>
       </div>
     </header>
+
+    {verseText && (
+      <div class="verse-text-reminder select-text">
+        "{verseText}"
+      </div>
+    )}
 
     <script>
       // Trigger the React modal from the static Astro shell
@@ -575,6 +600,19 @@ if (tab === 'apologetics' && apologetics && apologetics.length > 0) {
 		color: var(--color-primary);
 		margin: 0;
 		letter-spacing: -0.01em;
+	}
+
+	.verse-text-reminder {
+		font-family: var(--font-display);
+		font-size: 13px;
+		line-height: 1.4;
+		color: var(--color-on-surface-variant);
+		font-style: italic;
+		padding: 10px 14px;
+		background-color: var(--color-surface-container-lowest);
+		border-left: 3px solid var(--color-outline-variant);
+		border-radius: 0 8px 8px 0;
+		margin-bottom: 4px;
 	}
 
 	.subtle-ellipsis-btn {
