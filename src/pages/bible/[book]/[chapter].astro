@@ -77,6 +77,7 @@ chapterVerses.forEach(verseObj => {
 const currentChapterNum = parseInt(chapter);
 const hasPrev = currentChapterNum > 1;
 const hasNext = currentChapterNum < bookMeta.chapters;
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
 <Layout title={`${bookMeta.name} ${chapter}`}>
@@ -107,7 +108,7 @@ const hasNext = currentChapterNum < bookMeta.chapters;
               <div class="chapter-popover-grid">
                 {Array.from({ length: bookMeta.chapters }, (_, i) => i + 1).map(c => (
                   <a 
-                    href={`/bible/${book}/${c}`} 
+                    href={`${base}/bible/${book}/${c}`} 
                     class={`popover-chap-link ${c === currentChapterNum ? 'active' : ''}`}
                   >
                     {c}
@@ -138,7 +139,7 @@ const hasNext = currentChapterNum < bookMeta.chapters;
                   <div class="verse-body-wrapper">
                     <p class="verse-text">
                       {/* Tapping the verse text redirects to the evidence redirect gate */}
-                      <a href={`/bible/${book}/${chapter}/${verseNum}`} class="verse-text-link-wrapper">
+                      <a href={`${base}/bible/${book}/${chapter}/${verseNum}`} class="verse-text-link-wrapper">
                         {verseText}
                       </a>
                       
@@ -146,7 +147,7 @@ const hasNext = currentChapterNum < bookMeta.chapters;
                       <span class="verse-badge-tray-inline">
                         {evidenceTypes.includes('manuscript') && (
                           <a 
-                            href={`/bible/${book}/${chapter}/${verseNum}/manuscripts`} 
+                            href={`${base}/bible/${book}/${chapter}/${verseNum}/manuscripts`} 
                             class="icon-inline ms-icon" 
                             title="Manuscripts available"
                           >
@@ -157,7 +158,7 @@ const hasNext = currentChapterNum < bookMeta.chapters;
                         )}
                         {evidenceTypes.includes('contradiction') && (
                           <a 
-                            href={`/bible/${book}/${chapter}/${verseNum}/contradictions`} 
+                            href={`${base}/bible/${book}/${chapter}/${verseNum}/contradictions`} 
                             class="icon-inline ct-icon" 
                             title="Alleged contradictions available"
                           >
@@ -168,7 +169,7 @@ const hasNext = currentChapterNum < bookMeta.chapters;
                         )}
                         {evidenceTypes.includes('apologetics') && (
                           <a 
-                            href={`/bible/${book}/${chapter}/${verseNum}/apologetics`} 
+                            href={`${base}/bible/${book}/${chapter}/${verseNum}/apologetics`} 
                             class="icon-inline ap-icon" 
                             title="Apologetics defenses available"
                           >
@@ -207,7 +208,7 @@ const hasNext = currentChapterNum < bookMeta.chapters;
     <div class="pagination-footer select-none">
       {hasPrev ? (
         <a 
-          href={`/bible/${book}/${currentChapterNum - 1}`} 
+          href={`${base}/bible/${book}/${currentChapterNum - 1}`} 
           class="pager-btn"
         >
           &larr; Chapter {currentChapterNum - 1}
@@ -222,7 +223,7 @@ const hasNext = currentChapterNum < bookMeta.chapters;
 
       {hasNext ? (
         <a 
-          href={`/bible/${book}/${currentChapterNum + 1}`} 
+          href={`${base}/bible/${book}/${currentChapterNum + 1}`} 
           class="pager-btn"
         >
           Chapter {currentChapterNum + 1} &rarr;

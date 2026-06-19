@@ -207,12 +207,14 @@ function formatVerseIdToLabel(id) {
 function formatVerseIdToLink(id) {
   if (!id) return '';
   const p = id.split('_');
+  const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
   if (booksMeta.ot.some(b => b.id === p[0])) {
     const m = mapMtToLxx(p[0], p[1], p[2]);
-    return `/bible/${m.book}/${m.chapter}/${m.verse}/contradictions`;
+    return `${base}/bible/${m.book}/${m.chapter}/${m.verse}/contradictions`;
   }
-  return `/bible/${p[0]}/${p[1]}/${p[2]}/contradictions`;
+  return `${base}/bible/${p[0]}/${p[1]}/${p[2]}/contradictions`;
 }
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
 <Layout title={`Evidence: ${bookMeta.name} ${chapter}:${verse}`}>
@@ -220,7 +222,7 @@ function formatVerseIdToLink(id) {
     
     <!-- Top Header Back Navigation -->
     <header class="detail-header select-none">
-      <a href={`/bible/${book}/${chapter}`} class="back-btn" aria-label="Go back to chapter reader">
+      <a href={`${base}/bible/${book}/${chapter}`} class="back-btn" aria-label="Go back to chapter reader">
         <span class="back-arrow">
           <svg width="6" height="10" fill="none" stroke="currentColor" viewBox="0 0 6 10" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 9L1 5l4-4" />

@@ -29,6 +29,11 @@ const server = http.createServer((req, res) => {
   try {
     const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost:8080'}`);
     pathname = parsedUrl.pathname;
+    
+    // Support Astro base URL by stripping it for local directory lookup
+    if (pathname.startsWith('/ready_apologia')) {
+      pathname = pathname.substring('/ready_apologia'.length) || '/';
+    }
   } catch (err) {
     console.warn(`⚠️ Malformed URL requested: ${req.url}`);
     pathname = '/404.html'; // Route immediately to static 404 fallback

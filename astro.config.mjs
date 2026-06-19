@@ -5,7 +5,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   integrations: [react()],
   // Set the base path to match the GitHub repository name
-  site: 'https://mark-yacoub.github.io',
+  site: process.env.GITHUB_ACTIONS ? 'https://mark-yacoub.github.io' : 'http://localhost:8080',
   base: '/ready_apologia',
   // Since we are doing Scenario A (Static Site), we want 'static' output (default)
   output: 'static',

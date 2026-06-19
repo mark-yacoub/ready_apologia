@@ -80,7 +80,8 @@ export default function VerseTabs({
       {/* Category Segmented Pill Headers */}
       <div className="tab-segmented-bar" ref={containerRef}>
         {sortedTabs.map((tab) => {
-          const targetUrl = `/bible/${book}/${chapter}/${verse}/${tab.id}`;
+          const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+          const targetUrl = `${base}/bible/${book}/${chapter}/${verse}/${tab.id}`;
           const isActive = activeTab === tab.id;
           const currentOrderIndex = tabOrder.indexOf(tab.id);
 

@@ -69,10 +69,11 @@ export default function ScriptureNav() {
                 {Array.from({ length: book.chapters }, (_, i) => i + 1).map((chap) => {
                   const isCurrentChapter = book.id === currentBook && String(chap) === currentChapter;
                   
+                  const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
                   return (
                     <a
                       key={chap}
-                      href={`/bible/${book.id}/${chap}`}
+                      href={`${base}/bible/${book.id}/${chap}`}
                       className={`chapter-link ${isCurrentChapter ? 'active' : ''}`}
                     >
                       {chap}
