@@ -141,21 +141,49 @@ if (tab === 'manuscripts') {
 
 if (tab === 'contradictions') {
   contradictions = query(`
-    SELECT c.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright
+    SELECT c.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright,
+           pw.name as work_name, pw.url as work_url,
+           pf.id as father_id, pf.name as father_name, pf.year as father_year, pf.icon as father_icon,
+           CASE 
+             WHEN pf.id IS NOT NULL THEN 1
+             WHEN c.src = 'answering_islam' THEN 2
+             WHEN c.src = 'apologetic_apologetics_press' THEN 3
+             WHEN c.src = 'apologetic_defending_inerrancy' THEN 4
+             WHEN c.src = 'carm' THEN 5
+             WHEN c.src = 'answersingenesis' THEN 6
+             ELSE 7
+           END as sort_order
     FROM contradictions c
     LEFT JOIN apologetics_meta m ON c.src = m.id
+    LEFT JOIN patristics_works pw ON c.src = pw.id
+    LEFT JOIN patristics_fathers pf ON pw.father_id = pf.id
     WHERE c.verse1 = :checkId OR c.verse2 = :checkId
     GROUP BY c.title
+    ORDER BY sort_order ASC, pf.year ASC
   `, { checkId });
 }
 
 if (tab === 'apologetics') {
   apologetics = query(`
-    SELECT a.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright
+    SELECT a.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright,
+           pw.name as work_name, pw.url as work_url,
+           pf.id as father_id, pf.name as father_name, pf.year as father_year, pf.icon as father_icon,
+           CASE 
+             WHEN pf.id IS NOT NULL THEN 1
+             WHEN a.src = 'answering_islam' THEN 2
+             WHEN a.src = 'apologetic_apologetics_press' THEN 3
+             WHEN a.src = 'apologetic_defending_inerrancy' THEN 4
+             WHEN a.src = 'carm' THEN 5
+             WHEN a.src = 'answersingenesis' THEN 6
+             ELSE 7
+           END as sort_order
     FROM apologetics a
     LEFT JOIN apologetics_meta m ON a.src = m.id
+    LEFT JOIN patristics_works pw ON a.src = pw.id
+    LEFT JOIN patristics_fathers pf ON pw.father_id = pf.id
     WHERE a.verse = :checkId
     GROUP BY a.title
+    ORDER BY sort_order ASC, pf.year ASC
   `, { checkId });
 }
 
@@ -270,6 +298,18 @@ function formatVerseIdToLink(id) {
                       </div>
                     )}
 
+                    {/* Optional AI Summary */}
+                    {ct.summary && (
+                      <div class="ai-summary-box select-none">
+                        <span class="ai-icon" title="AI Generated Summary">
+                          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                          </svg>
+                        </span>
+                        <div class="ai-summary-text" set:html={parseMarkdown(ct.summary)} />
+                      </div>
+                    )}
+
                     {/* Rich Markdown body parser */}
                     <div class="card-response-body select-text">
                       <div set:html={parseMarkdown(ct.answer)} />
@@ -277,14 +317,24 @@ function formatVerseIdToLink(id) {
                     
                     {/* Subtle Source Meta Credit Footer */}
                     <div class="card-footer-source-box select-none">
-                      <div class="source-meta-text">
-                        <span class="source-meta-label">Source:</span>
-                        <span class="source-name-text">{ct.meta_name || ct.src}</span>
-                        {ct.meta_copyright && <span class="source-copyright-text">({ct.meta_copyright})</span>}
-                      </div>
-                      {ct.meta_url && (
-                        <a href={ct.meta_url} target="_blank" rel="noopener noreferrer" class="source-visit-pill-btn" title="Visit website page source">
-                          <span>Visit Source</span>
+                      {ct.father_id ? (
+                        <div class="patristics-meta-box">
+                          <img src={ct.father_icon} alt={ct.father_name} class="father-icon" loading="lazy" decoding="async" />
+                          <div class="patristics-text">
+                            <span class="father-name-text">{ct.father_name} <span class="father-year">({ct.father_year > 0 ? `AD ${ct.father_year}` : `${Math.abs(ct.father_year)} BC`})</span></span>
+                            <span class="work-name-text">{ct.work_name}</span>
+                          </div>
+                        </div>
+                      ) : (
+                        <div class="source-meta-text">
+                          <span class="source-meta-label">Source:</span>
+                          <span class="source-name-text">{ct.meta_name || ct.src}</span>
+                          {ct.meta_copyright && <span class="source-copyright-text">({ct.meta_copyright})</span>}
+                        </div>
+                      )}
+                      {(ct.work_url || ct.meta_url) && (
+                        <a href={ct.work_url || ct.meta_url} target="_blank" rel="noopener noreferrer" class="source-visit-pill-btn" title="Visit website page source">
+                          <span>{ct.father_id ? 'Read Text' : 'Visit Source'}</span>
                           <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
@@ -326,6 +376,18 @@ function formatVerseIdToLink(id) {
                   {/* Collapsible Content Panel */}
                   <div class="apologetics-card-content">
                     
+                    {/* Optional AI Summary */}
+                    {ap.summary && (
+                      <div class="ai-summary-box select-none">
+                        <span class="ai-icon" title="AI Generated Summary">
+                          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                          </svg>
+                        </span>
+                        <div class="ai-summary-text" set:html={parseMarkdown(ap.summary)} />
+                      </div>
+                    )}
+
                     {/* Rich Markdown body parser */}
                     <div class="card-response-body select-text">
                       <div set:html={parseMarkdown(ap.answer)} />
@@ -333,14 +395,24 @@ function formatVerseIdToLink(id) {
                     
                     {/* Subtle Source Meta Credit Footer */}
                     <div class="card-footer-source-box select-none">
-                      <div class="source-meta-text">
-                        <span class="source-meta-label">Source:</span>
-                        <span class="source-name-text">{ap.meta_name || ap.src}</span>
-                        {ap.meta_copyright && <span class="source-copyright-text">({ap.meta_copyright})</span>}
-                      </div>
-                      {ap.meta_url && (
-                        <a href={ap.meta_url} target="_blank" rel="noopener noreferrer" class="source-visit-pill-btn" title="Visit website page source">
-                          <span>Visit Source</span>
+                      {ap.father_id ? (
+                        <div class="patristics-meta-box">
+                          <img src={ap.father_icon} alt={ap.father_name} class="father-icon" loading="lazy" decoding="async" />
+                          <div class="patristics-text">
+                            <span class="father-name-text">{ap.father_name} <span class="father-year">({ap.father_year > 0 ? `AD ${ap.father_year}` : `${Math.abs(ap.father_year)} BC`})</span></span>
+                            <span class="work-name-text">{ap.work_name}</span>
+                          </div>
+                        </div>
+                      ) : (
+                        <div class="source-meta-text">
+                          <span class="source-meta-label">Source:</span>
+                          <span class="source-name-text">{ap.meta_name || ap.src}</span>
+                          {ap.meta_copyright && <span class="source-copyright-text">({ap.meta_copyright})</span>}
+                        </div>
+                      )}
+                      {(ap.work_url || ap.meta_url) && (
+                        <a href={ap.work_url || ap.meta_url} target="_blank" rel="noopener noreferrer" class="source-visit-pill-btn" title="Visit website page source">
+                          <span>{ap.father_id ? 'Read Text' : 'Visit Source'}</span>
                           <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
@@ -456,7 +528,7 @@ function formatVerseIdToLink(id) {
 		padding: 16px;
 		cursor: pointer;
 		font-family: var(--font-body);
-		font-size: 15px;
+		font-size: 16px;
 		font-weight: 800;
 		color: var(--color-primary);
 		list-style: none; /* Hide default disclosure arrow */
@@ -528,7 +600,7 @@ function formatVerseIdToLink(id) {
 		padding: 16px;
 		cursor: pointer;
 		font-family: var(--font-body);
-		font-size: 15px;
+		font-size: 16px;
 		font-weight: 800;
 		color: var(--color-primary);
 		list-style: none;
@@ -751,12 +823,29 @@ function formatVerseIdToLink(id) {
 		margin-bottom: 2px;
 	}
 
-	.response-paragraph {
-		font-size: 13px;
-		line-height: 1.55;
+	:global(.response-paragraph) {
+		font-size: 14px;
+		line-height: 1.5;
 		color: var(--color-on-surface-variant);
 		margin: 0;
 		text-align: justify;
+	}
+
+	:global(.response-list) {
+		font-size: 14px;
+		line-height: 1.5;
+		color: var(--color-on-surface-variant);
+		margin: 0;
+		padding-left: 14px;
+		text-align: justify;
+	}
+	
+	:global(.response-list-item) {
+		margin-bottom: 4px;
+	}
+	
+	:global(.response-list-item:last-child) {
+		margin-bottom: 0;
 	}
 
 	.card-footer {
@@ -771,7 +860,76 @@ function formatVerseIdToLink(id) {
 		text-align: center;
 		padding: 24px 12px;
 		color: var(--color-on-surface-variant);
+		font-size: 14px;
+		font-style: italic;
+	}
+
+	/* AI Summary Styling */
+	.ai-summary-box {
+		display: flex;
+		align-items: flex-start;
+		gap: 6px;
+		background-color: var(--color-surface-container-low);
+		padding: 10px 12px;
+		border-radius: 8px;
+		border: 1px dashed var(--color-outline-variant);
+		margin-bottom: 8px;
+	}
+	.ai-icon {
+		color: var(--color-on-surface-variant);
+		opacity: 0.8;
+		flex-shrink: 0;
+		margin-top: 2px;
+	}
+	.ai-summary-text {
 		font-size: 12.5px;
 		font-style: italic;
+		line-height: 1.45;
+		color: var(--color-on-surface-variant);
+	}
+	.ai-summary-text :global(> :first-child) {
+		margin-top: 0;
+	}
+	.ai-summary-text :global(> :last-child) {
+		margin-bottom: 0;
+	}
+	/* Override markdown parser's injected classes for the summary box */
+	.ai-summary-text :global(.response-paragraph),
+	.ai-summary-text :global(.response-list) {
+		font-size: inherit;
+		line-height: inherit;
+	}
+
+	/* Patristics Footer Styling */
+	.patristics-meta-box {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+	.father-icon {
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 1px solid var(--color-outline-variant);
+	}
+	.patristics-text {
+		display: flex;
+		flex-direction: column;
+	}
+	.father-name-text {
+		font-size: 12px;
+		font-weight: 800;
+		color: var(--color-primary);
+	}
+	.father-year {
+		font-weight: 600;
+		color: var(--color-on-surface-variant);
+		font-size: 10px;
+	}
+	.work-name-text {
+		font-size: 10px;
+		font-style: italic;
+		color: var(--color-on-surface-variant);
 	}
 </style>

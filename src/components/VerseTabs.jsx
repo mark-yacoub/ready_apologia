@@ -28,11 +28,22 @@ export default function VerseTabs({
     );
   }
 
+  const containerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (containerRef.current) {
+      const activeEl = containerRef.current.querySelector('.active');
+      if (activeEl) {
+        activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  }, [activeTab]);
+
   return (
     <div className="tabs-wrapper select-none">
       
       {/* Category Segmented Pill Headers (Sleek Apple-Style Static Slider Links) */}
-      <div className="tab-segmented-bar">
+      <div className="tab-segmented-bar" ref={containerRef}>
         {tabs.map(tab => {
           const targetUrl = `/bible/${book}/${chapter}/${verse}/${tab.id}`;
           const isActive = activeTab === tab.id;
