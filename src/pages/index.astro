@@ -1,5 +1,6 @@
 ---
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
 const redirectUrl = `${base}/bible/jn/1`;
 const canonicalUrl = new URL(redirectUrl, Astro.site || Astro.url).href;
 ---
@@ -8,6 +9,15 @@ const canonicalUrl = new URL(redirectUrl, Astro.site || Astro.url).href;
 <head>
   <meta charset="utf-8" />
   <title>Ready Apologia</title>
+  
+  <!-- SEO & Open Graph Tags for Root URL Sharing -->
+  <meta name="description" content="Ready Apologia - Defending the Faith. Explore ancient manuscript evidence and apologetics defenses for the scriptures." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ready Apologia - Defending the Faith" />
+  <meta property="og:description" content="Explore ancient manuscript evidence and apologetics defenses for the scriptures." />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={`${site}${base}/default-og-image.png`} />
+
   <link rel="canonical" href={canonicalUrl} />
   <meta name="robots" content="noindex" />
   <meta http-equiv="refresh" content={`0;url=${redirectUrl}`} />
