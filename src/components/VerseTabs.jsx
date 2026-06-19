@@ -57,6 +57,12 @@ export default function VerseTabs({
   const containerRef = React.useRef(null);
 
   React.useEffect(() => {
+    const handleOpen = () => setIsEditing(true);
+    window.addEventListener('open-tab-settings', handleOpen);
+    return () => window.removeEventListener('open-tab-settings', handleOpen);
+  }, []);
+
+  React.useEffect(() => {
     if (containerRef.current && !isEditing) {
       // Small timeout ensures the DOM has settled layout before calculating scroll
       setTimeout(() => {
@@ -85,37 +91,25 @@ export default function VerseTabs({
   return (
     <div className="tabs-wrapper select-none">
       
-      {/* Container holding the scrolling tabs and the fixed settings button */}
-      <div className="tab-bar-outer">
-        <div className="tab-segmented-bar" ref={containerRef}>
-          {sortedTabs.map((tab) => {
-            const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-            const targetUrl = `${base}/bible/${book}/${chapter}/${verse}/${tab.id}`;
-            const isActive = activeTab === tab.id;
+      {/* Category Segmented Pill Headers */}
+      <div className="tab-segmented-bar" ref={containerRef}>
+        {sortedTabs.map((tab) => {
+          const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+          const targetUrl = `${base}/bible/${book}/${chapter}/${verse}/${tab.id}`;
+          const isActive = activeTab === tab.id;
 
-            return (
-              <a
-                key={tab.id}
-                href={targetUrl}
-                className={`segmented-pill-btn ${isActive ? 'active' : ''}`}
-                role="tab"
-                aria-selected={isActive}
-              >
-                {tab.label}
-              </a>
-            );
-          })}
-        </div>
-
-        {/* Fixed Settings Button outside the scroll area so it's always visible */}
-        <button 
-          className="reorder-settings-trigger" 
-          onClick={() => setIsEditing(true)}
-          aria-label="Customize tab order"
-          title="Customize tab order"
-        >
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-        </button>
+          return (
+            <a
+              key={tab.id}
+              href={targetUrl}
+              className={`segmented-pill-btn ${isActive ? 'active' : ''}`}
+              role="tab"
+              aria-selected={isActive}
+            >
+              {tab.label}
+            </a>
+          );
+        })}
       </div>
 
       {/* Displays ONLY the active slot content directly inside the pre-rendered static page! */}
@@ -186,20 +180,13 @@ export default function VerseTabs({
         }
 
         /* Sleek Segmented Pill Track (Apple visual layout) */
-        .tab-bar-outer {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          position: relative;
-        }
-
         .tab-segmented-bar {
           display: flex;
           background-color: var(--color-surface-container-low);
           padding: 4px;
           border-radius: 10px;
           gap: 2px;
-          flex: 1;
+          position: relative;
           overflow-x: auto;
           scrollbar-width: none;
           border: 1px solid var(--color-outline-variant);
@@ -207,29 +194,6 @@ export default function VerseTabs({
         }
         .tab-segmented-bar::-webkit-scrollbar {
           display: none;
-        }
-
-        /* Fixed Settings Button on the right */
-        .reorder-settings-trigger {
-          flex-shrink: 0;
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
-          background-color: var(--color-surface-container-low);
-          border: 1px solid var(--color-outline-variant);
-          color: var(--color-on-surface-variant);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .reorder-settings-trigger:hover {
-          background-color: var(--color-outline-variant);
-          color: var(--color-primary);
-        }
-        .reorder-settings-trigger:active {
-          transform: scale(0.95);
         }
 
         /* Pill Anchor Links */

@@ -231,11 +231,32 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
         <span>{bookMeta.name} {chapter}</span>
       </a>
       
-      <!-- Minimalist Heading showing exactly John 1:1 -->
-      <h2 class="verse-drawer-title">
-        {bookMeta.name} {chapter}:{verse}
-      </h2>
+      <!-- Minimalist Heading showing exactly John 1:1 with subtle Settings Ellipsis -->
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <h2 class="verse-drawer-title">
+          {bookMeta.name} {chapter}:{verse}
+        </h2>
+        <button id="open-tab-settings-btn" class="subtle-ellipsis-btn" aria-label="Customize Verse View" title="Customize Tabs">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 12a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0z" />
+          </svg>
+        </button>
+      </div>
     </header>
+
+    <script>
+      // Trigger the React modal from the static Astro shell
+      // Listen to astro:page-load to re-attach the event listener after View Transitions navigation
+      document.addEventListener('astro:page-load', () => {
+        const btn = document.getElementById('open-tab-settings-btn');
+        if (btn) {
+          // Remove old listener to prevent duplicates if the element wasn't destroyed
+          btn.onclick = () => {
+            window.dispatchEvent(new CustomEvent('open-tab-settings'));
+          };
+        }
+      });
+    </script>
 
     <!-- Static Segmented Tab switcher anchors -->
     <VerseTabs 
@@ -494,6 +515,28 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 		color: var(--color-primary);
 		margin: 0;
 		letter-spacing: -0.01em;
+	}
+
+	.subtle-ellipsis-btn {
+		background: transparent;
+		border: none;
+		color: var(--color-on-surface-variant);
+		opacity: 0.6;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		padding: 4px;
+		border-radius: 50%;
+		transition: all 0.2s ease;
+	}
+	.subtle-ellipsis-btn:hover {
+		opacity: 1;
+		color: var(--color-primary);
+		background-color: var(--color-surface-container-low);
+	}
+	.subtle-ellipsis-btn:active {
+		transform: scale(0.95);
 	}
 
 	/* Panels */
