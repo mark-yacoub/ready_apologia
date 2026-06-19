@@ -69,6 +69,15 @@ const { title } = Astro.props;
 				<!-- Main scrollable content window -->
 				<main class="main-content">
 					<slot />
+
+					<!-- Footer -->
+					<footer class="app-footer">
+						<div class="footer-verses">
+							<p class="footer-verse">"knowing this first of all, that no prophecy of Scripture comes from someone's own interpretation."<br/><span class="footer-ref">— 2 Peter 1:20</span></p>
+							<p class="footer-verse">"You search the Scriptures because you think that in them you have eternal life; and it is they that bear witness about me."<br/><span class="footer-ref">— John 5:39</span></p>
+							<p class="footer-verse">"O you who have believed, do not ask about things which, if they are shown to you, would distress you"<br/><span class="footer-ref">— Quran: Surah Al-Ma'idah, Verse 101</span></p>
+						</div>
+					</footer>
 				</main>
 
 				<!-- Bottom Navigation (Hidden on desktop) -->
@@ -515,5 +524,46 @@ const { title } = Astro.props;
 	::-webkit-scrollbar-thumb {
 		background: var(--color-outline-variant);
 		border-radius: 10px;
+	}
+
+	/* ==========================================
+	   Footer
+	   ========================================== */
+	.app-footer {
+		margin-top: 48px;
+		padding-top: 24px;
+		border-top: 1px solid var(--color-outline-variant);
+		text-align: center;
+		padding-bottom: 24px;
+	}
+
+	.footer-verses {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.footer-verse {
+		font-family: var(--font-display);
+		font-style: italic;
+		font-size: 13px;
+		color: var(--color-on-surface-variant);
+		line-height: 1.6;
+		margin: 0;
+		opacity: 0.8;
+	}
+
+	.footer-ref {
+		font-family: var(--font-body);
+		font-style: normal;
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		display: block;
+		margin-top: 4px;
+		opacity: 0.6;
 	}
 </style>
