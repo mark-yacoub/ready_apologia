@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+---
+
+<Layout title="Page Not Found">
+  <div class="error-container">
+    <div class="error-content">
+      <h1 class="error-title">404</h1>
+      <h2 class="error-subtitle">Page Not Found</h2>
+      <p class="error-message">
+        It seems the verse or page you are looking for doesn't exist, or it may have been moved.
+      </p>
+      
+      <a href={`${base}/bible/jn/1`} class="back-home-btn">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Return to Genesis 1
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding: 24px;
+    text-align: center;
+  }
+  
+  .error-content {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 24px;
+    padding: 48px 32px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  }
+
+  .error-title {
+    font-family: var(--font-body);
+    font-size: 84px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-primary);
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+
+  .error-subtitle {
+    font-family: var(--font-body);
+    font-size: 24px;
+    font-weight: 700;
+    margin: 12px 0 16px;
+    color: var(--color-on-surface);
+  }
+
+  .error-message {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin-bottom: 32px;
+  }
+
+  .back-home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 99px;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .back-home-btn:hover {
+    background-color: #0f172a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+  }
+</style>

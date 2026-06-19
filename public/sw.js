@@ -3,7 +3,7 @@ const CACHE_NAME = 'ready-apologia-cache-v1';
 // Pre-cache home, styling, and basic navigator structure on install
 const PRE_CACHE_ASSETS = [
   '/',
-  '/bible/jn/1',
+  '/offline',
   '/assets/logo.png',
   '/assets/logo_with_text.png',
   '/favicon.svg',
@@ -37,7 +37,7 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Cache-First with Network-Fallbacbk Strategy (ideal for fast, offline static sites)
+// Cache-First with Network-Fallback Strategy (ideal for fast, offline static sites)
 self.addEventListener('fetch', (event) => {
   // Only handle standard HTTP GET requests
   if (event.request.method !== 'GET') return;
@@ -74,7 +74,7 @@ self.addEventListener('fetch', (event) => {
       }).catch(() => {
         // Completely offline and asset not in cache: fallback to offline page if HTML
         if (event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('/bible/jn/1'); // Default offline fallback is our John 1 homepage reader
+          return caches.match('/offline'); // Branded offline fallback page
         }
       });
     })

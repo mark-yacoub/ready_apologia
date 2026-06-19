@@ -10,4 +10,8 @@ export default defineConfig({
   base: '/ready_apologia',
   // Since we are doing Scenario A (Static Site), we want 'static' output (default)
   output: 'static',
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover'
+  }
 });

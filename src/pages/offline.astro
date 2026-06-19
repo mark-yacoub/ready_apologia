@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+---
+
+<Layout title="Offline Mode">
+  <div class="offline-container">
+    <div class="offline-content">
+      <div class="offline-icon-wrapper">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="offline-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18M10.14 10.14A9.957 9.957 0 005.13 13M14.07 14.07A9.953 9.953 0 0118.87 13M22 10a15.938 15.938 0 00-6.73-3.41M6.54 6.54A15.94 15.94 0 002 10M12 20h.01" />
+        </svg>
+      </div>
+      <h1 class="offline-title">You're Offline</h1>
+      <p class="offline-message">
+        It looks like you've lost your internet connection. 
+        Ready Apologia works best online, but you can still access any pages you've previously visited!
+      </p>
+      
+      <button onclick="window.location.reload()" class="retry-btn">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        Try Again
+      </button>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .offline-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding: 24px;
+    text-align: center;
+  }
+  
+  .offline-content {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 24px;
+    padding: 48px 32px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  }
+
+  .offline-icon-wrapper {
+    display: inline-flex;
+    padding: 20px;
+    background-color: var(--color-surface-container-low);
+    border-radius: 50%;
+    margin-bottom: 24px;
+  }
+
+  .offline-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--color-on-surface-variant);
+  }
+
+  .offline-title {
+    font-family: var(--font-body);
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0 0 16px;
+    color: var(--color-primary);
+  }
+
+  .offline-message {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin-bottom: 32px;
+  }
+
+  .retry-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 99px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .retry-btn:hover {
+    background-color: #0f172a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+  }
+</style>
