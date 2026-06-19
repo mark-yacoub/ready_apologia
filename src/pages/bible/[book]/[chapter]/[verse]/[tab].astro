@@ -147,11 +147,13 @@ if (tab === 'contradictions') {
            CASE 
              WHEN pf.id IS NOT NULL THEN 1
              WHEN c.src = 'answering_islam' THEN 2
-             WHEN c.src = 'apologetic_apologetics_press' THEN 3
-             WHEN c.src = 'apologetic_defending_inerrancy' THEN 4
-             WHEN c.src = 'carm' THEN 5
-             WHEN c.src = 'answersingenesis' THEN 6
-             ELSE 7
+             WHEN c.src = 'tektonics' THEN 3
+             WHEN c.src = 'apologetic_apologetics_press' THEN 4
+             WHEN c.src = 'apologetic_defending_inerrancy' THEN 5
+             WHEN c.src = 'carm' THEN 6
+             WHEN c.src = 'gotquestions' THEN 7
+             WHEN c.src = 'answersingenesis' THEN 8
+             ELSE 9
            END as sort_order
     FROM contradictions c
     LEFT JOIN apologetics_meta m ON c.src = m.id
@@ -171,11 +173,13 @@ if (tab === 'apologetics') {
            CASE 
              WHEN pf.id IS NOT NULL THEN 1
              WHEN a.src = 'answering_islam' THEN 2
-             WHEN a.src = 'apologetic_apologetics_press' THEN 3
-             WHEN a.src = 'apologetic_defending_inerrancy' THEN 4
-             WHEN a.src = 'carm' THEN 5
-             WHEN a.src = 'answersingenesis' THEN 6
-             ELSE 7
+             WHEN a.src = 'tektonics' THEN 3
+             WHEN a.src = 'apologetic_apologetics_press' THEN 4
+             WHEN a.src = 'apologetic_defending_inerrancy' THEN 5
+             WHEN a.src = 'carm' THEN 6
+             WHEN a.src = 'gotquestions' THEN 7
+             WHEN a.src = 'answersingenesis' THEN 8
+             ELSE 9
            END as sort_order
     FROM apologetics a
     LEFT JOIN apologetics_meta m ON a.src = m.id
