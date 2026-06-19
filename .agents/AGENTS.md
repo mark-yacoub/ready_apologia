@@ -15,4 +15,4 @@
   ```
 
 ## Git & Version Control Constraints
-- **Explicit Commits & Pushes Only**: While actively developing or testing features locally, NEVER automatically execute `git commit` or `git push` to origin without explicit instruction from the user. Only execute these commands when the user explicitly requests to save the work or deploy.
+- **Explicit Commits & Pushes Only**: NEVER automatically execute `git commit` or `git push` to origin without explicit instruction from the user. Only execute these commands when the user explicitly requests to save the work or deploy.
