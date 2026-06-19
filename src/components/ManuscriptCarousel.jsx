@@ -38,7 +38,8 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
   // Track Momentum Snapping index changes
   const handleTrackScroll = (e) => {
     const track = e.currentTarget;
-    const index = Math.round(track.scrollLeft / track.clientWidth);
+    const slideWidth = manuscripts.length > 1 ? track.clientWidth * 0.92 : track.clientWidth;
+    const index = Math.round(track.scrollLeft / slideWidth);
     if (index !== activeSlide && index >= 0 && index < manuscripts.length) {
       setActiveSlide(index);
     }
@@ -47,8 +48,9 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
   // Dot Indicator click scroller
   const scrollToIndex = (index) => {
     if (trackRef.current) {
+      const slideWidth = manuscripts.length > 1 ? trackRef.current.clientWidth * 0.92 : trackRef.current.clientWidth;
       trackRef.current.scrollTo({
-        left: index * trackRef.current.clientWidth,
+        left: index * slideWidth,
         behavior: 'smooth'
       });
       setActiveSlide(index);
@@ -142,7 +144,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
             <div key={ms.ms_id} className="carousel-slide">
               
               {/* Card Container */}
-              <div className="slide-card">
+              <div className={`slide-card ${activeSlide === index ? 'active-card' : 'inactive-card'}`}>
                 
                 {/* 1. Manuscript Image Scan Frame (Double tap triggers Zoom Lightbox) */}
                 <div className="ms-image-frame" onClick={() => triggerZoom(imgSrc, ms.image_name)}>
@@ -408,8 +410,8 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
         }
 
         .carousel-slide {
-          flex: 0 0 100%;
-          width: 100%;
+          flex: 0 0 ${manuscripts.length > 1 ? '92%' : '100%'};
+          width: ${manuscripts.length > 1 ? '92%' : '100%'};
           scroll-snap-align: start;
           box-sizing: border-box;
           padding: 4px;
@@ -423,6 +425,17 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
           display: flex;
           flex-direction: column;
+          transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .slide-card.inactive-card {
+          transform: scale(0.96);
+          opacity: 0.65;
+        }
+
+        .slide-card.active-card {
+          transform: scale(1);
+          opacity: 1;
         }
 
         /* 1. Image Frame layout */
