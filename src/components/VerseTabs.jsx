@@ -58,10 +58,18 @@ export default function VerseTabs({
 
   React.useEffect(() => {
     if (containerRef.current && !isEditing) {
-      const activeEl = containerRef.current.querySelector('.active');
-      if (activeEl) {
-        activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      }
+      // Small timeout ensures the DOM has settled layout before calculating scroll
+      setTimeout(() => {
+        const activeEl = containerRef.current.querySelector('.active');
+        if (activeEl && containerRef.current) {
+          const containerRect = containerRef.current.getBoundingClientRect();
+          const elRect = activeEl.getBoundingClientRect();
+          
+          const scrollPos = containerRef.current.scrollLeft + (elRect.left - containerRect.left) - (containerRect.width / 2) + (elRect.width / 2);
+          
+          containerRef.current.scrollTo({ left: scrollPos, behavior: 'smooth' });
+        }
+      }, 100);
     }
   }, [activeTab, isEditing]);
 
@@ -77,63 +85,36 @@ export default function VerseTabs({
   return (
     <div className="tabs-wrapper select-none">
       
-      {/* Category Segmented Pill Headers */}
-      <div className="tab-segmented-bar" ref={containerRef}>
-        {sortedTabs.map((tab) => {
-          const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-          const targetUrl = `${base}/bible/${book}/${chapter}/${verse}/${tab.id}`;
-          const isActive = activeTab === tab.id;
-          const currentOrderIndex = tabOrder.indexOf(tab.id);
+      {/* Container holding the scrolling tabs and the fixed settings button */}
+      <div className="tab-bar-outer">
+        <div className="tab-segmented-bar" ref={containerRef}>
+          {sortedTabs.map((tab) => {
+            const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+            const targetUrl = `${base}/bible/${book}/${chapter}/${verse}/${tab.id}`;
+            const isActive = activeTab === tab.id;
 
-          if (isEditing) {
             return (
-              <div key={tab.id} className="segmented-pill-btn edit-mode-pill active">
-                <button 
-                  className="reorder-arrow-btn" 
-                  onClick={() => moveTab(tab.id, -1)}
-                  disabled={currentOrderIndex === 0}
-                  aria-label="Move left"
-                >
-                  <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                </button>
-                <span className="edit-pill-label">{tab.label}</span>
-                <button 
-                  className="reorder-arrow-btn" 
-                  onClick={() => moveTab(tab.id, 1)}
-                  disabled={currentOrderIndex === tabOrder.length - 1}
-                  aria-label="Move right"
-                >
-                  <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-                </button>
-              </div>
+              <a
+                key={tab.id}
+                href={targetUrl}
+                className={`segmented-pill-btn ${isActive ? 'active' : ''}`}
+                role="tab"
+                aria-selected={isActive}
+              >
+                {tab.label}
+              </a>
             );
-          }
+          })}
+        </div>
 
-          return (
-            <a
-              key={tab.id}
-              href={targetUrl}
-              className={`segmented-pill-btn ${isActive ? 'active' : ''}`}
-              role="tab"
-              aria-selected={isActive}
-            >
-              {tab.label}
-            </a>
-          );
-        })}
-
-        {/* Gear / Check icon to toggle Edit Mode */}
+        {/* Fixed Settings Button outside the scroll area so it's always visible */}
         <button 
-          className={`reorder-toggle-btn ${isEditing ? 'active' : ''}`} 
-          onClick={() => setIsEditing(!isEditing)}
-          aria-label={isEditing ? "Finish reordering" : "Reorder tabs"}
-          title="Reorder tabs"
+          className="reorder-settings-trigger" 
+          onClick={() => setIsEditing(true)}
+          aria-label="Customize tab order"
+          title="Customize tab order"
         >
-          {isEditing ? (
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-          ) : (
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-          )}
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
         </button>
       </div>
 
@@ -143,6 +124,57 @@ export default function VerseTabs({
         {activeTab === 'contradictions' && contradictions}
         {activeTab === 'apologetics' && apologetics}
       </div>
+
+      {/* Settings Modal Popup */}
+      {isEditing && (
+        <div className="reorder-modal-backdrop" onClick={() => setIsEditing(false)}>
+          <div className="reorder-modal-card" onClick={e => e.stopPropagation()}>
+            <div className="reorder-modal-header">
+              <h3 className="reorder-modal-title">Customize Tab Order</h3>
+              <button className="reorder-modal-close" onClick={() => setIsEditing(false)}>
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+            
+            <p className="reorder-modal-desc">Use the arrows to set your preferred tab order. This saves to your device.</p>
+            
+            <div className="reorder-list">
+              {sortedTabs.map((tab, idx) => {
+                const isFirst = idx === 0;
+                const isLast = idx === sortedTabs.length - 1;
+                
+                return (
+                  <div key={tab.id} className="reorder-list-item">
+                    <span className="reorder-item-label">{tab.label}</span>
+                    <div className="reorder-item-controls">
+                      <button 
+                        className="reorder-arrow-btn" 
+                        onClick={() => moveTab(tab.id, -1)}
+                        disabled={isFirst}
+                        aria-label="Move up"
+                      >
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" /></svg>
+                      </button>
+                      <button 
+                        className="reorder-arrow-btn" 
+                        onClick={() => moveTab(tab.id, 1)}
+                        disabled={isLast}
+                        aria-label="Move down"
+                      >
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            
+            <button className="reorder-modal-done-btn" onClick={() => setIsEditing(false)}>
+              Done
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Custom Light-Only CSS Styles */}
       <style>{`
@@ -154,22 +186,53 @@ export default function VerseTabs({
         }
 
         /* Sleek Segmented Pill Track (Apple visual layout) */
+        .tab-bar-outer {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          position: relative;
+        }
+
         .tab-segmented-bar {
           display: flex;
           background-color: var(--color-surface-container-low);
           padding: 4px;
           border-radius: 10px;
           gap: 2px;
-          position: relative;
+          flex: 1;
           overflow-x: auto;
           scrollbar-width: none;
           border: 1px solid var(--color-outline-variant);
+          scroll-behavior: smooth;
         }
         .tab-segmented-bar::-webkit-scrollbar {
           display: none;
         }
 
-        /* Pill Anchor Links (Replaces heavy JS buttons) */
+        /* Fixed Settings Button on the right */
+        .reorder-settings-trigger {
+          flex-shrink: 0;
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
+          background-color: var(--color-surface-container-low);
+          border: 1px solid var(--color-outline-variant);
+          color: var(--color-on-surface-variant);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .reorder-settings-trigger:hover {
+          background-color: var(--color-outline-variant);
+          color: var(--color-primary);
+        }
+        .reorder-settings-trigger:active {
+          transform: scale(0.95);
+        }
+
+        /* Pill Anchor Links */
         .segmented-pill-btn {
           flex: 1;
           display: flex;
@@ -199,30 +262,115 @@ export default function VerseTabs({
           box-shadow: 0 2px 6px rgba(151, 69, 67, 0.2);
         }
 
-        /* Edit Mode Styles */
-        .edit-mode-pill {
-          justify-content: space-between;
-          padding: 6px 6px;
-          gap: 6px;
-          background-color: var(--color-surface) !important;
-          color: var(--color-primary) !important;
-          border: 1px dashed var(--color-outline-variant);
-          box-shadow: none !important;
-          animation: wiggle 0.3s ease-in-out infinite alternate;
+        /* Modal Styles */
+        .reorder-modal-backdrop {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 100;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          animation: fadeIn 0.2s ease-out forwards;
         }
-        
-        .edit-pill-label {
-          flex: 1;
-          text-align: center;
+
+        @keyframes fadeIn {
+          from { opacity: 0; backdrop-filter: blur(0px); }
+          to { opacity: 1; backdrop-filter: blur(4px); }
+        }
+
+        .reorder-modal-card {
+          background-color: var(--color-surface);
+          border-radius: 16px;
+          width: 100%;
+          max-width: 360px;
+          padding: 24px;
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+          transform: scale(0.95);
+          animation: scaleUp 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes scaleUp {
+          from { transform: scale(0.95) translateY(10px); }
+          to { transform: scale(1) translateY(0); }
+        }
+
+        .reorder-modal-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 8px;
+        }
+
+        .reorder-modal-title {
+          font-family: var(--font-display);
+          font-size: 18px;
+          font-weight: 800;
+          color: var(--color-primary);
+          margin: 0;
+        }
+
+        .reorder-modal-close {
+          background: none;
+          border: none;
+          color: var(--color-on-surface-variant);
+          cursor: pointer;
+          padding: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          transition: background-color 0.15s;
+        }
+        .reorder-modal-close:hover {
+          background-color: var(--color-surface-container-low);
+          color: var(--color-primary);
+        }
+
+        .reorder-modal-desc {
+          font-size: 13px;
+          color: var(--color-on-surface-variant);
+          margin-top: 0;
+          margin-bottom: 20px;
+          line-height: 1.4;
+        }
+
+        .reorder-list {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .reorder-list-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 16px;
+          background-color: var(--color-surface-container-low);
+          border: 1px solid var(--color-outline-variant);
+          border-radius: 10px;
+        }
+
+        .reorder-item-label {
+          font-weight: 700;
+          color: var(--color-primary);
+          font-size: 14px;
+        }
+
+        .reorder-item-controls {
+          display: flex;
+          align-items: center;
+          gap: 6px;
         }
 
         .reorder-arrow-btn {
-          background: var(--color-surface-container-low);
+          background: var(--color-surface);
           border: 1px solid var(--color-outline-variant);
           color: var(--color-primary);
           border-radius: 6px;
-          width: 24px;
-          height: 24px;
+          width: 32px;
+          height: 32px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -234,35 +382,32 @@ export default function VerseTabs({
           color: white;
           border-color: var(--color-secondary);
         }
+        .reorder-arrow-btn:active:not(:disabled) {
+          transform: scale(0.9);
+        }
         .reorder-arrow-btn:disabled {
           opacity: 0.3;
           cursor: not-allowed;
         }
 
-        .reorder-toggle-btn {
-          background: transparent;
+        .reorder-modal-done-btn {
+          width: 100%;
+          padding: 12px;
+          margin-top: 24px;
+          background-color: var(--color-primary);
+          color: white;
           border: none;
-          color: var(--color-on-surface-variant);
-          padding: 0 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          border-radius: 10px;
+          font-weight: 800;
+          font-size: 15px;
           cursor: pointer;
-          border-radius: 8px;
-          transition: all 0.2s;
+          transition: opacity 0.15s;
         }
-        .reorder-toggle-btn:hover {
-          color: var(--color-primary);
-          background-color: rgba(0,0,0,0.04);
+        .reorder-modal-done-btn:hover {
+          opacity: 0.9;
         }
-        .reorder-toggle-btn.active {
-          color: #16a34a; /* Green checkmark when active */
-          background-color: rgba(22, 163, 74, 0.1);
-        }
-
-        @keyframes wiggle {
-          0% { transform: rotate(-0.5deg); }
-          100% { transform: rotate(0.5deg); }
+        .reorder-modal-done-btn:active {
+          transform: scale(0.98);
         }
 
         .tab-panels-window {
