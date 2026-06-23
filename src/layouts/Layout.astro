@@ -1,6 +1,7 @@
 ---
 import BottomNav from '../components/BottomNav.jsx';
 import ScriptureNav from '../components/ScriptureNav.jsx';
+import OnboardingModal from '../components/OnboardingModal.jsx';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -111,6 +112,9 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 				<!-- Bottom Navigation (Hidden on desktop) -->
 				<BottomNav />
 			</div>
+
+			<!-- Global Onboarding Modal -->
+			<OnboardingModal client:load />
 
 			<!-- Collapsible Left Navigation Sidebar (Sitting on top of everything natively!) -->
 			<div id="scripture-nav-overlay"></div>

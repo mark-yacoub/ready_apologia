@@ -104,6 +104,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/components/VerseTabs.jsx`: Client-side React switcher for verse detail tabs.
 *   `src/components/BottomNav.jsx`: Immersive mobile segmented bottom navigation tabs.
 *   `src/components/ScriptureNav.jsx`: Collapsible Left Navigator featuring responsive desktop vertical app sections and soon-badges.
+*   `src/components/OnboardingModal.jsx`: Centered card overlay providing an initial onboarding tip, shown only once per session until completed.
 
 ---
 

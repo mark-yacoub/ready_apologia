@@ -28,6 +28,13 @@ export default function VerseTabs({
   const [tabOrder, setTabOrder] = React.useState(['manuscripts', 'contradictions', 'apologetics']);
   const [isEditing, setIsEditing] = React.useState(false);
 
+  // Onboarding Goal Check: If verse has all 3 evidence types, permanently disable the tip
+  React.useEffect(() => {
+    if (msCount > 0 && ctCount > 0 && apCount > 0) {
+      localStorage.setItem('ready_apologia_has_seen_full_evidence', 'true');
+    }
+  }, [msCount, ctCount, apCount]);
+
   React.useEffect(() => {
     const saved = localStorage.getItem('ready_apologia_tab_order');
     if (saved) {
