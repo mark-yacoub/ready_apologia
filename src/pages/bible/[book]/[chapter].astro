@@ -351,6 +351,8 @@ if (isNT) {
 		align-items: center;
 		gap: 8px;
 		margin-left: -8px; /* Align with left layout margins */
+		min-width: 0; /* Enable shrinking below content size */
+		position: relative; /* Anchor chapter popover here to avoid right-edge overflow */
 	}
 
 	/* Book Selector Button ("John") */
@@ -365,6 +367,11 @@ if (isNT) {
 		font-size: 28px;
 		font-weight: 800;
 		transition: background-color 0.15s, transform 0.1s;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		min-width: 0; /* Important for flex child truncation */
+		text-align: left;
 	}
 	.book-selector-btn:hover {
 		background-color: var(--color-surface-container-low);
@@ -375,8 +382,8 @@ if (isNT) {
 
 	/* Chapter Selector Dropdown Wrapper */
 	.chapter-dropdown-wrapper {
-		position: relative;
 		display: inline-block;
+		flex-shrink: 0; /* Prevent chapter number from shrinking */
 	}
 
 	.chapter-selector-btn {

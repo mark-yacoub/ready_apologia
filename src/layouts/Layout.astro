@@ -337,6 +337,8 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		display: flex;
 		align-items: center;
 		gap: 12px;
+		min-width: 0;
+		flex: 1;
 	}
 
 	.nav-burger-btn {
@@ -370,6 +372,8 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		align-items: center;
 		gap: 8px;
 		user-select: none;
+		min-width: 0;
+		flex: 1;
 	}
 
 	.header-shield-logo {
@@ -386,6 +390,9 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		color: var(--color-primary);
 		transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 		cursor: default;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	
 	/* Morphing Active State */
