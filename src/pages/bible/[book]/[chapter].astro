@@ -548,8 +548,8 @@ if (isNT) {
 	.verse-badge-tray-inline {
 		display: inline-flex;
 		align-items: center;
-		gap: 3px;
-		margin-left: 6px; /* Spacing separating text end from badges */
+		gap: 6px;
+		margin-left: 8px; /* Spacing separating text end from badges */
 		vertical-align: middle;
 		line-height: 1;
 		flex-shrink: 0;
@@ -567,30 +567,46 @@ if (isNT) {
 	}
 
 	.icon-inline {
+		position: relative;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 16px;
-		height: 16px;
-		border-radius: 4px;
+		width: 28px;
+		height: 28px;
+		border-radius: 6px;
 		background-color: var(--color-surface-container-low);
 		color: var(--color-secondary);
 		border: 1px solid var(--color-outline-variant);
 		transition: transform 0.15s ease, border-color 0.15s, color 0.15s;
 		text-decoration: none; /* Prune default anchor highlights */
 	}
+	
+	/* Invisible expanded touch target for accessibility */
+	.icon-inline::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 44px;
+		height: 44px;
+		z-index: 1;
+	}
+
 	.icon-inline:hover {
-		transform: scale(1.2) !important;
+		transform: scale(1.15) !important;
 		background-color: var(--color-surface-container-lowest) !important;
 		border-color: var(--color-secondary) !important;
 		color: var(--color-secondary) !important;
 	}
 
 	.icon-inline svg {
-		width: 10px;
-		height: 10px;
+		width: 16px;
+		height: 16px;
 		stroke: currentColor;
 		fill: none;
+		position: relative;
+		z-index: 2;
 	}
 
 	/* ==========================================
