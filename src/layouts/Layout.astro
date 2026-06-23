@@ -102,9 +102,10 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 						</div>
 
 						<div class="footer-verses">
-							<p class="footer-verse">"knowing this first of all, that no prophecy of Scripture comes from someone's own interpretation."<br/><span class="footer-ref">— 2 Peter 1:20</span></p>
 							<p class="footer-verse">"You search the Scriptures because you think that in them you have eternal life; and it is they that bear witness about me."<br/><span class="footer-ref">— John 5:39</span></p>
 							<p class="footer-verse">"O you who have believed, do not ask about things which, if they are shown to you, would distress you"<br/><span class="footer-ref">— Quran: Surah Al-Ma'idah, Verse 101</span></p>
+							<p class="footer-verse">"knowing this first of all, that no prophecy of Scripture comes from someone's own interpretation."<br/><span class="footer-ref">— 2 Peter 1:20</span></p>
+							<p class="footer-verse">"So if you are in doubt about that which We have revealed to you, then ask those who have been reading the Scripture before you."<br/><span class="footer-ref">— Quran: Surah Yunus, Verse 94</span></p>
 						</div>
 					</footer>
 				</main>
@@ -597,11 +598,12 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 	}
 
 	.footer-verses {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-		max-width: 600px;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px 16px;
+		max-width: 640px;
 		margin: 0 auto;
+		text-align: left;
 	}
 
 	.footer-verse {
