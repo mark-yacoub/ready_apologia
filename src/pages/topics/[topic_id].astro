@@ -13,7 +13,7 @@ const { topic_id } = Astro.params;
 const topicsData = loadAllTopicsData();
 
 const targetTopic = topicsData.find(t => t.topicId === topic_id);
-const rawTitle = targetTopic?.topicData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || topic_id.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+const rawTitle = targetTopic?.topicData?.name || targetTopic?.topicData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || topic_id.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 const topicTitle = `${rawTitle} Bible Verses & Early Church Evidence`;
 
 const topicDesc = `Comprehensive collection of Biblical Scripture verses (Old & New Testament) and early Church Patristic testimonies defending the ${rawTitle}. Explore historical Christian apologetics proofs and quotes.`;
@@ -24,12 +24,15 @@ const ntCategories = targetTopic?.topicData?.Scripture?.['New Testament']?.struc
 const otCategories = targetTopic?.topicData?.Scripture?.['Old Testament']?.structure || [];
 const allCategories = [...ntCategories, ...otCategories];
 
-const itemListElements = allCategories.slice(0, 10).map((cat, idx) => ({
-  "@type": "ListItem",
-  "position": idx + 1,
-  "name": `${cat.title} - ${rawTitle}`,
-  "description": `Biblical evidence and verses regarding ${cat.title.toLowerCase()} demonstrating the ${rawTitle.toLowerCase()}.`
-}));
+const itemListElements = allCategories.slice(0, 10).map((cat, idx) => {
+  const catName = cat?.title || 'General Evidence';
+  return {
+    "@type": "ListItem",
+    "position": idx + 1,
+    "name": `${catName} - ${rawTitle}`,
+    "description": `Biblical evidence and verses regarding ${catName.toLowerCase()} demonstrating the ${rawTitle.toLowerCase()}.`
+  };
+});
 
 const articleGraph = {
   "@context": "https://schema.org",

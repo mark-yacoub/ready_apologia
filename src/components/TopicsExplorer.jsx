@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import booksMeta from '../data/books_meta.json';
+import { getTopicColor } from '../utils/topicColors.js';
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
@@ -66,7 +67,12 @@ const VerseItem = ({ vId, text, note, topicId, categoryTitle = null }) => {
   const handleCardClick = (e) => {
     if (e.target.closest('.topic-note-btn')) return;
     if (topicId) {
-      localStorage.setItem('activeTopic', topicId);
+      let active = [];
+      try { active = JSON.parse(localStorage.getItem('activeTopics') || '[]'); } catch(e) {}
+      if (!active.includes(topicId)) {
+        active.push(topicId);
+        localStorage.setItem('activeTopics', JSON.stringify(active));
+      }
     }
     window.location.href = `${base}/bible/${bookId}/${chapterNum}#${verseNumStr}`;
   };
@@ -88,7 +94,17 @@ const VerseItem = ({ vId, text, note, topicId, categoryTitle = null }) => {
         <div className="verse-header-left">
           <a 
             href={`${base}/bible/${bookId}/${chapterNum}#${verseNumStr}`} 
-            onClick={(e) => { e.stopPropagation(); if (topicId) localStorage.setItem('activeTopic', topicId); }} 
+            onClick={(e) => { 
+              e.stopPropagation(); 
+              if (topicId) {
+                let active = [];
+                try { active = JSON.parse(localStorage.getItem('activeTopics') || '[]'); } catch(e) {}
+                if (!active.includes(topicId)) {
+                  active.push(topicId);
+                  localStorage.setItem('activeTopics', JSON.stringify(active));
+                }
+              }
+            }} 
             className="verse-ref-link"
           >
             <span className="verse-ref-pill">{refStr} <span className="ref-arrow">&gt;</span></span>
@@ -271,16 +287,26 @@ const FatherBlock = ({ fatherName, fData }) => {
 // Dedicated Topic View (No Accordions)
 // ----------------------------------------------------
 const DedicatedTopicView = ({ topicObj, verseTexts }) => {
-  const [activeTab, setActiveTab] = useState('New Testament'); // 'New Testament', 'Old Testament', 'Fathers'
+  const [activeTab, setActiveTab] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const h = window.location.hash;
+      if (h === '#ot') return 'Old Testament';
+      if (h === '#early-church' || h === '#pre-nicene-writings' || h === '#fathers') return 'Fathers';
+    }
+    return 'New Testament';
+  });
   const [activeFilter, setActiveFilter] = useState('All'); 
 
   const ntCount = getTestamentCount(topicObj.Scripture?.['New Testament']);
   const otCount = getTestamentCount(topicObj.Scripture?.['Old Testament']);
   const anfCount = getAnfCount(topicObj['Ante-Nicene Fathers']);
 
-  const handleTabChange = (tab) => {
+  const handleTabChange = (tab, hash) => {
     setActiveTab(tab);
     setActiveFilter('All');
+    if (typeof window !== 'undefined' && hash) {
+      window.history.replaceState(null, '', `#${hash}`);
+    }
   };
 
   const renderScriptureFeed = (testament) => {
@@ -293,15 +319,19 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
 
     const availableFilters = [
       { id: 'All', label: `All (${totalTestamentCount})` },
-      ...categories.map(c => ({ id: c.title, label: `${c.title} (${c.verses?.length || 0})` }))
+      ...categories.map((c, idx) => {
+        const title = c?.title || (categories.length === 1 ? 'General Evidence' : `Category ${idx + 1}`);
+        return { id: title, label: `${title} (${c?.verses?.length || 0})` };
+      })
     ];
 
     const feedContent = categories
-      .filter(cat => activeFilter === 'All' || activeFilter === cat.title)
-      .map(cat => (
-        <div key={cat.title} className="feed-category-block animate-fade-in">
-          <h2 className="feed-category-title">{cat.title} <span className="item-count">({cat.verses?.length || 0})</span></h2>
-          <VerseGroup verses={cat.verses} verseBank={verseBank} verseTexts={verseTexts} topicId={topicObj._id} testamentName={testament} />
+      .map((cat, idx) => ({ cat, title: cat?.title || (categories.length === 1 ? 'General Evidence' : `Category ${idx + 1}`) }))
+      .filter(item => activeFilter === 'All' || activeFilter === item.title)
+      .map(({ cat, title }) => (
+        <div key={title} className="feed-category-block animate-fade-in">
+          <h2 className="feed-category-title">{title} <span className="item-count">({cat?.verses?.length || 0})</span></h2>
+          <VerseGroup verses={cat?.verses || []} verseBank={verseBank} verseTexts={verseTexts} topicId={topicObj._id} testamentName={testament} />
         </div>
       ));
 
@@ -382,14 +412,14 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
   return (
     <div className="dedicated-topic-view">
       <div className="master-tabs-container">
-        <button className={`master-tab ${activeTab === 'New Testament' ? 'active' : ''}`} onClick={() => handleTabChange('New Testament')}>
+        <button id="nt" className={`master-tab ${activeTab === 'New Testament' ? 'active' : ''}`} onClick={() => handleTabChange('New Testament', 'nt')}>
           New Testament <span className="tab-count">({ntCount})</span>
         </button>
-        <button className={`master-tab ${activeTab === 'Old Testament' ? 'active' : ''}`} onClick={() => handleTabChange('Old Testament')}>
+        <button id="ot" className={`master-tab ${activeTab === 'Old Testament' ? 'active' : ''}`} onClick={() => handleTabChange('Old Testament', 'ot')}>
           Old Testament <span className="tab-count">({otCount})</span>
         </button>
-        <button className={`master-tab ${activeTab === 'Fathers' ? 'active' : ''}`} onClick={() => handleTabChange('Fathers')}>
-          Early Fathers <span className="tab-count">({anfCount})</span>
+        <button id="early-church" className={`master-tab ${activeTab === 'Fathers' ? 'active' : ''}`} onClick={() => handleTabChange('Fathers', 'early-church')}>
+          Pre-Nicene Writings <span className="tab-count">({anfCount})</span>
         </button>
       </div>
       <div className="master-tab-content">
@@ -404,20 +434,78 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
 
 export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [topicSearch, setTopicSearch] = useState('');
+  const [activeHighlightTopics, setActiveHighlightTopics] = useState([]);
   const isDedicatedPage = Boolean(initialTopicId);
+
+  const toggleHighlight = (tId) => {
+    let active = [];
+    try {
+      active = JSON.parse(localStorage.getItem('activeTopics') || '[]');
+    } catch(e) {}
+    
+    // Legacy support
+    const legacyTopic = localStorage.getItem('activeTopic');
+    if (legacyTopic && !active.length) {
+      active = [legacyTopic];
+      localStorage.removeItem('activeTopic');
+    }
+
+    if (active.includes(tId)) {
+      active = active.filter(id => id !== tId);
+    } else {
+      active.push(tId);
+    }
+    
+    localStorage.setItem('activeTopics', JSON.stringify(active));
+    setActiveHighlightTopics(active);
+  };
+
+  useEffect(() => {
+    const syncActive = () => {
+      if (typeof window !== 'undefined') {
+        let active = [];
+        try {
+          active = JSON.parse(localStorage.getItem('activeTopics') || '[]');
+        } catch(e) {}
+        
+        const legacyTopic = localStorage.getItem('activeTopic');
+        if (legacyTopic && !active.length) {
+          active = [legacyTopic];
+          localStorage.setItem('activeTopics', JSON.stringify(active));
+          localStorage.removeItem('activeTopic');
+        }
+        
+        setActiveHighlightTopics(active);
+      }
+    };
+    syncActive();
+    window.addEventListener('storage', syncActive);
+    window.addEventListener('pageshow', syncActive);
+    document.addEventListener('astro:after-swap', syncActive);
+    document.addEventListener('astro:page-load', syncActive);
+    return () => {
+      window.removeEventListener('storage', syncActive);
+      window.removeEventListener('pageshow', syncActive);
+      document.removeEventListener('astro:after-swap', syncActive);
+      document.removeEventListener('astro:page-load', syncActive);
+    };
+  }, []);
 
   // On dedicated page, we only show the one topic
   const displayTopics = isDedicatedPage ? topics.filter(t => t.topicId === initialTopicId) : topics;
 
-  // Pre-calculate titles for dropdown
+  // Pre-calculate titles and comprehensive counts for dropdown
   const topicOptions = topics.map(t => {
     return {
       id: t.topicId,
-      title: t.topicData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || t.topicId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+      title: t.topicData?.name || t.topicData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || t.topicId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+      count: getTopicTotalCount(t.topicData)
     };
   });
   
   const currentTopicOption = topicOptions.find(t => t.id === initialTopicId) || {};
+  const filteredTopicOptions = topicOptions.filter(t => t.title.toLowerCase().includes(topicSearch.toLowerCase()));
 
   return (
     <div className="topics-explorer select-none">
@@ -429,38 +517,13 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
       )}
 
       {isDedicatedPage && (
-        <div className="dedicated-topic-nav">
-          <a href={`${base}/topics`} className="back-to-topics-btn" title="Back to All Topics">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <div className="ios-nav-container">
+          <a href={`${base}/topics`} className="ios-nav-back" title="All Topics">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
             <span>All Topics</span>
           </a>
-          
-          <div className="topic-dropdown-container">
-            <button 
-              className={`topic-dropdown-btn ${dropdownOpen ? 'open' : ''}`} 
-              onClick={(e) => { e.stopPropagation(); setDropdownOpen(!dropdownOpen); }}
-            >
-              <span className="dropdown-label">Current Topic:</span>
-              <span className="dropdown-value">{currentTopicOption.title}</span>
-              <Chevron open={dropdownOpen} />
-            </button>
-            
-            {dropdownOpen && (
-              <div className="topic-dropdown-menu">
-                {topicOptions.map(t => (
-                  <a 
-                    key={t.id} 
-                    href={`${base}/topics/${t.id}`} 
-                    className={`dropdown-item ${t.id === initialTopicId ? 'active' : ''}`}
-                  >
-                    {t.title}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
       )}
 
@@ -468,34 +531,114 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
         {displayTopics.map(t => {
           const tId = t.topicId;
           const tData = t.topicData;
-          const tTitle = tData.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || tId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          const tTitle = tData.name || tData.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || tId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          const topicColor = getTopicColor(tId);
 
           if (isDedicatedPage) {
             return (
-              <div key={tId} className="dedicated-topic-view-container animate-fade-in">
-                <header className="dedicated-page-header">
-                  <h1 className="dedicated-page-title">{tTitle}</h1>
-                  <p className="dedicated-page-subtitle">Explore Biblical proofs and early Patristic witnesses.</p>
+              <div 
+                key={tId} 
+                className="dedicated-topic-view-container animate-fade-in"
+                style={{ '--topic-color': topicColor.hex, '--topic-bg': topicColor.bgHex }}
+              >
+                <header className="dedicated-hero-header">
+                  <div className="hero-title-wrapper select-none" onClick={(e) => e.stopPropagation()}>
+                    <button 
+                      className="hero-title-selector-btn"
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      aria-expanded={dropdownOpen}
+                      title="Switch topic"
+                    >
+                      <h1 className="hero-title-text">{tTitle}</h1>
+                      <span className="hero-switch-badge">
+                        <span>Switch Topic</span>
+                        <Chevron open={dropdownOpen} />
+                      </span>
+                    </button>
+
+                    {dropdownOpen && (
+                      <div className="hero-dropdown-sheet animate-fade-in">
+                        <div className="dropdown-sheet-header">Available Topics</div>
+                        <div className="dropdown-sheet-list">
+                          {topicOptions.map(opt => {
+                            const isSelected = opt.id === initialTopicId;
+                            return (
+                              <a 
+                                key={opt.id}
+                                href={`${base}/topics/${opt.id}`}
+                                className={`dropdown-sheet-item ${isSelected ? 'is-selected' : ''}`}
+                              >
+                                <span className="sheet-item-title">{opt.title}</span>
+                                <div className="sheet-item-right">
+                                  <span className="sheet-item-count">{opt.count}</span>
+                                  {isSelected && (
+                                    <svg className="sheet-checkmark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  )}
+                                </div>
+                              </a>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="hero-top-row">
+                    <p className="dedicated-page-subtitle">Explore Biblical proofs and early Patristic witnesses.</p>
+                    <button 
+                      className={`ios-compact-toggle ${activeHighlightTopics.includes(tId) ? 'is-active' : ''}`}
+                      onClick={() => toggleHighlight(tId)}
+                      aria-pressed={activeHighlightTopics.includes(tId)}
+                      title="Toggle Scripture Highlighting"
+                    >
+                      <span className="ios-toggle-track">
+                        <span className="ios-toggle-knob"></span>
+                      </span>
+                      <span className="compact-toggle-text">Highlight in Scripture</span>
+                    </button>
+                  </div>
                 </header>
                 <DedicatedTopicView topicObj={{ ...tData, _id: tId }} verseTexts={t.verseTexts} />
               </div>
             );
           }
 
+          const isHighlighted = activeHighlightTopics.includes(tId);
+
           const headerContent = (
-            <>
+            <div className="topic-card-inner-flex">
               <div className="header-text-block">
                 <h2 className="topic-main-heading">{tTitle}</h2>
-                <p className="topic-summary-text">Explore Biblical proofs and early Patristic witnesses.</p>
               </div>
               <div className="header-controls">
+                <button 
+                  className={`ios-compact-toggle card-toggle ${isHighlighted ? 'is-active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleHighlight(tId);
+                  }}
+                  title="Toggle Scripture Highlighting"
+                  aria-pressed={isHighlighted}
+                >
+                  <span className="ios-toggle-track">
+                    <span className="ios-toggle-knob"></span>
+                  </span>
+                  <span className="compact-toggle-text">Highlight in Scripture</span>
+                </button>
                 <Chevron open={false} />
               </div>
-            </>
+            </div>
           );
 
           return (
-            <div key={tId} className="master-topic-box" id={tId}>
+            <div 
+              key={tId} 
+              className="master-topic-box" 
+              id={tId}
+              style={{ '--topic-color': topicColor.hex, '--topic-bg': topicColor.bgHex }}
+            >
               <a href={`${base}/topics/${tId}`} className="topic-header-box is-link">
                 {headerContent}
               </a>
@@ -591,96 +734,252 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
           gap: 14px;
         }
 
-        /* Dedicated Topic Nav */
-        .dedicated-topic-nav {
+        /* Apple HIG iOS Navigation Bar & Popover Sheet */
+        .ios-nav-container {
+          position: relative;
+          z-index: 50;
+          margin-bottom: 12px;
+        }
+        .ios-nav-bar {
           display: flex;
           align-items: center;
-          gap: 16px;
-          margin-bottom: 24px;
+          justify-content: space-between;
+          height: 52px;
+          background: rgba(255, 255, 255, 0.75);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          padding: 0 8px;
+          border-radius: 14px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
-        
-        .back-to-topics-btn {
+        /* Apple HIG Hero Header & Title Dropdown */
+        .ios-nav-container {
+          margin-bottom: 16px;
+        }
+        .ios-nav-back {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
+          gap: 4px;
           color: #64748b;
           font-family: var(--font-body);
-          font-size: 14px;
+          font-size: 14.5px;
           font-weight: 600;
-          text-decoration: none;
           padding: 8px 12px;
           border-radius: 8px;
-          transition: all 0.2s ease;
+          transition: all 0.15s ease;
+          text-decoration: none;
         }
-        .back-to-topics-btn:hover {
+        .ios-nav-back:hover {
           background-color: #f1f5f9;
           color: #0f172a;
         }
-        
-        .topic-dropdown-container {
-          position: relative;
+
+        .dedicated-hero-header {
+          margin-bottom: 24px;
         }
-        
-        .topic-dropdown-btn {
+        .hero-title-wrapper {
+          position: relative;
+          display: inline-block;
+          margin-bottom: 6px;
+        }
+        .hero-title-selector-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          background: transparent;
+          border: none;
+          padding: 4px 8px;
+          margin: -4px -8px;
+          border-radius: 12px;
+          cursor: pointer;
+          transition: background 0.2s ease;
+          text-align: left;
+        }
+        .hero-title-selector-btn:hover {
+          background: rgba(0, 0, 0, 0.04);
+        }
+        .hero-title-text {
+          font-family: var(--font-display);
+          font-size: 32px;
+          font-weight: 900;
+          color: #0f172a;
+          margin: 0;
+          letter-spacing: -0.02em;
+          line-height: 1.1;
+        }
+        .hero-switch-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          background: #f1f5f9;
+          color: #475569;
+          font-family: var(--font-body);
+          font-size: 12px;
+          font-weight: 700;
+          padding: 4px 10px;
+          border-radius: 99px;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+        }
+        .hero-title-selector-btn:hover .hero-switch-badge {
+          background: #e2e8f0;
+          color: #0f172a;
+        }
+
+        .hero-dropdown-sheet {
+          position: absolute;
+          top: calc(100% + 8px);
+          left: 0;
+          width: 320px;
+          background: rgba(255, 255, 255, 0.96);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 16px;
+          box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04);
+          overflow: hidden;
+          z-index: 100;
+        }
+        .dropdown-sheet-header {
+          padding: 12px 16px 8px 16px;
+          font-size: 11px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: #94a3b8;
+          border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .dropdown-sheet-list {
+          padding: 6px;
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          max-height: 320px;
+          overflow-y: auto;
+        }
+        .dropdown-sheet-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 10px 12px;
+          border-radius: 10px;
+          text-decoration: none;
+          color: #1e293b;
+          font-family: var(--font-body);
+          font-size: 14.5px;
+          font-weight: 600;
+          transition: background 0.15s ease;
+        }
+        .dropdown-sheet-item:hover {
+          background: rgba(0, 0, 0, 0.04);
+        }
+        .dropdown-sheet-item.is-selected {
+          background: var(--topic-bg, #eff6ff);
+          color: var(--topic-color, #2563eb);
+          font-weight: 700;
+        }
+        .sheet-item-right {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .sheet-item-count {
+          background: #f1f5f9;
+          color: #64748b;
+          font-size: 11.5px;
+          font-weight: 700;
+          padding: 2px 7px;
+          border-radius: 99px;
+        }
+        .dropdown-sheet-item.is-selected .sheet-item-count {
+          background: var(--topic-bg, #dbeafe);
+          color: var(--topic-color, #2563eb);
+        }
+        .sheet-checkmark {
+          color: var(--topic-color, #2563eb);
+          flex-shrink: 0;
+        }
+
+        .topic-card-inner-flex {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          gap: 16px;
+        }
+        @media (max-width: 640px) {
+          .topic-card-inner-flex {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+          }
+          .header-controls {
+            width: 100%;
+            justify-content: space-between;
+          }
+        }
+        .hero-top-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-bottom: 8px;
+        }
+        .ios-compact-toggle {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background-color: #ffffff;
+          background: #f8fafc;
           border: 1px solid #e2e8f0;
-          border-radius: 8px;
-          padding: 8px 14px;
-          font-family: var(--font-body);
-          font-size: 14px;
-          color: #334155;
+          padding: 5px 12px;
+          border-radius: 99px;
           cursor: pointer;
-          transition: all 0.2s ease;
-          box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-        }
-        .topic-dropdown-btn:hover, .topic-dropdown-btn.open {
-          border-color: #cbd5e1;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-        }
-        .topic-dropdown-btn .dropdown-label {
-          color: #64748b;
-          font-weight: 500;
-        }
-        .topic-dropdown-btn .dropdown-value {
-          color: #0f172a;
-          font-weight: 700;
-        }
-        
-        .topic-dropdown-menu {
-          position: absolute;
-          top: calc(100% + 4px);
-          left: 0;
-          background-color: #ffffff;
-          border: 1px solid #e2e8f0;
-          border-radius: 8px;
-          padding: 6px;
-          min-width: 240px;
-          box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-          z-index: 100;
-          display: flex;
-          flex-direction: column;
-        }
-        .dropdown-item {
-          padding: 8px 12px;
-          color: #334155;
           font-family: var(--font-body);
-          font-size: 14px;
-          font-weight: 500;
-          text-decoration: none;
-          border-radius: 6px;
-          transition: background-color 0.15s ease;
+          font-size: 13px;
+          font-weight: 700;
+          color: #475569;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          user-select: none;
+          -webkit-user-select: none;
         }
-        .dropdown-item:hover {
-          background-color: #f1f5f9;
+        .ios-compact-toggle:hover {
+          background: #f1f5f9;
+          border-color: #cbd5e1;
           color: #0f172a;
         }
-        .dropdown-item.active {
-          background-color: #eff6ff;
-          color: #2563eb;
-          font-weight: 600;
+        .ios-compact-toggle.is-active {
+          background: var(--topic-bg, #ecfdf5);
+          border-color: var(--topic-color, #a7f3d0);
+          color: var(--topic-color, #059669);
+        }
+        .ios-toggle-track {
+          position: relative;
+          display: inline-block;
+          width: 32px;
+          height: 18px;
+          background-color: #cbd5e1;
+          border-radius: 99px;
+          transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          flex-shrink: 0;
+        }
+        .is-active .ios-toggle-track {
+          background-color: var(--topic-color, #10b981);
+        }
+        .ios-toggle-knob {
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          width: 14px;
+          height: 14px;
+          background-color: #ffffff;
+          border-radius: 50%;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(0,0,0,0.1);
+          transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .is-active .ios-toggle-knob {
+          transform: translateX(14px);
         }
 
         /* Expanded Inner Container */
@@ -1111,14 +1410,9 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
         }
         
         .fathers-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 24px;
-        }
-        @media (min-width: 768px) {
-          .fathers-grid {
-            grid-template-columns: 1fr 1fr;
-          }
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
         }
         
         .father-block {
