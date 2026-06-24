@@ -604,6 +604,58 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
     );
   };
 
+  const renderAncientJudaismFeed = () => {
+    const ajData = topicObj['Ancient Judaism'];
+    if (!ajData) return <div className="empty-state">No Ancient Judaism data available.</div>;
+    const eras = Object.keys(ajData);
+
+    const availableFilters = [
+      { id: 'All', label: `All (${ajCount})` },
+      ...eras.map(e => ({ id: e, label: `${e} (${getCenturyCount(ajData[e])})` }))
+    ];
+
+    const feedContent = eras
+      .filter(e => activeFilter === 'All' || activeFilter === e)
+      .map(era => {
+        const authors = ajData[era];
+        const eraCount = getCenturyCount(authors);
+        return (
+          <div key={era} className="feed-category-block animate-fade-in">
+            <h2 className="feed-category-title">{era} <span className="item-count">({eraCount})</span></h2>
+            <div className="fathers-grid">
+              {Object.keys(authors).map(authorName => {
+                const aData = authors[authorName];
+                return (
+                  <SourceBlock key={authorName} sourceName={authorName} sData={aData} />
+                );
+              })}
+            </div>
+          </div>
+        );
+      });
+
+    return (
+      <div className="scripture-feed-container">
+        <div className="feed-controls-bar">
+          <div className="pills-scroll-container">
+            {availableFilters.map(filter => (
+              <button
+                key={filter.id}
+                className={`filter-pill ${activeFilter === filter.id ? 'active' : ''}`}
+                onClick={() => setActiveFilter(filter.id)}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="feed-content-area">
+          {feedContent}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="dedicated-topic-view">
       <div className="master-tabs-container">
@@ -613,20 +665,20 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
         <button id="ot" className={`master-tab ${activeTab === 'Old Testament' ? 'active' : ''}`} onClick={() => handleTabChange('Old Testament', 'ot')}>
           Old Testament <span className="tab-count">({otCount})</span>
         </button>
+        <button id="early-church" className={`master-tab ${activeTab === 'Fathers' ? 'active' : ''}`} onClick={() => handleTabChange('Fathers', 'early-church')}>
+          Pre-Nicene Writings <span className="tab-count">({anfCount})</span>
+        </button>
         {ajCount > 0 && (
           <button id="ancient-judaism" className={`master-tab ${activeTab === 'Ancient Judaism' ? 'active' : ''}`} onClick={() => handleTabChange('Ancient Judaism', 'ancient-judaism')}>
             Ancient Judaism <span className="tab-count">({ajCount})</span>
           </button>
         )}
-        <button id="early-church" className={`master-tab ${activeTab === 'Fathers' ? 'active' : ''}`} onClick={() => handleTabChange('Fathers', 'early-church')}>
-          Pre-Nicene Writings <span className="tab-count">({anfCount})</span>
-        </button>
       </div>
       <div className="master-tab-content">
         {activeTab === 'New Testament' && renderScriptureFeed('New Testament')}
         {activeTab === 'Old Testament' && renderScriptureFeed('Old Testament')}
-        {activeTab === 'Ancient Judaism' && renderAncientJudaismFeed()}
         {activeTab === 'Fathers' && renderFathersFeed()}
+        {activeTab === 'Ancient Judaism' && renderAncientJudaismFeed()}
       </div>
     </div>
   );
