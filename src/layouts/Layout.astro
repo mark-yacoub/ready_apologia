@@ -9,9 +9,16 @@ interface Props {
 	description?: string;
 	ogImage?: string;
 	schema?: string;
+	keywords?: string;
 }
 
-const { title, description = "Ready Apologia - Defending the Faith", ogImage, schema } = Astro.props;
+const { 
+	title, 
+	description = "Ready Apologia - Defending the Faith with Biblical Scripture and Early Church Fathers", 
+	ogImage, 
+	schema,
+	keywords = "Apologetics, Bible Verses, Early Church Fathers, Divinity of Christ, Ready Apologia, Patristics, Scripture Evidence, Christian Apologetics, Ante-Nicene Fathers"
+} = Astro.props;
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
 const fallbackImage = `${site}${base}/default-og-image.png`;
@@ -24,8 +31,10 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+		<link rel="canonical" href={ogUrl} />
 		<meta name="generator" content={Astro.generator} />
 		
 		<!-- Open Graph / Social Media -->
@@ -34,6 +43,13 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		<meta property="og:title" content={`${title} | Ready Apologia`} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImageUrl} />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={ogUrl} />
+		<meta name="twitter:title" content={`${title} | Ready Apologia`} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
 
 		<title>{title} | Ready Apologia</title>
 		
@@ -111,7 +127,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 				</main>
 
 				<!-- Bottom Navigation (Hidden on desktop) -->
-				<BottomNav />
+				<BottomNav client:load />
 			</div>
 
 			<!-- Global Onboarding Modal -->

@@ -47,12 +47,16 @@ export async function getStaticPaths() {
   const allVerseIds = new Set([...msSet, ...ctSet, ...apSet].filter(Boolean));
   const paths = [];
 
+  const booksToBuild = BUILD_BOOKS;
+
   allVerseIds.forEach(id => {
     const parts = id.split('_');
     if (parts.length === 3) {
       const b = parts[0];
       const c = parts[1];
       const v = parts[2];
+
+      if (booksToBuild && !booksToBuild.has(b)) return;
       
       if (msSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'manuscripts' } });
       if (ctSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'contradictions' } });

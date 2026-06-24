@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TopicsExplorer from '../../components/TopicsExplorer.jsx';
+import { loadAllTopicsData } from '../../utils/topicsLoader.js';
+
+export async function getStaticPaths() {
+  return loadAllTopicsData().map(({ topicId }) => ({
+    params: { topic_id: topicId }
+  }));
+}
+
+const { topic_id } = Astro.params;
+const topicsData = loadAllTopicsData();
+
+const targetTopic = topicsData.find(t => t.topicId === topic_id);
+const rawTitle = targetTopic?.topicData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || topic_id.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+const topicTitle = `${rawTitle} Bible Verses & Early Church Evidence`;
+
+const topicDesc = `Comprehensive collection of Biblical Scripture verses (Old & New Testament) and early Church Patristic testimonies defending the ${rawTitle}. Explore historical Christian apologetics proofs and quotes.`;
+const topicKeywords = `verses ${rawTitle.toLowerCase()}, bible verses ${rawTitle.toLowerCase()}, early church fathers ${rawTitle.toLowerCase()}, ${rawTitle.toLowerCase()} apologetics, scripture evidence ${rawTitle.toLowerCase()}, proof of ${rawTitle.toLowerCase()}`;
+
+// Extract top verse references for Rich ItemList Schema
+const ntCategories = targetTopic?.topicData?.Scripture?.['New Testament']?.structure || [];
+const otCategories = targetTopic?.topicData?.Scripture?.['Old Testament']?.structure || [];
+const allCategories = [...ntCategories, ...otCategories];
+
+const itemListElements = allCategories.slice(0, 10).map((cat, idx) => ({
+  "@type": "ListItem",
+  "position": idx + 1,
+  "name": `${cat.title} - ${rawTitle}`,
+  "description": `Biblical evidence and verses regarding ${cat.title.toLowerCase()} demonstrating the ${rawTitle.toLowerCase()}.`
+}));
+
+const articleGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ready Apologia",
+          "item": Astro.site ? Astro.site.toString() : Astro.url.origin
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Apologetics Topics",
+          "item": `${Astro.site ? Astro.site.toString().replace(/\/$/, '') : Astro.url.origin}/topics`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": rawTitle,
+          "item": Astro.url.href
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": `${rawTitle} - Scripture & Patristic Evidence`,
+      "headline": topicTitle,
+      "description": topicDesc,
+      "keywords": topicKeywords,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": Astro.site ? Astro.site.toString() : Astro.url.origin
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "name": `Key Scripture Evidence for ${rawTitle}`,
+        "itemListElement": itemListElements
+      }
+    }
+  ]
+};
+const schemaJson = JSON.stringify(articleGraph);
+---
+
+<Layout title={topicTitle} description={topicDesc} keywords={topicKeywords} schema={schemaJson}>
+  <div class="topic-page-container">
+    <TopicsExplorer client:load topics={topicsData} initialTopicId={topic_id} />
+  </div>
+</Layout>
+
+<style>
+  .topic-page-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 12px;
+    min-height: 100%;
+  }
+</style>

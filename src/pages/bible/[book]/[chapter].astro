@@ -6,6 +6,7 @@ import { query } from '../../../db.js';
 import booksMeta from '../../../data/books_meta.json';
 import { mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
 import { BUILD_BOOKS } from '../../../utils/build_config.js';
+import { loadAllTopicsData } from '../../../utils/topicsLoader.js';
 
 // 1. Pre-render all chapters for NT and OT books
 export async function getStaticPaths() {
@@ -91,6 +92,24 @@ const apSet = new Set(
     return r.verse;
   })
 );
+
+// 4.5 Populate topic map
+const topicMap = {};
+loadAllTopicsData().forEach(({ topicId, topicData }) => {
+  ['Old Testament', 'New Testament'].forEach(test => {
+    const bank = topicData?.Scripture?.[test]?.verse_bank;
+    if (bank && typeof bank === 'object') {
+      Object.keys(bank).forEach(vId => {
+        const parts = vId.split('_');
+        if (parts[0] === book && parts[1] === chapter) {
+          const vNum = parts.slice(2).join('_');
+          if (!topicMap[vNum]) topicMap[vNum] = [];
+          topicMap[vNum].push(topicId);
+        }
+      });
+    }
+  });
+});
 
 chapterVerses.forEach(verseObj => {
   const verseNum = Object.keys(verseObj)[0];
@@ -198,7 +217,7 @@ if (isNT) {
 
           if (hasEvidence) {
             return (
-              <div class="verse-row active-verse">
+              <div class="verse-row active-verse" id={verseNum} data-topics={topicMap[verseNum] ? topicMap[verseNum].join(',') : ''}>
                 <div class="verse-row-content">
                   <span class="verse-num">{verseNum}</span>
                   <div class="verse-body-wrapper">
@@ -251,7 +270,7 @@ if (isNT) {
             );
           } else {
             return (
-              <div class="verse-row">
+              <div class="verse-row" id={verseNum} data-topics={topicMap[verseNum] ? topicMap[verseNum].join(',') : ''}>
                 <div class="verse-row-content">
                   <span class="verse-num muted">{verseNum}</span>
                   <div class="verse-body-wrapper">
@@ -324,8 +343,24 @@ if (isNT) {
     });
   };
 
+  const setupTopicHighlight = () => {
+    const activeTopic = localStorage.getItem('activeTopic');
+    if (!activeTopic) return;
+    
+    document.querySelectorAll('.verse-row[data-topics]').forEach(el => {
+      const topics = el.getAttribute('data-topics');
+      if (topics && topics.includes(activeTopic)) {
+        el.classList.add('topic-highlight');
+      }
+    });
+  };
+
   setupChapterPopover();
-  document.addEventListener('astro:after-swap', setupChapterPopover);
+  setupTopicHighlight();
+  document.addEventListener('astro:after-swap', () => {
+    setupChapterPopover();
+    setupTopicHighlight();
+  });
 </script>
 
 <style>
@@ -547,6 +582,16 @@ if (isNT) {
 		background-color: var(--color-surface-container-low);
 		border-left: 2px solid var(--color-secondary);
 		padding-left: 14px;
+	}
+
+	/* Topic Highlight (Global toggle) */
+	.verse-row.topic-highlight .verse-row-content {
+		background-color: rgba(151, 69, 67, 0.05); /* Very subtle Terracotta tint */
+		border-left: 2px solid var(--color-secondary);
+		padding-left: 14px;
+	}
+	.verse-row.topic-highlight.active-verse:hover .verse-row-content {
+		background-color: rgba(151, 69, 67, 0.1);
 	}
 
 	/* ============================================================
