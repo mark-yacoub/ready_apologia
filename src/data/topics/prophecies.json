@@ -3649,5 +3649,215 @@
         }
       ]
     }
-  ]
+  ],
+  "Ancient Judaism": {
+    "2nd Century BC to 1st Century AD": {
+      "Dead Sea Scrolls Pesharim": {
+        "note": "These commentaries from the Qumran community apply biblical prophecies to their contemporary events and the coming eschatological age. Although compiled/written down in the AD period, this text reflects much older theological and oral traditions dating back to the Second Temple (BC) era.",
+        "works": {
+          "4Q174 (Florilegium)": {
+            "date": "Late 1st Century BC",
+            "quotes": [
+              {
+                "chapter": "Commentary on 2 Samuel 7:14",
+                "quote": "\"I will be to him a father, and he shall be to me a son.\" He is the Branch of David who shall arise with the Interpreter of the Law to rule in Zion at the end of time.",
+                "url": "https://www.deadseascrolls.org.il/explore-the-archive/manuscript/4Q174-1"
+              }
+            ]
+          },
+          "4Q161 (Isaiah Pesher)": {
+            "date": "Late 1st Century BC",
+            "quotes": [
+              {
+                "chapter": "Commentary on Isaiah 11:1-5",
+                "quote": "[Interpreted, this concerns the Branch] of David who shall arise at the end [of days]... God will uphold him with [the spirit of] might, and will give him a glorious throne.",
+                "url": "https://www.deadseascrolls.org.il/explore-the-archive/manuscript/4Q161-1"
+              }
+            ]
+          },
+          "4Q252 (Genesis Commentary)": {
+            "date": "1st Century BC",
+            "quotes": [
+              {
+                "chapter": "Commentary on Genesis 49:10",
+                "quote": "The sceptre shall not depart from the tribe of Judah... Whenever Israel rules, there shall not fail to be a descendant of David upon the throne. For the ruler's staff is the Covenant of royalty... until the Messiah of Righteousness comes, the Branch of David. For to him and to his seed was granted the Covenant of royalty over his people for everlasting generations.",
+                "url": "https://www.deadseascrolls.org.il/explore-the-archive/manuscript/4Q252-1"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "1st Century BC to 1st Century AD": {
+      "1 Enoch (The Book of Parables)": {
+        "note": "The Book of Parables (1 Enoch 37-71) is a Jewish apocalyptic text that develops the 'Son of Man' figure from Daniel 7 into a pre-existent, messianic judge possessing the spirit of wisdom from Isaiah 11. Although compiled/written down in the AD period, this text reflects much older theological and oral traditions dating back to the Second Temple (BC) era.",
+        "works": {
+          "The Book of Enoch": {
+            "date": "1st Century BC to 1st Century AD",
+            "quotes": [
+              {
+                "chapter": "1 Enoch 48",
+                "quote": "And at that hour that Son of Man was named In the presence of the Lord of Spirits, And his name before the Head of Days. Yea, before the sun and the signs were created, Before the stars of the heaven were made, His name was named before the Lord of Spirits... All who dwell on earth shall fall down and worship before him, And will praise and bless and celebrate with song the Lord of Spirits.",
+                "url": "https://sacred-texts.com/bib/boe/boe051.htm"
+              },
+              {
+                "chapter": "1 Enoch 49",
+                "quote": "And in him dwells the spirit of wisdom, And the spirit which gives insight, And the spirit of understanding and of might, And the spirit of those who have fallen asleep in righteousness. And he shall judge the secret things, And none shall be able to utter a lying word before him; For he is the Elect One before the Lord of Spirits according to His good pleasure.",
+                "url": "https://sacred-texts.com/bib/boe/boe052.htm"
+              },
+              {
+                "chapter": "1 Enoch 62",
+                "quote": "And the Lord of Spirits seated him on the throne of His glory, And the spirit of righteousness was poured out upon him, And the word of his mouth slays all the sinners, And all the unrighteous are destroyed from before his face.",
+                "url": "https://sacred-texts.com/bib/boe/boe065.htm"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "1st to 8th Century AD": {
+      "Aramaic Targums": {
+        "note": "The Aramaic Targums are ancient Jewish translations and paraphrases of the Hebrew Bible, which often insert theological commentary and explicitly identify prophecies as referring to the King Messiah. Although compiled and written down in the AD period, this text reflects much older theological and oral traditions dating back to the Second Temple (BC) era.",
+        "works": {
+          "Targum Pseudo-Jonathan on Genesis": {
+            "date": "c. 4th-7th Century AD",
+            "quotes": [
+              {
+                "chapter": "Genesis 3:15",
+                "quote": "And it shall be that when the sons of the woman study the Torah, and perform its instructions, they will be prepared to smite you on your head to kill you. But when the sons of the woman forsake the commandments of the Torah, and do not perform its instructions, you will be ready to bite them in their heel, and afflict them with sickness. Nevertheless, there shall be a remedy for the sons of the woman, but for you, O serpent, there shall not be a remedy: for they shall make peace for each other in the end of days, in the days of the King Messiah.",
+                "url": "https://www.sefaria.org/Targum_Jonathan_on_Genesis.3.15"
+              }
+            ]
+          },
+          "Targum Onkelos on Genesis": {
+            "date": "c. 1st-2nd Century AD",
+            "quotes": [
+              {
+                "chapter": "Genesis 49:10",
+                "quote": "The transmission of dominion shall not cease from the house of Judah, nor the scribe from his children's children, forever, until the Messiah comes, to whom the Kingdom belongs, and whom nations shall obey.",
+                "url": "https://www.sefaria.org/Targum_Onkelos_on_Genesis.49.10"
+              }
+            ]
+          },
+          "Targum Onkelos on Numbers": {
+            "date": "c. 1st-2nd Century AD",
+            "quotes": [
+              {
+                "chapter": "Numbers 24:17",
+                "quote": "I see him, but not now; I behold him, but he is not near; when a king shall arise out of Jacob, and be anointed the Messiah out of Israel. He shall slay the princes of Moab, and rule over all the children of men.",
+                "url": "https://www.sefaria.org/Targum_Onkelos_on_Numbers.24.17"
+              }
+            ]
+          },
+          "Targum Jonathan on Isaiah": {
+            "date": "c. 2nd-4th Century AD",
+            "quotes": [
+              {
+                "chapter": "Isaiah 9:6",
+                "quote": "The prophet said to the house of David, For unto us a Child is born, unto us a Son is given, and He has taken the law upon Himself to keep it. His name is called from eternity, Wonderful, The Mighty God, who lives to eternity, the Messiah, whose peace shall be great upon us in His days.",
+                "url": "https://www.sefaria.org/Targum_Jonathan_on_Isaiah.9.6"
+              },
+              {
+                "chapter": "Isaiah 11:1",
+                "quote": "And a king shall come forth from the sons of Jesse, and the Messiah shall grow up from his sons' sons.",
+                "url": "https://www.sefaria.org/Targum_Jonathan_on_Isaiah.11.1"
+              },
+              {
+                "chapter": "Isaiah 52:13",
+                "quote": "Behold, my servant the Messiah shall prosper; he shall be exalted, and increase, and be very strong.",
+                "url": "https://www.sefaria.org/Targum_Jonathan_on_Isaiah.52.13"
+              }
+            ]
+          },
+          "Targum Jonathan on Micah": {
+            "date": "c. 2nd-4th Century AD",
+            "quotes": [
+              {
+                "chapter": "Micah 5:2",
+                "quote": "And you, O Bethlehem Ephrathah, you who were too small to be numbered among the thousands of the house of Judah, from you shall come forth before Me the Messiah, to exercise dominion over Israel, he whose name was mentioned from before, from the days of creation.",
+                "url": "https://www.sefaria.org/Targum_Jonathan_on_Micah.5.2"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Rabbinic Period (3rd - 6th Century AD)": {
+      "Midrash Rabbah": {
+        "note": "A foundational collection of classical rabbinic biblical interpretation (midrash). Although compiled/written down in the AD period, this text reflects much older theological and oral traditions dating back to the Second Temple (BC) era.",
+        "works": {
+          "Lamentations Rabbah": {
+            "date": "c. 5th Century AD",
+            "quotes": [
+              {
+                "chapter": "Lamentations Rabbah 1:51",
+                "quote": "What is the name of the King Messiah? R. Abba b. Kahana said: His name is 'the Lord'; as it is stated, And this is his name whereby he shall be called, The Lord is our righteousness (Jeremiah 23:6).",
+                "url": "https://www.sefaria.org/Eikhah_Rabbah.1.51"
+              }
+            ]
+          },
+          "Genesis Rabbah": {
+            "date": "c. 300 - 500 AD",
+            "quotes": [
+              {
+                "chapter": "Genesis Rabbah 2:4",
+                "quote": "\"And the spirit of God hovered over the face of the waters\" (Genesis 1:2) - this is the spirit of King Messiah, as it is written, \"And the spirit of the Lord shall rest upon him\" (Isaiah 11:2).",
+                "url": "https://www.sefaria.org/Bereshit_Rabbah.2.4"
+              }
+            ]
+          }
+        }
+      },
+      "Babylonian Talmud": {
+        "note": "The Babylonian Talmud is a central text of Rabbinic Judaism consisting of rabbinic debates, law, and lore. Although compiled/written down in the AD period, this text reflects much older theological and oral traditions dating back to the Second Temple (BC) era.",
+        "works": {
+          "Tractate Sanhedrin": {
+            "date": "c. 500 AD",
+            "quotes": [
+              {
+                "chapter": "Sanhedrin 98a",
+                "quote": "Rabbi Alexandri says: Rabbi Yehoshua ben Levi raises a contradiction between two verses. It is written: 'There came with the clouds of heaven, one like unto a son of man' (Daniel 7:13); and it is written: 'Behold, your king comes unto you... lowly, and riding upon a donkey' (Zechariah 9:9). He resolves the contradiction: If they merit it, the Messiah will come with the clouds of heaven; if they do not merit it, he will come lowly and riding upon a donkey.",
+                "url": "https://www.sefaria.org/Sanhedrin.98a"
+              },
+              {
+                "chapter": "Sanhedrin 98b",
+                "quote": "And the Rabbis say: The leper of the house of Rabbi Yehuda HaNasi is his name, as it is stated: 'Surely he has borne our sicknesses, and carried our pains; yet we did esteem him stricken, smitten of God, and afflicted' (Isaiah 53:4).",
+                "url": "https://www.sefaria.org/Sanhedrin.98b"
+              }
+            ]
+          },
+          "Tractate Sukkah": {
+            "date": "c. 500 AD",
+            "quotes": [
+              {
+                "chapter": "Sukkah 52a",
+                "quote": "The Gemara asks: With regard to the cause of the mourning, the Sages and Rabbi Yehuda disagree. One says that it is for Messiah ben Yosef who is slain; and one says that it is for the evil inclination that is slain. The Gemara comments: It is understandable according to the one who says that the mourning is for Messiah ben Yosef who is slain, as that is what is written: 'And they shall look unto Me because they have thrust him through; and they shall mourn for him, as one mourns for his only son' (Zechariah 12:10).",
+                "url": "https://www.sefaria.org/Sukkah.52a"
+              }
+            ]
+          }
+        }
+      },
+      "Midrash Tehillim": {
+        "note": "A collection of classical rabbinic aggadic interpretations on the Book of Psalms. Although compiled/written down in the AD period, this text reflects much older theological and oral traditions dating back to the Second Temple (BC) era.",
+        "works": {
+          "Midrash on Psalms": {
+            "date": "c. 3rd - 11th Century AD",
+            "quotes": [
+              {
+                "chapter": "Midrash Tehillim 2:9",
+                "quote": "R. Yudan said: All these goodly promises are in the decree of the King, the King of kings, who will fulfill them for the lord Messiah... The Lord said unto me: Thou art My son (Ps. 2:7).",
+                "url": "https://www.sefaria.org/Midrash_Tehillim.2.9"
+              },
+              {
+                "chapter": "Midrash Tehillim 18:29",
+                "quote": "R. Yudan said in the name of R. Aha: In the time to come, the Holy One, blessed be He, will seat the lord Messiah at His right hand, as it is said: The Lord saith unto my lord: Sit thou at My right hand (Ps. 110:1).",
+                "url": "https://www.sefaria.org/Midrash_Tehillim.18.29"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
 }

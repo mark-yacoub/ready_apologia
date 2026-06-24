@@ -204,19 +204,33 @@ const getFatherCount = (fData) => {
   return count;
 };
 
+const getAncientJudaismCount = (ajData) => {
+  if (!ajData || typeof ajData !== 'object') return 0;
+  let count = 0;
+  Object.values(ajData).forEach(era => {
+    Object.values(era || {}).forEach(author => {
+      Object.values(author?.works || {}).forEach(work => {
+        count += (work?.quotes?.length || 0);
+      });
+    });
+  });
+  return count;
+};
+
 const getTopicTotalCount = (tData) => {
   if (!tData) return 0;
   let count = getTestamentCount(tData.Scripture?.['New Testament']) +
          getTestamentCount(tData.Scripture?.['Old Testament']) +
-         getAnfCount(tData['Ante-Nicene Fathers']);
+         getAnfCount(tData['Ante-Nicene Fathers']) +
+         getAncientJudaismCount(tData['Ancient Judaism']);
   if (Array.isArray(tData.prophecies)) count += tData.prophecies.length;
   return count;
 };
 
 // ----------------------------------------------------
-const FatherBlock = ({ fatherName, fData }) => {
+const SourceBlock = ({ sourceName, sData }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const fatherCount = getFatherCount(fData);
+  const sourceCount = getFatherCount(sData);
 
   return (
     <div className={`father-block ${isOpen ? 'is-expanded' : ''}`}>
@@ -232,15 +246,15 @@ const FatherBlock = ({ fatherName, fData }) => {
           }
         }}
       >
-        <h3 className="father-name">{fatherName} <span className="item-count">({fatherCount})</span></h3>
+        <h3 className="father-name">{sourceName} <span className="item-count">({sourceCount})</span></h3>
         <Chevron open={isOpen} />
       </div>
 
       {isOpen && (
         <div className="father-content animate-fade-in">
-          {fData.note && <div className="father-note-box">{fData.note}</div>}
-          {Object.keys(fData.works || {}).map(workName => {
-            const workQuotes = fData.works[workName]?.quotes || [];
+          {sData.note && <div className="father-note-box">{sData.note}</div>}
+          {Object.keys(sData.works || {}).map(workName => {
+            const workQuotes = sData.works[workName]?.quotes || [];
             return (
               <div key={workName} className="patristic-work-group">
                 <h4 className="work-title">{workName} <span className="item-count">({workQuotes.length})</span></h4>
@@ -471,6 +485,7 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
       const h = window.location.hash;
       if (h === '#ot') return 'Old Testament';
       if (h === '#early-church' || h === '#pre-nicene-writings' || h === '#fathers') return 'Fathers';
+      if (h === '#ancient-judaism' || h === '#judaism') return 'Ancient Judaism';
     }
     return 'New Testament';
   });
@@ -479,6 +494,7 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
   const ntCount = getTestamentCount(topicObj.Scripture?.['New Testament']);
   const otCount = getTestamentCount(topicObj.Scripture?.['Old Testament']);
   const anfCount = getAnfCount(topicObj['Ante-Nicene Fathers']);
+  const ajCount = getAncientJudaismCount(topicObj['Ancient Judaism']);
 
   const handleTabChange = (tab, hash) => {
     setActiveTab(tab);
@@ -558,7 +574,7 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
               {Object.keys(fathers).map(fatherName => {
                 const fData = fathers[fatherName];
                 return (
-                  <FatherBlock key={fatherName} fatherName={fatherName} fData={fData} />
+                  <SourceBlock key={fatherName} sourceName={fatherName} sData={fData} />
                 );
               })}
             </div>
@@ -597,6 +613,11 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
         <button id="ot" className={`master-tab ${activeTab === 'Old Testament' ? 'active' : ''}`} onClick={() => handleTabChange('Old Testament', 'ot')}>
           Old Testament <span className="tab-count">({otCount})</span>
         </button>
+        {ajCount > 0 && (
+          <button id="ancient-judaism" className={`master-tab ${activeTab === 'Ancient Judaism' ? 'active' : ''}`} onClick={() => handleTabChange('Ancient Judaism', 'ancient-judaism')}>
+            Ancient Judaism <span className="tab-count">({ajCount})</span>
+          </button>
+        )}
         <button id="early-church" className={`master-tab ${activeTab === 'Fathers' ? 'active' : ''}`} onClick={() => handleTabChange('Fathers', 'early-church')}>
           Pre-Nicene Writings <span className="tab-count">({anfCount})</span>
         </button>
@@ -604,6 +625,7 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
       <div className="master-tab-content">
         {activeTab === 'New Testament' && renderScriptureFeed('New Testament')}
         {activeTab === 'Old Testament' && renderScriptureFeed('Old Testament')}
+        {activeTab === 'Ancient Judaism' && renderAncientJudaismFeed()}
         {activeTab === 'Fathers' && renderFathersFeed()}
       </div>
     </div>
@@ -1541,7 +1563,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
         }
         .master-tab.active {
           color: #0f172a;
-          border-bottom-color: #2563eb;
+          border-bottom-color: var(--topic-color, #2563eb);
         }
 
         .pills-scroll-container {
