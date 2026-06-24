@@ -78,8 +78,8 @@ const VerseItem = ({ vId, text, note, topicId, categoryTitle = null }) => {
   };
 
   return (
-    <div 
-      className="clean-verse-card" 
+    <div
+      className="clean-verse-card"
       onClick={handleCardClick}
       role="button"
       tabIndex={0}
@@ -92,10 +92,10 @@ const VerseItem = ({ vId, text, note, topicId, categoryTitle = null }) => {
     >
       <div className="verse-card-header">
         <div className="verse-header-left">
-          <a 
-            href={`${base}/bible/${bookId}/${chapterNum}#${verseNumStr}`} 
-            onClick={(e) => { 
-              e.stopPropagation(); 
+          <a
+            href={`${base}/bible/${bookId}/${chapterNum}#${verseNumStr}`}
+            onClick={(e) => {
+              e.stopPropagation();
               if (topicId) {
                 let active = [];
                 try { active = JSON.parse(localStorage.getItem('activeTopics') || '[]'); } catch(e) {}
@@ -104,7 +104,7 @@ const VerseItem = ({ vId, text, note, topicId, categoryTitle = null }) => {
                   localStorage.setItem('activeTopics', JSON.stringify(active));
                 }
               }
-            }} 
+            }}
             className="verse-ref-link"
           >
             <span className="verse-ref-pill">{refStr} <span className="ref-arrow">&gt;</span></span>
@@ -114,9 +114,9 @@ const VerseItem = ({ vId, text, note, topicId, categoryTitle = null }) => {
           )}
         </div>
         {note && (
-          <button 
-            className={`topic-note-btn ${isNoteOpen ? 'active' : ''}`} 
-            onClick={(e) => { e.stopPropagation(); setIsNoteOpen(!isNoteOpen); }} 
+          <button
+            className={`topic-note-btn ${isNoteOpen ? 'active' : ''}`}
+            onClick={(e) => { e.stopPropagation(); setIsNoteOpen(!isNoteOpen); }}
             aria-label="Toggle commentary note"
             title="View commentary note"
             type="button"
@@ -141,11 +141,11 @@ const VerseGroup = ({ verses, verseBank, verseTexts, topicId, testamentName, ver
   return (
     <div className="verse-group-list">
       {sortedIds.map(vId => (
-        <VerseItem 
-          key={vId} 
-          vId={vId} 
-          text={verseTexts[vId] || 'Verse text unavailable'} 
-          note={verseBank[vId]} 
+        <VerseItem
+          key={vId}
+          vId={vId}
+          text={verseTexts[vId] || 'Verse text unavailable'}
+          note={verseBank[vId]}
           topicId={topicId}
           categoryTitle={verseCategories ? verseCategories[vId]?.join(', ') : null}
         />
@@ -206,9 +206,11 @@ const getFatherCount = (fData) => {
 
 const getTopicTotalCount = (tData) => {
   if (!tData) return 0;
-  return getTestamentCount(tData.Scripture?.['New Testament']) + 
-         getTestamentCount(tData.Scripture?.['Old Testament']) + 
+  let count = getTestamentCount(tData.Scripture?.['New Testament']) +
+         getTestamentCount(tData.Scripture?.['Old Testament']) +
          getAnfCount(tData['Ante-Nicene Fathers']);
+  if (Array.isArray(tData.prophecies)) count += tData.prophecies.length;
+  return count;
 };
 
 // ----------------------------------------------------
@@ -218,8 +220,8 @@ const FatherBlock = ({ fatherName, fData }) => {
 
   return (
     <div className={`father-block ${isOpen ? 'is-expanded' : ''}`}>
-      <div 
-        className="father-header-box" 
+      <div
+        className="father-header-box"
         onClick={() => setIsOpen(!isOpen)}
         role="button"
         tabIndex={0}
@@ -233,7 +235,7 @@ const FatherBlock = ({ fatherName, fData }) => {
         <h3 className="father-name">{fatherName} <span className="item-count">({fatherCount})</span></h3>
         <Chevron open={isOpen} />
       </div>
-      
+
       {isOpen && (
         <div className="father-content animate-fade-in">
           {fData.note && <div className="father-note-box">{fData.note}</div>}
@@ -249,9 +251,9 @@ const FatherBlock = ({ fatherName, fData }) => {
                     };
                     const hasChapter = q?.chapter && q.chapter !== 'N/A';
                     return (
-                      <div 
-                        key={idx} 
-                        className="clean-verse-card" 
+                      <div
+                        key={idx}
+                        className="clean-verse-card"
                         onClick={handleQuoteClick}
                         role={q?.url ? "button" : undefined}
                         tabIndex={q?.url ? 0 : undefined}
@@ -284,6 +286,183 @@ const FatherBlock = ({ fatherName, fData }) => {
 };
 
 // ----------------------------------------------------
+// Prophecies Dedicated View
+// ----------------------------------------------------
+const ProphecyCard = ({ prophecy, verseTexts, topicId }) => {
+  const otBookId = prophecy.ot_verses?.[0]?.split('_')[0];
+  const bookName = otBookId ? formatBookName(otBookId) : '';
+  const otText = (prophecy.ot_verses || []).map(vId => verseTexts[vId] || '').filter(Boolean).join(' ');
+
+  return (
+    <div className="prophecy-card">
+      <div className="prophecy-card-header">
+        <div className="prophecy-header-top">
+          <h2 className="prophecy-title">{prophecy.name}</h2>
+          {prophecy.type && <span className="prophecy-type-badge">{prophecy.type}</span>}
+        </div>
+        {prophecy.date && <p className="prophecy-date-meta">{prophecy.date}</p>}
+      </div>
+
+      <div className="prophecy-card-body">
+        <div className="prophecy-ot-pane">
+          <h4 className="prophecy-pane-label">Old Testament Promise {bookName ? `(${bookName})` : ''}</h4>
+          <div className="prophecy-ot-text">{otText}</div>
+          <div className="prophecy-ot-refs">
+            {(prophecy.ot_verses || []).map(vId => {
+              const p = vId.split('_');
+              return (
+                <a key={vId} href={`${base}/bible/${p[0]}/${p[1]}#${p.slice(2).join('_')}`} className="verse-ref-link" onClick={(e) => {
+                  e.stopPropagation();
+                  let active = [];
+                  try { active = JSON.parse(localStorage.getItem('activeTopics') || '[]'); } catch(err) {}
+                  if (!active.includes(topicId)) {
+                    active.push(topicId);
+                    localStorage.setItem('activeTopics', JSON.stringify(active));
+                  }
+                }}>
+                  <span className="verse-ref-pill">{formatBookName(p[0])} {p[1]}:{p.slice(2).join('_')} <span className="ref-arrow">&gt;</span></span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="prophecy-nt-pane">
+          <h4 className="prophecy-pane-label">New Testament Fulfillment</h4>
+          <div className="prophecy-nt-stack">
+            {(prophecy.nt_fulfillments || []).map((nt, idx) => {
+              const ntText = (nt.verses || []).map(vId => verseTexts[vId] || '').filter(Boolean).join(' ');
+              return (
+                <div key={idx} className="prophecy-nt-block">
+                  {idx > 0 && <div className="prophecy-nt-divider" />}
+                  <div className="prophecy-nt-text">{ntText}</div>
+                  <div className="prophecy-nt-refs">
+                    {(nt.verses || []).map(vId => {
+                      const p = vId.split('_');
+                      return (
+                        <a key={vId} href={`${base}/bible/${p[0]}/${p[1]}#${p.slice(2).join('_')}`} className="verse-ref-link" onClick={(e) => {
+                          e.stopPropagation();
+                          let active = [];
+                          try { active = JSON.parse(localStorage.getItem('activeTopics') || '[]'); } catch(err) {}
+                          if (!active.includes(topicId)) {
+                            active.push(topicId);
+                            localStorage.setItem('activeTopics', JSON.stringify(active));
+                          }
+                        }}>
+                          <span className="verse-ref-pill">{formatBookName(p[0])} {p[1]}:{p.slice(2).join('_')} <span className="ref-arrow">&gt;</span></span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                  {nt.note && <div className="prophecy-nt-note">{nt.note}</div>}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PropheciesDedicatedView = ({ prophecies, verseTexts, topicId }) => {
+  const [activeTab, setActiveTab] = useState('Category');
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const categories = [...new Set(prophecies.map(p => p.category).filter(Boolean))];
+
+  // Group by book
+  const booksMap = new Map();
+  prophecies.forEach(p => {
+    const otBookId = p.ot_verses?.[0]?.split('_')[0];
+    if (otBookId) {
+      if (!booksMap.has(otBookId)) booksMap.set(otBookId, []);
+      booksMap.get(otBookId).push(p);
+    }
+  });
+
+  const bookIds = Array.from(booksMap.keys()).sort((a, b) => {
+    const idxA = booksMeta.ot.findIndex(x => x.id === a);
+    const idxB = booksMeta.ot.findIndex(x => x.id === b);
+    return (idxA === -1 ? 999 : idxA) - (idxB === -1 ? 999 : idxB);
+  });
+
+  const availableFilters = activeTab === 'Category'
+    ? [{ id: 'All', label: `All (${prophecies.length})` }, ...categories.map(c => ({ id: c, label: `${c} (${prophecies.filter(p => p.category === c).length})` }))]
+    : [{ id: 'All', label: `All (${prophecies.length})` }, ...bookIds.map(b => ({ id: b, label: `${formatBookName(b)} (${booksMap.get(b).length})` }))];
+
+  const filteredProphecies = activeTab === 'Category'
+    ? prophecies.filter(p => activeFilter === 'All' || p.category === activeFilter)
+    : prophecies.filter(p => {
+        if (activeFilter === 'All') return true;
+        const otBookId = p.ot_verses?.[0]?.split('_')[0];
+        return otBookId === activeFilter;
+      });
+
+  let feedContent = null;
+  if (activeTab === 'Category') {
+    const groups = categories.filter(c => activeFilter === 'All' || activeFilter === c);
+    feedContent = groups.map(c => {
+      const items = filteredProphecies.filter(p => p.category === c);
+      if (!items.length) return null;
+      return (
+        <div key={c} className="feed-category-block animate-fade-in">
+          <h2 className="feed-category-title">{c} <span className="item-count">({items.length})</span></h2>
+          <div className="prophecies-feed-list">
+            {items.map((p, idx) => <ProphecyCard key={p.name || idx} prophecy={p} verseTexts={verseTexts} topicId={topicId} />)}
+          </div>
+        </div>
+      );
+    });
+  } else {
+    const groups = bookIds.filter(b => activeFilter === 'All' || activeFilter === b);
+    feedContent = groups.map(b => {
+      const items = filteredProphecies.filter(p => p.ot_verses?.[0]?.split('_')[0] === b);
+      if (!items.length) return null;
+      return (
+        <div key={b} className="feed-category-block animate-fade-in">
+          <h2 className="feed-category-title">{formatBookName(b)} <span className="item-count">({items.length})</span></h2>
+          <div className="prophecies-feed-list">
+            {items.map((p, idx) => <ProphecyCard key={p.name || idx} prophecy={p} verseTexts={verseTexts} topicId={topicId} />)}
+          </div>
+        </div>
+      );
+    });
+  }
+
+  return (
+    <div className="dedicated-topic-view">
+      <div className="master-tabs-container">
+        <button className={`master-tab ${activeTab === 'Category' ? 'active' : ''}`} onClick={() => { setActiveTab('Category'); setActiveFilter('All'); }}>
+          By Category
+        </button>
+        <button className={`master-tab ${activeTab === 'Book' ? 'active' : ''}`} onClick={() => { setActiveTab('Book'); setActiveFilter('All'); }}>
+          By Book
+        </button>
+      </div>
+      <div className="scripture-feed-container">
+        <div className="feed-controls-bar">
+          <div className="pills-scroll-container">
+            {availableFilters.map(filter => (
+              <button
+                key={filter.id}
+                className={`filter-pill ${activeFilter === filter.id ? 'active' : ''}`}
+                onClick={() => setActiveFilter(filter.id)}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="feed-content-area prophecies-feed">
+          {feedContent}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ----------------------------------------------------
 // Dedicated Topic View (No Accordions)
 // ----------------------------------------------------
 const DedicatedTopicView = ({ topicObj, verseTexts }) => {
@@ -295,7 +474,7 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
     }
     return 'New Testament';
   });
-  const [activeFilter, setActiveFilter] = useState('All'); 
+  const [activeFilter, setActiveFilter] = useState('All');
 
   const ntCount = getTestamentCount(topicObj.Scripture?.['New Testament']);
   const otCount = getTestamentCount(topicObj.Scripture?.['Old Testament']);
@@ -340,8 +519,8 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
         <div className="feed-controls-bar">
           <div className="pills-scroll-container">
             {availableFilters.map(filter => (
-              <button 
-                key={filter.id} 
+              <button
+                key={filter.id}
                 className={`filter-pill ${activeFilter === filter.id ? 'active' : ''}`}
                 onClick={() => setActiveFilter(filter.id)}
               >
@@ -392,8 +571,8 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
         <div className="feed-controls-bar">
           <div className="pills-scroll-container">
             {availableFilters.map(filter => (
-              <button 
-                key={filter.id} 
+              <button
+                key={filter.id}
                 className={`filter-pill ${activeFilter === filter.id ? 'active' : ''}`}
                 onClick={() => setActiveFilter(filter.id)}
               >
@@ -443,7 +622,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
     try {
       active = JSON.parse(localStorage.getItem('activeTopics') || '[]');
     } catch(e) {}
-    
+
     // Legacy support
     const legacyTopic = localStorage.getItem('activeTopic');
     if (legacyTopic && !active.length) {
@@ -456,7 +635,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
     } else {
       active.push(tId);
     }
-    
+
     localStorage.setItem('activeTopics', JSON.stringify(active));
     setActiveHighlightTopics(active);
   };
@@ -468,14 +647,14 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
         try {
           active = JSON.parse(localStorage.getItem('activeTopics') || '[]');
         } catch(e) {}
-        
+
         const legacyTopic = localStorage.getItem('activeTopic');
         if (legacyTopic && !active.length) {
           active = [legacyTopic];
           localStorage.setItem('activeTopics', JSON.stringify(active));
           localStorage.removeItem('activeTopic');
         }
-        
+
         setActiveHighlightTopics(active);
       }
     };
@@ -503,7 +682,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
       count: getTopicTotalCount(t.topicData)
     };
   });
-  
+
   const currentTopicOption = topicOptions.find(t => t.id === initialTopicId) || {};
   const filteredTopicOptions = topicOptions.filter(t => t.title.toLowerCase().includes(topicSearch.toLowerCase()));
 
@@ -536,14 +715,14 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
 
           if (isDedicatedPage) {
             return (
-              <div 
-                key={tId} 
+              <div
+                key={tId}
                 className="dedicated-topic-view-container animate-fade-in"
                 style={{ '--topic-color': topicColor.hex, '--topic-bg': topicColor.bgHex }}
               >
                 <header className="dedicated-hero-header">
                   <div className="hero-title-wrapper select-none" onClick={(e) => e.stopPropagation()}>
-                    <button 
+                    <button
                       className="hero-title-selector-btn"
                       onClick={() => setDropdownOpen(!dropdownOpen)}
                       aria-expanded={dropdownOpen}
@@ -563,7 +742,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
                           {topicOptions.map(opt => {
                             const isSelected = opt.id === initialTopicId;
                             return (
-                              <a 
+                              <a
                                 key={opt.id}
                                 href={`${base}/topics/${opt.id}`}
                                 className={`dropdown-sheet-item ${isSelected ? 'is-selected' : ''}`}
@@ -585,8 +764,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
                     )}
                   </div>
                   <div className="hero-top-row">
-                    <p className="dedicated-page-subtitle">Explore Biblical proofs and early Patristic witnesses.</p>
-                    <button 
+                    <button
                       className={`ios-compact-toggle ${activeHighlightTopics.includes(tId) ? 'is-active' : ''}`}
                       onClick={() => toggleHighlight(tId)}
                       aria-pressed={activeHighlightTopics.includes(tId)}
@@ -599,7 +777,11 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
                     </button>
                   </div>
                 </header>
-                <DedicatedTopicView topicObj={{ ...tData, _id: tId }} verseTexts={t.verseTexts} />
+                {tData.prophecies ? (
+                  <PropheciesDedicatedView prophecies={tData.prophecies} verseTexts={t.verseTexts} topicId={tId} />
+                ) : (
+                  <DedicatedTopicView topicObj={{ ...tData, _id: tId }} verseTexts={t.verseTexts} />
+                )}
               </div>
             );
           }
@@ -612,7 +794,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
                 <h2 className="topic-main-heading">{tTitle}</h2>
               </div>
               <div className="header-controls">
-                <button 
+                <button
                   className={`ios-compact-toggle card-toggle ${isHighlighted ? 'is-active' : ''}`}
                   onClick={(e) => {
                     e.preventDefault();
@@ -633,9 +815,9 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
           );
 
           return (
-            <div 
-              key={tId} 
-              className="master-topic-box" 
+            <div
+              key={tId}
+              className="master-topic-box"
               id={tId}
               style={{ '--topic-color': topicColor.hex, '--topic-bg': topicColor.bgHex }}
             >
@@ -925,7 +1107,8 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
           justify-content: space-between;
           flex-wrap: wrap;
           gap: 12px;
-          margin-bottom: 8px;
+          margin-top: 16px;
+          margin-bottom: 16px;
         }
         .ios-compact-toggle {
           display: inline-flex;
@@ -1083,7 +1266,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
           border-bottom: 1px solid #dbeafe;
         }
         .nt-header-banner .chevron { color: #60a5fa; }
-        
+
         .ot-header-banner {
           background: #fefce8;
           color: #854d0e;
@@ -1197,11 +1380,11 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
           margin-left: 3px;
           transition: color 0.15s ease;
         }
-        .clean-verse-card:hover .verse-ref-pill {
+        .clean-verse-card:hover .verse-ref-pill, .verse-ref-link:hover .verse-ref-pill {
           background-color: #e2e8f0;
           color: #2563eb;
         }
-        .clean-verse-card:hover .ref-arrow {
+        .clean-verse-card:hover .ref-arrow, .verse-ref-link:hover .ref-arrow {
           color: #2563eb;
         }
 
@@ -1338,7 +1521,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
         .master-tabs-container::-webkit-scrollbar {
           display: none; /* Chrome/Safari */
         }
-        
+
         .master-tab {
           background: none;
           border: none;
@@ -1372,7 +1555,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
         .pills-scroll-container::-webkit-scrollbar {
           display: none;
         }
-        
+
         .filter-pill {
           background-color: #f1f5f9;
           color: #475569;
@@ -1408,13 +1591,13 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
           border-bottom: 1px solid #f1f5f9;
           padding-bottom: 8px;
         }
-        
+
         .fathers-grid {
           display: flex;
           flex-direction: column;
           gap: 20px;
         }
-        
+
         .father-block {
           background: #ffffff;
           border: 1px solid #e2e8f0;
@@ -1454,6 +1637,117 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
           padding: 20px;
         }
 
+
+        /* Prophecies Cards */
+        .prophecies-feed-list {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+        .prophecy-card {
+          background-color: var(--color-surface, #ffffff);
+          border: 1px solid var(--color-outline-variant, #cbd5e1);
+          border-radius: 14px;
+          overflow: hidden;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .prophecy-card-header {
+          padding: 18px 20px 14px;
+          background: #f8fafc;
+          border-bottom: 1px solid var(--color-outline-variant, #cbd5e1);
+        }
+        .prophecy-header-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          margin-bottom: 6px;
+        }
+        .prophecy-title {
+          font-family: var(--font-display);
+          font-size: 19px;
+          font-weight: 800;
+          color: var(--color-primary, #0f172a);
+          margin: 0;
+          line-height: 1.25;
+        }
+        .prophecy-type-badge {
+          font-family: var(--font-body);
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          padding: 4px 8px;
+          border-radius: 6px;
+          background-color: var(--topic-bg);
+          color: var(--topic-color);
+          white-space: nowrap;
+        }
+        .prophecy-date-meta {
+          font-family: var(--font-body);
+          font-size: 13px;
+          color: var(--color-on-surface-variant, #64748b);
+          margin: 0;
+        }
+        .prophecy-card-body {
+          display: flex;
+          flex-direction: column;
+        }
+        .prophecy-ot-pane {
+          padding: 16px 20px;
+          border-bottom: 1px solid var(--color-outline-variant, #cbd5e1);
+        }
+        .prophecy-nt-pane {
+          padding: 16px 20px;
+          background-color: rgba(0,0,0,0.01);
+        }
+        .prophecy-pane-label {
+          font-family: var(--font-display);
+          font-size: 13px;
+          font-weight: 700;
+          color: var(--color-on-surface-variant, #64748b);
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          margin: 0 0 10px 0;
+        }
+        .prophecy-ot-text, .prophecy-nt-text {
+          font-family: var(--font-display);
+          font-size: 16px;
+          line-height: 1.6;
+          color: var(--color-on-surface, #1e293b);
+          margin-bottom: 10px;
+        }
+        .prophecy-ot-refs, .prophecy-nt-refs {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+        .prophecy-nt-stack {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+        .prophecy-nt-block {
+          display: flex;
+          flex-direction: column;
+        }
+        .prophecy-nt-divider {
+          height: 1px;
+          background-color: var(--color-outline-variant, #cbd5e1);
+          margin: 0 0 16px 0;
+          opacity: 0.5;
+        }
+        .prophecy-nt-note {
+          margin-top: 12px;
+          padding: 12px 14px;
+          background-color: var(--topic-bg);
+          border-left: 3px solid var(--topic-color);
+          border-radius: 0 6px 6px 0;
+          font-family: var(--font-body);
+          font-size: 14px;
+          line-height: 1.5;
+          color: var(--color-primary, #0f172a);
+        }
 
         .item-count {
           font-weight: 500;

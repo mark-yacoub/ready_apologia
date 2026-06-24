@@ -12,13 +12,13 @@ import { getTopicColor } from '../../../utils/topicColors.js';
 // 1. Pre-render all chapters for NT and OT books
 export async function getStaticPaths() {
   const paths = [];
-  
+
   booksMeta.nt.forEach(book => {
     for (let c = 1; c <= book.chapters; c++) {
       paths.push({ params: { book: book.id, chapter: String(c) } });
     }
   });
-  
+
   booksMeta.ot.forEach(book => {
     for (let c = 1; c <= book.chapters; c++) {
       paths.push({ params: { book: book.id, chapter: String(c) } });
@@ -32,7 +32,7 @@ const { book, chapter } = Astro.params;
 
 // 2. Find Book Details
 const isNT = booksMeta.nt.some(b => b.id === book);
-const bookMeta = isNT 
+const bookMeta = isNT
   ? booksMeta.nt.find(b => b.id === book)
   : booksMeta.ot.find(b => b.id === book);
 
@@ -57,10 +57,10 @@ try {
 const evidenceMap = {};
 
 const lxxPrefix = `${book}_${chapter}_%`;
-const mtPrefix = isNT ? '' : `${mapLxxToMt(book, chapter, '1').book}_%`; 
+const mtPrefix = isNT ? '' : `${mapLxxToMt(book, chapter, '1').book}_%`;
 
 const msSet = new Set(
-  isNT 
+  isNT
     ? query("SELECT verse_id FROM manuscript_per_verse WHERE verse_id LIKE :p", { p: lxxPrefix }).map(r => r.verse_id)
     : query("SELECT verse_id, v11n_type FROM manuscript_per_verse_ot WHERE verse_id LIKE :lxx OR verse_id LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
         if (r.v11n_type === 'MT') {
@@ -94,7 +94,15 @@ const apSet = new Set(
   })
 );
 
-// 4.5 Populate topic map and commentary notes map
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+const formatRef = (vId) => {
+  const p = vId.split('_');
+  const bMeta = [...booksMeta.nt, ...booksMeta.ot].find(b => b.id === p[0]);
+  const bName = bMeta ? bMeta.name : p[0];
+  return `<a href="${base}/bible/${p[0]}/${p[1]}#${p.slice(2).join('_')}">${bName} ${p[1]}:${p.slice(2).join('_')}</a>`;
+};
+
 const topicMap = {};
 const topicNotesMap = {};
 loadAllTopicsData().forEach(({ topicId, topicData }) => {
@@ -113,17 +121,56 @@ loadAllTopicsData().forEach(({ topicId, topicData }) => {
       });
     }
   });
+
+  if (Array.isArray(topicData?.prophecies)) {
+    topicData.prophecies.forEach(prophecy => {
+      const otRefs = (prophecy.ot_verses || []).map(formatRef).join(', ');
+
+      (prophecy.ot_verses || []).forEach(vId => {
+        const parts = vId.split('_');
+        if (parts[0] === book && parts[1] === chapter) {
+          const vNum = parts.slice(2).join('_');
+          if (!topicMap[vNum]) topicMap[vNum] = [];
+          if (!topicMap[vNum].includes(topicId)) topicMap[vNum].push(topicId);
+
+          const ntListItems = (prophecy.nt_fulfillments || []).map(nt => {
+            const ntRefs = (nt.verses || []).map(formatRef).join(', ');
+            return `<li>${ntRefs}</li>`;
+          }).join('');
+          const noteHtml = `<div><strong>Prophecy:</strong> ${prophecy.name}</div><div style="margin-top: 8px;"><strong>Fulfillments:</strong></div><ul style="margin: 4px 0 0; padding-left: 16px;">${ntListItems}</ul>`;
+
+          if (!topicNotesMap[vNum]) topicNotesMap[vNum] = {};
+          topicNotesMap[vNum][topicId] = noteHtml;
+        }
+      });
+      (prophecy.nt_fulfillments || []).forEach(nt => {
+        (nt.verses || []).forEach(vId => {
+          const parts = vId.split('_');
+          if (parts[0] === book && parts[1] === chapter) {
+            const vNum = parts.slice(2).join('_');
+            if (!topicMap[vNum]) topicMap[vNum] = [];
+            if (!topicMap[vNum].includes(topicId)) topicMap[vNum].push(topicId);
+
+            const noteHtml = `<div><strong>Prophecy:</strong> ${prophecy.name}</div><div style="margin-top: 8px;"><strong>Promise:</strong> ${otRefs}</div>` + (nt.note ? `<div style="margin-top: 8px;"><strong>Note:</strong> ${nt.note}</div>` : '');
+
+            if (!topicNotesMap[vNum]) topicNotesMap[vNum] = {};
+            topicNotesMap[vNum][topicId] = noteHtml;
+          }
+        });
+      });
+    });
+  }
 });
 
 chapterVerses.forEach(verseObj => {
   const verseNum = Object.keys(verseObj)[0];
   const lxxId = `${book}_${chapter}_${verseNum}`;
-  
+
   const types = [];
   if (msSet.has(lxxId)) types.push('manuscript');
   if (ctSet.has(lxxId)) types.push('contradiction');
   if (apSet.has(lxxId)) types.push('apologetics');
-  
+
   if (types.length > 0) {
     evidenceMap[verseNum] = types;
   }
@@ -132,14 +179,13 @@ chapterVerses.forEach(verseObj => {
 const currentChapterNum = parseInt(chapter);
 const hasPrev = currentChapterNum > 1;
 const hasNext = currentChapterNum < bookMeta.chapters;
-const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
 // Generate OG Image from the oldest manuscript of chapter 1, verse 1 of this book
 let ogImage = undefined;
 const v11Id = `${book}_1_1`;
 if (isNT) {
   const earliestMs = query(`
-    SELECT m.ms_id, m.image_name 
+    SELECT m.ms_id, m.image_name
     FROM manuscript_per_verse m
     JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id
     WHERE m.verse_id = :v11Id
@@ -154,7 +200,7 @@ if (isNT) {
     const mtMappingV11 = mapLxxToMt(book, '1', '1');
     const mtIdV11 = `${mtMappingV11.book}_${mtMappingV11.chapter}_${mtMappingV11.verse}`;
     const earliestMsOt = query(`
-      SELECT m.ms_id, m.image_name 
+      SELECT m.ms_id, m.image_name
       FROM manuscript_per_verse_ot m
       JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id
       WHERE m.verse_id = :v11Id OR m.verse_id = :mtIdV11
@@ -177,7 +223,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 
 <Layout title={`${bookMeta.name} ${chapter}`} ogImage={ogImage}>
   <div class="chapter-reader-container">
-    
+
     <!-- Split Book & Chapter Dropdown Selector -->
     <header class="reader-header select-none">
       <div class="selector-hub">
@@ -185,7 +231,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
         <button class="book-selector-btn book-title" onclick="document.getElementById('nav-toggle-btn').click()">
           {bookMeta.name}
         </button>
-        
+
         <!-- 2. Chapter Number Selector (Clicking '1' opens inline Chapter Grid dropdown!) -->
         <div class="chapter-dropdown-wrapper">
           <button class="chapter-selector-btn" id="chapter-popover-trigger" aria-label="Select Chapter">
@@ -196,14 +242,14 @@ const topicsMeta = allTopics.reduce((acc, t) => {
               </svg>
             </span>
           </button>
-          
+
           <!-- Absolute Positioned Chapter Dropdown Popover -->
           <div class="chapter-dropdown-popover" id="chapter-dropdown-popover">
             <div class="popover-grid-scroll">
               <div class="chapter-popover-grid">
                 {Array.from({ length: bookMeta.chapters }, (_, i) => i + 1).map(c => (
-                  <a 
-                    href={`${base}/bible/${book}/${c}`} 
+                  <a
+                    href={`${base}/bible/${book}/${c}`}
                     class={`popover-chap-link ${c === currentChapterNum ? 'active' : ''}`}
                   >
                     {c}
@@ -222,7 +268,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
         chapterVerses.map(verseObj => {
           const verseNum = Object.keys(verseObj)[0];
           const verseText = verseObj[verseNum];
-          
+
           const evidenceTypes = evidenceMap[verseNum] || [];
           const hasEvidence = evidenceTypes.length > 0;
 
@@ -237,13 +283,13 @@ const topicsMeta = allTopics.reduce((acc, t) => {
                       <a href={`${base}/bible/${book}/${chapter}/${verseNum}`} class="verse-text-link-wrapper">
                         {verseText}
                       </a>
-                      
+
                       {/* Tapping individual badges routes DIRECTLY to their evidence tab pages! */}
                       <span class="verse-badge-tray-inline">
                         {evidenceTypes.includes('manuscript') && (
-                          <a 
-                            href={`${base}/bible/${book}/${chapter}/${verseNum}/manuscripts`} 
-                            class="icon-inline ms-icon" 
+                          <a
+                            href={`${base}/bible/${book}/${chapter}/${verseNum}/manuscripts`}
+                            class="icon-inline ms-icon"
                             title="Manuscripts available"
                           >
                             <svg viewBox="0 0 24 24" stroke-width="2.5">
@@ -252,9 +298,9 @@ const topicsMeta = allTopics.reduce((acc, t) => {
                           </a>
                         )}
                         {evidenceTypes.includes('contradiction') && (
-                          <a 
-                            href={`${base}/bible/${book}/${chapter}/${verseNum}/contradictions`} 
-                            class="icon-inline ct-icon" 
+                          <a
+                            href={`${base}/bible/${book}/${chapter}/${verseNum}/contradictions`}
+                            class="icon-inline ct-icon"
                             title="Alleged contradictions available"
                           >
                             <svg viewBox="0 0 24 24" stroke-width="2.5">
@@ -263,9 +309,9 @@ const topicsMeta = allTopics.reduce((acc, t) => {
                           </a>
                         )}
                         {evidenceTypes.includes('apologetics') && (
-                          <a 
-                            href={`${base}/bible/${book}/${chapter}/${verseNum}/apologetics`} 
-                            class="icon-inline ap-icon" 
+                          <a
+                            href={`${base}/bible/${book}/${chapter}/${verseNum}/apologetics`}
+                            class="icon-inline ap-icon"
                             title="Apologetics defenses available"
                           >
                             <svg viewBox="0 0 24 24" stroke-width="2.5">
@@ -302,8 +348,8 @@ const topicsMeta = allTopics.reduce((acc, t) => {
     <!-- Pagination Footer -->
     <div class="pagination-footer select-none">
       {hasPrev ? (
-        <a 
-          href={`${base}/bible/${book}/${currentChapterNum - 1}`} 
+        <a
+          href={`${base}/bible/${book}/${currentChapterNum - 1}`}
           class="pager-btn"
         >
           &larr; Chapter {currentChapterNum - 1}
@@ -317,8 +363,8 @@ const topicsMeta = allTopics.reduce((acc, t) => {
       </span>
 
       {hasNext ? (
-        <a 
-          href={`${base}/bible/${book}/${currentChapterNum + 1}`} 
+        <a
+          href={`${base}/bible/${book}/${currentChapterNum + 1}`}
           class="pager-btn"
         >
           Chapter {currentChapterNum + 1} &rarr;
@@ -359,7 +405,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
     try {
       activeTopics = JSON.parse(localStorage.getItem('activeTopics') || '[]');
     } catch(e) {}
-    
+
     // Legacy single topic support
     const legacyTopic = localStorage.getItem('activeTopic');
     if (legacyTopic && !activeTopics.length) {
@@ -374,20 +420,20 @@ const topicsMeta = allTopics.reduce((acc, t) => {
     document.querySelectorAll('.verse-row[data-topics]').forEach(el => {
       const verseTopicsStr = el.getAttribute('data-topics');
       if (!verseTopicsStr) return;
-      
+
       const verseTopics = verseTopicsStr.split(',');
       const intersection = activeTopics.filter(t => verseTopics.includes(t));
-      
+
       let existingPills = el.querySelector('.verse-topic-pills');
       if (existingPills) existingPills.remove();
       el.querySelectorAll('.topic-note-card').forEach(n => n.remove());
 
       if (intersection.length > 0) {
         el.classList.add('topic-highlight');
-        
+
         const pillsContainer = document.createElement('div');
         pillsContainer.className = 'verse-topic-pills';
-        
+
         const verseNotesStr = el.getAttribute('data-topic-notes');
         let verseNotes = {};
         try { verseNotes = JSON.parse(verseNotesStr || '{}'); } catch(e) {}
@@ -399,7 +445,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
           pill.className = 'topic-pill';
           pill.style.color = meta.color.hex;
           pill.style.backgroundColor = meta.color.bgHex;
-          
+
           const titleSpan = document.createElement('span');
           titleSpan.textContent = meta.title;
           pill.appendChild(titleSpan);
@@ -411,11 +457,11 @@ const topicsMeta = allTopics.reduce((acc, t) => {
             infoBtn.title = `View commentary note on ${meta.title}`;
             infoBtn.setAttribute('aria-label', `View commentary note on ${meta.title}`);
             infoBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M12 16v-4m0-4h.01"></path></svg>`;
-            
+
             infoBtn.addEventListener('click', (e) => {
               e.preventDefault();
               e.stopPropagation();
-              
+
               let existingNote = el.querySelector(`.topic-note-card[data-note-topic="${tId}"]`);
               if (existingNote) {
                 existingNote.remove();
@@ -430,8 +476,8 @@ const topicsMeta = allTopics.reduce((acc, t) => {
                 noteCard.setAttribute('data-note-topic', tId);
                 noteCard.style.backgroundColor = meta.color.bgHex;
                 noteCard.style.borderLeft = `3px solid ${meta.color.hex}`;
-                noteCard.textContent = verseNotes[tId];
-                
+                noteCard.innerHTML = verseNotes[tId];
+
                 const bodyWrapper = el.querySelector('.verse-body-wrapper');
                 if (bodyWrapper) bodyWrapper.appendChild(noteCard);
               }
@@ -521,6 +567,14 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 		color: #1e293b;
 		line-height: 1.5;
 		box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+	}
+	:global(.topic-note-card a) {
+		color: var(--color-primary);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+	:global(.topic-note-card a:hover) {
+		color: var(--color-secondary);
 	}
 
 
@@ -683,7 +737,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 		color: inherit;
 		display: block;
 	}
-	
+
 	.verse-row-content {
 		display: flex;
 		align-items: flex-start;
@@ -784,7 +838,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 		transition: transform 0.15s ease, border-color 0.15s, color 0.15s;
 		text-decoration: none; /* Prune default anchor highlights */
 	}
-	
+
 	/* Invisible expanded touch target for accessibility */
 	.icon-inline::after {
 		content: '';

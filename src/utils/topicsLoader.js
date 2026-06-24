@@ -58,6 +58,27 @@ export function loadAllTopicsData() {
         }
       });
 
+      if (Array.isArray(topicObj.prophecies)) {
+        topicObj.prophecies.forEach(prophecy => {
+          (prophecy.ot_verses || []).forEach(vId => {
+            const p = vId.split('_');
+            if (p.length >= 3) {
+              const text = getVerseText(p[0], p[1], p.slice(2).join('_'), false);
+              if (text) verseTexts[vId] = text;
+            }
+          });
+          (prophecy.nt_fulfillments || []).forEach(nt => {
+            (nt.verses || []).forEach(vId => {
+              const p = vId.split('_');
+              if (p.length >= 3) {
+                const text = getVerseText(p[0], p[1], p.slice(2).join('_'), true);
+                if (text) verseTexts[vId] = text;
+              }
+            });
+          });
+        });
+      }
+
       topicsData.push({ topicId, topicData: topicObj, verseTexts });
     } catch (err) {
       console.error(`Failed to load topic file ${file}:`, err);

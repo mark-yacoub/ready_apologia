@@ -15,6 +15,7 @@ const explicitTopicIndices = {
   'divinity_of_christ': 3,          // Slate Blue
   'divinity_of_the_holy_spirit': 4, // Teal
   'trinity': 0,                     // Indigo
+  'prophecies': 6,                  // Orange
 };
 
 export function getTopicColor(topicId) {
