@@ -378,6 +378,11 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 
 <!-- Inline Chapter Dropdown Trigger script -->
 <script is:inline>
+  try {
+    localStorage.setItem('lastVisitedUrl', window.location.pathname);
+  } catch (e) {
+    console.warn('Failed to save last visited URL:', e);
+  }
   const setupChapterPopover = () => {
     const trigger = document.getElementById('chapter-popover-trigger');
     const popover = document.getElementById('chapter-dropdown-popover');
@@ -504,10 +509,25 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 
   setupChapterPopover();
   setupTopicHighlight();
-  document.addEventListener('astro:after-swap', () => {
+  const handleSwap = () => {
     setupChapterPopover();
     setupTopicHighlight();
-  });
+    try {
+      if (window.location.pathname.includes('/bible/')) {
+        localStorage.setItem('lastVisitedUrl', window.location.pathname);
+      }
+    } catch (e) {
+      console.warn('Failed to save last visited URL on swap:', e);
+    }
+  };
+
+  const handleBeforeSwap = () => {
+    document.removeEventListener('astro:after-swap', handleSwap);
+    document.removeEventListener('astro:before-swap', handleBeforeSwap);
+  };
+
+  document.addEventListener('astro:after-swap', handleSwap);
+  document.addEventListener('astro:before-swap', handleBeforeSwap);
 </script>
 
 <style>

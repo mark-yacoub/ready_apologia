@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 export default function BottomNav() {
+  const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
   const [activeTab, setActiveTab] = useState('scripture');
+  const [scriptureUrl, setScriptureUrl] = useState(`${base}/`);
 
   useEffect(() => {
     const syncActiveTab = () => {
@@ -13,19 +15,31 @@ export default function BottomNav() {
       }
     };
 
+    const syncLastVisited = () => {
+      const lastVisited = localStorage.getItem('lastVisitedUrl');
+      if (lastVisited) {
+        setScriptureUrl(lastVisited);
+      } else {
+        setScriptureUrl(`${base}/`);
+      }
+    };
+
     syncActiveTab();
+    syncLastVisited();
+
     document.addEventListener('astro:after-swap', syncActiveTab);
+    document.addEventListener('astro:after-swap', syncLastVisited);
+
     return () => {
       document.removeEventListener('astro:after-swap', syncActiveTab);
+      document.removeEventListener('astro:after-swap', syncLastVisited);
     };
   }, []);
-
-  const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
   return (
     <div className="bottom-nav">
       {/* Scripture Tab */}
-      <a href={`${base}/`} className={`nav-item ${activeTab === 'scripture' ? 'active' : ''}`} aria-label="Scripture View">
+      <a href={scriptureUrl} className={`nav-item ${activeTab === 'scripture' ? 'active' : ''}`} aria-label="Scripture View">
         <div className="nav-icon-wrapper">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
