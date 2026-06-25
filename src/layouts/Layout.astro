@@ -80,6 +80,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		
 		<!-- App Bounding Container -->
 		<div class="app-container">
+			<div id="global-loading-indicator" class="global-loading-indicator"></div>
 			
 			<!-- Content Layout Core -->
 			<div class="content-frame">
@@ -226,6 +227,22 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 				clearTimeout(resizeTimer);
 				resizeTimer = setTimeout(setupSidebarToggle, 150);
 			});
+
+			// Global Loading Indicator for SPA feel
+			if (!window.hasLoadingIndicator) {
+				const indicator = document.getElementById('global-loading-indicator');
+				if (indicator) {
+					document.addEventListener('astro:before-preparation', () => {
+						indicator.classList.remove('done');
+						indicator.classList.add('loading');
+					});
+					document.addEventListener('astro:after-swap', () => {
+						indicator.classList.remove('loading');
+						indicator.classList.add('done');
+					});
+					window.hasLoadingIndicator = true;
+				}
+			}
 		</script>
 	</body>
 </html>
@@ -649,5 +666,34 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		display: block;
 		margin-top: 4px;
 		opacity: 0.6;
+	}
+
+	/* Global Loading Indicator (Progress Bar) */
+	.global-loading-indicator {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 3px;
+		background-color: var(--color-secondary);
+		z-index: 100;
+		width: 0;
+		opacity: 0;
+		transition: width 0.4s ease, opacity 0.2s ease;
+		pointer-events: none;
+	}
+	.global-loading-indicator.loading {
+		opacity: 1;
+		animation: simulate-loading 10s cubic-bezier(0.1, 0.8, 0.1, 1) forwards;
+	}
+	@keyframes simulate-loading {
+		0% { width: 0%; }
+		50% { width: 70%; }
+		90% { width: 90%; }
+		100% { width: 95%; }
+	}
+	.global-loading-indicator.done {
+		width: 100% !important;
+		opacity: 0;
+		transition: width 0.2s ease, opacity 0.2s ease 0.2s;
 	}
 </style>
