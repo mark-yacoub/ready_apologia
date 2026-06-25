@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollableTrack from './ScrollableTrack.jsx';
 
 export default function VerseTabs({ 
   msCount, 
@@ -58,30 +59,11 @@ export default function VerseTabs({
     }
   };
 
-  const containerRef = React.useRef(null);
-
   React.useEffect(() => {
     const handleOpen = () => setIsEditing(true);
     window.addEventListener('open-tab-settings', handleOpen);
     return () => window.removeEventListener('open-tab-settings', handleOpen);
   }, []);
-
-  React.useEffect(() => {
-    if (containerRef.current && !isEditing) {
-      // Small timeout ensures the DOM has settled layout before calculating scroll
-      setTimeout(() => {
-        const activeEl = containerRef.current.querySelector('.active');
-        if (activeEl && containerRef.current) {
-          const containerRect = containerRef.current.getBoundingClientRect();
-          const elRect = activeEl.getBoundingClientRect();
-          
-          const scrollPos = containerRef.current.scrollLeft + (elRect.left - containerRect.left) - (containerRect.width / 2) + (elRect.width / 2);
-          
-          containerRef.current.scrollTo({ left: scrollPos, behavior: 'smooth' });
-        }
-      }, 100);
-    }
-  }, [activeTab, isEditing]);
 
   // Sort the visible tabs according to the user's custom preference
   const sortedTabs = [...tabs].sort((a, b) => {
@@ -96,7 +78,7 @@ export default function VerseTabs({
     <div className="tabs-wrapper select-none">
       
       {/* Category Segmented Pill Headers */}
-      <div className="tab-segmented-bar" ref={containerRef}>
+      <ScrollableTrack containerClass="tab-segmented-bar" activeTrigger={`${activeTab}-${isEditing}`}>
         {sortedTabs.map((tab) => {
           const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
           const targetUrl = `${base}/bible/${book}/${chapter}/${verse}/${tab.id}`;
@@ -114,7 +96,7 @@ export default function VerseTabs({
             </a>
           );
         })}
-      </div>
+      </ScrollableTrack>
 
       {/* Settings Modal Popup */}
       {isEditing && (

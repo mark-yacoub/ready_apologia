@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import booksMeta from '../data/books_meta.json';
 import { getTopicColor } from '../utils/topicColors.js';
+import ScrollableTrack from './ScrollableTrack.jsx';
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
@@ -666,7 +667,7 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
 
   return (
     <div className="dedicated-topic-view">
-      <div className="master-tabs-container">
+      <ScrollableTrack containerClass="master-tabs-container" activeTrigger={activeTab}>
         <button id="nt" className={`master-tab ${activeTab === 'New Testament' ? 'active' : ''}`} onClick={() => handleTabChange('New Testament', 'nt')}>
           New Testament <span className="tab-count">({ntCount})</span>
         </button>
@@ -681,7 +682,7 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
             Ancient Judaism <span className="tab-count">({ajCount})</span>
           </button>
         )}
-      </div>
+      </ScrollableTrack>
       <div className="master-tab-content">
         {activeTab === 'New Testament' && renderScriptureFeed('New Testament')}
         {activeTab === 'Old Testament' && renderScriptureFeed('Old Testament')}
