@@ -195,10 +195,10 @@ const getCenturyCount = (centuryObj) => {
   return count;
 };
 
-const getFatherCount = (fData) => {
-  if (!fData || typeof fData !== 'object') return 0;
+const getSourceCount = (sData) => {
+  if (!sData || typeof sData !== 'object') return 0;
   let count = 0;
-  Object.values(fData.works || {}).forEach(work => {
+  Object.values(sData.works || {}).forEach(work => {
     count += (work?.quotes?.length || 0);
   });
   return count;
@@ -230,7 +230,7 @@ const getTopicTotalCount = (tData) => {
 // ----------------------------------------------------
 const SourceBlock = ({ sourceName, sData }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const sourceCount = getFatherCount(sData);
+  const sourceCount = getSourceCount(sData);
 
   return (
     <div className={`father-block ${isOpen ? 'is-expanded' : ''}`}>
@@ -252,12 +252,20 @@ const SourceBlock = ({ sourceName, sData }) => {
 
       {isOpen && (
         <div className="father-content animate-fade-in">
-          {sData.note && <div className="father-note-box">{sData.note}</div>}
-          {Object.keys(sData.works || {}).map(workName => {
-            const workQuotes = sData.works[workName]?.quotes || [];
+          {sData?.note && <div className="father-note-box">{sData.note}</div>}
+          {Object.keys(sData?.works || {}).map(workName => {
+            const workObj = sData.works[workName] || {};
+            const workQuotes = workObj.quotes || [];
+            const workDate = workObj.date;
+            const workNote = workObj.note;
             return (
               <div key={workName} className="patristic-work-group">
-                <h4 className="work-title">{workName} <span className="item-count">({workQuotes.length})</span></h4>
+                <div className="work-header-meta">
+                  <h4 className="work-title">
+                    {workName} {workDate && <span className="work-date-badge">({workDate})</span>} <span className="item-count">({workQuotes.length})</span>
+                  </h4>
+                  {workNote && <p className="work-note-text">{workNote}</p>}
+                </div>
                 <div className="verse-group-list">
                   {workQuotes.map((q, idx) => {
                     const handleQuoteClick = () => {
@@ -266,7 +274,7 @@ const SourceBlock = ({ sourceName, sData }) => {
                     const hasChapter = q?.chapter && q.chapter !== 'N/A';
                     return (
                       <div
-                        key={idx}
+                        key={q?.quote ? q.quote.slice(0, 40) : idx}
                         className="clean-verse-card"
                         onClick={handleQuoteClick}
                         role={q?.url ? "button" : undefined}
@@ -571,7 +579,7 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
           <div key={century} className="feed-category-block animate-fade-in">
             <h2 className="feed-category-title">{century} <span className="item-count">({centCount})</span></h2>
             <div className="fathers-grid">
-              {Object.keys(fathers).map(fatherName => {
+              {Object.keys(fathers || {}).map(fatherName => {
                 const fData = fathers[fatherName];
                 return (
                   <SourceBlock key={fatherName} sourceName={fatherName} sData={fData} />
@@ -623,7 +631,7 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
           <div key={era} className="feed-category-block animate-fade-in">
             <h2 className="feed-category-title">{era} <span className="item-count">({eraCount})</span></h2>
             <div className="fathers-grid">
-              {Object.keys(authors).map(authorName => {
+              {Object.keys(authors || {}).map(authorName => {
                 const aData = authors[authorName];
                 return (
                   <SourceBlock key={authorName} sourceName={authorName} sData={aData} />
@@ -1709,6 +1717,21 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
         }
         .father-content {
           padding: 20px;
+        }
+        .work-header-meta {
+          margin-bottom: 8px;
+        }
+        .work-date-badge {
+          font-size: 13px;
+          font-weight: 500;
+          color: #64748b;
+          margin-left: 4px;
+        }
+        .work-note-text {
+          font-size: 14px;
+          color: #475569;
+          margin: 4px 0 0 0;
+          line-height: 1.4;
         }
 
 

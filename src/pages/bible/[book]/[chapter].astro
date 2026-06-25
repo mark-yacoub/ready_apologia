@@ -441,8 +441,15 @@ const topicsMeta = allTopics.reduce((acc, t) => {
         intersection.forEach(tId => {
           const meta = topicsMeta[tId];
           if (!meta) return;
-          const pill = document.createElement('span');
-          pill.className = 'topic-pill';
+
+          const hasNote = !!verseNotes[tId];
+          const pill = document.createElement(hasNote ? 'button' : 'span');
+          pill.className = 'topic-pill' + (hasNote ? ' clickable' : '');
+          if (hasNote) {
+            pill.type = 'button';
+            pill.title = `View commentary note on ${meta.title}`;
+            pill.setAttribute('aria-label', `View commentary note on ${meta.title}`);
+          }
           pill.style.color = meta.color.hex;
           pill.style.backgroundColor = meta.color.bgHex;
 
@@ -450,15 +457,13 @@ const topicsMeta = allTopics.reduce((acc, t) => {
           titleSpan.textContent = meta.title;
           pill.appendChild(titleSpan);
 
-          if (verseNotes[tId]) {
-            const infoBtn = document.createElement('button');
-            infoBtn.className = 'pill-info-btn';
-            infoBtn.type = 'button';
-            infoBtn.title = `View commentary note on ${meta.title}`;
-            infoBtn.setAttribute('aria-label', `View commentary note on ${meta.title}`);
-            infoBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M12 16v-4m0-4h.01"></path></svg>`;
+          if (hasNote) {
+            const infoIcon = document.createElement('span');
+            infoIcon.className = 'pill-info-icon';
+            infoIcon.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M12 16v-4m0-4h.01"></path></svg>`;
+            pill.appendChild(infoIcon);
 
-            infoBtn.addEventListener('click', (e) => {
+            pill.addEventListener('click', (e) => {
               e.preventDefault();
               e.stopPropagation();
 
@@ -482,8 +487,6 @@ const topicsMeta = allTopics.reduce((acc, t) => {
                 if (bodyWrapper) bodyWrapper.appendChild(noteCard);
               }
             });
-
-            pill.appendChild(infoBtn);
           }
 
           pillsContainer.appendChild(pill);
@@ -536,25 +539,27 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 		line-height: 1.2 !important;
 		transition: all 0.15s ease;
 		box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+		margin: 0; /* Reset for button elements */
+	}
+	:global(.topic-pill.clickable) {
+		cursor: pointer;
+	}
+	:global(.topic-pill.clickable:hover) {
+		filter: brightness(0.95);
+		transform: scale(1.02);
 	}
 	:global(.topic-pill.note-open) {
 		box-shadow: 0 0 0 1.5px currentColor !important;
 	}
-	:global(.pill-info-btn) {
+	:global(.pill-info-icon) {
 		display: inline-flex !important;
 		align-items: center !important;
 		justify-content: center !important;
-		background: none !important;
-		border: none !important;
-		padding: 0 !important;
 		margin: 0 -2px 0 1px !important;
-		cursor: pointer !important;
-		color: inherit !important;
-		font-family: inherit !important;
 		opacity: 0.75;
 		transition: opacity 0.15s ease, transform 0.15s ease;
 	}
-	:global(.pill-info-btn:hover) {
+	:global(.topic-pill.clickable:hover .pill-info-icon) {
 		opacity: 1;
 		transform: scale(1.1);
 	}
@@ -786,7 +791,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 	/* Active/Evidence Verse Hover highlighting */
 	.verse-row.active-verse:hover .verse-row-content {
 		background-color: var(--color-surface-container-low);
-		border-left: 2px solid var(--color-secondary);
+		border-left: 2px solid var(--color-on-surface-variant);
 		padding-left: 14px;
 	}
 
@@ -798,6 +803,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 	}
 	.verse-row.topic-highlight.active-verse:hover .verse-row-content {
 		background-color: rgba(151, 69, 67, 0.1);
+		border-left-color: var(--color-secondary);
 	}
 
 	/* ============================================================
