@@ -143,7 +143,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		</div>
 
 		<!-- Navigation Toggles & Dynamic Scroll Header JS Script -->
-		<script is:inline>
+		<script>
 			const setupSidebarToggle = () => {
 				const toggleBtn = document.getElementById('nav-toggle-btn');
 				const sidebar = document.getElementById('scripture-nav-sidebar');
@@ -163,34 +163,28 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 					document.body.style.overflow = '';
 				};
 
-				// Bind direct event listeners (Static compilation recreation ensures safe bindings)
 				toggleBtn.addEventListener('click', openSidebar);
 				overlay.addEventListener('click', closeSidebar);
 
 				sidebar.addEventListener('click', (e) => {
-					if (e.target.closest('a')) {
+					if (e.target instanceof HTMLElement && e.target.closest('a')) {
 						closeSidebar();
 					}
 				});
 			};
 
-			// Apple-style Dynamic Header Swapping on Scroll
 			const setupScrollHeader = () => {
 				const headerBrand = document.getElementById('header-brand-text');
 				const mainContent = document.querySelector('.main-content');
-				
-				// Select either the big chapter title (e.g. "John 1") or the verse quote box on detail pages
 				const pageTitle = document.querySelector('.book-title') || document.querySelector('.verse-quote-box');
 
 				if (!headerBrand || !mainContent || !pageTitle) return;
 
-				const originalText = headerBrand.getAttribute('data-original');
+				const originalText = headerBrand.getAttribute('data-original') || '';
 
 				const handleScroll = () => {
 					const titleRect = pageTitle.getBoundingClientRect();
-					// If the page title has scrolled past the header threshold (52px height)
 					if (titleRect.bottom < 52) {
-						// Extract the active title from document title (e.g. "John 1" or "Evidence: Hebrews 9:12")
 						const docTitle = document.title.split('|')[0].trim();
 						const cleanTitle = docTitle.replace('Evidence:', '🔍').trim();
 						
@@ -204,7 +198,6 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 
 				mainContent.addEventListener('scroll', handleScroll);
 				
-				// Smooth scroll-to-top on clicking header chapter title
 				headerBrand.addEventListener('click', () => {
 					if (headerBrand.classList.contains('chapter-active')) {
 						mainContent.scrollTo({ top: 0, behavior: 'smooth' });
@@ -212,37 +205,34 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 				});
 			};
 
-			// Initialize Layout Listeners
-			setupSidebarToggle();
-			setupScrollHeader();
-
-			// Re-initialize on Astro navigation swaps
-			document.addEventListener('astro:after-swap', () => {
+			// Initialize layout components on page load/swap
+			document.addEventListener('astro:page-load', () => {
 				setupSidebarToggle();
 				setupScrollHeader();
 			});
 			
+			// Global resize listener (safe to add once since this module runs once)
 			let resizeTimer;
 			window.addEventListener('resize', () => {
 				clearTimeout(resizeTimer);
 				resizeTimer = setTimeout(setupSidebarToggle, 150);
 			});
 
-			// Global Loading Indicator for SPA feel
-			if (!window.hasLoadingIndicator) {
+			// Global Loading Indicator for SPA progress bar
+			document.addEventListener('astro:before-preparation', () => {
 				const indicator = document.getElementById('global-loading-indicator');
 				if (indicator) {
-					document.addEventListener('astro:before-preparation', () => {
-						indicator.classList.remove('done');
-						indicator.classList.add('loading');
-					});
-					document.addEventListener('astro:after-swap', () => {
-						indicator.classList.remove('loading');
-						indicator.classList.add('done');
-					});
-					window.hasLoadingIndicator = true;
+					indicator.classList.remove('done');
+					indicator.classList.add('loading');
 				}
-			}
+			});
+			document.addEventListener('astro:after-swap', () => {
+				const indicator = document.getElementById('global-loading-indicator');
+				if (indicator) {
+					indicator.classList.remove('loading');
+					indicator.classList.add('done');
+				}
+			});
 		</script>
 	</body>
 </html>
@@ -476,6 +466,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 			flex-shrink: 0;
 			height: 100%;
 			z-index: 30;
+			order: -1; /* Dock on the left */
 		}
 	}
 

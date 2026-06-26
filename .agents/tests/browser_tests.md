@@ -1,0 +1,107 @@
+# Browser Automation Test Cases
+
+This document defines the structured browser automation test cases for Ready Apologia. Run these test cases using the `/browser` subagent whenever code or styling changes are made to ensure zero regression.
+
+---
+
+## Test Case 1: Initial Redirect Gate & Last Visited Persistence
+1.  **Preparation**: Clear all browser storage, cookies, and `localStorage`.
+2.  **Action**: Navigate to root url `http://localhost:8080/ready_apologia/`.
+3.  **Verification**:
+    *   Confirm the page redirects automatically to `/ready_apologia/bible/jn/1`.
+    *   Verify `localStorage.getItem('lastVisitedUrl')` is initialized to `/ready_apologia/bible/jn/1`.
+4.  **Action**: Navigate to Genesis 1 by typing `http://localhost:8080/ready_apologia/bible/gn/1` in the browser or clicking the left sidebar.
+5.  **Verification**:
+    *   Verify `localStorage.getItem('lastVisitedUrl')` updates to `/ready_apologia/bible/gn/1`.
+6.  **Action**: Navigate to root url `http://localhost:8080/ready_apologia/`.
+7.  **Verification**:
+    *   Confirm the page redirects to `/ready_apologia/bible/gn/1`.
+
+---
+
+## Test Case 2: Verse Selection & Highlighting (Mobile View - 375x667)
+1.  **Action**: Go to `/ready_apologia/bible/jn/1` in mobile viewport.
+2.  **Action**: Click on Verse 3 text.
+3.  **Verification**:
+    *   Verify that Verse 3 row receives select/highlight styles (e.g. background change).
+4.  **Action**: Click on Verse 4 text.
+5.  **Verification**:
+    *   Verify Verse 3 select style is removed, and Verse 4 receives it.
+6.  **Action**: Hover over Verse 5.
+7.  **Verification**:
+    *   Verify a neutral hover border or background is briefly visible.
+
+---
+
+## Test Case 3: Mobile Pager Navigation & Swipes (Mobile View - 375x667)
+1.  **Action**: Go to `/ready_apologia/bible/jn/1` in mobile viewport.
+2.  **Action**: Locate the floating right arrow pager button (`Chapter 2 →`) and click it.
+3.  **Verification**:
+    *   Confirm the reader transitions smoothly to `/ready_apologia/bible/jn/2`.
+    *   Verify the top header branding text swaps to "John 2" as you scroll down.
+4.  **Action**: Click the floating left arrow pager button (`← Chapter 1`).
+5.  **Verification**:
+    *   Confirm the reader transitions back to `/ready_apologia/bible/jn/1`.
+
+---
+
+## Test Case 4: Evidence Tab Switching & Custom Order Persistence (Mobile View - 375x667)
+1.  **Action**: Navigate directly to `/ready_apologia/bible/jn/1/1`.
+2.  **Verification**:
+    *   Verify it redirects to `/ready_apologia/bible/jn/1/1/manuscripts`.
+3.  **Action**: Click the "Apologetics" tab in the segmented pill bar.
+4.  **Verification**:
+    *   Confirm URL changes to `/ready_apologia/bible/jn/1/1/apologetics` and the apologetics text renders.
+5.  **Action**: Click the settings ellipsis button (`#open-tab-settings-btn`) to open the "Customize Tab Order" modal.
+6.  **Action**: Move "Apologetics" to the top of the list and click "Done".
+7.  **Verification**:
+    *   Confirm the "Apologetics" tab is now the leftmost tab in the bar.
+    *   Verify `localStorage.getItem('ready_apologia_tab_order')` contains `["apologetics", ...]` (or matches custom order).
+8.  **Action**: Perform a full page reload on the tab page.
+9.  **Verification**:
+    *   Confirm the custom tab order persists.
+10. **Action**: Click the back navigation link `← John 1`.
+11. **Verification**:
+    *   Confirm it returns to the scripture reader at `/ready_apologia/bible/jn/1`.
+
+---
+
+## Test Case 5: Topics Explorer Scroll Controls (Mobile View - 375x667)
+1.  **Action**: Navigate to `/ready_apologia/topics/divinity_of_christ`.
+2.  **Verification**:
+    *   Verify the master tab bar containing NT, OT, Fathers, Ancient Judaism has a right scroll arrow overlay visible on the right edge.
+3.  **Action**: Click the right scroll arrow.
+4.  **Verification**:
+    *   Confirm the bar scrolls smoothly to the right.
+    *   Verify the left scroll arrow appears, and the right scroll arrow disappears when scrolled to the end.
+
+---
+
+## Test Case 6: Topics Highlight Toggling & Scripture Sync (Mobile View - 375x667)
+1.  **Action**: Clear `localStorage` and navigate to root `http://localhost:8080/ready_apologia/` (redirects to John 1).
+2.  **Action**: Click the "Topics" tab in the bottom nav to go to `/ready_apologia/topics`.
+3.  **Action**: Click the "Highlight in Scripture" toggle switch inside the "Divinity of Christ" card.
+4.  **Verification**:
+    *   Confirm `localStorage.getItem('activeTopics')` is set to `["divinity_of_christ"]`.
+5.  **Action**: Click the "Scripture" tab in the bottom nav to go back to John 1 reader (`/ready_apologia/bible/jn/1`).
+6.  **Verification**:
+    *   Confirm Verse 1 (`#1` row) has the `.topic-highlight` class applied.
+    *   Verify the Divinity of Christ commentary pill is appended to Verse 1 and is clickable.
+
+---
+
+## Test Case 7: Desktop Layout Auto-Docking (Desktop View - 1024x768)
+1.  **Action**: Open `/ready_apologia/bible/jn/1` in desktop view.
+2.  **Verification**:
+    *   Verify the Bottom Navigation tab bar is hidden (`display: none`).
+    *   Verify the collapsible sidebar navigation is permanently docked on the **left** side of the screen (`order: -1`).
+3.  **Action**: Click the section header "Old Testament" in the sidebar, click "Genesis", and click chapter "1".
+4.  **Verification**:
+    *   Confirm it navigates successfully to `/ready_apologia/bible/gn/1`.
+
+---
+
+## Test Case 8: Global Error & Warning Check
+1.  **Action**: Throughout all actions in Test Cases 1-7, monitor the browser console logs.
+2.  **Verification**:
+    *   Verify that **zero errors or warnings** are generated by the app scripts.
