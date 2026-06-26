@@ -271,6 +271,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 
           const evidenceTypes = evidenceMap[verseNum] || [];
           const hasEvidence = evidenceTypes.length > 0;
+          const hasTopics = !!topicMap[verseNum];
 
           if (hasEvidence) {
             return (
@@ -319,6 +320,21 @@ const topicsMeta = allTopics.reduce((acc, t) => {
                             </svg>
                           </a>
                         )}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          } else if (hasTopics) {
+            return (
+              <div class="verse-row active-verse type-topic" id={verseNum} data-topics={topicMap[verseNum] ? topicMap[verseNum].join(',') : ''} data-topic-notes={topicNotesMap[verseNum] ? JSON.stringify(topicNotesMap[verseNum]) : ''}>
+                <div class="verse-row-content">
+                  <span class="verse-num">{verseNum}</span>
+                  <div class="verse-body-wrapper">
+                    <p class="verse-text">
+                      <span class="verse-text-link-wrapper" style="cursor: text;">
+                        {verseText}
                       </span>
                     </p>
                   </div>
@@ -376,44 +392,44 @@ const topicsMeta = allTopics.reduce((acc, t) => {
   </div>
 </Layout>
 
-<!-- Inline Chapter Dropdown Trigger script -->
-<script is:inline data-astro-rerun>
-  try {
-    localStorage.setItem('lastVisitedUrl', window.location.pathname);
-  } catch (e) {
-    console.warn('Failed to save last visited URL:', e);
-  }
+<!-- Chapter UI & Logic -->
+<script>
   let closePopoverHandler;
 
-  const setupChapterPopover = () => {
+  const initChapterPage = () => {
+    if (window.location.pathname.includes('/bible/')) {
+      try {
+        localStorage.setItem('lastVisitedUrl', window.location.pathname);
+      } catch (e) {
+        console.warn('Failed to save last visited URL:', e);
+      }
+    }
+
     const trigger = document.getElementById('chapter-popover-trigger');
     const popover = document.getElementById('chapter-dropdown-popover');
 
-    if (!trigger || !popover) return;
-
-    trigger.addEventListener('click', (e) => {
-      e.stopPropagation(); // Prevent immediate backdrop close
-      popover.classList.toggle('open');
-    });
-
-    if (closePopoverHandler) {
-      document.removeEventListener('click', closePopoverHandler);
+    if (trigger && popover) {
+      if (closePopoverHandler) {
+        document.removeEventListener('click', closePopoverHandler);
+      }
+      
+      closePopoverHandler = () => popover.classList.remove('open');
+      
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent immediate backdrop close
+        popover.classList.toggle('open');
+      });
+      
+      // Tap outside closes popover
+      document.addEventListener('click', closePopoverHandler);
+      
+      // Prevent close if clicking inside grid
+      popover.addEventListener('click', (e) => e.stopPropagation());
     }
 
-    closePopoverHandler = () => {
-      popover.classList.remove('open');
-    };
-
-    // Tap outside closes popover
-    document.addEventListener('click', closePopoverHandler);
-
-    // Prevent close if clicking inside grid
-    popover.addEventListener('click', (e) => {
-      e.stopPropagation();
-    });
-  };
-
-  const setupTopicHighlight = () => {
+    const container = document.querySelector('.verses-container');
+    if (!container) return; // Exit early if not on a chapter page
+    
     let activeTopics = [];
     try {
       activeTopics = JSON.parse(localStorage.getItem('activeTopics') || '[]');
@@ -427,8 +443,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
       localStorage.removeItem('activeTopic');
     }
 
-    const container = document.querySelector('.verses-container');
-    const topicsMeta = container ? JSON.parse(container.getAttribute('data-topics-meta') || '{}') : {};
+    const topicsMeta = JSON.parse(container.getAttribute('data-topics-meta') || '{}');
 
     document.querySelectorAll('.verse-row[data-topics]').forEach(el => {
       const verseTopicsStr = el.getAttribute('data-topics');
@@ -515,15 +530,16 @@ const topicsMeta = allTopics.reduce((acc, t) => {
     });
   };
 
-  setupChapterPopover();
-  setupTopicHighlight();
-  const handleBeforeSwap = () => {
+  // Run on initial load and after every page navigation
+  document.addEventListener('astro:page-load', initChapterPage);
+
+  // Clean up global listeners before swap to prevent memory leaks
+  document.addEventListener('astro:before-swap', () => {
     if (closePopoverHandler) {
       document.removeEventListener('click', closePopoverHandler);
+      closePopoverHandler = null;
     }
-    document.removeEventListener('astro:before-swap', handleBeforeSwap);
-  };
-  document.addEventListener('astro:before-swap', handleBeforeSwap);
+  });
 </script>
 
 <style>
