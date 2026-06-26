@@ -77,14 +77,21 @@ This document defines the structured browser automation test cases for Ready Apo
 
 ---
 
-## Test Case 6: Topics Highlight Toggling & Scripture Sync (Mobile View - 375x667)
+## Test Case 6: Topics List Navigation, Highlight Toggling & Scripture Sync (Mobile View - 375x667)
 1.  **Action**: Clear `localStorage` and navigate to root `http://localhost:8080/ready_apologia/` (redirects to John 1).
 2.  **Action**: Click the "Topics" tab in the bottom nav to go to `/ready_apologia/topics`.
-3.  **Action**: Click the "Highlight in Scripture" toggle switch inside the "Divinity of Christ" card.
-4.  **Verification**:
+3.  **Verification**:
+    *   Verify the list of topics displays.
+    *   Verify that each card has a prominent red "Explore" button (with a right chevron arrow) on the right edge.
+4.  **Action**: Click the "Explore" button on the "Divinity of Christ" card.
+5.  **Verification**:
+    *   Confirm it navigates to `/ready_apologia/topics/divinity_of_christ`.
+6.  **Action**: Go back to `/ready_apologia/topics`.
+7.  **Action**: Click the "Highlight in Scripture" toggle switch inside the "Divinity of Christ" card.
+8.  **Verification**:
     *   Confirm `localStorage.getItem('activeTopics')` is set to `["divinity_of_christ"]`.
-5.  **Action**: Click the "Scripture" tab in the bottom nav to go back to John 1 reader (`/ready_apologia/bible/jn/1`).
-6.  **Verification**:
+9.  **Action**: Click the "Scripture" tab in the bottom nav to go back to John 1 reader (`/ready_apologia/bible/jn/1`).
+10. **Verification**:
     *   Confirm Verse 1 (`#1` row) has the `.topic-highlight` class applied.
     *   Verify the Divinity of Christ commentary pill is appended to Verse 1 and is clickable.
 

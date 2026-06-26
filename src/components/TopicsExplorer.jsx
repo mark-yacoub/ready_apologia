@@ -892,7 +892,12 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
                   </span>
                   <span className="compact-toggle-text">Highlight in Scripture</span>
                 </button>
-                <Chevron open={false} />
+                <div className="explore-badge-btn">
+                  Explore
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
               </div>
             </div>
           );
@@ -1192,6 +1197,33 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
           gap: 12px;
           margin-top: 16px;
           margin-bottom: 16px;
+        }
+        .explore-badge-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          background-color: var(--color-secondary, #974543);
+          color: #ffffff !important;
+          padding: 5px 12px;
+          border-radius: 99px;
+          font-family: var(--font-body);
+          font-size: 12px;
+          font-weight: 700;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          border: 1px solid transparent;
+          line-height: 1;
+        }
+        .explore-badge-btn svg {
+          stroke: currentColor;
+          fill: none;
+          flex-shrink: 0;
+        }
+        .topic-header-box.is-link:hover .explore-badge-btn {
+          filter: brightness(0.9);
+          transform: translateY(-1px);
+        }
+        .topic-header-box.is-link:active .explore-badge-btn {
+          transform: translateY(0) scale(0.98);
         }
         .ios-compact-toggle {
           display: inline-flex;
