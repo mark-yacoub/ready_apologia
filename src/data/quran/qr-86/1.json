@@ -1,0 +1,172 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَٱلسَّمَآءِ وَٱلطَّارِقِ",
+      "text": "By the sky and the night visitor!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "وَمَآ أَدْرَىٰكَ مَا ٱلطَّارِقُ",
+      "text": "And what will make you know what the night visitor is?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "ٱلنَّجْمُ ٱلثَّاقِبُ",
+      "text": "The piercing star!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "إِن كُلُّ نَفْسٍۢ لَّمَّا عَلَيْهَا حَافِظٌۭ",
+      "text": "Over every person (there is) a watcher.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "إِن كُلُّ نَفۡسٖ لَّمَا عَلَيۡهَا حَافِظٞ",
+          "english": "Every self has a preserver over it.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "إِن كُلُّ نَفۡسٖ لَّمَا عَلَيۡهَا حَافِظٞ",
+          "english": "Every self has a preserver over it.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "إِن كُلُّ نَفۡسٖ لَّمَا عَلَيۡهَا حَافِظٞ",
+          "english": "Every self has a preserver over it.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "إِن كُلُّ نَفۡسٖ لَّمَا عَلَيۡهَا حَافِظٞ",
+          "english": "Every self has a preserver over it.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "إِن كُلُّ نَفْسٖ لَّمَا عَلَيْهَا حَافِظٞۖ",
+          "english": "Every self has a preserver over it.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "إِن كُلُّ نَفْسٖ لَّمَا عَلَيْهَا حَافِظٞۖ",
+          "english": "Every self has a preserver over it.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "فَلْيَنظُرِ ٱلْإِنسَٰنُ مِمَّ خُلِقَ",
+      "text": "So let the human consider: what was he created from?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "خُلِقَ مِن مَّآءٍۢ دَافِقٍۢ",
+      "text": "He was created from spurting water.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "يَخْرُجُ مِنۢ بَيْنِ ٱلصُّلْبِ وَٱلتَّرَآئِبِ",
+      "text": "It comes forth from (a place) between the spine and the ribs.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "إِنَّهُۥ عَلَىٰ رَجْعِهِۦ لَقَادِرٌۭ",
+      "text": "Surely He is able indeed to bring him back,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "يَوْمَ تُبْلَى ٱلسَّرَآئِرُ",
+      "text": "on the Day when (all) secrets will be examined,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "فَمَا لَهُۥ مِن قُوَّةٍۢ وَلَا نَاصِرٍۢ",
+      "text": "and he will have no power (and) no helper.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "وَٱلسَّمَآءِ ذَاتِ ٱلرَّجْعِ",
+      "text": "By the sky full of returning (rain),",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "وَٱلْأَرْضِ ذَاتِ ٱلصَّدْعِ",
+      "text": "by the earth full of cracks!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "إِنَّهُۥ لَقَوْلٌۭ فَصْلٌۭ",
+      "text": "Surely it is a decisive word indeed!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "وَمَا هُوَ بِٱلْهَزْلِ",
+      "text": "It is no joke.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "إِنَّهُمْ يَكِيدُونَ كَيْدًۭا",
+      "text": "Surely they are hatching a plot,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "وَأَكِيدُ كَيْدًۭا",
+      "text": "but I (too) am hatching a plot.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "فَمَهِّلِ ٱلْكَٰفِرِينَ أَمْهِلْهُمْ رُوَيْدًۢا",
+      "text": "So let the disbelievers be, let them be for a little (while).",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

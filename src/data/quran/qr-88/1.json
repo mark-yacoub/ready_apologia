@@ -1,0 +1,268 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ هَلْ أَتَىٰكَ حَدِيثُ ٱلْغَٰشِيَةِ",
+      "text": "Has the story of the Covering come to you?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "وُجُوهٌۭ يَوْمَئِذٍ خَٰشِعَةٌ",
+      "text": "(Some) faces that Day will be downcast,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "عَامِلَةٌۭ نَّاصِبَةٌۭ",
+      "text": "laboring, weary.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "تَصْلَىٰ نَارًا حَامِيَةًۭ",
+      "text": "They will burn in a scorching Fire.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "تُصۡلَىٰ نَارًا حَامِيَةٗ",
+          "english": "made to roast in a hot fire,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "تُصۡلَىٰ نَارًا حَامِيَةٗ",
+          "english": "made to roast in a hot fire,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "تُصۡلَىٰ نَارًا حَامِيَةٗ",
+          "english": "made to roast in a hot fire,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "تَصۡلَىٰ نَارًا حَامِيَةٗ",
+          "english": "roasting in a hot fire,",
+          "reason": "",
+          "category": ""
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "تُسْقَىٰ مِنْ عَيْنٍ ءَانِيَةٍۢ",
+      "text": "They will be made to drink from a boiling spring.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "لَّيْسَ لَهُمْ طَعَامٌ إِلَّا مِن ضَرِيعٍۢ",
+      "text": "They will have no food except dry thorns,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "لَّا يُسْمِنُ وَلَا يُغْنِى مِن جُوعٍۢ",
+      "text": "(which) neither nourishes nor satisfies hunger.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "وُجُوهٌۭ يَوْمَئِذٍۢ نَّاعِمَةٌۭ",
+      "text": "(Other) faces that Day will be blessed,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "لِّسَعْيِهَا رَاضِيَةٌۭ",
+      "text": "content with their striving,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "فِى جَنَّةٍ عَالِيَةٍۢ",
+      "text": "in a Garden on high",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "لَّا تَسْمَعُ فِيهَا لَٰغِيَةًۭ",
+      "text": "– where they will hear no frivolous talk,",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "لَّا يُسۡمَعُ فِيهَا لَٰغِيَةٞ",
+          "english": "no nonsense is heard in it;",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "لَّا يُسۡمَعُ  فِيهَا لَٰغِيَةٞ",
+          "english": "no nonsense is heard in it;",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "لَّا يُسۡمَعُ فِيهَا لَٰغِيَةٞ",
+          "english": "no nonsense is heard in it;",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "لَّا يُسۡمَعُ فِيهَا لَٰغِيَةٞ",
+          "english": "no nonsense is heard in it;",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "لَّا تُسْمَعُ فِيهَا لَٰغِيَةٞۖ",
+          "english": "no nonsense is heard in it;",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "لَّا تُسْمَعُ فِيهَا لَٰغِيَةٞۖ",
+          "english": "no nonsense is heard in it;",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "فِيهَا عَيْنٌۭ جَارِيَةٌۭ",
+      "text": "where (there is) a flowing spring,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "فِيهَا سُرُرٌۭ مَّرْفُوعَةٌۭ",
+      "text": "where (there are) raised couches,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "وَأَكْوَابٌۭ مَّوْضُوعَةٌۭ",
+      "text": "and cups laid down,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "وَنَمَارِقُ مَصْفُوفَةٌۭ",
+      "text": "and cushions lined up,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "وَزَرَابِىُّ مَبْثُوثَةٌ",
+      "text": "and carpets spread out.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "أَفَلَا يَنظُرُونَ إِلَى ٱلْإِبِلِ كَيْفَ خُلِقَتْ",
+      "text": "Will they not look at the camels, how they were created,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 18,
+      "quran_arabic": "وَإِلَى ٱلسَّمَآءِ كَيْفَ رُفِعَتْ",
+      "text": "and at the sky, how it was raised up,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 19,
+      "quran_arabic": "وَإِلَى ٱلْجِبَالِ كَيْفَ نُصِبَتْ",
+      "text": "and at the mountains, how they were constructed,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 20,
+      "quran_arabic": "وَإِلَى ٱلْأَرْضِ كَيْفَ سُطِحَتْ",
+      "text": "and at the earth, how it was spread flat?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 21,
+      "quran_arabic": "فَذَكِّرْ إِنَّمَآ أَنتَ مُذَكِّرٌۭ",
+      "text": "So remind (them)! You are only a reminder.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 22,
+      "quran_arabic": "لَّسْتَ عَلَيْهِم بِمُصَيْطِرٍ",
+      "text": "You are not a record-keeper over them",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 23,
+      "quran_arabic": "إِلَّا مَن تَوَلَّىٰ وَكَفَرَ",
+      "text": "– except for the one who turns away and disbelieves.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 24,
+      "quran_arabic": "فَيُعَذِّبُهُ ٱللَّهُ ٱلْعَذَابَ ٱلْأَكْبَرَ",
+      "text": "God will punish him with the greatest punishment.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 25,
+      "quran_arabic": "إِنَّ إِلَيْنَآ إِيَابَهُمْ",
+      "text": "Surely to Us is their return.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 26,
+      "quran_arabic": "ثُمَّ إِنَّ عَلَيْنَا حِسَابَهُم",
+      "text": "Then surely on Us (depends) their reckoning.",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

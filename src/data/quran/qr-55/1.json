@@ -1,0 +1,633 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ٱلرَّحْمَٰنُ",
+      "text": "The Merciful",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "عَلَّمَ ٱلْقُرْءَانَ",
+      "text": "has taught the Qur’ān.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "خَلَقَ ٱلْإِنسَٰنَ",
+      "text": "He created the human.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "عَلَّمَهُ ٱلْبَيَانَ",
+      "text": "He taught him the explanation.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "ٱلشَّمْسُ وَٱلْقَمَرُ بِحُسْبَانٍۢ",
+      "text": "The sun and the moon (move) in predictable paths,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "وَٱلنَّجْمُ وَٱلشَّجَرُ يَسْجُدَانِ",
+      "text": "and the star and the tree prostrate themselves.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "وَٱلسَّمَآءَ رَفَعَهَا وَوَضَعَ ٱلْمِيزَانَ",
+      "text": "The sky – He raised it, and He laid down the scale",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "أَلَّا تَطْغَوْا۟ فِى ٱلْمِيزَانِ",
+      "text": "– do not transgress insolently concerning the scale,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "وَأَقِيمُوا۟ ٱلْوَزْنَ بِٱلْقِسْطِ وَلَا تُخْسِرُوا۟ ٱلْمِيزَانَ",
+      "text": "but establish the weight in justice, and do not cheat concerning the scale.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "وَٱلْأَرْضَ وَضَعَهَا لِلْأَنَامِ",
+      "text": "And the earth – He laid it down for all living creatures.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "فِيهَا فَٰكِهَةٌۭ وَٱلنَّخْلُ ذَاتُ ٱلْأَكْمَامِ",
+      "text": "On it (there are) fruit, and date palms with sheaths,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "وَٱلْحَبُّ ذُو ٱلْعَصْفِ وَٱلرَّيْحَانُ",
+      "text": "and grain with its husk, and fragrant herbs.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "خَلَقَ ٱلْإِنسَٰنَ مِن صَلْصَٰلٍۢ كَٱلْفَخَّارِ",
+      "text": "He created the human from clay like pottery,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "وَخَلَقَ ٱلْجَآنَّ مِن مَّارِجٍۢ مِّن نَّارٍۢ",
+      "text": "and He created the jinn from a mixture of fire.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "رَبُّ ٱلْمَشْرِقَيْنِ وَرَبُّ ٱلْمَغْرِبَيْنِ",
+      "text": "Lord of the two Easts, Lord of the two Wests.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 18,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 19,
+      "quran_arabic": "مَرَجَ ٱلْبَحْرَيْنِ يَلْتَقِيَانِ",
+      "text": "He let loose the two seas (which) meet.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 20,
+      "quran_arabic": "بَيْنَهُمَا بَرْزَخٌۭ لَّا يَبْغِيَانِ",
+      "text": "Between them (there is) a barrier (which) they do not seek (to cross).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 21,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 22,
+      "quran_arabic": "يَخْرُجُ مِنْهُمَا ٱللُّؤْلُؤُ وَٱلْمَرْجَانُ",
+      "text": "Pearl and coral come forth from both of them.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "يُخۡرَجُ مِنۡهُمَا اَ۬للُّؤۡلُؤُ وَاَلۡمَرۡجَانُ",
+          "english": "From them are brought out pearls and corals.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "يُخۡرَجُ مِنۡهُمَا اَ۬للُّولُؤُ وَاَلۡمَرۡجَانُ",
+          "english": "From them are brought out pearls and corals.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "يُخْرَجُ مِنْهُمَا اَ۬للُّؤْلُؤُاْ وَالْمَرْجَانُۖ",
+          "english": "From them are brought out pearls and corals.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "يُخْرَجُ مِنْهُمَا اَ۬للُّؤْلُؤُاْ وَالْمَرْجَانُۖ",
+          "english": "From them are brought out pearls and corals.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 23,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 24,
+      "quran_arabic": "وَلَهُ ٱلْجَوَارِ ٱلْمُنشَـَٔاتُ فِى ٱلْبَحْرِ كَٱلْأَعْلَٰمِ",
+      "text": "His are the (ships) running, raised up on the sea like landmarks.",
+      "canonical_variants": [
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "وَلَهُ ٱلۡجَوَارِ ٱلۡمُنشِـَٔاتُ فِي ٱلۡبَحۡرِ كَٱلۡأَعۡلَٰمِ",
+          "english": "His are the running ships that raise their sails in the sea like banners.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "وَلَهُ ٱلۡجَوَارِ ٱلۡمُنشَـَٔاتُ فِي ٱلۡبَحۡرِ كَٱلۡأَعۡلَٰمِ",
+          "english": "His are the running ships, whose sails are raised in the sea like banners.",
+          "reason": "",
+          "category": ""
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 25,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 26,
+      "quran_arabic": "كُلُّ مَنْ عَلَيْهَا فَانٍۢ",
+      "text": "All who are on it pass away,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 27,
+      "quran_arabic": "وَيَبْقَىٰ وَجْهُ رَبِّكَ ذُو ٱلْجَلَٰلِ وَٱلْإِكْرَامِ",
+      "text": "but the face of your Lord remains, full of splendor and honor.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 28,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 29,
+      "quran_arabic": "يَسْـَٔلُهُۥ مَن فِى ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۚ كُلَّ يَوْمٍ هُوَ فِى شَأْنٍۢ",
+      "text": "(All) who are in the heavens and the earth make requests of Him. Every day He (is engaged) in some task.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 30,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 31,
+      "quran_arabic": "سَنَفْرُغُ لَكُمْ أَيُّهَ ٱلثَّقَلَانِ",
+      "text": "Soon We shall be free (to attend) to you, you two burdens!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 32,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 33,
+      "quran_arabic": "يَٰمَعْشَرَ ٱلْجِنِّ وَٱلْإِنسِ إِنِ ٱسْتَطَعْتُمْ أَن تَنفُذُوا۟ مِنْ أَقْطَارِ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ فَٱنفُذُوا۟ ۚ لَا تَنفُذُونَ إِلَّا بِسُلْطَٰنٍۢ",
+      "text": "Assembly of jinn and humankind! If you are able to pass beyond the confines of the heavens and the earth, pass! You will not pass beyond (them) except by authority.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 34,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 35,
+      "quran_arabic": "يُرْسَلُ عَلَيْكُمَا شُوَاظٌۭ مِّن نَّارٍۢ وَنُحَاسٌۭ فَلَا تَنتَصِرَانِ",
+      "text": "A flame of fire and a furious wind will be sent against you, and you will not (be able to) defend yourselves.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "يُرۡسَلُ عَلَيۡكُمَا شُوَاظٞ مِّن نّ۪ارٖ",
+          "english": "Flares of fire and (of) brass, will be sent upon youdl, and you will not find help.",
+          "reason": "EXTRA WORDS",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "يُرۡسَلُ عَلَيۡكُمَا  شُوَاظٞ مِّن نّ۪ارٖ",
+          "english": "Flares of fire and (of) brass, will be sent upon youdl, and you will not find help.",
+          "reason": "EXTRA WORDS",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "يُرۡسَلُ عَلَيۡكُمَا شِوَاظٞ مِّن نَّارٖ",
+          "english": "Flares of fire and (of) brass, will be sent upon youdl, and you will not find help.",
+          "reason": "EXTRA WORDS",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "يُرۡسَلُ عَلَيۡكُمَا شِوَاظٞ مِّن نَّارٖ",
+          "english": "Flares of fire and (of) brass, will be sent upon youdl, and you will not find help.",
+          "reason": "EXTRA WORDS",
+          "category": "Lexical Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 36,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 37,
+      "quran_arabic": "فَإِذَا ٱنشَقَّتِ ٱلسَّمَآءُ فَكَانَتْ وَرْدَةًۭ كَٱلدِّهَانِ",
+      "text": "When the sky is split open and turns red like oil –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 38,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 39,
+      "quran_arabic": "فَيَوْمَئِذٍۢ لَّا يُسْـَٔلُ عَن ذَنۢبِهِۦٓ إِنسٌۭ وَلَا جَآنٌّۭ",
+      "text": "– on that Day neither human nor jinn will be questioned about his sin.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 40,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 41,
+      "quran_arabic": "يُعْرَفُ ٱلْمُجْرِمُونَ بِسِيمَٰهُمْ فَيُؤْخَذُ بِٱلنَّوَٰصِى وَٱلْأَقْدَامِ",
+      "text": "The sinners will be known by their mark, and they will be seized by the hair and the feet.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 42,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 43,
+      "quran_arabic": "هَٰذِهِۦ جَهَنَّمُ ٱلَّتِى يُكَذِّبُ بِهَا ٱلْمُجْرِمُونَ",
+      "text": "This is Gehenna which the sinners called a lie.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 44,
+      "quran_arabic": "يَطُوفُونَ بَيْنَهَا وَبَيْنَ حَمِيمٍ ءَانٍۢ",
+      "text": "They will go around between it and hot, boiling (water).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 45,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 46,
+      "quran_arabic": "وَلِمَنْ خَافَ مَقَامَ رَبِّهِۦ جَنَّتَانِ",
+      "text": "But for the one who fears the position of his Lord, (there are) two gardens –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 47,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 48,
+      "quran_arabic": "ذَوَاتَآ أَفْنَانٍۢ",
+      "text": "– with branches –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 49,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 50,
+      "quran_arabic": "فِيهِمَا عَيْنَانِ تَجْرِيَانِ",
+      "text": "– in both (there are) two flowing springs –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 51,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 52,
+      "quran_arabic": "فِيهِمَا مِن كُلِّ فَٰكِهَةٍۢ زَوْجَانِ",
+      "text": "– in both (there are) two of every (kind of) fruit –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 53,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 54,
+      "quran_arabic": "مُتَّكِـِٔينَ عَلَىٰ فُرُشٍۭ بَطَآئِنُهَا مِنْ إِسْتَبْرَقٍۢ ۚ وَجَنَى ٱلْجَنَّتَيْنِ دَانٍۢ",
+      "text": "– (they are) reclining on couches lined with brocade, and fresh fruit of both gardens is near (at hand) –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 55,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 56,
+      "quran_arabic": "فِيهِنَّ قَٰصِرَٰتُ ٱلطَّرْفِ لَمْ يَطْمِثْهُنَّ إِنسٌۭ قَبْلَهُمْ وَلَا جَآنٌّۭ",
+      "text": "– in them (there are maidens) restraining (their) glances – no man or jinn has had sex with them before them –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 57,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 58,
+      "quran_arabic": "كَأَنَّهُنَّ ٱلْيَاقُوتُ وَٱلْمَرْجَانُ",
+      "text": "– as if they were rubies and coral –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 59,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 60,
+      "quran_arabic": "هَلْ جَزَآءُ ٱلْإِحْسَٰنِ إِلَّا ٱلْإِحْسَٰنُ",
+      "text": "Is the payment for good anything but the good?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 61,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 62,
+      "quran_arabic": "وَمِن دُونِهِمَا جَنَّتَانِ",
+      "text": "And besides these two (there are another) two gardens –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 63,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 64,
+      "quran_arabic": "مُدْهَآمَّتَانِ",
+      "text": "– deep green –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 65,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 66,
+      "quran_arabic": "فِيهِمَا عَيْنَانِ نَضَّاخَتَانِ",
+      "text": "– in both (there are) two springs gushing forth –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 67,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 68,
+      "quran_arabic": "فِيهِمَا فَٰكِهَةٌۭ وَنَخْلٌۭ وَرُمَّانٌۭ",
+      "text": "– in both (there are) fruit, and date palms, and pomegranates –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 69,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 70,
+      "quran_arabic": "فِيهِنَّ خَيْرَٰتٌ حِسَانٌۭ",
+      "text": "– in them (there are) good and beautiful (maidens) –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 71,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 72,
+      "quran_arabic": "حُورٌۭ مَّقْصُورَٰتٌۭ فِى ٱلْخِيَامِ",
+      "text": "– dark-eyed (maidens), confined in tents –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 73,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 74,
+      "quran_arabic": "لَمْ يَطْمِثْهُنَّ إِنسٌۭ قَبْلَهُمْ وَلَا جَآنٌّۭ",
+      "text": "– no man or jinn has had sex with them before them –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 75,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 76,
+      "quran_arabic": "مُتَّكِـِٔينَ عَلَىٰ رَفْرَفٍ خُضْرٍۢ وَعَبْقَرِىٍّ حِسَانٍۢ",
+      "text": "– (they are) reclining on green cushions and beautiful carpets –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 77,
+      "quran_arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "text": "Which of the blessings of your Lord will you two call a lie?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 78,
+      "quran_arabic": "تَبَٰرَكَ ٱسْمُ رَبِّكَ ذِى ٱلْجَلَٰلِ وَٱلْإِكْرَامِ",
+      "text": "Blessed (be) the name of your Lord, full of splendor and honor.",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

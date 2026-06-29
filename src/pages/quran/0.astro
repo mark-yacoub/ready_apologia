@@ -1,0 +1,579 @@
+---
+import fs from 'fs';
+import path from 'path';
+import Layout from '../../layouts/Layout.astro';
+import LostCompanionProfile from '../../components/quran/LostCompanionProfile.astro';
+
+import { BUILD_BOOKS } from '../../utils/build_config.js';
+
+
+
+const surah = "0";
+const bookId = `qr-${surah}`;
+const chapter = '1';
+
+const booksMeta = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', 'data', 'books_meta.json'), 'utf8'));
+const currentBookMeta = booksMeta.quran.find(b => b.id === bookId);
+const bookName = currentBookMeta ? currentBookMeta.name : bookId;
+
+import { companionDisplayNameMap, normalizeCompanionFilename, STATIC_RECITATIONS, companionProminence } from '../../utils/quranConstants.js';
+
+let verses = [];
+let quranDataForClient = { verses: [] };
+try {
+  const chapterPath = path.join(process.cwd(), 'src', 'data', 'quran', bookId, `${chapter}.json`);
+  const chapData = JSON.parse(fs.readFileSync(chapterPath, 'utf8'));
+  verses = chapData.verses || [];
+  
+  const qData = verses.map(v => {
+    let variants = [];
+    try {
+      if (v.canonical_variants && v.canonical_variants.length > 0) {
+        variants = v.canonical_variants;
+      }
+    } catch (e) {}
+    
+    let codexVariants = [];
+    try {
+      if (v.competing_variants && v.competing_variants.length > 0) {
+        codexVariants = v.competing_variants.map(cv => ({
+          ...cv,
+          companion_codex: companionDisplayNameMap[cv.companion_codex] || cv.companion_codex
+        }));
+      }
+    } catch (e) {}
+    
+    return {
+      verseNum: v.verse,
+      baseArabic: v.quran_arabic,
+      baseEnglish: v.text,
+      canonicalVariants: variants,
+      codexVariants: codexVariants
+    };
+  });
+  quranDataForClient = { verses: qData };
+} catch (e) {
+  console.error("Error loading chapter data:", e);
+}
+
+const surahIndex = parseInt(surah, 10);
+const isLostSurah = surahIndex === 0;
+
+// Unique companions and recitations across the surah
+const allCompanions = new Set();
+const allRecitations = new Map(); // qari -> Set(rawi)
+
+verses.forEach(v => {
+  if (v.competing_variants) {
+    v.competing_variants.forEach(cv => {
+      if (cv.companion_codex) {
+        const normalized = companionDisplayNameMap[cv.companion_codex] || cv.companion_codex;
+        allCompanions.add(normalized);
+      }
+    });
+  }
+  if (v.canonical_variants) {
+    v.canonical_variants.forEach(cv => {
+      if (!allRecitations.has(cv.qari)) allRecitations.set(cv.qari, new Set());
+      allRecitations.get(cv.qari).add(cv.rawi);
+    });
+  }
+});
+
+
+
+const companionsArray = Array.from(allCompanions).sort((a, b) => {
+  const idxA = companionProminence.indexOf(a);
+  const idxB = companionProminence.indexOf(b);
+  if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+  if (idxA !== -1) return -1;
+  if (idxB !== -1) return 1;
+  return a.localeCompare(b);
+});
+
+// Load companion virtues
+const companionDataMap = {};
+companionsArray.forEach(comp => {
+  try {
+    const filename = normalizeCompanionFilename(comp);
+    const pPath = path.join(process.cwd(), 'src', 'data', 'quran_datasets', `${filename}.json`);
+    if (fs.existsSync(pPath)) {
+      const data = JSON.parse(fs.readFileSync(pPath, 'utf8'));
+      companionDataMap[comp] = {
+        name: data.person || comp,
+        virtues: data.virtues || []
+      };
+    }
+  } catch (e) {
+    console.error("Failed to load virtues for", comp, e);
+  }
+});
+
+const getSurahName = (index) => {
+  const meta = booksMeta.quran.find(b => b.id === `qr-${index}`);
+  return meta ? meta.name : `Surah ${index}`;
+};
+
+const groupedLostVerses = {};
+if (isLostSurah && verses.length > 0) {
+  const allVariants = verses[0].competing_variants || [];
+  allVariants.forEach(variant => {
+    const compKey = companionDisplayNameMap[variant.companion_codex] || variant.companion_codex;
+    if (!groupedLostVerses[compKey]) {
+      groupedLostVerses[compKey] = [];
+    }
+    groupedLostVerses[compKey].push(variant);
+  });
+}
+---
+
+<Layout title={`${bookName} - Ready Apologia`} description="Explore the Lost Verses of the Quran and the Unknown Surahs according to the Codices of the Early Companions of Prophet Muhammad.">
+    <div class="chapter-reader-container" data-quran={JSON.stringify(quranDataForClient)}>
+      <div class="reader-header">
+        <div class="selector-hub" style="position: relative;">
+          <button class="book-selector-btn" id="quran-chapter-dropdown-btn" style="display: flex; align-items: center; gap: 4px;">
+            {surahIndex === 0 ? bookName : `${surahIndex}. ${bookName}`}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div id="quran-chapter-dropdown-menu" style="display: none; position: absolute; top: 100%; left: 0; background: var(--color-surface); border: 1px solid var(--color-outline-variant); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 8px 0; max-height: 400px; overflow-y: auto; z-index: 100; min-width: 250px;">
+            {booksMeta.quran.map(b => (
+              <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${b.id.replace('qr-', '')}`} style={`display: block; padding: 10px 16px; color: var(--color-on-surface); text-decoration: none; font-size: 14px; ${b.id === bookId ? 'font-weight: bold; background: var(--color-surface-container-low);' : ''}`}>
+                {b.id === 'qr-0' ? b.name : `${b.id.replace('qr-', '')}. ${b.name}`}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <div class="quran-toolbar" style="display: flex; gap: 8px; margin-bottom: 24px; align-items: center; flex-wrap: wrap;">
+        <!-- Read As Selection -->
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 13px; font-weight: 600; color: var(--color-on-surface-variant);">Read As:</span>
+          <select id="quran-lens-select" class="quran-lens-select" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-outline-variant); background: var(--color-surface); font-size: 13px; max-width: 250px;">
+            {!isLostSurah && <option value="STANDARD">Standard Hafs (1924)</option>}
+            {isLostSurah && <option value="SHOW_ALL">Show All Codices</option>}
+            <optgroup label="Competing Codices (Companions)">
+              {companionsArray.map(c => (
+                <option value={`codex-${c}`}>{c.replace(/_/g, ' ')}'s Codex</option>
+              ))}
+            </optgroup>
+            {!isLostSurah && STATIC_RECITATIONS.map(rec => (
+              <optgroup label={`${rec.qariName} (Qari)`}>
+                {rec.rawis.map(rawi => (
+                  <option value={`recitation-${rec.qari}-${rawi.id}`}>{rawi.name} (Rawi)</option>
+                ))}
+              </optgroup>
+            ))}
+          </select>
+          
+        </div>
+        
+        <!-- View Mode Toggle -->
+        <div style="display: flex; align-items: center; gap: 4px; margin-left: auto; background: var(--color-surface-container-low); padding: 4px; border-radius: 8px;">
+          <button id="lang-btn-en" style="border: none; background: transparent; padding: 4px 12px; font-size: 12px; font-weight: 600; border-radius: 6px; cursor: pointer; color: var(--color-on-surface);">English</button>
+          <button id="lang-btn-ar" style="border: none; background: var(--color-primary); color: var(--color-on-primary); padding: 4px 12px; font-size: 12px; font-weight: 600; border-radius: 6px; cursor: pointer;">Arabic</button>
+        </div>
+        
+        <!-- Diff Tools -->
+        <div style="position: relative; margin-left: 8px;">
+          <button id="quran-diff-trigger" style="display: flex; align-items: center; gap: 4px; border: 1px solid var(--color-outline-variant); background: var(--color-surface); padding: 6px 12px; border-radius: 6px; font-size: 13px; cursor: pointer; color: var(--color-on-surface);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l-4 4-4-4M10 8v12"/></svg>
+            Compare Variants
+          </button>
+          <div id="quran-diff-popover" style="display: none; position: absolute; top: 100%; right: 0; margin-top: 8px; background: var(--color-surface); border: 1px solid var(--color-outline-variant); box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; padding: 12px; width: 300px; z-index: 50; flex-direction: column; gap: 12px;">
+            <div style="font-size: 13px; font-weight: 600; color: var(--color-on-surface);">Select texts to compare</div>
+            <select id="diff-text-1" style="padding: 6px; border-radius: 4px; border: 1px solid var(--color-outline-variant); font-size: 13px;">
+              {!isLostSurah && <option value="Hafs">Standard Hafs (1924)</option>}
+              <optgroup label="Competing Codices">
+                {companionsArray.map(c => (
+                  <option value={c}>{c.replace(/_/g, ' ')}'s Codex</option>
+                ))}
+              </optgroup>
+              {!isLostSurah && (
+                <optgroup label="Canonical Recitations">
+                  {STATIC_RECITATIONS.map(rec => (
+                    <option value={rec.qari}>{rec.qariName}</option>
+                  ))}
+                </optgroup>
+              )}
+            </select>
+            <div style="text-align: center; color: var(--color-on-surface-variant); font-size: 12px;">VS</div>
+            <select id="diff-text-2" style="padding: 6px; border-radius: 4px; border: 1px solid var(--color-outline-variant); font-size: 13px;">
+              {!isLostSurah && <option value="Hafs">Standard Hafs (1924)</option>}
+              <optgroup label="Competing Codices">
+                {companionsArray.map(c => (
+                  <option value={c}>{c.replace(/_/g, ' ')}'s Codex</option>
+                ))}
+              </optgroup>
+              {!isLostSurah && (
+                <optgroup label="Canonical Recitations">
+                  {STATIC_RECITATIONS.map(rec => (
+                    <option value={rec.qari}>{rec.qariName}</option>
+                  ))}
+                </optgroup>
+              )}
+            </select>
+            <button id="quran-diff-go-btn" style="background: var(--color-primary); color: white; border: none; padding: 8px; border-radius: 6px; font-weight: 600; cursor: pointer;">Show Diff View</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="lost-verses-container" style="display: flex; flex-direction: column; gap: 24px; margin-top: 16px;">
+          <div id="lost-verses-warning-banner" style="background-color: var(--color-surface-container-low); border-left: 4px solid var(--color-secondary); padding: 12px 16px; border-radius: 4px;">
+            <div style="font-weight: bold; color: var(--color-secondary); margin-bottom: 8px;">Lost Verses of the Quran</div>
+            <div style="font-size: 13.5px; color: var(--color-on-surface); line-height: 1.5;">
+              These verses are not present in the Uthmanic text on which all canonical recitations are derived. You can browse them grouped by companion below. Click "Read As [Companion]" on any group to set your active reading lens to that companion.
+            </div>
+          </div>
+          <div class="quick-jump-menu" style="display: flex; flex-wrap: wrap; gap: 8px; padding: 16px; background: var(--color-surface); border: 1px solid var(--color-outline-variant); border-radius: 8px;">
+            <div style="width: 100%; font-size: 12px; font-weight: bold; color: var(--color-on-surface-variant); text-transform: uppercase; margin-bottom: 4px;">Jump to Companion Codex</div>
+            {Object.keys(groupedLostVerses).map((companionName) => (
+              <a href={`#codex-${companionName}`} style="background: var(--color-surface-container-low); color: var(--color-on-surface); padding: 6px 12px; border-radius: 16px; font-size: 13px; text-decoration: none; border: 1px solid var(--color-outline-variant); transition: background-color 0.2s;">
+                {companionName.replace(/_/g, ' ')}
+              </a>
+            ))}
+          </div>
+
+          <div class="lost-verses-grouped-list" style="display: flex; flex-direction: column; gap: 24px;">
+            {Object.entries(groupedLostVerses).filter(([_, v]) => v.length > 0).sort((a,b) => companionsArray.indexOf(a[0]) - companionsArray.indexOf(b[0])).map(([companionName, variants]) => {
+              return <LostCompanionProfile 
+                companionName={companionName} 
+                companionData={companionDataMap[companionName]} 
+                variants={variants} 
+                isStandalone={false} 
+              />;
+            })}
+          </div>
+        </div>
+
+      <div class="pagination-footer">
+        {surahIndex > 0 ? (
+          <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahIndex - 1}`} class="pager-btn">
+            ← {getSurahName(surahIndex - 1)}
+          </a>
+        ) : (
+          <div class="pager-placeholder"></div>
+        )}
+        <div class="pager-indicator">{surahIndex === 0 ? "Lost Verses" : `Surah ${surahIndex}`}</div>
+        {surahIndex < 114 ? (
+          <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahIndex + 1}`} class="pager-btn">
+            {getSurahName(surahIndex + 1)} →
+          </a>
+        ) : (
+          <div class="pager-placeholder"></div>
+        )}
+      </div>
+    </div>
+</Layout>
+
+<script>
+  // Quran specific logic
+  const initQuranLogic = () => {
+    const container = document.querySelector('.chapter-reader-container');
+    if (!container || container.dataset.quranInit) return;
+    container.dataset.quranInit = 'true';
+    
+    // Setup Chapter Dropdown
+    const dropdownBtn = container.querySelector('#quran-chapter-dropdown-btn');
+    const dropdownMenu = container.querySelector('#quran-chapter-dropdown-menu');
+    if (dropdownBtn && dropdownMenu) {
+      dropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      });
+      document.addEventListener('click', (e) => {
+        if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
+          dropdownMenu.style.display = 'none';
+        }
+      });
+    }
+    
+    // Setup Lens Selector (Dropdown Navigation)
+    const lensSelect = container.querySelector('#quran-lens-select');
+    if (lensSelect) {
+      lensSelect.addEventListener('change', (e) => {
+        const val = e.target.value;
+        const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+        if (val === 'SHOW_ALL') {
+          window.location.href = `${base}/quran/0`;
+        } else if (val.startsWith('codex-')) {
+          const comp = val.replace('codex-', '');
+          window.location.href = `${base}/quran/0/${comp}`;
+        }
+      });
+    }
+    
+    // Setup Diff Trigger
+    const diffTrigger = document.getElementById('quran-diff-trigger');
+    const diffPopover = document.getElementById('quran-diff-popover');
+    const diffGoBtn = document.getElementById('quran-diff-go-btn');
+    
+    if (diffTrigger && diffPopover && diffGoBtn) {
+      diffTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        diffPopover.style.display = diffPopover.style.display === 'flex' ? 'none' : 'flex';
+      });
+      
+      // Close popover if clicked outside
+      document.addEventListener('click', (e) => {
+        if (diffPopover.style.display === 'flex' && !diffPopover.contains(e.target) && e.target !== diffTrigger) {
+          diffPopover.style.display = 'none';
+        }
+      });
+      
+      diffGoBtn.addEventListener('click', () => {
+        const t1 = document.getElementById('diff-text-1').value;
+        const t2 = document.getElementById('diff-text-2').value;
+        if (t1 === t2) {
+          alert("Please select two different texts to compare.");
+          return;
+        }
+        
+        const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+        window.location.href = `${base}/quran/diff/${t1}/${t2}`;
+      });
+    }
+
+    // Connect Lost Verses Group Headers to Lens Select
+    document.querySelectorAll('.read-as-lost-companion-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const codex = btn.getAttribute('data-codex');
+        if (lensSelect) {
+          lensSelect.value = codex;
+          lensSelect.dispatchEvent(new Event('change'));
+        }
+      });
+    });
+
+    // Setup companion virtues toggle
+    document.querySelectorAll('.companion-info-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const comp = btn.getAttribute('data-companion');
+        const panel = document.getElementById(`companion-virtues-${comp}`);
+        if (panel) {
+          if (panel.style.display === 'block') {
+            panel.style.display = 'none';
+            btn.textContent = comp.includes('Aisha') ? 'ℹ️ Why she matters' : 'ℹ️ Why he matters';
+          } else {
+            panel.style.display = 'block';
+            panel.open = true; // Ensure it opens when toggled from the button
+            btn.textContent = '📖 Hide Hadiths';
+          }
+        }
+      });
+    });
+    
+    // Setup Language Toggle
+    const btnAr = document.getElementById('lang-btn-ar');
+    const btnEn = document.getElementById('lang-btn-en');
+    
+    if (btnAr && btnEn) {
+      const updateLang = (primary) => {
+        localStorage.setItem('quran-lang-pref', primary);
+        if (primary === 'ar') {
+          btnAr.style.background = 'var(--color-primary)';
+          btnAr.style.color = 'var(--color-on-primary)';
+          btnEn.style.background = 'transparent';
+          btnEn.style.color = 'var(--color-on-surface)';
+          
+          document.querySelectorAll('.lost-verse-item, .companion-virtues-panel').forEach(row => {
+            const ar = row.querySelector('.quran-ar');
+            const en = row.querySelector('.quran-en');
+            const har = row.querySelector('.hadith-ar');
+            const hen = row.querySelector('.hadith-en');
+            if (en) {
+              en.style.fontSize = '16px';
+              en.style.opacity = '0.6';
+            }
+            if (ar) {
+              ar.style.fontSize = '26px';
+              ar.style.opacity = '1';
+            }
+            if (hen) {
+              hen.style.fontSize = '12px';
+              hen.style.opacity = '0.6';
+            }
+            if (har) {
+              har.style.fontSize = '22px';
+              har.style.opacity = '1';
+            }
+          });
+        } else {
+          btnEn.style.background = 'var(--color-primary)';
+          btnEn.style.color = 'var(--color-on-primary)';
+          btnAr.style.background = 'transparent';
+          btnAr.style.color = 'var(--color-on-surface)';
+          
+          document.querySelectorAll('.lost-verse-item, .companion-virtues-panel').forEach(row => {
+            const ar = row.querySelector('.quran-ar');
+            const en = row.querySelector('.quran-en');
+            const har = row.querySelector('.hadith-ar');
+            const hen = row.querySelector('.hadith-en');
+            if (en) {
+              en.style.fontSize = '22px';
+              en.style.opacity = '1';
+            }
+            if (ar) {
+              ar.style.fontSize = '16px';
+              ar.style.opacity = '0.6';
+            }
+            if (hen) {
+              hen.style.fontSize = '18px';
+              hen.style.opacity = '1';
+            }
+            if (har) {
+              har.style.fontSize = '14px';
+              har.style.opacity = '0.6';
+            }
+          });
+        }
+      };
+      
+      btnAr.addEventListener('click', () => updateLang('ar'));
+      btnEn.addEventListener('click', () => updateLang('en'));
+      
+      // Load initial preference
+      const initialLang = localStorage.getItem('quran-lang-pref') || 'en';
+      updateLang(initialLang);
+    }
+
+    // Persist lens selection
+    if (lensSelect) {
+      const savedLens = localStorage.getItem('quran-lens');
+      if (savedLens && savedLens !== lensSelect.value) {
+        lensSelect.value = savedLens;
+        lensSelect.dispatchEvent(new Event('change'));
+      }
+      lensSelect.addEventListener('change', (e) => {
+        const val = e.target.value;
+        localStorage.setItem('quran-lens', val);
+        const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+        if (val === 'SHOW_ALL') {
+          window.location.href = `${base}/quran/0`;
+        } else if (val.startsWith('codex-')) {
+          const comp = val.replace('codex-', '');
+          window.location.href = `${base}/quran/0/${comp}`;
+        }
+      });
+    }
+  };
+  
+  document.addEventListener('astro:page-load', () => {
+    initQuranLogic();
+  });
+</script>
+
+<style>
+  .chapter-reader-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .reader-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .selector-hub {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: -8px; 
+    min-width: 0; 
+    position: relative;
+  }
+  .book-selector-btn {
+    background: none;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--color-primary);
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 800;
+    text-align: left;
+  }
+  .verses-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .verse-row {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .verse-row-content {
+    display: flex;
+    align-items: flex-start;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    margin-left: -10px;
+    margin-right: -10px;
+    transition: all 0.15s ease;
+  }
+  .verse-row:hover .verse-row-content {
+    background-color: var(--color-surface-container-low);
+  }
+  .verse-num {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--color-on-surface-variant);
+    min-width: 16px;
+    text-align: right;
+    margin-top: 4px; 
+    user-select: none;
+    margin-right: 4px;
+  }
+  .verse-badge-tray-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .pagination-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--color-outline-variant);
+    padding-top: 18px;
+    margin-top: 32px;
+    padding-bottom: 18px;
+  }
+  .pager-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background-color: var(--color-surface-container-low);
+    color: var(--color-on-surface);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid var(--color-outline-variant);
+    transition: background-color 0.15s;
+  }
+  .pager-btn:hover {
+    background-color: var(--color-outline-variant);
+  }
+  .pager-indicator {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-on-surface-variant);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .pager-placeholder {
+    width: 70px;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--color-on-surface-variant);
+    font-size: 13px;
+  }
+</style>

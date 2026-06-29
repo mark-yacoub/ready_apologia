@@ -1,0 +1,32 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ قُلْ هُوَ ٱللَّهُ أَحَدٌ",
+      "text": "Say: ‘He is God. One!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "ٱللَّهُ ٱلصَّمَدُ",
+      "text": "God the Eternal!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+      "text": "He has not begotten and was not begotten,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
+      "text": "and He has no equal. None!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

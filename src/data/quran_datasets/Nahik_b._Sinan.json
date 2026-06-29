@@ -1,0 +1,29 @@
+{
+  "person": "Nahik b. Sinan",
+  "virtues": [
+    {
+      "hadith_arabic": "عَنْ شَقِيقٍ، قَالَ جَاءَ رَجُلٌ مِنْ بَنِي بَجِيلَةَ يُقَالُ لَهُ نَهِيكُ بْنُ سِنَانٍ إِلَى عَبْدِ اللَّهِ، فَقَالَ إِنِّي أَقْرَأُ الْمُفَصَّلَ فِي رَكْعَةٍ. فَقَالَ عَبْدُ اللَّهِ هَذًّا كَهَذِّ الشِّعْرِ، إِنِّي لأَعْرِفُ الْقَرَائِنَ الَّتِي كَانَ يَقْرِنُ بَيْنَهُنَّ النَّبِيُّ صلى الله عليه وسلم. ثُمَّ ذَكَرَ عِشْرِينَ سُورَةً مِنَ الْمُفَصَّلِ، سُورَتَيْنِ سُورَتَيْنِ فِي كُلِّ رَكْعَةٍ.",
+      "hadith_english": "Narrated Shaqiq: A man from the tribe of Bani Bajila called Nahik bin Sinan came to `Abdullah and said, \"I recite the Mufassal (suras) in one rak`a.\" `Abdullah said, \"(You recite it) hastily like the recitation of poetry! I know the suras which the Prophet (ﷺ) used to recite together in one rak`a.\" Then `Abdullah mentioned twenty suras from the Mufassal, (saying that the Prophet (ﷺ) used to recite) two suras in each rak`a.",
+      "source_reference": "Sahih Bukhari 5000",
+      "sunnah_url": "https://sunnah.com/bukhari:5000"
+    },
+    {
+      "hadith_arabic": "عَنْ أَبِي وَائِلٍ، قَالَ جَاءَ رَجُلٌ إِلَى عَبْدِ اللَّهِ يُقَالُ لَهُ نَهِيكُ بْنُ سِنَانٍ فَقَالَ يَا أَبَا عَبْدِ الرَّحْمَنِ كَيْفَ تَقْرَأُ هَذَا الْحَرْفَ أَلِفًا تَجِدُهُ أَمْ يَاءً مِنْ مَاءٍ غَيْرِ آسِنٍ أَوْ مِنْ مَاءٍ غَيْرِ يَاسِنٍ قَالَ فَقَالَ عَبْدُ اللَّهِ وَكُلَّ الْقُرْآنِ قَدْ أَحْصَيْتَ غَيْرَ هَذَا قَالَ إِنِّي لأَقْرَأُ الْمُفَصَّلَ فِي رَكْعَةٍ فَقَالَ هَذًّا كَهَذِّ الشِّعْرِ إِنَّ أَقْوَامًا يَقْرَءُونَ الْقُرْآنَ لاَ يُجَاوِزُ تَرَاقِيَهُمْ وَلَكِنْ إِذَا وَقَعَ فِي الْقَلْبِ فَرَسَخَ فِيهِ نَفَعَ...",
+      "hadith_english": "Abu Wa'il reported: A man came to 'Abdullah who was called Nahik b. Sinan. He said: Abu 'Abd al-Rahman, how do you recite this word? Do you read it with an alif or ya: min ma'in ghairi asin or min ma'in ghairi yasin? 'Abdullah said: You have memorized the whole of the Qur'an except this? He said: I recite all the mufassal surahs in one rak'ah. He said: Haste like the haste of poetry. There are people who recite the Qur'an but it does not go down beyond their collar bones... [omitted from the original translation: but when it falls into the heart and takes root therein, it benefits...]",
+      "source_reference": "Sahih Muslim 822 c",
+      "sunnah_url": "https://sunnah.com/muslim:822c"
+    }
+  ],
+  "variants": [
+    {
+      "surah": "47",
+      "ayah": 15,
+      "variant_arabic": "مَثَلُ الْجَنَّةِ الَّتِي وُعِدَ الْمُتَّقُونَ فِيهَا أَنْهَارٌ مِّن مَّاءٍ غَيْرِ يَاسِنٍ وَأَنْهَارٌ مِّن لَّبَنٍ لَّمْ يَتَغَيَّرْ طَعْمُهُ وَأَنْهَارٌ مِّنْ خَمْرٍ لَّذَّةٍ لِّلشَّارِبِينَ وَأَنْهَارٌ مِّنْ عَسَلٍ مُّصَفًّى وَلَهُمْ فِيهَا مِن كُلِّ الثَّمَرَاتِ وَمَغْفِرَةٌ مِّن رَّبِّهِمْ كَمَنْ هُوَ خَالِدٌ فِي النَّارِ وَسُقُوا مَاءً حَمِيمًا فَقَطَّعَ أَمْعَاءَهُمْ",
+      "variant_english": "Is the description of Paradise, which the righteous are promised, wherein are rivers of water unaltered (yasin, a dialectal variant of asin meaning stagnant or altered), rivers of milk the taste of which never changes, rivers of wine delicious to those who drink, and rivers of purified honey, in which they will have from all [kinds of] fruits and forgiveness from their Lord, like [that of] those who abide eternally in the Fire and are given to drink scalding water that will sever their intestines?",
+      "source_reference": "Sahih Muslim 6:336",
+      "hadith_arabic": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَابْنُ، نُمَيْرٍ جَمِيعًا عَنْ وَكِيعٍ، - قَالَ أَبُو بَكْرٍ حَدَّثَنَا وَكِيعٌ، - عَنِ الأَعْمَشِ، عَنْ أَبِي وَائِلٍ، قَالَ جَاءَ رَجُلٌ يُقَالُ لَهُ نَهِيكُ بْنُ سِنَانٍ إِلَى عَبْدِ اللَّهِ فَقَالَ يَا أَبَا عَبْدِ الرَّحْمَنِ كَيْفَ تَقْرَأُ هَذَا الْحَرْفَ أَلِفًا تَجِدُهُ أَمْ يَاءً مِنْ مَاءٍ غَيْرِ آسِنٍ أَوْ مِنْ مَاءٍ غَيْرِ يَاسِنٍ قَالَ فَقَالَ عَبْدُ اللَّهِ وَكُلَّ الْقُرْآنِ قَدْ أَحْصَيْتَ غَيْرَ هَذَا قَالَ إِنِّي لأَقْرَأُ الْمُفَصَّلَ فِي رَكْعَةٍ ‏.‏ فَقَالَ عَبْدُ اللَّهِ هَذًّا كَهَذِّ الشِّعْرِ إِنَّ أَقْوَامًا يَقْرَءُونَ الْقُرْآنَ لاَ يُجَاوِزُ تَرَاقِيَهُمْ وَلَكِنْ إِذَا وَقَعَ فِي الْقَلْبِ فَرَسَخَ فِيهِ نَفَعَ إِنَّ أَفْضَلَ الصَّلاَةِ الرُّكُوعُ وَالسُّجُودُ إِنِّي لأَعْلَمُ النَّظَائِرَ الَّتِي كَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم يَقْرُنُ بَيْنَهُنَّ سُورَتَيْنِ فِي كُلِّ رَكْعَةٍ ‏.‏ ثُمَّ قَامَ عَبْدُ اللَّهِ فَدَخَلَ عَلْقَمَةُ فِي إِثْرِهِ ثُمَّ خَرَجَ فَقَالَ قَدْ أَخْبَرَنِي بِهَا ‏.‏ قَالَ ابْنُ نُمَيْرٍ فِي رِوَايَتِهِ جَاءَ رَجُلٌ مِنْ بَنِي بَجِيلَةَ إِلَى عَبْدِ اللَّهِ وَلَمْ يَقُلْ نَهِيكُ بْنُ سِنَانٍ ‏.‏",
+      "hadith_english": "Abu Wa'il reported that a person named Nabik b. Sinan came to Abdullah (b. Mas'ud) and said:Abu 'Abd al-Rahman, how do you recite this word (alif) or (ya)? Would you read It as: min ma'in ghaira asin or au min ma'in ghaira ghaira yasin. (al-Qur'an, xlvii. 15)? 'Abdullah said: You (seem to) have memorised the whole of the Qur'an except this. He (again) said: I recite all the mufassal surahs in one rak'ah. Upon this 'Abdullah said: (You must have been reciting It) hastily like the recitation of poetry. Verily. there are people who recite the Qur'an, but it does not go down beyond their collar bones. It is (a fact with the Qur'an) that it is beneficial only when it settles in the heart and is rooted deeply in it. The best of (the acts) in prayer are bowing and prostration. I am quite aware of the occasions when the Messenger of Allah (ﷺ) combined together two surahs in every rak'ah. 'Abdullah then stood up and went out with 'Alqama following in his footstep. He said Ibn Numair had told him that the narration was like that:\" A person belonging to Banu Bajila came to 'Abdullah,\" and he did not mention (the name of) Nahik b. Sinan [omitted from the original translation: Then he (Alqamah) came out and said: \"He has informed me of them (the surahs).\"]",
+      "sunnah_url": "https://sunnah.com/muslim/6/336"
+    }
+  ]
+}

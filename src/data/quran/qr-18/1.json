@@ -1,0 +1,1196 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ٱلْحَمْدُ لِلَّهِ ٱلَّذِىٓ أَنزَلَ عَلَىٰ عَبْدِهِ ٱلْكِتَٰبَ وَلَمْ يَجْعَل لَّهُۥ عِوَجَا ۜ",
+      "text": "Praise (be) to God, who has sent down on His servant the Book! He has not made in it any crookedness.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "قَيِّمًۭا لِّيُنذِرَ بَأْسًۭا شَدِيدًۭا مِّن لَّدُنْهُ وَيُبَشِّرَ ٱلْمُؤْمِنِينَ ٱلَّذِينَ يَعْمَلُونَ ٱلصَّٰلِحَٰتِ أَنَّ لَهُمْ أَجْرًا حَسَنًۭا",
+      "text": "(He has made it) right: to warn of harsh violence from Himself, and to give good news to the believers who do righteous deeds, that for them (there is) a good reward",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "مَّٰكِثِينَ فِيهِ أَبَدًۭا",
+      "text": "in which they will remain forever,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "وَيُنذِرَ ٱلَّذِينَ قَالُوا۟ ٱتَّخَذَ ٱللَّهُ وَلَدًۭا",
+      "text": "and to warn those who have said, ‘God has taken a son.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "مَّا لَهُم بِهِۦ مِنْ عِلْمٍۢ وَلَا لِءَابَآئِهِمْ ۚ كَبُرَتْ كَلِمَةًۭ تَخْرُجُ مِنْ أَفْوَٰهِهِمْ ۚ إِن يَقُولُونَ إِلَّا كَذِبًۭا",
+      "text": "They have no knowledge about it, nor (did) their fathers. Monstrous is the word (that) comes out of their mouths! They say nothing but a lie.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "فَلَعَلَّكَ بَٰخِعٌۭ نَّفْسَكَ عَلَىٰٓ ءَاثَٰرِهِمْ إِن لَّمْ يُؤْمِنُوا۟ بِهَٰذَا ٱلْحَدِيثِ أَسَفًا",
+      "text": "Perhaps you are going to destroy yourself by following after them, if they do not believe in this proclamation.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "إِنَّا جَعَلْنَا مَا عَلَى ٱلْأَرْضِ زِينَةًۭ لَّهَا لِنَبْلُوَهُمْ أَيُّهُمْ أَحْسَنُ عَمَلًۭا",
+      "text": "Surely We have made what is on the earth a splendor for it, so that We may test them (to see) which of them is best in deed.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "وَإِنَّا لَجَٰعِلُونَ مَا عَلَيْهَا صَعِيدًۭا جُرُزًا",
+      "text": "And surely We shall make what is on it barren soil.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "أَمْ حَسِبْتَ أَنَّ أَصْحَٰبَ ٱلْكَهْفِ وَٱلرَّقِيمِ كَانُوا۟ مِنْ ءَايَٰتِنَا عَجَبًا",
+      "text": "Or did you think that the companions of the cave and al-Raqīm were an amazing thing among Our signs?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "إِذْ أَوَى ٱلْفِتْيَةُ إِلَى ٱلْكَهْفِ فَقَالُوا۟ رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحْمَةًۭ وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًۭا",
+      "text": "(Remember) when the young men took refuge in the cave, and said, ‘Our Lord, grant us mercy from Yourself, and furnish the right (course) for us in our situation.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "فَضَرَبْنَا عَلَىٰٓ ءَاذَانِهِمْ فِى ٱلْكَهْفِ سِنِينَ عَدَدًۭا",
+      "text": "So We sealed up their ears in the cave for a number of years,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "ثُمَّ بَعَثْنَٰهُمْ لِنَعْلَمَ أَىُّ ٱلْحِزْبَيْنِ أَحْصَىٰ لِمَا لَبِثُوٓا۟ أَمَدًۭا",
+      "text": "and then We raised them up (again), so that We might know which of the two factions would better count (the length of) time (they had) remained (there).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "نَّحْنُ نَقُصُّ عَلَيْكَ نَبَأَهُم بِٱلْحَقِّ ۚ إِنَّهُمْ فِتْيَةٌ ءَامَنُوا۟ بِرَبِّهِمْ وَزِدْنَٰهُمْ هُدًۭى",
+      "text": "We shall recount to you their story in truth: Surely they were young men who believed in their Lord, and We increased them in guidance.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "وَرَبَطْنَا عَلَىٰ قُلُوبِهِمْ إِذْ قَامُوا۟ فَقَالُوا۟ رَبُّنَا رَبُّ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ لَن نَّدْعُوَا۟ مِن دُونِهِۦٓ إِلَٰهًۭا ۖ لَّقَدْ قُلْنَآ إِذًۭا شَطَطًا",
+      "text": "We strengthened their hearts, when they stood up and said, ‘Our Lord is the Lord of the heavens and the earth. We do not call on any god other than Him. Certainly we would then have spoken an outrageous thing.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "هَٰٓؤُلَآءِ قَوْمُنَا ٱتَّخَذُوا۟ مِن دُونِهِۦٓ ءَالِهَةًۭ ۖ لَّوْلَا يَأْتُونَ عَلَيْهِم بِسُلْطَٰنٍۭ بَيِّنٍۢ ۖ فَمَنْ أَظْلَمُ مِمَّنِ ٱفْتَرَىٰ عَلَى ٱللَّهِ كَذِبًۭا",
+      "text": "These people of ours have taken gods other than Him. If only they would bring some clear authority concerning them! Who is more evil than the one who forges a lie against God?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "وَإِذِ ٱعْتَزَلْتُمُوهُمْ وَمَا يَعْبُدُونَ إِلَّا ٱللَّهَ فَأْوُۥٓا۟ إِلَى ٱلْكَهْفِ يَنشُرْ لَكُمْ رَبُّكُم مِّن رَّحْمَتِهِۦ وَيُهَيِّئْ لَكُم مِّنْ أَمْرِكُم مِّرْفَقًۭا",
+      "text": "When you have withdrawn from them and what they serve instead of God, take refuge in the cave. Your Lord will display some of His mercy to you, and will furnish some relief for you in your situation.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "۞ وَتَرَى ٱلشَّمْسَ إِذَا طَلَعَت تَّزَٰوَرُ عَن كَهْفِهِمْ ذَاتَ ٱلْيَمِينِ وَإِذَا غَرَبَت تَّقْرِضُهُمْ ذَاتَ ٱلشِّمَالِ وَهُمْ فِى فَجْوَةٍۢ مِّنْهُ ۚ ذَٰلِكَ مِنْ ءَايَٰتِ ٱللَّهِ ۗ مَن يَهْدِ ٱللَّهُ فَهُوَ ٱلْمُهْتَدِ ۖ وَمَن يُضْلِلْ فَلَن تَجِدَ لَهُۥ وَلِيًّۭا مُّرْشِدًۭا",
+      "text": "And you (would) see the sun when it rose, inclining from their cave toward the right, and when it set, passing them by on the left, while they were in the open part of it. That was one of the signs of God. Whoever God guides is the (rightly) guided one, and whoever He leads astray – you will not find for him an ally guiding (him).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 18,
+      "quran_arabic": "وَتَحْسَبُهُمْ أَيْقَاظًۭا وَهُمْ رُقُودٌۭ ۚ وَنُقَلِّبُهُمْ ذَاتَ ٱلْيَمِينِ وَذَاتَ ٱلشِّمَالِ ۖ وَكَلْبُهُم بَٰسِطٌۭ ذِرَاعَيْهِ بِٱلْوَصِيدِ ۚ لَوِ ٱطَّلَعْتَ عَلَيْهِمْ لَوَلَّيْتَ مِنْهُمْ فِرَارًۭا وَلَمُلِئْتَ مِنْهُمْ رُعْبًۭا",
+      "text": "And you (would) think them awake, even though they were asleep, and We were turning them (now) to the right and (now) to the left, while their dog (lay) stretched out (with) its front paws at the door (of the cave). If you (had) observed them, you would indeed have turned away from them in flight, and indeed been filled (with) dread because of them.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 19,
+      "quran_arabic": "وَكَذَٰلِكَ بَعَثْنَٰهُمْ لِيَتَسَآءَلُوا۟ بَيْنَهُمْ ۚ قَالَ قَآئِلٌۭ مِّنْهُمْ كَمْ لَبِثْتُمْ ۖ قَالُوا۟ لَبِثْنَا يَوْمًا أَوْ بَعْضَ يَوْمٍۢ ۚ قَالُوا۟ رَبُّكُمْ أَعْلَمُ بِمَا لَبِثْتُمْ فَٱبْعَثُوٓا۟ أَحَدَكُم بِوَرِقِكُمْ هَٰذِهِۦٓ إِلَى ٱلْمَدِينَةِ فَلْيَنظُرْ أَيُّهَآ أَزْكَىٰ طَعَامًۭا فَلْيَأْتِكُم بِرِزْقٍۢ مِّنْهُ وَلْيَتَلَطَّفْ وَلَا يُشْعِرَنَّ بِكُمْ أَحَدًا",
+      "text": "So We raised them up (again) that they might ask questions among themselves. A speaker among them said, ‘How long have you remained (here)?’ Some said, ‘We have (only) remained (here) a day, or part of a day.’ Others said, ‘Your Lord knows how long you have remained (here). So send one of you with this paper (money) of yours to the city, and let him see which (part) of it (has the) purest food, and let him bring you a supply of it. But let him be astute, and let no one realize (who) you (are).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 20,
+      "quran_arabic": "إِنَّهُمْ إِن يَظْهَرُوا۟ عَلَيْكُمْ يَرْجُمُوكُمْ أَوْ يُعِيدُوكُمْ فِى مِلَّتِهِمْ وَلَن تُفْلِحُوٓا۟ إِذًا أَبَدًۭا",
+      "text": "Surely they – if they become aware of you – they will stone you, or make you return to their creed, and then you will never prosper.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 21,
+      "quran_arabic": "وَكَذَٰلِكَ أَعْثَرْنَا عَلَيْهِمْ لِيَعْلَمُوٓا۟ أَنَّ وَعْدَ ٱللَّهِ حَقٌّۭ وَأَنَّ ٱلسَّاعَةَ لَا رَيْبَ فِيهَآ إِذْ يَتَنَٰزَعُونَ بَيْنَهُمْ أَمْرَهُمْ ۖ فَقَالُوا۟ ٱبْنُوا۟ عَلَيْهِم بُنْيَٰنًۭا ۖ رَّبُّهُمْ أَعْلَمُ بِهِمْ ۚ قَالَ ٱلَّذِينَ غَلَبُوا۟ عَلَىٰٓ أَمْرِهِمْ لَنَتَّخِذَنَّ عَلَيْهِم مَّسْجِدًۭا",
+      "text": "So We caused (the people of the city) to stumble upon them, in order that they might know that the promise of God is true, and that the Hour – (there is) no doubt about it. When they argued among themselves about their situation, they said, ‘Build over them a building. Their Lord knows about them.’ Those who prevailed over their situation said, ‘We shall indeed take (to building) a place of worship over them.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 22,
+      "quran_arabic": "سَيَقُولُونَ ثَلَٰثَةٌۭ رَّابِعُهُمْ كَلْبُهُمْ وَيَقُولُونَ خَمْسَةٌۭ سَادِسُهُمْ كَلْبُهُمْ رَجْمًۢا بِٱلْغَيْبِ ۖ وَيَقُولُونَ سَبْعَةٌۭ وَثَامِنُهُمْ كَلْبُهُمْ ۚ قُل رَّبِّىٓ أَعْلَمُ بِعِدَّتِهِم مَّا يَعْلَمُهُمْ إِلَّا قَلِيلٌۭ ۗ فَلَا تُمَارِ فِيهِمْ إِلَّا مِرَآءًۭ ظَٰهِرًۭا وَلَا تَسْتَفْتِ فِيهِم مِّنْهُمْ أَحَدًۭا",
+      "text": "Some say, ‘(There were) three, the fourth of them was their dog.’ But others say, ‘(There were) five, the sixth of them was their dog’ – guessing about what is unknown. Still others say, ‘(There were) seven, the eighth of them was their dog.’ Say: ‘My Lord knows about their number. No one knows (about) them except a few.’ So do not dispute about them, except (on) an obvious point, and do not ask for a pronouncement about them from any of them.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 23,
+      "quran_arabic": "وَلَا تَقُولَنَّ لِشَا۟ىْءٍ إِنِّى فَاعِلٌۭ ذَٰلِكَ غَدًا",
+      "text": "And do not say of anything, ‘Surely I am going to do that tomorrow,’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 24,
+      "quran_arabic": "إِلَّآ أَن يَشَآءَ ٱللَّهُ ۚ وَٱذْكُر رَّبَّكَ إِذَا نَسِيتَ وَقُلْ عَسَىٰٓ أَن يَهْدِيَنِ رَبِّى لِأَقْرَبَ مِنْ هَٰذَا رَشَدًۭا",
+      "text": "except (with the proviso): ‘If God pleases.’ And remember your Lord, when you forget, and say, ‘It may be that my Lord will guide me to something nearer the right (way) than this.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 25,
+      "quran_arabic": "وَلَبِثُوا۟ فِى كَهْفِهِمْ ثَلَٰثَ مِا۟ئَةٍۢ سِنِينَ وَٱزْدَادُوا۟ تِسْعًۭا",
+      "text": "They remained in their cave for three hundred years and (some) add nine (more).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 26,
+      "quran_arabic": "قُلِ ٱللَّهُ أَعْلَمُ بِمَا لَبِثُوا۟ ۖ لَهُۥ غَيْبُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۖ أَبْصِرْ بِهِۦ وَأَسْمِعْ ۚ مَا لَهُم مِّن دُونِهِۦ مِن وَلِىٍّۢ وَلَا يُشْرِكُ فِى حُكْمِهِۦٓ أَحَدًۭا",
+      "text": "Say: ‘God knows about how long they remained (there). To Him (belongs) the unseen of the heavens and the earth. How well He sees and hears! They have no ally other than Him, and He does not associate anyone in His judgment.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 27,
+      "quran_arabic": "وَٱتْلُ مَآ أُوحِىَ إِلَيْكَ مِن كِتَابِ رَبِّكَ ۖ لَا مُبَدِّلَ لِكَلِمَٰتِهِۦ وَلَن تَجِدَ مِن دُونِهِۦ مُلْتَحَدًۭا",
+      "text": "Recite what you have been inspired (with) of the Book of your Lord. No one can change His words, and you will find no refuge other than Him.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 28,
+      "quran_arabic": "وَٱصْبِرْ نَفْسَكَ مَعَ ٱلَّذِينَ يَدْعُونَ رَبَّهُم بِٱلْغَدَوٰةِ وَٱلْعَشِىِّ يُرِيدُونَ وَجْهَهُۥ ۖ وَلَا تَعْدُ عَيْنَاكَ عَنْهُمْ تُرِيدُ زِينَةَ ٱلْحَيَوٰةِ ٱلدُّنْيَا ۖ وَلَا تُطِعْ مَنْ أَغْفَلْنَا قَلْبَهُۥ عَن ذِكْرِنَا وَٱتَّبَعَ هَوَىٰهُ وَكَانَ أَمْرُهُۥ فُرُطًۭا",
+      "text": "Be patient within yourself with those who call on their Lord in the morning and the evening, desiring His face, and do not let your eyes turn away from them, desiring the (passing) splendor of this present life. Do not obey (anyone) whose heart We have made oblivious of Our remembrance, and (who only) follows his desire and whose concern is (only) excess.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 29,
+      "quran_arabic": "وَقُلِ ٱلْحَقُّ مِن رَّبِّكُمْ ۖ فَمَن شَآءَ فَلْيُؤْمِن وَمَن شَآءَ فَلْيَكْفُرْ ۚ إِنَّآ أَعْتَدْنَا لِلظَّٰلِمِينَ نَارًا أَحَاطَ بِهِمْ سُرَادِقُهَا ۚ وَإِن يَسْتَغِيثُوا۟ يُغَاثُوا۟ بِمَآءٍۢ كَٱلْمُهْلِ يَشْوِى ٱلْوُجُوهَ ۚ بِئْسَ ٱلشَّرَابُ وَسَآءَتْ مُرْتَفَقًا",
+      "text": "Say: ‘The truth is from your Lord. Whoever pleases, let him believe, and whoever pleases, let him disbelieve.’ Surely We have prepared a Fire for the evildoers – its walls will encompass them. If they call for help, they will be helped with water like molten metal (which) will scald their faces. Evil is the drink and evil the resting place!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 30,
+      "quran_arabic": "إِنَّ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ إِنَّا لَا نُضِيعُ أَجْرَ مَنْ أَحْسَنَ عَمَلًا",
+      "text": "Surely those who believe and do righteous deeds – surely We do not allow the reward of anyone who does a good deed to go to waste.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 31,
+      "quran_arabic": "أُو۟لَٰٓئِكَ لَهُمْ جَنَّٰتُ عَدْنٍۢ تَجْرِى مِن تَحْتِهِمُ ٱلْأَنْهَٰرُ يُحَلَّوْنَ فِيهَا مِنْ أَسَاوِرَ مِن ذَهَبٍۢ وَيَلْبَسُونَ ثِيَابًا خُضْرًۭا مِّن سُندُسٍۢ وَإِسْتَبْرَقٍۢ مُّتَّكِـِٔينَ فِيهَا عَلَى ٱلْأَرَآئِكِ ۚ نِعْمَ ٱلثَّوَابُ وَحَسُنَتْ مُرْتَفَقًۭا",
+      "text": "Those – for them (there are) Gardens of Eden through which rivers flow. There they will be adorned with bracelets of gold, and they will wear green clothes of silk and brocade, reclining there on couches. Excellent is the reward, and good the resting place!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 32,
+      "quran_arabic": "۞ وَٱضْرِبْ لَهُم مَّثَلًۭا رَّجُلَيْنِ جَعَلْنَا لِأَحَدِهِمَا جَنَّتَيْنِ مِنْ أَعْنَٰبٍۢ وَحَفَفْنَٰهُمَا بِنَخْلٍۢ وَجَعَلْنَا بَيْنَهُمَا زَرْعًۭا",
+      "text": "Strike for them a parable of two men: We made for one of them two gardens of grapes, and surrounded both with date palms, and placed between them (a field of) crops.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 33,
+      "quran_arabic": "كِلْتَا ٱلْجَنَّتَيْنِ ءَاتَتْ أُكُلَهَا وَلَمْ تَظْلِم مِّنْهُ شَيْـًۭٔا ۚ وَفَجَّرْنَا خِلَٰلَهُمَا نَهَرًۭا",
+      "text": "Each of the two gardens produced its fruit and did not fail in any way. And We caused a river to gush forth between them.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 34,
+      "quran_arabic": "وَكَانَ لَهُۥ ثَمَرٌۭ فَقَالَ لِصَٰحِبِهِۦ وَهُوَ يُحَاوِرُهُۥٓ أَنَا۠ أَكْثَرُ مِنكَ مَالًۭا وَأَعَزُّ نَفَرًۭا",
+      "text": "And he had fruit. So he said to his companion, while he was talking with him, ‘I am greater than you in wealth, and mightier in family.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 35,
+      "quran_arabic": "وَدَخَلَ جَنَّتَهُۥ وَهُوَ ظَالِمٌۭ لِّنَفْسِهِۦ قَالَ مَآ أَظُنُّ أَن تَبِيدَ هَٰذِهِۦٓ أَبَدًۭا",
+      "text": "And he entered his garden, doing himself evil, (for) he said, ‘I do not think that this will ever perish,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 36,
+      "quran_arabic": "وَمَآ أَظُنُّ ٱلسَّاعَةَ قَآئِمَةًۭ وَلَئِن رُّدِدتُّ إِلَىٰ رَبِّى لَأَجِدَنَّ خَيْرًۭا مِّنْهَا مُنقَلَبًۭا",
+      "text": "nor do I think the Hour is coming. If indeed I am returned to my Lord, I shall indeed find a better (place of) return than this.’",
+      "canonical_variants": [
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَمَا أَظُنُّ ٱلسَّاعَةَ قَآئِمَةٗ وَلَئِن رُّدِدتُّ إِلَىٰ رَبِّي لَأَجِدَنَّ خَيۡرٗا مِّنۡهُمَا مُنقَلَبٗا",
+          "english": "find something better than them both as a destination",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَمَا أَظُنُّ ٱلسَّاعَةَ قَآئِمَةٗ وَلَئِن رُّدِدتُّ إِلَىٰ رَبِّي لَأَجِدَنَّ خَيۡرٗا مِّنۡهُمَا مُنقَلَبٗا",
+          "english": "find something better than them both as a destination",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 37,
+      "quran_arabic": "قَالَ لَهُۥ صَاحِبُهُۥ وَهُوَ يُحَاوِرُهُۥٓ أَكَفَرْتَ بِٱلَّذِى خَلَقَكَ مِن تُرَابٍۢ ثُمَّ مِن نُّطْفَةٍۢ ثُمَّ سَوَّىٰكَ رَجُلًۭا",
+      "text": "His companion said to him, while he was talking with him, ‘Do you disbelieve in Him who created you from dust, then from a drop, (and) then fashioned you as a man?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 38,
+      "quran_arabic": "لَّٰكِنَّا۠ هُوَ ٱللَّهُ رَبِّى وَلَآ أُشْرِكُ بِرَبِّىٓ أَحَدًۭا",
+      "text": "But as for us, He is God, my Lord, and I do not associate anyone with my Lord.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 39,
+      "quran_arabic": "وَلَوْلَآ إِذْ دَخَلْتَ جَنَّتَكَ قُلْتَ مَا شَآءَ ٱللَّهُ لَا قُوَّةَ إِلَّا بِٱللَّهِ ۚ إِن تَرَنِ أَنَا۠ أَقَلَّ مِنكَ مَالًۭا وَوَلَدًۭا",
+      "text": "Why did you not say, when you entered your garden, “What God pleases,” (for there is) no power except in God? If you see me as inferior to you in wealth and children,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 40,
+      "quran_arabic": "فَعَسَىٰ رَبِّىٓ أَن يُؤْتِيَنِ خَيْرًۭا مِّن جَنَّتِكَ وَيُرْسِلَ عَلَيْهَا حُسْبَانًۭا مِّنَ ٱلسَّمَآءِ فَتُصْبِحَ صَعِيدًۭا زَلَقًا",
+      "text": "it may be that my Lord will give me (something) better than your garden, and send on it a reckoning from the sky, so that it becomes slippery soil,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 41,
+      "quran_arabic": "أَوْ يُصْبِحَ مَآؤُهَا غَوْرًۭا فَلَن تَسْتَطِيعَ لَهُۥ طَلَبًۭا",
+      "text": "or its water sinks (into the earth), so that you will not be able to find it.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 42,
+      "quran_arabic": "وَأُحِيطَ بِثَمَرِهِۦ فَأَصْبَحَ يُقَلِّبُ كَفَّيْهِ عَلَىٰ مَآ أَنفَقَ فِيهَا وَهِىَ خَاوِيَةٌ عَلَىٰ عُرُوشِهَا وَيَقُولُ يَٰلَيْتَنِى لَمْ أُشْرِكْ بِرَبِّىٓ أَحَدًۭا",
+      "text": "And (all) his fruit was overwhelmed, and in the morning he began wringing his hands over what he had spent on it, (for) it had collapsed on its trellises, and he said, ‘I wish I had not associated anyone with my Lord!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 43,
+      "quran_arabic": "وَلَمْ تَكُن لَّهُۥ فِئَةٌۭ يَنصُرُونَهُۥ مِن دُونِ ٱللَّهِ وَمَا كَانَ مُنتَصِرًا",
+      "text": "But there was no cohort to help him, other than God, and he was helpless.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 44,
+      "quran_arabic": "هُنَالِكَ ٱلْوَلَٰيَةُ لِلَّهِ ٱلْحَقِّ ۚ هُوَ خَيْرٌۭ ثَوَابًۭا وَخَيْرٌ عُقْبًۭا",
+      "text": "In such a case protection (belongs only) to God, the True One. He is best in reward, and best in final outcome.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 45,
+      "quran_arabic": "وَٱضْرِبْ لَهُم مَّثَلَ ٱلْحَيَوٰةِ ٱلدُّنْيَا كَمَآءٍ أَنزَلْنَٰهُ مِنَ ٱلسَّمَآءِ فَٱخْتَلَطَ بِهِۦ نَبَاتُ ٱلْأَرْضِ فَأَصْبَحَ هَشِيمًۭا تَذْرُوهُ ٱلرِّيَٰحُ ۗ وَكَانَ ٱللَّهُ عَلَىٰ كُلِّ شَىْءٍۢ مُّقْتَدِرًا",
+      "text": "Strike for them a parable of this present life: (It is) like water which We send down from the sky, and the vegetation of the earth mingles with it, and it becomes stubble which the winds scatter. God is powerful over everything.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 46,
+      "quran_arabic": "ٱلْمَالُ وَٱلْبَنُونَ زِينَةُ ٱلْحَيَوٰةِ ٱلدُّنْيَا ۖ وَٱلْبَٰقِيَٰتُ ٱلصَّٰلِحَٰتُ خَيْرٌ عِندَ رَبِّكَ ثَوَابًۭا وَخَيْرٌ أَمَلًۭا",
+      "text": "Wealth and sons are the (passing) splendor of this present life, but the things that endure – righteous deeds – are better in reward with your Lord, and better in hope.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 47,
+      "quran_arabic": "وَيَوْمَ نُسَيِّرُ ٱلْجِبَالَ وَتَرَى ٱلْأَرْضَ بَارِزَةًۭ وَحَشَرْنَٰهُمْ فَلَمْ نُغَادِرْ مِنْهُمْ أَحَدًۭا",
+      "text": "On the Day when We shall cause the mountains to move, and you see the earth coming forth, and We gather them so that We do not leave any of them behind,",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "وَيَوۡمَ تُسَيَّرُ اُ۬لۡجِبَالُ وَتَرَى اَ۬لۡأَرۡضَ بَارِزَةٗ وَحَشَرۡنَٰهُمۡ فَلَمۡ نُغَادِرۡ مِنۡهُمۡ أَحَدٗا",
+          "english": "And on the day when the mountains are set in motion",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "وَيَوۡمَ تُسَيَّرُ اُ۬لۡجِبَالُ وَتَر۪ي  اَ۬لۡأَرۡضَ بَارِزَةٗ وَحَشَرۡنَٰهُمۡ فَلَمۡ نُغَادِرۡ مِنۡهُمۡ أَحَدٗا",
+          "english": "And on the day when the mountains are set in motion",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَيَوۡمَ تُسَيَّرُ ٱلۡجِبَالُ وَتَرَى ٱلۡأَرۡضَ بَارِزَةٗ وَحَشَرۡنَٰهُمُۥ فَلَمۡ نُغَادِرۡ مِنۡهُمُۥ أَحَدٗا",
+          "english": "And on the day when the mountains are set in motion",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَيَوۡمَ تُسَيَّرُ ٱلۡجِبَالُ وَتَرَى ٱلۡأَرۡضَ بَارِزَةٗ وَحَشَرۡنَٰهُمُۥ فَلَمۡ نُغَادِرۡ مِنۡهُمُۥ أَحَدٗا",
+          "english": "And on the day when the mountains are set in motion",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 48,
+      "quran_arabic": "وَعُرِضُوا۟ عَلَىٰ رَبِّكَ صَفًّۭا لَّقَدْ جِئْتُمُونَا كَمَا خَلَقْنَٰكُمْ أَوَّلَ مَرَّةٍۭ ۚ بَلْ زَعَمْتُمْ أَلَّن نَّجْعَلَ لَكُم مَّوْعِدًۭا",
+      "text": "and they are presented before your Lord in lines: ‘Certainly you have come to Us as We created you the first time. Yet you claimed that We had not set an appointment for you!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 49,
+      "quran_arabic": "وَوُضِعَ ٱلْكِتَٰبُ فَتَرَى ٱلْمُجْرِمِينَ مُشْفِقِينَ مِمَّا فِيهِ وَيَقُولُونَ يَٰوَيْلَتَنَا مَالِ هَٰذَا ٱلْكِتَٰبِ لَا يُغَادِرُ صَغِيرَةًۭ وَلَا كَبِيرَةً إِلَّآ أَحْصَىٰهَا ۚ وَوَجَدُوا۟ مَا عَمِلُوا۟ حَاضِرًۭا ۗ وَلَا يَظْلِمُ رَبُّكَ أَحَدًۭا",
+      "text": "And the Book will be laid down, and you will see the sinners apprehensive because of what is in it, and they will say, ‘Woe to us! What (kind of) Book is this? It omits nothing small or great, but it has counted it?’ And they will find what they have done presented (to them), and your Lord will not do anyone evil.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 50,
+      "quran_arabic": "وَإِذْ قُلْنَا لِلْمَلَٰٓئِكَةِ ٱسْجُدُوا۟ لِءَادَمَ فَسَجَدُوٓا۟ إِلَّآ إِبْلِيسَ كَانَ مِنَ ٱلْجِنِّ فَفَسَقَ عَنْ أَمْرِ رَبِّهِۦٓ ۗ أَفَتَتَّخِذُونَهُۥ وَذُرِّيَّتَهُۥٓ أَوْلِيَآءَ مِن دُونِى وَهُمْ لَكُمْ عَدُوٌّۢ ۚ بِئْسَ لِلظَّٰلِمِينَ بَدَلًۭا",
+      "text": "(Remember) when We said to the angels: ‘Prostrate yourselves before Adam,’ and they prostrated themselves, except Iblīs. He was one of the jinn, and acted wickedly (against) the command of his Lord. Do you take him and his descendants as allies instead of Me, when they are your enemy? Evil is the exchange for the evildoers!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 51,
+      "quran_arabic": "۞ مَّآ أَشْهَدتُّهُمْ خَلْقَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ وَلَا خَلْقَ أَنفُسِهِمْ وَمَا كُنتُ مُتَّخِذَ ٱلْمُضِلِّينَ عَضُدًۭا",
+      "text": "I did not make them witnesses of the creation of the heavens and the earth, nor of the creation of themselves. I am not one to take those who lead (others) astray (for) support.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 52,
+      "quran_arabic": "وَيَوْمَ يَقُولُ نَادُوا۟ شُرَكَآءِىَ ٱلَّذِينَ زَعَمْتُمْ فَدَعَوْهُمْ فَلَمْ يَسْتَجِيبُوا۟ لَهُمْ وَجَعَلْنَا بَيْنَهُم مَّوْبِقًۭا",
+      "text": "On the Day when He will say, ‘Call those who you claimed were My associates,’ they will call them, but they will not respond to them – (for) We have set between them a place of destruction.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 53,
+      "quran_arabic": "وَرَءَا ٱلْمُجْرِمُونَ ٱلنَّارَ فَظَنُّوٓا۟ أَنَّهُم مُّوَاقِعُوهَا وَلَمْ يَجِدُوا۟ عَنْهَا مَصْرِفًۭا",
+      "text": "The sinners will see the Fire and think that they are about to fall into it, but they will find no escape from it.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 54,
+      "quran_arabic": "وَلَقَدْ صَرَّفْنَا فِى هَٰذَا ٱلْقُرْءَانِ لِلنَّاسِ مِن كُلِّ مَثَلٍۢ ۚ وَكَانَ ٱلْإِنسَٰنُ أَكْثَرَ شَىْءٍۢ جَدَلًۭا",
+      "text": "Certainly We have varied (the signs) for the people in this Qur’ān by means of every (kind of) parable, yet the people remain contentious for the most part.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 55,
+      "quran_arabic": "وَمَا مَنَعَ ٱلنَّاسَ أَن يُؤْمِنُوٓا۟ إِذْ جَآءَهُمُ ٱلْهُدَىٰ وَيَسْتَغْفِرُوا۟ رَبَّهُمْ إِلَّآ أَن تَأْتِيَهُمْ سُنَّةُ ٱلْأَوَّلِينَ أَوْ يَأْتِيَهُمُ ٱلْعَذَابُ قُبُلًۭا",
+      "text": "Nothing prevented the people from believing, when the guidance came to them, and from asking forgiveness from their Lord, except that the customary way of those of old should come upon them, or the punishment come upon them head on.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "وَمَا مَنَعَ اَ۬لنَّاسَ أَن يُؤۡمِنُوٓاْ إِذ جَّآءَهُمُ اُ۬لۡهُدَىٰ وَيَسۡتَغۡفِرُواْ رَبَّهُمۡ إِلَّآ أَن تَأۡتِيَهُمۡ سُنَّةُ اُ۬لۡأَوَّلِينَ أَوۡ يَأۡتِيَهُمُ اُ۬لۡعَذَابُ قِبَلٗا",
+          "english": "or to have the punishment come upon them face to face",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "وَمَا مَنَعَ اَ۬لنَّاسَ أَن يُومِنُواْ  إِذ جَّآءَهُمُ اُ۬لۡهُدَىٰ وَيَسۡتَغۡفِرُواْ رَبَّهُمۡ إِلَّا أَن تَاتِيَهُمۡ سُنَّةُ  اُ۬لۡأَوَّلِينَ أَوۡ يَاتِيَهُمُ اُ۬لۡعَذَابُ قِبَلٗا",
+          "english": "or to have the punishment come upon them face to face",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَمَا مَنَعَ ٱلنَّاسَ أَن يُؤۡمِنُواْ إِذۡ جَآءَهُمُ ٱلۡهُدَىٰ وَيَسۡتَغۡفِرُواْ رَبَّهُمُۥ إِلَّا أَن تَأۡتِيَهُمُۥ سُنَّةُ ٱلۡأَوَّلِينَ أَوۡ يَأۡتِيَهُمُ ٱلۡعَذَابُ قِبَلٗا",
+          "english": "or to have the punishment come upon them face to face",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَمَا مَنَعَ ٱلنَّاسَ أَن يُؤۡمِنُواْ إِذۡ جَآءَهُمُ ٱلۡهُدَىٰ وَيَسۡتَغۡفِرُواْ رَبَّهُمُۥ إِلَّا أَن تَأۡتِيَهُمُۥ سُنَّةُ ٱلۡأَوَّلِينَ أَوۡ يَأۡتِيَهُمُ ٱلۡعَذَابُ قِبَلٗا",
+          "english": "or to have the punishment come upon them face to face",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "وَمَا مَنَعَ اَ۬لنَّاسَ أَنْ يُّؤْمِنُواْ إِذْ جَآءَهُمُ اُ۬لْهُدَىٰ وَيَسْتَغْفِرُواْ رَبَّهُمْ إِلَّا أَن تَأْتِيَهُمْ سُنَّةُ اُ۬لْأَوَّلِينَ أَوْ يَأْتِيَهُمُ اُ۬لْعَذَابُ قِبَلاٗۖ",
+          "english": "or to have the punishment come upon them face to face",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "وَمَا مَنَعَ اَ۬لنَّاسَ أَنْ يُّومِنُوٓاْ إِذْ جَآءَهُمُ اُ۬لْهُد۪ىٰ وَيَسْتَغْفِرُواْ رَبَّهُمُۥٓ إِلَّآ أَن تَاتِيَهُمْ سُنَّةُ اُ۬لَاوَّلِينَ أَوْ يَاتِيَهُمُ اُ۬لْعَذَابُ قِبَلاٗۖ",
+          "english": "or to have the punishment come upon them face to face",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 56,
+      "quran_arabic": "وَمَا نُرْسِلُ ٱلْمُرْسَلِينَ إِلَّا مُبَشِّرِينَ وَمُنذِرِينَ ۚ وَيُجَٰدِلُ ٱلَّذِينَ كَفَرُوا۟ بِٱلْبَٰطِلِ لِيُدْحِضُوا۟ بِهِ ٱلْحَقَّ ۖ وَٱتَّخَذُوٓا۟ ءَايَٰتِى وَمَآ أُنذِرُوا۟ هُزُوًۭا",
+      "text": "We send the envoys only as bringers of good news and warners, but those who disbelieve dispute by means of falsehood in order to refute the truth with it. They have taken My signs and what they were warned about in mockery.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 57,
+      "quran_arabic": "وَمَنْ أَظْلَمُ مِمَّن ذُكِّرَ بِـَٔايَٰتِ رَبِّهِۦ فَأَعْرَضَ عَنْهَا وَنَسِىَ مَا قَدَّمَتْ يَدَاهُ ۚ إِنَّا جَعَلْنَا عَلَىٰ قُلُوبِهِمْ أَكِنَّةً أَن يَفْقَهُوهُ وَفِىٓ ءَاذَانِهِمْ وَقْرًۭا ۖ وَإِن تَدْعُهُمْ إِلَى ٱلْهُدَىٰ فَلَن يَهْتَدُوٓا۟ إِذًا أَبَدًۭا",
+      "text": "Who is more evil than the one who, having been reminded by the signs of his Lord, turns away from them, and forgets what his hands have sent forward? Surely We have made coverings over their hearts, so that they do not understand it, and a heaviness in their ears. Even if you call them to the guidance, they will never be guided.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 58,
+      "quran_arabic": "وَرَبُّكَ ٱلْغَفُورُ ذُو ٱلرَّحْمَةِ ۖ لَوْ يُؤَاخِذُهُم بِمَا كَسَبُوا۟ لَعَجَّلَ لَهُمُ ٱلْعَذَابَ ۚ بَل لَّهُم مَّوْعِدٌۭ لَّن يَجِدُوا۟ مِن دُونِهِۦ مَوْئِلًۭا",
+      "text": "Yet your Lord is the Forgiving, the One full of mercy. If He were to take them to task for what they have earned, He would indeed hurry the punishment for them. Yet for them (there is) an appointment from which they will find no escape.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 59,
+      "quran_arabic": "وَتِلْكَ ٱلْقُرَىٰٓ أَهْلَكْنَٰهُمْ لَمَّا ظَلَمُوا۟ وَجَعَلْنَا لِمَهْلِكِهِم مَّوْعِدًۭا",
+      "text": "Those towns – We destroyed them when they did evil, and We set an appointment for their destruction.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "وَتِلۡكَ اَ۬لۡقُر۪يٰٓ أَهۡلَكۡنَٰهُمۡ لَمَّا ظَلَمُواْ وَجَعَلۡنَا لِمُهۡلَكِهِم مَّوۡعِدٗا",
+          "english": "and We set an appointment for their annihilation",
+          "reason": "EXTRA WORDS",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "وَتِلۡكَ اَ۬لۡقُر۪يٰ أَهۡلَكۡنَٰهُمۡ لَمَّا ظَلَمُواْ وَجَعَلۡنَا  لِمُهۡلَكِهِم مَّوۡعِدٗا",
+          "english": "and We set an appointment for their annihilation",
+          "reason": "EXTRA WORDS",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَتِلۡكَ ٱلۡقُرَىٰ أَهۡلَكۡنَٰهُمُۥ لَمَّا ظَلَمُواْ وَجَعَلۡنَا لِمُهۡلَكِهِمُۥ مَوۡعِدٗا",
+          "english": "and We set an appointment for their annihilation",
+          "reason": "EXTRA WORDS",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَتِلۡكَ ٱلۡقُرَىٰ أَهۡلَكۡنَٰهُمُۥ لَمَّا ظَلَمُواْ وَجَعَلۡنَا لِمُهۡلَكِهِمُۥ مَوۡعِدٗا",
+          "english": "and We set an appointment for their annihilation",
+          "reason": "EXTRA WORDS",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "۞ وَتِلْكَ اَ۬لْقُرَىٰ أَهْلَكْنَٰهُمْ لَمَّا ظَلَمُواْ وَجَعَلْنَا لِمُهْلَكِهِم مَّوْعِداٗۖ",
+          "english": "and We set an appointment for their annihilation",
+          "reason": "EXTRA WORDS",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "۞ وَتِلْكَ اَ۬لْقُر۪ىٰٓ أَهْلَكْنَٰهُمْ لَمَّا ظَلَمُواْ وَجَعَلْنَا لِمُهْلَكِهِم مَّوْعِداٗۖ",
+          "english": "and We set an appointment for their annihilation",
+          "reason": "EXTRA WORDS",
+          "category": "Addition/Omission"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 60,
+      "quran_arabic": "وَإِذْ قَالَ مُوسَىٰ لِفَتَىٰهُ لَآ أَبْرَحُ حَتَّىٰٓ أَبْلُغَ مَجْمَعَ ٱلْبَحْرَيْنِ أَوْ أَمْضِىَ حُقُبًۭا",
+      "text": "(Remember) when Moses said to his young man, ‘I shall not give up until I reach the junction of the two seas, or (else) I shall go on for a long time.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 61,
+      "quran_arabic": "فَلَمَّا بَلَغَا مَجْمَعَ بَيْنِهِمَا نَسِيَا حُوتَهُمَا فَٱتَّخَذَ سَبِيلَهُۥ فِى ٱلْبَحْرِ سَرَبًۭا",
+      "text": "When they reached the junction of them, they forgot their fish, (for) it had taken its way into the sea, swimming off.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 62,
+      "quran_arabic": "فَلَمَّا جَاوَزَا قَالَ لِفَتَىٰهُ ءَاتِنَا غَدَآءَنَا لَقَدْ لَقِينَا مِن سَفَرِنَا هَٰذَا نَصَبًۭا",
+      "text": "So when they had passed beyond (that place), he said to his young man, ‘Bring us our morning meal. We have indeed become weary from this journey of ours.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 63,
+      "quran_arabic": "قَالَ أَرَءَيْتَ إِذْ أَوَيْنَآ إِلَى ٱلصَّخْرَةِ فَإِنِّى نَسِيتُ ٱلْحُوتَ وَمَآ أَنسَىٰنِيهُ إِلَّا ٱلشَّيْطَٰنُ أَنْ أَذْكُرَهُۥ ۚ وَٱتَّخَذَ سَبِيلَهُۥ فِى ٱلْبَحْرِ عَجَبًۭا",
+      "text": "He said, ‘Did you see when we took refuge at the rock? Surely I forgot the fish – none other than Satan made me forget to remember it – and it took its way into the sea – an amazing thing!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 64,
+      "quran_arabic": "قَالَ ذَٰلِكَ مَا كُنَّا نَبْغِ ۚ فَٱرْتَدَّا عَلَىٰٓ ءَاثَارِهِمَا قَصَصًۭا",
+      "text": "He said, ‘That is what we were seeking!’ So they returned, retracing their footsteps.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 65,
+      "quran_arabic": "فَوَجَدَا عَبْدًۭا مِّنْ عِبَادِنَآ ءَاتَيْنَٰهُ رَحْمَةًۭ مِّنْ عِندِنَا وَعَلَّمْنَٰهُ مِن لَّدُنَّا عِلْمًۭا",
+      "text": "And they found a servant, one of Our servants to whom We had given mercy from Us, and whom We had taught knowledge from Us.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 66,
+      "quran_arabic": "قَالَ لَهُۥ مُوسَىٰ هَلْ أَتَّبِعُكَ عَلَىٰٓ أَن تُعَلِّمَنِ مِمَّا عُلِّمْتَ رُشْدًۭا",
+      "text": "Moses said to him, ‘Shall I follow you on (the condition) that you teach me some of what you have been taught (of) right (knowledge)?’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 67,
+      "quran_arabic": "قَالَ إِنَّكَ لَن تَسْتَطِيعَ مَعِىَ صَبْرًۭا",
+      "text": "He said, ‘Surely you will not be able (to have) patience with me.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 68,
+      "quran_arabic": "وَكَيْفَ تَصْبِرُ عَلَىٰ مَا لَمْ تُحِطْ بِهِۦ خُبْرًۭا",
+      "text": "How could you have patience for what you cannot encompass in (your) awareness of it?’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 69,
+      "quran_arabic": "قَالَ سَتَجِدُنِىٓ إِن شَآءَ ٱللَّهُ صَابِرًۭا وَلَآ أَعْصِى لَكَ أَمْرًۭا",
+      "text": "He said, ‘You will find me, if God pleases, patient, and I shall not disobey you in any command.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 70,
+      "quran_arabic": "قَالَ فَإِنِ ٱتَّبَعْتَنِى فَلَا تَسْـَٔلْنِى عَن شَىْءٍ حَتَّىٰٓ أُحْدِثَ لَكَ مِنْهُ ذِكْرًۭا",
+      "text": "He said, ‘If you follow (me), do not ask me about anything, until I mention it to you.’",
+      "canonical_variants": [
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "قَالَ فَإِنِ اِ۪تَّبَعْتَنِے فَلَا تَسْـَٔلَنِّے عَن شَےْءٍ حَتَّىٰ أُحْدِثَ لَكَ مِنْهُ ذِكْراٗۖ",
+          "english": "then do not ever ask me about anything",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "قَالَ فَإِنِ اِ۪تَّبَعْتَنِے فَلَا تَسْـَٔلَنِّے عَن شَےْءٍ حَتَّىٰٓ أُحْدِثَ لَكَ مِنْهُ ذِكْراٗۖ",
+          "english": "then do not ever ask me about anything",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Addition/Omission"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 71,
+      "quran_arabic": "فَٱنطَلَقَا حَتَّىٰٓ إِذَا رَكِبَا فِى ٱلسَّفِينَةِ خَرَقَهَا ۖ قَالَ أَخَرَقْتَهَا لِتُغْرِقَ أَهْلَهَا لَقَدْ جِئْتَ شَيْـًٔا إِمْرًۭا",
+      "text": "So they both set out (and continued on) until, when they sailed in the ship, he made a hole in it. He said, ‘Have you made a hole in it in order to drown its passengers? You have indeed done a dreadful thing!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 72,
+      "quran_arabic": "قَالَ أَلَمْ أَقُلْ إِنَّكَ لَن تَسْتَطِيعَ مَعِىَ صَبْرًۭا",
+      "text": "He said, ‘Did I not say, “Surely you will not be able (to have) patience with me?”’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 73,
+      "quran_arabic": "قَالَ لَا تُؤَاخِذْنِى بِمَا نَسِيتُ وَلَا تُرْهِقْنِى مِنْ أَمْرِى عُسْرًۭا",
+      "text": "He said, ‘Do not take me to task for what I forgot, and do not burden me (with) hardship in my affair.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 74,
+      "quran_arabic": "فَٱنطَلَقَا حَتَّىٰٓ إِذَا لَقِيَا غُلَٰمًۭا فَقَتَلَهُۥ قَالَ أَقَتَلْتَ نَفْسًۭا زَكِيَّةًۢ بِغَيْرِ نَفْسٍۢ لَّقَدْ جِئْتَ شَيْـًۭٔا نُّكْرًۭا",
+      "text": "So they both set out (and continued on) until, when they met a young boy, he killed him. He said, ‘Have you killed an innocent person, other than (in retaliation) for a person? Certainly you have done a terrible thing!’",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "فَاَنطَلَقَا حَتَّىٰٓ إِذَا لَقِيَا غُلَٰمٗا فَقَتَلَهُۥ قَالَ أَقَتَلۡتَ نَفۡسٗا زَٰكِيَةَۢ بِغَيۡرِ نَفۡسٖ لَّقَد جِّئۡتَ شَيۡـٔٗا نُّكۡرٗا",
+          "english": "Did you kill an inherently sinless self . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "فَاَنطَلَقَا حَتَّىٰ إِذَا لَقِيَا غُلَٰمٗا فَقَتَلَهُۥ  قَالَ أَقَتَلۡتَ نَفۡسٗا زَٰكِيَةَۢ بِغَيۡرِ نَفۡسٖ لَّقَد جِّيتَ شَيۡـٔٗا نُّكۡرٗا",
+          "english": "Did you kill an inherently sinless self . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "فَٱنطَلَقَا حَتَّىٰ إِذَا لَقِيَا غُلَٰمٗا فَقَتَلَهُۥ قَالَ أَقَتَلۡتَ نَفۡسٗا زَٰكِيَةَۢ بِغَيۡرِ نَفۡسٖ لَّقَدۡ جِئۡتَ شَيۡـٔٗا نُّكۡرٗا",
+          "english": "Did you kill an inherently sinless self . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "فَٱنطَلَقَا حَتَّىٰ إِذَا لَقِيَا غُلَٰمٗا فَقَتَلَهُۥ قَالَ أَقَتَلۡتَ نَفۡسٗا زَٰكِيَةَۢ بِغَيۡرِ نَفۡسٖ لَّقَدۡ جِئۡتَ شَيۡـٔٗا نُّكۡرٗا",
+          "english": "Did you kill an inherently sinless self . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "فَانطَلَقَا حَتَّىٰ إِذَا لَقِيَا غُلَٰماٗ فَقَتَلَهُۥ قَالَ أَقَتَلْتَ نَفْساٗ زَٰكِيَةَۢ بِغَيْرِ نَفْسٖ لَّقَدْ جِئْتَ شَئْاٗ نُّكُراٗۖ",
+          "english": "Did you kill an inherently sinless self . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "فَانطَلَقَا حَتَّىٰٓ إِذَا لَقِيَا غُلَٰماٗ فَقَتَلَهُۥ قَالَ أَقَتَلْتَ نَفْساٗ زَٰكِيَةَۢ بِغَيْرِ نَفْسٖ لَّقَدْ جِئْتَ شَئْاٗ نُّكُراٗۖ",
+          "english": "Did you kill an inherently sinless self . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 75,
+      "quran_arabic": "۞ قَالَ أَلَمْ أَقُل لَّكَ إِنَّكَ لَن تَسْتَطِيعَ مَعِىَ صَبْرًۭا",
+      "text": "He said, ‘Did I not say to you, “Surely you will not be able (to have) patience with me?”’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 76,
+      "quran_arabic": "قَالَ إِن سَأَلْتُكَ عَن شَىْءٍۭ بَعْدَهَا فَلَا تُصَٰحِبْنِى ۖ قَدْ بَلَغْتَ مِن لَّدُنِّى عُذْرًۭا",
+      "text": "He said, ‘If I ask you about anything after this, do not keep me as a companion. You have had enough excuses from me.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 77,
+      "quran_arabic": "فَٱنطَلَقَا حَتَّىٰٓ إِذَآ أَتَيَآ أَهْلَ قَرْيَةٍ ٱسْتَطْعَمَآ أَهْلَهَا فَأَبَوْا۟ أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارًۭا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُۥ ۖ قَالَ لَوْ شِئْتَ لَتَّخَذْتَ عَلَيْهِ أَجْرًۭا",
+      "text": "So they both set out (and continued on) until, when they came to the people of a town, they asked its people for food, but they refused to offer them hospitality. They both found in it a wall on the verge of collapse, and he set it up. He said, ‘If you had wished, you could indeed have taken a reward for that.’",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "فَاَنطَلَقَا حَتَّىٰٓ إِذَآ أَتَيَآ أَهۡلَ قَرۡيَةٍ اِ۪سۡتَطۡعَمَآ أَهۡلَهَا فَأَبَوۡاْ أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارٗا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُۥۖ قَالَ لَوۡ شِئۡتَ لَتَخِذتَّ عَلَيۡهِ أَجۡرٗا",
+          "english": "He said, ‘If you had wanted, you could have taken a reward for it.’",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "فَاَنطَلَقَا حَتَّىٰ إِذَا أَتَيَا أَهۡلَ قَرۡيَةٍ اِ۪سۡتَطۡعَمَا أَهۡلَهَا فَأَبَوۡاْ  أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارٗا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُۥۖ  قَال لَّوۡ شِيتَ لَتَخِذتَّ عَلَيۡهِ أَجۡرٗا",
+          "english": "He said, ‘If you had wanted, you could have taken a reward for it.’",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "فَٱنطَلَقَا حَتَّىٰ إِذَا أَتَيَا أَهۡلَ قَرۡيَةٍ ٱسۡتَطۡعَمَا أَهۡلَهَا فَأَبَوۡاْ أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارٗا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُۥۖ قَالَ لَوۡ شِئۡتَ لَتَخِذۡتَ عَلَيۡهِۦ أَجۡرٗا",
+          "english": "He said, ‘If you had wanted, you could have taken a reward for it.’",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "فَٱنطَلَقَا حَتَّىٰ إِذَا أَتَيَا أَهۡلَ قَرۡيَةٍ ٱسۡتَطۡعَمَا أَهۡلَهَا فَأَبَوۡاْ أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارٗا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُۥۖ قَالَ لَوۡ شِئۡتَ لَتَخِذۡتَ عَلَيۡهِۦ أَجۡرٗا",
+          "english": "He said, ‘If you had wanted, you could have taken a reward for it.’",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Lexical Shift"
+        }
+      ],
+      "competing_variants": [
+        {
+          "companion_codex": "Ubayy b. Ka'b",
+          "variant_arabic": "فَانطَلَقَا حَتَّىٰ إِذَا أَتَيَا أَهْلَ قَرْيَةٍ اسْتَطْعَمَا أَهْلَهَا فَأَبَوْا أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارًا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُ ۖ قَالَ لَوْ شِئْتَ لَتَخِذْتَ عَلَيْهِ أَجْرًا",
+          "variant_english": "So they set out, until when they came to the people of a town, they asked its people for food, but they refused to offer them hospitality. And they found therein a wall about to collapse, so he set it up. [Moses] said, \"If you wished, you could surely have taken for it a wage (using a slightly different verb form conveying the same meaning).\"",
+          "source_reference": "Sahih Muslim 6167",
+          "hadith_arabic": "وَحَدَّثَنَا عَمْرٌو النَّاقِدُ، حَدَّثَنَا سُفْيَانُ بْنُ عُيَيْنَةَ، عَنْ عَمْرٍو، عَنْ سَعِيدِ بْنِ جُبَيْرٍ، عَنِ ابْنِ عَبَّاسٍ، عَنْ أُبَىِّ بْنِ كَعْبٍ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَرَأَ ‏{‏ لَتَخِذْتَ عَلَيْهِ أَجْرًا‏}‏ ‏.‏",
+          "hadith_english": "Ibn 'Abbas has reported this hadith on the authority of Ubayy b. ka'b that Allah's Apostle (ﷺ) used to recite this [omitted from the original translation: {Latakhidhta 'alayhi ajran} (You could surely have taken a wage for it)]",
+          "sunnah_url": "https://sunnah.com/muslim/43/225"
+        }
+      ]
+    },
+    {
+      "verse": 78,
+      "quran_arabic": "قَالَ هَٰذَا فِرَاقُ بَيْنِى وَبَيْنِكَ ۚ سَأُنَبِّئُكَ بِتَأْوِيلِ مَا لَمْ تَسْتَطِع عَّلَيْهِ صَبْرًا",
+      "text": "He said, ‘This is the parting between me and you. (Now) I shall inform you about the interpretation of what you were not able (to have) patience with.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 79,
+      "quran_arabic": "أَمَّا ٱلسَّفِينَةُ فَكَانَتْ لِمَسَٰكِينَ يَعْمَلُونَ فِى ٱلْبَحْرِ فَأَرَدتُّ أَنْ أَعِيبَهَا وَكَانَ وَرَآءَهُم مَّلِكٌۭ يَأْخُذُ كُلَّ سَفِينَةٍ غَصْبًۭا",
+      "text": "As for the ship, it belonged to poor people working on the sea, and I wanted to damage it, (because) behind them (there) was a king seizing every ship by force.",
+      "canonical_variants": [],
+      "competing_variants": [
+        {
+          "companion_codex": "Abdullah bin Abbas",
+          "variant_arabic": "أَمَّا السَّفِينَةُ فَكَانَتْ لِمَسَاكِينَ يَعْمَلُونَ فِي الْبَحْرِ فَأَرَدْتُ أَنْ أَعِيبَهَا وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا",
+          "variant_english": "As for the ship, it belonged to poor people working at sea. So I intended to cause a defect in it, for there was in front of them a king who seized every serviceable ship by force.",
+          "source_reference": "Sahih al-Bukhari 4725",
+          "hadith_arabic": "حَدَّثَنَا الْحُمَيْدِيُّ، حَدَّثَنَا سُفْيَانُ، حَدَّثَنَا عَمْرُو بْنُ دِينَارٍ، قَالَ أَخْبَرَنِي سَعِيدُ بْنُ جُبَيْرٍ... وَكَانَ ابْنُ عَبَّاسٍ يَقْرَأُ وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا، وَكَانَ يَقْرَأُ وَأَمَّا الْغُلاَمُ فَكَانَ كَافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ‏",
+          "hadith_english": "Narrated Sa`id bin Jubair: ... Allah's Messenger (ﷺ) said, \"We wished that Moses could have been more patient so that Allah might have described to us more about their story [omitted from the original translation: And Ibn 'Abbas used to recite: 'And in front of them was a king who seized every serviceable ship by force,' and he used to recite: 'As for the boy, he was a disbeliever and his parents were believers.']",
+          "sunnah_url": "https://sunnah.com/bukhari:4725"
+        },
+        {
+          "companion_codex": "Abdullah bin Abbas",
+          "variant_arabic": "أَمَّا السَّفِينَةُ فَكَانَتْ لِمَسَاكِينَ يَعْمَلُونَ فِي الْبَحْرِ فَأَرَدْتُ أَنْ أَعِيبَهَا وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ غَصْبًا",
+          "variant_english": "As for the ship, it belonged to poor people working at sea. So I intended to cause a defect in it, for there was in front of them (ahead of them) a king who seized every ship by force.",
+          "source_reference": "Sahih al-Bukhari 4726",
+          "hadith_arabic": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ مُوسَى... وَكَانَ وَرَاءَهُمْ، وَكَانَ أَمَامَهُمْ ـ قَرَأَهَا ابْنُ عَبَّاسٍ أَمَامَهُمْ مَلِكٌ ـ يَزْعُمُونَ عَنْ غَيْرِ سَعِيدٍ أَنَّهُ هُدَدُ بْنُ بُدَدٍ، وَالْغُلاَمُ الْمَقْتُولُ، اسْمُهُ يَزْعُمُونَ جَيْسُورٌ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ غَصْبًا...",
+          "hadith_english": "Narrated Ibn Juraij: ... And there was a king in furor (ahead) of them\" (18.79) And there was in front of them. Ibn `Abbas recited: 'In front of them (was) a king.' ... 'A king who seized every ship by force. (18.79)... [omitted from the original translation: They claim on the authority of someone other than Sa'id that he was Hudad bin Budad, and the slain boy, his name they claim was Jaisur.]",
+          "sunnah_url": "https://sunnah.com/bukhari:4726"
+        },
+        {
+          "companion_codex": "Abdullah bin Abbas",
+          "variant_arabic": "أَمَّا السَّفِينَةُ فَكَانَتْ لِمَسَاكِينَ يَعْمَلُونَ فِي الْبَحْرِ فَأَرَدتُّ أَنْ أَعِيبَهَا وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا",
+          "variant_english": "As for the ship, it belonged to poor people working at sea. So I intended to cause a defect in it, for in front (ahead) of them there was a king who seized every serviceable boat by force.",
+          "source_reference": "Sahih al-Bukhari 4727",
+          "hadith_arabic": "حَدَّثَنِي قُتَيْبَةُ بْنُ سَعِيدٍ... قَالَ وَكَانَ ابْنُ عَبَّاسٍ يَقْرَأُ وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا، وَأَمَّا الْغُلاَمُ فَكَانَ كَافِرًا",
+          "hadith_english": "Narrated Sa`id bin Jubair: ... Ibn `Abbas used to recite:-- 'And in front (ahead) of them there was a king who used to seize every (serviceable) boat by force. (18.79) ...and as for the boy he was a disbeliever",
+          "sunnah_url": "https://sunnah.com/bukhari:4727"
+        },
+        {
+          "companion_codex": "Sa'id b. Jubair",
+          "variant_arabic": "أَمَّا السَّفِينَةُ فَكَانَتْ لِمَسَاكِينَ يَعْمَلُونَ فِي الْبَحْرِ فَأَرَدْتُ أَنْ أَعِيبَهَا وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا",
+          "variant_english": "As for the boat, it belonged to poor people working at sea. So I intended to cause a defect in it as there was before them (ahead of them) a king who used to seize every sound (in good condition) boat by force.",
+          "source_reference": "Sahih Muslim 6163",
+          "hadith_arabic": "حَدَّثَنَا عَمْرُو بْنُ مُحَمَّدٍ النَّاقِدُ، وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ الْحَنْظَلِيُّ، وَعُبَيْدُ اللَّهِ بْنُ سَعِيدٍ، وَمُحَمَّدُ بْنُ أَبِي عُمَرَ الْمَكِّيُّ كُلُّهُمْ عَنِ ابْنِ عُيَيْنَةَ، - وَاللَّفْظُ لاِبْنِ أَبِي عُمَرَ - حَدَّثَنَا سُفْيَانُ، بْنُ عُيَيْنَةَ حَدَّثَنَا عَمْرُو بْنُ دِينَارٍ، عَنْ سَعِيدِ بْنِ جُبَيْرٍ، قَالَ قُلْتُ لاِبْنِ عَبَّاسٍ إِنَّ نَوْفًا الْبِكَالِيَّ يَزْعُمُ أَنَّ مُوسَى عَلَيْهِ السَّلاَمُ صَاحِبَ بَنِي إِسْرَائِيلَ لَيْسَ هُوَ مُوسَى صَاحِبَ الْخَضِرِ عَلَيْهِ السَّلاَمُ ‏.‏ فَقَالَ كَذَبَ عَدُوُّ اللَّهِ سَمِعْتُ أُبَىَّ بْنَ كَعْبٍ يَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏\"‏ قَامَ مُوسَى عَلَيْهِ السَّلاَمُ خَطِيبًا فِي بَنِي إِسْرَائِيلَ فَسُئِلَ أَىُّ النَّاسِ أَعْلَمُ فَقَالَ أَنَا أَعْلَمُ ‏.‏ قَالَ فَعَتَبَ اللَّهُ عَلَيْهِ إِذْ لَمْ يَرُدَّ الْعِلْمَ إِلَيْهِ فَأَوْحَى اللَّهُ إِلَيْهِ أَنَّ عَبْدًا مِنْ عِبَادِي بِمَجْمَعِ الْبَحْرَيْنِ هُوَ أَعْلَمُ مِنْكَ قَالَ مُوسَى أَىْ رَبِّ كَيْفَ لِي بِهِ فَقِيلَ لَهُ احْمِلْ حُوتًا فِي مِكْتَلٍ فَحَيْثُ تَفْقِدُ الْحُوتَ فَهُوَ ثَمَّ ‏.‏ فَانْطَلَقَ وَانْطَلَقَ مَعَهُ فَتَاهُ وَهُوَ يُوشَعُ بْنُ نُونٍ فَحَمَلَ مُوسَى عَلَيْهِ السَّلاَمُ حُوتًا فِي مِكْتَلٍ وَانْطَلَقَ هُوَ وَفَتَاهُ يَمْشِيَانِ حَتَّى أَتَيَا الصَّخْرَةَ فَرَقَدَ مُوسَى عَلَيْهِ السَّلاَمُ وَفَتَاهُ فَاضْطَرَبَ الْحُوتُ فِي الْمِكْتَلِ حَتَّى خَرَجَ مِنَ الْمِكْتَلِ فَسَقَطَ فِي الْبَحْرِ - قَالَ - وَأَمْسَكَ اللَّهُ عَنْهُ جِرْيَةَ الْمَاءِ حَتَّى كَانَ مِثْلَ الطَّاقِ فَكَانَ لِلْحُوتِ سَرَبًا وَكَانَ لِمُوسَى وَفَتَاهُ عَجَبًا فَانْطَلَقَا بَقِيَّةَ يَوْمِهِمَا وَلَيْلَتِهِمَا وَنَسِيَ صَاحِبُ مُوسَى أَنْ يُخْبِرَهُ فَلَمَّا أَصْبَحَ مُوسَى عَلَيْهِ السَّلاَمُ قَالَ لِفَتَاهُ آتِنَا غَدَاءَنَا لَقَدْ لَقِينَا مِنْ سَفَرِنَا هَذَا نَصَبًا - قَالَ - وَلَمْ يَنْصَبْ حَتَّى جَاوَزَ الْمَكَانَ الَّذِي أُمِرَ بِهِ ‏.‏ قَالَ أَرَأَيْتَ إِذْ أَوَيْنَا إِلَى الصَّخْرَةِ فَإِنِّي نَسِيتُ الْحُوتَ وَمَا أَنْسَانِيهُ إِلاَّ الشَّيْطَانُ أَنْ أَذْكُرَهُ وَاتَّخَذَ سَبِيلَهُ فِي الْبَحْرِ عَجَبًا ‏.‏ قَالَ مُوسَى ذَلِكَ مَا كُنَّا نَبْغِي فَارْتَدَّا عَلَى آثَارِهِمَا قَصَصًا ‏.‏ قَالَ يَقُصَّانِ آثَارَهُمَا حَتَّى أَتَيَا الصَّخْرَةَ فَرَأَى رَجُلاً مُسَجًّى عَلَيْهِ بِثَوْبٍ فَسَلَّمَ عَلَيْهِ مُوسَى ‏.‏ فَقَالَ لَهُ الْخَضِرُ أَنَّى بِأَرْضِكَ السَّلاَمُ قَالَ أَنَا مُوسَى ‏.‏ قَالَ مُوسَى بَنِي إِسْرَائِيلَ قَالَ نَعَمْ ‏.‏ قَالَ إِنَّكَ عَلَى عِلْمٍ مِنْ عِلْمِ اللَّهِ عَلَّمَكَهُ اللَّهُ لاَ أَعْلَمُهُ وَأَنَا عَلَى عِلْمٍ مِنْ عِلْمِ اللَّهِ عَلَّمَنِيهِ لاَ تَعْلَمُهُ ‏.‏ قَالَ لَهُ مُوسَى عَلَيْهِ السَّلاَمُ هَلْ أَتَّبِعُكَ عَلَى أَنْ تُعَلِّمَنِي مِمَّا عُلِّمْتَ رُشْدًا قَالَ إِنَّكَ لَنْ تَسْتَطِيعَ مَعِيَ صَبْرًا وَكَيْفَ تَصْبِرُ عَلَى مَا لَمْ تُحِطْ بِهِ خُبْرًا قَالَ سَتَجِدُنِي إِنْ شَاءَ اللَّهُ صَابِرًا وَلاَ أَعْصِي لَكَ أَمْرًا ‏.‏ قَالَ لَهُ الْخَضِرُ فَإِنِ اتَّبَعْتَنِي فَلاَ تَسْأَلْنِي عَنْ شَىْءٍ حَتَّى أُحْدِثَ لَكَ مِنْهُ ذِكْرًا ‏.‏ قَالَ نَعَمْ ‏.‏ فَانْطَلَقَ الْخَضِرُ وَمُوسَى يَمْشِيَانِ عَلَى سَاحِلِ الْبَحْرِ فَمَرَّتْ بِهِمَا سَفِينَةٌ فَكَلَّمَاهُمْ أَنْ يَحْمِلُوهُمَا فَعَرَفُوا الْخَضِرَ فَحَمَلُوهُمَا بِغَيْرِ نَوْلٍ فَعَمَدَ الْخَضِرُ إِلَى لَوْحٍ مِنْ أَلْوَاحِ السَّفِينَةِ فَنَزَعَهُ فَقَالَ لَهُ مُوسَى قَوْمٌ حَمَلُونَا بِغَيْرِ نَوْلٍ عَمَدْتَ إِلَى سَفِينَتِهِمْ فَخَرَقْتَهَا لِتُغْرِقَ أَهْلَهَا لَقَدْ جِئْتَ شَيْئًا إِمْرًا ‏.‏ قَالَ أَلَمْ أَقُلْ إِنَّكَ لَنْ تَسْتَطِيعَ مَعِيَ صَبْرًا قَالَ لاَ تُؤَاخِذْنِي بِمَا نَسِيتُ وَلاَ تُرْهِقْنِي مِنْ أَمْرِي عُسْرًا ثُمَّ خَرَجَا مِنَ السَّفِينَةِ فَبَيْنَمَا هُمَا يَمْشِيَانِ عَلَى السَّاحِلِ إِذَا غُلاَمٌ يَلْعَبُ مَعَ الْغِلْمَانِ فَأَخَذَ الْخَضِرُ بِرَأْسِهِ فَاقْتَلَعَهُ بِيَدِهِ فَقَتَلَهُ ‏.‏ فَقَالَ مُوسَى أَقَتَلْتَ نَفْسًا زَاكِيَةً بِغَيْرِ نَفْسٍ لَقَدْ جِئْتَ شَيْئًا نُكْرًا ‏.‏ قَالَ أَلَمْ أَقُلْ لَكَ إِنَّكَ لَنْ تَسْتَطِيعَ مَعِيَ صَبْرًا قَالَ وَهَذِهِ أَشَدُّ مِنَ الأُولَى ‏.‏ قَالَ إِنْ سَأَلْتُكَ عَنْ شَىْءٍ بَعْدَهَا فَلاَ تُصَاحِبْنِي قَدْ بَلَغْتَ مِنْ لَدُنِّي عُذْرًا ‏.‏ فَانْطَلَقَا حَتَّى إِذَا أَتَيَا أَهْلَ قَرْيَةٍ اسْتَطْعَمَا أَهْلَهَا فَأَبَوْا أَنْ يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارًا يُرِيدُ أَنْ يَنْقَضَّ فَأَقَامَهُ ‏.‏ يَقُولُ مَائِلٌ ‏.‏ قَالَ الْخَضِرُ بِيَدِهِ هَكَذَا فَأَقَامَهُ ‏.‏ قَالَ لَهُ مُوسَى قَوْمٌ أَتَيْنَاهُمْ فَلَمْ يُضَيِّفُونَا وَلَمْ يُطْعِمُونَا لَوْ شِئْتَ لَتَخِذْتَ عَلَيْهِ أَجْرًا ‏.‏ قَالَ هَذَا فِرَاقُ بَيْنِي وَبَيْنِكَ سَأُنَبِّئُكَ بِتَأْوِيلِ مَا لَمْ تَسْتَطِعْ عَلَيْهِ صَبْرًا ‏\"‏ ‏.‏ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ يَرْحَمُ اللَّهُ مُوسَى لَوَدِدْتُ أَنَّهُ كَانَ صَبَرَ حَتَّى يُقَصَّ عَلَيْنَا مِنْ أَخْبَارِهِمَا ‏\"‏ ‏.‏ قَالَ وَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ كَانَتِ الأُولَى مِنْ مُوسَى نِسْيَانًا ‏\"‏ ‏.‏ قَالَ ‏\"‏ وَجَاءَ عُصْفُورٌ حَتَّى وَقَعَ عَلَى حَرْفِ السَّفِينَةِ ثُمَّ نَقَرَ فِي الْبَحْرِ ‏.‏ فَقَالَ لَهُ الْخَضِرُ مَا نَقَصَ عِلْمِي وَعِلْمُكَ مِنْ عِلْمِ اللَّهِ إِلاَّ مِثْلَ مَا نَقَصَ هَذَا الْعُصْفُورُ مِنَ الْبَحْرِ ‏\"‏ ‏.‏ قَالَ سَعِيدُ بْنُ جُبَيْرٍ وَكَانَ يَقْرَأُ وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا ‏.‏ وَكَانَ يَقْرَأُ وَأَمَّا الْغُلاَمُ فَكَانَ كَافِرًا ‏.‏",
+          "hadith_english": "Sa'id b. Jubair reported:I said to Ibn Abbas that Nauf al-Bikali was of the opinion that Moses (peace be upon him), the Apostle of Bani Isra'il, was not the same who accompanied Khadir, whereupon he said: The enemy of Allah tells a lie. I heard Ubayy b. Ka'b say: Moses (peace be upon him) stood up to give sermon to the people of Isra'il. He was asked as to who amongst the people has the best knowledge, whereupon he said: I have the best knowledge. Thereupon Allah was annoyed with him that he did not attribute (the best knowledge) to Him. He revealed to him: A servant amongst My servants is at the junction of two rivers who has more knowledge than yours. Moses said: How can I meet him? It was said to him: Carry a fish in the large basket and the place where you find it missing there you will find him. Thereupon Moses proceeded forth along with a young man (Yusha'). Joshua b. Nun and Moses (peace be upon him) put the fish in the basket and there went along with him the young man (Yusha') until they came to a certain rock and Moses and his companion went to sleep and the fish stirred in that basket and fell into the ocean and Allah stopped the current of water like a vault until the way was made for the fish. Moses and his young companion were astonished and they walked for the rest of the day and the night and the friend of Moses forgot to inform him of this incident. When it was morning, Moses (peace be upon him) said to the young man: Bring for us the breakfast for we are dead tired because of this journey, and they did not feel exhausted until they had passed that place where they had been commanded (to stay). He said: Don't you know that when we reached the Sakhra (rock) I forgot the fish and nothing made me forget it but Satan that I could not remember it? How strange is it that the fish found a way in the river? Moses said: That was what we had been aiming at. Then both of them retraced their steps until they reached Sakhra; there they saw a man covered with a cloth. Moses greeted him. Khadir said to him: Where is as-Salam in our country.? He said: I am Moses, whereupon he (Khadir) said: You mean the Moses of Bani Isra'il? He said: Yes. He (Khadir) said: You have a knowledge out of the knowledge of Allah which in fact Allah imparted to you and about that I know nothing and I have knowledge out of Allah's knowledge which He imparted to me and about that you do not know. Moses (peace be upon him) said to him: May I follow you so that you may teach me that with which you have been taught righteousness. He said: You will not be able to bear with me; how you will be able to bear that about which you do not know? Moses said: Thou wilt find me patient, nor shalt I disobey you in aught. Khadir said to him: If you were to follow me, then do not ask me about anything until I myself speak to you about it. He said: Yes. So Khadir and Moses set forth on the bank of the river that there came before them a boat. Both of them talked to them (the owners of the boat) so that they might carry both of them. They had recognised Khadir and they carried them free. Khadir thereupon took hold of a plank in the boat and broke it away. Moses said: These people have carried us without any charge and you attempt to break their boat so that the people sailing in the boat may drown. This is (something) grievous that you have done. He said: Did I not say that you would not bear with me? He said: Blame me not for what I forgot and be not hard upon what I did. Then both of them got down from the boat and began to walk along the coastline that they saw a boy who had been playing with other boys. Khadir pulled up his head and killed him. Moses said: Have you killed an innocent person who is in no way guilty of slaying another? You have done something horrible. Thereupon he said: Did I not say to you that you will not be able to bear with me? He (Moses) said: This (act) is more grievous than the first one. He (Moses) further said. If I ask you about anything after this, keep not company with me, then you would no doubt find (a plausible) excuse for this. Then they both walked on until they reached the inhabitants of a village. They asked its inhabitants for food but they refused to entertain them as their guests. They found in it a wall which had been bent on one side and was about to fall. Khadir set it right with his own hand. Moses, said to him: It is the people to whom we came but they showed us no hospitality and they did not serve us food. If you wish you can get wages for it. He (Khadir) said: This is the parting of ways between me and you. Now I wish to reveal to you the significance of that for which you could not bear with me. Allah's Messenger (ﷺ) said. May Allah have mercy upon Moses! I wish if Moses could show patience and a (fuller) story of both of them could have been told. Allah's Messenger (ﷺ) said that the first thing which Moses said was out of forgetfulness. Then there came a sparrow until it perched on the wall of the boat and took water from the ocean. Thereupon, Khadir said: My knowledge and your knowledge in comparison with the knowledge of Allah is even less than the water taken by the sparrow in its beak in comparison to the water of the ocean, and Sa'id b. Jubair used to recite (verses 79 and 80 of Sura Kahf) in this way: There was before them a king who used to seize every boat by force which was in order, the boy was an unbeliever",
+          "sunnah_url": "https://sunnah.com/muslim/43/221"
+        },
+        {
+          "companion_codex": "Abdullah bin Abbas",
+          "variant_arabic": "أَمَّا السَّفِينَةُ فَكَانَتْ لِمَسَاكِينَ يَعْمَلُونَ فِي الْبَحْرِ فَأَرَدْتُ أَنْ أَعِيبَهَا وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ غَصْبًا",
+          "variant_english": "As for the ship, it belonged to poor people working at sea. So I intended to cause defect in it as there was in front of them a king who seized every ship by force.",
+          "source_reference": "Sahih al-Bukhari 2728",
+          "hadith_arabic": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ مُوسَى، أَخْبَرَنَا هِشَامٌ، أَنَّ ابْنَ جُرَيْجٍ، أَخْبَرَهُ قَالَ أَخْبَرَنِي يَعْلَى بْنُ مُسْلِمٍ، وَعَمْرُو بْنُ دِينَارٍ، عَنْ سَعِيدِ بْنِ جُبَيْرٍ، يَزِيدُ أَحَدُهُمَا عَلَى صَاحِبِهِ وَغَيْرُهُمَا قَدْ سَمِعْتُهُ يُحَدِّثُهُ عَنْ سَعِيدِ بْنِ جُبَيْرٍ قَالَ إِنَّا لَعِنْدَ ابْنِ عَبَّاسٍ ـ رضى الله عنهما ـ قَالَ حَدَّثَنِي أُبَىُّ بْنُ كَعْبٍ قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ مُوسَى رَسُولُ اللَّهِ ‏\"‏ فَذَكَرَ الْحَدِيثَ ‏{‏قَالَ أَلَمْ أَقُلْ إِنَّكَ لَنْ تَسْتَطِيعَ مَعِيَ صَبْرًا‏}‏ كَانَتِ الأُولَى نِسْيَانًا، وَالْوُسْطَى شَرْطًا، وَالثَّالِثَةُ عَمْدًا ‏{‏قَالَ لاَ تُؤَاخِذْنِي بِمَا نَسِيتُ وَلاَ تُرْهِقْنِي مِنْ أَمْرِي عُسْرًا‏}‏‏.‏ ‏{‏لَقِيَا غُلاَمًا فَقَتَلَهُ‏}‏ فَانْطَلَقَا فَوَجَدَا جِدَارًا يُرِيدُ أَنْ يَنْقَضَّ فَأَقَامَهُ‏.‏ قَرَأَهَا ابْنُ عَبَّاسٍ أَمَامَهُمْ مَلِكٌ‏.‏",
+          "hadith_english": "Narrated Ubai bin Ka`b:Allah's Messenger (ﷺ) said, \"Moses the Messenger of Allah,\" and then he narrated the whole story about him. Al-Khadir said to Moses, \"Did not I tell you that you can have no patience with me.\" (18.72). Moses then violated the agreement for the first time because of forgetfulness, then Moses promised that if he asked Al-Khadir about anything, the latter would have the right to desert him. Moses abided by that condition and on the third occasion he intentionally asked Al-Khadir and caused that condition to be applied. The three occasions referred to above are referred to by the following Verses: \"Call me not to account for forgetting And be not hard upon me.\" (18.73) \"Then they met a boy and Khadir killed him.\" (18.74) \"Then they proceeded and found a wall which was on the verge of falling and Khadir set it up straight\" [omitted from the original translation: Ibn 'Abbas recited it: \"In front of them was a king.\"]",
+          "sunnah_url": "https://sunnah.com/bukhari:2728"
+        },
+        {
+          "companion_codex": "Abdullah bin Abbas",
+          "variant_arabic": "أَمَّا السَّفِينَةُ فَكَانَتْ لِمَسَاكِينَ يَعْمَلُونَ فِي الْبَحْرِ فَأَرَدْتُ أَنْ أَعِيبَهَا وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا وَأَمَّا الْغُلَامُ فَكَانَ كَافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ فَخَشِينَا أَنْ يُرْهِقَهُمَا طُغْيَانًا وَكُفْرًا",
+          "variant_english": "As for the ship, it belonged to poor people working at sea. So I intended to cause a defect in it as there was a king in front of them (meaning ahead of them, clarifying the ambiguous 'behind them') who used to take every sound ship by force (meaning he would spare defective ones). And as for the boy, he was a disbeliever and his parents were believers, and we feared that he would overburden them by transgression and disbelief.",
+          "source_reference": "Sahih al-Bukhari 3401",
+          "hadith_arabic": "حَدَّثَنَا عَلِيُّ بْنُ عَبْدِ اللَّهِ، حَدَّثَنَا سُفْيَانُ، حَدَّثَنَا عَمْرُو بْنِ دِينَارٍ، قَالَ أَخْبَرَنِي سَعِيدُ بْنُ جُبَيْرٍ، قَالَ قُلْتُ لاِبْنِ عَبَّاسٍ إِنَّ نَوْفًا الْبَكَالِيَّ يَزْعُمُ أَنَّ مُوسَى صَاحِبَ الْخَضِرِ لَيْسَ هُوَ مُوسَى بَنِي إِسْرَائِيلَ، إِنَّمَا هُوَ مُوسَى آخَرُ‏.‏ فَقَالَ كَذَبَ عَدُوُّ اللَّهِ حَدَّثَنَا أُبَىُّ بْنُ كَعْبٍ عَنِ النَّبِيِّ صلى الله عليه وسلم ‏\"‏ أَنَّ مُوسَى قَامَ خَطِيبًا فِي بَنِي إِسْرَائِيلَ، فَسُئِلَ أَىُّ النَّاسِ أَعْلَمُ فَقَالَ أَنَا‏.‏ فَعَتَبَ اللَّهُ عَلَيْهِ إِذْ لَمْ يَرُدَّ الْعِلْمَ إِلَيْهِ‏.‏ فَقَالَ لَهُ بَلَى، لِي عَبْدٌ بِمَجْمَعِ الْبَحْرَيْنِ هُوَ أَعْلَمُ مِنْكَ‏.‏ قَالَ أَىْ رَبِّ وَمَنْ لِي بِهِ ـ وَرُبَّمَا قَالَ سُفْيَانُ أَىْ رَبِّ وَكَيْفَ لِي بِهِ ـ قَالَ تَأْخُذُ حُوتًا، فَتَجْعَلُهُ فِي مِكْتَلٍ، حَيْثُمَا فَقَدْتَ الْحُوتَ فَهْوَ ثَمَّ ـ وَرُبَّمَا قَالَ فَهْوَ ثَمَّهْ ـ وَأَخَذَ حُوتًا، فَجَعَلَهُ فِي مِكْتَلٍ، ثُمَّ انْطَلَقَ هُوَ وَفَتَاهُ يُوشَعُ بْنُ نُونٍ، حَتَّى أَتَيَا الصَّخْرَةَ، وَضَعَا رُءُوسَهُمَا فَرَقَدَ مُوسَى، وَاضْطَرَبَ الْحُوتُ فَخَرَجَ فَسَقَطَ فِي الْبَحْرِ، فَاتَّخَذَ سَبِيلَهُ فِي الْبَحْرِ سَرَبًا، فَأَمْسَكَ اللَّهُ عَنِ الْحُوتِ جِرْيَةَ الْمَاءِ، فَصَارَ مِثْلَ الطَّاقِ، فَقَالَ هَكَذَا مِثْلُ الطَّاقِ‏.‏ فَانْطَلَقَا يَمْشِيَانِ بَقِيَّةَ لَيْلَتِهِمَا وَيَوْمَهُمَا، حَتَّى إِذَا كَانَ مِنَ الْغَدِ قَالَ لِفَتَاهُ آتِنَا غَدَاءَنَا لَقَدْ لَقِينَا مِنْ سَفَرِنَا هَذَا نَصَبًا‏.‏ وَلَمْ يَجِدْ مُوسَى النَّصَبَ حَتَّى جَاوَزَ حَيْثُ أَمَرَهُ اللَّهُ‏.‏ قَالَ لَهُ فَتَاهُ أَرَأَيْتَ إِذْ أَوَيْنَا إِلَى الصَّخْرَةِ فَإِنِّي نَسِيتُ الْحُوتَ، وَمَا أَنْسَانِيهِ إِلاَّ الشَّيْطَانُ أَنْ أَذْكُرَهُ، وَاتَّخَذَ سَبِيلَهُ فِي الْبَحْرِ عَجَبًا، فَكَانَ لِلْحُوتِ سَرَبًا وَلَهُمَا عَجَبًا‏.‏ قَالَ لَهُ مُوسَى ذَلِكَ مَا كُنَّا نَبْغِي، فَارْتَدَّا عَلَى آثَارِهِمَا قَصَصًا، رَجَعَا يَقُصَّانِ آثَارَهُمَا حَتَّى انْتَهَيَا إِلَى الصَّخْرَةِ، فَإِذَا رَجُلٌ مُسَجًّى بِثَوْبٍ، فَسَلَّمَ مُوسَى، فَرَدَّ عَلَيْهِ‏.‏ فَقَالَ وَأَنَّى بِأَرْضِكَ السَّلاَمُ‏.‏ قَالَ أَنَا مُوسَى‏.‏ قَالَ مُوسَى بَنِي إِسْرَائِيلَ قَالَ نَعَمْ، أَتَيْتُكَ لِتُعَلِّمَنِي مِمَّا عُلِّمْتَ رَشَدًا‏.‏ قَالَ يَا مُوسَى إِنِّي عَلَى عِلْمٍ مِنْ عِلْمِ اللَّهِ، عَلَّمَنِيهِ اللَّهُ لاَ تَعْلَمُهُ وَأَنْتَ عَلَى عِلْمٍ مِنْ عِلْمِ اللَّهِ عَلَّمَكَهُ اللَّهُ لاَ أَعْلَمُهُ‏.‏ قَالَ هَلْ أَتَّبِعُكَ قَالَ ‏{‏إِنَّكَ لَنْ تَسْتَطِيعَ مَعِيَ صَبْرًا * وَكَيْفَ تَصْبِرُ عَلَى مَا لَمْ تُحِطْ بِهِ خُبْرًا‏}‏ إِلَى قَوْلِهِ ‏{‏إِمْرًا‏}‏ فَانْطَلَقَا يَمْشِيَانِ عَلَى سَاحِلِ الْبَحْرِ، فَمَرَّتْ بِهِمَا سَفِينَةٌ، كَلَّمُوهُمْ أَنْ يَحْمِلُوهُمْ، فَعَرَفُوا الْخَضِرَ، فَحَمَلُوهُ بِغَيْرِ نَوْلٍ، فَلَمَّا رَكِبَا فِي السَّفِينَةِ جَاءَ عُصْفُورٌ، فَوَقَعَ عَلَى حَرْفِ السَّفِينَةِ، فَنَقَرَ فِي الْبَحْرِ نَقْرَةً أَوْ نَقْرَتَيْنِ، قَالَ لَهُ الْخَضِرُ يَا مُوسَى، مَا نَقَصَ عِلْمِي وَعِلْمُكَ مِنْ عِلْمِ اللَّهِ إِلاَّ مِثْلَ مَا نَقَصَ هَذَا الْعُصْفُورُ بِمِنْقَارِهِ مِنَ الْبَحْرِ‏.‏ إِذْ أَخَذَ الْفَأْسَ فَنَزَعَ لَوْحًا، قَالَ فَلَمْ يَفْجَأْ مُوسَى إِلاَّ وَقَدْ قَلَعَ لَوْحًا بِالْقَدُّومِ‏.‏ فَقَالَ لَهُ مُوسَى مَا صَنَعْتَ قَوْمٌ حَمَلُونَا بِغَيْرِ نَوْلٍ، عَمَدْتَ إِلَى سَفِينَتِهِمْ فَخَرَقْتَهَا لِتُغْرِقَ أَهْلَهَا، لَقَدْ جِئْتَ شَيْئًا إِمْرًا‏.‏ قَالَ أَلَمْ أَقُلْ إِنَّكَ لَنْ تَسْتَطِيعَ مَعِيَ صَبْرًا‏.‏ قَالَ لاَ تُؤَاخِذْنِي بِمَا نَسِيتُ وَلاَ تُرْهِقْنِي مِنْ أَمْرِي عُسْرًا، فَكَانَتِ الأُولَى مِنْ مُوسَى نِسْيَانًا‏.‏ فَلَمَّا خَرَجَا مِنَ الْبَحْرِ مَرُّوا بِغُلاَمٍ يَلْعَبُ مَعَ الصِّبْيَانِ، فَأَخَذَ الْخَضِرُ بِرَأْسِهِ فَقَلَعَهُ بِيَدِهِ هَكَذَا ـ وَأَوْمَأَ سُفْيَانُ بِأَطْرَافِ أَصَابِعِهِ كَأَنَّهُ يَقْطِفُ شَيْئًا ـ فَقَالَ لَهُ مُوسَى أَقَتَلْتَ نَفْسًا زَكِيَّةً بِغَيْرِ نَفْسٍ لَقَدْ جِئْتَ شَيْئًا نُكْرًا‏.‏ قَالَ أَلَمْ أَقُلْ لَكَ إِنَّكَ لَنْ تَسْتَطِيعَ مَعِيَ صَبْرًا‏.‏ قَالَ إِنْ سَأَلْتُكَ عَنْ شَىْءٍ بَعْدَهَا فَلاَ تُصَاحِبْنِي، قَدْ بَلَغْتَ مِنْ لَدُنِّي عُذْرًا‏.‏ فَانْطَلَقَا حَتَّى إِذَا أَتَيَا أَهْلَ قَرْيَةٍ اسْتَطْعَمَا أَهْلَهَا فَأَبَوْا أَنْ يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارًا يُرِيدُ أَنْ يَنْقَضَّ مَائِلاً ـ أَوْمَأَ بِيَدِهِ هَكَذَا وَأَشَارَ سُفْيَانُ كَأَنَّهُ يَمْسَحُ شَيْئًا إِلَى فَوْقُ، فَلَمْ أَسْمَعْ سُفْيَانَ يَذْكُرُ مَائِلاً إِلاَّ مَرَّةً ـ قَالَ قَوْمٌ أَتَيْنَاهُمْ فَلَمْ يُطْعِمُونَا وَلَمْ يُضَيِّفُونَا عَمَدْتَ إِلَى حَائِطِهِمْ لَوْ شِئْتَ لاَتَّخَذْتَ عَلَيْهِ أَجْرًا‏.‏ قَالَ هَذَا فِرَاقُ بَيْنِي وَبَيْنِكَ، سَأُنَبِّئُكَ بِتَأْوِيلِ مَا لَمْ تَسْتَطِعْ عَلَيْهِ صَبْرًا‏\"‏‏.‏ قَالَ النَّبِيُّ صلى الله عليه وسلم ‏\"‏ وَدِدْنَا أَنَّ مُوسَى كَانَ صَبَرَ، فَقَصَّ اللَّهُ عَلَيْنَا مِنْ خَبَرِهِمَا ‏\"‏‏.‏ قَالَ سُفْيَانُ قَالَ النَّبِيُّ صلى الله عليه وسلم ‏\"‏ يَرْحَمُ اللَّهُ مُوسَى، لَوْ كَانَ صَبَرَ يُقَصُّ عَلَيْنَا مِنْ أَمْرِهِمَا ‏\"‏‏.‏ وَقَرَأَ ابْنُ عَبَّاسٍ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا، وَأَمَّا الْغُلاَمُ فَكَانَ كَافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ‏.‏ ثُمَّ قَالَ لِي سُفْيَانُ سَمِعْتُهُ مِنْهُ مَرَّتَيْنِ وَحَفِظْتُهُ مِنْهُ‏.‏ قِيلَ لِسُفْيَانَ حَفِظْتَهُ قَبْلَ أَنْ تَسْمَعَهُ مِنْ عَمْرٍو، أَوْ تَحَفَّظْتَهُ مِنْ إِنْسَانٍ فَقَالَ مِمَّنْ أَتَحَفَّظُهُ وَرَوَاهُ أَحَدٌ عَنْ عَمْرٍو غَيْرِي سَمِعْتُهُ مِنْهُ مَرَّتَيْنِ أَوْ ثَلاَثًا وَحَفِظْتُهُ مِنْهُ‏.‏",
+          "hadith_english": "Narrated Sa`id bin Jubair:I said to Ibn `Abbas, \"Nauf Al-Bakali claims that Moses, the companion of Al-Khadir was not Moses (the prophet) of the children of Israel, but some other Moses.\" Ibn `Abbas said, \"Allah's enemy (i.e. Nauf) has told a lie. Ubai bin Ka`b told us that the Prophet (ﷺ) said, 'Once Moses stood up and addressed Bani Israel. He was asked who was the most learned man amongst the people. He said, 'I.' Allah admonished him as he did not attribute absolute knowledge to Him (Allah). So, Allah said to him, 'Yes, at the junction of the two seas there is a Slave of Mine who is more learned than you.' Moses said, 'O my Lord! How can I meet him?' Allah said, 'Take a fish and put it in a large basket and you will find him at the place where you will lose the fish.' Moses took a fish and put it in a basket and proceeded along with his (servant) boy, Yusha` bin Noon, till they reached the rock where they laid their heads (i.e. lay down). Moses slept, and the fish, moving out of the basket, fell into the sea. It took its way into the sea (straight) as in a tunnel. Allah stopped the flow of water over the fish and it became like an arch (the Prophet (ﷺ) pointed out this arch with his hands). They travelled the rest of the night, and the next day Moses said to his boy (servant), 'Give us our food, for indeed, we have suffered much fatigue in this journey of ours.' Moses did not feel tired till he crossed that place which Allah had ordered him to seek after. His boy (servant) said to him, 'Do you know that when we were sitting near that rock, I forgot the fish, and none but Satan caused me to forget to tell (you) about it, and it took its course into the sea in an amazing way?.' So there was a path for the fish and that astonished them. Moses said, 'That was what we were seeking after.' So, both of them retraced their footsteps till they reached the rock. There they saw a man Lying covered with a garment. Moses greeted him and he replied saying, 'How do people greet each other in your land?' Moses said, 'I am Moses.' The man asked, 'Moses of Bani Israel?' Moses said, 'Yes, I have come to you so that you may teach me from those things which Allah has taught you.' He said, 'O Moses! I have some of the Knowledge of Allah which Allah has taught me, and which you do not know, while you have some of the Knowledge of Allah which Allah has taught you and which I do not know.' Moses asked, 'May I follow you?' He said, 'But you will not be able to remain patient with me for how can you be patient about things which you will not be able to understand?' (Moses said, 'You will find me, if Allah so will, truly patient, and I will not disobey you in aught.') So, both of them set out walking along the sea-shore, a boat passed by them and they asked the crew of the boat to take them on board. The crew recognized Al-Khadir and so they took them on board without fare. When they were on board the boat, a sparrow came and stood on the edge of the boat and dipped its beak once or twice into the sea. Al-Khadir said to Moses, 'O Moses! My knowledge and your knowledge have not decreased Allah's Knowledge except as much as this sparrow has decreased the water of the sea with its beak.' Then suddenly Al-Khadir took an adze and plucked a plank, and Moses did not notice it till he had plucked a plank with the adze. Moses said to him, 'What have you done? They took us on board charging us nothing; yet you have intentionally made a hole in their boat so as to drown its passengers. Verily, you have done a dreadful thing.' Al-Khadir replied, 'Did I not tell you that you would not be able to remain patient with me?' Moses replied, 'Do not blame me for what I have forgotten, and do not be hard upon me for my fault.' So the first excuse of Moses was that he had forgotten. When they had left the sea, they passed by a boy playing with other boys. Al-Khadir took hold of the boys head and plucked it with his hand like this. (Sufyan, the sub narrator pointed with his fingertips as if he was plucking some fruit.) Moses said to him, \"Have you killed an innocent person who has not killed any person? You have really done a horrible thing.\" Al-Khadir said, \"Did I not tell you that you could not remain patient with me?' Moses said \"If I ask you about anything after this, don't accompany me. You have received an excuse from me.' Then both of them went on till they came to some people of a village, and they asked its inhabitants for food but they refused to entertain them as guests. Then they saw therein a wall which was just going to collapse (and Al Khadir repaired it just by touching it with his hands). (Sufyan, the sub-narrator, pointed with his hands, illustrating how Al-Khadir passed his hands over the wall upwards.) Moses said, \"These are the people whom we have called on, but they neither gave us food, nor entertained us as guests, yet you have repaired their wall. If you had wished, you could have taken wages for it.\" Al-Khadir said, \"This is the parting between you and me, and I shall tell you the explanation of those things on which you could not remain patient.\" The Prophet (ﷺ) added, \"We wished that Moses could have remained patient by virtue of which Allah might have told us more about their story. (Sufyan the sub-narrator said that the Prophet (ﷺ) said, \"May Allah bestow His Mercy on Moses! If he had remained patient, we would have been told further about their case [omitted from the original translation: .\"] Ibn 'Abbas recited: \"There was a king in front of them who used to take every sound ship by force; and as for the boy, he was a disbeliever and his parents were believers.\" Then Sufyan said to me, \"I heard it from him twice and memorized it from him.\" It was said to Sufyan, \"Did you memorize it before you heard it from 'Amr, or did you memorize it from someone else?\" He said, \"From whom would I memorize it? And did anyone narrate it from 'Amr other than me? I heard it from him twice or thrice and memorized it from him.\"]",
+          "sunnah_url": "https://sunnah.com/bukhari/60/74"
+        }
+      ]
+    },
+    {
+      "verse": 80,
+      "quran_arabic": "وَأَمَّا ٱلْغُلَٰمُ فَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ فَخَشِينَآ أَن يُرْهِقَهُمَا طُغْيَٰنًۭا وَكُفْرًۭا",
+      "text": "As for the young boy, his parents were believers, and we feared that he would burden them both (with) insolent transgression and disbelief.",
+      "canonical_variants": [],
+      "competing_variants": [
+        {
+          "companion_codex": "Abdullah bin Abbas",
+          "variant_arabic": "وَأَمَّا الْغُلَامُ فَكَانَ كَافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ فَخَشِينَا أَنْ يُرْهِقَهُمَا طُغْيَانًا وَكُفْرًا",
+          "variant_english": "And as for the boy, he was a disbeliever, and his parents were believers, and we feared that he would overburden them by transgression and disbelief.",
+          "source_reference": "Sahih al-Bukhari 4725",
+          "hadith_arabic": "حَدَّثَنَا الْحُمَيْدِيُّ، حَدَّثَنَا سُفْيَانُ، حَدَّثَنَا عَمْرُو بْنُ دِينَارٍ، قَالَ أَخْبَرَنِي سَعِيدُ بْنُ جُبَيْرٍ... وَكَانَ ابْنُ عَبَّاسٍ يَقْرَأُ وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا، وَكَانَ يَقْرَأُ وَأَمَّا الْغُلاَمُ فَكَانَ كَافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ‏",
+          "hadith_english": "Narrated Sa`id bin Jubair: ... Allah's Messenger (ﷺ) said, \"We wished that Moses could have been more patient so that Allah might have described to us more about their story [omitted from the original translation: And Ibn 'Abbas used to recite: 'And there was a king ahead of them who used to seize every good ship by force.' And he used to recite: 'And as for the boy, he was a disbeliever, and his parents were believers.']\"",
+          "sunnah_url": "https://sunnah.com/bukhari:4725"
+        },
+        {
+          "companion_codex": "Abdullah bin Abbas",
+          "variant_arabic": "وَأَمَّا الْغُلَامُ فَكَانَ كَافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ فَخَشِينَا أَن يُرْهِقَهُمَا طُغْيَانًا وَكُفْرًا",
+          "variant_english": "And as for the boy, he was a disbeliever, and his parents were believers, and we feared that he would overburden them by transgression and disbelief.",
+          "source_reference": "Sahih al-Bukhari 4727",
+          "hadith_arabic": "حَدَّثَنِي قُتَيْبَةُ بْنُ سَعِيدٍ... قَالَ وَكَانَ ابْنُ عَبَّاسٍ يَقْرَأُ وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا، وَأَمَّا الْغُلاَمُ فَكَانَ كَافِرًا",
+          "hadith_english": "Narrated Sa`id bin Jubair: ... Ibn `Abbas used to recite:-- 'And in front (ahead) of them there was a king who used to seize every (serviceable) boat by force. (18.79) ...and as for the boy he was a disbeliever",
+          "sunnah_url": "https://sunnah.com/bukhari:4727"
+        },
+        {
+          "companion_codex": "Sa'id b. Jubair",
+          "variant_arabic": "وَأَمَّا الْغُلَامُ فَكَانَ كَافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ فَخَشِينَا أَن يُرْهِقَهُمَا طُغْيَانًا وَكُفْرًا",
+          "variant_english": "And as for the boy, he was an unbeliever and his parents were believers, and we feared that he would overburden them by transgression and disbelief.",
+          "source_reference": "Sahih Muslim 6163",
+          "hadith_arabic": "حَدَّثَنَا عَمْرُو بْنُ مُحَمَّدٍ النَّاقِدُ، وَإِسْحَاقُ بْنُ إِبْرَاهِيمَ الْحَنْظَلِيُّ، وَعُبَيْدُ اللَّهِ بْنُ سَعِيدٍ، وَمُحَمَّدُ بْنُ أَبِي عُمَرَ الْمَكِّيُّ كُلُّهُمْ عَنِ ابْنِ عُيَيْنَةَ، - وَاللَّفْظُ لاِبْنِ أَبِي عُمَرَ - حَدَّثَنَا سُفْيَانُ، بْنُ عُيَيْنَةَ حَدَّثَنَا عَمْرُو بْنُ دِينَارٍ، عَنْ سَعِيدِ بْنِ جُبَيْرٍ، قَالَ قُلْتُ لاِبْنِ عَبَّاسٍ إِنَّ نَوْفًا الْبِكَالِيَّ يَزْعُمُ أَنَّ مُوسَى عَلَيْهِ السَّلاَمُ صَاحِبَ بَنِي إِسْرَائِيلَ لَيْسَ هُوَ مُوسَى صَاحِبَ الْخَضِرِ عَلَيْهِ السَّلاَمُ ‏.‏ فَقَالَ كَذَبَ عَدُوُّ اللَّهِ سَمِعْتُ أُبَىَّ بْنَ كَعْبٍ يَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏\"‏ قَامَ مُوسَى عَلَيْهِ السَّلاَمُ خَطِيبًا فِي بَنِي إِسْرَائِيلَ فَسُئِلَ أَىُّ النَّاسِ أَعْلَمُ فَقَالَ أَنَا أَعْلَمُ ‏.‏ قَالَ فَعَتَبَ اللَّهُ عَلَيْهِ إِذْ لَمْ يَرُدَّ الْعِلْمَ إِلَيْهِ فَأَوْحَى اللَّهُ إِلَيْهِ أَنَّ عَبْدًا مِنْ عِبَادِي بِمَجْمَعِ الْبَحْرَيْنِ هُوَ أَعْلَمُ مِنْكَ قَالَ مُوسَى أَىْ رَبِّ كَيْفَ لِي بِهِ فَقِيلَ لَهُ احْمِلْ حُوتًا فِي مِكْتَلٍ فَحَيْثُ تَفْقِدُ الْحُوتَ فَهُوَ ثَمَّ ‏.‏ فَانْطَلَقَ وَانْطَلَقَ مَعَهُ فَتَاهُ وَهُوَ يُوشَعُ بْنُ نُونٍ فَحَمَلَ مُوسَى عَلَيْهِ السَّلاَمُ حُوتًا فِي مِكْتَلٍ وَانْطَلَقَ هُوَ وَفَتَاهُ يَمْشِيَانِ حَتَّى أَتَيَا الصَّخْرَةَ فَرَقَدَ مُوسَى عَلَيْهِ السَّلاَمُ وَفَتَاهُ فَاضْطَرَبَ الْحُوتُ فِي الْمِكْتَلِ حَتَّى خَرَجَ مِنَ الْمِكْتَلِ فَسَقَطَ فِي الْبَحْرِ - قَالَ - وَأَمْسَكَ اللَّهُ عَنْهُ جِرْيَةَ الْمَاءِ حَتَّى كَانَ مِثْلَ الطَّاقِ فَكَانَ لِلْحُوتِ سَرَبًا وَكَانَ لِمُوسَى وَفَتَاهُ عَجَبًا فَانْطَلَقَا بَقِيَّةَ يَوْمِهِمَا وَلَيْلَتِهِمَا وَنَسِيَ صَاحِبُ مُوسَى أَنْ يُخْبِرَهُ فَلَمَّا أَصْبَحَ مُوسَى عَلَيْهِ السَّلاَمُ قَالَ لِفَتَاهُ آتِنَا غَدَاءَنَا لَقَدْ لَقِينَا مِنْ سَفَرِنَا هَذَا نَصَبًا - قَالَ - وَلَمْ يَنْصَبْ حَتَّى جَاوَزَ الْمَكَانَ الَّذِي أُمِرَ بِهِ ‏.‏ قَالَ أَرَأَيْتَ إِذْ أَوَيْنَا إِلَى الصَّخْرَةِ فَإِنِّي نَسِيتُ الْحُوتَ وَمَا أَنْسَانِيهُ إِلاَّ الشَّيْطَانُ أَنْ أَذْكُرَهُ وَاتَّخَذَ سَبِيلَهُ فِي الْبَحْرِ عَجَبًا ‏.‏ قَالَ مُوسَى ذَلِكَ مَا كُنَّا نَبْغِي فَارْتَدَّا عَلَى آثَارِهِمَا قَصَصًا ‏.‏ قَالَ يَقُصَّانِ آثَارَهُمَا حَتَّى أَتَيَا الصَّخْرَةَ فَرَأَى رَجُلاً مُسَجًّى عَلَيْهِ بِثَوْبٍ فَسَلَّمَ عَلَيْهِ مُوسَى ‏.‏ فَقَالَ لَهُ الْخَضِرُ أَنَّى بِأَرْضِكَ السَّلاَمُ قَالَ أَنَا مُوسَى ‏.‏ قَالَ مُوسَى بَنِي إِسْرَائِيلَ قَالَ نَعَمْ ‏.‏ قَالَ إِنَّكَ عَلَى عِلْمٍ مِنْ عِلْمِ اللَّهِ عَلَّمَكَهُ اللَّهُ لاَ أَعْلَمُهُ وَأَنَا عَلَى عِلْمٍ مِنْ عِلْمِ اللَّهِ عَلَّمَنِيهِ لاَ تَعْلَمُهُ ‏.‏ قَالَ لَهُ مُوسَى عَلَيْهِ السَّلاَمُ هَلْ أَتَّبِعُكَ عَلَى أَنْ تُعَلِّمَنِي مِمَّا عُلِّمْتَ رُشْدًا قَالَ إِنَّكَ لَنْ تَسْتَطِيعَ مَعِيَ صَبْرًا وَكَيْفَ تَصْبِرُ عَلَى مَا لَمْ تُحِطْ بِهِ خُبْرًا قَالَ سَتَجِدُنِي إِنْ شَاءَ اللَّهُ صَابِرًا وَلاَ أَعْصِي لَكَ أَمْرًا ‏.‏ قَالَ لَهُ الْخَضِرُ فَإِنِ اتَّبَعْتَنِي فَلاَ تَسْأَلْنِي عَنْ شَىْءٍ حَتَّى أُحْدِثَ لَكَ مِنْهُ ذِكْرًا ‏.‏ قَالَ نَعَمْ ‏.‏ فَانْطَلَقَ الْخَضِرُ وَمُوسَى يَمْشِيَانِ عَلَى سَاحِلِ الْبَحْرِ فَمَرَّتْ بِهِمَا سَفِينَةٌ فَكَلَّمَاهُمْ أَنْ يَحْمِلُوهُمَا فَعَرَفُوا الْخَضِرَ فَحَمَلُوهُمَا بِغَيْرِ نَوْلٍ فَعَمَدَ الْخَضِرُ إِلَى لَوْحٍ مِنْ أَلْوَاحِ السَّفِينَةِ فَنَزَعَهُ فَقَالَ لَهُ مُوسَى قَوْمٌ حَمَلُونَا بِغَيْرِ نَوْلٍ عَمَدْتَ إِلَى سَفِينَتِهِمْ فَخَرَقْتَهَا لِتُغْرِقَ أَهْلَهَا لَقَدْ جِئْتَ شَيْئًا إِمْرًا ‏.‏ قَالَ أَلَمْ أَقُلْ إِنَّكَ لَنْ تَسْتَطِيعَ مَعِيَ صَبْرًا قَالَ لاَ تُؤَاخِذْنِي بِمَا نَسِيتُ وَلاَ تُرْهِقْنِي مِنْ أَمْرِي عُسْرًا ثُمَّ خَرَجَا مِنَ السَّفِينَةِ فَبَيْنَمَا هُمَا يَمْشِيَانِ عَلَى السَّاحِلِ إِذَا غُلاَمٌ يَلْعَبُ مَعَ الْغِلْمَانِ فَأَخَذَ الْخَضِرُ بِرَأْسِهِ فَاقْتَلَعَهُ بِيَدِهِ فَقَتَلَهُ ‏.‏ فَقَالَ مُوسَى أَقَتَلْتَ نَفْسًا زَاكِيَةً بِغَيْرِ نَفْسٍ لَقَدْ جِئْتَ شَيْئًا نُكْرًا ‏.‏ قَالَ أَلَمْ أَقُلْ لَكَ إِنَّكَ لَنْ تَسْتَطِيعَ مَعِيَ صَبْرًا قَالَ وَهَذِهِ أَشَدُّ مِنَ الأُولَى ‏.‏ قَالَ إِنْ سَأَلْتُكَ عَنْ شَىْءٍ بَعْدَهَا فَلاَ تُصَاحِبْنِي قَدْ بَلَغْتَ مِنْ لَدُنِّي عُذْرًا ‏.‏ فَانْطَلَقَا حَتَّى إِذَا أَتَيَا أَهْلَ قَرْيَةٍ اسْتَطْعَمَا أَهْلَهَا فَأَبَوْا أَنْ يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارًا يُرِيدُ أَنْ يَنْقَضَّ فَأَقَامَهُ ‏.‏ يَقُولُ مَائِلٌ ‏.‏ قَالَ الْخَضِرُ بِيَدِهِ هَكَذَا فَأَقَامَهُ ‏.‏ قَالَ لَهُ مُوسَى قَوْمٌ أَتَيْنَاهُمْ فَلَمْ يُضَيِّفُونَا وَلَمْ يُطْعِمُونَا لَوْ شِئْتَ لَتَخِذْتَ عَلَيْهِ أَجْرًا ‏.‏ قَالَ هَذَا فِرَاقُ بَيْنِي وَبَيْنِكَ سَأُنَبِّئُكَ بِتَأْوِيلِ مَا لَمْ تَسْتَطِعْ عَلَيْهِ صَبْرًا ‏\"‏ ‏.‏ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ يَرْحَمُ اللَّهُ مُوسَى لَوَدِدْتُ أَنَّهُ كَانَ صَبَرَ حَتَّى يُقَصَّ عَلَيْنَا مِنْ أَخْبَارِهِمَا ‏\"‏ ‏.‏ قَالَ وَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ كَانَتِ الأُولَى مِنْ مُوسَى نِسْيَانًا ‏\"‏ ‏.‏ قَالَ ‏\"‏ وَجَاءَ عُصْفُورٌ حَتَّى وَقَعَ عَلَى حَرْفِ السَّفِينَةِ ثُمَّ نَقَرَ فِي الْبَحْرِ ‏.‏ فَقَالَ لَهُ الْخَضِرُ مَا نَقَصَ عِلْمِي وَعِلْمُكَ مِنْ عِلْمِ اللَّهِ إِلاَّ مِثْلَ مَا نَقَصَ هَذَا الْعُصْفُورُ مِنَ الْبَحْرِ ‏\"‏ ‏.‏ قَالَ سَعِيدُ بْنُ جُبَيْرٍ وَكَانَ يَقْرَأُ وَكَانَ أَمَامَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا ‏.‏ وَكَانَ يَقْرَأُ وَأَمَّا الْغُلاَمُ فَكَانَ كَافِرًا ‏.‏",
+          "hadith_english": "Sa'id b. Jubair reported:I said to Ibn Abbas that Nauf al-Bikali was of the opinion that Moses (peace be upon him), the Apostle of Bani Isra'il, was not the same who accompanied Khadir, whereupon he said: The enemy of Allah tells a lie. I heard Ubayy b. Ka'b say: Moses (peace be upon him) stood up to give sermon to the people of Isra'il. He was asked as to who amongst the people has the best knowledge, whereupon he said: I have the best knowledge. Thereupon Allah was annoyed with him that he did not attribute (the best knowledge) to Him. He revealed to him: A servant amongst My servants is at the junction of two rivers who has more knowledge than yours. Moses said: How can I meet him? It was said to him: Carry a fish in the large basket and the place where you find it missing there you will find him. Thereupon Moses proceeded forth along with a young man (Yusha'). Joshua b. Nun and Moses (peace be upon him) put the fish in the basket and there went along with him the young man (Yusha') until they came to a certain rock and Moses and his companion went to sleep and the fish stirred in that basket and fell into the ocean and Allah stopped the current of water like a vault until the way was made for the fish. Moses and his young companion were astonished and they walked for the rest of the day and the night and the friend of Moses forgot to inform him of this incident. When it was morning, Moses (peace be upon him) said to the young man: Bring for us the breakfast for we are dead tired because of this journey, and they did not feel exhausted until they had passed that place where they had been commanded (to stay). He said: Don't you know that when we reached the Sakhra (rock) I forgot the fish and nothing made me forget it but Satan that I could not remember it? How strange is it that the fish found a way in the river? Moses said: That was what we had been aiming at. Then both of them retraced their steps until they reached Sakhra; there they saw a man covered with a cloth. Moses greeted him. Khadir said to him: Where is as-Salam in our country.? He said: I am Moses, whereupon he (Khadir) said: You mean the Moses of Bani Isra'il? He said: Yes. He (Khadir) said: You have a knowledge out of the knowledge of Allah which in fact Allah imparted to you and about that I know nothing and I have knowledge out of Allah's knowledge which He imparted to me and about that you do not know. Moses (peace be upon him) said to him: May I follow you so that you may teach me that with which you have been taught righteousness. He said: You will not be able to bear with me; how you will be able to bear that about which you do not know? Moses said: Thou wilt find me patient, nor shalt I disobey you in aught. Khadir said to him: If you were to follow me, then do not ask me about anything until I myself speak to you about it. He said: Yes. So Khadir and Moses set forth on the bank of the river that there came before them a boat. Both of them talked to them (the owners of the boat) so that they might carry both of them. They had recognised Khadir and they carried them free. Khadir thereupon took hold of a plank in the boat and broke it away. Moses said: These people have carried us without any charge and you attempt to break their boat so that the people sailing in the boat may drown. This is (something) grievous that you have done. He said: Did I not say that you would not bear with me? He said: Blame me not for what I forgot and be not hard upon what I did. Then both of them got down from the boat and began to walk along the coastline that they saw a boy who had been playing with other boys. Khadir pulled up his head and killed him. Moses said: Have you killed an innocent person who is in no way guilty of slaying another? You have done something horrible. Thereupon he said: Did I not say to you that you will not be able to bear with me? He (Moses) said: This (act) is more grievous than the first one. He (Moses) further said. If I ask you about anything after this, keep not company with me, then you would no doubt find (a plausible) excuse for this. Then they both walked on until they reached the inhabitants of a village. They asked its inhabitants for food but they refused to entertain them as their guests. They found in it a wall which had been bent on one side and was about to fall. Khadir set it right with his own hand. Moses, said to him: It is the people to whom we came but they showed us no hospitality and they did not serve us food. If you wish you can get wages for it. He (Khadir) said: This is the parting of ways between me and you. Now I wish to reveal to you the significance of that for which you could not bear with me. Allah's Messenger (ﷺ) said. May Allah have mercy upon Moses! I wish if Moses could show patience and a (fuller) story of both of them could have been told. Allah's Messenger (ﷺ) said that the first thing which Moses said was out of forgetfulness. Then there came a sparrow until it perched on the wall of the boat and took water from the ocean. Thereupon, Khadir said: My knowledge and your knowledge in comparison with the knowledge of Allah is even less than the water taken by the sparrow in its beak in comparison to the water of the ocean, and Sa'id b. Jubair used to recite (verses 79 and 80 of Sura Kahf) in this way: There was before them a king who used to seize every boat by force which was in order, the boy was an unbeliever",
+          "sunnah_url": "https://sunnah.com/muslim/43/221"
+        }
+      ]
+    },
+    {
+      "verse": 81,
+      "quran_arabic": "فَأَرَدْنَآ أَن يُبْدِلَهُمَا رَبُّهُمَا خَيْرًۭا مِّنْهُ زَكَوٰةًۭ وَأَقْرَبَ رُحْمًۭا",
+      "text": "We wanted their Lord to give to them both in exchange (one) better than him in purity, and closer (to them) in affection.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 82,
+      "quran_arabic": "وَأَمَّا ٱلْجِدَارُ فَكَانَ لِغُلَٰمَيْنِ يَتِيمَيْنِ فِى ٱلْمَدِينَةِ وَكَانَ تَحْتَهُۥ كَنزٌۭ لَّهُمَا وَكَانَ أَبُوهُمَا صَٰلِحًۭا فَأَرَادَ رَبُّكَ أَن يَبْلُغَآ أَشُدَّهُمَا وَيَسْتَخْرِجَا كَنزَهُمَا رَحْمَةًۭ مِّن رَّبِّكَ ۚ وَمَا فَعَلْتُهُۥ عَنْ أَمْرِى ۚ ذَٰلِكَ تَأْوِيلُ مَا لَمْ تَسْطِع عَّلَيْهِ صَبْرًۭا",
+      "text": "As for the wall, it belonged to two orphan boys in the city, and underneath it was a treasure belonging to them both, (for) their father had been a righteous man. Your Lord wanted them both to reach their maturity, and bring forth their treasure as a mercy from your Lord. I did not do it on my (own) command. That is the interpretation (of) what you were not able (to have) patience with.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 83,
+      "quran_arabic": "وَيَسْـَٔلُونَكَ عَن ذِى ٱلْقَرْنَيْنِ ۖ قُلْ سَأَتْلُوا۟ عَلَيْكُم مِّنْهُ ذِكْرًا",
+      "text": "They ask you about Dhū-l-Qarnayn. Say: ‘I shall recite to you a remembrance of him.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 84,
+      "quran_arabic": "إِنَّا مَكَّنَّا لَهُۥ فِى ٱلْأَرْضِ وَءَاتَيْنَٰهُ مِن كُلِّ شَىْءٍۢ سَبَبًۭا",
+      "text": "Surely We established him on the earth and gave him a way of access to everything.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 85,
+      "quran_arabic": "فَأَتْبَعَ سَبَبًا",
+      "text": "He followed (one such) way of access",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 86,
+      "quran_arabic": "حَتَّىٰٓ إِذَا بَلَغَ مَغْرِبَ ٱلشَّمْسِ وَجَدَهَا تَغْرُبُ فِى عَيْنٍ حَمِئَةٍۢ وَوَجَدَ عِندَهَا قَوْمًۭا ۗ قُلْنَا يَٰذَا ٱلْقَرْنَيْنِ إِمَّآ أَن تُعَذِّبَ وَإِمَّآ أَن تَتَّخِذَ فِيهِمْ حُسْنًۭا",
+      "text": "until, when he reached the setting of the sun, he found it setting in a muddy spring, and he found next to it a people. We said, “Dhū-l-Qarnayn! Either punish (them) or do them (some) good.”",
+      "canonical_variants": [
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "حَتَّىٰٓ إِذَا بَلَغَ مَغۡرِبَ ٱلشَّمۡسِ وَجَدَهَا تَغۡرُبُ فِي عَيۡنٍ حَٰمِيَةٖ وَوَجَدَ عِندَهَا قَوۡمٗاۖ قُلۡنَا يَٰذَا ٱلۡقَرۡنَيۡنِ إِمَّآ أَن تُعَذِّبَ وَإِمَّآ أَن تَتَّخِذَ فِيهِمۡ حُسۡنٗا",
+          "english": ". . . in a hot spring . . .",
+          "reason": "EXTRA WORDS",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "حَتَّىٰٓ إِذَا بَلَغَ مَغۡرِبَ ٱلشَّمۡسِ وَجَدَهَا تَغۡرُبُ فِي عَيۡنٍ حَمِئَةٖ وَوَجَدَ عِندَهَا قَوۡمٗاۖ قُلۡنَا يَٰذَا ٱلۡقَرۡنَيۡنِ إِمَّآ أَن تُعَذِّبَ وَإِمَّآ أَن تَتَّخِذَ فِيهِمۡ حُسۡنٗا",
+          "english": "So he pursued a certain course until, when he had reached the setting of the sun, he found it setting in a murky spring, and found a people in its vicinity.",
+          "reason": "",
+          "category": ""
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 87,
+      "quran_arabic": "قَالَ أَمَّا مَن ظَلَمَ فَسَوْفَ نُعَذِّبُهُۥ ثُمَّ يُرَدُّ إِلَىٰ رَبِّهِۦ فَيُعَذِّبُهُۥ عَذَابًۭا نُّكْرًۭا",
+      "text": "He said, “As for the one who does evil, we shall punish him. Then he will be returned to his Lord, and He will punish him (with) a terrible punishment.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 88,
+      "quran_arabic": "وَأَمَّا مَنْ ءَامَنَ وَعَمِلَ صَٰلِحًۭا فَلَهُۥ جَزَآءً ٱلْحُسْنَىٰ ۖ وَسَنَقُولُ لَهُۥ مِنْ أَمْرِنَا يُسْرًۭا",
+      "text": "But as for the one who believes, and does righteousness, for him (there is) the good payment, and we shall speak to him something easy from our command.”",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "۞ وَأَمَّا مَنۡ ءَامَنَ وَعَمِلَ صَٰلِحٗا فَلَهُۥ جَزَآءُ اُ۬لۡحُسۡنۭيٰۖ وَسَنَقُولُ لَهُۥ مِنۡ أَمۡرِنَا يُسۡرٗا",
+          "english": ". . . then for him is the repayment for the excellent (deed), and we will . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "۞ وَأَمَّا مَنۡ ءَامَنَ وَعَمِلَ صَٰلِحٗا فَلَهُۥ جَزَآءُ  اُ۬لۡحُسۡنۭيٰۖ وَسَنَقُول لَّهُۥ مِنۡ أَمۡرِنَا يُسۡرٗا",
+          "english": ". . . then for him is the repayment for the excellent (deed), and we will . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "وَأَمَّا مَنۡ ءَامَنَ وَعَمِلَ صَٰلِحٗا فَلَهُۥ جَزَآءُ ٱلۡحُسۡنَىٰۖ وَسَنَقُولُ لَهُۥ مِنۡ أَمۡرِنَا يُسۡرٗا",
+          "english": ". . . then for him is the repayment for the excellent (deed), and we will . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "وَأَمَّا مَنۡ ءَامَنَ وَعَمِلَ صَٰلِحٗا فَلَهُۥ جَزَآءً ٱلۡحُسۡنَىٰۖ وَسَنَقُولُ لَهُۥ مِنۡ أَمۡرِنَا يُسۡرٗا",
+          "english": "But as for the one who has attained faith and has acted righteously, then for him is the excellent (reward) as repayment, and we will speak to him with ease regarding our command.",
+          "reason": "",
+          "category": ""
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَأَمَّا مَنۡ ءَامَنَ وَعَمِلَ صَٰلِحٗا فَلَهُۥ جَزَآءُ ٱلۡحُسۡنَىٰۖ وَسَنَقُولُ لَهُۥ مِنۡ أَمۡرِنَا يُسۡرٗا",
+          "english": ". . . then for him is the repayment for the excellent (deed), and we will . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَأَمَّا مَنۡ ءَامَنَ وَعَمِلَ صَٰلِحٗا فَلَهُۥ جَزَآءُ ٱلۡحُسۡنَىٰۖ وَسَنَقُولُ لَهُۥ مِنۡ أَمۡرِنَا يُسۡرٗا",
+          "english": ". . . then for him is the repayment for the excellent (deed), and we will . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "وَأَمَّا مَنْ ءَامَنَ وَعَمِلَ صَٰلِحاٗ فَلَهُۥ جَزَآءُ اُ۬لْحُسْنَىٰۖ وَسَنَقُولُ لَهُۥ مِنْ أَمْرِنَا يُسْراٗۖ",
+          "english": ". . . then for him is the repayment for the excellent (deed), and we will . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "وَأَمَّا مَنَ اٰمَنَ وَعَمِلَ صَٰلِحاٗ فَلَهُۥ جَزَآءُ اُ۬لْحُسْن۪ىٰۖ وَسَنَقُولُ لَهُۥ مِنَ اَمْرِنَا يُسْراٗۖ",
+          "english": ". . . then for him is the repayment for the excellent (deed), and we will . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 89,
+      "quran_arabic": "ثُمَّ أَتْبَعَ سَبَبًا",
+      "text": "Then he followed (another) way of access",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 90,
+      "quran_arabic": "حَتَّىٰٓ إِذَا بَلَغَ مَطْلِعَ ٱلشَّمْسِ وَجَدَهَا تَطْلُعُ عَلَىٰ قَوْمٍۢ لَّمْ نَجْعَل لَّهُم مِّن دُونِهَا سِتْرًۭا",
+      "text": "until, when he reached the rising (place) of the sun, he found it rising on a people for whom We had not provided any shelter from it.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 91,
+      "quran_arabic": "كَذَٰلِكَ وَقَدْ أَحَطْنَا بِمَا لَدَيْهِ خُبْرًۭا",
+      "text": "So (it was), but We had already encompassed what his situation was in (our) awareness.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 92,
+      "quran_arabic": "ثُمَّ أَتْبَعَ سَبَبًا",
+      "text": "Then he followed (another) way of access",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 93,
+      "quran_arabic": "حَتَّىٰٓ إِذَا بَلَغَ بَيْنَ ٱلسَّدَّيْنِ وَجَدَ مِن دُونِهِمَا قَوْمًۭا لَّا يَكَادُونَ يَفْقَهُونَ قَوْلًۭا",
+      "text": "until, when he arrived (at the place) between the two barriers, he found on this side of them a people hardly able to understand (his) speech.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 94,
+      "quran_arabic": "قَالُوا۟ يَٰذَا ٱلْقَرْنَيْنِ إِنَّ يَأْجُوجَ وَمَأْجُوجَ مُفْسِدُونَ فِى ٱلْأَرْضِ فَهَلْ نَجْعَلُ لَكَ خَرْجًا عَلَىٰٓ أَن تَجْعَلَ بَيْنَنَا وَبَيْنَهُمْ سَدًّۭا",
+      "text": "They said, “Dhū-l-Qarnayn! Surely Yajūj and Majūj are fomenting corruption on the earth. Shall we pay tribute to you on (the condition) that you construct a barrier between us and them?”",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 95,
+      "quran_arabic": "قَالَ مَا مَكَّنِّى فِيهِ رَبِّى خَيْرٌۭ فَأَعِينُونِى بِقُوَّةٍ أَجْعَلْ بَيْنَكُمْ وَبَيْنَهُمْ رَدْمًا",
+      "text": "He said, “What my Lord has established me with is better. Help me with a force, (and) I shall construct a rampart between you and them.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 96,
+      "quran_arabic": "ءَاتُونِى زُبَرَ ٱلْحَدِيدِ ۖ حَتَّىٰٓ إِذَا سَاوَىٰ بَيْنَ ٱلصَّدَفَيْنِ قَالَ ٱنفُخُوا۟ ۖ حَتَّىٰٓ إِذَا جَعَلَهُۥ نَارًۭا قَالَ ءَاتُونِىٓ أُفْرِغْ عَلَيْهِ قِطْرًۭا",
+      "text": "Bring me blocks of iron!” – Until, when he had made level (the gap) between the two cliffs, he said, “Blow!” – Until, when he had made it a fire, he said, “Bring me (blocks of brass)! I will pour molten brass over it.”",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 97,
+      "quran_arabic": "فَمَا ٱسْطَٰعُوٓا۟ أَن يَظْهَرُوهُ وَمَا ٱسْتَطَٰعُوا۟ لَهُۥ نَقْبًۭا",
+      "text": "So they were not able to surmount it, nor were they able (to make) a hole in it.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 98,
+      "quran_arabic": "قَالَ هَٰذَا رَحْمَةٌۭ مِّن رَّبِّى ۖ فَإِذَا جَآءَ وَعْدُ رَبِّى جَعَلَهُۥ دَكَّآءَ ۖ وَكَانَ وَعْدُ رَبِّى حَقًّۭا",
+      "text": "He said, “This is a mercy from my Lord. But when the promise of my Lord comes, He will shatter it. The promise of my Lord is true.”’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 99,
+      "quran_arabic": "۞ وَتَرَكْنَا بَعْضَهُمْ يَوْمَئِذٍۢ يَمُوجُ فِى بَعْضٍۢ ۖ وَنُفِخَ فِى ٱلصُّورِ فَجَمَعْنَٰهُمْ جَمْعًۭا",
+      "text": "We shall leave some of them on that Day crashing into each other, and there will be a blast on the trumpet, and We shall gather them all together.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 100,
+      "quran_arabic": "وَعَرَضْنَا جَهَنَّمَ يَوْمَئِذٍۢ لِّلْكَٰفِرِينَ عَرْضًا",
+      "text": "We shall present Gehenna on that Day to the disbelievers,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 101,
+      "quran_arabic": "ٱلَّذِينَ كَانَتْ أَعْيُنُهُمْ فِى غِطَآءٍ عَن ذِكْرِى وَكَانُوا۟ لَا يَسْتَطِيعُونَ سَمْعًا",
+      "text": "whose eyes were covered from My remembrance and (who) were not capable (of) hearing.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 102,
+      "quran_arabic": "أَفَحَسِبَ ٱلَّذِينَ كَفَرُوٓا۟ أَن يَتَّخِذُوا۟ عِبَادِى مِن دُونِىٓ أَوْلِيَآءَ ۚ إِنَّآ أَعْتَدْنَا جَهَنَّمَ لِلْكَٰفِرِينَ نُزُلًۭا",
+      "text": "Do those who disbelieve think that they can take My servants as allies instead of Me? Surely We have prepared Gehenna as a reception for the disbelievers.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 103,
+      "quran_arabic": "قُلْ هَلْ نُنَبِّئُكُم بِٱلْأَخْسَرِينَ أَعْمَٰلًا",
+      "text": "Say: ‘Shall We inform you about the worst losers in (regard to their) deeds?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 104,
+      "quran_arabic": "ٱلَّذِينَ ضَلَّ سَعْيُهُمْ فِى ٱلْحَيَوٰةِ ٱلدُّنْيَا وَهُمْ يَحْسَبُونَ أَنَّهُمْ يُحْسِنُونَ صُنْعًا",
+      "text": "(They are) those whose striving goes astray in this present life, even though they think that they are doing good in (regard to their) work.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 105,
+      "quran_arabic": "أُو۟لَٰٓئِكَ ٱلَّذِينَ كَفَرُوا۟ بِـَٔايَٰتِ رَبِّهِمْ وَلِقَآئِهِۦ فَحَبِطَتْ أَعْمَٰلُهُمْ فَلَا نُقِيمُ لَهُمْ يَوْمَ ٱلْقِيَٰمَةِ وَزْنًۭا",
+      "text": "Those – (they are) those who disbelieve in the signs of their Lord and in the meeting with Him. So their deeds have come to nothing. We shall not assign any weight to them on the Day of Resurrection.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 106,
+      "quran_arabic": "ذَٰلِكَ جَزَآؤُهُمْ جَهَنَّمُ بِمَا كَفَرُوا۟ وَٱتَّخَذُوٓا۟ ءَايَٰتِى وَرُسُلِى هُزُوًا",
+      "text": "That is their payment – Gehenna – because they disbelieved and took My signs and My messengers in mockery.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 107,
+      "quran_arabic": "إِنَّ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ كَانَتْ لَهُمْ جَنَّٰتُ ٱلْفِرْدَوْسِ نُزُلًا",
+      "text": "(But) surely those who believe and do righteous deeds – for them (there will be) Gardens of Paradise as a reception,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 108,
+      "quran_arabic": "خَٰلِدِينَ فِيهَا لَا يَبْغُونَ عَنْهَا حِوَلًۭا",
+      "text": "there to remain. They will not desire any removal from there.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 109,
+      "quran_arabic": "قُل لَّوْ كَانَ ٱلْبَحْرُ مِدَادًۭا لِّكَلِمَٰتِ رَبِّى لَنَفِدَ ٱلْبَحْرُ قَبْلَ أَن تَنفَدَ كَلِمَٰتُ رَبِّى وَلَوْ جِئْنَا بِمِثْلِهِۦ مَدَدًۭا",
+      "text": "Say: ‘If the sea were ink for the words of my Lord, the sea would indeed give out before the words of my Lord would give out, even if We brought (another sea) like it as an extension.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 110,
+      "quran_arabic": "قُلْ إِنَّمَآ أَنَا۠ بَشَرٌۭ مِّثْلُكُمْ يُوحَىٰٓ إِلَىَّ أَنَّمَآ إِلَٰهُكُمْ إِلَٰهٌۭ وَٰحِدٌۭ ۖ فَمَن كَانَ يَرْجُوا۟ لِقَآءَ رَبِّهِۦ فَلْيَعْمَلْ عَمَلًۭا صَٰلِحًۭا وَلَا يُشْرِكْ بِعِبَادَةِ رَبِّهِۦٓ أَحَدًۢا",
+      "text": "Say: ‘I am only a human being like you. I am inspired that your God is one God. So whoever expects the meeting with his Lord, let him do righteous deeds and not associate anyone in the service of his Lord.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

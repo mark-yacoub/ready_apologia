@@ -1,0 +1,435 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ قٓ ۚ وَٱلْقُرْءَانِ ٱلْمَجِيدِ",
+      "text": "Qāf. By the glorious Qur’ān!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "بَلْ عَجِبُوٓا۟ أَن جَآءَهُم مُّنذِرٌۭ مِّنْهُمْ فَقَالَ ٱلْكَٰفِرُونَ هَٰذَا شَىْءٌ عَجِيبٌ",
+      "text": "– No! They are amazed that a warner has come to them from among them, and the disbelievers say, ‘This is an amazing thing!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "أَءِذَا مِتْنَا وَكُنَّا تُرَابًۭا ۖ ذَٰلِكَ رَجْعٌۢ بَعِيدٌۭ",
+      "text": "When we are dead, and turned to dust [. . .]? That is a far return!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "قَدْ عَلِمْنَا مَا تَنقُصُ ٱلْأَرْضُ مِنْهُمْ ۖ وَعِندَنَا كِتَٰبٌ حَفِيظٌۢ",
+      "text": "We know what the earth takes away from them, and with Us is a Book (that is) keeping watch.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "بَلْ كَذَّبُوا۟ بِٱلْحَقِّ لَمَّا جَآءَهُمْ فَهُمْ فِىٓ أَمْرٍۢ مَّرِيجٍ",
+      "text": "No! They called the truth a lie when it came to them, and they are in a confused state.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "أَفَلَمْ يَنظُرُوٓا۟ إِلَى ٱلسَّمَآءِ فَوْقَهُمْ كَيْفَ بَنَيْنَٰهَا وَزَيَّنَّٰهَا وَمَا لَهَا مِن فُرُوجٍۢ",
+      "text": "Do they not look at the sky above them, how We have built it, and adorned it, and it has no cracks?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "وَٱلْأَرْضَ مَدَدْنَٰهَا وَأَلْقَيْنَا فِيهَا رَوَٰسِىَ وَأَنۢبَتْنَا فِيهَا مِن كُلِّ زَوْجٍۭ بَهِيجٍۢ",
+      "text": "And the earth – We stretched it out, and cast on it firm mountains, and caused every beautiful kind (of plant) to grow on it,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "تَبْصِرَةًۭ وَذِكْرَىٰ لِكُلِّ عَبْدٍۢ مُّنِيبٍۢ",
+      "text": "as evidence and a reminder to every servant who turns (in repentance).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "وَنَزَّلْنَا مِنَ ٱلسَّمَآءِ مَآءًۭ مُّبَٰرَكًۭا فَأَنۢبَتْنَا بِهِۦ جَنَّٰتٍۢ وَحَبَّ ٱلْحَصِيدِ",
+      "text": "And We sent down blessed water from the sky, and caused gardens to grow by means of it, and grain for harvest,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "وَٱلنَّخْلَ بَاسِقَٰتٍۢ لَّهَا طَلْعٌۭ نَّضِيدٌۭ",
+      "text": "and tall date palms with bunches (of fruit),",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "رِّزْقًۭا لِّلْعِبَادِ ۖ وَأَحْيَيْنَا بِهِۦ بَلْدَةًۭ مَّيْتًۭا ۚ كَذَٰلِكَ ٱلْخُرُوجُ",
+      "text": "as a provision for the servants, and We give a barren land life by means of it. In this way the coming forth (will take place).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "كَذَّبَتْ قَبْلَهُمْ قَوْمُ نُوحٍۢ وَأَصْحَٰبُ ٱلرَّسِّ وَثَمُودُ",
+      "text": "Before them the people of Noah called (it) a lie, and the people of al-Rass, and Thamūd,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "وَعَادٌۭ وَفِرْعَوْنُ وَإِخْوَٰنُ لُوطٍۢ",
+      "text": "and ‘Ād, and Pharaoh, and the brothers of Lot,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "وَأَصْحَٰبُ ٱلْأَيْكَةِ وَقَوْمُ تُبَّعٍۢ ۚ كُلٌّۭ كَذَّبَ ٱلرُّسُلَ فَحَقَّ وَعِيدِ",
+      "text": "and the people of the Grove, and the people of Tubba‘ – each (of them) called the messengers liars, and My promise was proved true.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "أَفَعَيِينَا بِٱلْخَلْقِ ٱلْأَوَّلِ ۚ بَلْ هُمْ فِى لَبْسٍۢ مِّنْ خَلْقٍۢ جَدِيدٍۢ",
+      "text": "Were We tired out by the first creation? No! They are in doubt about a new creation.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "وَلَقَدْ خَلَقْنَا ٱلْإِنسَٰنَ وَنَعْلَمُ مَا تُوَسْوِسُ بِهِۦ نَفْسُهُۥ ۖ وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ ٱلْوَرِيدِ",
+      "text": "Certainly We created the human, and We know what his own self whispers within him, (for) We are closer to him than (his) jugular vein.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "إِذْ يَتَلَقَّى ٱلْمُتَلَقِّيَانِ عَنِ ٱلْيَمِينِ وَعَنِ ٱلشِّمَالِ قَعِيدٌۭ",
+      "text": "When the two meeters meet together, (one) seated on the right, and (one) on the left,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 18,
+      "quran_arabic": "مَّا يَلْفِظُ مِن قَوْلٍ إِلَّا لَدَيْهِ رَقِيبٌ عَتِيدٌۭ",
+      "text": "he does not utter a word without (there being) a watcher ready beside him.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 19,
+      "quran_arabic": "وَجَآءَتْ سَكْرَةُ ٱلْمَوْتِ بِٱلْحَقِّ ۖ ذَٰلِكَ مَا كُنتَ مِنْهُ تَحِيدُ",
+      "text": "The daze of death comes in truth: ‘That is what you were trying to avoid!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 20,
+      "quran_arabic": "وَنُفِخَ فِى ٱلصُّورِ ۚ ذَٰلِكَ يَوْمُ ٱلْوَعِيدِ",
+      "text": "There will be a blast on the trumpet: ‘That is the Day of Promise.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 21,
+      "quran_arabic": "وَجَآءَتْ كُلُّ نَفْسٍۢ مَّعَهَا سَآئِقٌۭ وَشَهِيدٌۭ",
+      "text": "Each person will come, (and) with him a driver and a witness.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 22,
+      "quran_arabic": "لَّقَدْ كُنتَ فِى غَفْلَةٍۢ مِّنْ هَٰذَا فَكَشَفْنَا عَنكَ غِطَآءَكَ فَبَصَرُكَ ٱلْيَوْمَ حَدِيدٌۭ",
+      "text": "‘Certainly you were oblivious of this, so We have removed your covering, and today your sight is sharp.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 23,
+      "quran_arabic": "وَقَالَ قَرِينُهُۥ هَٰذَا مَا لَدَىَّ عَتِيدٌ",
+      "text": "His comrade will say, ‘This is what I have ready.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 24,
+      "quran_arabic": "أَلْقِيَا فِى جَهَنَّمَ كُلَّ كَفَّارٍ عَنِيدٍۢ",
+      "text": "‘(You two), cast into Gehenna every stubborn disbeliever,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 25,
+      "quran_arabic": "مَّنَّاعٍۢ لِّلْخَيْرِ مُعْتَدٍۢ مُّرِيبٍ",
+      "text": "preventer of the good, transgressor, doubter,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 26,
+      "quran_arabic": "ٱلَّذِى جَعَلَ مَعَ ٱللَّهِ إِلَٰهًا ءَاخَرَ فَأَلْقِيَاهُ فِى ٱلْعَذَابِ ٱلشَّدِيدِ",
+      "text": "who set up another god with God. Cast him into the harsh punishment.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 27,
+      "quran_arabic": "۞ قَالَ قَرِينُهُۥ رَبَّنَا مَآ أَطْغَيْتُهُۥ وَلَٰكِن كَانَ فِى ضَلَٰلٍۭ بَعِيدٍۢ",
+      "text": "His (other) comrade will say, ‘Our Lord, I did not make him transgress insolently, but he was far astray.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 28,
+      "quran_arabic": "قَالَ لَا تَخْتَصِمُوا۟ لَدَىَّ وَقَدْ قَدَّمْتُ إِلَيْكُم بِٱلْوَعِيدِ",
+      "text": "He will say, ‘Do not dispute in My presence, when I have already sent forth the promise to you.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 29,
+      "quran_arabic": "مَا يُبَدَّلُ ٱلْقَوْلُ لَدَىَّ وَمَآ أَنَا۠ بِظَلَّٰمٍۢ لِّلْعَبِيدِ",
+      "text": "The word is not going to change with Me. I am not an evildoer to (My) servants.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 30,
+      "quran_arabic": "يَوْمَ نَقُولُ لِجَهَنَّمَ هَلِ ٱمْتَلَأْتِ وَتَقُولُ هَلْ مِن مَّزِيدٍۢ",
+      "text": "On the Day when We say to Gehenna, ‘Are you filled?,’ and it says, ‘Are there any more (to come)?,’",
+      "canonical_variants": [
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "يَوۡمَ يَقُولُ لِجَهَنَّمَ هَلِ ٱمۡتَلَأۡتِ وَتَقُولُ هَلۡ مِن مَّزِيدٖ",
+          "english": "On the day when He says to Hell, “Are you full?” And it says, “Are there any more?”",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "يَوۡمَ نَقُولُ لِجَهَنَّمَ هَلِ ٱمۡتَلَأۡتِ وَتَقُولُ هَلۡ مِن مَّزِيدٖ",
+          "english": "On the day when We say to Hell, “Are you full?” And it says, “Are there any more?”",
+          "reason": "",
+          "category": ""
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "يَوْمَ يَقُولُ لِجَهَنَّمَ هَلِ اِ۪مْتَلَأْتِ وَتَقُولُ هَلْ مِن مَّزِيدٖۖ",
+          "english": "On the day when He says to Hell, “Are you full?” And it says, “Are there any more?”",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "يَوْمَ يَقُولُ لِجَهَنَّمَ هَلِ اِ۪مْتَلَأْتِ وَتَقُولُ هَلْ مِن مَّزِيدٖۖ",
+          "english": "On the day when He says to Hell, “Are you full?” And it says, “Are there any more?”",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 31,
+      "quran_arabic": "وَأُزْلِفَتِ ٱلْجَنَّةُ لِلْمُتَّقِينَ غَيْرَ بَعِيدٍ",
+      "text": "and the Garden is brought near for the ones who guard (themselves) – (it is) not far:",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 32,
+      "quran_arabic": "هَٰذَا مَا تُوعَدُونَ لِكُلِّ أَوَّابٍ حَفِيظٍۢ",
+      "text": "‘This is what you were promised. (It is) for everyone who turns (in repentance and) keeps watch",
+      "canonical_variants": [
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "هَٰذَا مَا يُوعَدُونَ لِكُلِّ أَوَّابٍ حَفِيظٖ",
+          "english": "This is what they are promised—for every constant preserver who often turns to God,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "هَٰذَا مَا يُوعَدُونَ لِكُلِّ أَوَّابٍ حَفِيظٖ",
+          "english": "This is what they are promised—for every constant preserver who often turns to God,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 33,
+      "quran_arabic": "مَّنْ خَشِىَ ٱلرَّحْمَٰنَ بِٱلْغَيْبِ وَجَآءَ بِقَلْبٍۢ مُّنِيبٍ",
+      "text": "– whoever fears the Merciful in the unseen, and brings a heart turning (in repentance).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 34,
+      "quran_arabic": "ٱدْخُلُوهَا بِسَلَٰمٍۢ ۖ ذَٰلِكَ يَوْمُ ٱلْخُلُودِ",
+      "text": "Enter it in peace!’ That is the Day of Eternity.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 35,
+      "quran_arabic": "لَهُم مَّا يَشَآءُونَ فِيهَا وَلَدَيْنَا مَزِيدٌۭ",
+      "text": "There they will have whatever they please, and with Us (there is still) more.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 36,
+      "quran_arabic": "وَكَمْ أَهْلَكْنَا قَبْلَهُم مِّن قَرْنٍ هُمْ أَشَدُّ مِنْهُم بَطْشًۭا فَنَقَّبُوا۟ فِى ٱلْبِلَٰدِ هَلْ مِن مَّحِيصٍ",
+      "text": "How many a generation We have destroyed before them! They were stronger than them in power, and they searched about in the lands – was there any place of escape?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 37,
+      "quran_arabic": "إِنَّ فِى ذَٰلِكَ لَذِكْرَىٰ لِمَن كَانَ لَهُۥ قَلْبٌ أَوْ أَلْقَى ٱلسَّمْعَ وَهُوَ شَهِيدٌۭ",
+      "text": "Surely in that is a reminder indeed to whoever has a heart or listens attentively, and he is a witness.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 38,
+      "quran_arabic": "وَلَقَدْ خَلَقْنَا ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَا فِى سِتَّةِ أَيَّامٍۢ وَمَا مَسَّنَا مِن لُّغُوبٍۢ",
+      "text": "Certainly We created the heavens and the earth, and whatever is between them, in six days. No weariness touched Us in (doing) that.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 39,
+      "quran_arabic": "فَٱصْبِرْ عَلَىٰ مَا يَقُولُونَ وَسَبِّحْ بِحَمْدِ رَبِّكَ قَبْلَ طُلُوعِ ٱلشَّمْسِ وَقَبْلَ ٱلْغُرُوبِ",
+      "text": "Be patient with what they say, and glorify your Lord with praise before the rising of the sun, and before its setting.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 40,
+      "quran_arabic": "وَمِنَ ٱلَّيْلِ فَسَبِّحْهُ وَأَدْبَٰرَ ٱلسُّجُودِ",
+      "text": "And glorify Him during part of the night, and at the ends of the prostration.",
+      "canonical_variants": [
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَمِنَ ٱلَّيۡلِ فَسَبِّحۡهُۥ وَإِدۡبَٰرَ ٱلسُّجُودِ",
+          "english": "And highly exaltsg Him with praise in the night and at the ends of prostrations.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَمِنَ ٱلَّيۡلِ فَسَبِّحۡهُۥ وَإِدۡبَٰرَ ٱلسُّجُودِ",
+          "english": "And highly exaltsg Him with praise in the night and at the ends of prostrations.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "وَمِنَ اَ۬ليْلِ فَسَبِّحْهُ وَإِدْبَٰرَ اَ۬لسُّجُودِۖ",
+          "english": "And highly exaltsg Him with praise in the night and at the ends of prostrations.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "وَمِنَ اَ۬ليْلِ فَسَبِّحْهُ وَإِدْبَٰرَ اَ۬لسُّجُودِۖ",
+          "english": "And highly exaltsg Him with praise in the night and at the ends of prostrations.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 41,
+      "quran_arabic": "وَٱسْتَمِعْ يَوْمَ يُنَادِ ٱلْمُنَادِ مِن مَّكَانٍۢ قَرِيبٍۢ",
+      "text": "And listen for the Day when the caller will call from a place nearby.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 42,
+      "quran_arabic": "يَوْمَ يَسْمَعُونَ ٱلصَّيْحَةَ بِٱلْحَقِّ ۚ ذَٰلِكَ يَوْمُ ٱلْخُرُوجِ",
+      "text": "The Day when they hear the cry in truth – that is the Day of Coming Forth.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 43,
+      "quran_arabic": "إِنَّا نَحْنُ نُحْىِۦ وَنُمِيتُ وَإِلَيْنَا ٱلْمَصِيرُ",
+      "text": "Surely We – We give life and cause death, and to Us is the (final) destination.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 44,
+      "quran_arabic": "يَوْمَ تَشَقَّقُ ٱلْأَرْضُ عَنْهُمْ سِرَاعًۭا ۚ ذَٰلِكَ حَشْرٌ عَلَيْنَا يَسِيرٌۭ",
+      "text": "On the Day when the earth is split open from them, (and they come forth from the graves) rushing – that is an easy gathering for Us.",
+      "canonical_variants": [
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "يَوۡمَ تَشَّقَّقُ ٱلۡأَرۡضُ عَنۡهُمُۥ سِرَاعٗاۚ ذَٰلِكَ حَشۡرٌ عَلَيۡنَا يَسِيرٞ",
+          "english": "The day the earth vigorously ruptures open from above them, letting them rush out; that is an easy exodus for Us.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "يَوۡمَ تَشَّقَّقُ ٱلۡأَرۡضُ عَنۡهُمُۥ سِرَاعٗاۚ ذَٰلِكَ حَشۡرٌ عَلَيۡنَا يَسِيرٞ",
+          "english": "The day the earth vigorously ruptures open from above them, letting them rush out; that is an easy exodus for Us.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "يَوْمَ تَشَّقَّقُ اُ۬لْأَرْضُ عَنْهُمْ سِرَاعاٗۖ ذَٰلِكَ حَشْرٌ عَلَيْنَا يَسِيرٞۖ",
+          "english": "The day the earth vigorously ruptures open from above them, letting them rush out; that is an easy exodus for Us.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "يَوْمَ تَشَّقَّقُ اُ۬لَارْضُ عَنْهُمْ سِرَاعاٗۖ ذَٰلِكَ حَشْرٌ عَلَيْنَا يَسِيرٞۖ",
+          "english": "The day the earth vigorously ruptures open from above them, letting them rush out; that is an easy exodus for Us.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Addition/Omission"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 45,
+      "quran_arabic": "نَّحْنُ أَعْلَمُ بِمَا يَقُولُونَ ۖ وَمَآ أَنتَ عَلَيْهِم بِجَبَّارٍۢ ۖ فَذَكِّرْ بِٱلْقُرْءَانِ مَن يَخَافُ وَعِيدِ",
+      "text": "We know what they say. You are not a tyrant over them. So remind, by means of the Qur’ān, anyone who fears My promise.",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

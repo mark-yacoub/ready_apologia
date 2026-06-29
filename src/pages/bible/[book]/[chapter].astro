@@ -225,7 +225,7 @@ const topicsMeta = allTopics.reduce((acc, t) => {
   <div class="chapter-reader-container">
 
     <!-- Split Book & Chapter Dropdown Selector -->
-    <header class="reader-header select-none">
+    <header class="reader-header select-none" style="display: flex; flex-direction: column; gap: 12px;">
       <div class="selector-hub">
         <!-- 1. Book Name Selector (Clicking 'John' opens Left Navigation Menu) -->
         <button class="book-selector-btn book-title" onclick="document.getElementById('nav-toggle-btn').click()">
@@ -268,11 +268,9 @@ const topicsMeta = allTopics.reduce((acc, t) => {
         chapterVerses.map(verseObj => {
           const verseNum = Object.keys(verseObj)[0];
           const verseText = verseObj[verseNum];
-
+          const hasTopics = !!topicMap[verseNum];
           const evidenceTypes = evidenceMap[verseNum] || [];
           const hasEvidence = evidenceTypes.length > 0;
-          const hasTopics = !!topicMap[verseNum];
-
           if (hasEvidence) {
             return (
               <div class="verse-row active-verse" id={verseNum} data-topics={topicMap[verseNum] ? topicMap[verseNum].join(',') : ''} data-topic-notes={topicNotesMap[verseNum] ? JSON.stringify(topicNotesMap[verseNum]) : ''}>
@@ -530,8 +528,12 @@ const topicsMeta = allTopics.reduce((acc, t) => {
     });
   };
 
+
+  
   // Run on initial load and after every page navigation
-  document.addEventListener('astro:page-load', initChapterPage);
+  document.addEventListener('astro:page-load', () => {
+    initChapterPage();
+  });
 
   // Clean up global listeners before swap to prevent memory leaks
   document.addEventListener('astro:before-swap', () => {

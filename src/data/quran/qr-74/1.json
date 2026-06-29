@@ -1,0 +1,430 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ يَٰٓأَيُّهَا ٱلْمُدَّثِّرُ",
+      "text": "You, cloaked one!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "قُمْ فَأَنذِرْ",
+      "text": "Arise and warn!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "وَرَبَّكَ فَكَبِّرْ",
+      "text": "Magnify your Lord,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "وَثِيَابَكَ فَطَهِّرْ",
+      "text": "and purify your clothes,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "وَٱلرُّجْزَ فَٱهْجُرْ",
+      "text": "and flee from the defilement!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "وَلَا تَمْنُن تَسْتَكْثِرُ",
+      "text": "Do not confer a favor to gain more,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "وَلِرَبِّكَ فَٱصْبِرْ",
+      "text": "and be patient before your Lord.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "فَإِذَا نُقِرَ فِى ٱلنَّاقُورِ",
+      "text": "When there is a blast on the trumpet,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "فَذَٰلِكَ يَوْمَئِذٍۢ يَوْمٌ عَسِيرٌ",
+      "text": "that Day will be a hard Day",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "عَلَى ٱلْكَٰفِرِينَ غَيْرُ يَسِيرٍۢ",
+      "text": "– far from easy on the disbelievers.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "ذَرْنِى وَمَنْ خَلَقْتُ وَحِيدًۭا",
+      "text": "Leave Me (to deal with) him whom I created alone,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "وَجَعَلْتُ لَهُۥ مَالًۭا مَّمْدُودًۭا",
+      "text": "and for whom I supplied extensive wealth,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "وَبَنِينَ شُهُودًۭا",
+      "text": "and sons as witnesses,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "وَمَهَّدتُّ لَهُۥ تَمْهِيدًۭا",
+      "text": "and made everything smooth for him.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "ثُمَّ يَطْمَعُ أَنْ أَزِيدَ",
+      "text": "Then he is eager that I should do more.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "كَلَّآ ۖ إِنَّهُۥ كَانَ لِءَايَٰتِنَا عَنِيدًۭا",
+      "text": "By no means! He is stubborn to Our signs.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "سَأُرْهِقُهُۥ صَعُودًا",
+      "text": "I shall burden him with a hard climb.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 18,
+      "quran_arabic": "إِنَّهُۥ فَكَّرَ وَقَدَّرَ",
+      "text": "Surely he thought and decided –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 19,
+      "quran_arabic": "فَقُتِلَ كَيْفَ قَدَّرَ",
+      "text": "so may he perish (for) how he decided!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 20,
+      "quran_arabic": "ثُمَّ قُتِلَ كَيْفَ قَدَّرَ",
+      "text": "Once again, may he perish (for) how he decided!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 21,
+      "quran_arabic": "ثُمَّ نَظَرَ",
+      "text": "Then he looked,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 22,
+      "quran_arabic": "ثُمَّ عَبَسَ وَبَسَرَ",
+      "text": "then he frowned and scowled,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 23,
+      "quran_arabic": "ثُمَّ أَدْبَرَ وَٱسْتَكْبَرَ",
+      "text": "then he turned back and became arrogant,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 24,
+      "quran_arabic": "فَقَالَ إِنْ هَٰذَآ إِلَّا سِحْرٌۭ يُؤْثَرُ",
+      "text": "and said, ‘This is nothing but ordinary magic.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 25,
+      "quran_arabic": "إِنْ هَٰذَآ إِلَّا قَوْلُ ٱلْبَشَرِ",
+      "text": "This is nothing but the word of a human being.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 26,
+      "quran_arabic": "سَأُصْلِيهِ سَقَرَ",
+      "text": "I shall burn him in Saqar!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 27,
+      "quran_arabic": "وَمَآ أَدْرَىٰكَ مَا سَقَرُ",
+      "text": "And what will make you know what Saqar is?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 28,
+      "quran_arabic": "لَا تُبْقِى وَلَا تَذَرُ",
+      "text": "It spares nothing, and leaves nothing,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 29,
+      "quran_arabic": "لَوَّاحَةٌۭ لِّلْبَشَرِ",
+      "text": "scorching all flesh.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 30,
+      "quran_arabic": "عَلَيْهَا تِسْعَةَ عَشَرَ",
+      "text": "Over it are nineteen.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 31,
+      "quran_arabic": "وَمَا جَعَلْنَآ أَصْحَٰبَ ٱلنَّارِ إِلَّا مَلَٰٓئِكَةًۭ ۙ وَمَا جَعَلْنَا عِدَّتَهُمْ إِلَّا فِتْنَةًۭ لِّلَّذِينَ كَفَرُوا۟ لِيَسْتَيْقِنَ ٱلَّذِينَ أُوتُوا۟ ٱلْكِتَٰبَ وَيَزْدَادَ ٱلَّذِينَ ءَامَنُوٓا۟ إِيمَٰنًۭا ۙ وَلَا يَرْتَابَ ٱلَّذِينَ أُوتُوا۟ ٱلْكِتَٰبَ وَٱلْمُؤْمِنُونَ ۙ وَلِيَقُولَ ٱلَّذِينَ فِى قُلُوبِهِم مَّرَضٌۭ وَٱلْكَٰفِرُونَ مَاذَآ أَرَادَ ٱللَّهُ بِهَٰذَا مَثَلًۭا ۚ كَذَٰلِكَ يُضِلُّ ٱللَّهُ مَن يَشَآءُ وَيَهْدِى مَن يَشَآءُ ۚ وَمَا يَعْلَمُ جُنُودَ رَبِّكَ إِلَّا هُوَ ۚ وَمَا هِىَ إِلَّا ذِكْرَىٰ لِلْبَشَرِ",
+      "text": "We have made only angels as keepers of the Fire, and We have made their number only as a test for the disbelievers, so that those who have been given the Book may be certain, and that those who believe may increase in belief, and that those who have been given the Book and those who believe may not be in doubt, and that those in whose hearts is a sickness and the disbelievers may say, ‘What did God intend by this as a parable?’ In this way God leads astray whomever He pleases and guides whomever He pleases. No one knows the (angelic) forces of your Lord but Him. It is nothing but a reminder to humankind.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 32,
+      "quran_arabic": "كَلَّا وَٱلْقَمَرِ",
+      "text": "By no means! By the moon,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 33,
+      "quran_arabic": "وَٱلَّيْلِ إِذْ أَدْبَرَ",
+      "text": "and the night when it retreats,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 34,
+      "quran_arabic": "وَٱلصُّبْحِ إِذَآ أَسْفَرَ",
+      "text": "and the morning when it brightens!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 35,
+      "quran_arabic": "إِنَّهَا لَإِحْدَى ٱلْكُبَرِ",
+      "text": "Surely it is indeed one of the greatest things",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 36,
+      "quran_arabic": "نَذِيرًۭا لِّلْبَشَرِ",
+      "text": "– a warning to humankind –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 37,
+      "quran_arabic": "لِمَن شَآءَ مِنكُمْ أَن يَتَقَدَّمَ أَوْ يَتَأَخَّرَ",
+      "text": "to whoever of you pleases to go forward or lag behind.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 38,
+      "quran_arabic": "كُلُّ نَفْسٍۭ بِمَا كَسَبَتْ رَهِينَةٌ",
+      "text": "Each person (is held) in pledge for what he has earned,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 39,
+      "quran_arabic": "إِلَّآ أَصْحَٰبَ ٱلْيَمِينِ",
+      "text": "except for the companions on the right.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 40,
+      "quran_arabic": "فِى جَنَّٰتٍۢ يَتَسَآءَلُونَ",
+      "text": "In Gardens they will ask each other questions",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 41,
+      "quran_arabic": "عَنِ ٱلْمُجْرِمِينَ",
+      "text": "about the sinners:",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 42,
+      "quran_arabic": "مَا سَلَكَكُمْ فِى سَقَرَ",
+      "text": "‘What put you into Saqar?’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 43,
+      "quran_arabic": "قَالُوا۟ لَمْ نَكُ مِنَ ٱلْمُصَلِّينَ",
+      "text": "They will say, ‘We were not among the ones who prayed,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 44,
+      "quran_arabic": "وَلَمْ نَكُ نُطْعِمُ ٱلْمِسْكِينَ",
+      "text": "and we did not feed the poor,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 45,
+      "quran_arabic": "وَكُنَّا نَخُوضُ مَعَ ٱلْخَآئِضِينَ",
+      "text": "and we bantered with the banterers,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 46,
+      "quran_arabic": "وَكُنَّا نُكَذِّبُ بِيَوْمِ ٱلدِّينِ",
+      "text": "and we called the Day of Judgment a lie,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 47,
+      "quran_arabic": "حَتَّىٰٓ أَتَىٰنَا ٱلْيَقِينُ",
+      "text": "until the certainty came to us.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 48,
+      "quran_arabic": "فَمَا تَنفَعُهُمْ شَفَٰعَةُ ٱلشَّٰفِعِينَ",
+      "text": "The intercession of the intercessors will not benefit them.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 49,
+      "quran_arabic": "فَمَا لَهُمْ عَنِ ٱلتَّذْكِرَةِ مُعْرِضِينَ",
+      "text": "What is (the matter) with them, turning away from the Reminder,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 50,
+      "quran_arabic": "كَأَنَّهُمْ حُمُرٌۭ مُّسْتَنفِرَةٌۭ",
+      "text": "as if they were frightened donkeys",
+      "canonical_variants": [
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "كَأَنَّهُمْ حُمُرٞ مُّسْتَنفَرَةٞ",
+          "english": "as though they were donkeys made to panic",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "كَأَنَّهُمْ حُمُرٞ مُّسْتَنفَرَةٞ",
+          "english": "as though they were donkeys made to panic",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 51,
+      "quran_arabic": "فَرَّتْ مِن قَسْوَرَةٍۭ",
+      "text": "fleeing from a lion?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 52,
+      "quran_arabic": "بَلْ يُرِيدُ كُلُّ ٱمْرِئٍۢ مِّنْهُمْ أَن يُؤْتَىٰ صُحُفًۭا مُّنَشَّرَةًۭ",
+      "text": "No! Each one of them wants to be given scrolls unrolled.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 53,
+      "quran_arabic": "كَلَّا ۖ بَل لَّا يَخَافُونَ ٱلْءَاخِرَةَ",
+      "text": "By no means! No! They do not fear the Hereafter.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 54,
+      "quran_arabic": "كَلَّآ إِنَّهُۥ تَذْكِرَةٌۭ",
+      "text": "By no means! Surely it is a reminder,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 55,
+      "quran_arabic": "فَمَن شَآءَ ذَكَرَهُۥ",
+      "text": "and whoever pleases takes heed of it.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 56,
+      "quran_arabic": "وَمَا يَذْكُرُونَ إِلَّآ أَن يَشَآءَ ٱللَّهُ ۚ هُوَ أَهْلُ ٱلتَّقْوَىٰ وَأَهْلُ ٱلْمَغْفِرَةِ",
+      "text": "But they will not take heed unless God pleases. He is worthy of guarding (oneself) against, and worthy of (dispensing) forgiveness.",
+      "canonical_variants": [
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "وَمَا تَذْكُرُونَ إِلَّا أَنْ يَّشَآءَ اَ۬للَّهُۖ هُوَ أَهْلُ اُ۬لتَّقْوَىٰ وَأَهْلُ اُ۬لْمَغْفِرَةِۖ",
+          "english": "Yet youpl will not remember unless",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "وَمَا تَذْكُرُونَ إِلَّآ أَنْ يَّشَآءَ اَ۬للَّهُۖ هُوَ أَهْلُ اُ۬لتَّقْو۪ىٰ وَأَهْلُ اُ۬لْمَغْفِرَةِۖ",
+          "english": "Yet youpl will not remember unless",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Lexical Shift"
+        }
+      ],
+      "competing_variants": []
+    }
+  ]
+}

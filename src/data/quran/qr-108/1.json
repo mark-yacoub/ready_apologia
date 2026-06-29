@@ -1,0 +1,25 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ إِنَّآ أَعْطَيْنَٰكَ ٱلْكَوْثَرَ",
+      "text": "Surely We have given you the abundance.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "فَصَلِّ لِرَبِّكَ وَٱنْحَرْ",
+      "text": "So pray to your Lord and sacrifice.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "إِنَّ شَانِئَكَ هُوَ ٱلْأَبْتَرُ",
+      "text": "Surely your hater – he is the one cut off!",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

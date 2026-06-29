@@ -59,7 +59,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		<!-- Load Google Fonts -->
 		<link href="https://fonts.googleapis.com" rel="preconnect"/>
 		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-		<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+		<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
 
 		<!-- PWA Manifest & Worker links -->
 		<link rel="manifest" href={`${base}/manifest.json`} />
@@ -243,7 +243,9 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 	   ========================================== */
 	:root {
 		--color-primary: #09090b; /* Zinc 950 */
+		--color-on-primary: #ffffff;
 		--color-secondary: #974543; /* Terracotta Red */
+		--color-on-secondary: #ffffff;
 		--color-background: #f4f4f5; /* Zinc 100 background */
 		
 		--color-surface: #ffffff;

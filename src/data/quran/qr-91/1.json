@@ -1,0 +1,126 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَٱلشَّمْسِ وَضُحَىٰهَا",
+      "text": "By the sun and her morning light!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "وَٱلْقَمَرِ إِذَا تَلَىٰهَا",
+      "text": "By the moon when he follows her!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "وَٱلنَّهَارِ إِذَا جَلَّىٰهَا",
+      "text": "By the day when it reveals her!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "وَٱلَّيْلِ إِذَا يَغْشَىٰهَا",
+      "text": "By the night when it covers her!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "وَٱلسَّمَآءِ وَمَا بَنَىٰهَا",
+      "text": "By the sky and what built it!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "وَٱلْأَرْضِ وَمَا طَحَىٰهَا",
+      "text": "By the earth and what spread it!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "وَنَفْسٍۢ وَمَا سَوَّىٰهَا",
+      "text": "By the self and what fashioned it,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "فَأَلْهَمَهَا فُجُورَهَا وَتَقْوَىٰهَا",
+      "text": "and instilled it with its (tendency to) depravity and its (sense of) guarding (itself)!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "قَدْ أَفْلَحَ مَن زَكَّىٰهَا",
+      "text": "He has prospered who purifies it,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "وَقَدْ خَابَ مَن دَسَّىٰهَا",
+      "text": "and he has failed who corrupts it.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "كَذَّبَتْ ثَمُودُ بِطَغْوَىٰهَآ",
+      "text": "Thamūd called (it) a lie by their insolent transgression,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "إِذِ ٱنۢبَعَثَ أَشْقَىٰهَا",
+      "text": "when the most miserable (one) of them was raised up,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "فَقَالَ لَهُمْ رَسُولُ ٱللَّهِ نَاقَةَ ٱللَّهِ وَسُقْيَٰهَا",
+      "text": "and the messenger of God said to them, ‘The she-camel of God and her drink!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُم بِذَنۢبِهِمْ فَسَوَّىٰهَا",
+      "text": "But they called (him) a liar and wounded her. So their Lord covered them over for their sin and leveled it.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "وَلَا يَخَافُ عُقْبَٰهَا",
+      "text": "He was not afraid of its outcome.",
+      "canonical_variants": [
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "فَلَا يَخَافُ عُقْبَٰهَاۖ",
+          "english": "so He does not fear its ultimate outcome.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "فَلَا يَخَافُ عُقْبَٰهَاۖ",
+          "english": "so He does not fear its ultimate outcome.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Addition/Omission"
+        }
+      ],
+      "competing_variants": []
+    }
+  ]
+}

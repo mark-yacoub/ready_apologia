@@ -1,0 +1,60 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ",
+      "text": "Did We not expand your heart for you,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "وَوَضَعْنَا عَنكَ وِزْرَكَ",
+      "text": "and deliver you of your burden,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "ٱلَّذِىٓ أَنقَضَ ظَهْرَكَ",
+      "text": "which had broken your back?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "وَرَفَعْنَا لَكَ ذِكْرَكَ",
+      "text": "Did We not raise your reputation for you?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+      "text": "Surely with hardship (there is) ease.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "إِنَّ مَعَ ٱلْعُسْرِ يُسْرًۭا",
+      "text": "Surely with hardship (there is) ease.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "فَإِذَا فَرَغْتَ فَٱنصَبْ",
+      "text": "So when you are free, work on.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "وَإِلَىٰ رَبِّكَ فَٱرْغَب",
+      "text": "And to your Lord set (your) desire.",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

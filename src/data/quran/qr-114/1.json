@@ -1,0 +1,46 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ",
+      "text": "Say: ‘I take refuge with the Lord of the people,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "مَلِكِ ٱلنَّاسِ",
+      "text": "King of the people,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "إِلَٰهِ ٱلنَّاسِ",
+      "text": "God of the people,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ",
+      "text": "from the evil of the whispering one, the slinking one,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ",
+      "text": "who whispers in the hearts of the people,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
+      "text": "of the jinn and the people.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

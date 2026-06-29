@@ -27,6 +27,13 @@ export default function ScriptureNav() {
         const isBookNT = booksData.nt.some(b => b.id === bookId);
         setExpandedSection(isBookNT ? 'nt' : 'ot');
         setExpandedBook(bookId);
+      } else if (parts[1] === 'quran' && parts[2]) {
+        const surahIndex = parts[2];
+        const bookId = `qr-${surahIndex}`;
+        setCurrentBook(bookId);
+        setCurrentChapter('1');
+        setExpandedSection('quran');
+        setExpandedBook(bookId);
       }
       
       if (activePath.startsWith('/topics')) {
@@ -62,24 +69,36 @@ export default function ScriptureNav() {
   };
 
   const renderBookList = (books, type) => {
+    const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+    const isQuranType = type === 'quran';
+
     return (
       <div className="book-list animate-fade-in">
         {books.map((book) => (
           <div key={book.id} className={`book-item ${expandedBook === book.id ? 'expanded' : ''}`}>
-            <button 
-              onClick={() => toggleBook(book.id)} 
-              className="book-select-btn"
-            >
-              <span className="book-name">{book.name}</span>
-              <span className="arrow">{expandedBook === book.id ? '▼' : '▶'}</span>
-            </button>
+            {isQuranType ? (
+              <a 
+                href={`${base}/quran/${book.id.replace('qr-', '')}`}
+                className={`book-select-btn ${book.id === currentBook ? 'active-book' : ''}`}
+                style={{ textDecoration: 'none', display: 'flex', width: '100%' }}
+              >
+                <span className="book-name">{book.name}</span>
+              </a>
+            ) : (
+              <button 
+                onClick={() => toggleBook(book.id)} 
+                className="book-select-btn"
+              >
+                <span className="book-name">{book.name}</span>
+                <span className="arrow">{expandedBook === book.id ? '▼' : '▶'}</span>
+              </button>
+            )}
 
-            {expandedBook === book.id && (
+            {!isQuranType && expandedBook === book.id && (
               <div className="chapter-grid">
                 {Array.from({ length: book.chapters }, (_, i) => i + 1).map((chap) => {
                   const isCurrentChapter = book.id === currentBook && String(chap) === currentChapter;
                   
-                  const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
                   return (
                     <a
                       key={chap}
@@ -168,12 +187,16 @@ export default function ScriptureNav() {
         </div>
 
         {/* Quran */}
-        <div className="nav-section disabled">
-          <div className="section-header-btn">
+        <div className="nav-section">
+          <button 
+            onClick={() => toggleSection('quran')} 
+            className={`section-header-btn ${expandedSection === 'quran' ? 'active' : ''}`}
+          >
             <span className="icon">🌙</span>
             <span className="title-text">Quran (Arabic/English)</span>
-            <span className="badge">Soon</span>
-          </div>
+            <span className="section-arrow">{expandedSection === 'quran' ? '▼' : '▶'}</span>
+          </button>
+          {expandedSection === 'quran' && renderBookList(booksData.quran, 'quran')}
         </div>
       </div>
 
@@ -368,6 +391,11 @@ export default function ScriptureNav() {
         }
         .book-select-btn:hover {
           background-color: #f1f5f9;
+        }
+        .book-select-btn.active-book {
+          font-weight: 700;
+          color: var(--color-primary);
+          background-color: #e2e8f0;
         }
 
         .book-item.expanded .book-select-btn {

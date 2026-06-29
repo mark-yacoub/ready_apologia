@@ -1,0 +1,955 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ يَٰٓأَيُّهَا ٱلنَّاسُ ٱتَّقُوا۟ رَبَّكُمْ ۚ إِنَّ زَلْزَلَةَ ٱلسَّاعَةِ شَىْءٌ عَظِيمٌۭ",
+      "text": "People! Guard (yourselves) against your Lord! Surely the earthquake of the Hour is a great thing.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "يَوْمَ تَرَوْنَهَا تَذْهَلُ كُلُّ مُرْضِعَةٍ عَمَّآ أَرْضَعَتْ وَتَضَعُ كُلُّ ذَاتِ حَمْلٍ حَمْلَهَا وَتَرَى ٱلنَّاسَ سُكَٰرَىٰ وَمَا هُم بِسُكَٰرَىٰ وَلَٰكِنَّ عَذَابَ ٱللَّهِ شَدِيدٌۭ",
+      "text": "On the Day when you see it, every nursing woman will forget what she has nursed, and every pregnant female will deliver her burden, and you will see the people drunk when they are not drunk – but the punishment of God is harsh!",
+      "canonical_variants": [],
+      "competing_variants": [
+        {
+          "companion_codex": "Unknown",
+          "variant_arabic": "يَوْمَ تَرَوْنَهَا تَذْهَلُ كُلُّ مُرْضِعَةٍ عَمَّا أَرْضَعَتْ وَتَضَعُ كُلُّ ذَاتِ حَمْلٍ حَمْلَهَا وَتَرَى النَّاسَ سَكْرَى وَمَا هُمْ بِسَكْرَى وَلَكِنَّ عَذَابَ اللَّهِ شَدِيدٌ",
+          "variant_english": "On the Day you see it every nursing mother will be distracted from that [child] she was nursing, and every pregnant woman will abort her pregnancy, and you will see the people in a drunken state (sakra - alternative plural or collective form), yet they are not drunk (bi-sakra); but the punishment of Allah is severe.",
+          "source_reference": "Sahih al-Bukhari 4741",
+          "hadith_arabic": "حَدَّثَنَا عُمَرُ بْنُ حَفْصٍ، حَدَّثَنَا أَبِي، حَدَّثَنَا الأَعْمَشُ، حَدَّثَنَا أَبُو صَالِحٍ، عَنْ أَبِي سَعِيدٍ الْخُدْرِيِّ، قَالَ قَالَ النَّبِيُّ صلى الله عليه وسلم ‏\"‏ يَقُولُ اللَّهُ عَزَّ وَجَلَّ يَوْمَ الْقِيَامَةِ يَا آدَمُ‏.‏ يَقُولُ لَبَّيْكَ رَبَّنَا وَسَعْدَيْكَ، فَيُنَادَى بِصَوْتٍ إِنَّ اللَّهَ يَأْمُرُكَ أَنْ تُخْرِجَ مِنْ ذُرِّيَّتِكَ بَعْثًا إِلَى النَّارِ‏.‏ قَالَ يَا رَبِّ وَمَا بَعْثُ النَّارِ قَالَ مِنْ كُلِّ أَلْفٍ ـ أُرَاهُ قَالَ ـ تِسْعَمِائَةٍ وَتِسْعَةً وَتِسْعِينَ فَحِينَئِذٍ تَضَعُ الْحَامِلُ حَمْلَهَا وَيَشِيبُ الْوَلِيدُ ‏{‏وَتَرَى النَّاسَ سُكَارَى وَمَا هُمْ بِسُكَارَى وَلَكِنَّ عَذَابَ اللَّهِ شَدِيدٌ‏}‏ ‏\"‏‏.‏ فَشَقَّ ذَلِكَ عَلَى النَّاسِ حَتَّى تَغَيَّرَتْ وُجُوهُهُمْ، فَقَالَ النَّبِيُّ صلى الله عليه وسلم ‏\"‏ مِنْ يَأْجُوجَ وَمَأْجُوجَ تِسْعَمِائَةٍ وَتِسْعَةً وَتِسْعِينَ، وَمِنْكُمْ وَاحِدٌ، ثُمَّ أَنْتُمْ فِي النَّاسِ كَالشَّعْرَةِ السَّوْدَاءِ فِي جَنْبِ الثَّوْرِ الأَبْيَضِ، أَوْ كَالشَّعْرَةِ الْبَيْضَاءِ فِي جَنْبِ الثَّوْرِ الأَسْوَدِ، وَإِنِّي لأَرْجُو أَنْ تَكُونُوا رُبُعَ أَهْلِ الْجَنَّةِ ‏\"‏‏.‏ فَكَبَّرْنَا ثُمَّ قَالَ ‏\"‏ ثُلُثَ أَهْلِ الْجَنَّةِ ‏\"‏‏.‏ فَكَبَّرْنَا ثُمَّ قَالَ ‏\"‏ شَطْرَ أَهْلِ الْجَنَّةِ ‏\"‏‏.‏ فَكَبَّرْنَا‏.‏ قَالَ أَبُو أُسَامَةَ عَنِ الأَعْمَشِ ‏{‏تَرَى النَّاسَ سُكَارَى وَمَا هُمْ بِسُكَارَى‏}‏ وَقَالَ مِنْ كُلِّ أَلْفٍ تِسْعَمِائَةٍ وَتِسْعَةً وَتِسْعِينَ‏.‏ وَقَالَ جَرِيرٌ وَعِيسَى بْنُ يُونُسَ وَأَبُو مُعَاوِيَةَ ‏{‏سَكْرَى وَمَا هُمْ بِسَكْرَى‏}‏‏.‏",
+          "hadith_english": "Narrated Abu Sa`id Al-Khudri:The Prophet (ﷺ) said, \"On the day of Resurrection Allah will say, 'O Adam!' Adam will reply, 'Labbaik our Lord, and Sa`daik ' Then there will be a loud call (saying), Allah orders you to take from among your offspring a mission for the (Hell) Fire.' Adam will say, 'O Lord! Who are the mission for the (Hell) Fire?' Allah will say, 'Out of each thousand, take out 999.' At that time every pregnant female shall drop her load (have a miscarriage) and a child will have grey hair. And you shall see mankind as in a drunken state, yet not drunk, but severe will be the torment of Allah.\" (22.2) (When the Prophet (ﷺ) mentioned this), the people were so distressed (and afraid) that their faces got changed (in color) whereupon the Prophet (ﷺ) said, \"From Gog and Magog nine-hundred ninety-nine will be taken out and one from you. You Muslims (compared to the large number of other people) will be like a black hair on the side of a white ox, or a white hair on the side of a black ox, and I hope that you will be onefourth of the people of Paradise.\" On that, we said, \"Allahu-Akbar!\" Then he said, \"I hope that you will be one-third of the people of Paradise.\" We again said, \"Allahu-Akbar!\" Then he said, \"(I hope that you will be) one-half of the people of Paradise.\" So we said, \"Allahu Akbar\" [omitted from the original translation: Abu Usama narrated from Al-A'mash, \"{You see the people as drunken (sukara) and they are not drunken (bi-sukara)}\" and he said, \"Out of every thousand, nine hundred and ninety-nine.\" And Jarir, 'Isa bin Yunus, and Abu Mu'awiya said (that it is recited as), \"{sakra wa ma hum bi-sakra}\".]",
+          "sunnah_url": "https://sunnah.com/bukhari/65/263"
+        }
+      ]
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "وَمِنَ ٱلنَّاسِ مَن يُجَٰدِلُ فِى ٱللَّهِ بِغَيْرِ عِلْمٍۢ وَيَتَّبِعُ كُلَّ شَيْطَٰنٍۢ مَّرِيدٍۢ",
+      "text": "Yet among the people (there is) one who disputes about God without any knowledge, and follows every rebellious satan.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "كُتِبَ عَلَيْهِ أَنَّهُۥ مَن تَوَلَّاهُ فَأَنَّهُۥ يُضِلُّهُۥ وَيَهْدِيهِ إِلَىٰ عَذَابِ ٱلسَّعِيرِ",
+      "text": "It is written about him: ‘He who takes him as an ally – he will lead him astray and guide him to the punishment of the blazing (Fire).’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "يَٰٓأَيُّهَا ٱلنَّاسُ إِن كُنتُمْ فِى رَيْبٍۢ مِّنَ ٱلْبَعْثِ فَإِنَّا خَلَقْنَٰكُم مِّن تُرَابٍۢ ثُمَّ مِن نُّطْفَةٍۢ ثُمَّ مِنْ عَلَقَةٍۢ ثُمَّ مِن مُّضْغَةٍۢ مُّخَلَّقَةٍۢ وَغَيْرِ مُخَلَّقَةٍۢ لِّنُبَيِّنَ لَكُمْ ۚ وَنُقِرُّ فِى ٱلْأَرْحَامِ مَا نَشَآءُ إِلَىٰٓ أَجَلٍۢ مُّسَمًّۭى ثُمَّ نُخْرِجُكُمْ طِفْلًۭا ثُمَّ لِتَبْلُغُوٓا۟ أَشُدَّكُمْ ۖ وَمِنكُم مَّن يُتَوَفَّىٰ وَمِنكُم مَّن يُرَدُّ إِلَىٰٓ أَرْذَلِ ٱلْعُمُرِ لِكَيْلَا يَعْلَمَ مِنۢ بَعْدِ عِلْمٍۢ شَيْـًۭٔا ۚ وَتَرَى ٱلْأَرْضَ هَامِدَةًۭ فَإِذَآ أَنزَلْنَا عَلَيْهَا ٱلْمَآءَ ٱهْتَزَّتْ وَرَبَتْ وَأَنۢبَتَتْ مِن كُلِّ زَوْجٍۭ بَهِيجٍۢ",
+      "text": "People! If you are in doubt about the raising up – surely We created you from dust, then from a drop, then from a clot, (and) then from a lump, formed and unformed, so that We may make (it) clear to you. We establish in the wombs what We please for an appointed time, then We bring you forth as a child, (and) then (We provide for you) so that you may reach your maturity. Among you (there is) one who is taken, and among you (there is) one who is reduced to the worst (stage) of life, so that he knows nothing after (having had) knowledge. And you see the earth withered, but when We send down water on it, it stirs and swells, and grows (plants) of every beautiful kind.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "ذَٰلِكَ بِأَنَّ ٱللَّهَ هُوَ ٱلْحَقُّ وَأَنَّهُۥ يُحْىِ ٱلْمَوْتَىٰ وَأَنَّهُۥ عَلَىٰ كُلِّ شَىْءٍۢ قَدِيرٌۭ",
+      "text": "That is because God – He is the Truth, and because He gives the dead life, and because He is powerful over everything,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "وَأَنَّ ٱلسَّاعَةَ ءَاتِيَةٌۭ لَّا رَيْبَ فِيهَا وَأَنَّ ٱللَّهَ يَبْعَثُ مَن فِى ٱلْقُبُورِ",
+      "text": "and because the Hour is coming – (there is) no doubt about it – and because God will raise up those who are in the graves.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "وَمِنَ ٱلنَّاسِ مَن يُجَٰدِلُ فِى ٱللَّهِ بِغَيْرِ عِلْمٍۢ وَلَا هُدًۭى وَلَا كِتَٰبٍۢ مُّنِيرٍۢ",
+      "text": "Yet among the people (there is) one who disputes about God without any knowledge or guidance or illuminating Book,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "ثَانِىَ عِطْفِهِۦ لِيُضِلَّ عَن سَبِيلِ ٱللَّهِ ۖ لَهُۥ فِى ٱلدُّنْيَا خِزْىٌۭ ۖ وَنُذِيقُهُۥ يَوْمَ ٱلْقِيَٰمَةِ عَذَابَ ٱلْحَرِيقِ",
+      "text": "(who) turns away in scorn to lead (people) astray from the way of God. For him (there is) disgrace in this world, and on the Day of Resurrection We shall make him taste the punishment of the burning (Fire):",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "ثَانِيَ عِطۡفِهِۦ لِيَضِلَّ عَن سَبِيلِ اِ۬للَّهِۖ لَهُۥ فِي اِ۬لدُّنۡيۭا خِزۡيٞۖ وَنُذِيقُهُۥ يَوۡمَ اَ۬لۡقِيَٰمَةِ عَذَابَ اَ۬لۡحَرِيقِ",
+          "english": ". . . to stray from the way of Allah . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "ثَانِيَ عِطۡفِهِۦ لِيَضِلَّ عَن سَبِيلِ اِ۬للَّهِۖ لَهُۥ فِي  اِ۬لدُّنۡيۭا خِزۡيٞۖ وَنُذِيقُهُۥ يَوۡمَ اَ۬لۡقِيَٰمَةِ عَذَابَ اَ۬لۡحَرِيقِ",
+          "english": ". . . to stray from the way of Allah . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "ثَانِيَ عِطۡفِهِۦ لِيَضِلَّ عَن سَبِيلِ ٱللَّهِۖ لَهُۥ فِي ٱلدُّنۡيَا خِزۡيٞۖ وَنُذِيقُهُۥ يَوۡمَ ٱلۡقِيَٰمَةِ عَذَابَ ٱلۡحَرِيقِ",
+          "english": ". . . to stray from the way of Allah . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "ثَانِيَ عِطۡفِهِۦ لِيَضِلَّ عَن سَبِيلِ ٱللَّهِۖ لَهُۥ فِي ٱلدُّنۡيَا خِزۡيٞۖ وَنُذِيقُهُۥ يَوۡمَ ٱلۡقِيَٰمَةِ عَذَابَ ٱلۡحَرِيقِ",
+          "english": ". . . to stray from the way of Allah . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "ذَٰلِكَ بِمَا قَدَّمَتْ يَدَاكَ وَأَنَّ ٱللَّهَ لَيْسَ بِظَلَّٰمٍۢ لِّلْعَبِيدِ",
+      "text": "‘That is for what your (own) hands have sent forward, and (know) that God is not an evildoer to (His) servants.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "وَمِنَ ٱلنَّاسِ مَن يَعْبُدُ ٱللَّهَ عَلَىٰ حَرْفٍۢ ۖ فَإِنْ أَصَابَهُۥ خَيْرٌ ٱطْمَأَنَّ بِهِۦ ۖ وَإِنْ أَصَابَتْهُ فِتْنَةٌ ٱنقَلَبَ عَلَىٰ وَجْهِهِۦ خَسِرَ ٱلدُّنْيَا وَٱلْءَاخِرَةَ ۚ ذَٰلِكَ هُوَ ٱلْخُسْرَانُ ٱلْمُبِينُ",
+      "text": "Among the people (there is also) one who serves God sitting on the fence. If some good smites him, he is satisfied with it, but if some trouble smites him, he is overturned (by it). He loses this world and the Hereafter. That – it is the clearest loss!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "يَدْعُوا۟ مِن دُونِ ٱللَّهِ مَا لَا يَضُرُّهُۥ وَمَا لَا يَنفَعُهُۥ ۚ ذَٰلِكَ هُوَ ٱلضَّلَٰلُ ٱلْبَعِيدُ",
+      "text": "Instead of God, he calls on what does not harm him, and what does not benefit him. That – it is straying the farthest!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "يَدْعُوا۟ لَمَن ضَرُّهُۥٓ أَقْرَبُ مِن نَّفْعِهِۦ ۚ لَبِئْسَ ٱلْمَوْلَىٰ وَلَبِئْسَ ٱلْعَشِيرُ",
+      "text": "He calls indeed on one whose harm is nearer than his benefit. Evil indeed is the protector, and evil indeed the friend!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "إِنَّ ٱللَّهَ يُدْخِلُ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ جَنَّٰتٍۢ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ ۚ إِنَّ ٱللَّهَ يَفْعَلُ مَا يُرِيدُ",
+      "text": "Surely God will cause those who believe and do righteous deeds to enter Gardens through which rivers flow. Surely God does whatever He wills.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "مَن كَانَ يَظُنُّ أَن لَّن يَنصُرَهُ ٱللَّهُ فِى ٱلدُّنْيَا وَٱلْءَاخِرَةِ فَلْيَمْدُدْ بِسَبَبٍ إِلَى ٱلسَّمَآءِ ثُمَّ لْيَقْطَعْ فَلْيَنظُرْ هَلْ يُذْهِبَنَّ كَيْدُهُۥ مَا يَغِيظُ",
+      "text": "Whoever thinks that God will not help him in this world and the Hereafter, let him stretch a rope to the sky. Then let him cut (it), and see whether his scheme will take away what enrages (him).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "وَكَذَٰلِكَ أَنزَلْنَٰهُ ءَايَٰتٍۭ بَيِّنَٰتٍۢ وَأَنَّ ٱللَّهَ يَهْدِى مَن يُرِيدُ",
+      "text": "In this way We have sent it down as signs – clear signs – and because God guides whomever He wills.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "إِنَّ ٱلَّذِينَ ءَامَنُوا۟ وَٱلَّذِينَ هَادُوا۟ وَٱلصَّٰبِـِٔينَ وَٱلنَّصَٰرَىٰ وَٱلْمَجُوسَ وَٱلَّذِينَ أَشْرَكُوٓا۟ إِنَّ ٱللَّهَ يَفْصِلُ بَيْنَهُمْ يَوْمَ ٱلْقِيَٰمَةِ ۚ إِنَّ ٱللَّهَ عَلَىٰ كُلِّ شَىْءٍۢ شَهِيدٌ",
+      "text": "Surely those who believe, and those who are Jews, and the Sabians, and the Christians, and the Magians, and the idolaters – surely God will distinguish between them on the Day of Resurrection. Surely God is a witness over everything.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 18,
+      "quran_arabic": "أَلَمْ تَرَ أَنَّ ٱللَّهَ يَسْجُدُ لَهُۥ مَن فِى ٱلسَّمَٰوَٰتِ وَمَن فِى ٱلْأَرْضِ وَٱلشَّمْسُ وَٱلْقَمَرُ وَٱلنُّجُومُ وَٱلْجِبَالُ وَٱلشَّجَرُ وَٱلدَّوَآبُّ وَكَثِيرٌۭ مِّنَ ٱلنَّاسِ ۖ وَكَثِيرٌ حَقَّ عَلَيْهِ ٱلْعَذَابُ ۗ وَمَن يُهِنِ ٱللَّهُ فَمَا لَهُۥ مِن مُّكْرِمٍ ۚ إِنَّ ٱللَّهَ يَفْعَلُ مَا يَشَآءُ ۩",
+      "text": "Do you not see that God – whoever is in the heavens and whoever is on the earth prostrates before Him, and (so do) the sun, and the moon, and the stars, and the mountains, and the trees, and the animals, and many of the people? But (there are) many for whom the punishment is justified, and whomever God humiliates, (there is) no one to honor him. Surely God does whatever He pleases.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 19,
+      "quran_arabic": "۞ هَٰذَانِ خَصْمَانِ ٱخْتَصَمُوا۟ فِى رَبِّهِمْ ۖ فَٱلَّذِينَ كَفَرُوا۟ قُطِّعَتْ لَهُمْ ثِيَابٌۭ مِّن نَّارٍۢ يُصَبُّ مِن فَوْقِ رُءُوسِهِمُ ٱلْحَمِيمُ",
+      "text": "These two disputants dispute about their Lord. But those who disbelieve – clothes of fire have been cut for them, and boiling (water) will be poured (on them) from above their heads,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 20,
+      "quran_arabic": "يُصْهَرُ بِهِۦ مَا فِى بُطُونِهِمْ وَٱلْجُلُودُ",
+      "text": "by which what is in their bellies and (their) skins will be melted.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 21,
+      "quran_arabic": "وَلَهُم مَّقَٰمِعُ مِنْ حَدِيدٍۢ",
+      "text": "And for them (there are) hooked rods of iron.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 22,
+      "quran_arabic": "كُلَّمَآ أَرَادُوٓا۟ أَن يَخْرُجُوا۟ مِنْهَا مِنْ غَمٍّ أُعِيدُوا۟ فِيهَا وَذُوقُوا۟ عَذَابَ ٱلْحَرِيقِ",
+      "text": "Whenever they want to come out of it, because of (their) agony, they will be sent back into it, and: ‘Taste the punishment of the burning (Fire)!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 23,
+      "quran_arabic": "إِنَّ ٱللَّهَ يُدْخِلُ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ جَنَّٰتٍۢ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ يُحَلَّوْنَ فِيهَا مِنْ أَسَاوِرَ مِن ذَهَبٍۢ وَلُؤْلُؤًۭا ۖ وَلِبَاسُهُمْ فِيهَا حَرِيرٌۭ",
+      "text": "Surely God will cause those who believe and do righteous deeds to enter Gardens through which rivers flow. There they will be adorned with bracelets of gold and (with) pearls, and there their clothes (will be of) silk.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "إِنَّ اَ۬للَّهَ يُدۡخِلُ اُ۬لَّذِينَ ءَامَنُواْ وَعَمِلُواْ اُ۬لصَّٰلِحَٰتِ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا اَ۬لۡأَنۡهَٰرُ يُحَلَّوۡنَ فِيهَا مِنۡ أَسَاوِرَ مِن ذَهَبٖ وَلُؤۡلُوٕٖاْۖ وَلِبَاسُهُمۡ فِيهَا حَرِيرٞ",
+          "english": ". . . with bracelets of gold and (of) pearls . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "إِنَّ اَ۬للَّهَ يُدۡخِلُ اُ۬لَّذِينَ ءَامَنُواْ وَعَمِلُواْ اُ۬لصَّٰلِحَٰت  جَّنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا اَ۬لۡأَنۡهَٰرُ يُحَلَّوۡنَ فِيهَا مِنۡ  أَسَاوِرَ مِن ذَهَبٖ وَلُولُوٕٖاْۖ وَلِبَاسُهُمۡ فِيهَا حَرِيرٞ",
+          "english": ". . . with bracelets of gold and (of) pearls . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "إِنَّ ٱللَّهَ يُدۡخِلُ ٱلَّذِينَ ءَامَنُواْ وَعَمِلُواْ ٱلصَّٰلِحَٰتِ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ يُحَلَّوۡنَ فِيهَا مِنۡ أَسَاوِرَ مِن ذَهَبٖ وَلُؤۡلُوٕٖاْۖ وَلِبَاسُهُمُۥ فِيهَا حَرِيرٞ",
+          "english": ". . . with bracelets of gold and (of) pearls . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "إِنَّ ٱللَّهَ يُدۡخِلُ ٱلَّذِينَ ءَامَنُواْ وَعَمِلُواْ ٱلصَّٰلِحَٰتِ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ يُحَلَّوۡنَ فِيهَا مِنۡ أَسَاوِرَ مِن ذَهَبٖ وَلُؤۡلُوٕٖاْۖ وَلِبَاسُهُمُۥ فِيهَا حَرِيرٞ",
+          "english": ". . . with bracelets of gold and (of) pearls . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 24,
+      "quran_arabic": "وَهُدُوٓا۟ إِلَى ٱلطَّيِّبِ مِنَ ٱلْقَوْلِ وَهُدُوٓا۟ إِلَىٰ صِرَٰطِ ٱلْحَمِيدِ",
+      "text": "They have been guided to good speech, and they have been guided to the path of the Praiseworthy.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 25,
+      "quran_arabic": "إِنَّ ٱلَّذِينَ كَفَرُوا۟ وَيَصُدُّونَ عَن سَبِيلِ ٱللَّهِ وَٱلْمَسْجِدِ ٱلْحَرَامِ ٱلَّذِى جَعَلْنَٰهُ لِلنَّاسِ سَوَآءً ٱلْعَٰكِفُ فِيهِ وَٱلْبَادِ ۚ وَمَن يُرِدْ فِيهِ بِإِلْحَادٍۭ بِظُلْمٍۢ نُّذِقْهُ مِنْ عَذَابٍ أَلِيمٍۢ",
+      "text": "Surely those who disbelieve and keep (people) from the way of God and the Sacred Mosque, which We have made for the people equally – the resident there and the visitor – and whoever intends to pervert it in an evil manner – We shall make him taste a painful punishment.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "إِنَّ اَ۬لَّذِينَ كَفَرُواْ وَيَصُدُّونَ عَن سَبِيلِ اِ۬للَّهِ وَاَلۡمَسۡجِدِ اِ۬لۡحَرَامِ اِ۬لَّذِي جَعَلۡنَٰهُ لِلنّ۪اسِ سَوَآءٌ اِ۬لۡعَٰكِفُ فِيهِ وَاَلۡبَادِۦۚ وَمَن يُرِدۡ فِيهِ بِإِلۡحَادِۢ بِظُلۡمٖ نُّذِقۡهُ مِنۡ عَذَابٍ أَلِيمٖ",
+          "english": ". . . which We have designated for all mankind, equally for the one who consecrates himself therein and the visitor.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "إِنَّ اَ۬لَّذِينَ كَفَرُواْ وَيَصُدُّونَ عَن سَبِيلِ اِ۬للَّهِ وَاَلۡمَسۡجِدِ  اِ۬لۡحَرَامِ اِ۬لَّذِي جَعَلۡنَٰهُ لِلنَّاس سَّوَآءٌ اِ۬لۡعَٰكِف فِّيهِ وَاَلۡبَادِۦۚ  وَمَن يُرِدۡ فِيهِ بِإِلۡحَادِۢ بِظُلۡمٖ نُّذِقۡهُ مِنۡ عَذَابٍ أَلِيمٖ",
+          "english": ". . . which We have designated for all mankind, equally for the one who consecrates himself therein and the visitor.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "إِنَّ ٱلَّذِينَ كَفَرُواْ وَيَصُدُّونَ عَن سَبِيلِ ٱللَّهِ وَٱلۡمَسۡجِدِ ٱلۡحَرَامِ ٱلَّذِي جَعَلۡنَٰهُ لِلنَّاسِ سَوَآءٌ ٱلۡعَٰكِفُ فِيهِ وَٱلۡبَادِۚ وَمَن يُرِدۡ فِيهِ بِإِلۡحَادِۭ بِظُلۡمٖ نُّذِقۡهُ مِنۡ عَذَابٍ أَلِيمٖ",
+          "english": ". . . which We have designated for all mankind, equally for the one who consecrates himself therein and the visitor.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "إِنَّ ٱلَّذِينَ كَفَرُواْ وَيَصُدُّونَ عَن سَبِيلِ ٱللَّهِ وَٱلۡمَسۡجِدِ ٱلۡحَرَامِ ٱلَّذِي جَعَلۡنَٰهُ لِلنَّاسِ سَوَآءً ٱلۡعَٰكِفُ فِيهِ وَٱلۡبَادِۚ وَمَن يُرِدۡ فِيهِ بِإِلۡحَادِۭ بِظُلۡمٖ نُّذِقۡهُ مِنۡ عَذَابٍ أَلِيمٖ",
+          "english": "Indeed, those who have denied and bar (others) from the way of Allah and from the Inviolable Mosque, which We have designated for all mankind equally, (including) the one who consecrates himself therein and the visitor. And whoever wants any blasphemy unjustly therein—We will make him taste of a painful punishment.",
+          "reason": "",
+          "category": ""
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "إِنَّ ٱلَّذِينَ كَفَرُواْ وَيَصُدُّونَ عَن سَبِيلِ ٱللَّهِ وَٱلۡمَسۡجِدِ ٱلۡحَرَامِ ٱلَّذِي جَعَلۡنَٰهُۥ لِلنَّاسِ سَوَآءٌ ٱلۡعَٰكِفُ فِيهِۦ وَٱلۡبَادِۦۚ وَمَن يُرِدۡ فِيهِۦ بِإِلۡحَادِۭ بِظُلۡمٖ نُّذِقۡهُۥ مِنۡ عَذَابٍ أَلِيمٖ",
+          "english": ". . . which We have designated for all mankind, equally for the one who consecrates himself therein and the visitor.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "إِنَّ ٱلَّذِينَ كَفَرُواْ وَيَصُدُّونَ عَن سَبِيلِ ٱللَّهِ وَٱلۡمَسۡجِدِ ٱلۡحَرَامِ ٱلَّذِي جَعَلۡنَٰهُۥ لِلنَّاسِ سَوَآءٌ ٱلۡعَٰكِفُ فِيهِۦ وَٱلۡبَادِۦۚ وَمَن يُرِدۡ فِيهِۦ بِإِلۡحَادِۭ بِظُلۡمٖ نُّذِقۡهُۥ مِنۡ عَذَابٍ أَلِيمٖ",
+          "english": ". . . which We have designated for all mankind, equally for the one who consecrates himself therein and the visitor.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "إِنَّ اَ۬لذِينَ كَفَرُواْ وَيَصُدُّونَ عَن سَبِيلِ اِ۬للَّهِ وَالْمَسْجِدِ اِ۬لْحَرَامِ اِ۬لذِے جَعَلْنَٰهُ لِلنَّاسِ سَوَآءٌ اِ۬لْعَٰكِفُ فِيهِ وَالْبَادِۖ وَمَنْ يُّرِدْ فِيهِ بِإِلْحَادِۢ بِظُلْمٖ نُّذِقْهُ مِنْ عَذَابٍ أَلِيمٖۖ",
+          "english": ". . . which We have designated for all mankind, equally for the one who consecrates himself therein and the visitor.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "إِنَّ اَ۬لذِينَ كَفَرُواْ وَيَصُدُّونَ عَن سَبِيلِ اِ۬للَّهِ وَالْمَسْجِدِ اِ۬لْحَرَامِ اِ۬لذِے جَعَلْنَٰهُ لِلنَّاسِ سَوَآءٌ اِ۬لْعَٰكِفُ فِيهِ وَالْبَادِۦۖ وَمَنْ يُّرِدْ فِيهِ بِإِلْحَادِۢ بِظُلْمٖ نُّذِقْهُ مِنْ عَذَابٍ اَلِيمٖۖ",
+          "english": ". . . which We have designated for all mankind, equally for the one who consecrates himself therein and the visitor.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 26,
+      "quran_arabic": "وَإِذْ بَوَّأْنَا لِإِبْرَٰهِيمَ مَكَانَ ٱلْبَيْتِ أَن لَّا تُشْرِكْ بِى شَيْـًۭٔا وَطَهِّرْ بَيْتِىَ لِلطَّآئِفِينَ وَٱلْقَآئِمِينَ وَٱلرُّكَّعِ ٱلسُّجُودِ",
+      "text": "(Remember) when We settled the place of the House for Abraham: ‘Do not associate anything with Me, but purify My House for the ones who go around (it), and the ones who stand, and the ones who bow, (and) the ones who prostrate themselves.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 27,
+      "quran_arabic": "وَأَذِّن فِى ٱلنَّاسِ بِٱلْحَجِّ يَأْتُوكَ رِجَالًۭا وَعَلَىٰ كُلِّ ضَامِرٍۢ يَأْتِينَ مِن كُلِّ فَجٍّ عَمِيقٍۢ",
+      "text": "And proclaim the pilgrimage among the people. Let them come to you on foot and on every lean animal. They will come from every remote mountain pass,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 28,
+      "quran_arabic": "لِّيَشْهَدُوا۟ مَنَٰفِعَ لَهُمْ وَيَذْكُرُوا۟ ٱسْمَ ٱللَّهِ فِىٓ أَيَّامٍۢ مَّعْلُومَٰتٍ عَلَىٰ مَا رَزَقَهُم مِّنۢ بَهِيمَةِ ٱلْأَنْعَٰمِ ۖ فَكُلُوا۟ مِنْهَا وَأَطْعِمُوا۟ ٱلْبَآئِسَ ٱلْفَقِيرَ",
+      "text": "so that they may witness things of benefit to them, and mention the name of God, on (certain) specified days, over whatever animal of the livestock He has provided them: “Eat from them, and feed the wretched poor.”",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 29,
+      "quran_arabic": "ثُمَّ لْيَقْضُوا۟ تَفَثَهُمْ وَلْيُوفُوا۟ نُذُورَهُمْ وَلْيَطَّوَّفُوا۟ بِٱلْبَيْتِ ٱلْعَتِيقِ",
+      "text": "Then let them bring an end to their ritual state, and fulfill their vows, and go around the ancient House.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 30,
+      "quran_arabic": "ذَٰلِكَ وَمَن يُعَظِّمْ حُرُمَٰتِ ٱللَّهِ فَهُوَ خَيْرٌۭ لَّهُۥ عِندَ رَبِّهِۦ ۗ وَأُحِلَّتْ لَكُمُ ٱلْأَنْعَٰمُ إِلَّا مَا يُتْلَىٰ عَلَيْكُمْ ۖ فَٱجْتَنِبُوا۟ ٱلرِّجْسَ مِنَ ٱلْأَوْثَٰنِ وَٱجْتَنِبُوا۟ قَوْلَ ٱلزُّورِ",
+      "text": "That (is the rule). Whoever respects the sacred things of God – it will be better for him with his Lord. Permitted to you (to eat) are the livestock, except for what is recited to you. Avoid the abomination of the idols, and avoid the speaking of falsehood,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 31,
+      "quran_arabic": "حُنَفَآءَ لِلَّهِ غَيْرَ مُشْرِكِينَ بِهِۦ ۚ وَمَن يُشْرِكْ بِٱللَّهِ فَكَأَنَّمَا خَرَّ مِنَ ٱلسَّمَآءِ فَتَخْطَفُهُ ٱلطَّيْرُ أَوْ تَهْوِى بِهِ ٱلرِّيحُ فِى مَكَانٍۢ سَحِيقٍۢ",
+      "text": "(being) Ḥanīfs before God, not associating (anything) with Him. Whoever associates (anything) with God – (it is) as if he has fallen from the sky, and the birds snatched him away, or (as if) the wind has swept him away to some far off place.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 32,
+      "quran_arabic": "ذَٰلِكَ وَمَن يُعَظِّمْ شَعَٰٓئِرَ ٱللَّهِ فَإِنَّهَا مِن تَقْوَى ٱلْقُلُوبِ",
+      "text": "That (is the rule). Whoever respects the symbols of God – surely that (comes) from the guarding of (your) hearts.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 33,
+      "quran_arabic": "لَكُمْ فِيهَا مَنَٰفِعُ إِلَىٰٓ أَجَلٍۢ مُّسَمًّۭى ثُمَّ مَحِلُّهَآ إِلَى ٱلْبَيْتِ ٱلْعَتِيقِ",
+      "text": "(There are) benefits for you in this up to an appointed time. Then their lawful place is to the ancient House.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 34,
+      "quran_arabic": "وَلِكُلِّ أُمَّةٍۢ جَعَلْنَا مَنسَكًۭا لِّيَذْكُرُوا۟ ٱسْمَ ٱللَّهِ عَلَىٰ مَا رَزَقَهُم مِّنۢ بَهِيمَةِ ٱلْأَنْعَٰمِ ۗ فَإِلَٰهُكُمْ إِلَٰهٌۭ وَٰحِدٌۭ فَلَهُۥٓ أَسْلِمُوا۟ ۗ وَبَشِّرِ ٱلْمُخْبِتِينَ",
+      "text": "For every community We have appointed a ritual: that they should mention the name of God over whatever animal of the livestock He has provided them. Your God is one God, so submit to Him. And give good news to the humble,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 35,
+      "quran_arabic": "ٱلَّذِينَ إِذَا ذُكِرَ ٱللَّهُ وَجِلَتْ قُلُوبُهُمْ وَٱلصَّٰبِرِينَ عَلَىٰ مَآ أَصَابَهُمْ وَٱلْمُقِيمِى ٱلصَّلَوٰةِ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ",
+      "text": "those who, when God is mentioned, their hearts become afraid, and the ones who are patient with whatever smites them, and the ones who observe the prayer, and contribute from what We have provided them.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 36,
+      "quran_arabic": "وَٱلْبُدْنَ جَعَلْنَٰهَا لَكُم مِّن شَعَٰٓئِرِ ٱللَّهِ لَكُمْ فِيهَا خَيْرٌۭ ۖ فَٱذْكُرُوا۟ ٱسْمَ ٱللَّهِ عَلَيْهَا صَوَآفَّ ۖ فَإِذَا وَجَبَتْ جُنُوبُهَا فَكُلُوا۟ مِنْهَا وَأَطْعِمُوا۟ ٱلْقَانِعَ وَٱلْمُعْتَرَّ ۚ كَذَٰلِكَ سَخَّرْنَٰهَا لَكُمْ لَعَلَّكُمْ تَشْكُرُونَ",
+      "text": "The (sacrificial) animals – We have appointed them for you among the symbols of God: there is good for you in them. So mention the name of God over them, (as they stand) in lines. Then when their sides fall (to the ground), eat from them, and feed the needy and the beggar. In this way We have subjected them to you, so that you may be thankful.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 37,
+      "quran_arabic": "لَن يَنَالَ ٱللَّهَ لُحُومُهَا وَلَا دِمَآؤُهَا وَلَٰكِن يَنَالُهُ ٱلتَّقْوَىٰ مِنكُمْ ۚ كَذَٰلِكَ سَخَّرَهَا لَكُمْ لِتُكَبِّرُوا۟ ٱللَّهَ عَلَىٰ مَا هَدَىٰكُمْ ۗ وَبَشِّرِ ٱلْمُحْسِنِينَ",
+      "text": "Its flesh will not reach God, nor its blood, but the guarding (of yourselves) will reach Him from you. In this way He has subjected them to you, so that you may magnify God because He has guided you. Give good news to the doers of good.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 38,
+      "quran_arabic": "۞ إِنَّ ٱللَّهَ يُدَٰفِعُ عَنِ ٱلَّذِينَ ءَامَنُوٓا۟ ۗ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ خَوَّانٍۢ كَفُورٍ",
+      "text": "Surely God will repel (evil) from those who believe. Surely God does not love any traitor (or) ungrateful one.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "۞ إِنَّ اَ۬للَّهَ يَدۡفَعُ عَنِ اِ۬لَّذِينَ ءَامَنُوٓاْۗ إِنَّ اَ۬للَّهَ لَا يُحِبُّ كُلَّ خَوَّانٖ كَفُورٍ",
+          "english": "Indeed, Allah repels (harm) from those who . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "۞ إِنَّ اَ۬للَّهَ يَدۡفَع  عَّنِ اِ۬لَّذِينَ ءَامَنُواْۗ إِنَّ اَ۬للَّهَ لَا يُحِبُّ كُلَّ خَوَّانٖ كَفُورٍ",
+          "english": "Indeed, Allah repels (harm) from those who . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "۞ إِنَّ ٱللَّهَ يَدۡفَعُ عَنِ ٱلَّذِينَ ءَامَنُواْۗ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ خَوَّانٖ كَفُورٍ",
+          "english": "Indeed, Allah repels (harm) from those who . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "۞ إِنَّ ٱللَّهَ يَدۡفَعُ عَنِ ٱلَّذِينَ ءَامَنُواْۗ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ خَوَّانٖ كَفُورٍ",
+          "english": "Indeed, Allah repels (harm) from those who . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 39,
+      "quran_arabic": "أُذِنَ لِلَّذِينَ يُقَٰتَلُونَ بِأَنَّهُمْ ظُلِمُوا۟ ۚ وَإِنَّ ٱللَّهَ عَلَىٰ نَصْرِهِمْ لَقَدِيرٌ",
+      "text": "Permission is given to those who fight because they have been done evil – and surely God is indeed able to help them –",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "أُذِنَ لِلَّذِينَ يُقَٰتِلُونَ بِأَنَّهُمۡ ظُلِمُواْۚ وَإِنَّ اَ۬للَّهَ عَلَىٰ نَصۡرِهِمۡ لَقَدِيرٌ",
+          "english": ". . . to those who combat . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "أُذِن لِّلَّذِينَ يُقَٰتِلُونَ بِأَنَّهُمۡ ظُلِمُواْۚ وَإِنَّ اَ۬للَّهَ عَلَىٰ نَصۡرِهِمۡ  لَقَدِيرٌ",
+          "english": ". . . to those who combat . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "أُذِنَ لِلَّذِينَ يُقَٰتِلُونَ بِأَنَّهُمۡ ظُلِمُواْۚ وَإِنَّ ٱللَّهَ عَلَىٰ نَصۡرِهِمۡ لَقَدِيرٌ",
+          "english": ". . . to those who combat . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "أُذِنَ لِلَّذِينَ يُقَٰتَلُونَ بِأَنَّهُمۡ ظُلِمُواْۚ وَإِنَّ ٱللَّهَ عَلَىٰ نَصۡرِهِمۡ لَقَدِيرٌ",
+          "english": "Permission has been granted to those who are combated, because they have been dealt with unjustly—and most surely Allah is Able to give them support:",
+          "reason": "",
+          "category": ""
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "أَذِنَ لِلَّذِينَ يُقَٰتِلُونَ بِأَنَّهُمُۥ ظُلِمُواْۚ وَإِنَّ ٱللَّهَ عَلَىٰ نَصۡرِهِمُۥ لَقَدِيرٌ",
+          "english": ". . . to those who combat . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "أَذِنَ لِلَّذِينَ يُقَٰتِلُونَ بِأَنَّهُمُۥ ظُلِمُواْۚ وَإِنَّ ٱللَّهَ عَلَىٰ نَصۡرِهِمُۥ لَقَدِيرٌ",
+          "english": ". . . to those who combat . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 40,
+      "quran_arabic": "ٱلَّذِينَ أُخْرِجُوا۟ مِن دِيَٰرِهِم بِغَيْرِ حَقٍّ إِلَّآ أَن يَقُولُوا۟ رَبُّنَا ٱللَّهُ ۗ وَلَوْلَا دَفْعُ ٱللَّهِ ٱلنَّاسَ بَعْضَهُم بِبَعْضٍۢ لَّهُدِّمَتْ صَوَٰمِعُ وَبِيَعٌۭ وَصَلَوَٰتٌۭ وَمَسَٰجِدُ يُذْكَرُ فِيهَا ٱسْمُ ٱللَّهِ كَثِيرًۭا ۗ وَلَيَنصُرَنَّ ٱللَّهُ مَن يَنصُرُهُۥٓ ۗ إِنَّ ٱللَّهَ لَقَوِىٌّ عَزِيزٌ",
+      "text": "those who have been expelled from their homes without any right, only because they said, ‘Our Lord is God.’ But if God had not repelled some of the people by the means of others, many monasteries, and churches, and synagogues, and mosques, in which the name of God is mentioned often, would indeed have been destroyed. God will indeed help the one who helps Him – surely God is indeed strong, mighty –",
+      "canonical_variants": [
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "ٱلَّذِينَ أُخۡرِجُواْ مِن دِيَٰرِهِمُۥ بِغَيۡرِ حَقٍّ إِلَّا أَن يَقُولُواْ رَبُّنَا ٱللَّهُۗ وَلَوۡلَا دَفۡعُ ٱللَّهِ ٱلنَّاسَ بَعۡضَهُمُۥ بِبَعۡضٖ لَّهُدِمَتۡ صَوَٰمِعُ وَبِيَعٞ وَصَلَوَٰتٞ وَمَسَٰجِدُ يُذۡكَرُ فِيهَا ٱسۡمُ ٱللَّهِ كَثِيرٗاۗ وَلَيَنصُرَنَّ ٱللَّهُ مَن يَنصُرُهُۥۚ إِنَّ ٱللَّهَ لَقَوِيٌّ عَزِيزٌ",
+          "english": ". . . would have been demolished.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "ٱلَّذِينَ أُخۡرِجُواْ مِن دِيَٰرِهِمُۥ بِغَيۡرِ حَقٍّ إِلَّا أَن يَقُولُواْ رَبُّنَا ٱللَّهُۗ وَلَوۡلَا دَفۡعُ ٱللَّهِ ٱلنَّاسَ بَعۡضَهُمُۥ بِبَعۡضٖ لَّهُدِمَتۡ صَوَٰمِعُ وَبِيَعٞ وَصَلَوَٰتٞ وَمَسَٰجِدُ يُذۡكَرُ فِيهَا ٱسۡمُ ٱللَّهِ كَثِيرٗاۗ وَلَيَنصُرَنَّ ٱللَّهُ مَن يَنصُرُهُۥۚ إِنَّ ٱللَّهَ لَقَوِيٌّ عَزِيزٌ",
+          "english": ". . . would have been demolished.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "اِ۬لذِينَ أُخْرِجُواْ مِن دِيَٰرِهِم بِغَيْرِ حَقٍّ إِلَّا أَنْ يَّقُولُواْ رَبُّنَا اَ۬للَّهُۖ وَلَوْلَا دِفَٰعُ اُ۬للَّهِ اِ۬لنَّاسَ بَعْضَهُم بِبَعْضٖ لَّهُدِمَتْ صَوَٰمِعُ وَبِيَعٞ وَصَلَوَٰتٞ وَمَسَٰجِدُ يُذْكَرُ فِيهَا اَ۪سْمُ اُ۬للَّهِ كَثِيراٗۖ وَلَيَنصُرَنَّ اَ۬للَّهُ مَنْ يَّنصُرُهُۥۖ إِنَّ اَ۬للَّهَ لَقَوِيٌّ عَزِيزٌۖ",
+          "english": ". . . would have been demolished.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "اِ۬لذِينَ أُخْرِجُواْ مِن دِيٰ۪رِهِم بِغَيْرِ حَقٍّ اِلَّآ أَنْ يَّقُولُواْ رَبُّنَا اَ۬للَّهُۖ وَلَوْلَا دِفَٰعُ اُ۬للَّهِ اِ۬لنَّاسَ بَعْضَهُم بِبَعْضٖ لَّهُدِمَتْ صَوَٰمِعُ وَبِيَعٞ وَصَلَوَٰتٞ وَمَسَٰجِدُ يُذْكَرُ فِيهَا اَ۪سْمُ اُ۬للَّهِ كَثِيراٗۖ وَلَيَنصُرَنَّ اَ۬للَّهُ مَنْ يَّنصُرُهُۥٓۖ إِنَّ اَ۬للَّهَ لَقَوِيٌّ عَزِيزٌۖ",
+          "english": ". . . would have been demolished.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 41,
+      "quran_arabic": "ٱلَّذِينَ إِن مَّكَّنَّٰهُمْ فِى ٱلْأَرْضِ أَقَامُوا۟ ٱلصَّلَوٰةَ وَءَاتَوُا۟ ٱلزَّكَوٰةَ وَأَمَرُوا۟ بِٱلْمَعْرُوفِ وَنَهَوْا۟ عَنِ ٱلْمُنكَرِ ۗ وَلِلَّهِ عَٰقِبَةُ ٱلْأُمُورِ",
+      "text": "those who, if We establish them on the earth, observe the prayer and give the alms, and command right and forbid wrong. To God (belongs) the outcome of all affairs.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 42,
+      "quran_arabic": "وَإِن يُكَذِّبُوكَ فَقَدْ كَذَّبَتْ قَبْلَهُمْ قَوْمُ نُوحٍۢ وَعَادٌۭ وَثَمُودُ",
+      "text": "If they call you a liar, the people of Noah called (him) a liar before you, and (so did) ‘Ād, and Thamūd,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 43,
+      "quran_arabic": "وَقَوْمُ إِبْرَٰهِيمَ وَقَوْمُ لُوطٍۢ",
+      "text": "and the people of Abraham, and the people of Lot,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 44,
+      "quran_arabic": "وَأَصْحَٰبُ مَدْيَنَ ۖ وَكُذِّبَ مُوسَىٰ فَأَمْلَيْتُ لِلْكَٰفِرِينَ ثُمَّ أَخَذْتُهُمْ ۖ فَكَيْفَ كَانَ نَكِيرِ",
+      "text": "and the companions of Midian, and Moses was called a liar (too). I spared the disbelievers, then I seized them, and how was My loathing (of them)!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 45,
+      "quran_arabic": "فَكَأَيِّن مِّن قَرْيَةٍ أَهْلَكْنَٰهَا وَهِىَ ظَالِمَةٌۭ فَهِىَ خَاوِيَةٌ عَلَىٰ عُرُوشِهَا وَبِئْرٍۢ مُّعَطَّلَةٍۢ وَقَصْرٍۢ مَّشِيدٍ",
+      "text": "How many a town have We destroyed while it was doing evil, so it is (now) collapsed on its supports! (How many) an abandoned well and well-built palace!",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "فَكَأَيِّن مِّن قَرۡيَةٍ أَهۡلَكۡتُهَا وَهۡيَ ظَالِمَةٞ فَهۡيَ خَاوِيَةٌ عَلَىٰ عُرُوشِهَا وَبِئۡرٖ مُّعَطَّلَةٖ وَقَصۡرٖ مَّشِيدٍ",
+          "english": ". . . have I annihilated . . .",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "فَكَأَيِّن مِّن قَرۡيَةٍ  أَهۡلَكۡتُهَا وَهۡيَ ظَالِمَةٞ فَهۡيَ خَاوِيَةٌ عَلَىٰ عُرُوشِهَا وَبِيرٖ  مُّعَطَّلَةٖ وَقَصۡرٖ مَّشِيدٍ",
+          "english": ". . . have I annihilated . . .",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 46,
+      "quran_arabic": "أَفَلَمْ يَسِيرُوا۟ فِى ٱلْأَرْضِ فَتَكُونَ لَهُمْ قُلُوبٌۭ يَعْقِلُونَ بِهَآ أَوْ ءَاذَانٌۭ يَسْمَعُونَ بِهَا ۖ فَإِنَّهَا لَا تَعْمَى ٱلْأَبْصَٰرُ وَلَٰكِن تَعْمَى ٱلْقُلُوبُ ٱلَّتِى فِى ٱلصُّدُورِ",
+      "text": "Have they not traveled on the earth? Do they have hearts to understand with or ears to hear with? Surely it is not the sight (which) is blind, but the hearts which are within the chests are blind.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 47,
+      "quran_arabic": "وَيَسْتَعْجِلُونَكَ بِٱلْعَذَابِ وَلَن يُخْلِفَ ٱللَّهُ وَعْدَهُۥ ۚ وَإِنَّ يَوْمًا عِندَ رَبِّكَ كَأَلْفِ سَنَةٍۢ مِّمَّا تَعُدُّونَ",
+      "text": "They seek to hurry you with the punishment. God will not break His promise. Surely a day with your Lord is like a thousand years of what you count.",
+      "canonical_variants": [
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَيَسۡتَعۡجِلُونَكَ بِٱلۡعَذَابِ وَلَن يُخۡلِفَ ٱللَّهُ وَعۡدَهُۥۚ وَإِنَّ يَوۡمًا عِندَ رَبِّكَ كَأَلۡفِ سَنَةٖ مِّمَّا يَعُدُّونَ",
+          "english": ". . . of what they count.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَيَسۡتَعۡجِلُونَكَ بِٱلۡعَذَابِ وَلَن يُخۡلِفَ ٱللَّهُ وَعۡدَهُۥۚ وَإِنَّ يَوۡمًا عِندَ رَبِّكَ كَأَلۡفِ سَنَةٖ مِّمَّا يَعُدُّونَ",
+          "english": ". . . of what they count.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 48,
+      "quran_arabic": "وَكَأَيِّن مِّن قَرْيَةٍ أَمْلَيْتُ لَهَا وَهِىَ ظَالِمَةٌۭ ثُمَّ أَخَذْتُهَا وَإِلَىَّ ٱلْمَصِيرُ",
+      "text": "How many a town have I have spared while it was doing evil! Then I seized it. To Me is the (final) destination.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 49,
+      "quran_arabic": "قُلْ يَٰٓأَيُّهَا ٱلنَّاسُ إِنَّمَآ أَنَا۠ لَكُمْ نَذِيرٌۭ مُّبِينٌۭ",
+      "text": "Say: ‘People! I am only a clear warner for you.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 50,
+      "quran_arabic": "فَٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ لَهُم مَّغْفِرَةٌۭ وَرِزْقٌۭ كَرِيمٌۭ",
+      "text": "Those who believe and do righteous deeds – for them (there is) forgiveness and generous provision.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 51,
+      "quran_arabic": "وَٱلَّذِينَ سَعَوْا۟ فِىٓ ءَايَٰتِنَا مُعَٰجِزِينَ أُو۟لَٰٓئِكَ أَصْحَٰبُ ٱلْجَحِيمِ",
+      "text": "But those who strive against Our signs to obstruct (them) – those are the companions of the Furnace.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "وَاَلَّذِينَ سَعَوۡاْ فِيٓ ءَايَٰتِنَا مُعَجِّزِينَ أُوْلَٰٓئِكَ أَصۡحَٰبُ اُ۬لۡجَحِيمِ",
+          "english": ". . . attempting to thwart . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "وَاَلَّذِينَ سَعَوۡاْ فِي ءَايَٰتِنَا مُعَجِّزِينَ أُوْلَٰٓئِكَ أَصۡحَٰبُ  اُ۬لۡجَحِيمِ",
+          "english": ". . . attempting to thwart . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَٱلَّذِينَ سَعَوۡاْ فِي ءَايَٰتِنَا مُعَجِّزِينَ أُوْلَٰٓئِكَ أَصۡحَٰبُ ٱلۡجَحِيمِ",
+          "english": ". . . attempting to thwart . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَٱلَّذِينَ سَعَوۡاْ فِي ءَايَٰتِنَا مُعَجِّزِينَ أُوْلَٰٓئِكَ أَصۡحَٰبُ ٱلۡجَحِيمِ",
+          "english": ". . . attempting to thwart . . .",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 52,
+      "quran_arabic": "وَمَآ أَرْسَلْنَا مِن قَبْلِكَ مِن رَّسُولٍۢ وَلَا نَبِىٍّ إِلَّآ إِذَا تَمَنَّىٰٓ أَلْقَى ٱلشَّيْطَٰنُ فِىٓ أُمْنِيَّتِهِۦ فَيَنسَخُ ٱللَّهُ مَا يُلْقِى ٱلشَّيْطَٰنُ ثُمَّ يُحْكِمُ ٱللَّهُ ءَايَٰتِهِۦ ۗ وَٱللَّهُ عَلِيمٌ حَكِيمٌۭ",
+      "text": "We have not sent any messenger or any prophet before you, except that, when he began to wish, Satan cast (something) into his wishful thinking. But God cancels what Satan casts, (and) then God clearly composes His verses – surely God is knowing, wise –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 53,
+      "quran_arabic": "لِّيَجْعَلَ مَا يُلْقِى ٱلشَّيْطَٰنُ فِتْنَةًۭ لِّلَّذِينَ فِى قُلُوبِهِم مَّرَضٌۭ وَٱلْقَاسِيَةِ قُلُوبُهُمْ ۗ وَإِنَّ ٱلظَّٰلِمِينَ لَفِى شِقَاقٍۭ بَعِيدٍۢ",
+      "text": "so that He may make what Satan casts a test for those in whose hearts is a sickness, and whose hearts are hardened – and surely the evildoers are indeed in extreme defiance –",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 54,
+      "quran_arabic": "وَلِيَعْلَمَ ٱلَّذِينَ أُوتُوا۟ ٱلْعِلْمَ أَنَّهُ ٱلْحَقُّ مِن رَّبِّكَ فَيُؤْمِنُوا۟ بِهِۦ فَتُخْبِتَ لَهُۥ قُلُوبُهُمْ ۗ وَإِنَّ ٱللَّهَ لَهَادِ ٱلَّذِينَ ءَامَنُوٓا۟ إِلَىٰ صِرَٰطٍۢ مُّسْتَقِيمٍۢ",
+      "text": "and so that those who have been given the knowledge may know that it is the truth from your Lord, and may believe in it, and so that their hearts may be humble before Him. Surely God is indeed guiding those who believe to a straight path.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 55,
+      "quran_arabic": "وَلَا يَزَالُ ٱلَّذِينَ كَفَرُوا۟ فِى مِرْيَةٍۢ مِّنْهُ حَتَّىٰ تَأْتِيَهُمُ ٱلسَّاعَةُ بَغْتَةً أَوْ يَأْتِيَهُمْ عَذَابُ يَوْمٍ عَقِيمٍ",
+      "text": "Those who disbelieve will continue (to be) in doubt about it, until the Hour comes upon them unexpectedly, or the punishment of a barren Day comes upon them.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 56,
+      "quran_arabic": "ٱلْمُلْكُ يَوْمَئِذٍۢ لِّلَّهِ يَحْكُمُ بَيْنَهُمْ ۚ فَٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ فِى جَنَّٰتِ ٱلنَّعِيمِ",
+      "text": "The kingdom on that Day (will belong) to God. He will judge between them. Those who believe and do righteous deeds (will be) in Gardens of Bliss,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 57,
+      "quran_arabic": "وَٱلَّذِينَ كَفَرُوا۟ وَكَذَّبُوا۟ بِـَٔايَٰتِنَا فَأُو۟لَٰٓئِكَ لَهُمْ عَذَابٌۭ مُّهِينٌۭ",
+      "text": "but those who disbelieve and call Our signs a lie – for them (there will be) a humiliating punishment.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 58,
+      "quran_arabic": "وَٱلَّذِينَ هَاجَرُوا۟ فِى سَبِيلِ ٱللَّهِ ثُمَّ قُتِلُوٓا۟ أَوْ مَاتُوا۟ لَيَرْزُقَنَّهُمُ ٱللَّهُ رِزْقًا حَسَنًۭا ۚ وَإِنَّ ٱللَّهَ لَهُوَ خَيْرُ ٱلرَّٰزِقِينَ",
+      "text": "Those who have emigrated in the way of God, (and) then were killed or died, God will indeed provide them (with) a good provision. Surely God – He indeed is the best of providers.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 59,
+      "quran_arabic": "لَيُدْخِلَنَّهُم مُّدْخَلًۭا يَرْضَوْنَهُۥ ۗ وَإِنَّ ٱللَّهَ لَعَلِيمٌ حَلِيمٌۭ",
+      "text": "He will indeed cause them to enter by an entrance with which they will be pleased. Surely God is indeed knowing, forbearing.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 60,
+      "quran_arabic": "۞ ذَٰلِكَ وَمَنْ عَاقَبَ بِمِثْلِ مَا عُوقِبَ بِهِۦ ثُمَّ بُغِىَ عَلَيْهِ لَيَنصُرَنَّهُ ٱللَّهُ ۗ إِنَّ ٱللَّهَ لَعَفُوٌّ غَفُورٌۭ",
+      "text": "That (will be so). And whoever takes retribution with the same retribution he suffered, (and) then is sought out – God will indeed help him. Surely God is indeed pardoning, forgiving.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 61,
+      "quran_arabic": "ذَٰلِكَ بِأَنَّ ٱللَّهَ يُولِجُ ٱلَّيْلَ فِى ٱلنَّهَارِ وَيُولِجُ ٱلنَّهَارَ فِى ٱلَّيْلِ وَأَنَّ ٱللَّهَ سَمِيعٌۢ بَصِيرٌۭ",
+      "text": "That is because God causes the night to pass into the day, and causes the day to pass into the night, and because God is hearing, seeing.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 62,
+      "quran_arabic": "ذَٰلِكَ بِأَنَّ ٱللَّهَ هُوَ ٱلْحَقُّ وَأَنَّ مَا يَدْعُونَ مِن دُونِهِۦ هُوَ ٱلْبَٰطِلُ وَأَنَّ ٱللَّهَ هُوَ ٱلْعَلِىُّ ٱلْكَبِيرُ",
+      "text": "That is because God – He is the Truth, and because what they call on instead of Him, that is the falsehood, and because God is the Most High, the Great.",
+      "canonical_variants": [
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "ذَٰلِكَ بِأَنَّ ٱللَّهَ هُوَ ٱلۡحَقُّ وَأَنَّ مَا تَدۡعُونَ مِن دُونِهِۦ هُوَ ٱلۡبَٰطِلُ وَأَنَّ ٱللَّهَ هُوَ ٱلۡعَلِيُّ ٱلۡكَبِيرُ",
+          "english": ". . . whatever you call upon . . .",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "ذَٰلِكَ بِأَنَّ ٱللَّهَ هُوَ ٱلۡحَقُّ وَأَنَّ مَا يَدۡعُونَ مِن دُونِهِۦ هُوَ ٱلۡبَٰطِلُ وَأَنَّ ٱللَّهَ هُوَ ٱلۡعَلِيُّ ٱلۡكَبِيرُ",
+          "english": "That is because Allah is the Truth, and because whatever they call upon apart from Him is falsehood, and because Allah is the All-High, the Supreme.",
+          "reason": "",
+          "category": ""
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "ذَٰلِكَ بِأَنَّ ٱللَّهَ هُوَ ٱلۡحَقُّ وَأَنَّ مَا تَدۡعُونَ مِن دُونِهِۦ هُوَ ٱلۡبَٰطِلُ وَأَنَّ ٱللَّهَ هُوَ ٱلۡعَلِيُّ ٱلۡكَبِيرُ",
+          "english": ". . . whatever you call upon . . .",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "ذَٰلِكَ بِأَنَّ ٱللَّهَ هُوَ ٱلۡحَقُّ وَأَنَّ مَا تَدۡعُونَ مِن دُونِهِۦ هُوَ ٱلۡبَٰطِلُ وَأَنَّ ٱللَّهَ هُوَ ٱلۡعَلِيُّ ٱلۡكَبِيرُ",
+          "english": ". . . whatever you call upon . . .",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "ذَٰلِكَ بِأَنَّ اَ۬للَّهَ هُوَ اَ۬لْحَقُّ وَأَنَّ مَا تَدْعُونَ مِن دُونِهِۦ هُوَ اَ۬لْبَٰطِلُ وَأَنَّ اَ۬للَّهَ هُوَ اَ۬لْعَلِيُّ اُ۬لْكَبِيرُۖ",
+          "english": ". . . whatever you call upon . . .",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "ذَٰلِكَ بِأَنَّ اَ۬للَّهَ هُوَ اَ۬لْحَقُّ وَأَنَّ مَا تَدْعُونَ مِن دُونِهِۦ هُوَ اَ۬لْبَٰطِلُ وَأَنَّ اَ۬للَّهَ هُوَ اَ۬لْعَلِيُّ اُ۬لْكَبِيرُۖ",
+          "english": ". . . whatever you call upon . . .",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 63,
+      "quran_arabic": "أَلَمْ تَرَ أَنَّ ٱللَّهَ أَنزَلَ مِنَ ٱلسَّمَآءِ مَآءًۭ فَتُصْبِحُ ٱلْأَرْضُ مُخْضَرَّةً ۗ إِنَّ ٱللَّهَ لَطِيفٌ خَبِيرٌۭ",
+      "text": "Do you not see that God sends down water from the sky, (and) then the earth becomes green? God is astute, aware.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 64,
+      "quran_arabic": "لَّهُۥ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ وَإِنَّ ٱللَّهَ لَهُوَ ٱلْغَنِىُّ ٱلْحَمِيدُ",
+      "text": "To Him (belongs) whatever is in the heavens and whatever is on the earth. Surely God – He indeed is the wealthy One, the Praiseworthy.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 65,
+      "quran_arabic": "أَلَمْ تَرَ أَنَّ ٱللَّهَ سَخَّرَ لَكُم مَّا فِى ٱلْأَرْضِ وَٱلْفُلْكَ تَجْرِى فِى ٱلْبَحْرِ بِأَمْرِهِۦ وَيُمْسِكُ ٱلسَّمَآءَ أَن تَقَعَ عَلَى ٱلْأَرْضِ إِلَّا بِإِذْنِهِۦٓ ۗ إِنَّ ٱللَّهَ بِٱلنَّاسِ لَرَءُوفٌۭ رَّحِيمٌۭ",
+      "text": "Do you not see that God has subjected to you whatever is on the earth, and the ship that runs on the sea by His command, and He (that) holds up the sky so that it does not fall upon the earth, except by His permission? Surely God is indeed kind (and) compassionate with the people.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 66,
+      "quran_arabic": "وَهُوَ ٱلَّذِىٓ أَحْيَاكُمْ ثُمَّ يُمِيتُكُمْ ثُمَّ يُحْيِيكُمْ ۗ إِنَّ ٱلْإِنسَٰنَ لَكَفُورٌۭ",
+      "text": "He (it is) who gave you life, then He causes you to die, (and) then He will give you life (again). Surely the human is ungrateful indeed.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 67,
+      "quran_arabic": "لِّكُلِّ أُمَّةٍۢ جَعَلْنَا مَنسَكًا هُمْ نَاسِكُوهُ ۖ فَلَا يُنَٰزِعُنَّكَ فِى ٱلْأَمْرِ ۚ وَٱدْعُ إِلَىٰ رَبِّكَ ۖ إِنَّكَ لَعَلَىٰ هُدًۭى مُّسْتَقِيمٍۢ",
+      "text": "For every community we have appointed a ritual which they practice. So let them not argue with you about the matter, but call (them) to your Lord. Surely you are indeed on a straight guidance.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 68,
+      "quran_arabic": "وَإِن جَٰدَلُوكَ فَقُلِ ٱللَّهُ أَعْلَمُ بِمَا تَعْمَلُونَ",
+      "text": "If they dispute with you, say: ‘God knows what you do.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 69,
+      "quran_arabic": "ٱللَّهُ يَحْكُمُ بَيْنَكُمْ يَوْمَ ٱلْقِيَٰمَةِ فِيمَا كُنتُمْ فِيهِ تَخْتَلِفُونَ",
+      "text": "God will judge between you on the Day of Resurrection concerning your differences.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 70,
+      "quran_arabic": "أَلَمْ تَعْلَمْ أَنَّ ٱللَّهَ يَعْلَمُ مَا فِى ٱلسَّمَآءِ وَٱلْأَرْضِ ۗ إِنَّ ذَٰلِكَ فِى كِتَٰبٍ ۚ إِنَّ ذَٰلِكَ عَلَى ٱللَّهِ يَسِيرٌۭ",
+      "text": "Do you not know that God knows whatever is in the sky and the earth? Surely that is in a Book. Surely that is easy for God.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 71,
+      "quran_arabic": "وَيَعْبُدُونَ مِن دُونِ ٱللَّهِ مَا لَمْ يُنَزِّلْ بِهِۦ سُلْطَٰنًۭا وَمَا لَيْسَ لَهُم بِهِۦ عِلْمٌۭ ۗ وَمَا لِلظَّٰلِمِينَ مِن نَّصِيرٍۢ",
+      "text": "Instead of God, they serve what He has not sent down any authority for, and what they have no knowledge of. The evildoers will have no helper.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "۞ وَيَعۡبُدُونَ مِن دُونِ اِ۬للَّهِ مَا لَمۡ يُنزِلۡ بِهِۦ سُلۡطَٰنٗا وَمَا لَيۡسَ لَهُم بِهِۦ عِلۡمٞۗ وَمَا لِلظَّٰلِمِينَ مِن نَّصِيرٖ",
+          "english": ". . . things for which He bestowed no authority from on high . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "۞ وَيَعۡبُدُونَ  مِن دُونِ اِ۬للَّهِ مَا لَمۡ يُنزِلۡ بِهِۦ سُلۡطَٰنٗا وَمَا لَيۡسَ لَهُم بِهِۦ  عِلۡمٞۗ وَمَا لِلظَّٰلِمِينَ مِن نَّصِيرٖ",
+          "english": ". . . things for which He bestowed no authority from on high . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَيَعۡبُدُونَ مِن دُونِ ٱللَّهِ مَا لَمۡ يُنزِلۡ بِهِۦ سُلۡطَٰنٗا وَمَا لَيۡسَ لَهُمُۥ بِهِۦ عِلۡمٞۗ وَمَا لِلظَّٰلِمِينَ مِن نَّصِيرٖ",
+          "english": ". . . things for which He bestowed no authority from on high . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَيَعۡبُدُونَ مِن دُونِ ٱللَّهِ مَا لَمۡ يُنزِلۡ بِهِۦ سُلۡطَٰنٗا وَمَا لَيۡسَ لَهُمُۥ بِهِۦ عِلۡمٞۗ وَمَا لِلظَّٰلِمِينَ مِن نَّصِيرٖ",
+          "english": ". . . things for which He bestowed no authority from on high . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 72,
+      "quran_arabic": "وَإِذَا تُتْلَىٰ عَلَيْهِمْ ءَايَٰتُنَا بَيِّنَٰتٍۢ تَعْرِفُ فِى وُجُوهِ ٱلَّذِينَ كَفَرُوا۟ ٱلْمُنكَرَ ۖ يَكَادُونَ يَسْطُونَ بِٱلَّذِينَ يَتْلُونَ عَلَيْهِمْ ءَايَٰتِنَا ۗ قُلْ أَفَأُنَبِّئُكُم بِشَرٍّۢ مِّن ذَٰلِكُمُ ۗ ٱلنَّارُ وَعَدَهَا ٱللَّهُ ٱلَّذِينَ كَفَرُوا۟ ۖ وَبِئْسَ ٱلْمَصِيرُ",
+      "text": "When Our signs are recited to them as clear signs, you recognize defiance in the faces of those who disbelieve – they all but attack those who recite Our signs to them. Say: ‘Shall I inform you about (something) worse than that? The Fire! God has promised it to those who disbelieve – and it is an evil destination!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 73,
+      "quran_arabic": "يَٰٓأَيُّهَا ٱلنَّاسُ ضُرِبَ مَثَلٌۭ فَٱسْتَمِعُوا۟ لَهُۥٓ ۚ إِنَّ ٱلَّذِينَ تَدْعُونَ مِن دُونِ ٱللَّهِ لَن يَخْلُقُوا۟ ذُبَابًۭا وَلَوِ ٱجْتَمَعُوا۟ لَهُۥ ۖ وَإِن يَسْلُبْهُمُ ٱلذُّبَابُ شَيْـًۭٔا لَّا يَسْتَنقِذُوهُ مِنْهُ ۚ ضَعُفَ ٱلطَّالِبُ وَٱلْمَطْلُوبُ",
+      "text": "People! A parable is struck, so listen to it. Surely those you call on instead of God will not create a fly, even if they joined together for it. And if a fly were to snatch anything away from them, they would not (be able to) rescue it from it. Weak is the seeker and the sought (alike)!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 74,
+      "quran_arabic": "مَا قَدَرُوا۟ ٱللَّهَ حَقَّ قَدْرِهِۦٓ ۗ إِنَّ ٱللَّهَ لَقَوِىٌّ عَزِيزٌ",
+      "text": "They have not measured God (with) the measure due Him. Surely God is indeed strong, mighty.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 75,
+      "quran_arabic": "ٱللَّهُ يَصْطَفِى مِنَ ٱلْمَلَٰٓئِكَةِ رُسُلًۭا وَمِنَ ٱلنَّاسِ ۚ إِنَّ ٱللَّهَ سَمِيعٌۢ بَصِيرٌۭ",
+      "text": "God chooses messengers from the angels and from the people. Surely God is hearing, seeing.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 76,
+      "quran_arabic": "يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۗ وَإِلَى ٱللَّهِ تُرْجَعُ ٱلْأُمُورُ",
+      "text": "He knows what is before them and what is behind them. To God all affairs are returned.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 77,
+      "quran_arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱرْكَعُوا۟ وَٱسْجُدُوا۟ وَٱعْبُدُوا۟ رَبَّكُمْ وَٱفْعَلُوا۟ ٱلْخَيْرَ لَعَلَّكُمْ تُفْلِحُونَ ۩",
+      "text": "You who believe! Bow and prostrate yourselves, and serve your Lord, and do good, so that you may prosper.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 78,
+      "quran_arabic": "وَجَٰهِدُوا۟ فِى ٱللَّهِ حَقَّ جِهَادِهِۦ ۚ هُوَ ٱجْتَبَىٰكُمْ وَمَا جَعَلَ عَلَيْكُمْ فِى ٱلدِّينِ مِنْ حَرَجٍۢ ۚ مِّلَّةَ أَبِيكُمْ إِبْرَٰهِيمَ ۚ هُوَ سَمَّىٰكُمُ ٱلْمُسْلِمِينَ مِن قَبْلُ وَفِى هَٰذَا لِيَكُونَ ٱلرَّسُولُ شَهِيدًا عَلَيْكُمْ وَتَكُونُوا۟ شُهَدَآءَ عَلَى ٱلنَّاسِ ۚ فَأَقِيمُوا۟ ٱلصَّلَوٰةَ وَءَاتُوا۟ ٱلزَّكَوٰةَ وَٱعْتَصِمُوا۟ بِٱللَّهِ هُوَ مَوْلَىٰكُمْ ۖ فَنِعْمَ ٱلْمَوْلَىٰ وَنِعْمَ ٱلنَّصِيرُ",
+      "text": "And struggle for God with the struggling due Him. He has chosen you, and has not placed any difficulty on you in the (matter of) religion: the creed of your father Abraham. He named you Muslims, (both) before and in this, so that the messenger might be a witness against you, and that you might be witnesses against the people. So observe the prayer and give the alms, and hold fast to God. He is your Protector. Excellent is the Protector, and excellent is the Helper!",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

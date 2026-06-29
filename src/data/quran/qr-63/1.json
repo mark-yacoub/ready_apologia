@@ -1,0 +1,125 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ إِذَا جَآءَكَ ٱلْمُنَٰفِقُونَ قَالُوا۟ نَشْهَدُ إِنَّكَ لَرَسُولُ ٱللَّهِ ۗ وَٱللَّهُ يَعْلَمُ إِنَّكَ لَرَسُولُهُۥ وَٱللَّهُ يَشْهَدُ إِنَّ ٱلْمُنَٰفِقِينَ لَكَٰذِبُونَ",
+      "text": "When the hypocrites come to you, they say, ‘We bear witness that you are indeed the messenger of God.’ God knows that you are indeed His messenger, and God bears witness: ‘Surely the hypocrites are liars indeed!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "ٱتَّخَذُوٓا۟ أَيْمَٰنَهُمْ جُنَّةًۭ فَصَدُّوا۟ عَن سَبِيلِ ٱللَّهِ ۚ إِنَّهُمْ سَآءَ مَا كَانُوا۟ يَعْمَلُونَ",
+      "text": "They have taken their oaths as a cover, and have kept (people) from the way of God. Surely they – evil is what they have done.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "ذَٰلِكَ بِأَنَّهُمْ ءَامَنُوا۟ ثُمَّ كَفَرُوا۟ فَطُبِعَ عَلَىٰ قُلُوبِهِمْ فَهُمْ لَا يَفْقَهُونَ",
+      "text": "That is because they believed, (and) then they disbelieved. So a seal was set on their hearts, and they do not understand.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "۞ وَإِذَا رَأَيْتَهُمْ تُعْجِبُكَ أَجْسَامُهُمْ ۖ وَإِن يَقُولُوا۟ تَسْمَعْ لِقَوْلِهِمْ ۖ كَأَنَّهُمْ خُشُبٌۭ مُّسَنَّدَةٌۭ ۖ يَحْسَبُونَ كُلَّ صَيْحَةٍ عَلَيْهِمْ ۚ هُمُ ٱلْعَدُوُّ فَٱحْذَرْهُمْ ۚ قَٰتَلَهُمُ ٱللَّهُ ۖ أَنَّىٰ يُؤْفَكُونَ",
+      "text": "When you see them, their bodies please you, but when they speak, you hear their speech as if they were planks of wood propped up. They think every cry is against them. They are the enemy, so beware of them. God fight them! How deluded they are!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "وَإِذَا قِيلَ لَهُمْ تَعَالَوْا۟ يَسْتَغْفِرْ لَكُمْ رَسُولُ ٱللَّهِ لَوَّوْا۟ رُءُوسَهُمْ وَرَأَيْتَهُمْ يَصُدُّونَ وَهُم مُّسْتَكْبِرُونَ",
+      "text": "When it is said to them, ‘Come, the messenger of God will ask forgiveness for you,’ they shake their heads, and you see them turning aside, and they become arrogant.",
+      "canonical_variants": [
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "وَإِذَا قِيلَ لَهُمْ تَعَالَوْاْ يَسْتَغْفِرْ لَكُمْ رَسُولُ اُ۬للَّهِ لَوَوْاْ رُءُوسَهُمْ وَرَأَيْتَهُمْ يَصُدُّونَ وَهُم مُّسْتَكْبِرُونَۖ",
+          "english": ". . . they turn their heads . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "وَإِذَا قِيلَ لَهُمْ تَعَالَوْاْ يَسْتَغْفِرْ لَكُمْ رَسُولُ اُ۬للَّهِ لَوَوْاْ رُءُوسَهُمْ وَرَأَيْتَهُمْ يَصُدُّونَ وَهُم مُّسْتَكْبِرُونَۖ",
+          "english": ". . . they turn their heads . . .",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "سَوَآءٌ عَلَيْهِمْ أَسْتَغْفَرْتَ لَهُمْ أَمْ لَمْ تَسْتَغْفِرْ لَهُمْ لَن يَغْفِرَ ٱللَّهُ لَهُمْ ۚ إِنَّ ٱللَّهَ لَا يَهْدِى ٱلْقَوْمَ ٱلْفَٰسِقِينَ",
+      "text": "(It is) the same for to them whether you ask forgiveness for them or you do not ask forgiveness for them: God will not forgive them. Surely God does not guide the people who are wicked.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "هُمُ ٱلَّذِينَ يَقُولُونَ لَا تُنفِقُوا۟ عَلَىٰ مَنْ عِندَ رَسُولِ ٱللَّهِ حَتَّىٰ يَنفَضُّوا۟ ۗ وَلِلَّهِ خَزَآئِنُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ وَلَٰكِنَّ ٱلْمُنَٰفِقِينَ لَا يَفْقَهُونَ",
+      "text": "They are those who say, ‘Do not contribute to those who are with the messenger of God until they disperse,’ when the storehouses of the heavens and the earth (belong) to God. But the hypocrites do not understand (this).",
+      "canonical_variants": [],
+      "competing_variants": [
+        {
+          "companion_codex": "Zaid b. Arqam",
+          "variant_arabic": "هُمُ الَّذِينَ يَقُولُونَ لَا تُنْفِقُوا عَلَى مَنْ عِنْدَ رَسُولِ اللَّهِ حَتَّى يَنْفَضُّوا مِنْ حَوْلِهِ وَلِلَّهِ خَزَائِنُ السَّمَاوَاتِ وَالْأَرْضِ وَلَكِنَّ الْمُنَافِقِينَ لَا يَفْقَهُونَ",
+          "variant_english": "They are the ones who say, \"Do not spend on those who are with the Messenger of Allah until they disband from around him.\" And to Allah belong the depositories of the heavens and the earth, but the hypocrites do not understand.",
+          "source_reference": "Sahih Muslim 7024",
+          "hadith_arabic": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، حَدَّثَنَا الْحَسَنُ بْنُ مُوسَى، حَدَّثَنَا زُهَيْرُ بْنُ مُعَاوِيَةَ، حَدَّثَنَا أَبُو إِسْحَاقَ، أَنَّهُ سَمِعَ زَيْدَ بْنَ أَرْقَمَ، يَقُولُ خَرَجْنَا مَعَ رَسُولِ اللَّهِ صلى الله عليه وسلم فِي سَفَرٍ أَصَابَ النَّاسَ فِيهِ شِدَّةٌ فَقَالَ عَبْدُ اللَّهِ بْنُ أُبَىٍّ لأَصْحَابِهِ لاَ تُنْفِقُوا عَلَى مَنْ عِنْدَ رَسُولِ اللَّهِ حَتَّى يَنْفَضُّوا مِنْ حَوْلِهِ ‏.‏ قَالَ زُهَيْرٌ وَهِيَ قِرَاءَةُ مَنْ خَفَضَ حَوْلَهُ ‏.‏ وَقَالَ لَئِنْ رَجَعْنَا إِلَى الْمَدِينَةِ لَيُخْرِجَنَّ الأَعَزُّ مِنْهَا الأَذَلَّ - قَالَ - فَأَتَيْتُ النَّبِيَّ صلى الله عليه وسلم فَأَخْبَرْتُهُ بِذَلِكَ فَأَرْسَلَ إِلَى عَبْدِ اللَّهِ بْنِ أُبَىٍّ فَسَأَلَهُ فَاجْتَهَدَ يَمِينَهُ مَا فَعَلَ فَقَالَ كَذَبَ زَيْدٌ رَسُولَ اللَّهِ صلى الله عليه وسلم - قَالَ - فَوَقَعَ فِي نَفْسِي مِمَّا قَالُوهُ شِدَّةٌ حَتَّى أَنْزَلَ اللَّهُ تَصْدِيقِي ‏{‏ إِذَا جَاءَكَ الْمُنَافِقُونَ‏}‏ قَالَ ثُمَّ دَعَاهُمُ النَّبِيُّ صلى الله عليه وسلم لِيَسْتَغْفِرَ لَهُمْ - قَالَ - فَلَوَّوْا رُءُوسَهُمْ ‏.‏ وَقَوْلُهُ ‏{‏ كَأَنَّهُمْ خُشُبٌ مُسَنَّدَةٌ‏}‏ وَقَالَ كَانُوا رِجَالاً أَجْمَلَ شَىْءٍ ‏.‏",
+          "hadith_english": "Zaid b. Arqam reported:We set out on a journey along with Allah's Messenger (ﷺ) in which we faced many hardships. 'Abdullah b. Ubayy said to his friends: Do not give what you have in your possession to those who are with Allah's Messenger (ﷺ) until they desert him. Zubair said: That is the reciting of that person who recited as min haulahu (from around him) and the other reciting is man haulahia (who are around him). And in this case when we would return to Medina the honourable would drive out the meaner therefrom (lxiv. 8). I came to Allah's Apostle (ﷺ) and informed him about that and he sent someone to 'Abdullah b. Ubayy and he asked him whether he had said that or not. He took an oath to the fact that he had not done that and told that it was Zaid who had stated a lie to Allah's Messenger (ﷺ). Zaid said: I was much perturbed because of this until this verse was revealed attesting my truth:\" When the hypocrites come\" (lxiii. 1). Allah's Apostle (ﷺ) then called them in order to seek forgiveness for them, but they turned away their heads as if they were hooks of wood fixed in the wall (lxiii. 4), and they were in fact apparently good-looking persons",
+          "sunnah_url": "https://sunnah.com/muslim/51/1"
+        }
+      ]
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "يَقُولُونَ لَئِن رَّجَعْنَآ إِلَى ٱلْمَدِينَةِ لَيُخْرِجَنَّ ٱلْأَعَزُّ مِنْهَا ٱلْأَذَلَّ ۚ وَلِلَّهِ ٱلْعِزَّةُ وَلِرَسُولِهِۦ وَلِلْمُؤْمِنِينَ وَلَٰكِنَّ ٱلْمُنَٰفِقِينَ لَا يَعْلَمُونَ",
+      "text": "They say, ‘If indeed we return to the city, the mightier in it will indeed expel the lowlier,’ when all honor (belongs) to God, and to His messenger, and to the believers. But the hypocrites do not know (this).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا تُلْهِكُمْ أَمْوَٰلُكُمْ وَلَآ أَوْلَٰدُكُمْ عَن ذِكْرِ ٱللَّهِ ۚ وَمَن يَفْعَلْ ذَٰلِكَ فَأُو۟لَٰٓئِكَ هُمُ ٱلْخَٰسِرُونَ",
+      "text": "You who believe! Do not let your wealth or your children divert you from the remembrance of God. Whoever does that, those – they are the losers.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "وَأَنفِقُوا۟ مِن مَّا رَزَقْنَٰكُم مِّن قَبْلِ أَن يَأْتِىَ أَحَدَكُمُ ٱلْمَوْتُ فَيَقُولَ رَبِّ لَوْلَآ أَخَّرْتَنِىٓ إِلَىٰٓ أَجَلٍۢ قَرِيبٍۢ فَأَصَّدَّقَ وَأَكُن مِّنَ ٱلصَّٰلِحِينَ",
+      "text": "Contribute from what We have provided you, before death comes upon one of you, and he says, ‘My Lord, if only You would spare me for a time near (at hand), so that I might make a freewill offering, and become one of the righteous.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "وَلَن يُؤَخِّرَ ٱللَّهُ نَفْسًا إِذَا جَآءَ أَجَلُهَا ۚ وَٱللَّهُ خَبِيرٌۢ بِمَا تَعْمَلُونَ",
+      "text": "But God will not spare anyone when his time comes. God is aware of what you do.",
+      "canonical_variants": [
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "وَلَن يُؤَخِّرَ ٱللَّهُ نَفۡسًا إِذَا جَآءَ أَجَلُهَاۚ وَٱللَّهُ خَبِيرُۢ بِمَا يَعۡمَلُونَ",
+          "english": ". . . what they do.",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "وَلَن يُؤَخِّرَ ٱللَّهُ نَفۡسًا إِذَا جَآءَ أَجَلُهَاۚ وَٱللَّهُ خَبِيرُۢ بِمَا تَعۡمَلُونَ",
+          "english": "But Allah will not delay a soul when its time has come, for Allah is All-Aware of what youpl do.",
+          "reason": "",
+          "category": ""
+        }
+      ],
+      "competing_variants": []
+    }
+  ]
+}

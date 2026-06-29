@@ -1,0 +1,195 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ يَٰٓأَيُّهَا ٱلْمُزَّمِّلُ",
+      "text": "You, enwrapped one!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "قُمِ ٱلَّيْلَ إِلَّا قَلِيلًۭا",
+      "text": "Stay up through the night, except a little",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "نِّصْفَهُۥٓ أَوِ ٱنقُصْ مِنْهُ قَلِيلًا",
+      "text": "– half of it or a little less,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "أَوْ زِدْ عَلَيْهِ وَرَتِّلِ ٱلْقُرْءَانَ تَرْتِيلًا",
+      "text": "or a little more – and arrange the Qur’ān very carefully.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "إِنَّا سَنُلْقِى عَلَيْكَ قَوْلًۭا ثَقِيلًا",
+      "text": "Surely We shall cast upon you a heavy word.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "إِنَّ نَاشِئَةَ ٱلَّيْلِ هِىَ أَشَدُّ وَطْـًۭٔا وَأَقْوَمُ قِيلًا",
+      "text": "Surely the first part of the night – it is more efficacious and more suitable for speaking.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "إِنَّ نَاشِئَةَ اَ۬لَّيۡلِ هِيَ أَشَدُّ وِطَآءٗ وَأَقۡوَمُ قِيلًا",
+          "english": "is indeed more suitable and",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "إِنَّ نَاشِئَةَ اَ۬لَّيۡلِ هِيَ أَشَدُّ وِطَآءٗ وَأَقۡوَمُ قِيلًا",
+          "english": "is indeed more suitable and",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "إِنَّ لَكَ فِى ٱلنَّهَارِ سَبْحًۭا طَوِيلًۭا",
+      "text": "Surely during the day you have protracted business,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "وَٱذْكُرِ ٱسْمَ رَبِّكَ وَتَبَتَّلْ إِلَيْهِ تَبْتِيلًۭا",
+      "text": "but remember the name of your Lord and devote yourself to Him completely.",
+      "canonical_variants": [
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "وَٱذۡكُرِ ٱسۡمَ رَبِّكَ وَتَبَتَّلۡ إِلَيۡهِ تَبۡتِيلٗا",
+          "english": "devotion— 9 the Lord of the East",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "وَٱذۡكُرِ ٱسۡمَ رَبِّكَ وَتَبَتَّلۡ إِلَيۡهِ تَبۡتِيلٗا",
+          "english": "devotion. 9 (He is) the Lorde of the East",
+          "reason": "",
+          "category": ""
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "رَّبُّ ٱلْمَشْرِقِ وَٱلْمَغْرِبِ لَآ إِلَٰهَ إِلَّا هُوَ فَٱتَّخِذْهُ وَكِيلًۭا",
+      "text": "Lord of the East and the West – (there is) no god but Him, so take Him as a guardian,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "وَٱصْبِرْ عَلَىٰ مَا يَقُولُونَ وَٱهْجُرْهُمْ هَجْرًۭا جَمِيلًۭا",
+      "text": "and be patient with what they say, and forsake them gracefully.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "وَذَرْنِى وَٱلْمُكَذِّبِينَ أُو۟لِى ٱلنَّعْمَةِ وَمَهِّلْهُمْ قَلِيلًا",
+      "text": "Leave Me (to deal with) the ones who call (it) a lie – (those) possessors of prosperity – and let them be for a little (while).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "إِنَّ لَدَيْنَآ أَنكَالًۭا وَجَحِيمًۭا",
+      "text": "Surely We have chains and a Furnace,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "وَطَعَامًۭا ذَا غُصَّةٍۢ وَعَذَابًا أَلِيمًۭا",
+      "text": "and food that chokes, and a painful punishment,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "يَوْمَ تَرْجُفُ ٱلْأَرْضُ وَٱلْجِبَالُ وَكَانَتِ ٱلْجِبَالُ كَثِيبًۭا مَّهِيلًا",
+      "text": "on the Day when the earth and the mountains will quake, and the mountains will become a heap of shifting sand.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "إِنَّآ أَرْسَلْنَآ إِلَيْكُمْ رَسُولًۭا شَٰهِدًا عَلَيْكُمْ كَمَآ أَرْسَلْنَآ إِلَىٰ فِرْعَوْنَ رَسُولًۭا",
+      "text": "Surely We have sent to you a messenger as a witness over you, as We sent to Pharaoh a messenger.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "فَعَصَىٰ فِرْعَوْنُ ٱلرَّسُولَ فَأَخَذْنَٰهُ أَخْذًۭا وَبِيلًۭا",
+      "text": "But Pharaoh disobeyed the messenger, and We seized him harshly.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "فَكَيْفَ تَتَّقُونَ إِن كَفَرْتُمْ يَوْمًۭا يَجْعَلُ ٱلْوِلْدَٰنَ شِيبًا",
+      "text": "If you disbelieve, how will you guard (yourselves) against a Day which will turn the children grey,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 18,
+      "quran_arabic": "ٱلسَّمَآءُ مُنفَطِرٌۢ بِهِۦ ۚ كَانَ وَعْدُهُۥ مَفْعُولًا",
+      "text": "on which the sky will be split open and His promise comes to pass?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 19,
+      "quran_arabic": "إِنَّ هَٰذِهِۦ تَذْكِرَةٌۭ ۖ فَمَن شَآءَ ٱتَّخَذَ إِلَىٰ رَبِّهِۦ سَبِيلًا",
+      "text": "Surely this is a Reminder, and whoever pleases takes a way to his Lord.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 20,
+      "quran_arabic": "۞ إِنَّ رَبَّكَ يَعْلَمُ أَنَّكَ تَقُومُ أَدْنَىٰ مِن ثُلُثَىِ ٱلَّيْلِ وَنِصْفَهُۥ وَثُلُثَهُۥ وَطَآئِفَةٌۭ مِّنَ ٱلَّذِينَ مَعَكَ ۚ وَٱللَّهُ يُقَدِّرُ ٱلَّيْلَ وَٱلنَّهَارَ ۚ عَلِمَ أَن لَّن تُحْصُوهُ فَتَابَ عَلَيْكُمْ ۖ فَٱقْرَءُوا۟ مَا تَيَسَّرَ مِنَ ٱلْقُرْءَانِ ۚ عَلِمَ أَن سَيَكُونُ مِنكُم مَّرْضَىٰ ۙ وَءَاخَرُونَ يَضْرِبُونَ فِى ٱلْأَرْضِ يَبْتَغُونَ مِن فَضْلِ ٱللَّهِ ۙ وَءَاخَرُونَ يُقَٰتِلُونَ فِى سَبِيلِ ٱللَّهِ ۖ فَٱقْرَءُوا۟ مَا تَيَسَّرَ مِنْهُ ۚ وَأَقِيمُوا۟ ٱلصَّلَوٰةَ وَءَاتُوا۟ ٱلزَّكَوٰةَ وَأَقْرِضُوا۟ ٱللَّهَ قَرْضًا حَسَنًۭا ۚ وَمَا تُقَدِّمُوا۟ لِأَنفُسِكُم مِّنْ خَيْرٍۢ تَجِدُوهُ عِندَ ٱللَّهِ هُوَ خَيْرًۭا وَأَعْظَمَ أَجْرًۭا ۚ وَٱسْتَغْفِرُوا۟ ٱللَّهَ ۖ إِنَّ ٱللَّهَ غَفُورٌۭ رَّحِيمٌۢ",
+      "text": "Surely your Lord knows that you stay up nearly two-thirds of the night – or a half of it or a third of it – and (so do) a contingent of those with you. God determines the night and the day. He knows that you do not count it up, and He has turned to you (in forgiveness). So recite what is easy (for you) of the Qur’ān. He knows that some of you are sick, and others are striking forth on the earth, seeking some of the favor of God, and (still) others are fighting in the way of God. So recite what is easy (for you) of it, and observe the prayer and give the alms, and lend to God a good loan. Whatever good you send forward for yourselves, you will find it with God – it will be better and greater as a reward. Ask forgiveness from God. Surely God is forgiving, compassionate.",
+      "canonical_variants": [
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "۞ إِنَّ رَبَّكَ يَعْلَمُ أَنَّكَ تَقُومُ أَدْنَىٰ مِن ثُلُثَيِ اِ۬ليْلِ وَنِصْفِهِۦ وَثُلُثِهِۦ وَطَآئِفَةٞ مِّنَ اَ۬لذِينَ مَعَكَۖ وَاللَّهُ يُقَدِّرُ اُ۬ليْلَ وَالنَّهَارَۖ عَلِمَ أَن لَّن تُحْصُوهُ فَتَابَ عَلَيْكُمْۖ فَاقْرَءُواْ مَا تَيَسَّرَ مِنَ اَ۬لْقُرْءَانِۖ عَلِمَ أَن سَيَكُونُ مِنكُم مَّرْضَىٰ وَءَاخَرُونَ يَضْرِبُونَ فِے اِ۬لْأَرْضِ يَبْتَغُونَ مِن فَضْلِ اِ۬للَّهِ وَءَاخَرُونَ يُقَٰتِلُونَ فِے سَبِيلِ اِ۬للَّهِۖ فَاقْرَءُواْ مَا تَيَسَّرَ مِنْهُۖ وَأَقِيمُواْ اُ۬لصَّلَوٰةَ وَءَاتُواْ اُ۬لزَّكَوٰةَۖ وَأَقْرِضُواْ اُ۬للَّهَ قَرْضاً حَسَناٗۖ وَمَا تُقَدِّمُواْ لِأَنفُسِكُم مِّنْ خَيْرٖ تَجِدُوهُ عِندَ اَ۬للَّهِ هُوَ خَيْراٗ وَأَعْظَمَ أَجْراٗۖ وَاسْتَغْفِرُواْ اُ۬للَّهَۖ إِنَّ اَ۬للَّهَ غَفُورٞ رَّحِيمُۢۖ",
+          "english": "nearly two-thirds of the night, and (sometimes nearly) half of it, and (sometimes nearly) one-third of it",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "۞ اِنَّ رَبَّكَ يَعْلَمُ أَنَّكَ تَقُومُ أَدْن۪ىٰ مِن ثُلُثَيِ اِ۬ليْلِ وَنِصْفِهِۦ وَثُلُثِهِۦ وَطَآئِفَةٞ مِّنَ اَ۬لذِينَ مَعَكَۖ وَاللَّهُ يُقَدِّرُ اُ۬ليْلَ وَالنَّهَارَۖ عَلِمَ أَن لَّن تُحْصُوهُ فَتَابَ عَلَيْكُمْۖ فَاقْرَءُواْ مَا تَيَسَّرَ مِنَ اَ۬لْقُرْءَانِۖ عَلِمَ أَن سَيَكُونُ مِنكُم مَّرْض۪ىٰ وَءَاخَرُونَ يَضْرِبُونَ فِے اِ۬لَارْضِ يَبْتَغُونَ مِن فَضْلِ اِ۬للَّهِ وَءَاخَرُونَ يُقَٰتِلُونَ فِے سَبِيلِ اِ۬للَّهِۖ فَاقْرَءُواْ مَا تَيَسَّرَ مِنْهُۖ وَأَقِيمُواْ اُ۬لصَّلَوٰةَ وَءَاتُواْ اُ۬لزَّكَوٰةَۖ وَأَقْرِضُواْ اُ۬للَّهَ قَرْضاً حَسَناٗۖ وَمَا تُقَدِّمُواْ لِأَنفُسِكُم مِّنْ خَيْرٖ تَجِدُوهُ عِندَ اَ۬للَّهِ هُوَ خَيْراٗ وَأَعْظَمَ أَجْراٗۖ وَاسْتَغْفِرُواْ اُ۬للَّهَۖ إِنَّ اَ۬للَّهَ غَفُورٞ رَّحِيمٞۖ",
+          "english": "nearly two-thirds of the night, and (sometimes nearly) half of it, and (sometimes nearly) one-third of it",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    }
+  ]
+}

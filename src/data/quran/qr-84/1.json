@@ -1,0 +1,229 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ إِذَا ٱلسَّمَآءُ ٱنشَقَّتْ",
+      "text": "When the sky is split open,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "وَأَذِنَتْ لِرَبِّهَا وَحُقَّتْ",
+      "text": "and listens to its Lord and is made fit,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "وَإِذَا ٱلْأَرْضُ مُدَّتْ",
+      "text": "and when earth is stretched out,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "وَأَلْقَتْ مَا فِيهَا وَتَخَلَّتْ",
+      "text": "and casts forth what is in it and becomes empty,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "وَأَذِنَتْ لِرَبِّهَا وَحُقَّتْ",
+      "text": "and listens to its Lord and is made fit,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "يَٰٓأَيُّهَا ٱلْإِنسَٰنُ إِنَّكَ كَادِحٌ إِلَىٰ رَبِّكَ كَدْحًۭا فَمُلَٰقِيهِ",
+      "text": "you human – surely you are laboring to your Lord laboriously and are about to meet Him.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "فَأَمَّا مَنْ أُوتِىَ كِتَٰبَهُۥ بِيَمِينِهِۦ",
+      "text": "As for the one who is given his book in his right (hand),",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "فَسَوْفَ يُحَاسَبُ حِسَابًۭا يَسِيرًۭا",
+      "text": "he will receive an easy reckoning,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "وَيَنقَلِبُ إِلَىٰٓ أَهْلِهِۦ مَسْرُورًۭا",
+      "text": "and turn back to his family, rejoicing.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "وَأَمَّا مَنْ أُوتِىَ كِتَٰبَهُۥ وَرَآءَ ظَهْرِهِۦ",
+      "text": "But as for the one who is given his book behind his back,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "فَسَوْفَ يَدْعُوا۟ ثُبُورًۭا",
+      "text": "he will call out for destruction,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "وَيَصْلَىٰ سَعِيرًا",
+      "text": "and burn in a blazing (Fire).",
+      "canonical_variants": [
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَيُصَلَّي سَعِيرًا",
+          "english": "and will continuously roast at the Blaze.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَيُصَلَّيٰ سَعِيرًا",
+          "english": "and will continuously roast at the Blaze.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "وَيُصَلَّىٰ سَعِيراًۖ",
+          "english": "and will continuously roast at the Blaze.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Addition/Omission"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "وَيُصَلَّىٰ سَعِيراًۖ",
+          "english": "and will continuously roast at the Blaze.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Addition/Omission"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "إِنَّهُۥ كَانَ فِىٓ أَهْلِهِۦ مَسْرُورًا",
+      "text": "Surely he used to be among his family, rejoicing.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "إِنَّهُۥ ظَنَّ أَن لَّن يَحُورَ",
+      "text": "Surely he thought that he would not return.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "بَلَىٰٓ إِنَّ رَبَّهُۥ كَانَ بِهِۦ بَصِيرًۭا",
+      "text": "Yes indeed! Surely his Lord was watching him.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "فَلَآ أُقْسِمُ بِٱلشَّفَقِ",
+      "text": "I swear by the twilight,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "وَٱلَّيْلِ وَمَا وَسَقَ",
+      "text": "by the night and what it envelops,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 18,
+      "quran_arabic": "وَٱلْقَمَرِ إِذَا ٱتَّسَقَ",
+      "text": "by the moon when it becomes full!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 19,
+      "quran_arabic": "لَتَرْكَبُنَّ طَبَقًا عَن طَبَقٍۢ",
+      "text": "You will indeed ride story upon story.",
+      "canonical_variants": [
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "لَتَرۡكَبَنَّ طَبَقًا عَن طَبَقٖ",
+          "english": "you will surely mount stage by stage.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "لَتَرۡكَبَنَّ طَبَقًا عَن طَبَقٖ",
+          "english": "you will surely mount stage by stage.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 20,
+      "quran_arabic": "فَمَا لَهُمْ لَا يُؤْمِنُونَ",
+      "text": "What is (the matter) with them that they do not believe,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 21,
+      "quran_arabic": "وَإِذَا قُرِئَ عَلَيْهِمُ ٱلْقُرْءَانُ لَا يَسْجُدُونَ ۩",
+      "text": "and when the Qur’ān is recited to them, do not prostrate themselves?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 22,
+      "quran_arabic": "بَلِ ٱلَّذِينَ كَفَرُوا۟ يُكَذِّبُونَ",
+      "text": "No! Those who disbelieve call (it) a lie.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 23,
+      "quran_arabic": "وَٱللَّهُ أَعْلَمُ بِمَا يُوعُونَ",
+      "text": "Yet God knows what they hide away.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 24,
+      "quran_arabic": "فَبَشِّرْهُم بِعَذَابٍ أَلِيمٍ",
+      "text": "So give them news of a painful punishment",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 25,
+      "quran_arabic": "إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ لَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍۭ",
+      "text": "– except for those who believe and do righteous deeds. For them (there is) a reward without end.",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

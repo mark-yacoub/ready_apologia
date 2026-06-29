@@ -1,0 +1,841 @@
+{
+  "verses": [
+    {
+      "verse": 0,
+      "quran_arabic": "",
+      "text": "",
+      "canonical_variants": [],
+      "competing_variants": [
+        {
+          "companion_codex": "Umar bin Al-Khattab",
+          "variant_arabic": "",
+          "variant_english": "",
+          "source_reference": "Bukhari 2419",
+          "hadith_arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، أَخْبَرَنَا مَالِكٌ، عَنِ ابْنِ شِهَابٍ، عَنْ عُرْوَةَ بْنِ الزُّبَيْرِ، عَنْ عَبْدِ الرَّحْمَنِ بْنِ عَبْدٍ الْقَارِيِّ، أَنَّهُ قَالَ سَمِعْتُ عُمَرَ بْنَ الْخَطَّابِ ـ رضى الله عنه ـ يَقُولُ سَمِعْتُ هِشَامَ بْنَ حَكِيمِ بْنِ حِزَامٍ، يَقْرَأُ سُورَةَ الْفُرْقَانِ عَلَى غَيْرِ مَا أَقْرَؤُهَا، وَكَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم أَقْرَأَنِيهَا، وَكِدْتُ أَنْ أَعْجَلَ عَلَيْهِ، ثُمَّ أَمْهَلْتُهُ حَتَّى انْصَرَفَ، ثُمَّ لَبَّبْتُهُ بِرِدَائِهِ فَجِئْتُ بِهِ رَسُولَ اللَّهِ صلى الله عليه وسلم فَقُلْتُ إِنِّي سَمِعْتُ هَذَا يَقْرَأُ عَلَى غَيْرِ مَا أَقْرَأْتَنِيهَا، فَقَالَ لِي ‏\"‏ أَرْسِلْهُ ‏\"‏‏.‏ ثُمَّ قَالَ لَهُ ‏\"‏ اقْرَأْ ‏\"‏‏.‏ فَقَرَأَ‏.‏ قَالَ ‏\"‏ هَكَذَا أُنْزِلَتْ ‏\"‏‏.‏ ثُمَّ قَالَ لِي ‏\"‏ اقْرَأْ ‏\"‏‏.‏ فَقَرَأْتُ فَقَالَ ‏\"‏ هَكَذَا أُنْزِلَتْ‏.‏ إِنَّ الْقُرْآنَ أُنْزِلَ عَلَى سَبْعَةِ أَحْرُفٍ فَاقْرَءُوا مِنْهُ مَا تَيَسَّرَ ‏\"‏‏.‏",
+          "hadith_english": "Narrated `Umar bin Al-Khattab:I heard Hisham bin Hakim bin Hizam reciting Surat-al-Furqan in a way different to that of mine. Allah's Messenger (ﷺ) had taught it to me (in a different way). So, I was about to quarrel with him (during the prayer) but I waited till he finished, then I tied his garment round his neck and seized him by it and brought him to Allah's Messenger (ﷺ) and said, \"I have heard him reciting Surat-al-Furqan in a way different to the way you taught it to me.\" The Prophet (ﷺ) ordered me to release him and asked Hisham to recite it. When he recited it, Allah's Apostle said, \"It was revealed in this way.\" He then asked me to recite it. When I recited it, he said, \"It was revealed in this way. The Qur'an has been revealed in seven different ways, so recite it in the way that is easier for you",
+          "sunnah_url": "https://sunnah.com/bukhari/44/9"
+        },
+        {
+          "companion_codex": "Hisham bin Hakim",
+          "variant_arabic": "",
+          "variant_english": "",
+          "source_reference": "Sahih al-Bukhari 7550",
+          "hadith_arabic": "حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، حَدَّثَنَا اللَّيْثُ، عَنْ عُقَيْلٍ، عَنِ ابْنِ شِهَابٍ، حَدَّثَنِي عُرْوَةُ، أَنَّ الْمِسْوَرَ بْنَ مَخْرَمَةَ، وَعَبْدَ الرَّحْمَنِ بْنَ عَبْدٍ الْقَارِيَّ، حَدَّثَاهُ أَنَّهُمَا، سَمِعَا عُمَرَ بْنَ الْخَطَّابِ، يَقُولُ سَمِعْتُ هِشَامَ بْنَ حَكِيمٍ، يَقْرَأُ سُورَةَ الْفُرْقَانِ فِي حَيَاةِ رَسُولِ اللَّهِ صلى الله عليه وسلم فَاسْتَمَعْتُ لِقِرَاءَتِهِ، فَإِذَا هُوَ يَقْرَأُ عَلَى حُرُوفٍ كَثِيرَةٍ لَمْ يُقْرِئْنِيهَا رَسُولُ اللَّهِ صلى الله عليه وسلم، فَكِدْتُ أُسَاوِرُهُ فِي الصَّلاَةِ، فَتَصَبَّرْتُ حَتَّى سَلَّمَ، فَلَبَبْتُهُ بِرِدَائِهِ فَقُلْتُ مَنْ أَقْرَأَكَ هَذِهِ السُّورَةَ الَّتِي سَمِعْتُكَ تَقْرَأُ قَالَ أَقْرَأَنِيهَا رَسُولُ اللَّهِ صلى الله عليه وسلم فَقُلْتُ كَذَبْتَ، أَقْرَأَنِيهَا عَلَى غَيْرِ مَا قَرَأْتَ‏.‏ فَانْطَلَقْتُ بِهِ أَقُودُهُ إِلَى رَسُولِ اللَّهِ صلى الله عليه وسلم فَقُلْتُ إِنِّي سَمِعْتُ هَذَا يَقْرَأُ سُورَةَ الْفُرْقَانِ عَلَى حُرُوفٍ لَمْ تُقْرِئْنِيهَا‏.‏ فَقَالَ ‏\"‏ أَرْسِلْهُ، اقْرَأْ يَا هِشَامُ ‏\"‏‏.‏ فَقَرَأَ الْقِرَاءَةَ الَّتِي سَمِعْتُهُ‏.‏ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ كَذَلِكَ أُنْزِلَتْ ‏\"‏‏.‏ ثُمَّ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ اقْرَأْ يَا عُمَرُ ‏\"‏‏.‏ فَقَرَأْتُ الَّتِي أَقْرَأَنِي فَقَالَ ‏\"‏ كَذَلِكَ أُنْزِلَتْ، إِنَّ هَذَا الْقُرْآنَ أُنْزِلَ عَلَى سَبْعَةِ أَحْرُفٍ فَاقْرَءُوا مَا تَيَسَّرَ مِنْهُ ‏\"‏‏.‏",
+          "hadith_english": "Narrated `Umar bin Al-Khattab:I heard Hisham bin Hakim reciting Surat-al-Furqan during the lifetime of Allah's Messenger (ﷺ), I listened to his recitation and noticed that he was reciting in a way that Allah's Messenger (ﷺ) had not taught me. I was about to jump over him while He was still in prayer, but I waited patiently and when he finished his prayer, I put my sheet round his neck (and pulled him) and said, \"Who has taught you this Sura which I have heard you reciting?\" Hisham said, \"Allah's Messenger (ﷺ) taught it to me.\" I said, \"You are telling a lie, for he taught it to me in a way different from the way you have recited it!\" Then I started leading (dragged) him to Allah's Messenger (ﷺ) and said (to the Prophet), \" I have heard this man reciting Surat-al- Furqan in a way that you have not taught me.\" The Prophet (ﷺ) said: \"(O `Umar) release him! Recite, O Hisham.\" Hisham recited in the way I heard him reciting. Allah's Messenger (ﷺ) said, \"It was revealed like this.\" Then Allah's Messenger (ﷺ) said, \"Recite, O `Umar!\" I recited in the way he had taught me, whereupon he said, \"It was revealed like this,\" and added, \"The Qur'an has been revealed to be recited in seven different ways, so recite of it whichever is easy for you .\" (See Hadith No. 514, Vol)",
+          "sunnah_url": "https://sunnah.com/bukhari/97/175"
+        },
+        {
+          "companion_codex": "Hisham bin Al-Hakim",
+          "variant_arabic": "حُرُوفٍ كَثِيرَةٍ",
+          "variant_english": "several different ways",
+          "source_reference": "Sahih al-Bukhari 6936",
+          "hadith_arabic": "قَالَ أَبُو عَبْدِ اللَّهِ وَقَالَ اللَّيْثُ حَدَّثَنِي يُونُسُ، عَنِ ابْنِ شِهَابٍ، أَخْبَرَنِي عُرْوَةُ بْنُ الزُّبَيْرِ، أَنَّ الْمِسْوَرَ بْنَ مَخْرَمَةَ، وَعَبْدَ الرَّحْمَنِ بْنَ عَبْدٍ الْقَارِيَّ، أَخْبَرَاهُ أَنَّهُمَا، سَمِعَا عُمَرَ بْنَ الْخَطَّابِ، يَقُولُ سَمِعْتُ هِشَامَ بْنَ حَكِيمٍ، يَقْرَأُ سُورَةَ الْفُرْقَانِ فِي حَيَاةِ رَسُولِ اللَّهِ صلى الله عليه وسلم فَاسْتَمَعْتُ لِقِرَاءَتِهِ، فَإِذَا هُوَ يَقْرَؤُهَا عَلَى حُرُوفٍ كَثِيرَةٍ لَمْ يُقْرِئْنِيهَا رَسُولُ اللَّهِ صلى الله عليه وسلم كَذَلِكَ، فَكِدْتُ أُسَاوِرُهُ فِي الصَّلاَةِ فَانْتَظَرْتُهُ حَتَّى سَلَّمَ، ثُمَّ لَبَّبْتُهُ بِرِدَائِهِ أَوْ بِرِدَائِي فَقُلْتُ مَنْ أَقْرَأَكَ هَذِهِ السُّورَةَ قَالَ أَقْرَأَنِيهَا رَسُولُ اللَّهِ صلى الله عليه وسلم قُلْتُ لَهُ كَذَبْتَ فَوَاللَّهِ إِنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم أَقْرَأَنِي هَذِهِ السُّورَةَ الَّتِي سَمِعْتُكَ تَقْرَؤُهَا‏.‏ فَانْطَلَقْتُ أَقُودُهُ إِلَى رَسُولِ اللَّهِ صلى الله عليه وسلم فَقُلْتُ يَا رَسُولَ اللَّهِ إِنِّي سَمِعْتُ هَذَا يَقْرَأُ بِسُورَةِ الْفُرْقَانِ عَلَى حُرُوفٍ لَمْ تُقْرِئْنِيهَا، وَأَنْتَ أَقْرَأْتَنِي سُورَةَ الْفُرْقَانِ‏.‏ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ أَرْسِلْهُ يَا عُمَرُ، اقْرَأْ يَا هِشَامُ ‏\"‏‏.‏ فَقَرَأَ عَلَيْهِ الْقِرَاءَةَ الَّتِي سَمِعْتُهُ يَقْرَؤُهَا‏.‏ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ هَكَذَا أُنْزِلَتْ ‏\"‏‏.‏ ثُمَّ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ اقْرَأْ يَا عُمَرُ ‏\"‏‏.‏ فَقَرَأْتُ فَقَالَ ‏\"‏ هَكَذَا أُنْزِلَتْ ‏\"‏‏.‏ ثُمَّ قَالَ ‏\"‏ إِنَّ هَذَا الْقُرْآنَ أُنْزِلَ عَلَى سَبْعَةِ أَحْرُفٍ فَاقْرَءُوا مَا تَيَسَّرَ مِنْهُ ‏\"‏‏.‏",
+          "hadith_english": "Umar bin Al-Khattab said:I heard Hisham bin Al-Hakim reciting Surat Al-Furqan during the lifetime of Allah's Messenger (ﷺ). I listened to his recitation and noticed that he recited it in several different ways which Allah's Messenger (ﷺ) had not taught me. So I was about to jump over him during his Salat (prayer) but I waited till he finished his Salat (prayer) whereupon I put, either his upper garment or my upper garment around his neck and seized him by it and asked him, \"Who has taught you this Surah?\" He replied: \"Allah's Messenger (ﷺ) has taught it to me.\" I said (to him), \"You have told a lie! By Allah, Allah's Messenger (ﷺ) has taught me this Surah which I have heard you reciting.\" So I dragged him to the Allah's Messenger (ﷺ). I said: \"O Allah's Messenger I have heard this man reciting Surat Al-Furqan in a way in which you have not taught me, and you did teach me Surah Al-Furqan.\" On that Allah's Messenger (ﷺ) said, \"O 'Umar, release him! Recite, O Hisham\". So Hisham recited before him in the way as I heard him reciting. Allah's Messenger (ﷺ) said, \"It has been revealed like this.\" Then Allah's Messenger (ﷺ) said, \"Recite, O 'Umar\" So recited it. The Prophet (ﷺ) said, \"It has been revealed like this.\" And then he added, \"This Qur'an has been revealed to be recited in seven different ways, so recite it whichever way is easier for you\" [omitted from the original translation: Abu 'Abdullah said: Al-Laith said: Yunus narrated to me, from Ibn Shihab: 'Urwah bin Az-Zubair informed me that Al-Miswar bin Makhramah and 'Abdur-Rahman bin 'Abd Al-Qari informed him that they heard]",
+          "sunnah_url": "https://sunnah.com/bukhari/88/18"
+        }
+      ]
+    },
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ تَبَارَكَ ٱلَّذِى نَزَّلَ ٱلْفُرْقَانَ عَلَىٰ عَبْدِهِۦ لِيَكُونَ لِلْعَٰلَمِينَ نَذِيرًا",
+      "text": "Blessed (be) the One who sent down the Deliverance on His servant, so that he may be a warner to the worlds",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "ٱلَّذِى لَهُۥ مُلْكُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ وَلَمْ يَتَّخِذْ وَلَدًۭا وَلَمْ يَكُن لَّهُۥ شَرِيكٌۭ فِى ٱلْمُلْكِ وَخَلَقَ كُلَّ شَىْءٍۢ فَقَدَّرَهُۥ تَقْدِيرًۭا",
+      "text": "– the One who – to Him (belongs) the kingdom of the heavens and the earth. He has not taken a son, nor has He any associate in the kingdom. He created everything and decreed it exactly.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "وَٱتَّخَذُوا۟ مِن دُونِهِۦٓ ءَالِهَةًۭ لَّا يَخْلُقُونَ شَيْـًۭٔا وَهُمْ يُخْلَقُونَ وَلَا يَمْلِكُونَ لِأَنفُسِهِمْ ضَرًّۭا وَلَا نَفْعًۭا وَلَا يَمْلِكُونَ مَوْتًۭا وَلَا حَيَوٰةًۭ وَلَا نُشُورًۭا",
+      "text": "Yet they have taken gods other than Him. They do not create anything, since they are (themselves) created, and do not have power to (cause) themselves harm or benefit, and do not have power over death or life or raising up.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "وَقَالَ ٱلَّذِينَ كَفَرُوٓا۟ إِنْ هَٰذَآ إِلَّآ إِفْكٌ ٱفْتَرَىٰهُ وَأَعَانَهُۥ عَلَيْهِ قَوْمٌ ءَاخَرُونَ ۖ فَقَدْ جَآءُو ظُلْمًۭا وَزُورًۭا",
+      "text": "Those who disbelieve say, ‘This is nothing but a lie! He has forged it, and other people have helped him with it.’ So they have come to evil and falsehood.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "وَقَالُوٓا۟ أَسَٰطِيرُ ٱلْأَوَّلِينَ ٱكْتَتَبَهَا فَهِىَ تُمْلَىٰ عَلَيْهِ بُكْرَةًۭ وَأَصِيلًۭا",
+      "text": "And they say, ‘Old tales! He has written it down, and it is dictated to him morning and evening.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "قُلْ أَنزَلَهُ ٱلَّذِى يَعْلَمُ ٱلسِّرَّ فِى ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۚ إِنَّهُۥ كَانَ غَفُورًۭا رَّحِيمًۭا",
+      "text": "Say: ‘He has sent it down – He who knows the secret in the heavens and earth. Surely He is forgiving, compassionate.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "وَقَالُوا۟ مَالِ هَٰذَا ٱلرَّسُولِ يَأْكُلُ ٱلطَّعَامَ وَيَمْشِى فِى ٱلْأَسْوَاقِ ۙ لَوْلَآ أُنزِلَ إِلَيْهِ مَلَكٌۭ فَيَكُونَ مَعَهُۥ نَذِيرًا",
+      "text": "They say, ‘What is wrong with this messenger? He eats food and walks about in the markets. If only an angel were sent down to him to be a warner with him,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "أَوْ يُلْقَىٰٓ إِلَيْهِ كَنزٌ أَوْ تَكُونُ لَهُۥ جَنَّةٌۭ يَأْكُلُ مِنْهَا ۚ وَقَالَ ٱلظَّٰلِمُونَ إِن تَتَّبِعُونَ إِلَّا رَجُلًۭا مَّسْحُورًا",
+      "text": "or a treasure were cast (down) to him, or he had a garden from which to eat.’ The evildoers say, ‘You are only following a man (who is) bewitched.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "ٱنظُرْ كَيْفَ ضَرَبُوا۟ لَكَ ٱلْأَمْثَٰلَ فَضَلُّوا۟ فَلَا يَسْتَطِيعُونَ سَبِيلًۭا",
+      "text": "See how they strike parables for you! But they have gone astray and cannot (find) a way.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "تَبَارَكَ ٱلَّذِىٓ إِن شَآءَ جَعَلَ لَكَ خَيْرًۭا مِّن ذَٰلِكَ جَنَّٰتٍۢ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ وَيَجْعَل لَّكَ قُصُورًۢا",
+      "text": "Blessed is He who, if He pleases, will give you (what is) better than that – Gardens through which rivers flow – and He will give you palaces.",
+      "canonical_variants": [
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "تَبَارَكَ ٱلَّذِيٓ إِن شَآءَ جَعَلَ لَكَ خَيۡرٗا مِّن ذَٰلِكَ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ وَيَجۡعَلُ لَكَ قُصُورَۢا",
+          "english": "Supremely Blessed be the One Who, if He so willed, would provide you sg with better than that—Gardens beneath which rivers flow. And He would make for you palaces.",
+          "reason": "EXTRA WORDS",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "تَبَارَكَ ٱلَّذِيٓ إِن شَآءَ جَعَلَ لَكَ خَيۡرٗا مِّن ذَٰلِكَ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ وَيَجۡعَل لَّكَ قُصُورَۢا",
+          "english": "Supremely Blessed be the One Who, if He so willed, would provide you sg with better than that—Gardens beneath which rivers flow—and make for you palaces.",
+          "reason": "",
+          "category": ""
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "تَبَارَكَ ٱلَّذِي إِن شَآءَ جَعَلَ لَكَ خَيۡرٗا مِّن ذَٰلِكَ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ وَيَجۡعَلُ لَكَ قُصُورَۢا",
+          "english": "Supremely Blessed be the One Who, if He so willed, would provide you sg with better than that—Gardens beneath which rivers flow. And He would make for you palaces.",
+          "reason": "EXTRA WORDS",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "تَبَارَكَ ٱلَّذِي إِن شَآءَ جَعَلَ لَكَ خَيۡرٗا مِّن ذَٰلِكَ جَنَّٰتٖ تَجۡرِي مِن تَحۡتِهَا ٱلۡأَنۡهَٰرُ وَيَجۡعَلُ لَكَ قُصُورَۢا",
+          "english": "Supremely Blessed be the One Who, if He so willed, would provide you sg with better than that—Gardens beneath which rivers flow. And He would make for you palaces.",
+          "reason": "EXTRA WORDS",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "بَلْ كَذَّبُوا۟ بِٱلسَّاعَةِ ۖ وَأَعْتَدْنَا لِمَن كَذَّبَ بِٱلسَّاعَةِ سَعِيرًا",
+      "text": "No! They have called the Hour a lie – and We have prepared a blazing (Fire) for whoever calls the Hour a lie.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "إِذَا رَأَتْهُم مِّن مَّكَانٍۭ بَعِيدٍۢ سَمِعُوا۟ لَهَا تَغَيُّظًۭا وَزَفِيرًۭا",
+      "text": "When it sees them from a place far off, they will hear its raging and moaning.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "وَإِذَآ أُلْقُوا۟ مِنْهَا مَكَانًۭا ضَيِّقًۭا مُّقَرَّنِينَ دَعَوْا۟ هُنَالِكَ ثُبُورًۭا",
+      "text": "When they are cast into a narrow part of it, bound in chains, they will call out there (for) destruction.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "لَّا تَدْعُوا۟ ٱلْيَوْمَ ثُبُورًۭا وَٰحِدًۭا وَٱدْعُوا۟ ثُبُورًۭا كَثِيرًۭا",
+      "text": "‘Do not call out today (for) one destruction, but call out (for) many destruction(s)!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "قُلْ أَذَٰلِكَ خَيْرٌ أَمْ جَنَّةُ ٱلْخُلْدِ ٱلَّتِى وُعِدَ ٱلْمُتَّقُونَ ۚ كَانَتْ لَهُمْ جَزَآءًۭ وَمَصِيرًۭا",
+      "text": "Say: ‘Is that better, or the Garden of Eternity which is promised to the ones who guard (themselves)? It is their payment and (final) destination.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "لَّهُمْ فِيهَا مَا يَشَآءُونَ خَٰلِدِينَ ۚ كَانَ عَلَىٰ رَبِّكَ وَعْدًۭا مَّسْـُٔولًۭا",
+      "text": "Remaining there, they will have whatever they please. It is a promise (binding) on your Lord, (something) to be asked for.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "وَيَوْمَ يَحْشُرُهُمْ وَمَا يَعْبُدُونَ مِن دُونِ ٱللَّهِ فَيَقُولُ ءَأَنتُمْ أَضْلَلْتُمْ عِبَادِى هَٰٓؤُلَآءِ أَمْ هُمْ ضَلُّوا۟ ٱلسَّبِيلَ",
+      "text": "On the Day when He will gather them and what they serve instead of God, He will say, ‘Did you lead astray these servants of Mine, or did they (themselves) go astray from the way?’",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "وَيَوۡمَ نَحۡشُرُهُمۡ وَمَا يَعۡبُدُونَ مِن دُونِ اِ۬للَّهِ فَيَقُولُ ءَٰا۬نتُمۡ أَضۡلَلۡتُمۡ عِبَادِي هَٰٓؤُلَآءِ اَ۬مۡ هُمۡ ضَلُّواْ اُ۬لسَّبِيلَ",
+          "english": "And on the day when We herd them and what they worship apart from Allah, then He says, “Was it you pl who misguided these servants of Mine, or was it they who strayed from the way?”",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "وَيَوۡمَ نَحۡشُرُهُمۡ وَمَا  يَعۡبُدُونَ مِن دُونِ اِ۬للَّهِ فَيَقُولُ ءَٰا۬نتُمۡ أَضۡلَلۡتُمۡ عِبَادِي  هَٰؤُلَآءِ اَ۬مۡ هُمۡ ضَلُّواْ اُ۬لسَّبِيلَ",
+          "english": "And on the day when We herd them and what they worship apart from Allah, then He says, “Was it you pl who misguided these servants of Mine, or was it they who strayed from the way?”",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "وَيَوۡمَ نَحۡشُرُهُمۡ وَمَا يَعۡبُدُونَ مِن دُونِ ٱللَّهِ فَيَقُولُ ءَأَنتُمۡ أَضۡلَلۡتُمۡ عِبَادِي هَٰٓؤُلَآءِ أَمۡ هُمۡ ضَلُّواْ ٱلسَّبِيلَ",
+          "english": "And on the day when We herd them and what they worship apart from Allah, then He says, “Was it you pl who misguided these servants of Mine, or was it they who strayed from the way?”",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "وَيَوۡمَ يَحۡشُرُهُمۡ وَمَا يَعۡبُدُونَ مِن دُونِ ٱللَّهِ فَيَقُولُ ءَأَنتُمۡ أَضۡلَلۡتُمۡ عِبَادِي هَٰٓؤُلَآءِ أَمۡ هُمۡ ضَلُّواْ ٱلسَّبِيلَ",
+          "english": "And on the day when He herds them and what they worship apart from Allah, then He says, “Was it you pl who misguided these servants of Mine, or was it they who strayed from the way?”",
+          "reason": "",
+          "category": ""
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "وَيَوْمَ نَحْشُرُهُمْ وَمَا يَعْبُدُونَ مِن دُونِ اِ۬للَّهِ فَيَقُولُ ءَٰا۬نتُمْ أَضْلَلْتُمْ عِبَادِے هَٰؤُلَآءِ اَ۬مْ هُمْ ضَلُّواْ اُ۬لسَّبِيلَۖ",
+          "english": "And on the day when We herd them and what they worship apart from Allah, then He says, “Was it you pl who misguided these servants of Mine, or was it they who strayed from the way?”",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "وَيَوْمَ نَحْشُرُهُمْ وَمَا يَعْبُدُونَ مِن دُونِ اِ۬للَّهِ فَيَقُولُ ءَآنتُمُۥٓ أَضْلَلْتُمْ عِبَادِے هَٰٓؤُلَآءِ اَ۬مْ هُمْ ضَلُّواْ اُ۬لسَّبِيلَۖ",
+          "english": "And on the day when We herd them and what they worship apart from Allah, then He says, “Was it you pl who misguided these servants of Mine, or was it they who strayed from the way?”",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 18,
+      "quran_arabic": "قَالُوا۟ سُبْحَٰنَكَ مَا كَانَ يَنۢبَغِى لَنَآ أَن نَّتَّخِذَ مِن دُونِكَ مِنْ أَوْلِيَآءَ وَلَٰكِن مَّتَّعْتَهُمْ وَءَابَآءَهُمْ حَتَّىٰ نَسُوا۟ ٱلذِّكْرَ وَكَانُوا۟ قَوْمًۢا بُورًۭا",
+      "text": "They will say, ‘Glory to You! It was not fitting for us to take any allies other than You, but You gave them and their fathers enjoyment (of life), until they forgot the Reminder and became a ruined people.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 19,
+      "quran_arabic": "فَقَدْ كَذَّبُوكُم بِمَا تَقُولُونَ فَمَا تَسْتَطِيعُونَ صَرْفًۭا وَلَا نَصْرًۭا ۚ وَمَن يَظْلِم مِّنكُمْ نُذِقْهُ عَذَابًۭا كَبِيرًۭا",
+      "text": "‘So they have called you a liar in what you say, and you are incapable of turning (it) aside or (finding any) help. Whoever among you does evil – We shall make him taste a great punishment.’",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "فَقَدۡ كَذَّبُوكُم بِمَا تَقُولُونَ فَمَا يَسۡتَطِيعُونَ صَرۡفٗا وَلَا نَصۡرٗاۚ وَمَن يَظۡلِم مِّنكُمۡ نُذِقۡهُ عَذَابٗا كَبِيرٗا",
+          "english": "Thus they have certainly disbelieved youpl regarding what you say, so they can neither avoid (punishment) nor get any support. And whoever of you commits injustice, We will make him taste a supreme punishment.",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "فَقَدۡ كَذَّبُوكُم بِمَا تَقُولُونَ فَمَا يَسۡتَطِيعُونَ صَرۡفٗا  وَلَا نَصۡرٗاۚ وَمَن يَظۡلِم مِّنكُمۡ نُذِقۡهُ عَذَابٗا كَبِيرٗا",
+          "english": "Thus they have certainly disbelieved youpl regarding what you say, so they can neither avoid (punishment) nor get any support. And whoever of you commits injustice, We will make him taste a supreme punishment.",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "فَقَدۡ كَذَّبُوكُم بِمَا تَقُولُونَ فَمَا يَسۡتَطِيعُونَ صَرۡفٗا وَلَا نَصۡرٗاۚ وَمَن يَظۡلِم مِّنكُمۡ نُذِقۡهُ عَذَابٗا كَبِيرٗا",
+          "english": "Thus they have certainly disbelieved youpl regarding what you say, so they can neither avoid (punishment) nor get any support. And whoever of you commits injustice, We will make him taste a supreme punishment.",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "فَقَدۡ كَذَّبُوكُم بِمَا تَقُولُونَ فَمَا تَسۡتَطِيعُونَ صَرۡفٗا وَلَا نَصۡرٗاۚ وَمَن يَظۡلِم مِّنكُمۡ نُذِقۡهُ عَذَابٗا كَبِيرٗا",
+          "english": "Thus they have certainly disbelieved youpl regarding what you say, so you can neither avoid (punishment) nor get any support. And whoever of you commits injustice, We will make him taste a supreme punishment.",
+          "reason": "",
+          "category": ""
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "فَقَدۡ كَذَّبُوكُمُۥ بِمَا تَقُولُونَ فَمَا يَسۡتَطِيعُونَ صَرۡفٗا وَلَا نَصۡرٗاۚ وَمَن يَظۡلِم مِّنكُمُۥ نُذِقۡهُۥ عَذَابٗا كَبِيرٗا",
+          "english": "Thus they have certainly disbelieved youpl regarding what you say, so they can neither avoid (punishment) nor get any support. And whoever of you commits injustice, We will make him taste a supreme punishment.",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "فَقَدۡ كَذَّبُوكُمُۥ بِمَا تَقُولُونَ فَمَا يَسۡتَطِيعُونَ صَرۡفٗا وَلَا نَصۡرٗاۚ وَمَن يَظۡلِم مِّنكُمُۥ نُذِقۡهُۥ عَذَابٗا كَبِيرٗا",
+          "english": "Thus they have certainly disbelieved youpl regarding what you say, so they can neither avoid (punishment) nor get any support. And whoever of you commits injustice, We will make him taste a supreme punishment.",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "فَقَدْ كَذَّبُوكُم بِمَا تَقُولُونَ فَمَا يَسْتَطِيعُونَ صَرْفاٗ وَلَا نَصْراٗۖ وَمَنْ يَّظْلِم مِّنكُمْ نُذِقْهُ عَذَاباٗ كَبِيراٗۖ",
+          "english": "Thus they have certainly disbelieved youpl regarding what you say, so they can neither avoid (punishment) nor get any support. And whoever of you commits injustice, We will make him taste a supreme punishment.",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "فَقَدْ كَذَّبُوكُم بِمَا تَقُولُونَ فَمَا يَسْتَطِيعُونَ صَرْفاٗ وَلَا نَصْراٗۖ وَمَنْ يَّظْلِم مِّنكُمْ نُذِقْهُ عَذَاباٗ كَبِيراٗۖ",
+          "english": "Thus they have certainly disbelieved youpl regarding what you say, so they can neither avoid (punishment) nor get any support. And whoever of you commits injustice, We will make him taste a supreme punishment.",
+          "reason": "DIACRITICAL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 20,
+      "quran_arabic": "وَمَآ أَرْسَلْنَا قَبْلَكَ مِنَ ٱلْمُرْسَلِينَ إِلَّآ إِنَّهُمْ لَيَأْكُلُونَ ٱلطَّعَامَ وَيَمْشُونَ فِى ٱلْأَسْوَاقِ ۗ وَجَعَلْنَا بَعْضَكُمْ لِبَعْضٍۢ فِتْنَةً أَتَصْبِرُونَ ۗ وَكَانَ رَبُّكَ بَصِيرًۭا",
+      "text": "We have not sent any of the envoys before you, except that they indeed ate food and walked about in the markets. We have made some of you a test for others: ‘Will you be patient?’ Your Lord is seeing.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 21,
+      "quran_arabic": "۞ وَقَالَ ٱلَّذِينَ لَا يَرْجُونَ لِقَآءَنَا لَوْلَآ أُنزِلَ عَلَيْنَا ٱلْمَلَٰٓئِكَةُ أَوْ نَرَىٰ رَبَّنَا ۗ لَقَدِ ٱسْتَكْبَرُوا۟ فِىٓ أَنفُسِهِمْ وَعَتَوْ عُتُوًّۭا كَبِيرًۭا",
+      "text": "Those who do not expect to meet Us say, ‘If only the angels were sent down on us, or we saw our Lord.’ Certainly they have become arrogant within themselves and behaved with great disdain.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 22,
+      "quran_arabic": "يَوْمَ يَرَوْنَ ٱلْمَلَٰٓئِكَةَ لَا بُشْرَىٰ يَوْمَئِذٍۢ لِّلْمُجْرِمِينَ وَيَقُولُونَ حِجْرًۭا مَّحْجُورًۭا",
+      "text": "On the Day when they see the angels, (there will be) no good news that Day for the sinners, and they will say, ‘An absolute ban!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 23,
+      "quran_arabic": "وَقَدِمْنَآ إِلَىٰ مَا عَمِلُوا۟ مِنْ عَمَلٍۢ فَجَعَلْنَٰهُ هَبَآءًۭ مَّنثُورًا",
+      "text": "We shall press forward to whatever deeds they have done, and make them scattered dust.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 24,
+      "quran_arabic": "أَصْحَٰبُ ٱلْجَنَّةِ يَوْمَئِذٍ خَيْرٌۭ مُّسْتَقَرًّۭا وَأَحْسَنُ مَقِيلًۭا",
+      "text": "The companions of the Garden on that Day (will be in) a better dwelling place and a finer resting place.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 25,
+      "quran_arabic": "وَيَوْمَ تَشَقَّقُ ٱلسَّمَآءُ بِٱلْغَمَٰمِ وَنُزِّلَ ٱلْمَلَٰٓئِكَةُ تَنزِيلًا",
+      "text": "On the Day when the sky is split open, (along) with the clouds, and the angels are sent down all at once,",
+      "canonical_variants": [
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَيَوۡمَ تَشَّقَّقُ ٱلسَّمَآءُ بِٱلۡغَمَٰمِ وَنُنزِلُ ٱلۡمَلَٰٓئِكَةَ تَنزِيلًا",
+          "english": "And it is the day when the sky is cleft with clouds and We send down the angels in streams.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَيَوۡمَ تَشَّقَّقُ ٱلسَّمَآءُ بِٱلۡغَمَٰمِ وَنُنزِلُ ٱلۡمَلَٰٓئِكَةَ تَنزِيلًا",
+          "english": "And it is the day when the sky is cleft with clouds and We send down the angels in streams.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 26,
+      "quran_arabic": "ٱلْمُلْكُ يَوْمَئِذٍ ٱلْحَقُّ لِلرَّحْمَٰنِ ۚ وَكَانَ يَوْمًا عَلَى ٱلْكَٰفِرِينَ عَسِيرًۭا",
+      "text": "the true kingdom that Day (will belong) to the Merciful, and it will be a hard Day for the disbelievers.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 27,
+      "quran_arabic": "وَيَوْمَ يَعَضُّ ٱلظَّالِمُ عَلَىٰ يَدَيْهِ يَقُولُ يَٰلَيْتَنِى ٱتَّخَذْتُ مَعَ ٱلرَّسُولِ سَبِيلًۭا",
+      "text": "On the Day when the evildoer bites down on both his hands, he will say, ‘Would that I had taken a way with the messenger!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 28,
+      "quran_arabic": "يَٰوَيْلَتَىٰ لَيْتَنِى لَمْ أَتَّخِذْ فُلَانًا خَلِيلًۭا",
+      "text": "Woe to me! Would that I had not taken So-and-so as a friend!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 29,
+      "quran_arabic": "لَّقَدْ أَضَلَّنِى عَنِ ٱلذِّكْرِ بَعْدَ إِذْ جَآءَنِى ۗ وَكَانَ ٱلشَّيْطَٰنُ لِلْإِنسَٰنِ خَذُولًۭا",
+      "text": "Certainly he led me astray from the Reminder, after it came to me. Satan is the betrayer of humankind.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 30,
+      "quran_arabic": "وَقَالَ ٱلرَّسُولُ يَٰرَبِّ إِنَّ قَوْمِى ٱتَّخَذُوا۟ هَٰذَا ٱلْقُرْءَانَ مَهْجُورًۭا",
+      "text": "The messenger said, ‘My Lord! Surely my people have taken this Qur’ān (as a thing to be) shunned.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 31,
+      "quran_arabic": "وَكَذَٰلِكَ جَعَلْنَا لِكُلِّ نَبِىٍّ عَدُوًّۭا مِّنَ ٱلْمُجْرِمِينَ ۗ وَكَفَىٰ بِرَبِّكَ هَادِيًۭا وَنَصِيرًۭا",
+      "text": "In this way We have assigned to every prophet an enemy from the sinners. Yet your Lord is sufficient as a guide and helper.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 32,
+      "quran_arabic": "وَقَالَ ٱلَّذِينَ كَفَرُوا۟ لَوْلَا نُزِّلَ عَلَيْهِ ٱلْقُرْءَانُ جُمْلَةًۭ وَٰحِدَةًۭ ۚ كَذَٰلِكَ لِنُثَبِّتَ بِهِۦ فُؤَادَكَ ۖ وَرَتَّلْنَٰهُ تَرْتِيلًۭا",
+      "text": "Those who disbelieve say, ‘If only the Qur’ān were sent down on him all of one piece.’ (It has been sent down) in this way, so that We may make firm your heart by means of it. We have arranged it very carefully.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 33,
+      "quran_arabic": "وَلَا يَأْتُونَكَ بِمَثَلٍ إِلَّا جِئْنَٰكَ بِٱلْحَقِّ وَأَحْسَنَ تَفْسِيرًا",
+      "text": "They do not bring you any parable, except (that) We have (already) brought you the truth, and (something) better in exposition.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 34,
+      "quran_arabic": "ٱلَّذِينَ يُحْشَرُونَ عَلَىٰ وُجُوهِهِمْ إِلَىٰ جَهَنَّمَ أُو۟لَٰٓئِكَ شَرٌّۭ مَّكَانًۭا وَأَضَلُّ سَبِيلًۭا",
+      "text": "Those who are going to be gathered to Gehenna on their faces – those will be worse in position and farther astray (from the) way.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 35,
+      "quran_arabic": "وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَٰبَ وَجَعَلْنَا مَعَهُۥٓ أَخَاهُ هَٰرُونَ وَزِيرًۭا",
+      "text": "Certainly We gave Moses the Book, and appointed his brother Aaron as an assistant with him.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 36,
+      "quran_arabic": "فَقُلْنَا ٱذْهَبَآ إِلَى ٱلْقَوْمِ ٱلَّذِينَ كَذَّبُوا۟ بِـَٔايَٰتِنَا فَدَمَّرْنَٰهُمْ تَدْمِيرًۭا",
+      "text": "We said, ‘Both of you go to the people who have called Our signs a lie.’ We destroyed them completely.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 37,
+      "quran_arabic": "وَقَوْمَ نُوحٍۢ لَّمَّا كَذَّبُوا۟ ٱلرُّسُلَ أَغْرَقْنَٰهُمْ وَجَعَلْنَٰهُمْ لِلنَّاسِ ءَايَةًۭ ۖ وَأَعْتَدْنَا لِلظَّٰلِمِينَ عَذَابًا أَلِيمًۭا",
+      "text": "And the people of Noah – when they called the messengers liars – We drowned them, and made them a sign for the people. We have prepared for the evildoers a painful punishment.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 38,
+      "quran_arabic": "وَعَادًۭا وَثَمُودَا۟ وَأَصْحَٰبَ ٱلرَّسِّ وَقُرُونًۢا بَيْنَ ذَٰلِكَ كَثِيرًۭا",
+      "text": "And ‘Ād, and Thamūd, and the companions of al-Rass, and many generations between that.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 39,
+      "quran_arabic": "وَكُلًّۭا ضَرَبْنَا لَهُ ٱلْأَمْثَٰلَ ۖ وَكُلًّۭا تَبَّرْنَا تَتْبِيرًۭا",
+      "text": "Each – We struck parables for it, and each We destroyed completely.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 40,
+      "quran_arabic": "وَلَقَدْ أَتَوْا۟ عَلَى ٱلْقَرْيَةِ ٱلَّتِىٓ أُمْطِرَتْ مَطَرَ ٱلسَّوْءِ ۚ أَفَلَمْ يَكُونُوا۟ يَرَوْنَهَا ۚ بَلْ كَانُوا۟ لَا يَرْجُونَ نُشُورًۭا",
+      "text": "Certainly they have come upon the town which was rained on by an evil rain. Have they not seen it? No! They do not expect any raising up.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 41,
+      "quran_arabic": "وَإِذَا رَأَوْكَ إِن يَتَّخِذُونَكَ إِلَّا هُزُوًا أَهَٰذَا ٱلَّذِى بَعَثَ ٱللَّهُ رَسُولًا",
+      "text": "When they see you, they take you only in mockery: ‘Is this the one whom God has raised up as a messenger?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 42,
+      "quran_arabic": "إِن كَادَ لَيُضِلُّنَا عَنْ ءَالِهَتِنَا لَوْلَآ أَن صَبَرْنَا عَلَيْهَا ۚ وَسَوْفَ يَعْلَمُونَ حِينَ يَرَوْنَ ٱلْعَذَابَ مَنْ أَضَلُّ سَبِيلًا",
+      "text": "He would indeed have led us astray from our gods, had we not been patient toward them.’ Soon they will know, when they see the punishment, who is farther astray (from the) way.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 43,
+      "quran_arabic": "أَرَءَيْتَ مَنِ ٱتَّخَذَ إِلَٰهَهُۥ هَوَىٰهُ أَفَأَنتَ تَكُونُ عَلَيْهِ وَكِيلًا",
+      "text": "Do you see the one who takes his own desire as his god? Will you be a guardian over him?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 44,
+      "quran_arabic": "أَمْ تَحْسَبُ أَنَّ أَكْثَرَهُمْ يَسْمَعُونَ أَوْ يَعْقِلُونَ ۚ إِنْ هُمْ إِلَّا كَٱلْأَنْعَٰمِ ۖ بَلْ هُمْ أَضَلُّ سَبِيلًا",
+      "text": "Or do you think that most of them hear or understand? They are just like cattle – No! They are (even) farther astray (from the) way!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 45,
+      "quran_arabic": "أَلَمْ تَرَ إِلَىٰ رَبِّكَ كَيْفَ مَدَّ ٱلظِّلَّ وَلَوْ شَآءَ لَجَعَلَهُۥ سَاكِنًۭا ثُمَّ جَعَلْنَا ٱلشَّمْسَ عَلَيْهِ دَلِيلًۭا",
+      "text": "Have you not regarded your Lord, how He has stretched out the shadow? If He had (so) pleased, He would indeed have made it stand still. Then We made the sun a guide for it,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 46,
+      "quran_arabic": "ثُمَّ قَبَضْنَٰهُ إِلَيْنَا قَبْضًۭا يَسِيرًۭا",
+      "text": "(and) then We drew it to Us gradually.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 47,
+      "quran_arabic": "وَهُوَ ٱلَّذِى جَعَلَ لَكُمُ ٱلَّيْلَ لِبَاسًۭا وَٱلنَّوْمَ سُبَاتًۭا وَجَعَلَ ٱلنَّهَارَ نُشُورًۭا",
+      "text": "He (it is) who has made the night as a covering for you, and made sleep as a rest, and He has made the day as a raising up.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 48,
+      "quran_arabic": "وَهُوَ ٱلَّذِىٓ أَرْسَلَ ٱلرِّيَٰحَ بُشْرًۢا بَيْنَ يَدَىْ رَحْمَتِهِۦ ۚ وَأَنزَلْنَا مِنَ ٱلسَّمَآءِ مَآءًۭ طَهُورًۭا",
+      "text": "He (it is) who has sent the winds as good news before His mercy, and We have sent down pure water from the sky,",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "وَهۡوَ اَ۬لَّذِيٓ أَرۡسَلَ اَ۬لرِّيَٰحَ نُشُرَۢا بَيۡنَ يَدَيۡ رَحۡمَتِهِۦۚ وَأَنزَلۡنَا مِنَ اَ۬لسَّمَآءِ مَآءٗ طَهُورٗا",
+          "english": "And it is He Who sent the winds as a revival ahead of His mercy. And We sent down from the sky pure water",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "وَهۡوَ  اَ۬لَّذِي أَرۡسَلَ اَ۬لرِّيَٰحَ نُشُرَۢا بَيۡنَ يَدَيۡ رَحۡمَتِهِۦۚ وَأَنزَلۡنَا مِنَ  اَ۬لسَّمَآءِ مَآءٗ طَهُورٗا",
+          "english": "And it is He Who sent the winds as a revival ahead of His mercy. And We sent down from the sky pure water",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَهُوَ ٱلَّذِي أَرۡسَلَ ٱلرِّيحَ نُشُرَۢا بَيۡنَ يَدَيۡ رَحۡمَتِهِۦۚ وَأَنزَلۡنَا مِنَ ٱلسَّمَآءِ مَآءٗ طَهُورٗا",
+          "english": "And it is He Who sent the wind as revivers ahead of His mercy. And We sent down from the sky pure water",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَهُوَ ٱلَّذِي أَرۡسَلَ ٱلرِّيحَ نُشُرَۢا بَيۡنَ يَدَيۡ رَحۡمَتِهِۦۚ وَأَنزَلۡنَا مِنَ ٱلسَّمَآءِ مَآءٗ طَهُورٗا",
+          "english": "And it is He Who sent the wind as revivers ahead of His mercy. And We sent down from the sky pure water",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "وَهْوَ اَ۬لذِے أَرْسَلَ اَ۬لرِّيَٰحَ نُشُراَۢ بَيْنَ يَدَےْ رَحْمَتِهِۦۖ وَأَنزَلْنَا مِنَ اَ۬لسَّمَآءِ مَآءٗ طَهُوراٗ",
+          "english": "And it is He Who sent the winds as revivers ahead of His mercy. And We sent down from the sky pure water",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "وَهُوَ اَ۬لذِےٓ أَرْسَلَ اَ۬لرِّيَٰحَ نُشُراَۢ بَيْنَ يَدَےْ رَحْمَتِهِۦۖ وَأَنزَلْنَا مِنَ اَ۬لسَّمَآءِ مَآءٗ طَهُوراٗ",
+          "english": "And it is He Who sent the winds as revivers ahead of His mercy. And We sent down from the sky pure water",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Lexical Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 49,
+      "quran_arabic": "لِّنُحْۦِىَ بِهِۦ بَلْدَةًۭ مَّيْتًۭا وَنُسْقِيَهُۥ مِمَّا خَلَقْنَآ أَنْعَٰمًۭا وَأَنَاسِىَّ كَثِيرًۭا",
+      "text": "so that We might give some barren land life by means of it, and give it as a drink to some of what We have created – livestock and many people.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 50,
+      "quran_arabic": "وَلَقَدْ صَرَّفْنَٰهُ بَيْنَهُمْ لِيَذَّكَّرُوا۟ فَأَبَىٰٓ أَكْثَرُ ٱلنَّاسِ إِلَّا كُفُورًۭا",
+      "text": "Certainly We have varied it among them so that they might take heed, yet most of the people refuse (everything) but disbelief.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 51,
+      "quran_arabic": "وَلَوْ شِئْنَا لَبَعَثْنَا فِى كُلِّ قَرْيَةٍۢ نَّذِيرًۭا",
+      "text": "If We had (so) pleased, We would indeed have raised up a warner in every town.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 52,
+      "quran_arabic": "فَلَا تُطِعِ ٱلْكَٰفِرِينَ وَجَٰهِدْهُم بِهِۦ جِهَادًۭا كَبِيرًۭا",
+      "text": "So do not obey the disbelievers, but struggle mightily against them by means of it.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 53,
+      "quran_arabic": "۞ وَهُوَ ٱلَّذِى مَرَجَ ٱلْبَحْرَيْنِ هَٰذَا عَذْبٌۭ فُرَاتٌۭ وَهَٰذَا مِلْحٌ أُجَاجٌۭ وَجَعَلَ بَيْنَهُمَا بَرْزَخًۭا وَحِجْرًۭا مَّحْجُورًۭا",
+      "text": "He (it is) who has let loose the two seas, this one sweet and fresh, and this (other) one salty (and) bitter, and placed between them a barrier, and an absolute ban.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 54,
+      "quran_arabic": "وَهُوَ ٱلَّذِى خَلَقَ مِنَ ٱلْمَآءِ بَشَرًۭا فَجَعَلَهُۥ نَسَبًۭا وَصِهْرًۭا ۗ وَكَانَ رَبُّكَ قَدِيرًۭا",
+      "text": "He (it is) who created a human being from water, and made him related by blood and by marriage, (for) Your Lord is powerful.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 55,
+      "quran_arabic": "وَيَعْبُدُونَ مِن دُونِ ٱللَّهِ مَا لَا يَنفَعُهُمْ وَلَا يَضُرُّهُمْ ۗ وَكَانَ ٱلْكَافِرُ عَلَىٰ رَبِّهِۦ ظَهِيرًۭا",
+      "text": "Yet they serve what neither benefits them nor harms them, instead of God (alone). The disbeliever (always) allies himself against his Lord.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 56,
+      "quran_arabic": "وَمَآ أَرْسَلْنَٰكَ إِلَّا مُبَشِّرًۭا وَنَذِيرًۭا",
+      "text": "We have sent you only as a bringer of good news and a warner.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 57,
+      "quran_arabic": "قُلْ مَآ أَسْـَٔلُكُمْ عَلَيْهِ مِنْ أَجْرٍ إِلَّا مَن شَآءَ أَن يَتَّخِذَ إِلَىٰ رَبِّهِۦ سَبِيلًۭا",
+      "text": "Say: ‘I do not ask you for any reward for it, except for whoever pleases to take a way to his Lord.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 58,
+      "quran_arabic": "وَتَوَكَّلْ عَلَى ٱلْحَىِّ ٱلَّذِى لَا يَمُوتُ وَسَبِّحْ بِحَمْدِهِۦ ۚ وَكَفَىٰ بِهِۦ بِذُنُوبِ عِبَادِهِۦ خَبِيرًا",
+      "text": "Put your trust in the Living One who does not die, and glorify (Him) with His praise. He is sufficient (as One who) is aware of the sins of His servants,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 59,
+      "quran_arabic": "ٱلَّذِى خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَا فِى سِتَّةِ أَيَّامٍۢ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ ۚ ٱلرَّحْمَٰنُ فَسْـَٔلْ بِهِۦ خَبِيرًۭا",
+      "text": "who created the heavens and the earth, and whatever is between them, in six days. Then He mounted the throne (as) the Merciful. Ask anyone (who is) aware about Him!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 60,
+      "quran_arabic": "وَإِذَا قِيلَ لَهُمُ ٱسْجُدُوا۟ لِلرَّحْمَٰنِ قَالُوا۟ وَمَا ٱلرَّحْمَٰنُ أَنَسْجُدُ لِمَا تَأْمُرُنَا وَزَادَهُمْ نُفُورًۭا ۩",
+      "text": "But when it is said to them, ‘Prostrate yourselves before the Merciful,’ they say, ‘What is the Merciful? Shall we prostrate ourselves before what you command us?’ And it (only) increases them in aversion (to Him).",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 61,
+      "quran_arabic": "تَبَارَكَ ٱلَّذِى جَعَلَ فِى ٱلسَّمَآءِ بُرُوجًۭا وَجَعَلَ فِيهَا سِرَٰجًۭا وَقَمَرًۭا مُّنِيرًۭا",
+      "text": "Blessed is He who has made constellations in the sky, and has made a lamp in it, and an illuminating moon.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 62,
+      "quran_arabic": "وَهُوَ ٱلَّذِى جَعَلَ ٱلَّيْلَ وَٱلنَّهَارَ خِلْفَةًۭ لِّمَنْ أَرَادَ أَن يَذَّكَّرَ أَوْ أَرَادَ شُكُورًۭا",
+      "text": "He (it is) who has made the night and the day a succession – for anyone who wishes to take heed or wishes to be thankful.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 63,
+      "quran_arabic": "وَعِبَادُ ٱلرَّحْمَٰنِ ٱلَّذِينَ يَمْشُونَ عَلَى ٱلْأَرْضِ هَوْنًۭا وَإِذَا خَاطَبَهُمُ ٱلْجَٰهِلُونَ قَالُوا۟ سَلَٰمًۭا",
+      "text": "The servants of the Merciful are those who walk humbly on the earth, and when the ignorant address them, say: ‘Peace!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 64,
+      "quran_arabic": "وَٱلَّذِينَ يَبِيتُونَ لِرَبِّهِمْ سُجَّدًۭا وَقِيَٰمًۭا",
+      "text": "(They are) those who spend the night prostrating themselves and standing before their Lord,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 65,
+      "quran_arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا ٱصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ ۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا",
+      "text": "and those who say, ‘Our Lord, turn away from us the punishment of Gehenna. Surely its punishment is torment!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 66,
+      "quran_arabic": "إِنَّهَا سَآءَتْ مُسْتَقَرًّۭا وَمُقَامًۭا",
+      "text": "Surely it is an evil dwelling and resting place!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 67,
+      "quran_arabic": "وَٱلَّذِينَ إِذَآ أَنفَقُوا۟ لَمْ يُسْرِفُوا۟ وَلَمْ يَقْتُرُوا۟ وَكَانَ بَيْنَ ذَٰلِكَ قَوَامًۭا",
+      "text": "And (they are) those who, when they contribute, are neither wanton nor stingy, but right between that,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 68,
+      "quran_arabic": "وَٱلَّذِينَ لَا يَدْعُونَ مَعَ ٱللَّهِ إِلَٰهًا ءَاخَرَ وَلَا يَقْتُلُونَ ٱلنَّفْسَ ٱلَّتِى حَرَّمَ ٱللَّهُ إِلَّا بِٱلْحَقِّ وَلَا يَزْنُونَ ۚ وَمَن يَفْعَلْ ذَٰلِكَ يَلْقَ أَثَامًۭا",
+      "text": "and those who do not call on another god with God, and do not kill the person whom God has forbidden (to be killed), except by right, and do not commit adultery – whoever does that will meet (his) penalty.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 69,
+      "quran_arabic": "يُضَٰعَفْ لَهُ ٱلْعَذَابُ يَوْمَ ٱلْقِيَٰمَةِ وَيَخْلُدْ فِيهِۦ مُهَانًا",
+      "text": "The punishment will be doubled for him on the Day of Resurrection, and he will remain in it humiliated,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 70,
+      "quran_arabic": "إِلَّا مَن تَابَ وَءَامَنَ وَعَمِلَ عَمَلًۭا صَٰلِحًۭا فَأُو۟لَٰٓئِكَ يُبَدِّلُ ٱللَّهُ سَيِّـَٔاتِهِمْ حَسَنَٰتٍۢ ۗ وَكَانَ ٱللَّهُ غَفُورًۭا رَّحِيمًۭا",
+      "text": "except for the one who turns (in repentance), and believes, and does a righteous deed – and those, God will change their evil deeds (into) good ones, (for) God is forgiving, compassionate.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 71,
+      "quran_arabic": "وَمَن تَابَ وَعَمِلَ صَٰلِحًۭا فَإِنَّهُۥ يَتُوبُ إِلَى ٱللَّهِ مَتَابًۭا",
+      "text": "Whoever turns (in repentance) and does righteousness, surely he turns to God in complete repentance.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 72,
+      "quran_arabic": "وَٱلَّذِينَ لَا يَشْهَدُونَ ٱلزُّورَ وَإِذَا مَرُّوا۟ بِٱللَّغْوِ مَرُّوا۟ كِرَامًۭا",
+      "text": "(They are) those who do not bear false witness, and, when they pass by any frivolous talk, they pass by with dignity,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 73,
+      "quran_arabic": "وَٱلَّذِينَ إِذَا ذُكِّرُوا۟ بِـَٔايَٰتِ رَبِّهِمْ لَمْ يَخِرُّوا۟ عَلَيْهَا صُمًّۭا وَعُمْيَانًۭا",
+      "text": "and those who, when they are reminded by the signs of their Lord, do not fall down over it, deaf and blind,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 74,
+      "quran_arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا هَبْ لَنَا مِنْ أَزْوَٰجِنَا وَذُرِّيَّٰتِنَا قُرَّةَ أَعْيُنٍۢ وَٱجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
+      "text": "and those who say, ‘Our Lord, grant us comfort (to our) eyes from our wives and descendants, and make us a model for the ones who guard (themselves).’",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "وَاَلَّذِينَ يَقُولُونَ رَبَّنَا هَبۡ لَنَا مِنۡ أَزۡوَٰجِنَا وَذُرِّيَّتِنَا قُرَّةَ أَعۡيُنٖ وَاَجۡعَلۡنَا لِلۡمُتَّقِينَ إِمَامًا",
+          "english": "And they are those who say, “Our Lord, grant us in our spouses and our offspring a comfort to the eyes, and make us a good example of the ones who were mindful (of God).”",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "وَاَلَّذِينَ يَقُولُونَ رَبَّنَا هَبۡ لَنَا  مِنۡ أَزۡوَٰجِنَا وَذُرِّيَّتِنَا قُرَّةَ أَعۡيُنٖ وَاَجۡعَلۡنَا لِلۡمُتَّقِينَ  إِمَامًا",
+          "english": "And they are those who say, “Our Lord, grant us in our spouses and our offspring a comfort to the eyes, and make us a good example of the ones who were mindful (of God).”",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا هَبۡ لَنَا مِنۡ أَزۡوَٰجِنَا وَذُرِّيَّتِنَا قُرَّةَ أَعۡيُنٖ وَٱجۡعَلۡنَا لِلۡمُتَّقِينَ إِمَامًا",
+          "english": "And they are those who say, “Our Lord, grant us in our spouses and our offspring a comfort to the eyes, and make us a good example of the ones who were mindful (of God).”",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا هَبۡ لَنَا مِنۡ أَزۡوَٰجِنَا وَذُرِّيَّٰتِنَا قُرَّةَ أَعۡيُنٖ وَٱجۡعَلۡنَا لِلۡمُتَّقِينَ إِمَامًا",
+          "english": "And they are those who say, “Our Lord, grant us in our spouses and our offspring(s) a comfort to the eyes, and make us a good example of the ones who were mindful (of God).”",
+          "reason": "",
+          "category": ""
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 75,
+      "quran_arabic": "أُو۟لَٰٓئِكَ يُجْزَوْنَ ٱلْغُرْفَةَ بِمَا صَبَرُوا۟ وَيُلَقَّوْنَ فِيهَا تَحِيَّةًۭ وَسَلَٰمًا",
+      "text": "Those will be repaid with the exalted room because they were patient, and there they will meet a greeting and ‘Peace!’",
+      "canonical_variants": [
+        {
+          "qari": "asim",
+          "rawi": "shubah",
+          "arabic": "أُوْلَٰٓئِكَ يُجۡزَوۡنَ ٱلۡغُرۡفَةَ بِمَا صَبَرُواْ وَيَلۡقَوۡنَ فِيهَا تَحِيَّةٗ وَسَلَٰمًا",
+          "english": "Those are awarded the Chamber (in Heaven) for their patience, and will encounter therein greetings and peace,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Voice/Tense Shift"
+        },
+        {
+          "qari": "asim",
+          "rawi": "hafs",
+          "arabic": "أُوْلَٰٓئِكَ يُجۡزَوۡنَ ٱلۡغُرۡفَةَ بِمَا صَبَرُواْ وَيُلَقَّوۡنَ فِيهَا تَحِيَّةٗ وَسَلَٰمًا",
+          "english": "Those are awarded the Chamber (in Heaven) for their patience, and are received therein with greetings and peace,",
+          "reason": "",
+          "category": ""
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 76,
+      "quran_arabic": "خَٰلِدِينَ فِيهَا ۚ حَسُنَتْ مُسْتَقَرًّۭا وَمُقَامًۭا",
+      "text": "There they will dwell – it is good as a dwelling and resting place.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 77,
+      "quran_arabic": "قُلْ مَا يَعْبَؤُا۟ بِكُمْ رَبِّى لَوْلَا دُعَآؤُكُمْ ۖ فَقَدْ كَذَّبْتُمْ فَسَوْفَ يَكُونُ لِزَامًۢا",
+      "text": "Say: ‘My Lord would not care about you, if it were not for your prayer. But you have called (it) a lie, so it will be close at hand.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}

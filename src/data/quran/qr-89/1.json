@@ -1,0 +1,314 @@
+{
+  "verses": [
+    {
+      "verse": 1,
+      "quran_arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَٱلْفَجْرِ",
+      "text": "By the dawn",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 2,
+      "quran_arabic": "وَلَيَالٍ عَشْرٍۢ",
+      "text": "and ten nights!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 3,
+      "quran_arabic": "وَٱلشَّفْعِ وَٱلْوَتْرِ",
+      "text": "By the even and the odd!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 4,
+      "quran_arabic": "وَٱلَّيْلِ إِذَا يَسْرِ",
+      "text": "By the night when it journeys on!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 5,
+      "quran_arabic": "هَلْ فِى ذَٰلِكَ قَسَمٌۭ لِّذِى حِجْرٍ",
+      "text": "(Is there) in that an oath for a person of understanding?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 6,
+      "quran_arabic": "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِعَادٍ",
+      "text": "Do you not see how your Lord dealt with ‘Ād,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 7,
+      "quran_arabic": "إِرَمَ ذَاتِ ٱلْعِمَادِ",
+      "text": "Iram of the pillars,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 8,
+      "quran_arabic": "ٱلَّتِى لَمْ يُخْلَقْ مِثْلُهَا فِى ٱلْبِلَٰدِ",
+      "text": "the like of which was never created in (all) the lands,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 9,
+      "quran_arabic": "وَثَمُودَ ٱلَّذِينَ جَابُوا۟ ٱلصَّخْرَ بِٱلْوَادِ",
+      "text": "and Thamūd, who carved out the rock in the wādī,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 10,
+      "quran_arabic": "وَفِرْعَوْنَ ذِى ٱلْأَوْتَادِ",
+      "text": "and Pharaoh, he of the stakes,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 11,
+      "quran_arabic": "ٱلَّذِينَ طَغَوْا۟ فِى ٱلْبِلَٰدِ",
+      "text": "who (all) transgressed insolently in (their) lands,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 12,
+      "quran_arabic": "فَأَكْثَرُوا۟ فِيهَا ٱلْفَسَادَ",
+      "text": "and spread (too) much corruption there?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 13,
+      "quran_arabic": "فَصَبَّ عَلَيْهِمْ رَبُّكَ سَوْطَ عَذَابٍ",
+      "text": "So your Lord poured on them a scourge of punishment.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 14,
+      "quran_arabic": "إِنَّ رَبَّكَ لَبِٱلْمِرْصَادِ",
+      "text": "Surely your Lord indeed lies in wait.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 15,
+      "quran_arabic": "فَأَمَّا ٱلْإِنسَٰنُ إِذَا مَا ٱبْتَلَىٰهُ رَبُّهُۥ فَأَكْرَمَهُۥ وَنَعَّمَهُۥ فَيَقُولُ رَبِّىٓ أَكْرَمَنِ",
+      "text": "As for the human, whenever his Lord tests him, and honors him and blesses him, he says, ‘My Lord has honored me.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 16,
+      "quran_arabic": "وَأَمَّآ إِذَا مَا ٱبْتَلَىٰهُ فَقَدَرَ عَلَيْهِ رِزْقَهُۥ فَيَقُولُ رَبِّىٓ أَهَٰنَنِ",
+      "text": "But whenever he tests him, and restricts his provision for him, he says, ‘My Lord has humiliated me.’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 17,
+      "quran_arabic": "كَلَّا ۖ بَل لَّا تُكْرِمُونَ ٱلْيَتِيمَ",
+      "text": "By no means! No! You do not honor the orphan,",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "كَلَّاۖ بَل لَّا يُكۡرِمُونَ اَ۬لۡيَتِيمَ",
+          "english": "But no! Rather, they do not honor the orphan,",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "كَلَّاۖ بَل لَّا يُكۡرِمُونَ  اَ۬لۡيَتِيمَ",
+          "english": "But no! Rather, they do not honor the orphan,",
+          "reason": "GRAPHICAL/BASIC LETTER DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 18,
+      "quran_arabic": "وَلَا تَحَٰٓضُّونَ عَلَىٰ طَعَامِ ٱلْمِسْكِينِ",
+      "text": "nor do you urge the feeding of the poor,",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "وَلَا يَحُضُّونَ عَلَىٰ طَعَامِ اِ۬لۡمِسۡكِينِ",
+          "english": "and they do not urge (others) to (serve) food to the destitute,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "وَلَا يَحُضُّونَ عَلَىٰ طَعَامِ اِ۬لۡمِسۡكِينِ",
+          "english": "and they do not urge (others) to (serve) food to the destitute,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "bazzi",
+          "arabic": "وَلَا تَحُضُّونَ عَلَىٰ طَعَامِ ٱلۡمِسۡكِينِ",
+          "english": "and you do not urge (others) to (serve) food to the destitute,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "ibn_kathir",
+          "rawi": "qunbul",
+          "arabic": "وَلَا تَحُضُّونَ عَلَىٰ طَعَامِ ٱلۡمِسۡكِينِ",
+          "english": "and you do not urge (others) to (serve) food to the destitute,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "qalun",
+          "arabic": "وَلَا تَحُضُّونَ عَلَىٰ طَعَامِ اِ۬لْمِسْكِينِ",
+          "english": "and you do not urge (others) to (serve) food to the destitute,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        },
+        {
+          "qari": "nafi",
+          "rawi": "warsh",
+          "arabic": "وَلَا تَحُضُّونَ عَلَىٰ طَعَامِ اِ۬لْمِسْكِينِ",
+          "english": "and you do not urge (others) to (serve) food to the destitute,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Lexical Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 19,
+      "quran_arabic": "وَتَأْكُلُونَ ٱلتُّرَاثَ أَكْلًۭا لَّمًّۭا",
+      "text": "yet you devour the inheritance greedily,",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "وَيَأۡكُلُونَ اَ۬لتُّرَاثَ أَكۡلٗا لَّمّٗا",
+          "english": "and they devour inheritance (of the vulnerable) greedily,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "وَيَاكُلُونَ  اَ۬لتُّرَاثَ أَكۡلٗا لَّمّٗا",
+          "english": "and they devour inheritance (of the vulnerable) greedily,",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 20,
+      "quran_arabic": "وَتُحِبُّونَ ٱلْمَالَ حُبًّۭا جَمًّۭا",
+      "text": "and love wealth passionately.",
+      "canonical_variants": [
+        {
+          "qari": "abu_amr",
+          "rawi": "duri_abu_amr",
+          "arabic": "وَيُحِبُّونَ اَ۬لۡمَالَ حُبّٗا جَمّٗا",
+          "english": "and they love wealth immensely.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        },
+        {
+          "qari": "abu_amr",
+          "rawi": "susi",
+          "arabic": "وَيُحِبُّونَ اَ۬لۡمَالَ حُبّٗا جَمّٗا",
+          "english": "and they love wealth immensely.",
+          "reason": "VOWEL DIFFERENCES",
+          "category": "Pronoun/Person Shift"
+        }
+      ],
+      "competing_variants": []
+    },
+    {
+      "verse": 21,
+      "quran_arabic": "كَلَّآ إِذَا دُكَّتِ ٱلْأَرْضُ دَكًّۭا دَكًّۭا",
+      "text": "By no means! When the earth is shattered with a double shattering,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 22,
+      "quran_arabic": "وَجَآءَ رَبُّكَ وَٱلْمَلَكُ صَفًّۭا صَفًّۭا",
+      "text": "and your Lord comes, and the angels, line after line,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 23,
+      "quran_arabic": "وَجِا۟ىٓءَ يَوْمَئِذٍۭ بِجَهَنَّمَ ۚ يَوْمَئِذٍۢ يَتَذَكَّرُ ٱلْإِنسَٰنُ وَأَنَّىٰ لَهُ ٱلذِّكْرَىٰ",
+      "text": "and Gehenna is brought (forth) on that Day – on that Day the human will (finally) take heed, but how will the reminder be for him?",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 24,
+      "quran_arabic": "يَقُولُ يَٰلَيْتَنِى قَدَّمْتُ لِحَيَاتِى",
+      "text": "He will say, ‘Would that I had sent forward (righteous deeds) for my life!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 25,
+      "quran_arabic": "فَيَوْمَئِذٍۢ لَّا يُعَذِّبُ عَذَابَهُۥٓ أَحَدٌۭ",
+      "text": "On that Day no one will punish as He punishes,",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 26,
+      "quran_arabic": "وَلَا يُوثِقُ وَثَاقَهُۥٓ أَحَدٌۭ",
+      "text": "and no one will bind as He binds.",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 27,
+      "quran_arabic": "يَٰٓأَيَّتُهَا ٱلنَّفْسُ ٱلْمُطْمَئِنَّةُ",
+      "text": "‘You, secure one!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 28,
+      "quran_arabic": "ٱرْجِعِىٓ إِلَىٰ رَبِّكِ رَاضِيَةًۭ مَّرْضِيَّةًۭ",
+      "text": "Return to your Lord, approving (and) approved!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 29,
+      "quran_arabic": "فَٱدْخُلِى فِى عِبَٰدِى",
+      "text": "Enter among My servants!",
+      "canonical_variants": [],
+      "competing_variants": []
+    },
+    {
+      "verse": 30,
+      "quran_arabic": "وَٱدْخُلِى جَنَّتِى",
+      "text": "Enter My Garden!’",
+      "canonical_variants": [],
+      "competing_variants": []
+    }
+  ]
+}
