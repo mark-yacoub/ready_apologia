@@ -120,73 +120,82 @@ export const initQuranUI = (containerSelector = '.verses-container.quran-reader-
   }
 
   // 4. Setup Language Toggles
-  const btnEn = document.getElementById('lang-btn-en');
-  const btnAr = document.getElementById('lang-btn-ar');
-  if (btnEn && btnAr) {
-    const updateLang = (lang) => {
-      localStorage.setItem('quran-lang-pref', lang);
+  window.quranUpdateLang = (lang) => {
+    localStorage.setItem('quran-lang-pref', lang);
+    const btnEn = document.getElementById('lang-btn-en');
+    const btnAr = document.getElementById('lang-btn-ar');
+    
+    if (btnEn && btnAr) {
       if (lang === 'en') {
         btnEn.style.background = 'var(--color-primary)';
         btnEn.style.color = 'var(--color-on-primary)';
         btnAr.style.background = 'transparent';
         btnAr.style.color = 'var(--color-on-surface)';
-        
-        // Standard Verses
-        document.querySelectorAll('.quran-verse').forEach(row => {
-          row.querySelector('.quran-en').style.fontSize = '16px';
-          row.querySelector('.quran-en').style.opacity = '1';
-          row.querySelector('.quran-ar').style.fontSize = '24px';
-          row.querySelector('.quran-ar').style.opacity = '1';
-          row.querySelector('.quran-ar').style.color = 'var(--color-on-surface)';
-        });
-        
-        // Lost Verses & Hadiths
-        document.querySelectorAll('.lost-verse-item, .companion-virtues-panel').forEach(row => {
-          const ar = row.querySelector('.quran-ar');
-          const en = row.querySelector('.quran-en');
-          const har = row.querySelector('.hadith-ar');
-          const hen = row.querySelector('.hadith-en');
-          if (en) { en.style.fontSize = '22px'; en.style.opacity = '1'; }
-          if (ar) { ar.style.fontSize = '16px'; ar.style.opacity = '0.6'; }
-          if (hen) { hen.style.fontSize = '18px'; hen.style.opacity = '1'; }
-          if (har) { har.style.fontSize = '14px'; har.style.opacity = '0.6'; }
-        });
-        
       } else {
         btnAr.style.background = 'var(--color-primary)';
         btnAr.style.color = 'var(--color-on-primary)';
         btnEn.style.background = 'transparent';
         btnEn.style.color = 'var(--color-on-surface)';
-        
-        // Standard Verses
-        document.querySelectorAll('.quran-verse').forEach(row => {
-          row.querySelector('.quran-en').style.fontSize = '20px';
-          row.querySelector('.quran-en').style.opacity = '1';
-          row.querySelector('.quran-ar').style.fontSize = '16px';
-          row.querySelector('.quran-ar').style.opacity = '0.6';
-          row.querySelector('.quran-ar').style.color = 'var(--color-on-surface)';
-        });
-        
-        // Lost Verses & Hadiths
-        document.querySelectorAll('.lost-verse-item, .companion-virtues-panel').forEach(row => {
-          const ar = row.querySelector('.quran-ar');
-          const en = row.querySelector('.quran-en');
-          const har = row.querySelector('.hadith-ar');
-          const hen = row.querySelector('.hadith-en');
-          if (en) { en.style.fontSize = '16px'; en.style.opacity = '0.6'; }
-          if (ar) { ar.style.fontSize = '26px'; ar.style.opacity = '1'; }
-          if (hen) { hen.style.fontSize = '12px'; hen.style.opacity = '0.6'; }
-          if (har) { har.style.fontSize = '22px'; har.style.opacity = '1'; }
-        });
       }
-    };
-    
-    btnAr.addEventListener('click', () => updateLang('ar'));
-    btnEn.addEventListener('click', () => updateLang('en'));
+    }
+
+    if (lang === 'en') {
+      // Standard Verses
+      document.querySelectorAll('.quran-verse').forEach(row => {
+        const en = row.querySelector('.quran-en');
+        const ar = row.querySelector('.quran-ar');
+        if (en) { en.style.fontSize = '20px'; en.style.opacity = '1'; }
+        if (ar) { ar.style.fontSize = '16px'; ar.style.opacity = '0.6'; ar.style.color = 'var(--color-on-surface)'; }
+      });
+      
+      // Lost Verses & Hadiths & Variants
+      document.querySelectorAll('.lost-verse-item, .companion-virtues-panel, .variant-item').forEach(row => {
+        const ar = row.querySelector('.quran-ar');
+        const en = row.querySelector('.quran-en');
+        const har = row.querySelector('.hadith-ar');
+        const hen = row.querySelector('.hadith-en');
+        if (en) { en.style.fontSize = '22px'; en.style.opacity = '1'; }
+        if (ar) { ar.style.fontSize = '16px'; ar.style.opacity = '0.6'; }
+        if (hen) { hen.style.fontSize = '18px'; hen.style.opacity = '1'; }
+        if (har) { har.style.fontSize = '14px'; har.style.opacity = '0.6'; }
+      });
+      
+    } else {
+      // Standard Verses
+      document.querySelectorAll('.quran-verse').forEach(row => {
+        const en = row.querySelector('.quran-en');
+        const ar = row.querySelector('.quran-ar');
+        if (en) { en.style.fontSize = '16px'; en.style.opacity = '0.6'; }
+        if (ar) { ar.style.fontSize = '24px'; ar.style.opacity = '1'; ar.style.color = 'var(--color-on-surface)'; }
+      });
+      
+      // Lost Verses & Hadiths & Variants
+      document.querySelectorAll('.lost-verse-item, .companion-virtues-panel, .variant-item').forEach(row => {
+        const ar = row.querySelector('.quran-ar');
+        const en = row.querySelector('.quran-en');
+        const har = row.querySelector('.hadith-ar');
+        const hen = row.querySelector('.hadith-en');
+        if (en) { en.style.fontSize = '16px'; en.style.opacity = '0.6'; }
+        if (ar) { ar.style.fontSize = '26px'; ar.style.opacity = '1'; }
+        if (hen) { hen.style.fontSize = '12px'; hen.style.opacity = '0.6'; }
+        if (har) { har.style.fontSize = '22px'; har.style.opacity = '1'; }
+      });
+    }
+  };
+
+  const btnEn = document.getElementById('lang-btn-en');
+  const btnAr = document.getElementById('lang-btn-ar');
+  if (btnEn && btnAr) {
+    btnAr.addEventListener('click', () => window.quranUpdateLang('ar'));
+    btnEn.addEventListener('click', () => window.quranUpdateLang('en'));
     
     // Init state
     const initialLang = localStorage.getItem('quran-lang-pref') || 'en';
-    updateLang(initialLang);
+    window.quranUpdateLang(initialLang);
+  } else {
+    // If no buttons, at least ensure the styles are applied on load
+    const initialLang = localStorage.getItem('quran-lang-pref') || 'en';
+    window.quranUpdateLang(initialLang);
   }
 
   // 5. Verse Expansion (Badges)
@@ -209,9 +218,9 @@ export const initQuranUI = (containerSelector = '.verses-container.quran-reader-
               badgeBtn.style.color = 'var(--color-on-tertiary-container)';
               badgeBtn.style.border = '1px solid rgba(180, 83, 9, 0.2)';
             } else {
-              badgeBtn.style.background = 'var(--color-surface-container-low)';
-              badgeBtn.style.color = 'var(--color-on-surface)';
-              badgeBtn.style.border = '1px solid var(--color-outline-variant)';
+              badgeBtn.style.background = 'var(--color-secondary)';
+              badgeBtn.style.color = 'white';
+              badgeBtn.style.border = 'none';
             }
           };
           
@@ -239,13 +248,13 @@ export const initQuranUI = (containerSelector = '.verses-container.quran-reader-
             html += `<h4 style="margin: 0 0 10px 0; color: var(--color-primary); font-size: 14px; font-weight: 700;">Canonical Recitation Variants</h4>`;
             html += `<div style="display: flex; flex-direction: column; gap: 12px;">`;
             verseData.canonicalVariants.forEach(v => {
-              html += `<div style="border-bottom: 1px solid var(--color-outline-variant); padding-bottom: 12px;">`;
+              html += `<div class="variant-item" style="border-bottom: 1px solid var(--color-outline-variant); padding-bottom: 12px;">`;
               html += `<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">`;
               html += v.readers.map(r => `<span style="background: var(--color-primary-container); color: var(--color-on-primary-container); padding: 4px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600;">${r}</span>`).join('');
               if (v.category) html += `<span style="background: var(--color-tertiary-container); color: var(--color-on-tertiary-container); padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">${v.category}</span>`;
               html += `</div>`;
-              html += `<div style="direction: rtl; font-family: 'Amiri', serif; font-size: 22px; text-align: right; margin-bottom: 8px; color: var(--color-primary); line-height: 1.6;">${v.diffed_arabic || v.arabic}</div>`;
-              html += `<div style="font-size: 13.5px; color: var(--color-on-surface); line-height: 1.5;">${v.english}</div>`;
+              html += `<div class="quran-ar" style="direction: rtl; font-family: 'Amiri', serif; font-size: 22px; text-align: right; margin-bottom: 8px; color: var(--color-primary); line-height: 1.6;">${v.diffed_arabic || v.arabic}</div>`;
+              html += `<div class="quran-en" style="font-size: 13.5px; color: var(--color-on-surface); line-height: 1.5;">${v.english}</div>`;
               if (v.reason) html += `<div style="display: flex; align-items: center; gap: 6px; margin-top: 10px;"><span style="background: var(--color-error-container); color: var(--color-on-error-container); padding: 3px 8px; border-radius: 12px; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Reason</span> <span style="font-size: 12.5px; color: var(--color-on-surface-variant);">${v.reason}</span></div>`;
               html += `</div>`;
             });
@@ -255,14 +264,27 @@ export const initQuranUI = (containerSelector = '.verses-container.quran-reader-
             html += `<h4 style="margin: 0 0 10px 0; color: var(--color-secondary); font-size: 14px; font-weight: 700;">Competing Companion Codices</h4>`;
             html += `<div style="display: flex; flex-direction: column; gap: 12px;">`;
             verseData.codexVariants.forEach(v => {
-              html += `<div style="border-bottom: 1px solid var(--color-outline-variant); padding-bottom: 12px;">`;
+              html += `<div class="variant-item" style="border-bottom: 1px solid var(--color-outline-variant); padding-bottom: 12px;">`;
               html += `<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">`;
               const comps = v.companions || [v.companion_codex].filter(Boolean);
               html += comps.map(c => `<span style="background: var(--color-secondary-container); color: var(--color-on-secondary-container); padding: 4px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600;">${c.replace(/_/g, ' ')}'s Codex</span>`).join('');
               html += `</div>`;
-              html += `<div style="direction: rtl; font-family: 'Amiri', serif; font-size: 22px; text-align: right; margin-bottom: 8px; color: var(--color-secondary); line-height: 1.6;">${v.diffed_variant_arabic || v.variant_arabic}</div>`;
-              html += `<div style="font-size: 13.5px; color: var(--color-on-surface); line-height: 1.5;">${v.variant_english}</div>`;
-              if (v.hadith_english) html += `<div style="display: flex; align-items: flex-start; gap: 8px; margin-top: 10px; background: var(--color-surface-container-low); padding: 8px 12px; border-radius: 8px; border-left: 3px solid var(--color-secondary);"><span style="font-size: 14px;">📜</span> <span style="font-size: 12px; color: var(--color-on-surface-variant); line-height: 1.5;">${v.hadith_english}</span></div>`;
+              html += `<div class="quran-ar" style="direction: rtl; font-family: 'Amiri', serif; font-size: 22px; text-align: right; margin-bottom: 8px; color: var(--color-secondary); line-height: 1.6;">${v.diffed_variant_arabic || v.variant_arabic}</div>`;
+              html += `<div class="quran-en" style="font-size: 13.5px; color: var(--color-on-surface); line-height: 1.5;">${v.variant_english}</div>`;
+              if (v.hadith_arabic || v.hadith_english) {
+                html += `<div style="font-size: 12.5px; background: var(--color-surface-container-low); padding: 12px; border-radius: 6px; margin-top: 10px; color: var(--color-on-surface-variant); border-left: 3px solid var(--color-secondary);">`;
+                html += `<div style="font-weight: 600; margin-bottom: 8px; color: var(--color-secondary);">Context (Hadith):</div>`;
+                if (v.hadith_arabic) {
+                  html += `<div class="hadith-ar" style="direction: rtl; font-family: 'Amiri', serif; font-size: 16px; margin-bottom: 8px; color: var(--color-on-surface); line-height: 1.6;">${v.hadith_arabic}</div>`;
+                }
+                if (v.hadith_english) {
+                  html += `<div class="hadith-en" style="line-height: 1.5; margin-bottom: 8px;">${v.hadith_english}</div>`;
+                }
+                html += `<div style="font-size: 11px; text-align: right; margin-top: 4px;">Source: <a href="${v.sunnah_url || '#'}" target="_blank" style="text-decoration: underline; color: var(--color-secondary); font-weight: 500;">${v.source_reference || 'Source'}</a></div>`;
+                html += `</div>`;
+              } else if (v.source_reference || v.sunnah_url) {
+                html += `<div style="margin-top: 6px; font-size: 11px; color: var(--color-on-surface-variant);">Source: <a href="${v.sunnah_url || '#'}" target="_blank" style="text-decoration: underline; color: var(--color-secondary);">${v.source_reference || 'Source'}</a></div>`;
+              }
               html += `</div>`;
             });
             html += `</div>`;
@@ -276,6 +298,10 @@ export const initQuranUI = (containerSelector = '.verses-container.quran-reader-
           btn.style.background = isCanonical ? 'var(--color-primary-container)' : 'var(--color-secondary-container)';
           btn.style.color = isCanonical ? 'var(--color-on-primary-container)' : 'var(--color-on-secondary-container)';
           btn.style.border = '1px solid transparent';
+          
+          if (window.quranUpdateLang) {
+            window.quranUpdateLang(localStorage.getItem('quran-lang-pref') || 'en');
+          }
         });
       });
     } catch(err) {
