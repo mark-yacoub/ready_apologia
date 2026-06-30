@@ -62,6 +62,14 @@ export const initQuranUI = (containerSelector = '.verses-container.quran-reader-
       
       if (val === 'SHOW_ALL') {
         window.location.href = `${base}/quran/0`;
+      } else if (val === 'STANDARD') {
+        if (isSurah0) {
+          window.location.href = `${base}/quran/1`;
+        } else {
+          const match = window.location.pathname.match(/\/quran\/(\d+)/);
+          const surahIndex = match ? match[1] : 1;
+          window.location.href = `${base}/quran/${surahIndex}`;
+        }
       } else if (val.startsWith('codex-')) {
         const comp = val.replace('codex-', '');
         if (isSurah0) {
@@ -195,13 +203,24 @@ export const initQuranUI = (containerSelector = '.verses-container.quran-reader-
           const isCanonical = btn.classList.contains('quran-badge-canonical');
           const isCompanion = btn.classList.contains('quran-badge-companion');
           
+          const resetBadge = (badgeBtn) => {
+            if (badgeBtn.classList.contains('quran-badge-canonical')) {
+              badgeBtn.style.background = 'var(--color-tertiary-container)';
+              badgeBtn.style.color = 'var(--color-on-tertiary-container)';
+              badgeBtn.style.border = '1px solid rgba(180, 83, 9, 0.2)';
+            } else {
+              badgeBtn.style.background = 'var(--color-surface-container-low)';
+              badgeBtn.style.color = 'var(--color-on-surface)';
+              badgeBtn.style.border = '1px solid var(--color-outline-variant)';
+            }
+          };
+          
           // Toggle off if already open for this specific type of badge
           const activeType = panel.getAttribute('data-active-type');
           if (panel.style.display === 'block' && activeType === (isCanonical ? 'canonical' : 'companion')) {
             panel.style.display = 'none';
             panel.removeAttribute('data-active-type');
-            btn.style.background = 'var(--color-surface-container-high)';
-            btn.style.color = 'var(--color-on-surface)';
+            resetBadge(btn);
             return;
           }
           
@@ -210,8 +229,7 @@ export const initQuranUI = (containerSelector = '.verses-container.quran-reader-
           
           // Reset other badge styles in this row
           btn.parentElement.querySelectorAll('.quran-badge').forEach(b => {
-            b.style.background = 'var(--color-surface-container-high)';
-            b.style.color = 'var(--color-on-surface)';
+            resetBadge(b);
           });
           
           let html = `<div style="font-size: 13.5px; color: var(--color-on-surface); line-height: 1.6; text-align: left;">`;
@@ -219,29 +237,32 @@ export const initQuranUI = (containerSelector = '.verses-container.quran-reader-
           if (isCanonical && verseData.canonicalVariants && verseData.canonicalVariants.length > 0) {
             panel.setAttribute('data-active-type', 'canonical');
             html += `<h4 style="margin: 0 0 10px 0; color: var(--color-primary); font-size: 14px; font-weight: 700;">Canonical Recitation Variants</h4>`;
-            html += `<div style="display: flex; flex-direction: column; gap: 10px;">`;
+            html += `<div style="display: flex; flex-direction: column; gap: 12px;">`;
             verseData.canonicalVariants.forEach(v => {
-              html += `<div style="border-bottom: 1px solid var(--color-outline-variant); padding-bottom: 8px;">`;
-              html += `<div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 4px; font-size: 12.5px;">`;
-              html += `<span>${v.rawiName} (Rawi of ${v.qariName})</span>`;
-              if (v.category) html += `<span style="font-size: 11px; background: var(--color-surface-container-high); padding: 2px 6px; border-radius: 4px; color: var(--color-on-surface-variant);">${v.category}</span>`;
+              html += `<div style="border-bottom: 1px solid var(--color-outline-variant); padding-bottom: 12px;">`;
+              html += `<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">`;
+              html += v.readers.map(r => `<span style="background: var(--color-primary-container); color: var(--color-on-primary-container); padding: 4px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600;">${r}</span>`).join('');
+              if (v.category) html += `<span style="background: var(--color-tertiary-container); color: var(--color-on-tertiary-container); padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">${v.category}</span>`;
               html += `</div>`;
-              html += `<div style="direction: rtl; font-family: 'Amiri', serif; font-size: 22px; text-align: right; margin-bottom: 6px; color: var(--color-primary); line-height: 1.6;">${v.arabic}</div>`;
-              html += `<div style="font-size: 13px; color: var(--color-on-surface);">${v.english}</div>`;
-              if (v.reason) html += `<div style="font-size: 11.5px; color: var(--color-on-surface-variant); margin-top: 4px; background: var(--color-surface-container-lowest); padding: 4px 8px; border-radius: 4px;"><strong>Reason:</strong> ${v.reason}</div>`;
+              html += `<div style="direction: rtl; font-family: 'Amiri', serif; font-size: 22px; text-align: right; margin-bottom: 8px; color: var(--color-primary); line-height: 1.6;">${v.diffed_arabic || v.arabic}</div>`;
+              html += `<div style="font-size: 13.5px; color: var(--color-on-surface); line-height: 1.5;">${v.english}</div>`;
+              if (v.reason) html += `<div style="display: flex; align-items: center; gap: 6px; margin-top: 10px;"><span style="background: var(--color-error-container); color: var(--color-on-error-container); padding: 3px 8px; border-radius: 12px; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Reason</span> <span style="font-size: 12.5px; color: var(--color-on-surface-variant);">${v.reason}</span></div>`;
               html += `</div>`;
             });
             html += `</div>`;
           } else if (isCompanion && verseData.codexVariants && verseData.codexVariants.length > 0) {
             panel.setAttribute('data-active-type', 'companion');
             html += `<h4 style="margin: 0 0 10px 0; color: var(--color-secondary); font-size: 14px; font-weight: 700;">Competing Companion Codices</h4>`;
-            html += `<div style="display: flex; flex-direction: column; gap: 10px;">`;
+            html += `<div style="display: flex; flex-direction: column; gap: 12px;">`;
             verseData.codexVariants.forEach(v => {
-              html += `<div style="border-bottom: 1px solid var(--color-outline-variant); padding-bottom: 8px;">`;
-              html += `<div style="font-weight: bold; margin-bottom: 4px; font-size: 12.5px; color: var(--color-secondary);">${v.companion_codex.replace(/_/g, ' ')}'s Codex</div>`;
-              html += `<div style="direction: rtl; font-family: 'Amiri', serif; font-size: 22px; text-align: right; margin-bottom: 6px; color: var(--color-secondary); line-height: 1.6;">${v.variant_arabic}</div>`;
-              html += `<div style="font-size: 13px; color: var(--color-on-surface);">${v.variant_english}</div>`;
-              if (v.hadith_english) html += `<div style="font-size: 11.5px; background: var(--color-surface-container-low); padding: 6px 10px; border-radius: 4px; margin-top: 6px; color: var(--color-on-surface-variant); border-left: 3px solid var(--color-outline-variant);"><strong>Hadith:</strong> ${v.hadith_english}</div>`;
+              html += `<div style="border-bottom: 1px solid var(--color-outline-variant); padding-bottom: 12px;">`;
+              html += `<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">`;
+              const comps = v.companions || [v.companion_codex].filter(Boolean);
+              html += comps.map(c => `<span style="background: var(--color-secondary-container); color: var(--color-on-secondary-container); padding: 4px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600;">${c.replace(/_/g, ' ')}'s Codex</span>`).join('');
+              html += `</div>`;
+              html += `<div style="direction: rtl; font-family: 'Amiri', serif; font-size: 22px; text-align: right; margin-bottom: 8px; color: var(--color-secondary); line-height: 1.6;">${v.diffed_variant_arabic || v.variant_arabic}</div>`;
+              html += `<div style="font-size: 13.5px; color: var(--color-on-surface); line-height: 1.5;">${v.variant_english}</div>`;
+              if (v.hadith_english) html += `<div style="display: flex; align-items: flex-start; gap: 8px; margin-top: 10px; background: var(--color-surface-container-low); padding: 8px 12px; border-radius: 8px; border-left: 3px solid var(--color-secondary);"><span style="font-size: 14px;">📜</span> <span style="font-size: 12px; color: var(--color-on-surface-variant); line-height: 1.5;">${v.hadith_english}</span></div>`;
               html += `</div>`;
             });
             html += `</div>`;
@@ -254,6 +275,7 @@ export const initQuranUI = (containerSelector = '.verses-container.quran-reader-
           panel.style.display = 'block';
           btn.style.background = isCanonical ? 'var(--color-primary-container)' : 'var(--color-secondary-container)';
           btn.style.color = isCanonical ? 'var(--color-on-primary-container)' : 'var(--color-on-secondary-container)';
+          btn.style.border = '1px solid transparent';
         });
       });
     } catch(err) {

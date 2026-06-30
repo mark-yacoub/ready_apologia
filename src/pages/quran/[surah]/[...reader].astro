@@ -4,7 +4,7 @@ import path from 'path';
 import Layout from '../../../layouts/Layout.astro';
 
 import { BUILD_BOOKS } from '../../../utils/build_config.js';
-import { normalizeArabic } from '../../../utils/diffUtils.js';
+import { normalizeArabic, diffArabicWords } from '../../../utils/diffUtils.js';
 
 const normalizeSentence = (sentence) => {
   if (!sentence) return '';
@@ -170,23 +170,65 @@ try {
       });
       
       // Filter out variants that match the active reader's Arabic
-      variants = allRenderedVariants.filter(r => normalizeSentence(r.arabic) !== normalizeSentence(activeBaseArabic));
-      const distinctCanonical = new Set(variants.map(cv => normalizeSentence(cv.arabic)));
-      uniqueCanonicalCount = distinctCanonical.size;
+      const filteredVariants = allRenderedVariants.filter(r => normalizeSentence(r.arabic) !== normalizeSentence(activeBaseArabic));
+      
+      const variantGroupMap = new Map();
+      filteredVariants.forEach(r => {
+        const norm = normalizeSentence(r.arabic);
+        if (!variantGroupMap.has(norm)) {
+          variantGroupMap.set(norm, {
+            arabic: r.arabic,
+            english: r.english,
+            reason: r.reason,
+            category: r.category,
+            readers: []
+          });
+        }
+        variantGroupMap.get(norm).readers.push(`${r.rawiName} (of ${r.qariName})`);
+      });
+      
+      variants = Array.from(variantGroupMap.values());
+      uniqueCanonicalCount = variants.length;
     } catch (e) {}
     
     let codexVariants = [];
     let uniqueCodexCount = 0;
     try {
       if (v.competing_variants && v.competing_variants.length > 0) {
-        codexVariants = v.competing_variants.map(cv => ({
+        const mappedCodices = v.competing_variants.map(cv => ({
           ...cv,
           companion_codex: companionDisplayNameMap[cv.companion_codex] || cv.companion_codex
         }));
-        const distinctCodex = new Set(codexVariants.map(cv => normalizeSentence(cv.variant_arabic)));
-        uniqueCodexCount = distinctCodex.size;
+        
+        const codexGroupMap = new Map();
+        mappedCodices.forEach(cv => {
+          const norm = normalizeSentence(cv.variant_arabic);
+          if (!codexGroupMap.has(norm)) {
+             codexGroupMap.set(norm, {
+                variant_arabic: cv.variant_arabic,
+                variant_english: cv.variant_english,
+                hadith_english: cv.hadith_english,
+                companions: []
+             });
+          }
+          if (!codexGroupMap.get(norm).companions.includes(cv.companion_codex)) {
+             codexGroupMap.get(norm).companions.push(cv.companion_codex);
+          }
+        });
+        
+        codexVariants = Array.from(codexGroupMap.values());
+        uniqueCodexCount = codexVariants.length;
       }
     } catch (e) {}
+
+    // Add highlighted diffs
+    variants.forEach(v_variant => {
+      v_variant.diffed_arabic = diffArabicWords(activeBaseArabic, v_variant.arabic).rendered2;
+    });
+    codexVariants.forEach(v_variant => {
+      v_variant.diffed_variant_arabic = diffArabicWords(activeBaseArabic, v_variant.variant_arabic).rendered2;
+    });
+    
     
     return {
       verseNum: v.verse,
@@ -504,7 +546,7 @@ if (isLostSurah && verses.length > 0) {
                   
                   <div class="verse-badge-tray-inline" style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 6px; margin-top: 4px; margin-left: 0;">
                     {(verse.uniqueCanonicalCount > 0) && (
-                    <button class="quran-badge quran-badge-canonical" data-verse={verse.verseNum} style="background: var(--color-surface-container-low); color: var(--color-on-surface); border: 1px solid var(--color-outline-variant); border-radius: 4px; padding: 4px 8px; font-size: 11px; font-weight: 600; cursor: pointer;">
+                    <button class="quran-badge quran-badge-canonical" data-verse={verse.verseNum} style="background: var(--color-tertiary-container); color: var(--color-on-tertiary-container); border: 1px solid rgba(180, 83, 9, 0.2); border-radius: 4px; padding: 4px 8px; font-size: 11px; font-weight: 600; cursor: pointer;">
                       {verse.uniqueCanonicalCount} Distinct Recitations
                     </button>
                   )}

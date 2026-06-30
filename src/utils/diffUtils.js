@@ -1,44 +1,78 @@
 export function normalizeArabic(word) {
   let norm = word;
   
-  // 0. Remove dagger alif if it's on top of an Alif Maqsura (ىٰ -> ى)
-  // This matches Uthmani's ىٰ with Imla'i's ى
-  norm = norm.replace(/\u0649\u0670/g, '\u0649');
+  // 0. Remove dagger alif if it's on top of an Alif Maqsura or Ya (ىٰ -> ى, يٰ -> ي)
+  norm = norm.replace(/([\u0649\u064A])\u0670/g, '$1');
 
-  // 1. Convert Waw+DaggerAlif and Ya+DaggerAlif to Alif
-  norm = norm.replace(/[\u0648\u064A]\u0670/g, '\u0627');
+  // 1. Specific words where Waw is used as Alif (صَلَوٰة -> صلاة)
+  norm = norm.replace(/صل[وؤ][\u0670\u0627]?ة/g, 'صلاة');
+  norm = norm.replace(/زك[وؤ][\u0670\u0627]?ة/g, 'زكاة');
+  norm = norm.replace(/حي[وؤ][\u0670\u0627]?ة/g, 'حياة');
   
   // 2. Convert standalone Dagger Alif to regular Alif
   norm = norm.replace(/\u0670/g, '\u0627');
 
-  // 3. Remove Tajweed/Uthmani specific diacritics, waqf marks, and Sukoon
-  norm = norm.replace(/[\u06D6-\u06DC\u06DF-\u06ED\u0653\u0640\u0652]/g, '');
+  // 3. Normalize Tajweed-specific Tanween encodings to standard Tanween
+  norm = norm.replace(/[\u0657\u065C]/g, '\u064B'); // Variant Fathatan
+  norm = norm.replace(/[\u065E\u065D]/g, '\u064C'); // Variant Dammatan
+  norm = norm.replace(/[\u0656]/g, '\u064D'); // Variant Kasratan
+  
+  // 3b. Normalize Iqlab (changing tanween to vowel+meem)
+  norm = norm.replace(/\u064E\u06E2/g, '\u064B'); // Fatha + Meem -> Fathatan
+  norm = norm.replace(/\u064F\u06E2/g, '\u064C'); // Damma + Meem -> Dammatan
+  norm = norm.replace(/\u0650\u06E2/g, '\u064D'); // Kasra + Meem -> Kasratan
+
+  // 3c. Convert Imala/Taqlil marks to Fatha (often used instead of Fatha or alongside it)
+  // 06EA is Empty Centre Low Stop. 06ED is Small Low Meem (used for Taqlil in Warsh, but also Iqlab after vowels).
+  // Only convert 06ED to Fatha if it's the sole vowel on a consonant (not following another vowel/tanween).
+  norm = norm.replace(/([^\u064B-\u0650])\u06ED/g, '$1\u064E');
+  norm = norm.replace(/\u06EA/g, '\u064E');
+  norm = norm.replace(/\u064E+/g, '\u064E');
+
+  // 3d. Remove Tajweed/Uthmani specific diacritics, waqf marks, small waw/yaa, and Sukoon
+  norm = norm.replace(/[\u06D6-\u06DC\u06DE-\u06EC\u06EE-\u06F0\u0653\u0640\u0652\u06E5\u06E6\u06ED]/g, '');
 
   // 4. Normalize Alif Wasla to regular Alif
   norm = norm.replace(/\u0671/g, '\u0627');
 
-  // 5. Normalize Ya/Alif Maqsura to just Ya
-  norm = norm.replace(/\u0649/g, '\u064A');
+  // 5. Normalize Ya/Alif Maqsura/Yeh Barree to just Ya
+  norm = norm.replace(/[\u0649\u06D2]/g, '\u064A');
 
   // 6. Normalize all Hamza carriers and independent Hamza to a standard Hamza
-  norm = norm.replace(/[\u0621\u0623\u0624\u0625\u0626\u0654\u0655]/g, '\u0621');
+  norm = norm.replace(/[\u0648\u064A\u0649\u0627]?[\u0654\u0655]/g, '\u0621');
+  norm = norm.replace(/[\u0621\u0623\u0624\u0625\u0626]/g, '\u0621');
   
+  // 6b. Word-initial Hamza to Alif (handles Naql variant where Hamza is dropped but vowel is transferred)
+  norm = norm.replace(/^\u0621/g, '\u0627');
+
+  // 6c. Swap Tanween+Alif to Alif+Tanween for consistent matching (orthographic variance)
+  norm = norm.replace(/([\u064B\u064C\u064D])\u0627/g, '\u0627$1');
+
   // 7. Remove Idgham Shadda (Shadda on the very first letter of the word)
   norm = norm.replace(/^([^\u064B-\u0651])\u0651/, '$1');
   
-  // 8. Fix ordering of Fatha and Alif (Uthmanic sometimes puts Fatha before Alif, Imla'i after)
-  norm = norm.replace(/\u064E\u0627/g, '\u0627\u064E');
+  // 7b. Remove internal Idgham Shadda (e.g. ذتّ -> ذت, دتّ -> دت, etc.)
+  norm = norm.replace(/([ذدثطظب][\u064B-\u0650]?)([تطدكم])\u0651/g, '$1$2');
+  
+  // 8. Remove all diacritics from regular Alifs (Alif Wasla or Mater Lectionis shouldn't have vowels differing that matter for diffing)
+  norm = norm.replace(/\u0627[\u064B-\u0651]+/g, '\u0627');
   
   // 9. Standardize specific words that are spelled differently in Imla'i vs Uthmanic but mean the same
   norm = norm.replace(/^ذ[اَ]*ل[ِ]*ك[َ]*$/g, 'ذلك'); // ذلك
   norm = norm.replace(/^ه[اَ]*ذ[اَ]*$/g, 'هذا'); // هذا
   norm = norm.replace(/^الرَّحْم[اَ]*ن[ِ]*$/g, 'الرحمن'); // الرحمن
   norm = norm.replace(/^الَّي[َُِ]*ل/g, 'اللَّيل'); // الليل
+
+  // 10. Standardize orthographic quirks of Allah/Lillah and Alladhi
+  // Some orthographies put Shadda on Lam, some don't. We strip the shadda and fatha from the Lam in these specific words.
+  norm = norm.replace(/لَّه/g, 'له'); // الله, لله
+  norm = norm.replace(/لَّذ/g, 'لذ'); // الذي, الذين
   
-  // 10. Remove short vowels from word-initial Alef (these are just Alif Wasla helper vowels)
-  // Since we process word by word or whole sentences, we can replace \b\u0627 followed by vowels.
-  // We'll use a split/map approach to be safe with word boundaries in Arabic
-  norm = norm.split(/\s+/).map(w => w.replace(/^(\u0627)[\u064B-\u0651]+/g, '$1')).join(' ');
+  // 11. Strip terminal Damma/Kasra from Mim Al-Jam' (Silah variant)
+  norm = norm.replace(/([هكت][\u064B-\u0652]?\u0645)[\u064F\u0650]$/g, '$1');
+  
+  // 12. Ignore vowel variance on "Huwa" and "Hiya" after prefixes (e.g. Wa-Huwa vs Wa-Hwa)
+  norm = norm.replace(/^([وفل][\u064E]?)?ه[\u064F\u0650]?(و|ي)[\u064E]?$/g, '$1ه$2');
   
   return norm;
 }
