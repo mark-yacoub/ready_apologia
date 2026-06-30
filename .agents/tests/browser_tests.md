@@ -213,3 +213,55 @@ This document defines the structured browser automation test cases for Ready Apo
 - **Expected Outcome**:
   - The strict `quran_data.js` validation script should pass successfully without throwing `VALIDATION ERROR`.
   - The build should compile all 900+ static routes successfully.
+
+---
+
+## Test Case 14: Quran Reader Dropdown Routing & Textual Fallbacks
+
+### Step 14.1: Dropdown Navigation & URL Updates
+- **Action**: Navigate to `http://localhost:8080/ready_apologia/quran/1` (defaulting to standard Hafs).
+- **Action**: Open the "Read As" dropdown in the header and select "Warsh (Nafi')".
+- **Expected Outcome**:
+  - URL updates to `http://localhost:8080/ready_apologia/quran/1/warsh`.
+  - The page content changes to Warsh text.
+- **Action**: Click "Read As" again and select "Aisha's Codex".
+- **Expected Outcome**:
+  - URL updates to `http://localhost:8080/ready_apologia/quran/1/Aisha`.
+
+### Step 14.2: Codex Textual Fallback Verification
+- **Action**: Look at Verse 1 (Al-Fatihah 1) under `http://localhost:8080/ready_apologia/quran/1/Aisha`.
+- **Expected Outcome**:
+  - Since Aisha has no variant for Verse 1, standard text (Standard 1924 Hafs) is displayed as fallback.
+  - The text should not fall back to the previously selected Warsh text.
+- **Action**: Look at Verse 4 (Al-Fatihah 4).
+- **Expected Outcome**:
+  - Aisha's variant is injected (represented by a badge).
+
+---
+
+## Test Case 15: Quran Pagination State & Author Persistence
+
+### Step 15.1: Codex Navigation (Aisha)
+- **Action**: Navigate to `http://localhost:8080/ready_apologia/quran/1/Aisha`.
+- **Action**: Click the floating right arrow pager button (`Chapter 2 →`).
+- **Expected Outcome**:
+  - URL updates to `http://localhost:8080/ready_apologia/quran/2/Aisha` (persisting the author "Aisha").
+- **Action**: Click the floating left arrow pager button (`← Chapter 1`).
+- **Expected Outcome**:
+  - URL updates back to `http://localhost:8080/ready_apologia/quran/1/Aisha`.
+- **Action**: Click the floating left arrow pager button (`← Lost Verses`).
+- **Expected Outcome**:
+  - URL updates to `http://localhost:8080/ready_apologia/quran/0/Aisha` (navigates to Aisha's lost verses).
+
+### Step 15.2: Canonical Navigation (Warsh)
+- **Action**: Navigate to `http://localhost:8080/ready_apologia/quran/1/warsh`.
+- **Action**: Click the floating right arrow pager button (`Chapter 2 →`).
+- **Expected Outcome**:
+  - URL updates to `http://localhost:8080/ready_apologia/quran/2/warsh`.
+- **Action**: Click the floating left arrow pager button (`← Chapter 1`).
+- **Expected Outcome**:
+  - URL updates back to `http://localhost:8080/ready_apologia/quran/1/warsh`.
+- **Action**: Click the floating left arrow pager button (`← Lost Verses`).
+- **Expected Outcome**:
+  - Since Warsh is a canonical recitation and has no lost verses, the URL should drop the `warsh` subpath and navigate to the generic lost verses view: `http://localhost:8080/ready_apologia/quran/0`.
+

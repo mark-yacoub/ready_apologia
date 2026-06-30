@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import booksData from '../data/books_meta.json';
+import { STATIC_RECITATIONS } from '../utils/quranConstants.js';
 
 export default function ScriptureNav() {
   const [expandedSection, setExpandedSection] = useState('nt'); // 'nt', 'ot', or null
   const [expandedBook, setExpandedBook] = useState(null); // book id (e.g. 'jn')
   const [currentBook, setCurrentBook] = useState(null);
   const [currentChapter, setCurrentChapter] = useState(null);
+  const [currentReader, setCurrentReader] = useState(null);
   const [activeTab, setActiveTab] = useState('scripture');
 
   // Synchronize active scripture route context
@@ -23,6 +25,7 @@ export default function ScriptureNav() {
         
         setCurrentBook(bookId);
         setCurrentChapter(chapNum);
+        setCurrentReader(null);
         
         const isBookNT = booksData.nt.some(b => b.id === bookId);
         setExpandedSection(isBookNT ? 'nt' : 'ot');
@@ -34,10 +37,14 @@ export default function ScriptureNav() {
         setCurrentChapter('1');
         setExpandedSection('quran');
         setExpandedBook(bookId);
+        setCurrentReader(parts[3] ? decodeURIComponent(parts[3]) : null);
+      } else {
+        setCurrentReader(null);
       }
       
       if (activePath.startsWith('/topics')) {
         setActiveTab('topics');
+
       } else {
         setActiveTab('scripture');
       }
@@ -76,15 +83,31 @@ export default function ScriptureNav() {
       <div className="book-list animate-fade-in">
         {books.map((book) => (
           <div key={book.id} className={`book-item ${expandedBook === book.id ? 'expanded' : ''}`}>
-            {isQuranType ? (
+            {isQuranType ? (() => {
+              let quranHref = `${base}/quran/${book.id.replace('qr-', '')}`;
+              const targetSurah = book.id.replace('qr-', '');
+              if (currentReader) {
+                if (targetSurah === '0') {
+                  // If target is Surah 0, only append companion codices. Canonical doesn't exist in Surah 0.
+                  const canonicalIds = STATIC_RECITATIONS.flatMap(q => q.rawis.map(r => r.id));
+                  const isCanonical = canonicalIds.includes(currentReader);
+                  if (!isCanonical) {
+                    quranHref += `/${currentReader}`;
+                  }
+                } else {
+                  quranHref += `/${currentReader}`;
+                }
+              }
+              return (
               <a 
-                href={`${base}/quran/${book.id.replace('qr-', '')}`}
+                href={quranHref}
                 className={`book-select-btn ${book.id === currentBook ? 'active-book' : ''}`}
                 style={{ textDecoration: 'none', display: 'flex', width: '100%' }}
               >
                 <span className="book-name">{book.name}</span>
               </a>
-            ) : (
+              );
+            })() : (
               <button 
                 onClick={() => toggleBook(book.id)} 
                 className="book-select-btn"

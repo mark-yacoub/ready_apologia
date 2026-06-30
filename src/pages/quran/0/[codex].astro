@@ -202,7 +202,7 @@ if (isLostSurah && verses.length > 0) {
             {isLostSurah && <option value="SHOW_ALL">Show All Codices</option>}
             <optgroup label="Competing Codices (Companions)">
               {companionsArray.map(c => (
-                <option value={`codex-${c}`}>{c.replace(/_/g, ' ')}'s Codex</option>
+                <option value={`codex-${c}`} selected={codex === c}>{c.replace(/_/g, ' ')}'s Codex</option>
               ))}
             </optgroup>
             {!isLostSurah && STATIC_RECITATIONS.map(rec => (
@@ -281,7 +281,7 @@ if (isLostSurah && verses.length > 0) {
 
       <div class="pagination-footer">
         {surahIndex > 0 ? (
-          <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahIndex - 1}`} class="pager-btn">
+          <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahIndex - 1}/${codex}`} class="pager-btn">
             ← {getSurahName(surahIndex - 1)}
           </a>
         ) : (
@@ -289,7 +289,7 @@ if (isLostSurah && verses.length > 0) {
         )}
         <div class="pager-indicator">{surahIndex === 0 ? "Lost Verses" : `Surah ${surahIndex}`}</div>
         {surahIndex < 114 ? (
-          <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahIndex + 1}`} class="pager-btn">
+          <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahIndex + 1}/${codex}`} class="pager-btn">
             {getSurahName(surahIndex + 1)} →
           </a>
         ) : (
@@ -300,153 +300,10 @@ if (isLostSurah && verses.length > 0) {
 </Layout>
 
 <script>
-  // Quran specific logic for codex page
-  const initQuranLogic = () => {
-    const container = document.querySelector('.chapter-reader-container');
-    if (!container || container.dataset.quranInit) return;
-    container.dataset.quranInit = 'true';
-    
-    // Setup Chapter Dropdown
-    const dropdownBtn = container.querySelector('#quran-chapter-dropdown-btn');
-    const dropdownMenu = container.querySelector('#quran-chapter-dropdown-menu');
-    if (dropdownBtn && dropdownMenu) {
-      dropdownBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-      });
-      document.addEventListener('click', (e) => {
-        if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
-          dropdownMenu.style.display = 'none';
-        }
-      });
-    }
-    
-    // Setup Lens Selector (Dropdown Navigation)
-    const lensSelect = container.querySelector('#quran-lens-select');
-    if (lensSelect) {
-      const active = lensSelect.getAttribute('data-active-codex');
-      if (active) lensSelect.value = 'codex-' + active;
-      
-      lensSelect.addEventListener('change', (e) => {
-        const val = e.target.value;
-        const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-        if (val === 'SHOW_ALL') {
-          window.location.href = `${base}/quran/0`;
-        } else if (val.startsWith('codex-')) {
-          const comp = val.replace('codex-', '');
-          window.location.href = `${base}/quran/0/${comp}`;
-        }
-      });
-    }
-    
-    // Setup Diff Trigger
-    const diffTrigger = document.getElementById('quran-diff-trigger');
-    const diffPopover = document.getElementById('quran-diff-popover');
-    const diffGoBtn = document.getElementById('quran-diff-go-btn');
-    
-    if (diffTrigger && diffPopover && diffGoBtn) {
-      diffTrigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        diffPopover.style.display = diffPopover.style.display === 'flex' ? 'none' : 'flex';
-      });
-      
-      // Close popover if clicked outside
-      document.addEventListener('click', (e) => {
-        if (diffPopover.style.display === 'flex' && !diffPopover.contains(e.target) && e.target !== diffTrigger) {
-          diffPopover.style.display = 'none';
-        }
-      });
-      
-      diffGoBtn.addEventListener('click', () => {
-        const t1 = document.getElementById('diff-text-1').value;
-        const t2 = document.getElementById('diff-text-2').value;
-        if (t1 === t2) {
-          alert("Please select two different texts to compare.");
-          return;
-        }
-        
-        const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-        window.location.href = `${base}/quran/diff/${t1}/${t2}`;
-      });
-    }
-
-    // Setup Language Toggle
-    const btnAr = document.getElementById('lang-btn-ar');
-    const btnEn = document.getElementById('lang-btn-en');
-    
-    if (btnAr && btnEn) {
-      const updateLang = (primary) => {
-        localStorage.setItem('quran-lang-pref', primary);
-        if (primary === 'ar') {
-          btnAr.style.background = 'var(--color-primary)';
-          btnAr.style.color = 'var(--color-on-primary)';
-          btnEn.style.background = 'transparent';
-          btnEn.style.color = 'var(--color-on-surface)';
-          
-          document.querySelectorAll('.lost-verse-item, .companion-virtues-panel').forEach(row => {
-            const ar = row.querySelector('.quran-ar');
-            const en = row.querySelector('.quran-en');
-            const har = row.querySelector('.hadith-ar');
-            const hen = row.querySelector('.hadith-en');
-            if (en) {
-              en.style.fontSize = '16px';
-              en.style.opacity = '0.6';
-            }
-            if (ar) {
-              ar.style.fontSize = '26px';
-              ar.style.opacity = '1';
-            }
-            if (hen) {
-              hen.style.fontSize = '12px';
-              hen.style.opacity = '0.6';
-            }
-            if (har) {
-              har.style.fontSize = '22px';
-              har.style.opacity = '1';
-            }
-          });
-        } else {
-          btnEn.style.background = 'var(--color-primary)';
-          btnEn.style.color = 'var(--color-on-primary)';
-          btnAr.style.background = 'transparent';
-          btnAr.style.color = 'var(--color-on-surface)';
-          
-          document.querySelectorAll('.lost-verse-item, .companion-virtues-panel').forEach(row => {
-            const ar = row.querySelector('.quran-ar');
-            const en = row.querySelector('.quran-en');
-            const har = row.querySelector('.hadith-ar');
-            const hen = row.querySelector('.hadith-en');
-            if (en) {
-              en.style.fontSize = '22px';
-              en.style.opacity = '1';
-            }
-            if (ar) {
-              ar.style.fontSize = '16px';
-              ar.style.opacity = '0.6';
-            }
-            if (hen) {
-              hen.style.fontSize = '18px';
-              hen.style.opacity = '1';
-            }
-            if (har) {
-              har.style.fontSize = '14px';
-              har.style.opacity = '0.6';
-            }
-          });
-        }
-      };
-      
-      btnAr.addEventListener('click', () => updateLang('ar'));
-      btnEn.addEventListener('click', () => updateLang('en'));
-      
-      // Load initial preference
-      const initialLang = localStorage.getItem('quran-lang-pref') || 'en';
-      updateLang(initialLang);
-    }
-  };
+  import { initQuranUI } from '../../../scripts/quran_ui.js';
   
   document.addEventListener('astro:page-load', () => {
-    initQuranLogic();
+    initQuranUI('.lost-verses-container');
   });
 </script>
 

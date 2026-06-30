@@ -35,6 +35,11 @@ export function normalizeArabic(word) {
   norm = norm.replace(/^الرَّحْم[اَ]*ن[ِ]*$/g, 'الرحمن'); // الرحمن
   norm = norm.replace(/^الَّي[َُِ]*ل/g, 'اللَّيل'); // الليل
   
+  // 10. Remove short vowels from word-initial Alef (these are just Alif Wasla helper vowels)
+  // Since we process word by word or whole sentences, we can replace \b\u0627 followed by vowels.
+  // We'll use a split/map approach to be safe with word boundaries in Arabic
+  norm = norm.split(/\s+/).map(w => w.replace(/^(\u0627)[\u064B-\u0651]+/g, '$1')).join(' ');
+  
   return norm;
 }
 

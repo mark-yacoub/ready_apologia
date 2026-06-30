@@ -31,6 +31,8 @@ export const companionDisplayNameMap = {
   "Unknown": "Unknown"
 };
 
+export const allUniqueCompanions = Array.from(new Set(Object.values(companionDisplayNameMap)));
+
 export const normalizeCompanionFilename = (name) => {
   const mapping = {
     "A'isha": "Aisha",

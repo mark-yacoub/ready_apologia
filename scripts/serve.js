@@ -28,7 +28,7 @@ const server = http.createServer((req, res) => {
   let pathname = '/';
   try {
     const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost:8080'}`);
-    pathname = parsedUrl.pathname;
+    pathname = decodeURIComponent(parsedUrl.pathname);
     
     // Support Astro base URL by stripping it for local directory lookup
     if (pathname.startsWith('/ready_apologia')) {
