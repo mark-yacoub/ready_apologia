@@ -67,14 +67,6 @@ const VerseItem = ({ vId, text, note, topicId, categoryTitle = null }) => {
 
   const handleCardClick = (e) => {
     if (e.target.closest('.topic-note-btn')) return;
-    if (topicId) {
-      let active = [];
-      try { active = JSON.parse(localStorage.getItem('activeTopics') || '[]'); } catch(e) {}
-      if (!active.includes(topicId)) {
-        active.push(topicId);
-        localStorage.setItem('activeTopics', JSON.stringify(active));
-      }
-    }
     window.location.href = `${base}/bible/${bookId}/${chapterNum}#${verseNumStr}`;
   };
 
@@ -97,14 +89,6 @@ const VerseItem = ({ vId, text, note, topicId, categoryTitle = null }) => {
             href={`${base}/bible/${bookId}/${chapterNum}#${verseNumStr}`}
             onClick={(e) => {
               e.stopPropagation();
-              if (topicId) {
-                let active = [];
-                try { active = JSON.parse(localStorage.getItem('activeTopics') || '[]'); } catch(e) {}
-                if (!active.includes(topicId)) {
-                  active.push(topicId);
-                  localStorage.setItem('activeTopics', JSON.stringify(active));
-                }
-              }
             }}
             className="verse-ref-link"
           >
@@ -336,12 +320,6 @@ const ProphecyCard = ({ prophecy, verseTexts, topicId }) => {
               return (
                 <a key={vId} href={`${base}/bible/${p[0]}/${p[1]}#${p.slice(2).join('_')}`} className="verse-ref-link" onClick={(e) => {
                   e.stopPropagation();
-                  let active = [];
-                  try { active = JSON.parse(localStorage.getItem('activeTopics') || '[]'); } catch(err) {}
-                  if (!active.includes(topicId)) {
-                    active.push(topicId);
-                    localStorage.setItem('activeTopics', JSON.stringify(active));
-                  }
                 }}>
                   <span className="verse-ref-pill">{formatBookName(p[0])} {p[1]}:{p.slice(2).join('_')} <span className="ref-arrow">&gt;</span></span>
                 </a>
@@ -365,12 +343,6 @@ const ProphecyCard = ({ prophecy, verseTexts, topicId }) => {
                       return (
                         <a key={vId} href={`${base}/bible/${p[0]}/${p[1]}#${p.slice(2).join('_')}`} className="verse-ref-link" onClick={(e) => {
                           e.stopPropagation();
-                          let active = [];
-                          try { active = JSON.parse(localStorage.getItem('activeTopics') || '[]'); } catch(err) {}
-                          if (!active.includes(topicId)) {
-                            active.push(topicId);
-                            localStorage.setItem('activeTopics', JSON.stringify(active));
-                          }
                         }}>
                           <span className="verse-ref-pill">{formatBookName(p[0])} {p[1]}:{p.slice(2).join('_')} <span className="ref-arrow">&gt;</span></span>
                         </a>
@@ -703,7 +675,8 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
   const toggleHighlight = (tId) => {
     let active = [];
     try {
-      active = JSON.parse(localStorage.getItem('activeTopics') || '[]');
+      const parsed = JSON.parse(localStorage.getItem('activeTopics') || '[]');
+      active = Array.isArray(parsed) ? parsed : [];
     } catch(e) {}
 
     // Legacy support
@@ -728,7 +701,8 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
       if (typeof window !== 'undefined') {
         let active = [];
         try {
-          active = JSON.parse(localStorage.getItem('activeTopics') || '[]');
+          const parsed = JSON.parse(localStorage.getItem('activeTopics') || '[]');
+          active = Array.isArray(parsed) ? parsed : [];
         } catch(e) {}
 
         const legacyTopic = localStorage.getItem('activeTopic');

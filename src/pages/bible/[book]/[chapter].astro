@@ -430,7 +430,8 @@ const topicsMeta = allTopics.reduce((acc, t) => {
     
     let activeTopics = [];
     try {
-      activeTopics = JSON.parse(localStorage.getItem('activeTopics') || '[]');
+      const parsed = JSON.parse(localStorage.getItem('activeTopics') || '[]');
+      activeTopics = Array.isArray(parsed) ? parsed : [];
     } catch(e) {}
 
     // Legacy single topic support
