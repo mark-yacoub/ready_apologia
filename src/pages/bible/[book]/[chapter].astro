@@ -8,6 +8,7 @@ import { mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
 import { BUILD_BOOKS } from '../../../utils/build_config.js';
 import { loadAllTopicsData } from '../../../utils/topicsLoader.js';
 import { getTopicColor } from '../../../utils/topicColors.js';
+import { NT_TRANSLATION_ID } from '../../../utils/bible_config.js';
 
 // 1. Pre-render all chapters for NT and OT books
 export async function getStaticPaths() {
@@ -41,7 +42,7 @@ if (!bookMeta) {
 }
 
 // 3. Load Scripture Content from JSON
-const folder = isNT ? 'esv' : 'lxx2012';
+const folder = isNT ? NT_TRANSLATION_ID : 'lxx2012';
 const filePath = path.join(process.cwd(), 'src/data/scripture', folder, `${book}.json`);
 let chapterVerses = [];
 

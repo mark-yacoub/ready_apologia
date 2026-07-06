@@ -1,13 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { NT_TRANSLATION_ID, NT_TRANSLATION_NAME } from '../src/utils/bible_config.js';
 
-const SOURCE_ESV = '/usr/local/google/home/markyacoub/Documents/data_collection/bible/esv/output';
+const SOURCE_NT = `/usr/local/google/home/markyacoub/Documents/data_collection/bible/${NT_TRANSLATION_ID}/output`;
 const SOURCE_LXX = '/usr/local/google/home/markyacoub/Documents/data_collection/bible/lxx2012/output';
 
-const DEST_ESV = './src/data/scripture/esv';
+const DEST_NT = `./src/data/scripture/${NT_TRANSLATION_ID}`;
 const DEST_LXX = './src/data/scripture/lxx2012';
 
-// 27 Books of the New Testament (ESV)
+// 27 Books of the New Testament
 const NT_BOOKS = [
   'mt', 'mk', 'lk', 'jn', 'acts', 'rom', '1cor', '2cor', 'gal', 'eph', 
   'phil', 'col', '1thes', '2thes', '1tm', '2tm', 'ti', 'phlm', 'heb', 'jas', 
@@ -22,13 +23,13 @@ function ensureDirectory(dir) {
 }
 
 function importScripture() {
-  ensureDirectory(DEST_ESV);
+  ensureDirectory(DEST_NT);
   ensureDirectory(DEST_LXX);
 
-  console.log('\n--- Importing New Testament (ESV) ---');
+  console.log(`\n--- Importing New Testament (${NT_TRANSLATION_NAME}) ---`);
   NT_BOOKS.forEach(book => {
-    const srcFile = path.join(SOURCE_ESV, `${book}.json`);
-    const destFile = path.join(DEST_ESV, `${book}.json`);
+    const srcFile = path.join(SOURCE_NT, `${book}.json`);
+    const destFile = path.join(DEST_NT, `${book}.json`);
 
     if (fs.existsSync(srcFile)) {
       fs.copyFileSync(srcFile, destFile);

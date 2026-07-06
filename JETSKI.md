@@ -91,11 +91,11 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `.gitignore`: Standard Git exclusion rules for `node_modules/`, `dist/`, and `.astro/`.
 *   `data.db`: The SQLite database queried during pre-rendering.
 *   `docs/db_schema.sql`: SQL schema definitions for database queries.
-*   `scripts/import_scripture.js`: Script to sync ESV (NT) and LXX (OT) JSON scripture databases.
+*   `scripts/import_scripture.js`: Script to sync NASB (NT) and LXX (OT) JSON scripture databases.
 *   `scripts/copy_sample_images.js`: Script to recursively copy sample manuscript images from data collection.
 *   `scripts/serve.js`: Zero-dependency static server running on `http://localhost:8080` for testing.
 *   `src/db.js`: Database query helper utilizing `node:sqlite`.
-*   `src/data/scripture/`: Contains the imported scripture files (ESV NT & LXX2012 OT) in structured JSON format.
+*   `src/data/scripture/`: Contains the imported scripture files (NASB NT & LXX2012 OT) in structured JSON format.
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.
 *   `src/layouts/Layout.astro`: The main responsive layout shell in light-only mode.
 *   `src/pages/index.astro`: Homepage handling auto-redirects to John 1.

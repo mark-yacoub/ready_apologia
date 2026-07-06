@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import booksData from '../data/books_meta.json';
 import { STATIC_RECITATIONS } from '../utils/quranConstants.js';
+import { NT_TRANSLATION_NAME } from '../utils/bible_config.js';
 
 export default function ScriptureNav() {
   const [expandedSection, setExpandedSection] = useState('nt'); // 'nt', 'ot', or null
@@ -190,7 +191,7 @@ export default function ScriptureNav() {
             className={`section-header-btn ${expandedSection === 'nt' ? 'active' : ''}`}
           >
             <span className="icon">✝</span>
-            <span className="title-text">New Testament (ESV)</span>
+            <span className="title-text">New Testament ({NT_TRANSLATION_NAME})</span>
             <span className="section-arrow">{expandedSection === 'nt' ? '▼' : '▶'}</span>
           </button>
           {expandedSection === 'nt' && renderBookList(booksData.nt, 'nt')}

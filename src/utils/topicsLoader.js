@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { NT_TRANSLATION_ID } from './bible_config.js';
 
 export function loadAllTopicsData() {
   const topicsDir = path.join(process.cwd(), 'src/data/topics');
@@ -9,7 +10,7 @@ export function loadAllTopicsData() {
   const scriptureCache = {};
 
   const getVerseText = (book, chapter, verse, isNT) => {
-    const folder = isNT ? 'esv' : 'lxx2012';
+    const folder = isNT ? NT_TRANSLATION_ID : 'lxx2012';
     const cacheKey = `${folder}/${book}`;
 
     if (scriptureCache[cacheKey] === undefined) {

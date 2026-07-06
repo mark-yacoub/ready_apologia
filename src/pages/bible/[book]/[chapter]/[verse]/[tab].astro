@@ -10,6 +10,7 @@ import booksMeta from '../../../../../data/books_meta.json';
 import { parseMarkdown } from '../../../../../utils/markdown.js';
 import { mapMtToLxx, mapLxxToMt } from '../../../../../utils/scripture_mapper.js';
 import { BUILD_BOOKS } from '../../../../../utils/build_config.js';
+import { NT_TRANSLATION_ID } from '../../../../../utils/bible_config.js';
 
 // 1. Pre-render sub-path page routes
 export async function getStaticPaths() {
@@ -93,7 +94,7 @@ const ctCount = query("SELECT COUNT(DISTINCT title) as count FROM contradictions
 const apCount = query("SELECT COUNT(DISTINCT title) as count FROM apologetics WHERE verse = :checkId", { checkId })[0].count;
 
 // 3.5 Load Verse Text
-const folder = isNT ? 'esv' : 'lxx2012';
+const folder = isNT ? NT_TRANSLATION_ID : 'lxx2012';
 const scriptureFilePath = path.join(process.cwd(), 'src/data/scripture', folder, `${book}.json`);
 let verseText = "";
 

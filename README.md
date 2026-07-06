@@ -95,11 +95,11 @@ pkill -f astro
 *   `.gitignore`: Standard Git exclusion rules for node dependencies and build outputs.
 *   `data.db`: SQLite database containing apologetics and manuscript metadata.
 *   `docs/db_schema.sql`: SQL schema definitions for the SQLite database.
-*   `scripts/import_scripture.js`: Script to import ESV (NT) and LXX (OT) JSON scriptures into the repository.
+*   `scripts/import_scripture.js`: Script to import NASB (NT) and LXX (OT) JSON scriptures into the repository.
 *   `scripts/copy_sample_images.js`: Script to recursively search and copy sample manuscript images from the big data collection.
 *   `scripts/serve.js`: Zero-dependency HTTP server.
 *   `src/db.js`: Database helper utilizing built-in Node 22 `node:sqlite`.
-*   `src/data/scripture/`: Imported ESV (NT) and LXX (OT) scripture JSON files.
+*   `src/data/scripture/`: Imported NASB (NT) and LXX (OT) scripture JSON files.
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.
 *   `src/pages/`: Page templates for Scripture chapter readers (`[chapter].astro`) and dedicated SEO verse pages (`[verse].astro`).
 *   `src/components/`: Interactive Material 3 React elements (`BottomNav.jsx`, `ScriptureNav.jsx`, `VerseTabs.jsx`, `OnboardingModal.jsx`).
