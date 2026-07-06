@@ -1,0 +1,29 @@
+{
+  "person": "Jabir bin Abdullah",
+  "virtues": [
+    {
+      "hadith_arabic": "عَنْ جَابِرِ بْنِ عَبْدِ اللَّهِ، قَالَ كَانَ رَسُولُ اللَّهِ صلى الله عليه وسلم يُعَلِّمُنَا الاِسْتِخَارَةَ فِي الأُمُورِ كُلِّهَا كَمَا يُعَلِّمُنَا السُّورَةَ مِنَ الْقُرْآنِ",
+      "hadith_english": "Narrated Jabir bin `Abdullah: The Prophet (ﷺ) used to teach us the way of doing Istikhara, in all matters as he taught us the Suras of the Quran.",
+      "source_reference": "Sahih al-Bukhari 1162",
+      "sunnah_url": "https://sunnah.com/bukhari:1162"
+    },
+    {
+      "hadith_arabic": "عَنْ جَابِرِ بْنِ عَبْدِ اللَّهِ، قَالَ فِي حَجَّةِ النَّبِيِّ صلى الله عليه وسلم: وَرَسُولُ اللَّهِ صلى الله عليه وسلم بَيْنَ أَظْهُرِنَا وَعَلَيْهِ يَنْزِلُ الْقُرْآنُ وَهُوَ يَعْرِفُ تَأْوِيلَهُ وَمَا عَمِلَ بِهِ مِنْ شَىْءٍ عَمِلْنَا بِهِ",
+      "hadith_english": "Jabir bin Abdullah said regarding the Farewell Pilgrimage: 'The Messenger of Allah (ﷺ) was among us, and the Qur'an was being revealed to him, and he knew its interpretation, and whatever he did, we did.'",
+      "source_reference": "Sahih Muslim 1218a",
+      "sunnah_url": "https://sunnah.com/muslim:1218a"
+    }
+  ],
+  "variants": [
+    {
+      "surah": "24",
+      "ayah": 33,
+      "variant_arabic": "وَلاَ تُكْرِهُوا فَتَيَاتِكُمْ عَلَى الْبِغَاءِ إِنْ أَرَدْنَ تَحَصُّنًا لِتَبْتَغُوا عَرَضَ الْحَيَاةِ الدُّنْيَا وَمَنْ يُكْرِهْهُنَّ فَإِنَّ اللَّهَ مِنْ بَعْدِ إِكْرَاهِهِنَّ لَهُنَّ غَفُورٌ رَحِيمٌ",
+      "variant_english": "And compel not your slave-girls to prostitution when they desire to keep chaste in order to seek the frail goods of this world's life, and whoever compels them, then surely after their compulsion Allah is Forgiving, Merciful",
+      "source_reference": "Sahih Muslim 3029a",
+      "hadith_arabic": "حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، وَأَبُو كُرَيْبٍ جَمِيعًا عَنْ أَبِي مُعَاوِيَةَ، - وَاللَّفْظُ لأَبِي كُرَيْبٍ - حَدَّثَنَا أَبُو مُعَاوِيَةَ، حَدَّثَنَا الأَعْمَشُ، عَنْ أَبِي سُفْيَانَ، عَنْ جَابِرٍ، قَالَ كَانَ عَبْدُ اللَّهِ بْنُ أُبَىٍّ ابْنِ سَلُولَ يَقُولُ لِجَارِيَةٍ لَهُ اذْهَبِي فَابْغِينَا شَيْئًا فَأَنْزَلَ اللَّهُ عَزَّ وَجَلَّ ‏{‏ وَلاَ تُكْرِهُوا فَتَيَاتِكُمْ عَلَى الْبِغَاءِ إِنْ أَرَدْنَ تَحَصُّنًا لِتَبْتَغُوا عَرَضَ الْحَيَاةِ الدُّنْيَا وَمَنْ يُكْرِهْهُنَّ فَإِنَّ اللَّهَ مِنْ بَعْدِ إِكْرَاهِهِنَّ‏}‏ لَهُنَّ ‏{‏ غَفُورٌ رَحِيمٌ‏}‏",
+      "hadith_english": "Jabir reported that 'Abdullah b. Ubayy b. Salul used to say to his slave-girl:Go and fetch something for us by committing prostitution. It was in this connection that Allah, the Exalted and Glorious, revealed this verse:\" And compel not your slave-girls to prostitution when they desire to keep chaste in order to seek the frail goods of this world's life, and whoever compels them, then surely after their compulsion Allah is Forgiving, Merciful\" (xxiv)\n\n[omitted from the english translation: {lahunna} (for them)]",
+      "sunnah_url": "https://sunnah.com/muslim/56/30"
+    }
+  ]
+}

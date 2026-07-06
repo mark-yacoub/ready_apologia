@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import QuranPageHeader from './QuranPageHeader.astro';
+import { loadNonUthmanicData } from '../utils/nonUthmanicLoader.js';
 
 interface Props {
   type: 'lost' | 'abrogated';
@@ -10,39 +11,575 @@ const { type } = Astro.props;
 const isLost = type === 'lost';
 const title = isLost ? 'Lost Verses' : 'Abrogated Verses';
 const index = isLost ? 0 : -1;
+
+// Define TypeScript interfaces for robustness and type safety
+interface Hadith {
+  source_reference: string;
+  sunnah_url?: string;
+  hadith_arabic?: string;
+  hadith_english?: string;
+}
+
+interface Variant {
+  companion_codex: string;
+  variant_arabic?: string;
+  variant_english?: string;
+  source_reference: string;
+  sunnah_url?: string;
+  hadith_arabic?: string;
+  hadith_english?: string;
+  is_abrogated_in_recitation?: boolean;
+  surah: string | number;
+  ayah: number | string | null;
+}
+
+interface Companion {
+  name: string;
+  tier: string;
+  importance_rank: number;
+  bio_url: string;
+  bio_text: string;
+  virtues: Hadith[];
+  variants: Variant[];
+}
+
+// Load data asynchronously (L6 performance pattern using Promise.all internally)
+const companionsWithData: Companion[] = await loadNonUthmanicData(type);
+const superstarsList = companionsWithData.map(c => ({ name: c.name }));
 ---
 
 <Layout title={title}>
-  <div class="quran-reader-container theme-quran">
+  <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader currentTitle={title} currentIndex={index} />
     
+    <!-- Intro Footnote -->
+    {isLost && (
+      <p class="page-intro-footnote">
+        These verses were historically recited and attested by prominent companions. Although Caliph Uthman subsequently ordered all competing codices to be collected and burned to standardize the Quranic text (as recorded in <a href="https://sunnah.com/bukhari:4987" target="_blank" rel="noopener noreferrer" class="intro-link">Sahih al-Bukhari 4987</a>), these specific passages remain verified by authentic (Sahih) hadiths, even though their original Surah placements have been lost to history. The resulting Uthmanic canon was restricted to a single skeletal text (<em>rasm</em>). Because early Arabic script lacked diacritical dots and vowel markings, this ambiguity allowed for variant readings, eventually giving rise to the ten canonical recitations (<em>Qira'at</em>) practiced today.
+      </p>
+    )}
+
+    <!-- Language Toggle -->
+    <div class="language-toggle select-none">
+      <button id="toggle-en" class="toggle-btn active">English</button>
+      <button id="toggle-ar" class="toggle-btn">Arabic</button>
+    </div>
+
+    <!-- Filter by Companions (Pills) -->
+    <div class="companions-filter select-none">
+      {superstarsList.map(c => (
+        <a href="#" class="filter-pill" data-companion={c.name}>{c.name}</a>
+      ))}
+    </div>
+
     <div class="quran-content">
-      <p class="empty-message">This is an empty page for {title}. Content coming soon.</p>
+      {companionsWithData.map(companion => (
+        <section class="companion-section" id={`companion-${companion.name.replace(/\s+/g, '-')}`}>
+          <div class="companion-header">
+            {companion.bio_url ? (
+              <a href={companion.bio_url} target="_blank" rel="noopener noreferrer" class="companion-name-link">
+                <h1 class="companion-name">
+                  {companion.name}
+                  <span class="ext-link-icon">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </span>
+                </h1>
+              </a>
+            ) : (
+              <h1 class="companion-name">{companion.name}</h1>
+            )}
+            {/* a11y Fix: Changed from <a> link with href="#" to semantic <button> */}
+            <button class="read-as-btn">Read All of {companion.name} Competing Codex</button>
+          </div>
+
+          <!-- Why They Matter (Collapsible, uses Virtues) -->
+          {companion.bio_text && (
+            <details class="why-matter-details">
+              <summary class="details-summary">
+                {companion.name === 'Aisha' ? 'Why she matters' : 'Why he matters'}
+              </summary>
+              <div class="details-content">
+                <p class="bio-text">{companion.bio_text}</p>
+                {companion.virtues && companion.virtues.length > 0 && (
+                  <div class="bio-hadiths">
+                    {companion.virtues.map((hadith: Hadith) => (
+                      <div class="bio-hadith-card">
+                        <h4 class="hadith-ref">
+                          {hadith.sunnah_url ? (
+                            <a href={hadith.sunnah_url} target="_blank" rel="noopener noreferrer" class="hadith-title-link">
+                              {hadith.source_reference}
+                              <svg class="icon-inline" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                              </svg>
+                            </a>
+                          ) : (
+                            hadith.source_reference
+                          )}
+                        </h4>
+                        {hadith.hadith_arabic && <p class="text-arabic" dir="rtl">{hadith.hadith_arabic}</p>}
+                        {hadith.hadith_english && <p class="text-english">{hadith.hadith_english}</p>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </details>
+          )}
+
+          <!-- Variants (Lost Verses) List -->
+          <div class="variants-list">
+            {companion.variants.length > 0 ? (
+              companion.variants.map((v: Variant) => (
+                <div class="variant-card">
+                  <h2 class="variant-ref-title">
+                    {v.sunnah_url ? (
+                      <a href={v.sunnah_url} target="_blank" rel="noopener noreferrer" class="hadith-title-link">
+                        {v.source_reference}
+                        <svg class="icon-inline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                      </a>
+                    ) : (
+                      v.source_reference
+                    )}
+                  </h2>
+                  
+                  {v.variant_arabic && (
+                    <div class="variant-text-block">
+                      <p class="text-arabic variant-arabic" dir="rtl">{v.variant_arabic}</p>
+                      {v.variant_english && <p class="text-english variant-english">{v.variant_english}</p>}
+                    </div>
+                  )}
+
+                  <div class="hadith-context-block">
+                    <span class="label">Hadith Context:</span>
+                    {v.hadith_arabic && <p class="text-arabic" dir="rtl">{v.hadith_arabic}</p>}
+                    {v.hadith_english && (
+                      <p class="text-english hadith-english">
+                        {v.hadith_english.split('\n').map((line: string) => {
+                          if (line.startsWith('[omitted from the english translation:')) {
+                            return <span class="translation-patch">{line}</span>;
+                          }
+                          return line;
+                        })}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p class="no-variants-message">
+                No lost verses are recorded for this companion, though alternative readings for Uthmanic verses are documented in their codex.
+              </p>
+            )}
+          </div>
+        </section>
+      ))}
     </div>
   </div>
 </Layout>
+
+<script>
+  const initToggle = () => {
+    const btnEn = document.getElementById('toggle-en');
+    const btnAr = document.getElementById('toggle-ar');
+    const container = document.querySelector('.quran-reader-container');
+
+    if (!btnEn || !btnAr || !container) return;
+
+    const setLanguage = (lang) => {
+      localStorage.setItem('quranLanguage', lang);
+      if (lang === 'arabic') {
+        container.classList.remove('prefer-english');
+        container.classList.add('prefer-arabic');
+        btnAr.classList.add('active');
+        btnEn.classList.remove('active');
+      } else {
+        container.classList.remove('prefer-arabic');
+        container.classList.add('prefer-english');
+        btnEn.classList.add('active');
+        btnAr.classList.remove('active');
+      }
+    };
+
+    // Initialize from localStorage
+    const savedLang = localStorage.getItem('quranLanguage') || 'english';
+    setLanguage(savedLang);
+
+    btnEn.addEventListener('click', () => setLanguage('english'));
+    btnAr.addEventListener('click', () => setLanguage('arabic'));
+  };
+
+  document.addEventListener('astro:page-load', initToggle);
+</script>
 
 <style>
   .quran-reader-container {
     display: flex;
     flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-intro-footnote {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    opacity: 0.85;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-outline-variant);
+  }
+
+  .intro-link {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .intro-link:hover {
+    text-decoration: underline;
+  }
+
+  .language-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto 24px auto;
+    background-color: var(--color-surface-container-low);
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--color-outline-variant);
+  }
+
+  .toggle-btn {
+    padding: 6px 16px;
+    border: none;
+    background: none;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-on-surface-variant);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+
+  .toggle-btn:hover {
+    color: var(--color-primary);
+  }
+
+  .toggle-btn.active {
+    background-color: var(--color-surface);
+    color: var(--color-secondary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .companions-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .filter-pill {
+    padding: 6px 14px;
+    background-color: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    color: var(--color-on-surface-variant);
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .filter-pill:hover {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+    background-color: var(--color-surface);
   }
 
   .quran-content {
-    padding: 40px 20px;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-outline-variant);
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
   }
 
-  .empty-message {
-    font-family: var(--font-body);
-    color: var(--color-on-surface-variant);
-    font-size: 16px;
-    line-height: 1.6;
+  .companion-section {
+    border-bottom: 1px solid var(--color-outline-variant);
+    padding-bottom: 40px;
+  }
+
+  .companion-section:last-child {
+    border-bottom: none;
+  }
+
+  .companion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 16px;
+  }
+
+  .companion-name-link {
+    text-decoration: none;
+    color: inherit;
+    flex-shrink: 0;
+  }
+
+  .companion-name {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--color-primary);
     margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s ease;
+  }
+
+  .companion-name-link:hover .companion-name {
+    color: var(--color-secondary);
+  }
+
+  .ext-link-icon {
+    opacity: 0.5;
+    transition: opacity 0.15s ease;
+    color: var(--color-secondary);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .companion-name-link:hover .ext-link-icon {
+    opacity: 0.9;
+  }
+
+  .read-as-btn {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    text-decoration: none;
+    border: 1px solid var(--color-secondary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    text-align: center;
+    white-space: normal;
+    max-width: 300px;
+    /* Added to reset default button styles */
+    background: none;
+    cursor: pointer;
+  }
+
+  .read-as-btn:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-surface);
+  }
+
+  .why-matter-details {
+    background-color: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .details-summary {
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-on-surface);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .details-summary:hover {
+    background-color: var(--color-outline-variant);
+  }
+
+  .details-content {
+    padding: 16px;
+    border-top: 1px solid var(--color-outline-variant);
+    background-color: var(--color-surface);
+  }
+
+  .bio-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0 0 16px 0;
+  }
+
+  .bio-hadiths {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .bio-hadith-card {
+    padding: 12px;
+    background-color: var(--color-surface-container-low);
+    border-radius: 6px;
+    border: 1px solid var(--color-outline-variant);
+  }
+
+  .hadith-ref {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+  }
+
+  .text-arabic {
+    font-family: 'Amiri', 'Traditional Arabic', serif;
+    line-height: 1.8;
+    text-align: right;
+    margin: 0 0 8px 0;
+    color: var(--color-on-surface);
+  }
+
+  .text-english {
+    font-family: var(--font-display);
+    line-height: 1.5;
+    color: var(--color-on-surface-variant);
+    margin: 0;
+  }
+
+  .variants-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .variant-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .variant-ref-title {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+  }
+
+  .hadith-title-link {
+    color: var(--color-secondary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s ease;
+  }
+
+  .hadith-title-link:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .icon-inline {
+    opacity: 0.6;
+  }
+
+  .hadith-title-link:hover .icon-inline {
+    opacity: 1;
+  }
+
+  .label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-on-surface-variant);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .variant-text-block {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--color-outline-variant);
+  }
+
+  .translation-patch {
+    display: block;
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #fff5f5;
+    border-left: 3px solid var(--color-secondary);
+    color: #9b2c2c;
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  .no-variants-message {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-on-surface-variant);
+    font-style: italic;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Responsive styles for long button */
+  @media (max-width: 650px) {
+    .companion-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .read-as-btn {
+      max-width: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  /* Language Prominence Overrides */
+
+  /* English Prominent */
+  .quran-reader-container.prefer-english .text-english {
+    font-size: 16px;
+    color: var(--color-on-surface);
+    font-weight: 500;
+  }
+
+  .quran-reader-container.prefer-english .text-arabic {
+    font-size: 20px;
+    color: var(--color-on-surface-variant);
+    opacity: 0.6;
+  }
+
+  /* Arabic Prominent */
+  .quran-reader-container.prefer-arabic .text-arabic {
+    font-size: 26px;
+    color: var(--color-on-surface);
+  }
+
+  .quran-reader-container.prefer-arabic .text-english {
+    font-size: 14px;
+    color: var(--color-on-surface-variant);
+    opacity: 0.7;
+    font-weight: 400;
   }
 </style>
