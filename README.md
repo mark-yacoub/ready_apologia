@@ -101,6 +101,7 @@ pkill -f astro
 *   `src/db.js`: Database helper utilizing built-in Node 22 `node:sqlite`.
 *   `src/data/scripture/`: Imported NASB (NT) and LXX (OT) scripture JSON files.
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.
-*   `src/pages/`: Page templates for Scripture chapter readers (`[chapter].astro`) and dedicated SEO verse pages (`[verse].astro`).
-*   `src/components/`: Interactive Material 3 React elements (`BottomNav.jsx`, `ScriptureNav.jsx`, `VerseTabs.jsx`, `OnboardingModal.jsx`).
+*   `src/pages/`: Page templates for Bible reader, Quran reader, and Companion Codices.
+*   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages and headers).
+*   `src/utils/`: Helper utilities for loading scripture, topics, and non-Uthmanic Quran data.
 *   `docs/adr/`: [Architectural Decision Records (ADRs)](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/adr/0001-framework-and-offline-strategy.md) detailing the technology choices.

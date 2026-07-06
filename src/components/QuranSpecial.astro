@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { type } = Astro.props;
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const isLost = type === 'lost';
 const title = isLost ? 'Lost Verses' : 'Abrogated Verses';
 const index = isLost ? 0 : -1;
@@ -68,7 +69,7 @@ const superstarsList = companionsWithData.map(c => ({ name: c.name }));
     <!-- Filter by Companions (Pills) -->
     <div class="companions-filter select-none">
       {superstarsList.map(c => (
-        <a href="#" class="filter-pill" data-companion={c.name}>{c.name}</a>
+        <a href={`${base}/quran/codex/${c.name.toLowerCase().replace(/\s+/g, '-')}`} class="filter-pill">{c.name}</a>
       ))}
     </div>
 
@@ -92,8 +93,9 @@ const superstarsList = companionsWithData.map(c => ({ name: c.name }));
             ) : (
               <h1 class="companion-name">{companion.name}</h1>
             )}
-            {/* a11y Fix: Changed from <a> link with href="#" to semantic <button> */}
-            <button class="read-as-btn">Read All of {companion.name} Competing Codex</button>
+            <a href={`${base}/quran/codex/${companion.name.toLowerCase().replace(/\s+/g, '-')}`} class="read-as-btn">
+              Read All of {companion.name} Competing Codex
+            </a>
           </div>
 
           <!-- Why They Matter (Collapsible, uses Virtues) -->
@@ -368,6 +370,7 @@ const superstarsList = companionsWithData.map(c => ({ name: c.name }));
   }
 
   .read-as-btn {
+    display: inline-block;
     font-family: var(--font-body);
     font-size: 13px;
     font-weight: 700;

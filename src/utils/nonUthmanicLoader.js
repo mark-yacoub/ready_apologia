@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import { loadEnglishData } from './quran_loader.js';
 
 /**
  * Sorts hadiths by collection (Bukhari first, then Muslim) and then by reference number.
@@ -132,3 +133,105 @@ export const loadNonUthmanicData = async (type) => {
 
   return companionsWithData;
 };
+
+export async function loadCompanionCodex(companionName) {
+  const companionsPath = path.join(process.cwd(), 'src/data/quran/non_uthmanic/companions.json');
+  const companionsData = await loadJsonSafely(companionsPath, []);
+  const companion = companionsData.find(c => c.name === companionName);
+
+  if (!companion) {
+    return null;
+  }
+
+  // Load virtues
+  const fileName = companion.name.replace(/\s+/g, '_') + '.json';
+  const filePath = path.join(process.cwd(), 'src/data/quran/non_uthmanic/codices', fileName);
+  let virtues = [];
+  try {
+    if (existsSync(filePath)) {
+      const content = await fs.readFile(filePath, 'utf-8');
+      const parsed = JSON.parse(content);
+      virtues = parsed.virtues || [];
+      virtues.sort(sortHadiths);
+    }
+  } catch (e) {
+    console.error(`[NonUthmanicLoader] Failed to load virtues for ${companion.name}`, e);
+  }
+
+  // Load variants
+  const masterVariantsPath = path.join(process.cwd(), 'src/data/quran/non_uthmanic/master_variants.json');
+  const masterVariants = await loadJsonSafely(masterVariantsPath, []);
+
+  const lostVerses = [];
+  const uthmanicVariants = [];
+
+  masterVariants.forEach((entry) => {
+    const isSurahLost = entry.surah === 'unknown' || entry.surah === 0 || entry.surah === '0';
+    const isAyahLost = entry.ayah === 'unknown' || entry.ayah === 0 || entry.ayah === '0' || entry.ayah === null;
+
+    entry.variants.forEach((v) => {
+      if (v.companion_codex === companionName) {
+        const variantWithSurahAyah = {
+          ...v,
+          surah: entry.surah,
+          ayah: entry.ayah
+        };
+
+        if (v.is_abrogated_in_recitation !== true) {
+          if (isSurahLost && isAyahLost) {
+            lostVerses.push(variantWithSurahAyah);
+          } else {
+            uthmanicVariants.push(variantWithSurahAyah);
+          }
+        }
+      }
+    });
+  });
+
+  lostVerses.sort(sortHadiths);
+  uthmanicVariants.sort((a, b) => {
+    const surahA = parseInt(a.surah);
+    const surahB = parseInt(b.surah);
+    if (surahA !== surahB) return surahA - surahB;
+    const ayahA = parseInt(a.ayah);
+    const ayahB = parseInt(b.ayah);
+    return ayahA - ayahB;
+  });
+
+  const surahCache = {};
+  const englishData = loadEnglishData();
+
+  for (const variant of uthmanicVariants) {
+    const surahStr = String(variant.surah);
+    const ayahStr = String(variant.ayah);
+
+    if (!surahCache[surahStr]) {
+      const arabicFilePath = path.join(process.cwd(), 'src/data/quran/arabic/surahs', `${surahStr}.json`);
+      let arabicData = { verses: {} };
+      try {
+        if (existsSync(arabicFilePath)) {
+          const content = await fs.readFile(arabicFilePath, 'utf-8');
+          arabicData = JSON.parse(content);
+        }
+      } catch (e) {
+        console.error(`Failed to load Arabic data for surah ${surahStr}`, e);
+      }
+      surahCache[surahStr] = arabicData;
+    }
+
+    const arabicText = surahCache[surahStr].verses[ayahStr] || '';
+    const englishTextObj = englishData[`${surahStr}:${ayahStr}`];
+    const englishText = englishTextObj ? englishTextObj.text : '';
+
+    variant.uthmanic_arabic = arabicText;
+    variant.uthmanic_english = englishText;
+    variant.surah_name = surahCache[surahStr].transliteration || `Surah ${surahStr}`;
+  }
+
+  return {
+    ...companion,
+    virtues,
+    lostVerses,
+    uthmanicVariants
+  };
+}

@@ -101,10 +101,17 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/pages/index.astro`: Homepage handling auto-redirects to John 1.
 *   `src/pages/bible/[book]/[chapter].astro`: Compact scripture chapter reader with inline-end badges.
 *   `src/pages/bible/[book]/[chapter]/[verse].astro`: 100% SEO-indexable static verse detail page.
+*   `src/pages/quran/[surah].astro`: Surah reader page showing Arabic and English translation.
+*   `src/pages/quran/0.astro`: Lost Verses page entry point.
+*   `src/pages/quran/-1.astro`: Abrogated Verses page entry point.
+*   `src/pages/quran/codex/[companion].astro`: Companion Codex page showing comparisons, virtues, and lost verses.
 *   `src/components/VerseTabs.jsx`: Client-side React switcher for verse detail tabs.
 *   `src/components/BottomNav.jsx`: Immersive mobile segmented bottom navigation tabs.
-*   `src/components/ScriptureNav.jsx`: Collapsible Left Navigator featuring responsive desktop vertical app sections and soon-badges.
-*   `src/components/OnboardingModal.jsx`: Centered card overlay providing an initial onboarding tip, shown only once per session until completed.
+*   `src/components/ScriptureNav.jsx`: Collapsible Left Navigator featuring responsive desktop vertical app sections.
+*   `src/components/OnboardingModal.jsx`: Centered card overlay providing an initial onboarding tip.
+*   `src/components/QuranSpecial.astro`: Component rendering Lost or Abrogated verses list.
+*   `src/components/QuranPageHeader.astro`: Header component for Quran pages with Surah selection dropdown.
+*   `src/utils/nonUthmanicLoader.js`: Loader for non-Uthmanic data (companions, variants, virtues).
 
 ---
 
