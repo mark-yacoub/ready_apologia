@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import booksData from '../data/books_meta.json';
-import { STATIC_RECITATIONS } from '../utils/quranConstants.js';
 import { NT_TRANSLATION_NAME } from '../utils/bible_config.js';
 
 export default function ScriptureNav() {
@@ -31,14 +30,6 @@ export default function ScriptureNav() {
         const isBookNT = booksData.nt.some(b => b.id === bookId);
         setExpandedSection(isBookNT ? 'nt' : 'ot');
         setExpandedBook(bookId);
-      } else if (parts[1] === 'quran' && parts[2]) {
-        const surahIndex = parts[2];
-        const bookId = `qr-${surahIndex}`;
-        setCurrentBook(bookId);
-        setCurrentChapter('1');
-        setExpandedSection('quran');
-        setExpandedBook(bookId);
-        setCurrentReader(parts[3] ? decodeURIComponent(parts[3]) : null);
       } else {
         setCurrentReader(null);
       }
@@ -78,47 +69,20 @@ export default function ScriptureNav() {
 
   const renderBookList = (books, type) => {
     const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-    const isQuranType = type === 'quran';
 
     return (
       <div className="book-list animate-fade-in">
         {books.map((book) => (
           <div key={book.id} className={`book-item ${expandedBook === book.id ? 'expanded' : ''}`}>
-            {isQuranType ? (() => {
-              let quranHref = `${base}/quran/${book.id.replace('qr-', '')}`;
-              const targetSurah = book.id.replace('qr-', '');
-              if (currentReader) {
-                if (targetSurah === '0') {
-                  // If target is Surah 0, only append companion codices. Canonical doesn't exist in Surah 0.
-                  const canonicalIds = STATIC_RECITATIONS.flatMap(q => q.rawis.map(r => r.id));
-                  const isCanonical = canonicalIds.includes(currentReader);
-                  if (!isCanonical) {
-                    quranHref += `/${currentReader}`;
-                  }
-                } else {
-                  quranHref += `/${currentReader}`;
-                }
-              }
-              return (
-              <a 
-                href={quranHref}
-                className={`book-select-btn ${book.id === currentBook ? 'active-book' : ''}`}
-                style={{ textDecoration: 'none', display: 'flex', width: '100%' }}
-              >
-                <span className="book-name">{book.name}</span>
-              </a>
-              );
-            })() : (
-              <button 
-                onClick={() => toggleBook(book.id)} 
-                className="book-select-btn"
-              >
-                <span className="book-name">{book.name}</span>
-                <span className="arrow">{expandedBook === book.id ? '▼' : '▶'}</span>
-              </button>
-            )}
+            <button 
+              onClick={() => toggleBook(book.id)} 
+              className="book-select-btn"
+            >
+              <span className="book-name">{book.name}</span>
+              <span className="arrow">{expandedBook === book.id ? '▼' : '▶'}</span>
+            </button>
 
-            {!isQuranType && expandedBook === book.id && (
+            {expandedBook === book.id && (
               <div className="chapter-grid">
                 {Array.from({ length: book.chapters }, (_, i) => i + 1).map((chap) => {
                   const isCurrentChapter = book.id === currentBook && String(chap) === currentChapter;
@@ -208,19 +172,6 @@ export default function ScriptureNav() {
             <span className="section-arrow">{expandedSection === 'ot' ? '▼' : '▶'}</span>
           </button>
           {expandedSection === 'ot' && renderBookList(booksData.ot, 'ot')}
-        </div>
-
-        {/* Quran */}
-        <div className="nav-section">
-          <button 
-            onClick={() => toggleSection('quran')} 
-            className={`section-header-btn ${expandedSection === 'quran' ? 'active' : ''}`}
-          >
-            <span className="icon">🌙</span>
-            <span className="title-text">Quran (Arabic/English)</span>
-            <span className="section-arrow">{expandedSection === 'quran' ? '▼' : '▶'}</span>
-          </button>
-          {expandedSection === 'quran' && renderBookList(booksData.quran, 'quran')}
         </div>
       </div>
 
