@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import booksData from '../data/books_meta.json';
 import { NT_TRANSLATION_NAME } from '../utils/bible_config.js';
+import { getQuranSections } from '../utils/quran_config.js';
 
 export default function ScriptureNav() {
   const [expandedSection, setExpandedSection] = useState('nt'); // 'nt', 'ot', or null
@@ -9,6 +10,7 @@ export default function ScriptureNav() {
   const [currentChapter, setCurrentChapter] = useState(null);
   const [currentReader, setCurrentReader] = useState(null);
   const [activeTab, setActiveTab] = useState('scripture');
+  const [currentQuranIndex, setCurrentQuranIndex] = useState(null);
 
   // Synchronize active scripture route context
   useEffect(() => {
@@ -26,17 +28,26 @@ export default function ScriptureNav() {
         setCurrentBook(bookId);
         setCurrentChapter(chapNum);
         setCurrentReader(null);
+        setCurrentQuranIndex(null);
         
         const isBookNT = booksData.nt.some(b => b.id === bookId);
         setExpandedSection(isBookNT ? 'nt' : 'ot');
         setExpandedBook(bookId);
-      } else {
+      } else if (parts[1] === 'quran' && parts[2]) {
+        setCurrentBook(null);
+        setCurrentChapter(null);
         setCurrentReader(null);
+        setCurrentQuranIndex(parseInt(parts[2]));
+        setExpandedSection('quran');
+      } else {
+        setCurrentBook(null);
+        setCurrentChapter(null);
+        setCurrentReader(null);
+        setCurrentQuranIndex(null);
       }
       
       if (activePath.startsWith('/topics')) {
         setActiveTab('topics');
-
       } else {
         setActiveTab('scripture');
       }
@@ -172,6 +183,33 @@ export default function ScriptureNav() {
             <span className="section-arrow">{expandedSection === 'ot' ? '▼' : '▶'}</span>
           </button>
           {expandedSection === 'ot' && renderBookList(booksData.ot, 'ot')}
+        </div>
+
+        {/* Quran */}
+        <div className="nav-section">
+          <button 
+            onClick={() => toggleSection('quran')} 
+            className={`section-header-btn ${expandedSection === 'quran' ? 'active' : ''}`}
+          >
+            <span className="icon">📖</span>
+            <span className="title-text">Quran</span>
+            <span className="section-arrow">{expandedSection === 'quran' ? '▼' : '▶'}</span>
+          </button>
+          {expandedSection === 'quran' && (
+            <div className="book-list animate-fade-in">
+              {getQuranSections().map((sec) => (
+                <div key={sec.id} className="book-item">
+                  <a
+                    href={sec.path}
+                    className={`book-select-btn ${currentQuranIndex === sec.index ? 'active-book' : ''}`}
+                    style={{ paddingLeft: '12px' }}
+                  >
+                    <span className="book-name">{sec.name}</span>
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

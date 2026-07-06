@@ -1,0 +1,238 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import Layout from '../../layouts/Layout.astro';
+import QuranPageHeader from '../../components/QuranPageHeader.astro';
+import { TOTAL_SURAHS } from '../../utils/quran_config.js';
+import { loadEnglishData } from '../../utils/quran_loader.js';
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (let i = 1; i <= TOTAL_SURAHS; i++) {
+    paths.push({ params: { surah: String(i) } });
+  }
+  return paths;
+}
+
+const { surah } = Astro.params;
+const surahNum = parseInt(surah);
+
+// 1. Load Arabic Data
+const arabicFilePath = path.join(process.cwd(), 'src/data/quran/arabic/surahs', `${surah}.json`);
+let arabicData = { name: '', transliteration: '', verses: {} };
+try {
+  const content = fs.readFileSync(arabicFilePath, 'utf-8');
+  arabicData = JSON.parse(content);
+} catch (e) {
+  console.error(`Failed to load Arabic data for surah ${surah}`, e);
+}
+
+// 2. Load English Data
+const englishData = loadEnglishData();
+
+// 3. Combine verses
+const verses = [];
+const totalVerses = arabicData.total_verses || 0;
+
+for (let i = 1; i <= totalVerses; i++) {
+  const verseKey = `${surah}:${i}`;
+  const arabicText = arabicData.verses[String(i)] || '';
+  const englishTextObj = englishData[verseKey];
+  const englishText = englishTextObj ? englishTextObj.text : '';
+  
+  verses.push({
+    number: i,
+    arabic: arabicText,
+    english: englishText
+  });
+}
+---
+
+<Layout title={`${surahNum}. ${arabicData.transliteration}`}>
+  <div class="quran-reader-container theme-quran prefer-english">
+    <QuranPageHeader currentTitle={`${surahNum}. ${arabicData.transliteration}`} currentIndex={surahNum} />
+    
+    <!-- Language Toggle -->
+    <div class="language-toggle select-none">
+      <button id="toggle-en" class="toggle-btn active">English</button>
+      <button id="toggle-ar" class="toggle-btn">Arabic</button>
+    </div>
+
+    <div class="quran-content">
+      {verses.length > 0 ? (
+        <div class="verses-list">
+          {verses.map(v => (
+            <div class="verse-card" id={`v-${v.number}`}>
+              <span class="verse-num">{v.number}</span>
+              <p class="text-arabic">{v.arabic}</p>
+              <p class="text-english">{v.english}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="empty-message">No verses found for this Surah.</p>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const initToggle = () => {
+    const btnEn = document.getElementById('toggle-en');
+    const btnAr = document.getElementById('toggle-ar');
+    const container = document.querySelector('.quran-reader-container');
+
+    if (!btnEn || !btnAr || !container) return;
+
+    const setLanguage = (lang) => {
+      localStorage.setItem('quranLanguage', lang);
+      if (lang === 'arabic') {
+        container.classList.remove('prefer-english');
+        container.classList.add('prefer-arabic');
+        btnAr.classList.add('active');
+        btnEn.classList.remove('active');
+      } else {
+        container.classList.remove('prefer-arabic');
+        container.classList.add('prefer-english');
+        btnEn.classList.add('active');
+        btnAr.classList.remove('active');
+      }
+    };
+
+    // Initialize from localStorage
+    const savedLang = localStorage.getItem('quranLanguage') || 'english';
+    setLanguage(savedLang);
+
+
+    btnEn.addEventListener('click', () => setLanguage('english'));
+    btnAr.addEventListener('click', () => setLanguage('arabic'));
+  };
+
+  document.addEventListener('astro:page-load', initToggle);
+</script>
+
+<style>
+  .quran-reader-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .language-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto 24px auto;
+    background-color: var(--color-surface-container-low);
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--color-outline-variant);
+  }
+
+  .toggle-btn {
+    padding: 6px 16px;
+    border: none;
+    background: none;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-on-surface-variant);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+
+  .toggle-btn:hover {
+    color: var(--color-primary);
+  }
+
+  .toggle-btn.active {
+    background-color: var(--color-surface);
+    color: var(--color-secondary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .quran-content {
+    margin-top: 8px;
+  }
+
+  .verses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .verse-card {
+    padding: 24px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: box-shadow 0.2s ease;
+  }
+  .verse-card:hover {
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .verse-num {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-on-surface-variant);
+    opacity: 0.5;
+    letter-spacing: 0.5px;
+  }
+
+  .text-arabic {
+    font-family: 'Amiri', 'Traditional Arabic', serif;
+    direction: rtl;
+    text-align: right;
+    line-height: 2;
+    margin: 0;
+  }
+
+  .text-english {
+    font-family: var(--font-display);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Prominence Overrides */
+  
+  /* English Prominent */
+  .quran-reader-container.prefer-english .text-english {
+    font-size: 17px;
+    color: var(--color-on-surface);
+    font-weight: 500;
+  }
+
+  .quran-reader-container.prefer-english .text-arabic {
+    font-size: 20px;
+    color: var(--color-on-surface-variant);
+    opacity: 0.6;
+  }
+
+  /* Arabic Prominent */
+  .quran-reader-container.prefer-arabic .text-arabic {
+    font-size: 26px;
+    color: var(--color-on-surface);
+  }
+
+  .quran-reader-container.prefer-arabic .text-english {
+    font-size: 14px;
+    color: var(--color-on-surface-variant);
+    opacity: 0.7;
+    font-weight: 400;
+  }
+
+  .empty-message {
+    font-family: var(--font-body);
+    color: var(--color-on-surface-variant);
+    font-size: 16px;
+    text-align: center;
+    margin: 40px 0;
+  }
+</style>

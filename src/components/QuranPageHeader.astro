@@ -1,0 +1,192 @@
+---
+import { getQuranSections } from '../utils/quran_config.js';
+
+interface Props {
+  currentTitle: string;
+  currentIndex: number;
+}
+
+const { currentTitle, currentIndex } = Astro.props;
+const sections = getQuranSections();
+---
+
+<header class="quran-reader-header select-none">
+  <div class="selector-hub">
+
+    <!-- Surah Selector Dropdown -->
+    <div class="surah-dropdown-wrapper">
+      <button class="surah-selector-btn book-title" id="surah-popover-trigger" aria-label="Select Surah">
+        <span>{currentTitle}</span>
+        <span class="chevron-down">
+          <svg width="8" height="5" fill="none" stroke="currentColor" viewBox="0 0 10 6" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4" />
+          </svg>
+        </span>
+      </button>
+
+      <!-- Dropdown Popover -->
+      <div class="surah-dropdown-popover" id="surah-dropdown-popover">
+        <div class="popover-grid-scroll">
+          <div class="surah-popover-list">
+            {sections.map(sec => (
+              <a
+                href={sec.path}
+                class={`popover-link ${sec.index === currentIndex ? 'active' : ''}`}
+              >
+                {sec.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  let closePopoverHandler;
+
+  const initQuranHeader = () => {
+    const trigger = document.getElementById('surah-popover-trigger');
+    const popover = document.getElementById('surah-dropdown-popover');
+
+    if (trigger && popover) {
+      if (closePopoverHandler) {
+        document.removeEventListener('click', closePopoverHandler);
+      }
+      
+      closePopoverHandler = () => popover.classList.remove('open');
+      
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        popover.classList.toggle('open');
+      });
+      
+      document.addEventListener('click', closePopoverHandler);
+      popover.addEventListener('click', (e) => e.stopPropagation());
+    }
+  };
+
+  document.addEventListener('astro:page-load', initQuranHeader);
+  document.addEventListener('astro:before-swap', () => {
+    if (closePopoverHandler) {
+      document.removeEventListener('click', closePopoverHandler);
+      closePopoverHandler = null;
+    }
+  });
+</script>
+
+<style>
+  .quran-reader-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .selector-hub {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: -8px;
+    position: relative;
+  }
+
+
+
+  .surah-dropdown-wrapper {
+    display: inline-block;
+    position: relative;
+  }
+
+  .surah-selector-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--color-secondary);
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 800;
+    transition: background-color 0.15s;
+  }
+  .surah-selector-btn:hover {
+    background-color: var(--color-surface-container-low);
+  }
+
+  .chevron-down {
+    font-size: 12px;
+    color: var(--color-on-surface-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+    opacity: 0.7;
+  }
+  .chevron-down svg {
+    width: 8px;
+    height: 8px;
+    display: block;
+  }
+
+  .surah-dropdown-popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 50;
+    width: 250px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    margin-top: 8px;
+    display: none;
+    transform: translateY(-8px);
+    opacity: 0;
+    transition: all 0.2s ease;
+  }
+  .surah-dropdown-popover.open {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .popover-grid-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+  }
+
+  .surah-popover-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .popover-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    color: var(--color-on-surface);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    text-decoration: none;
+  }
+  .popover-link:hover {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+    background-color: var(--color-surface-container-lowest);
+  }
+  .popover-link.active {
+    background-color: var(--color-secondary);
+    color: #ffffff;
+    border-color: var(--color-secondary);
+  }
+</style>

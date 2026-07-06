@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import QuranPageHeader from './QuranPageHeader.astro';
+
+interface Props {
+  type: 'lost' | 'abrogated';
+}
+
+const { type } = Astro.props;
+const isLost = type === 'lost';
+const title = isLost ? 'Lost Verses' : 'Abrogated Verses';
+const index = isLost ? 0 : -1;
+---
+
+<Layout title={title}>
+  <div class="quran-reader-container theme-quran">
+    <QuranPageHeader currentTitle={title} currentIndex={index} />
+    
+    <div class="quran-content">
+      <p class="empty-message">This is an empty page for {title}. Content coming soon.</p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .quran-reader-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quran-content {
+    padding: 40px 20px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .empty-message {
+    font-family: var(--font-body);
+    color: var(--color-on-surface-variant);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

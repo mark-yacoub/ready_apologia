@@ -10,6 +10,7 @@ interface Props {
 	ogImage?: string;
 	schema?: string;
 	keywords?: string;
+	theme?: string;
 }
 
 const { 
@@ -17,7 +18,8 @@ const {
 	description = "Ready Apologia - Defending the Faith with Biblical Scripture and Early Church Fathers", 
 	ogImage, 
 	schema,
-	keywords = "Apologetics, Bible Verses, Early Church Fathers, Divinity of Christ, Ready Apologia, Patristics, Scripture Evidence, Christian Apologetics, Ante-Nicene Fathers"
+	keywords = "Apologetics, Bible Verses, Early Church Fathers, Divinity of Christ, Ready Apologia, Patristics, Scripture Evidence, Christian Apologetics, Ante-Nicene Fathers",
+	theme
 } = Astro.props;
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
@@ -79,7 +81,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 	<body class="bg-slate-100 text-slate-900 min-h-screen flex justify-center items-center transition-colors duration-200">
 		
 		<!-- App Bounding Container -->
-		<div class="app-container">
+		<div class={`app-container ${theme ? `theme-${theme}` : ''}`}>
 			<div id="global-loading-indicator" class="global-loading-indicator"></div>
 			
 			<!-- Content Layout Core -->
@@ -173,10 +175,22 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 				});
 			};
 
+			let activeScrollHandler = null;
+			let activeBrandClickHandler = null;
+
 			const setupScrollHeader = () => {
 				const headerBrand = document.getElementById('header-brand-text');
 				const mainContent = document.querySelector('.main-content');
 				const pageTitle = document.querySelector('.book-title') || document.querySelector('.verse-quote-box');
+
+				if (activeScrollHandler && mainContent) {
+					mainContent.removeEventListener('scroll', activeScrollHandler);
+					activeScrollHandler = null;
+				}
+				if (activeBrandClickHandler && headerBrand) {
+					headerBrand.removeEventListener('click', activeBrandClickHandler);
+					activeBrandClickHandler = null;
+				}
 
 				if (!headerBrand || !mainContent || !pageTitle) return;
 
@@ -197,12 +211,18 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 				};
 
 				mainContent.addEventListener('scroll', handleScroll);
+				activeScrollHandler = handleScroll;
 				
-				headerBrand.addEventListener('click', () => {
+				const handleBrandClick = () => {
 					if (headerBrand.classList.contains('chapter-active')) {
 						mainContent.scrollTo({ top: 0, behavior: 'smooth' });
 					}
-				});
+				};
+				headerBrand.addEventListener('click', handleBrandClick);
+				activeBrandClickHandler = handleBrandClick;
+
+				// Run once immediately to sync header state with initial scroll position
+				handleScroll();
 			};
 
 			// Initialize layout components on page load/swap
@@ -270,6 +290,11 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		
 		--font-display: 'Literata', Georgia, 'Amiri', 'Traditional Arabic', Arial, serif;
 		--font-body: 'Public Sans', -apple-system, 'Amiri', 'Traditional Arabic', Arial, sans-serif;
+	}
+
+	.theme-quran {
+		--color-primary: #022c22;
+		--color-secondary: #059669;
 	}
 
 	body {
