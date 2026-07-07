@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import QuranPageHeader from './QuranPageHeader.astro';
+import VariantCard from './VariantCard.astro';
 import { loadNonUthmanicData } from '../utils/nonUthmanicLoader.js';
 
 interface Props {
@@ -138,44 +139,7 @@ const superstarsList = companionsWithData.map(c => ({ name: c.name }));
           <div class="variants-list">
             {companion.variants.length > 0 ? (
               companion.variants.map((v: Variant) => (
-                <div class="variant-card">
-                  <h2 class="variant-ref-title">
-                    {v.sunnah_url ? (
-                      <a href={v.sunnah_url} target="_blank" rel="noopener noreferrer" class="hadith-title-link">
-                        {v.source_reference}
-                        <svg class="icon-inline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                          <polyline points="15 3 21 3 21 9"></polyline>
-                          <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                      </a>
-                    ) : (
-                      v.source_reference
-                    )}
-                  </h2>
-                  
-                  {v.variant_arabic && (
-                    <div class="variant-text-block">
-                      <p class="text-arabic variant-arabic" dir="rtl">{v.variant_arabic}</p>
-                      {v.variant_english && <p class="text-english variant-english">{v.variant_english}</p>}
-                    </div>
-                  )}
-
-                  <div class="hadith-context-block">
-                    <span class="label">Hadith Context:</span>
-                    {v.hadith_arabic && <p class="text-arabic" dir="rtl">{v.hadith_arabic}</p>}
-                    {v.hadith_english && (
-                      <p class="text-english hadith-english">
-                        {v.hadith_english.split('\n').map((line: string) => {
-                          if (line.startsWith('[omitted from the english translation:')) {
-                            return <span class="translation-patch">{line}</span>;
-                          }
-                          return line;
-                        })}
-                      </p>
-                    )}
-                  </div>
-                </div>
+                <VariantCard variant={v} showCompanionHeader={false} />
               ))
             ) : (
               <p class="no-variants-message">

@@ -47,6 +47,41 @@ async function loadJsonSafely(filePath, fallback = []) {
   return fallback;
 }
 
+let masterVariantsCache = null;
+let variantsBySurahCache = null;
+
+async function getMasterVariants() {
+  if (!masterVariantsCache) {
+    const masterVariantsPath = path.join(process.cwd(), 'src/data/quran/non_uthmanic/master_variants.json');
+    masterVariantsCache = await loadJsonSafely(masterVariantsPath, []);
+  }
+  return masterVariantsCache;
+}
+
+/**
+ * Returns pre-grouped and sorted active variants for a specific Surah in O(1) time after initial cache load.
+ */
+export async function getVariantsForSurah(surahNum) {
+  if (!variantsBySurahCache) {
+    const masterVariants = await getMasterVariants();
+    variantsBySurahCache = {};
+    for (const entry of masterVariants) {
+      const surahStr = String(entry.surah);
+      if (!variantsBySurahCache[surahStr]) {
+        variantsBySurahCache[surahStr] = {};
+      }
+      const ayahStr = String(entry.ayah);
+      if (!variantsBySurahCache[surahStr][ayahStr]) {
+        variantsBySurahCache[surahStr][ayahStr] = [];
+      }
+      const activeVariants = (entry.variants || []).filter(v => v.is_abrogated_in_recitation !== true);
+      activeVariants.sort(sortHadiths);
+      variantsBySurahCache[surahStr][ayahStr].push(...activeVariants);
+    }
+  }
+  return variantsBySurahCache[String(surahNum)] || {};
+}
+
 /**
  * Loads, filters, groups, and sorts non-Uthmanic Quran data for superstars companions.
  * Reads files in parallel to optimize build performance.
@@ -65,8 +100,7 @@ export const loadNonUthmanicData = async (type) => {
     .filter(c => c.tier === 'Superstar' && c.name !== 'Unknown')
     .sort((a, b) => a.importance_rank - b.importance_rank);
 
-  const masterVariantsPath = path.join(process.cwd(), 'src/data/quran/non_uthmanic/master_variants.json');
-  const masterVariants = await loadJsonSafely(masterVariantsPath, []);
+  const masterVariants = await getMasterVariants();
 
   const filteredVariantsByCompanion = {};
 
@@ -159,8 +193,7 @@ export async function loadCompanionCodex(companionName) {
   }
 
   // Load variants
-  const masterVariantsPath = path.join(process.cwd(), 'src/data/quran/non_uthmanic/master_variants.json');
-  const masterVariants = await loadJsonSafely(masterVariantsPath, []);
+  const masterVariants = await getMasterVariants();
 
   const lostVerses = [];
   const uthmanicVariants = [];

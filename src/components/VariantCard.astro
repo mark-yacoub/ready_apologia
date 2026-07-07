@@ -1,0 +1,202 @@
+---
+interface Props {
+  variant: any;
+  showCompanionHeader?: boolean;
+  titleTag?: 'h2' | 'h3';
+}
+
+const { variant, showCompanionHeader = false, titleTag = 'h2' } = Astro.props;
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const TitleTag = titleTag;
+---
+
+<div class="variant-card">
+  {showCompanionHeader && (
+    <div class="variant-header">
+      <span class="companion-name">{variant.companion_codex}</span>
+      <a href={`${base}/quran/codex/${variant.companion_codex.toLowerCase().replace(/\s+/g, '-')}`} class="read-as-btn">
+        Read as {variant.companion_codex}
+      </a>
+    </div>
+  )}
+  
+  <TitleTag class="variant-ref-title">
+    {variant.sunnah_url ? (
+      <a href={variant.sunnah_url} target="_blank" rel="noopener noreferrer" class="hadith-title-link">
+        {variant.source_reference}
+        <svg class="icon-inline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
+    ) : (
+      variant.source_reference
+    )}
+  </TitleTag>
+
+  {variant.variant_arabic && (
+    <div class="variant-text-block">
+      <p class="text-arabic variant-arabic" dir="rtl">{variant.variant_arabic}</p>
+      {variant.variant_english && <p class="text-english variant-english">{variant.variant_english}</p>}
+    </div>
+  )}
+
+  <div class="hadith-context-block">
+    <span class="label">Hadith Context:</span>
+    {variant.hadith_arabic && <p class="text-arabic" dir="rtl">{variant.hadith_arabic}</p>}
+    {variant.hadith_english && (
+      <p class="text-english hadith-english">
+        {variant.hadith_english.split('\n').map((line: string) => {
+          if (line.startsWith('[omitted from the english translation:')) {
+            return <span class="translation-patch">{line}</span>;
+          }
+          return line;
+        })}
+      </p>
+    )}
+  </div>
+</div>
+
+<style>
+  .variant-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .variant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-outline-variant);
+  }
+
+  .companion-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--color-primary);
+  }
+
+  .read-as-btn {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    text-decoration: none;
+    border: 1px solid var(--color-secondary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    background: none;
+    cursor: pointer;
+  }
+
+  .read-as-btn:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-surface);
+  }
+
+  .variant-ref-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin: 0;
+  }
+
+  .hadith-title-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s ease;
+  }
+
+  .hadith-title-link:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .icon-inline {
+    opacity: 0.6;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .hadith-title-link:hover .icon-inline {
+    opacity: 1;
+  }
+
+  .label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-on-surface-variant);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .variant-text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 12px;
+    border-left: 3px solid var(--color-secondary);
+  }
+
+  .hadith-context-block {
+    margin-top: 4px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--color-outline-variant);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .translation-patch {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-style: italic;
+    color: var(--color-secondary);
+    background-color: rgba(151, 69, 67, 0.05);
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-left: 2px solid var(--color-secondary);
+    margin-top: 4px;
+  }
+
+  .text-arabic {
+    font-family: 'Amiri', 'Traditional Arabic', serif;
+    line-height: 1.8;
+    text-align: right;
+    margin: 0;
+    color: var(--color-on-surface);
+  }
+
+  .text-english {
+    font-family: var(--font-display);
+    line-height: 1.5;
+    color: var(--color-on-surface-variant);
+    margin: 0;
+  }
+
+  @media (max-width: 500px) {
+    .variant-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+</style>

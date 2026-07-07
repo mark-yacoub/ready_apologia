@@ -3,8 +3,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Layout from '../../layouts/Layout.astro';
 import QuranPageHeader from '../../components/QuranPageHeader.astro';
+import VariantCard from '../../components/VariantCard.astro';
 import { TOTAL_SURAHS } from '../../utils/quran_config.js';
 import { loadEnglishData } from '../../utils/quran_loader.js';
+import { getVariantsForSurah } from '../../utils/nonUthmanicLoader.js';
 
 export async function getStaticPaths() {
   const paths = [];
@@ -30,7 +32,10 @@ try {
 // 2. Load English Data
 const englishData = loadEnglishData();
 
-// 3. Combine verses
+// 3. Load Variants via O(1) in-memory cache lookup
+const variantsByAyah = await getVariantsForSurah(surahNum);
+
+// 4. Combine verses
 const verses = [];
 const totalVerses = arabicData.total_verses || 0;
 
@@ -39,11 +44,13 @@ for (let i = 1; i <= totalVerses; i++) {
   const arabicText = arabicData.verses[String(i)] || '';
   const englishTextObj = englishData[verseKey];
   const englishText = englishTextObj ? englishTextObj.text : '';
+  const verseVariants = variantsByAyah[String(i)] || [];
   
   verses.push({
     number: i,
     arabic: arabicText,
-    english: englishText
+    english: englishText,
+    variants: verseVariants
   });
 }
 ---
@@ -66,6 +73,19 @@ for (let i = 1; i <= totalVerses; i++) {
               <span class="verse-num">{v.number}</span>
               <p class="text-arabic">{v.arabic}</p>
               <p class="text-english">{v.english}</p>
+              
+              {v.variants.length > 0 && (
+                <details class="competing-codex-details">
+                  <summary class="competing-codex-summary">
+                    <span class="competing-pill">Competing Codex</span>
+                  </summary>
+                  <div class="variants-list">
+                    {v.variants.map(variant => (
+                      <VariantCard variant={variant} showCompanionHeader={true} />
+                    ))}
+                  </div>
+                </details>
+              )}
             </div>
           ))}
         </div>
@@ -235,4 +255,49 @@ for (let i = 1; i <= totalVerses; i++) {
     text-align: center;
     margin: 40px 0;
   }
+
+  /* Competing Codex Styles */
+  .competing-codex-details {
+    margin-top: 16px;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-surface-container-low);
+  }
+
+  .competing-codex-summary {
+    padding: 12px 16px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none; /* Hide default arrow in some browsers */
+  }
+
+  .competing-pill {
+    display: inline-block;
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #f87171;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.15s ease;
+  }
+
+  .competing-codex-summary:hover .competing-pill {
+    background-color: #fca5a5;
+  }
+
+  .competing-codex-details .variants-list {
+    padding: 16px;
+    border-top: 1px solid var(--color-outline-variant);
+    background-color: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 </style>
+

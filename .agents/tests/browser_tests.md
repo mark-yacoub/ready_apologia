@@ -133,4 +133,23 @@ This document defines the structured browser automation test cases for Ready Apo
 - **Expected Outcome**:
   - The build should compile all static routes successfully.
 
+---
+
+## Test Case 11: Quran Competing Codex Pill & Codex Page Navigation
+1.  **Action**: Navigate to Surah 2 reader (`http://localhost:8080/ready_apologia/quran/2`).
+2.  **Verification**:
+    *   Confirm the page renders Surah 2 verses.
+3.  **Action**: Scroll down to Verse 184 (`#v-184`).
+4.  **Verification**:
+    *   Verify that Verse 184 contains a clickable `<summary>` element featuring the red `COMPETING CODEX` pill (`.competing-pill`).
+5.  **Action**: Click the `COMPETING CODEX` summary pill on Verse 184.
+6.  **Verification**:
+    *   Confirm the `<details>` element expands to reveal the competing reading variant cards.
+    *   Verify that both Arabic (`.text-arabic`) and English (`.text-english`) texts, as well as the hyperlinked hadith reference (`.hadith-title-link`), are visible inside the variant cards.
+7.  **Action**: Click the "Read as Abdullah bin Umar" button (`.read-as-btn`) inside one of the variant cards.
+8.  **Verification**:
+    *   Confirm the browser navigates smoothly to the full companion codex page (`/ready_apologia/quran/codex/abdullah-bin-umar`).
+    *   Verify that the full codex page displays the companion title, bio section, and structured Uthmanic comparison cards cleanly without layout shifts or console errors.
+
+
 
