@@ -3,11 +3,12 @@ import { getQuranSections } from '../utils/quran_config.js';
 
 interface Props {
   currentTitle: string;
-  currentIndex: number;
+  currentIndex: number | string;
+  hideDropdown?: boolean;
 }
 
-const { currentTitle, currentIndex } = Astro.props;
-const sections = getQuranSections();
+const { currentTitle, currentIndex, hideDropdown = false } = Astro.props;
+const sections = hideDropdown ? [] : getQuranSections();
 ---
 
 <header class="quran-reader-header select-none">
@@ -15,30 +16,34 @@ const sections = getQuranSections();
 
     <!-- Surah Selector Dropdown -->
     <div class="surah-dropdown-wrapper">
-      <button class="surah-selector-btn book-title" id="surah-popover-trigger" aria-label="Select Surah">
+      <button class={`surah-selector-btn book-title ${hideDropdown ? 'no-dropdown' : ''}`} id={hideDropdown ? '' : 'surah-popover-trigger'} aria-label="Select Surah" style={hideDropdown ? 'cursor: default;' : ''}>
         <span>{currentTitle}</span>
-        <span class="chevron-down">
-          <svg width="8" height="5" fill="none" stroke="currentColor" viewBox="0 0 10 6" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4" />
-          </svg>
-        </span>
+        {!hideDropdown && (
+          <span class="chevron-down">
+            <svg width="8" height="5" fill="none" stroke="currentColor" viewBox="0 0 10 6" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M1 1l4 4 4-4" />
+            </svg>
+          </span>
+        )}
       </button>
 
       <!-- Dropdown Popover -->
-      <div class="surah-dropdown-popover" id="surah-dropdown-popover">
-        <div class="popover-grid-scroll">
-          <div class="surah-popover-list">
-            {sections.map(sec => (
-              <a
-                href={sec.path}
-                class={`popover-link ${sec.index === currentIndex ? 'active' : ''}`}
-              >
-                {sec.name}
-              </a>
-            ))}
+      {!hideDropdown && (
+        <div class="surah-dropdown-popover" id="surah-dropdown-popover">
+          <div class="popover-grid-scroll">
+            <div class="surah-popover-list">
+              {sections.map(sec => (
+                <a
+                  href={sec.path}
+                  class={`popover-link ${sec.index === currentIndex ? 'active' : ''}`}
+                >
+                  {sec.name}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   </div>
 </header>

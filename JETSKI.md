@@ -101,7 +101,9 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/pages/index.astro`: Homepage handling auto-redirects to John 1.
 *   `src/pages/bible/[book]/[chapter].astro`: Compact scripture chapter reader with inline-end badges.
 *   `src/pages/bible/[book]/[chapter]/[verse].astro`: 100% SEO-indexable static verse detail page.
+*   `src/pages/quran/index.astro`: Quran home page with filters and evidence cards.
 *   `src/pages/quran/[surah].astro`: Surah reader page showing Arabic and English translation.
+*   `src/pages/quran/variant/[slug].astro`: Dynamic page listing all verses matching a specific Qiraat effect or category.
 *   `src/pages/quran/0.astro`: Lost Verses page entry point.
 *   `src/pages/quran/-1.astro`: Abrogated Verses page entry point.
 *   `src/pages/quran/codex/[companion].astro`: Companion Codex page showing comparisons, virtues, and lost verses.

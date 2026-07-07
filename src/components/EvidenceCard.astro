@@ -1,0 +1,50 @@
+---
+export interface Props {
+  title: string;
+  intro?: string;
+  className?: string;
+}
+
+const { title, intro, className = '' } = Astro.props;
+---
+<section class={`evidence-card ${className}`}>
+  <div class="card-header">
+    <h2>{title}</h2>
+    {intro && <p class="scholastic-intro">{intro}</p>}
+  </div>
+  <slot />
+</section>
+
+<style>
+  .evidence-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(11, 102, 59, 0.05);
+  }
+
+  .evidence-card.warm-tint {
+    background: linear-gradient(to bottom right, #ffffff, #f7fdf9);
+    border-color: rgba(11, 102, 59, 0.15);
+  }
+
+  .card-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .scholastic-intro {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    text-align: justify;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+  }
+</style>

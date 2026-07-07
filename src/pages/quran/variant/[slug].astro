@@ -1,0 +1,171 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import QuranPageHeader from '../../../components/QuranPageHeader.astro';
+import QiraatCard from '../../../components/QiraatCard.astro';
+import EvidenceCard from '../../../components/EvidenceCard.astro';
+import { getAllQiraatCategoriesAndEffects, getVersesForQiraatSlug } from '../../../utils/qiraatLoader.js';
+
+export async function getStaticPaths() {
+  const filters = await getAllQiraatCategoriesAndEffects();
+  return filters.map(f => ({
+    params: { slug: f.slug },
+    props: { filterInfo: f }
+  }));
+}
+
+const { slug } = Astro.params;
+const { filterInfo } = Astro.props;
+
+const verses = await getVersesForQiraatSlug(slug);
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+// Prepare verses with highlights
+const formattedVerses = verses.map(v => {
+  let arabicHTML = v.uthmanic_arabic;
+  let englishHTML = v.uthmanic_english;
+
+  for (const variant of v.qiraatVariants) {
+    if (variant.hafs_arabic_word) {
+      try {
+        const arabicRegex = new RegExp(escapeRegExp(variant.hafs_arabic_word), 'gu');
+        arabicHTML = arabicHTML.replace(arabicRegex, (match) => `<span class="qiraat-highlight">${match}</span>`);
+      } catch (e) {
+        if (process.env.NODE_ENV !== 'production') console.warn(`[slug] RegExp failed for Arabic word: ${variant.hafs_arabic_word}`, e);
+      }
+    }
+    if (variant.hafs_english_word && variant.hafs_english_word !== 'N/A') {
+      try {
+        const englishRegex = new RegExp(`\\b${escapeRegExp(variant.hafs_english_word)}\\b`, 'gi');
+        englishHTML = englishHTML.replace(englishRegex, (match) => `<span class="qiraat-highlight">${match}</span>`);
+      } catch (e) {
+        if (process.env.NODE_ENV !== 'production') console.warn(`[slug] RegExp failed for English word: ${variant.hafs_english_word}`, e);
+      }
+    }
+  }
+
+  return {
+    ...v,
+    arabicHTML,
+    englishHTML
+  };
+});
+---
+
+<Layout title={`Quran Variants: ${filterInfo.title}`}>
+  <div class="quran-reader-container theme-quran prefer-english">
+    <QuranPageHeader 
+      currentTitle={filterInfo.title}
+      currentIndex="home" 
+      hideDropdown={true}
+    />
+    
+    <div class="quran-content evidence-page-container">
+      <div class="fade-in">
+        <EvidenceCard 
+          title={filterInfo.type === 'effect' ? 'Meaning Alteration' : 'Textual Mechanism'}
+          intro={filterInfo.type === 'effect' 
+            ? `The variants listed below fall under the effect category of "${filterInfo.title}". These variants alter the semantic meaning, grammatical structure, or general syntax of the Uthmanic text in officially recognized recitations (Qiraat). Such differences stem from the inherent ambiguity of early Arabic orthography which lacked dots and vowels.`
+            : `The variants listed below fall under the mechanism category of "${filterInfo.title}". This specific textual difference between the Hafs reading and other recognized readings highlights the fluidity in dotting, vowelization, or orthography present during the early oral and written transmission of the text.`}
+        />
+      </div>
+
+      <div class="verses-list">
+        {formattedVerses.map(v => (
+          <div class="verse-card fade-in">
+            <span class="verse-num">{v.surah_name} {v.surah}:{v.ayah}</span>
+            <p class="text-arabic" set:html={v.arabicHTML} />
+            <p class="text-english" set:html={v.englishHTML} />
+            
+            <div class="variants-list">
+              {v.qiraatVariants.map((variant: any) => (
+                <QiraatCard variant={variant} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .evidence-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 5rem;
+    padding-top: 2rem;
+  }
+
+  .verses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .verse-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+
+  .verse-num {
+    display: inline-block;
+    background-color: var(--color-secondary);
+    color: white;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .text-arabic {
+    font-family: var(--font-arabic), serif;
+    font-size: 1.8rem;
+    line-height: 2.2;
+    text-align: right;
+    direction: rtl;
+    color: var(--color-on-surface);
+    margin: 0 0 1rem 0;
+  }
+
+  .text-english {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-primary);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .variants-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--color-outline-variant);
+    padding-top: 1.5rem;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  :global(.qiraat-highlight) {
+    background-color: rgba(11, 102, 59, 0.15); /* Green with opacity */
+    color: #0b663b;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+</style>

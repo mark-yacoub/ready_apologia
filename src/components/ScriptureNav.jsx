@@ -37,7 +37,17 @@ export default function ScriptureNav() {
         setCurrentBook(null);
         setCurrentChapter(null);
         setCurrentReader(null);
-        setCurrentQuranIndex(parseInt(parts[2]));
+        if (parts[2] === 'codex' || parts[2] === 'variant') {
+          setCurrentQuranIndex('home');
+        } else {
+          setCurrentQuranIndex(parseInt(parts[2]));
+        }
+        setExpandedSection('quran');
+      } else if (parts[1] === 'quran') {
+        setCurrentBook(null);
+        setCurrentChapter(null);
+        setCurrentReader(null);
+        setCurrentQuranIndex('home');
         setExpandedSection('quran');
       } else {
         setCurrentBook(null);
@@ -197,6 +207,15 @@ export default function ScriptureNav() {
           </button>
           {expandedSection === 'quran' && (
             <div className="book-list animate-fade-in">
+              <div className="book-item">
+                <a
+                  href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran`}
+                  className={`book-select-btn ${currentQuranIndex === 'home' ? 'active-book' : ''}`}
+                  style={{ paddingLeft: '12px' }}
+                >
+                  <span className="book-name">⚖️ Evidence & Filters</span>
+                </a>
+              </div>
               {getQuranSections().map((sec) => (
                 <div key={sec.id} className="book-item">
                   <a

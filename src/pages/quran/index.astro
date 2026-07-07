@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import QuranPageHeader from '../../components/QuranPageHeader.astro';
+import EvidenceCard from '../../components/EvidenceCard.astro';
+import FilterPill from '../../components/FilterPill.astro';
+import { getAllQiraatCategoriesAndEffects } from '../../utils/qiraatLoader.js';
+import { loadCompanionCodex, loadNonUthmanicData } from '../../utils/nonUthmanicLoader.js';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+// Load Qiraat categories and effects
+const qiraatFilters = await getAllQiraatCategoriesAndEffects();
+const effects = qiraatFilters.filter(f => f.type === 'effect').sort((a, b) => b.count - a.count);
+const categories = qiraatFilters.filter(f => f.type === 'category').sort((a, b) => b.count - a.count);
+
+// Load companions
+const companionsPath = path.join(process.cwd(), 'src/data/quran/non_uthmanic/companions.json');
+let companions = [];
+try {
+  const content = await fs.readFile(companionsPath, 'utf-8');
+  const allCompanions = JSON.parse(content);
+
+  const companionsWithCounts = await Promise.all(allCompanions
+    .filter(c => c.name !== 'Unknown')
+    .map(async c => {
+      const slug = c.name.toLowerCase().replace(/\s+/g, '-');
+      let count = 0;
+      try {
+        const codexData = await loadCompanionCodex(c.name);
+        if (codexData) {
+          count = (codexData.uthmanicVariants ? codexData.uthmanicVariants.length : 0) + 
+                  (codexData.lostVerses ? codexData.lostVerses.length : 0);
+        }
+      } catch (e) {
+        if (process.env.NODE_ENV !== 'production') console.warn(`[index] Failed to load codex data for ${c.name}`, e);
+      }
+      return { name: c.name, slug, count };
+    }));
+  companions = companionsWithCounts.sort((a, b) => b.count - a.count);
+} catch (e) {
+  if (process.env.NODE_ENV !== 'production') console.warn("[index] Failed to load companions data", e);
+}
+
+// Load lost verses count
+let lostVersesCount = 0;
+try {
+  const lostData = await loadNonUthmanicData('lost');
+  lostVersesCount = lostData.reduce((acc, companion) => acc + companion.variants.length, 0);
+} catch (e) {
+  if (process.env.NODE_ENV !== 'production') console.warn("[index] Failed to load lost verses count", e);
+}
+
+// Ensure base path for links
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+---
+
+<Layout title="Quran Evidence & Filters - Ready Apologia">
+  <div class="quran-reader-container theme-quran prefer-english">
+    <QuranPageHeader 
+      currentTitle="Evidence & Filters"
+      currentIndex="home" 
+      hideDropdown={true}
+    />
+
+    <div class="evidence-page-container fade-in">
+      <!-- 1. Lost Verses Card -->
+      <EvidenceCard 
+        title="Lost Verses" 
+        className="warm-tint"
+        intro="Islamic tradition records numerous instances where verses or entire sections of the Quran were recited during the time of Muhammad but were subsequently lost, forgotten, or consumed. These reports highlight that the standard Uthmanic text does not represent the entirety of what was originally recited as Quran."
+      >
+        <div class="pill-grid">
+          <FilterPill href={`${base}/quran/0`} title="View Lost Verses" count={lostVersesCount} variant="primary" />
+        </div>
+      </EvidenceCard>
+
+      <!-- 2. Competing Codices Card -->
+      <EvidenceCard 
+        title="Competing Codices" 
+        className="warm-tint"
+        intro="Before Uthman standardized the Quranic text and destroyed dissenting manuscripts, several prominent companions—some of whom Muhammad explicitly commanded Muslims to learn the Quran from—maintained their own personal codices. These codices often varied significantly in structure, surah count, and textual content."
+      >
+        <div class="pill-grid">
+          {companions.map(companion => (
+            <FilterPill href={`${base}/quran/codex/${companion.slug}`} title={companion.name} count={companion.count} variant="primary-soft" />
+          ))}
+        </div>
+      </EvidenceCard>
+
+      <!-- 3. Variant Readings (Qiraat) by Effect -->
+      <EvidenceCard 
+        title="Variant Readings (Qiraat) – By Change Effect" 
+        className="warm-tint"
+        intro="Due to the inherent ambiguity of the early Arabic consonantal script (<em>rasm</em>)—which lacked diacritical dots (<em>i'jam</em>) and vowel markers (<em>harakat</em>)—early reciters supplied their own vocalizations and consonant choices. This resulted in thousands of officially recognized variants that alter the semantic meaning or grammatical structure of the text."
+      >
+        <div class="pill-grid">
+          {effects.map(filter => (
+            <FilterPill href={`${base}/quran/variant/${filter.slug}`} title={filter.title} count={filter.count} variant="primary-soft" />
+          ))}
+        </div>
+      </EvidenceCard>
+
+      <!-- 4. Variant Readings (Qiraat) by Category -->
+      <EvidenceCard 
+        title="Variant Readings (Qiraat) – By Change Category" 
+        className="warm-tint"
+        intro="The Qiraat variants can also be categorized by their specific textual mechanism, such as vowel shifts, dotting variations, or the addition/omission of letters. These variations demonstrate the fluidity of the early oral and written transmission of the Quran."
+      >
+        <div class="pill-grid">
+          {categories.map(filter => (
+            <FilterPill href={`${base}/quran/variant/${filter.slug}`} title={filter.title} count={filter.count} variant="primary-soft" />
+          ))}
+        </div>
+      </EvidenceCard>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .evidence-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    padding-bottom: 5rem;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pill-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+</style>

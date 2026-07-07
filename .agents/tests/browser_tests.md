@@ -173,5 +173,21 @@ This document defines the structured browser automation test cases for Ready Apo
     *   Verify that expanding both pills independently works cleanly without layout collisions or console errors.
 
 
+---
 
-
+## Test Case 13: Quran Evidence & Filters Home Page & Variant Navigation
+1.  **Action**: Navigate to `http://localhost:8080/ready_apologia/quran`.
+2.  **Verification**:
+    *   Confirm the page renders the Evidence & Filters home page.
+    *   Verify the top header reads "Evidence & Filters" and the surah selector dropdown chevron is completely hidden.
+    *   Verify the "Lost Verses" card displays a total count badge (e.g., `<span class="count-badge light">`).
+    *   Verify the "Competing Codices" card displays companion pills with numerical counts next to them.
+3.  **Action**: Click the `Abdullah bin Umar` pill inside the Competing Codices card.
+4.  **Verification**:
+    *   Confirm the browser navigates successfully to `/ready_apologia/quran/codex/abdullah-bin-umar`.
+5.  **Action**: Navigate back to `http://localhost:8080/ready_apologia/quran`.
+6.  **Action**: Click the `Change Meaning (general semantic shift)` pill inside the Qiraat variants by effect card.
+7.  **Verification**:
+    *   Confirm the browser navigates successfully to `/ready_apologia/quran/variant/effect-change-meaning-general-semantic-shift`.
+    *   Verify the top header renders "Change Meaning (general semantic shift)" and the dropdown chevron is hidden.
+    *   Verify the verses list displays variant cards with the variant words visually highlighted in green.

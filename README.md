@@ -105,3 +105,12 @@ pkill -f astro
 *   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages and headers).
 *   `src/utils/`: Helper utilities for loading scripture, topics, and non-Uthmanic Quran data.
 *   `docs/adr/`: [Architectural Decision Records (ADRs)](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/adr/0001-framework-and-offline-strategy.md) detailing the technology choices.
+
+## 🗺️ Route Map
+| Route | Description |
+| :--- | :--- |
+| `/quran` | Evidence & Filters Home (Qiraat & Competing Codices access) |
+| `/quran/[surah]` | Quran reader with Uthmanic Arabic and English translation |
+| `/quran/variant/[slug]` | Dynamic page showing all verses affected by a specific Qiraat effect or category |
+| `/quran/codex/[companion]` | Deep-dive into a companion's non-Uthmanic codex (e.g., Ubayy, Ibn Masud) |
+| `/quran/0` | Special route rendering verses historically reported but lost/abrogated |
