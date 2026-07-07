@@ -47,39 +47,43 @@ async function loadJsonSafely(filePath, fallback = []) {
   return fallback;
 }
 
-let masterVariantsCache = null;
-let variantsBySurahCache = null;
+let masterVariantsPromise = null;
+let variantsBySurahPromise = null;
 
 async function getMasterVariants() {
-  if (!masterVariantsCache) {
+  if (!masterVariantsPromise) {
     const masterVariantsPath = path.join(process.cwd(), 'src/data/quran/non_uthmanic/master_variants.json');
-    masterVariantsCache = await loadJsonSafely(masterVariantsPath, []);
+    masterVariantsPromise = loadJsonSafely(masterVariantsPath, []);
   }
-  return masterVariantsCache;
+  return masterVariantsPromise;
 }
 
 /**
  * Returns pre-grouped and sorted active variants for a specific Surah in O(1) time after initial cache load.
  */
 export async function getVariantsForSurah(surahNum) {
-  if (!variantsBySurahCache) {
-    const masterVariants = await getMasterVariants();
-    variantsBySurahCache = {};
-    for (const entry of masterVariants) {
-      const surahStr = String(entry.surah);
-      if (!variantsBySurahCache[surahStr]) {
-        variantsBySurahCache[surahStr] = {};
+  if (!variantsBySurahPromise) {
+    variantsBySurahPromise = (async () => {
+      const masterVariants = await getMasterVariants();
+      const cache = {};
+      for (const entry of masterVariants) {
+        const surahStr = String(entry.surah);
+        if (!cache[surahStr]) {
+          cache[surahStr] = {};
+        }
+        const ayahStr = String(entry.ayah);
+        if (!cache[surahStr][ayahStr]) {
+          cache[surahStr][ayahStr] = [];
+        }
+        const activeVariants = (entry.variants || []).filter(v => v.is_abrogated_in_recitation !== true);
+        activeVariants.sort(sortHadiths);
+        cache[surahStr][ayahStr].push(...activeVariants);
       }
-      const ayahStr = String(entry.ayah);
-      if (!variantsBySurahCache[surahStr][ayahStr]) {
-        variantsBySurahCache[surahStr][ayahStr] = [];
-      }
-      const activeVariants = (entry.variants || []).filter(v => v.is_abrogated_in_recitation !== true);
-      activeVariants.sort(sortHadiths);
-      variantsBySurahCache[surahStr][ayahStr].push(...activeVariants);
-    }
+      return cache;
+    })();
   }
-  return variantsBySurahCache[String(surahNum)] || {};
+  const cache = await variantsBySurahPromise;
+  return cache[String(surahNum)] || {};
 }
 
 /**

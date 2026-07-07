@@ -7,6 +7,8 @@ import VariantCard from '../../components/VariantCard.astro';
 import { TOTAL_SURAHS } from '../../utils/quran_config.js';
 import { loadEnglishData } from '../../utils/quran_loader.js';
 import { getVariantsForSurah } from '../../utils/nonUthmanicLoader.js';
+import { getQiraatForSurah } from '../../utils/qiraatLoader.js';
+import QiraatCard from '../../components/QiraatCard.astro';
 
 export async function getStaticPaths() {
   const paths = [];
@@ -34,6 +36,7 @@ const englishData = loadEnglishData();
 
 // 3. Load Variants via O(1) in-memory cache lookup
 const variantsByAyah = await getVariantsForSurah(surahNum);
+const qiraatByAyah = await getQiraatForSurah(surahNum);
 
 // 4. Combine verses
 const verses = [];
@@ -45,12 +48,49 @@ for (let i = 1; i <= totalVerses; i++) {
   const englishTextObj = englishData[verseKey];
   const englishText = englishTextObj ? englishTextObj.text : '';
   const verseVariants = variantsByAyah[String(i)] || [];
+  const qiraatVariants = qiraatByAyah[String(i)] || [];
+  
+  let arabicTextHTML = arabicText;
+  let englishTextHTML = englishText;
+
+  if (qiraatVariants.length > 0) {
+    const englishWords = [...new Set(qiraatVariants.map((v: any) => v.hafs_english_word).filter(Boolean))];
+    if (englishWords.length > 0) {
+      // Sort by length descending so longer phrases get replaced first
+      englishWords.sort((a: string, b: string) => b.length - a.length);
+      const escapedWords = englishWords.map((w: string) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      const regex = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+      englishTextHTML = englishTextHTML.replace(
+        regex,
+        (match) => `<span class="qiraat-highlight">${match}</span>`
+      );
+    }
+
+    const arabicWords = [...new Set(qiraatVariants.map((v: any) => v.hafs_arabic_word).filter(Boolean))];
+    if (arabicWords.length > 0) {
+      // Sort by length descending
+      arabicWords.sort((a: string, b: string) => b.length - a.length);
+      const regexParts = arabicWords.map((w: string) => {
+        // Strip diacritics to get base letters, then allow optional diacritics between AND after letters
+        const base = w.replace(/[\u064B-\u065F\u0670]/g, '');
+        return base.split('').map(c => c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('[\\u064B-\\u065F\\u0670]*') + '[\\u064B-\\u065F\\u0670]*';
+      });
+      const regex = new RegExp(`(${regexParts.join('|')})`, 'g');
+      arabicTextHTML = arabicTextHTML.replace(
+        regex,
+        (match) => `<span class="qiraat-highlight">${match}</span>`
+      );
+    }
+  }
   
   verses.push({
     number: i,
     arabic: arabicText,
     english: englishText,
-    variants: verseVariants
+    arabicHTML: arabicTextHTML,
+    englishHTML: englishTextHTML,
+    variants: verseVariants,
+    qiraatVariants: qiraatVariants
   });
 }
 ---
@@ -71,8 +111,23 @@ for (let i = 1; i <= totalVerses; i++) {
           {verses.map(v => (
             <div class="verse-card" id={`v-${v.number}`}>
               <span class="verse-num">{v.number}</span>
-              <p class="text-arabic">{v.arabic}</p>
-              <p class="text-english">{v.english}</p>
+              <p class="text-arabic" set:html={v.arabicHTML} />
+              <p class="text-english" set:html={v.englishHTML} />
+              
+              {v.qiraatVariants && v.qiraatVariants.length > 0 && (
+                <details class="qiraat-details">
+                  <summary class="qiraat-summary">
+                    <span class="qiraat-pill">
+                      {Array.from(new Set(v.qiraatVariants.map((variant: any) => `${variant.category} - ${variant.effect}`))).join(' | ')}
+                    </span>
+                  </summary>
+                  <div class="variants-list">
+                    {v.qiraatVariants.map((variant: any) => (
+                      <QiraatCard variant={variant} />
+                    ))}
+                  </div>
+                </details>
+              )}
               
               {v.variants.length > 0 && (
                 <details class="competing-codex-details">
@@ -298,6 +353,57 @@ for (let i = 1; i <= totalVerses; i++) {
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+
+  /* Qiraat Styles */
+  .qiraat-details {
+    margin-top: 8px;
+    border: 1px solid #fef08a; /* yellow-200 */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fefce8; /* yellow-50 */
+  }
+
+  .qiraat-summary {
+    padding: 12px 16px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+  }
+
+  .qiraat-pill {
+    display: inline-block;
+    background-color: #fef08a; /* yellow-200 */
+    color: #a16207; /* yellow-800 */
+    border: 1px solid #fde047; /* yellow-300 */
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    transition: all 0.15s ease;
+  }
+
+  .qiraat-summary:hover .qiraat-pill {
+    background-color: #fde047; /* yellow-300 */
+  }
+
+  .qiraat-details .variants-list {
+    padding: 16px;
+    border-top: 1px solid #fef08a;
+    background-color: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Global scope needed for elements created via set:html */
+  :global(.qiraat-highlight) {
+    background-color: rgba(254, 240, 138, 0.4); /* yellow-200 with opacity */
+    border-radius: 4px;
+    padding: 0 4px;
+    border-bottom: 2px solid #facc15; /* yellow-400 */
   }
 </style>
 

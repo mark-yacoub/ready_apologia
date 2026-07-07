@@ -1,0 +1,214 @@
+---
+export interface QiraatVariant {
+  category: string;
+  effect: string;
+  hafs_arabic_word: string;
+  hafs_english_word: string;
+  variant_arabic_word: string;
+  variant_english_word: string;
+  description?: string;
+  readers?: string[];
+}
+
+interface Props {
+  variant: QiraatVariant;
+}
+
+const { variant } = Astro.props;
+---
+
+<div class="qiraat-card">
+  <div class="qiraat-header">
+    <div class="qiraat-meta">
+      <span class="qiraat-category">{variant.category}</span>
+      <span class="qiraat-effect">{variant.effect}</span>
+    </div>
+  </div>
+  
+  <div class="qiraat-diff">
+    <div class="diff-side hafs-side">
+      <span class="diff-label">Original (Hafs)</span>
+      <p class="text-arabic diff-arabic" dir="rtl">{variant.hafs_arabic_word}</p>
+      <p class="text-english diff-english">{variant.hafs_english_word}</p>
+    </div>
+    
+    <div class="diff-divider">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </div>
+    
+    <div class="diff-side variant-side">
+      <span class="diff-label">Variant Reading</span>
+      <p class="text-arabic diff-arabic" dir="rtl">{variant.variant_arabic_word}</p>
+      <p class="text-english diff-english">{variant.variant_english_word}</p>
+    </div>
+  </div>
+
+  {variant.description && <p class="qiraat-description">{variant.description}</p>}
+  
+  {variant.readers && variant.readers.length > 0 && (
+    <div class="qiraat-readers">
+      <span class="readers-label">Read by:</span>
+      <p class="readers-list">{variant.readers.join(', ')}</p>
+    </div>
+  )}
+</div>
+
+<style>
+  .qiraat-card {
+    background-color: var(--color-surface);
+    border: 1px solid #fef08a; /* yellow-200 */
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .qiraat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-outline-variant);
+    padding-bottom: 12px;
+  }
+
+  .qiraat-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .qiraat-category {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 800;
+    color: #ca8a04; /* yellow-600 */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .qiraat-effect {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-on-surface-variant);
+  }
+
+  .qiraat-diff {
+    display: flex;
+    align-items: stretch;
+    background-color: var(--color-surface-container-low);
+    border-radius: 8px;
+    padding: 16px;
+    gap: 16px;
+    border: 1px solid var(--color-outline-variant);
+  }
+
+  .diff-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hafs-side {
+    border-right: 1px dashed var(--color-outline-variant);
+    padding-right: 16px;
+  }
+
+  .variant-side {
+    padding-left: 8px;
+  }
+
+  .diff-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-on-surface-variant);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .diff-arabic {
+    font-size: 24px !important; /* Force larger size for isolation */
+    color: var(--color-on-surface);
+  }
+
+  .diff-english {
+    font-size: 15px !important;
+    font-weight: 600;
+  }
+
+  .diff-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-on-surface-variant);
+    opacity: 0.5;
+  }
+
+  .qiraat-description {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin: 0;
+    padding: 12px;
+    background-color: rgba(253, 224, 71, 0.1); /* light yellow tint */
+    border-left: 3px solid #facc15; /* yellow-400 */
+    border-radius: 0 6px 6px 0;
+  }
+
+  .qiraat-readers {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .readers-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-on-surface-variant);
+    text-transform: uppercase;
+  }
+
+  .readers-list {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-on-surface);
+    margin: 0;
+  }
+
+  /* Responsive styles for diff block */
+  @media (max-width: 500px) {
+    .qiraat-diff {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .hafs-side {
+      border-right: none;
+      border-bottom: 1px dashed var(--color-outline-variant);
+      padding-right: 0;
+      padding-bottom: 16px;
+      width: 100%;
+    }
+    
+    .variant-side {
+      padding-left: 0;
+      width: 100%;
+    }
+    
+    .diff-divider {
+      transform: rotate(90deg);
+      margin: -8px 0;
+    }
+  }
+</style>

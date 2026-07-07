@@ -3,7 +3,7 @@
 **CRITICAL RULE: NEVER modify these test cases based on subagent failures or assumptions. If a test fails and you suspect the test is outdated, you MUST consult the user before altering any of the test logic.**
 
 This document defines the structured browser automation test cases for Ready Apologia. Run these test cases using the `/browser` subagent whenever code or styling changes are made to ensure zero regression.
-**Note**: You can spin up a subagent per test concurrently to finish the entire test suite faster.
+**Note on Execution**: You can spin up all test subagents concurrently to finish the entire test suite faster. However, to prevent Chrome DevTools Protocol (port 9222) connection overload and timeouts, instruct each subagent in its prompt to stagger its start time by a few seconds (e.g., Subagent 1 starts immediately, Subagent 2 waits 4 seconds before connecting, Subagent 3 waits 8 seconds, etc.). Also, ensure a full production build (`astro build`) has completed before running tests that navigate to Old Testament books (e.g., Genesis) to prevent 404 errors.
 ---
 
 ## Test Case 1: Initial Redirect Gate & Last Visited Persistence
@@ -150,6 +150,28 @@ This document defines the structured browser automation test cases for Ready Apo
 8.  **Verification**:
     *   Confirm the browser navigates smoothly to the full companion codex page (`/ready_apologia/quran/codex/abdullah-bin-umar`).
     *   Verify that the full codex page displays the companion title, bio section, and structured Uthmanic comparison cards cleanly without layout shifts or console errors.
+
+---
+
+## Test Case 12: Quran Qira'at Variant Readings & Inline Highlighting
+1.  **Action**: Navigate to Surah 1 reader (`http://localhost:8080/ready_apologia/quran/1`).
+2.  **Verification**:
+    *   Confirm the page renders Surah 1 verses.
+3.  **Action**: Inspect Verse 4 (`#v-4`).
+4.  **Verification**:
+    *   Verify that the English word "Master" and the Arabic word "مَٰلِكِ" in the main verse text are wrapped in `<span class="qiraat-highlight">`, giving them a subtle yellow background and bottom border.
+    *   Verify that Verse 4 contains a clickable `<summary class="qiraat-summary">` featuring the yellow/orange Qira'at pill (`.qiraat-pill`) with text indicating the change category and effect (e.g., `Graphical/Basic Letter Difference - Change Meaning (general semantic shift)`).
+    *   Verify that no variant reading with both category or effect as "Other" / "other" is rendered.
+5.  **Action**: Click the Qira'at summary pill on Verse 4.
+6.  **Verification**:
+    *   Confirm the `<details class="qiraat-details">` element expands to reveal the Qira'at variant card (`.qiraat-card`).
+    *   Verify the side-by-side diff box (`.qiraat-diff`) cleanly displays `Original (Hafs)` on the left and `Variant Reading` on the right, separated by a divider icon.
+    *   Verify the description callout box (`.qiraat-description`) and the list of canonical readers (`.qiraat-readers`) are visible and cleanly formatted.
+7.  **Action**: Navigate to Surah 2 reader and scroll to Verse 184 (`http://localhost:8080/ready_apologia/quran/2#v-184`).
+8.  **Verification**:
+    *   Confirm that Verse 184 displays **both** the red `COMPETING CODEX` pill (`.competing-pill`) and the yellow/orange Qira'at variant reading pill (`.qiraat-pill`) simultaneously.
+    *   Verify that expanding both pills independently works cleanly without layout collisions or console errors.
+
 
 
 
