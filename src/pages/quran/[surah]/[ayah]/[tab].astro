@@ -1,0 +1,188 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+import Layout from '../../../../layouts/Layout.astro';
+import QuranVerseTabs from '../../../../components/QuranVerseTabs.jsx';
+import QuranManuscriptCarousel from '../../../../components/QuranManuscriptCarousel.jsx';
+import { query } from '../../../../db.js';
+import { loadEnglishData } from '../../../../utils/quran_loader.js';
+import { assignManuscriptScanNames } from '../../../../utils/manuscript_utils.js';
+
+export async function getStaticPaths() {
+  const msQuran = query("SELECT DISTINCT verse_id FROM manuscript_per_verse_quran").map(r => r.verse_id);
+
+  const paths = [];
+
+  msQuran.forEach(id => {
+    const [s, a] = id.split(':');
+    if (s && a) {
+      paths.push({ params: { surah: s, ayah: a, tab: 'manuscripts' } });
+    }
+  });
+
+  return paths;
+}
+
+const { surah, ayah, tab } = Astro.params;
+const verseId = `${surah}:${ayah}`;
+
+const msCountInfo = query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse_quran WHERE verse_id = :verseId", { verseId });
+const msCount = msCountInfo.length > 0 ? msCountInfo[0].count : 0;
+
+const englishData = loadEnglishData();
+const verseTextObj = englishData[verseId];
+const verseText = verseTextObj ? verseTextObj.text : '';
+
+let manuscripts = [];
+
+if (tab === 'manuscripts') {
+  const rawManuscripts = query(`
+    SELECT m.image_name, mm.* 
+    FROM manuscript_per_verse_quran m 
+    LEFT JOIN manuscripts_meta_quran mm ON m.ms_id = mm.ms_id 
+    WHERE m.verse_id = :verseId
+    ORDER BY mm.earliest_date ASC
+  `, { verseId });
+
+  manuscripts = assignManuscriptScanNames(rawManuscripts);
+}
+
+// Generate OG Image
+let ogImage = undefined;
+const earliestMs = query(`
+  SELECT m.ms_id, m.image_name 
+  FROM manuscript_per_verse_quran m
+  JOIN manuscripts_meta_quran mm ON m.ms_id = mm.ms_id
+  WHERE m.verse_id = :verseId
+  ORDER BY mm.earliest_date ASC
+  LIMIT 1
+`, { verseId });
+if (earliestMs.length > 0 && earliestMs[0].image_name) {
+  ogImage = `https://pub-219566f197174e27a10f51e5fb2414f6.r2.dev/quran/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
+}
+
+let seoDescription = `Explore ancient manuscript evidence for Quran Surah ${surah}:${ayah} in Ready Apologia.`;
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+---
+
+<Layout 
+  title={`Evidence: Surah ${surah}:${ayah}`} 
+  description={seoDescription} 
+  ogImage={ogImage} 
+>
+  <div class="verse-detail-container theme-quran">
+    
+    <header class="detail-header select-none">
+      <a href={`${base}/quran/${surah}#v-${ayah}`} class="back-btn" aria-label="Go back to surah reader">
+        <span class="back-arrow">
+          <svg width="6" height="10" fill="none" stroke="currentColor" viewBox="0 0 6 10" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 9L1 5l4-4" />
+          </svg>
+        </span>
+        <span>Surah {surah}</span>
+      </a>
+      
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <h2 class="verse-drawer-title" style="color: var(--quran-primary);">
+          Surah {surah}:{ayah}
+        </h2>
+      </div>
+    </header>
+
+    {verseText && (
+      <div class="verse-text-reminder select-text" style="border-left-color: var(--quran-primary);">
+        "{verseText}"
+      </div>
+    )}
+
+    <QuranVerseTabs 
+      client:load 
+      msCount={msCount}
+      activeTab={tab}
+      surah={surah}
+      ayah={ayah}
+    />
+      
+    <div class="tab-panels-window">
+      {tab === 'manuscripts' && (
+        <div>
+          <QuranManuscriptCarousel 
+            client:load 
+            manuscripts={manuscripts} 
+            surah={surah} 
+            ayah={ayah} 
+            verseLabel={`Surah ${surah}:${ayah}`} 
+          />
+        </div>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<style>
+	.verse-detail-container {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+
+	.detail-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid var(--color-outline-variant);
+		padding-bottom: 14px;
+	}
+
+	.back-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 6px 12px;
+		background-color: var(--color-surface-container-low);
+		color: var(--color-on-surface-variant);
+		border: 1px solid var(--color-outline-variant);
+		border-radius: 8px;
+		font-size: 11px;
+		font-weight: 700;
+		text-decoration: none;
+		transition: all 0.15s ease;
+	}
+	.back-btn:hover {
+		background-color: var(--color-outline-variant);
+		color: var(--quran-primary, #10b981);
+	}
+	.back-arrow {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.back-arrow svg {
+		stroke: currentColor;
+		fill: none;
+	}
+
+	.verse-drawer-title {
+		font-family: var(--font-display);
+		font-size: 22px;
+		font-weight: 800;
+		margin: 0;
+		letter-spacing: -0.01em;
+	}
+
+	.verse-text-reminder {
+		font-family: var(--font-display);
+		font-size: 13px;
+		line-height: 1.4;
+		color: var(--color-on-surface-variant);
+		font-style: italic;
+		padding: 10px 14px;
+		background-color: var(--color-surface-container-lowest);
+		border-left: 3px solid var(--quran-primary, #10b981);
+		border-radius: 0 8px 8px 0;
+		margin-bottom: 4px;
+	}
+
+  .tab-panels-window { margin-top: 14px; }
+</style>

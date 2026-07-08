@@ -9,6 +9,7 @@ import { loadEnglishData } from '../../utils/quran_loader.js';
 import { getVariantsForSurah } from '../../utils/nonUthmanicLoader.js';
 import { getQiraatForSurah } from '../../utils/qiraatLoader.js';
 import QiraatCard from '../../components/QiraatCard.astro';
+import { query } from '../../db.js';
 
 export async function getStaticPaths() {
   const paths = [];
@@ -37,6 +38,14 @@ const englishData = loadEnglishData();
 // 3. Load Variants via O(1) in-memory cache lookup
 const variantsByAyah = await getVariantsForSurah(surahNum);
 const qiraatByAyah = await getQiraatForSurah(surahNum);
+
+// 3.5 Load Manuscript Maps
+const msPrefix = `${surahNum}:%`;
+const msQuranSet = new Set(
+  query("SELECT DISTINCT verse_id FROM manuscript_per_verse_quran WHERE verse_id LIKE :prefix", { prefix: msPrefix })
+  .map((r: any) => r.verse_id)
+);
+
 
 // 4. Combine verses
 const verses = [];
@@ -83,6 +92,8 @@ for (let i = 1; i <= totalVerses; i++) {
     }
   }
   
+  const hasManuscript = msQuranSet.has(verseKey);
+  
   verses.push({
     number: i,
     arabic: arabicText,
@@ -90,7 +101,8 @@ for (let i = 1; i <= totalVerses; i++) {
     arabicHTML: arabicTextHTML,
     englishHTML: englishTextHTML,
     variants: verseVariants,
-    qiraatVariants: qiraatVariants
+    qiraatVariants: qiraatVariants,
+    hasManuscript: hasManuscript
   });
 }
 ---
@@ -110,7 +122,16 @@ for (let i = 1; i <= totalVerses; i++) {
         <div class="verses-list">
           {verses.map(v => (
             <div class="verse-card" id={`v-${v.number}`}>
-              <span class="verse-num">{v.number}</span>
+              <div class="verse-badge-tray">
+                <span class="verse-num">{v.number}</span>
+                {v.hasManuscript && (
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/manuscripts`} class="icon-inline ms-icon" title="Manuscripts available">
+                    <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </a>
+                )}
+              </div>
               <p class="text-arabic" set:html={v.arabicHTML} />
               <p class="text-english" set:html={v.englishHTML} />
               
@@ -250,6 +271,33 @@ for (let i = 1; i <= totalVerses; i++) {
   }
   .verse-card:hover {
     box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .verse-badge-tray {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: -4px;
+  }
+
+  .icon-inline.ms-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-on-surface-variant);
+    opacity: 0.7;
+    transition: all 0.2s ease;
+  }
+
+  .icon-inline.ms-icon:hover {
+    color: var(--color-secondary);
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .icon-inline.ms-icon svg {
+    width: 17px;
+    height: 17px;
   }
 
   .verse-num {

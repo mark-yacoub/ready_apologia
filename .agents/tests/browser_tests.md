@@ -191,3 +191,21 @@ This document defines the structured browser automation test cases for Ready Apo
     *   Confirm the browser navigates successfully to `/ready_apologia/quran/variant/effect-change-meaning-general-semantic-shift`.
     *   Verify the top header renders "Change Meaning (general semantic shift)" and the dropdown chevron is hidden.
     *   Verify the verses list displays variant cards with the variant words visually highlighted in green.
+
+---
+
+## Test Case 14: Quran Verse Manuscript Evidence Drawer
+1.  **Action**: Navigate to Surah 43 reader (`http://localhost:8080/ready_apologia/quran/43`).
+2.  **Verification**:
+    *   Confirm the page renders Surah 43 verses.
+3.  **Action**: Scroll down to Verse 10 (`#v-10`).
+4.  **Verification**:
+    *   Verify that the Verse 10 number is wrapped in a clickable `.verse-badge-tray` link containing the manuscript evidence icon.
+5.  **Action**: Click the manuscript evidence badge tray on Verse 10.
+6.  **Verification**:
+    *   Confirm the browser navigates smoothly to the verse evidence drawer (`/ready_apologia/quran/43/10/manuscripts`).
+    *   Verify that the "Manuscripts" tab is present and marked as active (`.segmented-pill-btn.active`).
+    *   Verify the manuscript carousel renders and the manuscript image scan (`.ms-image`) is visible or loading.
+    *   Verify that the "Date" prominently displays "AD" formatted numbers, and "Script Style" is displayed in the metadata grid.
+    *   Verify that if the manuscript contains "Variants & Typos", it is styled in the prominent red `.variants-highlight` block.
+    *   Verify that clicking the share or download actions (`.share-btn`, `.save-btn`) works without throwing console errors.
