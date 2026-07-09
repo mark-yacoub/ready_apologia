@@ -1,0 +1,59 @@
+/* ============================================================
+   Authoritative L6 Design System: Verse Evidence Badges
+   Shared across Bible, Quran, and future corpora reader pages.
+   ============================================================ */
+
+.evidence-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background-color: var(--color-surface-container-low);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-outline-variant);
+  transition: transform 0.15s ease, border-color 0.15s, color 0.15s, background-color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* Invisible expanded touch target for WCAG mobile accessibility (minimum 44x44px hit area) */
+.evidence-badge::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  z-index: 1;
+}
+
+/* Mouse hover styling */
+.evidence-badge:hover {
+  transform: scale(1.15) !important;
+  background-color: var(--color-surface-container-lowest) !important;
+  border-color: var(--color-secondary) !important;
+  color: var(--color-secondary) !important;
+}
+
+/* Keyboard navigation & screen reader focus-visible styling (WCAG inclusive design) */
+.evidence-badge:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  background-color: var(--color-surface-container-lowest) !important;
+  border-color: var(--color-secondary) !important;
+  color: var(--color-secondary) !important;
+}
+
+.evidence-badge svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  position: relative;
+  z-index: 2;
+}

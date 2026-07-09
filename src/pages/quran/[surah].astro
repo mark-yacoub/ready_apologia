@@ -11,6 +11,7 @@ import { getQiraatForSurah } from '../../utils/qiraatLoader.js';
 import QiraatCard from '../../components/QiraatCard.astro';
 import { query } from '../../db.js';
 import { loadChristianFootnotes } from '../../utils/christian_footnotes_loader.js';
+import { loadQuranContradictions } from '../../utils/quran_contradictions_loader.js';
 
 export async function getStaticPaths() {
   const paths = [];
@@ -49,6 +50,10 @@ const msQuranSet = new Set(
 
 const christianFootnotesSet = new Set(
   Object.keys(loadChristianFootnotes()).filter(k => k.startsWith(`${surahNum}:`))
+);
+
+const quranContradictionsSet = new Set(
+  Object.keys(loadQuranContradictions()).filter(k => k.startsWith(`${surahNum}:`))
 );
 
 
@@ -99,6 +104,7 @@ for (let i = 1; i <= totalVerses; i++) {
   
   const hasManuscript = msQuranSet.has(verseKey);
   const hasChristianFootnotes = christianFootnotesSet.has(verseKey);
+  const hasContradictions = quranContradictionsSet.has(verseKey);
   
   verses.push({
     number: i,
@@ -109,7 +115,8 @@ for (let i = 1; i <= totalVerses; i++) {
     variants: verseVariants,
     qiraatVariants: qiraatVariants,
     hasManuscript: hasManuscript,
-    hasChristianFootnotes: hasChristianFootnotes
+    hasChristianFootnotes: hasChristianFootnotes,
+    hasContradictions: hasContradictions
   });
 }
 ---
@@ -131,10 +138,10 @@ for (let i = 1; i <= totalVerses; i++) {
             <div class="verse-card" id={`v-${v.number}`}>
               <div class="verse-badge-tray">
                 <span class="verse-num">{v.number}</span>
-                {v.hasManuscript && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/manuscripts`} class="evidence-badge ms-icon" title="Manuscripts available" aria-label={`View manuscript evidence for Surah ${surahNum}, verse ${v.number}`}>
-                    <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                {v.hasContradictions && (
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/contradictions`} class="evidence-badge ct-icon" title="Contradictions available" aria-label={`View contradictions for Surah ${surahNum}, verse ${v.number}`}>
+                    <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 11 3-11M15 6l3 11 3-11M12 3v18M6 6h12M12 3C8.5 3 5 4 5 4M12 3c3.5 0 7 1 7 1" />
                     </svg>
                   </a>
                 )}
@@ -142,6 +149,13 @@ for (let i = 1; i <= totalVerses; i++) {
                   <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/christian-footnotes`} class="evidence-badge christian-footnote-icon" title="Christian Commentary" aria-label={`View Christian commentary for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m-4-10h8" />
+                    </svg>
+                  </a>
+                )}
+                {v.hasManuscript && (
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/manuscripts`} class="evidence-badge ms-icon" title="Manuscripts available" aria-label={`View manuscript evidence for Surah ${surahNum}, verse ${v.number}`}>
+                    <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </a>
                 )}

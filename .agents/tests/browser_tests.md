@@ -209,3 +209,22 @@ This document defines the structured browser automation test cases for Ready Apo
     *   Verify that the "Date" prominently displays "AD" formatted numbers, and "Script Style" is displayed in the metadata grid.
     *   Verify that if the manuscript contains "Variants & Typos", it is styled in the prominent red `.variants-highlight` block.
     *   Verify that clicking the share or download actions (`.share-btn`, `.save-btn`) works without throwing console errors.
+
+---
+
+## Test Case 15: Quran Contradictions Evidence Drawer
+1.  **Action**: Navigate to Surah 7 reader (`http://localhost:8080/ready_apologia/quran/7`).
+2.  **Verification**:
+    *   Confirm the page renders Surah 7 verses.
+3.  **Action**: Scroll down to Verse 120 (`#v-120`).
+4.  **Verification**:
+    *   Verify that Verse 120 contains a `.verse-badge-tray` displaying the `.ct-icon` (scales icon) for contradictions.
+5.  **Action**: Click the scales icon on Verse 120.
+6.  **Verification**:
+    *   Confirm the browser navigates smoothly to the Contradictions tab (`/ready_apologia/quran/7/120/contradictions`).
+    *   Verify that the "Contradictions" tab is marked as active (`.segmented-pill-btn.active`) and appears first in the scrollable tab list before Christian Footnotes and Manuscripts.
+    *   Verify that the Contradictions box (`.contradiction-details-card`) is fully visible and rendered as a standard view box without a `<details>` accordion wrapper or toggle chevron.
+    *   Verify the title displays cleanly with the scales icon inline.
+    *   Verify the "Supporting Verses" section exists without an outer box-background and cleanly displays verse snippets with soft green `.snippet-supp` backgrounds mapped directly onto the snippets.
+    *   Verify the "Opposing Verses" section cleanly displays verse snippets with soft red `.snippet-opp` backgrounds.
+    *   Verify that each snippet hosts a compact inline verse reference link pill (`.ct-verse-link`), preventing the link from acting as a massive floating UI button nested unnaturally over the text.
