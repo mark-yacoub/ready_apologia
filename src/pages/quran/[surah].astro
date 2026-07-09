@@ -132,14 +132,14 @@ for (let i = 1; i <= totalVerses; i++) {
               <div class="verse-badge-tray">
                 <span class="verse-num">{v.number}</span>
                 {v.hasManuscript && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/manuscripts`} class="icon-inline ms-icon" title="Manuscripts available">
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/manuscripts`} class="evidence-badge ms-icon" title="Manuscripts available" aria-label={`View manuscript evidence for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </a>
                 )}
                 {v.hasChristianFootnotes && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/christian-footnotes`} class="icon-inline christian-footnote-icon" title="Christian Commentary">
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/christian-footnotes`} class="evidence-badge christian-footnote-icon" title="Christian Commentary" aria-label={`View Christian commentary for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m-4-10h8" />
                     </svg>
@@ -291,43 +291,7 @@ for (let i = 1; i <= totalVerses; i++) {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: -4px;
-  }
-
-  .icon-inline.ms-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-on-surface-variant);
-    opacity: 0.7;
-    transition: all 0.2s ease;
-  }
-
-  .icon-inline.ms-icon:hover {
-    color: var(--color-secondary);
-    opacity: 1;
-    transform: scale(1.05);
-  }
-
-  .icon-inline.ms-icon svg,
-  .icon-inline.christian-footnote-icon svg {
-    width: 17px;
-    height: 17px;
-  }
-
-  .icon-inline.christian-footnote-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-on-surface-variant);
-    opacity: 0.7;
-    transition: all 0.2s ease;
-  }
-
-  .icon-inline.christian-footnote-icon:hover {
-    color: var(--color-secondary);
-    opacity: 1;
-    transform: scale(1.05);
+    margin-bottom: 4px;
   }
 
   .verse-num {

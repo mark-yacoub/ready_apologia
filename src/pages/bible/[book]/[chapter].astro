@@ -289,8 +289,9 @@ const topicsMeta = allTopics.reduce((acc, t) => {
                         {evidenceTypes.includes('manuscript') && (
                           <a
                             href={`${base}/bible/${book}/${chapter}/${verseNum}/manuscripts`}
-                            class="icon-inline ms-icon"
+                            class="evidence-badge ms-icon"
                             title="Manuscripts available"
+                            aria-label={`View manuscript evidence for ${bookMeta.name} ${chapter}:${verseNum}`}
                           >
                             <svg viewBox="0 0 24 24" stroke-width="2.5">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -300,8 +301,9 @@ const topicsMeta = allTopics.reduce((acc, t) => {
                         {evidenceTypes.includes('contradiction') && (
                           <a
                             href={`${base}/bible/${book}/${chapter}/${verseNum}/contradictions`}
-                            class="icon-inline ct-icon"
+                            class="evidence-badge ct-icon"
                             title="Alleged contradictions available"
+                            aria-label={`View alleged contradictions for ${bookMeta.name} ${chapter}:${verseNum}`}
                           >
                             <svg viewBox="0 0 24 24" stroke-width="2.5">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7h3.5m5.5 0H18m0 0l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9h-3.5M10 5h4m-2-3v18m-5-3h10" />
@@ -311,8 +313,9 @@ const topicsMeta = allTopics.reduce((acc, t) => {
                         {evidenceTypes.includes('apologetics') && (
                           <a
                             href={`${base}/bible/${book}/${chapter}/${verseNum}/apologetics`}
-                            class="icon-inline ap-icon"
+                            class="evidence-badge ap-icon"
                             title="Apologetics defenses available"
+                            aria-label={`View apologetics defenses for ${bookMeta.name} ${chapter}:${verseNum}`}
                           >
                             <svg viewBox="0 0 24 24" stroke-width="2.5">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -864,49 +867,6 @@ const topicsMeta = allTopics.reduce((acc, t) => {
 	}
 	.verse-text-link-wrapper:hover {
 		color: var(--color-primary);
-	}
-
-	.icon-inline {
-		position: relative;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 28px;
-		height: 28px;
-		border-radius: 6px;
-		background-color: var(--color-surface-container-low);
-		color: var(--color-secondary);
-		border: 1px solid var(--color-outline-variant);
-		transition: transform 0.15s ease, border-color 0.15s, color 0.15s;
-		text-decoration: none; /* Prune default anchor highlights */
-	}
-
-	/* Invisible expanded touch target for accessibility */
-	.icon-inline::after {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 44px;
-		height: 44px;
-		z-index: 1;
-	}
-
-	.icon-inline:hover {
-		transform: scale(1.15) !important;
-		background-color: var(--color-surface-container-lowest) !important;
-		border-color: var(--color-secondary) !important;
-		color: var(--color-secondary) !important;
-	}
-
-	.icon-inline svg {
-		width: 16px;
-		height: 16px;
-		stroke: currentColor;
-		fill: none;
-		position: relative;
-		z-index: 2;
 	}
 
 	/* ==========================================
