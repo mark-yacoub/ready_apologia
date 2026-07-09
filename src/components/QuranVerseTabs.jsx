@@ -6,11 +6,13 @@ export default function QuranVerseTabs({
   msCount, 
   christianFootnotesCount,
   contradictionsCount,
+  scientificErrorsCount,
   activeTab,
   surah,
   ayah,
 }) {
   const tabs = [
+    { id: 'scientific-errors', label: `Scientific Errors (${scientificErrorsCount})`, show: scientificErrorsCount > 0 },
     { id: 'contradictions', label: `Contradictions (${contradictionsCount})`, show: contradictionsCount > 0 },
     { id: 'christian-footnotes', label: `Christian Footnotes (${christianFootnotesCount})`, show: christianFootnotesCount > 0 },
     { id: 'manuscripts', label: `Manuscripts (${msCount})`, show: msCount > 0 },

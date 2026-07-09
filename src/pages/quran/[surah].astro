@@ -12,6 +12,7 @@ import QiraatCard from '../../components/QiraatCard.astro';
 import { query } from '../../db.js';
 import { loadChristianFootnotes } from '../../utils/christian_footnotes_loader.js';
 import { loadQuranContradictions } from '../../utils/quran_contradictions_loader.js';
+import { loadScientificErrors } from '../../utils/quran_scientific_errors_loader.js';
 
 export async function getStaticPaths() {
   const paths = [];
@@ -54,6 +55,10 @@ const christianFootnotesSet = new Set(
 
 const quranContradictionsSet = new Set(
   Object.keys(loadQuranContradictions()).filter(k => k.startsWith(`${surahNum}:`))
+);
+
+const scientificErrorsSet = new Set(
+  Object.keys(loadScientificErrors()).filter(k => k.startsWith(`${surahNum}:`))
 );
 
 
@@ -105,6 +110,7 @@ for (let i = 1; i <= totalVerses; i++) {
   const hasManuscript = msQuranSet.has(verseKey);
   const hasChristianFootnotes = christianFootnotesSet.has(verseKey);
   const hasContradictions = quranContradictionsSet.has(verseKey);
+  const hasScientificErrors = scientificErrorsSet.has(verseKey);
   
   verses.push({
     number: i,
@@ -116,7 +122,8 @@ for (let i = 1; i <= totalVerses; i++) {
     qiraatVariants: qiraatVariants,
     hasManuscript: hasManuscript,
     hasChristianFootnotes: hasChristianFootnotes,
-    hasContradictions: hasContradictions
+    hasContradictions: hasContradictions,
+    hasScientificErrors: hasScientificErrors
   });
 }
 ---
@@ -142,6 +149,13 @@ for (let i = 1; i <= totalVerses; i++) {
                   <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/contradictions`} class="evidence-badge ct-icon" title="Contradictions available" aria-label={`View contradictions for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 11 3-11M15 6l3 11 3-11M12 3v18M6 6h12M12 3C8.5 3 5 4 5 4M12 3c3.5 0 7 1 7 1" />
+                    </svg>
+                  </a>
+                )}
+                {v.hasScientificErrors && (
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/scientific-errors`} class="evidence-badge se-icon" title="Scientific Error available" aria-label={`View scientific errors for Surah ${surahNum}, verse ${v.number}`}>
+                    <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18h8 M3 22h18 M14 22a7 7 0 1 0 0-14h-1 M9 14h2 M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z M12 6V3 M20 4v4m0 3v.01" />
                     </svg>
                   </a>
                 )}
