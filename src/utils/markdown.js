@@ -38,7 +38,36 @@ export function parseMarkdown(text) {
   html = html.replace(scriptureRegex, '<span class="exegesis-scripture-pill">$1</span>');
   
   // 4. Parse Inline Anchors: [text](url)
-  html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="exegesis-inline-link">$1</a>');
+  html = html.replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
+    let finalUrl = url;
+    let targetAttrs = 'target="_blank" rel="noopener noreferrer"';
+
+    if (url.startsWith('bible://')) {
+      const rawPath = url.slice('bible://'.length).replace(/^\/+|\/+$/g, '');
+      const [book, chapter, ...rest] = rawPath.split('/').filter(Boolean);
+      const verseStr = rest.join('/');
+
+      const baseUrl = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL 
+        ? import.meta.env.BASE_URL 
+        : '/ready_apologia/';
+      const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+
+      if (book && chapter) {
+        const firstVerseMatch = (verseStr.match(/\d+/) || [])[0];
+        const anchor = firstVerseMatch ? `#${firstVerseMatch}` : '';
+        finalUrl = `${base}/bible/${encodeURIComponent(book)}/${encodeURIComponent(chapter)}${anchor}`;
+      } else if (book) {
+        finalUrl = `${base}/bible/${encodeURIComponent(book)}`;
+      } else {
+        finalUrl = `${base}/bible`;
+      }
+      targetAttrs = ''; // open internal links in the same tab
+    }
+
+    // Defensive attribute escaping against XSS injection
+    const safeUrl = finalUrl.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    return `<a href="${safeUrl}" ${targetAttrs} class="exegesis-inline-link">${text}</a>`;
+  });
   
   // 5. Parse Unordered Lists (bullet points starting with "* ")
   // Execute BEFORE paragraph splitting so lists get isolated cleanly

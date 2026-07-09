@@ -4,12 +4,14 @@ import ScrollableTrack from './ScrollableTrack.jsx';
 
 export default function QuranVerseTabs({ 
   msCount, 
+  christianFootnotesCount,
   activeTab,
   surah,
   ayah,
 }) {
   const tabs = [
     { id: 'manuscripts', label: `Manuscripts (${msCount})`, show: msCount > 0 },
+    { id: 'christian-footnotes', label: `Christian Footnotes (${christianFootnotesCount})`, show: christianFootnotesCount > 0 },
   ].filter(t => t.show);
 
   if (tabs.length === 0) {

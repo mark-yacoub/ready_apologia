@@ -8,6 +8,8 @@ import QuranManuscriptCarousel from '../../../../components/QuranManuscriptCarou
 import { query } from '../../../../db.js';
 import { loadEnglishData } from '../../../../utils/quran_loader.js';
 import { assignManuscriptScanNames } from '../../../../utils/manuscript_utils.js';
+import { loadChristianFootnotes } from '../../../../utils/christian_footnotes_loader.js';
+import { parseMarkdown } from '../../../../utils/markdown.js';
 
 export async function getStaticPaths() {
   const msQuran = query("SELECT DISTINCT verse_id FROM manuscript_per_verse_quran").map(r => r.verse_id);
@@ -21,6 +23,14 @@ export async function getStaticPaths() {
     }
   });
 
+  const footnotes = loadChristianFootnotes();
+  Object.keys(footnotes).forEach(id => {
+    const [s, a] = id.split(':');
+    if (s && a) {
+      paths.push({ params: { surah: s, ayah: a, tab: 'christian-footnotes' } });
+    }
+  });
+
   return paths;
 }
 
@@ -29,6 +39,10 @@ const verseId = `${surah}:${ayah}`;
 
 const msCountInfo = query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse_quran WHERE verse_id = :verseId", { verseId });
 const msCount = msCountInfo.length > 0 ? msCountInfo[0].count : 0;
+
+const footnotesMap = loadChristianFootnotes();
+const christianFootnotes = footnotesMap[verseId] || [];
+const christianFootnotesCount = christianFootnotes.length;
 
 const englishData = loadEnglishData();
 const verseTextObj = englishData[verseId];
@@ -99,6 +113,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
     <QuranVerseTabs 
       client:load 
       msCount={msCount}
+      christianFootnotesCount={christianFootnotesCount}
       activeTab={tab}
       surah={surah}
       ayah={ayah}
@@ -114,6 +129,16 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
             ayah={ayah} 
             verseLabel={`Surah ${surah}:${ayah}`} 
           />
+        </div>
+      )}
+      {tab === 'christian-footnotes' && (
+        <div class="christian-footnotes-panel">
+          {christianFootnotes.map((note) => (
+            <div class="footnote-card">
+              <div class="footnote-content" set:html={parseMarkdown(note.content)} />
+              <p class="footnote-source">- from <em>The Quran with Christian Commentary: A Guide to Understanding the Scripture of Islam</em></p>
+            </div>
+          ))}
         </div>
       )}
     </div>
@@ -185,4 +210,42 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 	}
 
   .tab-panels-window { margin-top: 14px; }
+
+  .christian-footnotes-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footnote-card {
+    padding: 16px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+  }
+
+  .footnote-content {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-on-surface);
+    margin: 0 0 12px 0;
+    white-space: normal;
+  }
+
+  .footnote-content :global(p) {
+    margin: 0 0 12px 0;
+  }
+  .footnote-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .footnote-source {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-on-surface-variant);
+    margin: 0;
+    font-style: italic;
+    opacity: 0.8;
+  }
 </style>

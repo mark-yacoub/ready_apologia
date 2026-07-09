@@ -10,6 +10,7 @@ import { getVariantsForSurah } from '../../utils/nonUthmanicLoader.js';
 import { getQiraatForSurah } from '../../utils/qiraatLoader.js';
 import QiraatCard from '../../components/QiraatCard.astro';
 import { query } from '../../db.js';
+import { loadChristianFootnotes } from '../../utils/christian_footnotes_loader.js';
 
 export async function getStaticPaths() {
   const paths = [];
@@ -44,6 +45,10 @@ const msPrefix = `${surahNum}:%`;
 const msQuranSet = new Set(
   query("SELECT DISTINCT verse_id FROM manuscript_per_verse_quran WHERE verse_id LIKE :prefix", { prefix: msPrefix })
   .map((r: any) => r.verse_id)
+);
+
+const christianFootnotesSet = new Set(
+  Object.keys(loadChristianFootnotes()).filter(k => k.startsWith(`${surahNum}:`))
 );
 
 
@@ -93,6 +98,7 @@ for (let i = 1; i <= totalVerses; i++) {
   }
   
   const hasManuscript = msQuranSet.has(verseKey);
+  const hasChristianFootnotes = christianFootnotesSet.has(verseKey);
   
   verses.push({
     number: i,
@@ -102,7 +108,8 @@ for (let i = 1; i <= totalVerses; i++) {
     englishHTML: englishTextHTML,
     variants: verseVariants,
     qiraatVariants: qiraatVariants,
-    hasManuscript: hasManuscript
+    hasManuscript: hasManuscript,
+    hasChristianFootnotes: hasChristianFootnotes
   });
 }
 ---
@@ -128,6 +135,13 @@ for (let i = 1; i <= totalVerses; i++) {
                   <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/manuscripts`} class="icon-inline ms-icon" title="Manuscripts available">
                     <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </a>
+                )}
+                {v.hasChristianFootnotes && (
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/christian-footnotes`} class="icon-inline christian-footnote-icon" title="Christian Commentary">
+                    <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m-4-10h8" />
                     </svg>
                   </a>
                 )}
@@ -295,9 +309,25 @@ for (let i = 1; i <= totalVerses; i++) {
     transform: scale(1.05);
   }
 
-  .icon-inline.ms-icon svg {
+  .icon-inline.ms-icon svg,
+  .icon-inline.christian-footnote-icon svg {
     width: 17px;
     height: 17px;
+  }
+
+  .icon-inline.christian-footnote-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-on-surface-variant);
+    opacity: 0.7;
+    transition: all 0.2s ease;
+  }
+
+  .icon-inline.christian-footnote-icon:hover {
+    color: var(--color-secondary);
+    opacity: 1;
+    transform: scale(1.05);
   }
 
   .verse-num {

@@ -1,0 +1,95 @@
+/* Unified Global Markdown & Exegesis Stylesheet (L6 Pattern) */
+
+/* Theme Accent Defaults: Bible uses secondary/primary, Quran uses emerald green */
+:root {
+  --exegesis-link-color: var(--color-secondary);
+  --exegesis-pill-color: var(--color-primary);
+  --exegesis-pill-bg: var(--color-surface-container-low);
+}
+
+.theme-quran {
+  --exegesis-link-color: var(--quran-primary, #10b981);
+  --exegesis-pill-color: var(--quran-primary, #10b981);
+  --exegesis-pill-bg: rgba(16, 185, 129, 0.1);
+}
+
+/* Standalone Horizontal Dividers */
+.exegesis-divider {
+  border: none;
+  border-top: 1px solid var(--color-outline-variant);
+  margin: 10px 0;
+  width: 100%;
+  opacity: 0.5;
+}
+
+/* Paragraph and List Typography */
+.response-paragraph {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-on-surface);
+  margin: 0 0 12px 0;
+  text-align: justify;
+}
+.response-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.response-list {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-on-surface);
+  margin: 0 0 12px 0;
+  padding-left: 18px;
+}
+.response-list-item {
+  margin-bottom: 6px;
+}
+.response-list-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Scripture Pill Badges */
+.exegesis-scripture-pill {
+  display: inline-block;
+  background-color: var(--exegesis-pill-bg);
+  border: 1px solid var(--color-outline-variant);
+  color: var(--exegesis-pill-color);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 5px;
+  margin: 0 2px;
+  vertical-align: middle;
+  user-select: text;
+  letter-spacing: -0.01em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: all 0.15s ease;
+}
+
+/* Interactive Clickable Links (including scripture badges inside anchors) */
+a.exegesis-inline-link {
+  color: var(--exegesis-link-color) !important;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+a.exegesis-inline-link .exegesis-scripture-pill {
+  border-color: var(--exegesis-link-color);
+  color: var(--exegesis-link-color);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+a.exegesis-inline-link:hover,
+a.exegesis-inline-link:hover .exegesis-scripture-pill {
+  background-color: var(--exegesis-link-color);
+  color: #ffffff !important;
+  border-color: var(--exegesis-link-color);
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}

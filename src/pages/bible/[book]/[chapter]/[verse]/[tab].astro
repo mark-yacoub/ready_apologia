@@ -831,44 +831,7 @@ if (tab === 'apologetics' && apologetics && apologetics.length > 0) {
 		fill: none;
 	}
 
-	/* Markdown Inline Links Styling */
-	.card-response-body :global(.exegesis-inline-link) {
-		color: var(--color-secondary) !important;
-		font-weight: 700;
-		text-decoration: none;
-		border-bottom: 1px dashed var(--color-secondary);
-		transition: border-bottom-color 0.15s;
-	}
-	.card-response-body :global(.exegesis-inline-link:hover) {
-		border-bottom-style: solid;
-	}
 
-	/* Markdown Standalone horizontal dividers */
-	.card-response-body :global(.exegesis-divider) {
-		border: none;
-		border-top: 1px solid var(--color-outline-variant);
-		margin: 10px 0;
-		width: 100%;
-		opacity: 0.5;
-	}
-
-	/* Inline Scripture Reference Badges style */
-	.card-response-body :global(.exegesis-scripture-pill) {
-		display: inline-block;
-		background-color: var(--color-surface-container-low);
-		border: 1px solid var(--color-outline-variant);
-		color: var(--color-primary);
-		font-family: var(--font-body);
-		font-size: 11px;
-		font-weight: 800;
-		padding: 2.5px 6px;
-		border-radius: 5px;
-		margin: 0 3px;
-		vertical-align: middle;
-		user-select: text;
-		letter-spacing: -0.01em;
-		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
-	}
 
 	@keyframes slideDown {
 		from { opacity: 0; transform: translateY(-2px); }
@@ -971,30 +934,7 @@ if (tab === 'apologetics' && apologetics && apologetics.length > 0) {
 		margin-bottom: 2px;
 	}
 
-	:global(.response-paragraph) {
-		font-size: 14px;
-		line-height: 1.5;
-		color: var(--color-on-surface-variant);
-		margin: 0;
-		text-align: justify;
-	}
 
-	:global(.response-list) {
-		font-size: 14px;
-		line-height: 1.5;
-		color: var(--color-on-surface-variant);
-		margin: 0;
-		padding-left: 14px;
-		text-align: justify;
-	}
-	
-	:global(.response-list-item) {
-		margin-bottom: 4px;
-	}
-	
-	:global(.response-list-item:last-child) {
-		margin-bottom: 0;
-	}
 
 	.card-footer {
 		border-top: 1px dashed var(--color-outline-variant);
