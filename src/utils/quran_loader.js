@@ -18,3 +18,24 @@ export const loadEnglishData = () => {
     return {};
   }
 };
+
+const cachedArabicSurahs = {};
+
+export const loadArabicSurah = (surahNum) => {
+  if (!surahNum) return { verses: {}, versesHTML: {} };
+  const key = String(surahNum);
+  if (cachedArabicSurahs[key]) {
+    return cachedArabicSurahs[key];
+  }
+  const arabicFilePath = path.join(process.cwd(), 'src/data/quran/arabic/surahs', `${key}.json`);
+  try {
+    if (fs.existsSync(arabicFilePath)) {
+      const content = fs.readFileSync(arabicFilePath, 'utf-8');
+      cachedArabicSurahs[key] = JSON.parse(content);
+      return cachedArabicSurahs[key];
+    }
+  } catch (e) {
+    console.error(`Failed to load Arabic surah ${key}`, e);
+  }
+  return { verses: {}, versesHTML: {} };
+};

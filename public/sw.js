@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ready-apologia-cache-v1';
+const CACHE_NAME = 'ready-apologia-cache-v2';
 
 // Pre-cache home, styling, and basic navigator structure on install
 const PRE_CACHE_ASSETS = [
@@ -23,7 +23,13 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('Pre-caching core assets...');
-      return cache.addAll(PRE_CACHE_ASSETS);
+      return Promise.allSettled(
+        PRE_CACHE_ASSETS.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn(`[SW] Skip pre-cache for ${url}:`, err);
+          })
+        )
+      );
     })
   );
   self.skipWaiting();

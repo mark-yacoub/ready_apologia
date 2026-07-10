@@ -62,6 +62,26 @@ export function parseMarkdown(text) {
         finalUrl = `${base}/bible`;
       }
       targetAttrs = ''; // open internal links in the same tab
+    } else if (url.startsWith('quran://') || url.startsWith('quran/') || url.startsWith('/quran/')) {
+      const rawPath = url.replace(/^(\/)?quran:\/\//, '').replace(/^(\/)?quran\//, '').replace(/^\/+|\/+$/g, '');
+      const [surah, ...rest] = rawPath.split('/').filter(Boolean);
+      const ayahStr = rest.join('/');
+
+      const baseUrl = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL 
+        ? import.meta.env.BASE_URL 
+        : '/ready_apologia/';
+      const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+
+      if (surah && ayahStr) {
+        const firstAyahMatch = (ayahStr.match(/\d+/) || [])[0];
+        const anchor = firstAyahMatch ? `#v-${firstAyahMatch}` : '';
+        finalUrl = `${base}/quran/${encodeURIComponent(surah)}${anchor}`;
+      } else if (surah) {
+        finalUrl = `${base}/quran/${encodeURIComponent(surah)}`;
+      } else {
+        finalUrl = `${base}/quran`;
+      }
+      targetAttrs = ''; // open internal links in the same tab
     }
 
     // Defensive attribute escaping against XSS injection

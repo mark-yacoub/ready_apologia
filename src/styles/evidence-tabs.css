@@ -59,3 +59,308 @@
   border-radius: 12px;
   background-color: var(--color-surface-container-low);
 }
+
+/* Islamic Commentary Icon & Styling */
+.evidence-badge.ic-icon {
+  color: #0d9488; /* Teal / Emerald Islamic scholarship tint */
+  background-color: rgba(13, 148, 136, 0.1);
+  border-color: rgba(13, 148, 136, 0.25);
+}
+
+.evidence-badge.ic-icon:hover {
+  background-color: rgba(13, 148, 136, 0.2);
+  border-color: rgba(13, 148, 136, 0.4);
+}
+
+.ic-verse-box {
+  background-color: var(--color-surface-container-low);
+  border-left: 4px solid #0d9488;
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  margin: 6px 0 10px 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--color-on-surface);
+  line-height: 1.5;
+}
+
+.ic-box-header {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #0d9488;
+  margin-bottom: 4px;
+  font-style: normal;
+}
+
+/* Debate Authority Banner (Moved to Bottom) */
+.ic-authority-banner {
+  background-color: rgba(13, 148, 136, 0.08);
+  border: 1px solid rgba(13, 148, 136, 0.25);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.ic-authority-title {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: #0d9488;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ic-authority-body {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+/* Verse Range Pill */
+.ic-range-pill {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  background-color: rgba(13, 148, 136, 0.15);
+  color: #0d9488;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  margin-left: 8px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Collapsible Full Scripture Context */
+.ic-context-details {
+  background-color: var(--color-surface-container-low);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 12px 0 16px 0;
+}
+
+.ic-context-summary {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: #0d9488;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ic-context-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px dashed var(--color-outline-variant);
+  padding-top: 12px;
+}
+
+.ic-context-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ic-context-num {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--quran-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Tighten Paragraph & List Spacing inside Commentary Cards */
+.contradiction-card-content .response-paragraph {
+  margin-bottom: 8px !important;
+  line-height: 1.5;
+}
+.contradiction-card-content .response-list {
+  margin-bottom: 8px !important;
+}
+
+/* Global Tab Reordering Modal Styles (Restored from commit 9c5725df) */
+.reorder-modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; backdrop-filter: blur(0px); }
+  to { opacity: 1; backdrop-filter: blur(4px); }
+}
+
+.reorder-modal-card {
+  background-color: var(--color-surface);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 360px;
+  padding: 24px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(0.95);
+  animation: scaleUp 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.95) translateY(10px); }
+  to { transform: scale(1) translateY(0); }
+}
+
+.reorder-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.reorder-modal-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.reorder-modal-close {
+  background: none;
+  border: none;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.15s;
+}
+.reorder-modal-close:hover {
+  background-color: var(--color-surface-container-low);
+  color: var(--color-primary);
+}
+
+.reorder-modal-desc {
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+  margin-top: 0;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.reorder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reorder-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: var(--color-surface-container-low);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 10px;
+}
+
+.reorder-item-label {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 14px;
+}
+
+.reorder-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reorder-arrow-btn {
+  background: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  color: var(--color-primary);
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.reorder-arrow-btn:hover:not(:disabled) {
+  background: var(--color-secondary);
+  color: white;
+  border-color: var(--color-secondary);
+}
+.reorder-arrow-btn:active:not(:disabled) {
+  transform: scale(0.9);
+}
+.reorder-arrow-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.reorder-modal-done-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 24px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.reorder-modal-done-btn:hover {
+  opacity: 0.9;
+}
+.reorder-modal-done-btn:active {
+  transform: scale(0.98);
+}
+
+/* Subtle Ellipsis Settings Button (Shared for Bible & Quran Drawer Headers) */
+.subtle-ellipsis-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-on-surface-variant);
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 12px;
+  margin: -8px; /* Offset the large padding to maintain visual alignment */
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+.subtle-ellipsis-btn:hover {
+  opacity: 1;
+  color: var(--quran-primary, var(--color-primary));
+  background-color: var(--color-surface-container-low);
+}
+.subtle-ellipsis-btn:active {
+  transform: scale(0.95);
+}
