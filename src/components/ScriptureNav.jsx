@@ -169,39 +169,13 @@ export default function ScriptureNav() {
       
       {/* 3. Scrollable Books Tree Navigator */}
       <div className="sidebar-scroll-content">
-        {/* New Testament */}
-        <div className="nav-section">
-          <button 
-            onClick={() => toggleSection('nt')} 
-            className={`section-header-btn ${expandedSection === 'nt' ? 'active' : ''}`}
-          >
-            <span className="icon">✝</span>
-            <span className="title-text">New Testament ({NT_TRANSLATION_NAME})</span>
-            <span className="section-arrow">{expandedSection === 'nt' ? '▼' : '▶'}</span>
-          </button>
-          {expandedSection === 'nt' && renderBookList(booksData.nt, 'nt')}
-        </div>
-
-        {/* Old Testament */}
-        <div className="nav-section">
-          <button 
-            onClick={() => toggleSection('ot')} 
-            className={`section-header-btn ${expandedSection === 'ot' ? 'active' : ''}`}
-          >
-            <span className="icon">📜</span>
-            <span className="title-text">Old Testament (LXX)</span>
-            <span className="section-arrow">{expandedSection === 'ot' ? '▼' : '▶'}</span>
-          </button>
-          {expandedSection === 'ot' && renderBookList(booksData.ot, 'ot')}
-        </div>
-
         {/* Quran */}
         <div className="nav-section">
           <button 
             onClick={() => toggleSection('quran')} 
             className={`section-header-btn ${expandedSection === 'quran' ? 'active' : ''}`}
           >
-            <span className="icon">📖</span>
+            <span className="icon">🌙</span>
             <span className="title-text">Quran</span>
             <span className="section-arrow">{expandedSection === 'quran' ? '▼' : '▶'}</span>
           </button>
@@ -229,6 +203,32 @@ export default function ScriptureNav() {
               ))}
             </div>
           )}
+        </div>
+
+        {/* New Testament */}
+        <div className="nav-section">
+          <button 
+            onClick={() => toggleSection('nt')} 
+            className={`section-header-btn ${expandedSection === 'nt' ? 'active' : ''}`}
+          >
+            <span className="icon">✝</span>
+            <span className="title-text">New Testament ({NT_TRANSLATION_NAME})</span>
+            <span className="section-arrow">{expandedSection === 'nt' ? '▼' : '▶'}</span>
+          </button>
+          {expandedSection === 'nt' && renderBookList(booksData.nt, 'nt')}
+        </div>
+
+        {/* Old Testament */}
+        <div className="nav-section">
+          <button 
+            onClick={() => toggleSection('ot')} 
+            className={`section-header-btn ${expandedSection === 'ot' ? 'active' : ''}`}
+          >
+            <span className="icon">📜</span>
+            <span className="title-text">Old Testament (LXX)</span>
+            <span className="section-arrow">{expandedSection === 'ot' ? '▼' : '▶'}</span>
+          </button>
+          {expandedSection === 'ot' && renderBookList(booksData.ot, 'ot')}
         </div>
       </div>
 

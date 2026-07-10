@@ -117,6 +117,9 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 
 					<!-- Footer -->
 					<footer class="app-footer">
+						<p class="footer-disclaimer">
+							Ready Apologia is an actively evolving project. We are continuously adding new theological filters, deep-dive topics, and manuscript data, while rigorously refining our quality checks. If you notice any bugs, misalignments, or have suggestions, please use the feedback links below to help us improve. Expect fresh updates on a biweekly basis!
+						</p>
 						<div class="footer-links">
 							<a href="https://catenabible.com" target="_blank" rel="noopener noreferrer">About Us</a>
 							<span class="link-divider">&bull;</span>
@@ -643,6 +646,17 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		border-top: 1px solid var(--color-outline-variant);
 		text-align: center;
 		padding-bottom: 24px;
+	}
+
+	.footer-disclaimer {
+		font-family: var(--font-body);
+		font-size: 10px;
+		color: var(--color-on-surface-variant);
+		opacity: 0.5;
+		max-width: 500px;
+		margin: 0 auto 20px auto;
+		line-height: 1.4;
+		font-style: italic;
 	}
 
 	.footer-links {
