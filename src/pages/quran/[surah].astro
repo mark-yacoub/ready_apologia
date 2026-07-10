@@ -8,6 +8,7 @@ import { TOTAL_SURAHS } from '../../utils/quran_config.js';
 import { loadEnglishData } from '../../utils/quran_loader.js';
 import { getVariantsForSurah } from '../../utils/nonUthmanicLoader.js';
 import { getQiraatForSurah } from '../../utils/qiraatLoader.js';
+import { loadVerseLabels } from '../../utils/quran_verse_labels_loader.js';
 import QiraatCard from '../../components/QiraatCard.astro';
 import { query } from '../../db.js';
 import { getEvidenceSetsForSurahPrefix } from '../../utils/quran_evidence_service.js';
@@ -40,6 +41,7 @@ const englishData = loadEnglishData();
 // 3. Load Variants via O(1) in-memory cache lookup
 const variantsByAyah = await getVariantsForSurah(surahNum);
 const qiraatByAyah = await getQiraatForSurah(surahNum);
+const verseLabelsData = loadVerseLabels();
 
 // 3.5 Load Manuscript Maps
 const msPrefix = `${surahNum}:%`;
@@ -65,6 +67,7 @@ for (let i = 1; i <= totalVerses; i++) {
   const englishText = englishTextObj ? englishTextObj.text : '';
   const verseVariants = variantsByAyah[String(i)] || [];
   const qiraatVariants = qiraatByAyah[String(i)] || [];
+  const labelsObj = verseLabelsData[verseKey] || {};
   
   let arabicTextHTML = arabicText;
   let englishTextHTML = englishText;
@@ -115,6 +118,7 @@ for (let i = 1; i <= totalVerses; i++) {
     englishHTML: englishTextHTML,
     variants: verseVariants,
     qiraatVariants: qiraatVariants,
+    labels: labelsObj,
     hasManuscript: hasManuscript,
     hasChristianFootnotes: hasChristianFootnotes,
     hasContradictions: hasContradictions,
@@ -239,6 +243,21 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
                   </div>
                 </details>
               )}
+              
+              {v.labels && Object.keys(v.labels).length > 0 && (
+                <div class="verse-labels-container">
+                  {Object.entries(v.labels).map(([labelName, noteText]) => (
+                    <details class="label-details" data-surah={surahNum} data-verse={v.number} data-label-name={labelName}>
+                      <summary class="label-summary">
+                        <span class="label-pill">{labelName}</span>
+                      </summary>
+                      <div class="label-note">
+                        {noteText}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -251,6 +270,7 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
 
 <script>
   import { DEFAULT_QURAN_TAB_ORDER, sanitizeTabOrder } from '../../utils/quran_config.js';
+  import { trackQuranLabelInteraction } from '../../utils/analytics.js';
 
   const initToggle = () => {
     const btnEn = document.getElementById('toggle-en');
@@ -300,6 +320,19 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
         });
       }
     } catch (e) {}
+
+    // Analytics: Track Verse Label Expansions (O(1) Global Delegation)
+    container.addEventListener('toggle', (e) => {
+      const target = e.target;
+      if (target instanceof HTMLDetailsElement && target.matches('.label-details') && target.open) {
+        trackQuranLabelInteraction({
+          surahNum: target.getAttribute('data-surah') || '',
+          verseNum: target.getAttribute('data-verse') || '',
+          labelName: target.getAttribute('data-label-name') || '',
+          action: 'expand_label'
+        });
+      }
+    }, true); // useCapture: true is REQUIRED because toggle events do not bubble
   };
 
   document.addEventListener('astro:page-load', initToggle);
@@ -547,6 +580,56 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
     border-radius: 4px;
     padding: 0 4px;
     border-bottom: 2px solid #facc15; /* yellow-400 */
+  }
+
+  /* Verse Labels Styles */
+  .verse-labels-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .label-details {
+    border: 1px solid #d8b4fe; /* purple-300 */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #faf5ff; /* purple-50 */
+  }
+
+  .label-summary {
+    padding: 12px 16px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none; /* Hide default arrow in some browsers */
+  }
+
+  .label-pill {
+    display: inline-block;
+    background-color: #e9d5ff; /* purple-200 */
+    color: #6b21a8; /* purple-800 */
+    border: 1px solid #c084fc; /* purple-400 */
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    transition: all 0.15s ease;
+  }
+
+  .label-summary:hover .label-pill {
+    background-color: #d8b4fe; /* purple-300 */
+  }
+
+  .label-note {
+    padding: 16px;
+    border-top: 1px solid #f3e8ff; /* purple-100 */
+    background-color: var(--color-surface);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-on-surface);
+    white-space: pre-wrap; /* Preserve markdown/JSON newlines accurately */
   }
 </style>
 

@@ -77,6 +77,18 @@ export function trackTopicInteraction({ topicId, action, verseRef }) {
 }
 
 /**
+ * Track user interactions with Quran Verse Labels (Theological Defects, Mutilations, etc.)
+ */
+export function trackQuranLabelInteraction({ surahNum, verseNum, labelName, action }) {
+  trackEvent('quran_label_interaction', {
+    surah_num: surahNum || '',
+    verse_num: verseNum || '',
+    label_name: labelName || '',
+    action: action || '',
+  });
+}
+
+/**
  * Track when a user customizes their tab hierarchy in the settings modal.
  */
 export function trackTabReorder({ testament, topTab, fullOrder }) {
