@@ -89,6 +89,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 
 ## 📂 Codebase Map
 *   `.gitignore`: Standard Git exclusion rules for `node_modules/`, `dist/`, and `.astro/`.
+*   `.github/workflows/deploy.yml`: Automated CI/CD deployment workflow to sync static builds directly to Cloudflare R2 object storage.
 *   `data.db`: The SQLite database queried during pre-rendering.
 *   `docs/db_schema.sql`: SQL schema definitions for database queries.
 *   `scripts/import_scripture.js`: Script to sync NASB (NT) and LXX (OT) JSON scripture databases.

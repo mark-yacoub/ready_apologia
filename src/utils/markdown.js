@@ -49,7 +49,7 @@ export function parseMarkdown(text) {
 
       const baseUrl = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL 
         ? import.meta.env.BASE_URL 
-        : '/ready_apologia/';
+        : '/';
       const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 
       if (book && chapter) {
@@ -69,7 +69,7 @@ export function parseMarkdown(text) {
 
       const baseUrl = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL 
         ? import.meta.env.BASE_URL 
-        : '/ready_apologia/';
+        : '/';
       const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 
       if (surah && ayahStr) {

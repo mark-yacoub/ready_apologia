@@ -93,6 +93,7 @@ pkill -f astro
 
 ## 📂 Repository Map
 *   `.gitignore`: Standard Git exclusion rules for node dependencies and build outputs.
+*   `.github/workflows/deploy.yml`: Automated CI/CD deployment workflow to sync static builds directly to Cloudflare R2 object storage.
 *   `data.db`: SQLite database containing apologetics and manuscript metadata.
 *   `docs/db_schema.sql`: SQL schema definitions for the SQLite database.
 *   `scripts/import_scripture.js`: Script to import NASB (NT) and LXX (OT) JSON scriptures into the repository.

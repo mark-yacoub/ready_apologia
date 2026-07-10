@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mark-yacoub.github.io/ready_apologia/sitemap-index.xml
+Sitemap: https://readyapologia.com/sitemap-index.xml

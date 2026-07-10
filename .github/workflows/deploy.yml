@@ -1,33 +1,24 @@
-name: Deploy to GitHub Pages
+name: Deploy to Cloudflare R2
 
 on:
-  # Trigger the workflow every time you push to the `master` or `main` branch
   push:
     branches: [ main, master ]
-  # Allows you to run this workflow manually from the Actions tab on GitHub
   workflow_dispatch:
 
-# Allow this job to clone the repo and create a page deployment
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, cancelling any runs currently in progress
-# if a newer push is detected, so we don't waste build minutes on outdated code.
+# Allow only one concurrent deployment
 concurrency:
-  group: "pages"
+  group: "r2-deploy"
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
 
@@ -38,19 +29,14 @@ jobs:
         run: corepack yarn build
         env:
           NODE_OPTIONS: '--experimental-sqlite'
+          SITE_URL: 'https://readyapologia.com'
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: ./dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - name: Sync to Cloudflare R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          aws s3 sync ./dist s3://ready-apologia-web/ \
+            --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
+            --delete
