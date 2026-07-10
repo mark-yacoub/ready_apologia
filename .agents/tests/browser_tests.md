@@ -228,3 +228,43 @@ This document defines the structured browser automation test cases for Ready Apo
     *   Verify the "Supporting Verses" section exists without an outer box-background and cleanly displays verse snippets with soft green `.snippet-supp` backgrounds mapped directly onto the snippets.
     *   Verify the "Opposing Verses" section cleanly displays verse snippets with soft red `.snippet-opp` backgrounds.
     *   Verify that each snippet hosts a compact inline verse reference link pill (`.ct-verse-link`), preventing the link from acting as a massive floating UI button nested unnaturally over the text.
+
+---
+
+## Test Case 16: Quran Christian Commentaries & Tafseer Tabs
+1.  **Action**: Navigate directly to a mapped verse tab, for example: `/ready_apologia/quran/1/1/christian-commentaries`.
+2.  **Verification**:
+    *   Confirm the "Christian Commentaries" tab pill is marked active.
+    *   Verify the commentary text and author/source pill are displayed correctly.
+3.  **Action**: Navigate directly to `/ready_apologia/quran/1/1/tafseer`.
+4.  **Verification**:
+    *   Confirm the "Tafseer" tab is marked active.
+    *   Verify the Tafseer Ibn Katheer content renders properly inside its display card.
+
+---
+
+## Test Case 17: Quran Scientific Errors Tab
+1.  **Action**: Navigate directly to a mapped scientific error verse, e.g., `/ready_apologia/quran/86/6/scientific-errors`.
+2.  **Verification**:
+    *   Confirm the "Scientific Errors" tab is marked active.
+    *   Verify the error description, classification details, and callout elements are cleanly rendered within the layout.
+
+---
+
+## Test Case 18: Quran Debunking Miracles, Clickable Verse Text & Tab Preference Redirection
+1.  **Action**: Clear `localStorage` and navigate to Surah 86 reader (`http://localhost:8080/ready_apologia/quran/86`).
+2.  **Verification**:
+    *   Confirm Surah 86 renders.
+    *   Verify Verse 1 contains the `.dm-icon` (explosion icon) evidence badge colored identically to others.
+    *   Verify the Arabic text of Verse 1 is wrapped in a clickable anchor link (`.verse-text-link`).
+3.  **Action**: Click the Arabic text of Verse 1.
+4.  **Verification**:
+    *   Confirm the browser navigates to `/ready_apologia/quran/86/1`.
+    *   Confirm the `/ready_apologia/quran/86/1` index page automatically redirects to `/ready_apologia/quran/86/1/debunking-miracles` (since Debunking Miracles is configured as the default first tab).
+    *   Verify the "Debunking Miracles" tab is marked active in the segmented bar.
+    *   Verify the Claim and Refutation are prominently rendered inside `.debunking-claim-box` and `.debunking-refutation-section`.
+    *   Verify the Circular info icon `(i)` button (`.info-icon-btn`) is rendered at the bottom footer.
+5.  **Action**: Click the settings ellipsis button (`#open-tab-settings-btn`) to open "Customize Tab Order". Move a different tab to the top (e.g., jump "Manuscripts" or another available tab above Debunking Miracles) and save.
+6.  **Action**: Navigate back to `/ready_apologia/quran/86` and click the Verse 1 text again.
+7.  **Verification**:
+    *   Confirm that this time, it dynamically redirects to the new preferred tab (if the evidence is available for that verse) instead of defaulting to Debunking Miracles.
