@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { generateQuranTabSEO } from '../../../../utils/seoFactory.js';
 import Layout from '../../../../layouts/Layout.astro';
 import QuranVerseTabs from '../../../../components/QuranVerseTabs.jsx';
 import QuranManuscriptCarousel from '../../../../components/QuranManuscriptCarousel.jsx';
@@ -105,12 +106,22 @@ if (earliestMs.length > 0 && earliestMs[0].image_name) {
   ogImage = `https://pub-219566f197174e27a10f51e5fb2414f6.r2.dev/quran/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
 }
 
-let seoDescription = `Explore ancient manuscript evidence for Quran Surah ${surah}:${ayah} in Ready Apologia.`;
+const { seoTitle, seoDescription } = generateQuranTabSEO({ 
+  tab, 
+  surah, 
+  ayah, 
+  manuscripts, 
+  verseContradictions, 
+  parsedScientificErrors, 
+  verseDebunking, 
+  islamicCommentaries 
+});
+
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
 <Layout 
-  title={`Evidence: Surah ${surah}:${ayah}`} 
+  title={seoTitle} 
   description={seoDescription} 
   ogImage={ogImage} 
 >

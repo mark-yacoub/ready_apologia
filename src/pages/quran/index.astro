@@ -52,9 +52,12 @@ try {
 
 // Ensure base path for links
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+const seoTitle = "Quran Evidence - Variant Manuscripts & Christian Apologetics";
+const seoDescription = "Explore the Quran through a critical apologetics lens. Discover thousands of lost verses, competing codices, and variant readings with manuscript evidence.";
 ---
 
-<Layout title="Quran Evidence & Filters - Ready Apologia">
+<Layout title={seoTitle} description={seoDescription}>
   <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader 
       currentTitle="Evidence & Filters"

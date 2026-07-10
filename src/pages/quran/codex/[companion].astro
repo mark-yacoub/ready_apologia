@@ -46,9 +46,12 @@ codexData.uthmanicVariants.forEach(v => {
 });
 
 const surahsList = Object.values(variantsBySurah).sort((a, b) => parseInt(a.number) - parseInt(b.number));
+
+const seoTitle = `${codexData.name} Codex - Variant Manuscripts & Lost Verses`;
+const seoDescription = `Explore the ${codexData.name} Codex. Discover ${codexData.uthmanicVariants.length} historical manuscript differences, alternative readings, and lost verses that diverge from the standard Uthmanic text of the Quran.`;
 ---
 
-<Layout title={`${codexData.name} Codex`}>
+<Layout title={seoTitle} description={seoDescription}>
   <div class="quran-reader-container theme-quran prefer-english">
     
     <!-- Header: Companion Name (Clickable) -->

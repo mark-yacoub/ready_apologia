@@ -124,9 +124,23 @@ for (let i = 1; i <= totalVerses; i++) {
     hasEvidence: hasEvidence
   });
 }
+
+const seoTitle = `Surah ${arabicData.transliteration} (${surahNum}) - Read with Christian Apologetics, Manuscripts & Variants`;
+let seoDescription = `Read Surah ${arabicData.transliteration} (${surahNum}) in English and Arabic. Filter through thousands of variant readings, variant manuscripts, debunked miracles and apologetic commentaries.`;
+
+const variantCount = verses.filter(v => v.hasVariants).length;
+const contradictionCount = verses.filter(v => v.hasContradictions).length;
+const scientificErrorCount = verses.filter(v => v.hasScientificErrors).length;
+if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
+  const stats = [];
+  if (variantCount > 0) stats.push(`${variantCount} textual variants/manuscripts`);
+  if (contradictionCount > 0) stats.push(`${contradictionCount} contradictions`);
+  if (scientificErrorCount > 0) stats.push(`${scientificErrorCount} scientific errors`);
+  seoDescription += ` This Surah features deep analysis on ${stats.join(', ')}.`;
+}
 ---
 
-<Layout title={`${surahNum}. ${arabicData.transliteration}`}>
+<Layout title={seoTitle} description={seoDescription}>
   <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader currentTitle={`${surahNum}. ${arabicData.transliteration}`} currentIndex={surahNum} />
     

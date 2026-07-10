@@ -48,9 +48,12 @@ interface Companion {
 // Load data asynchronously (L6 performance pattern using Promise.all internally)
 const companionsWithData: Companion[] = await loadNonUthmanicData(type);
 const superstarsList = companionsWithData.map(c => ({ name: c.name }));
+
+const seoTitle = isLost ? "Lost Verses of the Quran | Apologetics & Manuscript Evidence" : "Abrogated Verses in the Quran (Naskh) | Apologetics Evidence";
+const seoDescription = isLost ? "Explore the lost verses of the Quran that were historically recited by prominent companions but omitted from the Uthmanic canon." : "Analyze abrogated verses (Naskh) within the Quran. Explore how early companions historically documented these textual changes and differing recitations.";
 ---
 
-<Layout title={title}>
+<Layout title={seoTitle} description={seoDescription}>
   <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader currentTitle={title} currentIndex={index} />
     

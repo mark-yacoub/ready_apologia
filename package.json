@@ -8,6 +8,7 @@
     "build": "NODE_OPTIONS='--experimental-sqlite' astro build",
     "preview": "astro preview",
     "serve": "node scripts/serve.js",
+    "test:seo": "node scripts/test_seo.mjs",
     "astro": "astro"
   },
   "dependencies": {

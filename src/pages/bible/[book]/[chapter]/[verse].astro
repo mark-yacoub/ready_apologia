@@ -80,6 +80,8 @@ if (hasMs) {
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const redirectUrl = `${base}/bible/${book}/${chapter}/${verse}/${firstTab}`;
 const canonicalUrl = new URL(redirectUrl, Astro.site || Astro.url).href;
+
+return Astro.redirect(encodeURI(redirectUrl), 301);
 ---
 
 <!DOCTYPE html>
@@ -88,7 +90,6 @@ const canonicalUrl = new URL(redirectUrl, Astro.site || Astro.url).href;
   <meta charset="utf-8" />
   <title>Ready Apologia</title>
   <link rel="canonical" href={canonicalUrl} />
-  <meta name="robots" content="noindex" />
   <meta http-equiv="refresh" content={`0;url=${redirectUrl}`} />
   <script is:inline define:vars={{ redirectUrl }}>
     window.location.replace(redirectUrl);

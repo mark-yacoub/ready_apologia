@@ -21,6 +21,10 @@ const defaultTab = availableTabs.length > 0 ? availableTabs[0] : DEFAULT_QURAN_T
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const fallbackUrl = `${base}/quran/${surah}/${ayah}/${defaultTab}`;
 const canonicalUrl = new URL(fallbackUrl, Astro.site || Astro.url).href;
+
+// Optional: for fully SSR/hybrid hosts, this natively 301s. 
+// For pure SSG, Astro turns this into a meta refresh HTML file.
+return Astro.redirect(encodeURI(fallbackUrl), 301);
 ---
 
 <!DOCTYPE html>
@@ -29,7 +33,6 @@ const canonicalUrl = new URL(fallbackUrl, Astro.site || Astro.url).href;
   <meta charset="utf-8" />
   <title>Ready Apologia - Quran Evidence</title>
   <link rel="canonical" href={canonicalUrl} />
-  <meta name="robots" content="noindex" />
   <meta http-equiv="refresh" content={`0;url=${fallbackUrl}`} />
   <script is:inline define:vars={{ availableTabs, defaultTab, base, surah, ayah, defaultOrder: DEFAULT_QURAN_TAB_ORDER }}>
     let targetTab = defaultTab;

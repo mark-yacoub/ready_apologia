@@ -1,4 +1,5 @@
 ---
+import { generateBibleTabSEO } from '../../../../../utils/seoFactory.js';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -267,36 +268,19 @@ if (isNT) {
   } catch(e) {}
 }
 
-// Generate SEO Description & JSON-LD Schema
-let seoDescription = `Explore apologetics, alleged contradictions, and ancient manuscript evidence for ${bookMeta.name} ${chapter}:${verse} in Ready Apologia.`;
-let seoSchema = undefined;
-
-const sanitizeHTML = (str) => {
-  if (!str) return "";
-  return str.replace(/<[^>]*>?/gm, '').replace(/"/g, '&quot;'); 
-};
-
-if (tab === 'apologetics' && apologetics && apologetics.length > 0) {
-  seoDescription = `Apologetic defenses for ${bookMeta.name} ${chapter}:${verse}. Topics include: ${sanitizeHTML(apologetics[0].title)}.`;
-  const faqs = apologetics.map(ap => ({
-    "@type": "Question",
-    "name": sanitizeHTML(ap.title),
-    "acceptedAnswer": { "@type": "Answer", "text": sanitizeHTML(ap.answer) }
-  }));
-  seoSchema = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faqs });
-} else if (tab === 'contradictions' && contradictions && contradictions.length > 0) {
-  seoDescription = `Answers to alleged contradictions in ${bookMeta.name} ${chapter}:${verse}. Topics include: ${sanitizeHTML(contradictions[0].title)}.`;
-  const faqs = contradictions.map(ct => ({
-    "@type": "Question",
-    "name": sanitizeHTML(ct.title),
-    "acceptedAnswer": { "@type": "Answer", "text": sanitizeHTML(ct.answer) }
-  }));
-  seoSchema = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faqs });
-}
+const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({ 
+  tab, 
+  bookName: bookMeta.name, 
+  chapter, 
+  verse, 
+  manuscripts, 
+  contradictions, 
+  apologetics 
+});
 ---
 
 <Layout 
-  title={`Evidence: ${bookMeta.name} ${chapter}:${verse}`} 
+  title={seoTitle} 
   description={seoDescription} 
   ogImage={ogImage} 
   schema={seoSchema}

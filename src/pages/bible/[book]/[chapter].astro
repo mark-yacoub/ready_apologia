@@ -220,9 +220,23 @@ const topicsMeta = allTopics.reduce((acc, t) => {
   acc[t.topicId] = { title: name, color: getTopicColor(t.topicId) };
   return acc;
 }, {});
+
+const seoTitle = `${bookMeta.name} ${chapter} - Read with Evidence & Apologetics`;
+let seoDescription = `Read ${bookMeta.name} ${chapter} in English alongside ancient manuscript evidence, Christian apologetics, answers to alleged contradictions, and cross-references.`;
+
+const evidenceVerseCount = Object.keys(evidenceMap).length;
+const topicsVerseCount = Object.keys(topicMap).length;
+
+if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
+  const stats = [];
+  if (evidenceVerseCount > 0) stats.push(`textual and critical evidence for ${evidenceVerseCount} verse${evidenceVerseCount > 1 ? 's' : ''}`);
+  if (topicsVerseCount > 0) stats.push(`deep theological topics across ${topicsVerseCount} verse${topicsVerseCount > 1 ? 's' : ''}`);
+  
+  seoDescription += ` This chapter includes ${stats.join(' and ')}.`;
+}
 ---
 
-<Layout title={`${bookMeta.name} ${chapter}`} ogImage={ogImage}>
+<Layout title={seoTitle} description={seoDescription} ogImage={ogImage}>
   <div class="chapter-reader-container">
 
     <!-- Split Book & Chapter Dropdown Selector -->

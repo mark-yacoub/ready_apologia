@@ -1,0 +1,15 @@
+---
+const redirectUrl = import.meta.env.BASE_URL === '/' ? '/bible/jn/1' : `${import.meta.env.BASE_URL}/bible/jn/1`;
+return Astro.redirect(redirectUrl, 301);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Ready Apologia - Bible</title>
+  <meta http-equiv="refresh" content={`0;url=${redirectUrl}`} />
+</head>
+<body style="margin: 0; padding: 0; background-color: #f8fafc;">
+</body>
+</html>

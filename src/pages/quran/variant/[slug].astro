@@ -52,9 +52,12 @@ const formattedVerses = verses.map(v => {
     englishHTML
   };
 });
+
+const seoTitle = `Quran Variants: ${filterInfo.title} | Missing Manuscripts & Analysis`;
+const seoDescription = `Explore ${verses.length} Quranic textual variants (Qiraat) categorized as "${filterInfo.title}". Discover how missing dots, vowels, and differing orthography alter the meaning of the standard Uthmanic Quran.`;
 ---
 
-<Layout title={`Quran Variants: ${filterInfo.title}`}>
+<Layout title={seoTitle} description={seoDescription}>
   <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader 
       currentTitle={filterInfo.title}
