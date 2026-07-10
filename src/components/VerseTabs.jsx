@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/evidence-tabs.css';
 import ScrollableTrack from './ScrollableTrack.jsx';
+import { trackTabReorder } from '../utils/analytics.js';
 
 export default function VerseTabs({ 
   msCount, 
@@ -57,6 +58,7 @@ export default function VerseTabs({
       [newOrder[currentIndex], newOrder[newIndex]] = [newOrder[newIndex], newOrder[currentIndex]];
       setTabOrder(newOrder);
       localStorage.setItem('ready_apologia_tab_order', JSON.stringify(newOrder));
+      trackTabReorder({ testament: 'Bible', topTab: newOrder[0], fullOrder: newOrder });
     }
   };
 

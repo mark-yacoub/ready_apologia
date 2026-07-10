@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import '../styles/evidence-carousel.css';
+import { R2_BASE_URL } from '../utils/cdn_config.js';
 
 function getManuscriptTag(ms, isNT) {
   if (isNT) {
@@ -33,8 +34,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
   
   const trackRef = useRef(null);
 
-  // Production Cloudflare R2 CDN Base URL
-  const R2_BASE_URL = 'https://pub-219566f197174e27a10f51e5fb2414f6.r2.dev';
+
 
   // Track Momentum Snapping index changes
   const handleTrackScroll = (e) => {

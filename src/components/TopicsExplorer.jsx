@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import booksMeta from '../data/books_meta.json';
 import { getTopicColor } from '../utils/topicColors.js';
 import ScrollableTrack from './ScrollableTrack.jsx';
+import { trackTopicInteraction } from '../utils/analytics.js';
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
@@ -101,7 +102,14 @@ const VerseItem = ({ vId, text, note, topicId, categoryTitle = null }) => {
         {note && (
           <button
             className={`topic-note-btn ${isNoteOpen ? 'active' : ''}`}
-            onClick={(e) => { e.stopPropagation(); setIsNoteOpen(!isNoteOpen); }}
+            onClick={(e) => { 
+              e.stopPropagation(); 
+              const nextState = !isNoteOpen;
+              setIsNoteOpen(nextState); 
+              if (nextState) {
+                trackTopicInteraction({ topicId, action: 'note_opened', verseRef: refStr });
+              }
+            }}
             aria-label="Toggle commentary note"
             title="View commentary note"
             type="button"

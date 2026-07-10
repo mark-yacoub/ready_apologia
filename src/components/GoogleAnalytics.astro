@@ -1,0 +1,43 @@
+---
+// Google Analytics 4 (GA4) injection component with L6 SPA transition & global delegation hooks
+const measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || 'G-PLACEHOLDER';
+const isProd = import.meta.env.PROD && measurementId !== 'G-PLACEHOLDER';
+---
+
+{isProd && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
+    <script is:inline define:vars={{ measurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      window.GA_MEASUREMENT_ID = measurementId;
+      gtag('js', new Date());
+      gtag('config', measurementId, {
+        send_page_view: false // Handled precisely in handleRouteTracking across SPA transitions
+      });
+    </script>
+  </>
+)}
+
+{!isProd && (
+  <script is:inline define:vars={{ measurementId }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    window.GA_MEASUREMENT_ID = measurementId;
+    window.GA_DEBUG = true;
+  </script>
+)}
+
+<script>
+  import { handleRouteTracking, initGlobalClickTracking } from '../utils/analytics.js';
+
+  // Initialize global event delegation for outbound link tracking once on startup
+  initGlobalClickTracking();
+
+  // Run central regex route-based tracking on every page load & SPA transition
+  document.addEventListener('astro:page-load', () => {
+    handleRouteTracking();
+  });
+</script>

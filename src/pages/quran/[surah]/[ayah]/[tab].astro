@@ -17,6 +17,7 @@ import { loadScientificErrors, parseExplanationString } from '../../../../utils/
 import { loadDebunkingMiracles } from '../../../../utils/quran_debunking_loader.js';
 import { formatCommentaryWithVerseBoxes, getRangeVerses } from '../../../../utils/quran_commentary_helpers.js';
 import { getEvidenceSets } from '../../../../utils/quran_evidence_service.js';
+import { R2_BASE_URL } from '../../../../utils/cdn_config.js';
 
 export async function getStaticPaths() {
   const {
@@ -103,7 +104,7 @@ const earliestMs = query(`
   LIMIT 1
 `, { verseId });
 if (earliestMs.length > 0 && earliestMs[0].image_name) {
-  ogImage = `https://pub-219566f197174e27a10f51e5fb2414f6.r2.dev/quran/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
+  ogImage = `${R2_BASE_URL}/quran/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
 }
 
 const { seoTitle, seoDescription } = generateQuranTabSEO({ 

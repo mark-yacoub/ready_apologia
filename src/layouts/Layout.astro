@@ -2,6 +2,7 @@
 import BottomNav from '../components/BottomNav.jsx';
 import ScriptureNav from '../components/ScriptureNav.jsx';
 import OnboardingModal from '../components/OnboardingModal.jsx';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/markdown-exegesis.css';
 import '../styles/evidence-badges.css';
@@ -60,6 +61,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		
 		{schema && <script type="application/ld+json" set:html={schema} />}
 		<ClientRouter />
+		<GoogleAnalytics />
 		
 		<!-- Load Google Fonts -->
 		<link href="https://fonts.googleapis.com" rel="preconnect"/>

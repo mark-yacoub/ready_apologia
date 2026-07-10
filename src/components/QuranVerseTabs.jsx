@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/evidence-tabs.css';
 import ScrollableTrack from './ScrollableTrack.jsx';
 import { DEFAULT_QURAN_TAB_ORDER, sanitizeTabOrder } from '../utils/quran_config.js';
+import { trackTabReorder } from '../utils/analytics.js';
 
 export default function QuranVerseTabs({ 
   msCount, 
@@ -58,6 +59,7 @@ export default function QuranVerseTabs({
       [newOrder[currentIndex], newOrder[newIndex]] = [newOrder[newIndex], newOrder[currentIndex]];
       setTabOrder(newOrder);
       localStorage.setItem('ready_apologia_quran_tab_order', JSON.stringify(newOrder));
+      trackTabReorder({ testament: 'Quran', topTab: newOrder[0], fullOrder: newOrder });
     }
   };
 

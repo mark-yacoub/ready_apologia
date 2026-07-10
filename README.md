@@ -103,8 +103,8 @@ pkill -f astro
 *   `src/data/scripture/`: Imported NASB (NT) and LXX (OT) scripture JSON files.
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.
 *   `src/pages/`: Page templates for Bible reader, Quran reader, Quran verse evidence drawers, and Companion Codices.
-*   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages, headers, and evidence tabs).
-*   `src/utils/`: Helper utilities for loading scripture, topics, non-Uthmanic Quran data, and apologetic evidence (debunking miracles, contradictions, scientific errors).
+*   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages, headers, evidence tabs, and `GoogleAnalytics.astro` for GA4 tracking).
+*   `src/utils/`: Helper utilities for loading scripture, topics, non-Uthmanic Quran data, global CDN configuration (`cdn_config.js`), client-side GA4 event tracking (`analytics.js`), and apologetic evidence (debunking miracles, contradictions, scientific errors).
 *   `src/data/quran/debunking/`: Dataset for debunked Quranic scientific miracles.
 *   `docs/adr/`: [Architectural Decision Records (ADRs)](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/adr/0001-framework-and-offline-strategy.md) detailing the technology choices.
 

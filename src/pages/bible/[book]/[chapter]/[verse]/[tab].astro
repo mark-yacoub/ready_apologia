@@ -12,6 +12,7 @@ import { parseMarkdown } from '../../../../../utils/markdown.js';
 import { mapMtToLxx, mapLxxToMt } from '../../../../../utils/scripture_mapper.js';
 import { BUILD_BOOKS } from '../../../../../utils/build_config.js';
 import { NT_TRANSLATION_ID } from '../../../../../utils/bible_config.js';
+import { R2_BASE_URL } from '../../../../../utils/cdn_config.js';
 
 // 1. Pre-render sub-path page routes
 export async function getStaticPaths() {
@@ -250,7 +251,7 @@ if (isNT) {
     LIMIT 1
   `, { verseId });
   if (earliestMs.length > 0 && earliestMs[0].image_name) {
-    ogImage = `https://pub-219566f197174e27a10f51e5fb2414f6.r2.dev/images/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
+    ogImage = `${R2_BASE_URL}/images/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
   }
 } else {
   try {
@@ -263,7 +264,7 @@ if (isNT) {
       LIMIT 1
     `, { lxxId: verseId, mtId });
     if (earliestMsOt.length > 0 && earliestMsOt[0].image_name) {
-      ogImage = `https://pub-219566f197174e27a10f51e5fb2414f6.r2.dev/ot_images/${earliestMsOt[0].ms_id}/${encodeURIComponent(earliestMsOt[0].image_name)}`;
+      ogImage = `${R2_BASE_URL}/ot_images/${earliestMsOt[0].ms_id}/${encodeURIComponent(earliestMsOt[0].image_name)}`;
     }
   } catch(e) {}
 }

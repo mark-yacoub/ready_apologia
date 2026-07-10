@@ -114,8 +114,11 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/components/BottomNav.jsx`: Immersive mobile segmented bottom navigation tabs.
 *   `src/components/ScriptureNav.jsx`: Collapsible Left Navigator featuring responsive desktop vertical app sections.
 *   `src/components/OnboardingModal.jsx`: Centered card overlay providing an initial onboarding tip.
+*   `src/components/GoogleAnalytics.astro`: Astro `<head>` component injecting GA4 tracking scripts and global SPA/route delegation.
 *   `src/components/QuranSpecial.astro`: Component rendering Lost or Abrogated verses list.
 *   `src/components/QuranPageHeader.astro`: Header component for Quran pages with Surah selection dropdown.
+*   `src/utils/analytics.js`: L6 client-side Google Analytics 4 utility handling SPA transitions, tab views, and global event delegation.
+*   `src/utils/cdn_config.js`: Global CDN image base URL configuration (`R2_BASE_URL`).
 *   `src/utils/nonUthmanicLoader.js`: Loader for non-Uthmanic data (companions, variants, virtues).
 *   `src/utils/quran_debunking_loader.js`: Loader utility for Quranic scientific miracles debunking data.
 *   `src/data/quran/debunking/`: Contains the scientific miracles debunked JSON dataset.
