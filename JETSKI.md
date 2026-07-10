@@ -103,17 +103,21 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/pages/bible/[book]/[chapter]/[verse].astro`: 100% SEO-indexable static verse detail page.
 *   `src/pages/quran/index.astro`: Quran home page with filters and evidence cards.
 *   `src/pages/quran/[surah].astro`: Surah reader page showing Arabic and English translation.
+*   `src/pages/quran/[surah]/[ayah]/[tab].astro`: Quran verse evidence drawer (Debunking Miracles, Scientific Errors, Contradictions, Footnotes, Commentaries, Manuscripts).
 *   `src/pages/quran/variant/[slug].astro`: Dynamic page listing all verses matching a specific Qiraat effect or category.
 *   `src/pages/quran/0.astro`: Lost Verses page entry point.
 *   `src/pages/quran/-1.astro`: Abrogated Verses page entry point.
 *   `src/pages/quran/codex/[companion].astro`: Companion Codex page showing comparisons, virtues, and lost verses.
-*   `src/components/VerseTabs.jsx`: Client-side React switcher for verse detail tabs.
+*   `src/components/VerseTabs.jsx`: Client-side React switcher for Bible verse detail tabs.
+*   `src/components/QuranVerseTabs.jsx`: Client-side React switcher for Quran verse evidence tabs (defaulting to Debunking Miracles).
 *   `src/components/BottomNav.jsx`: Immersive mobile segmented bottom navigation tabs.
 *   `src/components/ScriptureNav.jsx`: Collapsible Left Navigator featuring responsive desktop vertical app sections.
 *   `src/components/OnboardingModal.jsx`: Centered card overlay providing an initial onboarding tip.
 *   `src/components/QuranSpecial.astro`: Component rendering Lost or Abrogated verses list.
 *   `src/components/QuranPageHeader.astro`: Header component for Quran pages with Surah selection dropdown.
 *   `src/utils/nonUthmanicLoader.js`: Loader for non-Uthmanic data (companions, variants, virtues).
+*   `src/utils/quran_debunking_loader.js`: Loader utility for Quranic scientific miracles debunking data.
+*   `src/data/quran/debunking/`: Contains the scientific miracles debunked JSON dataset.
 
 ---
 

@@ -101,9 +101,10 @@ pkill -f astro
 *   `src/db.js`: Database helper utilizing built-in Node 22 `node:sqlite`.
 *   `src/data/scripture/`: Imported NASB (NT) and LXX (OT) scripture JSON files.
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.
-*   `src/pages/`: Page templates for Bible reader, Quran reader, and Companion Codices.
-*   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages and headers).
-*   `src/utils/`: Helper utilities for loading scripture, topics, and non-Uthmanic Quran data.
+*   `src/pages/`: Page templates for Bible reader, Quran reader, Quran verse evidence drawers, and Companion Codices.
+*   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages, headers, and evidence tabs).
+*   `src/utils/`: Helper utilities for loading scripture, topics, non-Uthmanic Quran data, and apologetic evidence (debunking miracles, contradictions, scientific errors).
+*   `src/data/quran/debunking/`: Dataset for debunked Quranic scientific miracles.
 *   `docs/adr/`: [Architectural Decision Records (ADRs)](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/adr/0001-framework-and-offline-strategy.md) detailing the technology choices.
 
 ## 🗺️ Route Map
@@ -111,6 +112,7 @@ pkill -f astro
 | :--- | :--- |
 | `/quran` | Evidence & Filters Home (Qiraat & Competing Codices access) |
 | `/quran/[surah]` | Quran reader with Uthmanic Arabic and English translation |
+| `/quran/[surah]/[ayah]/[tab]` | Quran verse evidence drawer (Debunking Miracles, Scientific Errors, Contradictions, Footnotes, Commentaries, Manuscripts) |
 | `/quran/variant/[slug]` | Dynamic page showing all verses affected by a specific Qiraat effect or category |
 | `/quran/codex/[companion]` | Deep-dive into a companion's non-Uthmanic codex (e.g., Ubayy, Ibn Masud) |
 | `/quran/0` | Special route rendering verses historically reported but lost/abrogated |

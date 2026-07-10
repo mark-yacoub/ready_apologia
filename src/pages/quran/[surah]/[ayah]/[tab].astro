@@ -13,51 +13,34 @@ import { loadIslamicCommentaries } from '../../../../utils/islamic_commentaries_
 import { parseMarkdown } from '../../../../utils/markdown.js';
 import { loadQuranContradictions } from '../../../../utils/quran_contradictions_loader.js';
 import { loadScientificErrors, parseExplanationString } from '../../../../utils/quran_scientific_errors_loader.js';
+import { loadDebunkingMiracles } from '../../../../utils/quran_debunking_loader.js';
 import { formatCommentaryWithVerseBoxes, getRangeVerses } from '../../../../utils/quran_commentary_helpers.js';
+import { getEvidenceSets } from '../../../../utils/quran_evidence_service.js';
 
 export async function getStaticPaths() {
-  const msQuran = query("SELECT DISTINCT verse_id FROM manuscript_per_verse_quran").map(r => r.verse_id);
+  const {
+    msQuranSet,
+    footnotesSet,
+    contradictionsSet,
+    scientificErrorsSet,
+    islamicCommentariesSet,
+    debunkingSet
+  } = getEvidenceSets();
 
   const paths = [];
+  const addPaths = (set, tabName) => {
+    set.forEach(id => {
+      const [s, a] = id.split(':');
+      if (s && a) paths.push({ params: { surah: s, ayah: a, tab: tabName } });
+    });
+  };
 
-  msQuran.forEach(id => {
-    const [s, a] = id.split(':');
-    if (s && a) {
-      paths.push({ params: { surah: s, ayah: a, tab: 'manuscripts' } });
-    }
-  });
-
-  const footnotes = loadChristianFootnotes();
-  Object.keys(footnotes).forEach(id => {
-    const [s, a] = id.split(':');
-    if (s && a) {
-      paths.push({ params: { surah: s, ayah: a, tab: 'christian-footnotes' } });
-    }
-  });
-
-  const contradictionsMap = loadQuranContradictions();
-  Object.keys(contradictionsMap).forEach(id => {
-    const [s, a] = id.split(':');
-    if (s && a) {
-      paths.push({ params: { surah: s, ayah: a, tab: 'contradictions' } });
-    }
-  });
-
-  const scientificErrorsMap = loadScientificErrors();
-  Object.keys(scientificErrorsMap).forEach(id => {
-    const [s, a] = id.split(':');
-    if (s && a) {
-      paths.push({ params: { surah: s, ayah: a, tab: 'scientific-errors' } });
-    }
-  });
-
-  const islamicMap = loadIslamicCommentaries();
-  Object.keys(islamicMap).forEach(id => {
-    const [s, a] = id.split(':');
-    if (s && a) {
-      paths.push({ params: { surah: s, ayah: a, tab: 'islamic-commentaries' } });
-    }
-  });
+  addPaths(msQuranSet, 'manuscripts');
+  addPaths(footnotesSet, 'christian-footnotes');
+  addPaths(contradictionsSet, 'contradictions');
+  addPaths(scientificErrorsSet, 'scientific-errors');
+  addPaths(islamicCommentariesSet, 'islamic-commentaries');
+  addPaths(debunkingSet, 'debunking-miracles');
 
   return paths;
 }
@@ -84,6 +67,10 @@ const quranScientificErrorsMap = loadScientificErrors();
 const rawVerseError = quranScientificErrorsMap[verseId];
 const parsedScientificErrors = rawVerseError ? parseExplanationString(rawVerseError.explanation) : [];
 const scientificErrorsCount = parsedScientificErrors.length > 0 ? 1 : 0;
+
+const quranDebunkingMap = loadDebunkingMiracles();
+const verseDebunking = quranDebunkingMap[verseId] || [];
+const debunkingCount = verseDebunking.length;
 
 // 3. Rejoin and pass non-box paragraphs through Markdown parser
 const englishData = loadEnglishData();
@@ -157,6 +144,9 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       </div>
     )}
 
+    <script is:inline>
+      try { localStorage.setItem('ready_apologia_has_seen_full_evidence', 'true'); } catch (e) {}
+    </script>
     <script>
       document.addEventListener('astro:page-load', () => {
         const btn = document.getElementById('open-quran-tab-settings-btn');
@@ -175,12 +165,70 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       islamicCommentariesCount={islamicCommentariesCount}
       contradictionsCount={contradictionsCount}
       scientificErrorsCount={scientificErrorsCount}
+      debunkingCount={debunkingCount}
       activeTab={tab}
       surah={surah}
       ayah={ayah}
     />
       
     <div class="tab-panels-window">
+      {tab === 'debunking-miracles' && (
+        <div class="contradiction-panel-container">
+          {verseDebunking.map((item) => (
+            <div class="contradiction-details-card">
+              <div class="contradiction-summary-header">
+                <span class="summary-title-main">
+                  <span class="ct-scales-icon" style="color: var(--color-secondary);">
+                    <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" width="18" height="18">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l2 4 4-1-2 4 3 3-4 1 1 4-4-2-3 3-1-4-4 1 2-4-4-2 4-1-1-4 4 2 3-4z" />
+                    </svg>
+                  </span>
+                  <span>Claimed Miracle: {item.miracle_category || "General"}</span>
+                </span>
+              </div>
+
+              <div class="contradiction-card-content">
+                {item.claim && (
+                  <div class="debunking-claim-box">
+                    <span class="debunking-claim-label">APOLOGIST CLAIM</span>
+                    <p class="debunking-claim-text">"{item.claim}"</p>
+                  </div>
+                )}
+
+                {item.refutation && (
+                  <div class="debunking-refutation-section">
+                    <h4 class="debunking-refutation-heading">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: #10b981;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <span>Refutation & Exegesis</span>
+                    </h4>
+                    <div class="ct-answer-body" style="margin-top: 8px;">
+                      {item.refutation}
+                    </div>
+                  </div>
+                )}
+
+                {(item.classification || item.classification_explanation) && (
+                  <details class="debunking-methodology-details">
+                    <summary class="debunking-methodology-summary">
+                      <span class="debunking-methodology-title">
+                        <strong>{item.classification || "Analysis"}</strong>
+                      </span>
+                      <span class="info-icon-btn" title="Click for explanation" aria-label="Explanation info">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                      </span>
+                    </summary>
+                    {item.classification_explanation && (
+                      <div class="debunking-methodology-body">
+                        <p>{item.classification_explanation}</p>
+                      </div>
+                    )}
+                  </details>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       {tab === 'islamic-commentaries' && (
         <div class="contradiction-panel-container">
           {islamicCommentaries.map((comm) => {
@@ -569,5 +617,105 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
     line-height: 1.6;
     color: var(--color-on-surface);
     white-space: pre-wrap;
+  }
+
+  .debunking-claim-box {
+    margin-top: 16px;
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    background-color: var(--color-surface-container-low);
+    border-left: 3px solid var(--color-secondary);
+    border-radius: 0 8px 8px 0;
+  }
+  .debunking-claim-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--color-secondary);
+    margin-bottom: 6px;
+  }
+  .debunking-claim-text {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--color-on-surface);
+    margin: 0;
+  }
+  .debunking-refutation-section {
+    margin-bottom: 20px;
+  }
+  .debunking-refutation-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .debunking-methodology-details {
+    margin-top: 24px;
+    border-top: 1px solid var(--color-outline-variant);
+    padding-top: 14px;
+    font-family: var(--font-body);
+  }
+  .debunking-methodology-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--color-on-surface-variant);
+    list-style: none;
+    user-select: none;
+  }
+  .debunking-methodology-summary::-webkit-details-marker {
+    display: none;
+  }
+  .debunking-methodology-summary:hover {
+    color: var(--color-on-surface);
+  }
+  .debunking-methodology-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .debunking-methodology-title strong {
+    color: var(--color-on-surface);
+  }
+  .info-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    color: var(--color-on-surface-variant);
+    background-color: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    transition: all 0.15s ease;
+  }
+  .debunking-methodology-summary:hover .info-icon-btn {
+    color: var(--color-on-surface);
+    border-color: var(--color-on-surface-variant);
+    background-color: var(--color-outline-variant);
+  }
+  .debunking-methodology-body {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 6px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--color-on-surface-variant);
+  }
+  .debunking-methodology-body p {
+    margin: 0;
   }
 </style>

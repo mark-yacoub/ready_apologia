@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/evidence-tabs.css';
 import ScrollableTrack from './ScrollableTrack.jsx';
+import { DEFAULT_QURAN_TAB_ORDER, sanitizeTabOrder } from '../utils/quran_config.js';
 
 export default function QuranVerseTabs({ 
   msCount, 
@@ -8,11 +9,13 @@ export default function QuranVerseTabs({
   islamicCommentariesCount,
   contradictionsCount,
   scientificErrorsCount,
+  debunkingCount,
   activeTab,
   surah,
   ayah,
 }) {
   const tabs = [
+    { id: 'debunking-miracles', label: `Debunking Miracles (${debunkingCount})`, show: debunkingCount > 0 },
     { id: 'scientific-errors', label: `Scientific Errors (${scientificErrorsCount})`, show: scientificErrorsCount > 0 },
     { id: 'contradictions', label: `Contradictions (${contradictionsCount})`, show: contradictionsCount > 0 },
     { id: 'christian-footnotes', label: `Christian Footnotes (${christianFootnotesCount})`, show: christianFootnotesCount > 0 },
@@ -28,16 +31,20 @@ export default function QuranVerseTabs({
     );
   }
 
-  const [tabOrder, setTabOrder] = React.useState(['scientific-errors', 'contradictions', 'christian-footnotes', 'islamic-commentaries', 'manuscripts']);
+  const [tabOrder, setTabOrder] = React.useState(DEFAULT_QURAN_TAB_ORDER);
   const [isEditing, setIsEditing] = React.useState(false);
+
+  React.useEffect(() => {
+    localStorage.setItem('ready_apologia_has_seen_full_evidence', 'true');
+  }, []);
 
   React.useEffect(() => {
     const saved = localStorage.getItem('ready_apologia_quran_tab_order');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length >= 4) {
-          setTabOrder(parsed);
+        if (Array.isArray(parsed)) {
+          setTabOrder(sanitizeTabOrder(parsed));
         }
       } catch (e) {}
     }

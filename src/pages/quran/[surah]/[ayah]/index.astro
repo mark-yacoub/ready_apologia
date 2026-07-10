@@ -1,0 +1,53 @@
+---
+import { getAllEvidenceVerseIds, getAvailableTabsForVerse } from '../../../../utils/quran_evidence_service.js';
+import { DEFAULT_QURAN_TAB_ORDER } from '../../../../utils/quran_config.js';
+
+export async function getStaticPaths() {
+  const allVerseIds = getAllEvidenceVerseIds();
+  const paths = [];
+  allVerseIds.forEach(id => {
+    const [s, a] = id.split(':');
+    if (s && a) {
+      paths.push({ params: { surah: s, ayah: a } });
+    }
+  });
+  return paths;
+}
+
+const { surah, ayah } = Astro.params;
+const verseId = `${surah}:${ayah}`;
+const availableTabs = getAvailableTabsForVerse(verseId);
+const defaultTab = availableTabs.length > 0 ? availableTabs[0] : DEFAULT_QURAN_TAB_ORDER[0];
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const fallbackUrl = `${base}/quran/${surah}/${ayah}/${defaultTab}`;
+const canonicalUrl = new URL(fallbackUrl, Astro.site || Astro.url).href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Ready Apologia - Quran Evidence</title>
+  <link rel="canonical" href={canonicalUrl} />
+  <meta name="robots" content="noindex" />
+  <meta http-equiv="refresh" content={`0;url=${fallbackUrl}`} />
+  <script is:inline define:vars={{ availableTabs, defaultTab, base, surah, ayah, defaultOrder: DEFAULT_QURAN_TAB_ORDER }}>
+    let targetTab = defaultTab;
+    try {
+      const savedOrder = localStorage.getItem('ready_apologia_quran_tab_order');
+      const orderToCheck = (savedOrder && JSON.parse(savedOrder)) || defaultOrder;
+      if (Array.isArray(orderToCheck)) {
+        for (const tab of orderToCheck) {
+          if (availableTabs.includes(tab)) {
+            targetTab = tab;
+            break;
+          }
+        }
+      }
+    } catch (e) {}
+    window.location.replace(`${base}/quran/${surah}/${ayah}/${targetTab}`);
+  </script>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f4f5;">
+</body>
+</html>

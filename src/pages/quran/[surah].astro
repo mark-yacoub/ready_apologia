@@ -10,10 +10,8 @@ import { getVariantsForSurah } from '../../utils/nonUthmanicLoader.js';
 import { getQiraatForSurah } from '../../utils/qiraatLoader.js';
 import QiraatCard from '../../components/QiraatCard.astro';
 import { query } from '../../db.js';
-import { loadChristianFootnotes } from '../../utils/christian_footnotes_loader.js';
-import { loadQuranContradictions } from '../../utils/quran_contradictions_loader.js';
-import { loadScientificErrors } from '../../utils/quran_scientific_errors_loader.js';
-import { loadIslamicCommentaries } from '../../utils/islamic_commentaries_loader.js';
+import { getEvidenceSetsForSurahPrefix } from '../../utils/quran_evidence_service.js';
+
 
 export async function getStaticPaths() {
   const paths = [];
@@ -45,26 +43,15 @@ const qiraatByAyah = await getQiraatForSurah(surahNum);
 
 // 3.5 Load Manuscript Maps
 const msPrefix = `${surahNum}:%`;
-const msQuranSet = new Set(
-  query("SELECT DISTINCT verse_id FROM manuscript_per_verse_quran WHERE verse_id LIKE :prefix", { prefix: msPrefix })
-  .map((r: any) => r.verse_id)
-);
+const {
+  msQuranSet,
+  christianFootnotesSet,
+  islamicCommentariesSet,
+  quranContradictionsSet,
+  scientificErrorsSet,
+  debunkingMiraclesSet
+} = getEvidenceSetsForSurahPrefix(surahNum);
 
-const christianFootnotesSet = new Set(
-  Object.keys(loadChristianFootnotes()).filter(k => k.startsWith(`${surahNum}:`))
-);
-
-const islamicCommentariesSet = new Set(
-  Object.keys(loadIslamicCommentaries()).filter(k => k.startsWith(`${surahNum}:`))
-);
-
-const quranContradictionsSet = new Set(
-  Object.keys(loadQuranContradictions()).filter(k => k.startsWith(`${surahNum}:`))
-);
-
-const scientificErrorsSet = new Set(
-  Object.keys(loadScientificErrors()).filter(k => k.startsWith(`${surahNum}:`))
-);
 
 
 // 4. Combine verses
@@ -117,6 +104,8 @@ for (let i = 1; i <= totalVerses; i++) {
   const hasContradictions = quranContradictionsSet.has(verseKey);
   const hasScientificErrors = scientificErrorsSet.has(verseKey);
   const hasIslamicCommentary = islamicCommentariesSet.has(verseKey);
+  const hasDebunkingMiracles = debunkingMiraclesSet.has(verseKey);
+  const hasEvidence = hasManuscript || hasChristianFootnotes || hasContradictions || hasScientificErrors || hasIslamicCommentary || hasDebunkingMiracles;
   
   verses.push({
     number: i,
@@ -130,7 +119,9 @@ for (let i = 1; i <= totalVerses; i++) {
     hasChristianFootnotes: hasChristianFootnotes,
     hasContradictions: hasContradictions,
     hasScientificErrors: hasScientificErrors,
-    hasIslamicCommentary: hasIslamicCommentary
+    hasIslamicCommentary: hasIslamicCommentary,
+    hasDebunkingMiracles: hasDebunkingMiracles,
+    hasEvidence: hasEvidence
   });
 }
 ---
@@ -152,6 +143,13 @@ for (let i = 1; i <= totalVerses; i++) {
             <div class="verse-card" id={`v-${v.number}`}>
               <div class="verse-badge-tray">
                 <span class="verse-num">{v.number}</span>
+                {v.hasDebunkingMiracles && (
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/debunking-miracles`} data-tab-id="debunking-miracles" class="evidence-badge dm-icon" title="Debunked Miracle available" aria-label={`View debunked miracles for Surah ${surahNum}, verse ${v.number}`}>
+                    <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l2 4 4-1-2 4 3 3-4 1 1 4-4-2-3 3-1-4-4 1 2-4-4-2 4-1-1-4 4 2 3-4z" />
+                    </svg>
+                  </a>
+                )}
                 {v.hasContradictions && (
                   <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/contradictions`} data-tab-id="contradictions" class="evidence-badge ct-icon" title="Contradictions available" aria-label={`View contradictions for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
@@ -188,8 +186,17 @@ for (let i = 1; i <= totalVerses; i++) {
                   </a>
                 )}
               </div>
-              <p class="text-arabic" set:html={v.arabicHTML} />
-              <p class="text-english" set:html={v.englishHTML} />
+              {v.hasEvidence ? (
+                <>
+                  <p class="text-arabic"><a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}`} class="verse-text-link" set:html={v.arabicHTML} /></p>
+                  <p class="text-english"><a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}`} class="verse-text-link" set:html={v.englishHTML} /></p>
+                </>
+              ) : (
+                <>
+                  <p class="text-arabic" set:html={v.arabicHTML} />
+                  <p class="text-english" set:html={v.englishHTML} />
+                </>
+              )}
               
               {v.qiraatVariants && v.qiraatVariants.length > 0 && (
                 <details class="qiraat-details">
@@ -229,6 +236,8 @@ for (let i = 1; i <= totalVerses; i++) {
 </Layout>
 
 <script>
+  import { DEFAULT_QURAN_TAB_ORDER, sanitizeTabOrder } from '../../utils/quran_config.js';
+
   const initToggle = () => {
     const btnEn = document.getElementById('toggle-en');
     const btnAr = document.getElementById('toggle-ar');
@@ -262,7 +271,7 @@ for (let i = 1; i <= totalVerses; i++) {
     // Dynamic Badge Reordering based on user's saved Quran tab preferences
     try {
       const savedOrder = localStorage.getItem('ready_apologia_quran_tab_order');
-      const order = savedOrder ? JSON.parse(savedOrder) : ['scientific-errors', 'contradictions', 'christian-footnotes', 'islamic-commentaries', 'manuscripts'];
+      const order = savedOrder ? sanitizeTabOrder(JSON.parse(savedOrder)) : DEFAULT_QURAN_TAB_ORDER;
       if (Array.isArray(order)) {
         const trays = document.querySelectorAll('.verse-badge-tray');
         trays.forEach(tray => {
@@ -270,7 +279,9 @@ for (let i = 1; i <= totalVerses; i++) {
           badges.forEach(badge => {
             const tabId = badge.getAttribute('data-tab-id');
             const idx = order.indexOf(tabId);
-            badge.style.order = idx !== -1 ? String(idx + 1) : String(order.length + 1);
+            if (badge instanceof HTMLElement) {
+              badge.style.order = idx !== -1 ? String(idx + 1) : String(order.length + 1);
+            }
           });
         });
       }
@@ -281,6 +292,16 @@ for (let i = 1; i <= totalVerses; i++) {
 </script>
 
 <style>
+  .verse-text-link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .verse-text-link:hover {
+    opacity: 0.8;
+  }
+
   .quran-reader-container {
     display: flex;
     flex-direction: column;
@@ -374,6 +395,13 @@ for (let i = 1; i <= totalVerses; i++) {
     font-family: var(--font-display);
     line-height: 1.6;
     margin: 0;
+  }
+
+  .verse-text-link-wrapper {
+    transition: color 0.15s ease;
+  }
+  .verse-text-link-wrapper:hover {
+    color: var(--color-primary) !important;
   }
 
   /* Prominence Overrides */
