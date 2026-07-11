@@ -19,7 +19,6 @@ const canonicalUrl = new URL(redirectUrl, Astro.site || Astro.url).href;
   <meta property="og:image" content={`${site}${base}/default-og-image.png`} />
 
   <link rel="canonical" href={canonicalUrl} />
-  <meta name="robots" content="noindex" />
   <meta http-equiv="refresh" content={`0;url=${redirectUrl}`} />
   <script is:inline define:vars={{ defaultRedirectUrl: redirectUrl }}>
     const lastVisitedUrl = localStorage.getItem('lastVisitedUrl');

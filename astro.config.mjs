@@ -5,8 +5,8 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), sitemap()],
-  // Set site URL from environment or default to localhost for development
-  site: process.env.SITE_URL || 'http://localhost:8080',
+  // Set site URL from environment or default to production domain
+  site: process.env.SITE_URL || 'https://readyapologia.com',
   base: '/',
   // Since we are doing Scenario A (Static Site), we want 'static' output (default)
   output: 'static',
