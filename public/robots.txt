@@ -1,4 +1,19 @@
 User-agent: *
 Allow: /
 
+# Limit crawl rate for AI and data scraper bots
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: Google-Extended
+User-agent: Anthropic-ai
+User-agent: ClaudeBot
+User-agent: Claude-Web
+User-agent: CCBot
+User-agent: Omgilibot
+User-agent: Omgili
+User-agent: PerplexityBot
+User-agent: Cohere-ai
+User-agent: FacebookBot
+Crawl-delay: 30
+
 Sitemap: https://readyapologia.com/sitemap-index.xml
