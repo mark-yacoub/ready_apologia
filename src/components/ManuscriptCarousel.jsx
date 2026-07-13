@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, Suspense, lazy } from 'react';
+const ManuscriptLightbox = lazy(() => import('./ManuscriptLightbox.jsx'));
 import '../styles/evidence-carousel.css';
 import { R2_BASE_URL } from '../utils/cdn_config.js';
 
@@ -28,7 +29,6 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
   const [zoomFileName, setZoomFileName] = useState('');
   
   // Dynamic Magnification & Loading States (Ink Mode completely removed!)
-  const [zoomScale, setZoomScale] = useState(1); // 1x to 3x magnifier
   const [loadedImages, setLoadedImages] = useState({}); // CDN spinner tracker
   const [failedImages, setFailedImages] = useState({}); // Broken cloud image 404 tracker
   
@@ -120,7 +120,6 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
   const triggerZoom = (imgSrc, filename) => {
     setFullScreenImg(imgSrc);
     setZoomFileName(filename);
-    setZoomScale(1); // Reset magnification
   };
 
   if (!manuscripts || manuscripts.length === 0) {
@@ -338,70 +337,16 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
          5. Immersive Fullscreen Magnification Lightbox modal
          ============================================================ */}
       {fullScreenImg && (
-        <div className="fullscreen-lightbox-modal" onClick={() => setFullScreenImg(null)}>
-          
-          {/* Header controls */}
-          <div className="lightbox-header" onClick={(e) => e.stopPropagation()}>
-            <span className="lightbox-title">Fullscreen Magnifier</span>
-            
-            {/* Magnification controls */}
-            <div className="lightbox-zoom-controls select-none">
-              <button 
-                onClick={() => setZoomScale(prev => Math.max(prev - 0.25, 1))} 
-                className="zoom-ctrl-btn"
-                disabled={zoomScale === 1}
-                title="Zoom Out"
-              >
-                −
-              </button>
-              <span className="zoom-percentage-tag">{Math.round(zoomScale * 100)}%</span>
-              <button 
-                onClick={() => setZoomScale(prev => Math.min(prev + 0.25, 3))} 
-                className="zoom-ctrl-btn"
-                disabled={zoomScale === 3}
-                title="Zoom In"
-              >
-                +
-              </button>
-            </div>
-
-            <button className="lightbox-close-btn" onClick={() => setFullScreenImg(null)} aria-label="Close modal">
-              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Zoom magnifier panning panel */}
-          <div className="lightbox-zoom-area">
-            <img 
-              src={fullScreenImg} 
-              alt="Manuscript fragment fullscreen magnification" 
-              className="lightbox-image"
-              style={{ 
-                transform: `scale(${zoomScale})`, 
-                transition: 'transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1)',
-                cursor: zoomScale > 1 ? 'grab' : 'zoom-in'
-              }}
-            />
-          </div>
-
-          {/* Bottom action */}
-          <div className="lightbox-footer" onClick={(e) => e.stopPropagation()}>
-            <button 
-              onClick={(e) => handleDownload(e, fullScreenImg, zoomFileName)} 
-              className="lightbox-save-btn"
-              title="Direct download high-resolution scan to local device gallery"
-            >
-              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              <span>Save Scan to device</span>
-            </button>
-          </div>
-
-        </div>
+        <Suspense fallback={<div className="fullscreen-lightbox-container loading"></div>}>
+          <ManuscriptLightbox 
+            imgSrc={fullScreenImg} 
+            fileName={zoomFileName} 
+            onClose={() => setFullScreenImg(null)} 
+            handleDownload={handleDownload} 
+          />
+        </Suspense>
       )}
+
 
       
 
