@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import booksMeta from '../data/books_meta.json';
 import { getTopicColor } from '../utils/topicColors.js';
 import ScrollableTrack from './ScrollableTrack.jsx';
 import { trackTopicInteraction } from '../utils/analytics.js';
+import { TOPICS_TAXONOMY } from '../data/topicsTaxonomy.js';
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
@@ -736,8 +737,48 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
     };
   }, []);
 
-  // On dedicated page, we only show the one topic
-  const displayTopics = isDedicatedPage ? topics.filter(t => t.topicId === initialTopicId) : topics;
+  // Fast O(1) Topic Lookup Map
+  const topicsMap = useMemo(() => {
+    return new Map(topics.map(t => [t.topicId, t]));
+  }, [topics]);
+
+  // Compute Categorized Sections with Orphan Safety Net
+  const categorizedSections = useMemo(() => {
+    const mappedIds = new Set();
+
+    const sections = TOPICS_TAXONOMY.map(section => {
+      const subHeadings = section.subHeadings
+        .map(sub => {
+          const items = sub.topics
+            .map(id => {
+              mappedIds.add(id);
+              return topicsMap.get(id);
+            })
+            .filter(Boolean);
+
+          return { ...sub, items };
+        })
+        .filter(sub => sub.items.length > 0);
+
+      return { ...section, subHeadings };
+    }).filter(section => section.subHeadings.length > 0);
+
+    // Safety net: Collect unmapped topics if any exist
+    const unmappedTopics = topics.filter(t => !mappedIds.has(t.topicId));
+    if (unmappedTopics.length > 0) {
+      sections.push({
+        mainHeading: 'General Topics',
+        subHeadings: [
+          {
+            title: 'Other',
+            items: unmappedTopics
+          }
+        ]
+      });
+    }
+
+    return sections;
+  }, [topics, topicsMap]);
 
   // Pre-calculate titles and comprehensive counts for dropdown
   const topicOptions = topics.map(t => {
@@ -771,14 +812,14 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
         </div>
       )}
 
-      <div className={isDedicatedPage ? "dedicated-topic-wrapper" : "topics-accordion-list"} onClick={() => setDropdownOpen(false)}>
-        {displayTopics.map(t => {
-          const tId = t.topicId;
-          const tData = t.topicData;
-          const tTitle = tData.name || tData.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || tId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-          const topicColor = getTopicColor(tId);
+      {isDedicatedPage ? (
+        <div className="dedicated-topic-wrapper" onClick={() => setDropdownOpen(false)}>
+          {displayTopics.map(t => {
+            const tId = t.topicId;
+            const tData = t.topicData;
+            const tTitle = tData.name || tData.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || tId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            const topicColor = getTopicColor(tId);
 
-          if (isDedicatedPage) {
             return (
               <div
                 key={tId}
@@ -849,55 +890,75 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
                 )}
               </div>
             );
-          }
+          })}
+        </div>
+      ) : (
+        <div className="topics-index-layout" onClick={() => setDropdownOpen(false)}>
+          {categorizedSections.map(classification => (
+            <section key={classification.mainHeading} className="main-heading-section">
+              <h2 className="main-heading-title">{classification.mainHeading}</h2>
+              {classification.subHeadings.map(subGroup => (
+                <div key={subGroup.title} className="sub-heading-section">
+                  <h3 className="sub-heading-title"><span>{subGroup.title}</span></h3>
+                  <div className="topics-accordion-list">
+                    {subGroup.items.map(t => {
+                      const tId = t.topicId;
+                      const tData = t.topicData;
+                      const tTitle = tData.name || tData.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || tId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                      const topicColor = getTopicColor(tId);
+                      const isHighlighted = activeHighlightTopics.includes(tId);
 
-          const isHighlighted = activeHighlightTopics.includes(tId);
+                      const headerContent = (
+                        <div className="topic-card-inner-flex">
+                          <div className="header-text-block">
+                            <h4 className="topic-main-heading">{tTitle}</h4>
+                          </div>
+                          <div className="header-controls">
+                            <button
+                              className={`ios-compact-toggle card-toggle ${isHighlighted ? 'is-active' : ''}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                toggleHighlight(tId);
+                              }}
+                              title="Toggle Scripture Highlighting"
+                              aria-pressed={isHighlighted}
+                            >
+                              <span className="ios-toggle-track">
+                                <span className="ios-toggle-knob"></span>
+                              </span>
+                              <span className="compact-toggle-text">Highlight in Scripture</span>
+                            </button>
+                            <div className="explore-badge-btn">
+                              Explore
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      );
 
-          const headerContent = (
-            <div className="topic-card-inner-flex">
-              <div className="header-text-block">
-                <h2 className="topic-main-heading">{tTitle}</h2>
-              </div>
-              <div className="header-controls">
-                <button
-                  className={`ios-compact-toggle card-toggle ${isHighlighted ? 'is-active' : ''}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleHighlight(tId);
-                  }}
-                  title="Toggle Scripture Highlighting"
-                  aria-pressed={isHighlighted}
-                >
-                  <span className="ios-toggle-track">
-                    <span className="ios-toggle-knob"></span>
-                  </span>
-                  <span className="compact-toggle-text">Highlight in Scripture</span>
-                </button>
-                <div className="explore-badge-btn">
-                  Explore
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
+                      return (
+                        <div
+                          key={tId}
+                          className="master-topic-box"
+                          id={tId}
+                          style={{ '--topic-color': topicColor.hex, '--topic-bg': topicColor.bgHex }}
+                        >
+                          <a href={`${base}/topics/${tId}`} className="topic-header-box is-link">
+                            {headerContent}
+                          </a>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            </div>
-          );
-
-          return (
-            <div
-              key={tId}
-              className="master-topic-box"
-              id={tId}
-              style={{ '--topic-color': topicColor.hex, '--topic-bg': topicColor.bgHex }}
-            >
-              <a href={`${base}/topics/${tId}`} className="topic-header-box is-link">
-                {headerContent}
-              </a>
-            </div>
-          );
-        })}
-      </div>
+              ))}
+            </section>
+          ))}
+        </div>
+      )}
 
       <style dangerouslySetInnerHTML={{ __html: `
         .topics-explorer {
@@ -925,6 +986,60 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
           margin: 0;
           line-height: 1.5;
         }
+
+        /* --------------------------------------
+           Classification Layout Styles
+           -------------------------------------- */
+        .topics-index-layout {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+        }
+
+        .main-heading-section {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .main-heading-title {
+          font-family: var(--font-display);
+          font-size: 24px;
+          font-weight: 700;
+          color: var(--color-primary);
+          margin: 0;
+          letter-spacing: -0.01em;
+          border-bottom: 1px solid var(--color-outline-variant, #e4e4e7);
+          padding-bottom: 6px;
+        }
+
+        .sub-heading-section {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .sub-heading-title {
+          font-family: var(--font-cinzel, 'Times New Roman', serif); /* Fallback just in case var string differs */
+          font-size: 22px;
+          font-weight: 600;
+          color: var(--color-on-surface-variant, #475569);
+          margin: 0 0 8px 0;
+          text-align: center;
+          position: relative;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+        }
+
+        .sub-heading-title::after {
+          content: '';
+          display: block;
+          width: 60px;
+          height: 1px;
+          background-color: var(--color-outline-variant, #cbd5e1);
+          margin: 8px auto 0 auto;
+        }
+
 
         /* Master Topic Boxes (Level 1) */
         .topics-accordion-list {
