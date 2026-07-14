@@ -19,7 +19,8 @@ export const TOPICS_TAXONOMY = [
       {
         title: 'Scripture',
         topics: [
-          'quranic_deficiencies'
+          'quranic_deficiencies',
+          'scientific_errors'
         ]
       }
     ]

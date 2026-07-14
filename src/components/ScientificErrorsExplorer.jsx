@@ -6,63 +6,63 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
 import { VerseItem } from './common/VerseItem.jsx';
 import { TopicDropdown } from './common/TopicDropdown.jsx';
-import '../styles/TopicsExplorer.css';// --- Module-Level Static Constants (Zero Allocation per Render) ---
-const STANDARD_MAP = {
-  'Borrowed Mythology': 'Borrowed Mythology & Plagiarism',
-  'Borrowed Mythology & Plagiarism': 'Borrowed Mythology & Plagiarism',
-  'Contradicts the Bible': 'Contradicts the Bible',
-  'Devalues Women': 'Devalues Women',
-  'Failed Prophecy': 'Failed Prophecy',
-  'Historical Error': 'Historical Error',
-  'Incites Violence & Intolerance': 'Incites Violence & Intolerance',
-  'Promotes Division & Discrimination': 'Promotes Division & Discrimination',
-  'Sanctions Slavery & Concubinage': 'Sanctions Slavery & Concubinage',
-  'Theological Defect': 'Theological Defect'
+import '../styles/TopicsExplorer.css';
+
+// --- Module-Level Static Constants & Mappers ---
+const extractSpecificError = (explanation) => {
+  let phrase = explanation.split('.')[0].trim();
+  if (phrase.startsWith('States the human embryo') || phrase.startsWith('States man becomes a clot')) return 'Embryology';
+  if (phrase.startsWith('Claims mountains') || phrase.startsWith('Reiterates the claim') || phrase.startsWith('Describes mountains')) return 'Geology';
+  return phrase;
 };
 
-const normalizeAndSplitLabel = (rawLabel) => {
-  const clean = rawLabel.replace(/^[0-9]+\.\s*/, '').trim();
-  if (STANDARD_MAP[clean]) return [STANDARD_MAP[clean]];
+const CATEGORY_MAP = {
+  // Astronomy & Cosmology
+  'Geocentricism': 'Astronomy & Cosmology',
+  'Cosmology / Flat Earth': 'Astronomy & Cosmology',
+  'Astronomy': 'Astronomy & Cosmology',
+  'Stars are Missiles Shot at Devils': 'Astronomy & Cosmology',
+  'Moon Emits Light': 'Astronomy & Cosmology',
+  'Cosmology': 'Astronomy & Cosmology',
+  'Seven Heavens': 'Astronomy & Cosmology',
+  'Stars are Located in the Nearest Heaven': 'Astronomy & Cosmology',
+  'Earth Created in Six Days': 'Astronomy & Cosmology',
+  'Earth Created before Stars': 'Astronomy & Cosmology',
+  'Sky is a Tent/Dome': 'Astronomy & Cosmology',
+  'Sky can Fall Down on People': 'Astronomy & Cosmology',
+  'The Earth is Flat': 'Astronomy & Cosmology',
+  'The Earth does not Rotate': 'Astronomy & Cosmology',
 
-  const targets = [];
-  for (const [key, normalizedName] of Object.entries(STANDARD_MAP)) {
-    if (clean.includes(key) && !targets.includes(normalizedName)) {
-      targets.push(normalizedName);
-    }
-  }
-  return targets.length > 0 ? targets : [clean];
+  // Biology & Life Sciences
+  'Evolution': 'Biology & Life Sciences',
+  'Anatomy': 'Biology & Life Sciences',
+  'Embryology': 'Biology & Life Sciences',
+  'All Organisms are Created in Pairs': 'Biology & Life Sciences',
+  'Source and Purity of Milk': 'Biology & Life Sciences',
+  'The Heart as the Organ of Thinking': 'Biology & Life Sciences',
+
+  // Earth Sciences
+  'Permanent Barrier between Fresh and Salt Water': 'Earth Sciences',
+  'Geology': 'Earth Sciences',
+  'No Evaporation in Water Cycle': 'Earth Sciences',
+
+  // Mathematics & Logic
+  'Mathematical Error in Hereditary Laws': 'Mathematics & Logic'
 };
 
-const CUSTOM_ORDER_KEYWORDS = [
-  ['devalues women'],
-  ['historical error'],
-  ['incites violence'],
-  ['promotes division'],
-  ['slavery'],
-  ['borrowed myth', 'plagiarism'],
-  ['theological defect'],
-  ['contradicts the bible'],
-  ['failed prophecy']
-];
-
-const getLabelPriority = (label) => {
-  const lower = label.toLowerCase();
-  for (let i = 0; i < CUSTOM_ORDER_KEYWORDS.length; i++) {
-    if (CUSTOM_ORDER_KEYWORDS[i].some(kw => lower.includes(kw))) {
-      return i;
-    }
-  }
-  return 999;
+const getMasterCategory = (specificError) => {
+  return CATEGORY_MAP[specificError] || 'Other'; 
 };
 
-const getTopicTotalCount = (tData, verseLabels) => {
-  if (tData._isQuran) {
-    return Object.keys(verseLabels).length;
-  }
+const getTopicTotalCount = (t) => {
+  if (t.totalCount !== undefined) return t.totalCount; // Prioritize explicitly set totalCount
+  const tData = t.topicData;
+  if (!tData) return 0;
+  
   let count = 0;
   if (tData.Scripture) {
-    ['New Testament', 'Old Testament'].forEach(t => {
-      const s = tData.Scripture[t]?.structure;
+    ['New Testament', 'Old Testament'].forEach(testament => {
+      const s = tData.Scripture[testament]?.structure;
       if (s) count += s.reduce((acc, cat) => acc + (cat.verses?.length || 0), 0);
     });
   }
@@ -84,41 +84,41 @@ const getTopicTotalCount = (tData, verseLabels) => {
   return count;
 };
 
-export default function QuranicTopicsExplorer({ topicsDropdownData = [], verseLabels = {}, drogeTranslation = {} }) {
+export default function ScientificErrorsExplorer({ topicsDropdownData = [], scientificErrors = {}, drogeTranslation = {} }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('');
 
-  const topicId = 'quranic_deficiencies';
+  const topicId = 'scientific_errors';
   const topicColor = { hex: '#059669', bgHex: '#d1fae5' }; // .theme-quran derived
-  const tTitle = "Quranic Deficiencies";
+  const tTitle = "Scientific Errors";
 
   // Parse & Categorize Data Purely (No Render Side-Effects)
   const { map, sortedLabels } = useMemo(() => {
     const dataMap = new Map();
 
-    for (const [vId, labelsObj] of Object.entries(verseLabels)) {
+    for (const [vId, errorObj] of Object.entries(scientificErrors)) {
       const [surahNum, verseNum] = vId.split(':').map(Number);
-      
-      for (const [rawLabel, note] of Object.entries(labelsObj)) {
-        const targetLabels = normalizeAndSplitLabel(rawLabel);
-        const translatedText = drogeTranslation[vId]?.text || 'Translation unavailable';
+      const explanation = errorObj.explanation;
+      const specificError = extractSpecificError(explanation);
+      const masterCat = getMasterCategory(specificError);
 
-        for (const label of targetLabels) {
-          if (!dataMap.has(label)) dataMap.set(label, []);
-          dataMap.get(label).push({ vId, surahNum, verseNum, text: translatedText, note });
-        }
-      }
+      const translatedText = drogeTranslation[vId]?.text || 'Translation unavailable';
+      const note = explanation; 
+
+      if (!dataMap.has(masterCat)) dataMap.set(masterCat, []);
+      dataMap.get(masterCat).push({ vId, surahNum, verseNum, text: translatedText, note, specificError });
     }
 
-    // Sort labels according to user's requested custom sequence
+    // Sort tabs according to hardcoded sequence
+    const priority = ['Astronomy & Cosmology', 'Biology & Life Sciences', 'Earth Sciences', 'Mathematics & Logic', 'Other'];
     const sorted = Array.from(dataMap.keys()).sort((a, b) => {
-      const pA = getLabelPriority(a);
-      const pB = getLabelPriority(b);
+      const pA = priority.indexOf(a) !== -1 ? priority.indexOf(a) : 999;
+      const pB = priority.indexOf(b) !== -1 ? priority.indexOf(b) : 999;
       if (pA !== pB) return pA - pB;
       return a.localeCompare(b);
     });
 
-    // Sort verses numerically within each label
+    // Sort verses numerically within each tab
     for (const label of sorted) {
       dataMap.get(label).sort((a, b) => {
         return a.surahNum !== b.surahNum ? a.surahNum - b.surahNum : a.verseNum - b.verseNum;
@@ -126,18 +126,18 @@ export default function QuranicTopicsExplorer({ topicsDropdownData = [], verseLa
     }
 
     return { map: dataMap, sortedLabels: sorted };
-  }, [verseLabels, drogeTranslation]);
+  }, [scientificErrors, drogeTranslation]);
 
   // Derive current tab without calling setState inside render/useMemo
   const currentTab = activeTab || (sortedLabels.length > 0 ? sortedLabels[0] : '');
 
   const topicOptions = topicsDropdownData.map(t => {
-    const isQuran = t.topicId === 'quranic_deficiencies';
     const computedName = t.topicData?.name || t.topicData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || t.topicId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
     return {
       id: t.topicId,
       title: computedName,
-      count: t.totalCount !== undefined ? t.totalCount : getTopicTotalCount(t.topicData, verseLabels)
+      count: t.totalCount !== undefined ? t.totalCount : getTopicTotalCount(t)
     };
   });
 
@@ -166,15 +166,16 @@ export default function QuranicTopicsExplorer({ topicsDropdownData = [], verseLa
               setDropdownOpen={setDropdownOpen}
               base={base}
             />
-            {/* Omitted the "Highlight in Scripture" functionality as requested */}
-          </header>          <div className="dedicated-topic-view">
+          </header>
+
+          <div className="dedicated-topic-view">
             <ScrollableTrack containerClass="master-tabs-container" activeTrigger={currentTab}>
               {sortedLabels.map(label => {
                 const count = map.get(label).length;
                 return (
                   <button
                     key={label}
-                    id={label.replace(/\s+/g, '-')}
+                    id={label.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '')}
                     className={`master-tab ${currentTab === label ? 'active' : ''}`}
                     onClick={() => setActiveTab(label)}
                   >
@@ -200,7 +201,7 @@ export default function QuranicTopicsExplorer({ topicsDropdownData = [], verseLa
                             text={v.text}
                             note={v.note}
                             topicId={topicId}
-                            categoryTitle={v.label}
+                            categoryTitle={v.specificError}
                             isQuran={true}
                           />
                         ))}

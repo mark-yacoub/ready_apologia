@@ -86,13 +86,28 @@ export function loadAllTopicsData() {
     }
   });
 
+  const quranicDeficienciesData = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/data/quran/verse_labels.json'), 'utf8'));
+
   topicsData.push({
     topicId: 'quranic_deficiencies',
     topicData: {
       name: "Quranic Deficiencies",
       Scripture: { Quran: { structure: [] } }
     },
-    verseTexts: {}
+    verseTexts: {},
+    totalCount: Object.keys(quranicDeficienciesData).length
+  });
+
+  const scientificData = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/data/quran/scientific_errors/scientific_errors.json'), 'utf8'));
+
+  topicsData.push({
+    topicId: 'scientific_errors',
+    topicData: {
+      name: "Scientific Errors",
+      Scripture: { Quran: { structure: [] } }
+    },
+    verseTexts: {},
+    totalCount: Object.keys(scientificData).length
   });
 
   return topicsData;
