@@ -780,6 +780,8 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
     return sections;
   }, [topics, topicsMap]);
 
+  const displayTopics = isDedicatedPage ? [topicsMap.get(initialTopicId)].filter(Boolean) : topics;
+
   // Pre-calculate titles and comprehensive counts for dropdown
   const topicOptions = topics.map(t => {
     return {
@@ -914,21 +916,23 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
                             <h4 className="topic-main-heading">{tTitle}</h4>
                           </div>
                           <div className="header-controls">
-                            <button
-                              className={`ios-compact-toggle card-toggle ${isHighlighted ? 'is-active' : ''}`}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                toggleHighlight(tId);
-                              }}
-                              title="Toggle Scripture Highlighting"
-                              aria-pressed={isHighlighted}
-                            >
-                              <span className="ios-toggle-track">
-                                <span className="ios-toggle-knob"></span>
-                              </span>
-                              <span className="compact-toggle-text">Highlight in Scripture</span>
-                            </button>
+                            {tId !== 'quranic_deficiencies' && (
+                              <button
+                                className={`ios-compact-toggle card-toggle ${isHighlighted ? 'is-active' : ''}`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  toggleHighlight(tId);
+                                }}
+                                title="Toggle Scripture Highlighting"
+                                aria-pressed={isHighlighted}
+                              >
+                                <span className="ios-toggle-track">
+                                  <span className="ios-toggle-knob"></span>
+                                </span>
+                                <span className="compact-toggle-text">Highlight in Scripture</span>
+                              </button>
+                            )}
                             <div className="explore-badge-btn">
                               Explore
                               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">

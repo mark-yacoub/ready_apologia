@@ -159,7 +159,7 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
       {verses.length > 0 ? (
         <div class="verses-list">
           {verses.map(v => (
-            <div class="verse-card" id={`v-${v.number}`}>
+            <div class="verse-card" id={`${v.number}`}>
               <div class="verse-badge-tray">
                 <span class="verse-num">{v.number}</span>
                 {v.hasDebunkingMiracles && (

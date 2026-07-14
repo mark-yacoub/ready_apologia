@@ -18,7 +18,9 @@ export const TOPICS_TAXONOMY = [
     subHeadings: [
       {
         title: 'Scripture',
-        topics: []
+        topics: [
+          'quranic_deficiencies'
+        ]
       }
     ]
   }

@@ -129,7 +129,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
   <div class="verse-detail-container theme-quran">
     
     <header class="detail-header select-none">
-      <a href={`${base}/quran/${surah}#v-${ayah}`} class="back-btn" aria-label="Go back to surah reader">
+      <a href={`${base}/quran/${surah}#${ayah}`} class="back-btn" aria-label="Go back to surah reader">
         <span class="back-arrow">
           <svg width="6" height="10" fill="none" stroke="currentColor" viewBox="0 0 6 10" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 9L1 5l4-4" />
@@ -373,7 +373,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
                               const targetText = targetTextObj ? targetTextObj.text : '';
                               return (
                                 <div class="verse-text-reminder snippet-reminder snippet-supp">
-                                  <a href={`${base}/quran/${vs}#v-${va}`} class="ct-verse-link" title="Tap to read this supporting verse">{`Surah ${v}`} &rarr;</a>
+                                  <a href={`${base}/quran/${vs}#${va}`} class="ct-verse-link" title="Tap to read this supporting verse">{`Surah ${v}`} &rarr;</a>
                                   {targetText && <span> "{targetText}"</span>}
                                 </div>
                               );
@@ -392,7 +392,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
                               const targetText = targetTextObj ? targetTextObj.text : '';
                               return (
                                 <div class="verse-text-reminder snippet-reminder snippet-opp">
-                                  <a href={`${base}/quran/${vs}#v-${va}`} class="ct-verse-link" title="Tap to read this contrasting verse">{`Surah ${v}`} &rarr;</a>
+                                  <a href={`${base}/quran/${vs}#${va}`} class="ct-verse-link" title="Tap to read this contrasting verse">{`Surah ${v}`} &rarr;</a>
                                   {targetText && <span> "{targetText}"</span>}
                                 </div>
                               );

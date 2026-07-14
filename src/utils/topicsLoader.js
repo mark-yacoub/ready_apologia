@@ -86,5 +86,14 @@ export function loadAllTopicsData() {
     }
   });
 
+  topicsData.push({
+    topicId: 'quranic_deficiencies',
+    topicData: {
+      name: "Quranic Deficiencies",
+      Scripture: { Quran: { structure: [] } }
+    },
+    verseTexts: {}
+  });
+
   return topicsData;
 }
