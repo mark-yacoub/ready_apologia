@@ -76,9 +76,22 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		<script is:inline define:vars={{ base }}>
 			if ('serviceWorker' in navigator) {
 				window.addEventListener('load', () => {
+					const hadController = !!navigator.serviceWorker.controller;
+					let refreshing = false;
+
+					navigator.serviceWorker.addEventListener('controllerchange', () => {
+						if (hadController && !refreshing) {
+							refreshing = true;
+							window.location.reload();
+						}
+					});
+
 					navigator.serviceWorker.register(`${base}/sw.js`)
-						.then(reg => console.log('PWA Service Worker registered successfully!'))
-						.catch(err => console.warn('PWA Service Worker registration failed:', err));
+						.then((reg) => {
+							console.log('PWA Service Worker registered successfully!');
+							reg.update();
+						})
+						.catch((err) => console.warn('PWA Service Worker registration failed:', err));
 				});
 			}
 		</script>

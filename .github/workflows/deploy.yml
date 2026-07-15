@@ -37,6 +37,19 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
         run: |
+          # Sync static assets (excluding sw.js and HTML files) with default long-term cache
           aws s3 sync ./dist s3://ready-apologia-web/ \
             --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
-            --delete
+            --delete \
+            --exclude "sw.js" \
+            --exclude "*.html"
+
+          # Sync sw.js and HTML files with strict no-cache directive
+          aws s3 sync ./dist s3://ready-apologia-web/ \
+            --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
+            --exclude "*" \
+            --include "sw.js" \
+            --include "*.html" \
+            --cache-control "no-cache, no-store, must-revalidate"
+
+
