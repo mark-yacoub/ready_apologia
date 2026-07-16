@@ -11,13 +11,15 @@ export default function VerseTabs({
   book,
   chapter,
   verse,
+  videosCount = 0,
 }) {
   
   // Build the horizontal links track. Switching tabs is now a standard, bookmarkable page link!
   const tabs = [
     { id: 'manuscripts', label: `Manuscripts (${msCount})`, show: msCount > 0 },
     { id: 'contradictions', label: `Alleged Contradictions (${ctCount})`, show: ctCount > 0 },
-    { id: 'apologetics', label: `Apologetics (${apCount})`, show: apCount > 0 }
+    { id: 'apologetics', label: `Apologetics (${apCount})`, show: apCount > 0 },
+    { id: 'videos', label: `Videos (${videosCount})`, show: videosCount > 0 }
   ].filter(t => t.show);
 
   if (tabs.length === 0) {
@@ -28,7 +30,7 @@ export default function VerseTabs({
     );
   }
 
-  const [tabOrder, setTabOrder] = React.useState(['manuscripts', 'contradictions', 'apologetics']);
+  const [tabOrder, setTabOrder] = React.useState(['manuscripts', 'contradictions', 'apologetics', 'videos']);
   const [isEditing, setIsEditing] = React.useState(false);
 
   // Onboarding Goal Check: If verse has all 3 evidence types, permanently disable the tip
@@ -43,7 +45,8 @@ export default function VerseTabs({
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length === 3) {
+        if (Array.isArray(parsed) && parsed.length >= 3) {
+          if (!parsed.includes('videos')) parsed.push('videos');
           setTabOrder(parsed);
         }
       } catch (e) {}

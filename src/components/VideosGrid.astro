@@ -1,0 +1,268 @@
+---
+const { videos } = Astro.props;
+---
+
+<div class="videos-grid-container">
+  {videos && videos.length > 0 ? (
+    <div class="videos-grid">
+      {videos.map((video: any) => {
+        // resolvedVerses now injected directly from the Controller DTO!
+        const resolvedVerses = video.resolvedVerses || [];
+        const dynamicTitle = video.title 
+          || video.summary 
+          || (video.apologist_name && video.apologist_name !== "Unknown" 
+              ? `YouTube Short by ${video.apologist_name}`
+              : 'YouTube Short Apologetics Video');
+
+        return (
+          <div class="video-card">
+            <div class="iframe-container">
+              <iframe 
+                src={`https://www.youtube.com/embed/${video.video_id}`} 
+                title={dynamicTitle}
+                frameborder="0" 
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+              </iframe>
+            </div>
+
+            <div class="video-meta">
+              {video.apologist_name && !video.apologist_name.toLowerCase().includes("unknown") && (
+                <div class="apologist-name">
+                  <span class="apologist-badge">{video.apologist_name}</span>
+                </div>
+              )}
+
+              {video.summary && (
+                <div class="video-summary">
+                  <p>{video.summary}</p>
+                </div>
+              )}
+
+              {resolvedVerses.length > 0 && (
+                <details class="mentioned-verses-details">
+                  <summary class="mentioned-verses-summary">
+                    <span class="summary-title">Mentioned Verses ({resolvedVerses.length})</span>
+                    <span class="summary-chevron">
+                      <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </span>
+                  </summary>
+                  <div class="mentioned-verses-content">
+                    <div class="ct-verses-list">
+                      {resolvedVerses.map((rv: any) => (
+                        <div class="verse-text-reminder snippet-reminder">
+                          <a href={rv.link} class="ct-verse-link" title="Tap to read this verse">{rv.label} &rarr;</a>
+                          {rv.text && <span> "{rv.text}"</span>}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </details>
+              )}
+
+              <div class="video-footer">
+                <a href={`https://www.youtube.com/shorts/${video.video_id}`} target="_blank" rel="noopener noreferrer" class="source-visit-pill-btn" title="Watch on YouTube">
+                  <span>Watch on YouTube</span>
+                  <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  ) : (
+    <p class="empty-tabs-placeholder">No videos mapped for this verse.</p>
+  )}
+</div>
+
+<style>
+  .videos-grid-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    align-items: start;
+  }
+
+  .video-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .video-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.04);
+  }
+
+  .iframe-container {
+    position: relative;
+    width: 100%;
+    /* 9:16 aspect ratio for shorts */
+    padding-bottom: 177.77%; 
+    background-color: #000;
+  }
+  
+  .iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-meta {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .apologist-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-surface-container-low);
+    color: var(--color-on-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .video-summary p {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--color-on-surface);
+    margin: 0;
+  }
+
+  /* Verses Accordion copied heavily from contradiction-details-card */
+  .mentioned-verses-details {
+    margin-top: 4px;
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .mentioned-verses-summary {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-on-surface);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-surface-container-low);
+    transition: background-color 0.15s;
+    list-style: none;
+  }
+  .mentioned-verses-summary::-webkit-details-marker {
+    display: none;
+  }
+  .mentioned-verses-summary:hover {
+    background-color: var(--color-outline-variant);
+  }
+  
+  .summary-chevron {
+    color: var(--color-on-surface-variant);
+    transition: transform 0.2s ease;
+  }
+  .mentioned-verses-details[open] .summary-chevron {
+    transform: rotate(180deg);
+  }
+
+  .mentioned-verses-content {
+    padding: 12px;
+    border-top: 1px solid var(--color-outline-variant);
+    background-color: var(--color-surface);
+  }
+
+  .ct-verses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .snippet-reminder {
+    padding: 8px 12px;
+    font-size: 12.5px;
+    border-left: 3px solid var(--color-primary);
+    background-color: var(--color-surface-container-lowest);
+    border-radius: 0 6px 6px 0;
+    line-height: 1.4;
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--color-on-surface-variant);
+  }
+
+  .ct-verse-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--color-on-surface);
+    text-decoration: none;
+    transition: all 0.15s;
+    margin-right: 6px;
+    margin-bottom: 2px;
+  }
+  .ct-verse-link:hover {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+  }
+
+  .video-footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px dashed var(--color-outline-variant);
+    padding-top: 8px;
+    margin-top: 4px;
+  }
+
+  .source-visit-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background-color: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    color: #ef4444; /* YouTube red accent */
+    font-size: 11px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .source-visit-pill-btn:hover {
+    background-color: #fef2f2;
+    border-color: #fca5a5;
+  }
+</style>

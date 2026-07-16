@@ -3,6 +3,7 @@ import { generateBibleTabSEO } from '../../../../../utils/seoFactory.js';
 import Layout from '../../../../../layouts/Layout.astro';
 import VerseTabs from '../../../../../components/VerseTabs.jsx';
 import ManuscriptCarousel from '../../../../../components/ManuscriptCarousel.jsx';
+import VideosGrid from '../../../../../components/VideosGrid.astro';
 import { query } from '../../../../../db.js';
 import booksMeta from '../../../../../data/books_meta.json';
 import { parseMarkdown } from '../../../../../utils/markdown.js';
@@ -10,6 +11,7 @@ import { mapMtToLxx, mapLxxToMt } from '../../../../../utils/scripture_mapper.js
 import { BUILD_BOOKS } from '../../../../../utils/build_config.js';
 import { R2_BASE_URL } from '../../../../../utils/cdn_config.js';
 import { getScriptureVerseText, getScriptureVerseTextById } from '../../../../../utils/scripture_service.js';
+import { enrichVideosWithVerses } from '../../../../../utils/video_service.js';
 
 // 1. Pre-render sub-path page routes
 export async function getStaticPaths() {
@@ -26,6 +28,7 @@ export async function getStaticPaths() {
 
   const ctRaw = query("SELECT DISTINCT verse1 as v FROM contradictions UNION SELECT DISTINCT verse2 FROM contradictions").map(r => r.v);
   const apRaw = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
+  const vdRaw = query("SELECT DISTINCT verse_id FROM short_per_verse").map(r => r.verse_id);
   
   const mapToLxxIfOt = (id) => {
     if (!id) return null;
@@ -39,12 +42,14 @@ export async function getStaticPaths() {
 
   const ct = ctRaw.map(mapToLxxIfOt);
   const ap = apRaw.map(mapToLxxIfOt);
+  const vd = vdRaw.map(mapToLxxIfOt);
   
   const msSet = new Set([...msNt, ...msOt]);
   const ctSet = new Set(ct);
   const apSet = new Set(ap);
+  const vdSet = new Set(vd);
   
-  const allVerseIds = new Set([...msSet, ...ctSet, ...apSet].filter(Boolean));
+  const allVerseIds = new Set([...msSet, ...ctSet, ...apSet, ...vdSet].filter(Boolean));
   const paths = [];
 
   const booksToBuild = BUILD_BOOKS;
@@ -61,6 +66,7 @@ export async function getStaticPaths() {
       if (msSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'manuscripts' } });
       if (ctSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'contradictions' } });
       if (apSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'apologetics' } });
+      if (vdSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'videos' } });
     }
   });
 
@@ -91,6 +97,7 @@ const msCount = isNT
 
 const ctCount = query("SELECT COUNT(DISTINCT title) as count FROM contradictions WHERE verse1 = :checkId OR verse2 = :checkId", { checkId })[0].count;
 const apCount = query("SELECT COUNT(DISTINCT title) as count FROM apologetics WHERE verse = :checkId", { checkId })[0].count;
+const vdCount = query("SELECT COUNT(DISTINCT video_id) as count FROM short_per_verse WHERE verse_id = :checkId", { checkId })[0].count;
 
 // 3.5 Load Verse Text
 const verseText = getScriptureVerseText(book, chapter, verse);
@@ -99,6 +106,7 @@ const verseText = getScriptureVerseText(book, chapter, verse);
 let manuscripts = [];
 let contradictions = [];
 let apologetics = [];
+let videos = [];
 
 if (tab === 'manuscripts') {
   const rawManuscripts = isNT ? query(`
@@ -191,6 +199,16 @@ if (tab === 'apologetics') {
     GROUP BY a.title
     ORDER BY sort_order ASC, pf.year ASC
   `, { checkId });
+}
+
+if (tab === 'videos') {
+  const rawVideos = query(`
+    SELECT sm.* 
+    FROM short_per_verse spv
+    JOIN shorts_metadata sm ON spv.video_id = sm.video_id
+    WHERE spv.verse_id = :checkId
+  `, { checkId });
+  videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 }
 
 function formatBookIdToName(id) {
@@ -321,6 +339,7 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
       msCount={msCount}
       ctCount={ctCount}
       apCount={apCount}
+      videosCount={vdCount}
       activeTab={tab}
       book={book}
       chapter={chapter}
@@ -517,6 +536,12 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
           ) : (
             <p class="empty-tabs-placeholder">No apologetics defenses mapped for this verse.</p>
           )}
+        </div>
+      )}
+
+      {tab === 'videos' && (
+        <div class="videos-panel-container">
+          <VideosGrid videos={videos} />
         </div>
       )}
 

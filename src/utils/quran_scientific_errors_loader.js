@@ -1,4 +1,4 @@
-import scientificErrors from '../data/quran/scientific_errors/scientific_errors.json';
+import scientificErrors from '../data/quran/scientific_errors/scientific_errors.json' with { type: 'json' };
 
 export function loadScientificErrors() {
   return scientificErrors || {};

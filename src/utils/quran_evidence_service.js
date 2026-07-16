@@ -19,14 +19,19 @@ export function getEvidenceSets() {
   const scientificErrorsSet = new Set(Object.keys(loadScientificErrors()));
   const islamicCommentariesSet = new Set(Object.keys(loadIslamicCommentaries()));
   const debunkingSet = new Set(Object.keys(loadDebunkingMiracles()));
-
+  
+  const videosSet = new Set(
+    query("SELECT DISTINCT verse_id FROM short_per_verse WHERE verse_id LIKE '%\\_%' ESCAPE '\\' AND verse_id NOT LIKE '%\\_%\\_%' ESCAPE '\\'")
+      .map(r => r.verse_id.replace('_', ':'))
+  );
   memoizedSets = {
     msQuranSet,
     footnotesSet,
     contradictionsSet,
     scientificErrorsSet,
     islamicCommentariesSet,
-    debunkingSet
+    debunkingSet,
+    videosSet
   };
   return memoizedSets;
 }
@@ -39,7 +44,8 @@ export function getAllEvidenceVerseIds() {
     ...sets.contradictionsSet,
     ...sets.scientificErrorsSet,
     ...sets.islamicCommentariesSet,
-    ...sets.debunkingSet
+    ...sets.debunkingSet,
+    ...sets.videosSet
   ].filter(Boolean));
   return allIds;
 }
@@ -53,12 +59,14 @@ export function getEvidenceFlagsForVerse(verseId) {
     hasScientificErrors: sets.scientificErrorsSet.has(verseId),
     hasIslamicCommentary: sets.islamicCommentariesSet.has(verseId),
     hasDebunkingMiracles: sets.debunkingSet.has(verseId),
+    hasVideos: sets.videosSet.has(verseId),
     hasEvidence: sets.msQuranSet.has(verseId) ||
                  sets.footnotesSet.has(verseId) ||
                  sets.contradictionsSet.has(verseId) ||
                  sets.scientificErrorsSet.has(verseId) ||
                  sets.islamicCommentariesSet.has(verseId) ||
-                 sets.debunkingSet.has(verseId)
+                 sets.debunkingSet.has(verseId) ||
+                 sets.videosSet.has(verseId)
   };
 }
 
@@ -70,6 +78,7 @@ export function getAvailableTabsForVerse(verseId) {
     flags.hasContradictions ? 'contradictions' : null,
     flags.hasChristianFootnotes ? 'christian-footnotes' : null,
     flags.hasIslamicCommentary ? 'islamic-commentaries' : null,
+    flags.hasVideos ? 'videos' : null,
     flags.hasManuscript ? 'manuscripts' : null,
   ].filter(Boolean);
 }
@@ -85,6 +94,7 @@ export function getEvidenceSetsForSurahPrefix(surahNum) {
     quranContradictionsSet: filterPrefix(sets.contradictionsSet),
     scientificErrorsSet: filterPrefix(sets.scientificErrorsSet),
     islamicCommentariesSet: filterPrefix(sets.islamicCommentariesSet),
-    debunkingMiraclesSet: filterPrefix(sets.debunkingSet)
+    debunkingMiraclesSet: filterPrefix(sets.debunkingSet),
+    videosSet: filterPrefix(sets.videosSet)
   };
 }

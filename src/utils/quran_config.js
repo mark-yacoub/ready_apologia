@@ -22,6 +22,7 @@ export const QURAN_TABS_CONFIG = [
   { id: 'contradictions', labelPrefix: 'Contradictions' },
   { id: 'christian-footnotes', labelPrefix: 'Christian Footnotes' },
   { id: 'islamic-commentaries', labelPrefix: 'Islamic Commentaries' },
+  { id: 'videos', labelPrefix: 'Videos' },
   { id: 'manuscripts', labelPrefix: 'Manuscripts' },
 ];
 

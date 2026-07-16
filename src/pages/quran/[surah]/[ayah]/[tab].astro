@@ -6,6 +6,7 @@ import { generateQuranTabSEO } from '../../../../utils/seoFactory.js';
 import Layout from '../../../../layouts/Layout.astro';
 import QuranVerseTabs from '../../../../components/QuranVerseTabs.jsx';
 import QuranManuscriptCarousel from '../../../../components/QuranManuscriptCarousel.jsx';
+import VideosGrid from '../../../../components/VideosGrid.astro';
 import { query } from '../../../../db.js';
 import { loadEnglishData } from '../../../../utils/quran_loader.js';
 import { assignManuscriptScanNames } from '../../../../utils/manuscript_utils.js';
@@ -17,6 +18,7 @@ import { loadScientificErrors, parseExplanationString } from '../../../../utils/
 import { loadDebunkingMiracles } from '../../../../utils/quran_debunking_loader.js';
 import { formatCommentaryWithVerseBoxes, getRangeVerses } from '../../../../utils/quran_commentary_helpers.js';
 import { getEvidenceSets } from '../../../../utils/quran_evidence_service.js';
+import { enrichVideosWithVerses } from '../../../../utils/video_service.js';
 import { R2_BASE_URL } from '../../../../utils/cdn_config.js';
 
 export async function getStaticPaths() {
@@ -26,7 +28,8 @@ export async function getStaticPaths() {
     contradictionsSet,
     scientificErrorsSet,
     islamicCommentariesSet,
-    debunkingSet
+    debunkingSet,
+    videosSet
   } = getEvidenceSets();
 
   const paths = [];
@@ -43,6 +46,7 @@ export async function getStaticPaths() {
   addPaths(scientificErrorsSet, 'scientific-errors');
   addPaths(islamicCommentariesSet, 'islamic-commentaries');
   addPaths(debunkingSet, 'debunking-miracles');
+  addPaths(videosSet, 'videos');
 
   return paths;
 }
@@ -74,6 +78,10 @@ const quranDebunkingMap = loadDebunkingMiracles();
 const verseDebunking = quranDebunkingMap[verseId] || [];
 const debunkingCount = verseDebunking.length;
 
+const dbVerseId = verseId.replace(':', '_');
+const vdCountInfo = query("SELECT COUNT(DISTINCT video_id) as count FROM short_per_verse WHERE verse_id = :dbVerseId", { dbVerseId });
+const videosCount = vdCountInfo.length > 0 ? vdCountInfo[0].count : 0;
+
 // 3. Rejoin and pass non-box paragraphs through Markdown parser
 const englishData = loadEnglishData();
 const verseTextObj = englishData[verseId];
@@ -91,6 +99,17 @@ if (tab === 'manuscripts') {
   `, { verseId });
 
   manuscripts = assignManuscriptScanNames(rawManuscripts);
+}
+
+let videos = [];
+if (tab === 'videos') {
+  const rawVideos = query(`
+    SELECT sm.* 
+    FROM short_per_verse spv
+    JOIN shorts_metadata sm ON spv.video_id = sm.video_id
+    WHERE spv.verse_id = :dbVerseId
+  `, { dbVerseId });
+  videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 }
 
 // Generate OG Image
@@ -178,6 +197,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       contradictionsCount={contradictionsCount}
       scientificErrorsCount={scientificErrorsCount}
       debunkingCount={debunkingCount}
+      videosCount={videosCount}
       activeTab={tab}
       surah={surah}
       ayah={ayah}
@@ -409,6 +429,11 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
                 </div>
             );
           })}
+        </div>
+      )}
+      {tab === 'videos' && (
+        <div class="videos-panel-container">
+          <VideosGrid videos={videos} />
         </div>
       )}
     </div>
