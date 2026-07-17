@@ -10,6 +10,12 @@ export const TOPICS_TAXONOMY = [
           'trinity',
           'prophecies'
         ]
+      },
+      {
+        title: 'Scripture',
+        topics: [
+          'nt_authors'
+        ]
       }
     ]
   },

@@ -14,283 +14,26 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 import { VerseItem, InfoIcon } from './common/VerseItem.jsx';
 import { TopicDropdown } from './common/TopicDropdown.jsx';
 
-const Chevron = ({ open }) => (
-  <svg className={`chevron ${open ? 'open' : ''}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-  </svg>
-);
+import { Chevron } from './topics/Chevron.jsx';
+import { SourceBlock } from './topics/SourceBlock.jsx';
+import { ProphecyCard } from './topics/ProphecyCard.jsx';
 
-export const formatBookName = (bookId) => {
-  const ntBook = booksMeta.nt.find(b => b.id === bookId);
-  if (ntBook) return ntBook.name;
-  const otBook = booksMeta.ot.find(b => b.id === bookId);
-  if (otBook) return otBook.name;
-  return bookId.charAt(0).toUpperCase() + bookId.slice(1);
-};
-
-// Sort verses canonically (LXX order for OT, standard NT order)
-const sortCanonicalVerses = (verseIds, testamentName) => {
-  const metaList = testamentName === 'New Testament' ? booksMeta.nt : booksMeta.ot;
-  return [...verseIds].sort((a, b) => {
-    const partsA = a.split('_');
-    const partsB = b.split('_');
-    const bookA = partsA[0];
-    const bookB = partsB[0];
-    const idxA = metaList.findIndex(x => x.id === bookA);
-    const idxB = metaList.findIndex(x => x.id === bookB);
-    if (idxA !== idxB) {
-      return (idxA === -1 ? 999 : idxA) - (idxB === -1 ? 999 : idxB);
-    }
-    const chapA = parseInt(partsA[1], 10) || 0;
-    const chapB = parseInt(partsB[1], 10) || 0;
-    if (chapA !== chapB) return chapA - chapB;
-    const vA = parseInt(partsA[2], 10) || 0;
-    const vB = parseInt(partsB[2], 10) || 0;
-    return vA - vB;
-  });
-};
-
-const VerseGroup = ({ verses, verseBank, verseTexts, topicId, testamentName, verseCategories = null }) => {
-  const sortedIds = sortCanonicalVerses(verses, testamentName);
-  return (
-    <div className="verse-group-list">
-      {sortedIds.map(vId => (
-        <VerseItem
-          key={vId}
-          vId={vId}
-          text={verseTexts[vId] || 'Verse text unavailable'}
-          note={verseBank[vId]}
-          topicId={topicId}
-          categoryTitle={verseCategories ? verseCategories[vId]?.join(', ') : null}
-        />
-      ))}
-    </div>
-  );
-};
-
+import { VerseGroup } from './topics/VerseGroup.jsx';
+import { formatBookName } from '../utils/topicHelpers.js';
+import {
+  getTestamentCount,
+  getAnfCount,
+  getCenturyCount,
+  getSourceCount,
+  getAncientJudaismCount,
+  getTopicTotalCount
+} from '../utils/topicCounters.js';
 
 
 // ----------------------------------------------------
-// Master TopicsExplorer Component
-// ----------------------------------------------------
-
-// ----------------------------------------------------
-// Patristic Father Block (Collapsible)
-
-// ----------------------------------------------------
-// Count Calculators
-// ----------------------------------------------------
-const getTestamentCount = (tData) => {
-  if (!tData || !Array.isArray(tData.structure)) return 0;
-  return tData.structure.reduce((acc, cat) => acc + (cat.verses?.length || 0), 0);
-};
-
-const getAnfCount = (anfData) => {
-  if (!anfData || typeof anfData !== 'object') return 0;
-  let count = 0;
-  Object.values(anfData).forEach(century => {
-    Object.values(century || {}).forEach(father => {
-      Object.values(father?.works || {}).forEach(work => {
-        count += (work?.quotes?.length || 0);
-      });
-    });
-  });
-  return count;
-};
-
-const getCenturyCount = (centuryObj) => {
-  if (!centuryObj || typeof centuryObj !== 'object') return 0;
-  let count = 0;
-  Object.values(centuryObj).forEach(father => {
-    Object.values(father?.works || {}).forEach(work => {
-      count += (work?.quotes?.length || 0);
-    });
-  });
-  return count;
-};
-
-const getSourceCount = (sData) => {
-  if (!sData || typeof sData !== 'object') return 0;
-  let count = 0;
-  Object.values(sData.works || {}).forEach(work => {
-    count += (work?.quotes?.length || 0);
-  });
-  return count;
-};
-
-const getAncientJudaismCount = (ajData) => {
-  if (!ajData || typeof ajData !== 'object') return 0;
-  let count = 0;
-  Object.values(ajData).forEach(era => {
-    Object.values(era || {}).forEach(author => {
-      Object.values(author?.works || {}).forEach(work => {
-        count += (work?.quotes?.length || 0);
-      });
-    });
-  });
-  return count;
-};
-
-const getTopicTotalCount = (t) => {
-  if (t.totalCount !== undefined) return t.totalCount; // Prioritize explicitly set totalCount
-  const tData = t.topicData;
-  if (!tData) return 0;
-  let count = getTestamentCount(tData.Scripture?.['New Testament']) +
-         getTestamentCount(tData.Scripture?.['Old Testament']) +
-         getAnfCount(tData['Ante-Nicene Fathers']) +
-         getAncientJudaismCount(tData['Ancient Judaism']);
-  if (Array.isArray(tData.prophecies)) count += tData.prophecies.length;
-  return count;
-};
-
-// ----------------------------------------------------
-const SourceBlock = ({ sourceName, sData }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const sourceCount = getSourceCount(sData);
-
-  return (
-    <div className={`father-block ${isOpen ? 'is-expanded' : ''}`}>
-      <div
-        className="father-header-box"
-        onClick={() => setIsOpen(!isOpen)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            setIsOpen(!isOpen);
-          }
-        }}
-      >
-        <h3 className="father-name">{sourceName} <span className="item-count">({sourceCount})</span></h3>
-        <Chevron open={isOpen} />
-      </div>
-
-      {isOpen && (
-        <div className="father-content animate-fade-in">
-          {sData?.note && <div className="father-note-box">{sData.note}</div>}
-          {Object.keys(sData?.works || {}).map(workName => {
-            const workObj = sData.works[workName] || {};
-            const workQuotes = workObj.quotes || [];
-            const workDate = workObj.date;
-            const workNote = workObj.note;
-            return (
-              <div key={workName} className="patristic-work-group">
-                <div className="work-header-meta">
-                  <h4 className="work-title">
-                    {workName} {workDate && <span className="work-date-badge">({workDate})</span>} <span className="item-count">({workQuotes.length})</span>
-                  </h4>
-                  {workNote && <p className="work-note-text">{workNote}</p>}
-                </div>
-                <div className="verse-group-list">
-                  {workQuotes.map((q, idx) => {
-                    const handleQuoteClick = () => {
-                      if (q?.url) window.open(q.url, '_blank', 'noopener,noreferrer');
-                    };
-                    const hasChapter = q?.chapter && q.chapter !== 'N/A';
-                    return (
-                      <div
-                        key={q?.quote ? q.quote.slice(0, 40) : idx}
-                        className="clean-verse-card"
-                        onClick={handleQuoteClick}
-                        role={q?.url ? "button" : undefined}
-                        tabIndex={q?.url ? 0 : undefined}
-                        onKeyDown={q?.url ? (e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            handleQuoteClick();
-                          }
-                        } : undefined}
-                      >
-                        {(hasChapter || q?.url) && (
-                          <div className="verse-card-header">
-                            <span className="verse-ref-pill">
-                              {hasChapter ? q.chapter : 'Source'} {q?.url && <span className="ref-arrow">&gt;</span>}
-                            </span>
-                          </div>
-                        )}
-                        <p className="verse-card-text">"{q?.quote || ''}"</p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-};
-
 // ----------------------------------------------------
 // Prophecies Dedicated View
 // ----------------------------------------------------
-const ProphecyCard = ({ prophecy, verseTexts, topicId }) => {
-  const otBookId = prophecy.ot_verses?.[0]?.split('_')[0];
-  const bookName = otBookId ? formatBookName(otBookId) : '';
-  const otText = (prophecy.ot_verses || []).map(vId => verseTexts[vId] || '').filter(Boolean).join(' ');
-
-  return (
-    <div className="prophecy-card">
-      <div className="prophecy-card-header">
-        <div className="prophecy-header-top">
-          <h2 className="prophecy-title">{prophecy.name}</h2>
-          {prophecy.type && <span className="prophecy-type-badge">{prophecy.type}</span>}
-        </div>
-        {prophecy.date && <p className="prophecy-date-meta">{prophecy.date}</p>}
-      </div>
-
-      <div className="prophecy-card-body">
-        <div className="prophecy-ot-pane">
-          <h4 className="prophecy-pane-label">Old Testament Promise {bookName ? `(${bookName})` : ''}</h4>
-          <div className="prophecy-ot-text">{otText}</div>
-          <div className="prophecy-ot-refs">
-            {(prophecy.ot_verses || []).map(vId => {
-              const p = vId.split('_');
-              return (
-                <a key={vId} href={`${base}/bible/${p[0]}/${p[1]}#${p.slice(2).join('_')}`} className="verse-ref-link" onClick={(e) => {
-                  e.stopPropagation();
-                }}>
-                  <span className="verse-ref-pill">{formatBookName(p[0])} {p[1]}:{p.slice(2).join('_')} <span className="ref-arrow">&gt;</span></span>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="prophecy-nt-pane">
-          <h4 className="prophecy-pane-label">New Testament Fulfillment</h4>
-          <div className="prophecy-nt-stack">
-            {(prophecy.nt_fulfillments || []).map((nt, idx) => {
-              const ntText = (nt.verses || []).map(vId => verseTexts[vId] || '').filter(Boolean).join(' ');
-              return (
-                <div key={idx} className="prophecy-nt-block">
-                  {idx > 0 && <div className="prophecy-nt-divider" />}
-                  <div className="prophecy-nt-text">{ntText}</div>
-                  <div className="prophecy-nt-refs">
-                    {(nt.verses || []).map(vId => {
-                      const p = vId.split('_');
-                      return (
-                        <a key={vId} href={`${base}/bible/${p[0]}/${p[1]}#${p.slice(2).join('_')}`} className="verse-ref-link" onClick={(e) => {
-                          e.stopPropagation();
-                        }}>
-                          <span className="verse-ref-pill">{formatBookName(p[0])} {p[1]}:{p.slice(2).join('_')} <span className="ref-arrow">&gt;</span></span>
-                        </a>
-                      );
-                    })}
-                  </div>
-                  {nt.note && <div className="prophecy-nt-note">{nt.note}</div>}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const PropheciesDedicatedView = ({ prophecies, verseTexts, topicId }) => {
   const [activeTab, setActiveTab] = useState('Category');
   const [activeFilter, setActiveFilter] = useState('All');
@@ -597,6 +340,82 @@ const DedicatedTopicView = ({ topicObj, verseTexts }) => {
 };
 
 
+const AuthorshipDedicatedView = ({ tData }) => {
+  const [activeBook, setActiveBook] = useState(null);
+  const [activeCentury, setActiveCentury] = useState('All');
+
+  const authorship = tData.authorship_data || {};
+  const books = Object.keys(authorship);
+  
+  // Set initial active book once books are loaded
+  useEffect(() => {
+    if (books.length > 0 && !activeBook) {
+      setActiveBook(books[0]);
+    }
+  }, [books, activeBook]);
+
+  if (!activeBook || !authorship[activeBook]) return null;
+  
+  const bookData = authorship[activeBook];
+  const centuries = Object.keys(bookData);
+
+  const availableFilters = [
+    { id: 'All', label: 'All Centuries' },
+    ...centuries.map(c => ({ id: c, label: c }))
+  ];
+
+  const feedContent = centuries
+    .filter(c => activeCentury === 'All' || activeCentury === c)
+    .map(century => {
+      const fathers = bookData[century];
+      return (
+        <div key={century} className="feed-category-block animate-fade-in">
+          <h2 className="feed-category-title">{century} <span className="item-count">({Object.keys(fathers).length} sources)</span></h2>
+          <div className="fathers-grid">
+            {Object.keys(fathers).map(fatherName => (
+              <SourceBlock key={fatherName} sourceName={fatherName} sData={fathers[fatherName]} />
+            ))}
+          </div>
+        </div>
+      );
+    });
+
+  return (
+    <div className="dedicated-topic-view">
+      <ScrollableTrack containerClass="master-tabs-container" activeTrigger={activeBook}>
+        {books.map(b => (
+          <button
+            key={b}
+            className={`master-tab ${activeBook === b ? 'active' : ''}`}
+            onClick={() => { setActiveBook(b); setActiveCentury('All'); }}
+          >
+            {b}
+          </button>
+        ))}
+      </ScrollableTrack>
+      <div className="scripture-feed-container">
+        <div className="feed-controls-bar">
+          <div className="pills-scroll-container">
+            {availableFilters.map(filter => (
+              <button
+                key={filter.id}
+                className={`filter-pill ${activeCentury === filter.id ? 'active' : ''}`}
+                onClick={() => setActiveCentury(filter.id)}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="feed-content-area">
+          {feedContent}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [topicSearch, setTopicSearch] = useState('');
@@ -759,22 +578,26 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
                     setDropdownOpen={setDropdownOpen}
                     base={base}
                   />
-                  <div className="hero-top-row">
-                    <button
-                      className={`ios-compact-toggle ${activeHighlightTopics.includes(tId) ? 'is-active' : ''}`}
-                      onClick={() => toggleHighlight(tId)}
-                      aria-pressed={activeHighlightTopics.includes(tId)}
-                      title="Toggle Scripture Highlighting"
-                    >
-                      <span className="ios-toggle-track">
-                        <span className="ios-toggle-knob"></span>
-                      </span>
-                      <span className="compact-toggle-text">Highlight in Scripture</span>
-                    </button>
-                  </div>
+                  {tData.hideHighlightButton ? null : (
+                    <div className="hero-top-row">
+                      <button
+                        className={`ios-compact-toggle ${activeHighlightTopics.includes(tId) ? 'is-active' : ''}`}
+                        onClick={() => toggleHighlight(tId)}
+                        aria-pressed={activeHighlightTopics.includes(tId)}
+                        title="Toggle Scripture Highlighting"
+                      >
+                        <span className="ios-toggle-track">
+                          <span className="ios-toggle-knob"></span>
+                        </span>
+                        <span className="compact-toggle-text">Highlight in Scripture</span>
+                      </button>
+                    </div>
+                  )}
                 </header>
                 {tData.prophecies ? (
                   <PropheciesDedicatedView prophecies={tData.prophecies} verseTexts={t.verseTexts} topicId={tId} />
+                ) : tData.authorship_data ? (
+                  <AuthorshipDedicatedView tData={tData} />
                 ) : (
                   <DedicatedTopicView topicObj={{ ...tData, _id: tId }} verseTexts={t.verseTexts} />
                 )}
@@ -804,7 +627,7 @@ export default function TopicsExplorer({ topics = [], initialTopicId = null }) {
                             <h4 className="topic-main-heading">{tTitle}</h4>
                           </div>
                           <div className="header-controls">
-                            {(tId !== 'quranic_deficiencies' && tId !== 'scientific_errors') && (
+                            {(!tData.hideHighlightButton && tId !== 'quranic_deficiencies' && tId !== 'scientific_errors') && (
                               <button
                                 className={`ios-compact-toggle card-toggle ${isHighlighted ? 'is-active' : ''}`}
                                 onClick={(e) => {
