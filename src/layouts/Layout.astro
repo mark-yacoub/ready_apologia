@@ -66,35 +66,9 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		<!-- Load Google Fonts -->
 		<link href="https://fonts.googleapis.com" rel="preconnect"/>
 		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-		<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
+		<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet"/>
 
-		<!-- PWA Manifest & Worker links -->
-		<link rel="manifest" href={`${base}/manifest.json`} />
-		<meta name="theme-color" content="#18181b" />
-
-		<!-- Register PWA Service Worker -->
-		<script is:inline define:vars={{ base }}>
-			if ('serviceWorker' in navigator) {
-				window.addEventListener('load', () => {
-					const hadController = !!navigator.serviceWorker.controller;
-					let refreshing = false;
-
-					navigator.serviceWorker.addEventListener('controllerchange', () => {
-						if (hadController && !refreshing) {
-							refreshing = true;
-							window.location.reload();
-						}
-					});
-
-					navigator.serviceWorker.register(`${base}/sw.js`)
-						.then((reg) => {
-							console.log('PWA Service Worker registered successfully!');
-							reg.update();
-						})
-						.catch((err) => console.warn('PWA Service Worker registration failed:', err));
-				});
-			}
-		</script>
+		<!-- Removed PWA Service Worker Registration -->
 	</head>
 	<body class="bg-slate-100 text-slate-900 min-h-screen flex justify-center items-center transition-colors duration-200">
 		
@@ -312,6 +286,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		--font-display: 'Literata', Georgia, 'Amiri', 'Traditional Arabic', Arial, serif;
 		--font-body: 'Public Sans', -apple-system, 'Amiri', 'Traditional Arabic', Arial, sans-serif;
 		--font-cinzel: 'Cinzel', serif;
+		--font-headings: 'Lora', Georgia, serif;
 	}
 
 	.theme-quran {
