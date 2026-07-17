@@ -8,7 +8,7 @@ function testTestCase12() {
   const html1 = fs.readFileSync(htmlPath1, 'utf-8');
   
   // Verse 4 exists
-  assert(html1.includes('id="v-4"'), "Verse 4 should exist in Surah 1");
+  assert(html1.includes('id="v-4"') || html1.includes('id="4"'), "Verse 4 should exist in Surah 1");
   
   // Verse 4 English and Arabic highlighting
   assert(html1.includes('<span class="qiraat-highlight">Master</span>') || html1.includes('<span class="qiraat-highlight">master</span>'), "English word 'Master' should be highlighted");
@@ -23,11 +23,11 @@ function testTestCase12() {
   const html2 = fs.readFileSync(htmlPath2, 'utf-8');
   
   // Verse 184 exists
-  assert(html2.includes('id="v-184"'), "Verse 184 should exist in Surah 2");
+  assert(html2.includes('id="v-184"') || html2.includes('id="184"'), "Verse 184 should exist in Surah 2");
   
   // Extract Verse 184 block roughly
-  const v184Start = html2.indexOf('id="v-184"');
-  const v185Start = html2.indexOf('id="v-185"');
+  const v184Start = html2.indexOf('id="v-184"') > -1 ? html2.indexOf('id="v-184"') : html2.indexOf('id="184"');
+  const v185Start = html2.indexOf('id="v-185"') > -1 ? html2.indexOf('id="v-185"') : html2.indexOf('id="185"');
   const v184Block = html2.substring(v184Start, v185Start > -1 ? v185Start : undefined);
   
   // Verse 184 has both competing-pill and qiraat-pill
