@@ -17855,7 +17855,7 @@
         "variant_english_word": "each",
         "category": "Vowel Difference (harakat)",
         "effect": "Grammatical Case Change",
-        "description": "Change in grammatical case from the accusative 'kullan' (direct object) to the nominative 'kullun' (topic/subject), altering the sentence structure.",
+        "description": "Change in grammatical case from the accusative 'kullan' (direct object) to the nominative 'kullun' (evidence/subject), altering the sentence structure.",
         "readers": [
           "Hisham",
           "Ibn Dhakwan"

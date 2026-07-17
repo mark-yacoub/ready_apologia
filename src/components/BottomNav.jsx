@@ -8,8 +8,8 @@ export default function BottomNav() {
   useEffect(() => {
     const syncActiveTab = () => {
       const pathname = window.location.pathname;
-      if (pathname.includes('/topics')) {
-        setActiveTab('topics');
+      if (pathname.includes('/evidence')) {
+        setActiveTab('evidence');
       } else {
         setActiveTab('scripture');
       }
@@ -48,14 +48,14 @@ export default function BottomNav() {
         <span className="label">Scripture</span>
       </a>
       
-      {/* Topics Tab */}
-      <a href={`${base}/topics`} className={`nav-item ${activeTab === 'topics' ? 'active' : ''}`} aria-label="Topics">
+      {/* Evidence Tab */}
+      <a href={`${base}/evidence`} className={`nav-item ${activeTab === 'evidence' ? 'active' : ''}`} aria-label="Evidence">
         <div className="nav-icon-wrapper">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
           </svg>
         </div>
-        <span className="label">Topics</span>
+        <span className="label">Evidence</span>
       </a>
       
       {/* Library Tab (Coming Soon) */}

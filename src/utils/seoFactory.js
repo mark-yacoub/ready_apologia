@@ -39,7 +39,7 @@ export const generateBibleTabSEO = ({ tab, bookName, chapter, verse, manuscripts
 
   // Dynamic Data Injections & Schema Generation
   if (tab === 'apologetics' && apologetics && apologetics.length > 0) {
-    seoDescription = `Apologetic defenses for ${bookName} ${chapter}:${verse}. Topics include: ${sanitizeHTML(apologetics[0].title)}.`;
+    seoDescription = `Apologetic defenses for ${bookName} ${chapter}:${verse}. Evidence include: ${sanitizeHTML(apologetics[0].title)}.`;
     
     // Rich FAQ Schema for Google Search
     const faqs = apologetics.map(ap => ({
@@ -50,7 +50,7 @@ export const generateBibleTabSEO = ({ tab, bookName, chapter, verse, manuscripts
     seoSchema = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faqs });
 
   } else if (tab === 'contradictions' && contradictions && contradictions.length > 0) {
-    seoDescription = `Answers to alleged contradictions in ${bookName} ${chapter}:${verse}. Topics include: ${sanitizeHTML(contradictions[0].title)}.`;
+    seoDescription = `Answers to alleged contradictions in ${bookName} ${chapter}:${verse}. Evidence include: ${sanitizeHTML(contradictions[0].title)}.`;
     
     // Rich FAQ Schema for Google Search
     const faqs = contradictions.map(ct => ({
@@ -109,11 +109,11 @@ export const generateQuranTabSEO = ({ tab, surah, ayah, manuscripts, verseContra
 
   // Inject critical data dynamically into Descriptions
   if (tab === 'contradictions' && verseContradictions && verseContradictions.length > 0) {
-    seoDescription = `Answers to alleged contradictions in Surah ${surah}:${ayah}. Topics include: ${sanitizeHTML(verseContradictions[0].topic)}.`;
+    seoDescription = `Answers to alleged contradictions in Surah ${surah}:${ayah}. Evidence include: ${sanitizeHTML(verseContradictions[0].evidence)}.`;
   } else if (tab === 'scientific-errors' && parsedScientificErrors && parsedScientificErrors.length > 0) {
     seoDescription = `Review and analysis of alleged scientific errors in Surah ${surah}:${ayah}: ${sanitizeHTML(parsedScientificErrors[0].label)}.`;
   } else if (tab === 'debunking-miracles' && verseDebunking && verseDebunking.length > 0) {
-    seoDescription = `Analysis and refutation of claimed miracles in Surah ${surah}:${ayah}. Topics include: ${sanitizeHTML(verseDebunking[0].miracle_category || "Mathematical/Scientific Claims")}.`;
+    seoDescription = `Analysis and refutation of claimed miracles in Surah ${surah}:${ayah}. Evidence include: ${sanitizeHTML(verseDebunking[0].miracle_category || "Mathematical/Scientific Claims")}.`;
   } else if (tab === 'manuscripts' && manuscripts && manuscripts.length > 0) {
     const msNames = manuscripts.slice(0, 3).map(m => m.name || m.ms_id).join(', ');
     seoDescription = `Explore ${manuscripts.length} ancient manuscript scans and textual variants for Quran Surah ${surah}:${ayah}, including ${msNames}.`;

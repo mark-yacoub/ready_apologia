@@ -66,11 +66,11 @@ export function trackQuranSpecialView({ pageType, slugOrId }) {
 }
 
 /**
- * Track user interactions inside the Topics section.
+ * Track user interactions inside the Evidence section.
  */
-export function trackTopicInteraction({ topicId, action, verseRef }) {
-  trackEvent('topic_interaction', {
-    topic_id: topicId || '',
+export function trackEvidenceInteraction({ evidenceId, action, verseRef }) {
+  trackEvent('evidence_interaction', {
+    evidence_id: evidenceId || '',
     action: action || '',
     verse_ref: verseRef || '',
   });

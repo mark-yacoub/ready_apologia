@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EvidenceExplorer from '../../components/EvidenceExplorer.jsx';
+import { loadAllEvidenceData } from '../../utils/evidenceLoader.js';
+
+export async function getStaticPaths() {
+  return loadAllEvidenceData().map(({ evidenceId }) => ({
+    params: { evidence_id: evidenceId }
+  }));
+}
+
+const { evidence_id } = Astro.params;
+const evidenceData = loadAllEvidenceData();
+
+const targetEvidence = evidenceData.find(t => t.evidenceId === evidence_id);
+const rawTitle = targetEvidence?.evidenceData?.name || targetEvidence?.evidenceData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || evidence_id.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+const evidenceTitle = `${rawTitle} Bible Verses & Early Church Evidence`;
+
+const evidenceDesc = `Comprehensive collection of Biblical Scripture verses (Old & New Testament) and early Church Patristic testimonies defending the ${rawTitle}. Explore historical Christian apologetics proofs and quotes.`;
+const evidenceKeywords = `verses ${rawTitle.toLowerCase()}, bible verses ${rawTitle.toLowerCase()}, early church fathers ${rawTitle.toLowerCase()}, ${rawTitle.toLowerCase()} apologetics, scripture evidence ${rawTitle.toLowerCase()}, proof of ${rawTitle.toLowerCase()}`;
+
+// Extract top verse references for Rich ItemList Schema
+const ntCategories = targetEvidence?.evidenceData?.Scripture?.['New Testament']?.structure || [];
+const otCategories = targetEvidence?.evidenceData?.Scripture?.['Old Testament']?.structure || [];
+const allCategories = [...ntCategories, ...otCategories];
+
+const itemListElements = allCategories.slice(0, 10).map((cat, idx) => {
+  const catName = cat?.title || 'General Evidence';
+  return {
+    "@type": "ListItem",
+    "position": idx + 1,
+    "name": `${catName} - ${rawTitle}`,
+    "description": `Biblical evidence and verses regarding ${catName.toLowerCase()} demonstrating the ${rawTitle.toLowerCase()}.`
+  };
+});
+
+const articleGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ready Apologia",
+          "item": Astro.site ? Astro.site.toString() : Astro.url.origin
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Apologetics Evidence",
+          "item": `${Astro.site ? Astro.site.toString().replace(/\/$/, '') : Astro.url.origin}/evidence`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": rawTitle,
+          "item": Astro.url.href
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": Astro.url.href,
+      "url": Astro.url.href,
+      "name": `${rawTitle} - Scripture & Patristic Evidence`,
+      "headline": evidenceTitle,
+      "description": evidenceDesc,
+      "keywords": evidenceKeywords,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": Astro.site ? Astro.site.toString() : Astro.url.origin
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "name": `Key Scripture Evidence for ${rawTitle}`,
+        "itemListElement": itemListElements
+      }
+    }
+  ]
+};
+const schemaJson = JSON.stringify(articleGraph);
+---
+
+<Layout title={evidenceTitle} description={evidenceDesc} keywords={evidenceKeywords} schema={schemaJson}>
+  <div class="evidence-page-container">
+    <EvidenceExplorer client:load evidence={evidenceData} initialEvidenceId={evidence_id} />
+  </div>
+</Layout>
+
+<style>
+  .evidence-page-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 12px;
+    min-height: 100%;
+  }
+</style>

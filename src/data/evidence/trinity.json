@@ -1,0 +1,1144 @@
+{
+  "name": "Holy Trinity",
+  "Scripture": {
+    "Old Testament": {
+      "verse_bank": {
+        "gn_1_2": "The Spirit of God is described as actively hovering over the waters, introducing the Spirit as a distinct agent involved in the act of creation alongside God.",
+        "gn_1_26": "God speaks using plural pronouns ('Let us make man in our image, after our likeness'), indicating a plurality of persons communicating within the divine counsel.",
+        "hg_2_5": "The LORD of hosts speaks to the people, assuring them of His presence by stating that 'My Spirit remains in your midst.' This distinguishes the LORD who is speaking from His Spirit, who actively dwells among the people as a distinct comforting presence, foreshadowing the distinct personhood of the Holy Spirit within the Godhead.",
+        "is_48_16": "The speaker, who identifies Himself in the surrounding context with divine titles such as 'the first and the last', explicitly states that He has been sent by the Lord GOD and His Spirit, presenting three distinct personal agents working together.",
+        "is_61_1": "This verse explicitly mentions three distinct figures: the 'Lord GOD', the 'Spirit of the Lord GOD', and the anointed speaker ('me', representing the Messiah), demonstrating a triune interplay in the work of salvation.",
+        "is_63_10": "This verse states that the people rebelled and 'grieved his Holy Spirit', attributing personal characteristics (capable of being grieved) to the Spirit as a distinct, acting agent alongside God.",
+        "is_63_9": "This verse introduces 'the angel of his presence' as the Savior and Redeemer of Israel, distinguishing a divine saving agent from the Lord Himself.",
+        "ps_32_6": "This verse describes creation being accomplished by three distinct agents: the LORD (Yahweh), His Word (which corresponds to the Son or Logos), and the breath or Spirit (Ruach) of His mouth, foreshadowing the Trinitarian persons.",
+        "ws_9_17": "This verse explicitly references God sending both wisdom and His holy spirit from on high, demonstrating a plurality of divine agents sent to humanity.",
+        "zec_12_10": "The LORD speaks of pouring out the 'spirit of grace' (referencing the Holy Spirit) and says the people will look on 'me whom they have pierced' and mourn for 'him.' This passage involves the speaking LORD, the distinct Spirit, and the pierced LORD, foreshadowing the multiple persons of the Trinity.",
+        "is_42_1": "The LORD speaks of placing His Spirit upon His chosen Servant, clearly presenting three distinct, active persons (the LORD, the Spirit, and the Servant) working together in the divine plan."
+      },
+      "structure": [
+        {
+          "title": "The Trinity in Creation",
+          "verses": [
+            "gn_1_2",
+            "ps_32_6"
+          ]
+        },
+        {
+          "title": "Plurality within the Godhead",
+          "verses": [
+            "gn_1_26",
+            "is_63_9",
+            "ws_9_17"
+          ]
+        },
+        {
+          "title": "The Three Persons in Salvation and Ministry",
+          "verses": [
+            "is_48_16",
+            "is_61_1",
+            "is_42_1",
+            "zec_12_10"
+          ]
+        },
+        {
+          "title": "The Personhood and Presence of the Holy Spirit",
+          "verses": [
+            "hg_2_5",
+            "is_63_10"
+          ]
+        }
+      ]
+    },
+    "New Testament": {
+      "verse_bank": {
+        "jn_3_34": "This verse reveals the coordinated relationship between the three persons of the Trinity, showing that God (the Father) sends the Son (the one who is sent) and provides the Spirit without limit.",
+        "acts_20_28": "This verse highlights the distinct persons and coordinated actions of the Trinity: the Holy Spirit acts as a divine person by appointing overseers, the church is identified as belonging to God, and it is redeemed through 'his own blood' (referring to the sacrificial work of God the Son, Jesus Christ).",
+        "rom_1_4": "In the opening greeting (Romans 1:1-4), Paul references all three persons of the Trinity in a coordinated way. He speaks of the 'gospel of God' (the Father) concerning 'his Son' (Jesus Christ), who was declared to be the Son of God in power according to the 'Spirit of holiness' (the Holy Spirit) by his resurrection.",
+        "acts_5_32": "This verse, in its immediate context, demonstrates the distinct persons of the Trinity working in coordination. It describes God (the Father) giving the Holy Spirit to believers, who acts as a witness to the resurrection and exaltation of Jesus (the Son).",
+        "eph_1_17": "Paul prays that the God of our Lord Jesus Christ (the Father) would give believers the Spirit of wisdom, mentioning all three distinct persons of the Godhead in one coordinated statement.",
+        "eph_2_18": "This verse explicitly describes the coordinated work of the Trinity in salvation: through the Son (Jesus), believers have access by one Holy Spirit to God the Father.",
+        "eph_2_22": "This verse demonstrates the distinct but unified action of the Trinity, stating that believers are being built in Christ (the Son) into a dwelling place for God (the Father) by the Spirit.",
+        "mk_12_36": "Jesus explicitly names the Holy Spirit as the inspirer of David's prophetic words, which describe a divine conversation between the Father ('The Lord') and the Son ('my Lord'). This verse reveals three distinct persons: the Holy Spirit acting as the agent of divine revelation, the Father declaring sovereign authority, and the Son being exalted to the Father's right hand.",
+        "1pt_1_2": "This verse presents a clear triadic formula, coordinating the three persons of the Trinity in the process of salvation: the foreknowledge of God the Father, the sanctifying work of the Spirit, and the atoning work through the sprinkling of the blood of Jesus Christ.",
+        "lk_10_21": "In this verse, Jesus is described as rejoicing in the Holy Spirit while simultaneously praying to God the Father. This demonstrates the presence and distinct interaction of all three persons of the Trinity in a single moment.",
+        "2cor_13_14": "This verse presents a clear triadic formula in a closing benediction, coordinating the 'grace of the Lord Jesus Christ', the 'love of God' (the Father), and the 'fellowship of the Holy Spirit'. This demonstrates their distinct persons and roles while implying a shared divine status and unity in bestowing spiritual blessings upon believers.",
+        "rom_8_9": "Paul interchangeably refers to the Holy Spirit as the 'Spirit of God' and the 'Spirit of Christ,' highlighting the shared divine nature and essential unity of the three persons.",
+        "rom_8_11": "This verse distinguishes all three persons by describing the Father as 'him who raised Jesus from the dead,' the Son as 'Jesus' or 'Christ,' and the Holy Spirit as 'his Spirit who lives in you,' showing their cooperative action in salvation and resurrection.",
+        "mt_22_43": "Jesus explains that David, speaking by the inspiration of the Holy Spirit, refers to the Messiah (the Son) as 'Lord' when quoting a conversation between the 'Lord' (the Father) and the Messiah. This verse references the Father, the Son, and the Holy Spirit together in the context of divine revelation and the divine authority of the Son.",
+        "phil_3_3": "This verse coordinates the three persons of the Godhead in the context of Christian life, describing believers as those who worship by the Spirit of God and glory in Christ Jesus.",
+        "jn_14_16": "Jesus (the Son) promises to ask the Father, who will give the believers another Advocate (the Holy Spirit), showing distinct interaction between all three divine persons.",
+        "jn_14_26": "Jesus explains that the Father will send the Advocate, the Holy Spirit, in His (the Son's) name, demonstrating the coordinated action and distinct roles of the Father, Son, and Holy Spirit.",
+        "mt_28_19": "Jesus commands his disciples to baptize in the singular 'name' of the Father, and of the Son, and of the Holy Spirit, demonstrating a triadic formula that points to three distinct persons sharing one divine nature and authority.",
+        "1cor_6_11": "This verse presents a clear triadic formula in the context of salvation, stating that believers are washed, sanctified, and justified 'in the name of the Lord Jesus Christ and by the Spirit of our God,' demonstrating the coordinated work of the Son, the Holy Spirit, and God the Father.",
+        "heb_9_14": "This verse presents a clear triadic formula, showing all three Persons of the Trinity cooperating in the work of redemption: Christ (the Son) offers Himself as a spotless sacrifice, He does so through the eternal Spirit (the Holy Spirit), and the offering is made to God (the Father).",
+        "2cor_3_3": "This verse presents a triadic formula by mentioning Christ, the Spirit, and the living God together. It demonstrates their coordinated work, describing believers as a letter from Christ that is written by the Spirit of the living God.",
+        "1jn_5_7": "This verse explicitly names the Father, the Word (Son), and the Holy Ghost, stating that 'these three are one', providing a direct triadic formula and assertion of their shared divine unity.",
+        "jn_1_33": "This verse references all three persons of the Trinity simultaneously in distinct roles: the Father ('he that sent me'), the Holy Spirit ('the Spirit descending'), and the Son ('he which baptizeth with the Holy Ghost').",
+        "1pt_3_18": "This verse highlights the coordinated work of the Trinity in salvation, stating that 'Christ' (the Son) suffered for sins to bring us to 'God' (the Father), and was made alive by the 'Spirit'.",
+        "1pt_4_14": "This verse presents a triadic formula by mentioning the three persons of the Trinity together: it references the name of 'Christ' (the Son) and states that the 'Spirit' of glory and of 'God' (the Father) rests upon believers.",
+        "gal_4_6": "This verse demonstrates the Trinity by explicitly mentioning all three persons acting in coordination: God the Father sends the Spirit of His Son into the hearts of believers, showing distinct persons interacting in the process of salvation.",
+        "lk_3_22": "At Jesus' baptism, the three persons of the Trinity are revealed simultaneously: the Holy Spirit descends in bodily form like a dove upon Jesus (the Son), and the Father speaks from heaven, affirming Jesus as His beloved Son.",
+        "lk_4_18": "Jesus reads from Isaiah, identifying Himself as the anointed one, thereby referencing the entire Trinity: the Spirit (Holy Spirit) of the Lord (the Father) is upon Him (the Son) to empower His ministry.",
+        "acts_10_38": "This verse explicitly mentions all three persons of the Trinity working in coordination, stating that God (the Father) anointed Jesus of Nazareth (the Son) with the Holy Spirit, demonstrating their distinct identities and cooperative action in the divine mission.",
+        "acts_7_55": "Stephen, being full of the Holy Spirit, looks up into heaven and sees the glory of God (the Father) and Jesus (the Son) standing at the right hand of God. This scene demonstrates the simultaneous, distinct presence of all three persons of the Godhead.",
+        "rom_15_16": "This verse mentions all three persons of the Trinity working together in the process of salvation and ministry: Paul serves as a minister of Christ Jesus, proclaiming the gospel of God (the Father), so that the Gentiles may be sanctified by the Holy Spirit.",
+        "rom_15_30": "This verse uses a clear triadic formula where Paul appeals to the believers by the Lord Jesus Christ and by the love of the Spirit, urging them to pray to God (the Father), demonstrating their distinct yet coordinated persons in the life of the believer.",
+        "rv_5_6": "This verse symbolically depicts the three persons of the Trinity by mentioning the throne (representing God the Father), the Lamb (representing God the Son), and the seven spirits of God (representing the Holy Spirit). It illustrates their distinct co-existence and interconnectedness within the heavenly vision.",
+        "mt_12_18": "In this prophecy applied to Jesus, God the Father speaks of His chosen servant (the Son) and declares that He will put His Spirit (the Holy Spirit) upon Him, highlighting the distinct persons of the Trinity acting in coordination.",
+        "mt_12_28": "Jesus (the Son) states that He casts out demons by the Spirit of God (the Holy Spirit), which inaugurates the kingdom of God (the Father), demonstrating the shared, coordinated action of all three persons.",
+        "acts_2_33": "This verse explicitly describes the coordinated action of all three persons: Jesus (the Son) is exalted at the right hand of God, receives the promised Holy Spirit from the Father, and pours out the Spirit upon the believers.",
+        "2thes_2_13": "This verse presents a triadic formula where all three persons of the Godhead are united in the work of salvation: God (the Father) chooses the believers, the Lord (Jesus Christ) loves them, and the Spirit performs the work of sanctification.",
+        "lk_1_35": "During the Annunciation, the angel Gabriel references all three persons of the Trinity, highlighting their distinct roles in the Incarnation: the Holy Spirit will come upon Mary, the power of the Most High (the Father) will overshadow her, and the child born will be called the Son of God.",
+        "jn_15_26": "Jesus (the Son) promises to send the Advocate (the Holy Spirit) from the Father. This explicitly names all three divine persons, demonstrating their distinct identities and cooperative action as the Spirit proceeds from the Father and is sent by the Son."
+      },
+      "structure": [
+        {
+          "title": "The Incarnation, Baptism, and Earthly Ministry of Christ",
+          "verses": [
+            "lk_1_35",
+            "lk_3_22",
+            "lk_4_18",
+            "lk_10_21",
+            "jn_1_33",
+            "mt_12_18",
+            "mt_12_28",
+            "acts_10_38"
+          ]
+        },
+        {
+          "title": "The Promise, Sending, and Proceeding of the Holy Spirit",
+          "verses": [
+            "jn_3_34",
+            "jn_14_16",
+            "jn_14_26",
+            "jn_15_26",
+            "acts_2_33",
+            "acts_5_32",
+            "gal_4_6"
+          ]
+        },
+        {
+          "title": "Salvation, Sanctification, and the Believer's Life",
+          "verses": [
+            "acts_20_28",
+            "eph_1_17",
+            "eph_2_18",
+            "eph_2_22",
+            "1pt_1_2",
+            "1pt_3_18",
+            "1pt_4_14",
+            "rom_8_11",
+            "rom_15_16",
+            "rom_15_30",
+            "phil_3_3",
+            "1cor_6_11",
+            "2cor_3_3",
+            "heb_9_14",
+            "2thes_2_13"
+          ]
+        },
+        {
+          "title": "Divine Revelation, Prophecy, and Heavenly Vision",
+          "verses": [
+            "mk_12_36",
+            "mt_22_43",
+            "rom_1_4",
+            "acts_7_55",
+            "rv_5_6"
+          ]
+        },
+        {
+          "title": "Triadic Formulas and the Unity of the Divine Nature",
+          "verses": [
+            "mt_28_19",
+            "2cor_13_14",
+            "1jn_5_7",
+            "rom_8_9"
+          ]
+        }
+      ]
+    }
+  },
+  "Ante-Nicene Fathers": {
+    "3rd Century": {
+      "Tertullian": {
+        "note": "Lived c. AD 155 to AD 220. Prolific early Latin father.",
+        "works": {
+          "Against Praxeas": {
+            "date": "c. AD 213",
+            "quotes": [
+              {
+                "chapter": "Chapter 25",
+                "quote": "Thus the connection of the Father in the Son , and of the Son in the Paraclete, produces three coherent Persons, who are yet distinct One from Another. These Three are one essence , not one Person",
+                "url": "https://www.newadvent.org/fathers/0317.htm"
+              },
+              {
+                "chapter": "Chapter 26",
+                "quote": "He commands them to baptize into the Father and the Son and the Holy Ghost , not into a unipersonal God. And indeed it is not once only, but three times, that we are immersed into the Three Persons, at each several mention of Their names.",
+                "url": "https://www.newadvent.org/fathers/0317.htm"
+              },
+              {
+                "chapter": "Chapter 30",
+                "quote": "Meanwhile He has received from the Father the promised gift, and has shed it forth, even the Holy Spirit \u2014 the Third Name in the Godhead, and the Third Degree of the Divine Majesty; the Declarer of the One Monarchy of God , but at the same time the Interpreter of the Economy , to every one who hears and receives the words of the new prophecy ; and the Leader into all truth , such as is in the Father , and the Son , and the Holy Ghost , according to the mystery of the doctrine of Christ .",
+                "url": "https://www.newadvent.org/fathers/0317.htm"
+              },
+              {
+                "chapter": "Chapter 31",
+                "quote": "What need would there be of the gospel, which is the substance of the New Covenant, laying down (as it does) that the Law and the Prophets lasted until John the Baptist , if thenceforward the Father , the Son , and the Spirit are not both believed in as Three, and as making One Only God?",
+                "url": "https://www.newadvent.org/fathers/0317.htm"
+              },
+              {
+                "chapter": "Chapter 2",
+                "quote": "while the mystery of the dispensation is still guarded, which distributes the Unity into a Trinity, placing in their order the three Persons \u2014 the Father, the Son, and the Holy Ghost: three, however, not in condition, but in degree; not in substance, but in form; not in power, but in aspect; yet of one substance, and of one condition, and of one power, inasmuch as He is one God, from whom these degrees and forms and aspects are reckoned, under the name of the Father, and of the Son, and of the Holy Ghost.",
+                "url": "https://www.newadvent.org/fathers/0317.htm"
+              },
+              {
+                "chapter": "Chapter 8",
+                "quote": "Now the Spirit indeed is third from God and the Son; just as the fruit of the tree is third from the root, or as the stream out of the river is third from the fountain, or as the apex of the ray is third from the sun. Nothing, however, is alien from that original source whence it derives its own properties. In like manner the Trinity, flowing down from the Father through intertwined and connected steps, does not at all disturb the Monarchy, while it at the same time guards the state of the Economy.",
+                "url": "https://www.newadvent.org/fathers/0317.htm"
+              },
+              {
+                "chapter": "Chapter 9",
+                "quote": "Bear always in mind that this is the rule of faith which I profess; by it I testify that the Father, and the Son, and the Spirit are inseparable from each other, and so will you know in what sense this is said. Now, observe, my assertion is that the Father is one, and the Son one, and the Spirit one, and that They are distinct from Each Other.",
+                "url": "https://www.newadvent.org/fathers/0317.htm"
+              },
+              {
+                "chapter": "Chapter 11",
+                "quote": "Still, in these few quotations the distinction of Persons in the Trinity is clearly set forth. For there is the Spirit Himself who speaks, and the Father to whom He speaks, and the Son of whom He speaks.",
+                "url": "https://www.newadvent.org/fathers/0317.htm"
+              },
+              {
+                "chapter": "Chapter 13",
+                "quote": "For we, who by the grace of God possess an insight into both the times and the occasions of the Sacred Writings, especially we who are followers of the Paraclete, not of human teachers, do indeed definitively declare that Two Beings are God, the Father and the Son, and, with the addition of the Holy Spirit, even Three, according to the principle of the divine economy, which introduces number",
+                "url": "https://www.newadvent.org/fathers/0317.htm"
+              }
+            ]
+          },
+          "The Prescription Against Heretics": {
+            "date": "c. AD 200",
+            "quotes": [
+              {
+                "chapter": "Chapter 13",
+                "quote": "Now, with regard to this rule of faith \u2014 that we may from this point acknowledge what it is which we defend \u2014 it is, you must know, that which prescribes the belief that there is one only God, and that He is none other than the Creator of the world, who produced all things out of nothing through His own Word, first of all sent forth; that this Word is called His Son, and, under the name of God, was seen in diverse manners by the patriarchs, heard at all times in the prophets, at last brought down by the Spirit and Power of the Father into the Virgin Mary, was made flesh in her womb, and, being born of her, went forth as Jesus Christ; thenceforth He preached the new law and the new promise of the kingdom of heaven, worked miracles; having been crucified, He rose again the third day; (then) having ascended into the heavens, He sat at the right hand of the Father; sent instead of Himself the Power of the Holy Ghost to lead such as believe; will come with glory to take the saints to the enjoyment of everlasting life and of the heavenly promises, and to condemn the wicked to everlasting fire, after the resurrection of both these classes shall have happened, together with the restoration of their flesh.",
+                "url": "https://www.newadvent.org/fathers/0311.htm"
+              },
+              {
+                "chapter": "Chapter 20",
+                "quote": "Accordingly, after one of these had been struck off, He commanded the eleven others, on His departure to the Father, to go and teach all nations, who were to be baptized into the Father, and into the Son, and into the Holy Ghost.",
+                "url": "https://www.newadvent.org/fathers/0311.htm"
+              }
+            ]
+          },
+          "On Prayer": {
+            "date": "c. AD 198",
+            "quotes": [
+              {
+                "chapter": "Chapter 25. Of Time for Prayer",
+                "quote": "we pray at least not less than thrice in the day, debtors as we are to Three \u2014 Father, Son, and Holy Spirit",
+                "url": "https://www.newadvent.org/fathers/0322.htm"
+              }
+            ]
+          },
+          "Ad Martyras": {
+            "date": "c. AD 197",
+            "quotes": [
+              {
+                "chapter": "Chapter 3",
+                "quote": "You are about to pass through a noble struggle, in which the living God acts the part of superintendent, in which the Holy Ghost is your trainer, in which the prize is an eternal crown of angelic essence, citizenship in the heavens, glory everlasting. Therefore your Master, Jesus Christ, who has anointed you with His Spirit, and led you forth to the arena, has seen it good, before the day of conflict, to take you from a condition more pleasant in itself, and has imposed on you a harder treatment, that your strength might be the greater.",
+                "url": "https://www.newadvent.org/fathers/0323.htm"
+              }
+            ]
+          },
+          "On Modesty": {
+            "date": "c. AD 220",
+            "quotes": [
+              {
+                "chapter": "Chapter 21",
+                "quote": "For the very Church itself is, properly and principally, the Spirit Himself, in whom is the Trinity of the One Divinity \u2014 Father, Son, and Holy Spirit .",
+                "url": "https://www.newadvent.org/fathers/0407.htm"
+              }
+            ]
+          },
+          "On Baptism": {
+            "date": "c. AD 198",
+            "quotes": [
+              {
+                "chapter": "Chapter 6",
+                "quote": "Thus, too, does the angel , the witness of baptism , make the paths straight for the Holy Spirit , who is about to come upon us, by the washing away of sins , which faith , sealed in (the name of) the Father , and the Son , and the Holy Spirit , obtains.",
+                "url": "https://www.newadvent.org/fathers/0321.htm"
+              },
+              {
+                "chapter": "Chapter 6",
+                "quote": "Moreover, after the pledging both of the attestation of faith and the promise  of salvation under three witnesses, there is added, of necessity, mention of the Church ;  inasmuch as, wherever there are three, (that is, the Father , the Son , and the Holy Spirit ,) there is the Church , which is a body of three.",
+                "url": "https://www.newadvent.org/fathers/0321.htm"
+              },
+              {
+                "chapter": "Chapter 13",
+                "quote": "For the law of baptizing has been imposed , and the formula prescribed: Go, He says, teach the nations , baptizing them into the name of the Father , and of the Son , and of the Holy Spirit .",
+                "url": "https://www.newadvent.org/fathers/0321.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Peter of Alexandria": {
+        "note": "Flourished in the 3rd century.",
+        "works": {
+          "Fragments": {
+            "date": "2nd or 3rd Century",
+            "quotes": [
+              {
+                "chapter": "5.\u2014 That Up to the Time of the Destruction of Jerusalem, the Jews Rightly Appointed the Fourteenth Day of the First Lunar Month",
+                "quote": "Therefore, when the holy prophets , and all, as I have said, who righteously and justly walked in the law of the Lord, together with the entire people, celebrated a typical and shadowy Passover , the Creator and Lord of every visible and invisible creature, the only-begotten Son, and the Word co-eternal with the Father and the Holy Spirit , and of the same substance with them, according to His divine nature, our Lord and God , Jesus Christ , being in the end of the world born according to the flesh of our holy and glorious lady, Mother of God , and Ever-Virgin, and, of a truth , of Mary the Mother of God ; and being seen upon earth, and having true and real converse as man with men, who were of the same substance with Him, according to His human nature , Himself also, with the people, in the years before His public ministry and during His public ministry, did celebrate the legal and shadowy Passover , eating the typical lamb.",
+                "url": "https://www.newadvent.org/fathers/0621.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Gregory Thaumaturgus": {
+        "note": "Lived c. AD 213 to AD 270. Bishop in Pontus.",
+        "works": {
+          "Ekthesis tes pisteos (Exposition of the Faith)": {
+            "date": "3rd Century",
+            "quotes": [
+              {
+                "chapter": "N/A",
+                "quote": "There is therefore nothing created, nothing greater or less (literally, nothing subject) in the Trinity ( oute oun ktiston ti, he doulon en te triadi ), nothing superadded, as though it had not existed before, but never been without the Son, nor the Son without the Spirit; and this same Trinity is immutable and unalterable forever.",
+                "url": "https://www.newadvent.org/cathen/07015a.htm"
+              }
+            ]
+          },
+          "Twelve Evidence on the Faith": {
+            "date": "3rd Century",
+            "quotes": [
+              {
+                "chapter": "Evidence 12, Explication",
+                "quote": "In behalf of this grace let us glorify the Father , who has given His only begotten Son for the life of the world. Let us glorify the Holy Spirit that works in us, and quickens us, and furnishes the gifts meet for the fellowship of God",
+                "url": "https://www.newadvent.org/fathers/0607.htm"
+              }
+            ]
+          },
+          "On the Trinity": {
+            "date": "Mid 3rd Century",
+            "quotes": [
+              {
+                "chapter": "A fragment",
+                "quote": "All (the persons ) are one nature, one essence , one will, and are called the Holy Trinity ; and these also are haines subsistent, one nature in three persons , and one genus.",
+                "url": "https://www.newadvent.org/fathers/0606.htm"
+              },
+              {
+                "chapter": "A fragment",
+                "quote": "We speak also of Father, Son, and Holy Spirit : these, however, are not names which have only supervened at some after period, but they are subsistences.",
+                "url": "https://www.newadvent.org/fathers/0606.htm"
+              },
+              {
+                "chapter": "A fragment",
+                "quote": "And thus it was declared to us that there is an Eternal Trinity in equal honour .",
+                "url": "https://www.newadvent.org/fathers/0606.htm"
+              },
+              {
+                "chapter": "A fragment",
+                "quote": "Neither were there two natures , but only one nature of the Holy Trinity before the incarnation of the Word, the Son; and the nature of the Trinity remained one also after the incarnation of the Son.",
+                "url": "https://www.newadvent.org/fathers/0606.htm"
+              }
+            ]
+          },
+          "A Sectional Confession of Faith": {
+            "date": "3rd Century",
+            "quotes": [
+              {
+                "chapter": "1",
+                "quote": "Nor less alienated from the true confession are those who hold not the doctrine of the Trinity according to truth , as a relation consisting of three persons , but impiously conceive it as implying a triple being in a unity ( Monad ), formed in the way of synthesis",
+                "url": "https://www.newadvent.org/fathers/0605.htm"
+              },
+              {
+                "chapter": "5",
+                "quote": "For either we must apprehend the perfect Trinity in its natural and genuine glory , or we shall be under the necessity of speaking no more of a Trinity, but only of a Unity; or else, not numbering created objects with the Creator, nor the creatures with the Lord of all, we mast also not number what is sanctified with what sanctifies; even as no object that is made can be numbered with the Trinity, but in the name of the Holy Trinity baptism and invocation and worship are administered.",
+                "url": "https://www.newadvent.org/fathers/0605.htm"
+              },
+              {
+                "chapter": "7",
+                "quote": "We forswear this, because we believe that three persons \u2014 namely, Father, Son, and Holy Spirit \u2014 are declared to possess the one Godhead: for the one divinity showing itself forth according to nature in the Trinity establishes the oneness of the nature",
+                "url": "https://www.newadvent.org/fathers/0605.htm"
+              },
+              {
+                "chapter": "14",
+                "quote": "That there are indeed three persons , inasmuch as there is one person of God the Father , and one of the Lord the Son , and one of the Holy Spirit ; and yet that there is but one divinity, inasmuch as the Son is the Image of God the Father , who is One \u2014 that is, He is God of God ; and in like manner the Spirit is called the Spirit of God , and that, too, of nature according to the very substance, and not according to simple participation of God . And there is one substance in the Trinity, which does not subsist also in the case of objects that are made",
+                "url": "https://www.newadvent.org/fathers/0605.htm"
+              },
+              {
+                "chapter": "18",
+                "quote": "We acknowledge that the Son and the Spirit are consubstantial with the Father , and that the substance of the Trinity is one \u2014 that is, that there is one divinity according to nature, the Father remaining unbegotten, and the Son being begotten of the Father in a true generation, and not in a formation by will, and the Spirit being sent forth eternally from the substance of the Father through the Son , with power to sanctify the whole creation.",
+                "url": "https://www.newadvent.org/fathers/0605.htm"
+              },
+              {
+                "chapter": "19",
+                "quote": "Wherefore the Trinity is to be adored, to be glorified , to be honoured, and to be reverenced; the Father being apprehended in the Son even as the Son is of Him, and the Son being glorified in the Father , inasmuch as He is of the Father , and being manifested in the Holy Spirit to the sanctified.",
+                "url": "https://www.newadvent.org/fathers/0605.htm"
+              },
+              {
+                "chapter": "20",
+                "quote": "And that the holy Trinity is to be worshipped without either separation or alienation, is taught us by Paul , who says in his Second Epistle to the Corinthians: The grace of our Lord Jesus Christ , and the love of God , and the communion of the Holy Ghost , be with you all.",
+                "url": "https://www.newadvent.org/fathers/0605.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Clement of Alexandria": {
+        "note": "Lived c. AD 150 to AD 215. Theologian.",
+        "works": {
+          "Fragments": {
+            "date": "2nd or 3rd Century",
+            "quotes": [
+              {
+                "chapter": "Macarius Chrysocephalus: Parable of the Prodigal Son, 6",
+                "quote": "And put a ring on his hand. Here is the mystery of the Trinity; which is the seal impressed on those who believe .",
+                "url": "https://www.newadvent.org/fathers/0211.htm"
+              },
+              {
+                "chapter": "Macarius Chrysocephalus: Parable of the Prodigal Son, 7",
+                "quote": "Let us obtain the joy laid up, in which Paul exulting, exclaimed, Who shall separate us from the love of Christ? Romans 8:35 To Him belongs glory and honour , with the Father and the Holy Spirit , world without end. Amen .",
+                "url": "https://www.newadvent.org/fathers/0211.htm"
+              }
+            ]
+          },
+          "Who is the Rich Man That Shall Be Saved?": {
+            "date": "c. AD 200",
+            "quotes": [
+              {
+                "chapter": "XXXIV",
+                "quote": "knowing not what a treasure in an earthen vessel we bear, protected as it is by the power of God the Father , and the blood of God the Son , and the dew of the Holy Spirit .",
+                "url": "https://www.newadvent.org/fathers/0207.htm"
+              },
+              {
+                "chapter": "XLII",
+                "quote": "But to him who directs his eye to salvation and desires it, and asks with boldness and vehemence for its bestowal, the good Father who is in heaven will give the true purification and the changeless life. To whom, by His Son Jesus Christ , the Lord of the living and dead, and by the Holy Spirit , be glory , honour , power, eternal majesty, both now and ever, from generation to generation, and from eternity to eternity . Amen .",
+                "url": "https://www.newadvent.org/fathers/0207.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Archelaus": {
+        "note": "Flourished in the 3rd century.",
+        "works": {
+          "A Fragment of the Same Disputation": {
+            "date": "3rd Century",
+            "quotes": [
+              {
+                "chapter": "3",
+                "quote": "For we do not declare the mysteries touching the Father, and the Son, and the Holy Spirit to a Gentile; neither do we speak of the mysteries plainly in presence of the catechumens; but many a time we express ourselves in an occult manner, so that the faithful who have intelligence may apprehend the truths referred to, while those who have not that intelligence may receive no hurt.",
+                "url": "https://www.newadvent.org/fathers/0616.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Hippolytus": {
+        "note": "Lived c. AD 170 to AD 235. Theologian in Rome.",
+        "works": {
+          "Commentary on Proverbs": {
+            "date": "3rd Century",
+            "quotes": [
+              {
+                "chapter": "First fragment",
+                "quote": "By three things the earth is moved, viz., by the Father, the Son, and the Holy Ghost.",
+                "url": "https://www.newadvent.org/fathers/0502.htm"
+              },
+              {
+                "chapter": "First fragment",
+                "quote": "The spider, that supports itself upon its hands, and is easily caught, dwells in the strongholds of kings. That is, the thief with his hands extended (on the cross), rests on the cross of Christ and dwells n Paradise, the stronghold of the three Kings \u2014 Father, Son, and Holy Ghost.",
+                "url": "https://www.newadvent.org/fathers/0502.htm"
+              },
+              {
+                "chapter": "First fragment",
+                "quote": "By Father, Son, and Holy Spirit, the whole earth is moved.",
+                "url": "https://www.newadvent.org/fathers/0502.htm"
+              },
+              {
+                "chapter": "Second fragment, on Proverbs 9:1",
+                "quote": "And she has furnished her table: that denotes the promised knowledge of the Holy Trinity; it also refers to His honoured and undefiled body and blood, which day by day are administered and offered sacrificially at the spiritual divine table, as a memorial of that first and ever-memorable table of the spiritual divine supper.",
+                "url": "https://www.newadvent.org/fathers/0502.htm"
+              }
+            ]
+          },
+          "Doubtful fragments on the Pentateuch": {
+            "date": "2nd or 3rd Century",
+            "quotes": [
+              {
+                "chapter": "Preface",
+                "quote": "In the name of the Father, and the Son, and the Holy Spirit, one God.",
+                "url": "https://www.newadvent.org/fathers/0502.htm"
+              }
+            ]
+          },
+          "On the Psalms": {
+            "date": "3rd Century",
+            "quotes": [
+              {
+                "chapter": "I. The Argument of the Exposition of the Psalms by Hippolytus, (Bishop) of Rome, Section 3",
+                "quote": "Thus, then, it was also meet that the hymns to God on account of the destruction of enemies, and in thanksgiving for the goodness of God, should contain not simply one set of fifty, but three such, for the name of Father, and Son, and Holy Spirit.",
+                "url": "https://www.newadvent.org/fathers/0502.htm"
+              }
+            ]
+          },
+          "Against Noetus": {
+            "date": "Early 3rd Century",
+            "quotes": [
+              {
+                "chapter": "8",
+                "quote": "A man, therefore, even though he will it not, is compelled to acknowledge God the Father Almighty, and Christ Jesus the Son of God , who, being God , became man, to whom also the Father made all things subject, Himself excepted, and the Holy Spirit ; and that these, therefore, are three.",
+                "url": "https://www.newadvent.org/fathers/0521.htm"
+              },
+              {
+                "chapter": "14",
+                "quote": "I shall not indeed speak of two Gods, but of one; of two Persons however, and of a third economy (disposition), viz., the grace of the Holy Ghost . For the Father indeed is One, but there are two Persons, because there is also the Son; and then there is the third, the Holy Spirit .",
+                "url": "https://www.newadvent.org/fathers/0521.htm"
+              },
+              {
+                "chapter": "14",
+                "quote": "It is the Father who commands,  and the Son who obeys, and the Holy Spirit who gives understanding:  the Father who is above all ,  and the Son who is through all , and the Holy Spirit who is in all . And we cannot otherwise think of one God ,  but by believing in truth in Father and Son and Holy Spirit .",
+                "url": "https://www.newadvent.org/fathers/0521.htm"
+              },
+              {
+                "chapter": "14",
+                "quote": "And by this He showed, that whosoever omitted any one of these, failed in glorifying God perfectly. For it is through this Trinity that the Father is glorified . For the Father willed, the Son did, the Spirit manifested.",
+                "url": "https://www.newadvent.org/fathers/0521.htm"
+              },
+              {
+                "chapter": "18",
+                "quote": "This is the God who for our sakes became man, to whom also the Father has put all things in subjection. To Him be the glory and the power, with the Father and the Holy Spirit , in the holy Church both now and ever, and even for evermore. Amen .",
+                "url": "https://www.newadvent.org/fathers/0521.htm"
+              }
+            ]
+          }
+        }
+      },
+      "St. Gregory Thaumaturgus": {
+        "note": "Lived c. AD 213 to AD 270. Bishop in Pontus.",
+        "works": {
+          "A Declaration of Faith": {
+            "date": "3rd Century",
+            "quotes": [
+              {
+                "chapter": "N/A",
+                "quote": "There is one God , the Father of the living Word... There is one Lord, Only of the Only, God of God... And there is One Holy Spirit , having His subsistence from God , and being made manifest by the Son... There is a perfect Trinity, in glory and eternity and sovereignty, neither divided nor estranged. Wherefore there is nothing either created or in servitude in the Trinity; nor anything superinduced, as if at some former period it was non-existent, and at some later period it was introduced. And thus neither was the Son ever wanting to the Father , nor the Spirit to the Son; but without variation and without change, the same Trinity abides ever.",
+                "url": "https://www.newadvent.org/fathers/0601.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Dionysius of Alexandria": {
+        "note": "Flourished in the 3rd century.",
+        "works": {
+          "Epistle to Dionysius Bishop of Rome": {
+            "date": "Mid 3rd Century",
+            "quotes": [
+              {
+                "chapter": "From the Second Book, 8",
+                "quote": "The individual haines uttered by me can neither be separated from one another, nor parted. I spoke of the Father, and before I made mention of the Son I already signified Him in the Father. I added the Son; and the Father, even although I had not previously named Him, had already been absolutely comprehended in the Son. I added the Holy Spirit; but, at the same time, I conveyed under the name whence and by whom He proceeded. But they are ignorant that neither the Father, in that He is Father, can be separated from the Son, for that name is the evident ground of coherence and conjunction; nor can the Son be separated from the Father, for this word Father indicates association between them. And there is, moreover, evident a Spirit who can neither be disjoined from Him who sends, nor from Him who brings Him. How, then, should I who use such names think that these are absolutely divided and separated the one from the other?",
+                "url": "https://www.newadvent.org/fathers/0612.htm"
+              },
+              {
+                "chapter": "From the Second Book, 9",
+                "quote": "Thus, indeed, we expand the indivisible Unity into a Trinity; and again we contract the Trinity, which cannot be diminished, into a Unity.",
+                "url": "https://www.newadvent.org/fathers/0612.htm"
+              },
+              {
+                "chapter": "About the Middle of the Treatise, 15",
+                "quote": "If, from the fact that there are three hypostases, they say that they are divided, there are three whether they like it or no, or else let them get rid of the divine Trinity altogether.",
+                "url": "https://www.newadvent.org/fathers/0612.htm"
+              },
+              {
+                "chapter": "And Again",
+                "quote": "For on this account after the Unity there is also the most divine Trinity.",
+                "url": "https://www.newadvent.org/fathers/0612.htm"
+              },
+              {
+                "chapter": "The Conclusion of the Entire Treatise, 16",
+                "quote": "And to God the Father, and His Son our Lord Jesus Christ, with the Holy Spirit, be glory and dominion for ever and ever. Amen.",
+                "url": "https://www.newadvent.org/fathers/0612.htm"
+              }
+            ]
+          },
+          "Refutation and Apology": {
+            "date": "Mid 3rd Century",
+            "quotes": [
+              {
+                "chapter": "N/A",
+                "quote": "Trinity in Unity and the Unity in Trinity",
+                "url": "https://www.newadvent.org/cathen/05011a.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Julius Africanus": {
+        "note": "Flourished in the 3rd century.",
+        "works": {
+          "Extant Works": {
+            "date": "2nd or 3rd Century",
+            "quotes": [
+              {
+                "chapter": "Fragment 19",
+                "quote": "For we who both know the measure of those words, and are not ignorant of the grace of faith, give thanks to the Father, who has bestowed on us His creatures Jesus Christ the Saviour of all, and our Lord; to whom be glory and majesty, with the Holy Spirit, forever.",
+                "url": "https://www.newadvent.org/fathers/0614.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Dionysius": {
+        "note": "Flourished in the 3rd century.",
+        "works": {
+          "Epistles and Epistolary Fragments": {
+            "date": "2nd to 4th Century",
+            "quotes": [
+              {
+                "chapter": "Epistle 6",
+                "quote": "For since of the doctrine, which lately has been set on foot at Ptolemais, a city of Pentapolis, implores and full of blasphemy against Almighty God and the Father of our Lord Jesus Christ; full of unbelief and perfidy towards His only begotten Son and the first-born of every creature, the Word made man, and which takes away the perception of the Holy Spirit",
+                "url": "https://www.newadvent.org/fathers/0632.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Dionysius of Rome": {
+        "note": "Flourished in the 3rd century.",
+        "works": {
+          "Against the Sabellians": {
+            "date": "3rd Century",
+            "quotes": [
+              {
+                "chapter": "1",
+                "quote": "For it is essential that the Divine Word should be united to the God of all, and that the Holy Spirit should abide and dwell in God ; and thus that the Divine Trinity should be reduced and gathered into one, as if into a certain head \u2014 that is, into the omnipotent God of all.",
+                "url": "https://www.newadvent.org/fathers/0713.htm"
+              },
+              {
+                "chapter": "1",
+                "quote": "For these indeed rightly know that the Trinity is declared in the divine Scripture , but that the doctrine that there are three gods is neither taught in the Old nor in the New Testament .",
+                "url": "https://www.newadvent.org/fathers/0713.htm"
+              },
+              {
+                "chapter": "3",
+                "quote": "That admirable and divine unity, therefore, must neither be separated into three divinities, nor must the dignity and eminent greatness of the Lord be diminished by having applied to it the name of creation, but we must believe in God the Father Omnipotent, and on Christ Jesus His Son, and on the Holy Spirit . Moreover, that the Word is united to the God of all, because He says, I and the Father are one; John 10:30 and, I am in the Father , and the Father is in Me. John 14:10 Thus doubtless will be maintained in its integrity the doctrine of the divine Trinity, and the sacred announcement of the monarchy.",
+                "url": "https://www.newadvent.org/fathers/0713.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Clement": {
+        "note": "Lived c. AD 35 to AD 99 (or c. AD 150 to 215). Often refers to Clement of Rome or Clement of Alexandria.",
+        "works": {
+          "First Epistle Concerning Virginity": {
+            "date": "3rd Century",
+            "quotes": [
+              {
+                "chapter": "Chapter 13",
+                "quote": "workmen who shall be such as the apostles; workmen who imitate the Father, and the Son, and the Holy Spirit; who are concerned for the salvation of men",
+                "url": "https://www.newadvent.org/fathers/0803.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Victorinus": {
+        "note": "Bishop of Pettau and early Latin exegete, martyred c. AD 304.",
+        "works": {
+          "Commentary on the Apocalypse": {
+            "date": "Late 3rd Century",
+            "quotes": [
+              {
+                "chapter": "From the First Chapter",
+                "quote": "The many waters are understood to be many peoples, or the gift of baptism that He sent forth by the apostles , saying: Go, teach all nations, baptizing them in the name of the Father , and of the Son , and of the Holy Ghost .",
+                "url": "https://www.newadvent.org/fathers/0712.htm"
+              },
+              {
+                "chapter": "From the Eleventh Chapter",
+                "quote": "Moreover, we say that the measure of God's temple is the command of God to confess the Father Almighty, and that His Son Christ was begotten by the Father before the beginning of the world, and was made man in very soul and flesh, both of them having overcome misery and death; and that, when received with His body into heaven by the Father , He shed forth the Holy Spirit , the gift and pledge of immortality , that He was announced by the prophets , He was described by the law, He was God's hand, and the Word of the Father from God , Lord over all, and founder of the world: this is the reed and the measure of faith ; and no one worships the holy altar save he who confesses this faith .",
+                "url": "https://www.newadvent.org/fathers/0712.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Pionius": {
+        "note": "Presbyter martyred in Smyrna c. AD 250.",
+        "works": {
+          "The Martyrdom of Polycarp": {
+            "date": "c. AD 155",
+            "quotes": [
+              {
+                "chapter": "Chapter 22",
+                "quote": "I have collected these things, when they had almost faded away through the lapse of time, that the Lord Jesus Christ may also gather me along with His elect into His heavenly kingdom, to whom, with the Father and the Holy Spirit , be glory for ever and ever. Amen .",
+                "url": "https://www.newadvent.org/fathers/0102.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Munnulus of Girba": {
+        "note": "Bishop of Girba, present at the Seventh Council of Carthage in AD 256.",
+        "works": {
+          "The Seventh Council of Carthage": {
+            "date": "AD 256",
+            "quotes": [
+              {
+                "chapter": "The Judgment of Eighty-Seven Bishops on the Baptism of Heretics",
+                "quote": "The truth of our Mother the Catholic Church, brethren, has always remained and still remains with us, and even especially in the Trinity of baptism, as our Lord says, Go and baptize the nations, in the name of the Father, of the Son, and of the Holy Spirit. Matthew 28:19 Since, then, we manifestly know that heretics have not either Father, or Son, or Holy Spirit, they ought, when they come to the Church our Mother, truly to be born again and to be baptized; that the cancer which they had, and the anger of damnation, and the witchery of error, may be sanctified by the holy and heavenly layer.",
+                "url": "https://www.newadvent.org/fathers/0508.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Euchratius of Thenae": {
+        "note": "Bishop of Thenae, present at the Seventh Council of Carthage in AD 256.",
+        "works": {
+          "The Seventh Council of Carthage": {
+            "date": "AD 256",
+            "quotes": [
+              {
+                "chapter": "The Judgment of Eighty-Seven Bishops on the Baptism of Heretics",
+                "quote": "God and our Lord Jesus Christ, teaching the apostles with His own mouth, has entirely completed our faith, and the grace of baptism, and the rule of the ecclesiastical law, saying: Go and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost. Matthew 28:18 Thus the false and wicked baptism of heretics must be rejected by us, and refuted with all detestation, from whose month is expressed poison, not life, not celestial grace, but blasphemy of the Trinity.",
+                "url": "https://www.newadvent.org/fathers/0508.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Barsamya": {
+        "note": "Bishop of Edessa, alleged martyr under Trajan (or Decius).",
+        "works": {
+          "Martyrdom of Barsamya": {
+            "date": "Late 4th or 5th Century",
+            "quotes": [
+              {
+                "chapter": "N/A",
+                "quote": "Those above have themselves preached, and have taught those below concerning the living worship of the King Christ, seeing that they worship Him, and His Father, together with His divine Spirit.",
+                "url": "https://www.newadvent.org/fathers/0865.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Anonymous (often attributed to Tertullian)": {
+        "note": "Unknown author, historically linked to the works or era of Tertullian.",
+        "works": {
+          "The Passion of the Holy Martyrs Perpetua and Felicity": {
+            "date": "c. AD 202",
+            "quotes": [
+              {
+                "chapter": "Chapter 6",
+                "quote": "O most brave and blessed martyrs! O truly called and chosen unto the glory of our Lord Jesus Christ! Whom whoever magnifies, and honours, and adores, assuredly ought to read these examples for the edification of the Church, not less than the ancient ones, so that new virtues also may testify that one and the same Holy Spirit is always operating even until now, and God the Father Omnipotent, and His Son Jesus Christ our Lord, whose is the glory and infinite power for ever and ever. Amen.",
+                "url": "https://www.newadvent.org/fathers/0324.htm"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Apocryphal & Anonymous Writings (Various Dates)": {
+      "Unknown": {
+        "note": "These are texts spanning the 2nd to 4th centuries of varying or anonymous authorship.",
+        "works": {
+          "Acts of Sharbil": {
+            "date": "Late 4th Century",
+            "quotes": [
+              {
+                "chapter": "N/A",
+                "quote": "For this One who put on a body is God , the Son of God , Son of the essence of His Father, and Son of the nature of Him who begot Him: for He is the adorable brightness of His Godhead, and is the glorious manifestation of His majesty, and together with His Father He existed from eternity and from everlasting, His arm, and His right hand, and His power, and His wisdom, and His strength, and the living Spirit which is from Him, the Expiator and Sanctifier of all His worshippers.",
+                "url": "https://www.newadvent.org/fathers/0856.htm"
+              },
+              {
+                "chapter": "N/A",
+                "quote": "And, because they were in dread of the persecutors, they arose and gave him the seal of salvation ,  while he confessed the Father , and the Son , and the Holy Spirit .",
+                "url": "https://www.newadvent.org/fathers/0856.htm"
+              }
+            ]
+          },
+          "The Acts of Peter of Alexandria": {
+            "date": "4th Century",
+            "quotes": [
+              {
+                "chapter": "N/A",
+                "quote": "This is that Arius the heresiarch, the divider of the consubstantial and indivisible Trinity.",
+                "url": "https://www.newadvent.org/fathers/0619.htm"
+              },
+              {
+                "chapter": "N/A",
+                "quote": "These gifts, O Lord Jesus, are Yours, whose wont it is thus magnificently to honour Your martyrs after death: You who with the Father and the Holy Consubstantial Spirit live and reign for evermore.",
+                "url": "https://www.newadvent.org/fathers/0619.htm"
+              }
+            ]
+          },
+          "The Didache": {
+            "date": "Late 1st or Early 2nd Century",
+            "quotes": [
+              {
+                "chapter": "Chapter 7. Concerning Baptism",
+                "quote": "Having first said all these things, baptize into the name of the Father , and of the Son , and of the Holy Spirit , Matthew 28:19 in living water.",
+                "url": "https://www.newadvent.org/fathers/0714.htm"
+              },
+              {
+                "chapter": "Chapter 7. Concerning Baptism",
+                "quote": "But if you have not either, pour out water thrice upon the head into the name of Father and Son and Holy Spirit .",
+                "url": "https://www.newadvent.org/fathers/0714.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Pseudo-Hippolytus": {
+        "note": "These are texts spanning the 2nd to 4th centuries of varying or anonymous authorship.",
+        "works": {
+          "On the End of the World": {
+            "date": "3rd or 4th Century",
+            "quotes": [
+              {
+                "chapter": "43",
+                "quote": "You are without beginning, like the Father, and co-eternal with the Spirit.",
+                "url": "https://www.newadvent.org/fathers/0504.htm"
+              },
+              {
+                "chapter": "44",
+                "quote": "But come into the kingdom prepared for you from the foundation of the world; enjoy for ever and ever that which is given you by my Father in heaven, and the holy and quickening Spirit.",
+                "url": "https://www.newadvent.org/fathers/0504.htm"
+              },
+              {
+                "chapter": "49",
+                "quote": "Which joy may it be ours to reach, by the grace and kindness of our Lord Jesus Christ, to whom pertain glory, honour, and adoration, with His Father, who is without beginning, and His holy, and good, and quickening Spirit, now and ever, and to the ages of the ages. Amen.",
+                "url": "https://www.newadvent.org/fathers/0504.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Anonymous": {
+        "note": "These are texts spanning the 2nd to 4th centuries of varying or anonymous authorship.",
+        "works": {
+          "A Treatise Against the Heretic Novatian": {
+            "date": "Mid 3rd Century",
+            "quotes": [
+              {
+                "chapter": "3",
+                "quote": "Whence also the Lord Christ charges upon Peter, and moreover also upon the rest of His disciples , Go and preach the Gospel to the nations , baptizing them in the name of the Father , and of the Son , and of the Holy Ghost . That is, that that same Trinity which operated figuratively in Noah's days through the dove, now operates in the Church spiritually through the disciples .",
+                "url": "https://www.newadvent.org/fathers/0514.htm"
+              }
+            ]
+          },
+          "A Treatise on Re-Baptism": {
+            "date": "Mid 3rd Century",
+            "quotes": [
+              {
+                "chapter": "7",
+                "quote": "Neither must you esteem what our Lord said as being contrary to this treatment: Go, teach the nations; baptize them in the name of the Father, and of the Son, and of the Holy Ghost. Matthew 28:19 Because, although this is true and right, and to be observed by all means in the Church, and moreover has been used to be observed, yet it behooves us to consider that invocation of the name of Jesus ought not to be thought futile by us on account of the veneration and power of that very name...",
+                "url": "https://www.newadvent.org/fathers/0515.htm"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "4th Century and Later (Syriac, Pre-Nicene & Nicene Fathers)": {
+      "Methodius": {
+        "note": "Flourished in the 4th century or later.",
+        "works": {
+          "Oration on the Psalms": {
+            "date": "4th Century",
+            "quotes": [
+              {
+                "chapter": "V",
+                "quote": "For the kingdom of the Father, of the Son, and of the Holy Ghost, is one, even as their substance is one and their dominion one. Whence also, with one and the same adoration, we worship the one Deity in three Persons, subsisting without beginning, uncreate, without end, and to which there is no successor. For neither will the Father ever cease to be the Father, nor again the Son to be the Son and King, nor the Holy Ghost to be what in substance and personality He is. For nothing of the Trinity will suffer diminution, either in respect of eternity, or of communion, or of sovereignty.",
+                "url": "https://www.newadvent.org/fathers/0628.htm"
+              },
+              {
+                "chapter": "VI",
+                "quote": "Therefore we also bless You, O Lord; You with the Father and the Holy Spirit are blessed before the worlds and forever.",
+                "url": "https://www.newadvent.org/fathers/0628.htm"
+              },
+              {
+                "chapter": "VII",
+                "quote": "and that Christ having thus suffered in the flesh, and having risen again the third day, might, with equal honour and glory with the Father and the Holy Ghost, be by all created things equally adored",
+                "url": "https://www.newadvent.org/fathers/0628.htm"
+              }
+            ]
+          },
+          "Oration Concerning Simeon and Anna": {
+            "date": "4th Century",
+            "quotes": [
+              {
+                "chapter": "II",
+                "quote": "Whence also in this place they are not only said to hymn with their praises the divine substance of the divine unity, but also the glory to be adored by all of that one of the sacred Trinity, which now, by the appearance of God in the flesh, has even lighted upon earth.",
+                "url": "https://www.newadvent.org/fathers/0627.htm"
+              },
+              {
+                "chapter": "II",
+                "quote": "For we believe that, together with the Son, who was made man for our sakes, according to the good pleasure of His will, was also present the Father, who is inseparable from Him as to His divine nature, anal also the Spirit, who is of one and the same essence with Him.",
+                "url": "https://www.newadvent.org/fathers/0627.htm"
+              },
+              {
+                "chapter": "XII",
+                "quote": "Of such a nature was the adverse reward of the Jews for their unbelief, which caused them to refuse to pay to the Trinity the tribute of praise.",
+                "url": "https://www.newadvent.org/fathers/0627.htm"
+              },
+              {
+                "chapter": "XIV",
+                "quote": "For Yours is the glory, and the power, and the greatness, and the majesty, with the Father and the Holy Spirit, forever. Amen.",
+                "url": "https://www.newadvent.org/fathers/0627.htm"
+              }
+            ]
+          },
+          "Concerning Free Will": {
+            "date": "3rd Century",
+            "quotes": [
+              {
+                "chapter": "Orthodoxus",
+                "quote": "Let us then also sing the like song, and raise the hymn to the Holy Father, glorifying in the Spirit Jesus, who is in His bosom.",
+                "url": "https://www.newadvent.org/fathers/0624.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Alexander of Alexandria": {
+        "note": "Died AD 328. Bishop of Alexandria during the Council of Nicaea.",
+        "works": {
+          "Epistles on the Arian Heresy and the Deposition of Arius": {
+            "date": "c. AD 320",
+            "quotes": [
+              {
+                "chapter": "5. On the Soul and Body and the Passion of the Lord, 7",
+                "quote": "Then the Lord, the third day after His death, rose again, thus bringing man to a knowledge of the Trinity.",
+                "url": "https://www.newadvent.org/fathers/0622.htm"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "2nd Century": {
+      "Justin Martyr": {
+        "note": "Lived c. AD 100 to AD 165. Early Christian Apologist and Martyr.",
+        "works": {
+          "First Apology": {
+            "date": "c. AD 155",
+            "quotes": [
+              {
+                "chapter": "Chapter 61. Christian baptism",
+                "quote": "in order that we may not remain the children of necessity and of ignorance , but may become the children of choice and knowledge , and may obtain in the water the remission of sins formerly committed, there is pronounced over him who chooses to be born again, and has repented of his sins , the name of God the Father and Lord of the universe ... And in the name of Jesus Christ , who was crucified under Pontius Pilate , and in the name of the Holy Ghost , who through the prophets foretold all things about Jesus , he who is illuminated is washed.",
+                "url": "https://www.newadvent.org/fathers/0126.htm"
+              },
+              {
+                "chapter": "Chapter 65. Administration of the sacraments",
+                "quote": "There is then brought to the president of the brethren  bread and a cup of wine mixed with water; and he taking them, gives praise and glory to the Father of the universe , through the name of the Son and of the Holy Ghost , and offers thanks at considerable length for our being counted worthy to receive these things at His hands.",
+                "url": "https://www.newadvent.org/fathers/0126.htm"
+              },
+              {
+                "chapter": "Chapter 67. Weekly worship of the Christians",
+                "quote": "and for all things wherewith we are supplied, we bless the Maker of all through His Son Jesus Christ , and through the Holy Ghost .",
+                "url": "https://www.newadvent.org/fathers/0126.htm"
+              },
+              {
+                "chapter": "Chapter 6",
+                "quote": "But both Him, and the Son (who came forth from Him and taught us these things, and the host of the other good angels who follow and are made like to Him),  and the prophetic Spirit, we worship and adore, knowing them in reason and truth, and declaring without grudging to every one who wishes to learn, as we have been taught.",
+                "url": "https://www.newadvent.org/fathers/0126.htm"
+              },
+              {
+                "chapter": "Chapter 13",
+                "quote": "Our teacher of these things is Jesus Christ, who also was born for this purpose, and was crucified under Pontius Pilate, procurator of Jud\u00e6a, in the times of Tiberius C\u00e6sar; and that we reasonably worship Him, having learned that He is the Son of the true God Himself, and holding Him in the second place, and the prophetic Spirit in the third, we will prove.",
+                "url": "https://www.newadvent.org/fathers/0126.htm"
+              },
+              {
+                "chapter": "Chapter 61",
+                "quote": "For, in the name of God, the Father and Lord of the universe, and of our Saviour Jesus Christ, and of the Holy Spirit, they then receive the washing with water.",
+                "url": "https://www.newadvent.org/fathers/0126.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Irenaeus": {
+        "note": "Lived c. AD 130 to AD 202. Disciple of Polycarp (who was a disciple of John).",
+        "works": {
+          "Fragments from the Lost Writings of Irenaeus": {
+            "date": "Late 2nd Century",
+            "quotes": [
+              {
+                "chapter": "26",
+                "quote": "For if he has not the Holy Spirit, he has no knowledge of the Creator; he has not received Jesus Christ the Life; he knows not the Father who is in heaven",
+                "url": "https://www.newadvent.org/fathers/0134.htm"
+              },
+              {
+                "chapter": "39",
+                "quote": "Christ, who was called the Son of God before the ages, was manifested in the fullness of time, in order that He might cleanse us through His blood, who were under the power of sin, presenting us as pure sons to His Father, if we yield ourselves obediently to the chastisement of the Spirit.",
+                "url": "https://www.newadvent.org/fathers/0134.htm"
+              }
+            ]
+          },
+          "Against Heresies": {
+            "date": "c. AD 180",
+            "quotes": [
+              {
+                "chapter": "Book IV, Chapter 20",
+                "quote": "That one God formed all things in the world, by means of the Word and the Holy Spirit: and that although he is to us in this life invisible and incomprehensible, nevertheless he is not unknown; inasmuch as his works do declare him, and his Word has shown that in many modes he may be seen and known.",
+                "url": "https://www.newadvent.org/fathers/0103.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Theophilus": {
+        "note": "Died c. AD 183. Bishop of Antioch.",
+        "works": {
+          "Martyrdom of Habib the Deacon": {
+            "date": "4th Century",
+            "quotes": [
+              {
+                "chapter": "N/A",
+                "quote": "receive my spirit into Your presence, through Your Divine Spirit, O glorious Son of the adorable Father!",
+                "url": "https://www.newadvent.org/fathers/0857.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Athenagoras the Athenian": {
+        "note": "Lived c. AD 133 to AD 190. Christian philosopher.",
+        "works": {
+          "A Plea for the Christians": {
+            "date": "c. AD 177",
+            "quotes": [
+              {
+                "chapter": "Chapter 10",
+                "quote": "Who, then, would not be astonished to hear men who speak of God the Father, and of God the Son, and of the Holy Spirit, and who declare both their power in union and their distinction in order, called atheists?",
+                "url": "https://www.newadvent.org/fathers/0205.htm"
+              },
+              {
+                "chapter": "Chapter 12",
+                "quote": "what is the oneness of the Son with the Father, what the communion of the Father with the Son, what is the Spirit, what is the unity of these three, the Spirit, the Son, the Father, and their distinction in unity",
+                "url": "https://www.newadvent.org/fathers/0205.htm"
+              },
+              {
+                "chapter": "Chapter 24",
+                "quote": "For, as we acknowledge a God, and a Son his Logos, and a Holy Spirit, united in essence \u2014 the Father, the Son, the Spirit, because the Son is the Intelligence, Reason, Wisdom of the Father, and the Spirit an effluence, as light from fire",
+                "url": "https://www.newadvent.org/fathers/0205.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Anonymous (Eye-witnesses)": {
+        "note": "Authors of martyrdom accounts who were present at the events.",
+        "works": {
+          "The Martyrdom of Ignatius": {
+            "date": "c. AD 108",
+            "quotes": [
+              {
+                "chapter": "Chapter 7. Ignatius appears in a vision after his death",
+                "quote": "...in Christ Jesus our Lord; by whom, and with whom, be glory and power to the Father, with the Holy Spirit, for evermore! Amen.",
+                "url": "https://www.newadvent.org/fathers/0123.htm"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "1st and 2nd Century (Apostolic Fathers)": {
+      "Clement of Rome": {
+        "note": "Lived c. AD 35 to AD 99. Co-worker of Paul.",
+        "works": {
+          "Epistle to the Corinthians": {
+            "date": "c. AD 96",
+            "quotes": [
+              {
+                "chapter": "58",
+                "quote": "As God liveth, and the Lord Jesus Christ liveth and the Holy Spirit \u2014 the faith and hope of the elect, so surely he that performeth",
+                "url": "https://www.newadvent.org/cathen/04012c.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Church of Smyrna": {
+        "note": "Written c. AD 155, detailing the martyrdom of Polycarp.",
+        "works": {
+          "The Martyrdom of Polycarp": {
+            "date": "c. AD 155",
+            "quotes": [
+              {
+                "chapter": "Chapter 14",
+                "quote": "Wherefore also I praise You for all things, I bless You, I glorify You, along with the everlasting and heavenly Jesus Christ , Your beloved Son , with whom, to You, and the Holy Ghost , be glory both now and to all coming ages. Amen .",
+                "url": "https://www.newadvent.org/fathers/0102.htm"
+              },
+              {
+                "chapter": "Chapter 22",
+                "quote": "We wish you, brethren, all happiness , while you walk according to the doctrine of the Gospel of Jesus Christ ; with whom be glory to God the Father and the Holy Spirit , for the salvation of His holy elect, after whose example  the blessed Polycarp suffered, following in whose steps may we too be found in the kingdom of Jesus Christ !",
+                "url": "https://www.newadvent.org/fathers/0102.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Ignatius": {
+        "note": "Lived c. AD 35 to AD 108. Bishop of Antioch and Apostolic Father.",
+        "works": {
+          "Epistle to the Ephesians": {
+            "date": "c. AD 110",
+            "quotes": [
+              {
+                "chapter": "Chapter 9",
+                "quote": "prepared for the building of God the Father, and drawn up on high by the instrument of Jesus Christ, which is the cross, making use of the Holy Spirit as a rope",
+                "url": "https://www.newadvent.org/fathers/0104.htm"
+              },
+              {
+                "chapter": "Chapter 18",
+                "quote": "For our God, Jesus Christ, was, according to the appointment of God, conceived in the womb by Mary, of the seed of David, but by the Holy Ghost.",
+                "url": "https://www.newadvent.org/fathers/0104.htm"
+              }
+            ]
+          },
+          "Epistle to the Magnesians": {
+            "date": "c. AD 110",
+            "quotes": [
+              {
+                "chapter": "Chapter 13",
+                "quote": "Study, therefore, to be established in the doctrines of the Lord and the apostles, that so all things, whatsoever you do, may prosper both in the flesh and spirit; in faith and love; in the Son, and in the Father, and in the Spirit; in the beginning and in the end; with your most admirable bishop, and the well-compacted spiritual crown of your presbytery, and the deacons who are according to God. Be subject to the bishop, and to one another, as Jesus Christ to the Father, according to the flesh, and the apostles to Christ, and to the Father, and to the Spirit; that so there may be a union both fleshly and spiritual.",
+                "url": "https://www.newadvent.org/fathers/0105.htm"
+              }
+            ]
+          }
+        }
+      },
+      "Addaeus": {
+        "note": "Also known as Thaddeus of Edessa, one of the Seventy Disciples.",
+        "works": {
+          "The Doctrine of Addai": {
+            "date": "c. AD 400",
+            "quotes": [
+              {
+                "chapter": "N/A",
+                "quote": "and get you a new mind, that worships the Maker and not the things which are made \u2014 a mind in which is portrayed the image of verity and of truth, of the Father, and of the Son, and of the Holy Spirit; believing and being baptized in the triple and glorious names.",
+                "url": "https://www.newadvent.org/fathers/0853.htm"
+              },
+              {
+                "chapter": "N/A",
+                "quote": "and the blessed promise of future joy which they shall receive who have believed in Christ and worshipped Him and His exalted Father, and have confessed Him and His divine Spirit.",
+                "url": "https://www.newadvent.org/fathers/0853.htm"
+              },
+              {
+                "chapter": "N/A",
+                "quote": "And all those who believed in Christ did Add\u00e6us receive, and baptized them in the name of the Father, and of the Son, and of the Holy Spirit.",
+                "url": "https://www.newadvent.org/fathers/0853.htm"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

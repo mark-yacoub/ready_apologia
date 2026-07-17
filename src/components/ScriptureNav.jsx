@@ -56,8 +56,8 @@ export default function ScriptureNav() {
         setCurrentQuranIndex(null);
       }
       
-      if (activePath.startsWith('/topics')) {
-        setActiveTab('topics');
+      if (activePath.startsWith('/evidence')) {
+        setActiveTab('evidence');
       } else {
         setActiveTab('scripture');
       }
@@ -145,14 +145,14 @@ export default function ScriptureNav() {
           <span className="btn-label">Scripture</span>
         </a>
         
-        {/* Topics Button */}
-        <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/topics`} className={`sidebar-nav-btn ${activeTab === 'topics' ? 'active' : ''}`} aria-label="Topics">
+        {/* Evidence Button */}
+        <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/evidence`} className={`sidebar-nav-btn ${activeTab === 'evidence' ? 'active' : ''}`} aria-label="Evidence">
           <div className="btn-icon-wrapper">
             <svg viewBox="0 0 24 24" strokeWidth="2.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
             </svg>
           </div>
-          <span className="btn-label">Topics</span>
+          <span className="btn-label">Evidence</span>
         </a>
         
         {/* Library Button (Coming Soon) */}

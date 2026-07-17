@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import ScrollableTrack from './ScrollableTrack.jsx';
-import { trackTopicInteraction } from '../utils/analytics.js';
+import { trackEvidenceInteraction } from '../utils/analytics.js';
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
 import { VerseItem } from './common/VerseItem.jsx';
-import { TopicDropdown } from './common/TopicDropdown.jsx';
-import '../styles/TopicsExplorer.css';
+import { EvidenceDropdown } from './common/EvidenceDropdown.jsx';
+import '../styles/EvidenceExplorer.css';
 
 // --- Module-Level Static Constants & Mappers ---
 const extractSpecificError = (explanation) => {
@@ -54,9 +54,9 @@ const getMasterCategory = (specificError) => {
   return CATEGORY_MAP[specificError] || 'Other'; 
 };
 
-const getTopicTotalCount = (t) => {
+const getEvidenceTotalCount = (t) => {
   if (t.totalCount !== undefined) return t.totalCount; // Prioritize explicitly set totalCount
-  const tData = t.topicData;
+  const tData = t.evidenceData;
   if (!tData) return 0;
   
   let count = 0;
@@ -84,12 +84,12 @@ const getTopicTotalCount = (t) => {
   return count;
 };
 
-export default function ScientificErrorsExplorer({ topicsDropdownData = [], scientificErrors = {}, drogeTranslation = {} }) {
+export default function ScientificErrorsExplorer({ evidenceDropdownData = [], scientificErrors = {}, drogeTranslation = {} }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('');
 
-  const topicId = 'scientific_errors';
-  const topicColor = { hex: '#059669', bgHex: '#d1fae5' }; // .theme-quran derived
+  const evidenceId = 'scientific_errors';
+  const evidenceColor = { hex: '#059669', bgHex: '#d1fae5' }; // .theme-quran derived
   const tTitle = "Scientific Errors";
 
   // Parse & Categorize Data Purely (No Render Side-Effects)
@@ -131,44 +131,44 @@ export default function ScientificErrorsExplorer({ topicsDropdownData = [], scie
   // Derive current tab without calling setState inside render/useMemo
   const currentTab = activeTab || (sortedLabels.length > 0 ? sortedLabels[0] : '');
 
-  const topicOptions = topicsDropdownData.map(t => {
-    const computedName = t.topicData?.name || t.topicData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || t.topicId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+  const evidenceOptions = evidenceDropdownData.map(t => {
+    const computedName = t.evidenceData?.name || t.evidenceData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || t.evidenceId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
     return {
-      id: t.topicId,
+      id: t.evidenceId,
       title: computedName,
-      count: t.totalCount !== undefined ? t.totalCount : getTopicTotalCount(t)
+      count: t.totalCount !== undefined ? t.totalCount : getEvidenceTotalCount(t)
     };
   });
 
   return (
-    <div className="topics-explorer select-none relative">
+    <div className="evidence-explorer select-none relative">
       <div className="ios-nav-container">
-        <a href={`${base}/topics`} className="ios-nav-back" title="All Topics">
+        <a href={`${base}/evidence`} className="ios-nav-back" title="All Evidence">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M15 18l-6-6 6-6"/>
           </svg>
-          <span>All Topics</span>
+          <span>All Evidence</span>
         </a>
       </div>
 
-      <div className="dedicated-topic-wrapper" onClick={() => setDropdownOpen(false)}>
+      <div className="dedicated-evidence-wrapper" onClick={() => setDropdownOpen(false)}>
         <div
-          className="dedicated-topic-view-container animate-fade-in"
-          style={{ '--topic-color': topicColor.hex, '--topic-bg': topicColor.bgHex }}
+          className="dedicated-evidence-view-container animate-fade-in"
+          style={{ '--evidence-color': evidenceColor.hex, '--evidence-bg': evidenceColor.bgHex }}
         >
           <header className="dedicated-hero-header" style={{ paddingBottom: '16px' }}>
-            <TopicDropdown
+            <EvidenceDropdown
               tTitle={tTitle}
-              currentTopicId={topicId}
-              topicOptions={topicOptions}
+              currentEvidenceId={evidenceId}
+              evidenceOptions={evidenceOptions}
               dropdownOpen={dropdownOpen}
               setDropdownOpen={setDropdownOpen}
               base={base}
             />
           </header>
 
-          <div className="dedicated-topic-view">
+          <div className="dedicated-evidence-view">
             <ScrollableTrack containerClass="master-tabs-container" activeTrigger={currentTab}>
               {sortedLabels.map(label => {
                 const count = map.get(label).length;
@@ -200,7 +200,7 @@ export default function ScientificErrorsExplorer({ topicsDropdownData = [], scie
                             vId={v.vId}
                             text={v.text}
                             note={v.note}
-                            topicId={topicId}
+                            evidenceId={evidenceId}
                             categoryTitle={v.specificError}
                             isQuran={true}
                           />

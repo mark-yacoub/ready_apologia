@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import booksMeta from '../../data/books_meta.json';
-import { trackTopicInteraction } from '../../utils/analytics.js';
+import { trackEvidenceInteraction } from '../../utils/analytics.js';
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
@@ -19,7 +19,7 @@ const formatBookName = (bookId) => {
   return bookId.charAt(0).toUpperCase() + bookId.slice(1);
 };
 
-export const VerseItem = ({ vId, text, note, topicId, categoryTitle = null, isQuran = false }) => {
+export const VerseItem = ({ vId, text, note, evidenceId, categoryTitle = null, isQuran = false }) => {
   const [isNoteOpen, setIsNoteOpen] = useState(false);
 
   let refStr = '';
@@ -42,7 +42,7 @@ export const VerseItem = ({ vId, text, note, topicId, categoryTitle = null, isQu
   }
 
   const handleCardClick = (e) => {
-    if (e.target.closest('.topic-note-btn')) return;
+    if (e.target.closest('.evidence-note-btn')) return;
     window.location.href = linkTarget;
   };
 
@@ -76,13 +76,13 @@ export const VerseItem = ({ vId, text, note, topicId, categoryTitle = null, isQu
         </div>
         {note && (
           <button
-            className={`topic-note-btn ${isNoteOpen ? 'active' : ''}`}
+            className={`evidence-note-btn ${isNoteOpen ? 'active' : ''}`}
             onClick={(e) => { 
               e.stopPropagation(); 
               const nextState = !isNoteOpen;
               setIsNoteOpen(nextState); 
               if (nextState) {
-                trackTopicInteraction({ topicId, action: 'note_opened', verseRef: refStr });
+                trackEvidenceInteraction({ evidenceId, action: 'note_opened', verseRef: refStr });
               }
             }}
             aria-label="Toggle commentary note"

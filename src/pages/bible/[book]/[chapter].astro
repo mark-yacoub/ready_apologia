@@ -6,8 +6,8 @@ import { query } from '../../../db.js';
 import booksMeta from '../../../data/books_meta.json';
 import { mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
 import { BUILD_BOOKS } from '../../../utils/build_config.js';
-import { loadAllTopicsData } from '../../../utils/topicsLoader.js';
-import { getTopicColor } from '../../../utils/topicColors.js';
+import { loadAllEvidenceData } from '../../../utils/evidenceLoader.js';
+import { getEvidenceColor as getTopicColor } from '../../../utils/evidenceColors.js';
 import { NT_TRANSLATION_ID } from '../../../utils/bible_config.js';
 import { R2_BASE_URL } from '../../../utils/cdn_config.js';
 
@@ -56,7 +56,7 @@ try {
 }
 
 // 4. Populate active evidence per verse
-const evidenceMap = {};
+const verseTagsMap = {};
 
 const lxxPrefix = `${book}_${chapter}_%`;
 const mtPrefix = isNT ? '' : `${mapLxxToMt(book, chapter, '1').book}_%`;
@@ -116,35 +116,35 @@ const formatRef = (vId) => {
   return `<a href="${base}/bible/${p[0]}/${p[1]}#${p.slice(2).join('_')}">${bName} ${p[1]}:${p.slice(2).join('_')}</a>`;
 };
 
-const topicMap = {};
-const topicNotesMap = {};
-loadAllTopicsData().forEach(({ topicId, topicData }) => {
+const evidenceMap = {};
+const evidenceNotesMap = {};
+loadAllEvidenceData().forEach(({ evidenceId, evidenceData }) => {
   ['Old Testament', 'New Testament'].forEach(test => {
-    const bank = topicData?.Scripture?.[test]?.verse_bank;
+    const bank = evidenceData?.Scripture?.[test]?.verse_bank;
     if (bank && typeof bank === 'object') {
       Object.keys(bank).forEach(vId => {
         const parts = vId.split('_');
         if (parts[0] === book && parts[1] === chapter) {
           const vNum = parts.slice(2).join('_');
-          if (!topicMap[vNum]) topicMap[vNum] = [];
-          topicMap[vNum].push(topicId);
-          if (!topicNotesMap[vNum]) topicNotesMap[vNum] = {};
-          topicNotesMap[vNum][topicId] = bank[vId];
+          if (!evidenceMap[vNum]) evidenceMap[vNum] = [];
+          evidenceMap[vNum].push(evidenceId);
+          if (!evidenceNotesMap[vNum]) evidenceNotesMap[vNum] = {};
+          evidenceNotesMap[vNum][evidenceId] = bank[vId];
         }
       });
     }
   });
 
-  if (Array.isArray(topicData?.prophecies)) {
-    topicData.prophecies.forEach(prophecy => {
+  if (Array.isArray(evidenceData?.prophecies)) {
+    evidenceData.prophecies.forEach(prophecy => {
       const otRefs = (prophecy.ot_verses || []).map(formatRef).join(', ');
 
       (prophecy.ot_verses || []).forEach(vId => {
         const parts = vId.split('_');
         if (parts[0] === book && parts[1] === chapter) {
           const vNum = parts.slice(2).join('_');
-          if (!topicMap[vNum]) topicMap[vNum] = [];
-          if (!topicMap[vNum].includes(topicId)) topicMap[vNum].push(topicId);
+          if (!evidenceMap[vNum]) evidenceMap[vNum] = [];
+          if (!evidenceMap[vNum].includes(evidenceId)) evidenceMap[vNum].push(evidenceId);
 
           const ntListItems = (prophecy.nt_fulfillments || []).map(nt => {
             const ntRefs = (nt.verses || []).map(formatRef).join(', ');
@@ -152,8 +152,8 @@ loadAllTopicsData().forEach(({ topicId, topicData }) => {
           }).join('');
           const noteHtml = `<div><strong>Prophecy:</strong> ${prophecy.name}</div><div style="margin-top: 8px;"><strong>Fulfillments:</strong></div><ul style="margin: 4px 0 0; padding-left: 16px;">${ntListItems}</ul>`;
 
-          if (!topicNotesMap[vNum]) topicNotesMap[vNum] = {};
-          topicNotesMap[vNum][topicId] = noteHtml;
+          if (!evidenceNotesMap[vNum]) evidenceNotesMap[vNum] = {};
+          evidenceNotesMap[vNum][evidenceId] = noteHtml;
         }
       });
       (prophecy.nt_fulfillments || []).forEach(nt => {
@@ -161,13 +161,13 @@ loadAllTopicsData().forEach(({ topicId, topicData }) => {
           const parts = vId.split('_');
           if (parts[0] === book && parts[1] === chapter) {
             const vNum = parts.slice(2).join('_');
-            if (!topicMap[vNum]) topicMap[vNum] = [];
-            if (!topicMap[vNum].includes(topicId)) topicMap[vNum].push(topicId);
+            if (!evidenceMap[vNum]) evidenceMap[vNum] = [];
+            if (!evidenceMap[vNum].includes(evidenceId)) evidenceMap[vNum].push(evidenceId);
 
             const noteHtml = `<div><strong>Prophecy:</strong> ${prophecy.name}</div><div style="margin-top: 8px;"><strong>Promise:</strong> ${otRefs}</div>` + (nt.note ? `<div style="margin-top: 8px;"><strong>Note:</strong> ${nt.note}</div>` : '');
 
-            if (!topicNotesMap[vNum]) topicNotesMap[vNum] = {};
-            topicNotesMap[vNum][topicId] = noteHtml;
+            if (!evidenceNotesMap[vNum]) evidenceNotesMap[vNum] = {};
+            evidenceNotesMap[vNum][evidenceId] = noteHtml;
           }
         });
       });
@@ -186,7 +186,7 @@ chapterVerses.forEach(verseObj => {
   if (vdSet.has(lxxId)) types.push('video');
 
   if (types.length > 0) {
-    evidenceMap[verseNum] = types;
+    verseTagsMap[verseNum] = types;
   }
 });
 
@@ -227,23 +227,23 @@ if (isNT) {
   } catch(e) {}
 }
 
-const allTopics = loadAllTopicsData();
-const topicsMeta = allTopics.reduce((acc, t) => {
-  const name = t.topicData.name || t.topicId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-  acc[t.topicId] = { title: name, color: getTopicColor(t.topicId) };
+const allTopics = loadAllEvidenceData();
+const evidenceMeta = allTopics.reduce((acc, t) => {
+  const name = t.evidenceData.name || t.evidenceId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+  acc[t.evidenceId] = { title: name, color: getTopicColor(t.evidenceId) };
   return acc;
 }, {});
 
 const seoTitle = `${bookMeta.name} ${chapter} - Read with Evidence & Apologetics`;
 let seoDescription = `Read ${bookMeta.name} ${chapter} in English alongside ancient manuscript evidence, Christian apologetics, answers to alleged contradictions, and cross-references.`;
 
+const verseTagsCount = Object.keys(verseTagsMap).length;
 const evidenceVerseCount = Object.keys(evidenceMap).length;
-const topicsVerseCount = Object.keys(topicMap).length;
 
-if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
+if (verseTagsCount > 0 || evidenceVerseCount > 0) {
   const stats = [];
-  if (evidenceVerseCount > 0) stats.push(`textual and critical evidence for ${evidenceVerseCount} verse${evidenceVerseCount > 1 ? 's' : ''}`);
-  if (topicsVerseCount > 0) stats.push(`deep theological topics across ${topicsVerseCount} verse${topicsVerseCount > 1 ? 's' : ''}`);
+  if (verseTagsCount > 0) stats.push(`textual and critical evidence for ${verseTagsCount} verse${verseTagsCount > 1 ? 's' : ''}`);
+  if (evidenceVerseCount > 0) stats.push(`deep theological topics across ${evidenceVerseCount} verse${evidenceVerseCount > 1 ? 's' : ''}`);
   
   seoDescription += ` This chapter includes ${stats.join(' and ')}.`;
 }
@@ -291,17 +291,17 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
     </header>
 
     <!-- Scripture Verses -->
-    <div class="verses-container" data-topics-meta={JSON.stringify(topicsMeta)}>
+    <div class="verses-container" data-evidence-meta={JSON.stringify(evidenceMeta)}>
       {chapterVerses.length > 0 ? (
         chapterVerses.map(verseObj => {
           const verseNum = Object.keys(verseObj)[0];
           const verseText = verseObj[verseNum];
-          const hasTopics = !!topicMap[verseNum];
-          const evidenceTypes = evidenceMap[verseNum] || [];
+          const hasTopics = !!evidenceMap[verseNum];
+          const evidenceTypes = verseTagsMap[verseNum] || [];
           const hasEvidence = evidenceTypes.length > 0;
           if (hasEvidence) {
             return (
-              <div class="verse-row active-verse" id={verseNum} data-topics={topicMap[verseNum] ? topicMap[verseNum].join(',') : ''} data-topic-notes={topicNotesMap[verseNum] ? JSON.stringify(topicNotesMap[verseNum]) : ''}>
+              <div class="verse-row active-verse" id={verseNum} data-evidence-id={evidenceMap[verseNum] ? evidenceMap[verseNum].join(',') : ''} data-evidence-notes={evidenceNotesMap[verseNum] ? JSON.stringify(evidenceNotesMap[verseNum]) : ''}>
                 <div class="verse-row-content">
                   <span class="verse-num">{verseNum}</span>
                   <div class="verse-body-wrapper">
@@ -369,7 +369,7 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
             );
           } else if (hasTopics) {
             return (
-              <div class="verse-row active-verse type-topic" id={verseNum} data-topics={topicMap[verseNum] ? topicMap[verseNum].join(',') : ''} data-topic-notes={topicNotesMap[verseNum] ? JSON.stringify(topicNotesMap[verseNum]) : ''}>
+              <div class="verse-row active-verse type-topic" id={verseNum} data-evidence-id={evidenceMap[verseNum] ? evidenceMap[verseNum].join(',') : ''} data-evidence-notes={evidenceNotesMap[verseNum] ? JSON.stringify(evidenceNotesMap[verseNum]) : ''}>
                 <div class="verse-row-content">
                   <span class="verse-num">{verseNum}</span>
                   <div class="verse-body-wrapper">
@@ -384,7 +384,7 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
             );
           } else {
             return (
-              <div class="verse-row" id={verseNum} data-topics={topicMap[verseNum] ? topicMap[verseNum].join(',') : ''} data-topic-notes={topicNotesMap[verseNum] ? JSON.stringify(topicNotesMap[verseNum]) : ''}>
+              <div class="verse-row" id={verseNum} data-evidence-id={evidenceMap[verseNum] ? evidenceMap[verseNum].join(',') : ''} data-evidence-notes={evidenceNotesMap[verseNum] ? JSON.stringify(evidenceNotesMap[verseNum]) : ''}>
                 <div class="verse-row-content">
                   <span class="verse-num muted">{verseNum}</span>
                   <div class="verse-body-wrapper">
@@ -471,50 +471,50 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
     const container = document.querySelector('.verses-container');
     if (!container) return; // Exit early if not on a chapter page
     
-    let activeTopics = [];
+    let activeEvidence = [];
     try {
-      const parsed = JSON.parse(localStorage.getItem('activeTopics') || '[]');
-      activeTopics = Array.isArray(parsed) ? parsed : [];
+      const parsed = JSON.parse(localStorage.getItem('activeEvidence') || '[]');
+      activeEvidence = Array.isArray(parsed) ? parsed : [];
     } catch(e) {}
 
     // Legacy single topic support
-    const legacyTopic = localStorage.getItem('activeTopic');
-    if (legacyTopic && !activeTopics.length) {
-      activeTopics = [legacyTopic];
-      localStorage.setItem('activeTopics', JSON.stringify(activeTopics));
+    const legacyEvidence = localStorage.getItem('activeTopic');
+    if (legacyEvidence && !activeEvidence.length) {
+      activeEvidence = [legacyEvidence];
+      localStorage.setItem('activeEvidence', JSON.stringify(activeEvidence));
       localStorage.removeItem('activeTopic');
     }
 
-    const topicsMeta = JSON.parse(container.getAttribute('data-topics-meta') || '{}');
+    const evidenceMeta = JSON.parse(container.getAttribute('data-evidence-meta') || '{}');
 
-    document.querySelectorAll('.verse-row[data-topics]').forEach(el => {
-      const verseTopicsStr = el.getAttribute('data-topics');
-      if (!verseTopicsStr) return;
+    document.querySelectorAll('.verse-row[data-evidence-id]').forEach(el => {
+      const verseEvidenceStr = el.getAttribute('data-evidence-id');
+      if (!verseEvidenceStr) return;
 
-      const verseTopics = verseTopicsStr.split(',');
-      const intersection = activeTopics.filter(t => verseTopics.includes(t));
+      const verseEvidence = verseEvidenceStr.split(',');
+      const intersection = activeEvidence.filter(t => verseEvidence.includes(t));
 
-      let existingPills = el.querySelector('.verse-topic-pills');
+      let existingPills = el.querySelector('.verse-evidence-pills');
       if (existingPills) existingPills.remove();
-      el.querySelectorAll('.topic-note-card').forEach(n => n.remove());
+      el.querySelectorAll('.evidence-note-card').forEach(n => n.remove());
 
       if (intersection.length > 0) {
-        el.classList.add('topic-highlight');
+        el.classList.add('evidence-highlight');
 
         const pillsContainer = document.createElement('div');
-        pillsContainer.className = 'verse-topic-pills';
+        pillsContainer.className = 'verse-evidence-pills';
 
-        const verseNotesStr = el.getAttribute('data-topic-notes');
+        const verseNotesStr = el.getAttribute('data-evidence-notes');
         let verseNotes = {};
         try { verseNotes = JSON.parse(verseNotesStr || '{}'); } catch(e) {}
 
         intersection.forEach(tId => {
-          const meta = topicsMeta[tId];
+          const meta = evidenceMeta[tId];
           if (!meta) return;
 
           const hasNote = !!verseNotes[tId];
           const pill = document.createElement(hasNote ? 'button' : 'span');
-          pill.className = 'topic-pill' + (hasNote ? ' clickable' : '');
+          pill.className = 'evidence-pill' + (hasNote ? ' clickable' : '');
           if (hasNote) {
             pill.type = 'button';
             pill.title = `View commentary note on ${meta.title}`;
@@ -537,18 +537,18 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
               e.preventDefault();
               e.stopPropagation();
 
-              let existingNote = el.querySelector(`.topic-note-card[data-note-topic="${tId}"]`);
+              let existingNote = el.querySelector(`.evidence-note-card[data-note-evidence="${tId}"]`);
               if (existingNote) {
                 existingNote.remove();
                 pill.classList.remove('note-open');
               } else {
-                el.querySelectorAll('.topic-note-card').forEach(n => n.remove());
-                el.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('note-open'));
+                el.querySelectorAll('.evidence-note-card').forEach(n => n.remove());
+                el.querySelectorAll('.evidence-pill').forEach(p => p.classList.remove('note-open'));
 
                 pill.classList.add('note-open');
                 const noteCard = document.createElement('div');
-                noteCard.className = 'topic-note-card animate-fade-in';
-                noteCard.setAttribute('data-note-topic', tId);
+                noteCard.className = 'evidence-note-card animate-fade-in';
+                noteCard.setAttribute('data-note-evidence', tId);
                 noteCard.style.backgroundColor = meta.color.bgHex;
                 noteCard.style.borderLeft = `3px solid ${meta.color.hex}`;
                 noteCard.innerHTML = verseNotes[tId];
@@ -567,7 +567,7 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
           bodyWrapper.appendChild(pillsContainer);
         }
       } else {
-        el.classList.remove('topic-highlight');
+        el.classList.remove('evidence-highlight');
       }
     });
   };
@@ -597,13 +597,13 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
 		flex-direction: column;
 	}
 
-	:global(.verse-topic-pills) {
+	:global(.verse-evidence-pills) {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px;
 		margin-top: 10px;
 	}
-	:global(.topic-pill) {
+	:global(.evidence-pill) {
 		font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
 		font-size: 11.5px !important;
 		font-weight: 600 !important;
@@ -619,14 +619,14 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
 		box-shadow: 0 1px 2px rgba(0,0,0,0.03);
 		margin: 0; /* Reset for button elements */
 	}
-	:global(.topic-pill.clickable) {
+	:global(.evidence-pill.clickable) {
 		cursor: pointer;
 	}
-	:global(.topic-pill.clickable:hover) {
+	:global(.evidence-pill.clickable:hover) {
 		filter: brightness(0.95);
 		transform: scale(1.02);
 	}
-	:global(.topic-pill.note-open) {
+	:global(.evidence-pill.note-open) {
 		box-shadow: 0 0 0 1.5px currentColor !important;
 	}
 	:global(.pill-info-icon) {
@@ -637,11 +637,11 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
 		opacity: 0.75;
 		transition: opacity 0.15s ease, transform 0.15s ease;
 	}
-	:global(.topic-pill.clickable:hover .pill-info-icon) {
+	:global(.evidence-pill.clickable:hover .pill-info-icon) {
 		opacity: 1;
 		transform: scale(1.1);
 	}
-	:global(.topic-note-card) {
+	:global(.evidence-note-card) {
 		margin-top: 10px;
 		padding: 12px 14px;
 		border-radius: 0 8px 8px 0;
@@ -651,12 +651,12 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
 		line-height: 1.5;
 		box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 	}
-	:global(.topic-note-card a) {
+	:global(.evidence-note-card a) {
 		color: var(--color-primary);
 		text-decoration: underline;
 		text-underline-offset: 2px;
 	}
-	:global(.topic-note-card a:hover) {
+	:global(.evidence-note-card a:hover) {
 		color: var(--color-secondary);
 	}
 
@@ -874,12 +874,12 @@ if (evidenceVerseCount > 0 || topicsVerseCount > 0) {
 	}
 
 	/* Topic Highlight (Global toggle) */
-	.verse-row.topic-highlight .verse-row-content {
+	.verse-row.evidence-highlight .verse-row-content {
 		background-color: rgba(151, 69, 67, 0.05); /* Very subtle Terracotta tint */
 		border-left: 2px solid var(--color-secondary);
 		padding-left: 14px;
 	}
-	.verse-row.topic-highlight.active-verse:hover .verse-row-content {
+	.verse-row.evidence-highlight.active-verse:hover .verse-row-content {
 		background-color: rgba(151, 69, 67, 0.1);
 		border-left-color: var(--color-secondary);
 	}
