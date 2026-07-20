@@ -10,9 +10,7 @@ const { videos } = Astro.props;
         const resolvedVerses = video.resolvedVerses || [];
         const dynamicTitle = video.title 
           || video.summary 
-          || (video.apologist_name && video.apologist_name !== "Unknown" 
-              ? `YouTube Short by ${video.apologist_name}`
-              : 'YouTube Short Apologetics Video');
+          || 'YouTube Short Apologetics Video';
 
         return (
           <div class="video-card">
@@ -28,11 +26,7 @@ const { videos } = Astro.props;
             </div>
 
             <div class="video-meta">
-              {video.apologist_name && !video.apologist_name.toLowerCase().includes("unknown") && (
-                <div class="apologist-name">
-                  <span class="apologist-badge">{video.apologist_name}</span>
-                </div>
-              )}
+
 
               {video.summary && (
                 <div class="video-summary">
@@ -134,19 +128,7 @@ const { videos } = Astro.props;
     gap: 12px;
   }
 
-  .apologist-badge {
-    display: inline-flex;
-    align-items: center;
-    background-color: var(--color-surface-container-low);
-    color: var(--color-on-surface);
-    border: 1px solid var(--color-outline-variant);
-    border-radius: 999px;
-    padding: 4px 10px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
+
 
   .video-summary p {
     font-family: var(--font-body);
