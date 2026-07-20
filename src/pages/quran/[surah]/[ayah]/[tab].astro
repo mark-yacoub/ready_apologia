@@ -7,6 +7,7 @@ import Layout from '../../../../layouts/Layout.astro';
 import QuranVerseTabs from '../../../../components/QuranVerseTabs.jsx';
 import QuranManuscriptCarousel from '../../../../components/QuranManuscriptCarousel.jsx';
 import VideosGrid from '../../../../components/VideosGrid.astro';
+import { getQuranOgImage } from '../../../../utils/ogImageResolver.js';
 import { query } from '../../../../db.js';
 import { loadEnglishData } from '../../../../utils/quran_loader.js';
 import { assignManuscriptScanNames } from '../../../../utils/manuscript_utils.js';
@@ -116,18 +117,7 @@ if (tab === 'videos') {
 }
 
 // Generate OG Image
-let ogImage = undefined;
-const earliestMs = query(`
-  SELECT m.ms_id, m.image_name
-  FROM manuscript_per_verse_quran m
-  JOIN manuscripts_meta_quran mm ON m.ms_id = mm.ms_id
-  WHERE m.verse_id = :verseId
-  ORDER BY mm.earliest_date ASC
-  LIMIT 1
-`, { verseId });
-if (earliestMs.length > 0 && earliestMs[0].image_name) {
-  ogImage = `${R2_BASE_URL}/quran/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
-}
+const ogImage = getQuranOgImage(surah, ayah);
 
 const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO({
   tab,

@@ -4,6 +4,8 @@ import Layout from '../../../../../layouts/Layout.astro';
 import VerseTabs from '../../../../../components/VerseTabs.jsx';
 import ManuscriptCarousel from '../../../../../components/ManuscriptCarousel.jsx';
 import VideosGrid from '../../../../../components/VideosGrid.astro';
+import { R2_BASE_URL } from '../../../../../utils/cdn_config.js';
+import { getBibleOgImage } from '../../../../../utils/ogImageResolver.js';
 import { query } from '../../../../../db.js';
 import booksMeta from '../../../../../data/books_meta.json';
 import { parseMarkdown } from '../../../../../utils/markdown.js';
@@ -241,34 +243,7 @@ function formatVerseIdToLink(id) {
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
 // Generate OG Image from the oldest manuscript
-let ogImage = undefined;
-if (isNT) {
-  const earliestMs = query(`
-    SELECT m.ms_id, m.image_name
-    FROM manuscript_per_verse m
-    JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id
-    WHERE m.verse_id = :verseId
-    ORDER BY mm.earliest_date ASC
-    LIMIT 1
-  `, { verseId });
-  if (earliestMs.length > 0 && earliestMs[0].image_name) {
-    ogImage = `${R2_BASE_URL}/images/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
-  }
-} else {
-  try {
-    const earliestMsOt = query(`
-      SELECT m.ms_id, m.image_name
-      FROM manuscript_per_verse_ot m
-      JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id
-      WHERE m.verse_id = :lxxId OR m.verse_id = :mtId
-      ORDER BY mm.earliest_date ASC
-      LIMIT 1
-    `, { lxxId: verseId, mtId });
-    if (earliestMsOt.length > 0 && earliestMsOt[0].image_name) {
-      ogImage = `${R2_BASE_URL}/ot_images/${earliestMsOt[0].ms_id}/${encodeURIComponent(earliestMsOt[0].image_name)}`;
-    }
-  } catch(e) {}
-}
+const ogImage = getBibleOgImage(book, chapter, verse, isNT);
 
 const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO({
   tab,

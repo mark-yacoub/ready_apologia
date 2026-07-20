@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Layout from '../../layouts/Layout.astro';
 import QuranPageHeader from '../../components/QuranPageHeader.astro';
+import { getQuranOgImage } from '../../utils/ogImageResolver.js';
 import VariantCard from '../../components/VariantCard.astro';
 import { TOTAL_SURAHS } from '../../utils/quran_config.js';
 import { BUILD_SURAHS } from '../../utils/build_config.js';
@@ -149,9 +150,12 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
   if (scientificErrorCount > 0) stats.push(`${scientificErrorCount} scientific errors`);
   seoDescription += ` This Surah features deep analysis on ${stats.join(', ')}.`;
 }
+
+// Generate OG Image from the oldest manuscript belonging to ANY verse in this surah
+const ogImage = getQuranOgImage(surahNum, null);
 ---
 
-<Layout title={seoTitle} description={seoDescription} keywords={seoKeywords}>
+<Layout title={seoTitle} description={seoDescription} keywords={seoKeywords} ogImage={ogImage}>
   <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader currentTitle={`${surahNum}. ${arabicData.transliteration}`} currentIndex={surahNum} />
 

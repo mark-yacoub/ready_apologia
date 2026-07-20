@@ -5,6 +5,7 @@ import Layout from '../../../layouts/Layout.astro';
 import { query } from '../../../db.js';
 import booksMeta from '../../../data/books_meta.json';
 import { mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
+import { getBibleOgImage } from '../../../utils/ogImageResolver.js';
 import { BUILD_BOOKS } from '../../../utils/build_config.js';
 import { loadAllEvidenceData } from '../../../utils/evidenceLoader.js';
 import { getEvidenceColor as getTopicColor } from '../../../utils/evidenceColors.js';
@@ -194,38 +195,8 @@ const currentChapterNum = parseInt(chapter);
 const hasPrev = currentChapterNum > 1;
 const hasNext = currentChapterNum < bookMeta.chapters;
 
-// Generate OG Image from the oldest manuscript of chapter 1, verse 1 of this book
-let ogImage = undefined;
-const v11Id = `${book}_1_1`;
-if (isNT) {
-  const earliestMs = query(`
-    SELECT m.ms_id, m.image_name
-    FROM manuscript_per_verse m
-    JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id
-    WHERE m.verse_id = :v11Id
-    ORDER BY mm.earliest_date ASC
-    LIMIT 1
-  `, { v11Id });
-  if (earliestMs.length > 0 && earliestMs[0].image_name) {
-    ogImage = `${R2_BASE_URL}/images/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
-  }
-} else {
-  try {
-    const mtMappingV11 = mapLxxToMt(book, '1', '1');
-    const mtIdV11 = `${mtMappingV11.book}_${mtMappingV11.chapter}_${mtMappingV11.verse}`;
-    const earliestMsOt = query(`
-      SELECT m.ms_id, m.image_name
-      FROM manuscript_per_verse_ot m
-      JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id
-      WHERE m.verse_id = :v11Id OR m.verse_id = :mtIdV11
-      ORDER BY mm.earliest_date ASC
-      LIMIT 1
-    `, { v11Id, mtIdV11 });
-    if (earliestMsOt.length > 0 && earliestMsOt[0].image_name) {
-      ogImage = `${R2_BASE_URL}/ot_images/${earliestMsOt[0].ms_id}/${encodeURIComponent(earliestMsOt[0].image_name)}`;
-    }
-  } catch(e) {}
-}
+// Generate OG Image from the oldest manuscript belonging to ANY verse in this chapter
+const ogImage = getBibleOgImage(book, chapter, null, isNT);
 
 const allTopics = loadAllEvidenceData();
 const evidenceMeta = allTopics.reduce((acc, t) => {
