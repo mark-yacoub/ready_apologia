@@ -8,6 +8,9 @@ const isProd = import.meta.env.PROD && measurementId !== 'G-PLACEHOLDER';
   <>
     <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
     <script is:inline define:vars={{ measurementId }}>
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        window[`ga-disable-${measurementId}`] = true;
+      }
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       window.gtag = gtag;
