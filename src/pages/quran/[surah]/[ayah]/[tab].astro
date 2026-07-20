@@ -20,6 +20,7 @@ import { formatCommentaryWithVerseBoxes, getRangeVerses } from '../../../../util
 import { getEvidenceSets } from '../../../../utils/quran_evidence_service.js';
 import { enrichVideosWithVerses } from '../../../../utils/video_service.js';
 import { R2_BASE_URL } from '../../../../utils/cdn_config.js';
+import { BUILD_SURAHS } from '../../../../utils/build_config.js';
 
 export async function getStaticPaths() {
   const {
@@ -36,7 +37,9 @@ export async function getStaticPaths() {
   const addPaths = (set, tabName) => {
     set.forEach(id => {
       const [s, a] = id.split(':');
-      if (s && a) paths.push({ params: { surah: s, ayah: a, tab: tabName } });
+      if (s && a && (!BUILD_SURAHS || BUILD_SURAHS.has(s))) {
+        paths.push({ params: { surah: s, ayah: a, tab: tabName } });
+      }
     });
   };
 

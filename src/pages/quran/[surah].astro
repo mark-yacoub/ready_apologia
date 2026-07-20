@@ -5,6 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 import QuranPageHeader from '../../components/QuranPageHeader.astro';
 import VariantCard from '../../components/VariantCard.astro';
 import { TOTAL_SURAHS } from '../../utils/quran_config.js';
+import { BUILD_SURAHS } from '../../utils/build_config.js';
 import { loadEnglishData } from '../../utils/quran_loader.js';
 import { getVariantsForSurah } from '../../utils/nonUthmanicLoader.js';
 import { getQiraatForSurah } from '../../utils/qiraatLoader.js';
@@ -17,8 +18,9 @@ import { getEvidenceSetsForSurahPrefix } from '../../utils/quran_evidence_servic
 
 export async function getStaticPaths() {
   const paths = [];
-  for (let i = 1; i <= TOTAL_SURAHS; i++) {
-    paths.push({ params: { surah: String(i) } });
+  const surahsToBuild = BUILD_SURAHS ? Array.from(BUILD_SURAHS) : Array.from({length: TOTAL_SURAHS}, (_, i) => String(i + 1));
+  for (const surah of surahsToBuild) {
+    paths.push({ params: { surah } });
   }
   return paths;
 }
@@ -353,7 +355,54 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
     }, true); // useCapture: true is REQUIRED because toggle events do not bubble
   };
 
-  document.addEventListener('astro:page-load', initToggle);
+  // L6 Event Delegation for Verse Clicks
+  const handleQuranVerseClick = (e) => {
+    // Ignore middle-clicks, cmd/ctrl-clicks which open in new tabs
+    if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    
+    const link = e.target.closest('.verse-card a[href]');
+    if (!link) return;
+
+    const verseCard = link.closest('.verse-card');
+    if (verseCard && verseCard.id) {
+      history.replaceState(history.state, '', window.location.pathname + '#' + verseCard.id);
+    }
+  };
+
+  // ------------------------------------------------------------------
+  // L6 Refactor: Deterministic Scroll Restoration
+  // ------------------------------------------------------------------
+  const restoreScrollPosition = () => {
+    // Astro's default scroll restoration crashes if IDs are purely numeric (e.g., id="15").
+    // We manually intercept the hash and use getElementById which natively handles numbers.
+    if (!window.location.hash) return;
+    
+    const hashId = window.location.hash.substring(1);
+    const element = document.getElementById(hashId);
+    
+    if (element) {
+      // Deterministically wait for the browser's layout engine to finish painting
+      // before telling it to calculate geometrical scroll positions.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          element.scrollIntoView({ behavior: 'auto', block: 'center' });
+        });
+      });
+    }
+  };
+
+  // ------------------------------------------------------------------
+  // Lifecycle Bindings
+  // ------------------------------------------------------------------
+  document.addEventListener('astro:page-load', () => {
+    initToggle();
+    document.addEventListener('click', handleQuranVerseClick);
+    restoreScrollPosition();
+  });
+
+  document.addEventListener('astro:before-swap', () => {
+    document.removeEventListener('click', handleQuranVerseClick);
+  });
 </script>
 
 <style>

@@ -580,7 +580,52 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
   });
 
   // Clean up global listeners before swap to prevent memory leaks
+  // L6 Event Delegation
+  const handleBibleVerseClick = (e) => {
+    // Ignore middle-clicks, cmd/ctrl-clicks which open in new tabs
+    if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    
+    const link = e.target.closest('.verse-row a[href]');
+    if (!link) return;
+
+    const verseRow = link.closest('.verse-row');
+    if (verseRow && verseRow.id) {
+      history.replaceState(history.state, '', window.location.pathname + '#' + verseRow.id);
+    }
+  };
+
+  // ------------------------------------------------------------------
+  // L6 Refactor: Deterministic Scroll Restoration
+  // ------------------------------------------------------------------
+  const restoreScrollPosition = () => {
+    // Astro's default scroll restoration crashes if IDs are purely numeric (e.g., id="15").
+    // We manually intercept the hash and use getElementById which natively handles numbers.
+    if (!window.location.hash) return;
+    
+    const hashId = window.location.hash.substring(1);
+    const element = document.getElementById(hashId);
+    
+    if (element) {
+      // Deterministically wait for the browser's layout engine to finish painting
+      // before telling it to calculate geometrical scroll positions.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          element.scrollIntoView({ behavior: 'auto', block: 'center' });
+        });
+      });
+    }
+  };
+
+  // ------------------------------------------------------------------
+  // Lifecycle Bindings
+  // ------------------------------------------------------------------
+  document.addEventListener('astro:page-load', () => {
+    document.addEventListener('click', handleBibleVerseClick);
+    restoreScrollPosition();
+  });
+
   document.addEventListener('astro:before-swap', () => {
+    document.removeEventListener('click', handleBibleVerseClick);
     if (closePopoverHandler) {
       document.removeEventListener('click', closePopoverHandler);
       closePopoverHandler = null;
