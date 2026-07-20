@@ -1,2 +1,2 @@
-export const BUILD_BOOKS = new Set(['jn']);
-export const BUILD_SURAHS = new Set(['1']);
+export const BUILD_BOOKS = null;
+export const BUILD_SURAHS = null;

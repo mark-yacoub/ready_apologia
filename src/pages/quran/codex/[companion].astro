@@ -1,7 +1,10 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import VariantCard from '../../../components/VariantCard.astro';
+import VideosCarousel from '../../../components/VideosCarousel.astro';
 import { loadCompanionCodex } from '../../../utils/nonUthmanicLoader.js';
+import { query } from '../../../db.js';
+import { enrichVideosWithVerses } from '../../../utils/video_service.js';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -29,6 +32,18 @@ const codexData = await loadCompanionCodex(companionName);
 
 if (!codexData) {
   return Astro.redirect('/404');
+}
+
+const codexVerseId = codexData.verse_id;
+let videos = [];
+if (codexVerseId) {
+  const rawVideos = query(`
+    SELECT sm.* 
+    FROM short_per_verse spv
+    JOIN shorts_metadata sm ON spv.video_id = sm.video_id
+    WHERE spv.verse_id = :codexVerseId
+  `, { codexVerseId });
+  videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 }
 
 // Group Uthmanic variants by Surah
@@ -131,6 +146,14 @@ const seoDescription = `Explore the ${codexData.name} Codex. Discover ${codexDat
             <VariantCard variant={v} showCompanionHeader={false} titleTag="h3" />
           ))}
         </div>
+      </section>
+    )}
+
+    <!-- Videos / Shorts Section -->
+    {videos.length > 0 && (
+      <section class="codex-section">
+        <h2 class="section-title">Apologetics Shorts on {codexData.name}</h2>
+        <VideosCarousel videos={videos} />
       </section>
     )}
 

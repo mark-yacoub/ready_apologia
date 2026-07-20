@@ -3,6 +3,20 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { loadEnglishData } from './quran_loader.js';
 
+export const GENERAL_VARIANT_IDS = [
+  "satanic_0", "sanaa_0", "fatima_0", "khalifa_0", "ali_0", 
+  "12thimam_0", "hafsa_0", "khuzaymahibnthabit_0", "khuzaimah_0", 
+  "abualansari_0", "variantcodices_0", "companions_0", "muhammad_0"
+];
+
+const COMPANION_VERSE_ID_MAP = {
+  "Abdullah bin Masud": "ibnmasud_0",
+  "Ubayy bin Kab": "ubayy_0",
+  "Aisha": "aisha_0",
+  "Abu Musa al-Ashari": "abumusa_0",
+  "Abdullah bin Umar": "ibnumar_0"
+};
+
 /**
  * Sorts hadiths by collection (Bukhari first, then Muslim) and then by reference number.
  */
@@ -165,6 +179,7 @@ export const loadNonUthmanicData = async (type) => {
     return {
       ...companion,
       virtues,
+      verse_id: COMPANION_VERSE_ID_MAP[companion.name] || null,
       variants: filteredVariantsByCompanion[companion.name] || []
     };
   }));
@@ -268,6 +283,7 @@ export async function loadCompanionCodex(companionName) {
   return {
     ...companion,
     virtues,
+    verse_id: COMPANION_VERSE_ID_MAP[companionName] || null,
     lostVerses,
     uthmanicVariants
   };
