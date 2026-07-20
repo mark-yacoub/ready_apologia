@@ -77,10 +77,10 @@ export const VerseItem = ({ vId, text, note, evidenceId, categoryTitle = null, i
         {note && (
           <button
             className={`evidence-note-btn ${isNoteOpen ? 'active' : ''}`}
-            onClick={(e) => { 
-              e.stopPropagation(); 
+            onClick={(e) => {
+              e.stopPropagation();
               const nextState = !isNoteOpen;
-              setIsNoteOpen(nextState); 
+              setIsNoteOpen(nextState);
               if (nextState) {
                 trackEvidenceInteraction({ evidenceId, action: 'note_opened', verseRef: refStr });
               }

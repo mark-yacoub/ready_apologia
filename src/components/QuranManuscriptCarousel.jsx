@@ -15,11 +15,11 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
   const [activeSlide, setActiveSlide] = useState(0);
   const [fullScreenImg, setFullScreenImg] = useState(null);
   const [zoomFileName, setZoomFileName] = useState('');
-  
+
   // Dynamic Magnification & Loading States (Ink Mode completely removed!)
   const [loadedImages, setLoadedImages] = useState({}); // CDN spinner tracker
   const [failedImages, setFailedImages] = useState({}); // Broken cloud image 404 tracker
-  
+
   const trackRef = useRef(null);
 
 
@@ -62,7 +62,7 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
   // Web Share panels
   const handleShare = async (e, ms) => {
     e.preventDefault();
-    
+
     const cleanLabel = verseLabel || 'Scripture Verse';
     const shareData = {
       title: `${ms.name} - Manuscript Evidence`,
@@ -91,13 +91,13 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
       const response = await fetch(imgUrl);
       const blob = await response.blob();
       const localUrl = window.URL.createObjectURL(blob);
-      
+
       const link = document.createElement('a');
       link.href = localUrl;
       link.download = filename || 'manuscript_scan.jpg';
       document.body.appendChild(link);
       link.click();
-      
+
       document.body.removeChild(link);
       window.URL.revokeObjectURL(localUrl);
     } catch (err) {
@@ -116,11 +116,11 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
 
   return (
     <div className="carousel-container select-none">
-      
+
       {/* Snapping Track Wrapper */}
-      <div 
-        className="carousel-track" 
-        onScroll={handleTrackScroll} 
+      <div
+        className="carousel-track"
+        onScroll={handleTrackScroll}
         ref={trackRef}
       >
         {manuscripts.map((ms, index) => {
@@ -139,13 +139,13 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
 
           return (
             <div key={ms.image_name} className="carousel-slide">
-              
+
               {/* Card Container */}
               <div className={`slide-card ${activeSlide === index ? 'active-card' : 'inactive-card'}`}>
-                
+
                 {/* 1. Manuscript Image Scan Frame (Double tap triggers Zoom Lightbox) */}
                 <div className="ms-image-frame" onClick={() => triggerZoom(imgSrc, ms.image_name)}>
-                  
+
                   {/* If image failed to load (404 or timeout), show clean offline warning fallback */}
                   {failedImages[ms.image_name] ? (
                     <div className="ms-skeleton-loader ms-error-fallback select-none">
@@ -166,9 +166,9 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
                       )}
 
                       {/* Image is ALWAYS rendered to ensure browser triggers network loading immediately! */}
-                      <img 
-                        src={imgSrc} 
-                        alt={altText} 
+                      <img
+                        src={imgSrc}
+                        alt={altText}
                         className={`ms-image ${isLoaded ? 'loaded' : 'loading'}`}
                         ref={(el) => {
                           if (el && el.complete && !isLoaded) {
@@ -187,8 +187,8 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
 
                   {/* Desktop Arrow navigation chevrons */}
                   {activeSlide > 0 && (
-                    <button 
-                      onClick={slidePrev} 
+                    <button
+                      onClick={slidePrev}
                       className="carousel-nav-arrow prev-arrow"
                       title="View previous manuscript"
                     >
@@ -196,8 +196,8 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
                     </button>
                   )}
                   {activeSlide < manuscripts.length - 1 && (
-                    <button 
-                      onClick={slideNext} 
+                    <button
+                      onClick={slideNext}
                       className="carousel-nav-arrow next-arrow"
                       title="View next manuscript"
                     >
@@ -206,8 +206,8 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
                   )}
 
                   {/* Expand Zoom button */}
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); triggerZoom(imgSrc, ms.image_name); }} 
+                  <button
+                    onClick={(e) => { e.stopPropagation(); triggerZoom(imgSrc, ms.image_name); }}
                     className="image-expand-btn"
                     title="View scan in fullscreen magnifier"
                   >
@@ -225,8 +225,8 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
 
                 {/* 2. Actions bar */}
                 <div className="ms-action-bar">
-                  <button 
-                    onClick={(e) => handleShare(e, ms)} 
+                  <button
+                    onClick={(e) => handleShare(e, ms)}
                     className="action-btn share-btn"
                     title="Share this manuscript evidence link"
                   >
@@ -236,8 +236,8 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
                     <span>Share Evidence</span>
                   </button>
 
-                  <button 
-                    onClick={(e) => handleDownload(e, imgSrc, ms.image_name)} 
+                  <button
+                    onClick={(e) => handleDownload(e, imgSrc, ms.image_name)}
                     className="action-btn save-btn"
                     title="Save scan directly to device photo gallery"
                   >
@@ -296,7 +296,7 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
                 </div>
 
               </div>
-              
+
             </div>
           );
         })}
@@ -321,16 +321,16 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
          ============================================================ */}
       {fullScreenImg && (
         <Suspense fallback={<div className="fullscreen-lightbox-container loading"></div>}>
-          <ManuscriptLightbox 
-            imgSrc={fullScreenImg} 
-            fileName={zoomFileName} 
-            onClose={() => setFullScreenImg(null)} 
-            handleDownload={handleDownload} 
+          <ManuscriptLightbox
+            imgSrc={fullScreenImg}
+            fileName={zoomFileName}
+            onClose={() => setFullScreenImg(null)}
+            handleDownload={handleDownload}
           />
         </Suspense>
       )}
 
-      
+
 
     </div>
   );

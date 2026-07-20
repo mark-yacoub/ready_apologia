@@ -14,10 +14,39 @@ const evidenceData = loadAllEvidenceData();
 
 const targetEvidence = evidenceData.find(t => t.evidenceId === evidence_id);
 const rawTitle = targetEvidence?.evidenceData?.name || targetEvidence?.evidenceData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || evidence_id.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-const evidenceTitle = `${rawTitle} Bible Verses & Early Church Evidence`;
 
-const evidenceDesc = `Comprehensive collection of Biblical Scripture verses (Old & New Testament) and early Church Patristic testimonies defending the ${rawTitle}. Explore historical Christian apologetics proofs and quotes.`;
-const evidenceKeywords = `verses ${rawTitle.toLowerCase()}, bible verses ${rawTitle.toLowerCase()}, early church fathers ${rawTitle.toLowerCase()}, ${rawTitle.toLowerCase()} apologetics, scripture evidence ${rawTitle.toLowerCase()}, proof of ${rawTitle.toLowerCase()}`;
+const seoStrategy = {
+  divinity_of_christ: {
+    title: "Biblical Evidence for the Divinity of Christ",
+    description: "Explore all verses in the New Testament and Old Testament about the divinity of Christ from different lenses, as well as Pre-Nicene writings along with ancient Judaism's belief in the 'Two Powers in Heaven' and the Second Person of the Godhead.",
+    keywords: "divinity of christ bible verses, pre-nicene writings divinity of christ, ancient judaism two powers in heaven, 2nd person of the trinity"
+  },
+  divinity_of_the_holy_spirit: {
+    title: "Evidence for the Divinity of the Holy Spirit",
+    description: "Discover theological and scriptural evidence supporting the deity and personhood of the Holy Spirit across the Old and New Testaments, reinforced by Pre-Nicene Christian writings.",
+    keywords: "divinity of the holy spirit, is the holy spirit god, personhood of the holy spirit, holy spirit bible verses, pre-nicene writings holy spirit"
+  },
+  nt_authors: {
+    title: "Authorship of the New Testament",
+    description: "Examine historical and textual evidence verifying the authorship, authenticity, and apostolic origins of the New Testament documents and gospels.",
+    keywords: "who wrote the gospels, new testament authorship, historical reliability of the bible, apostolic succession"
+  },
+  prophecies: {
+    title: "Messianic Prophecies Fulfilled by Jesus Christ",
+    description: "A comprehensive apologetics list of Old Testament prophecies concerning the Messiah, alongside their exact and undeniable fulfillments in the New Testament.",
+    keywords: "messianic prophecies, jesus fulfilled prophecy, old testament prophecies of jesus, scripture evidence"
+  },
+  trinity: {
+    title: "Biblical Evidence for the Holy Trinity",
+    description: "Explore the scriptural foundations and Pre-Nicene church treatises that define and defend the Triune nature of God: Father, Son, and Holy Spirit.",
+    keywords: "holy trinity bible verses, evidence for the trinity, triune god, god in three persons, early church trinity doctrine"
+  }
+};
+
+const strat = seoStrategy[evidence_id] || {};
+const evidenceTitle = strat.title || `${rawTitle} Bible Verses & Early Church Evidence`;
+const evidenceDesc = strat.description || `Comprehensive collection of Biblical Scripture verses (Old & New Testament) and early Church Patristic testimonies defending the ${rawTitle}. Explore historical Christian apologetics proofs and quotes.`;
+const evidenceKeywords = strat.keywords || `verses ${rawTitle.toLowerCase()}, bible verses ${rawTitle.toLowerCase()}, early church fathers ${rawTitle.toLowerCase()}, ${rawTitle.toLowerCase()} apologetics, scripture evidence ${rawTitle.toLowerCase()}, proof of ${rawTitle.toLowerCase()}`;
 
 // Extract top verse references for Rich ItemList Schema
 const ntCategories = targetEvidence?.evidenceData?.Scripture?.['New Testament']?.structure || [];

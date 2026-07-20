@@ -34,7 +34,7 @@ export function trackEvent(eventName, params = {}) {
  */
 export function trackPageView(url, title) {
   if (typeof window === 'undefined') return;
-  
+
   trackEvent('page_view', {
     page_location: url || window.location.href,
     page_path: window.location.pathname,

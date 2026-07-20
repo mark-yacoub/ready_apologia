@@ -8,16 +8,17 @@ import { loadAllEvidenceData } from '../../utils/evidenceLoader.js';
 // We load all evidence solely to populate the generic top-of-page Dropdown selector
 const evidenceDropdownData = loadAllEvidenceData();
 const evidenceTitle = "Scientific Errors in the Quran";
-const evidenceDesc = "Analyzing scientific errors and historical cosmological miscalculations in the Quran.";
+const evidenceDesc = "A critical apologetics analysis of scientific errors in the Quran, detailing geocentricism, flat earth cosmology, embryological inaccuracies, mathematical errors in inheritance, and mistaken astronomy (e.g., stars as missiles).";
+const evidenceKeywords = "quran scientific errors, quran flat earth, embryology in the quran, geocentricism islam, quran mathematical errors";
 ---
 
-<Layout title={evidenceTitle} description={evidenceDesc} theme="quran">
+<Layout title={evidenceTitle} description={evidenceDesc} keywords={evidenceKeywords} theme="quran">
   <div class="evidence-page-container">
-    <ScientificErrorsExplorer 
-      client:load 
-      evidenceDropdownData={evidenceDropdownData} 
-      scientificErrors={scientificErrorsObj} 
-      drogeTranslation={drogeTranslation} 
+    <ScientificErrorsExplorer
+      client:load
+      evidenceDropdownData={evidenceDropdownData}
+      scientificErrors={scientificErrorsObj}
+      drogeTranslation={drogeTranslation}
     />
   </div>
 </Layout>

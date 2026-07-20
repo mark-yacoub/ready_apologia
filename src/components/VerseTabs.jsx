@@ -3,17 +3,17 @@ import '../styles/evidence-tabs.css';
 import ScrollableTrack from './ScrollableTrack.jsx';
 import { trackTabReorder } from '../utils/analytics.js';
 
-export default function VerseTabs({ 
-  msCount, 
-  ctCount, 
-  apCount, 
+export default function VerseTabs({
+  msCount,
+  ctCount,
+  apCount,
   activeTab,
   book,
   chapter,
   verse,
   videosCount = 0,
 }) {
-  
+
   // Build the horizontal links track. Switching tabs is now a standard, bookmarkable page link!
   const tabs = [
     { id: 'manuscripts', label: `Manuscripts (${msCount})`, show: msCount > 0 },
@@ -82,7 +82,7 @@ export default function VerseTabs({
 
   return (
     <div className="tabs-wrapper select-none">
-      
+
       {/* Category Segmented Pill Headers */}
       <ScrollableTrack containerClass="tab-segmented-bar" activeTrigger={`${activeTab}-${isEditing}`}>
         {sortedTabs.map((tab) => {
@@ -114,28 +114,28 @@ export default function VerseTabs({
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
-            
+
             <p className="reorder-modal-desc">Use the arrows to set your preferred tab order. This saves to your device.</p>
-            
+
             <div className="reorder-list">
               {sortedTabs.map((tab, idx) => {
                 const isFirst = idx === 0;
                 const isLast = idx === sortedTabs.length - 1;
-                
+
                 return (
                   <div key={tab.id} className="reorder-list-item">
                     <span className="reorder-item-label">{tab.label}</span>
                     <div className="reorder-item-controls">
-                      <button 
-                        className="reorder-arrow-btn" 
+                      <button
+                        className="reorder-arrow-btn"
                         onClick={() => moveTab(tab.id, -1)}
                         disabled={isFirst}
                         aria-label="Move up"
                       >
                         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" /></svg>
                       </button>
-                      <button 
-                        className="reorder-arrow-btn" 
+                      <button
+                        className="reorder-arrow-btn"
                         onClick={() => moveTab(tab.id, 1)}
                         disabled={isLast}
                         aria-label="Move down"
@@ -147,7 +147,7 @@ export default function VerseTabs({
                 );
               })}
             </div>
-            
+
             <button className="reorder-modal-done-btn" onClick={() => setIsEditing(false)}>
               Done
             </button>
@@ -156,7 +156,7 @@ export default function VerseTabs({
       )}
 
       {/* Custom Light-Only CSS Styles */}
-      
+
 
     </div>
   );

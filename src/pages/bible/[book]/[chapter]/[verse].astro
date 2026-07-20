@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 
   const ctRaw = query("SELECT DISTINCT verse1 as v FROM contradictions UNION SELECT DISTINCT verse2 FROM contradictions").map(r => r.v);
   const apRaw = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
-  
+
   const mapToLxxIfOt = (id) => {
     if (!id) return null;
     const p = id.split('_');
@@ -32,7 +32,7 @@ export async function getStaticPaths() {
 
   const ct = ctRaw.map(mapToLxxIfOt);
   const ap = apRaw.map(mapToLxxIfOt);
-  
+
   const allVerseIds = new Set([...msNt, ...msOt, ...ct, ...ap].filter(Boolean));
   const paths = [];
 

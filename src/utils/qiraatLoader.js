@@ -33,7 +33,7 @@ async function getRawQiraatData() {
 export async function getQiraatForSurah(surahNum) {
   const data = await getRawQiraatData();
   const cache = {};
-  
+
   for (const item of data) {
     const parts = item.verse_id.split(':');
     if (parts.length === 2) {
@@ -64,7 +64,7 @@ export async function getAllQiraatCategoriesAndEffects() {
     for (const v of (item.variants || [])) {
       const cat = (v.category || '');
       const eff = (v.effect || '');
-      
+
       if (cat.toLowerCase() !== 'other' && eff.toLowerCase() !== 'other') {
         if (eff) {
           const effSlug = slugifyQiraatFilter('effect', eff);
@@ -95,13 +95,13 @@ export async function getVersesForQiraatSlug(slug) {
         const cat = (v.category || '');
         const eff = (v.effect || '');
         if (cat.toLowerCase() === 'other' || eff.toLowerCase() === 'other') return false;
-        
+
         const effSlug = slugifyQiraatFilter('effect', eff);
         const catSlug = slugifyQiraatFilter('category', cat);
-        
+
         return (slug === effSlug || slug === catSlug);
       });
-      
+
       if (validVariants.length > 0) {
         matches.push({
           surah: parseInt(surah),

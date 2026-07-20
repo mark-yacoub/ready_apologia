@@ -8,19 +8,19 @@ const { videos } = Astro.props;
       {videos.map((video: any) => {
         // resolvedVerses now injected directly from the Controller DTO!
         const resolvedVerses = video.resolvedVerses || [];
-        const dynamicTitle = video.title 
-          || video.summary 
+        const dynamicTitle = video.title
+          || video.summary
           || 'YouTube Short Apologetics Video';
 
         return (
           <div class="video-card">
             <div class="iframe-container">
-              <iframe 
-                src={`https://www.youtube.com/embed/${video.video_id}`} 
+              <iframe
+                src={`https://www.youtube.com/embed/${video.video_id}`}
                 title={dynamicTitle}
-                frameborder="0" 
+                frameborder="0"
                 loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen>
               </iframe>
             </div>
@@ -81,7 +81,7 @@ const { videos } = Astro.props;
     flex-direction: column;
     width: 100%;
   }
-  
+
   .videos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -108,10 +108,10 @@ const { videos } = Astro.props;
     position: relative;
     width: 100%;
     /* 9:16 aspect ratio for shorts */
-    padding-bottom: 177.77%; 
+    padding-bottom: 177.77%;
     background-color: #000;
   }
-  
+
   .iframe-container iframe {
     position: absolute;
     top: 0;
@@ -146,7 +146,7 @@ const { videos } = Astro.props;
     border-radius: 8px;
     overflow: hidden;
   }
-  
+
   .mentioned-verses-summary {
     padding: 10px 14px;
     cursor: pointer;
@@ -167,7 +167,7 @@ const { videos } = Astro.props;
   .mentioned-verses-summary:hover {
     background-color: var(--color-outline-variant);
   }
-  
+
   .summary-chevron {
     color: var(--color-on-surface-variant);
     transition: transform 0.2s ease;

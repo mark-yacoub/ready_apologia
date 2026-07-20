@@ -51,14 +51,14 @@ const CATEGORY_MAP = {
 };
 
 const getMasterCategory = (specificError) => {
-  return CATEGORY_MAP[specificError] || 'Other'; 
+  return CATEGORY_MAP[specificError] || 'Other';
 };
 
 const getEvidenceTotalCount = (t) => {
   if (t.totalCount !== undefined) return t.totalCount; // Prioritize explicitly set totalCount
   const tData = t.evidenceData;
   if (!tData) return 0;
-  
+
   let count = 0;
   if (tData.Scripture) {
     ['New Testament', 'Old Testament'].forEach(testament => {
@@ -103,7 +103,7 @@ export default function ScientificErrorsExplorer({ evidenceDropdownData = [], sc
       const masterCat = getMasterCategory(specificError);
 
       const translatedText = drogeTranslation[vId]?.text || 'Translation unavailable';
-      const note = explanation; 
+      const note = explanation;
 
       if (!dataMap.has(masterCat)) dataMap.set(masterCat, []);
       dataMap.get(masterCat).push({ vId, surahNum, verseNum, text: translatedText, note, specificError });
@@ -184,7 +184,7 @@ export default function ScientificErrorsExplorer({ evidenceDropdownData = [], sc
                 );
               })}
             </ScrollableTrack>
-            
+
             <div className="master-tab-content">
               {currentTab && map.has(currentTab) && (
                 <div className="scripture-feed-container animate-fade-in">

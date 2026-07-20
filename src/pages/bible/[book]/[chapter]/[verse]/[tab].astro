@@ -29,7 +29,7 @@ export async function getStaticPaths() {
   const ctRaw = query("SELECT DISTINCT verse1 as v FROM contradictions UNION SELECT DISTINCT verse2 FROM contradictions").map(r => r.v);
   const apRaw = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
   const vdRaw = query("SELECT DISTINCT verse_id FROM short_per_verse").map(r => r.verse_id);
-  
+
   const mapToLxxIfOt = (id) => {
     if (!id) return null;
     const p = id.split('_');
@@ -43,12 +43,12 @@ export async function getStaticPaths() {
   const ct = ctRaw.map(mapToLxxIfOt);
   const ap = apRaw.map(mapToLxxIfOt);
   const vd = vdRaw.map(mapToLxxIfOt);
-  
+
   const msSet = new Set([...msNt, ...msOt]);
   const ctSet = new Set(ct);
   const apSet = new Set(ap);
   const vdSet = new Set(vd);
-  
+
   const allVerseIds = new Set([...msSet, ...ctSet, ...apSet, ...vdSet].filter(Boolean));
   const paths = [];
 
@@ -62,7 +62,7 @@ export async function getStaticPaths() {
       const v = parts[2];
 
       if (booksToBuild && !booksToBuild.has(b)) return;
-      
+
       if (msSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'manuscripts' } });
       if (ctSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'contradictions' } });
       if (apSet.has(id)) paths.push({ params: { book: b, chapter: c, verse: v, tab: 'apologetics' } });
@@ -78,7 +78,7 @@ const verseId = `${book}_${chapter}_${verse}`;
 
 // 2. Find Book Details
 const isNT = booksMeta.nt.some(b => b.id === book);
-const bookMeta = isNT 
+const bookMeta = isNT
   ? booksMeta.nt.find(b => b.id === book)
   : booksMeta.ot.find(b => b.id === book);
 
@@ -110,16 +110,16 @@ let videos = [];
 
 if (tab === 'manuscripts') {
   const rawManuscripts = isNT ? query(`
-    SELECT m.image_name, mm.* 
-    FROM manuscript_per_verse m 
-    LEFT JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id 
+    SELECT m.image_name, mm.*
+    FROM manuscript_per_verse m
+    LEFT JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id
     WHERE m.verse_id = :verseId
     ORDER BY mm.earliest_date ASC
   `, { verseId }) : query(`
-    SELECT m.image_name, mm.* 
-    FROM manuscript_per_verse_ot m 
-    LEFT JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id 
-    WHERE (m.verse_id = :lxxId AND m.v11n_type = 'LXX') 
+    SELECT m.image_name, mm.*
+    FROM manuscript_per_verse_ot m
+    LEFT JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id
+    WHERE (m.verse_id = :lxxId AND m.v11n_type = 'LXX')
        OR (m.verse_id = :mtId AND m.v11n_type = 'MT')
     ORDER BY mm.earliest_date ASC
   `, { lxxId: verseId, mtId });
@@ -136,12 +136,12 @@ if (tab === 'manuscripts') {
   manuscripts = rawManuscripts.map(ms => {
     const total = msCounts[ms.ms_id] || 0;
     let displayName = ms.name || ms.ms_id;
-    
+
     if (total > 1) {
       msTracker[ms.ms_id] = (msTracker[ms.ms_id] || 0) + 1;
       displayName = `${ms.name || ms.ms_id} (Scan ${msTracker[ms.ms_id]})`;
     }
-    
+
     return {
       ...ms,
       name: displayName
@@ -154,7 +154,7 @@ if (tab === 'contradictions') {
     SELECT c.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright,
            pw.name as work_name, pw.url as work_url,
            pf.id as father_id, pf.name as father_name, pf.year as father_year, pf.icon as father_icon,
-           CASE 
+           CASE
              WHEN pf.id IS NOT NULL THEN 1
              WHEN c.src = 'answering_islam' THEN 2
              WHEN c.src = 'tektonics' THEN 3
@@ -180,7 +180,7 @@ if (tab === 'apologetics') {
     SELECT a.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright,
            pw.name as work_name, pw.url as work_url,
            pf.id as father_id, pf.name as father_name, pf.year as father_year, pf.icon as father_icon,
-           CASE 
+           CASE
              WHEN pf.id IS NOT NULL THEN 1
              WHEN a.src = 'answering_islam' THEN 2
              WHEN a.src = 'tektonics' THEN 3
@@ -203,7 +203,7 @@ if (tab === 'apologetics') {
 
 if (tab === 'videos') {
   const rawVideos = query(`
-    SELECT sm.* 
+    SELECT sm.*
     FROM short_per_verse spv
     JOIN shorts_metadata sm ON spv.video_id = sm.video_id
     WHERE spv.verse_id = :checkId
@@ -244,7 +244,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 let ogImage = undefined;
 if (isNT) {
   const earliestMs = query(`
-    SELECT m.ms_id, m.image_name 
+    SELECT m.ms_id, m.image_name
     FROM manuscript_per_verse m
     JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id
     WHERE m.verse_id = :verseId
@@ -257,7 +257,7 @@ if (isNT) {
 } else {
   try {
     const earliestMsOt = query(`
-      SELECT m.ms_id, m.image_name 
+      SELECT m.ms_id, m.image_name
       FROM manuscript_per_verse_ot m
       JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id
       WHERE m.verse_id = :lxxId OR m.verse_id = :mtId
@@ -270,25 +270,27 @@ if (isNT) {
   } catch(e) {}
 }
 
-const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({ 
-  tab, 
-  bookName: bookMeta.name, 
-  chapter, 
-  verse, 
-  manuscripts, 
-  contradictions, 
-  apologetics 
+const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO({
+  tab,
+  bookName: bookMeta.name,
+  chapter,
+  verse,
+  manuscripts,
+  contradictions,
+  apologetics,
+  isNT
 });
 ---
 
-<Layout 
-  title={seoTitle} 
-  description={seoDescription} 
-  ogImage={ogImage} 
+<Layout
+  title={seoTitle}
+  description={seoDescription}
+  keywords={seoKeywords}
+  ogImage={ogImage}
   schema={seoSchema}
 >
   <div class="verse-detail-container">
-    
+
     <!-- Top Header Back Navigation -->
     <header class="detail-header select-none">
       <a href={`${base}/bible/${book}/${chapter}#${verse}`} class="back-btn" aria-label="Go back to chapter reader">
@@ -299,7 +301,7 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
         </span>
         <span>{bookMeta.name} {chapter}</span>
       </a>
-      
+
       <!-- Minimalist Heading showing exactly John 1:1 with subtle Settings Ellipsis -->
       <div style="display: flex; align-items: center; gap: 8px;">
         <h2 class="verse-drawer-title">
@@ -334,8 +336,8 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
     </script>
 
     <!-- Static Segmented Tab switcher anchors -->
-    <VerseTabs 
-      client:load 
+    <VerseTabs
+      client:load
       msCount={msCount}
       ctCount={ctCount}
       apCount={apCount}
@@ -345,17 +347,17 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
       chapter={chapter}
       verse={verse}
     />
-      
+
     <!-- ACTIVE TAB PANEL CONTENTS -->
     <div class="tab-panels-window">
-      
+
       {tab === 'manuscripts' && (
         <div>
-          <ManuscriptCarousel 
-            client:load 
-            manuscripts={manuscripts} 
-            verseId={verseId} 
-            verseLabel={`${bookMeta.name} ${chapter}:${verse}`} 
+          <ManuscriptCarousel
+            client:load
+            manuscripts={manuscripts}
+            verseId={verseId}
+            verseLabel={`${bookMeta.name} ${chapter}:${verse}`}
             isNT={isNT}
           />
         </div>
@@ -369,13 +371,13 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
               const otherVerseLabel = formatVerseIdToLabel(otherVerseId);
               const otherVerseLink = formatVerseIdToLink(otherVerseId);
               const otherVerseText = getScriptureVerseTextById(otherVerseId);
-              
+
               // Determine if details panel is open by default (always open if 1, pre-open 1st if multiple)
               const isInitiallyOpen = contradictions.length === 1 || index === 0;
-              
+
               return (
                 <details open={isInitiallyOpen} class="contradiction-details-card">
-                  
+
                   {/* Interactive Accordion Header Title */}
                   <summary class="contradiction-summary-header select-none">
                     <span class="summary-title">{ct.title}</span>
@@ -388,7 +390,7 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
 
                   {/* Collapsible Content Panel */}
                   <div class="contradiction-card-content">
-                    
+
                     {otherVerseId && (
                       <div class="contrasting-verse-section">
                         <div class="contrasting-badge-box select-none">
@@ -422,7 +424,7 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
                     <div class="card-response-body select-text">
                       <div set:html={parseMarkdown(ct.answer)} />
                     </div>
-                    
+
                     {/* Subtle Source Meta Credit Footer */}
                     <div class="card-footer-source-box select-none">
                       {ct.father_id ? (
@@ -467,10 +469,10 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
             apologetics.map((ap, index) => {
               // Determine if details panel is open by default (always open if 1, pre-open 1st if multiple)
               const isInitiallyOpen = apologetics.length === 1 || index === 0;
-              
+
               return (
                 <details open={isInitiallyOpen} class="apologetics-details-card">
-                  
+
                   {/* Interactive Accordion Header Title */}
                   <summary class="apologetics-summary-header select-none">
                     <span class="summary-title">{ap.title}</span>
@@ -483,7 +485,7 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
 
                   {/* Collapsible Content Panel */}
                   <div class="apologetics-card-content">
-                    
+
                     {/* Optional AI Summary */}
                     {ap.summary && (
                       <div class="ai-summary-box select-none">
@@ -500,7 +502,7 @@ const { seoTitle, seoDescription, seoSchema } = generateBibleTabSEO({
                     <div class="card-response-body select-text">
                       <div set:html={parseMarkdown(ap.answer)} />
                     </div>
-                    
+
                     {/* Subtle Source Meta Credit Footer */}
                     <div class="card-footer-source-box select-none">
                       {ap.father_id ? (

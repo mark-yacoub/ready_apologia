@@ -25,14 +25,14 @@ export default function ManuscriptLightbox({ imgSrc, fileName, onClose, handleDo
   return (
     <div className="fullscreen-lightbox-container">
       {/* Explicit Backdrop captures clicks strictly outside the content */}
-      <div 
-        className="lightbox-backdrop" 
-        onClick={onClose} 
-        aria-label="Close fullscreen view" 
-        role="button" 
+      <div
+        className="lightbox-backdrop"
+        onClick={onClose}
+        aria-label="Close fullscreen view"
+        role="button"
         tabIndex={0}
       />
-      
+
       {/* Modal Content - Avoids event bubbling hacks */}
       <div className="lightbox-content">
         <TransformWrapper
@@ -46,7 +46,7 @@ export default function ManuscriptLightbox({ imgSrc, fileName, onClose, handleDo
             <React.Fragment>
               <div className="lightbox-header">
                 <span className="lightbox-title">Fullscreen Magnifier</span>
-                
+
                 {/* Magnification controls hidden on mobile */}
                 <div className="lightbox-zoom-controls desktop-only select-none">
                   <button onClick={() => zoomOut()} className="zoom-ctrl-btn" title="Zoom Out">−</button>
@@ -63,17 +63,17 @@ export default function ManuscriptLightbox({ imgSrc, fileName, onClose, handleDo
 
               <div className="lightbox-zoom-area">
                 <TransformComponent wrapperClass="zoom-wrapper" contentClass="zoom-content">
-                  <img 
-                    src={imgSrc} 
-                    alt="Manuscript fragment fullscreen magnification" 
+                  <img
+                    src={imgSrc}
+                    alt="Manuscript fragment fullscreen magnification"
                     className="lightbox-image"
                   />
                 </TransformComponent>
               </div>
 
               <div className="lightbox-footer">
-                <button 
-                  onClick={(e) => handleDownload(e, imgSrc, fileName)} 
+                <button
+                  onClick={(e) => handleDownload(e, imgSrc, fileName)}
                   className="lightbox-save-btn"
                   title="Direct download high-resolution scan to local device gallery"
                 >

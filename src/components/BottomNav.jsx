@@ -47,7 +47,7 @@ export default function BottomNav() {
         </div>
         <span className="label">Scripture</span>
       </a>
-      
+
       {/* Evidence Tab */}
       <a href={`${base}/evidence`} className={`nav-item ${activeTab === 'evidence' ? 'active' : ''}`} aria-label="Evidence">
         <div className="nav-icon-wrapper">
@@ -57,7 +57,7 @@ export default function BottomNav() {
         </div>
         <span className="label">Evidence</span>
       </a>
-      
+
       {/* Library Tab (Coming Soon) */}
       <button className="nav-item disabled" disabled aria-label="Library (Coming Soon)">
         <div className="nav-icon-wrapper">

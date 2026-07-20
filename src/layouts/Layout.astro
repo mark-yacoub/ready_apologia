@@ -16,10 +16,10 @@ interface Props {
 	theme?: string;
 }
 
-const { 
-	title, 
-	description = "Ready Apologia - Defending the Faith with Biblical Scripture and Early Church Fathers", 
-	ogImage, 
+const {
+	title,
+	description = "Ready Apologia - Defending the Faith with Biblical Scripture and Early Church Fathers",
+	ogImage,
 	schema,
 	keywords = "Apologetics, Bible Verses, Early Church Fathers, Divinity of Christ, Ready Apologia, Patristics, Scripture Evidence, Christian Apologetics, Ante-Nicene Fathers",
 	theme
@@ -42,7 +42,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		<link rel="apple-touch-icon" href={`${base}/assets/logo.png`} />
 		<link rel="canonical" href={ogUrl} />
 		<meta name="generator" content={Astro.generator} />
-		
+
 		<!-- Open Graph / Social Media -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={ogUrl} />
@@ -58,11 +58,11 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		<meta name="twitter:image" content={ogImageUrl} />
 
 		<title>{title} | Ready Apologia</title>
-		
+
 		{schema && <script type="application/ld+json" set:html={schema} />}
 		<ClientRouter />
 		<GoogleAnalytics />
-		
+
 		<!-- Load Google Fonts -->
 		<link href="https://fonts.googleapis.com" rel="preconnect"/>
 		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -71,11 +71,11 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		<!-- Removed PWA Service Worker Registration -->
 	</head>
 	<body class="bg-slate-100 text-slate-900 min-h-screen flex justify-center items-center transition-colors duration-200">
-		
+
 		<!-- App Bounding Container -->
 		<div class={`app-container ${theme ? `theme-${theme}` : ''}`}>
 			<div id="global-loading-indicator" class="global-loading-indicator"></div>
-			
+
 			<!-- Content Layout Core -->
 			<div class="content-frame">
 				<!-- Header -->
@@ -87,14 +87,14 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 								<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
 							</svg>
 						</button>
-						
+
 						<!-- Brand Logo Crest + Typography (Brand ID swap on scroll) -->
 						<div class="brand-container">
 							<img src={`${base}/assets/logo.png`} alt="Ready Apologia Emblem" class="header-shield-logo" />
 							<span class="brand-text" id="header-brand-text" data-original="Ready Apologia">Ready Apologia</span>
 						</div>
 					</div>
-					
+
 					<div class="header-right-spacer"></div>
 				</header>
 
@@ -196,7 +196,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 					if (titleRect.bottom < 52) {
 						const docTitle = document.title.split('|')[0].trim();
 						const cleanTitle = docTitle.replace('Evidence:', '🔍').trim();
-						
+
 						headerBrand.innerText = cleanTitle;
 						headerBrand.classList.add('chapter-active');
 					} else {
@@ -207,7 +207,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 
 				mainContent.addEventListener('scroll', handleScroll);
 				activeScrollHandler = handleScroll;
-				
+
 				const handleBrandClick = () => {
 					if (headerBrand.classList.contains('chapter-active')) {
 						mainContent.scrollTo({ top: 0, behavior: 'smooth' });
@@ -225,7 +225,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 				setupSidebarToggle();
 				setupScrollHeader();
 			});
-			
+
 			// Global resize listener (safe to add once since this module runs once)
 			let resizeTimer;
 			window.addEventListener('resize', () => {
@@ -262,27 +262,27 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		--color-secondary: #974543; /* Terracotta Red */
 		--color-on-secondary: #ffffff;
 		--color-background: #f4f4f5; /* Zinc 100 background */
-		
+
 		--color-surface: #ffffff;
 		--color-on-surface: #09090b;
 		--color-on-surface-variant: #71717a; /* Zinc 500 */
 		--color-outline-variant: #e4e4e7; /* Zinc 200 */
-		
+
 		--color-surface-container-low: #f4f4f5;
 		--color-surface-container-lowest: #ffffff;
-		
+
 		--color-primary-container: #e0e7ff; /* Indigo 100 */
 		--color-on-primary-container: #3730a3; /* Indigo 800 */
-		
+
 		--color-secondary-container: #fce7f3; /* Pink 100 */
 		--color-on-secondary-container: #9d174d; /* Pink 800 */
-		
+
 		--color-tertiary-container: #fef3c7; /* Amber 100 */
 		--color-on-tertiary-container: #b45309; /* Amber 700 */
-		
+
 		--color-error-container: #fee2e2; /* Red 100 */
 		--color-on-error-container: #b91c1c; /* Red 700 */
-		
+
 		--font-display: 'Literata', Georgia, 'Amiri', 'Traditional Arabic', Arial, serif;
 		--font-body: 'Public Sans', -apple-system, 'Amiri', 'Traditional Arabic', Arial, sans-serif;
 		--font-cinzel: 'Cinzel', serif;
@@ -315,7 +315,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		user-select: none;
 		-webkit-user-select: none;
 	}
-	
+
 	.select-text {
 		user-select: text;
 		-webkit-user-select: text;
@@ -453,7 +453,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	
+
 	/* Morphing Active State */
 	.brand-text.chapter-active {
 		color: var(--color-secondary) !important; /* Indigo highlighted scroll target */

@@ -72,7 +72,7 @@ for (let i = 1; i <= totalVerses; i++) {
   const verseVariants = variantsByAyah[String(i)] || [];
   const qiraatVariants = qiraatByAyah[String(i)] || [];
   const labelsObj = verseLabelsData[verseKey] || {};
-  
+
   let arabicTextHTML = arabicText;
   let englishTextHTML = englishText;
 
@@ -105,7 +105,7 @@ for (let i = 1; i <= totalVerses; i++) {
       );
     }
   }
-  
+
   const hasManuscript = msQuranSet.has(verseKey);
   const hasChristianFootnotes = christianFootnotesSet.has(verseKey);
   const hasContradictions = quranContradictionsSet.has(verseKey);
@@ -114,7 +114,7 @@ for (let i = 1; i <= totalVerses; i++) {
   const hasDebunkingMiracles = debunkingMiraclesSet.has(verseKey);
   const hasVideos = videosSet.has(verseKey);
   const hasEvidence = hasManuscript || hasChristianFootnotes || hasContradictions || hasScientificErrors || hasIslamicCommentary || hasDebunkingMiracles || hasVideos;
-  
+
   verses.push({
     number: i,
     arabic: arabicText,
@@ -135,8 +135,9 @@ for (let i = 1; i <= totalVerses; i++) {
   });
 }
 
-const seoTitle = `Surah ${arabicData.transliteration} (${surahNum}) - Read with Christian Apologetics, Manuscripts & Variants`;
-let seoDescription = `Read Surah ${arabicData.transliteration} (${surahNum}) in English and Arabic. Filter through thousands of variant readings, variant manuscripts, debunked miracles and apologetic commentaries.`;
+const seoTitle = `Surah ${arabicData.transliteration} (${surahNum}) - Critical Apologetics Analysis`;
+let seoDescription = `Read Surah ${arabicData.transliteration} with a literal accurate translation and explore each ayah's theological defects, historical errors, borrowed mythologies, and Qiraat manuscript variants.`;
+const seoKeywords = `surah ${arabicData.transliteration}, literal accurate translation, apologetics, contradictions, borrowed mythology, theological defect`;
 
 const variantCount = verses.filter(v => v.hasVariants).length;
 const contradictionCount = verses.filter(v => v.hasContradictions).length;
@@ -150,10 +151,10 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
 }
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} keywords={seoKeywords}>
   <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader currentTitle={`${surahNum}. ${arabicData.transliteration}`} currentIndex={surahNum} />
-    
+
     <!-- Language Toggle -->
     <div class="language-toggle select-none">
       <button id="toggle-en" class="toggle-btn active">English</button>
@@ -228,7 +229,7 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
                   <p class="text-english" set:html={v.englishHTML} />
                 </>
               )}
-              
+
               {v.qiraatVariants && v.qiraatVariants.length > 0 && (
                 <details class="qiraat-details">
                   <summary class="qiraat-summary">
@@ -244,7 +245,7 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
                   </div>
                 </details>
               )}
-              
+
               {v.variants.length > 0 && (
                 <details class="competing-codex-details">
                   <summary class="competing-codex-summary">
@@ -260,7 +261,7 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
                   </div>
                 </details>
               )}
-              
+
               {v.labels && Object.keys(v.labels).length > 0 && (
                 <div class="verse-labels-container">
                   {Object.entries(v.labels).map(([labelName, noteText]) => (
@@ -359,7 +360,7 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
   const handleQuranVerseClick = (e) => {
     // Ignore middle-clicks, cmd/ctrl-clicks which open in new tabs
     if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
-    
+
     const link = e.target.closest('.verse-card a[href]');
     if (!link) return;
 
@@ -376,10 +377,10 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
     // Astro's default scroll restoration crashes if IDs are purely numeric (e.g., id="15").
     // We manually intercept the hash and use getElementById which natively handles numbers.
     if (!window.location.hash) return;
-    
+
     const hashId = window.location.hash.substring(1);
     const element = document.getElementById(hashId);
-    
+
     if (element) {
       // Deterministically wait for the browser's layout engine to finish painting
       // before telling it to calculate geometrical scroll positions.
@@ -519,7 +520,7 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
   }
 
   /* Prominence Overrides */
-  
+
   /* English Prominent */
   .quran-reader-container.prefer-english .text-english {
     font-size: 17px;

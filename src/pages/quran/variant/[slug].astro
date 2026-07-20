@@ -53,23 +53,24 @@ const formattedVerses = verses.map(v => {
   };
 });
 
-const seoTitle = `Quran Variants: ${filterInfo.title} | Missing Manuscripts & Analysis`;
-const seoDescription = `Explore ${verses.length} Quranic textual variants (Qiraat) categorized as "${filterInfo.title}". Discover how missing dots, vowels, and differing orthography alter the meaning of the standard Uthmanic Quran.`;
+const seoTitle = `Quranic Qiraat Variant: ${filterInfo.title}`;
+const seoDescription = `Critically analyze the ${filterInfo.title} textual variant in the Quran. Understand its effect on Islamic theology, grammar changes, and manuscript transmission variations.`;
+const seoKeywords = `qiraat ${filterInfo.title}, quran variant reading ${filterInfo.title}, quran preservation, rasm differences`;
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} keywords={seoKeywords}>
   <div class="quran-reader-container theme-quran prefer-english">
-    <QuranPageHeader 
+    <QuranPageHeader
       currentTitle={filterInfo.title}
-      currentIndex="home" 
+      currentIndex="home"
       hideDropdown={true}
     />
-    
+
     <div class="quran-content evidence-page-container">
       <div class="fade-in">
-        <EvidenceCard 
+        <EvidenceCard
           title={filterInfo.type === 'effect' ? 'Meaning Alteration' : 'Textual Mechanism'}
-          intro={filterInfo.type === 'effect' 
+          intro={filterInfo.type === 'effect'
             ? `The variants listed below fall under the effect category of "${filterInfo.title}". These variants alter the semantic meaning, grammatical structure, or general syntax of the Uthmanic text in officially recognized recitations (Qiraat). Such differences stem from the inherent ambiguity of early Arabic orthography which lacked dots and vowels.`
             : `The variants listed below fall under the mechanism category of "${filterInfo.title}". This specific textual difference between the Hafs reading and other recognized readings highlights the fluidity in dotting, vowelization, or orthography present during the early oral and written transmission of the text.`}
         />
@@ -81,7 +82,7 @@ const seoDescription = `Explore ${verses.length} Quranic textual variants (Qiraa
             <span class="verse-num">{v.surah_name} {v.surah}:{v.ayah}</span>
             <p class="text-arabic" set:html={v.arabicHTML} />
             <p class="text-english" set:html={v.englishHTML} />
-            
+
             <div class="variants-list">
               {v.qiraatVariants.map((variant: any) => (
                 <QiraatCard variant={variant} />
@@ -163,7 +164,7 @@ const seoDescription = `Explore ${verses.length} Quranic textual variants (Qiraa
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  
+
   :global(.qiraat-highlight) {
     background-color: rgba(11, 102, 59, 0.15); /* Green with opacity */
     color: #0b663b;

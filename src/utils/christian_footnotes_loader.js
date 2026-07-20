@@ -5,7 +5,7 @@ let cache = null;
 
 export function loadChristianFootnotes() {
   if (cache) return cache;
-  
+
   // L6 Pattern: Environment variable override with internal project data fallback
   const defaultPath = path.join(process.cwd(), 'src/data/quran/commentary/nickel_annotations.json');
   const filePath = process.env.NICKEL_ANNOTATIONS_PATH || defaultPath;

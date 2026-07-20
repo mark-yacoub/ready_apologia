@@ -346,7 +346,7 @@ const AuthorshipDedicatedView = ({ tData }) => {
 
   const authorship = tData.authorship_data || {};
   const books = Object.keys(authorship);
-  
+
   // Set initial active book once books are loaded
   useEffect(() => {
     if (books.length > 0 && !activeBook) {
@@ -355,7 +355,7 @@ const AuthorshipDedicatedView = ({ tData }) => {
   }, [books, activeBook]);
 
   if (!activeBook || !authorship[activeBook]) return null;
-  
+
   const bookData = authorship[activeBook];
   const centuries = Object.keys(bookData);
 
@@ -675,8 +675,8 @@ export default function EvidenceExplorer({ evidence = [], initialEvidenceId = nu
         </div>
       )}
 
-      
-        
+
+
     </div>
   );
 }

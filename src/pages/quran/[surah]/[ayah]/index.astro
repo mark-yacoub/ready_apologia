@@ -22,7 +22,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const fallbackUrl = `${base}/quran/${surah}/${ayah}/${defaultTab}`;
 const canonicalUrl = new URL(fallbackUrl, Astro.site || Astro.url).href;
 
-// Optional: for fully SSR/hybrid hosts, this natively 301s. 
+// Optional: for fully SSR/hybrid hosts, this natively 301s.
 // For pure SSG, Astro turns this into a meta refresh HTML file.
 return Astro.redirect(encodeURI(fallbackUrl), 301);
 ---

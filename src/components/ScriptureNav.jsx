@@ -20,16 +20,16 @@ export default function ScriptureNav() {
       // Strip base URL if present to ensure reliable splitting
       const activePath = pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
       const parts = activePath.split('/');
-      
+
       if (parts[1] === 'bible' && parts[2]) {
         const bookId = parts[2];
         const chapNum = parts[3];
-        
+
         setCurrentBook(bookId);
         setCurrentChapter(chapNum);
         setCurrentReader(null);
         setCurrentQuranIndex(null);
-        
+
         const isBookNT = booksData.nt.some(b => b.id === bookId);
         setExpandedSection(isBookNT ? 'nt' : 'ot');
         setExpandedBook(bookId);
@@ -55,7 +55,7 @@ export default function ScriptureNav() {
         setCurrentReader(null);
         setCurrentQuranIndex(null);
       }
-      
+
       if (activePath.startsWith('/evidence')) {
         setActiveTab('evidence');
       } else {
@@ -64,7 +64,7 @@ export default function ScriptureNav() {
     };
 
     syncNavWithUrl();
-    
+
     document.addEventListener('astro:after-swap', syncNavWithUrl);
     return () => {
       document.removeEventListener('astro:after-swap', syncNavWithUrl);
@@ -95,8 +95,8 @@ export default function ScriptureNav() {
       <div className="book-list animate-fade-in">
         {books.map((book) => (
           <div key={book.id} className={`book-item ${expandedBook === book.id ? 'expanded' : ''}`}>
-            <button 
-              onClick={() => toggleBook(book.id)} 
+            <button
+              onClick={() => toggleBook(book.id)}
               className="book-select-btn"
             >
               <span className="book-name">{book.name}</span>
@@ -107,7 +107,7 @@ export default function ScriptureNav() {
               <div className="chapter-grid">
                 {Array.from({ length: book.chapters }, (_, i) => i + 1).map((chap) => {
                   const isCurrentChapter = book.id === currentBook && String(chap) === currentChapter;
-                  
+
                   return (
                     <a
                       key={chap}
@@ -132,7 +132,7 @@ export default function ScriptureNav() {
       <div className="sidebar-header">
         <h3>Navigation</h3>
       </div>
-      
+
       {/* 2. Desktop Navigation Panel (Visible only on desktop, hidden on mobile) */}
       <div className="sidebar-tabs-vertical">
         {/* Scripture Button */}
@@ -144,7 +144,7 @@ export default function ScriptureNav() {
           </div>
           <span className="btn-label">Scripture</span>
         </a>
-        
+
         {/* Evidence Button */}
         <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/evidence`} className={`sidebar-nav-btn ${activeTab === 'evidence' ? 'active' : ''}`} aria-label="Evidence">
           <div className="btn-icon-wrapper">
@@ -154,7 +154,7 @@ export default function ScriptureNav() {
           </div>
           <span className="btn-label">Evidence</span>
         </a>
-        
+
         {/* Library Button (Coming Soon) */}
         <button className="sidebar-nav-btn disabled" disabled aria-label="Library (Coming Soon)">
           <div className="btn-icon-wrapper">
@@ -166,13 +166,13 @@ export default function ScriptureNav() {
           <span className="soon-badge">Soon</span>
         </button>
       </div>
-      
+
       {/* 3. Scrollable Books Tree Navigator */}
       <div className="sidebar-scroll-content">
         {/* Quran */}
         <div className="nav-section">
-          <button 
-            onClick={() => toggleSection('quran')} 
+          <button
+            onClick={() => toggleSection('quran')}
             className={`section-header-btn ${expandedSection === 'quran' ? 'active' : ''}`}
           >
             <span className="icon">🌙</span>
@@ -207,8 +207,8 @@ export default function ScriptureNav() {
 
         {/* New Testament */}
         <div className="nav-section">
-          <button 
-            onClick={() => toggleSection('nt')} 
+          <button
+            onClick={() => toggleSection('nt')}
             className={`section-header-btn ${expandedSection === 'nt' ? 'active' : ''}`}
           >
             <span className="icon">✝</span>
@@ -220,8 +220,8 @@ export default function ScriptureNav() {
 
         {/* Old Testament */}
         <div className="nav-section">
-          <button 
-            onClick={() => toggleSection('ot')} 
+          <button
+            onClick={() => toggleSection('ot')}
             className={`section-header-btn ${expandedSection === 'ot' ? 'active' : ''}`}
           >
             <span className="icon">📜</span>
@@ -373,7 +373,7 @@ export default function ScriptureNav() {
         .section-header-btn:hover {
           background-color: #f8fafc;
         }
-        
+
         .section-header-btn.active {
           background-color: #f4f4f5;
           color: #18181b;
@@ -389,7 +389,7 @@ export default function ScriptureNav() {
         .section-header-btn .title-text {
           flex: 1;
         }
-        
+
         .section-arrow {
           font-size: 9px;
           opacity: 0.7;
@@ -472,7 +472,7 @@ export default function ScriptureNav() {
           color: var(--color-secondary);
           box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
         }
-        
+
         .chapter-link.active {
           background-color: var(--color-secondary);
           color: #ffffff;

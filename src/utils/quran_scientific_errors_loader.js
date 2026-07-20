@@ -8,9 +8,9 @@ export function parseExplanationString(explanationString = "") {
   return explanationString.split(' | ').map(part => {
     let label = "Scientific Error";
     let text = part.trim();
-    
+
     const firstPeriodIdx = part.indexOf('. ');
-    
+
     if (firstPeriodIdx !== -1) {
       label = part.substring(0, firstPeriodIdx).trim();
       text = part.substring(firstPeriodIdx + 2).trim();
@@ -18,7 +18,7 @@ export function parseExplanationString(explanationString = "") {
       label = part.trim();
       text = "";
     }
-    
+
     return { label, text };
   });
 }

@@ -63,7 +63,7 @@ if (isLost) {
   const nonIndexableIds = GENERAL_VARIANT_IDS;
   const idSet = nonIndexableIds.map(id => `'${id}'`).join(',');
   const rawVideos = query(`
-    SELECT sm.* 
+    SELECT sm.*
     FROM short_per_verse spv
     JOIN shorts_metadata sm ON spv.video_id = sm.video_id
     WHERE spv.verse_id IN (${idSet})
@@ -75,18 +75,18 @@ const validVerseIds = companionsWithData.map(c => c.verse_id).filter(Boolean);
 if (validVerseIds.length > 0) {
   const idSet = validVerseIds.map(id => `'${id}'`).join(',');
   const allCodexVideos = query(`
-    SELECT sm.*, spv.verse_id 
+    SELECT sm.*, spv.verse_id
     FROM short_per_verse spv
     JOIN shorts_metadata sm ON spv.video_id = sm.video_id
     WHERE spv.verse_id IN (${idSet})
   `);
-  
+
   const videosByVerseId = {};
   allCodexVideos.forEach(v => {
     if (!videosByVerseId[v.verse_id]) videosByVerseId[v.verse_id] = [];
     videosByVerseId[v.verse_id].push(v);
   });
-  
+
   companionsWithData.forEach(c => {
     if (c.verse_id && videosByVerseId[c.verse_id]) {
       c.videos = enrichVideosWithVerses(videosByVerseId[c.verse_id], base);
@@ -102,7 +102,7 @@ if (validVerseIds.length > 0) {
 <Layout title={seoTitle} description={seoDescription}>
   <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader currentTitle={title} currentIndex={index} />
-    
+
     <!-- Intro Footnote -->
     {isLost && (
       <p class="page-intro-footnote">
@@ -583,7 +583,7 @@ if (validVerseIds.length > 0) {
       align-items: flex-start;
       gap: 12px;
     }
-    
+
     .read-as-btn {
       max-width: none;
       width: 100%;

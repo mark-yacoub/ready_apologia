@@ -234,8 +234,8 @@ const evidenceMeta = allTopics.reduce((acc, t) => {
   return acc;
 }, {});
 
-const seoTitle = `${bookMeta.name} ${chapter} - Read with Evidence & Apologetics`;
-let seoDescription = `Read ${bookMeta.name} ${chapter} in English alongside ancient manuscript evidence, Christian apologetics, answers to alleged contradictions, and cross-references.`;
+const seoTitle = `${bookMeta.name} ${chapter} - Bible Apologetics and Evidences`;
+let seoDescription = `Read ${bookMeta.name} ${chapter} with word-for-word translation and explore each verse's manuscripts, ancient and modern apologetics, and responses to alleged contradictions.`;
 
 const verseTagsCount = Object.keys(verseTagsMap).length;
 const evidenceVerseCount = Object.keys(evidenceMap).length;
@@ -244,12 +244,17 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
   const stats = [];
   if (verseTagsCount > 0) stats.push(`textual and critical evidence for ${verseTagsCount} verse${verseTagsCount > 1 ? 's' : ''}`);
   if (evidenceVerseCount > 0) stats.push(`deep theological topics across ${evidenceVerseCount} verse${evidenceVerseCount > 1 ? 's' : ''}`);
-  
+
   seoDescription += ` This chapter includes ${stats.join(' and ')}.`;
 }
 ---
 
-<Layout title={seoTitle} description={seoDescription} ogImage={ogImage}>
+<Layout
+  title={seoTitle}
+  description={seoDescription}
+  ogImage={ogImage}
+  keywords={`${bookMeta.name} ${chapter}, apologetics, contradictions, commentaries`}
+>
   <div class="chapter-reader-container">
 
     <!-- Split Book & Chapter Dropdown Selector -->
@@ -453,24 +458,24 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
       if (closePopoverHandler) {
         document.removeEventListener('click', closePopoverHandler);
       }
-      
+
       closePopoverHandler = () => popover.classList.remove('open');
-      
+
       trigger.addEventListener('click', (e) => {
         e.stopPropagation(); // Prevent immediate backdrop close
         popover.classList.toggle('open');
       });
-      
+
       // Tap outside closes popover
       document.addEventListener('click', closePopoverHandler);
-      
+
       // Prevent close if clicking inside grid
       popover.addEventListener('click', (e) => e.stopPropagation());
     }
 
     const container = document.querySelector('.verses-container');
     if (!container) return; // Exit early if not on a chapter page
-    
+
     let activeEvidence = [];
     try {
       const parsed = JSON.parse(localStorage.getItem('activeEvidence') || '[]');
@@ -573,7 +578,7 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
   };
 
 
-  
+
   // Run on initial load and after every page navigation
   document.addEventListener('astro:page-load', () => {
     initChapterPage();
@@ -584,7 +589,7 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
   const handleBibleVerseClick = (e) => {
     // Ignore middle-clicks, cmd/ctrl-clicks which open in new tabs
     if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
-    
+
     const link = e.target.closest('.verse-row a[href]');
     if (!link) return;
 
@@ -601,10 +606,10 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
     // Astro's default scroll restoration crashes if IDs are purely numeric (e.g., id="15").
     // We manually intercept the hash and use getElementById which natively handles numbers.
     if (!window.location.hash) return;
-    
+
     const hashId = window.location.hash.substring(1);
     const element = document.getElementById(hashId);
-    
+
     if (element) {
       // Deterministically wait for the browser's layout engine to finish painting
       // before telling it to calculate geometrical scroll positions.

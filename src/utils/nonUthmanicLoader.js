@@ -4,8 +4,8 @@ import path from 'node:path';
 import { loadEnglishData } from './quran_loader.js';
 
 export const GENERAL_VARIANT_IDS = [
-  "satanic_0", "sanaa_0", "fatima_0", "khalifa_0", "ali_0", 
-  "12thimam_0", "hafsa_0", "khuzaymahibnthabit_0", "khuzaimah_0", 
+  "satanic_0", "sanaa_0", "fatima_0", "khalifa_0", "ali_0",
+  "12thimam_0", "hafsa_0", "khuzaymahibnthabit_0", "khuzaimah_0",
   "abualansari_0", "variantcodices_0", "companions_0", "muhammad_0"
 ];
 
@@ -37,7 +37,7 @@ export function sortHadiths(a, b) {
   if (numA !== numB) {
     return numA - numB;
   }
-  
+
   return refA.localeCompare(refB);
 }
 
@@ -103,8 +103,8 @@ export async function getVariantsForSurah(surahNum) {
 /**
  * Loads, filters, groups, and sorts non-Uthmanic Quran data for superstars companions.
  * Reads files in parallel to optimize build performance.
- * 
- * @param {'lost' | 'abrogated'} type 
+ *
+ * @param {'lost' | 'abrogated'} type
  * @returns {Promise<Array<Object>>} Resolved companion data list
  */
 export const loadNonUthmanicData = async (type) => {
@@ -127,8 +127,8 @@ export const loadNonUthmanicData = async (type) => {
     const isSurahLost = entry.surah === 'unknown' || entry.surah === 0 || entry.surah === '0';
     const isAyahLost = entry.ayah === 'unknown' || entry.ayah === 0 || entry.ayah === '0' || entry.ayah === null;
 
-    const matchType = isLost 
-      ? (isSurahLost && isAyahLost) 
+    const matchType = isLost
+      ? (isSurahLost && isAyahLost)
       : true;
 
     if (matchType) {
@@ -161,7 +161,7 @@ export const loadNonUthmanicData = async (type) => {
     const fileName = companion.name.replace(/\s+/g, '_') + '.json';
     const filePath = path.join(process.cwd(), 'src/data/quran/non_uthmanic/codices', fileName);
     let virtues = [];
-    
+
     try {
       if (existsSync(filePath)) {
         const content = await fs.readFile(filePath, 'utf-8');

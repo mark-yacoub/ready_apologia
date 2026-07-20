@@ -59,14 +59,14 @@ const sections = hideDropdown ? [] : getQuranSections();
       if (closePopoverHandler) {
         document.removeEventListener('click', closePopoverHandler);
       }
-      
+
       closePopoverHandler = () => popover.classList.remove('open');
-      
+
       trigger.addEventListener('click', (e) => {
         e.stopPropagation();
         popover.classList.toggle('open');
       });
-      
+
       document.addEventListener('click', closePopoverHandler);
       popover.addEventListener('click', (e) => e.stopPropagation());
     }

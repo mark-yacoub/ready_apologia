@@ -6,7 +6,7 @@ export default function OnboardingModal() {
   useEffect(() => {
     // Check if the user has permanently dismissed the tip by achieving the goal
     const hasAchievedGoal = localStorage.getItem('ready_apologia_has_seen_full_evidence') === 'true';
-    
+
     // Check if the user has already seen the tip during this specific browser session
     const hasSeenThisSession = sessionStorage.getItem('ready_apologia_session_tip_shown') === 'true';
 

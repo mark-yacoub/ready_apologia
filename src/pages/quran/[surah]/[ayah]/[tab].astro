@@ -94,9 +94,9 @@ let manuscripts = [];
 
 if (tab === 'manuscripts') {
   const rawManuscripts = query(`
-    SELECT m.image_name, mm.* 
-    FROM manuscript_per_verse_quran m 
-    LEFT JOIN manuscripts_meta_quran mm ON m.ms_id = mm.ms_id 
+    SELECT m.image_name, mm.*
+    FROM manuscript_per_verse_quran m
+    LEFT JOIN manuscripts_meta_quran mm ON m.ms_id = mm.ms_id
     WHERE m.verse_id = :verseId
     ORDER BY mm.earliest_date ASC
   `, { verseId });
@@ -107,7 +107,7 @@ if (tab === 'manuscripts') {
 let videos = [];
 if (tab === 'videos') {
   const rawVideos = query(`
-    SELECT sm.* 
+    SELECT sm.*
     FROM short_per_verse spv
     JOIN shorts_metadata sm ON spv.video_id = sm.video_id
     WHERE spv.verse_id = :dbVerseId
@@ -118,7 +118,7 @@ if (tab === 'videos') {
 // Generate OG Image
 let ogImage = undefined;
 const earliestMs = query(`
-  SELECT m.ms_id, m.image_name 
+  SELECT m.ms_id, m.image_name
   FROM manuscript_per_verse_quran m
   JOIN manuscripts_meta_quran mm ON m.ms_id = mm.ms_id
   WHERE m.verse_id = :verseId
@@ -129,27 +129,29 @@ if (earliestMs.length > 0 && earliestMs[0].image_name) {
   ogImage = `${R2_BASE_URL}/quran/${earliestMs[0].ms_id}/${encodeURIComponent(earliestMs[0].image_name)}`;
 }
 
-const { seoTitle, seoDescription } = generateQuranTabSEO({ 
-  tab, 
-  surah, 
-  ayah, 
-  manuscripts, 
-  verseContradictions, 
-  parsedScientificErrors, 
-  verseDebunking, 
-  islamicCommentaries 
+const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO({
+  tab,
+  surah,
+  ayah,
+  manuscripts,
+  verseContradictions,
+  parsedScientificErrors,
+  verseDebunking,
+  islamicCommentaries
 });
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
-<Layout 
-  title={seoTitle} 
-  description={seoDescription} 
-  ogImage={ogImage} 
+<Layout
+  title={seoTitle}
+  description={seoDescription}
+  keywords={seoKeywords}
+  ogImage={ogImage}
+  schema={seoSchema}
 >
   <div class="verse-detail-container theme-quran">
-    
+
     <header class="detail-header select-none">
       <a href={`${base}/quran/${surah}#${ayah}`} class="back-btn" aria-label="Go back to surah reader">
         <span class="back-arrow">
@@ -159,7 +161,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
         </span>
         <span>Surah {surah}</span>
       </a>
-      
+
       <div style="display: flex; align-items: center; gap: 8px;">
         <h2 class="verse-drawer-title" style="color: var(--quran-primary);">
           Surah {surah}:{ayah}
@@ -192,8 +194,8 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       });
     </script>
 
-    <QuranVerseTabs 
-      client:load 
+    <QuranVerseTabs
+      client:load
       msCount={msCount}
       christianFootnotesCount={christianFootnotesCount}
       islamicCommentariesCount={islamicCommentariesCount}
@@ -205,7 +207,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       surah={surah}
       ayah={ayah}
     />
-      
+
     <div class="tab-panels-window">
       {tab === 'debunking-miracles' && (
         <div class="contradiction-panel-container">
@@ -351,12 +353,12 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       )}
       {tab === 'manuscripts' && (
         <div>
-          <QuranManuscriptCarousel 
-            client:load 
-            manuscripts={manuscripts} 
-            surah={surah} 
-            ayah={ayah} 
-            verseLabel={`Surah ${surah}:${ayah}`} 
+          <QuranManuscriptCarousel
+            client:load
+            manuscripts={manuscripts}
+            surah={surah}
+            ayah={ayah}
+            verseLabel={`Surah ${surah}:${ayah}`}
           />
         </div>
       )}
@@ -383,7 +385,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
                       {ct.evidence}
                     </span>
                   </div>
-                  
+
                   <div class="contradiction-card-content">
                     <div class="ct-flex-boxes">
                       {ct.supporting_verses && ct.supporting_verses.length > 0 && (
@@ -404,7 +406,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
                           </div>
                         </div>
                       )}
-                      
+
                       {ct.opposite_verses && ct.opposite_verses.length > 0 && (
                         <div class="ct-box">
                           <h4 class="ct-box-header" style="color: #ef4444;">Opposing Verses</h4>
@@ -577,7 +579,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
   }
   .ct-scales-icon svg {
     display: block;
-    color: #ef4444; 
+    color: #ef4444;
   }
   .contradiction-card-content {
     background-color: var(--color-surface-container-lowest);

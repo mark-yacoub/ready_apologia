@@ -19,7 +19,7 @@ export function getEvidenceSets() {
   const scientificErrorsSet = new Set(Object.keys(loadScientificErrors()));
   const islamicCommentariesSet = new Set(Object.keys(loadIslamicCommentaries()));
   const debunkingSet = new Set(Object.keys(loadDebunkingMiracles()));
-  
+
   const videosSet = new Set(
     query("SELECT DISTINCT verse_id FROM short_per_verse WHERE verse_id LIKE '%\\_%' ESCAPE '\\' AND verse_id NOT LIKE '%\\_%\\_%' ESCAPE '\\'")
       .map(r => r.verse_id.replace('_', ':'))

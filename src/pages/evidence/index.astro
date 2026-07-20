@@ -5,8 +5,8 @@ import { loadAllEvidenceData } from '../../utils/evidenceLoader.js';
 
 const evidenceData = loadAllEvidenceData();
 
-const pageDesc = "Comprehensive directory of Christian apologetics evidence. Explore Biblical Scripture proofs and early Church Patristic testimonies defending core doctrines like the Divinity of Christ.";
-const pageKeywords = "verses divinity of christ, bible verses divinity of christ, apologetics evidence, scripture evidence ready apologia, ante-nicene fathers divinity of christ";
+const pageDesc = "Explore the core theology and scripture of Christianity and Islam, directly using verses from the scripture or ancient writers' quotes.";
+const pageKeywords = "apologetics directory, christian evidence, defend the faith, scriptural apologetics, early church theology";
 
 const schemaObj = {
   "@context": "https://schema.org",
@@ -22,7 +22,7 @@ const schemaObj = {
 const schemaJson = JSON.stringify(schemaObj);
 ---
 
-<Layout title="Apologetics Evidence" description={pageDesc} keywords={pageKeywords} schema={schemaJson}>
+<Layout title="Christian Apologetics Evidence Directory" description={pageDesc} keywords={pageKeywords} schema={schemaJson}>
   <div class="evidence-index-container">
     <EvidenceExplorer client:load evidence={evidenceData} />
   </div>

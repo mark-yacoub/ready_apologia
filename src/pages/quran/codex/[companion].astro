@@ -38,7 +38,7 @@ const codexVerseId = codexData.verse_id;
 let videos = [];
 if (codexVerseId) {
   const rawVideos = query(`
-    SELECT sm.* 
+    SELECT sm.*
     FROM short_per_verse spv
     JOIN shorts_metadata sm ON spv.video_id = sm.video_id
     WHERE spv.verse_id = :codexVerseId
@@ -62,13 +62,14 @@ codexData.uthmanicVariants.forEach(v => {
 
 const surahsList = Object.values(variantsBySurah).sort((a, b) => parseInt(a.number) - parseInt(b.number));
 
-const seoTitle = `${codexData.name} Codex - Variant Manuscripts & Lost Verses`;
-const seoDescription = `Explore the ${codexData.name} Codex. Discover ${codexData.uthmanicVariants.length} historical manuscript differences, alternative readings, and lost verses that diverge from the standard Uthmanic text of the Quran.`;
+const seoTitle = `The Codex of ${codexData.name} - Competing Quranic Manuscripts`;
+const seoDescription = `While Uthman burnt varying versions of the Quran to enforce standardization, the ${codexData.name} codex survived in parts through the Sahih Hadith. Discover its variant readings, lost verses, and differences from the standard text.`;
+const seoKeywords = `codex of ${codexData.name}, non-uthmanic quran, uthmanic compilation, variant quran manuscripts, burned quran manuscripts`;
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} keywords={seoKeywords}>
   <div class="quran-reader-container theme-quran prefer-english">
-    
+
     <!-- Header: Companion Name (Clickable) -->
     <header class="codex-header select-none">
       <a href="/quran/0" class="back-link">
@@ -163,7 +164,7 @@ const seoDescription = `Explore the ${codexData.name} Codex. Discover ${codexDat
         {surahsList.map((surah) => (
           <div class="surah-group">
             <h3 class="surah-group-title">{surah.number}. {surah.name}</h3>
-            
+
             {surah.variants.map((v) => (
               <div class="comparison-card">
                 <div class="verse-ref-header">
@@ -630,7 +631,7 @@ const seoDescription = `Explore the ${codexData.name} Codex. Discover ${codexDat
   }
 
   /* Language Prominence Overrides */
-  
+
   /* English Prominent */
   .quran-reader-container.prefer-english .text-english {
     font-size: 15px;

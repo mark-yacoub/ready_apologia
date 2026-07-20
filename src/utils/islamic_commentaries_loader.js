@@ -5,7 +5,7 @@ let cache = null;
 
 export function loadIslamicCommentaries() {
   if (cache) return cache;
-  
+
   const defaultPath = path.join(process.cwd(), 'src/data/quran/commentary/tafsir_ibn_kathir_catena.json');
   const filePath = process.env.IBN_KATHIR_PATH || defaultPath;
 

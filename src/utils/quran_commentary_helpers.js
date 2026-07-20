@@ -4,7 +4,7 @@ import { loadEnglishData, loadArabicSurah } from './quran_loader.js';
 /**
  * Formats raw Ibn Kathir commentary markdown by isolating standalone quoted verses
  * into highlighted Quoted Scripture boxes and tightening paragraph spacing.
- * 
+ *
  * @param {string} text - Raw markdown commentary text
  * @returns {string} Formatted HTML string
  */
@@ -12,7 +12,7 @@ export function formatCommentaryWithVerseBoxes(text) {
   if (!text) return '';
   let norm = text.replace(/^(\{[^\}]+\}[\s\.,;]*)\n(?!\n)/gm, '$1\n\n');
   norm = norm.replace(/^((?:['"])\d+\.[^\n'"]+(?:['"]|\})[\s\.,;]*(?:\([^\)]+\))?)\n(?!\n)/gm, '$1\n\n');
-  
+
   const paras = norm.split(/\n\n+/);
   const processed = [];
   let currentQuotes = [];
@@ -35,7 +35,7 @@ export function formatCommentaryWithVerseBoxes(text) {
   if (currentQuotes.length > 0) {
     processed.push(`<div class="ic-verse-box"><div class="ic-box-header">Quoted Scripture</div>${currentQuotes.join('<br/><br/>')}</div>`);
   }
-  
+
   return processed.map(block => {
     if (block.startsWith('<div class="ic-verse-box">')) return block;
     return parseMarkdown(block);
@@ -45,7 +45,7 @@ export function formatCommentaryWithVerseBoxes(text) {
 /**
  * Parses a multi-verse range string (e.g., "2:68-71" or "2:67") and returns an array
  * of verse objects containing their ayah number, Arabic text, and Droge English translation.
- * 
+ *
  * @param {string} rangeStr - The verse range string (e.g., "2:68-71")
  * @param {string|number} surah - The surah number
  * @returns {Array<{number: number, arabic: string, english: string}>}

@@ -45,7 +45,7 @@ const CODEX_MAPPINGS = {
  */
 function resolveVerseString(verseStr, base, quranEnglishData) {
   const parts = verseStr.split('_');
-  
+
   if (parts.length === 2 && parts[1] === '0') {
     // Handling for competing codices / lost verses mappings
     const codex = CODEX_MAPPINGS[parts[0]];
@@ -75,13 +75,13 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
     let book = parts[0];
     let chap = parts[1];
     let verse = parts[2];
-    
+
     // Check if OT for LXX mapping
     const isOt = booksMeta.ot.some((b) => b.id === book);
     let linkPath = `${book}/${chap}#${verse}`;
     let displayChap = chap;
     let displayVerse = verse;
-    
+
     if (isOt) {
       const lxxMap = mapMtToLxx(book, chap, verse);
       if (lxxMap) {
@@ -90,7 +90,7 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
         displayVerse = String(lxxMap.verse);
       }
     }
-    
+
     return {
       label: `${formatBookIdToName(verseStr)} ${displayChap}:${displayVerse}`,
       link: `${base}/bible/${linkPath}`,
@@ -109,27 +109,27 @@ const ISLAM_TOPICS_REGEX = /\b(islam|muslim|quran|muhammad|allah|hadith|sura)\b/
 
 function getTopicScore(summary) {
   if (!summary) return 2;
-  
+
   // Rule: If it has Islamic terms, it's Islam -> Priority 3 (Lowest topic priority)
   if (ISLAM_TOPICS_REGEX.test(summary)) return 3;
-  
+
   // Rule: If it has zero Islamic terms but has Jesus generic terms -> Priority 1
   if (JESUS_TOPICS_REGEX.test(summary)) return 1;
-  
+
   return 2; // Priority 2 (General)
 }
 
 function getTierScore(channelId, apologistName) {
   if (!channelId && !apologistName) return 4;
-  
+
   const cId = channelId ? channelId.toLowerCase() : '';
   const aName = apologistName ? apologistName.toLowerCase() : '';
-  
+
   // Robust case-insensitive checking
   if (TIER_1.has(cId) || TIER_1.has(aName)) return 1;
   if (TIER_2.has(cId) || TIER_2.has(aName)) return 2;
   if (TIER_3.has(cId) || TIER_3.has(aName)) return 3;
-  
+
   return 4;
 }
 
@@ -139,22 +139,22 @@ export function sortVideos(videos) {
     const rigorA = a.rigor_score || 0;
     const rigorB = b.rigor_score || 0;
     if (rigorA !== rigorB) return rigorB - rigorA;
-    
+
     // 2. Number of verses mentioned (lower is better, assuming empty is 0 but shouldn't happen based on index)
     const versesA = a.resolvedVerses ? a.resolvedVerses.length : 0;
     const versesB = b.resolvedVerses ? b.resolvedVerses.length : 0;
     if (versesA !== versesB) return versesA - versesB;
-    
+
     // 3. Tier (lower number is better rank)
     const tierA = getTierScore(a.channel_id, a.apologist_name);
     const tierB = getTierScore(b.channel_id, b.apologist_name);
     if (tierA !== tierB) return tierA - tierB;
-    
+
     // 4. Topic matching (Jesus=1, General=2, Islam=3)
     const topicA = getTopicScore(a.summary);
     const topicB = getTopicScore(b.summary);
     if (topicA !== topicB) return topicA - topicB;
-    
+
     // 5. Tie breaker: Title alphabetically
     const titleA = a.title || '';
     const titleB = b.title || '';
@@ -170,7 +170,7 @@ export function sortVideos(videos) {
  */
 export function enrichVideosWithVerses(videos, base) {
   if (!videos || !videos.length) return [];
-  
+
   const quranEnglishData = loadEnglishData();
 
   const enriched = videos.map(video => {
@@ -182,12 +182,12 @@ export function enrichVideosWithVerses(videos, base) {
         .map(v => resolveVerseString(v.trim(), base, quranEnglishData))
         .filter(Boolean);
     }
-    
+
     return {
       ...video,
       resolvedVerses
     };
   });
-  
+
   return sortVideos(enriched);
 }

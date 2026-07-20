@@ -13,7 +13,7 @@ const fileCache = new Map();
 /**
  * Retrieves the localized scripture text for a specific biblical verse.
  * Transparently manages bidirectional translations mappings (e.g., retrieving LXX text when presented with MT standard IDs).
- * 
+ *
  * @param {string} book - Standard book ID (e.g., 'mt', 'jn', 'gen')
  * @param {string|number} chapter - Chapter number
  * @param {string|number} verse - Verse number
@@ -21,13 +21,13 @@ const fileCache = new Map();
  */
 export function getScriptureVerseText(book, chapter, verse) {
   if (!book || !chapter || !verse) return "";
-  
+
   let b = book;
   let c = String(chapter);
   let v = String(verse);
-  
+
   const isNt = booksMeta.nt.some(bk => bk.id === b);
-  
+
   // Intercept OT requests and map from standard Masoretic Text numbering to LXX
   if (!isNt && booksMeta.ot.some(bk => bk.id === b)) {
     const m = mapMtToLxx(b, c, v);
@@ -35,10 +35,10 @@ export function getScriptureVerseText(book, chapter, verse) {
     c = m.chapter;
     v = m.verse;
   }
-  
+
   const folder = isNt ? NT_TRANSLATION_ID : 'lxx2012';
   const filePath = path.join(process.cwd(), 'src/data/scripture', folder, `${b}.json`);
-  
+
   if (!fileCache.has(filePath)) {
     try {
       const content = fs.readFileSync(filePath, 'utf-8');
@@ -51,10 +51,10 @@ export function getScriptureVerseText(book, chapter, verse) {
 
   const bookData = fileCache.get(filePath);
   const chapterVerses = bookData[c] || [];
-  
+
   // Find the verse string payload in the array
   const verseObj = chapterVerses.find(x => Object.keys(x)[0] === v);
-  
+
   return verseObj ? verseObj[v] : "";
 }
 

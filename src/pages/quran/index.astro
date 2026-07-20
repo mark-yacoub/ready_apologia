@@ -28,7 +28,7 @@ try {
       try {
         const codexData = await loadCompanionCodex(c.name);
         if (codexData) {
-          count = (codexData.uthmanicVariants ? codexData.uthmanicVariants.length : 0) + 
+          count = (codexData.uthmanicVariants ? codexData.uthmanicVariants.length : 0) +
                   (codexData.lostVerses ? codexData.lostVerses.length : 0);
         }
       } catch (e) {
@@ -53,22 +53,23 @@ try {
 // Ensure base path for links
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
-const seoTitle = "Quran Evidence - Variant Manuscripts & Christian Apologetics";
-const seoDescription = "Explore the Quran through a critical apologetics lens. Discover thousands of lost verses, competing codices, and variant readings with manuscript evidence.";
+const seoTitle = "Quran Evidence - Variant Manuscripts & Critical Apologetics";
+const seoDescription = "Discover the untold, historical side of the Quran. Explore thousands of lost verses, competing companion codices, and variant readings (Qiraat) with manuscript evidence.";
+const seoKeywords = "quran manuscript variants, qiraat differences, lost verses of the quran, critical study of islam";
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} keywords={seoKeywords}>
   <div class="quran-reader-container theme-quran prefer-english">
-    <QuranPageHeader 
+    <QuranPageHeader
       currentTitle="Evidence & Filters"
-      currentIndex="home" 
+      currentIndex="home"
       hideDropdown={true}
     />
 
     <div class="evidence-page-container fade-in">
       <!-- 1. Lost Verses Card -->
-      <EvidenceCard 
-        title="Lost Verses" 
+      <EvidenceCard
+        title="Lost Verses"
         className="warm-tint"
         intro="Islamic tradition records numerous instances where verses or entire sections of the Quran were recited during the time of Muhammad but were subsequently lost, forgotten, or consumed. These reports highlight that the standard Uthmanic text does not represent the entirety of what was originally recited as Quran."
       >
@@ -78,8 +79,8 @@ const seoDescription = "Explore the Quran through a critical apologetics lens. D
       </EvidenceCard>
 
       <!-- 2. Competing Codices Card -->
-      <EvidenceCard 
-        title="Competing Codices" 
+      <EvidenceCard
+        title="Competing Codices"
         className="warm-tint"
         intro="Before Uthman standardized the Quranic text and destroyed dissenting manuscripts, several prominent companions—some of whom Muhammad explicitly commanded Muslims to learn the Quran from—maintained their own personal codices. These codices often varied significantly in structure, surah count, and textual content."
       >
@@ -91,8 +92,8 @@ const seoDescription = "Explore the Quran through a critical apologetics lens. D
       </EvidenceCard>
 
       <!-- 3. Variant Readings (Qiraat) by Effect -->
-      <EvidenceCard 
-        title="Variant Readings (Qiraat) – By Change Effect" 
+      <EvidenceCard
+        title="Variant Readings (Qiraat) – By Change Effect"
         className="warm-tint"
         intro="Due to the inherent ambiguity of the early Arabic consonantal script (<em>rasm</em>)—which lacked diacritical dots (<em>i'jam</em>) and vowel markers (<em>harakat</em>)—early reciters supplied their own vocalizations and consonant choices. This resulted in thousands of officially recognized variants that alter the semantic meaning or grammatical structure of the text."
       >
@@ -104,8 +105,8 @@ const seoDescription = "Explore the Quran through a critical apologetics lens. D
       </EvidenceCard>
 
       <!-- 4. Variant Readings (Qiraat) by Category -->
-      <EvidenceCard 
-        title="Variant Readings (Qiraat) – By Change Category" 
+      <EvidenceCard
+        title="Variant Readings (Qiraat) – By Change Category"
         className="warm-tint"
         intro="The Qiraat variants can also be categorized by their specific textual mechanism, such as vowel shifts, dotting variations, or the addition/omission of letters. These variations demonstrate the fluidity of the early oral and written transmission of the Quran."
       >
@@ -126,7 +127,7 @@ const seoDescription = "Explore the Quran through a critical apologetics lens. D
     padding: 2rem 1.5rem;
     padding-bottom: 5rem;
   }
-  
+
   .fade-in {
     animation: fadeIn 0.4s ease-out;
   }

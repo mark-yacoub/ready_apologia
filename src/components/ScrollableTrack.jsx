@@ -20,11 +20,11 @@ export default function ScrollableTrack({ children, containerClass, activeTrigge
     if (!el) return;
 
     checkScroll();
-    
+
     // Check again on window resize
     const handleResize = () => checkScroll();
     window.addEventListener('resize', handleResize);
-    
+
     // Check after fonts/layout settle
     const t = setTimeout(checkScroll, 200);
 
@@ -115,9 +115,9 @@ export default function ScrollableTrack({ children, containerClass, activeTrigge
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
         </button>
       )}
-      <div 
-        className={containerClass} 
-        ref={containerRef} 
+      <div
+        className={containerClass}
+        ref={containerRef}
         onScroll={checkScroll}
       >
         {children}

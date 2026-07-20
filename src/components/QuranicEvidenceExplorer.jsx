@@ -98,7 +98,7 @@ export default function QuranicEvidenceExplorer({ evidenceDropdownData = [], ver
 
     for (const [vId, labelsObj] of Object.entries(verseLabels)) {
       const [surahNum, verseNum] = vId.split(':').map(Number);
-      
+
       for (const [rawLabel, note] of Object.entries(labelsObj)) {
         const targetLabels = normalizeAndSplitLabel(rawLabel);
         const translatedText = drogeTranslation[vId]?.text || 'Translation unavailable';
@@ -183,7 +183,7 @@ export default function QuranicEvidenceExplorer({ evidenceDropdownData = [], ver
                 );
               })}
             </ScrollableTrack>
-            
+
             <div className="master-tab-content">
               {currentTab && map.has(currentTab) && (
                 <div className="scripture-feed-container animate-fade-in">

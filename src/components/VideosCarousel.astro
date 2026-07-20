@@ -14,21 +14,21 @@ const { videos } = Astro.props;
           {videos.map((video: any) => {
             // resolvedVerses now injected directly from the Controller DTO!
             const resolvedVerses = video.resolvedVerses || [];
-            const dynamicTitle = video.title 
-              || video.summary 
-              || (video.apologist_name && video.apologist_name !== "Unknown" 
+            const dynamicTitle = video.title
+              || video.summary
+              || (video.apologist_name && video.apologist_name !== "Unknown"
                   ? `YouTube Short by ${video.apologist_name}`
                   : 'YouTube Short Apologetics Video');
 
             return (
               <div class="video-card">
                 <div class="iframe-container">
-                  <iframe 
-                    src={`https://www.youtube.com/embed/${video.video_id}`} 
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.video_id}`}
                     title={dynamicTitle}
-                    frameborder="0" 
+                    frameborder="0"
                     loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen>
                   </iframe>
                 </div>
@@ -101,31 +101,31 @@ const { videos } = Astro.props;
       const container = wrapper.querySelector('.videos-carousel-container') as HTMLElement | null;
       const btnLeft = wrapper.querySelector('.carousel-btn-left') as HTMLElement | null;
       const btnRight = wrapper.querySelector('.carousel-btn-right') as HTMLElement | null;
-      
+
       if (!container || !btnLeft || !btnRight) return;
-      
-      const scrollAmount = 240; 
-      
+
+      const scrollAmount = 240;
+
       btnLeft.addEventListener('click', () => {
         container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
       });
-      
+
       btnRight.addEventListener('click', () => {
         container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       });
-      
+
       const updateButtons = () => {
         const maxScroll = container.scrollWidth - container.clientWidth;
         btnLeft.style.opacity = container.scrollLeft > 5 ? '1' : '0';
         btnLeft.style.pointerEvents = container.scrollLeft > 5 ? 'auto' : 'none';
-        
+
         btnRight.style.opacity = container.scrollLeft < maxScroll - 5 ? '1' : '0';
         btnRight.style.pointerEvents = container.scrollLeft < maxScroll - 5 ? 'auto' : 'none';
       };
-      
+
       container.addEventListener('scroll', updateButtons, { passive: true });
       setTimeout(updateButtons, 100);
-      
+
       const resizeObserver = new ResizeObserver(() => {
         updateButtons();
       });
@@ -190,11 +190,11 @@ const { videos } = Astro.props;
     overscroll-behavior-x: contain;
     padding-bottom: 12px; /* space for scrollbar */
     -webkit-overflow-scrolling: touch;
-    
+
     scrollbar-width: thin;
     scrollbar-color: var(--color-outline-variant) transparent;
   }
-  
+
   .videos-carousel-container::-webkit-scrollbar {
     height: 6px;
   }
@@ -205,7 +205,7 @@ const { videos } = Astro.props;
     background-color: var(--color-outline-variant);
     border-radius: 20px;
   }
-  
+
   .videos-carousel-track {
     display: flex;
     gap: 16px;
@@ -235,10 +235,10 @@ const { videos } = Astro.props;
     position: relative;
     width: 100%;
     /* 9:16 aspect ratio for shorts */
-    padding-bottom: 177.77%; 
+    padding-bottom: 177.77%;
     background-color: #000;
   }
-  
+
   .iframe-container iframe {
     position: absolute;
     top: 0;
@@ -284,7 +284,7 @@ const { videos } = Astro.props;
     border-radius: 8px;
     overflow: hidden;
   }
-  
+
   .mentioned-verses-summary {
     padding: 8px 12px; /* Reduced slightly */
     cursor: pointer;
@@ -305,7 +305,7 @@ const { videos } = Astro.props;
   .mentioned-verses-summary:hover {
     background-color: var(--color-outline-variant);
   }
-  
+
   .summary-chevron {
     color: var(--color-on-surface-variant);
     transition: transform 0.2s ease;

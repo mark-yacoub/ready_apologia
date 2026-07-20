@@ -24,21 +24,21 @@ const { variant } = Astro.props;
       <span class="qiraat-effect">{variant.effect}</span>
     </div>
   </div>
-  
+
   <div class="qiraat-diff">
     <div class="diff-side hafs-side">
       <span class="diff-label">Original (Hafs)</span>
       <p class="text-arabic diff-arabic" dir="rtl">{variant.hafs_arabic_word}</p>
       <p class="text-english diff-english">{variant.hafs_english_word}</p>
     </div>
-    
+
     <div class="diff-divider">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <line x1="5" y1="12" x2="19" y2="12"></line>
         <polyline points="12 5 19 12 12 19"></polyline>
       </svg>
     </div>
-    
+
     <div class="diff-side variant-side">
       <span class="diff-label">Variant Reading</span>
       <p class="text-arabic diff-arabic" dir="rtl">{variant.variant_arabic_word}</p>
@@ -47,7 +47,7 @@ const { variant } = Astro.props;
   </div>
 
   {variant.description && <p class="qiraat-description">{variant.description}</p>}
-  
+
   {variant.readers && variant.readers.length > 0 && (
     <div class="qiraat-readers">
       <span class="readers-label">Read by:</span>
@@ -192,7 +192,7 @@ const { variant } = Astro.props;
       align-items: center;
       text-align: center;
     }
-    
+
     .hafs-side {
       border-right: none;
       border-bottom: 1px dashed var(--color-outline-variant);
@@ -200,12 +200,12 @@ const { variant } = Astro.props;
       padding-bottom: 16px;
       width: 100%;
     }
-    
+
     .variant-side {
       padding-left: 0;
       width: 100%;
     }
-    
+
     .diff-divider {
       transform: rotate(90deg);
       margin: -8px 0;
