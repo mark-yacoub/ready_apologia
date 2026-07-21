@@ -100,9 +100,11 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
   return null;
 }
 
-const TIER_1 = new Set(['mikewinger', 'inspiringphilosophy', 'givemeananswer', 'crossexamined', 'capturingchristianity', 'testifyapologetics', 'redpenlogic', 'copticorthodoxanswers']);
-const TIER_2 = new Set(['apologiastudios', 'livingwaters', 'cirainternational', 'vocabmalone', 'davidwood', 'towardsjesus', '@towardsjesus']);
-const TIER_3 = new Set(['shamounian', 'godlogic', 'godlogic2.0', '@godlogicapologetics']);
+const TIER_1 = new Set(['copticorthodoxanswers']);
+const TIER_2 = new Set(['inspiringphilosophy', 'capturingchristianity', 'testifyapologetics']);
+const TIER_3 = new Set(['davidwood', 'cirainternational', 'crossexamined', 'redpenlogic', 'givemeananswer', 'mikewinger', 'livingwaters']);
+const TIER_4 = new Set(['shamounian', 'towardsjesus', '@towardsjesus', 'godlogic', 'godlogic2.0', '@godlogicapologetics']);
+const TIER_5 = new Set(['apologiastudios', 'vocabmalone']);
 
 const JESUS_TOPICS_REGEX = /\b(trinity|deity|resurrection|jewish|jehovah|son of god|hebrew israelites?|mormons?)\b/i;
 const ISLAM_TOPICS_REGEX = /\b(islam|muslim|quran|muhammad|allah|hadith|sura)\b/i;
@@ -120,7 +122,7 @@ function getTopicScore(summary) {
 }
 
 function getTierScore(channelId, apologistName) {
-  if (!channelId && !apologistName) return 4;
+  if (!channelId && !apologistName) return 6;
 
   const cId = channelId ? channelId.toLowerCase() : '';
   const aName = apologistName ? apologistName.toLowerCase() : '';
@@ -129,8 +131,10 @@ function getTierScore(channelId, apologistName) {
   if (TIER_1.has(cId) || TIER_1.has(aName)) return 1;
   if (TIER_2.has(cId) || TIER_2.has(aName)) return 2;
   if (TIER_3.has(cId) || TIER_3.has(aName)) return 3;
+  if (TIER_4.has(cId) || TIER_4.has(aName)) return 4;
+  if (TIER_5.has(cId) || TIER_5.has(aName)) return 5;
 
-  return 4;
+  return 6;
 }
 
 export function sortVideos(videos) {
