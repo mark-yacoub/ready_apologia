@@ -1,0 +1,146 @@
+---
+export interface Props {
+  card: {
+    slug: string;
+    title: string;
+    description: string;
+    thumbnail?: string;
+  };
+  base: string;
+}
+
+const { card, base } = Astro.props;
+
+// Image Optimization for remote CDNs (Specifically Unsplash for our mock catalog)
+let optimizedThumbnail = card.thumbnail;
+if (optimizedThumbnail && optimizedThumbnail.includes('images.unsplash.com')) {
+  // If it doesn't already have query params, forcefully append optimal parameters. 
+  // Unsplash implicitly uses Imgix across their platform. Using standard APIs `&w=350&q=80&fm=webp` 
+  // slashes payloads dynamically without the need for build-time Astro assets pipelines!
+  const hasParams = optimizedThumbnail.includes('?');
+  optimizedThumbnail += (hasParams ? '&' : '?') + 'w=350&q=80&fm=webp';
+}
+---
+
+<a href={`${base}/discover/${card.slug}`} class="discover-card">
+  <div class="card-image-wrap">
+    {optimizedThumbnail ? (
+      <img 
+        src={optimizedThumbnail} 
+        alt={card.title} 
+        loading="lazy" 
+        decoding="async"
+        width="350"
+        height="250"
+      />
+    ) : (
+      <div class="fallback-bg"></div>
+    )}
+  </div>
+  <div class="card-content">
+    <h4 class="card-title">{card.title}</h4>
+    <p class="card-desc">{card.description}</p>
+  </div>
+</a>
+
+<style>
+  .discover-card {
+    flex: 0 0 auto;
+    width: 154px; /* Updated compact size for multiple cards visible */
+    height: 220px;
+    background-color: var(--color-surface, #ffffff);
+    border-radius: 14px;
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    scroll-snap-align: start;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .discover-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+    border-color: #d4d4d8; /* Zinc 300 */
+  }
+  
+  .discover-card:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  }
+
+  .card-image-wrap {
+    width: 100%;
+    height: 110px;
+    background-color: var(--color-surface-container-low, #f4f4f5);
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-outline-variant, #e4e4e7);
+    position: relative;
+  }
+
+  .card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 154 / 110;
+    transition: transform 0.4s ease;
+  }
+  
+  .discover-card:hover .card-image-wrap img {
+    transform: scale(1.05); /* subtle zoom on hover */
+  }
+  
+  .fallback-bg {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e4e4e7 0%, #f4f4f5 100%);
+  }
+
+  .card-content {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .card-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.25;
+    color: var(--color-on-surface, #09090b);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-desc {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--color-on-surface-variant, #71717a);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  @media (min-width: 768px) {
+    .discover-card {
+      width: 180px;
+      height: 240px;
+    }
+    .card-image-wrap {
+      height: 120px;
+    }
+    .card-title {
+      font-size: 14.5px;
+    }
+    .card-desc {
+      font-size: 12px;
+    }
+  }
+</style>

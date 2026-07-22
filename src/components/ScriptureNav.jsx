@@ -58,6 +58,8 @@ export default function ScriptureNav() {
 
       if (activePath.startsWith('/evidence')) {
         setActiveTab('evidence');
+      } else if (activePath.startsWith('/discover')) {
+        setActiveTab('discover');
       } else {
         setActiveTab('scripture');
       }
@@ -155,16 +157,15 @@ export default function ScriptureNav() {
           <span className="btn-label">Evidence</span>
         </a>
 
-        {/* Library Button (Coming Soon) */}
-        <button className="sidebar-nav-btn disabled" disabled aria-label="Library (Coming Soon)">
+        {/* Discover Button */}
+        <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/discover`} className={`sidebar-nav-btn ${activeTab === 'discover' ? 'active' : ''}`} aria-label="Discover">
           <div className="btn-icon-wrapper">
             <svg viewBox="0 0 24 24" strokeWidth="2.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
           </div>
-          <span className="btn-label">Library</span>
-          <span className="soon-badge">Soon</span>
-        </button>
+          <span className="btn-label">Discover</span>
+        </a>
       </div>
 
       {/* 3. Scrollable Books Tree Navigator */}

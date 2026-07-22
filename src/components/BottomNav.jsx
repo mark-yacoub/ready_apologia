@@ -10,6 +10,8 @@ export default function BottomNav() {
       const pathname = window.location.pathname;
       if (pathname.includes('/evidence')) {
         setActiveTab('evidence');
+      } else if (pathname.includes('/discover')) {
+        setActiveTab('discover');
       } else {
         setActiveTab('scripture');
       }
@@ -58,16 +60,15 @@ export default function BottomNav() {
         <span className="label">Evidence</span>
       </a>
 
-      {/* Library Tab (Coming Soon) */}
-      <button className="nav-item disabled" disabled aria-label="Library (Coming Soon)">
+      {/* Discover Tab */}
+      <a href={`${base}/discover`} className={`nav-item ${activeTab === 'discover' ? 'active' : ''}`} aria-label="Discover">
         <div className="nav-icon-wrapper">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
           </svg>
         </div>
-        <span className="label">Library</span>
-        <span className="badge">Soon</span>
-      </button>
+        <span className="label">Discover</span>
+      </a>
     </div>
   );
 }

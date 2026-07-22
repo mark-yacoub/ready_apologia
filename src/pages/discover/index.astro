@@ -1,0 +1,341 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DiscoverCard from '../../components/DiscoverCard.astro';
+import discoverData from '../../data/discoverCatalog.json';
+
+// Type definitions for build-time robustness
+interface DiscoverItem {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  subcategory: string;
+  thumbnail?: string;
+}
+
+const rawData = discoverData as DiscoverItem[];
+
+// Defensively Cluster by Category -> Subcategory
+const clusteredByCategory = rawData.reduce<Record<string, Record<string, DiscoverItem[]>>>((acc, item) => {
+  const cat = item.category?.trim();
+  const sub = item.subcategory?.trim();
+  
+  // Malformed structural protection
+  if (!cat || !sub) return acc;
+  
+  if (!acc[cat]) acc[cat] = {};
+  if (!acc[cat][sub]) acc[cat][sub] = [];
+  
+  acc[cat][sub].push(item);
+  return acc;
+}, {});
+
+const categories = Object.keys(clusteredByCategory);
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+const pageDesc = "Explore deep dives and historical timelines regarding Christianity and Islam.";
+const pageKeywords = "discover, apologetics";
+---
+
+<Layout title="Discover | Ready Apologia" description={pageDesc} keywords={pageKeywords}>
+  <div class="discover-hub">
+    <header class="hub-header">
+      <h1 class="hub-title">Discover</h1>
+      <p class="hub-subtitle">In-depth thematic defenses and historical timelines.</p>
+      
+      <div class="category-tabs-wrapper">
+        <div class="master-tabs-container" role="tablist" aria-label="Discover Categories">
+          {categories.map((category, index) => {
+            const safeId = category.toLowerCase().replace(/\s+/g, '-');
+            return (
+              <button 
+                id={`tab-${safeId}`}
+                class={`master-tab category-tab ${index === 0 ? 'active' : ''}`} 
+                role="tab"
+                aria-selected={index === 0 ? "true" : "false"}
+                aria-controls={`panel-${safeId}`}
+                data-target={category}
+              >
+                {category}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </header>
+
+    <div class="categories-container" id="discover-panels">
+      {categories.map((category, index) => {
+        const safeId = category.toLowerCase().replace(/\s+/g, '-');
+        return (
+          <div 
+            id={`panel-${safeId}`}
+            class="major-category-block animate-fade-in" 
+            role="tabpanel"
+            aria-labelledby={`tab-${safeId}`}
+            data-category={category} 
+            hidden={index !== 0}
+          >
+          <div class="major-category-header">
+            <h2 class="major-category-title">{category}</h2>
+          </div>
+          
+          <div class="subcategories-container">
+            {Object.keys(clusteredByCategory[category]).map((subcategory) => (
+              <section class="discover-section">
+                <div class="section-header">
+                  <h3 class="section-title">{subcategory}</h3>
+                </div>
+                <div class="cards-scroller">
+                  {clusteredByCategory[category][subcategory].map((card) => (
+                    <DiscoverCard card={card} base={base} />
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </div>
+      );
+    })}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function setupTabs() {
+    const hub = document.getElementById('discover-panels');
+    const tabContainer = document.querySelector('.master-tabs-container') as HTMLElement;
+    
+    if (!hub || !tabContainer) return;
+
+    const tabs = Array.from(tabContainer.querySelectorAll<HTMLButtonElement>('.category-tab'));
+    const blocks = hub.querySelectorAll<HTMLElement>('.major-category-block');
+    
+    if (tabs.length === 0) return;
+
+    // Set initial tab indices correctly (only active tab is focusable)
+    tabs.forEach((t, i) => t.setAttribute('tabindex', i === 0 ? '0' : '-1'));
+
+    const activateTab = (targetBtn: HTMLButtonElement) => {
+      // 1. Safely toggle ARIA attributes and active states
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+      targetBtn.classList.add('active');
+      targetBtn.setAttribute('aria-selected', 'true');
+      targetBtn.setAttribute('tabindex', '0');
+      targetBtn.focus();
+
+      // 2. Toggle content panels (Unhooking JS from CSS specificity entirely via HTML5 hidden)
+      const targetCategory = targetBtn.getAttribute('data-target');
+      blocks.forEach(block => {
+        if (block.getAttribute('data-category') === targetCategory) {
+          block.hidden = false;
+        } else {
+          block.hidden = true;
+        }
+      });
+    };
+
+    // O(1) Event Delegation on Click
+    tabContainer.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest<HTMLButtonElement>('.category-tab');
+      if (!target) return;
+      activateTab(target);
+    });
+
+    // W3C ARIA Keyboard Navigation Support
+    tabContainer.addEventListener('keydown', (e) => {
+      const activeElement = document.activeElement as HTMLButtonElement;
+      const currentIndex = tabs.indexOf(activeElement);
+      
+      if (currentIndex === -1) return; // Not focused on a tab
+
+      let nextIndex: number | null = null;
+      if (e.key === 'ArrowRight') {
+        nextIndex = (currentIndex + 1) % tabs.length;
+      } else if (e.key === 'ArrowLeft') {
+        nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      } else if (e.key === 'Home') {
+        nextIndex = 0;
+      } else if (e.key === 'End') {
+        nextIndex = tabs.length - 1;
+      }
+
+      if (nextIndex !== null) {
+        e.preventDefault(); // Stop natural scrolling
+        activateTab(tabs[nextIndex]);
+      }
+    });
+  }
+  
+  // Support standard document load and Astro View Transitions natively
+  document.addEventListener('DOMContentLoaded', setupTabs);
+  document.addEventListener('astro:page-load', setupTabs);
+</script>
+
+<style>
+  .discover-hub {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 24px;
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  .hub-header {
+    padding: 24px 0 0 0;
+  }
+  
+  .hub-title {
+    font-size: 30px;
+    font-weight: 900;
+    margin: 0 20px 6px 20px;
+    color: var(--color-primary, #1e293b);
+    letter-spacing: -0.02em;
+    font-family: var(--font-headings, inherit);
+  }
+  
+  .hub-subtitle {
+    font-size: 14px;
+    color: var(--color-on-surface-variant, #64748b);
+    margin: 0 20px 0 20px;
+    line-height: 1.5;
+    font-family: var(--font-body, inherit);
+  }
+
+  .category-tabs-wrapper {
+    margin-top: 16px;
+    width: 100%;
+  }
+
+  .master-tabs-container {
+    display: flex;
+    gap: 12px;
+    border-bottom: 2px solid #e2e8f0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0 20px;
+  }
+  
+  .master-tabs-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .master-tab {
+    background: none;
+    border: none;
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    color: #64748b;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .master-tab:hover {
+    color: #334155;
+  }
+
+  .master-tab.active {
+    color: #0f172a;
+    border-bottom-color: var(--evidence-color, var(--color-secondary, #974543));
+  }
+
+  .categories-container {
+    padding-top: 8px; /* Reduced from 16px since we lost the big header */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .major-category-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Bulletproof hidden behavior from JS overrides */
+  .major-category-block[hidden] {
+    display: none !important;
+  }
+
+  .major-category-header {
+    display: none; /* Hide the big headings now that we have tabs */
+  }
+
+  .major-category-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0;
+    color: var(--color-on-surface, #09090b);
+    font-family: var(--font-display, Georgia, serif);
+    letter-spacing: -0.5px;
+  }
+
+  .subcategories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-top: 16px;
+  }
+
+  .discover-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-header {
+    padding: 0 20px;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: var(--font-cinzel, 'Times New Roman', serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-on-surface-variant, #475569);
+    margin: 0 0 12px 0;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background-color: var(--color-outline-variant, #cbd5e1);
+    margin: 8px 0 0 0;
+  }
+
+  /* Horizontal scrolling for native touch devices */
+  .cards-scroller {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 0 20px 24px 20px; /* Padding bottom for shadow clearance */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .cards-scroller::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+</style>
