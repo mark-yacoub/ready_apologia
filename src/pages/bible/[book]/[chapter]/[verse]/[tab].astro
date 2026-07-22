@@ -9,59 +9,25 @@ import { getBibleOgImage } from '../../../../../utils/ogImageResolver.js';
 import { query } from '../../../../../db.js';
 import booksMeta from '../../../../../data/books_meta.json';
 import { parseMarkdown } from '../../../../../utils/markdown.js';
-import { mapMtToLxx, mapLxxToMt } from '../../../../../utils/scripture_mapper.js';
+import { mapLxxToMt, mapMtToLxx } from '../../../../../utils/scripture_mapper.js';
 import { BUILD_BOOKS } from '../../../../../utils/build_config.js';
-import { R2_BASE_URL } from '../../../../../utils/cdn_config.js';
 import { getScriptureVerseText, getScriptureVerseTextById } from '../../../../../utils/scripture_service.js';
 import { enrichVideosWithVerses } from '../../../../../utils/video_service.js';
+import { getAllEvidenceVerseSets, parseVerseId } from '../../../../../utils/path_generator.js';
 
 // 1. Pre-render sub-path page routes
 export async function getStaticPaths() {
-  const msNt = query("SELECT DISTINCT verse_id FROM manuscript_per_verse").map(r => r.verse_id);
-  const msOtRows = query("SELECT DISTINCT verse_id, v11n_type FROM manuscript_per_verse_ot");
-  const msOt = msOtRows.map(r => {
-    if (r.v11n_type === 'MT') {
-      const p = r.verse_id.split('_');
-      const mapped = mapMtToLxx(p[0], p[1], p[2]);
-      return `${mapped.book}_${mapped.chapter}_${mapped.verse}`;
-    }
-    return r.verse_id;
-  });
-
-  const ctRaw = query("SELECT DISTINCT verse1 as v FROM contradictions UNION SELECT DISTINCT verse2 FROM contradictions").map(r => r.v);
-  const apRaw = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
-  const vdRaw = query("SELECT DISTINCT verse_id FROM short_per_verse").map(r => r.verse_id);
-
-  const mapToLxxIfOt = (id) => {
-    if (!id) return null;
-    const p = id.split('_');
-    if (booksMeta.ot.some(b => b.id === p[0])) {
-      const m = mapMtToLxx(p[0], p[1], p[2]);
-      return `${m.book}_${m.chapter}_${m.verse}`;
-    }
-    return id;
-  };
-
-  const ct = ctRaw.map(mapToLxxIfOt);
-  const ap = apRaw.map(mapToLxxIfOt);
-  const vd = vdRaw.map(mapToLxxIfOt);
-
-  const msSet = new Set([...msNt, ...msOt]);
-  const ctSet = new Set(ct);
-  const apSet = new Set(ap);
-  const vdSet = new Set(vd);
-
-  const allVerseIds = new Set([...msSet, ...ctSet, ...apSet, ...vdSet].filter(Boolean));
+  const { msSet, ctSet, apSet, vdSet, allVerseIds } = getAllEvidenceVerseSets();
   const paths = [];
 
   const booksToBuild = BUILD_BOOKS;
 
   allVerseIds.forEach(id => {
-    const parts = id.split('_');
-    if (parts.length === 3) {
-      const b = parts[0];
-      const c = parts[1];
-      const v = parts[2];
+    const parts = parseVerseId(id);
+    if (parts) {
+      const b = parts.book;
+      const c = parts.chapter;
+      const v = parts.verse;
 
       if (booksToBuild && !booksToBuild.has(b)) return;
 
