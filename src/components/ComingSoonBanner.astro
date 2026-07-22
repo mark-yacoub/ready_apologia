@@ -1,0 +1,105 @@
+---
+export interface Props {
+  title?: string;
+  message?: string;
+  buttonText?: string;
+  url?: string;
+}
+
+const {
+  title = "More Topics Coming Soon",
+  message = "We are actively researching and building more deep-dive discovery topics to be pushed in the coming weeks. Stay tuned!",
+  buttonText = "Vote on next articles",
+  url = "https://forms.gle/KVeeDW41J9zqJtdZ7"
+} = Astro.props;
+---
+
+<aside aria-label="Coming soon announcement" class="discovery-coming-soon">
+  <div class="coming-soon-icon" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+  </div>
+  <div class="coming-soon-content">
+    <h3 class="coming-soon-title">{title}</h3>
+    <p class="coming-soon-text">{message}</p>
+    <a href={url} target="_blank" rel="noopener noreferrer" class="coming-soon-btn">
+      {buttonText}
+    </a>
+  </div>
+</aside>
+
+<style>
+  .discovery-coming-soon {
+    margin: 32px 20px 24px 20px;
+    background-color: var(--color-surface-container-low, #f4f4f5);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .coming-soon-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-primary-container, #e0e7ff);
+    color: var(--color-on-primary-container, #3730a3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .coming-soon-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .coming-soon-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .coming-soon-title {
+    font-family: var(--font-headings, inherit);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--color-primary, #09090b);
+    margin: 0;
+  }
+
+  .coming-soon-text {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--color-on-surface-variant, #71717a);
+    margin: 0 0 8px 0;
+    max-width: 300px;
+  }
+
+  .coming-soon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: var(--color-secondary, #974543);
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 700;
+    border-radius: 99px;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .coming-soon-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+
+  .coming-soon-btn:active {
+    transform: translateY(0);
+  }
+</style>

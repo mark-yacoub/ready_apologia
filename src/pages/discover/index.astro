@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import DiscoverCard from '../../components/DiscoverCard.astro';
+import ComingSoonBanner from '../../components/ComingSoonBanner.astro';
 import discoverData from '../../data/discoverCatalog.json';
 
 // Type definitions for build-time robustness
@@ -98,6 +99,9 @@ const pageKeywords = "discover, apologetics";
       );
     })}
     </div>
+
+    <ComingSoonBanner url="https://forms.gle/KVeeDW41J9zqJtdZ7" />
+
   </div>
 </Layout>
 
