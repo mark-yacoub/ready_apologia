@@ -6,5 +6,13 @@
     "title": "Archaeological Evidence of the Divine Christ",
     "description": "Archaeological and hard evidences showing the Claim of Divinity of Jesus.",
     "thumbnail": "/media/divinity_timeline/megiddo_mosaic/image_1.jpg"
+  },
+  {
+    "category": "Islamics",
+    "subcategory": "Scripture",
+    "slug": "quran-preservation",
+    "title": "The Myth of the Preservation of the Quran",
+    "description": "Examine the evidence of the corruption.",
+    "thumbnail": "/media/quran_preservation/cover.png"
   }
 ]

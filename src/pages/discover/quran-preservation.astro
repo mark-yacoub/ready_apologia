@@ -1,0 +1,564 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import JourneyNav from '../../components/quranpreservation/JourneyNav.jsx';
+import CodexColumns from '../../components/quranpreservation/CodexColumns.jsx';
+import RecitersInfographic from '../../components/quranpreservation/RecitersInfographic.jsx';
+import UthmansFireTimeline from '../../components/quranpreservation/UthmansFireTimeline.jsx';
+import QiraatTable from '../../components/quranpreservation/QiraatTable.jsx';
+import SanaaViewer from '../../components/quranpreservation/SanaaViewer.jsx';
+import HadithScroller from '../../components/quranpreservation/HadithScroller.jsx';
+import TawaturFlipCard from '../../components/quranpreservation/TawaturFlipCard.jsx';
+import MissingVersesGrid from '../../components/quranpreservation/MissingVersesGrid.jsx';
+import ConclusionStage from '../../components/quranpreservation/ConclusionStage.jsx';
+import quranData from '../../data/discover/islam/scripture/quran_preservation.json';
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+function formatMarkdown(text) {
+  if (!text) return '';
+  let html = text;
+  
+  // Extract "A Question to Wonder:" into a custom UI box natively
+  html = html.replace(/\*\*A Question to Wonder:\*\*\s*(.*)/g, '<div class="wonder-box"><div class="wonder-title"><span class="wonder-icon">🤔</span> A Question to Wonder</div><div class="wonder-text">$1</div></div>');
+  
+  // Images: ![alt](/url) -> Safely inject base URL for Astro production
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
+     const cleanUrl = url.startsWith('/') ? `${base}${url}` : url;
+     return `<img src="${cleanUrl}" alt="${alt}" class="responsive-markdown-image" />`;
+  });
+  
+  // Links: [text](/url) -> Safely inject base URL
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
+     const cleanUrl = url.startsWith('/') ? `${base}${url}` : url;
+     return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="content-link">${text}</a>`;
+  });
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong class="markdown-bold">$1</strong>');
+  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  html = html.replace(/\n\n/g, '<br/><br/>').replace(/\n/g, '<br/>');
+  
+  return html;
+}
+
+// Prepare stages for the sticky nav bar, ignoring small children for top level items
+const topLevelStages = quranData.map((stage, i) => ({
+  id: `stage-${i}`,
+  title: stage.title.replace(/^Stage\s+\d+:\s*/i, '') // Strip redundant "Stage X:" prefix
+}));
+
+const pageDesc = "The Preservation Myth of the Quran: Explore the historical timeline dismantling the myth of perfect preservation.";
+const pageKeywords = "quran preservation, myth, uthman, sanaa palimpsest, qiraat";
+---
+
+<Layout title="The Preservation Myth | Ready Apologia" description={pageDesc} keywords={pageKeywords}>
+  <div class="article-journey-container">
+    {/* Navigation */}
+    <JourneyNav stages={topLevelStages} client:load />
+
+    {/* Content */}
+    <div class="journey-content">
+      {quranData.map((stage, index) => {
+        const cleanTitle = stage.title.replace(/^Stage\s+\d+:\s*/i, '');
+        const isNumberedStage = /^Stage\s+\d+/i.test(stage.title);
+        
+        const isConclusion = stage.title.includes("Conclusion");
+        
+        return (
+          <section id={`stage-${index}`} class="journey-stage">
+            {!isConclusion && (
+              <header class="stage-header">
+                {isNumberedStage && <div class="stage-badge">STAGE {index}</div>}
+                <h2 class="stage-title">{cleanTitle}</h2>
+              </header>
+            )}
+              
+              <div class="stage-body">
+                {isConclusion ? (
+                  <ConclusionStage stage={stage} client:load />
+                ) : (
+                  <p class="main-content" set:html={formatMarkdown(stage.content)}></p>
+                )}
+            
+            {/* Custom UI Rendering based on specific stages/JSON data */}
+            
+            {/* Stage 3: Codex Columns */}
+            {stage.title.includes("Competing Companion") && (
+              <CodexColumns 
+                client:load 
+                childNode={stage.children.find(c => c.title.includes("114 vs 111"))}
+              />
+            )}
+
+            {/* Stage 2 JSON Injected Readers Table */}
+            {stage.readers_table && (
+              <RecitersInfographic tableData={stage.readers_table} tableColumns={stage.readers_table_columns} client:load />
+            )}
+
+            {/* Stage 6: Hard Archaeology - Sana'a Images and Viewer */}
+            {stage.title.includes("Hard Archaeology") && stage.sanaa_variants && (
+              <div class="sanaa-section">
+                <SanaaViewer variants={stage.sanaa_variants} client:load />
+                
+                <h4 class="image-gallery-title">Manuscript Evidence</h4>
+                <div class="image-gallery">
+                  <figure>
+                    <img src={`${base}/images/discover/sanaa_double_versions.jpg`} alt="Sanaa Double Versions under UV light" loading="lazy" />
+                    <figcaption>Sana'a Palimpsest Double Versions under UV light</figcaption>
+                  </figure>
+                  <figure>
+                    <img src={`${base}/images/discover/sanaa_stanford.jpg`} alt="Stanford 07 Folio Recto" loading="lazy" />
+                    <figcaption>Stanford '07 Folio Recto</figcaption>
+                  </figure>
+                </div>
+                {stage.llmTexts?.["Image Caption"] && (
+                  <div class="caption-block">
+                    <p>{stage.llmTexts["Image Caption"]}</p>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {/* Stage 7: Qiraat Table */}
+            {stage.title.includes("The Qira'at") && stage.qiraat_examples && (
+              <QiraatTable qiraatExamples={stage.qiraat_examples} client:load />
+            )}
+            
+            {/* Stage 8: Apologetic Shield Warning Block */}
+            {stage.title.includes("Apologetic Shield") && (
+              <div class="warning-block">
+                <div class="warning-icon">⚠️</div>
+                <div class="warning-content">
+                  <h4 class="warning-title">Pre-Flight Briefing</h4>
+                  <p>Be highly analytical in this section. Watch out for theological excuses (like 'Divine Abrogation') used to retroactively justify textual corruption in the historical record.</p>
+                </div>
+              </div>
+            )}
+            
+            {/* Children sections */}
+            {stage.children && stage.children.length > 0 && (
+              stage.title.includes("Uthman's Fire") ? (
+                <UthmansFireTimeline client:load childrenNodes={stage.children} />
+              ) : stage.title.includes("Missing Verses") ? (
+                <MissingVersesGrid client:load childrenNodes={stage.children} />
+              ) : (
+                <div class="sub-stages">
+                  {stage.children.map((child) => (
+                    <div class="child-stage">
+                      <h3 class="child-title">{child.title}</h3>
+                      <p class="child-content" set:html={formatMarkdown(child.content)}></p>
+                      
+                      {/* Theological Dilemma (Stage 1) */}
+                      {child.llmTexts && child.llmTexts["Theological Dilemma"] && (
+                        <details class="dilemma-drawer">
+                          <summary>Theological Dilemma</summary>
+                          <div class="drawer-content">
+                            {child.llmTexts["Theological Dilemma"]}
+                          </div>
+                        </details>
+                      )}
+
+                      {/* Infographic Text / Yamama Flip Card (Stage 2) */}
+                      {child.llmTexts && child.llmTexts["Infographic Text"] && child.hadiths && child.hadiths.length > 0 && (
+                        <TawaturFlipCard 
+                          llmText={child.llmTexts["Infographic Text"]} 
+                          hadith={child.hadiths[0]} 
+                          client:load 
+                        />
+                      )}
+                      
+                      {/* Logic Gap (Stage 8) */}
+                      {child.llmTexts && child.llmTexts["Absurdity of Abrogation"] && (
+                        <div class="logic-gap">
+                          <h4>Logic Gap</h4>
+                          <p>{child.llmTexts["Absurdity of Abrogation"]}</p>
+                        </div>
+                      )}
+                      
+                      {/* Hadith Rendering logic */}
+                      {child.hadiths && child.hadiths.length > 0 && !child.title.includes("114 vs 111") && !child.title.includes("Single Thread") && (
+                        child.title.includes("The Prophet Forgets") ? (
+                          <HadithScroller hadiths={child.hadiths} client:load />
+                        ) : (
+                          <div class="hadith-citations">
+                            {child.hadiths.map((h) => (
+                              <blockquote class="hadith-quote">
+                                <div class="hadith-ref" set:html={formatMarkdown(h.reference)}></div>
+                                {h.arabic_text && <div class="hadith-arabic" dir="rtl" set:html={formatMarkdown(h.arabic_text)}></div>}
+                                <div class="hadith-english" set:html={formatMarkdown(h.english_text)}></div>
+                              </blockquote>
+                            ))}
+                          </div>
+                        )
+                      )}
+                      
+                      {/* Post Content / Takeaways (Rendered after Hadiths) */}
+                      {child.post_content && <div class="child-post-content" set:html={formatMarkdown(child.post_content)}></div>}
+                    </div>
+                  ))}
+                </div>
+              )
+            )}
+            
+            {stage.post_content && <div class="stage-post-content" set:html={formatMarkdown(stage.post_content)}></div>}
+            {/* Conclusion Call to Action is now fully managed by ConclusionStage Component */}
+          </div>
+        </section>
+        );
+      })}
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  .article-journey-container {
+    background-color: #0f172a; 
+    min-height: 100vh;
+    font-family: var(--font-body, system-ui, sans-serif);
+    /* Negate global Layout margin/padding to achieve flush edge-to-edge UI */
+    margin: -16px; 
+    width: calc(100% + 32px);
+  }
+  
+  .journey-sticky-nav {
+    position: sticky;
+    top: -16px; /* Offset the 16px scrolling container padding */
+    z-index: 50;
+  }
+
+  @media (min-width: 768px) {
+    .article-journey-container {
+      margin: -24px -32px;
+      width: calc(100% + 64px);
+    }
+    .journey-sticky-nav {
+      top: -24px; /* Offset the 24px scrolling container padding */
+    }
+  }
+
+  .journey-content {
+    max-width: 650px;
+    margin: 0 auto;
+    background-color: white; 
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    min-height: 100vh;
+  }
+
+  .journey-stage {
+    padding: 12px 16px; /* Significantly tighter vertical padding */
+    border-bottom: 10px solid #f1f5f9; /* Make the dividing line thicker but softer like a native app section divider, instead of white space */
+    position: relative;
+  }
+  
+  .journey-stage:first-child {
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .journey-stage:last-child {
+    background: #0f172a;
+    color: white;
+    border-bottom: none;
+  }
+  .journey-stage:last-child .stage-title, .journey-stage:last-child .main-content {
+    color: white;
+  }
+
+  .stage-header {
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stage-badge {
+    background-color: #ef4444;
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+  }
+
+  .stage-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.02em;
+    font-family: var(--font-headings, inherit);
+  }
+
+  .main-content, .child-content {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1e293b;
+    margin: 0 0 4px 0; /* Radically reduced bottom margin */
+  }
+
+  .main-content strong.markdown-bold, .child-content strong.markdown-bold {
+    color: #0f172a;
+    font-weight: 800;
+    background-image: linear-gradient(120deg, #fef08a 0%, #fde047 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 88%;
+    padding: 0 2px;
+  }
+
+  .main-content .content-link, .child-content .content-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 2px solid #bfdbfe;
+    transition: all 0.2s ease;
+  }
+  .main-content .content-link:hover, .child-content .content-link:hover {
+    background-color: #dbeafe;
+    border-bottom-color: #2563eb;
+  }
+
+  .sub-stages {
+    margin-top: 12px; /* Pull children much closer to the parent text */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .child-stage {
+    position: relative;
+    padding-left: 10px;
+    border-left: 3px solid #e2e8f0;
+  }
+
+  .child-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0 0 6px 0;
+  }
+
+  
+
+  .dilemma-drawer {
+    margin: 12px 0;
+    background: white;
+    border: 1px solid #fecdd3;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(225, 29, 72, 0.1);
+  }
+
+  .dilemma-drawer summary {
+    padding: 10px 14px;
+    font-weight: 800;
+    color: #be123c;
+    cursor: pointer;
+    background: #fff1f2;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none; /* Hide default arrow */
+  }
+  .dilemma-drawer summary::-webkit-details-marker {
+    display: none;
+  }
+  .dilemma-drawer summary::before {
+    content: "🤔";
+  }
+
+  .drawer-content {
+    padding: 14px;
+    color: #881337;
+    font-size: 13px;
+    line-height: 1.45;
+    background: #fff1f2;
+    border-top: 1px solid #fecdd3;
+    border-radius: 0 0 8px 8px;
+  }
+  
+  .logic-gap {
+    margin: 12px 0;
+    padding: 14px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1);
+  }
+  .logic-gap h4 {
+    margin: 0 0 4px 0;
+    color: #1d4ed8;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .logic-gap p {
+    margin: 0;
+    color: #1e3a8a;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .warning-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    padding: 14px;
+    border-radius: 8px;
+    margin: 16px 0;
+    box-shadow: 0 4px 6px -1px rgba(217, 119, 6, 0.1);
+  }
+
+  .warning-icon {
+    font-size: 20px;
+    margin-top: 2px;
+  }
+
+  .warning-title {
+    margin: 0 0 4px 0;
+    color: #b45309;
+    font-size: 15px;
+    font-weight: 800;
+  }
+  
+  .warning-content p {
+    margin: 0;
+    color: #92400e;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .image-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 12px 0;
+  }
+  
+  .image-gallery-title {
+    margin: 20px 0 10px 0;
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  .image-gallery img {
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .cta-block {
+    text-align: center;
+    padding: 24px 16px;
+  }
+  .cta-block h4 {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    color: #f8fafc;
+  }
+
+  .hadith-quote {
+    margin: 12px 0;
+    background-color: #f8fafc;
+    border-left: 4px solid #b91c1c;
+    padding: 16px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+
+  .hadith-ref {
+    font-size: 13px;
+    font-weight: 800;
+    color: #64748b;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .hadith-ref a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .hadith-ref a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+  }
+
+  .hadith-arabic {
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #334155;
+    margin-bottom: 12px;
+  }
+
+  .hadith-english {
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1e293b;
+  }
+
+  .hadith-citations {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  /* Wonder Box UI */
+  .wonder-box {
+    margin: 32px 0 16px 0;
+    background: linear-gradient(to right, #f8fafc, #f1f5f9);
+    border: 1px solid #cbd5e1;
+    border-left: 4px solid #8b5cf6; /* Vibrant violet */
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+  .wonder-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #4c1d95; /* Deep violet */
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+  }
+  .wonder-icon {
+    font-size: 24px;
+  }
+  .wonder-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #334155;
+    font-weight: 500;
+  }
+
+  /* Markdown Embedded Images */
+  .responsive-markdown-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 24px auto;
+    display: block;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+  }
+
+  /* Hardcoded Image Gallery in Stage 6 */
+  .image-gallery figure {
+    margin: 0 0 24px 0;
+  }
+  .image-gallery img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+  }
+</style>
