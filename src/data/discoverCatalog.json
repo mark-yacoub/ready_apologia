@@ -1,26 +1,10 @@
 [
   {
     "category": "Christianity",
-    "subcategory": "Scripture",
-    "slug": "bible-authors",
-    "title": "Reliability of the Authors",
-    "description": "Why we can trust the witnesses of the New Testament.",
-    "thumbnail": "https://images.unsplash.com/photo-1544813545-4827b64fcacb?auto=format&fit=crop&q=80&w=600&h=800"
-  },
-  {
-    "category": "Christianity",
     "subcategory": "History",
     "slug": "divinity-timeline",
-    "title": "Timeline of Divinity",
+    "title": "Archaeological Evidence of the Divine Christ",
     "description": "Archaeological and hard evidences showing the Claim of Divinity of Jesus.",
-    "thumbnail": "https://images.unsplash.com/photo-1599900989395-5e60d5bfa78f?auto=format&fit=crop&q=80&w=600&h=800"
-  },
-  {
-    "category": "Islam",
-    "subcategory": "History",
-    "slug": "quran-preservation",
-    "title": "The Myth of Perfect Preservation",
-    "description": "Exploring the historical compilation of the Quran.",
-    "thumbnail": "https://images.unsplash.com/photo-1585038561142-ff0bcbc8527a?auto=format&fit=crop&q=80&w=600&h=800"
+    "thumbnail": "/media/discover/megiddo_mosaic.jpg"
   }
 ]

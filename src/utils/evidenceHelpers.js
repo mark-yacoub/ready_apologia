@@ -28,3 +28,10 @@ export const sortCanonicalVerses = (verseIds, testamentName) => {
     return vA - vB;
   });
 };
+
+export const formatEvidenceTitle = (evidenceId, evidenceData) => {
+  if (!evidenceData) return evidenceId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+  return evidenceData.name 
+    || evidenceData.Scripture?.['New Testament']?.title?.replace('New Testament ', '') 
+    || evidenceId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+};

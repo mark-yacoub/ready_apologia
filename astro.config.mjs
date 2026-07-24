@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  devToolbar: { enabled: false },
   integrations: [react(), sitemap({ entryLimit: 10000 })],
   // Set site URL from environment or default to production domain
   site: process.env.SITE_URL || 'https://readyapologia.com',

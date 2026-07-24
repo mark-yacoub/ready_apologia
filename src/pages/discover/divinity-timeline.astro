@@ -1,0 +1,238 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/timeline.css';
+
+import rawDivinityTimeline from '../../data/divinityTimeline.json';
+import { getTimelineViewData } from '../../utils/timelineHelpers.js';
+
+const mapData = getTimelineViewData(rawDivinityTimeline);
+
+const uniqueCountries = [...new Set(mapData.map(e => e.country))].filter(c => c !== "Unknown").sort();
+const uniqueCenturies = [...new Set(mapData.map(e => e.centuryLabel))].sort();
+const uniqueCategories = [...new Set(mapData.map(e => e.category))].sort();
+
+const dynamicCategories = uniqueCategories.map(name => {
+   return { id: name, name: name }
+});
+
+// Vibrant Editorial Palette for Dynamic Category Coloring
+const editorialColors = [
+  '#b91c1c', // Crimson (Archaeology)
+  '#4338ca', // Indigo (Magic)
+  '#15803d', // Emerald (Heresiology)
+  '#a21caf', // Amethyst (Patristics)
+  '#b45309', // Amber (Papyri)
+  '#0f766e', // Teal (Nomina Sacra)
+  '#334155'  // Slate (Fallback for future)
+];
+
+const categoryDict: Record<string, {name: string, color: string}> = {};
+dynamicCategories.forEach((cat, index) => {
+   categoryDict[cat.id] = {
+      name: cat.name,
+      color: editorialColors[index % editorialColors.length]
+   };
+});
+
+const pageDesc = "Interactive Timeline map tracing Pre-Nicene Christology.";
+---
+
+<Layout title="Archaeological Evidence of the Divine Christ" description={pageDesc} theme="timeline-mode">
+<divinity-timeline-app>
+
+  <!-- Data Store for Astro Transitions -->
+  <div id="timeline-data-store" style="display:none;"
+       data-total-cats={dynamicCategories.length} 
+       data-total-countries={uniqueCountries.length}
+       data-total-cents={uniqueCenturies.length}>
+  </div>
+
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+
+  <!-- L6 Declarative UI Templates -->
+  <template id="template-video-card">
+    <a class="rich-video-card" target="_blank">
+      <div class="rich-video-thumb">
+        <div class="rich-video-play">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M5 3l14 9-14 9V3z"/></svg>
+        </div>
+      </div>
+      <div class="rich-video-info">Watch on YouTube</div>
+    </a>
+  </template>
+
+  <template id="template-source-card">
+    <a class="rich-source-card" target="_blank">
+      <div class="rich-source-icon"><img alt="Source Icon"></div>
+      <div class="rich-source-text"></div>
+    </a>
+  </template>
+
+  <div class="divinity-container">
+    
+    <div class="meta-header">
+      <a href="/discover" class="back-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Discover
+      </a>
+      <div class="spacer"></div>
+      <button class="filter-trigger-btn" onclick="document.getElementById('filter-modal').showModal()">
+         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+         Filters
+      </button>
+    </div>
+
+    <!-- Vertical Timeline Feed -->
+    <div class="timeline-feed" id="timeline-feed">
+      <div class="timeline-intro">
+         <h1 class="intro-title">Archaeological Evidence of the Divine Christ</h1>
+         <p class="intro-text">
+            A common myth levied against Christianity is that the divinity of Jesus was a later invention—a theological concept fabricated centuries later at the Council of Nicaea. This baseless claim is completely divorced from historical reality. From the earliest days of our historical record, Christians worshipped Christ as God without a shadow of a doubt. The following sequence of archaeological and documentary evidence irrefutably demonstrates this unbroken, early belief. As we unearth more history every single day, the truth only shines brighter.
+         </p>
+      </div>
+
+      <div class="timeline-scroll-track" style="position: relative; padding-top: 24px;">
+        <div class="timeline-line"></div>
+        
+      {mapData.map((evt) => {
+        const catInfo = categoryDict[evt.category] || { name: evt.category, color: '#2563eb' };
+        return (
+        <div class="timeline-event" data-category={evt.category} data-country={evt.country} data-century={evt.centuryLabel} id={`event-${evt.id}`}>
+          
+          <div class="timeline-dot" style={`background-color: ${catInfo.color}; box-shadow: 0 0 0 4px ${catInfo.color}22;`}></div>
+          <div class="timeline-card-compact" style={`border-top-color: ${catInfo.color};`} data-id={evt.id} data-color={catInfo.color}>
+            
+            <div class="compact-card-header">
+              <div class="compact-card-text">
+                <div class="compact-meta">
+                   <span class="date-badge" style={`color: ${catInfo.color}`}>{evt.displayDate}</span>
+                   {evt.location !== "Unknown" && <span class="location-micro">📍 {evt.location}</span>}
+                </div>
+                <h3 class="compact-title">{evt.title}</h3>
+              </div>
+              
+              {evt.photos && evt.photos.length > 0 && (
+                <div class="compact-card-thumb" style={`background-image: url('${evt.photos[0]}')`}></div>
+              )}
+            </div>
+            {evt.shortSummary && (
+               <div class="compact-card-body">
+                  <p class="compact-summary">
+                     {evt.shortSummary.length > 110 ? evt.shortSummary.substring(0, 110) + '...' : evt.shortSummary}
+                  </p>
+               </div>
+            )}
+            {/* Visual affordance for clicking */}
+            <div class="compact-read-more" style={`border-top: 1px solid ${catInfo.color}15; color: ${catInfo.color};`}>
+               <span>Deep Dive</span>
+               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </div>
+      )})}
+
+      <div id="no-results-msg" class="no-results" style="display: none;">
+         No events precisely match these filters.
+      </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Modal / Bottom Sheet Component */}
+  <dialog id="event-modal" class="modern-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div id="modal-meta" class="modal-meta"></div>
+        <button class="modal-close-btn" id="modal-close" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-scroll-area">
+        <h2 id="modal-title" class="modal-title"></h2>
+        <p id="modal-summary" class="modal-summary"></p>
+        
+        <div id="modal-gallery" class="modal-gallery"></div>
+        
+        <div id="modal-quotes" class="modal-quotes"></div>
+        
+        <div id="modal-description" class="markdown-body"></div>
+        
+        <div id="modal-videos-section"></div>
+        
+        <div id="modal-sources-section"></div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Multi-select Filter Bottom Sheet -->
+  <dialog id="filter-modal" class="bottom-sheet">
+    <div class="bottom-sheet-header">
+      <h2>Refine Timeline</h2>
+      <button class="modal-close-btn" onclick="document.getElementById('filter-modal').close()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="bottom-sheet-body">
+      
+      <div class="filter-group block-group">
+        <h3 class="filter-section-title">Theological Category</h3>
+        <div class="checkbox-grid one-column">
+           {dynamicCategories.map((cat, idx) => {
+             const cColor = categoryDict[cat.id]?.color || '#2563eb';
+             return (
+             <label class="checkbox-label cat-label">
+                <input type="checkbox" checked name="filter-category" value={cat.id} style={`accent-color: ${cColor}`} />
+                <span style={`color: ${cColor}; font-weight: 700;`}>{cat.name}</span>
+             </label>
+           )})}
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3 class="filter-section-title">Century</h3>
+        <div class="checkbox-grid">
+           {uniqueCenturies.map(c => (
+             <label class="checkbox-label">
+                <input type="checkbox" checked name="filter-century" value={c} />
+                <span>{c}</span>
+             </label>
+           ))}
+        </div>
+      </div>
+      
+      <div class="filter-group">
+        <h3 class="filter-section-title">Geography (By Country)</h3>
+        <div class="checkbox-grid">
+           {uniqueCountries.map(loc => (
+             <label class="checkbox-label">
+                <input type="checkbox" checked name="filter-country" value={loc} />
+                <span>{loc}</span>
+             </label>
+           ))}
+        </div>
+      </div>
+
+    </div>
+  </dialog>
+
+
+
+  
+
+  
+
+
+</divinity-timeline-app>
+</Layout>
+
+<script>
+import '../../components/timeline/DivinityTimelineApp.js';
+</script>

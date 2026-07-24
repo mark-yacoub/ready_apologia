@@ -268,3 +268,23 @@ This document defines the structured browser automation test cases for Ready Apo
 6.  **Action**: Navigate back to `/ready_apologia/quran/86` and click the Verse 1 text again (`#v-1 .verse-text-link`).
 7.  **Verification**:
     *   Confirm that this time, it dynamically redirects to the new preferred tab (if the evidence is available for that verse) instead of defaulting to Debunking Miracles.
+
+---
+
+## Test Case 19: Divinity Timeline Filtering & Deep Dive Modal (Desktop View - 1024x768)
+1.  **Action**: Navigate to `http://localhost:4321/ready_apologia/discover/divinity-timeline`.
+2.  **Verification**:
+    *   Confirm the page renders the Archaeological Evidence of the Divine Christ timeline context.
+    *   Verify that timeline events (e.g. `.timeline-event`) are visible on the page.
+    *   Verify that no console errors are thrown while parsing timeline payloads.
+3.  **Action**: Click the "Filters" button (`.filter-trigger-btn`) to open the settings modal.
+4.  **Verification**:
+    *   Confirm the bottom sheet/modal (`#filter-modal`) opens successfully.
+5.  **Action**: Uncheck a few checkboxes under "Theological Category" (e.g., uncheck 'Magic').
+6.  **Verification**:
+    *   Confirm that the page DOM reflects the CSS change and only nodes matching active filters remain visible, while hidden cards receive `display: none !important` via the dynamic style block.
+7.  **Action**: Close the filter modal, and click on an available timeline card's "Deep Dive" button (`.timeline-card-compact`).
+8.  **Verification**:
+    *   Confirm the Deep Dive modal (`#event-modal`) opens.
+    *   Verify the title, category, and date badge render without any XSS leakage (DOMPurify execution passes successfully).
+    *   Verify that `Videos` or `Primary Sources & Articles` sections render cleanly via the parsed `<template>` elements.
