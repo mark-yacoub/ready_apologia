@@ -11,9 +11,10 @@ class DivinityTimelineApp extends HTMLElement {
         this.totalCenturies = parseInt(dataEl.dataset.totalCents || '0', 10);
         this.totalCountries = parseInt(dataEl.dataset.totalCountries || '0', 10);
         this.totalCategories = parseInt(dataEl.dataset.totalCats || '0', 10);
+        this.basePath = this.getAttribute('data-base-url') || '';
         
         try {
-            const response = await fetch('/api/timeline-data.json');
+            const response = await fetch(`${this.basePath}/api/timeline-data.json`);
             if (response.ok) {
                 const eventsData = await response.json();
                 eventsData.forEach(e => { this.timelineEventsData[e.id] = e; });
@@ -81,7 +82,7 @@ class DivinityTimelineApp extends HTMLElement {
             
             event.photos.forEach(p => {
                 const img = document.createElement('img');
-                img.src = p;
+                img.src = `${this.basePath}/media/divinity_timeline/${p}`;
                 img.className = 'modal-gallery-img';
                 img.alt = "Timeline Photo";
                 container.appendChild(img);

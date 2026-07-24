@@ -26,7 +26,7 @@ if (optimizedThumbnail && optimizedThumbnail.includes('images.unsplash.com')) {
   <div class="card-image-wrap">
     {optimizedThumbnail ? (
       <img 
-        src={optimizedThumbnail} 
+        src={optimizedThumbnail.startsWith('/') ? `${base}${optimizedThumbnail}` : optimizedThumbnail} 
         alt={card.title} 
         loading="lazy" 
         decoding="async"

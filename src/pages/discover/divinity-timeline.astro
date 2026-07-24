@@ -35,10 +35,11 @@ dynamicCategories.forEach((cat, index) => {
 });
 
 const pageDesc = "Interactive Timeline map tracing Pre-Nicene Christology.";
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
 <Layout title="Archaeological Evidence of the Divine Christ" description={pageDesc} theme="timeline-mode">
-<divinity-timeline-app>
+<divinity-timeline-app data-base-url={base}>
 
   <!-- Data Store for Astro Transitions -->
   <div id="timeline-data-store" style="display:none;"
@@ -120,7 +121,7 @@ const pageDesc = "Interactive Timeline map tracing Pre-Nicene Christology.";
               </div>
               
               {evt.photos && evt.photos.length > 0 && (
-                <div class="compact-card-thumb" style={`background-image: url('${evt.photos[0]}')`}></div>
+                <div class="compact-card-thumb" style={`background-image: url('${base}/media/divinity_timeline/${evt.photos[0]}')`}></div>
               )}
             </div>
             {evt.shortSummary && (
