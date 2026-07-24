@@ -11,6 +11,10 @@ export default defineConfig({
   base: '/',
   // Since we are doing Scenario A (Static Site), we want 'static' output (default)
   output: 'static',
+  redirects: {
+    '/topics': '/evidence',
+    '/topics/[evidence_id]': '/evidence/[evidence_id]',
+  },
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'viewport'
