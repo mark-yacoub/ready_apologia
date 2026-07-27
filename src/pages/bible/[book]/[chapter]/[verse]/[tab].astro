@@ -6,10 +6,11 @@ import ManuscriptCarousel from '../../../../../components/ManuscriptCarousel.jsx
 import VideosGrid from '../../../../../components/VideosGrid.astro';
 import { R2_BASE_URL } from '../../../../../utils/cdn_config.js';
 import { getBibleOgImage } from '../../../../../utils/ogImageResolver.js';
-import { query } from '../../../../../db.js';
 import booksMeta from '../../../../../data/books_meta.json';
 import { parseMarkdown } from '../../../../../utils/markdown.js';
 import { mapLxxToMt, mapMtToLxx } from '../../../../../utils/scripture_mapper.js';
+import SourceFooter from '../../../../../components/SourceFooter.astro';
+import { getEvidenceCounts, getFormattedManuscriptsByVerseId, getContradictionsByVerseId, getApologeticsByVerseId, getRawVideosByVerseId } from '../../../../../utils/evidence_repository.js';
 import { BUILD_BOOKS } from '../../../../../utils/build_config.js';
 import { getScriptureVerseText, getScriptureVerseTextById } from '../../../../../utils/scripture_service.js';
 import { enrichVideosWithVerses } from '../../../../../utils/video_service.js';
@@ -44,28 +45,26 @@ export async function getStaticPaths() {
 const { book, chapter, verse, tab } = Astro.params;
 const verseId = `${book}_${chapter}_${verse}`;
 
+// 1.5 Pre-compute O(1) books map
+const booksMetaMap = {};
+booksMeta.nt.forEach(b => booksMetaMap[b.id] = b);
+booksMeta.ot.forEach(b => booksMetaMap[b.id] = b);
+
 // 2. Find Book Details
-const isNT = booksMeta.nt.some(b => b.id === book);
-const bookMeta = isNT
-  ? booksMeta.nt.find(b => b.id === book)
-  : booksMeta.ot.find(b => b.id === book);
+const bookMeta = booksMetaMap[book];
 
 if (!bookMeta) {
   return Astro.redirect('/404');
 }
+
+const isNT = booksMeta.nt.some(b => b.id === book);
 
 const mtObj = mapLxxToMt(book, chapter, verse);
 const mtId = `${mtObj.book}_${mtObj.chapter}_${mtObj.verse}`;
 const checkId = isNT ? verseId : mtId;
 
 // 3. Query active evidence counts
-const msCount = isNT
-  ? query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse WHERE verse_id = :verseId", { verseId })[0].count
-  : query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse_ot WHERE (verse_id = :lxxId AND v11n_type = 'LXX') OR (verse_id = :mtId AND v11n_type = 'MT')", { lxxId: verseId, mtId })[0].count;
-
-const ctCount = query("SELECT COUNT(DISTINCT title) as count FROM contradictions WHERE verse1 = :checkId OR verse2 = :checkId", { checkId })[0].count;
-const apCount = query("SELECT COUNT(DISTINCT title) as count FROM apologetics WHERE verse = :checkId", { checkId })[0].count;
-const vdCount = query("SELECT COUNT(DISTINCT video_id) as count FROM short_per_verse WHERE verse_id = :checkId", { checkId })[0].count;
+const { msCount, ctCount, apCount, vdCount } = getEvidenceCounts(verseId, mtId, checkId, isNT);
 
 // 3.5 Load Verse Text
 const verseText = getScriptureVerseText(book, chapter, verse);
@@ -77,118 +76,34 @@ let apologetics = [];
 let videos = [];
 
 if (tab === 'manuscripts') {
-  const rawManuscripts = isNT ? query(`
-    SELECT m.image_name, mm.*
-    FROM manuscript_per_verse m
-    LEFT JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id
-    WHERE m.verse_id = :verseId
-    ORDER BY mm.earliest_date ASC
-  `, { verseId }) : query(`
-    SELECT m.image_name, mm.*
-    FROM manuscript_per_verse_ot m
-    LEFT JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id
-    WHERE (m.verse_id = :lxxId AND m.v11n_type = 'LXX')
-       OR (m.verse_id = :mtId AND m.v11n_type = 'MT')
-    ORDER BY mm.earliest_date ASC
-  `, { lxxId: verseId, mtId });
-
-  // Automatic Page/Scan Indexing (Prevents duplicates confusion for P66, etc.)
-  const msCounts = {};
-  rawManuscripts.forEach(ms => {
-    if (ms.ms_id) {
-      msCounts[ms.ms_id] = (msCounts[ms.ms_id] || 0) + 1;
-    }
-  });
-
-  const msTracker = {};
-  manuscripts = rawManuscripts.map(ms => {
-    const total = msCounts[ms.ms_id] || 0;
-    let displayName = ms.name || ms.ms_id;
-
-    if (total > 1) {
-      msTracker[ms.ms_id] = (msTracker[ms.ms_id] || 0) + 1;
-      displayName = `${ms.name || ms.ms_id} (Scan ${msTracker[ms.ms_id]})`;
-    }
-
-    return {
-      ...ms,
-      name: displayName
-    };
-  });
+  manuscripts = getFormattedManuscriptsByVerseId(verseId, mtId, isNT);
 }
 
 if (tab === 'contradictions') {
-  contradictions = query(`
-    SELECT c.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright,
-           pw.name as work_name, pw.url as work_url,
-           pf.id as father_id, pf.name as father_name, pf.year as father_year, pf.icon as father_icon,
-           CASE
-             WHEN pf.id IS NOT NULL THEN 1
-             WHEN c.src = 'answering_islam' THEN 2
-             WHEN c.src = 'tektonics' THEN 3
-             WHEN c.src = 'apologetic_apologetics_press' THEN 4
-             WHEN c.src = 'apologetic_defending_inerrancy' THEN 5
-             WHEN c.src = 'carm' THEN 6
-             WHEN c.src = 'gotquestions' THEN 7
-             WHEN c.src = 'answersingenesis' THEN 8
-             ELSE 9
-           END as sort_order
-    FROM contradictions c
-    LEFT JOIN apologetics_meta m ON c.src = m.id
-    LEFT JOIN patristics_works pw ON c.src = pw.id
-    LEFT JOIN patristics_fathers pf ON pw.father_id = pf.id
-    WHERE c.verse1 = :checkId OR c.verse2 = :checkId
-    GROUP BY c.title
-    ORDER BY sort_order ASC, pf.year ASC
-  `, { checkId });
+  contradictions = getContradictionsByVerseId(checkId);
 }
 
 if (tab === 'apologetics') {
-  apologetics = query(`
-    SELECT a.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright,
-           pw.name as work_name, pw.url as work_url,
-           pf.id as father_id, pf.name as father_name, pf.year as father_year, pf.icon as father_icon,
-           CASE
-             WHEN pf.id IS NOT NULL THEN 1
-             WHEN a.src = 'answering_islam' THEN 2
-             WHEN a.src = 'tektonics' THEN 3
-             WHEN a.src = 'apologetic_apologetics_press' THEN 4
-             WHEN a.src = 'apologetic_defending_inerrancy' THEN 5
-             WHEN a.src = 'carm' THEN 6
-             WHEN a.src = 'gotquestions' THEN 7
-             WHEN a.src = 'answersingenesis' THEN 8
-             ELSE 9
-           END as sort_order
-    FROM apologetics a
-    LEFT JOIN apologetics_meta m ON a.src = m.id
-    LEFT JOIN patristics_works pw ON a.src = pw.id
-    LEFT JOIN patristics_fathers pf ON pw.father_id = pf.id
-    WHERE a.verse = :checkId
-    GROUP BY a.title
-    ORDER BY sort_order ASC, pf.year ASC
-  `, { checkId });
+  apologetics = getApologeticsByVerseId(checkId);
 }
 
 if (tab === 'videos') {
-  const rawVideos = query(`
-    SELECT sm.*
-    FROM short_per_verse spv
-    JOIN shorts_metadata sm ON spv.video_id = sm.video_id
-    WHERE spv.verse_id = :checkId
-  `, { checkId });
+  const rawVideos = getRawVideosByVerseId(checkId);
   videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 }
 
 function formatBookIdToName(id) {
   if (!id) return '';
   const bookCode = id.split('_')[0];
-  const found = booksMeta.nt.find(b => b.id === bookCode) || booksMeta.ot.find(b => b.id === bookCode);
+  const found = booksMetaMap[bookCode];
   return found ? found.name : bookCode.toUpperCase();
 }
 
 function formatVerseIdToLabel(id) {
   if (!id) return '';
   const p = id.split('_');
+  if (!booksMetaMap[p[0]]) return '';
+
   if (booksMeta.ot.some(b => b.id === p[0])) {
     const m = mapMtToLxx(p[0], p[1], p[2]);
     return `${formatBookIdToName(id)} ${m.chapter}:${m.verse}`;
@@ -196,15 +111,15 @@ function formatVerseIdToLabel(id) {
   return `${formatBookIdToName(id)} ${p[1]}:${p[2]}`;
 }
 
-function formatVerseIdToLink(id) {
+function formatVerseIdToLink(id, targetTab = 'contradictions') {
   if (!id) return '';
   const p = id.split('_');
   const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
   if (booksMeta.ot.some(b => b.id === p[0])) {
     const m = mapMtToLxx(p[0], p[1], p[2]);
-    return `${base}/bible/${m.book}/${m.chapter}/${m.verse}/contradictions`;
+    return `${base}/bible/${m.book}/${m.chapter}/${m.verse}/${targetTab}`;
   }
-  return `${base}/bible/${p[0]}/${p[1]}/${p[2]}/contradictions`;
+  return `${base}/bible/${p[0]}/${p[1]}/${p[2]}/${targetTab}`;
 }
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
@@ -367,31 +282,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
                     </div>
 
                     {/* Subtle Source Meta Credit Footer */}
-                    <div class="card-footer-source-box select-none">
-                      {ct.father_id ? (
-                        <div class="patristics-meta-box">
-                          <img src={ct.father_icon} alt={ct.father_name} class="father-icon" loading="lazy" decoding="async" />
-                          <div class="patristics-text">
-                            <span class="father-name-text">{ct.father_name} <span class="father-year">({ct.father_year > 0 ? `AD ${ct.father_year}` : `${Math.abs(ct.father_year)} BC`})</span></span>
-                            <span class="work-name-text">{ct.work_name}</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div class="source-meta-text">
-                          <span class="source-meta-label">Source:</span>
-                          <span class="source-name-text">{ct.meta_name || ct.src}</span>
-                          {ct.meta_copyright && <span class="source-copyright-text">({ct.meta_copyright})</span>}
-                        </div>
-                      )}
-                      {(ct.work_url || ct.meta_url) && (
-                        <a href={ct.work_url || ct.meta_url} target="_blank" rel="noopener noreferrer" class="source-visit-pill-btn" title="Visit website page source">
-                          <span>{ct.father_id ? 'Read Text' : 'Visit Source'}</span>
-                          <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
-                        </a>
-                      )}
-                    </div>
+                    <SourceFooter item={ct} />
 
                   </div>
 
@@ -445,31 +336,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
                     </div>
 
                     {/* Subtle Source Meta Credit Footer */}
-                    <div class="card-footer-source-box select-none">
-                      {ap.father_id ? (
-                        <div class="patristics-meta-box">
-                          <img src={ap.father_icon} alt={ap.father_name} class="father-icon" loading="lazy" decoding="async" />
-                          <div class="patristics-text">
-                            <span class="father-name-text">{ap.father_name} <span class="father-year">({ap.father_year > 0 ? `AD ${ap.father_year}` : `${Math.abs(ap.father_year)} BC`})</span></span>
-                            <span class="work-name-text">{ap.work_name}</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div class="source-meta-text">
-                          <span class="source-meta-label">Source:</span>
-                          <span class="source-name-text">{ap.meta_name || ap.src}</span>
-                          {ap.meta_copyright && <span class="source-copyright-text">({ap.meta_copyright})</span>}
-                        </div>
-                      )}
-                      {(ap.work_url || ap.meta_url) && (
-                        <a href={ap.work_url || ap.meta_url} target="_blank" rel="noopener noreferrer" class="source-visit-pill-btn" title="Visit website page source">
-                          <span>{ap.father_id ? 'Read Text' : 'Visit Source'}</span>
-                          <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
-                        </a>
-                      )}
-                    </div>
+                    <SourceFooter item={ap} />
 
                   </div>
 

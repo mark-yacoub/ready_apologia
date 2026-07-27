@@ -1,0 +1,133 @@
+---
+/**
+ * @typedef {Object} EvidenceItem
+ * @property {string} [father_id]
+ * @property {string} [father_icon]
+ * @property {string} [father_name]
+ * @property {number} [father_year]
+ * @property {string} [work_name]
+ * @property {string} [meta_name]
+ * @property {string} [src]
+ * @property {string} [meta_copyright]
+ * @property {string} [work_url]
+ * @property {string} [meta_url]
+ */
+
+/** @type {{ item: EvidenceItem }} */
+const { item } = Astro.props;
+---
+
+{(item.father_id || item.meta_name || item.src) && (
+  <div class="card-footer-source-box select-none">
+    {item.father_id ? (
+      <div class="patristics-meta-box">
+        <img src={item.father_icon} alt={item.father_name} class="father-icon" loading="lazy" decoding="async" />
+        <div class="patristics-text">
+          <span class="father-name-text">{item.father_name} <span class="father-year">({item.father_year > 0 ? `AD ${item.father_year}` : `${Math.abs(item.father_year)} BC`})</span></span>
+          <span class="work-name-text">{item.work_name}</span>
+        </div>
+      </div>
+    ) : (
+      <div class="source-meta-text">
+        <span class="source-meta-label">Source:</span>
+        <span class="source-name-text">{item.meta_name || item.src}</span>
+        {item.meta_copyright && <span class="source-copyright-text">({item.meta_copyright})</span>}
+      </div>
+    )}
+    {(item.work_url || item.meta_url) && (
+      <a href={item.work_url || item.meta_url} target="_blank" rel="noopener noreferrer" class="source-visit-pill-btn" title="Visit website page source">
+        <span>{item.father_id ? 'Read Text' : 'Visit Source'}</span>
+        <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </a>
+    )}
+  </div>
+)}
+
+<style>
+	/* Source Meta Credit Footer Layouts */
+	.card-footer-source-box {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-top: 1px dashed var(--color-outline-variant);
+		padding-top: 10px;
+		margin-top: 4px;
+	}
+	.source-meta-text {
+		font-size: 10px;
+		color: var(--color-on-surface-variant);
+		opacity: 0.95;
+	}
+	.source-meta-label {
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.3px;
+		margin-right: 4px;
+	}
+	.source-name-text {
+		font-weight: 700;
+	}
+	.source-copyright-text {
+		font-style: italic;
+		margin-left: 4px;
+		opacity: 0.85;
+	}
+
+	.source-visit-pill-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 3px 8px;
+		border-radius: 5px;
+		background-color: var(--color-surface-container-low);
+		border: 1px solid var(--color-outline-variant);
+		color: var(--color-primary);
+		font-size: 10px;
+		font-weight: 800;
+		text-decoration: none;
+		transition: all 0.15s;
+	}
+	.source-visit-pill-btn:hover {
+		background-color: var(--color-outline-variant);
+		color: var(--color-secondary);
+	}
+	.source-visit-pill-btn svg {
+		stroke: currentColor;
+		fill: none;
+	}
+
+	/* Patristics Footer Styling */
+	.patristics-meta-box {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+	.father-icon {
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 1px solid var(--color-outline-variant);
+	}
+	.patristics-text {
+		display: flex;
+		flex-direction: column;
+	}
+	.father-name-text {
+		font-size: 12px;
+		font-weight: 800;
+		color: var(--color-primary);
+	}
+	.father-year {
+		font-weight: 600;
+		color: var(--color-on-surface-variant);
+		font-size: 10px;
+	}
+	.work-name-text {
+		font-size: 10px;
+		font-style: italic;
+		color: var(--color-on-surface-variant);
+	}
+</style>

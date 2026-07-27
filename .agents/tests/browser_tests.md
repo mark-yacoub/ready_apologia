@@ -8,21 +8,21 @@ This document defines the structured browser automation test cases for Ready Apo
 
 ## Test Case 1: Initial Redirect Gate & Last Visited Persistence
 1.  **Preparation**: Clear all browser storage, cookies, and `localStorage`.
-2.  **Action**: Navigate to root url `http://localhost:8080/ready_apologia/`.
+2.  **Action**: Navigate to root url `http://localhost:8080/`.
 3.  **Verification**:
-    *   Confirm the page redirects automatically to `/ready_apologia/bible/jn/1`.
-    *   Verify `localStorage.getItem('lastVisitedUrl')` is initialized to `/ready_apologia/bible/jn/1`.
-4.  **Action**: Navigate to Genesis 1 by typing `http://localhost:8080/ready_apologia/bible/gn/1` in the browser or clicking the left sidebar.
+    *   Confirm the page redirects automatically to `/bible/jn/1`.
+    *   Verify `localStorage.getItem('lastVisitedUrl')` is initialized to `/bible/jn/1`.
+4.  **Action**: Navigate to Genesis 1 by typing `http://localhost:8080/bible/gn/1` in the browser or clicking the left sidebar.
 5.  **Verification**:
-    *   Verify `localStorage.getItem('lastVisitedUrl')` updates to `/ready_apologia/bible/gn/1`.
-6.  **Action**: Navigate to root url `http://localhost:8080/ready_apologia/`.
+    *   Verify `localStorage.getItem('lastVisitedUrl')` updates to `/bible/gn/1`.
+6.  **Action**: Navigate to root url `http://localhost:8080/`.
 7.  **Verification**:
-    *   Confirm the page redirects to `/ready_apologia/bible/gn/1`.
+    *   Confirm the page redirects to `/bible/gn/1`.
 
 ---
 
 ## Test Case 2: Verse Selection & Highlighting (Mobile View - 375x667)
-1.  **Action**: Go to `/ready_apologia/bible/jn/1` in mobile viewport.
+1.  **Action**: Go to `/bible/jn/1` in mobile viewport.
 2.  **Action**: Hover or touch (without releasing) Verse 3 text link (`.verse-text-link-wrapper`).
 3.  **Verification**:
     *   Verify that Verse 3 row receives select/highlight styles (e.g. background change) while held.
@@ -33,24 +33,24 @@ This document defines the structured browser automation test cases for Ready Apo
 ---
 
 ## Test Case 3: Mobile Pager Navigation & Swipes (Mobile View - 375x667)
-1.  **Action**: Go to `/ready_apologia/bible/jn/1` in mobile viewport.
+1.  **Action**: Go to `/bible/jn/1` in mobile viewport.
 2.  **Action**: Locate the floating right arrow pager button (`.pager-btn` containing `Chapter 2 →`) and click it.
 3.  **Verification**:
-    *   Confirm the reader transitions smoothly to `/ready_apologia/bible/jn/2`.
+    *   Confirm the reader transitions smoothly to `/bible/jn/2`.
     *   Verify the top header branding text swaps to "John 2" as you scroll down.
 4.  **Action**: Click the floating left arrow pager button (`.pager-btn` containing `← Chapter 1`).
 5.  **Verification**:
-    *   Confirm the reader transitions back to `/ready_apologia/bible/jn/1`.
+    *   Confirm the reader transitions back to `/bible/jn/1`.
 
 ---
 
 ## Test Case 4: Evidence Tab Switching & Custom Order Persistence (Mobile View - 375x667)
-1.  **Action**: Navigate directly to `/ready_apologia/bible/jn/1/1`.
+1.  **Action**: Navigate directly to `/bible/jn/1/1`.
 2.  **Verification**:
-    *   Verify it redirects to `/ready_apologia/bible/jn/1/1/manuscripts`.
+    *   Verify it redirects to `/bible/jn/1/1/manuscripts`.
 3.  **Action**: Click the "Apologetics" tab in the segmented pill bar.
 4.  **Verification**:
-    *   Confirm URL changes to `/ready_apologia/bible/jn/1/1/apologetics` and the apologetics text renders.
+    *   Confirm URL changes to `/bible/jn/1/1/apologetics` and the apologetics text renders.
 5.  **Action**: Click the settings ellipsis button (`#open-tab-settings-btn`) to open the "Customize Tab Order" modal.
 6.  **Action**: Move "Apologetics" to the top of the list and click "Done".
 7.  **Verification**:
@@ -61,12 +61,12 @@ This document defines the structured browser automation test cases for Ready Apo
     *   Confirm the custom tab order persists.
 10. **Action**: Click the back navigation link `← John 1`.
 11. **Verification**:
-    *   Confirm it returns to the scripture reader at `/ready_apologia/bible/jn/1`.
+    *   Confirm it returns to the scripture reader at `/bible/jn/1`.
 
 ---
 
 ## Test Case 5: Topics Explorer Scroll Controls (Mobile View - 375x667)
-1.  **Action**: Navigate to `/ready_apologia/topics/divinity_of_christ`.
+1.  **Action**: Navigate to `/topics/divinity_of_christ`.
 2.  **Verification**:
     *   Verify the master tab bar containing NT, OT, Fathers, Ancient Judaism (`.scrollable-track-wrapper`) has a right scroll arrow overlay visible on the right edge.
 3.  **Action**: Click the right scroll arrow.
@@ -77,19 +77,19 @@ This document defines the structured browser automation test cases for Ready Apo
 ---
 
 ## Test Case 6: Topics List Navigation, Highlight Toggling & Scripture Sync (Mobile View - 375x667)
-1.  **Action**: Clear `localStorage` and navigate to root `http://localhost:8080/ready_apologia/` (redirects to John 1).
-2.  **Action**: Click the "Topics" tab in the bottom nav to go to `/ready_apologia/topics`.
+1.  **Action**: Clear `localStorage` and navigate to root `http://localhost:8080/` (redirects to John 1).
+2.  **Action**: Click the "Topics" tab in the bottom nav to go to `/topics`.
 3.  **Verification**:
     *   Verify the list of topics displays.
     *   Verify that each card has a prominent red "Explore" button (with a right chevron arrow) on the right edge.
 4.  **Action**: Click the "Explore" button on the "Divinity of Christ" card.
 5.  **Verification**:
-    *   Confirm it navigates to `/ready_apologia/topics/divinity_of_christ`.
-6.  **Action**: Go back to `/ready_apologia/topics`.
+    *   Confirm it navigates to `/topics/divinity_of_christ`.
+6.  **Action**: Go back to `/topics`.
 7.  **Action**: Click the "Highlight in Scripture" toggle switch inside the "Divinity of Christ" card.
 8.  **Verification**:
     *   Confirm `localStorage.getItem('activeTopics')` is set to `["divinity_of_christ"]`.
-9.  **Action**: Click the "Scripture" tab in the bottom nav to go back to John 1 reader (`/ready_apologia/bible/jn/1`).
+9.  **Action**: Click the "Scripture" tab in the bottom nav to go back to John 1 reader (`/bible/jn/1`).
 10. **Verification**:
     *   Confirm Verse 1 (`#1` row) has the `.type-topic` class applied.
     *   Verify the Divinity of Christ commentary pill (`.verse-topic-pills`) is appended to Verse 1 and is clickable.
@@ -97,13 +97,13 @@ This document defines the structured browser automation test cases for Ready Apo
 ---
 
 ## Test Case 7: Desktop Layout Auto-Docking (Desktop View - 1024x768)
-1.  **Action**: Open `/ready_apologia/bible/jn/1` in desktop view.
+1.  **Action**: Open `/bible/jn/1` in desktop view.
 2.  **Verification**:
     *   Verify the Bottom Navigation tab bar is hidden (`display: none`).
     *   Verify the collapsible sidebar navigation is permanently docked on the **left** side of the screen (`order: -1`).
 3.  **Action**: Click the section header "Old Testament" in the sidebar, click "Genesis", and click chapter "1".
 4.  **Verification**:
-    *   Confirm it navigates successfully to `/ready_apologia/bible/gn/1`.
+    *   Confirm it navigates successfully to `/bible/gn/1`.
 
 ---
 
@@ -115,12 +115,12 @@ This document defines the structured browser automation test cases for Ready Apo
 ---
 
 ## Test Case 9: Multi-Topic Highlighting & Navigation Persistence (SPA Transition)
-1.  **Action**: Clear `localStorage` and navigate to root `http://localhost:8080/ready_apologia/` (redirects to John 1).
-2.  **Action**: Click the "Topics" tab in the bottom nav to go to `/ready_apologia/topics`.
+1.  **Action**: Clear `localStorage` and navigate to root `http://localhost:8080/` (redirects to John 1).
+2.  **Action**: Click the "Topics" tab in the bottom nav to go to `/topics`.
 3.  **Action**: Toggle the "Highlight in Scripture" switch to **Active** on every single topic card.
 4.  **Action**: Open the collapsible left navigation sidebar, click on "Old Testament", select "Genesis", and click on chapter "1".
 5.  **Verification**:
-    *   Confirm the reader transitions successfully to `/ready_apologia/bible/gn/1`.
+    *   Confirm the reader transitions successfully to `/bible/gn/1`.
     *   Verify that Verse 2 (`#2` row) has the `.type-topic` class applied.
     *   Verify the Divinity of the Holy Spirit and Trinity commentary pills (`.verse-topic-pills`) are successfully appended to Verse 2 and are interactive.
     *   Verify that **zero console errors** (specifically, `SyntaxError` redeclaration errors) are thrown during or after navigation.
@@ -136,7 +136,7 @@ This document defines the structured browser automation test cases for Ready Apo
 ---
 
 ## Test Case 11: Quran Competing Codex Pill & Codex Page Navigation
-1.  **Action**: Navigate to Surah 2 reader (`http://localhost:8080/ready_apologia/quran/2`).
+1.  **Action**: Navigate to Surah 2 reader (`http://localhost:8080/quran/2`).
 2.  **Verification**:
     *   Confirm the page renders Surah 2 verses.
 3.  **Action**: Scroll down to Verse 184 (`#v-184`).
@@ -148,13 +148,13 @@ This document defines the structured browser automation test cases for Ready Apo
     *   Verify that both Arabic (`.text-arabic`) and English (`.text-english`) texts, as well as the hyperlinked hadith reference (`.hadith-title-link`), are visible inside the variant cards.
 7.  **Action**: Click the "Read as Abdullah bin Umar" button (`.read-as-btn`) inside one of the variant cards.
 8.  **Verification**:
-    *   Confirm the browser navigates smoothly to the full companion codex page (`/ready_apologia/quran/codex/abdullah-bin-umar`).
+    *   Confirm the browser navigates smoothly to the full companion codex page (`/quran/codex/abdullah-bin-umar`).
     *   Verify that the full codex page displays the companion title, bio section, and structured Uthmanic comparison cards cleanly without layout shifts or console errors.
 
 ---
 
 ## Test Case 12: Quran Qira'at Variant Readings & Inline Highlighting
-1.  **Action**: Navigate to Surah 1 reader (`http://localhost:8080/ready_apologia/quran/1`).
+1.  **Action**: Navigate to Surah 1 reader (`http://localhost:8080/quran/1`).
 2.  **Verification**:
     *   Confirm the page renders Surah 1 verses.
 3.  **Action**: Inspect Verse 4 (`#v-4`).
@@ -167,7 +167,7 @@ This document defines the structured browser automation test cases for Ready Apo
     *   Confirm the `<details class="qiraat-details">` element expands to reveal the Qira'at variant card (`.qiraat-card`).
     *   Verify the side-by-side diff box (`.qiraat-diff`) cleanly displays `Original (Hafs)` on the left and `Variant Reading` on the right, separated by a divider icon.
     *   Verify the description callout box (`.qiraat-description`) and the list of canonical readers (`.qiraat-readers`) are visible and cleanly formatted.
-7.  **Action**: Navigate to Surah 2 reader and scroll to Verse 184 (`http://localhost:8080/ready_apologia/quran/2#v-184`).
+7.  **Action**: Navigate to Surah 2 reader and scroll to Verse 184 (`http://localhost:8080/quran/2#v-184`).
 8.  **Verification**:
     *   Confirm that Verse 184 displays **both** the red `COMPETING CODEX` pill (`.competing-pill`) and the yellow/orange Qira'at variant reading pill (`.qiraat-pill`) simultaneously.
     *   Verify that expanding both pills independently works cleanly without layout collisions or console errors.
@@ -176,7 +176,7 @@ This document defines the structured browser automation test cases for Ready Apo
 ---
 
 ## Test Case 13: Quran Evidence & Filters Home Page & Variant Navigation
-1.  **Action**: Navigate to `http://localhost:8080/ready_apologia/quran`.
+1.  **Action**: Navigate to `http://localhost:8080/quran`.
 2.  **Verification**:
     *   Confirm the page renders the Evidence & Filters home page.
     *   Verify the top header reads "Evidence & Filters" and the surah selector dropdown chevron is completely hidden.
@@ -184,18 +184,18 @@ This document defines the structured browser automation test cases for Ready Apo
     *   Verify the "Competing Codices" card displays companion pills with numerical counts next to them.
 3.  **Action**: Click the `Abdullah bin Umar` pill inside the Competing Codices card.
 4.  **Verification**:
-    *   Confirm the browser navigates successfully to `/ready_apologia/quran/codex/abdullah-bin-umar`.
-5.  **Action**: Navigate back to `http://localhost:8080/ready_apologia/quran`.
+    *   Confirm the browser navigates successfully to `/quran/codex/abdullah-bin-umar`.
+5.  **Action**: Navigate back to `http://localhost:8080/quran`.
 6.  **Action**: Click the `Change Meaning (general semantic shift)` pill inside the Qiraat variants by effect card.
 7.  **Verification**:
-    *   Confirm the browser navigates successfully to `/ready_apologia/quran/variant/effect-change-meaning-general-semantic-shift`.
+    *   Confirm the browser navigates successfully to `/quran/variant/effect-change-meaning-general-semantic-shift`.
     *   Verify the top header renders "Change Meaning (general semantic shift)" and the dropdown chevron is hidden.
     *   Verify the verses list displays variant cards with the variant words visually highlighted in green.
 
 ---
 
 ## Test Case 14: Quran Verse Manuscript Evidence Drawer
-1.  **Action**: Navigate to Surah 43 reader (`http://localhost:8080/ready_apologia/quran/43`).
+1.  **Action**: Navigate to Surah 43 reader (`http://localhost:8080/quran/43`).
 2.  **Verification**:
     *   Confirm the page renders Surah 43 verses.
 3.  **Action**: Scroll down to Verse 10 (`#v-10`).
@@ -203,7 +203,7 @@ This document defines the structured browser automation test cases for Ready Apo
     *   Verify that the Verse 10 badge tray contains a clickable `.ms-icon` link for manuscript evidence.
 5.  **Action**: Click the manuscript evidence badge icon (`#v-10 .ms-icon`) on Verse 10.
 6.  **Verification**:
-    *   Confirm the browser navigates smoothly to the verse evidence drawer (`/ready_apologia/quran/43/10/manuscripts`).
+    *   Confirm the browser navigates smoothly to the verse evidence drawer (`/quran/43/10/manuscripts`).
     *   Verify that the "Manuscripts" tab is present and marked as active (`.segmented-pill-btn.active`).
     *   Verify the manuscript carousel renders and the manuscript image scan (`.ms-image`) is visible or loading.
     *   Verify that the "Date" prominently displays "AD" formatted numbers, and "Script Style" is displayed in the metadata grid.
@@ -213,7 +213,7 @@ This document defines the structured browser automation test cases for Ready Apo
 ---
 
 ## Test Case 15: Quran Contradictions Evidence Drawer
-1.  **Action**: Navigate to Surah 7 reader (`http://localhost:8080/ready_apologia/quran/7`).
+1.  **Action**: Navigate to Surah 7 reader (`http://localhost:8080/quran/7`).
 2.  **Verification**:
     *   Confirm the page renders Surah 7 verses.
 3.  **Action**: Scroll down to Verse 120 (`#v-120`).
@@ -221,7 +221,7 @@ This document defines the structured browser automation test cases for Ready Apo
     *   Verify that Verse 120 contains a `.verse-badge-tray` displaying the `.ct-icon` (scales icon) for contradictions.
 5.  **Action**: Click the scales icon on Verse 120.
 6.  **Verification**:
-    *   Confirm the browser navigates smoothly to the Contradictions tab (`/ready_apologia/quran/7/120/contradictions`).
+    *   Confirm the browser navigates smoothly to the Contradictions tab (`/quran/7/120/contradictions`).
     *   Verify that the "Contradictions" tab is marked as active (`.segmented-pill-btn.active`) and appears first in the scrollable tab list before Christian Footnotes and Manuscripts.
     *   Verify that the Contradictions box (`.contradiction-details-card`) is fully visible and rendered as a standard view box without a `<details>` accordion wrapper or toggle chevron.
     *   Verify the title displays cleanly with the scales icon inline.
@@ -232,11 +232,11 @@ This document defines the structured browser automation test cases for Ready Apo
 ---
 
 ## Test Case 16: Quran Christian Commentaries & Tafseer Tabs
-1.  **Action**: Navigate directly to a mapped verse tab, for example: `/ready_apologia/quran/1/1/christian-footnotes`.
+1.  **Action**: Navigate directly to a mapped verse tab, for example: `/quran/1/1/christian-footnotes`.
 2.  **Verification**:
     *   Confirm the "Christian Footnotes" tab pill (`christian-footnotes`) is marked active.
     *   Verify the commentary/footnote text and author/source pill are displayed correctly.
-3.  **Action**: Navigate directly to `/ready_apologia/quran/1/1/islamic-commentaries`.
+3.  **Action**: Navigate directly to `/quran/1/1/islamic-commentaries`.
 4.  **Verification**:
     *   Confirm the "Islamic Commentaries" (`islamic-commentaries`) tab is marked active.
     *   Verify the Tafseer Ibn Katheer or Islamic commentary content renders properly inside its display card.
@@ -244,7 +244,7 @@ This document defines the structured browser automation test cases for Ready Apo
 ---
 
 ## Test Case 17: Quran Scientific Errors Tab
-1.  **Action**: Navigate directly to a mapped scientific error verse, e.g., `/ready_apologia/quran/86/6/scientific-errors`.
+1.  **Action**: Navigate directly to a mapped scientific error verse, e.g., `/quran/86/6/scientific-errors`.
 2.  **Verification**:
     *   Confirm the "Scientific Errors" tab is marked active.
     *   Verify the error description, classification details, and callout elements are cleanly rendered within the layout.
@@ -252,27 +252,27 @@ This document defines the structured browser automation test cases for Ready Apo
 ---
 
 ## Test Case 18: Quran Debunking Miracles, Clickable Verse Text & Tab Preference Redirection
-1.  **Action**: Clear `localStorage` and navigate to Surah 86 reader (`http://localhost:8080/ready_apologia/quran/86`).
+1.  **Action**: Clear `localStorage` and navigate to Surah 86 reader (`http://localhost:8080/quran/86`).
 2.  **Verification**:
     *   Confirm Surah 86 renders.
     *   Verify Verse 1 contains the `.dm-icon` (explosion icon) evidence badge colored identically to others.
     *   Verify the Arabic text of Verse 1 is wrapped in a clickable anchor link (`.verse-text-link`).
 3.  **Action**: Click the Arabic text of Verse 1 (`#v-1 .verse-text-link`).
 4.  **Verification**:
-    *   Confirm the browser navigates to `/ready_apologia/quran/86/1`.
-    *   Confirm the `/ready_apologia/quran/86/1` index page automatically redirects to `/ready_apologia/quran/86/1/debunking-miracles` (since Debunking Miracles is configured as the default first tab).
+    *   Confirm the browser navigates to `/quran/86/1`.
+    *   Confirm the `/quran/86/1` index page automatically redirects to `/quran/86/1/debunking-miracles` (since Debunking Miracles is configured as the default first tab).
     *   Verify the "Debunking Miracles" tab is marked active in the segmented bar.
     *   Verify the Claim and Refutation are prominently rendered inside `.debunking-claim-box` and `.debunking-refutation-section`.
     *   Verify the Circular info icon `(i)` button (`.info-icon-btn`) is rendered at the bottom footer.
 5.  **Action**: Click the settings ellipsis button (`#open-tab-settings-btn`) to open "Customize Tab Order". Move a different tab to the top (e.g., jump "Manuscripts" or another available tab above Debunking Miracles) and save.
-6.  **Action**: Navigate back to `/ready_apologia/quran/86` and click the Verse 1 text again (`#v-1 .verse-text-link`).
+6.  **Action**: Navigate back to `/quran/86` and click the Verse 1 text again (`#v-1 .verse-text-link`).
 7.  **Verification**:
     *   Confirm that this time, it dynamically redirects to the new preferred tab (if the evidence is available for that verse) instead of defaulting to Debunking Miracles.
 
 ---
 
 ## Test Case 19: Divinity Timeline Filtering & Deep Dive Modal (Desktop View - 1024x768)
-1.  **Action**: Navigate to `http://localhost:4321/ready_apologia/discover/divinity-timeline`.
+1.  **Action**: Navigate to `http://localhost:4321/discover/divinity-timeline`.
 2.  **Verification**:
     *   Confirm the page renders the Archaeological Evidence of the Divine Christ timeline context.
     *   Verify that timeline events (e.g. `.timeline-event`) are visible on the page.
