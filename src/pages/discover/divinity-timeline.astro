@@ -34,11 +34,12 @@ dynamicCategories.forEach((cat, index) => {
    };
 });
 
-const pageDesc = "Interactive Timeline map tracing Pre-Nicene Christology.";
+const pageDesc = "Explore our interactive timeline of archaeological and historical evidence proving early Christian belief in the divinity of Jesus Christ long before the Council of Nicaea.";
+const pageKeywords = "divinity of Christ, pre-nicene christology, archaeological evidence for Jesus as God, did early christians believe jesus was god, christian apologetics timeline, council of nicaea myth";
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
-<Layout title="Archaeological Evidence of the Divine Christ" description={pageDesc} theme="timeline-mode">
+<Layout title="Archaeological Evidence of the Divine Christ" description={pageDesc} keywords={pageKeywords} ogImage="/media/divinity_timeline/megiddo_mosaic/image_1.jpg" theme="timeline-mode">
 <divinity-timeline-app data-base-url={base}>
 
   <!-- Data Store for Astro Transitions -->

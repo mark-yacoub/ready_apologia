@@ -17,10 +17,6 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 function formatMarkdown(text) {
   if (!text) return '';
   let html = text;
-  
-  // Extract "A Question to Wonder:" into a custom UI box natively
-  html = html.replace(/\*\*A Question to Wonder:\*\*\s*(.*)/g, '<div class="wonder-box"><div class="wonder-title"><span class="wonder-icon">🤔</span> A Question to Wonder</div><div class="wonder-text">$1</div></div>');
-  
   // Images: ![alt](/url) -> Safely inject base URL for Astro production
   html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
      const cleanUrl = url.startsWith('/') ? `${base}${url}` : url;
@@ -39,28 +35,66 @@ function formatMarkdown(text) {
   return html;
 }
 
+// Process raw data midway, avoiding modifications to the upstream source JSON
+const processedData = JSON.parse(JSON.stringify(quranData));
+processedData.forEach(stage => {
+  if (stage.title.includes("Competing Companion")) {
+    stage.component_type = "CODEX_COLUMNS";
+    if (stage.children) {
+      stage.children.forEach(c => {
+        if (c.title.includes("114 vs 111")) {
+          c.component_type = "CODEX_CHILD";
+        }
+      });
+    }
+  }
+  if (stage.title.includes("Uthman's Fire")) stage.component_type = "UTHMANS_FIRE_TIMELINE";
+  if (stage.title.includes("The Qira'at")) stage.component_type = "QIRAAT_TABLE";
+  if (stage.title.includes("Hard Archaeology")) stage.component_type = "SANAA_VIEWER";
+  if (stage.title.includes("The Aftermath & Despair")) stage.component_type = "MISSING_VERSES_GRID";
+  if (stage.title.includes("The theological defense")) stage.component_type = "APOLOGETIC_SHIELD";
+  if (stage.title.includes("Conclusion")) stage.component_type = "CONCLUSION";
+  
+  if (stage.children) {
+    stage.children.forEach(child => {
+      if (child.title.includes("The Prophet Forgets")) child.component_type = "PROPHET_FORGETS";
+      if (child.title.includes("The Single Thread")) child.component_type = "SINGLE_THREAD";
+    });
+  }
+
+  // Deeply extract "A Question to Wonder:" strings into formal JSON UI properties
+  const extractWonder = (node) => {
+    if (node.post_content && node.post_content.includes('**A Question to Wonder:**')) {
+      node.wonder_question = node.post_content.replace('**A Question to Wonder:**', '').trim();
+      delete node.post_content;
+    }
+    if (node.children) node.children.forEach(extractWonder);
+  };
+  extractWonder(stage);
+});
+
 // Prepare stages for the sticky nav bar, ignoring small children for top level items
-const topLevelStages = quranData.map((stage, i) => ({
+const topLevelStages = processedData.map((stage, i) => ({
   id: `stage-${i}`,
   title: stage.title.replace(/^Stage\s+\d+:\s*/i, '') // Strip redundant "Stage X:" prefix
 }));
 
-const pageDesc = "The Preservation Myth of the Quran: Explore the historical timeline dismantling the myth of perfect preservation.";
-const pageKeywords = "quran preservation, myth, uthman, sanaa palimpsest, qiraat";
+const pageDesc = "Dismantling the myth of perfect Quran preservation. Explore the historical timeline involving Uthman's compilation, the Sana'a Palimpsest, missing verses, and competing codices.";
+const pageKeywords = "quran preservation myth, has the quran been changed, uthman quran compilation, sanaa palimpsest, qiraat variants, missing quran verses, textual criticism of the quran, islamic apologetics";
 ---
 
-<Layout title="The Preservation Myth | Ready Apologia" description={pageDesc} keywords={pageKeywords}>
+<Layout title="The Myth of Quranic Preservation: Historical Evidence" description={pageDesc} keywords={pageKeywords} ogImage="/media/quran_preservation/cover.png">
   <div class="article-journey-container">
     {/* Navigation */}
     <JourneyNav stages={topLevelStages} client:load />
 
     {/* Content */}
     <div class="journey-content">
-      {quranData.map((stage, index) => {
+      {processedData.map((stage, index) => {
         const cleanTitle = stage.title.replace(/^Stage\s+\d+:\s*/i, '');
         const isNumberedStage = /^Stage\s+\d+/i.test(stage.title);
         
-        const isConclusion = stage.title.includes("Conclusion");
+        const isConclusion = stage.component_type === 'CONCLUSION';
         
         return (
           <section id={`stage-${index}`} class="journey-stage">
@@ -81,10 +115,10 @@ const pageKeywords = "quran preservation, myth, uthman, sanaa palimpsest, qiraat
             {/* Custom UI Rendering based on specific stages/JSON data */}
             
             {/* Stage 3: Codex Columns */}
-            {stage.title.includes("Competing Companion") && (
+            {stage.component_type === 'CODEX_COLUMNS' && (
               <CodexColumns 
                 client:load 
-                childNode={stage.children.find(c => c.title.includes("114 vs 111"))}
+                childNode={stage.children.find(c => c.component_type === 'CODEX_CHILD')}
               />
             )}
 
@@ -94,7 +128,7 @@ const pageKeywords = "quran preservation, myth, uthman, sanaa palimpsest, qiraat
             )}
 
             {/* Stage 6: Hard Archaeology - Sana'a Images and Viewer */}
-            {stage.title.includes("Hard Archaeology") && stage.sanaa_variants && (
+            {stage.component_type === 'SANAA_VIEWER' && stage.sanaa_variants && (
               <div class="sanaa-section">
                 <SanaaViewer variants={stage.sanaa_variants} client:load />
                 
@@ -118,12 +152,12 @@ const pageKeywords = "quran preservation, myth, uthman, sanaa palimpsest, qiraat
             )}
             
             {/* Stage 7: Qiraat Table */}
-            {stage.title.includes("The Qira'at") && stage.qiraat_examples && (
+            {stage.component_type === 'QIRAAT_TABLE' && stage.qiraat_examples && (
               <QiraatTable qiraatExamples={stage.qiraat_examples} client:load />
             )}
             
             {/* Stage 8: Apologetic Shield Warning Block */}
-            {stage.title.includes("Apologetic Shield") && (
+            {stage.component_type === 'APOLOGETIC_SHIELD' && (
               <div class="warning-block">
                 <div class="warning-icon">⚠️</div>
                 <div class="warning-content">
@@ -135,9 +169,9 @@ const pageKeywords = "quran preservation, myth, uthman, sanaa palimpsest, qiraat
             
             {/* Children sections */}
             {stage.children && stage.children.length > 0 && (
-              stage.title.includes("Uthman's Fire") ? (
+              stage.component_type === 'UTHMANS_FIRE_TIMELINE' ? (
                 <UthmansFireTimeline client:load childrenNodes={stage.children} />
-              ) : stage.title.includes("Missing Verses") ? (
+              ) : stage.component_type === 'MISSING_VERSES_GRID' ? (
                 <MissingVersesGrid client:load childrenNodes={stage.children} />
               ) : (
                 <div class="sub-stages">
@@ -174,8 +208,8 @@ const pageKeywords = "quran preservation, myth, uthman, sanaa palimpsest, qiraat
                       )}
                       
                       {/* Hadith Rendering logic */}
-                      {child.hadiths && child.hadiths.length > 0 && !child.title.includes("114 vs 111") && !child.title.includes("Single Thread") && (
-                        child.title.includes("The Prophet Forgets") ? (
+                      {child.hadiths && child.hadiths.length > 0 && child.component_type !== 'CODEX_CHILD' && child.component_type !== 'SINGLE_THREAD' && (
+                        child.component_type === 'PROPHET_FORGETS' ? (
                           <HadithScroller hadiths={child.hadiths} client:load />
                         ) : (
                           <div class="hadith-citations">
@@ -192,6 +226,12 @@ const pageKeywords = "quran preservation, myth, uthman, sanaa palimpsest, qiraat
                       
                       {/* Post Content / Takeaways (Rendered after Hadiths) */}
                       {child.post_content && <div class="child-post-content" set:html={formatMarkdown(child.post_content)}></div>}
+                      {child.wonder_question && (
+                        <div class="wonder-box">
+                          <div class="wonder-title"><span class="wonder-icon">🤔</span> A Question to Wonder</div>
+                          <div class="wonder-text" set:html={formatMarkdown(child.wonder_question)}></div>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -199,6 +239,12 @@ const pageKeywords = "quran preservation, myth, uthman, sanaa palimpsest, qiraat
             )}
             
             {stage.post_content && <div class="stage-post-content" set:html={formatMarkdown(stage.post_content)}></div>}
+            {stage.wonder_question && (
+              <div class="wonder-box">
+                <div class="wonder-title"><span class="wonder-icon">🤔</span> A Question to Wonder</div>
+                <div class="wonder-text" set:html={formatMarkdown(stage.wonder_question)}></div>
+              </div>
+            )}
             {/* Conclusion Call to Action is now fully managed by ConclusionStage Component */}
           </div>
         </section>
