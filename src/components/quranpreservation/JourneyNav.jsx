@@ -37,6 +37,9 @@ const JourneyNav = ({ stages }) => {
       
       if (newActiveId !== activeId) {
         setActiveId(newActiveId);
+        if (typeof window !== 'undefined') {
+          window.history.replaceState(null, '', `#${newActiveId}`);
+        }
       }
     };
 
@@ -49,7 +52,8 @@ const JourneyNav = ({ stages }) => {
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const scrollTo = (id) => {
+  const scrollTo = (id, behavior = 'smooth') => {
+    if (typeof window === 'undefined') return;
     const el = document.getElementById(id);
     const scrollContainer = document.querySelector('.main-content') || window;
     
@@ -59,7 +63,7 @@ const JourneyNav = ({ stages }) => {
       if (scrollContainer === window) {
          const elementPosition = el.getBoundingClientRect().top;
          const offsetPosition = elementPosition + window.scrollY - navOffset;
-         window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+         window.scrollTo({ top: offsetPosition, behavior });
       } else {
          const elementPosition = el.getBoundingClientRect().top;
          const containerPosition = scrollContainer.getBoundingClientRect().top;
@@ -67,14 +71,33 @@ const JourneyNav = ({ stages }) => {
          
          scrollContainer.scrollTo({
             top: currentScroll + (elementPosition - containerPosition) - navOffset,
-            behavior: 'smooth'
+            behavior
          });
       }
       
       setActiveId(id);
       setIsOpen(false);
+      window.history.replaceState(null, '', `#${id}`);
     }
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hashId = window.location.hash.substring(1);
+      let attempts = 0;
+      const attemptScroll = () => {
+        const el = document.getElementById(hashId);
+        if (el) {
+          scrollTo(hashId, 'auto');
+        } else if (attempts < 50) {
+          attempts++;
+          requestAnimationFrame(attemptScroll);
+        }
+      };
+      requestAnimationFrame(attemptScroll);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const activeTitle = stages.find(s => s.id === activeId)?.title || 'Journey';
 

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import ScrollableTrack from './ScrollableTrack.jsx';
 import { trackEvidenceInteraction } from '../utils/analytics.js';
 
@@ -86,7 +86,12 @@ const getEvidenceTotalCount = (tData, verseLabels) => {
 
 export default function QuranicEvidenceExplorer({ evidenceDropdownData = [], verseLabels = {}, drogeTranslation = {} }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('');
+  const [activeTab, setActiveTab] = useState(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      return decodeURIComponent(window.location.hash.substring(1));
+    }
+    return '';
+  });
 
   const evidenceId = 'quranic_deficiencies';
   const evidenceColor = { hex: '#059669', bgHex: '#d1fae5' }; // .theme-quran derived
@@ -128,8 +133,26 @@ export default function QuranicEvidenceExplorer({ evidenceDropdownData = [], ver
     return { map: dataMap, sortedLabels: sorted };
   }, [verseLabels, drogeTranslation]);
 
-  // Derive current tab without calling setState inside render/useMemo
-  const currentTab = activeTab || (sortedLabels.length > 0 ? sortedLabels[0] : '');
+  const handleTabClick = (label) => {
+    setActiveTab(label);
+    if (typeof window !== 'undefined') {
+      const hash = label.replace(/\s+/g, '-');
+      window.history.replaceState(null, '', `#${hash}`);
+    }
+  };
+
+  // Derive current tab safely
+  const currentTab = useMemo(() => {
+    if (activeTab) {
+      const match = sortedLabels.find(l => 
+        l.toLowerCase() === activeTab.toLowerCase() || 
+        l.replace(/\s+/g, '-') === activeTab ||
+        l.replace(/\s+/g, '-').toLowerCase() === activeTab.toLowerCase()
+      );
+      if (match) return match;
+    }
+    return sortedLabels.length > 0 ? sortedLabels[0] : '';
+  }, [activeTab, sortedLabels]);
 
   const evidenceOptions = evidenceDropdownData.map(t => {
     const isQuran = t.evidenceId === 'quranic_deficiencies';
@@ -176,7 +199,7 @@ export default function QuranicEvidenceExplorer({ evidenceDropdownData = [], ver
                     key={label}
                     id={label.replace(/\s+/g, '-')}
                     className={`master-tab ${currentTab === label ? 'active' : ''}`}
-                    onClick={() => setActiveTab(label)}
+                    onClick={() => handleTabClick(label)}
                   >
                     {label} <span className="tab-count">({count})</span>
                   </button>

@@ -3,18 +3,29 @@ import ScrollableTrack from '../../ScrollableTrack.jsx';
 import { SourceBlock } from '../SourceBlock.jsx';
 
 export const AuthorshipDedicatedView = ({ tData }) => {
-  const [activeBook, setActiveBook] = useState(null);
-  const [activeCentury, setActiveCentury] = useState('All');
-
   const authorship = tData.authorship_data || {};
   const books = useMemo(() => Object.keys(authorship), [authorship]);
 
-  // Set initial active book once books are loaded
-  useEffect(() => {
-    if (books.length > 0 && !activeBook) {
-      setActiveBook(books[0]);
+  const [activeBook, setActiveBook] = useState(() => {
+    const defaultBook = books[0] || null;
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hashBook = decodeURIComponent(window.location.hash.substring(1));
+      const match = books.find(k => k.replace(/\s+/g, '_') === hashBook || k === hashBook);
+      if (match) {
+        return match;
+      }
     }
-  }, [books, activeBook]);
+    return defaultBook;
+  });
+
+  const [activeCentury, setActiveCentury] = useState('All');
+  const handleBookChange = (b) => {
+    setActiveBook(b);
+    setActiveCentury('All');
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', `#${encodeURIComponent(b.replace(/\s+/g, '_'))}`);
+    }
+  };
 
   if (!activeBook || !authorship[activeBook]) return null;
 
@@ -49,7 +60,7 @@ export const AuthorshipDedicatedView = ({ tData }) => {
           <button
             key={b}
             className={`master-tab ${activeBook === b ? 'active' : ''}`}
-            onClick={() => { setActiveBook(b); setActiveCentury('All'); }}
+            onClick={() => handleBookChange(b)}
           >
             {b}
           </button>

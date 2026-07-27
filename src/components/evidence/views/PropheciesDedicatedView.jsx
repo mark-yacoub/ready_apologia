@@ -1,11 +1,41 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import booksMeta from '../../../data/books_meta.json';
 import { formatBookName } from '../../../utils/evidenceHelpers.js';
 import { ProphecyCard } from '../ProphecyCard.jsx';
 
 export const PropheciesDedicatedView = ({ prophecies, verseTexts, evidenceId }) => {
-  const [activeTab, setActiveTab] = useState('Category');
-  const [activeFilter, setActiveFilter] = useState('All');
+  const getInitialHashState = () => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hashContent = window.location.hash.slice(1);
+      const parts = hashContent.split('::');
+      const tab = decodeURIComponent(parts[0] || '');
+      const filter = decodeURIComponent(parts.slice(1).join('::') || '');
+      if (tab === 'Category' || tab === 'Book') {
+        return { tab, filter: filter || 'All' };
+      }
+    }
+    return { tab: 'Category', filter: 'All' };
+  };
+
+  const [activeTab, setActiveTab] = useState(() => getInitialHashState().tab);
+  const [activeFilter, setActiveFilter] = useState(() => getInitialHashState().filter);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setActiveFilter('All');
+    if (typeof window !== 'undefined') {
+      const hash = `${encodeURIComponent(tab)}::All`;
+      window.history.replaceState(null, '', `#${hash}`);
+    }
+  };
+
+  const handleFilterChange = (filter) => {
+    setActiveFilter(filter);
+    if (typeof window !== 'undefined') {
+      const hash = `${encodeURIComponent(activeTab)}::${encodeURIComponent(filter)}`;
+      window.history.replaceState(null, '', `#${hash}`);
+    }
+  };
 
   const categories = useMemo(() => {
     return [...new Set(prophecies.map(p => p.category).filter(Boolean))];
@@ -81,10 +111,10 @@ export const PropheciesDedicatedView = ({ prophecies, verseTexts, evidenceId }) 
   return (
     <div className="dedicated-evidence-view">
       <div className="master-tabs-container">
-        <button className={`master-tab ${activeTab === 'Category' ? 'active' : ''}`} onClick={() => { setActiveTab('Category'); setActiveFilter('All'); }}>
+        <button className={`master-tab ${activeTab === 'Category' ? 'active' : ''}`} onClick={() => handleTabChange('Category')}>
           By Category
         </button>
-        <button className={`master-tab ${activeTab === 'Book' ? 'active' : ''}`} onClick={() => { setActiveTab('Book'); setActiveFilter('All'); }}>
+        <button className={`master-tab ${activeTab === 'Book' ? 'active' : ''}`} onClick={() => handleTabChange('Book')}>
           By Book
         </button>
       </div>
@@ -95,7 +125,7 @@ export const PropheciesDedicatedView = ({ prophecies, verseTexts, evidenceId }) 
               <button
                 key={filter.id}
                 className={`filter-pill ${activeFilter === filter.id ? 'active' : ''}`}
-                onClick={() => setActiveFilter(filter.id)}
+                onClick={() => handleFilterChange(filter.id)}
               >
                 {filter.label}
               </button>

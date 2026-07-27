@@ -84,9 +84,25 @@ const getEvidenceTotalCount = (t) => {
   return count;
 };
 
+const formatTabId = (label) => label.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+
+const getInitialTab = () => {
+  if (typeof window !== 'undefined' && window.location.hash) {
+    return window.location.hash.substring(1);
+  }
+  return '';
+};
+
 export default function ScientificErrorsExplorer({ evidenceDropdownData = [], scientificErrors = {}, drogeTranslation = {} }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('');
+  const [activeTab, setActiveTab] = useState(getInitialTab);
+
+  const handleTabChange = (label) => {
+    setActiveTab(label);
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', `#${formatTabId(label)}`);
+    }
+  };
 
   const evidenceId = 'scientific_errors';
   const evidenceColor = { hex: '#059669', bgHex: '#d1fae5' }; // .theme-quran derived
@@ -128,8 +144,14 @@ export default function ScientificErrorsExplorer({ evidenceDropdownData = [], sc
     return { map: dataMap, sortedLabels: sorted };
   }, [scientificErrors, drogeTranslation]);
 
-  // Derive current tab without calling setState inside render/useMemo
-  const currentTab = activeTab || (sortedLabels.length > 0 ? sortedLabels[0] : '');
+  // Derive current tab safely
+  const currentTab = useMemo(() => {
+    if (activeTab) {
+      const match = sortedLabels.find(l => l.toLowerCase() === activeTab.toLowerCase() || formatTabId(l) === activeTab);
+      if (match) return match;
+    }
+    return sortedLabels.length > 0 ? sortedLabels[0] : '';
+  }, [activeTab, sortedLabels]);
 
   const evidenceOptions = evidenceDropdownData.map(t => {
     const computedName = t.evidenceData?.name || t.evidenceData?.Scripture?.['New Testament']?.title?.replace('New Testament ', '') || t.evidenceId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
@@ -175,9 +197,9 @@ export default function ScientificErrorsExplorer({ evidenceDropdownData = [], sc
                 return (
                   <button
                     key={label}
-                    id={label.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '')}
+                    id={formatTabId(label)}
                     className={`master-tab ${currentTab === label ? 'active' : ''}`}
-                    onClick={() => setActiveTab(label)}
+                    onClick={() => handleTabChange(label)}
                   >
                     {label} <span className="tab-count">({count})</span>
                   </button>
