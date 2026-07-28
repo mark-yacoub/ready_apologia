@@ -20,18 +20,51 @@ const pageKeywords = "discover, apologetics";
       <p class="hub-subtitle">Deep dive into topics drawn from historical and scriptural sources.</p>
     </header>
 
-    <div class="categories-container" id="discover-panels">
-      {clusteredCatalog.map((categoryGroup) => {
+    <div class="hero-cards-container tabs-controller" style="padding-top: 16px; padding-bottom: 24px;">
+      {clusteredCatalog.map((categoryGroup, index) => {
+        const isActive = index === 0;
+        const isChristianity = categoryGroup.name === 'Christianity';
         const safeId = categoryGroup.name.toLowerCase().replace(/\s+/g, '-');
+        return (
+          <button
+            type="button"
+            class={`category-hero-card ${isActive ? 'is-active' : ''} ${isChristianity ? 'christian-theme' : 'islam-theme'}`}
+            data-target={`panel-${safeId}`}
+          >
+            <div class="hero-card-content">
+              <h2 class="hero-card-title">{categoryGroup.name}</h2>
+              <p class="hero-card-subtitle">
+                {isChristianity ? 'Defending Core Theology' : 'Evaluating Scripture'}
+              </p>
+            </div>
+            <div class="hero-watermark">
+              {isChristianity ? (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3v18M7 8h10"/>
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              )}
+            </div>
+          </button>
+        );
+      })}
+    </div>
+
+    <div class="categories-container" id="discover-panels">
+      {clusteredCatalog.map((categoryGroup, index) => {
+        const safeId = categoryGroup.name.toLowerCase().replace(/\s+/g, '-');
+        // Pre-hide non-first panels logically
+        const initialStyle = index === 0 ? "display: flex;" : "display: none;";
         return (
           <div 
             id={`panel-${safeId}`}
             class="major-category-block animate-fade-in" 
-            data-category={categoryGroup.name} 
+            data-category={categoryGroup.name}
+            style={initialStyle}
           >
-          <div class="major-category-header">
-            <h2 class="major-category-title">{categoryGroup.name}</h2>
-          </div>
           
           <div class="subcategories-container">
             {categoryGroup.subcategories.map((subGroup) => (
@@ -55,7 +88,49 @@ const pageKeywords = "discover, apologetics";
     <ComingSoonBanner url="https://forms.gle/KVeeDW41J9zqJtdZ7" />
 
   </div>
+  </div>
 </Layout>
+
+<script>
+  function setupDiscoverTabs() {
+    const parentContainer = document.querySelector('.tabs-controller');
+    const panels = document.querySelectorAll('.major-category-block');
+    
+    if (!parentContainer || !panels.length) return;
+
+    // Use event delegation rather than O(N) inline listeners
+    parentContainer.addEventListener('click', (e) => {
+      // Find the closest button if they clicked an inner element (like SVG or text)
+      const btn = e.target.closest('.category-hero-card');
+      if (!btn) return;
+
+      const targetId = btn.getAttribute('data-target');
+      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      
+      // Update active classes efficiently
+      parentContainer.querySelectorAll('.category-hero-card').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      
+      // Panel display toggle
+      panels.forEach(p => {
+        if (p.id === targetId) {
+          p.style.display = 'flex';
+          p.classList.remove('animate-fade-in');
+          void p.offsetWidth; // Force Reflow
+          p.classList.add('animate-fade-in');
+        } else {
+          p.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  // Bind aggressively but exactly once per lifecycle
+  setupDiscoverTabs();
+  
+  // Astro View Transitions graceful hooking
+  document.addEventListener('astro:page-load', setupDiscoverTabs);
+</script>
 
 
 
@@ -74,7 +149,7 @@ const pageKeywords = "discover, apologetics";
   .hub-title {
     font-size: 30px;
     font-weight: 900;
-    margin: 0 20px 6px 20px;
+    margin: 0 0 4px 0;
     color: var(--color-primary, #1e293b);
     letter-spacing: -0.02em;
     font-family: var(--font-headings, inherit);
@@ -83,52 +158,115 @@ const pageKeywords = "discover, apologetics";
   .hub-subtitle {
     font-size: 14px;
     color: var(--color-on-surface-variant, #64748b);
-    margin: 0 20px 0 20px;
+    margin: 0;
     line-height: 1.5;
     font-family: var(--font-body, inherit);
   }
 
-  .category-tabs-wrapper {
-    margin-top: 16px;
-    width: 100%;
-  }
-
-  .master-tabs-container {
+  .hero-cards-container {
     display: flex;
-    gap: 12px;
-    border-bottom: 2px solid #e2e8f0;
+    gap: 16px;
     overflow-x: auto;
+    padding-bottom: 8px;
     scrollbar-width: none;
-    padding: 0 20px;
+    -webkit-overflow-scrolling: touch;
   }
-  
-  .master-tabs-container::-webkit-scrollbar {
+  .hero-cards-container::-webkit-scrollbar {
     display: none;
   }
 
-  .master-tab {
-    background: none;
+  .category-hero-card {
+    position: relative;
+    flex: 0 0 calc(85% - 8px);
+    max-width: 340px;
+    height: 140px;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     border: none;
-    padding: 12px 16px;
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 700;
-    color: #64748b;
     cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
-    transition: all 0.2s ease;
-    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  @media (min-width: 768px) {
+    .category-hero-card {
+      flex: 1;
+      height: 160px;
+      padding: 24px;
+    }
   }
 
-  .master-tab:hover {
-    color: #334155;
+  .category-hero-card:active {
+    transform: scale(0.97);
   }
 
-  .master-tab.active {
-    color: #0f172a;
-    border-bottom-color: var(--evidence-color, var(--color-secondary, #974543));
+  .category-hero-card:not(.is-active) {
+    opacity: 0.6;
+    filter: grayscale(40%);
   }
+  .category-hero-card.is-active {
+    opacity: 1;
+    filter: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+  }
+
+  .christian-theme { background: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%); }
+  .christian-theme.is-active {
+    background: linear-gradient(135deg, #f5e6e6 0%, #ecd3d3 100%);
+    border: 1px solid rgba(151, 69, 67, 0.1);
+  }
+  .christian-theme.is-active .hero-card-title { color: #974543; }
+
+  .islam-theme { background: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%); }
+  .islam-theme.is-active {
+    background: linear-gradient(135deg, #e6f5ec 0%, #d3ece0 100%);
+    border: 1px solid rgba(16, 185, 129, 0.1);
+  }
+  .islam-theme.is-active .hero-card-title { color: #059669; }
+
+  .hero-card-content { position: relative; z-index: 2; }
+  
+  .hero-card-title {
+    font-family: var(--font-headings);
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0 0 2px 0;
+    color: #1e293b;
+    letter-spacing: -0.02em;
+  }
+  @media (min-width: 768px) {
+    .hero-card-title { font-size: 28px; margin: 0 0 4px 0; }
+  }
+
+  .hero-card-subtitle {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #64748b;
+    margin: 0;
+  }
+  @media (min-width: 768px) {
+    .hero-card-subtitle { font-size: 14.5px; }
+  }
+
+  .hero-watermark {
+    position: absolute;
+    right: -20px;
+    bottom: -40px;
+    z-index: 1;
+    opacity: 0.08;
+    transform: rotate(-10deg);
+    transition: opacity 0.3s ease;
+  }
+  .category-hero-card.is-active .hero-watermark { opacity: 0.15; }
+  .hero-watermark svg { width: 180px; height: 180px; }
+  .christian-theme .hero-watermark { color: #974543; }
+  .islam-theme .hero-watermark { color: #059669; }
 
   .categories-container {
     padding-top: 16px; 
@@ -140,22 +278,7 @@ const pageKeywords = "discover, apologetics";
   .major-category-block {
     display: flex;
     flex-direction: column;
-    padding: 0 20px;
-  }
-
-  .major-category-header {
-    margin-bottom: 24px;
-    border-bottom: 3px solid #cbd5e1;
-    padding-bottom: 12px;
-  }
-
-  .major-category-title {
-    font-size: 32px;
-    font-weight: 800;
-    margin: 0;
-    color: var(--color-on-surface, #09090b);
-    font-family: var(--font-display, Georgia, serif);
-    letter-spacing: -0.5px;
+    padding: 0;
   }
 
   .subcategories-container {
@@ -174,6 +297,7 @@ const pageKeywords = "discover, apologetics";
     font-weight: 600;
     color: var(--color-on-surface-variant, #475569);
     margin: 0 0 12px 0;
+    text-align: center;
     position: relative;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -185,7 +309,7 @@ const pageKeywords = "discover, apologetics";
     width: 60px;
     height: 1px;
     background-color: var(--color-outline-variant, #cbd5e1);
-    margin: 8px 0 0 0;
+    margin: 8px auto 0 auto;
   }
 
   /* Horizontal scrolling for native touch devices */
@@ -195,7 +319,7 @@ const pageKeywords = "discover, apologetics";
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 16px;
-    padding: 0 20px 24px 20px; /* Padding bottom for shadow clearance */
+    padding: 0 4px 24px 4px; /* Padding bottom for shadow clearance */
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none; /* Firefox */
   }

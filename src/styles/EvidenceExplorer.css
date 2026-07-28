@@ -1392,4 +1392,229 @@
   color: #3b82f6;
 }
 
+/* =========================================================
+   Modern App Evidence Index Layout
+   ========================================================= */
+
+/* Hero Cards Container */
+.hero-cards-container {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.hero-cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hero Card Buttons */
+.category-hero-card {
+  position: relative;
+  flex: 0 0 calc(85% - 8px);
+  max-width: 340px;
+  height: 140px;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+@media (min-width: 768px) {
+  .category-hero-card {
+    flex: 1; /* Stretch evenly on desktop */
+    height: 160px;
+    padding: 24px;
+  }
+}
+
+.category-hero-card:active {
+  transform: scale(0.97);
+}
+
+.category-hero-card:not(.is-active) {
+  opacity: 0.6;
+  filter: grayscale(40%);
+}
+.category-hero-card.is-active {
+  opacity: 1;
+  filter: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+/* Christianity Theme (Terracotta/Zinc) */
+.category-hero-card.christian-theme {
+  background: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%);
+}
+.category-hero-card.christian-theme.is-active {
+  background: linear-gradient(135deg, #f5e6e6 0%, #ecd3d3 100%);
+  border: 1px solid rgba(151, 69, 67, 0.1);
+}
+.category-hero-card.christian-theme.is-active .hero-card-title {
+  color: #974543;
+}
+
+/* Islam Theme (Emerald/Teal) */
+.category-hero-card.islam-theme {
+  background: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%);
+}
+.category-hero-card.islam-theme.is-active {
+  background: linear-gradient(135deg, #e6f5ec 0%, #d3ece0 100%);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+}
+.category-hero-card.islam-theme.is-active .hero-card-title {
+  color: #059669;
+}
+
+.hero-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-card-title {
+  font-family: var(--font-headings);
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 2px 0;
+  color: #1e293b;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 768px) {
+  .hero-card-title {
+    font-size: 28px;
+    margin: 0 0 4px 0;
+  }
+}
+
+.hero-card-subtitle {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .hero-card-subtitle {
+    font-size: 14.5px;
+  }
+}
+
+.hero-watermark {
+  position: absolute;
+  right: -20px;
+  bottom: -40px;
+  z-index: 1;
+  opacity: 0.08;
+  transform: rotate(-10deg);
+  transition: opacity 0.3s ease;
+}
+.category-hero-card.is-active .hero-watermark {
+  opacity: 0.15;
+}
+.hero-watermark svg {
+  width: 180px;
+  height: 180px;
+}
+.christian-theme .hero-watermark {
+  color: #974543;
+}
+.islam-theme .hero-watermark {
+  color: #059669;
+}
+
+
+/* Inset Grouped Lists (iOS Settings style) */
+.inset-groups-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 16px;
+}
+
+.inset-group-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inset-group-title {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin: 0 0 0 16px; /* Indent slightly matching iOS */
+}
+
+.inset-group-list {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.inset-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  text-decoration: none;
+  position: relative;
+  background: white;
+  transition: background 0.15s ease;
+}
+.inset-row:active {
+  background: #f8fafc;
+}
+
+/* Border bottom for all except last row */
+.inset-row:not(.last-row)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  right: 0;
+  height: 1px;
+  background-color: #f1f5f9;
+}
+
+.inset-row-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inset-row-title {
+  font-family: var(--font-headings);
+  font-size: 19px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.inset-row-subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+}
+
+.inset-row-chevron {
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+}
+
       
