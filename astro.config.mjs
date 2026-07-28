@@ -5,16 +5,14 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   devToolbar: { enabled: false },
-  integrations: [react(), sitemap({ entryLimit: 10000 })],
+  integrations: [react(), sitemap({ 
+    entryLimit: 10000
+  })],
   // Set site URL from environment or default to production domain
   site: process.env.SITE_URL || 'https://readyapologia.com',
   base: '/',
   // Since we are doing Scenario A (Static Site), we want 'static' output (default)
   output: 'static',
-  redirects: {
-    '/topics': '/evidence',
-    '/topics/[evidence_id]': '/evidence/[evidence_id]',
-  },
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'viewport'

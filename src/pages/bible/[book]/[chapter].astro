@@ -282,8 +282,8 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
                   <span class="verse-num">{verseNum}</span>
                   <div class="verse-body-wrapper">
                     <p class="verse-text">
-                      {/* Tapping the verse text redirects to the evidence redirect gate */}
-                      <a href={`${base}/bible/${book}/${chapter}/${verseNum}`} class="verse-text-link-wrapper">
+                      {/* Tapping the verse text routes directly to the highest priority evidence tab */}
+                      <a href={`${base}/bible/${book}/${chapter}/${verseNum}/${{ 'manuscript': 'manuscripts', 'contradiction': 'contradictions', 'apologetics': 'apologetics', 'video': 'videos' }[evidenceTypes[0]] || 'manuscripts'}`} class="verse-text-link-wrapper">
                         {verseText}
                       </a>
 
@@ -293,6 +293,7 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
                           <a
                             href={`${base}/bible/${book}/${chapter}/${verseNum}/manuscripts`}
                             class="evidence-badge ms-icon"
+                            data-tab-id="manuscripts"
                             title="Manuscripts available"
                             aria-label={`View manuscript evidence for ${bookMeta.name} ${chapter}:${verseNum}`}
                           >
@@ -305,6 +306,7 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
                           <a
                             href={`${base}/bible/${book}/${chapter}/${verseNum}/contradictions`}
                             class="evidence-badge ct-icon"
+                            data-tab-id="contradictions"
                             title="Alleged contradictions available"
                             aria-label={`View alleged contradictions for ${bookMeta.name} ${chapter}:${verseNum}`}
                           >
@@ -317,6 +319,7 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
                           <a
                             href={`${base}/bible/${book}/${chapter}/${verseNum}/apologetics`}
                             class="evidence-badge ap-icon"
+                            data-tab-id="apologetics"
                             title="Apologetics defenses available"
                             aria-label={`View apologetics defenses for ${bookMeta.name} ${chapter}:${verseNum}`}
                           >
@@ -329,6 +332,7 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
                           <a
                             href={`${base}/bible/${book}/${chapter}/${verseNum}/videos`}
                             class="evidence-badge vd-icon"
+                            data-tab-id="videos"
                             title="Apologetics videos available"
                             aria-label={`View apologetics videos for ${bookMeta.name} ${chapter}:${verseNum}`}
                           >
@@ -411,6 +415,7 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
 
 <!-- Chapter UI & Logic -->
 <script>
+  import { enforceUserBadgePriority } from '../../../utils/dom_tabs.js';
   let closePopoverHandler;
 
   const initChapterPage = () => {
@@ -546,6 +551,10 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
         el.classList.remove('evidence-highlight');
       }
     });
+
+    // Enforce dynamic user layout preferences immediately on hydration
+    const defaultTabs = ['manuscripts', 'contradictions', 'apologetics', 'videos'];
+    enforceUserBadgePriority('ready_apologia_tab_order', defaultTabs, '.verse-row', '.verse-badge-tray-inline', '.verse-text-link-wrapper');
   };
 
 
@@ -556,7 +565,6 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
   });
 
   // Clean up global listeners before swap to prevent memory leaks
-  // L6 Event Delegation
   const handleBibleVerseClick = (e) => {
     // Ignore middle-clicks, cmd/ctrl-clicks which open in new tabs
     if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
