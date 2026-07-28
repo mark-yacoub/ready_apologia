@@ -109,6 +109,36 @@ export function trackOutboundClick({ targetName, url }) {
   });
 }
 
+/**
+ * Track timeline event viewing
+ */
+export function trackTimelineEventView({ eventId, eventTitle }) {
+  trackEvent('timeline_event_view', {
+    event_id: eventId || '',
+    event_title: eventTitle || '',
+  });
+}
+
+/**
+ * Track timeline filter applied
+ */
+export function trackTimelineFilterApplied({ filterType, activeCount }) {
+  trackEvent('timeline_filter_applied', {
+    filter_type: filterType || '',
+    active_count: activeCount || 0,
+  });
+}
+
+/**
+ * Track onboarding banner interactions
+ */
+export function trackOnboardingInteraction({ tipId, action }) {
+  trackEvent('onboarding_interaction', {
+    tip_id: tipId || '',
+    action: action || '',
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Route & Global Event Delegation Handlers
 // ---------------------------------------------------------------------------
@@ -119,6 +149,7 @@ const QURAN_TAB_REGEX = /^\/quran\/(?<surah>\d+)\/(?<ayah>\d+)\/(?<tabId>[^/?#]+
 const QURAN_CODEX_REGEX = /^\/quran\/codex\/(?<companion>[^/?#]+)/;
 const QURAN_VARIANT_REGEX = /^\/quran\/variant\/(?<slug>[^/?#]+)/;
 const QURAN_SPECIAL_NUM_REGEX = /^\/quran\/(?<num>0|-1)(?:$|[/?#])/;
+const DISCOVER_ARTICLE_REGEX = /^\/discover\/(?<slug>[^/?#]+)/;
 
 let lastTrackedPath = null;
 
@@ -185,6 +216,15 @@ export function handleRouteTracking() {
     trackQuranSpecialView({ pageType, slugOrId: matchNum.groups.num });
     return;
   }
+
+  // 5. Discover Article Routes
+  const matchDiscover = activePath.match(DISCOVER_ARTICLE_REGEX);
+  if (matchDiscover?.groups && matchDiscover.groups.slug) {
+    trackEvent('discover_article_view', {
+      article_slug: matchDiscover.groups.slug,
+    });
+    return;
+  }
 }
 
 let isDelegationInitialized = false;
@@ -198,6 +238,23 @@ export function initGlobalClickTracking() {
 
   document.addEventListener('click', (e) => {
     if (!(e.target instanceof Node)) return;
+    
+    // 1. Intercept declarative custom tracking metrics
+    const trackEl = e.target.closest('[data-track-event]');
+    if (trackEl) {
+      const eventName = trackEl.getAttribute('data-track-event');
+      const params = {};
+      for (let i = 0; i < trackEl.attributes.length; i++) {
+        const attr = trackEl.attributes[i];
+        if (attr.name.startsWith('data-track-') && attr.name !== 'data-track-event') {
+          const paramName = attr.name.slice(11).replace(/-/g, '_');
+          params[paramName] = attr.value;
+        }
+      }
+      trackEvent(eventName, params);
+    }
+
+    // 2. Intercept outbound link clicks
     const link = e.target.closest('a');
     if (!link || !link.href) return;
 

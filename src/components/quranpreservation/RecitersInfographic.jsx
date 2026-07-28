@@ -41,6 +41,9 @@ export default function RecitersInfographic({ tableData, tableColumns }) {
         <div 
           onMouseEnter={() => setShow(true)}
           onMouseLeave={() => setShow(false)}
+          data-track-event={!show ? "preservation_interaction" : null}
+          data-track-element="reciters_infographic"
+          data-track-action="expand"
           onClick={() => setShow(!show)}
           style={{ cursor: 'pointer', color: iconColor, fontSize: '13px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px', height: '20px' }}
         >

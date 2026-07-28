@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useOnboardingSequence } from '../hooks/useOnboardingSequence.js';
+import { trackOnboardingInteraction } from '../utils/analytics.js';
 
 export default function OnboardingBanner() {
   const { activeTip, dismissCurrent } = useOnboardingSequence();
+
+  const trackedViews = useRef(new Set());
+
+  useEffect(() => {
+    if (activeTip?.id && !trackedViews.current.has(activeTip.id)) {
+      trackOnboardingInteraction({ tipId: activeTip.id, action: 'view' });
+      trackedViews.current.add(activeTip.id);
+    }
+  }, [activeTip?.id]);
+
+  const handleDismiss = () => {
+    if (activeTip) {
+      trackOnboardingInteraction({ tipId: activeTip.id, action: 'dismiss' });
+    }
+    dismissCurrent();
+  };
 
   if (!activeTip) return null;
 
@@ -11,7 +28,7 @@ export default function OnboardingBanner() {
       <div className="banner-content">
         <p>{activeTip.text}</p>
       </div>
-      <button className="banner-close" onClick={dismissCurrent} aria-label="Dismiss tip">
+      <button className="banner-close" onClick={handleDismiss} aria-label="Dismiss tip">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>

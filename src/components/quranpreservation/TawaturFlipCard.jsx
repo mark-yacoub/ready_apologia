@@ -51,6 +51,9 @@ const TawaturFlipCard = ({ llmText, hadith }) => {
             {llmText}
           </p>
           <button 
+            data-track-event="preservation_interaction"
+            data-track-element="tawatur_card"
+            data-track-action="flip_front"
             onClick={() => setIsFlipped(true)}
             style={{ 
               background: '#0f172a', 
@@ -109,6 +112,9 @@ const TawaturFlipCard = ({ llmText, hadith }) => {
           </div>
           
           <button 
+            data-track-event="preservation_interaction"
+            data-track-element="tawatur_card"
+            data-track-action="flip_back"
             onClick={() => setIsFlipped(false)}
             style={{ 
               background: '#f1f5f9', 

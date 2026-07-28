@@ -125,6 +125,8 @@ const JourneyNav = ({ stages }) => {
           {stages.map((stage, idx) => (
             <div 
               key={stage.id} 
+              data-track-event="journey_nav_interaction"
+              data-track-stage-id={stage.id}
               onClick={() => scrollTo(stage.id)}
               style={{
                 padding: '16px 20px',

@@ -1,3 +1,5 @@
+import { trackTimelineEventView, trackTimelineFilterApplied } from '../../utils/analytics.js';
+
 class DivinityTimelineApp extends HTMLElement {
     constructor() {
         super();
@@ -50,6 +52,8 @@ class DivinityTimelineApp extends HTMLElement {
     openModal(id, color) {
         const event = this.timelineEventsData[id];
         if (!event) return;
+        
+        trackTimelineEventView({ eventId: id, eventTitle: event.title });
         
         // Modal elements
         const modal = this.querySelector('#event-modal');
@@ -245,6 +249,14 @@ class DivinityTimelineApp extends HTMLElement {
         const selectedCats = getChecked('filter-category');
         const selectedCountries = getChecked('filter-country');
         const selectedCents = getChecked('filter-century');
+
+        if (this._filterTimeout) clearTimeout(this._filterTimeout);
+        this._filterTimeout = setTimeout(() => {
+            trackTimelineFilterApplied({ 
+                filterType: 'combined', 
+                activeCount: selectedCats.length + selectedCountries.length + selectedCents.length 
+            });
+        }, 500);
 
         // L6 Standard: Delegate filter matrix rendering to native CSS matching engine via injected stylesheet 
         // to completely eliminate layout recalculation loops and thrashing
