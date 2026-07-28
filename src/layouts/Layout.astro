@@ -1,11 +1,11 @@
 ---
 import BottomNav from '../components/BottomNav.jsx';
 import ScriptureNav from '../components/ScriptureNav.jsx';
-import OnboardingModal from '../components/OnboardingModal.jsx';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/markdown-exegesis.css';
 import '../styles/evidence-badges.css';
+import OnboardingBanner from '../components/OnboardingBanner.jsx';
 
 interface Props {
 	title: string;
@@ -100,6 +100,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 
 				<!-- Main scrollable content window -->
 				<main class="main-content">
+					<OnboardingBanner client:load />
 					<slot />
 
 					<!-- Footer -->
@@ -127,9 +128,6 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 				<!-- Bottom Navigation (Hidden on desktop) -->
 				<BottomNav client:load />
 			</div>
-
-			<!-- Global Onboarding Modal -->
-			<OnboardingModal client:load />
 
 			<!-- Collapsible Left Navigation Sidebar (Sitting on top of everything natively!) -->
 			<div id="scripture-nav-overlay"></div>

@@ -11,6 +11,7 @@ import { loadAllEvidenceData } from '../../../utils/evidenceLoader.js';
 import { getEvidenceColor as getTopicColor } from '../../../utils/evidenceColors.js';
 import { NT_TRANSLATION_ID } from '../../../utils/bible_config.js';
 import { R2_BASE_URL } from '../../../utils/cdn_config.js';
+import OnboardingBanner from '../../../components/OnboardingBanner.jsx';
 
 // 1. Pre-render all chapters for NT and OT books
 export async function getStaticPaths() {
@@ -227,7 +228,6 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
   keywords={`${bookMeta.name} ${chapter}, apologetics, contradictions, commentaries`}
 >
   <div class="chapter-reader-container">
-
     <!-- Split Book & Chapter Dropdown Selector -->
     <header class="reader-header select-none" style="display: flex; flex-direction: column; gap: 12px;">
       <div class="selector-hub">
@@ -283,7 +283,7 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
                   <div class="verse-body-wrapper">
                     <p class="verse-text">
                       {/* Tapping the verse text routes directly to the highest priority evidence tab */}
-                      <a href={`${base}/bible/${book}/${chapter}/${verseNum}/${{ 'manuscript': 'manuscripts', 'contradiction': 'contradictions', 'apologetics': 'apologetics', 'video': 'videos' }[evidenceTypes[0]] || 'manuscripts'}`} class="verse-text-link-wrapper">
+                      <a href={`${base}/bible/${book}/${chapter}/${verseNum}/${{ 'manuscript': 'manuscripts', 'contradiction': 'contradictions', 'apologetics': 'apologetics', 'video': 'videos' }[evidenceTypes[0]] || 'manuscripts'}`} class="verse-text-link-wrapper" data-onboarding-trigger="verse">
                         {verseText}
                       </a>
 
@@ -294,6 +294,7 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
                             href={`${base}/bible/${book}/${chapter}/${verseNum}/manuscripts`}
                             class="evidence-badge ms-icon"
                             data-tab-id="manuscripts"
+                            data-onboarding-trigger="verse"
                             title="Manuscripts available"
                             aria-label={`View manuscript evidence for ${bookMeta.name} ${chapter}:${verseNum}`}
                           >
