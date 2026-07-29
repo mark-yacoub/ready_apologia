@@ -1,0 +1,213 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/evidence-feed.css';
+import articleData from '../../data/extrabiblical-evidence-for-jesus.json';
+
+const pageDesc = articleData.description;
+const pageKeywords = "evidence for jesus, historical jesus, extrabiblical evidence, tacitus, josephus, early christianity";
+
+// Top-level immutable theme pipeline mapped dynamically from JSON
+const sortedThemes = articleData.themes;
+
+// Pure functional pipeline (L6 pattern) to extract, parse, and chronologically sort evidence instances
+const allEvidences = sortedThemes
+  .flatMap(theme =>
+    theme.evidences.map(ev => {
+      // Robust regex split: handles em-dash, en-dash, or standard hyphen with liberal whitespace
+      const nameParts = ev.name.split(/\s*[-–—]\s*/);
+      
+      return {
+        ...ev,
+        themeId: theme.id,
+        themeTitle: theme.title.split(':')[0],
+        mainTitle: nameParts[0],
+        subTitle: nameParts.length > 1 ? nameParts[1] : ev.sourceType,
+        // Utilize the actual historical string representation rather than forcibly hacking integers
+        displayDate: ev.dateStr || `c. ${ev.dateInt}`
+      };
+    })
+  )
+  .sort((a, b) => a.dateInt - b.dateInt);
+
+// Scholar Highlighter Logic (parses **markdown** into styled semantic tags)
+const textHighlighter = (str) => {
+  if (!str) return '';
+  return str.replace(/\*\*(.*?)\*\*/g, '<span class="quote-highlight">$1</span>');
+};
+---
+
+<Layout title={articleData.title} description={pageDesc} keywords={pageKeywords} theme="evidence-mode">
+  <div class="evidence-page-wrapper">
+    
+    <div class="meta-header">
+      <a href="/discover" class="back-btn" aria-label="Go back to Discover tab">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        Discover
+      </a>
+    </div>
+
+    <header class="hero-section">
+      <div class="hero-tag">
+        <div class="dot" aria-hidden="true"></div>
+        Extrabiblical Catalog
+      </div>
+      <h1 class="hero-title">Evidence for<br/>Jesus</h1>
+      <p class="hero-desc">{articleData.description}</p>
+    </header>
+
+    {/* Accessible Tablist for Filtering */}
+    <nav class="filter-pills-container" id="filter-container" aria-label="Evidence themes filter">
+      <button class="filter-pill active" data-filter="all" aria-pressed="true">All</button>
+      {sortedThemes.map(theme => (
+        <button class="filter-pill" data-filter={theme.id} aria-pressed="false">{theme.title.split(':')[0]}</button>
+      ))}
+    </nav>
+
+    {/* Live Region for Screenreaders */}
+    <main class="timeline-container" id="timeline-root" aria-live="polite">
+      <div class="timeline-line-vertical" aria-hidden="true"></div>
+      
+      {allEvidences.map((ev) => (
+        <div class="timeline-row evidence-item" data-theme={ev.themeId} id={`evidence-${ev.id}`}>
+          <div class="timeline-node-container" aria-hidden="true">
+             <div class="timeline-circle">
+               {/* Compress the long string dates precisely for the small timeline node */}
+               {ev.displayDate.replace('AD ', '').replace('c. ', 'c.')}
+             </div>
+          </div>
+          <div class="timeline-connector" aria-hidden="true"></div>
+          
+          <article class="timeline-card" aria-labelledby={`title-${ev.id}`}>
+             <header class="card-eyebrow">
+               <span class="card-subtitle">{ev.subTitle}</span>
+               <span class="card-theme-badge">{ev.themeTitle}</span>
+             </header>
+             
+             <div class="card-title-group">
+               <h3 class="card-title" id={`title-${ev.id}`}>{ev.mainTitle}</h3>
+               {ev.nameDesc && (
+                 <button 
+                   class="author-bio-toggle" 
+                   aria-expanded="false" 
+                   aria-controls={`bio-${ev.id}`}
+                   aria-label={`Toggle author biography for ${ev.mainTitle}`}
+                 >
+                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                 </button>
+               )}
+             </div>
+             
+             {/* Biographical Container decoupled from DOM click logic via ARIA controls */}
+             {ev.nameDesc && (
+               <div class="author-bio-container" id={`bio-${ev.id}`} hidden>
+                 <p class="author-bio-text">{ev.nameDesc}</p>
+               </div>
+             )}
+             
+             <div class="card-quote-wrapper">
+               <blockquote class="card-quote" set:html={`"${textHighlighter(ev.quote)}"`}></blockquote>
+             </div>
+             
+             {ev.keyFact && (
+               <div class="card-key-fact" role="note">
+                 {ev.keyFact.replace(/\*\*/g, '')}
+               </div>
+             )}
+             
+             {ev.explanation && (
+               <div class="collapsible-content">
+                 <p class="card-explanation collapsed" id={`desc-${ev.id}`}>{ev.explanation}</p>
+                 <button class="read-more-btn" aria-expanded="false" aria-controls={`desc-${ev.id}`}>Read more...</button>
+               </div>
+             )}
+             
+             {ev.urls && ev.urls.length > 0 && (
+                <div class="card-urls">
+                  {ev.urls.map(urlObj => (
+                    <a href={urlObj.url} target="_blank" rel="noopener noreferrer" class="url-link">
+                      🔗 {urlObj.title.replace(/Wikipedia/gi, 'Source')}
+                    </a>
+                  ))}
+                </div>
+             )}
+          </article>
+        </div>
+      ))}
+    </main>
+
+  </div>
+</Layout>
+
+<script>
+  function initEvidenceFeed() {
+    // 1. Hardware Accelerated Filtering via Event Delegation
+    const filterContainer = document.getElementById('filter-container');
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const evidenceItems = document.querySelectorAll('.evidence-item');
+    
+    // Ensure we don't bind duplicates if script runs multiple times
+    if (!filterContainer || filterContainer.hasAttribute('data-initialized')) return;
+    filterContainer.setAttribute('data-initialized', 'true');
+    
+    // Event delegation blocks thrashing by binding only 1 master listener
+    filterContainer.addEventListener('click', (e) => {
+      const pill = e.target.closest('.filter-pill');
+      if (!pill) return;
+      
+      // Update ARIA accessible states
+      filterPills.forEach(p => {
+        p.classList.remove('active');
+        p.setAttribute('aria-pressed', 'false');
+      });
+      pill.classList.add('active');
+      pill.setAttribute('aria-pressed', 'true');
+      
+      const filterValue = pill.getAttribute('data-filter');
+      
+      // Toggle declarative hidden attribute instead of raw JS element style blocks
+      evidenceItems.forEach(item => {
+        item.hidden = (filterValue !== 'all' && item.dataset.theme !== filterValue);
+      });
+      
+      // Slide the horizontally scrollable pill track to fully expose and center the selected pill
+      pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    });
+
+    // 2. Decoupled Bio Toggling (A11Y compliant & indestructible)
+    document.querySelectorAll('.author-bio-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('aria-controls');
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        
+        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!isExpanded));
+        target.hidden = isExpanded;
+      });
+    });
+
+    // 3. Decoupled Read More (A11Y compliant & indestructible)
+    document.querySelectorAll('.read-more-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('aria-controls');
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        
+        target.classList.remove('collapsed');
+        btn.hidden = true;
+        
+        // Announce to screenreader the element has been fully unclipped
+        btn.setAttribute('aria-expanded', 'true');
+      });
+    });
+  }
+
+  // Gracefully handles standard page load and Astro View Transitions
+  document.addEventListener('astro:page-load', initEvidenceFeed);
+  // Fallback if View Transitions is bypassed
+  if (document.readyState !== 'loading') {
+    initEvidenceFeed();
+  } else {
+    document.addEventListener('DOMContentLoaded', initEvidenceFeed);
+  }
+</script>

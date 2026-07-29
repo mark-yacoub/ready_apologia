@@ -14,5 +14,13 @@
     "title": "The Myth of the Preservation of the Quran",
     "description": "Examine the evidence of the corruption.",
     "thumbnail": "/media/quran_preservation/cover.png"
+  },
+  {
+    "category": "Christianity",
+    "subcategory": "History",
+    "slug": "extrabiblical-evidence-for-jesus",
+    "title": "Extrabiblical & Historical Evidence for Jesus",
+    "description": "An exhaustive, verified compilation of 62 Ante-Nicene non-Christian sources.",
+    "thumbnail": "/media/extrabiblical_evidence/cover.jpg"
   }
 ]
