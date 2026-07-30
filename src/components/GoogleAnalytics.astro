@@ -10,9 +10,10 @@ const isProd = import.meta.env.PROD && measurementId !== 'G-PLACEHOLDER';
     <script is:inline define:vars={{ measurementId }}>
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         window[`ga-disable-${measurementId}`] = true;
+        window.GA_DEBUG = true;
       }
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){window.dataLayer.push(arguments);}
       window.gtag = gtag;
       window.GA_MEASUREMENT_ID = measurementId;
       gtag('js', new Date());
@@ -26,7 +27,7 @@ const isProd = import.meta.env.PROD && measurementId !== 'G-PLACEHOLDER';
 {!isProd && (
   <script is:inline define:vars={{ measurementId }}>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){window.dataLayer.push(arguments);}
     window.gtag = gtag;
     window.GA_MEASUREMENT_ID = measurementId;
     window.GA_DEBUG = true;

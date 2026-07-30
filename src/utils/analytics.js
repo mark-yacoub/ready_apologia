@@ -10,6 +10,8 @@ const sendGtag = (...args) => {
   window.dataLayer = window.dataLayer || [];
   if (typeof window.gtag === 'function') {
     window.gtag(...args);
+  } else if (args[0] === 'event') {
+    window.dataLayer.push({ event: args[1], ...args[2] });
   } else {
     window.dataLayer.push(args);
   }
@@ -19,26 +21,34 @@ const sendGtag = (...args) => {
 export function trackEvent(eventName, params = {}) {
   if (typeof window === 'undefined') return;
 
-  sendGtag('event', eventName, {
-    ...params,
-    send_to: window.GA_MEASUREMENT_ID || undefined,
-  });
+  const payload = { ...params };
+  if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID !== 'G-PLACEHOLDER') {
+    payload.send_to = window.GA_MEASUREMENT_ID;
+  }
+
+  sendGtag('event', eventName, payload);
 
   if (import.meta.env.DEV || window.GA_DEBUG) {
-    console.log(`[GA4 Debug] Event: ${eventName}`, params);
+    console.log(`[GA4 Debug] Event: ${eventName}`, payload);
   }
 }
 
 /**
  * Track virtual page views during Astro ClientRouter transitions.
+ * 
+ * @warning IMPORTANT - GA4 SPA DOUBLE TRACKING:
+ * GA4 "Enhanced Measurement" has natively enabled "Page changes based on browser history" by default since 2023.
+ * Since Astro ClientRouter uses the History API, GA4 will natively fire a page_view event when the URL changes.
+ * Immediately after, this trackPageView function fires a 2nd manual page_view event, resulting in inflated duplicate page views.
+ * To use this custom implementation properly (which has superior tracking fidelity for Astro's DOM titles), 
+ * you MUST open the Google Analytics UI -> Admin -> Data Streams -> Web Stream Details -> Enhanced Measurement settings,
+ * and DISABLE "Page changes based on browser history events", or you will double-track all SPA navigations.
  */
 export function trackPageView(url, title) {
-  if (typeof window === 'undefined') return;
-
   trackEvent('page_view', {
-    page_location: url || window.location.href,
-    page_path: window.location.pathname,
-    page_title: title || document.title,
+    page_location: url || (typeof window !== 'undefined' ? window.location.href : ''),
+    page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+    page_title: title || (typeof window !== 'undefined' ? document.title : ''),
   });
 }
 
@@ -99,15 +109,7 @@ export function trackTabReorder({ testament, topTab, fullOrder }) {
   });
 }
 
-/**
- * Track clicks on outbound actions (external origins or target="_blank").
- */
-export function trackOutboundClick({ targetName, url }) {
-  trackEvent('outbound_click', {
-    target_name: targetName || '',
-    destination_url: url || '',
-  });
-}
+// Removed trackOutboundClick since it is handled natively by GA4 Enhanced Measurement
 
 /**
  * Track timeline event viewing
@@ -163,11 +165,30 @@ export function handleRouteTracking() {
   if (lastTrackedPath === currentPath) return;
   lastTrackedPath = currentPath;
 
+  // 1. Always track virtual page_view on client transition
+  trackPageView(window.location.href, document.title);
+
+  // 2. [L6 Refactor] Declarative DOM-first Routing
+  // Pages can inject a hidden div with id="route-analytics-payload" and a data-payload JSON string.
+  // This removes the need for brittle centralized regex matching moving forward.
+  const payloadEl = document.getElementById('route-analytics-payload');
+  if (payloadEl && payloadEl.dataset.payload) {
+    try {
+      const payload = JSON.parse(payloadEl.dataset.payload);
+      if (payload.eventName && payload.params) {
+        trackEvent(payload.eventName, payload.params);
+        return;
+      }
+    } catch (e) {
+      console.warn('[GA4] Failed to parse route-analytics-payload JSON', e);
+    }
+  }
+
+  // 3. Fallback to Legacy Regex Matching (prevent data loss on unmigrated pages)
   const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
   const activePath = currentPath.startsWith(base) ? currentPath.slice(base.length) : currentPath;
 
-  // 1. Always track virtual page_view on client transition
-  trackPageView(window.location.href, document.title);
+
 
   // 2. Bible verse evidence drawer tab
   const matchBible = activePath.match(BIBLE_TAB_REGEX);
@@ -217,7 +238,7 @@ export function handleRouteTracking() {
     return;
   }
 
-  // 5. Discover Article Routes
+  // Legacy Discover Article Routes
   const matchDiscover = activePath.match(DISCOVER_ARTICLE_REGEX);
   if (matchDiscover?.groups && matchDiscover.groups.slug) {
     trackEvent('discover_article_view', {
@@ -254,21 +275,6 @@ export function initGlobalClickTracking() {
       trackEvent(eventName, params);
     }
 
-    // 2. Intercept outbound link clicks
-    const link = e.target.closest('a');
-    if (!link || !link.href) return;
-
-    try {
-      const linkUrl = new URL(link.href, window.location.origin);
-      const isExternal = linkUrl.origin !== window.location.origin;
-      const isNewTab = link.getAttribute('target') === '_blank';
-
-      if (isExternal || isNewTab) {
-        const label = link.textContent?.trim() || link.getAttribute('aria-label') || linkUrl.hostname;
-        trackOutboundClick({ targetName: label, url: link.href });
-      }
-    } catch (err) {
-      // Ignore malformed URLs or javascript: protocols
-    }
+    // Outbound link tracking has been removed in favor of GA4's native Enhanced Measurement
   });
 }

@@ -136,6 +136,17 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
   apologetics,
   isNT
 });
+
+const analyticsPayload = JSON.stringify({
+  eventName: 'evidence_tab_view',
+  params: {
+    testament: 'Bible',
+    book_or_surah: book,
+    chapter_or_ayah: chapter,
+    verse_id: `${book}_${chapter}_${verse}`,
+    tab_id: tab
+  }
+});
 ---
 
 <Layout
@@ -145,6 +156,8 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
   ogImage={ogImage}
   schema={seoSchema}
 >
+  <div id="route-analytics-payload" data-payload={analyticsPayload} aria-hidden="true" style="display: none;"></div>
+  
   <div class="verse-detail-container">
 
     <!-- Top Header Back Navigation -->
