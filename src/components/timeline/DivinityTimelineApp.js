@@ -1,4 +1,8 @@
 import { trackTimelineEventView, trackTimelineFilterApplied } from '../../utils/analytics.js';
+import {
+  setupInitialHashScroll,
+  setupSectionObserver
+} from '../../utils/section_navigator.js';
 
 class DivinityTimelineApp extends HTMLElement {
     constructor() {
@@ -29,8 +33,34 @@ class DivinityTimelineApp extends HTMLElement {
         this.setupFilters();
         this.bindCardClicks();
         this.setupCarousels();
+        this.setupHashNavigation();
     }
     
+    setupHashNavigation() {
+        this.initialHashLock = true;
+        
+        // 1. Initial Hash Scroll
+        this._cleanupHashScroll = setupInitialHashScroll({
+            offset: 100,
+            onComplete: () => {
+                this.initialHashLock = false;
+            }
+        });
+
+        // 2. Observer for URL Hash Updates while scrolling
+        this._cleanupHashObserver = setupSectionObserver({
+            selector: '.timeline-event',
+            rootMargin: '-20% 0px -70% 0px',
+            isLocked: () => this.initialHashLock,
+            updateUrl: true
+        });
+    }
+
+    disconnectedCallback() {
+        if (this._cleanupHashScroll) this._cleanupHashScroll();
+        if (this._cleanupHashObserver) this._cleanupHashObserver();
+    }
+
     getYoutubeId(url) {
         const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         const match = url.match(regExp);
@@ -44,6 +74,10 @@ class DivinityTimelineApp extends HTMLElement {
             card.addEventListener('click', (e) => {
                 const id = card.dataset.id;
                 const color = card.dataset.color;
+                const parentEvent = card.closest('.timeline-event');
+                if (parentEvent && parentEvent.id) {
+                    window.history.replaceState(null, '', `#${parentEvent.id}`);
+                }
                 if (id) this.openModal(id, color);
             });
         });

@@ -110,7 +110,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/pages/quran/0.astro`: Lost Verses page entry point.
 *   `src/pages/quran/-1.astro`: Abrogated Verses page entry point.
 *   `src/pages/quran/codex/[companion].astro`: Companion Codex page showing comparisons, virtues, and lost verses.
-*   `src/pages/discover/islamic-dilemma.astro`: Discover deep-dive page for The Islamic Dilemma featuring Apple-style sections, sticky step navigation, and inline manuscript carousels.
+*   `src/pages/discover/`: Discover deep-dive articles (`divinity-timeline.astro`, `extrabiblical-evidence-for-jesus.astro`, `islamic-dilemma.astro`, `quran-preservation.astro`) configured with URL `#hash` linking and initial mount hash auto-scrolling so specific chapters, stages, or evidence sections can be shared.
 *   `src/components/islamicdilemma/`: Interactive visual components for the Islamic Dilemma (`DilemmaNav`, `DilemmaDecisionCard`, `AffirmationTable`, `ManuscriptTimeline`, `LogicalTrapDiagram`, `ObjectionsSection`, `PrimaryReferenceTable`).
 *   `src/data/discover/islam/scripture/islamic_dilemma.md`: Read-only markdown source of truth for the Islamic Dilemma topic.
 *   `src/components/VerseTabs.jsx`: Client-side React switcher for Bible verse detail tabs.
@@ -125,6 +125,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/utils/cdn_config.js`: Global CDN image base URL configuration (`R2_BASE_URL`).
 *   `src/utils/nonUthmanicLoader.js`: Loader for non-Uthmanic data (companions, variants, virtues).
 *   `src/utils/quran_debunking_loader.js`: Loader utility for Quranic scientific miracles debunking data.
+*   `src/utils/section_navigator.js`: L6 centralized URL `#hash` navigation and section scroll-spy observer utility for Discover articles.
 *   `src/data/quran/debunking/`: Contains the scientific miracles debunked JSON dataset.
 
 ---

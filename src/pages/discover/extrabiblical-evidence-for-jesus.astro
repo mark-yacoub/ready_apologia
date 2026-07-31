@@ -139,6 +139,14 @@ const textHighlighter = (str) => {
 </Layout>
 
 <script>
+  import {
+    setupInitialHashScroll,
+    setupSectionObserver
+  } from '../../utils/section_navigator.js';
+
+  let _cleanupHashScroll = null;
+  let _cleanupHashObserver = null;
+
   function initEvidenceFeed() {
     // 1. Hardware Accelerated Filtering via Event Delegation
     const filterContainer = document.getElementById('filter-container');
@@ -198,6 +206,31 @@ const textHighlighter = (str) => {
         
         // Announce to screenreader the element has been fully unclipped
         btn.setAttribute('aria-expanded', 'true');
+      });
+    });
+
+    // 4. URL Hash Navigation & Section Linking
+    if (_cleanupHashScroll) _cleanupHashScroll();
+    if (_cleanupHashObserver) _cleanupHashObserver();
+
+    let initialHashLock = true;
+    _cleanupHashScroll = setupInitialHashScroll({
+      offset: 110,
+      onComplete: () => {
+        initialHashLock = false;
+      }
+    });
+
+    _cleanupHashObserver = setupSectionObserver({
+      selector: '.evidence-item',
+      rootMargin: '-20% 0px -70% 0px',
+      isLocked: () => initialHashLock,
+      updateUrl: true
+    });
+
+    evidenceItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (item.id) window.history.replaceState(null, '', `#${item.id}`);
       });
     });
   }

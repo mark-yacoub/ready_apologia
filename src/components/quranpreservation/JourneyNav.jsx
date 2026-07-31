@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  scrollToSection,
+  setupInitialHashScroll
+} from '../../utils/section_navigator.js';
 
 const JourneyNav = ({ stages }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeId, setActiveId] = useState(stages[0]?.id || '');
   const [progress, setProgress] = useState(0);
+  const isInitialMountRef = useRef(true);
 
   useEffect(() => {
     const scrollContainer = document.querySelector('.main-content') || window;
@@ -37,14 +42,13 @@ const JourneyNav = ({ stages }) => {
       
       if (newActiveId !== activeId) {
         setActiveId(newActiveId);
-        if (typeof window !== 'undefined') {
+        if (typeof window !== 'undefined' && !isInitialMountRef.current) {
           window.history.replaceState(null, '', `#${newActiveId}`);
         }
       }
     };
 
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
-    // Run once on mount
     handleScroll();
     
     return () => scrollContainer.removeEventListener('scroll', handleScroll);
@@ -53,51 +57,27 @@ const JourneyNav = ({ stages }) => {
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const scrollTo = (id, behavior = 'smooth') => {
-    if (typeof window === 'undefined') return;
-    const el = document.getElementById(id);
-    const scrollContainer = document.querySelector('.main-content') || window;
-    
-    if (el) {
-      const navOffset = 60; // Approximate height of the nav bar
-      
-      if (scrollContainer === window) {
-         const elementPosition = el.getBoundingClientRect().top;
-         const offsetPosition = elementPosition + window.scrollY - navOffset;
-         window.scrollTo({ top: offsetPosition, behavior });
-      } else {
-         const elementPosition = el.getBoundingClientRect().top;
-         const containerPosition = scrollContainer.getBoundingClientRect().top;
-         const currentScroll = scrollContainer.scrollTop;
-         
-         scrollContainer.scrollTo({
-            top: currentScroll + (elementPosition - containerPosition) - navOffset,
-            behavior
-         });
-      }
-      
-      setActiveId(id);
-      setIsOpen(false);
+    setActiveId(id);
+    setIsOpen(false);
+    if (typeof window !== 'undefined') {
       window.history.replaceState(null, '', `#${id}`);
     }
+    scrollToSection(id, { behavior, offset: 60 });
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.location.hash) {
-      const hashId = window.location.hash.substring(1);
-      let attempts = 0;
-      const attemptScroll = () => {
-        const el = document.getElementById(hashId);
-        if (el) {
-          scrollTo(hashId, 'auto');
-        } else if (attempts < 50) {
-          attempts++;
-          requestAnimationFrame(attemptScroll);
-        }
-      };
-      requestAnimationFrame(attemptScroll);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const validIds = stages.map(s => s.id);
+    const cleanup = setupInitialHashScroll({
+      validIds,
+      offset: 60,
+      onHashFound: (id) => setActiveId(id),
+      onComplete: () => {
+        isInitialMountRef.current = false;
+      }
+    });
+    return cleanup;
+  }, [stages]);
+
 
   const activeTitle = stages.find(s => s.id === activeId)?.title || 'Journey';
 

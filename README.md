@@ -104,7 +104,8 @@ pkill -f astro
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.
 *   `src/pages/`: Page templates for Bible reader, Quran reader, Quran verse evidence drawers, and Companion Codices.
 *   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages, headers, evidence tabs, and `GoogleAnalytics.astro` for GA4 tracking).
-*   `src/utils/`: Helper utilities for loading scripture, topics, non-Uthmanic Quran data, global CDN configuration (`cdn_config.js`), client-side GA4 event tracking (`analytics.js`), and apologetic evidence (debunking miracles, contradictions, scientific errors).
+*   `src/utils/`: Helper utilities for loading scripture, topics, non-Uthmanic Quran data, global CDN configuration (`cdn_config.js`), client-side GA4 event tracking (`analytics.js`), Discover URL `#hash` section navigation (`section_navigator.js`), and apologetic evidence (debunking miracles, contradictions, scientific errors).
+
 *   `src/data/quran/debunking/`: Dataset for debunked Quranic scientific miracles.
 *   `docs/adr/`: [Architectural Decision Records (ADRs)](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/adr/0001-framework-and-offline-strategy.md) detailing the technology choices.
 
@@ -118,4 +119,8 @@ pkill -f astro
 | `/quran/codex/[companion]` | Deep-dive into a companion's non-Uthmanic codex (e.g., Ubayy, Ibn Masud) |
 | `/quran/0` | Special route rendering verses historically reported but lost/abrogated |
 | `/discover` | Discover hub with deep dives on Christian theology and Islamic scripture |
-| `/discover/islamic-dilemma` | The Islamic Dilemma interactive deep-dive page |
+| `/discover/islamic-dilemma` | The Islamic Dilemma interactive deep-dive page (supports `#stage-X` URL hash sharing) |
+| `/discover/quran-preservation` | The Myth of Quranic Preservation deep-dive page (supports `#stage-X` URL hash sharing) |
+| `/discover/divinity-timeline` | Archaeological Evidence of the Divine Christ timeline (supports `#event-id` URL hash sharing) |
+| `/discover/extrabiblical-evidence-for-jesus` | Extrabiblical & Historical Evidence for Jesus catalog (supports `#evidence-id` URL hash sharing) |
+

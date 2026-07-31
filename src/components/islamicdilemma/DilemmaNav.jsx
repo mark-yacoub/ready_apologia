@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ScrollableTrack from '../ScrollableTrack.jsx';
+import {
+  scrollToSection,
+  setupInitialHashScroll,
+  setupSectionObserver
+} from '../../utils/section_navigator.js';
 
 const STAGES = [
   { id: 'stage-1', num: '01', title: 'Core Question' },
@@ -13,52 +18,37 @@ const STAGES = [
 
 export default function DilemmaNav() {
   const [activeId, setActiveId] = useState('stage-1');
+  const isInitialMountRef = useRef(true);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: '-20% 0px -60% 0px',
-        threshold: 0
+    const validIds = STAGES.map(s => s.id);
+    const cleanup = setupInitialHashScroll({
+      validIds,
+      onHashFound: (id) => setActiveId(id),
+      onComplete: () => {
+        isInitialMountRef.current = false;
       }
-    );
-
-    STAGES.forEach((stage) => {
-      const el = document.getElementById(stage.id);
-      if (el) observer.observe(el);
     });
+    return cleanup;
+  }, []);
 
-    return () => observer.disconnect();
+  useEffect(() => {
+    const cleanup = setupSectionObserver({
+      selector: '.dilemma-section',
+      rootMargin: '-20% 0px -60% 0px',
+      isLocked: () => isInitialMountRef.current,
+      onActiveIdChange: (id) => setActiveId(id),
+      updateUrl: true
+    });
+    return cleanup;
   }, []);
 
   const handleNavClick = (id) => {
     setActiveId(id);
-    const target = document.getElementById(id);
-    if (target) {
-      const scrollContainer = document.querySelector('.main-content') || window;
-      const navOffset = 80;
-      
-      if (scrollContainer === window) {
-        const elementPosition = target.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - navOffset;
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-      } else {
-        const elementPosition = target.getBoundingClientRect().top;
-        const containerPosition = scrollContainer.getBoundingClientRect().top;
-        const currentScroll = scrollContainer.scrollTop;
-        
-        scrollContainer.scrollTo({
-          top: currentScroll + (elementPosition - containerPosition) - navOffset,
-          behavior: 'smooth'
-        });
-      }
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', `#${id}`);
     }
+    scrollToSection(id, { behavior: 'smooth' });
   };
 
   return (
