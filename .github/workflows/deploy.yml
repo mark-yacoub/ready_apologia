@@ -31,6 +31,7 @@ jobs:
         env:
           NODE_OPTIONS: '--experimental-sqlite'
           SITE_URL: 'https://readyapologia.com'
+          PUBLIC_GA_MEASUREMENT_ID: 'G-N4QFGNVW99'
 
       - name: Sync to Cloudflare R2
         env:
