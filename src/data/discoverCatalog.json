@@ -16,6 +16,14 @@
     "thumbnail": "/media/quran_preservation/cover.png"
   },
   {
+    "category": "Islamics",
+    "subcategory": "Scripture",
+    "slug": "islamic-dilemma",
+    "title": "The Islamic Dilemma: Why the Quran Self-Destructs on the Christian Bible",
+    "description": "An interactive exploration of the Islamic Dilemma: examining Quranic affirmation of the 7th-century Gospel, classical tafsir, manuscript evidence, and historical contradictions.",
+    "thumbnail": "/media/islamic_dilemma/cover.jpg"
+  },
+  {
     "category": "Christianity",
     "subcategory": "History",
     "slug": "extrabiblical-evidence-for-jesus",

@@ -1,0 +1,1190 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DilemmaNav from '../../components/islamicdilemma/DilemmaNav.jsx';
+import DilemmaDecisionCard from '../../components/islamicdilemma/DilemmaDecisionCard.jsx';
+import AffirmationTable from '../../components/islamicdilemma/AffirmationTable.jsx';
+import ManuscriptTimeline from '../../components/islamicdilemma/ManuscriptTimeline.jsx';
+import LogicalTrapDiagram from '../../components/islamicdilemma/LogicalTrapDiagram.jsx';
+import ObjectionsSection from '../../components/islamicdilemma/ObjectionsSection.jsx';
+import PrimaryReferenceTable from '../../components/islamicdilemma/PrimaryReferenceTable.jsx';
+import ManuscriptCarousel from '../../components/ManuscriptCarousel.jsx';
+
+import { getFormattedManuscriptsByVerseId } from '../../utils/evidence_repository.js';
+import { parseMarkdown } from '../../utils/markdown.js';
+import '../../styles/islamic-dilemma-tables.css';
+import '../../styles/islamic-dilemma-objections.css';
+import { parseDilemmaMarkdown } from '../../utils/dilemma_parser.js';
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+// 1. Fetch manuscript evidence rows during Astro SSG build-time
+const msJohn1_1 = getFormattedManuscriptsByVerseId("jn_1_1", null, true);
+const msMark15_39 = getFormattedManuscriptsByVerseId("mk_15_39", null, true);
+const msMatt28_19 = getFormattedManuscriptsByVerseId("mt_28_19", null, true);
+const ms1Cor15_3 = getFormattedManuscriptsByVerseId("1cor_15_3", null, true);
+
+const dilemmaData = parseDilemmaMarkdown();
+
+const pageTitle = "The Islamic Dilemma: Why the Quran Self-Destructs on the Christian Bible";
+const pageDesc = "An interactive exploration of the Islamic Dilemma: examining Quranic affirmation of the 7th-century Gospel, classical tafsir, manuscript evidence, and historical contradictions.";
+const pageKeywords = "islamic dilemma, surah 5:47, injil uncorrupted, quran confirms bible, tahrif al-nass, codex sinaiticus, christian apologetics islam";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  keywords={pageKeywords}
+  ogImage="/media/islamic_dilemma/cover.jpg"
+>
+  <div class="dilemma-page-wrapper">
+    {/* Breadcrumb Navigation */}
+    <div class="breadcrumb-header">
+      <a href={`${base}/discover`} class="back-link" aria-label="Go back to Discover tab">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        <span>Discover</span>
+      </a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current">Islamics · Scripture</span>
+    </div>
+
+    {/* Header Hero */}
+    <header class="dilemma-hero">
+      <div class="hero-tag">Comparative Scripture & Classical Tafsir</div>
+      <h1 class="hero-title">The Islamic Dilemma</h1>
+      <p class="hero-subtitle">Why the Quran Self-Destructs on the Christian Bible</p>
+
+      {/* Surah 5:47 Anchor Quote Box */}
+      <blockquote class="hero-quote-box">
+        <p class="quote-text">
+          “So let the People of the Gospel judge by what God has sent down in it. Whoever does not judge by what God has sent down, those – they are the wicked.”
+        </p>
+        <footer class="quote-footer">
+          <a href={`${base}/quran/5/47`} class="quran-ref-pill" title="Open Surah 5:47 in Quran reader">
+            <span>Surah 5:47</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" class="ref-arrow"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg>
+          </a>
+          <a href={`${base}/quran/5/47/islamic-commentaries`} class="tafsir-link-pill" title="Open Ibn Kathir Tafsir for Surah 5:47">
+            <span>Ibn Kathir Exegesis</span>
+          </a>
+        </footer>
+      </blockquote>
+    </header>
+
+    {/* Sticky Step Navigation Bar */}
+    <DilemmaNav client:load />
+
+    {/* ====================================================
+        SECTION 1: THE CORE QUESTION
+        ==================================================== */}
+    <section id="stage-1" class="dilemma-section section-core">
+      <div class="section-intro">
+        <span class="section-num-tag">STEP 01</span>
+        <h2 class="section-heading">Can a Muslim Respect the Christian Scriptures Without Destroying Islam?</h2>
+        <p class="section-lead">
+          For centuries, Christian apologetics and comparative religious debate have grappled with the claims of Islam. Central to Islam’s message is the assertion that Muhammad is the final prophet and that the Quran is the culmination of God's revelation to humanity. But this claim rests on a foundation that poses a profound, inescapable logical problem known as <strong>The Islamic Dilemma</strong>.
+        </p>
+      </div>
+
+      <DilemmaDecisionCard />
+    </section>
+
+    {/* ====================================================
+        SECTION 2: QURAN & TAFSIR AFFIRMATION
+        ==================================================== */}
+    <section id="stage-2" class="dilemma-section section-affirmation">
+      <div class="section-intro">
+        <span class="section-num-tag">STEP 02</span>
+        <h2 class="section-heading">The Quran and Classical Tafsir Affirm the 7th-Century Bible</h2>
+        <p class="section-lead">
+          One of the most widespread misconceptions in popular Islamic apologetics is the idea that the Quran teaches the doctrine of <em>Tahrif al-Nass</em>—the complete textual corruption of the Torah and Gospel prior to Muhammad's birth. However, a careful examination of the Quranic text—confirmed by classical Islamic exegesis (<em>Tafsir</em>)—reveals precisely the opposite: the Quran consistently speaks of the Jewish and Christian Scriptures <strong>in the present tense</strong>, as existing, authoritative, and uncorrupted documents in the hands of 7th-century Christians and Jews.
+        </p>
+      </div>
+
+      {/* 4 Pillars Grid */}
+      <div class="pillars-grid">
+        {/* Pillar A */}
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <span class="pillar-badge">PILLAR A</span>
+            <a href={`${base}/quran/5/47`} class="pillar-ref-link">Surah 5:47</a>
+          </div>
+          <h3 class="pillar-title">Commanding 7th-Century Christians to Judge by the Gospel</h3>
+          <p class="pillar-text">
+            Why would God command Christians in 632 AD to judge by a book that had been lost or corrupted centuries earlier? For a command to be intelligible, the object of the command must exist and be accessible.
+          </p>
+          <div class="tafsir-quote-card">
+            <div class="tafsir-card-header">
+              <span>Tafsir Ibn Kathir on Surah 5:47</span>
+              <a href={`${base}/quran/5/47/islamic-commentaries`} class="open-tafsir-btn">Read in App →</a>
+            </div>
+            <blockquote class="tafsir-excerpt">
+              “&#123;and We gave him the Injil, in which was guidance and light&#125; a guidance that directs to the truth and a light that removes the doubts and solves disputes... Allah then mentioned the Injil, praised it and commanded its people to adhere to it and follow it.”
+            </blockquote>
+          </div>
+        </div>
+
+        {/* Pillar B */}
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <span class="pillar-badge">PILLAR B</span>
+            <a href={`${base}/quran/5/68`} class="pillar-ref-link">Surah 5:68</a>
+          </div>
+          <h3 class="pillar-title">Standing Fast on the Torah and Gospel</h3>
+          <p class="pillar-text">
+            The Quran tells Christians and Jews that they have no spiritual standing unless they actively uphold the Scriptures they possess. This is a present-tense directive.
+          </p>
+          <div class="tafsir-quote-card">
+            <div class="tafsir-card-header">
+              <span>Tafsir Ibn Kathir on Surah 5:68</span>
+              <a href={`${base}/quran/5/68/islamic-commentaries`} class="open-tafsir-btn">Read in App →</a>
+            </div>
+            <blockquote class="tafsir-excerpt">
+              “O Muhammad, say, &#123;O People of the Scripture! You have nothing...&#125; <strong>meaning no real religion until you adhere to and implement the Tawrah and the Injil. That is, until you believe in all the Books that you have that Allah revealed to the Prophets.</strong>”
+            </blockquote>
+          </div>
+        </div>
+
+        {/* Pillar C */}
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <span class="pillar-badge">PILLAR C</span>
+            <a href={`${base}/quran/5/43`} class="pillar-ref-link">Surah 5:43</a>
+          </div>
+          <h3 class="pillar-title">Torah Authority and Behavioral Disobedience</h3>
+          <p class="pillar-text">
+            When modern polemicists claim that the Jews' Torah was textually corrupt, they contradict classical tafsir. Ibn Kathir emphasizes that their sin was <strong>behavioral disobedience</strong>—abandoning and refusing to implement the true laws written in their Book.
+          </p>
+          <div class="tafsir-quote-card">
+            <div class="tafsir-card-header">
+              <span>Tafsir Ibn Kathir on Surah 5:43</span>
+              <a href={`${base}/quran/5/43/islamic-commentaries`} class="open-tafsir-btn">Read in App →</a>
+            </div>
+            <blockquote class="tafsir-excerpt">
+              “He asked them about the ruling of stoning in the Tawrah to make them admit to what the Tawrah contains and what they collaborated to hide, deny and exclude from implementing for all that time.”
+            </blockquote>
+          </div>
+        </div>
+
+        {/* Pillar D */}
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <span class="pillar-badge">PILLAR D</span>
+            <a href={`${base}/quran/10/94`} class="pillar-ref-link">Surah 10:94</a>
+          </div>
+          <h3 class="pillar-title">Muhammad's Own Benchmark of Truth</h3>
+          <p class="pillar-text">
+            When Muhammad himself experienced doubt regarding his revelations, the Quran directed him to seek confirmation from those who read the biblical Scriptures: <em>“If you are in doubt about what We have sent down to you, ask those who have been reciting the Book before you.”</em>
+          </p>
+          <div class="benchmark-pill-box">
+            <span>Epistemological Benchmark:</span>
+            <strong>7th-Century Bible Readers are established as the test of authenticity for the Quran.</strong>
+          </div>
+        </div>
+      </div>
+
+      {/* Orthodox Affirmation Data Table */}
+      <AffirmationTable rows={dilemmaData.section2.tableData} />
+    </section>
+
+    {/* ====================================================
+        SECTION 3: GOD'S WORDS CANNOT BE CORRUPTED
+        ==================================================== */}
+    <section id="stage-3" class="dilemma-section section-immutability">
+      <div class="section-intro">
+        <span class="section-num-tag">STEP 03</span>
+        <h2 class="section-heading">God's Words Cannot Be Corrupted</h2>
+        <p class="section-lead">
+          When confronted with <a href={`${base}/quran/5/47`} class="exegesis-inline-link">Surah 5:47</a> and <a href={`${base}/quran/5/68`} class="exegesis-inline-link">Surah 5:68</a>, Muslim apologists often retreat to the argument that while God <em>originally</em> gave a true Torah and Gospel, men altered and destroyed them over time. Yet the Quran itself slams the door on this objection by proclaiming that <strong>the words of God cannot be changed</strong>.
+        </p>
+      </div>
+
+      {/* Promises Cards Row */}
+      <div class="promises-row">
+        <div class="promise-card">
+          <a href={`${base}/quran/6/34`} class="promise-ref">Surah 6:34</a>
+          <p class="promise-quote">“...No one can change the words of God. Certainly some of the story has (already) come to you about the envoys (before you).”</p>
+        </div>
+        <div class="promise-card">
+          <a href={`${base}/quran/6/115`} class="promise-ref">Surah 6:115</a>
+          <p class="promise-quote">“Perfect is the word of your Lord in truth and justice. No one can change His words. He is the Hearing, the Knowing.”</p>
+        </div>
+        <div class="promise-card">
+          <a href={`${base}/quran/18/27`} class="promise-ref">Surah 18:27</a>
+          <p class="promise-quote">“Recite what you have been inspired (with) of the Book of your Lord. No one can change His words, and you will find no refuge other than Him.”</p>
+        </div>
+      </div>
+
+      {/* Ibn Kathir Callout Banner */}
+      <div class="immutability-callout">
+        <div class="callout-top">
+          <span class="callout-tag">Classical Exegesis Consensus</span>
+          <a href={`${base}/quran/18/27/islamic-commentaries`} class="callout-tafsir-link">Tafsir Ibn Kathir on Surah 18:27 →</a>
+        </div>
+        <blockquote class="callout-quote">
+          “&#123;None can change His Words,&#125; meaning, <strong>no one can alter them, distort them or misinterpret them.</strong>”
+        </blockquote>
+      </div>
+
+      {/* Tahrif Comparison & Hadith Card */}
+      <div class="tahrif-comparison-grid">
+        <div class="tahrif-card card-mana">
+          <div class="tahrif-badge badge-green">CLASSICAL ORTHODOXY</div>
+          <h4 class="tahrif-title">Tahrif al-Ma'na (Corruption of Meaning)</h4>
+          <p class="tahrif-desc">
+            Early Islamic authorities (Ibn Abbas, Ibn Kathir) taught that when the Quran accuses people of "changing words from their places," it refers to misinterpreting the meaning while leaving the written text intact (<a href={`${base}/quran/5/44/islamic-commentaries`} class="exegesis-inline-link">Tafsir on 5:44</a>).
+          </p>
+        </div>
+
+        <div class="tahrif-card card-hadith">
+          <div class="tahrif-badge badge-gold">SUNAN ABI DAWUD 4449</div>
+          <h4 class="tahrif-title">Muhammad Honors the Physical Torah</h4>
+          <p class="tahrif-desc">
+            Muhammad himself is recorded as taking a physical copy of the 7th-century Torah, placing it on a cushion, and proclaiming:
+          </p>
+          <blockquote class="hadith-quote">
+            “I believed in thee and in Him Who revealed thee.”
+          </blockquote>
+          <a href="https://sunnah.com/abudawud:4449" target="_blank" rel="noopener noreferrer" class="hadith-source-link">Sunan Abi Dawud 4449 (Authenticated by Ibn Kathir) →</a>
+        </div>
+      </div>
+    </section>
+
+    {/* ====================================================
+        SECTION 4: WHAT DID THE 7TH-CENTURY BIBLE SAY?
+        ==================================================== */}
+    <section id="stage-4" class="dilemma-section section-bible">
+      <div class="section-intro">
+        <span class="section-num-tag">STEP 04</span>
+        <h2 class="section-heading">What Did the 7th-Century Bible Actually Say?</h2>
+        <p class="section-lead">
+          We now arrive at the empirical heart of the dilemma: <strong>What was written in the Gospel (<em>Injil</em>) that Christians possessed in the 7th century AD—the very book God commanded them to judge by?</strong> We do not have to guess. Archaeology and manuscript science provide thousands of Greek codices, papyri, and ancient translations that predate Islam by centuries and were circulating throughout the Mediterranean and Arabian world during Muhammad's life.
+        </p>
+      </div>
+
+      {/* Manuscript Preservation Timeline Card */}
+      <ManuscriptTimeline />
+
+      {/* Codex Sinaiticus Intro Card */}
+      <div class="codex-showcase-intro">
+        <div class="codex-meta">
+          <span class="codex-tag">c. 330–360 AD</span>
+          <h3 class="codex-title">Codex Sinaiticus & Pre-Islamic Greek Codices</h3>
+        </div>
+        <p class="codex-summary">
+          Written nearly 300 years before Islam, this complete New Testament manuscript contains the exact same Gospel message Christians proclaim today—including the Crucifixion, the eternal Deity of Christ, and the Trinity.
+        </p>
+      </div>
+
+      {/* 1. John 1:1 Inline Manuscript Carousel */}
+      <div class="scripture-showcase-card">
+        <header class="showcase-header">
+          <div class="showcase-left">
+            <span class="showcase-badge">DEITY OF CHRIST</span>
+            <a href={`${base}/bible/jn/1/1`} class="showcase-ref">John 1:1, 14 (NASB)</a>
+          </div>
+          <a href={`${base}/bible/jn/1/1/manuscripts`} class="open-bible-btn">Open John 1:1 Reader →</a>
+        </header>
+        <blockquote class="showcase-quote">
+          “In the beginning was the Word, and the Word was with God, and the Word was God... And the Word became flesh, and dwelt among us, and we saw His glory, glory as of the only begotten from the Father, full of grace and truth.”
+        </blockquote>
+        <div class="inline-carousel-wrap">
+          <div class="inline-carousel-header">
+            <span>Ancient Manuscript Scans · John 1:1</span>
+            <span class="ms-count-badge">{msJohn1_1.length} Manuscripts</span>
+          </div>
+          <ManuscriptCarousel
+            manuscripts={msJohn1_1}
+            verseId="jn_1_1"
+            verseLabel="John 1:1"
+            isNT={true}
+            client:load
+          />
+        </div>
+      </div>
+
+      {/* 2. Mark 15:39 Inline Manuscript Carousel */}
+      <div class="scripture-showcase-card">
+        <header class="showcase-header">
+          <div class="showcase-left">
+            <span class="showcase-badge">CRUCIFIXION & PASSION</span>
+            <a href={`${base}/bible/mk/15/39`} class="showcase-ref">Mark 15:39 (NASB)</a>
+          </div>
+          <a href={`${base}/bible/mk/15/39/manuscripts`} class="open-bible-btn">Open Mark 15:39 Reader →</a>
+        </header>
+        <blockquote class="showcase-quote">
+          “When the centurion, who was standing right in front of Him, saw the way He breathed His last, he said, ‘Truly this man was the Son of God!’”
+        </blockquote>
+        <div class="inline-carousel-wrap">
+          <div class="inline-carousel-header">
+            <span>Ancient Manuscript Scans · Mark 15:39</span>
+            <span class="ms-count-badge">{msMark15_39.length} Manuscripts</span>
+          </div>
+          <ManuscriptCarousel
+            manuscripts={msMark15_39}
+            verseId="mk_15_39"
+            verseLabel="Mark 15:39"
+            isNT={true}
+            client:load
+          />
+        </div>
+      </div>
+
+      {/* 3. Matthew 28:19 Inline Manuscript Carousel */}
+      <div class="scripture-showcase-card">
+        <header class="showcase-header">
+          <div class="showcase-left">
+            <span class="showcase-badge">THE TRINITY</span>
+            <a href={`${base}/bible/mt/28/19`} class="showcase-ref">Matthew 28:19 (NASB)</a>
+          </div>
+          <a href={`${base}/bible/mt/28/19/manuscripts`} class="open-bible-btn">Open Matthew 28:19 Reader →</a>
+        </header>
+        <blockquote class="showcase-quote">
+          “Go therefore and make disciples of all the nations, baptizing them in the name of the Father and the Son and the Holy Spirit.”
+        </blockquote>
+        <div class="inline-carousel-wrap">
+          <div class="inline-carousel-header">
+            <span>Ancient Manuscript Scans · Matthew 28:19</span>
+            <span class="ms-count-badge">{msMatt28_19.length} Manuscripts</span>
+          </div>
+          <ManuscriptCarousel
+            manuscripts={msMatt28_19}
+            verseId="mt_28_19"
+            verseLabel="Matthew 28:19"
+            isNT={true}
+            client:load
+          />
+        </div>
+      </div>
+
+      {/* Codex Vaticanus & Alexandrinus Summary Footer */}
+      <div class="codices-footer-card">
+        <h4 class="codices-title">Codex Vaticanus (c. 300 AD) & Codex Alexandrinus (c. 400 AD)</h4>
+        <p class="codices-text">
+          These monumental Greek Bibles, alongside ancient Syriac (<em>Peshitta</em>) and Latin (<em>Vulgate</em>) manuscripts circulating in the Middle East, prove with 100% historical certainty that the <strong>only Gospel existing in the 7th century</strong> was the fourfold Gospel affirming: (1) Jesus Christ is the eternal Son of God, (2) Jesus was publicly crucified and died on the cross for our sins, and (3) Jesus rose bodily from the dead on the third day.
+        </p>
+      </div>
+    </section>
+
+    {/* ====================================================
+        SECTION 5: THE FATAL CONTRADICTION
+        ==================================================== */}
+    <section id="stage-5" class="dilemma-section section-contradiction">
+      <div class="section-intro">
+        <span class="section-num-tag">STEP 05</span>
+        <h2 class="section-heading">The Fatal Contradiction</h2>
+        <p class="section-lead">
+          Here the trap of the Islamic Dilemma springs shut. The Quran commands 7th-century Christians to judge by the Gospel in their hands (<a href={`${base}/quran/5/47`} class="exegesis-inline-link">Surah 5:47</a>), yet the Quran simultaneously condemns the fundamental doctrines of that very Gospel.
+        </p>
+      </div>
+
+      {/* Collision Grid */}
+      <div class="collision-grid">
+        {/* Crucifixion Collision Card */}
+        <div class="collision-card">
+          <div class="collision-top">
+            <span class="collision-badge badge-red">DENYING THE CRUCIFIXION</span>
+            <a href={`${base}/quran/4/157`} class="collision-ref">Surah 4:157–158</a>
+          </div>
+          <blockquote class="collision-quote">
+            “and for their saying, ‘Surely we killed the Messiah, Jesus, son of Mary, the messenger of God’ – yet they did not kill him, nor did they crucify him... Certainly they did not kill him. No! God raised him to Himself.”
+          </blockquote>
+          <div class="collision-contrast">
+            <span>Historical Gospel Standard:</span>
+            <p>Complete Passion accounts in all four Gospels; confirmed by Roman and Jewish historians (Tacitus, Josephus).</p>
+          </div>
+        </div>
+
+        {/* Deity Collision Card */}
+        <div class="collision-card">
+          <div class="collision-top">
+            <span class="collision-badge badge-red">DENYING THE DEITY OF CHRIST</span>
+            <a href={`${base}/quran/5/72`} class="collision-ref">Surah 5:72 / Surah 9:30</a>
+          </div>
+          <blockquote class="collision-quote">
+            “Certainly they have disbelieved who say, ‘Surely God – He is the Messiah, son of Mary’... The Christians say, ‘The Messiah is the son of God.’ ... How are they (so) deluded?”
+          </blockquote>
+          <div class="collision-contrast">
+            <span>Historical Gospel Standard:</span>
+            <p>Jesus declared as eternal Word and divine Son (<a href={`${base}/bible/jn/1/1`} class="exegesis-inline-link">John 1:1</a>, <a href={`${base}/bible/col/2/9`} class="exegesis-inline-link">Colossians 2:9</a>, <a href={`${base}/bible/mt/28/19`} class="exegesis-inline-link">Matthew 28:19</a>).</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Interactive Flowchart Diagram */}
+      <LogicalTrapDiagram />
+    </section>
+
+    {/* ====================================================
+        SECTION 6: COMMON ISLAMIC OBJECTIONS REFUTED
+        ==================================================== */}
+    <section id="stage-6" class="dilemma-section section-objections">
+      <div class="section-intro">
+        <span class="section-num-tag">STEP 06</span>
+        <h2 class="section-heading">Common Islamic Objections Refuted</h2>
+        <p class="section-lead">
+          When presented with the historical and Quranic evidence of the Islamic Dilemma, Muslim apologists typically raise three standard objections. Every objection can be definitively refuted using classical Islamic sources and historical linguistics.
+        </p>
+      </div>
+
+      <ObjectionsSection objections={dilemmaData.section6.objectionsList} client:load />
+    </section>
+
+    {/* ====================================================
+        SECTION 7: CONCLUSION & REFERENCE TABLE
+        ==================================================== */}
+    <section id="stage-7" class="dilemma-section section-conclusion">
+      <div class="section-intro">
+        <span class="section-num-tag">STEP 07</span>
+        <h2 class="section-heading">An Invitation to the Unbroken Word</h2>
+        <p class="section-lead">
+          The Islamic Dilemma demonstrates that Islam cannot stand on its own historical or theological claims. It attempts to build its authority on the foundation of the biblical prophets and apostles, yet it attacks the very foundation it stands upon. For the sincere seeker, this dilemma is not merely an intellectual debate—it is a signpost pointing toward the truth of the Gospel.
+        </p>
+      </div>
+
+      {/* 4. 1 Corinthians 15:3-4 Inline Manuscript Carousel */}
+      <div class="scripture-showcase-card conclusion-showcase">
+        <header class="showcase-header">
+          <div class="showcase-left">
+            <span class="showcase-badge badge-terracotta">THE EARLIEST CREED (c. 30–35 AD)</span>
+            <a href={`${base}/bible/1cor/15/3`} class="showcase-ref">1 Corinthians 15:3–4 (NASB)</a>
+          </div>
+          <a href={`${base}/bible/1cor/15/3/manuscripts`} class="open-bible-btn">Open 1 Cor 15:3 Reader →</a>
+        </header>
+        <blockquote class="showcase-quote">
+          “For I delivered to you as of first importance what I also received, <strong>that Christ died for our sins according to the Scriptures, and that He was buried, and that He was raised on the third day according to the Scriptures</strong>.”
+        </blockquote>
+        <div class="inline-carousel-wrap">
+          <div class="inline-carousel-header">
+            <span>Ancient Manuscript Scans · 1 Corinthians 15:3–4</span>
+            <span class="ms-count-badge">{ms1Cor15_3.length} Manuscripts</span>
+          </div>
+          <ManuscriptCarousel
+            manuscripts={ms1Cor15_3}
+            verseId="1cor_15_3"
+            verseLabel="1 Corinthians 15:3-4"
+            isNT={true}
+            client:load
+          />
+        </div>
+      </div>
+
+      {/* Primary Reference Summary Table */}
+      <PrimaryReferenceTable rows={dilemmaData.section7.tableData} />
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .dilemma-page-wrapper {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 24px 16px 64px 16px;
+    font-family: var(--font-body, -apple-system, sans-serif);
+    color: var(--color-on-surface, #09090b);
+  }
+
+  @media (min-width: 768px) {
+    .dilemma-page-wrapper {
+      padding: 32px 28px 80px 28px;
+    }
+  }
+
+  /* Breadcrumb */
+  .breadcrumb-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-on-surface-variant, #71717a);
+    margin-bottom: 24px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-secondary, #974543);
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .back-link:hover {
+    opacity: 0.8;
+  }
+
+  .breadcrumb-sep {
+    opacity: 0.4;
+  }
+
+  .breadcrumb-current {
+    font-weight: 600;
+  }
+
+  /* Hero Section */
+  .dilemma-hero {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-secondary, #974543);
+    background: rgba(151, 69, 67, 0.08);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 8px 0;
+    color: var(--color-on-surface, #09090b);
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 42px;
+    }
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-on-surface-variant, #71717a);
+    margin: 0 0 28px 0;
+  }
+
+  .hero-quote-box {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    text-align: left;
+  }
+
+  .quote-text {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--color-on-surface, #09090b);
+    margin: 0 0 16px 0;
+  }
+
+  .quote-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .quran-ref-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #059669;
+    background: #ecfdf5;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .quran-ref-pill:hover {
+    background: #d1fae5;
+  }
+
+  .ref-arrow {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tafsir-link-pill {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #0f766e;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Section Styling */
+  .dilemma-section {
+    margin-bottom: 64px;
+    scroll-margin-top: 100px;
+  }
+
+  .section-intro {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 32px auto;
+  }
+
+  .section-num-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-secondary, #974543);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .section-heading {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 14px 0;
+    color: var(--color-on-surface, #09090b);
+  }
+
+  @media (min-width: 768px) {
+    .section-heading {
+      font-size: 30px;
+    }
+  }
+
+  .section-lead {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-on-surface-variant, #475569);
+    margin: 0;
+  }
+
+  /* Pillars Grid (Section 2) */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  @media (min-width: 640px) {
+    .pillars-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .pillar-card {
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 18px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  }
+
+  .pillar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pillar-badge {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-on-surface-variant, #71717a);
+    letter-spacing: 0.08em;
+  }
+
+  .pillar-ref-link {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: #059669;
+    text-decoration: none;
+  }
+
+  .pillar-ref-link:hover {
+    text-decoration: underline;
+  }
+
+  .pillar-title {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-on-surface, #09090b);
+  }
+
+  .pillar-text {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #334155;
+    margin: 0;
+  }
+
+  .tafsir-quote-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .tafsir-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0f766e;
+    margin-bottom: 8px;
+  }
+
+  .open-tafsir-btn {
+    color: #0f766e;
+    text-decoration: underline;
+  }
+
+  .tafsir-excerpt {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #475569;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .benchmark-pill-box {
+    background: #fef3c7;
+    border: 1px solid #fde68a;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: #78350f;
+    line-height: 1.4;
+  }
+
+  .benchmark-pill-box span {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #b45309;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  /* Promises Row (Section 3) */
+  .promises-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .promises-row {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .promise-card {
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 16px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .promise-ref {
+    display: inline-block;
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #0369a1;
+    text-decoration: none;
+    margin-bottom: 10px;
+  }
+
+  .promise-ref:hover {
+    text-decoration: underline;
+  }
+
+  .promise-quote {
+    font-size: 13.5px;
+    font-style: italic;
+    line-height: 1.55;
+    color: #334155;
+    margin: 0;
+  }
+
+  .immutability-callout {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #bfdbfe;
+    border-radius: 18px;
+    padding: 22px 24px;
+    margin-bottom: 24px;
+  }
+
+  .callout-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .callout-tag {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #1d4ed8;
+  }
+
+  .callout-tafsir-link {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1e40af;
+    text-decoration: underline;
+  }
+
+  .callout-quote {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 17px;
+    line-height: 1.5;
+    color: #1e3a8a;
+    margin: 0;
+  }
+
+  .tahrif-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .tahrif-comparison-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .tahrif-card {
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 18px;
+    padding: 22px;
+  }
+
+  .tahrif-badge {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    margin-bottom: 10px;
+  }
+
+  .badge-green {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  .badge-gold {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .tahrif-title {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-on-surface, #09090b);
+    margin: 0 0 10px 0;
+  }
+
+  .tahrif-desc {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #334155;
+    margin: 0;
+  }
+
+  .hadith-quote {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 15px;
+    font-weight: 700;
+    font-style: italic;
+    color: #78350f;
+    background: #fffbeb;
+    border-left: 3px solid #f59e0b;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .hadith-source-link {
+    font-size: 12px;
+    font-weight: 700;
+    color: #b45309;
+    text-decoration: underline;
+  }
+
+  /* Section 4 Scripture Showcase Cards */
+  .codex-showcase-intro {
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 18px;
+    padding: 24px;
+    margin: 28px 0;
+    text-align: center;
+  }
+
+  .codex-tag {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-secondary, #974543);
+    background: rgba(151, 69, 67, 0.08);
+    padding: 4px 12px;
+    border-radius: 9999px;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+
+  .codex-title {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 21px;
+    font-weight: 700;
+    margin: 6px 0 10px 0;
+  }
+
+  .codex-summary {
+    font-size: 14px;
+    color: var(--color-on-surface-variant, #475569);
+    line-height: 1.6;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .scripture-showcase-card {
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 20px;
+    padding: 24px;
+    margin: 28px 0;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  .showcase-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .showcase-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .showcase-badge {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    background: #f1f5f9;
+    color: #334155;
+    padding: 4px 10px;
+    border-radius: 9999px;
+  }
+
+  .badge-terracotta {
+    background: rgba(151, 69, 67, 0.1);
+    color: #974543;
+  }
+
+  .showcase-ref {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-secondary, #974543);
+    text-decoration: none;
+  }
+
+  .showcase-ref:hover {
+    text-decoration: underline;
+  }
+
+  .open-bible-btn {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--color-secondary, #974543);
+    text-decoration: underline;
+  }
+
+  .showcase-quote {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-on-surface, #09090b);
+    background: var(--color-surface-container-low, #f4f4f5);
+    border-left: 4px solid var(--color-secondary, #974543);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+    margin: 0 0 24px 0;
+  }
+
+  .inline-carousel-wrap {
+    border-top: 1px solid var(--color-outline-variant, #e4e4e7);
+    padding-top: 20px;
+  }
+
+  .inline-carousel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-on-surface-variant, #475569);
+    margin-bottom: 12px;
+  }
+
+  .ms-count-badge {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .codices-footer-card {
+    background: var(--color-surface-container-low, #f4f4f5);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 28px;
+  }
+
+  .codices-title {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+  }
+
+  .codices-text {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #334155;
+    margin: 0;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* Collision Grid (Section 5) */
+  .collision-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  @media (min-width: 640px) {
+    .collision-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .collision-card {
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 18px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .collision-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .collision-badge {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 9999px;
+  }
+
+  .badge-red {
+    background: #ffe4e6;
+    color: #9f1239;
+  }
+
+  .collision-ref {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: #9f1239;
+    text-decoration: none;
+  }
+
+  .collision-ref:hover {
+    text-decoration: underline;
+  }
+
+  .collision-quote {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 14.5px;
+    font-style: italic;
+    line-height: 1.55;
+    color: #881337;
+    margin: 0;
+    background: #fff1f2;
+    padding: 14px 16px;
+    border-radius: 12px;
+  }
+
+  .collision-contrast {
+    border-top: 1px dashed var(--color-outline-variant, #e4e4e7);
+    padding-top: 14px;
+  }
+
+  .collision-contrast span {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-on-surface, #09090b);
+    margin-bottom: 4px;
+  }
+
+  .collision-contrast p {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .exegesis-inline-link {
+    color: var(--color-secondary, #974543);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

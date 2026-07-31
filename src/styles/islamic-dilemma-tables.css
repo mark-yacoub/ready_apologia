@@ -1,0 +1,117 @@
+.affirmation-table-wrapper, .primary-reference-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 16px;
+  background: var(--color-surface, #ffffff);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  margin-top: 32px;
+}
+
+.affirmation-table, .primary-reference-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.affirmation-table th, .primary-reference-table th {
+  background: var(--color-surface-container-low, #f4f4f5);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-on-surface-variant, #475569);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 14px 16px;
+  border-bottom: 2px solid var(--color-outline-variant, #e4e4e7);
+}
+
+.affirmation-table td, .primary-reference-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--color-outline-variant, #e4e4e7);
+  vertical-align: top;
+}
+
+.affirmation-table tr:last-child td, .primary-reference-table tr:last-child td {
+  border-bottom: none;
+}
+
+.mobile-th-label {
+  display: none;
+}
+
+.ref-cell {
+  white-space: nowrap;
+}
+
+.tabular-pill {
+  font-size: 13px !important;
+  padding: 4px 10px !important;
+}
+
+.quote-cell {
+  font-style: italic;
+  color: var(--color-on-surface, #09090b);
+  line-height: 1.6;
+}
+
+.significance-cell, .summary-cell {
+  color: #334155;
+  line-height: 1.55;
+}
+
+.category-cell {
+  font-weight: 700;
+  color: var(--color-secondary, #974543);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .affirmation-table thead, .primary-reference-table thead {
+    display: none;
+  }
+  
+  .affirmation-table, .affirmation-table tbody, .affirmation-table tr, .affirmation-table td,
+  .primary-reference-table, .primary-reference-table tbody, .primary-reference-table tr, .primary-reference-table td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .affirmation-table tr, .primary-reference-table tr {
+    border-bottom: 4px solid var(--color-outline-variant, #e4e4e7);
+    padding: 16px;
+  }
+  .affirmation-table tr:last-child, .primary-reference-table tr:last-child {
+    border-bottom: none;
+  }
+
+  .affirmation-table td, .primary-reference-table td {
+    border-bottom: none;
+    padding: 8px 0;
+  }
+
+  .mobile-th-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--color-secondary, #974543);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    opacity: 0.8;
+  }
+
+  .ref-cell {
+    padding-top: 0 !important;
+    padding-bottom: 12px !important;
+    border-bottom: 1px dashed var(--color-outline-variant, #e4e4e7) !important;
+    margin-bottom: 8px;
+  }
+  
+  .category-cell {
+    padding-top: 0 !important;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+}

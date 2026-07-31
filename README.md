@@ -117,3 +117,5 @@ pkill -f astro
 | `/quran/variant/[slug]` | Dynamic page showing all verses affected by a specific Qiraat effect or category |
 | `/quran/codex/[companion]` | Deep-dive into a companion's non-Uthmanic codex (e.g., Ubayy, Ibn Masud) |
 | `/quran/0` | Special route rendering verses historically reported but lost/abrogated |
+| `/discover` | Discover hub with deep dives on Christian theology and Islamic scripture |
+| `/discover/islamic-dilemma` | The Islamic Dilemma interactive deep-dive page |

@@ -110,6 +110,9 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/pages/quran/0.astro`: Lost Verses page entry point.
 *   `src/pages/quran/-1.astro`: Abrogated Verses page entry point.
 *   `src/pages/quran/codex/[companion].astro`: Companion Codex page showing comparisons, virtues, and lost verses.
+*   `src/pages/discover/islamic-dilemma.astro`: Discover deep-dive page for The Islamic Dilemma featuring Apple-style sections, sticky step navigation, and inline manuscript carousels.
+*   `src/components/islamicdilemma/`: Interactive visual components for the Islamic Dilemma (`DilemmaNav`, `DilemmaDecisionCard`, `AffirmationTable`, `ManuscriptTimeline`, `LogicalTrapDiagram`, `ObjectionsSection`, `PrimaryReferenceTable`).
+*   `src/data/discover/islam/scripture/islamic_dilemma.md`: Read-only markdown source of truth for the Islamic Dilemma topic.
 *   `src/components/VerseTabs.jsx`: Client-side React switcher for Bible verse detail tabs.
 *   `src/components/QuranVerseTabs.jsx`: Client-side React switcher for Quran verse evidence tabs (defaulting to Debunking Miracles).
 *   `src/components/BottomNav.jsx`: Immersive mobile segmented bottom navigation tabs.

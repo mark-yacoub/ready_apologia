@@ -82,6 +82,27 @@ export function parseMarkdown(text) {
         finalUrl = `${base}/quran`;
       }
       targetAttrs = ''; // open internal links in the same tab
+    } else if (url.startsWith('tafseer/') || url.startsWith('/tafseer/')) {
+      const rawPath = url.replace(/^(\/)?tafseer\//, '').replace(/^\/+|\/+$/g, '');
+      const [surah, ...rest] = rawPath.split('/').filter(Boolean);
+      const ayahStr = rest.join('/');
+
+      const baseUrl = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL
+        ? import.meta.env.BASE_URL
+        : '/';
+      const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+
+      if (surah && ayahStr) {
+        const firstAyahMatch = (ayahStr.match(/\d+/) || [])[0];
+        finalUrl = firstAyahMatch
+          ? `${base}/quran/${encodeURIComponent(surah)}/${encodeURIComponent(firstAyahMatch)}/islamic-commentaries`
+          : `${base}/quran/${encodeURIComponent(surah)}`;
+      } else if (surah) {
+        finalUrl = `${base}/quran/${encodeURIComponent(surah)}`;
+      } else {
+        finalUrl = `${base}/quran`;
+      }
+      targetAttrs = ''; // open internal links in the same tab
     }
 
     // Defensive attribute escaping against XSS injection
