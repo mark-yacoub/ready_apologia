@@ -117,6 +117,12 @@ if (tab === 'videos') {
   videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 }
 
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+// Construct explicit self-referencing canonical URL for the active Quran ayah tab
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/quran/${surah}/${ayah}/${tab}`;
+
 // Generate OG Image
 const ogImage = getQuranOgImage(surah, ayah);
 
@@ -128,10 +134,9 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
   verseContradictions,
   parsedScientificErrors,
   verseDebunking,
-  islamicCommentaries
+  islamicCommentaries,
+  canonicalUrl: canonicalURL
 });
-
-const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
 ---
 
@@ -140,6 +145,8 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
   description={seoDescription}
   keywords={seoKeywords}
   ogImage={ogImage}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
   schema={seoSchema}
 >
   <RouteAnalytics

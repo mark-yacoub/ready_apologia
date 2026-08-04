@@ -1,5 +1,17 @@
+# Standard Search Engine Crawlers
 User-agent: *
 Allow: /
+Allow: /bible/
+Allow: /quran/
+Allow: /discover/
+Allow: /evidence/
+
+# Protect crawl budget by disallowing utility, API, and error routes
+Disallow: /api/
+Disallow: /404
+Disallow: /offline
+Disallow: /*?*
+Disallow: /*.json$
 
 # Limit crawl rate for AI and data scraper bots
 User-agent: GPTBot
@@ -14,6 +26,8 @@ User-agent: Omgili
 User-agent: PerplexityBot
 User-agent: Cohere-ai
 User-agent: FacebookBot
+Disallow: /api/
 Crawl-delay: 30
 
+# Canonical Sitemap Index
 Sitemap: https://readyapologia.com/sitemap-index.xml

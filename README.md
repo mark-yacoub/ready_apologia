@@ -98,6 +98,7 @@ pkill -f astro
 *   `docs/db_schema.sql`: SQL schema definitions for the SQLite database.
 *   `scripts/import_scripture.js`: Script to import NASB (NT) and LXX (OT) JSON scriptures into the repository.
 *   `scripts/copy_sample_images.js`: Script to recursively search and copy sample manuscript images from the big data collection.
+*   `scripts/find_creator_top_verse.js`: Script to find the #1 ranked Bible verse per apologist creator based on the UI multi-step sorting algorithm.
 *   `scripts/serve.js`: Zero-dependency HTTP server.
 *   `src/db.js`: Database helper utilizing built-in Node 22 `node:sqlite`.
 *   `src/data/scripture/`: Imported NASB (NT) and LXX (OT) scripture JSON files.

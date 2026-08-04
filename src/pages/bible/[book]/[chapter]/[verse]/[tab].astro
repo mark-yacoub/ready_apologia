@@ -124,6 +124,10 @@ function formatVerseIdToLink(id, targetTab = 'contradictions') {
 }
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
+// Construct explicit self-referencing canonical URL for the active verse tab
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/bible/${book}/${chapter}/${verse}/${tab}`;
+
 // Generate OG Image from the oldest manuscript
 const ogImage = getBibleOgImage(book, chapter, verse, isNT);
 
@@ -135,7 +139,8 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
   manuscripts,
   contradictions,
   apologetics,
-  isNT
+  isNT,
+  canonicalUrl: canonicalURL
 });
 
 ---
@@ -145,6 +150,8 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
   description={seoDescription}
   keywords={seoKeywords}
   ogImage={ogImage}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
   schema={seoSchema}
 >
   <RouteAnalytics

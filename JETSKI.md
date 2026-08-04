@@ -99,6 +99,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `docs/pillar2_seo_implementation.md`: Technical SEO Master Plan & Implementation Code for sitemaps, FAQ JSON-LD schema, Open Graph, and robots.txt.
 *   `scripts/import_scripture.js`: Script to sync NASB (NT) and LXX (OT) JSON scripture databases.
 *   `scripts/copy_sample_images.js`: Script to recursively copy sample manuscript images from data collection.
+*   `scripts/find_creator_top_verse.js`: Script to find the #1 ranked Bible verse per apologist creator based on the UI multi-step sorting algorithm.
 *   `scripts/serve.js`: Zero-dependency static server running on `http://localhost:8080` for testing.
 *   `src/db.js`: Database query helper utilizing `node:sqlite`.
 *   `src/data/scripture/`: Contains the imported scripture files (NASB NT & LXX2012 OT) in structured JSON format.

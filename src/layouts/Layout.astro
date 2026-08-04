@@ -11,6 +11,8 @@ interface Props {
 	title: string;
 	description?: string;
 	ogImage?: string;
+	canonicalURL?: string;
+	ogUrl?: string;
 	schema?: string;
 	keywords?: string;
 	theme?: string;
@@ -20,15 +22,46 @@ const {
 	title,
 	description = "Ready Apologia - Defending the Faith with Biblical Scripture and Early Church Fathers",
 	ogImage,
+	canonicalURL,
+	ogUrl: customOgUrl,
 	schema,
 	keywords = "Apologetics, Bible Verses, Early Church Fathers, Divinity of Christ, Ready Apologia, Patristics, Scripture Evidence, Christian Apologetics, Ante-Nicene Fathers",
 	theme
 } = Astro.props;
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
 const fallbackImage = `${site}${base}/default-og-image.png`;
 const ogImageUrl = ogImage ? (ogImage.startsWith('http') ? ogImage : `${site}${base}${ogImage}`) : fallbackImage;
-const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
+
+/**
+ * L6 Deterministic Canonical Normalization:
+ * Always strip trailing slashes (except root '/') and strip query/hash noise
+ * so /bible/jn/1/ and /bible/jn/1 resolve to an identical canonical URL.
+ */
+function normalizeCanonicalUrl(inputPath) {
+  const absoluteUrl = inputPath.startsWith('http')
+    ? new URL(inputPath)
+    : new URL(inputPath, site || Astro.url);
+  
+  // Remove query params and hash fragments
+  absoluteUrl.search = '';
+  absoluteUrl.hash = '';
+
+  let pathname = absoluteUrl.pathname;
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    pathname = pathname.slice(0, -1);
+  }
+  absoluteUrl.pathname = pathname;
+  return absoluteUrl.href;
+}
+
+const rawTargetUrl = canonicalURL || customOgUrl || Astro.url.pathname;
+const canonicalHref = normalizeCanonicalUrl(rawTargetUrl);
+const ogUrl = canonicalHref;
+
+const formattedTitle = title.endsWith('Ready Apologia') || title.includes(' | Ready Apologia')
+  ? title
+  : `${title} | Ready Apologia`;
 ---
 
 <!doctype html>
@@ -40,24 +73,28 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site || Astro.url).href;
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 		<link rel="icon" type="image/png" href={`${base}/assets/logo.png`} />
 		<link rel="apple-touch-icon" href={`${base}/assets/logo.png`} />
-		<link rel="canonical" href={ogUrl} />
+		<link rel="canonical" href={canonicalHref} />
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Open Graph / Social Media -->
 		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Ready Apologia" />
+		<meta property="og:locale" content="en_US" />
 		<meta property="og:url" content={ogUrl} />
-		<meta property="og:title" content={`${title} | Ready Apologia`} />
+		<meta property="og:title" content={formattedTitle} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:alt" content={formattedTitle} />
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:url" content={ogUrl} />
-		<meta name="twitter:title" content={`${title} | Ready Apologia`} />
+		<meta name="twitter:title" content={formattedTitle} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
+		<meta name="twitter:image:alt" content={formattedTitle} />
 
-		<title>{title} | Ready Apologia</title>
+		<title>{formattedTitle}</title>
 
 		{schema && <script type="application/ld+json" set:html={schema} />}
 		<ClientRouter />
