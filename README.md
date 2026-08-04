@@ -108,7 +108,6 @@ pkill -f astro
 *   `src/utils/`: Helper utilities for loading scripture, topics, non-Uthmanic Quran data, global CDN configuration (`cdn_config.js`), client-side GA4 event tracking (`analytics.js`), Discover URL `#hash` section navigation (`section_navigator.js`), and apologetic evidence (debunking miracles, contradictions, scientific errors).
 
 *   `src/data/quran/debunking/`: Dataset for debunked Quranic scientific miracles.
-*   `docs/adr/`: [Architectural Decision Records (ADRs)](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/adr/0001-framework-and-offline-strategy.md) detailing the technology choices.
 *   `docs/distribution_strategy.md`: [Multi-Channel Marketing, Outreach & Distribution Strategy](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/distribution_strategy.md) actionable master plan and checklists.
 *   `docs/creator_contacts.md`: [Creator Contacts & Outreach Directory](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/creator_contacts.md) for top apologists indexed in Ready Apologia.
 *   `docs/creator_top_verses.md`: [Personalized Creator Top Bible Verses & Outreach Playbook](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/creator_top_verses.md) with shareable WOW links per creator.

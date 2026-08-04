@@ -10,7 +10,7 @@ This document outlines the architectural options, cost-optimization strategies, 
 2. **Zero Hallucination Guarantee:** Cannot generate fake facts, bogus manuscript dates, or inaccurate verse references. In live debate situations, hallucinated data causes severe reputational harm.
 3. **Strict Theological Orthodoxy:** All outputs must strictly align with historic Christian orthodoxy (e.g., Nicene Creed, Deity of Christ, Trinity, Reliability of Scripture) and reject heterodox/heretical views (Modalism, Arianism, Pelagianism, etc.).
 4. **Budget Friendly / Low Cost:** Leverage free tiers and caching to keep operating costs near $0.00.
-5. **Offline-First Compatibility:** Align with Ready Apologia's offline PWA philosophy where possible.
+5. **Static Site Compatibility:** Align with Ready Apologia's static site generation philosophy where possible.
 
 ---
 
@@ -26,10 +26,10 @@ This document outlines the architectural options, cost-optimization strategies, 
 * **Cost:** **$0.00** under Gemini's generous free tier (15 requests/min, 1,500 requests/day).
 * **Pros:** Highly accurate reasoning and strong instruction-following capabilities.
 
-### Option C: In-Browser Local AI via WebLLM (100% Free & Offline)
-* **How it works:** Runs a small open-source model (e.g. Gemma 2B or Llama 3 8B) directly in the user's browser using WebGPU and Service Worker caching.
+### Option C: In-Browser Local AI via WebLLM (100% Free & Client-Side)
+* **How it works:** Runs a small open-source model (e.g. Gemma 2B or Llama 3 8B) directly in the user's browser using WebGPU and browser caching.
 * **Cost:** **$0.00 forever** (uses client compute).
-* **Pros:** 100% offline field use capability.
+* **Pros:** 100% client-side field use capability without server APIs.
 * **Cons:** Requires initial ~1GB-2.5GB model download and high device performance.
 
 ### Option D: SQLite FTS Pattern-Matching Chatbot (No LLM Required)
@@ -99,6 +99,6 @@ User Query: "Did Jesus claim to be God?"
 
 ## 🗺️ 6. Proposed Implementation Steps
 
-1. **Phase 1 (UI & Offline Baseline):** Build `src/components/Chatbot.jsx` powered by local SQLite FTS searching.
+1. **Phase 1 (UI & Search Baseline):** Build `src/components/Chatbot.jsx` powered by local SQLite FTS searching.
 2. **Phase 2 (RAG & Gemini Endpoint):** Create an Astro server endpoint connecting to Gemini 1.5 Flash with `temperature: 0` and strict grounding system prompts.
 3. **Phase 3 (Caching & Whitelisted Fallback):** Add Exact Match / Semantic caching and Google Custom Search fallback for trusted apologetics domains.

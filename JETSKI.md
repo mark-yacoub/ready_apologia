@@ -1,17 +1,17 @@
 # 🧠 Jetski Project Memory: Ready Apologia
 
-This is the persistent memory file for **Ready Apologia**. Any new AI session **MUST** read this file first to understand the current codebase architecture, SQLite schema, design systems, responsive layout rules, PWA caching strategies, and active implementation plans.
+This is the persistent memory file for **Ready Apologia**. Any new AI session **MUST** read this file first to understand the current codebase architecture, SQLite schema, design systems, responsive layout rules, static site generation strategies, and active implementation plans.
 
 ---
 
 ## 🚀 Technology Stack & Architecture
-Ready Apologia V1 is designed as a **zero-dependency, offline-first Progressive Web App (PWA)** optimized for both high-end iOS devices and offline field use by Christian evangelists.
+Ready Apologia V1 is designed as a **zero-dependency, high-speed mobile-first web application** optimized for both high-end iOS devices and field use by Christian evangelists.
 
 *   **Framework:** Astro v4 (Static Site Generation - SSG)
 *   **Interactive Islands:** React (client:load)
 *   **Database:** SQLite (`data.db` directly queried during pre-rendering using Node 22's built-in `node:sqlite`)
 *   **CSS/Layout:** Pure, Tailwind-free semantic CSS custom properties (variables) and standard CSS Flexbox.
-*   **Icons:** 100% Bulletproof Inline Vector SVGs (all Material Web fonts deleted for instant offline support).
+*   **Icons:** 100% Bulletproof Inline Vector SVGs (all Material Web fonts deleted for instant loading speed).
 
 ---
 
@@ -79,11 +79,9 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 
 ---
 
-## 📲 PWA & Offline-First Strategies
+## 📲 Mobile App Launching
 1.  **Immersive launching (`public/manifest.json`):**
     Configured with `"display": "standalone"`. When added to the home screen on iOS/Android, it launches in fullscreen native mode with no browser URL bar. Shield logo (`/assets/logo.png`) is the app icon.
-2.  **Offline Service Worker (`public/sw.js`):**
-    Uses a resilient **Cache-First with Network-Fallback** strategy. It automatically pre-caches critical CSS/JS and dynamically caches visited scripture pages, images, and SQLite queries for 100% offline field use.
 
 ---
 
@@ -175,7 +173,7 @@ Overhaul `[verse].astro` and `VerseTabs.jsx` to replace all Tailwind utility cla
 
 ## 🧠 Instructions for Future AI Sessions
 1.  **Strictly Avoid Tailwind CSS:** Always write custom CSS selectors and variables inside `<style>` tags for local styling. Tailwind is not configured globally and utility classes will fail/collapse.
-2.  **Offline-First Enforcement:** Never write features requiring a live server API. Everything must be statically pre-rendered during Astro compile.
+2.  **Static Pre-rendering Enforcement:** Never write features requiring a live server API. Everything must be statically pre-rendered during Astro compile.
 3.  **Mandatory UI Self-Audit (Quality Assurance):** Anytime you build, edit, or polish a user interface (UI), you **MUST** run the local static server, take a screenshot using the headless browser CLI (`gbrowser`), and inspect the generated PNG yourself using the `view_file` tool **before** declaring the task complete. Critically evaluate the layout for text overflows, alignments, spacing, double-logo bugs, and color contrast. Compare it against reference designs to ensure it is an outstanding, premium-quality UI.
 4.  **Continuous Documentation Sync (README & JETSKI.md):** Anytime you add, remove, or modify files, components, routes, static assets, helper scripts, or command workflows, you **MUST** immediately update both `README.md` and `JETSKI.md` to keep the Repository Map, setup guides, and CLI commands perfectly synchronized with the actual codebase state. Never leave documentation stale.
 5.  **Mandatory SEO Strategy Check:** If creating any new tab, new evidence topic, or ingesting any new data that generates a new unique page pattern, you **MUST** explicitly prompt the user for the SEO title, description, keywords, and FAQ schema data for that page. No webpage component should be shipped without a precise SEO structure designed by the user.

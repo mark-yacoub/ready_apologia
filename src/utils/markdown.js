@@ -1,6 +1,6 @@
 /**
  * Safe, high-performance, zero-dependency Markdown to HTML regex parser.
- * Built specifically for PWA offline speeds, parsing headers, bold text,
+ * Built specifically for high-performance speeds, parsing headers, bold text,
  * inline links, and dual paragraph line breaks error-free.
  */
 export function parseMarkdown(text) {

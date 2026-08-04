@@ -146,7 +146,7 @@ export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, vers
                 {/* 1. Manuscript Image Scan Frame (Double tap triggers Zoom Lightbox) */}
                 <div className="ms-image-frame" onClick={() => triggerZoom(imgSrc, ms.image_name)}>
 
-                  {/* If image failed to load (404 or timeout), show clean offline warning fallback */}
+                  {/* If image failed to load (404 or timeout), show clean error warning fallback */}
                   {failedImages[ms.image_name] ? (
                     <div className="ms-skeleton-loader ms-error-fallback select-none">
                       <svg className="fallback-icon warning-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5" style={{ width: '24px', height: '24px', color: 'var(--color-secondary)' }}>

@@ -51,7 +51,7 @@ export default defineConfig({
       filter: (page) => {
         const url = new URL(page);
         const path = url.pathname.replace(/\/$/, '');
-        return path !== '/offline' && !path.includes('/404');
+        return !path.includes('/404');
       },
       serialize: (item) => {
         const url = new URL(item.url);

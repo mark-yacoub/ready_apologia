@@ -4,7 +4,7 @@
  * and robust regex-based SPA transition tracking.
  */
 
-// Singleton GA4 dispatcher resilient to SSR and offline states
+// Singleton GA4 dispatcher resilient to SSR states
 const sendGtag = (...args) => {
   if (typeof window === 'undefined') return;
   window.dataLayer = window.dataLayer || [];

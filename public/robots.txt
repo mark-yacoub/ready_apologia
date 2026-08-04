@@ -9,7 +9,6 @@ Allow: /evidence/
 # Protect crawl budget by disallowing utility, API, and error routes
 Disallow: /api/
 Disallow: /404
-Disallow: /offline
 Disallow: /*?*
 Disallow: /*.json$
 
