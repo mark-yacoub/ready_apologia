@@ -4,6 +4,7 @@ import path from 'node:path';
 
 import { generateQuranTabSEO } from '../../../../utils/seoFactory.js';
 import Layout from '../../../../layouts/Layout.astro';
+import RouteAnalytics from '../../../../components/common/RouteAnalytics.astro';
 import QuranVerseTabs from '../../../../components/QuranVerseTabs.jsx';
 import QuranManuscriptCarousel from '../../../../components/QuranManuscriptCarousel.jsx';
 import VideosGrid from '../../../../components/VideosGrid.astro';
@@ -131,6 +132,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
 });
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
 ---
 
 <Layout
@@ -140,6 +142,16 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
   ogImage={ogImage}
   schema={seoSchema}
 >
+  <RouteAnalytics
+    eventName="evidence_tab_view"
+    params={{
+      testament: 'Quran',
+      book_or_surah: surah,
+      chapter_or_ayah: ayah,
+      verse_id: `${surah}:${ayah}`,
+      tab_id: tab
+    }}
+  />
   <div class="verse-detail-container theme-quran">
 
     <header class="detail-header select-none">

@@ -93,6 +93,10 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `CHATBOT_IDEAS.md`: Architectural options, zero-hallucination guardrails, orthodoxy rules, and caching strategy for the chatbot feature.
 *   `data.db`: The SQLite database queried during pre-rendering.
 *   `docs/db_schema.sql`: SQL schema definitions for database queries.
+*   `docs/distribution_strategy.md`: Multi-Channel Marketing, Outreach & Distribution Strategy with actionable checklists.
+*   `docs/creator_contacts.md`: Verified Creator Contacts & Outreach Directory for top apologists indexed in Ready Apologia.
+*   `docs/creator_top_verses.md`: Personalized Creator Top Bible Verses & Outreach Playbook with shareable WOW links per creator.
+*   `docs/pillar2_seo_implementation.md`: Technical SEO Master Plan & Implementation Code for sitemaps, FAQ JSON-LD schema, Open Graph, and robots.txt.
 *   `scripts/import_scripture.js`: Script to sync NASB (NT) and LXX (OT) JSON scripture databases.
 *   `scripts/copy_sample_images.js`: Script to recursively copy sample manuscript images from data collection.
 *   `scripts/serve.js`: Zero-dependency static server running on `http://localhost:8080` for testing.
@@ -119,6 +123,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/components/ScriptureNav.jsx`: Collapsible Left Navigator featuring responsive desktop vertical app sections.
 *   `src/components/OnboardingModal.jsx`: Centered card overlay providing an initial onboarding tip.
 *   `src/components/GoogleAnalytics.astro`: Astro `<head>` component injecting GA4 tracking scripts and global SPA/route delegation.
+*   `src/components/common/RouteAnalytics.astro`: L6 declarative GA4 route analytics component emitting `#route-analytics-payload` DOM metadata for SPA transitions.
 *   `src/components/QuranSpecial.astro`: Component rendering Lost or Abrogated verses list.
 *   `src/components/QuranPageHeader.astro`: Header component for Quran pages with Surah selection dropdown.
 *   `src/utils/analytics.js`: L6 client-side Google Analytics 4 utility handling SPA transitions, tab views, and global event delegation.

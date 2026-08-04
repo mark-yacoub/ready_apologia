@@ -1,0 +1,18 @@
+---
+/**
+ * L6 Declarative GA4 Route Analytics Component
+ * 
+ * Emits a hidden DOM metadata element (#route-analytics-payload) containing JSON payload for GA4 tracking.
+ * When Astro ClientRouter performs an SPA navigation, handleRouteTracking() in src/utils/analytics.js
+ * inspects this element and fires the corresponding event cleanly without relying on centralized regex matching.
+ */
+export interface Props {
+  eventName: string;
+  params: Record<string, any>;
+}
+
+const { eventName, params } = Astro.props;
+const payload = JSON.stringify({ eventName, params });
+---
+
+<div id="route-analytics-payload" data-payload={payload} aria-hidden="true" style="display: none;"></div>

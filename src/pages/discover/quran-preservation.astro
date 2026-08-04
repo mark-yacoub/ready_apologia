@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
 import JourneyNav from '../../components/quranpreservation/JourneyNav.jsx';
 import CodexColumns from '../../components/quranpreservation/CodexColumns.jsx';
 import RecitersInfographic from '../../components/quranpreservation/RecitersInfographic.jsx';
@@ -84,6 +85,7 @@ const pageKeywords = "quran preservation myth, has the quran been changed, uthma
 ---
 
 <Layout title="The Myth of Quranic Preservation: Historical Evidence" description={pageDesc} keywords={pageKeywords} ogImage="/media/quran_preservation/cover.png">
+  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'quran-preservation' }} />
   <div class="article-journey-container">
     {/* Navigation */}
     <JourneyNav stages={topLevelStages} client:load />

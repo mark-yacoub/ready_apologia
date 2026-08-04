@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
 import DilemmaNav from '../../components/islamicdilemma/DilemmaNav.jsx';
 import DilemmaDecisionCard from '../../components/islamicdilemma/DilemmaDecisionCard.jsx';
 import AffirmationTable from '../../components/islamicdilemma/AffirmationTable.jsx';
@@ -36,6 +37,7 @@ const pageKeywords = "islamic dilemma, surah 5:47, injil uncorrupted, quran conf
   keywords={pageKeywords}
   ogImage="/media/islamic_dilemma/cover.jpg"
 >
+  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'islamic-dilemma' }} />
   <div class="dilemma-page-wrapper">
     {/* Breadcrumb Navigation */}
     <div class="breadcrumb-header">

@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
 import '../../styles/evidence-feed.css';
 import articleData from '../../data/extrabiblical-evidence-for-jesus.json';
 
@@ -37,6 +38,7 @@ const textHighlighter = (str) => {
 ---
 
 <Layout title={articleData.title} description={pageDesc} keywords={pageKeywords} theme="evidence-mode">
+  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'extrabiblical-evidence-for-jesus' }} />
   <div class="evidence-page-wrapper">
     
     <div class="meta-header">

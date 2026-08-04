@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
 import QuranPageHeader from '../../../components/QuranPageHeader.astro';
 import QiraatCard from '../../../components/QiraatCard.astro';
 import EvidenceCard from '../../../components/EvidenceCard.astro';
@@ -56,9 +57,17 @@ const formattedVerses = verses.map(v => {
 const seoTitle = `Quranic Qiraat Variant: ${filterInfo.title}`;
 const seoDescription = `Critically analyze the ${filterInfo.title} textual variant in the Quran. Understand its effect on Islamic theology, grammar changes, and manuscript transmission variations.`;
 const seoKeywords = `qiraat ${filterInfo.title}, quran variant reading ${filterInfo.title}, quran preservation, rasm differences`;
+
 ---
 
 <Layout title={seoTitle} description={seoDescription} keywords={seoKeywords}>
+  <RouteAnalytics
+    eventName="quran_special_view"
+    params={{
+      page_type: 'variant',
+      slug_or_id: slug
+    }}
+  />
   <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader
       currentTitle={filterInfo.title}

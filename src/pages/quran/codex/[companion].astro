@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
 import VariantCard from '../../../components/VariantCard.astro';
 import VideosCarousel from '../../../components/VideosCarousel.astro';
 import { loadCompanionCodex } from '../../../utils/nonUthmanicLoader.js';
@@ -65,9 +66,17 @@ const surahsList = Object.values(variantsBySurah).sort((a, b) => parseInt(a.numb
 const seoTitle = `The Codex of ${codexData.name} - Competing Quranic Manuscripts`;
 const seoDescription = `While Uthman burnt varying versions of the Quran to enforce standardization, the ${codexData.name} codex survived in parts through the Sahih Hadith. Discover its variant readings, lost verses, and differences from the standard text.`;
 const seoKeywords = `codex of ${codexData.name}, non-uthmanic quran, uthmanic compilation, variant quran manuscripts, burned quran manuscripts`;
+
 ---
 
 <Layout title={seoTitle} description={seoDescription} keywords={seoKeywords}>
+  <RouteAnalytics
+    eventName="quran_special_view"
+    params={{
+      page_type: 'codex',
+      slug_or_id: companion
+    }}
+  />
   <div class="quran-reader-container theme-quran prefer-english">
 
     <!-- Header: Companion Name (Clickable) -->

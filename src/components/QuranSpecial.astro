@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import RouteAnalytics from './common/RouteAnalytics.astro';
 import QuranPageHeader from './QuranPageHeader.astro';
 import VariantCard from './VariantCard.astro';
 import VideosCarousel from './VideosCarousel.astro';
@@ -97,9 +98,17 @@ if (validVerseIds.length > 0) {
 } else {
   companionsWithData.forEach(c => c.videos = []);
 }
+
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
+  <RouteAnalytics
+    eventName="quran_special_view"
+    params={{
+      page_type: type === 'lost' ? 'lost_verses' : 'abrogated_verses',
+      slug_or_id: type === 'lost' ? '0' : '-1'
+    }}
+  />
   <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader currentTitle={title} currentIndex={index} />
 

@@ -145,18 +145,11 @@ export function trackOnboardingInteraction({ tipId, action }) {
 // Route & Global Event Delegation Handlers
 // ---------------------------------------------------------------------------
 
-// Self-documenting route regex matchers immune to query params or slashes
-const BIBLE_TAB_REGEX = /^\/bible\/(?<book>[^/]+)\/(?<chapter>\d+)\/(?<verse>[^/]+)\/(?<tabId>[^/?#]+)/;
-const QURAN_TAB_REGEX = /^\/quran\/(?<surah>\d+)\/(?<ayah>\d+)\/(?<tabId>[^/?#]+)/;
-const QURAN_CODEX_REGEX = /^\/quran\/codex\/(?<companion>[^/?#]+)/;
-const QURAN_VARIANT_REGEX = /^\/quran\/variant\/(?<slug>[^/?#]+)/;
-const QURAN_SPECIAL_NUM_REGEX = /^\/quran\/(?<num>0|-1)(?:$|[/?#])/;
-const DISCOVER_ARTICLE_REGEX = /^\/discover\/(?<slug>[^/?#]+)/;
-
 let lastTrackedPath = null;
 
 /**
- * Automatically inspect current pathname using regex patterns and dispatch route-based tracking.
+ * Inspect declarative route metadata (#route-analytics-payload) and dispatch GA4 tracking.
+ * Standard L6 Production pattern: routes define their analytics schema contract via <RouteAnalytics />.
  */
 export function handleRouteTracking() {
   if (typeof window === 'undefined') return;
@@ -168,83 +161,18 @@ export function handleRouteTracking() {
   // 1. Always track virtual page_view on client transition
   trackPageView(window.location.href, document.title);
 
-  // 2. [L6 Refactor] Declarative DOM-first Routing
-  // Pages can inject a hidden div with id="route-analytics-payload" and a data-payload JSON string.
-  // This removes the need for brittle centralized regex matching moving forward.
+  // 2. [L6 Standard] Declarative DOM-first Routing
+  // Pages inject <RouteAnalytics /> which renders <div id="route-analytics-payload" data-payload={JSON}>.
   const payloadEl = document.getElementById('route-analytics-payload');
   if (payloadEl && payloadEl.dataset.payload) {
     try {
       const payload = JSON.parse(payloadEl.dataset.payload);
       if (payload.eventName && payload.params) {
         trackEvent(payload.eventName, payload.params);
-        return;
       }
     } catch (e) {
       console.warn('[GA4] Failed to parse route-analytics-payload JSON', e);
     }
-  }
-
-  // 3. Fallback to Legacy Regex Matching (prevent data loss on unmigrated pages)
-  const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-  const activePath = currentPath.startsWith(base) ? currentPath.slice(base.length) : currentPath;
-
-
-
-  // 2. Bible verse evidence drawer tab
-  const matchBible = activePath.match(BIBLE_TAB_REGEX);
-  if (matchBible?.groups) {
-    const { book, chapter, verse, tabId } = matchBible.groups;
-    trackEvidenceTabView({
-      testament: 'Bible',
-      bookOrSurah: book,
-      chapterOrAyah: chapter,
-      verseId: `${book}_${chapter}_${verse}`,
-      tabId,
-    });
-    return;
-  }
-
-  // 3. Quran verse evidence drawer tab
-  const matchQuran = activePath.match(QURAN_TAB_REGEX);
-  if (matchQuran?.groups) {
-    const { surah, ayah, tabId } = matchQuran.groups;
-    trackEvidenceTabView({
-      testament: 'Quran',
-      bookOrSurah: surah,
-      chapterOrAyah: ayah,
-      verseId: `${surah}:${ayah}`,
-      tabId,
-    });
-    return;
-  }
-
-  // 4. Special Quran routes (Codex, Variant, Lost/Abrogated)
-  const matchCodex = activePath.match(QURAN_CODEX_REGEX);
-  if (matchCodex?.groups) {
-    trackQuranSpecialView({ pageType: 'codex', slugOrId: matchCodex.groups.companion });
-    return;
-  }
-
-  const matchVariant = activePath.match(QURAN_VARIANT_REGEX);
-  if (matchVariant?.groups) {
-    trackQuranSpecialView({ pageType: 'variant', slugOrId: matchVariant.groups.slug });
-    return;
-  }
-
-  const matchNum = activePath.match(QURAN_SPECIAL_NUM_REGEX);
-  if (matchNum?.groups) {
-    const pageType = matchNum.groups.num === '0' ? 'lost_verses' : 'abrogated_verses';
-    trackQuranSpecialView({ pageType, slugOrId: matchNum.groups.num });
-    return;
-  }
-
-  // Legacy Discover Article Routes
-  const matchDiscover = activePath.match(DISCOVER_ARTICLE_REGEX);
-  if (matchDiscover?.groups && matchDiscover.groups.slug) {
-    trackEvent('discover_article_view', {
-      article_slug: matchDiscover.groups.slug,
-    });
-    return;
   }
 }
 

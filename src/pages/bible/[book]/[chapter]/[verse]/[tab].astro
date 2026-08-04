@@ -1,6 +1,7 @@
 ---
 import { generateBibleTabSEO } from '../../../../../utils/seoFactory.js';
 import Layout from '../../../../../layouts/Layout.astro';
+import RouteAnalytics from '../../../../../components/common/RouteAnalytics.astro';
 import VerseTabs from '../../../../../components/VerseTabs.jsx';
 import ManuscriptCarousel from '../../../../../components/ManuscriptCarousel.jsx';
 import VideosGrid from '../../../../../components/VideosGrid.astro';
@@ -137,16 +138,6 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
   isNT
 });
 
-const analyticsPayload = JSON.stringify({
-  eventName: 'evidence_tab_view',
-  params: {
-    testament: 'Bible',
-    book_or_surah: book,
-    chapter_or_ayah: chapter,
-    verse_id: `${book}_${chapter}_${verse}`,
-    tab_id: tab
-  }
-});
 ---
 
 <Layout
@@ -156,8 +147,16 @@ const analyticsPayload = JSON.stringify({
   ogImage={ogImage}
   schema={seoSchema}
 >
-  <div id="route-analytics-payload" data-payload={analyticsPayload} aria-hidden="true" style="display: none;"></div>
-  
+  <RouteAnalytics
+    eventName="evidence_tab_view"
+    params={{
+      testament: 'Bible',
+      book_or_surah: book,
+      chapter_or_ayah: chapter,
+      verse_id: `${book}_${chapter}_${verse}`,
+      tab_id: tab
+    }}
+  />
   <div class="verse-detail-container">
 
     <!-- Top Header Back Navigation -->

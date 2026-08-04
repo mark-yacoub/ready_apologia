@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
 import '../../styles/timeline.css';
 
 import rawDivinityTimeline from '../../data/divinityTimeline.json';
@@ -40,6 +41,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
 <Layout title="Archaeological Evidence of the Divine Christ" description={pageDesc} keywords={pageKeywords} ogImage="/media/divinity_timeline/megiddo_mosaic/image_1.jpg" theme="timeline-mode">
+  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'divinity-timeline' }} />
 <divinity-timeline-app data-base-url={base}>
 
   <!-- Data Store for Astro Transitions -->
