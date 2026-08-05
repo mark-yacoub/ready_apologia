@@ -94,7 +94,7 @@ const seoKeywords = `qiraat ${filterInfo.title}, quran variant reading ${filterI
 
             <div class="variants-list">
               {v.qiraatVariants.map((variant: any) => (
-                <QiraatCard variant={variant} />
+                <QiraatCard variant={variant} surah={v.surah} ayah={v.ayah} />
               ))}
             </div>
           </div>

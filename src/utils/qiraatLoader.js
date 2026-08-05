@@ -46,7 +46,12 @@ export async function getQiraatForSurah(surahNum) {
           const cat = (v.category || '').toLowerCase();
           const eff = (v.effect || '').toLowerCase();
           return cat !== 'other' && eff !== 'other';
-        });
+        }).map(v => ({
+          ...v,
+          surah: surah,
+          ayah: ayah,
+          verificationUrl: `https://quran.com/${surah}/${ayah}/qiraat`
+        }));
         cache[surah][ayah] = validVariants;
       }
     }
@@ -100,7 +105,12 @@ export async function getVersesForQiraatSlug(slug) {
         const catSlug = slugifyQiraatFilter('category', cat);
 
         return (slug === effSlug || slug === catSlug);
-      });
+      }).map(v => ({
+        ...v,
+        surah: surah,
+        ayah: ayah,
+        verificationUrl: `https://quran.com/${surah}/${ayah}/qiraat`
+      }));
 
       if (validVariants.length > 0) {
         matches.push({

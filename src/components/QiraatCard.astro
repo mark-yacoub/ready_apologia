@@ -8,6 +8,9 @@ export interface QiraatVariant {
   variant_english_word: string;
   description?: string;
   readers?: string[];
+  surah?: number | string; // Appended via qiraatLoader DTO
+  ayah?: number | string;  // Appended via qiraatLoader DTO
+  verificationUrl?: string; // Appended via qiraatLoader DTO
 }
 
 interface Props {
@@ -23,6 +26,22 @@ const { variant } = Astro.props;
       <span class="qiraat-category">{variant.category}</span>
       <span class="qiraat-effect">{variant.effect}</span>
     </div>
+    {variant.verificationUrl && (
+      <a 
+        href={variant.verificationUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="qiraat-source-btn"
+        aria-label={`Verify Qiraat variant source for Surah ${variant.surah} Ayah ${variant.ayah} on Quran.com (opens in a new tab)`}
+      >
+        Verify Source
+        <svg class="icon-inline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
+    )}
   </div>
 
   <div class="qiraat-diff">
@@ -95,6 +114,23 @@ const { variant } = Astro.props;
     font-size: 14px;
     font-weight: 600;
     color: var(--color-on-surface-variant);
+  }
+
+  .qiraat-source-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    color: #ca8a04; /* yellow-600 */
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .qiraat-source-btn:hover {
+    color: #a16207; /* yellow-800 */
   }
 
   .qiraat-diff {

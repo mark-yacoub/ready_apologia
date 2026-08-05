@@ -254,7 +254,7 @@ const ogImage = getQuranOgImage(surahNum, null);
                   </summary>
                   <div class="variants-list">
                     {v.qiraatVariants.map((variant: any) => (
-                      <QiraatCard variant={variant} />
+                      <QiraatCard variant={variant} surah={surahNum} ayah={v.number} />
                     ))}
                   </div>
                 </details>
