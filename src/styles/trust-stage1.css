@@ -1,0 +1,1023 @@
+/* ==========================================================================
+   Trustworthiness Stage 1: Textual Transmission & Manuscript Evidence
+   Pure Semantic CSS — Zero Tailwind — Ready Apologia Light Theme
+   ========================================================================== */
+
+:root {
+  --color-primary: #09090b;
+  --color-on-primary: #ffffff;
+  --color-secondary: #974543;
+  --color-on-secondary: #ffffff;
+  --color-background: #f4f4f5;
+  --color-surface: #ffffff;
+  --color-on-surface: #09090b;
+  --color-on-surface-variant: #71717a;
+  --color-outline-variant: #e4e4e7;
+  --color-surface-container-low: #f4f4f5;
+  --color-surface-container-lowest: #ffffff;
+  --color-primary-container: #e0e7ff;
+  --color-on-primary-container: #3730a3;
+  --color-secondary-container: #fce7f3;
+  --color-on-secondary-container: #9d174d;
+
+  --font-display: 'Literata', Georgia, 'Amiri', serif;
+  --font-body: 'Public Sans', -apple-system, sans-serif;
+  --font-headings: 'Lora', Georgia, serif;
+}
+
+/* Base Wrapper */
+.trust-stage1-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  font-family: var(--font-body, 'Public Sans', sans-serif);
+  color: var(--color-on-surface, #09090b);
+  box-sizing: border-box;
+}
+
+.trust-stage1-container * {
+  box-sizing: border-box;
+}
+
+/* Hero Archive Header */
+.trust-stage1-hero {
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 20px;
+  padding: 32px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px -2px rgba(9, 9, 11, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.trust-stage1-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--color-secondary, #974543), var(--color-primary, #09090b));
+}
+
+.trust-stage1-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background-color: var(--color-secondary-container, #fce7f3);
+  color: var(--color-on-secondary-container, #9d174d);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.trust-stage1-title {
+  font-family: var(--font-headings, var(--font-display, Georgia, serif));
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--color-primary, #09090b);
+  margin: 0 0 12px 0;
+}
+
+.trust-stage1-subtitle {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--color-on-surface-variant, #71717a);
+  max-width: 880px;
+  margin: 0;
+}
+
+/* Section Navigation Segmented Bar */
+.trust-stage1-nav-bar {
+  display: flex;
+  background-color: var(--color-surface-container-low, #f4f4f5);
+  padding: 6px;
+  border-radius: 14px;
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  margin-bottom: 28px;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.trust-stage1-nav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.trust-stage1-nav-btn {
+  flex: 1;
+  min-width: max-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: var(--font-body, sans-serif);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--color-on-surface-variant, #71717a);
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.trust-stage1-nav-btn:hover {
+  background-color: rgba(9, 9, 11, 0.05);
+  color: var(--color-primary, #09090b);
+}
+
+.trust-stage1-nav-btn.active-tab {
+  background-color: var(--color-primary, #09090b);
+  color: var(--color-on-primary, #ffffff);
+  box-shadow: 0 2px 8px rgba(9, 9, 11, 0.15);
+}
+
+/* Section Headers */
+.trust-section-header {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.trust-section-title-wrap {
+  flex: 1;
+  min-width: 260px;
+}
+
+.trust-section-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-secondary, #974543);
+  margin-bottom: 4px;
+}
+
+.trust-section-title {
+  font-family: var(--font-headings, Georgia, serif);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-primary, #09090b);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Feature 1: Comparative Histogram / Bar Chart
+   ========================================================================== */
+.trust-histogram-card {
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.trust-histogram-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 18px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--color-outline-variant, #e4e4e7);
+}
+
+.trust-histogram-metric-group,
+.trust-histogram-scale-group {
+  display: inline-flex;
+  background: var(--color-surface-container-low, #f4f4f5);
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.trust-histogram-metric-btn,
+.trust-histogram-scale-btn {
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-on-surface-variant, #71717a);
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trust-histogram-metric-btn:hover,
+.trust-histogram-scale-btn:hover {
+  color: var(--color-primary, #09090b);
+}
+
+.trust-histogram-metric-btn.active-metric,
+.trust-histogram-scale-btn.active-scale {
+  background: var(--color-surface, #ffffff);
+  color: var(--color-primary, #09090b);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.trust-histogram-chart-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trust-histogram-row {
+  display: grid;
+  grid-template-columns: 260px 1fr 140px;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background-color: var(--color-surface, #ffffff);
+}
+
+.trust-histogram-row:hover {
+  background-color: var(--color-surface-container-low, #f4f4f5);
+  border-color: var(--color-outline-variant, #e4e4e7);
+  transform: translateX(3px);
+}
+
+.trust-histogram-row.is-selected-row {
+  background-color: rgba(151, 69, 67, 0.06);
+  border-color: var(--color-secondary, #974543);
+  box-shadow: 0 2px 10px rgba(151, 69, 67, 0.1);
+}
+
+.trust-histogram-row.is-biblical-row {
+  background-color: rgba(151, 69, 67, 0.04);
+  border: 1px solid rgba(151, 69, 67, 0.25);
+}
+
+.trust-histogram-row.is-biblical-row:hover {
+  background-color: rgba(151, 69, 67, 0.08);
+  border-color: var(--color-secondary, #974543);
+}
+
+.trust-histogram-label-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.trust-histogram-author-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-primary, #09090b);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trust-biblical-tag {
+  display: inline-flex;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #ffffff;
+  background: var(--color-secondary, #974543);
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.trust-histogram-date-sub {
+  font-size: 11.5px;
+  color: var(--color-on-surface-variant, #71717a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trust-histogram-bar-col {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.trust-histogram-bar-track {
+  width: 100%;
+  height: 22px;
+  background-color: var(--color-surface-container-low, #f4f4f5);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  position: relative;
+}
+
+.trust-histogram-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.trust-histogram-bar-fill.is-biblical-fill {
+  background: linear-gradient(90deg, #974543, #b91c1c);
+  box-shadow: 0 0 10px rgba(151, 69, 67, 0.4);
+}
+
+.trust-histogram-bar-fill.is-classical-fill {
+  background: linear-gradient(90deg, #64748b, #475569);
+}
+
+.trust-histogram-value-col {
+  text-align: right;
+  font-weight: 800;
+  font-size: 13.5px;
+  color: var(--color-primary, #09090b);
+  white-space: nowrap;
+}
+
+.trust-histogram-value-sub {
+  font-size: 11px;
+  color: var(--color-on-surface-variant, #71717a);
+  display: block;
+}
+
+/* Ancient Archive Dossier Card (Feature 1 Selectable) */
+.trust-archive-dossier-card {
+  margin-top: 24px;
+  background: #fcfbf9;
+  border: 1.5px solid var(--color-secondary, #974543);
+  border-radius: 16px;
+  padding: 22px;
+  position: relative;
+  box-shadow: 0 8px 24px -4px rgba(151, 69, 67, 0.12);
+  animation: trustFadeIn 0.3s ease;
+}
+
+@keyframes trustFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dossier-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(151, 69, 67, 0.2);
+}
+
+.dossier-title-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.dossier-title {
+  font-family: var(--font-headings, Georgia, serif);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-primary, #09090b);
+  margin: 0;
+}
+
+.dossier-source-type {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-secondary, #974543);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dossier-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.dossier-stat-box {
+  background: #ffffff;
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 10px;
+  padding: 8px 14px;
+  flex: 1;
+  min-width: 140px;
+}
+
+.dossier-stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-on-surface-variant, #71717a);
+  text-transform: uppercase;
+  display: block;
+}
+
+.dossier-stat-val {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-primary, #09090b);
+}
+
+.dossier-quote-box {
+  background: #ffffff;
+  border-left: 3px solid var(--color-secondary, #974543);
+  padding: 14px 16px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 14px;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #334155;
+  font-style: italic;
+}
+
+.dossier-explanation {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #334155;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Feature 2: 4-Category Textual Variants Pie / Donut Chart
+   ========================================================================== */
+.trust-variants-section {
+  margin-bottom: 36px;
+}
+
+.trust-variants-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.trust-donut-wrap {
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.trust-donut-svg {
+  width: 240px;
+  height: 240px;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.donut-slice {
+  transition: all 0.25s ease;
+  transform-origin: 100px 100px;
+}
+
+.donut-slice:hover,
+.donut-slice-selected {
+  transform: scale(1.04);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+.trust-donut-center-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.donut-center-num {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--color-primary, #09090b);
+  line-height: 1;
+  display: block;
+}
+
+.donut-center-sub {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--color-on-surface-variant, #71717a);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+  display: block;
+}
+
+.trust-variants-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Prominent Green Banner / Badge (0% doctrinal impact) */
+.trust-doctrinal-zero-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #ecfdf5;
+  border: 2px solid #059669;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.12);
+}
+
+.doctrinal-zero-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #059669;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doctrinal-zero-content {
+  flex: 1;
+}
+
+.doctrinal-zero-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: #065f46;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.01em;
+}
+
+.doctrinal-zero-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #047857;
+  margin: 0;
+}
+
+/* Legend & Category Selector Buttons */
+.trust-variant-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.trust-variant-legend-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.trust-variant-legend-btn:hover {
+  background: var(--color-surface-container-low, #f4f4f5);
+  transform: translateX(3px);
+}
+
+.trust-variant-legend-btn.active-legend-btn {
+  border-color: var(--color-primary, #09090b);
+  background: var(--color-surface-container-low, #f4f4f5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.legend-btn-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legend-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.legend-cat-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--color-primary, #09090b);
+}
+
+.legend-cat-pct {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-on-surface-variant, #71717a);
+  background: rgba(0, 0, 0, 0.04);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+/* Selected Category Detail Card */
+.trust-variant-detail-card {
+  background: var(--color-surface, #ffffff);
+  border: 1.5px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 4px;
+  animation: trustFadeIn 0.25s ease;
+}
+
+.variant-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-outline-variant, #e4e4e7);
+}
+
+.variant-detail-title {
+  font-family: var(--font-headings, Georgia, serif);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-primary, #09090b);
+  margin: 0;
+}
+
+.variant-detail-pct-badge {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 6px;
+  color: #ffffff;
+}
+
+.variant-detail-quote {
+  background: var(--color-surface-container-low, #f4f4f5);
+  border-left: 3px solid var(--color-primary, #09090b);
+  padding: 12px 14px;
+  border-radius: 0 8px 8px 0;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.variant-detail-fact {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #334155;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.variant-detail-explanation {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-on-surface-variant, #71717a);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Feature 3: 14 Cornerstone Biblical Manuscripts Cards
+   ========================================================================== */
+.trust-manuscripts-section {
+  margin-bottom: 32px;
+}
+
+.trust-manuscripts-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 16px;
+  padding: 12px 16px;
+}
+
+.trust-manuscript-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.trust-manuscript-filter-btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-on-surface-variant, #71717a);
+  background: var(--color-surface-container-low, #f4f4f5);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trust-manuscript-filter-btn:hover {
+  background: #e4e4e7;
+  color: var(--color-primary, #09090b);
+}
+
+.trust-manuscript-filter-btn.active-filter {
+  background: var(--color-primary, #09090b);
+  color: var(--color-on-primary, #ffffff);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.trust-manuscript-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+  max-width: 320px;
+}
+
+.trust-manuscript-search-input {
+  width: 100%;
+  padding: 9px 14px 9px 36px;
+  font-family: var(--font-body, sans-serif);
+  font-size: 13.5px;
+  background: var(--color-surface-container-low, #f4f4f5);
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 10px;
+  color: var(--color-primary, #09090b);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.trust-manuscript-search-input:focus {
+  border-color: var(--color-secondary, #974543);
+  background: var(--color-surface, #ffffff);
+}
+
+.search-icon-svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--color-on-surface-variant, #71717a);
+  pointer-events: none;
+}
+
+.trust-manuscripts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 24px;
+}
+
+.trust-manuscript-card {
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s ease;
+}
+
+.trust-manuscript-card:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  border-color: #cbd5e1;
+  transform: translateY(-3px);
+}
+
+.trust-ms-header {
+  padding: 20px 22px 14px 22px;
+  border-bottom: 1px solid var(--color-outline-variant, #e4e4e7);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.trust-ms-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.trust-ms-name {
+  font-family: var(--font-headings, Georgia, serif);
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--color-primary, #09090b);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.trust-ms-type-badge {
+  flex-shrink: 0;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+}
+
+.trust-ms-type-badge.is-nt-badge {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+}
+
+.trust-ms-type-badge.is-ot-badge {
+  background: #fff7ed;
+  color: #c2410c;
+  border-color: #fed7aa;
+}
+
+.trust-ms-date-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-secondary, #974543);
+}
+
+.trust-ms-body {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.trust-ms-keyfact {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid var(--color-secondary, #974543);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #1e293b;
+}
+
+.trust-ms-quote {
+  background: #fdfbf7;
+  border: 1px solid #f1ece1;
+  border-radius: 10px;
+  padding: 14px 16px;
+  position: relative;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 14px;
+  line-height: 1.65;
+  color: #334155;
+  font-style: italic;
+}
+
+.trust-ms-quote-icon {
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  font-size: 28px;
+  line-height: 1;
+  color: #e2e8f0;
+  font-family: Georgia, serif;
+  pointer-events: none;
+}
+
+.trust-ms-explanation {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--color-on-surface-variant, #71717a);
+  margin: 0;
+}
+
+.trust-ms-carousel-wrap {
+  margin-top: auto;
+  border-top: 1px solid var(--color-outline-variant, #e4e4e7);
+  background: #f8fafc;
+  padding: 14px 12px;
+}
+
+.trust-ms-carousel-header {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 900px) {
+  .trust-variants-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .trust-histogram-row {
+    grid-template-columns: 200px 1fr 100px;
+  }
+}
+
+@media (max-width: 640px) {
+  .trust-histogram-card {
+    padding: 14px 12px;
+  }
+  .trust-histogram-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .trust-histogram-metric-group,
+  .trust-histogram-scale-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .trust-histogram-metric-btn,
+  .trust-histogram-scale-btn {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  .trust-histogram-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 12px 10px;
+  }
+  .trust-histogram-label-col {
+    width: 100%;
+    overflow: visible;
+  }
+  .trust-histogram-author-name {
+    font-size: 15px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .trust-histogram-value-col {
+    align-self: flex-start;
+    text-align: left;
+    font-size: 13.5px;
+    font-weight: 700;
+  }
+  .trust-histogram-bar-col {
+    width: 100%;
+  }
+  .trust-variants-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .trust-legend-item {
+    padding: 10px 12px;
+    font-size: 14px;
+    min-height: 44px;
+  }
+  .trust-manuscripts-grid {
+    grid-template-columns: 1fr;
+  }
+  .trust-manuscript-search-wrap {
+    max-width: 100%;
+    width: 100%;
+  }
+}

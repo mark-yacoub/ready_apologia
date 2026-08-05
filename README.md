@@ -103,8 +103,8 @@ pkill -f astro
 *   `src/db.js`: Database helper utilizing built-in Node 22 `node:sqlite`.
 *   `src/data/scripture/`: Imported NASB (NT) and LXX (OT) scripture JSON files.
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.
-*   `src/pages/`: Page templates for Bible reader, Quran reader, Quran verse evidence drawers, and Companion Codices.
-*   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages, headers, evidence tabs, `RouteAnalytics.astro` for declarative DOM routing, and `GoogleAnalytics.astro` for GA4 tracking).
+*   `src/pages/`: Page templates for Bible reader, Quran reader, Quran verse evidence drawers, Companion Codices, and Discover articles (`divinity-timeline.astro`, `extrabiblical-evidence-for-jesus.astro`, `islamic-dilemma.astro`, `quran-preservation.astro`, `trustworthiness-of-the-bible.astro`).
+*   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages, headers, evidence tabs, `RouteAnalytics.astro` for declarative DOM routing, `GoogleAnalytics.astro` for GA4 tracking, and `discover/trustworthiness/` for Stage 1-4 UI components).
 *   `src/utils/`: Helper utilities for loading scripture, topics, non-Uthmanic Quran data, global CDN configuration (`cdn_config.js`), client-side GA4 event tracking (`analytics.js`), Discover URL `#hash` section navigation (`section_navigator.js`), and apologetic evidence (debunking miracles, contradictions, scientific errors).
 
 *   `src/data/quran/debunking/`: Dataset for debunked Quranic scientific miracles.

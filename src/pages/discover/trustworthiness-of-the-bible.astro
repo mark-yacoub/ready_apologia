@@ -1,0 +1,240 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import '../../styles/trust-page.css';
+
+import TrustworthinessOverview from '../../components/discover/trustworthiness/TrustworthinessOverview.jsx';
+import Stage1TextualTransmission from '../../components/discover/trustworthiness/Stage1TextualTransmission.jsx';
+import Stage2ArchaeologyHistory from '../../components/discover/trustworthiness/Stage2ArchaeologyHistory.jsx';
+import Stage3EyewitnessCredibility from '../../components/discover/trustworthiness/Stage3EyewitnessCredibility.jsx';
+import Stage4CanonVerdict from '../../components/discover/trustworthiness/Stage4CanonVerdict.jsx';
+
+import articleData from '../../data/trustworthiness-of-the-bible.json';
+
+const pageTitle = articleData.title || "The Trustworthiness of the Bible: From Ancient Manuscripts to Historical Reality";
+const pageDesc = articleData.description || "An exhaustive, multi-stage evidentiary repository establishing the historical, textual, archaeological, and statistical trustworthiness of the Old and New Testaments.";
+const pageKeywords = "trustworthiness of the bible, new testament reliability, manuscript evidence, codex sinaiticus, p52 rylands papyrus, biblical archaeology, patristic quotations, cs lewis trilemma, christian apologetics";
+
+// Group evidences by stage
+const stage1Themes = articleData.themes.filter(t => t.id.startsWith('stage1'));
+const stage2Themes = articleData.themes.filter(t => t.id.startsWith('stage2'));
+const stage3Themes = articleData.themes.filter(t => t.id.startsWith('stage3'));
+const stage4Themes = articleData.themes.filter(t => t.id.startsWith('stage4'));
+
+const stage1Evidences = stage1Themes.flatMap(t => t.evidences || []);
+const stage2Evidences = stage2Themes.flatMap(t => t.evidences || []);
+const stage3Evidences = stage3Themes.flatMap(t => t.evidences || []);
+const stage4Evidences = stage4Themes.flatMap(t => t.evidences || []);
+
+// FAQ Structured Data (JSON-LD)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many ancient manuscripts of the New Testament exist?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Over 5,800 Greek manuscripts and more than 24,000 total ancient manuscripts (including Latin, Syriac, Coptic, and Armenian translations) survive today, giving the New Testament more manuscript support than any other work of antiquity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the time gap between the New Testament autographs and the earliest surviving copies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The earliest surviving New Testament fragment is Papyrus 52 (P52), dated to c. AD 125, only 30 to 50 years after the Gospel of John was written. Major codices like Vaticanus and Sinaiticus date to the early 4th century—a time gap of just 200–250 years, compared to 400 to 1,400+ years for classical authors like Caesar, Tacitus, and Homer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do any textual variants in New Testament manuscripts affect core Christian doctrines?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Approximately 78% of textual variants are spelling and nonsense errors, 17% are untranslatable synonyms or word order differences, 4% are scribal slips not supported by the tradition, and less than 1% are both meaningful and viable. Exactly 0% of textual variants affect any core Christian doctrine."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many times did early pre-Nicene Church Fathers quote the New Testament?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Early pre-Nicene church fathers (such as Justin Martyr, Irenaeus, Clement of Alexandria, Tertullian, and Origen) quoted the New Testament over 36,000 times before AD 325. Even if all ancient manuscripts were destroyed, virtually the entire New Testament could be reconstructed from their quotations alone."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={pageTitle} description={pageDesc} keywords={pageKeywords} ogImage="/media/trustworthiness_bible/cover.jpg" theme="evidence-mode">
+  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'trustworthiness-of-the-bible' }} />
+  
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <div class="trust-page-wrapper">
+    <div class="trust-meta-header">
+      <a href="/discover" class="trust-back-btn" aria-label="Go back to Discover hub">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        Discover Hub
+      </a>
+    </div>
+
+    <header class="trust-hero-section">
+      <div class="trust-hero-tag">
+        <div class="dot" aria-hidden="true"></div>
+        Exhaustive Apologetic Repository
+      </div>
+      <h1 class="trust-hero-title">The Trustworthiness of the Bible</h1>
+      <p class="trust-hero-desc">{articleData.description}</p>
+    </header>
+
+    {/* Accessible Mutually Exclusive Stage Chapters Bar */}
+    <nav class="trust-filter-container" id="stage-filter-nav" aria-label="Trustworthiness Chapters Filter">
+      <button class="trust-stage-pill active" data-stage="overview" aria-pressed="true">Overview</button>
+      <button class="trust-stage-pill" data-stage="stage1" aria-pressed="false">1. Manuscripts (37)</button>
+      <button class="trust-stage-pill" data-stage="stage2" aria-pressed="false">2. Archaeology (27)</button>
+      <button class="trust-stage-pill" data-stage="stage3" aria-pressed="false">3. Eyewitnesses (17)</button>
+      <button class="trust-stage-pill" data-stage="stage4" aria-pressed="false">4. Canon & Verdict (11)</button>
+    </nav>
+
+    <main class="trust-stages-container">
+      {/* Executive Overview Dashboard (Default Active View) */}
+      <section class="trust-stage-section" id="section-overview" data-stage-panel="overview" style="display: block;">
+        <TrustworthinessOverview client:load />
+      </section>
+
+      {/* Stage 1: Textual Transmission & Ancient Manuscripts */}
+      <section class="trust-stage-section" id="section-stage1" data-stage-panel="stage1" style="display: none;">
+        <header class="trust-stage-header">
+          <div class="trust-stage-eyebrow">Stage 1 // Foundation</div>
+          <h2 class="trust-stage-title">Textual Transmission & Manuscript Evidence</h2>
+        </header>
+        <Stage1TextualTransmission client:load evidences={stage1Evidences} />
+        <div class="trust-chapter-footer-card">
+          <span class="trust-footer-eyebrow">NEXT CHAPTER // STAGE 2</span>
+          <h3 class="trust-footer-title">Continue to Historical & Archaeological Corroboration</h3>
+          <button type="button" class="trust-footer-btn" data-goto-stage="stage2">
+            <span>Explore Stage 2: Archaeology & History →</span>
+          </button>
+        </div>
+      </section>
+
+      {/* Stage 2: Historical & Archaeological Corroboration */}
+      <section class="trust-stage-section" id="section-stage2" data-stage-panel="stage2" style="display: none;">
+        <header class="trust-stage-header">
+          <div class="trust-stage-eyebrow">Stage 2 // Corroboration</div>
+          <h2 class="trust-stage-title">Historical & Archaeological Evidence</h2>
+        </header>
+        <Stage2ArchaeologyHistory client:load evidences={stage2Evidences} />
+        <div class="trust-chapter-footer-card">
+          <span class="trust-footer-eyebrow">NEXT CHAPTER // STAGE 3</span>
+          <h3 class="trust-footer-title">Continue to Eyewitness Credibility & Onomastics</h3>
+          <button type="button" class="trust-footer-btn" data-goto-stage="stage3">
+            <span>Explore Stage 3: Eyewitness Credibility →</span>
+          </button>
+        </div>
+      </section>
+
+      {/* Stage 3: Eyewitness Credibility, Onomastics & Undesigned Coincidences */}
+      <section class="trust-stage-section" id="section-stage3" data-stage-panel="stage3" style="display: none;">
+        <header class="trust-stage-header">
+          <div class="trust-stage-eyebrow">Stage 3 // Eyewitness Authenticity</div>
+          <h2 class="trust-stage-title">Eyewitness Credibility & Onomastic Demography</h2>
+        </header>
+        <Stage3EyewitnessCredibility client:load evidences={stage3Evidences} />
+        <div class="trust-chapter-footer-card">
+          <span class="trust-footer-eyebrow">NEXT CHAPTER // STAGE 4</span>
+          <h3 class="trust-footer-title">Continue to Canon, Patristic Quotations & The Verdict</h3>
+          <button type="button" class="trust-footer-btn" data-goto-stage="stage4">
+            <span>Explore Stage 4: Canon & Verdict →</span>
+          </button>
+        </div>
+      </section>
+
+      {/* Stage 4: Canon, Patristic Quotations & The Verdict */}
+      <section class="trust-stage-section" id="section-stage4" data-stage-panel="stage4" style="display: none;">
+        <header class="trust-stage-header">
+          <div class="trust-stage-eyebrow">Stage 4 // Capstone & Verdict</div>
+          <h2 class="trust-stage-title">Canon, Patristic Quotations & The Christological Verdict</h2>
+        </header>
+        <Stage4CanonVerdict client:load evidences={stage4Evidences} />
+        <div class="trust-chapter-footer-card">
+          <span class="trust-footer-eyebrow">COMPLETE // ARCHIVE CAPSTONE</span>
+          <h3 class="trust-footer-title">Return to the Executive Overview Dashboard</h3>
+          <button type="button" class="trust-footer-btn" data-goto-stage="overview">
+            <span>← Return to Overview Dashboard</span>
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  function setupStageFilters() {
+    const nav = document.getElementById('stage-filter-nav');
+    if (!nav || nav.hasAttribute('data-filters-initialized')) return;
+    nav.setAttribute('data-filters-initialized', 'true');
+
+    const buttons = nav.querySelectorAll('.trust-stage-pill');
+    const sections = document.querySelectorAll('.trust-stage-section');
+
+    const activateStage = (stage) => {
+      buttons.forEach(b => {
+        const isMatch = b.getAttribute('data-stage') === stage;
+        b.classList.toggle('active', isMatch);
+        b.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+      });
+
+      sections.forEach(sec => {
+        const secStage = sec.getAttribute('data-stage-panel');
+        (sec as HTMLElement).style.display = (secStage === stage) ? 'block' : 'none';
+      });
+
+      // Update location hash without jumping unless deep linking
+      if (history.replaceState) {
+        history.replaceState(null, '', stage === 'overview' ? window.location.pathname : `#${stage}`);
+      }
+
+      // Scroll smoothly to top of filter nav for clean reading
+      nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    // 1. Listen to top navigation pills
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const stage = btn.getAttribute('data-stage');
+        if (stage) activateStage(stage);
+      });
+    });
+
+    // 2. Listen to Next Chapter pagination buttons
+    document.querySelectorAll('[data-goto-stage]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const stage = btn.getAttribute('data-goto-stage');
+        if (stage) activateStage(stage);
+      });
+    });
+
+    // 3. Prevent duplicate global event listeners on window across SPA transitions
+    if ((window as any).__trustStageNavHandler) {
+      window.removeEventListener('trust-navigate-stage', (window as any).__trustStageNavHandler);
+    }
+    (window as any).__trustStageNavHandler = (e: any) => {
+      const stage = e.detail?.stage;
+      if (stage) activateStage(stage);
+    };
+    window.addEventListener('trust-navigate-stage', (window as any).__trustStageNavHandler);
+
+    // 4. Handle initial URL deep-link hash (e.g. #stage2 or #evidence-...)
+    const hash = window.location.hash.replace('#', '').toLowerCase();
+    if (['stage1', 'stage2', 'stage3', 'stage4', 'overview'].includes(hash)) {
+      activateStage(hash);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', setupStageFilters);
+  document.addEventListener('astro:page-load', setupStageFilters);
+</script>

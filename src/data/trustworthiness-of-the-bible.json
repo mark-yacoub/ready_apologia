@@ -1,0 +1,2571 @@
+{
+  "id": "trustworthiness-of-the-bible",
+  "title": "The Trustworthiness of the Bible: From Ancient Manuscripts to Historical Reality",
+  "description": "An exhaustive, multi-stage evidentiary repository establishing the historical, textual, archaeological, and statistical trustworthiness of the Old and New Testaments. Woven across four sequential stages\u2014Textual Transmission, Historical & Archaeological Corroboration, Eyewitness Credibility & Onomastics, and Canonical Verdict\u2014this dataset brings together 92 cornerstone evidences, classical histogram comparisons, and direct SQLite database linking to original manuscript folios.",
+  "lastUpdated": "2026-07-31",
+  "totalEvidences": 92,
+  "themes": [
+    {
+      "id": "stage1-classical-comparison",
+      "title": "Stage 1: Classical Antiquity vs. Biblical Manuscripts (Histogram Comparison)",
+      "description": "Comparative statistical data across 15 classical ancient authors and works against the New and Old Testaments, analyzing time gaps, surviving manuscript counts, and textual fidelity.",
+      "evidences": [
+        {
+          "id": "nt-manuscripts",
+          "name": "The New Testament (Greek & Ancient Translations)",
+          "nameDesc": "The 27 books of the New Testament, composed by 1st-century apostles and eyewitnesses.",
+          "dateStr": "c. AD 40\u201395",
+          "dateInt": 65,
+          "sourceType": "New Testament Scripture",
+          "autographDate": "c. AD 40\u201395",
+          "earliestCopyDate": "c. AD 125 (P52, Rylands Papyrus)",
+          "timeGapYears": "30\u2013100 years",
+          "manuscriptCount": {
+            "greek": 5800,
+            "latin": 10000,
+            "syriac_coptic_other": 8200,
+            "total": 24000
+          },
+          "accuracyPercentage": 99.5,
+          "keyFact": "**Over 5,800 Greek manuscripts** and **24,000+ total ancient manuscripts** with **99.5% textual fidelity**",
+          "quote": "In the beginning was the Word, and the Word was with God, and the Word was God. He was in the beginning with God. (John 1:1\u20132, preserved identically across ancient papyri and codices)",
+          "explanation": "The New Testament has an unprecedented wealth of manuscript testimony. Whereas classical Greek and Roman historians survive in only a few dozen late medieval copies, the New Testament is backed by thousands of manuscripts dating within decades and centuries of the original authors, making textual corruption statistically impossible.",
+          "urls": [
+            {
+              "title": "CSNTM (Center for the Study of New Testament Manuscripts)",
+              "url": "https://www.csntm.org/"
+            },
+            {
+              "title": "Wikipedia - Biblical Manuscript",
+              "url": "https://en.wikipedia.org/wiki/Biblical_manuscript"
+            }
+          ],
+          "tags": [
+            "New Testament",
+            "Histograms",
+            "Manuscript Evidence",
+            "Textual Criticism"
+          ]
+        },
+        {
+          "id": "homer-iliad",
+          "name": "Homer \u2014 The Iliad",
+          "nameDesc": "Ancient Greek epic poem attributed to Homer, set during the Trojan War and regarded as the foundation of ancient Greek literature.",
+          "dateStr": "c. 800 BC",
+          "dateInt": -800,
+          "sourceType": "Classical Ancient Epic",
+          "autographDate": "c. 800 BC",
+          "earliestCopyDate": "c. 400 BC (fragments)",
+          "timeGapYears": "400 years",
+          "manuscriptCount": {
+            "greek": 1757,
+            "latin": 0,
+            "total": 1757
+          },
+          "accuracyPercentage": 95.0,
+          "keyFact": "**1,757 surviving manuscripts** with a **400-year time gap** (~95% textual agreement)",
+          "quote": "Sing, O goddess, the anger of Achilles son of Peleus, that brought countless ills upon the Achaean... (Iliad 1.1\u20132)",
+          "explanation": "Homer's Iliad is the second best-preserved text of classical antiquity after the Bible. Yet it has fewer than 1,800 manuscripts and approximately 5% textual corruption/uncertainty\u2014compared to 24,000+ manuscripts and 99.5% accuracy for the New Testament.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Homer",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0134"
+            },
+            {
+              "title": "Wikipedia - Iliad",
+              "url": "https://en.wikipedia.org/wiki/Iliad"
+            }
+          ],
+          "tags": [
+            "Homer",
+            "Iliad",
+            "Classical Comparison",
+            "Histograms"
+          ]
+        },
+        {
+          "id": "caesar-gallic-wars",
+          "name": "Julius Caesar \u2014 The Gallic Wars (De Bello Gallico)",
+          "nameDesc": "Roman military campaign memoirs written by Julius Caesar recounting his conquest of Gaul.",
+          "dateStr": "c. 58\u201350 BC",
+          "dateInt": -54,
+          "sourceType": "Roman Historian & General",
+          "autographDate": "c. 58\u201350 BC",
+          "earliestCopyDate": "c. AD 850",
+          "timeGapYears": "900 years",
+          "manuscriptCount": {
+            "greek": 0,
+            "latin": 251,
+            "total": 251
+          },
+          "accuracyPercentage": 98.0,
+          "keyFact": "**251 surviving manuscripts** with a **900-year time gap** between autograph and earliest copy",
+          "quote": "All Gaul is divided into three parts, one of which the Belgae inhabit, the Aquitani another, those who in their own language are called Celts... (De Bello Gallico 1.1)",
+          "explanation": "No historian doubts Julius Caesar's Gallic Wars, yet our knowledge of it rests on only 251 manuscripts, the earliest of which was copied 900 years after Caesar's death. By comparison, New Testament manuscripts appear within 30 to 100 years of composition.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Caesar",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.02.0001"
+            },
+            {
+              "title": "Wikipedia - Commentarii de Bello Gallico",
+              "url": "https://en.wikipedia.org/wiki/Commentarii_de_Bello_Gallico"
+            }
+          ],
+          "tags": [
+            "Julius Caesar",
+            "Gallic Wars",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "tacitus-annals-histories",
+          "name": "Cornelius Tacitus \u2014 Annals & Histories",
+          "nameDesc": "The greatest Roman historian of the Latin language, documenting the reigns of Tiberius, Claudius, and Nero.",
+          "dateStr": "c. AD 100\u2013116",
+          "dateInt": 110,
+          "sourceType": "Roman Senator & Historian",
+          "autographDate": "c. AD 100\u2013116",
+          "earliestCopyDate": "c. AD 850 (Medicean I & II)",
+          "timeGapYears": "750\u2013900 years",
+          "manuscriptCount": {
+            "greek": 0,
+            "latin": 33,
+            "total": 33
+          },
+          "accuracyPercentage": 98.0,
+          "keyFact": "**Only 33 surviving manuscripts** with a **750-to-1,000-year gap** from autograph to earliest copy",
+          "quote": "Christus, from whom the name had its origin, suffered the extreme penalty during the reign of Tiberius at the hands of one of our procurators, Pontius Pilatus... (Annals 15.44)",
+          "explanation": "Tacitus is our primary source for 1st-century Roman history, yet books 1\u20136 of his Annals survive in only a single manuscript (Medicean I), and books 11\u201316 in only one other (Medicean II). To apply skeptical biblical standards to Tacitus would wipe out Roman history.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Tacitus",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.02.0078"
+            },
+            {
+              "title": "Wikipedia - Annals (Tacitus)",
+              "url": "https://en.wikipedia.org/wiki/Annals_(Tacitus)"
+            }
+          ],
+          "tags": [
+            "Tacitus",
+            "Annals",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "herodotus-histories",
+          "name": "Herodotus \u2014 The Histories",
+          "nameDesc": "5th-century BC Greek historian known as the 'Father of History', documenting the Greco-Persian Wars.",
+          "dateStr": "c. 440 BC",
+          "dateInt": -440,
+          "sourceType": "Greek Historian",
+          "autographDate": "c. 440 BC",
+          "earliestCopyDate": "c. AD 900 (papyri fragments from 1st century AD)",
+          "timeGapYears": "1,350 years (for complete manuscripts)",
+          "manuscriptCount": {
+            "greek": 109,
+            "latin": 0,
+            "total": 109
+          },
+          "accuracyPercentage": 97.0,
+          "keyFact": "**109 surviving manuscripts** with a **1,350-year gap** for complete texts",
+          "quote": "This is the display of the inquiry of Herodotus of Halicarnassus, so that things done by man not be forgotten in time... (Histories 1.1)",
+          "explanation": "Herodotus is widely cited by historians, yet only 109 manuscripts exist, with a gap of over a millennium between original composition and our earliest complete medieval copies.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Herodotus",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0126"
+            },
+            {
+              "title": "Wikipedia - Histories (Herodotus)",
+              "url": "https://en.wikipedia.org/wiki/Histories_(Herodotus)"
+            }
+          ],
+          "tags": [
+            "Herodotus",
+            "Histories",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "plato-tetralogies",
+          "name": "Plato \u2014 Tetralogies & Dialogues",
+          "nameDesc": "Ancient Athenian philosopher, founder of the Academy, and author of philosophical dialogues including the Republic.",
+          "dateStr": "c. 400\u2013347 BC",
+          "dateInt": -375,
+          "sourceType": "Greek Philosopher",
+          "autographDate": "c. 400\u2013347 BC",
+          "earliestCopyDate": "c. AD 895 (Clarke Plato, Oxford)",
+          "timeGapYears": "1,200 years",
+          "manuscriptCount": {
+            "greek": 210,
+            "latin": 0,
+            "total": 210
+          },
+          "accuracyPercentage": 98.0,
+          "keyFact": "**210 surviving manuscripts** with a **1,200-year time gap**",
+          "quote": "And is not the love of learning the love of wisdom, which is philosophy? (Republic 2.376b)",
+          "explanation": "No scholar questions the authenticity of Plato's philosophical dialogues, despite a 1,200-year gap between Plato's death and our oldest complete Greek manuscript.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Plato",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0168"
+            },
+            {
+              "title": "Wikipedia - Plato",
+              "url": "https://en.wikipedia.org/wiki/Plato"
+            }
+          ],
+          "tags": [
+            "Plato",
+            "Philosophy",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "thucydides-peloponnesian-war",
+          "name": "Thucydides \u2014 History of the Peloponnesian War",
+          "nameDesc": "Athenian historian and general who chronicled the war between Athens and Sparta.",
+          "dateStr": "c. 410\u2013400 BC",
+          "dateInt": -405,
+          "sourceType": "Greek Historian",
+          "autographDate": "c. 410\u2013400 BC",
+          "earliestCopyDate": "c. AD 900",
+          "timeGapYears": "1,300 years",
+          "manuscriptCount": {
+            "greek": 96,
+            "latin": 0,
+            "total": 96
+          },
+          "accuracyPercentage": 98.0,
+          "keyFact": "**96 surviving manuscripts** with a **1,300-year gap**",
+          "quote": "Thucydides, an Athenian, wrote the history of the war between the Peloponnesians and the Athenians... (History 1.1)",
+          "explanation": "Thucydides is celebrated for strict military historiography, yet only 96 manuscripts survive, copied 13 centuries after his lifetime.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Thucydides",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0200"
+            },
+            {
+              "title": "Wikipedia - History of the Peloponnesian War",
+              "url": "https://en.wikipedia.org/wiki/History_of_the_Peloponnesian_War"
+            }
+          ],
+          "tags": [
+            "Thucydides",
+            "Peloponnesian War",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "suetonius-twelve-caesars",
+          "name": "Gaius Suetonius Tranquillus \u2014 The Twelve Caesars",
+          "nameDesc": "Roman historian and imperial secretary under Hadrian, author of biographies of Julius Caesar and 11 emperors.",
+          "dateStr": "c. AD 121",
+          "dateInt": 121,
+          "sourceType": "Roman Biographer",
+          "autographDate": "c. AD 121",
+          "earliestCopyDate": "c. AD 820 (Memmius Codex)",
+          "timeGapYears": "700 years",
+          "manuscriptCount": {
+            "greek": 0,
+            "latin": 200,
+            "total": 200
+          },
+          "accuracyPercentage": 98.0,
+          "keyFact": "**~200 surviving manuscripts** with a **700-year time gap**",
+          "quote": "Since the Jews constantly made disturbances at the instigation of Chrestus, he [Claudius] expelled them from Rome. (Life of Claudius 25.4)",
+          "explanation": "Suetonius is an invaluable source for Roman imperial history, yet his works are preserved in roughly 200 medieval manuscripts copied 7 centuries after his death.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Suetonius",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.02.0132"
+            },
+            {
+              "title": "Wikipedia - The Twelve Caesars",
+              "url": "https://en.wikipedia.org/wiki/The_Twelve_Caesars"
+            }
+          ],
+          "tags": [
+            "Suetonius",
+            "Twelve Caesars",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "livy-history-of-rome",
+          "name": "Titus Livius (Livy) \u2014 History of Rome (Ab Urbe Condita)",
+          "nameDesc": "Roman historian who wrote a monumental 142-book history of Rome from its founding to the reign of Augustus.",
+          "dateStr": "c. 27 BC \u2013 AD 17",
+          "dateInt": 1,
+          "sourceType": "Roman Historian",
+          "autographDate": "c. 27 BC \u2013 AD 17",
+          "earliestCopyDate": "c. AD 400 (fragments), AD 900 (complete books)",
+          "timeGapYears": "400\u2013900 years",
+          "manuscriptCount": {
+            "greek": 0,
+            "latin": 150,
+            "total": 150
+          },
+          "accuracyPercentage": 96.0,
+          "keyFact": "**150 surviving manuscripts** (of which 107 of 142 books are completely lost)",
+          "quote": "Whether I am likely to accomplish anything worthy of the labour, if I record the achievements of the Roman people from the foundation of the city... (Ab Urbe Condita 1.1)",
+          "explanation": "Out of Livy's original 142 books, 107 are completely lost to history. Only 35 books survive in 150 manuscripts\u2014a stark contrast to the New Testament, where all 27 books survive complete in thousands of witnesses.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Livy",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.02.0151"
+            },
+            {
+              "title": "Wikipedia - Ab Urbe Condita Libri",
+              "url": "https://en.wikipedia.org/wiki/Ab_Urbe_Condita_Libri"
+            }
+          ],
+          "tags": [
+            "Livy",
+            "Roman History",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "aristotle-poetics-works",
+          "name": "Aristotle \u2014 Poetics & Philosophical Works",
+          "nameDesc": "Ancient Greek philosopher, student of Plato, tutor to Alexander the Great, and founder of the Lyceum.",
+          "dateStr": "c. 384\u2013322 BC",
+          "dateInt": -350,
+          "sourceType": "Greek Philosopher",
+          "autographDate": "c. 384\u2013322 BC",
+          "earliestCopyDate": "c. AD 1100",
+          "timeGapYears": "1,400 years",
+          "manuscriptCount": {
+            "greek": 150,
+            "latin": 0,
+            "total": 150
+          },
+          "accuracyPercentage": 97.0,
+          "keyFact": "**~150 surviving manuscripts** with a **1,400-year gap**",
+          "quote": "Tragedy, then, is an imitation of an action that is serious, complete, and of a certain magnitude... (Poetics 1449b)",
+          "explanation": "Aristotle's works shaped Western science and logic, yet our surviving Greek copies date 1,400 years after his death.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Aristotle",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0056"
+            },
+            {
+              "title": "Wikipedia - Aristotle",
+              "url": "https://en.wikipedia.org/wiki/Aristotle"
+            }
+          ],
+          "tags": [
+            "Aristotle",
+            "Philosophy",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "ot-manuscripts",
+          "name": "The Old Testament (Hebrew Bible & Dead Sea Scrolls)",
+          "nameDesc": "The 39 books of the Hebrew Bible, composed by prophets, scribes, and kings from Moses to Malachi.",
+          "dateStr": "c. 1400\u2013400 BC",
+          "dateInt": -800,
+          "sourceType": "Old Testament Scripture",
+          "autographDate": "c. 1400\u2013400 BC",
+          "earliestCopyDate": "c. 250 BC (Dead Sea Scrolls, 4QSam-b, 4QExod-f)",
+          "timeGapYears": "150\u2013400 years",
+          "manuscriptCount": {
+            "hebrew": 3000,
+            "greek_lxx": 1500,
+            "other": 5500,
+            "total": 10000
+          },
+          "accuracyPercentage": 99.0,
+          "keyFact": "**Over 10,000 Hebrew, Septuagint, and ancient Old Testament manuscripts**, backed by **over 200 Dead Sea Scrolls**",
+          "quote": "Hear, O Israel: The LORD our God, the LORD is one. You shall love the LORD your God with all your heart... (Deuteronomy 6:4\u20135, Nash Papyrus & Dead Sea Scrolls)",
+          "explanation": "Before 1947, our oldest Hebrew Old Testament manuscripts were the 10th-century Masoretic codices (Aleppo and Leningrad). The discovery of the Dead Sea Scrolls pushed our manuscript evidence back over 1,000 years, proving that the Hebrew text was copied with miraculous precision.",
+          "urls": [
+            {
+              "title": "The Dead Sea Scrolls - Israel Museum",
+              "url": "http://dss.collections.imj.org.il/"
+            },
+            {
+              "title": "Wikipedia - Dead Sea Scrolls",
+              "url": "https://en.wikipedia.org/wiki/Dead_Sea_Scrolls"
+            }
+          ],
+          "tags": [
+            "Old Testament",
+            "Dead Sea Scrolls",
+            "Masoretic Text",
+            "Hebrew Bible"
+          ]
+        },
+        {
+          "id": "demosthenes-speeches",
+          "name": "Demosthenes \u2014 Speeches & Odes",
+          "nameDesc": "Athenian statesman and greatest orator of ancient Greece.",
+          "dateStr": "c. 384\u2013322 BC",
+          "dateInt": -350,
+          "sourceType": "Greek Orator",
+          "autographDate": "c. 384\u2013322 BC",
+          "earliestCopyDate": "c. AD 1100",
+          "timeGapYears": "1,400 years",
+          "manuscriptCount": {
+            "greek": 200,
+            "latin": 0,
+            "total": 200
+          },
+          "accuracyPercentage": 97.0,
+          "keyFact": "**~200 surviving manuscripts** with a **1,400-year time gap**",
+          "quote": "First, men of Athens, if anyone is confident that the state can be saved... (Philippic I)",
+          "explanation": "Demosthenes's political speeches are a primary source for 4th-century BC Athenian history, yet our surviving copies date 1,400 years after his lifetime.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Demosthenes",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0070"
+            },
+            {
+              "title": "Wikipedia - Demosthenes",
+              "url": "https://en.wikipedia.org/wiki/Demosthenes"
+            }
+          ],
+          "tags": [
+            "Demosthenes",
+            "Oratory",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "sophocles-tragedies",
+          "name": "Sophocles \u2014 Tragedies (Oedipus Rex, Antigone)",
+          "nameDesc": "One of the three ancient Greek tragedians whose plays have survived.",
+          "dateStr": "c. 496\u2013406 BC",
+          "dateInt": -450,
+          "sourceType": "Greek Dramatist",
+          "autographDate": "c. 496\u2013406 BC",
+          "earliestCopyDate": "c. AD 1000",
+          "timeGapYears": "1,400 years",
+          "manuscriptCount": {
+            "greek": 193,
+            "latin": 0,
+            "total": 193
+          },
+          "accuracyPercentage": 96.0,
+          "keyFact": "**193 surviving manuscripts** (only 7 of 123 plays survive complete)",
+          "quote": "O generations of men, how I count you as equal with those who live not at all! (Oedipus Rex 1186)",
+          "explanation": "Out of 123 plays written by Sophocles, only 7 survive in complete form today in fewer than 200 medieval manuscripts.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Sophocles",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0186"
+            },
+            {
+              "title": "Wikipedia - Sophocles",
+              "url": "https://en.wikipedia.org/wiki/Sophocles"
+            }
+          ],
+          "tags": [
+            "Sophocles",
+            "Greek Tragedy",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "pliny-younger-epistulae",
+          "name": "Pliny the Younger \u2014 Letters (Epistulae)",
+          "nameDesc": "Roman senator and imperial magistrate under Trajan.",
+          "dateStr": "c. AD 61\u2013113",
+          "dateInt": 100,
+          "sourceType": "Roman Senator",
+          "autographDate": "c. AD 61\u2013113",
+          "earliestCopyDate": "c. AD 850 (Codex Laurentianus)",
+          "timeGapYears": "750 years",
+          "manuscriptCount": {
+            "greek": 0,
+            "latin": 7,
+            "total": 7
+          },
+          "accuracyPercentage": 98.0,
+          "keyFact": "**Only 7 surviving manuscripts** with a **750-year time gap**",
+          "quote": "It is my custom, Lord Emperor, to refer to you all questions whereof I am in doubt... (Epistulae 10.96)",
+          "explanation": "Pliny's letters are our most intimate window into Roman imperial governance and the eruption of Mount Vesuvius, yet they survive in only 7 manuscripts.",
+          "urls": [
+            {
+              "title": "Wikipedia - Pliny the Younger",
+              "url": "https://en.wikipedia.org/wiki/Pliny_the_Younger"
+            }
+          ],
+          "tags": [
+            "Pliny the Younger",
+            "Epistulae",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "lucretius-de-rerum-natura",
+          "name": "Lucretius \u2014 On the Nature of Things (De Rerum Natura)",
+          "nameDesc": "Roman poet and Epicurean philosopher.",
+          "dateStr": "c. 99\u201355 BC",
+          "dateInt": -70,
+          "sourceType": "Roman Epicurean Philosopher",
+          "autographDate": "c. 99\u201355 BC",
+          "earliestCopyDate": "c. AD 800 (Codex Oblongus & Codex Quadratus)",
+          "timeGapYears": "850 years",
+          "manuscriptCount": {
+            "greek": 0,
+            "latin": 2,
+            "total": 2
+          },
+          "accuracyPercentage": 95.0,
+          "keyFact": "**Only 2 9th-century manuscripts survive** from an **850-year gap**",
+          "quote": "Mother of Aeneas and his race, delight of men and gods, life-giving Venus... (De Rerum Natura 1.1)",
+          "explanation": "Lucretius's masterpiece was nearly lost forever, surviving in only two Carolingian manuscripts from the 9th century.",
+          "urls": [
+            {
+              "title": "Wikipedia - De rerum natura",
+              "url": "https://en.wikipedia.org/wiki/De_rerum_natura"
+            }
+          ],
+          "tags": [
+            "Lucretius",
+            "Epicureanism",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "catullus-poems",
+          "name": "Gaius Valerius Catullus \u2014 Poems (Carmina)",
+          "nameDesc": "Late Republican Roman neoteric poet.",
+          "dateStr": "c. 84\u201354 BC",
+          "dateInt": -60,
+          "sourceType": "Roman Poet",
+          "autographDate": "c. 84\u201354 BC",
+          "earliestCopyDate": "c. AD 1300",
+          "timeGapYears": "1,350 years",
+          "manuscriptCount": {
+            "greek": 0,
+            "latin": 3,
+            "total": 3
+          },
+          "accuracyPercentage": 93.0,
+          "keyFact": "**Only 3 late medieval manuscripts survive** after a **1,350-year time gap**",
+          "quote": "To whom am I to present my pretty new book, freshly smoothed off with dry pumice? (Carmina 1.1)",
+          "explanation": "Catullus's entire body of work was preserved through a single manuscript discovered in Verona around AD 1300, from which only three medieval copies were made.",
+          "urls": [
+            {
+              "title": "Wikipedia - Catullus",
+              "url": "https://en.wikipedia.org/wiki/Catullus"
+            }
+          ],
+          "tags": [
+            "Catullus",
+            "Carmina",
+            "Classical Comparison"
+          ]
+        },
+        {
+          "id": "euripides-tragedies",
+          "name": "Euripides \u2014 Tragedies (Medea, The Bacchae)",
+          "nameDesc": "The last of classical Athens's three great tragic dramatists.",
+          "dateStr": "c. 480\u2013406 BC",
+          "dateInt": -430,
+          "sourceType": "Greek Dramatist",
+          "autographDate": "c. 480\u2013406 BC",
+          "earliestCopyDate": "c. AD 1100",
+          "timeGapYears": "1,500 years",
+          "manuscriptCount": {
+            "greek": 330,
+            "latin": 0,
+            "total": 330
+          },
+          "accuracyPercentage": 96.0,
+          "keyFact": "**330 surviving manuscripts** (only 18 of 95 plays survive complete)",
+          "quote": "Would that the Argo had never winged its way to the land of Colchis... (Medea 1)",
+          "explanation": "Out of 95 plays written by Euripides, only 18 survive complete today, copied a millennium and a half after his death.",
+          "urls": [
+            {
+              "title": "Perseus Digital Library - Euripides",
+              "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0098"
+            },
+            {
+              "title": "Wikipedia - Euripides",
+              "url": "https://en.wikipedia.org/wiki/Euripides"
+            }
+          ],
+          "tags": [
+            "Euripides",
+            "Greek Tragedy",
+            "Classical Comparison"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage1-biblical-manuscripts",
+      "title": "Stage 1: Cornerstone Biblical Manuscripts & Codices",
+      "description": "The foundation stones of biblical manuscript testimony, from 2nd-century papyri (P52, P66, P75) to the Great Uncial Codices (Sinaiticus, Vaticanus, Alexandrinus, Bezae) and Dead Sea Scrolls, linked directly to SQLite folios.",
+      "evidences": [
+        {
+          "id": "p52-rylands-papyrus",
+          "name": "Papyrus 52 (P52) \u2014 The Rylands Library Papyrus",
+          "nameDesc": "The earliest known surviving fragment of the New Testament, containing seven lines from the Gospel of John 18:31\u201333 on the front (recto) and lines from verses 37\u201338 on the back (verso).",
+          "dateStr": "c. AD 125 (100\u2013150 AD)",
+          "dateInt": 125,
+          "sourceType": "New Testament Greek Papyrus",
+          "ms_id": "P52",
+          "verse_id": "jn_18_31",
+          "folio_name": "p52_recto.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Earliest New Testament fragment**, dating within **30 to 50 years** of the original composition of John's Gospel",
+          "quote": "The Jews said to him, 'It is not lawful for us to put anyone to death.' This was to fulfill the word that Jesus had spoken... Pilate entered the headquarters and called Jesus and said to him, 'Are you the **King of the Jews**?' (John 18:31\u201333, preserved on P52)",
+          "explanation": "Discovered in Egypt in 1920 by Bernard Grenfell, P52 proved conclusively that the Gospel of John was written in the 1st century and was already circulating far up the Nile River in Egypt by AD 125, destroying 19th-century skeptical theories that John was a late 2nd-century forgery.",
+          "urls": [
+            {
+              "title": "John Rylands Library - Papyrus P52",
+              "url": "https://en.wikipedia.org/wiki/Rylands_Library_Papyrus_P52"
+            },
+            {
+              "title": "CSNTM - P52",
+              "url": "https://www.csntm.org/"
+            }
+          ],
+          "tags": [
+            "P52",
+            "Gospel of John",
+            "Earliest Fragment",
+            "Papyrus",
+            "Pontius Pilate"
+          ]
+        },
+        {
+          "id": "p66-bodmer-papyrus-ii",
+          "name": "Papyrus 66 (P66) \u2014 Bodmer Papyrus II",
+          "nameDesc": "A near-complete early 3rd-century papyrus codex of the Gospel of John, containing John 1:1\u20136:11, 6:35\u201314:26, and fragments of chapters 14\u201321.",
+          "dateStr": "c. AD 200",
+          "dateInt": 200,
+          "sourceType": "New Testament Greek Papyrus Codex",
+          "ms_id": "P66",
+          "verse_id": "jn_1_1",
+          "folio_name": "p66_bodmer_1.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Preserves the Prologue of John (John 1:1)** and Jesus's divine 'I AM' statement (**John 8:58**) from around **AD 200**",
+          "quote": "**In the beginning was the Word**, and the Word was with God, and **the Word was God**... Jesus said to them, 'Truly, truly, I say to you, before Abraham was, **I AM**.' (John 1:1, 8:58 in P66)",
+          "explanation": "P66 demonstrates that early Christians around AD 200 were reading and copying the exact high Christology of John's Gospel that we read today. As Wes Huff highlights, there are no theological or doctrinal divergences in P66\u2014only scribal spelling corrections.",
+          "urls": [
+            {
+              "title": "Wikipedia - Papyrus 66",
+              "url": "https://en.wikipedia.org/wiki/Papyrus_66"
+            },
+            {
+              "title": "CSNTM - Bodmer Papyri",
+              "url": "https://www.csntm.org/"
+            }
+          ],
+          "tags": [
+            "P66",
+            "Bodmer Papyri",
+            "Gospel of John",
+            "High Christology",
+            "I AM"
+          ]
+        },
+        {
+          "id": "p75-bodmer-papyrus-xiv-xv",
+          "name": "Papyrus 75 (P75) \u2014 Bodmer Papyrus XIV\u2013XV",
+          "nameDesc": "An early papyrus codex containing extensive portions of the Gospel of Luke and the Gospel of John, famous for its incredible textual discipline and agreement with Codex Vaticanus.",
+          "dateStr": "c. AD 175\u2013225",
+          "dateInt": 200,
+          "sourceType": "New Testament Greek Papyrus Codex",
+          "ms_id": "P75",
+          "verse_id": "lk_3_18",
+          "folio_name": "p75_1A_10r.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Over 99% textual agreement with the 4th-century Codex Vaticanus**, proving a **disciplined, controlled copying tradition**",
+          "quote": "I and the Father are one. (John 10:30, preserved in P75)... And Thomas answered and said to him, 'My Lord and my God!' (John 20:28)",
+          "explanation": "P75 proved that 4th-century Great Uncials like Codex Vaticanus were not 'edited' or 'invented' by later imperial scribes, but were faithful transcriptions of an ultra-precise copying tradition reaching back into the 2nd century.",
+          "urls": [
+            {
+              "title": "Wikipedia - Papyrus 75",
+              "url": "https://en.wikipedia.org/wiki/Papyrus_75"
+            },
+            {
+              "title": "Vatican Library - Papyri Bodmer",
+              "url": "https://www.csntm.org/"
+            }
+          ],
+          "tags": [
+            "P75",
+            "Gospel of Luke",
+            "Gospel of John",
+            "Textual Discipline"
+          ]
+        },
+        {
+          "id": "p46-chester-beatty-ii",
+          "name": "Papyrus 46 (P46) \u2014 Chester Beatty Papyrus II",
+          "nameDesc": "The oldest surviving collection of the Pauline Epistles and Hebrews, written on 86 leaves of an original 104-leaf papyrus codex.",
+          "dateStr": "c. AD 175\u2013225",
+          "dateInt": 200,
+          "sourceType": "New Testament Greek Papyrus Codex",
+          "ms_id": "P46",
+          "verse_id": "phil_1_5",
+          "folio_name": "p46_folio_086v.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Oldest collection of Paul's Epistles**, preserving **Philippians 2:6\u201311** and **Colossians 1:15\u201317** intact",
+          "quote": "Who, though **he was in the form of God**, did not count equality with God a thing to be grasped... For **by him all things were created**, in heaven and on earth... (Philippians 2:6, Colossians 1:16 in P46)",
+          "explanation": "P46 proves that the highest Christology of the New Testament\u2014Jesus as Creator and in the very form of God\u2014was universally circulated and celebrated in Paul's letters less than 150 years after the Resurrection.",
+          "urls": [
+            {
+              "title": "Wikipedia - Papyrus 46",
+              "url": "https://en.wikipedia.org/wiki/Papyrus_46"
+            },
+            {
+              "title": "University of Michigan Library - P46",
+              "url": "https://www.csntm.org/"
+            }
+          ],
+          "tags": [
+            "P46",
+            "Pauline Epistles",
+            "Chester Beatty",
+            "High Christology"
+          ]
+        },
+        {
+          "id": "p47-chester-beatty-iii",
+          "name": "Papyrus 47 (P47) \u2014 Chester Beatty Papyrus III",
+          "nameDesc": "An early 3rd-century papyrus codex containing 10 leaves of the Book of Revelation (chapters 9:10 to 17:2).",
+          "dateStr": "c. AD 250",
+          "dateInt": 250,
+          "sourceType": "New Testament Greek Papyrus",
+          "ms_id": "P47",
+          "verse_id": "rv_11_19",
+          "folio_name": "p47_folio_4v.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Oldest substantial manuscript of Revelation**, preserving the apocalyptic visions of John from **AD 250**",
+          "quote": "Then God's temple in heaven was opened, and the ark of his covenant was seen within his temple... (Revelation 11:19 in P47)",
+          "explanation": "P47 provides vital 3rd-century testimony to the text of Revelation, confirming its early canonical authority and preservation in Egyptian Christian communities.",
+          "urls": [
+            {
+              "title": "Wikipedia - Papyrus 47",
+              "url": "https://en.wikipedia.org/wiki/Papyrus_47"
+            },
+            {
+              "title": "CSNTM - P47",
+              "url": "https://www.csntm.org/"
+            }
+          ],
+          "tags": [
+            "P47",
+            "Book of Revelation",
+            "Chester Beatty"
+          ]
+        },
+        {
+          "id": "p72-bodmer-vii-ix",
+          "name": "Papyrus 72 (P72) \u2014 Bodmer Papyrus VII\u2013IX",
+          "nameDesc": "The earliest known manuscript of the Epistles of 1 Peter, 2 Peter, and Jude, copied as part of a miscellaneous theological codex.",
+          "dateStr": "c. AD 300",
+          "dateInt": 300,
+          "sourceType": "New Testament Greek Papyrus",
+          "ms_id": "P72",
+          "verse_id": "1pt_0_0",
+          "folio_name": "GA_P72_0001.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Earliest complete copy of 1\u20132 Peter and Jude**, confirming early apostolic attribution and text",
+          "quote": "Simeon Peter, a servant and apostle of Jesus Christ, to those who have obtained a faith of equal standing with ours... (2 Peter 1:1 in P72)",
+          "explanation": "P72 is a treasure of early Christian transmission, proving that even the shorter General Epistles were carefully copied and bound together as authoritative Scripture in pre-Nicene Egypt.",
+          "urls": [
+            {
+              "title": "Wikipedia - Papyrus 72",
+              "url": "https://en.wikipedia.org/wiki/Papyrus_72"
+            },
+            {
+              "title": "Vatican Library - P72",
+              "url": "https://www.csntm.org/"
+            }
+          ],
+          "tags": [
+            "P72",
+            "1 Peter",
+            "2 Peter",
+            "Jude",
+            "Bodmer Papyri"
+          ]
+        },
+        {
+          "id": "codex-sinaiticus-01",
+          "name": "Codex Sinaiticus (01, Aleph)",
+          "nameDesc": "The oldest surviving complete New Testament and one of the two oldest Christian Bibles in the world, written in Greek uncial script on calfskin vellum.",
+          "dateStr": "c. AD 330\u2013360",
+          "dateInt": 345,
+          "sourceType": "Great Uncial Greek Bible Codex",
+          "ms_id": "01",
+          "verse_id": "mt_0_0",
+          "folio_name": "20001_00010_Q73_1r_B427_p.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Oldest complete New Testament in the world**, written on parchment around **AD 340**",
+          "quote": "The book of the genealogy of Jesus Christ, the son of David, the son of Abraham. (Matthew 1:1 in Codex Sinaiticus)",
+          "explanation": "Discovered at St. Catherine's Monastery at the foot of Mount Sinai, Codex Sinaiticus provides an entire, untruncated 4th-century Greek New Testament that matches our modern critical Greek text with over 99% accuracy.",
+          "urls": [
+            {
+              "title": "Codex Sinaiticus Project (British Library)",
+              "url": "https://codexsinaiticus.org/"
+            },
+            {
+              "title": "Wikipedia - Codex Sinaiticus",
+              "url": "https://en.wikipedia.org/wiki/Codex_Sinaiticus"
+            }
+          ],
+          "tags": [
+            "Codex Sinaiticus",
+            "Great Uncial",
+            "Complete NT",
+            "St. Catherines"
+          ]
+        },
+        {
+          "id": "codex-vaticanus-b",
+          "name": "Codex Vaticanus (B, 03)",
+          "nameDesc": "One of the oldest extant manuscripts of the Greek Bible (Old and New Testaments), housed in the Vatican Library since at least the 15th century.",
+          "dateStr": "c. AD 300\u2013325",
+          "dateInt": 315,
+          "sourceType": "Great Uncial Greek Bible Codex",
+          "ms_id": "B",
+          "verse_id": "1chr_10_1",
+          "folio_name": "B_501_00505.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**The most disciplined 4th-century uncial Bible**, serving as the **primary text-critical bedrock** for modern translations",
+          "quote": "In the beginning was the Word, and the Word was with God, and the Word was God. (John 1:1 in Codex Vaticanus)",
+          "explanation": "Codex Vaticanus is celebrated by textual scholars (such as Westcott and Hort) as the most faithful 4th-century witness to the Alexandrian textual tradition, matching 2nd-century papyri like P75 with astounding precision.",
+          "urls": [
+            {
+              "title": "Vatican Library - Codex Vaticanus",
+              "url": "https://en.wikipedia.org/wiki/Codex_Vaticanus"
+            },
+            {
+              "title": "Wikipedia - Codex Vaticanus",
+              "url": "https://en.wikipedia.org/wiki/Codex_Vaticanus"
+            }
+          ],
+          "tags": [
+            "Codex Vaticanus",
+            "Great Uncial",
+            "Vatican",
+            "Alexandrian Text"
+          ]
+        },
+        {
+          "id": "codex-alexandrinus-02",
+          "name": "Codex Alexandrinus (A, 02)",
+          "nameDesc": "A 5th-century manuscript of the Greek Bible, containing the Old Testament (Septuagint) and most of the New Testament, presented to England by the Patriarch of Constantinople in 1627.",
+          "dateStr": "c. AD 400\u2013440",
+          "dateInt": 420,
+          "sourceType": "Great Uncial Greek Bible Codex",
+          "ms_id": "02",
+          "verse_id": "acts_13_7",
+          "folio_name": "02_90v.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**One of the four Great Uncial Bibles**, preserving 5th-century text of Gospels, Acts, and Epistles",
+          "quote": "When they had gone through the whole island as far as Paphos... with the proconsul **Sergius Paulus**, a man of intelligence. (Acts 13:6\u20137 in Codex Alexandrinus)",
+          "explanation": "Codex Alexandrinus was the first of the Great Uncials to become available to Western European scholars in the 1600s, igniting modern textual criticism and confirming that the Byzantine and Alexandrian traditions both preserve authentic scripture.",
+          "urls": [
+            {
+              "title": "British Library - Codex Alexandrinus",
+              "url": "https://en.wikipedia.org/wiki/Codex_Alexandrinus"
+            },
+            {
+              "title": "Wikipedia - Codex Alexandrinus",
+              "url": "https://en.wikipedia.org/wiki/Codex_Alexandrinus"
+            }
+          ],
+          "tags": [
+            "Codex Alexandrinus",
+            "Great Uncial",
+            "British Library"
+          ]
+        },
+        {
+          "id": "codex-ephraemi-rescriptus-04",
+          "name": "Codex Ephraemi Rescriptus (C, 04)",
+          "nameDesc": "A 5th-century Greek uncial palimpsest codex of the Bible, where the biblical text was washed off in the 12th century to write ascetic treatises of Ephraem the Syrian.",
+          "dateStr": "c. AD 425\u2013450",
+          "dateInt": 440,
+          "sourceType": "Great Uncial Palimpsest Bible Codex",
+          "ms_id": "04",
+          "verse_id": "mt_0_0",
+          "folio_name": "20004_01_01.01.01-18_f106r.jpeg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**5th-century uncial palimpsest** recovered through chemical and photographic decipherment, confirming 64 leaves of OT and 145 leaves of NT",
+          "quote": "Great indeed, we confess, is the mystery of godliness: **He was manifested in the flesh**, vindicated by the Spirit... (1 Timothy 3:16 in Codex Ephraemi)",
+          "explanation": "Codex Ephraemi is a dramatic triumph of textual recovery. Even though a medieval scribe erased the 5th-century scripture to reuse the vellum, modern imaging revealed the original Greek biblical text underneath, confirming text-critical harmony.",
+          "urls": [
+            {
+              "title": "Biblioth\u00e8que nationale de France - Codex C",
+              "url": "https://en.wikipedia.org/wiki/Codex_Ephraemi_Rescriptus"
+            },
+            {
+              "title": "Wikipedia - Codex Ephraemi Rescriptus",
+              "url": "https://en.wikipedia.org/wiki/Codex_Ephraemi_Rescriptus"
+            }
+          ],
+          "tags": [
+            "Codex Ephraemi",
+            "Palimpsest",
+            "Great Uncial"
+          ]
+        },
+        {
+          "id": "codex-bezae-05",
+          "name": "Codex Bezae Cantabrigiensis (D, 05)",
+          "nameDesc": "A 5th-century bilingual uncial codex containing the Gospels and Acts in Greek on the left page and Latin on the right page.",
+          "dateStr": "c. AD 400\u2013500",
+          "dateInt": 450,
+          "sourceType": "Great Bilingual Uncial Codex",
+          "ms_id": "05",
+          "verse_id": "mt_2_4",
+          "folio_name": "05_004v.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Oldest bilingual Greek-Latin codex** and the primary witness to the **Western text-type** of Gospels and Acts",
+          "quote": "And assembling all the chief priests and scribes of the people, he inquired of them where the Christ was to be born... (Matthew 2:4 in Codex Bezae)",
+          "explanation": "Codex Bezae is the cornerstone of the Western textual family. Its unique readings in Acts and the Gospels provide invaluable geographical and historical footnotes from early Christian scribes.",
+          "urls": [
+            {
+              "title": "Cambridge University Library - Codex Bezae",
+              "url": "https://en.wikipedia.org/wiki/Codex_Bezae"
+            },
+            {
+              "title": "Wikipedia - Codex Bezae",
+              "url": "https://en.wikipedia.org/wiki/Codex_Bezae"
+            }
+          ],
+          "tags": [
+            "Codex Bezae",
+            "Bilingual",
+            "Western Text",
+            "Cambridge"
+          ]
+        },
+        {
+          "id": "great-isaiah-scroll-1qisaa",
+          "name": "The Great Isaiah Scroll (1QIsa a) \u2014 Qumran Cave 1",
+          "nameDesc": "The largest, best-preserved, and most famous of the Dead Sea Scrolls, containing the entire 66 chapters of the Book of Isaiah in Hebrew on 17 parchment sheets.",
+          "dateStr": "c. 150\u2013100 BC",
+          "dateInt": -125,
+          "sourceType": "Old Testament Hebrew Scroll",
+          "ms_id": "(Great Isaiah Scroll)",
+          "verse_id": "is_53_5",
+          "folio_name": "(Great Isaiah Scroll)_col44.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Pushed Hebrew Old Testament manuscripts back over 1,000 years**, proving **miraculous scribal accuracy**",
+          "quote": "But **he was pierced for our transgressions**; he was crushed for our iniquities; upon him was the chastisement that brought us peace, and **with his wounds we are healed**. (Isaiah 53:5 in the Great Isaiah Scroll, c. 125 BC)",
+          "explanation": "Before the discovery of the Dead Sea Scrolls in 1947, skeptics claimed that the prophecy of Isaiah 53 (the Suffering Servant) must have been altered by Christians after Jesus's life. The Great Isaiah Scroll\u2014carbon-dated over a century before Christ\u2014proved that the prophecy of a pierced, suffering Messiah was recorded in Hebrew word-for-word before Jesus was born.",
+          "urls": [
+            {
+              "title": "The Digital Dead Sea Scrolls - Great Isaiah Scroll",
+              "url": "http://dss.collections.imj.org.il/isaiah"
+            },
+            {
+              "title": "Wikipedia - Isaiah Scroll",
+              "url": "https://en.wikipedia.org/wiki/Isaiah_Scroll"
+            }
+          ],
+          "tags": [
+            "Dead Sea Scrolls",
+            "Great Isaiah Scroll",
+            "Isaiah 53",
+            "Old Testament",
+            "1,000 Year Leap"
+          ]
+        },
+        {
+          "id": "11q5-great-psalms-scroll",
+          "name": "The Great Psalms Scroll (11Q5) \u2014 Qumran Cave 11",
+          "nameDesc": "A magnificent Herodian leather scroll from Qumran Cave 11 preserving 41 biblical psalms and several apocryphal hymns.",
+          "dateStr": "c. AD 30\u201350",
+          "dateInt": 40,
+          "sourceType": "Old Testament Hebrew Scroll",
+          "ms_id": "11Q5",
+          "verse_id": "ps_101_1",
+          "folio_name": "11Q5_FcJfy9tYtn3p5ucvRwrIuG2YWbv3lmEYzSsXzI6suC0jvE5VtBiX334NGw.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Preserves 41 Hebrew Psalms from the time of Christ**, corroborating Second Temple liturgical worship",
+          "quote": "I will sing of steadfast love and justice; to you, O LORD, I will make music... (Psalm 101:1 in 11Q5)",
+          "explanation": "11Q5 demonstrates how the Psalms\u2014the hymno-prophetic prayers quoted by Jesus on the cross and by the apostles in Acts\u2014were faithfully copied and revered by Jewish scribes in Judea.",
+          "urls": [
+            {
+              "title": "Wikipedia - 11Q5",
+              "url": "https://en.wikipedia.org/wiki/11Q5"
+            },
+            {
+              "title": "Dead Sea Scrolls Exhibition",
+              "url": "https://en.wikipedia.org/wiki/Dead_Sea_Scrolls"
+            }
+          ],
+          "tags": [
+            "Dead Sea Scrolls",
+            "11Q5",
+            "Psalms",
+            "Second Temple"
+          ]
+        },
+        {
+          "id": "p115-papyrus-115-revelation",
+          "name": "Papyrus 115 (P115) \u2014 Oxyrhynchus Papyrus 4499",
+          "nameDesc": "A fragmentary 3rd-century papyrus codex of the Book of Revelation, famous for containing the variant reading '616' (chi-iota-stigma) for the number of the beast in Revelation 13:18.",
+          "dateStr": "c. AD 225\u2013275",
+          "dateInt": 250,
+          "sourceType": "New Testament Greek Papyrus",
+          "ms_id": "P115",
+          "verse_id": "rv_1_1",
+          "folio_name": "p115_plate1_recto.jpg",
+          "command to llm": "Fetch folio image from data.db by ms_id and verse_id (or folio_name)",
+          "keyFact": "**Oldest surviving witness to Revelation 13**, preserving the famous **hexakosiai deka hex (616)** variant alongside Codex Ephraemi",
+          "quote": "Let the one who has understanding calculate the number of the beast, for it is the number of a man, and his number is **616** (or **666**). (Revelation 13:18 in P115)",
+          "explanation": "P115 is a prime illustration of textual variants in action: because Nero Caesar's name in Hebrew gematria adds up to 666 (when spelled Neron Kesar) or 616 (when spelled Nero Kesar in Latin style), early scribes knew the historical cipher and reflected it in manuscripts without altering any Christian doctrine.",
+          "urls": [
+            {
+              "title": "Wikipedia - Papyrus 115",
+              "url": "https://en.wikipedia.org/wiki/Papyrus_115"
+            },
+            {
+              "title": "CSNTM - P115",
+              "url": "https://www.csntm.org/"
+            }
+          ],
+          "tags": [
+            "P115",
+            "Revelation 13:18",
+            "666",
+            "616",
+            "Textual Variants"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage1-textual-variants",
+      "title": "Stage 1: The Taxonomy of Textual Variants (~400,000 Variants Analyzed)",
+      "description": "Scientific classification of New Testament textual variants into four categories, showing why ~80% are spelling differences and zero percent affect any essential Christian doctrine.",
+      "evidences": [
+        {
+          "id": "variant-cat1-spelling",
+          "name": "Category 1: Spelling & Nonsense Variants (~75\u201380% of All Variants)",
+          "nameDesc": "The vast majority of the ~400,000 New Testament textual variants are simple spelling differences, movable nus, iota subscripts, or accidental scribal slips of the pen that cannot even be translated into English.",
+          "sourceType": "Textual Variant Taxonomy",
+          "category": "Spelling & Nonsense (<80%)",
+          "percentageOfTotal": 78.0,
+          "keyFact": "**~78% of all 400,000 variants are spelling differences** like *movable nu* or spelling *John* with one N vs. two Ns",
+          "quote": "**John** spelled **\u0399\u03c9\u03b1\u03bd\u03bd\u03b7\u03c2** (two nus) vs. **\u0399\u03c9\u03b1\u03bd\u03b7\u03c2** (one nu) \u2014 or **David** spelled **\u0394\u03b1\u03b2\u03b9\u03b4** vs. **\u0394\u03b1\u03c5\u03b9\u03b4**",
+          "explanation": "When skeptics claim there are '400,000 errors in the Bible', they conceal the fact that nearly 80% are spelling variations. In Greek, adding an optional 'N' at the end of a word before a vowel (a movable nu, identical to English 'a' vs. 'an') counts as a variant every single time it occurs across 5,800 manuscripts.",
+          "urls": [
+            {
+              "title": "Wikipedia - Textual Variants in the New Testament",
+              "url": "https://en.wikipedia.org/wiki/Textual_variants_in_the_New_Testament"
+            },
+            {
+              "title": "CSNTM - Textual Criticism",
+              "url": "https://www.csntm.org/"
+            }
+          ],
+          "tags": [
+            "Textual Variants",
+            "Spelling",
+            "Movable Nu",
+            "75 Percent"
+          ],
+          "dateStr": "c. AD 40\u201395",
+          "dateInt": 65
+        },
+        {
+          "id": "variant-cat2-synonyms",
+          "name": "Category 2: Untranslatable Synonyms & Word Order (~15\u201320% of All Variants)",
+          "nameDesc": "Greek word order is highly flexible because grammatical function is determined by noun case endings rather than word order. Shifting 'Jesus Christ' to 'Christ Jesus' or adding a definite article changes nothing in translation.",
+          "sourceType": "Textual Variant Taxonomy",
+          "category": "Synonyms & Word Order (~15%)",
+          "percentageOfTotal": 17.0,
+          "keyFact": "**~17% of variants involve word order or synonyms** (*'Jesus Christ'* vs. *'Christ Jesus'*), with **zero impact on English translation**",
+          "quote": "**'Jesus Christ is Lord'** (\u0399\u03b7\u03c3\u03bf\u03c5\u03c2 \u03a7\u03c1\u03b9\u03c3\u03c4\u03bf\u03c2) vs. **'Christ Jesus is Lord'** (\u03a7\u03c1\u03b9\u03c3\u03c4\u03bf\u03c2 \u0399\u03b7\u03c3\u03bf\u03c5\u03c2) \u2014 or **'Jesus'** vs. **'the Jesus'** (\u03bf \u0399\u03b7\u03c3\u03bf\u03c5\u03c2)",
+          "explanation": "In Greek, 'Paul loves Jesus' and 'Jesus loves Paul (with accusative ending)' can be written in six different word orders without changing the meaning. Every variation across thousands of copies adds to the variant count without altering the text's message.",
+          "urls": [
+            {
+              "title": "Wikipedia - Textual Criticism of the New Testament",
+              "url": "https://en.wikipedia.org/wiki/Textual_criticism_of_the_New_Testament"
+            }
+          ],
+          "tags": [
+            "Textual Variants",
+            "Word Order",
+            "Synonyms"
+          ],
+          "dateStr": "c. AD 40\u201395",
+          "dateInt": 65
+        },
+        {
+          "id": "variant-cat3-meaningful-not-viable",
+          "name": "Category 3: Meaningful but NOT Viable Variants (<5% of All Variants)",
+          "nameDesc": "Variants that change the meaning of a sentence but are found in only a single late manuscript or are obvious scribal blunders that no scholar considers authentic.",
+          "sourceType": "Textual Variant Taxonomy",
+          "category": "Meaningful Not Viable (<5%)",
+          "percentageOfTotal": 4.0,
+          "keyFact": "**Obvious scribal blunders** like 1 Thess 2:7 where a scribe accidentally wrote **'horses'** instead of **'gentle'**",
+          "quote": "1 Thessalonians 2:7 \u2014 **'we were gentle among you'** (\u03b7\u03c0\u03b9\u03bf\u03b9, epioi) vs. **'we were horses among you'** (\u03b9\u03c0\u03c0\u03bf\u03b9, hippoi, found in one late medieval scribe's slip)",
+          "explanation": "Because Greek letters H (eta) and I (iota) sounded similar in Byzantine Greek, a sleepy medieval scribe dropped an H and turned 'gentle' into 'horses'. While meaningful, this variant is not viable\u2014it is immediately detected and dismissed by textual critics.",
+          "urls": [
+            {
+              "title": "Wikipedia - Textual Variants in the New Testament",
+              "url": "https://en.wikipedia.org/wiki/Textual_variants_in_the_New_Testament"
+            }
+          ],
+          "tags": [
+            "Textual Variants",
+            "Scribal Errors",
+            "Not Viable"
+          ],
+          "dateStr": "c. AD 40\u201395",
+          "dateInt": 65
+        },
+        {
+          "id": "variant-cat4-meaningful-and-viable",
+          "name": "Category 4: Meaningful AND Viable Variants (<1% of All Variants)",
+          "nameDesc": "The tiny fraction (<1%) of variants that both affect the meaning of a verse and have good early manuscript support on both sides\u2014yet none of which affect any essential Christian doctrine.",
+          "sourceType": "Textual Variant Taxonomy",
+          "category": "Meaningful & Viable (<1%)",
+          "percentageOfTotal": 0.8,
+          "keyFact": "**Less than 1% of variants are meaningful and viable**, and **ZERO percent affect any core doctrine** of Christian faith",
+          "quote": "Romans 5:1 \u2014 **'we have peace with God'** (\u03b5\u03c7\u03bf\u03bc\u03b5\u03bd, indicative) vs. **'let us have peace with God'** (\u03b5\u03c7\u03c9\u03bc\u03b5\u03bd, subjunctive, o vs. long o)... 1 John 1:4 \u2014 **'our joy'** vs. **'your joy'**",
+          "explanation": "Even among the <1% of variants where scholars debate the original reading, no Christian creed, moral command, or theological doctrine hangs in the balance. Whether Romans 5:1 is a declaration ('we have peace') or an exhortation ('let us have peace'), justification by faith remains bedrock biblical truth.",
+          "urls": [
+            {
+              "title": "Wikipedia - Textual Criticism of the New Testament",
+              "url": "https://en.wikipedia.org/wiki/Textual_criticism_of_the_New_Testament"
+            }
+          ],
+          "tags": [
+            "Textual Variants",
+            "Viable Variants",
+            "Zero Doctrinal Impact"
+          ],
+          "dateStr": "c. AD 40\u201395",
+          "dateInt": 65
+        },
+        {
+          "id": "bracketed-longer-ending-mark",
+          "name": "Bracketed Passage 1: The Longer Ending of Mark (Mark 16:9\u201320)",
+          "nameDesc": "The 12-verse ending of Mark's Gospel found in the majority of medieval manuscripts but absent from the two oldest 4th-century codices (Sinaiticus and Vaticanus).",
+          "sourceType": "Major Textual Variant / Bracketed Passage",
+          "category": "Bracketed Passage",
+          "percentageOfTotal": 0.1,
+          "keyFact": "**Transparently bracketed in modern Bibles** with footnotes explaining its absence in **Codex Sinaiticus and Vaticanus**",
+          "quote": "[[Now when he rose early on the first day of the week, he appeared first to Mary Magdalene...]] (Mark 16:9\u201320, bracketed in ESV, NIV, CSB)",
+          "explanation": "Rather than hiding textual variants, modern English translations openly bracket Mark 16:9\u201320 and include explanatory footnotes. Furthermore, every resurrection appearance and teaching in Mark 16:9\u201320 is independently taught and corroborated in Matthew, Luke, John, and Acts\u2014proving no doctrine is lost either way.",
+          "urls": [
+            {
+              "title": "Wikipedia - Mark 16",
+              "url": "https://en.wikipedia.org/wiki/Mark_16"
+            }
+          ],
+          "tags": [
+            "Mark 16",
+            "Longer Ending of Mark",
+            "Bracketed Passages",
+            "Transparency"
+          ],
+          "dateStr": "c. AD 40\u201395",
+          "dateInt": 65
+        },
+        {
+          "id": "bracketed-pericope-adulterae",
+          "name": "Bracketed Passage 2: The Woman Caught in Adultery (John 7:53\u20138:11 / Pericope Adulterae)",
+          "nameDesc": "The famous story of Jesus and the woman caught in adultery, absent from the earliest papyri (P66, P75) and 4th-century uncials, but preserved in later Western and Byzantine manuscripts.",
+          "sourceType": "Major Textual Variant / Bracketed Passage",
+          "category": "Bracketed Passage",
+          "percentageOfTotal": 0.1,
+          "keyFact": "**Openly bracketed in modern Bibles**, demonstrating the **complete intellectual honesty** of Christian Bible translators",
+          "quote": "[[Let him who is without sin among you be the first to throw a stone at her...]] (John 8:7, bracketed in modern translations)",
+          "explanation": "While many scholars believe this story represents an authentic oral memory of Jesus's compassion and wisdom, textual criticism confirms it was likely not in John's original autograph. By bracketing it, translators demonstrate that Christians value truth and textual integrity above all else.",
+          "urls": [
+            {
+              "title": "Wikipedia - Jesus and the woman taken in adultery",
+              "url": "https://en.wikipedia.org/wiki/Jesus_and_the_woman_taken_in_adultery"
+            }
+          ],
+          "tags": [
+            "John 8",
+            "Pericope Adulterae",
+            "Woman Caught in Adultery",
+            "Transparency"
+          ],
+          "dateStr": "c. AD 40\u201395",
+          "dateInt": 65
+        }
+      ]
+    },
+    {
+      "id": "stage2-archaeology-nt",
+      "title": "Stage 2: New Testament Archaeology, Inscriptions & Coinage",
+      "description": "Extra-biblical inscriptions, monuments, civic buildings, and coins corroborating New Testament rulers, titles, and geographical landmarks.",
+      "evidences": [
+        {
+          "id": "pilate-stone-caesarea",
+          "name": "The Pontius Pilate Inscription (Caesarea Maritima)",
+          "nameDesc": "A limestone block discovered in 1961 at the Roman theater in Caesarea Maritima, bearing an original 1st-century Latin dedication by Pontius Pilate to Emperor Tiberius.",
+          "dateStr": "c. AD 26\u201336",
+          "dateInt": 30,
+          "sourceType": "Roman Monumental Inscription",
+          "keyFact": "**Confirms Pontius Pilate as 'Prefect of Judea'** during the exact reign of **Tiberius Caesar**, matching **Luke 3:1**",
+          "quote": "TIBERIEUM ... [PON]TIUS PILATUS ... [PRAEF]ECTUS IUDA[EAE] (To Tiberius ... Pontius Pilate ... Prefect of Judea)",
+          "explanation": "For centuries, skeptics questioned whether Pontius Pilate was a historical figure or whether Gospel authors invented him. The Pilate Stone not only proved his historical existence, but confirmed his exact Roman military title as 'Prefect' (Praefectus)\u2014a title Gospel authors got right, whereas even the great Roman historian Tacitus mistakenly called him 'Procurator' centuries later.",
+          "urls": [
+            {
+              "title": "Wikipedia - Pilate Stone",
+              "url": "https://en.wikipedia.org/wiki/Pilate_stone"
+            },
+            {
+              "title": "Israel Museum - Pilate Inscription",
+              "url": "https://en.wikipedia.org/wiki/Pilate_stone"
+            }
+          ],
+          "tags": [
+            "Pontius Pilate",
+            "Caesarea",
+            "Roman Inscription",
+            "Prefect",
+            "Luke 3:1"
+          ]
+        },
+        {
+          "id": "erastus-inscription-corinth",
+          "name": "The Erastus Inscription (Corinth)",
+          "nameDesc": "A mid-1st century limestone paving stone discovered in 1929 near the theater in ancient Corinth, commemorating a city official who paid for the pavement out of his own funds.",
+          "dateStr": "c. AD 50",
+          "dateInt": 50,
+          "sourceType": "Roman Monumental Inscription",
+          "keyFact": "**Corroborates 'Erastus, the city treasurer'** in Corinth, exactly as greeted by Paul in **Romans 16:23**",
+          "quote": "ERASTUS PRO AEDILIT[AT]E S[UA] P[ECUNIA] STRAVIT (Erastus, in return for his aedileship, laid this pavement at his own expense)",
+          "explanation": "In Romans 16:23, written from Corinth around AD 57, Paul sends greetings from 'Erastus, the city treasurer (oikonomos / aedile)'. The archaeological discovery of a prominent Corinthian civic official named Erastus from the exact same decade provides stunning extra-biblical proof of Paul's social and historical networks.",
+          "urls": [
+            {
+              "title": "Wikipedia - Erastus of Corinth",
+              "url": "https://en.wikipedia.org/wiki/Erastus_of_Corinth"
+            }
+          ],
+          "tags": [
+            "Erastus",
+            "Corinth",
+            "Romans 16:23",
+            "Archaeology"
+          ]
+        },
+        {
+          "id": "gallio-inscription-delphi",
+          "name": "The Gallio Inscription (Delphi Inscription)",
+          "nameDesc": "An imperial rescript from Emperor Claudius discovered at Delphi, Greece, naming Lucius Junius Gallio as Proconsul of Achaia.",
+          "dateStr": "c. AD 52 (Summer AD 51\u2013May AD 52)",
+          "dateInt": 52,
+          "sourceType": "Roman Imperial Rescript Inscription",
+          "keyFact": "**Provides the absolute chronological anchor** for Paul's 18-month ministry in Corinth in **Acts 18:12\u201317**",
+          "quote": "Tiberius Claudius Caesar Augustus Germanicus... to Gallio, my friend and Proconsul of Achaia...",
+          "explanation": "In Acts 18:12, Luke records that when Gallio was proconsul of Achaia, Jews brought Paul before the judgment seat (bema) in Corinth. Because Roman proconsuls served one-year terms, the Delphi inscription dates Gallio's term precisely to AD 51\u201352\u2014giving historians the exact chronological anchor for Paul's entire missionary chronology.",
+          "urls": [
+            {
+              "title": "Wikipedia - Delphi Inscription",
+              "url": "https://en.wikipedia.org/wiki/Delphi_Inscription"
+            }
+          ],
+          "tags": [
+            "Gallio",
+            "Delphi",
+            "Acts 18",
+            "Chronology"
+          ]
+        },
+        {
+          "id": "politarch-inscriptions-thessalonica",
+          "name": "The Politarch Inscriptions of Thessalonica",
+          "nameDesc": "A collection of 35+ ancient Greek civic inscriptions from Thessalonica and Macedonia using the title 'Politarch' (city magistrate).",
+          "dateStr": "1st Century BC \u2013 1st Century AD",
+          "dateInt": 50,
+          "sourceType": "Greek Civic Inscriptions",
+          "keyFact": "**Vindicates Luke's historical accuracy** in calling Thessalonian rulers **'Politarchs' (Acts 17:6, 8)**",
+          "quote": "In the time of the Politarchs... (Vardar Gate Inscription, Thessalonica, British Museum)",
+          "explanation": "For generations, skeptical scholars claimed Luke invented the title 'Politarch' in Acts 17:6 because the word did not appear in classical Greek literature. Archaeology subsequently unearthed over 35 inscriptions in Macedonia\u201419 from Thessalonica itself\u2014proving Luke was an eyewitness who knew exact local administrative titles.",
+          "urls": [
+            {
+              "title": "Wikipedia - Politarch",
+              "url": "https://en.wikipedia.org/wiki/Politarch"
+            }
+          ],
+          "tags": [
+            "Politarch",
+            "Thessalonica",
+            "Acts 17",
+            "Luke's Accuracy"
+          ]
+        },
+        {
+          "id": "caiaphas-ossuary-jerusalem",
+          "name": "The Caiaphas Ossuary (Jerusalem)",
+          "nameDesc": "A highly decorated 1st-century limestone bone box discovered in 1990 in a family tomb in south Jerusalem, inscribed with the name of the High Priest Joseph Caiaphas.",
+          "dateStr": "c. AD 18\u201336",
+          "dateInt": 30,
+          "sourceType": "Jewish Archaeological Ossuary",
+          "keyFact": "**Corroborates the physical remains and family tomb** of **High Priest Caiaphas**, who presided over Jesus's trial (**Matthew 26:57**)",
+          "quote": "Yehosef bar Qayafa (Joseph, son of Caiaphas)",
+          "explanation": "The Gospel accounts record that Jesus was arrested and brought before High Priest Caiaphas, who prophesied that one man should die for the nation (John 11:49\u201350). The accidental excavation of Caiaphas's family tomb in Jerusalem confirmed his historical reality and priestly status.",
+          "urls": [
+            {
+              "title": "Wikipedia - Caiaphas ossuary",
+              "url": "https://en.wikipedia.org/wiki/Caiaphas_ossuary"
+            }
+          ],
+          "tags": [
+            "Caiaphas",
+            "Ossuary",
+            "High Priest",
+            "Matthew 26"
+          ]
+        },
+        {
+          "id": "pool-of-bethesda-jerusalem",
+          "name": "The Pool of Bethesda (Jerusalem)",
+          "nameDesc": "An excavated complex of healing pools in the Muslim Quarter of Jerusalem near the Sheep Gate, built with five covered colonnades.",
+          "dateStr": "1st Century AD (excavated 19th\u201320th century)",
+          "dateInt": 30,
+          "sourceType": "New Testament Archaeological Site",
+          "keyFact": "**Excavation revealed the exact 'five porticoes'** described in **John 5:2**, refuting skeptical claims of allegory",
+          "quote": "Now there is in Jerusalem by the Sheep Gate a pool, in Aramaic called Bethesda, which has **five roofed colonnades**. (John 5:2)",
+          "explanation": "19th-century higher critics dismissed the 'five porticoes' of Bethesda as a Gnostic or allegorical invention by John representing the five books of Moses. Excavations in the 1930s and 1960s uncovered the rectangular pool divided by a central partition, creating exactly five covered colonnades\u2014proving John was an eyewitness to pre-AD 70 Jerusalem.",
+          "urls": [
+            {
+              "title": "Wikipedia - Pool of Bethesda",
+              "url": "https://en.wikipedia.org/wiki/Pool_of_Bethesda"
+            }
+          ],
+          "tags": [
+            "Pool of Bethesda",
+            "John 5",
+            "Jerusalem Archaeology",
+            "Eyewitness"
+          ]
+        },
+        {
+          "id": "pool-of-siloam-jerusalem",
+          "name": "The Pool of Siloam (Jerusalem)",
+          "nameDesc": "A monumental stone-lined pool discovered in 2004 during sewer excavations in the City of David in south Jerusalem.",
+          "dateStr": "1st Century AD (Herodian Period)",
+          "dateInt": 30,
+          "sourceType": "New Testament Archaeological Site",
+          "keyFact": "**Uncovered the actual Herodian pool** where Jesus healed the man born blind (**John 9:7**)",
+          "quote": "Go, wash in the **Pool of Siloam** (which means Sent). So he went and washed and came back seeing. (John 9:7)",
+          "explanation": "Discovered accidentally by construction workers in 2004, the Herodian Pool of Siloam was excavated by the Israel Antiquities Authority, revealing stone steps and terraces where pilgrims cleansed themselves before ascending to the Temple\u2014and where Jesus performed His famous healing.",
+          "urls": [
+            {
+              "title": "Wikipedia - Pool of Siloam",
+              "url": "https://en.wikipedia.org/wiki/Pool_of_Siloam"
+            }
+          ],
+          "tags": [
+            "Pool of Siloam",
+            "John 9",
+            "City of David",
+            "Miracles"
+          ]
+        },
+        {
+          "id": "synagogue-of-magdala",
+          "name": "The Synagogue of Magdala & The Magdala Stone",
+          "nameDesc": "A 1st-century synagogue discovered in 2009 in Magdala on the western shore of the Sea of Galilee, featuring a carved ceremonial stone depicting the Second Temple menorah.",
+          "dateStr": "c. AD 20\u201370",
+          "dateInt": 30,
+          "sourceType": "1st-Century Galilean Synagogue",
+          "keyFact": "**Proves thriving Jewish synagogues existed in Galilee** during Jesus's ministry (**Matthew 4:23**)",
+          "quote": "And he went throughout all Galilee, teaching in their **synagogues** and proclaiming the gospel of the kingdom... (Matthew 4:23)",
+          "explanation": "Some critical scholars previously asserted that synagogues were an invention of the post-AD 70 rabbinic period and that Gospel depictions of Jesus teaching in Galilean synagogues were anachronistic. The discovery of 1st-century synagogues at Magdala, Capernaum, and Gamla shattered that objection.",
+          "urls": [
+            {
+              "title": "Wikipedia - Magdala stone",
+              "url": "https://en.wikipedia.org/wiki/Magdala_stone"
+            }
+          ],
+          "tags": [
+            "Magdala",
+            "Galilee",
+            "Synagogues",
+            "Mary Magdalene"
+          ]
+        },
+        {
+          "id": "temple-warning-inscription-soreg",
+          "name": "The Temple Warning Inscription (Soreg Stone)",
+          "nameDesc": "A limestone block discovered in 1871 in Jerusalem bearing a 1st-century Greek decree from Herod's Temple forbidding Gentiles from entering the inner sanctuary.",
+          "dateStr": "c. 20 BC \u2013 AD 70",
+          "dateInt": 30,
+          "sourceType": "Second Temple Inscription",
+          "keyFact": "**Corroborates the exact Jewish temple barrier and death penalty** that led to Paul's arrest in **Acts 21:28\u201331**",
+          "quote": "No foreigner is to enter within the balustrade and embankment around the sanctuary. Whoever is caught will have himself to blame for his subsequent **death**.",
+          "explanation": "In Acts 21:28, an angry mob seized Paul in Jerusalem, crying out that he had brought Trophimus the Ephesian into the Temple, defiling the holy place. The Soreg warning inscription is physical proof of the lethal barrier separating Gentiles from the court of Israel.",
+          "urls": [
+            {
+              "title": "Wikipedia - Temple Warning inscription",
+              "url": "https://en.wikipedia.org/wiki/Temple_Warning_inscription"
+            }
+          ],
+          "tags": [
+            "Temple Warning",
+            "Soreg",
+            "Acts 21",
+            "Jerusalem"
+          ]
+        },
+        {
+          "id": "coinage-tribute-penny-tiberius",
+          "name": "The Tribute Penny (Tiberius Caesar Denarius)",
+          "nameDesc": "The standard silver Roman denarius circulating in Judea during Jesus's ministry, minted with the portrait of Emperor Tiberius.",
+          "dateStr": "c. AD 14\u201337",
+          "dateInt": 30,
+          "sourceType": "Roman Imperial Coinage",
+          "keyFact": "**Confirming the exact coin, image, and inscription** of **Tiberius Caesar** referenced in **Mark 12:15\u201316**",
+          "quote": "And Jesus said to them, 'Whose likeness and inscription is this?' They said to him, **'Caesar's.'** (Mark 12:16) \u2014 Inscription on coin: **TI CAESAR DIVI AUG F AUGUSTUS**",
+          "explanation": "When the Pharisees tried to trap Jesus over paying taxes to Rome, Jesus asked for a denarius. Archaeology confirms that Tiberius denarii bore the image of Tiberius and the blasphemous title 'Son of the Divine Augustus'\u2014explaining why Jews despised the coin and why Jesus's answer was so brilliant.",
+          "urls": [
+            {
+              "title": "Wikipedia - Tribute penny",
+              "url": "https://en.wikipedia.org/wiki/Tribute_penny"
+            }
+          ],
+          "tags": [
+            "Tribute Penny",
+            "Tiberius",
+            "Denarius",
+            "Mark 12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage2-secular-historians",
+      "title": "Stage 2: Non-Christian Secular Historians Attesting to Jesus",
+      "description": "Roman, Greek, and Jewish historians and philosophers (Josephus, Tacitus, Pliny, Suetonius, Lucian, Talmud) independently attesting to Jesus's crucifixion under Pilate and early Christian worship.",
+      "evidences": [
+        {
+          "id": "josephus-testimonium-flavianum",
+          "name": "Flavius Josephus \u2014 Antiquities of the Jews 18.3.3 & 20.9.1",
+          "nameDesc": "1st-century Jewish priest, Pharisee, and military general who became court historian for the Flavian emperors in Rome.",
+          "dateStr": "c. AD 93",
+          "dateInt": 93,
+          "sourceType": "Jewish Historian",
+          "keyFact": "**Independent 1st-century Jewish attestation** of **Jesus's crucifixion under Pilate**, his disciples' belief in his **resurrection**, and the martyrdom of **James**",
+          "quote": "He was [the] Christ. And when Pilate, at the suggestion of the principal men amongst us, had condemned him to the cross, those that loved him at the first did not forsake him; for he appeared to them alive again the third day... (Antiquities 18.3.3)",
+          "explanation": "Josephus is the most important non-Christian historian of 1st-century Judea. He documents Jesus as a wise teacher and miracle worker condemned by Pilate, and in Antiquities 20.9.1 records the martyrdom of 'James, the brother of Jesus, who was called Christ.'",
+          "urls": [
+            {
+              "title": "Wikipedia - Josephus on Jesus",
+              "url": "https://en.wikipedia.org/wiki/Josephus_on_Jesus"
+            }
+          ],
+          "tags": [
+            "Josephus",
+            "Testimonium Flavianum",
+            "James",
+            "Jewish Historian"
+          ]
+        },
+        {
+          "id": "tacitus-annals-christus",
+          "name": "Cornelius Tacitus \u2014 Annals 15.44",
+          "nameDesc": "Roman senator, consul, and greatest Roman historian of the Latin language.",
+          "dateStr": "c. AD 116",
+          "dateInt": 116,
+          "sourceType": "Roman Historian",
+          "keyFact": "**Roman imperial confirmation** that **Christus suffered the extreme penalty** under **Pontius Pilate** during the reign of **Tiberius**",
+          "quote": "Christus, from whom the name had its origin, suffered the extreme penalty during the reign of Tiberius at the hands of one of our procurators, Pontius Pilatus, and a most mischievous superstition, thus checked for the moment, again broke out... (Annals 15.44)",
+          "explanation": "Tacitus provides an independent, hostile Roman senator's record of Jesus's execution and the sudden, inexplicable resurgence of Christianity in Judea immediately after His crucifixion.",
+          "urls": [
+            {
+              "title": "Wikipedia - Tacitus on Christ",
+              "url": "https://en.wikipedia.org/wiki/Tacitus_on_Christ"
+            }
+          ],
+          "tags": [
+            "Tacitus",
+            "Annals 15.44",
+            "Roman Historian",
+            "Crucifixion"
+          ]
+        },
+        {
+          "id": "pliny-the-younger-christians",
+          "name": "Pliny the Younger \u2014 Epistulae 10.96",
+          "nameDesc": "Roman governor of Bithynia-Pontus in Asia Minor, writing to Emperor Trajan.",
+          "dateStr": "c. AD 112",
+          "dateInt": 112,
+          "sourceType": "Roman Governor",
+          "keyFact": "**Documents early Christians singing hymns to Christ 'as to a god'** and taking moral vows of holiness",
+          "quote": "They were in the habit of meeting on a certain fixed day before it was light, when they sang in alternate verses a hymn to **Christ, as to a god**, and bound themselves by a solemn oath... not to commit any fraud, theft or adultery... (Epistle 10.96)",
+          "explanation": "Pliny's letter to Trajan is the oldest non-Christian administrative document describing early Christian worship. It proves that within decades of the apostles, Christians were worshipping Jesus as God.",
+          "urls": [
+            {
+              "title": "Wikipedia - Pliny the Younger on Christians",
+              "url": "https://en.wikipedia.org/wiki/Pliny_the_Younger_on_Christians"
+            }
+          ],
+          "tags": [
+            "Pliny the Younger",
+            "Early Worship",
+            "Trajan",
+            "Divine Christology"
+          ]
+        },
+        {
+          "id": "suetonius-claudius-chrestus",
+          "name": "Gaius Suetonius Tranquillus \u2014 Life of Claudius 25.4",
+          "nameDesc": "Roman historian and imperial secretary under Hadrian.",
+          "dateStr": "c. AD 121",
+          "dateInt": 121,
+          "sourceType": "Roman Biographer",
+          "keyFact": "**Corroborates the Roman edict expelling Jews from Rome** over 'Chrestus', matching **Acts 18:2**",
+          "quote": "Since the Jews constantly made disturbances at the instigation of **Chrestus**, he [Claudius] expelled them from Rome. (Life of Claudius 25.4)",
+          "explanation": "In Acts 18:2, Paul meets Aquila and Priscilla in Corinth because 'Claudius had commanded all the Jews to leave Rome.' Suetonius confirms this exact imperial expulsion around AD 49 caused by disputes over Christ.",
+          "urls": [
+            {
+              "title": "Wikipedia - Suetonius on Christians",
+              "url": "https://en.wikipedia.org/wiki/Suetonius_on_Christians"
+            }
+          ],
+          "tags": [
+            "Suetonius",
+            "Claudius",
+            "Acts 18",
+            "Aquila and Priscilla"
+          ]
+        },
+        {
+          "id": "lucian-of-samosata-peregrinus",
+          "name": "Lucian of Samosata \u2014 The Passing of Peregrinus",
+          "nameDesc": "2nd-century Assyrian-Greek satirist and philosopher.",
+          "dateStr": "c. AD 165",
+          "dateInt": 165,
+          "sourceType": "Greek Satirist",
+          "keyFact": "**Hostile pagan confirmation** that Christians worship a **crucified sage in Palestine** and live as brothers",
+          "quote": "The Christians, you know, worship a man to this day\u2014the distinguished personage who introduced their novel rites, and was **crucified on that account**... (The Passing of Peregrinus 11\u201313)",
+          "explanation": "Even as an enemy ridiculing Christianity, Lucian confirms that Jesus was a real historical teacher crucified in Palestine and that His followers lived in sacrificial community.",
+          "urls": [
+            {
+              "title": "Wikipedia - Lucian on Jesus",
+              "url": "https://en.wikipedia.org/wiki/Lucian_on_Jesus"
+            }
+          ],
+          "tags": [
+            "Lucian",
+            "Crucifixion",
+            "Pagan Witness"
+          ]
+        },
+        {
+          "id": "mara-bar-serapion-letter",
+          "name": "Mara bar Serapion \u2014 Syriac Letter to His Son",
+          "nameDesc": "A Stoic philosopher from Roman Syria writing from prison to his son.",
+          "dateStr": "c. AD 73\u2013200",
+          "dateInt": 73,
+          "sourceType": "Syriac Stoic Philosopher",
+          "keyFact": "**Compares the execution of Jesus ('the wise King')** to Socrates and Pythagoras, noting His laws live on",
+          "quote": "What advantage did the Jews gain from executing their **wise King**? ... Nor did the wise King die for good; he lived on in the teaching which he had given.",
+          "explanation": "Mara bar Serapion provides an early Syriac philosophical reflection on the injustice of Jesus's execution, recognizing Him as the wise King of the Jews whose teachings endured after His death.",
+          "urls": [
+            {
+              "title": "Wikipedia - Mara bar Serapion on Jesus",
+              "url": "https://en.wikipedia.org/wiki/Mara_bar_Serapion_on_Jesus"
+            }
+          ],
+          "tags": [
+            "Mara bar Serapion",
+            "Wise King",
+            "Syriac Witness"
+          ]
+        },
+        {
+          "id": "celsus-contra-celsum-resurrection",
+          "name": "Celsus \u2014 The True Word (via Origen's Contra Celsum)",
+          "nameDesc": "2nd-century Greek Platonist philosopher who wrote the earliest comprehensive literary attack on Christianity.",
+          "dateStr": "c. AD 175",
+          "dateInt": 175,
+          "sourceType": "Greek Platonist Philosopher",
+          "keyFact": "**Confirms that early Christians proclaimed an empty tomb, angels, and appearances first to Mary Magdalene**",
+          "quote": "But who saw this? **A hysterical female, as you say**... And why did you say that **an angel came to the tomb** to remove the stone? (Contra Celsum 2.55, 5.58)",
+          "explanation": "In trying to explain away the Resurrection as hallucination or deceit, Celsus inadvertently confirms that the foundational gospel narrative in the 2nd century included Jesus's predictions, the empty tomb, an angel at the stone, and appearances first to Mary Magdalene.",
+          "urls": [
+            {
+              "title": "Wikipedia - Celsus on Jesus",
+              "url": "https://en.wikipedia.org/wiki/Celsus_on_Jesus"
+            }
+          ],
+          "tags": [
+            "Celsus",
+            "Resurrection",
+            "Mary Magdalene",
+            "Empty Tomb"
+          ]
+        },
+        {
+          "id": "babylonian-talmud-sanhedrin-43a",
+          "name": "The Babylonian Talmud \u2014 Tractate Sanhedrin 43a",
+          "nameDesc": "The central text of Rabbinic Judaism, preserving ancient Tannaic traditions.",
+          "dateStr": "c. AD 200\u2013500 (traditions from 1st\u20132nd century)",
+          "dateInt": 250,
+          "sourceType": "Rabbinic Jewish Talmud",
+          "keyFact": "**Hostile rabbinic confirmation** that **'Yeshu' was hanged on the eve of Passover** and performed signs",
+          "quote": "On the eve of Passover **Yeshu** was hanged. For forty days before the execution took place, a herald went forth and cried, 'He is going forth to be stoned because **he has practiced sorcery and enticed Israel to apostasy**.' (Sanhedrin 43a)",
+          "explanation": "The Talmudic Rabbis did not deny that Jesus performed miracles; instead, they accused Him of 'sorcery' (corroborating the Pharisees' charge in Matthew 12:24 that He cast out demons by Beelzebul) and confirmed His execution on Passover eve.",
+          "urls": [
+            {
+              "title": "Wikipedia - Jesus in the Talmud",
+              "url": "https://en.wikipedia.org/wiki/Jesus_in_the_Talmud"
+            }
+          ],
+          "tags": [
+            "Talmud",
+            "Sanhedrin 43a",
+            "Passover",
+            "Miracles"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage2-archaeology-ot",
+      "title": "Stage 2: Old Testament Archaeology, Monuments & Inscriptions",
+      "description": "Extra-biblical royal steles, annals, bullae, and prisms (Tel Dan Stele, Mesha Stele, Taylor Prism, Cyrus Cylinder) corroborating Old Testament monarchs and events.",
+      "evidences": [
+        {
+          "id": "tel-dan-stele-david",
+          "name": "The Tel Dan Stele (House of David Inscription)",
+          "nameDesc": "A 9th-century BC Aramean basalt victory stele discovered in 1993 at Tel Dan in northern Israel by Avraham Biran.",
+          "dateStr": "c. 840\u2013800 BC",
+          "dateInt": -840,
+          "sourceType": "Aramean Monumental Stele",
+          "keyFact": "**First extra-biblical historical mention of 'The House of David'** (*Beit David*), destroying minimalist claims that King David was a myth",
+          "quote": "[I killed Jeho]ram son of [Ahab] king of Israel, and [I] killed [Ahaz]iah son of [Jehoram king] of **the House of David** (BYT DWD).",
+          "explanation": "Before 1993, biblical minimalists asserted that King David was a legendary fiction like King Arthur. The Tel Dan Stele\u2014erected by an Aramean king boasting of victory over Judah\u2014proved that David was a historical monarch who founded a recognized royal dynasty.",
+          "urls": [
+            {
+              "title": "Wikipedia - Tel Dan stele",
+              "url": "https://en.wikipedia.org/wiki/Tel_Dan_stele"
+            }
+          ],
+          "tags": [
+            "Tel Dan Stele",
+            "House of David",
+            "King David",
+            "9th Century BC"
+          ]
+        },
+        {
+          "id": "mesha-stele-moabite-stone",
+          "name": "The Mesha Stele (The Moabite Stone)",
+          "nameDesc": "An 840 BC basalt victory stele erected by King Mesha of Moab, discovered in 1868 in Dhiban, Jordan.",
+          "dateStr": "c. 840 BC",
+          "dateInt": -840,
+          "sourceType": "Moabite Monumental Stele",
+          "keyFact": "**Corroborates 2 Kings 3**, naming **King Mesha of Moab, King Omri of Israel**, and the God of Israel (**YHWH**)",
+          "quote": "I am **Mesha**, son of Chemosh-gad, king of Moab... **Omri was king of Israel**, and he oppressed Moab many days... I took from there the vessels of **YHWH** and dragged them before Chemosh.",
+          "explanation": "The Mesha Stele is a parallel Canaanite account of the Moabite rebellion described in 2 Kings 3. It confirms the reigns of Omri and Ahab, the oppression of Moab, and the earliest extra-biblical mention of Israel's covenant name for God, YHWH.",
+          "urls": [
+            {
+              "title": "Wikipedia - Mesha Stele",
+              "url": "https://en.wikipedia.org/wiki/Mesha_Stele"
+            }
+          ],
+          "tags": [
+            "Mesha Stele",
+            "Moabite Stone",
+            "2 Kings 3",
+            "YHWH",
+            "Omri"
+          ]
+        },
+        {
+          "id": "sennacherib-taylor-prism-jerusalem",
+          "name": "Sennacherib's Taylor Prism & The Siege of Jerusalem",
+          "nameDesc": "A six-sided clay prism inscribed with the royal annals of Assyrian King Sennacherib, discovered in Nineveh in 1830.",
+          "dateStr": "c. 691 BC",
+          "dateInt": -691,
+          "sourceType": "Assyrian Royal Annals Prism",
+          "keyFact": "**Corroborates the Assyrian siege of Jerusalem in 2 Kings 18\u201319**, boasting that he trapped **'Hezekiah the Judean... like a bird in a cage'** without ever claiming he captured the city",
+          "quote": "As for **Hezekiah the Judean**, who did not submit to my yoke... Himself I made a prisoner in Jerusalem, his royal residence, **like a bird in a cage**...",
+          "explanation": "In 2 Kings 19 and Isaiah 37, Sennacherib besieged Jerusalem but was turned back by divine intervention without firing an arrow into the city. Sennacherib's own prism confirms he trapped Hezekiah in Jerusalem\u2014yet conspicuously omits any claim of capturing the city or looting the temple, a deafening silence that proves biblical history.",
+          "urls": [
+            {
+              "title": "Wikipedia - Sennacherib's Annals",
+              "url": "https://en.wikipedia.org/wiki/Sennacherib%27s_Annals"
+            },
+            {
+              "title": "British Museum - Taylor Prism",
+              "url": "https://en.wikipedia.org/wiki/Sennacherib%27s_Annals"
+            }
+          ],
+          "tags": [
+            "Taylor Prism",
+            "Sennacherib",
+            "Hezekiah",
+            "2 Kings 18"
+          ]
+        },
+        {
+          "id": "hezekiah-bulla-jerusalem",
+          "name": "King Hezekiah's Bulla (Ophel Excavations, Jerusalem)",
+          "nameDesc": "An stamped clay seal impression (bulla) belonging to King Hezekiah of Judah, discovered in 2015 by Eilat Mazar at the Ophel in Jerusalem.",
+          "dateStr": "c. 727\u2013698 BC",
+          "dateInt": -710,
+          "sourceType": "Judean Royal Seal Impression",
+          "keyFact": "**The personal royal seal of King Hezekiah**, found just feet away from a bulla bearing the name **'Isaiah [the prophet]'**",
+          "quote": "Belonging to **Hezekiah [son of] Ahaz, King of Judah**",
+          "explanation": "Excavated in an undisturbed royal layer at the foot of the Temple Mount, King Hezekiah's bulla is tangible physical contact with one of Judah's greatest righteous kings\u2014confirming his lineage from Ahaz and his royal administration in Jerusalem.",
+          "urls": [
+            {
+              "title": "Wikipedia - Bulla of Hezekiah",
+              "url": "https://en.wikipedia.org/wiki/Bulla_of_Hezekiah"
+            }
+          ],
+          "tags": [
+            "Hezekiah",
+            "Bulla",
+            "Ophel",
+            "Royal Seal"
+          ]
+        },
+        {
+          "id": "cyrus-cylinder-babylon",
+          "name": "The Cyrus Cylinder (Babylon)",
+          "nameDesc": "A barrel-shaped clay cylinder inscribed in Akkadian cuneiform by Cyrus the Great of Persia following his conquest of Babylon in 539 BC.",
+          "dateStr": "c. 539 BC",
+          "dateInt": -539,
+          "sourceType": "Persian Imperial Proclamation Cylinder",
+          "keyFact": "**Corroborates the Persian royal decree allowing exiled peoples to return home and rebuild their temples**, matching **Ezra 1:1\u20134**",
+          "quote": "I returned the images of the gods, who had resided there, to their places and... **I gathered all their inhabitants and returned to them their dwellings**...",
+          "explanation": "19th-century skeptics mocked Ezra 1, claiming a Persian monarch would never permit captive nations to return home and rebuild their sanctuaries. The discovery of the Cyrus Cylinder in 1879 proved that Cyrus's official imperial policy was precisely what the Bible recorded.",
+          "urls": [
+            {
+              "title": "Wikipedia - Cyrus Cylinder",
+              "url": "https://en.wikipedia.org/wiki/Cyrus_Cylinder"
+            },
+            {
+              "title": "British Museum - Cyrus Cylinder",
+              "url": "https://en.wikipedia.org/wiki/Cyrus_Cylinder"
+            }
+          ],
+          "tags": [
+            "Cyrus Cylinder",
+            "Ezra 1",
+            "Babylonian Exile",
+            "Persian Empire"
+          ]
+        },
+        {
+          "id": "kurkh-monolith-ahab",
+          "name": "The Kurkh Monolith of Shalmaneser III",
+          "nameDesc": "An Assyrian limestone stele discovered in 1861 in eastern Turkey, recording the campaigns of King Shalmaneser III.",
+          "dateStr": "c. 853 BC",
+          "dateInt": -853,
+          "sourceType": "Assyrian Royal Monolith",
+          "keyFact": "**Explicitly names 'Ahab the Israelite'** and his 2,000 chariots at the Battle of Qarqar (**1 Kings 20\u201322**)",
+          "quote": "2,000 chariots, 10,000 soldiers of **Ahab the Israelite** (A-ha-ab-bu Sir-i-la-a-a)...",
+          "explanation": "The Kurkh Monolith provides extra-biblical attestation of King Ahab of Israel as a major regional military power in the 9th century BC, corroborating his chariotry and kingdom size.",
+          "urls": [
+            {
+              "title": "Wikipedia - Kurkh Monoliths",
+              "url": "https://en.wikipedia.org/wiki/Kurkh_Monoliths"
+            }
+          ],
+          "tags": [
+            "Kurkh Monolith",
+            "Ahab",
+            "1 Kings",
+            "Battle of Qarqar"
+          ]
+        },
+        {
+          "id": "black-obelisk-shalmaneser-jehu",
+          "name": "The Black Obelisk of Shalmaneser III",
+          "nameDesc": "A black limestone Assyrian relief obelisk from Nimrud, commemorating the campaigns of Shalmaneser III.",
+          "dateStr": "c. 841 BC",
+          "dateInt": -841,
+          "sourceType": "Assyrian Royal Relief Obelisk",
+          "keyFact": "**Contains the earliest known surviving illustration of an Israelite figure**, depicting **'Jehu, son of Omri'** bowing down",
+          "quote": "The tribute of **Jehu, son of Omri**: I received from him silver, gold, a golden bowl, a golden vase... (2 Kings 9\u201310)",
+          "explanation": "Discovered in 1846 by Austen Henry Layard, the Black Obelisk depicts King Jehu of Israel (or his ambassador) kneeling before the Assyrian king\u2014providing visual and textual confirmation of Israel's northern monarchs.",
+          "urls": [
+            {
+              "title": "Wikipedia - Black Obelisk of Shalmaneser III",
+              "url": "https://en.wikipedia.org/wiki/Black_Obelisk_of_Shalmaneser_III"
+            }
+          ],
+          "tags": [
+            "Black Obelisk",
+            "Jehu",
+            "2 Kings 9",
+            "Nimrud"
+          ]
+        },
+        {
+          "id": "merneptah-stele-israel",
+          "name": "The Merneptah Stele (The Israel Stele)",
+          "nameDesc": "An Egyptian granite victory stele erected by Pharaoh Merneptah (son of Ramesses II) at Thebes, discovered in 1896 by Flinders Petrie.",
+          "dateStr": "c. 1208 BC",
+          "dateInt": -1208,
+          "sourceType": "Egyptian Monumental Stele",
+          "keyFact": "**Earliest extra-biblical historical reference to 'Israel'** as a socio-ethnic group established in Canaan",
+          "quote": "Canaan is captive with all woe. Ashkelon is conquered, Gezer seized... **Israel is laid waste and his seed is not**...",
+          "explanation": "The Merneptah Stele proves that as early as 1208 BC, Israel was already an established, recognized people group in the land of Canaan\u2014refuting skeptical theories that Israel did not emerge until the Babylonian exile.",
+          "urls": [
+            {
+              "title": "Wikipedia - Merneptah Stele",
+              "url": "https://en.wikipedia.org/wiki/Merneptah_Stele"
+            }
+          ],
+          "tags": [
+            "Merneptah Stele",
+            "Israel Stele",
+            "13th Century BC",
+            "Exodus"
+          ]
+        },
+        {
+          "id": "nabonidus-chronicle-belshazzar",
+          "name": "The Nabonidus Chronicle & Belshazzar's Cylinder",
+          "nameDesc": "Babylonian cuneiform clay cylinders and chronicles recording the reign of Nabonidus, the last king of the Neo-Babylonian Empire.",
+          "dateStr": "c. 540 BC",
+          "dateInt": -540,
+          "sourceType": "Babylonian Royal Chronicle",
+          "keyFact": "**Vindicates Daniel 5's mention of Belshazzar as ruling king of Babylon**, explaining why Daniel was offered the **'third ruler'** spot",
+          "quote": "He [Nabonidus] entrusted the camp to his oldest **son, the firstborn [Belshazzar]**... He let everything go, **entrusted the kingship to him**...",
+          "explanation": "19th-century higher critics asserted that the Book of Daniel was historically blundering for calling Belshazzar the king of Babylon when ancient Greek historians knew Nabonidus was the last king. Babylonian cylinders discovered in Ur proved that Nabonidus spent 10 years in Arabia while his son Belshazzar ruled as co-regent in Babylon\u2014which is precisely why Belshazzar offered Daniel the highest position he could give: 'the third ruler in the kingdom' (Daniel 5:16, 29).",
+          "urls": [
+            {
+              "title": "Wikipedia - Nabonidus Chronicle",
+              "url": "https://en.wikipedia.org/wiki/Nabonidus_Chronicle"
+            },
+            {
+              "title": "Wikipedia - Belshazzar",
+              "url": "https://en.wikipedia.org/wiki/Belshazzar"
+            }
+          ],
+          "tags": [
+            "Nabonidus",
+            "Belshazzar",
+            "Daniel 5",
+            "Third Ruler",
+            "Babylon"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage3-onomastics",
+      "title": "Stage 3: Onomastics \u2014 1st-Century Palestinian Name Frequency & Disambiguation",
+      "description": "Statistical comparison of personal names in the Gospels/Acts against 1st-century Palestinian ossuary and inscription data (Bauckham/Ilan), proving local eyewitness authorship.",
+      "evidences": [
+        {
+          "id": "onomastics-male-names-simon-joseph",
+          "name": "1st-Century Palestinian Male Name Frequencies (Simon, Joseph, Eleazar)",
+          "nameDesc": "Statistical name frequency analysis by Richard Bauckham (Jesus and the Eyewitnesses) and Tal Ilan (Lexicon of Jewish Names in Late Antiquity), comparing 3,000+ ossuaries and grave inscriptions against the Gospels and Acts.",
+          "dateStr": "c. 330 BC \u2013 AD 200",
+          "dateInt": 30,
+          "sourceType": "Statistical Onomastic Lexicon",
+          "keyFact": "**Simon (#1)** represents **24.3%** of Jewish men in Palestine and **24.2%** in the Gospels/Acts; **Joseph (#2)** represents **8.6%** in Palestine and **9.1%** in Gospels/Acts",
+          "quote": "Top 10 Male Names in 1st-Century Palestine: **1. Simon (24.3%), 2. Joseph (8.6%), 3. Eleazar (6.6%), 4. Judah (6.5%), 5. John (5.0%), 6. Jesus (4.1%)**... exactly mirroring Gospel/Acts percentages.",
+          "explanation": "If someone in 2nd-century Rome, Ephesus, or Egypt invented the Gospels, they would have no way of knowing the precise mathematical popularity of male names in Judea and Galilee before AD 70. The fact that Gospel name frequencies match 1st-century Palestinian grave inscriptions to within 0.5% proves local eyewitness origin.",
+          "urls": [
+            {
+              "title": "Wikipedia - Jesus and the Eyewitnesses",
+              "url": "https://en.wikipedia.org/wiki/Jesus_and_the_Eyewitnesses"
+            }
+          ],
+          "tags": [
+            "Onomastics",
+            "Richard Bauckham",
+            "Tal Ilan",
+            "Simon",
+            "Joseph",
+            "Eyewitness"
+          ]
+        },
+        {
+          "id": "onomastics-female-names-mary-salome",
+          "name": "1st-Century Palestinian Female Name Frequencies (Mary, Salome, Martha)",
+          "nameDesc": "Statistical comparison of female names in 1st-century Jewish Palestine against the New Testament.",
+          "dateStr": "c. 330 BC \u2013 AD 200",
+          "dateInt": 30,
+          "sourceType": "Statistical Onomastic Lexicon",
+          "keyFact": "**Mary (Miriam)** represents **25.1%** of women in Palestine and **26.0%** in Gospels/Acts (1 out of every 4 women!); **Salome (#2)** represents **19.8%** vs. **21.0%**",
+          "quote": "Top Female Names: **1. Mary (25.1%), 2. Salome (19.8%), 3. Shelamzion (8.0%), 4. Martha (6.0%), 5. Joanna (4.0%)**",
+          "explanation": "Nearly 50% of all Jewish women in 1st-century Palestine were named either Mary or Salome. The Gospels reflect this exact real-world demographic distribution.",
+          "urls": [
+            {
+              "title": "Wikipedia - Jesus and the Eyewitnesses",
+              "url": "https://en.wikipedia.org/wiki/Jesus_and_the_Eyewitnesses"
+            }
+          ],
+          "tags": [
+            "Onomastics",
+            "Mary",
+            "Salome",
+            "Female Names",
+            "Eyewitness"
+          ]
+        },
+        {
+          "id": "onomastics-disambiguation-principle",
+          "name": "The Disambiguation Principle in Gospel Speech Patterns",
+          "nameDesc": "How popular vs. rare names are treated in the Gospels and Acts.",
+          "dateStr": "c. AD 40\u201395",
+          "dateInt": 65,
+          "sourceType": "Textual & Onomastic Analysis",
+          "keyFact": "**Popular names are always disambiguated** (*Simon Peter*, *Simon the Tanner*, *Mary Magdalene*), whereas **rare names never are** (*Bartimaeus*, *Zacchaeus*, *Nicodemus*)",
+          "quote": "**Simon Peter** (nickname), **Simon the Zealot** (sect), **Simon of Cyrene** (hometown), **Simon the Tanner** (profession) vs. **Zacchaeus** (no disambiguator needed)",
+          "explanation": "In 1st-century Palestine, because 1 out of 4 men was named Simon and 1 out of 4 women was named Mary, everyday speech required disambiguators (patronymics, professions, hometowns, or nicknames) to avoid confusion. But for rare names like Zacchaeus or Bartimaeus, no tag was needed. The Gospel writers naturally follow this exact eyewitness speech rule.",
+          "urls": [
+            {
+              "title": "Wikipedia - Jesus and the Eyewitnesses",
+              "url": "https://en.wikipedia.org/wiki/Jesus_and_the_Eyewitnesses"
+            }
+          ],
+          "tags": [
+            "Onomastics",
+            "Disambiguation",
+            "Eyewitness",
+            "Simon Peter",
+            "Zacchaeus"
+          ]
+        },
+        {
+          "id": "onomastics-gnostic-apocryphal-failure",
+          "name": "The Apocryphal & Gnostic Gospel Contrast",
+          "nameDesc": "Comparison of Jewish name frequencies in 2nd/3rd-century apocryphal and Gnostic gospels (Gospel of Thomas, Gospel of Mary, Gospel of Judas) against 1st-century Palestine.",
+          "dateStr": "c. AD 150\u2013300",
+          "dateInt": 200,
+          "sourceType": "Comparative Literary Analysis",
+          "keyFact": "**Apocryphal gospels completely fail** to match Palestinian name frequencies, over-using dramatic names and omitting disambiguators",
+          "quote": "In the **Gospel of Thomas** and **Gospel of Mary**, common names are used without disambiguation and name distributions diverge wildly from 1st-century Judean ossuaries.",
+          "explanation": "When authors outside 1st-century Palestine tried to write gospels in the 2nd and 3rd centuries, they failed the onomastic test completely\u2014proving by contrast that the four canonical Gospels are genuine 1st-century Palestinian documents.",
+          "urls": [
+            {
+              "title": "Wikipedia - Gospel of Thomas",
+              "url": "https://en.wikipedia.org/wiki/Gospel_of_Thomas"
+            }
+          ],
+          "tags": [
+            "Onomastics",
+            "Apocryphal Gospels",
+            "Gospel of Thomas",
+            "Contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage3-undesigned-coincidences",
+      "title": "Stage 3: Undesigned Coincidences \u2014 Interlocking Eyewitness Testimony",
+      "description": "Casual, interlocking historical and geographical details across different Gospels that effortlessly explain 'why' or 'how' without apparent collaboration.",
+      "evidences": [
+        {
+          "id": "undesigned-green-grass-passover",
+          "name": "Undesigned Coincidence 1: 'Much Green Grass' & Passover (John 6:4, 10 / Mark 6:39)",
+          "nameDesc": "An interlocking coincidence between John's Gospel and Mark's Gospel regarding the feeding of the 5,000.",
+          "dateStr": "c. AD 30",
+          "dateInt": 30,
+          "sourceType": "Undesigned Coincidence",
+          "keyFact": "**John 6:10** and **Mark 6:39** mention **'green grass'**, explained by **John 6:4** noting that **Passover was at hand** (the rainy spring season)",
+          "quote": "Then he commanded them all to sit down in groups on the **green grass** (Mark 6:39)... Now the **Passover**, the feast of the Jews, **was at hand** (John 6:4).",
+          "explanation": "In Galilee, the hills are brown and scorched by sun nine months of the year. Why would Mark and John casually mention green grass? Because John 6:4 notes it was Passover season (early spring)\u2014the only few weeks of the year when winter rains turn the Galilean hills green.",
+          "urls": [
+            {
+              "title": "Wikipedia - Undesigned coincidences",
+              "url": "https://en.wikipedia.org/wiki/Undesigned_coincidences"
+            }
+          ],
+          "tags": [
+            "Undesigned Coincidences",
+            "Green Grass",
+            "Passover",
+            "Feeding of the 5000",
+            "John 6",
+            "Mark 6"
+          ]
+        },
+        {
+          "id": "undesigned-philip-bethsaida-bread",
+          "name": "Undesigned Coincidence 2: 'Where Are We to Buy Bread?' (John 6:5 / Luke 9:10 / John 1:44)",
+          "nameDesc": "Why Jesus specifically asked Philip where to buy bread for the multitude.",
+          "dateStr": "c. AD 30",
+          "dateInt": 30,
+          "sourceType": "Undesigned Coincidence",
+          "keyFact": "**Jesus asks Philip** where to buy bread (**John 6:5**), explained by **Luke 9:10** (near **Bethsaida**) and **John 1:44** (**Philip was from Bethsaida**)",
+          "quote": "Jesus said to **Philip**, 'Where are we to buy bread, so that these people may eat?' (John 6:5)... Now **Philip was from Bethsaida** in Galilee (John 1:44).",
+          "explanation": "Why test Philip instead of Peter or Judas the treasurer? Luke 9:10 reveals the miracle happened near Bethsaida, and John 1:44 casually mentions Philip was from Bethsaida. Philip was the local disciple who knew where the bakers were.",
+          "urls": [
+            {
+              "title": "Wikipedia - Undesigned coincidences",
+              "url": "https://en.wikipedia.org/wiki/Undesigned_coincidences"
+            }
+          ],
+          "tags": [
+            "Undesigned Coincidences",
+            "Philip",
+            "Bethsaida",
+            "John 6",
+            "Luke 9"
+          ]
+        },
+        {
+          "id": "undesigned-destroy-this-temple-trial",
+          "name": "Undesigned Coincidence 3: The False Witnesses at Jesus's Trial (Mark 14:58 / John 2:19)",
+          "nameDesc": "How John's Gospel explains the distorted accusation of the false witnesses at Caiaphas's tribunal.",
+          "dateStr": "c. AD 30\u201333",
+          "dateInt": 33,
+          "sourceType": "Undesigned Coincidence",
+          "keyFact": "**False witnesses accuse Jesus** of saying **'I will destroy this temple'** (**Mark 14:58**), explained by **John 2:19** where Jesus said **'Destroy this temple... I will raise it up'** 3 years prior",
+          "quote": "We heard him say, 'I will destroy this temple...' (Mark 14:58) vs. Jesus answered them, **'Destroy this temple, and in three days I will raise it up'** (John 2:19).",
+          "explanation": "Nowhere in the Synoptic Gospels does Jesus ever say He will destroy the temple. Why would false witnesses invent such a quote? John 2:19 records Jesus's actual words three years earlier at His first temple cleansing. The Synoptics report the twisted trial charge; John preserves the original statement.",
+          "urls": [
+            {
+              "title": "Wikipedia - Undesigned coincidences",
+              "url": "https://en.wikipedia.org/wiki/Undesigned_coincidences"
+            }
+          ],
+          "tags": [
+            "Undesigned Coincidences",
+            "Destroy this temple",
+            "Mark 14",
+            "John 2",
+            "Trial"
+          ]
+        },
+        {
+          "id": "undesigned-herods-servants-joanna",
+          "name": "Undesigned Coincidence 4: Herod's Servants & Joanna (Matthew 14:1\u20132 / Luke 8:3)",
+          "nameDesc": "How Matthew and Luke knew private court conversation inside Herod Antipas's palace.",
+          "dateStr": "c. AD 30",
+          "dateInt": 30,
+          "sourceType": "Undesigned Coincidence",
+          "keyFact": "**Herod speaks to 'his servants'** about Jesus (**Matthew 14:1\u20132**), explained by **Luke 8:3** listing **Joanna, wife of Chuza, Herod's household manager**",
+          "quote": "Herod... said to **his servants**, 'This is John the Baptist...' (Matthew 14:2) vs. **Joanna, the wife of Chuza, Herod\u2019s household manager**... (Luke 8:3)",
+          "explanation": "How could Galilean fishermen know what King Herod Antipas privately confided to his servants? Luke 8:3 casually lists the female supporters of Jesus's ministry, including Joanna, wife of Chuza, Herod's royal palace manager. The Gospel writers had a direct Christian eyewitness inside Herod's court.",
+          "urls": [
+            {
+              "title": "Wikipedia - Undesigned coincidences",
+              "url": "https://en.wikipedia.org/wiki/Undesigned_coincidences"
+            }
+          ],
+          "tags": [
+            "Undesigned Coincidences",
+            "Herod Antipas",
+            "Joanna",
+            "Chuza",
+            "Matthew 14",
+            "Luke 8"
+          ]
+        },
+        {
+          "id": "undesigned-mending-nets-miraculous-catch",
+          "name": "Undesigned Coincidence 5: 'Mending Their Nets' (Matthew 4:21 / Luke 5:6)",
+          "nameDesc": "Why James and John were sitting in the boat mending their nets when Jesus called them.",
+          "dateStr": "c. AD 30",
+          "dateInt": 30,
+          "sourceType": "Undesigned Coincidence",
+          "keyFact": "**James and John were 'mending their nets'** (**Matthew 4:21**), explained by **Luke 5:6** noting their **nets were breaking** from the miraculous catch",
+          "quote": "Going on from there he saw two other brothers... in the boat with Zebedee their father, **mending their nets** (Matthew 4:21)... and their **nets were breaking** (Luke 5:6).",
+          "explanation": "Matthew reports that James and John were mending nets without mentioning the miracle. Luke records the miraculous catch of fish that tore their nets without mentioning the mending. They interlock effortlessly as independent eyewitness accounts.",
+          "urls": [
+            {
+              "title": "Wikipedia - Undesigned coincidences",
+              "url": "https://en.wikipedia.org/wiki/Undesigned_coincidences"
+            }
+          ],
+          "tags": [
+            "Undesigned Coincidences",
+            "Mending Nets",
+            "Matthew 4",
+            "Luke 5",
+            "James and John"
+          ]
+        },
+        {
+          "id": "undesigned-blindfolded-prophesy",
+          "name": "Undesigned Coincidence 6: 'Who Struck You?' (Matthew 26:67\u201368 / Luke 22:64)",
+          "nameDesc": "Why the guards mocking Jesus commanded Him to 'prophesy' who hit Him.",
+          "dateStr": "c. AD 33",
+          "dateInt": 33,
+          "sourceType": "Undesigned Coincidence",
+          "keyFact": "**Guards beat Jesus and ask 'Who struck you?'** (**Matthew 26:68**), explained by **Luke 22:64** noting they had **blindfolded him**",
+          "quote": "'Prophesy to us, you Christ! **Who is it that struck you?**' (Matthew 26:68) vs. And having **blindfolded him**, they kept asking him, 'Prophesy! Who is it that struck you?' (Luke 22:64)",
+          "explanation": "Why would anyone consider it a prophecy to name a man standing in front of you who just slapped your face? Matthew omits the blindfold; Luke includes it\u2014explaining the entire mockery.",
+          "urls": [
+            {
+              "title": "Wikipedia - Undesigned coincidences",
+              "url": "https://en.wikipedia.org/wiki/Undesigned_coincidences"
+            }
+          ],
+          "tags": [
+            "Undesigned Coincidences",
+            "Blindfold",
+            "Matthew 26",
+            "Luke 22",
+            "Trial"
+          ]
+        },
+        {
+          "id": "undesigned-james-john-first-cousins",
+          "name": "Undesigned Coincidence 7: James & John as First Cousins of Jesus (Matthew 27:56 / Mark 15:40 / John 19:25)",
+          "nameDesc": "Why the mother of James and John asked Jesus for the right and left hand seats of His kingdom.",
+          "dateStr": "c. AD 33",
+          "dateInt": 33,
+          "sourceType": "Undesigned Coincidence",
+          "keyFact": "**James and John ask for royal thrones** (**Matthew 20:20**), explained by cross-referencing women at the cross showing they were **Jesus's first cousins**",
+          "quote": "**Mother of the sons of Zebedee** (Matthew 27:56) = **Salome** (Mark 15:40) = **'his mother's sister'** (John 19:25)",
+          "explanation": "Why were James and John so bold as to ask for the highest thrones in Jesus's kingdom? Comparing the lists of women at the cross across Matthew, Mark, and John proves that Salome (mother of Zebedee's sons) was Mary's sister\u2014making James and John Jesus's first cousins.",
+          "urls": [
+            {
+              "title": "Wikipedia - Undesigned coincidences",
+              "url": "https://en.wikipedia.org/wiki/Undesigned_coincidences"
+            }
+          ],
+          "tags": [
+            "Undesigned Coincidences",
+            "James and John",
+            "Cousins",
+            "Salome",
+            "Matthew 20"
+          ]
+        },
+        {
+          "id": "undesigned-evening-sabbath-healings",
+          "name": "Undesigned Coincidence 8: Waiting Until Sundown (Matthew 8:16 / Mark 1:21 / Luke 4:31)",
+          "nameDesc": "Why the people of Capernaum waited until evening to bring their sick to Jesus.",
+          "dateStr": "c. AD 30",
+          "dateInt": 30,
+          "sourceType": "Undesigned Coincidence",
+          "keyFact": "**People wait until evening** to bring sick (**Matthew 8:16**), explained by **Mark 1:21** and **Luke 4:31** noting the day was **the Sabbath**",
+          "quote": "**That evening** they brought to him many who were oppressed by demons... (Matthew 8:16) vs. And on **the Sabbath** he entered the synagogue... (Mark 1:21)",
+          "explanation": "Why wait until sundown when someone is dying? Because the entire day of ministry occurred on the Sabbath. At sundown the Sabbath ended, allowing the townsfolk to carry their sick legally without violating rabbinic burden-carrying laws.",
+          "urls": [
+            {
+              "title": "Wikipedia - Undesigned coincidences",
+              "url": "https://en.wikipedia.org/wiki/Undesigned_coincidences"
+            }
+          ],
+          "tags": [
+            "Undesigned Coincidences",
+            "Sabbath",
+            "Matthew 8",
+            "Mark 1",
+            "Capernaum"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage3-criterion-of-embarrassment",
+      "title": "Stage 3: The Criterion of Embarrassment \u2014 Brutally Honest Reporting",
+      "description": "Damaging, counter-intuitive, or humiliating details about the Apostles, Old Testament heroes, and Jesus that a fabricator would have concealed.",
+      "evidences": [
+        {
+          "id": "embarrass-peters-denials",
+          "name": "Peter's Threefold Denial of Christ (Mark 14:66\u201372)",
+          "nameDesc": "The supreme leader of the apostolic church repeatedly denying he even knew Jesus to a lowly servant girl.",
+          "sourceType": "Criterion of Embarrassment",
+          "keyFact": "**The leader of the early church repeatedly denies Jesus** with curses and oaths (**Mark 14:71**)",
+          "quote": "But he began to invoke a curse on himself and to swear, **'I do not know this man of whom you speak.'** (Mark 14:71)",
+          "explanation": "If the Gospel of Mark was fabricated by early Christians to glorify their leaders, why record their head apostle cowardly denying his Lord three times? Historical methodology recognizes that damaging details about revered leaders are authentic reporting.",
+          "urls": [
+            {
+              "title": "Wikipedia - Criterion of embarrassment",
+              "url": "https://en.wikipedia.org/wiki/Criterion_of_embarrassment"
+            }
+          ],
+          "tags": [
+            "Criterion of Embarrassment",
+            "Peter",
+            "Denials",
+            "Mark 14"
+          ],
+          "dateStr": "c. AD 30\u201395",
+          "dateInt": 50
+        },
+        {
+          "id": "embarrass-women-first-witnesses",
+          "name": "Women as the First Eyewitnesses of the Resurrection (John 20:11\u201318 / Luke 24:10\u201311)",
+          "nameDesc": "In 1st-century Greco-Roman and Jewish legal culture, female testimony was regarded as inadmissible or secondary in a court of law.",
+          "sourceType": "Criterion of Embarrassment",
+          "keyFact": "**Mary Magdalene is the first eyewitness** of the resurrected Christ, in a culture where **women's testimony was devalued**",
+          "quote": "Now it was **Mary Magdalene** and Joanna and Mary the mother of James... but these words **seemed to them an idle tale**, and they did not believe them. (Luke 24:10\u201311)",
+          "explanation": "As noted by Josephus (Antiquities 4.8.15) and the Talmud (Rosh Hashanah 1.8), women were not permitted to act as legal witnesses. Any 1st-century fabricator inventing a resurrection story would have made Peter, Nicodemus, or Joseph of Arimathea the first witness. Making women the first witnesses proves the authors recorded what actually happened.",
+          "urls": [
+            {
+              "title": "Wikipedia - Criterion of embarrassment",
+              "url": "https://en.wikipedia.org/wiki/Criterion_of_embarrassment"
+            }
+          ],
+          "tags": [
+            "Criterion of Embarrassment",
+            "Women Witnesses",
+            "Mary Magdalene",
+            "Resurrection"
+          ],
+          "dateStr": "c. AD 30\u201395",
+          "dateInt": 50
+        },
+        {
+          "id": "embarrass-jesus-family-insane",
+          "name": "Jesus's Family Thinking He Was Insane (Mark 3:21 / John 7:5)",
+          "nameDesc": "The Gospel accounts recording that Jesus's own mother and brothers initially thought He had lost His mind.",
+          "sourceType": "Criterion of Embarrassment",
+          "keyFact": "**Jesus's own family tried to seize him**, saying **'He is out of his mind'** (**Mark 3:21**)",
+          "quote": "And when his family heard it, they went out to seize him, for they were saying, **'He is out of his mind.'** (Mark 3:21)... For **not even his brothers believed in him** (John 7:5).",
+          "explanation": "In an ancient honor-shame culture, having your own family reject you as mentally unstable was deeply humiliating. No Christian hagiographer would invent Mark 3:21 or John 7:5.",
+          "urls": [
+            {
+              "title": "Wikipedia - Criterion of embarrassment",
+              "url": "https://en.wikipedia.org/wiki/Criterion_of_embarrassment"
+            }
+          ],
+          "tags": [
+            "Criterion of Embarrassment",
+            "Jesus Family",
+            "Mark 3:21",
+            "Brothers"
+          ],
+          "dateStr": "c. AD 30\u201395",
+          "dateInt": 50
+        },
+        {
+          "id": "embarrass-cry-of-dereliction",
+          "name": "Jesus's Cry of Dereliction on the Cross (Mark 15:34)",
+          "nameDesc": "Jesus crying out in agony on the cross in the words of Psalm 22:1.",
+          "sourceType": "Criterion of Embarrassment",
+          "keyFact": "**Jesus cries out on the cross**: **'My God, my God, why have you forsaken me?'** (**Mark 15:34**)",
+          "quote": "And at the ninth hour Jesus cried with a loud voice, 'Eloi, Eloi, lema sabachthani?' which means, **'My God, my God, why have you forsaken me?'** (Mark 15:34)",
+          "explanation": "Pagan critics like Celsus mocked Christians for worshipping a Savior who seemed helpless and abandoned by God on the cross. The Gospel authors faithfully recorded His agonizing cry of dereliction (fulfilling Psalm 22) because they were pledged to historical truth.",
+          "urls": [
+            {
+              "title": "Wikipedia - Sayings of Jesus on the cross",
+              "url": "https://en.wikipedia.org/wiki/Sayings_of_Jesus_on_the_cross"
+            }
+          ],
+          "tags": [
+            "Criterion of Embarrassment",
+            "Crucifixion",
+            "My God why have you forsaken me",
+            "Psalm 22"
+          ],
+          "dateStr": "c. AD 30\u201395",
+          "dateInt": 50
+        },
+        {
+          "id": "embarrass-disciples-fleeing",
+          "name": "The Disciples Cowardly Fleeing at Gethsemane (Mark 14:50)",
+          "nameDesc": "All twelve apostles abandoning Jesus at the moment of His arrest.",
+          "sourceType": "Criterion of Embarrassment",
+          "keyFact": "**Every single disciple abandoned Jesus and fled into the night** (**Mark 14:50**)",
+          "quote": "**And they all left him and fled.** (Mark 14:50)",
+          "explanation": "In ancient literature, martyrs' disciples stood bravely by their master. The Gospels record the embarrassing truth: every apostle fled in fear.",
+          "urls": [
+            {
+              "title": "Wikipedia - Criterion of embarrassment",
+              "url": "https://en.wikipedia.org/wiki/Criterion_of_embarrassment"
+            }
+          ],
+          "tags": [
+            "Criterion of Embarrassment",
+            "Disciples Fleeing",
+            "Gethsemane",
+            "Mark 14"
+          ],
+          "dateStr": "c. AD 30\u201395",
+          "dateInt": 50
+        }
+      ]
+    },
+    {
+      "id": "stage4-patristic-quotations",
+      "title": "Stage 4: Patristic Quotations \u2014 Pre-Nicene Citation Statistics",
+      "description": "Over 36,000 quotations of the New Testament by pre-Nicene Church Fathers, enabling 99%+ reconstruction of Scripture without any Greek manuscripts.",
+      "evidences": [
+        {
+          "id": "patristic-total-quotations",
+          "name": "Pre-Nicene Patristic Quotations (Over 36,000 Citations)",
+          "nameDesc": "The extensive quotations of New Testament scripture by early Church Fathers before the Council of Nicaea (AD 325), documented by Bruce Metzger, Norman Geisler, William Nix, and J.B. Lightfoot.",
+          "dateStr": "c. AD 95\u2013325",
+          "dateInt": 200,
+          "sourceType": "Early Patristic Citation Statistics",
+          "keyFact": "**Over 36,000 New Testament quotations** before AD 325, allowing us to reconstruct **99%+ of the entire New Testament** without a single Greek manuscript",
+          "quote": "Total Pre-Nicene Quotations: **Gospels (19,368), Acts (1,352), Pauline Epistles (7,778), General Epistles (670), Revelation (333)** \u2014 Totaling **36,289 citations**.",
+          "explanation": "Even if an enemy burned every single Greek, Latin, Syriac, and Coptic manuscript of the New Testament, we could restore over 99% of the text purely from the sermons, commentaries, and letters of the early Church Fathers written within two centuries of the apostles.",
+          "urls": [
+            {
+              "title": "Wikipedia - Biblical Manuscript (Patristic Citations)",
+              "url": "https://en.wikipedia.org/wiki/Biblical_manuscript"
+            },
+            {
+              "title": "CSNTM - Patristic Quotations",
+              "url": "https://www.csntm.org/"
+            }
+          ],
+          "tags": [
+            "Patristic Quotations",
+            "36,000 Citations",
+            "Church Fathers",
+            "Reconstruction Guarantee"
+          ]
+        },
+        {
+          "id": "patristic-justin-martyr",
+          "name": "Justin Martyr \u2014 First Apology & Dialogue with Trypho",
+          "nameDesc": "2nd-century Christian philosopher and martyr who wrote extensive apologies to Roman Emperors.",
+          "dateStr": "c. AD 150\u2013165",
+          "dateInt": 155,
+          "sourceType": "Early Church Father",
+          "keyFact": "**Over 330 quotations** of the Gospels ('Memoirs of the Apostles'), Paul, and Revelation in mid-2nd century Rome",
+          "quote": "For the apostles, in the **memoirs composed by them, which are called Gospels**, have thus delivered unto us what was enjoined upon them... (First Apology 66)",
+          "explanation": "Justin Martyr demonstrates that by AD 150 in Rome, the canonical Gospels were read weekly in Christian worship services as authoritative Scripture on par with the Old Testament prophets.",
+          "urls": [
+            {
+              "title": "Wikipedia - Justin Martyr",
+              "url": "https://en.wikipedia.org/wiki/Justin_Martyr"
+            }
+          ],
+          "tags": [
+            "Justin Martyr",
+            "Gospels",
+            "Memoirs of the Apostles",
+            "2nd Century"
+          ]
+        },
+        {
+          "id": "patristic-irenaeus-lyons",
+          "name": "Irenaeus of Lyons \u2014 Against Heresies (Adversus Haereses)",
+          "nameDesc": "Bishop of Lyons in Gaul, student of Polycarp (who was discipled by the Apostle John).",
+          "dateStr": "c. AD 180",
+          "dateInt": 180,
+          "sourceType": "Early Church Father",
+          "keyFact": "**Over 1,800 New Testament quotations**, explicitly defending the **four-fold canonical Gospel** (Matthew, Mark, Luke, John)",
+          "quote": "It is not possible that the Gospels can be either more or fewer in number than they are. For, since there are **four zones of the world in which we live**, and four principal winds... (Against Heresies 3.11.8)",
+          "explanation": "Irenaeus\u2014whose spiritual lineage traces directly to the Apostle John via Polycarp\u2014quoted 22 of the 27 New Testament books over 1,800 times around AD 180, proving canonical consensus long before Constantine.",
+          "urls": [
+            {
+              "title": "Wikipedia - Irenaeus",
+              "url": "https://en.wikipedia.org/wiki/Irenaeus"
+            }
+          ],
+          "tags": [
+            "Irenaeus",
+            "Fourfold Gospel",
+            "Against Heresies",
+            "Polycarp"
+          ]
+        },
+        {
+          "id": "patristic-clement-alexandria",
+          "name": "Clement of Alexandria \u2014 Stromata & Paedagogus",
+          "nameDesc": "Head of the Catechetical School of Alexandria in Egypt.",
+          "dateStr": "c. AD 195\u2013215",
+          "dateInt": 200,
+          "sourceType": "Early Church Father",
+          "keyFact": "**Over 2,400 New Testament quotations**, demonstrating Scripture's undisputed authority in Egyptian Christianity",
+          "quote": "We do not have this teaching from men, but we have received it from the voice of the Lord through the Scriptures... (Stromata 7.16)",
+          "explanation": "Clement quoted the New Testament 2,406 times, proving that Egyptian Christian communities across the Mediterranean held the same canonical text as Gaul and Rome.",
+          "urls": [
+            {
+              "title": "Wikipedia - Clement of Alexandria",
+              "url": "https://en.wikipedia.org/wiki/Clement_of_Alexandria"
+            }
+          ],
+          "tags": [
+            "Clement of Alexandria",
+            "Egypt",
+            "Patristic Citations"
+          ]
+        },
+        {
+          "id": "patristic-tertullian-carthage",
+          "name": "Tertullian of Carthage \u2014 Apologeticus & Against Marcion",
+          "nameDesc": "Early Christian apologist and father of Latin theology in North Africa.",
+          "dateStr": "c. AD 200\u2013220",
+          "dateInt": 210,
+          "sourceType": "Early Church Father",
+          "keyFact": "**Over 7,200 New Testament citations**, quoting 23 of the 27 New Testament books across his works",
+          "quote": "If you would satisfy your curiosity... run over to the apostolic churches, where the **very authentic thrones of the apostles** are still pre-eminent, where their **own authentic writings are read**... (De Praescriptione Haereticorum 36)",
+          "explanation": "Tertullian's massive 7,258 New Testament quotations prove that by AD 200, the Latin-speaking church in North Africa possessed and revered the same New Testament Scriptures as the Greek East.",
+          "urls": [
+            {
+              "title": "Wikipedia - Tertullian",
+              "url": "https://en.wikipedia.org/wiki/Tertullian"
+            }
+          ],
+          "tags": [
+            "Tertullian",
+            "North Africa",
+            "Latin Theology",
+            "7200 Citations"
+          ]
+        },
+        {
+          "id": "patristic-origen-alexandria",
+          "name": "Origen of Alexandria \u2014 Commentaries & Contra Celsum",
+          "nameDesc": "Brilliant 3rd-century biblical scholar and textual critic who compiled the Hexapla.",
+          "dateStr": "c. AD 210\u2013250",
+          "dateInt": 230,
+          "sourceType": "Early Church Father & Biblical Scholar",
+          "keyFact": "**Over 17,900 New Testament citations**, quoting **all 27 books of the New Testament**",
+          "quote": "The four Gospels alone are undisputed in the Church of God under heaven... (cited in Eusebius, Church History 6.25)",
+          "explanation": "Origen quoted the New Testament an astonishing 17,922 times. His scholarship confirms that the entire New Testament canon was established and studied in detail a century before the Council of Nicaea.",
+          "urls": [
+            {
+              "title": "Wikipedia - Origen",
+              "url": "https://en.wikipedia.org/wiki/Origen"
+            }
+          ],
+          "tags": [
+            "Origen",
+            "17900 Citations",
+            "Alexandria",
+            "All 27 Books"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage4-canon-history",
+      "title": "Stage 4: Early Canonical Milestones & Recognition History",
+      "description": "Apostolic and early patristic recognition of canonical Scripture, refuting modern myths about Constantine and the Council of Nicaea.",
+      "evidences": [
+        {
+          "id": "canon-1tim-2pet-scripture",
+          "name": "Apostolic Recognition: 1 Timothy 5:18 & 2 Peter 3:15\u201316",
+          "nameDesc": "Internal New Testament evidence where apostles cite contemporary New Testament writings as authoritative Scripture.",
+          "dateStr": "c. AD 64\u201368",
+          "dateInt": 65,
+          "sourceType": "Apostolic Canonical Milestone",
+          "keyFact": "**Paul quotes Luke 10:7 as 'Scripture'** alongside Deuteronomy 25:4; **Peter equates Paul's Epistles with 'the other Scriptures'**",
+          "quote": "For the **Scripture says**, 'You shall not muzzle an ox when it treads out the grain,' and, **'The laborer deserves his wages.'** (1 Timothy 5:18 / Luke 10:7)... our beloved brother **Paul also wrote to you**... which the ignorant twist to their own destruction, **as they do the other Scriptures**. (2 Peter 3:15\u201316)",
+          "explanation": "Canonization was not a late ecclesiastical invention; Scripture recognized Scripture within the lifetime of the apostles.",
+          "urls": [
+            {
+              "title": "Wikipedia - Development of the New Testament canon",
+              "url": "https://en.wikipedia.org/wiki/Development_of_the_New_Testament_canon"
+            }
+          ],
+          "tags": [
+            "Canon",
+            "1 Timothy 5:18",
+            "2 Peter 3:16",
+            "Scripture"
+          ]
+        },
+        {
+          "id": "canon-muratorian-fragment",
+          "name": "The Muratori Fragment (The Muratorian Canon)",
+          "nameDesc": "A 7th-century Latin manuscript copy of the oldest known list of New Testament books, originally composed in Greek in Rome around AD 170.",
+          "dateStr": "c. AD 170",
+          "dateInt": 170,
+          "sourceType": "Earliest Canonical List",
+          "keyFact": "**Oldest surviving canonical catalog**, listing **22 of the 27 New Testament books** as authoritative around **AD 170**",
+          "quote": "The third book of the Gospel is that according to Luke... The fourth of the Gospels is that of John... the Acts of all the Apostles... the Epistles of Paul...",
+          "explanation": "The Muratorian Fragment proves that 150 years before the Council of Nicaea, the Christian church had a recognized, defined New Testament canon.",
+          "urls": [
+            {
+              "title": "Wikipedia - Muratorian fragment",
+              "url": "https://en.wikipedia.org/wiki/Muratorian_fragment"
+            }
+          ],
+          "tags": [
+            "Muratorian Fragment",
+            "Canon",
+            "AD 170",
+            "Rome"
+          ]
+        },
+        {
+          "id": "canon-refuting-constantine-myth",
+          "name": "Refuting the Constantine & Council of Nicaea Myth",
+          "nameDesc": "Historical clarification on what actually happened at the Council of Nicaea (AD 325).",
+          "dateStr": "AD 325",
+          "dateInt": 325,
+          "sourceType": "Historical Canonical Milestone",
+          "keyFact": "**The Council of Nicaea did not discuss or vote on the biblical canon**; Constantine never 'selected' the books of the Bible",
+          "quote": "The Council of Nicaea addressed the Arian heresy regarding the deity of Christ; the canon of Scripture was already an established reality among Christians across three continents.",
+          "explanation": "Popular fiction (like Dan Brown's The Da Vinci Code) claims Emperor Constantine 'invented' the New Testament canon at Nicaea in AD 325. Historical records of the council prove the canon was never even on the agenda\u2014because the books had already been organic consensus Scripture for centuries.",
+          "urls": [
+            {
+              "title": "Wikipedia - First Council of Nicaea",
+              "url": "https://en.wikipedia.org/wiki/First_Council_of_Nicaea"
+            },
+            {
+              "title": "Wikipedia - Development of the New Testament canon",
+              "url": "https://en.wikipedia.org/wiki/Development_of_the_New_Testament_canon"
+            }
+          ],
+          "tags": [
+            "Constantine",
+            "Nicaea",
+            "Canon Myth",
+            "Dan Brown"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage4-verdict",
+      "title": "Stage 4: The Christological Verdict \u2014 'Who Do You Say That I Am?'",
+      "description": "The apologetic synthesis connecting textual transmission, historicity, and eyewitness credibility to Jesus's central question in Mark 8:29.",
+      "evidences": [
+        {
+          "id": "verdict-cs-lewis-trilemma",
+          "name": "C.S. Lewis's Trilemma & Infinite Importance",
+          "nameDesc": "C.S. Lewis's classic apologetic framework from Mere Christianity.",
+          "dateStr": "AD 1952",
+          "dateInt": 1952,
+          "sourceType": "Apologetic Synthesis",
+          "keyFact": "**'Christianity, if false, is of no importance, and if true, of infinite importance. The only thing it cannot be is moderately important.'**",
+          "quote": "A man who was merely a man and said the sort of things Jesus said would not be a great moral teacher. He would either be a lunatic... or else he would be the Devil of Hell... You can shut him up for a fool... or you can fall at his feet and call him Lord and God.",
+          "explanation": "Because the manuscript evidence proves we have what they wrote, archaeology proves the historical setting is real, and undesigned coincidences prove the authors were honest eyewitnesses, we cannot dismiss Jesus as a 'moderately important' moral teacher. We must face His divine claims.",
+          "urls": [
+            {
+              "title": "Wikipedia - Lewis's trilemma",
+              "url": "https://en.wikipedia.org/wiki/Lewis%27s_trilemma"
+            }
+          ],
+          "tags": [
+            "C.S. Lewis",
+            "Trilemma",
+            "Lord Liar Lunatic",
+            "Verdict"
+          ]
+        },
+        {
+          "id": "verdict-who-do-you-say-that-i-am",
+          "name": "The Ultimate Question: 'Who Do You Say That I Am?' (Mark 8:29)",
+          "nameDesc": "Jesus's central question to His disciples in Caesarea Philippi.",
+          "dateStr": "c. AD 30",
+          "dateInt": 30,
+          "sourceType": "Biblical Synthesis",
+          "keyFact": "**All evidence across Textual Transmission, Archaeology, Eyewitness Credibility, and Canon leads to one personal verdict**: **'Who do you say that I am?'**",
+          "quote": "And he asked them, 'But **who do you say that I am?**' Peter answered him, **'You are the Christ.'** (Mark 8:29)",
+          "explanation": "As Wes Huff concludes in all three presentations, the Bible is not just a collection of generally historically reliable books\u2014it is the living and active Word of God, preserved miraculously from ancient papyrus to modern print, bringing every reader to answer Jesus's question for themselves.",
+          "urls": [
+            {
+              "title": "Wikipedia - Confession of Peter",
+              "url": "https://en.wikipedia.org/wiki/Confession_of_Peter"
+            }
+          ],
+          "tags": [
+            "Who do you say that I am",
+            "Mark 8:29",
+            "Peter's Confession",
+            "Verdict"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -30,5 +30,13 @@
     "title": "Extrabiblical & Historical Evidence for Jesus",
     "description": "An exhaustive, verified compilation of 62 Ante-Nicene non-Christian sources.",
     "thumbnail": "/media/extrabiblical_evidence/cover.jpg"
+  },
+  {
+    "category": "Christianity",
+    "subcategory": "Scripture",
+    "slug": "trustworthiness-of-the-bible",
+    "title": "The Trustworthiness of the Bible: From Ancient Manuscripts to Historical Reality",
+    "description": "An exhaustive, multi-stage evidentiary repository establishing the historical, textual, archaeological, and statistical trustworthiness of the Old and New Testaments.",
+    "thumbnail": "/media/trustworthiness_bible/cover.jpg"
   }
 ]
