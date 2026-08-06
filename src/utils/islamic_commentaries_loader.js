@@ -1,34 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { TAFSEER_CONFIG } from './tafseer_config.js';
 
 let cache = null;
 
-/**
- * Registry of Islamic commentaries to load.
- * Order matters: commentaries will be loaded and displayed in the UI in the order defined here.
- */
-const TAFSEER_REGISTRY = [
-  {
-    name: 'Tafsir Al-Tabari',
-    defaultPath: 'src/data/quran/commentary/tafsir_tabari_english.json',
-    envKey: 'TABARI_PATH',
-    transform: (item) => {
-      // Create a shallow copy to prevent in-place mutation of the loaded JSON object
-      const cloned = { ...item };
-      cloned.title = 'Tafsir Al-Tabari';
-      delete cloned.source_volume_page;
-      return cloned;
-    }
-  },
-  {
-    name: 'Tafsir Ibn Kathir',
-    defaultPath: 'src/data/quran/commentary/tafsir_ibn_kathir_catena.json',
-    envKey: 'IBN_KATHIR_PATH',
-    transform: (item) => ({ ...item }) // Shallow copy
-  }
-];
-
-function processCommentaryFile(filePath, map, transformFn) {
+function processCommentaryConfig(config, map) {
+  const filePath = process.env[config.envKey] || path.join(process.cwd(), config.defaultPath);
   if (!fs.existsSync(filePath)) {
     console.warn(`[IslamicCommentariesLoader] File not found: ${filePath}`);
     return;
@@ -41,8 +18,18 @@ function processCommentaryFile(filePath, map, transformFn) {
     for (const [key, item] of Object.entries(obj)) {
       if (!key || !item) continue;
 
-      // Apply source-specific transformations safely
-      const transformedItem = transformFn ? transformFn(item) : { ...item };
+      // Construct a structured immutable commentary object conforming to the L6 schema
+      const commentaryEntry = {
+        ...item,
+        id: config.id,
+        name: config.name,
+        title: config.displayTitle,
+        scholar: config.scholar,
+        date: config.date,
+        era: config.era,
+        authority: config.authority,
+        source_volume_page: config.id === 'tabari' ? undefined : item.source_volume_page
+      };
 
       const idsToMap = [];
       if (key.includes('-')) {
@@ -51,7 +38,7 @@ function processCommentaryFile(filePath, map, transformFn) {
           const [startStr, endStr] = range.split('-');
           const start = parseInt(startStr, 10);
           const end = parseInt(endStr, 10);
-          
+
           if (!isNaN(start) && !isNaN(end) && start <= end) {
             for (let v = start; v <= end; v++) {
               idsToMap.push(`${surah}:${v}`);
@@ -70,7 +57,7 @@ function processCommentaryFile(filePath, map, transformFn) {
         if (!map[targetId]) {
           map[targetId] = [];
         }
-        map[targetId].push(transformedItem);
+        map[targetId].push(commentaryEntry);
       }
     }
   } catch (e) {
@@ -83,9 +70,8 @@ export function loadIslamicCommentaries() {
 
   const map = {};
 
-  for (const config of TAFSEER_REGISTRY) {
-    const filePath = process.env[config.envKey] || path.join(process.cwd(), config.defaultPath);
-    processCommentaryFile(filePath, map, config.transform);
+  for (const config of TAFSEER_CONFIG) {
+    processCommentaryConfig(config, map);
   }
 
   cache = map;
