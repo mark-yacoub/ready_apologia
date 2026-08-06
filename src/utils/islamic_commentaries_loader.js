@@ -6,21 +6,42 @@ let cache = null;
 
 function processCommentaryConfig(config, map) {
   const filePath = process.env[config.envKey] || path.join(process.cwd(), config.defaultPath);
+  const arabicFilePath = config.arabicPath ? path.join(process.cwd(), config.arabicPath) : null;
+
   if (!fs.existsSync(filePath)) {
     console.warn(`[IslamicCommentariesLoader] File not found: ${filePath}`);
     return;
   }
 
   try {
-    const raw = fs.readFileSync(filePath, 'utf-8');
-    const obj = JSON.parse(raw);
+    const rawEn = fs.readFileSync(filePath, 'utf-8');
+    const objEn = JSON.parse(rawEn);
 
-    for (const [key, item] of Object.entries(obj)) {
-      if (!key || !item) continue;
+    let objAr = {};
+    if (arabicFilePath && fs.existsSync(arabicFilePath)) {
+      const rawAr = fs.readFileSync(arabicFilePath, 'utf-8');
+      objAr = JSON.parse(rawAr);
+    } else if (arabicFilePath) {
+      console.warn(`[IslamicCommentariesLoader] Arabic File not found: ${arabicFilePath}`);
+    }
 
-      // Construct a structured immutable commentary object conforming to the L6 schema
+    const allKeys = new Set([...Object.keys(objEn), ...Object.keys(objAr)]);
+
+    for (const key of allKeys) {
+      const itemEn = objEn[key];
+      const itemAr = objAr[key];
+      
+      if (!itemEn && !itemAr) continue;
+      
+      // Prefer English metadata (verse_range, title, etc) but fallback to Arabic if missing
+      const baseItem = itemEn || itemAr;
+
+      // Construct a structured immutable commentary object
       const commentaryEntry = {
-        ...item,
+        ...baseItem, // captures title, verse_range, source_volume_page, etc.
+        commentary: itemEn ? itemEn.commentary : undefined,
+        commentary_arabic: itemAr ? itemAr.commentary : undefined,
+        title_arabic: itemAr ? itemAr.title : undefined,
         id: config.id,
         name: config.name,
         title: config.displayTitle,
@@ -28,7 +49,8 @@ function processCommentaryConfig(config, map) {
         date: config.date,
         era: config.era,
         authority: config.authority,
-        source_volume_page: config.id === 'tabari' ? undefined : item.source_volume_page
+        aiTranslated: config.aiTranslated || false,
+        source_volume_page: config.id === 'tabari' ? undefined : baseItem.source_volume_page
       };
 
       const idsToMap = [];
@@ -61,7 +83,7 @@ function processCommentaryConfig(config, map) {
       }
     }
   } catch (e) {
-    console.error(`[IslamicCommentariesLoader] Error reading or parsing ${filePath}:`, e);
+    console.error(`[IslamicCommentariesLoader] Error reading or parsing ${config.id}:`, e);
   }
 }
 

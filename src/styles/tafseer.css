@@ -9,11 +9,59 @@
   margin-top: 4px;
 }
 
-/* 1. Segmented Control / Pill Bar */
-.tafseer-nav-wrapper {
+/* 1. Segmented Control / Pill Bar & Header Controls */
+.tafseer-header-controls {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tafseer-single-title {
+  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-on-surface, #0f172a);
+  padding: 4px;
+}
+
+.tafseer-lang-toggle {
+  display: inline-flex;
+  background: var(--color-surface-container-low, #f1f5f9);
+  padding: 4px;
+  border-radius: 12px;
+  gap: 4px;
+  border: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.08));
+}
+
+.tafseer-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 9px;
+  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-on-surface-variant, #64748b);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.tafseer-lang-btn:hover {
+  color: var(--color-on-surface, #0f172a);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.tafseer-lang-btn.is-active {
+  background: var(--color-surface, #ffffff);
+  color: var(--color-on-surface, #0f172a);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
 .tafseer-segmented-track {
@@ -81,6 +129,13 @@
   font-size: 15px;
   line-height: 1.68;
   color: var(--color-on-surface, #1e293b);
+}
+
+.tafseer-exegesis-prose[dir="rtl"] {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: right;
 }
 
 .tafseer-source-footer {
@@ -172,6 +227,20 @@ details[open] .tafseer-chevron {
   line-height: 1.5;
   margin: 0;
   color: var(--color-on-surface-variant, #64748b);
+}
+
+.tafseer-ai-translation-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--color-on-surface-variant, #64748b);
+  opacity: 0.85;
+}
+
+.tafseer-ai-translation-note svg {
+  color: #a855f7; /* Subtle purple spark accent */
 }
 
 /* 4. Always-Expanded Scholarly Authority Section */

@@ -358,14 +358,26 @@ export const generateQuranTabSEO = createTabSEOResolver(
         return {
           title: `${verseRef} - Islamic Commentaries (Tafsir)`,
           description: hasData
-            ? `Read the un-abridged English version of authoritative Islamic commentaries (such as Tafsir Al-Tabari and Ibn Kathir) for ${verseRef}.`
-            : `Read the un-abridged English version of authoritative Islamic commentaries for ${verseRef}.`,
-          keywords: `english tafsir al tabari ${data.surah}:${data.ayah}, english tafseer al-tabari ${data.surah}:${data.ayah}, al tabari ${data.surah}:${data.ayah}, tafsir ibn kathir ${data.surah}:${data.ayah}, quran ${verseRef} explanation, islamic exegesis, sahih hadith context`,
+            ? `Read authoritative Islamic commentaries for ${verseRef} (including Tafsir Al-Tabari and Tafsir Ibn Kathir) in both un-abridged English translations and the original Arabic text.`
+            : `Read authoritative Islamic commentaries for ${verseRef} in both English and Arabic.`,
+          keywords: `english tafsir al tabari ${data.surah}:${data.ayah}, arabic tafsir al-tabari ${data.surah}:${data.ayah}, al tabari ${data.surah}:${data.ayah}, english tafsir ibn kathir ${data.surah}:${data.ayah}, arabic tafsir ibn kathir ${data.surah}:${data.ayah}, quran ${verseRef} explanation, islamic exegesis, sahih hadith context`,
           schema: hasData
             ? buildFaqSchema(
-                data.islamicCommentaries,
-                ic => `What does ${ic.title || 'Tafsir Ibn Kathir'} say about ${verseRef} in English?`,
-                ic => ic.commentary,
+                data.islamicCommentaries.flatMap(ic => {
+                  const items = [{
+                    q: `What does ${ic.title || 'Tafsir'} say about ${verseRef} in English?`,
+                    a: ic.commentary
+                  }];
+                  if (ic.commentary_arabic) {
+                    items.push({
+                      q: `What does ${ic.title_arabic || ic.title || 'Tafsir'} say about ${verseRef} in the original Arabic?`,
+                      a: ic.commentary_arabic
+                    });
+                  }
+                  return items;
+                }),
+                item => item.q,
+                item => item.a,
                 data.canonicalUrl
               )
             : undefined

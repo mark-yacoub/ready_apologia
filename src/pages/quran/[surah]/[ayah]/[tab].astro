@@ -74,7 +74,8 @@ const islamicCommentariesCount = __rawIslamicCommentaries.length;
 const islamicCommentaries = __rawIslamicCommentaries.map(comm => ({
   ...comm,
   rangeVerses: getRangeVerses(comm.verse_range, surah),
-  formattedContent: formatCommentaryWithVerseBoxes(comm.commentary)
+  formattedContent: comm.commentary ? formatCommentaryWithVerseBoxes(comm.commentary) : '',
+  formattedArabicContent: comm.commentary_arabic ? formatCommentaryWithVerseBoxes(comm.commentary_arabic) : ''
 }));
 
 const quranContradictionsMap = loadQuranContradictions();

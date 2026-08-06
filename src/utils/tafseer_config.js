@@ -11,6 +11,8 @@ export const TAFSEER_CONFIG = [
     date: 'AD 883',
     era: 'Classical Sunni Exegesis • AD 883',
     defaultPath: 'src/data/quran/commentary/tafsir_tabari_english.json',
+    arabicPath: 'src/data/quran/commentary/tafsir_tabari_arabic.json',
+    aiTranslated: true,
     envKey: 'TABARI_PATH',
     authority: {
       lead: "The Foundational Exegesis (Jami' al-Bayan): Abu Ja'far Muhammad ibn Jarir al-Tabari produced the earliest comprehensive Quranic commentary to survive intact. Completed around AD 883, it established the definitive paradigm of Tafsir bil-Ma'thur (interpretation strictly anchored in documented apostolic tradition, Sahaba consensus, and earliest classical Arabic grammar).",
@@ -25,6 +27,7 @@ export const TAFSEER_CONFIG = [
     date: 'AD 1373',
     era: 'Classical Sunni Exegesis • AD 1373',
     defaultPath: 'src/data/quran/commentary/tafsir_ibn_kathir_catena.json',
+    arabicPath: 'src/data/quran/commentary/tafsir_ibn_kathir_arabic.json',
     envKey: 'IBN_KATHIR_PATH',
     authority: {
       lead: "Universal Sunni Consensus (Tafsir al-Qur'an al-Azim): Hafiz Ibn Kathir is universally regarded across all major orthodox Sunni schools (traditional, Salafi, Ash'ari) as the most authoritative classical exegesis, praised for strictly interpreting the Quran through the Quran itself and authenticated Hadith.",
