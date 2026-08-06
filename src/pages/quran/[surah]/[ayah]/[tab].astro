@@ -247,7 +247,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: #10b981;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                       <span>Refutation & Exegesis</span>
                     </h4>
-                    <div class="ct-answer-body" style="margin-top: 8px;">
+                    <div class="ct-answer-body ct-plain-text" style="margin-top: 8px;">
                       {item.refutation}
                     </div>
                   </div>
@@ -351,7 +351,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                    </div>
                    {errorObject.text && (
                      <div class="contradiction-card-content">
-                        <div class="ct-answer-body" style="padding-top: 16px;">
+                        <div class="ct-answer-body ct-plain-text" style="padding-top: 16px;">
                           {errorObject.text}
                         </div>
                      </div>
@@ -436,7 +436,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                       )}
                     </div>
 
-                    <div class="ct-answer-body">
+                    <div class="ct-answer-body ct-plain-text">
                       {ct.description}
                     </div>
                   </div>
@@ -667,8 +667,73 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     font-size: 15px;
     line-height: 1.6;
     color: var(--color-on-surface);
+  }
+  .ct-plain-text {
     white-space: pre-wrap;
   }
+
+  .ct-answer-body :global(h3),
+  .ct-answer-body :global(h4),
+  .ct-answer-body :global(h5),
+  .ct-answer-body :global(h6) {
+    font-family: var(--font-display, inherit);
+    color: var(--color-on-surface);
+    font-weight: 700;
+    margin: 14px 0 6px 0;
+    line-height: 1.35;
+  }
+
+  .ct-answer-body :global(h3) {
+    font-size: 16px;
+    border-bottom: 1px solid var(--color-outline-variant);
+    padding-bottom: 4px;
+    margin-top: 16px;
+  }
+
+  .ct-answer-body :global(h4) {
+    font-size: 15px;
+    color: var(--quran-primary, #0d9488);
+    margin-top: 14px;
+  }
+
+  .ct-answer-body :global(h5) {
+    font-size: 13.5px;
+    color: var(--color-on-surface-variant);
+    margin-top: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .ct-answer-body :global(h6) {
+    font-size: 13px;
+    color: var(--color-on-surface-variant);
+    margin-top: 10px;
+  }
+
+  .ct-answer-body :global(h3:first-child),
+  .ct-answer-body :global(h4:first-child),
+  .ct-answer-body :global(h5:first-child),
+  .ct-answer-body :global(h6:first-child) {
+    margin-top: 0;
+  }
+
+  .ct-answer-body :global(p.response-paragraph) {
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0 0 10px 0;
+  }
+
+  .ct-answer-body :global(p.response-paragraph:last-child) {
+    margin-bottom: 0;
+  }
+
+  .ct-answer-body :global(hr.exegesis-divider) {
+    border: none;
+    border-top: 1px solid var(--color-outline-variant);
+    margin: 12px 0;
+    opacity: 0.6;
+  }
+
 
   .debunking-claim-box {
     margin-top: 16px;

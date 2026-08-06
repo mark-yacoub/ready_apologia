@@ -356,11 +356,19 @@ export const generateQuranTabSEO = createTabSEOResolver(
         const verseRef = `Surah ${data.surah}:${data.ayah}`;
         const hasData = Array.isArray(data.islamicCommentaries) && data.islamicCommentaries.length > 0;
         return {
-          title: `${verseRef} - Tafsir Ibn Kathir`,
+          title: `${verseRef} - Islamic Commentaries (Tafsir)`,
           description: hasData
-            ? `Read the un-abridged English version of Ibn Kathir's authoritative Islamic commentary for ${verseRef}: ${sanitizeHTML(data.islamicCommentaries[0].title || "Commentary context")}.`
-            : `Read the un-abridged English version of the authoritative Islamic commentary from Ibn Kathir for ${verseRef}.`,
-          keywords: `${verseRef} tafsir ibn kathir, islamic commentary, sahih hadith context`
+            ? `Read the un-abridged English version of authoritative Islamic commentaries (such as Tafsir Al-Tabari and Ibn Kathir) for ${verseRef}.`
+            : `Read the un-abridged English version of authoritative Islamic commentaries for ${verseRef}.`,
+          keywords: `english tafsir al tabari ${data.surah}:${data.ayah}, english tafseer al-tabari ${data.surah}:${data.ayah}, al tabari ${data.surah}:${data.ayah}, tafsir ibn kathir ${data.surah}:${data.ayah}, quran ${verseRef} explanation, islamic exegesis, sahih hadith context`,
+          schema: hasData
+            ? buildFaqSchema(
+                data.islamicCommentaries,
+                ic => `What does ${ic.title || 'Tafsir Ibn Kathir'} say about ${verseRef} in English?`,
+                ic => ic.commentary,
+                data.canonicalUrl
+              )
+            : undefined
         };
       }
     },
