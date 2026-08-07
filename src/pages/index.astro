@@ -22,8 +22,12 @@ const canonicalUrl = new URL(redirectUrl, Astro.site || Astro.url).href;
   <link rel="canonical" href={canonicalUrl} />
   <meta http-equiv="refresh" content={`0;url=${redirectUrl}`} />
   <script is:inline define:vars={{ defaultRedirectUrl: redirectUrl }}>
+    const lastVisitedAppUrl = localStorage.getItem('lastVisitedAppUrl');
     const lastVisitedUrl = localStorage.getItem('lastVisitedUrl');
-    if (lastVisitedUrl) {
+    
+    if (lastVisitedAppUrl) {
+      window.location.replace(lastVisitedAppUrl);
+    } else if (lastVisitedUrl) {
       window.location.replace(lastVisitedUrl);
     } else {
       window.location.replace(defaultRedirectUrl);

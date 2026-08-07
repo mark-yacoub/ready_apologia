@@ -255,6 +255,24 @@ const formattedTitle = title.endsWith('Ready Apologia') || title.includes(' | Re
 
 			// Initialize layout components on page load/swap
 			document.addEventListener('astro:page-load', () => {
+				// Defend against trapping the user in a 404 page loop
+				if (!document.title.includes('Not Found')) {
+					const path = window.location.pathname;
+					
+					if (path !== '/' && !path.startsWith('/api/')) {
+						// Defend against Private Browsing UI crashes
+						try {
+							localStorage.setItem('lastVisitedAppUrl', path);
+							
+							if (path.includes('/bible/') || path.includes('/quran/')) {
+								localStorage.setItem('lastVisitedUrl', path);
+							}
+						} catch (e) {
+							console.warn('Navigation state could not be persisted', e);
+						}
+					}
+				}
+
 				setupSidebarToggle();
 				setupScrollHeader();
 			});

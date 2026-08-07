@@ -420,14 +420,6 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
   let closePopoverHandler;
 
   const initChapterPage = () => {
-    if (window.location.pathname.includes('/bible/')) {
-      try {
-        localStorage.setItem('lastVisitedUrl', window.location.pathname);
-      } catch (e) {
-        console.warn('Failed to save last visited URL:', e);
-      }
-    }
-
     const trigger = document.getElementById('chapter-popover-trigger');
     const popover = document.getElementById('chapter-dropdown-popover');
 
