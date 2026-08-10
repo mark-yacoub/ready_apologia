@@ -100,10 +100,10 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
   return null;
 }
 
-const TIER_1 = new Set(['copticorthodoxanswers']);
-const TIER_2 = new Set(['inspiringphilosophy', 'capturingchristianity', 'testifyapologetics']);
-const TIER_3 = new Set(['davidwood', 'cirainternational', 'crossexamined', 'redpenlogic', 'givemeananswer', 'mikewinger', 'livingwaters']);
-const TIER_4 = new Set(['shamounian', 'towardsjesus', '@towardsjesus', 'godlogic', 'godlogic2.0', '@godlogicapologetics']);
+const TIER_1 = new Set(['copticorthodoxanswers', 'ancientfaithministries', 'jonathanpageauclips']);
+const TIER_2 = new Set(['inspiringphilosophy', 'capturingchristianity', 'testifyapologetics', 'weshuff']);
+const TIER_3 = new Set(['davidwood', 'cirainternational', 'crossexamined', 'redpenlogic', 'givemeananswer', 'mikewinger', 'livingwaters', 'apologeticsroadshow']);
+const TIER_4 = new Set(['shamounian', 'towardsjesus', 'godlogic', 'godlogic2.0', 'godlogicapologetics']);
 const TIER_5 = new Set(['apologiastudios', 'vocabmalone']);
 
 const JESUS_TOPICS_REGEX = /\b(trinity|deity|resurrection|jewish|jehovah|son of god|hebrew israelites?|mormons?)\b/i;
@@ -124,7 +124,7 @@ function getTopicScore(summary) {
 function getTierScore(channelId, apologistName) {
   if (!channelId && !apologistName) return 6;
 
-  const cId = channelId ? channelId.toLowerCase() : '';
+  const cId = channelId ? channelId.toLowerCase().replace(/^@/, '') : '';
   const aName = apologistName ? apologistName.toLowerCase() : '';
 
   // Robust case-insensitive checking
