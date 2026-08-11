@@ -106,6 +106,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/pages/index.astro`: Homepage handling auto-redirects to John 1.
 *   `src/pages/bible/[book]/[chapter].astro`: Compact scripture chapter reader with inline-end badges.
 *   `src/pages/bible/[book]/[chapter]/[verse].astro`: 100% SEO-indexable static verse detail page.
+*   `src/pages/bible/gospels/videos.astro`: Overview page showing apologetics videos across all four Gospels.
 *   `src/pages/quran/index.astro`: Quran home page with filters and evidence cards.
 *   `src/pages/quran/[surah].astro`: Surah reader page showing Arabic and English translation.
 *   `src/pages/quran/[surah]/[ayah]/[tab].astro`: Quran verse evidence drawer (Debunking Miracles, Scientific Errors, Contradictions, Footnotes, Commentaries, Manuscripts).

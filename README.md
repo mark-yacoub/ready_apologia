@@ -116,6 +116,7 @@ pkill -f astro
 ## 🗺️ Route Map
 | Route | Description |
 | :--- | :--- |
+| `/bible/gospels/videos` | Overview video feed of apologetics shorts across all four Gospels |
 | `/quran` | Evidence & Filters Home (Qiraat & Competing Codices access) |
 | `/quran/[surah]` | Quran reader with Uthmanic Arabic and English translation |
 | `/quran/[surah]/[ayah]/[tab]` | Quran verse evidence drawer (Debunking Miracles, Scientific Errors, Contradictions, Footnotes, Commentaries, Manuscripts) |

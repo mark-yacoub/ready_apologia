@@ -3,6 +3,10 @@ import booksData from '../data/books_meta.json';
 import { NT_TRANSLATION_NAME } from '../utils/bible_config.js';
 import { getQuranSections } from '../utils/quran_config.js';
 
+const OVERVIEW_ROUTES = {
+  gospels: 'nt'
+};
+
 export default function ScriptureNav() {
   const [expandedSection, setExpandedSection] = useState('nt'); // 'nt', 'ot', or null
   const [expandedBook, setExpandedBook] = useState(null); // book id (e.g. 'jn')
@@ -30,9 +34,14 @@ export default function ScriptureNav() {
         setCurrentReader(null);
         setCurrentQuranIndex(null);
 
-        const isBookNT = booksData.nt.some(b => b.id === bookId);
-        setExpandedSection(isBookNT ? 'nt' : 'ot');
-        setExpandedBook(bookId);
+        if (OVERVIEW_ROUTES[bookId]) {
+          setExpandedSection(OVERVIEW_ROUTES[bookId]);
+          setExpandedBook(bookId);
+        } else {
+          const isBookNT = booksData.nt.some(b => b.id === bookId);
+          setExpandedSection(isBookNT ? 'nt' : 'ot');
+          setExpandedBook(bookId);
+        }
       } else if (parts[1] === 'quran' && parts[2]) {
         setCurrentBook(null);
         setCurrentChapter(null);
@@ -90,11 +99,21 @@ export default function ScriptureNav() {
     }
   };
 
-  const renderBookList = (books, type) => {
+  const renderBookList = (books, type, preamble = []) => {
     const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
     return (
       <div className="book-list animate-fade-in">
+        {preamble.map(item => (
+          <div key={item.id} className="book-item">
+            <a
+              href={`${base}${item.path}`}
+              className={`book-select-btn ${currentBook === item.id ? 'active-book' : ''}`}
+            >
+              <span className="book-name">{item.name}</span>
+            </a>
+          </div>
+        ))}
         {books.map((book) => (
           <div key={book.id} className={`book-item ${expandedBook === book.id ? 'expanded' : ''}`}>
             <button
@@ -216,7 +235,9 @@ export default function ScriptureNav() {
             <span className="title-text">New Testament ({NT_TRANSLATION_NAME})</span>
             <span className="section-arrow">{expandedSection === 'nt' ? '▼' : '▶'}</span>
           </button>
-          {expandedSection === 'nt' && renderBookList(booksData.nt, 'nt')}
+          {expandedSection === 'nt' && renderBookList(booksData.nt, 'nt', [
+            { id: 'gospels', name: '🎥 The Gospels Overview', path: '/bible/gospels/videos' }
+          ])}
         </div>
 
         {/* Old Testament */}

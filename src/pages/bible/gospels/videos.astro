@@ -1,0 +1,45 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import VideosGrid from '../../../components/VideosGrid.astro';
+import { getRawVideosByVerseId } from '../../../utils/evidence_repository.js';
+import { enrichVideosWithVerses } from '../../../utils/video_service.js';
+
+const rawVideos = getRawVideosByVerseId('gospels');
+const videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
+
+const seoTitle = "The Gospels Overview - Videos & Apologetics";
+const seoDescription = "Watch apologetics videos and shorts about the history, textual reliability, and overview of the Gospels.";
+const canonicalURL = Astro.site ? `${Astro.site.toString().replace(/\/$/, '')}${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/bible/gospels/videos` : '';
+---
+
+<Layout
+  title={seoTitle}
+  description={seoDescription}
+  canonicalURL={canonicalURL}
+>
+  <div class="verse-detail-container">
+    <header class="detail-header select-none">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <h2 class="verse-drawer-title">
+          The Gospels
+        </h2>
+      </div>
+    </header>
+
+    <div class="verse-text-reminder select-text" style="font-style: normal; margin-bottom: 20px;">
+      Explore foundational videos on the reliability, historicity, and overview of the four Gospels.
+    </div>
+
+    <div class="videos-panel-container">
+      <VideosGrid videos={videos} />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .videos-panel-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+</style>

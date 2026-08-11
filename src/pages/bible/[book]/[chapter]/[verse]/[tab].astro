@@ -382,75 +382,8 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
 	/* ==========================================
 	   Tab Sub-Path Detail View CSS
 	   ========================================== */
-	.verse-detail-container {
-		display: flex;
-		flex-direction: column;
-		gap: 14px;
-	}
 
 	/* Header Apple Navigation */
-	.detail-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		border-bottom: 1px solid var(--color-outline-variant);
-		padding-bottom: 14px;
-	}
-
-	.back-btn {
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-		padding: 6px 12px;
-		background-color: var(--color-surface-container-low);
-		color: var(--color-on-surface-variant);
-		border: 1px solid var(--color-outline-variant);
-		border-radius: 8px;
-		font-size: 11px;
-		font-weight: 700;
-		text-decoration: none;
-		transition: all 0.15s ease;
-	}
-	.back-btn:hover {
-		background-color: var(--color-outline-variant);
-		color: var(--color-primary);
-	}
-	.back-btn:active {
-		transform: scale(0.97);
-	}
-	.back-arrow {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.back-arrow svg {
-		stroke: currentColor;
-		fill: none;
-	}
-
-	.verse-drawer-title {
-		font-family: var(--font-display);
-		font-size: 22px;
-		font-weight: 800;
-		color: var(--color-primary);
-		margin: 0;
-		letter-spacing: -0.01em;
-	}
-
-	.verse-text-reminder {
-		font-family: var(--font-display);
-		font-size: 13px;
-		line-height: 1.4;
-		color: var(--color-on-surface-variant);
-		font-style: italic;
-		padding: 10px 14px;
-		background-color: var(--color-surface-container-lowest);
-		border-left: 3px solid var(--color-outline-variant);
-		border-radius: 0 8px 8px 0;
-		margin-bottom: 4px;
-	}
-
-	.subtle-ellipsis-btn {
 		background: transparent;
 		border: none;
 		color: var(--color-on-surface-variant);
