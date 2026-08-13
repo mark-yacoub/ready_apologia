@@ -5,6 +5,7 @@ import { DEFAULT_QURAN_TAB_ORDER, sanitizeTabOrder } from '../utils/quran_config
 import { trackTabReorder } from '../utils/analytics.js';
 
 export default function QuranVerseTabs({
+  activeTafsirScholarId,
   msCount,
   christianFootnotesCount,
   islamicCommentariesCount,
@@ -21,7 +22,7 @@ export default function QuranVerseTabs({
     { id: 'scientific-errors', label: `Scientific Errors (${scientificErrorsCount})`, show: scientificErrorsCount > 0 },
     { id: 'contradictions', label: `Contradictions (${contradictionsCount})`, show: contradictionsCount > 0 },
     { id: 'christian-footnotes', label: `Christian Footnotes (${christianFootnotesCount})`, show: christianFootnotesCount > 0 },
-    { id: 'islamic-commentaries', label: `Islamic Commentaries (${islamicCommentariesCount})`, show: islamicCommentariesCount > 0 },
+    { id: 'tafsir', label: `Islamic Commentaries (${islamicCommentariesCount})`, show: islamicCommentariesCount > 0 },
     { id: 'videos', label: `Videos (${videosCount})`, show: videosCount > 0 },
     { id: 'manuscripts', label: `Manuscripts (${msCount})`, show: msCount > 0 },
   ].filter(t => t.show);
@@ -84,7 +85,10 @@ export default function QuranVerseTabs({
       <ScrollableTrack containerClass="tab-segmented-bar" activeTrigger={`${activeTab}-${isEditing}`}>
         {sortedTabs.map((tab) => {
           const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-          const targetUrl = `${base}/quran/${surah}/${ayah}/${tab.id}`;
+          let targetUrl = `${base}/quran/${surah}/${ayah}/${tab.id}`;
+          if (tab.id === 'tafsir' && activeTafsirScholarId) {
+            targetUrl = `${base}/quran/${surah}/${ayah}/tafsir/${activeTafsirScholarId}`;
+          }
           const isActive = activeTab === tab.id;
 
           return (

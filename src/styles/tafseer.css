@@ -119,6 +119,67 @@
   transition: border-color 0.2s ease;
 }
 
+/* Card Meta Bar & Source Button (Pattern A) */
+.tafseer-card-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: var(--color-surface, #ffffff);
+  border-bottom: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.06));
+  gap: 12px;
+}
+
+.tafseer-meta-era {
+  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-on-surface-variant, #64748b);
+  letter-spacing: 0.01em;
+}
+
+.tafseer-card-meta-bar[dir="rtl"] .tafseer-meta-era {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 13.5px;
+}
+
+.tafseer-source-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--color-surface-container-low, #f1f5f9);
+  border: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.08));
+  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--color-on-surface, #0f172a);
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.tafseer-card-meta-bar[dir="rtl"] .tafseer-source-link-btn {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 13px;
+  flex-direction: row-reverse;
+}
+
+.tafseer-source-link-btn:hover {
+  background: var(--color-surface, #ffffff);
+  border-color: var(--color-secondary, #974543);
+  color: var(--color-secondary, #974543);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transform: translateY(-0.5px);
+}
+
+.tafseer-source-link-btn svg {
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
 .tafseer-card-body {
   padding: 20px 22px;
   background: var(--color-surface-container-lowest, #fafafa);
@@ -136,27 +197,6 @@
   font-size: 18px;
   line-height: 1.8;
   text-align: right;
-}
-
-.tafseer-source-footer {
-  margin-top: 20px;
-  padding-top: 14px;
-  border-top: 1px dashed var(--color-outline-variant, rgba(0, 0, 0, 0.08));
-  font-size: 12px;
-  color: var(--color-on-surface-variant, #64748b);
-  text-align: right;
-}
-.tafseer-source-footer span {
-  font-weight: 600;
-}
-
-/* 3. Full Scripture Context Disclosure */
-.tafseer-scripture-context {
-  margin-bottom: 20px;
-  background: var(--color-surface, #ffffff);
-  border: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.08));
-  border-radius: 12px;
-  overflow: hidden;
 }
 
 .tafseer-context-summary {

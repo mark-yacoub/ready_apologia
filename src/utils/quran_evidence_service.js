@@ -77,7 +77,7 @@ export function getAvailableTabsForVerse(verseId) {
     flags.hasScientificErrors ? 'scientific-errors' : null,
     flags.hasContradictions ? 'contradictions' : null,
     flags.hasChristianFootnotes ? 'christian-footnotes' : null,
-    flags.hasIslamicCommentary ? 'islamic-commentaries' : null,
+    flags.hasIslamicCommentary ? 'tafsir' : null,
     flags.hasVideos ? 'videos' : null,
     flags.hasManuscript ? 'manuscripts' : null,
   ].filter(Boolean);
@@ -97,4 +97,9 @@ export function getEvidenceSetsForSurahPrefix(surahNum) {
     debunkingMiraclesSet: filterPrefix(sets.debunkingSet),
     videosSet: filterPrefix(sets.videosSet)
   };
+}
+
+export function getDefaultTafsirScholarForVerse(verseId) {
+  const map = loadIslamicCommentaries();
+  return map[verseId]?.[0]?.id || 'tabari';
 }

@@ -351,36 +351,40 @@ export const generateQuranTabSEO = createTabSEOResolver(
         };
       }
     },
-    'islamic-commentaries': {
+    'tafsir': {
       dynamic: (data) => {
         const verseRef = `Surah ${data.surah}:${data.ayah}`;
-        const hasData = Array.isArray(data.islamicCommentaries) && data.islamicCommentaries.length > 0;
+        const ac = data.activeCommentary;
+        if (ac) {
+          const schemaItems = [];
+          if (ac.commentary) {
+            schemaItems.push({
+              q: `What does ${ac.title || 'Tafsir'} say about ${verseRef} in English?`,
+              a: ac.commentary
+            });
+          }
+          if (ac.commentary_arabic) {
+            schemaItems.push({
+              q: `What does ${ac.title_arabic || ac.title || 'Tafsir'} say about ${verseRef} in the original Arabic?`,
+              a: ac.commentary_arabic
+            });
+          }
+          const cleanName = ac.name || 'Tafsir';
+          return {
+            title: `${cleanName} - ${verseRef} (English & Arabic) | Ready Apologia`,
+            description: `Read ${ac.title || cleanName} for Quran ${verseRef} in both English translation and the original Arabic text (${ac.era || 'Classical Exegesis'}).`,
+            keywords: `${cleanName} ${verseRef}, english ${cleanName} ${verseRef}, arabic ${cleanName}, quran ${verseRef} explanation, islamic exegesis`,
+            schema: schemaItems.length > 0 
+              ? buildFaqSchema(schemaItems, item => item.q, item => item.a, data.canonicalUrl)
+              : undefined
+          };
+        }
+        
         return {
           title: `${verseRef} - Islamic Commentaries (Tafsir)`,
-          description: hasData
-            ? `Read authoritative Islamic commentaries for ${verseRef} (including Tafsir Al-Tabari and Tafsir Ibn Kathir) in both un-abridged English translations and the original Arabic text.`
-            : `Read authoritative Islamic commentaries for ${verseRef} in both English and Arabic.`,
-          keywords: `english tafsir al tabari ${data.surah}:${data.ayah}, arabic tafsir al-tabari ${data.surah}:${data.ayah}, al tabari ${data.surah}:${data.ayah}, english tafsir ibn kathir ${data.surah}:${data.ayah}, arabic tafsir ibn kathir ${data.surah}:${data.ayah}, quran ${verseRef} explanation, islamic exegesis, sahih hadith context`,
-          schema: hasData
-            ? buildFaqSchema(
-                data.islamicCommentaries.flatMap(ic => {
-                  const items = [{
-                    q: `What does ${ic.title || 'Tafsir'} say about ${verseRef} in English?`,
-                    a: ic.commentary
-                  }];
-                  if (ic.commentary_arabic) {
-                    items.push({
-                      q: `What does ${ic.title_arabic || ic.title || 'Tafsir'} say about ${verseRef} in the original Arabic?`,
-                      a: ic.commentary_arabic
-                    });
-                  }
-                  return items;
-                }),
-                item => item.q,
-                item => item.a,
-                data.canonicalUrl
-              )
-            : undefined
+          description: `Read authoritative Islamic commentaries for ${verseRef} in both English and Arabic.`,
+          keywords: `english tafsir ${verseRef}, quran ${verseRef} explanation, islamic exegesis, sahih hadith context`,
+          schema: undefined
         };
       }
     },

@@ -21,7 +21,7 @@ export const QURAN_TABS_CONFIG = [
   { id: 'scientific-errors', labelPrefix: 'Scientific Errors' },
   { id: 'contradictions', labelPrefix: 'Contradictions' },
   { id: 'christian-footnotes', labelPrefix: 'Christian Footnotes' },
-  { id: 'islamic-commentaries', labelPrefix: 'Islamic Commentaries' },
+  { id: 'tafsir', labelPrefix: 'Islamic Commentaries' },
   { id: 'videos', labelPrefix: 'Videos' },
   { id: 'manuscripts', labelPrefix: 'Manuscripts' },
 ];

@@ -100,7 +100,7 @@ export function parseMarkdown(text) {
       if (surah && ayahStr) {
         const firstAyahMatch = (ayahStr.match(/\d+/) || [])[0];
         finalUrl = firstAyahMatch
-          ? `${base}/quran/${encodeURIComponent(surah)}/${encodeURIComponent(firstAyahMatch)}/islamic-commentaries`
+          ? `${base}/quran/${encodeURIComponent(surah)}/${encodeURIComponent(firstAyahMatch)}/tafsir/tabari`
           : `${base}/quran/${encodeURIComponent(surah)}`;
       } else if (surah) {
         finalUrl = `${base}/quran/${encodeURIComponent(surah)}`;

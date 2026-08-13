@@ -19,7 +19,6 @@ import { parseMarkdown } from '../../../../utils/markdown.js';
 import { loadQuranContradictions } from '../../../../utils/quran_contradictions_loader.js';
 import { loadScientificErrors, parseExplanationString } from '../../../../utils/quran_scientific_errors_loader.js';
 import { loadDebunkingMiracles } from '../../../../utils/quran_debunking_loader.js';
-import { formatCommentaryWithVerseBoxes, getRangeVerses } from '../../../../utils/quran_commentary_helpers.js';
 import { getEvidenceSets } from '../../../../utils/quran_evidence_service.js';
 import { enrichVideosWithVerses } from '../../../../utils/video_service.js';
 import { R2_BASE_URL } from '../../../../utils/cdn_config.js';
@@ -50,7 +49,15 @@ export async function getStaticPaths() {
   addPaths(footnotesSet, 'christian-footnotes');
   addPaths(contradictionsSet, 'contradictions');
   addPaths(scientificErrorsSet, 'scientific-errors');
-  addPaths(islamicCommentariesSet, 'islamic-commentaries');
+    const islamicMapPaths = loadIslamicCommentaries();
+  Object.keys(islamicMapPaths).forEach(verseId => {
+    const [s, a] = verseId.split(':');
+    if (s && a && (!BUILD_SURAHS || BUILD_SURAHS.has(s))) {
+      islamicMapPaths[verseId].forEach(comm => {
+        paths.push({ params: { surah: s, ayah: a, tab: `tafsir/${comm.id}` } });
+      });
+    }
+  });
   addPaths(debunkingSet, 'debunking-miracles');
   addPaths(videosSet, 'videos');
 
@@ -58,6 +65,8 @@ export async function getStaticPaths() {
 }
 
 const { surah, ayah, tab } = Astro.params;
+const isTafsirTab = tab.startsWith('tafsir');
+const activeScholarId = isTafsirTab ? tab.split('/')[1] : null;
 const verseId = `${surah}:${ayah}`;
 
 const msCountInfo = query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse_quran WHERE verse_id = :verseId", { verseId });
@@ -73,9 +82,8 @@ const islamicCommentariesCount = __rawIslamicCommentaries.length;
 
 const islamicCommentaries = __rawIslamicCommentaries.map(comm => ({
   ...comm,
-  rangeVerses: getRangeVerses(comm.verse_range, surah),
-  formattedContent: comm.commentary ? formatCommentaryWithVerseBoxes(comm.commentary) : '',
-  formattedArabicContent: comm.commentary_arabic ? formatCommentaryWithVerseBoxes(comm.commentary_arabic) : ''
+  formattedContent: comm.commentary ? parseMarkdown(comm.commentary) : '',
+  formattedArabicContent: comm.commentary_arabic ? parseMarkdown(comm.commentary_arabic) : ''
 }));
 
 const quranContradictionsMap = loadQuranContradictions();
@@ -137,8 +145,17 @@ const canonicalURL = `${siteUrl}${base}/quran/${surah}/${ayah}/${tab}`;
 // Generate OG Image
 const ogImage = getQuranOgImage(surah, ayah);
 
+
+const activeCommentary = isTafsirTab 
+  ? (islamicCommentaries.find(c => c.id === activeScholarId) || islamicCommentaries[0]) 
+  : null;
+const scholarMenu = isTafsirTab 
+  ? islamicCommentaries.map(c => ({ id: c.id, title: c.title || c.name || "Tafsir" })) 
+  : [];
+
 const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO({
-  tab,
+  tab: isTafsirTab ? 'tafsir' : tab,
+  activeCommentary,
   surah,
   ayah,
   manuscripts,
@@ -229,7 +246,8 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
       scientificErrorsCount={scientificErrorsCount}
       debunkingCount={debunkingCount}
       videosCount={videosCount}
-      activeTab={tab}
+      activeTab={isTafsirTab ? 'tafsir' : tab}
+      activeTafsirScholarId={__rawIslamicCommentaries.length > 0 ? __rawIslamicCommentaries[0].id : null}
       surah={surah}
       ayah={ayah}
     />
@@ -292,12 +310,13 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
           ))}
         </div>
       )}
-      {tab === 'islamic-commentaries' && (
+      {isTafsirTab && activeCommentary && (
         <TafseerViewer 
           client:load 
-          commentaries={islamicCommentaries} 
+          activeCommentary={activeCommentary}
+          scholarMenu={scholarMenu}
           surah={surah} 
-          ayah={ayah} 
+          ayah={ayah}
         />
       )}
       {tab === 'scientific-errors' && (

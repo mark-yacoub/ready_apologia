@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { TAFSEER_CONFIG } from './tafseer_config.js';
+import { TAFSEER_CONFIG, resolveScholarSources } from './tafseer_config.js';
 
 let cache = null;
 
@@ -33,25 +33,8 @@ function processCommentaryConfig(config, map) {
       
       if (!itemEn && !itemAr) continue;
       
-      // Prefer English metadata (verse_range, title, etc) but fallback to Arabic if missing
+      // Prefer English metadata (title, etc) but fallback to Arabic if missing
       const baseItem = itemEn || itemAr;
-
-      // Construct a structured immutable commentary object
-      const commentaryEntry = {
-        ...baseItem, // captures title, verse_range, source_volume_page, etc.
-        commentary: itemEn ? itemEn.commentary : undefined,
-        commentary_arabic: itemAr ? itemAr.commentary : undefined,
-        title_arabic: itemAr ? itemAr.title : undefined,
-        id: config.id,
-        name: config.name,
-        title: config.displayTitle,
-        scholar: config.scholar,
-        date: config.date,
-        era: config.era,
-        authority: config.authority,
-        aiTranslated: config.aiTranslated || false,
-        source_volume_page: config.id === 'tabari' ? undefined : baseItem.source_volume_page
-      };
 
       const idsToMap = [];
       if (key.includes('-')) {
@@ -76,6 +59,27 @@ function processCommentaryConfig(config, map) {
       }
 
       for (const targetId of idsToMap) {
+        const [s, a] = targetId.split(':');
+        const resolvedSources = resolveScholarSources(config, s, a);
+
+        const commentaryEntry = {
+          ...baseItem,
+          commentary: itemEn ? itemEn.commentary : undefined,
+          commentary_arabic: itemAr ? itemAr.commentary : undefined,
+          title_arabic: itemAr ? itemAr.title : undefined,
+          id: config.id,
+          hashSlug: config.hashSlug || config.id,
+          name: config.name,
+          title: config.displayTitle,
+          scholar: config.scholar,
+          date: config.date,
+          era: config.era,
+          era_arabic: config.era_arabic || config.era,
+          authority: config.authority,
+          translationNote: config.translationNote || null,
+          sources: resolvedSources
+        };
+
         if (!map[targetId]) {
           map[targetId] = [];
         }

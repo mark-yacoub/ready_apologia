@@ -14,7 +14,8 @@ import { loadVerseLabels } from '../../utils/quran_verse_labels_loader.js';
 import QiraatCard from '../../components/QiraatCard.astro';
 import PillChevron from '../../components/PillChevron.astro';
 import { query } from '../../db.js';
-import { getEvidenceSetsForSurahPrefix } from '../../utils/quran_evidence_service.js';
+import { loadIslamicCommentaries } from '../../utils/islamic_commentaries_loader.js';
+import { getEvidenceSetsForSurahPrefix, getDefaultTafsirScholarForVerse } from '../../utils/quran_evidence_service.js';
 
 
 export async function getStaticPaths() {
@@ -113,6 +114,8 @@ for (let i = 1; i <= totalVerses; i++) {
   const hasScientificErrors = scientificErrorsSet.has(verseKey);
   const hasIslamicCommentary = islamicCommentariesSet.has(verseKey);
   const hasDebunkingMiracles = debunkingMiraclesSet.has(verseKey);
+  const defaultScholar = hasIslamicCommentary ? getDefaultTafsirScholarForVerse(verseKey) : '';
+  const tafsirLinkTab = hasIslamicCommentary ? `tafsir/${defaultScholar}` : '';
   const hasVideos = videosSet.has(verseKey);
   const hasEvidence = hasManuscript || hasChristianFootnotes || hasContradictions || hasScientificErrors || hasIslamicCommentary || hasDebunkingMiracles || hasVideos;
 
@@ -121,7 +124,7 @@ for (let i = 1; i <= totalVerses; i++) {
   else if (hasContradictions) defaultFirstTab = 'contradictions';
   else if (hasScientificErrors) defaultFirstTab = 'scientific-errors';
   else if (hasChristianFootnotes) defaultFirstTab = 'christian-footnotes';
-  else if (hasIslamicCommentary) defaultFirstTab = 'islamic-commentaries';
+  else if (hasIslamicCommentary) defaultFirstTab = tafsirLinkTab;
   else if (hasVideos) defaultFirstTab = 'videos';
   else if (hasManuscript) defaultFirstTab = 'manuscripts';
 
@@ -142,7 +145,8 @@ for (let i = 1; i <= totalVerses; i++) {
     hasIslamicCommentary: hasIslamicCommentary,
     hasDebunkingMiracles: hasDebunkingMiracles,
     hasVideos: hasVideos,
-    hasEvidence: hasEvidence
+    hasEvidence: hasEvidence,
+    tafsirLinkTab: tafsirLinkTab
   });
 }
 
@@ -211,7 +215,7 @@ const ogImage = getQuranOgImage(surahNum, null);
                   </a>
                 )}
                 {v.hasIslamicCommentary && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/islamic-commentaries`} data-tab-id="islamic-commentaries" class="evidence-badge ic-icon" title="Islamic Commentary" aria-label={`View Islamic commentary for Surah ${surahNum}, verse ${v.number}`}>
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/${v.tafsirLinkTab}`} data-tab-id="tafsir" class="evidence-badge ic-icon" title="Islamic Commentary" aria-label={`View Islamic commentary for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2.2" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                     </svg>
