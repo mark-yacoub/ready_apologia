@@ -38,5 +38,13 @@
     "title": "The Trustworthiness of the Bible: From Ancient Manuscripts to Historical Reality",
     "description": "An exhaustive, multi-stage evidentiary repository establishing the historical, textual, archaeological, and statistical trustworthiness of the Old and New Testaments.",
     "thumbnail": "/media/trustworthiness_bible/cover.jpg"
+  },
+  {
+    "category": "Islamics",
+    "subcategory": "The Prophet",
+    "slug": "convenient-revelations",
+    "title": "Convenient Revelations",
+    "description": "Examine undeniable timeline and figh facts revealing the exact self-serving utility of specific Medinan revelations.",
+    "thumbnail": "/media/convenient_revelations/cover.jpg"
   }
 ]

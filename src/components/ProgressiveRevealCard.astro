@@ -1,0 +1,143 @@
+---
+import type { Theme } from '../types/Theme';
+import { parseAndLinkReferences } from '../utils/referenceToLink';
+
+export interface Props {
+  theme: Theme;
+}
+
+const { theme } = Astro.props as Props;
+
+
+// Instead of passing huge strings, we pass the theme object directly.
+// This is much safer, L6-compliant, and prevents XSS/escaping nightmares.
+const slug = theme.title.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/[\s_]+/g, '-');
+---
+
+<div class="reveal-card border border-slate-300 rounded-xl bg-white shadow-sm overflow-hidden mt-3 mb-0">
+  <!-- Step 1: Claim and Sources -->
+  <div class="p-5 md:p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <div class="w-1.5 h-6 bg-slate-800 rounded-full"></div>
+      <h3 id={`${slug}-claim`} class="text-xl font-bold text-slate-800 font-serif tracking-tight">The Historical Claim</h3>
+    </div>
+    
+    <div class="text-slate-800 mb-5 text-[17px] leading-relaxed prose-a:text-emerald-700 prose-a:font-semibold" set:html={parseAndLinkReferences(theme.the_claim)} />
+    
+    <div class="sources-block bg-slate-50 border border-slate-200 rounded-lg p-4 text-sm text-slate-700">
+      <strong class="text-slate-900 uppercase tracking-widest text-xs flex items-center mb-2">
+        <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+        Islamic Sources
+      </strong> 
+      <div class="prose prose-sm max-w-none text-slate-700 space-y-2 marker:text-slate-400">
+         {theme.orthodox_sources.map(src => (
+            <>
+              <div class="mt-4 mb-2 font-bold text-slate-900 text-sm tracking-tight border-b border-slate-200 pb-1">
+                {src.flow_stage}
+              </div>
+              <ul class="list-disc pl-5 m-0 mb-4 text-slate-700 leading-relaxed text-[15px]">
+                <li class="mb-2">
+                  <strong set:html={parseAndLinkReferences(src.reference) + ":"} />
+                  <span set:html={parseAndLinkReferences(src.english)} />
+                </li>
+              </ul>
+            </>
+         ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: The Apologist Defense (Hidden initially) -->
+  <div class="defense-container bg-amber-50/50 border-t border-amber-200 p-5 md:p-6 hidden transition-all duration-300">
+    <div class="flex items-center gap-2 mb-2 hidden defense-title">
+      <div class="w-1.5 h-5 bg-amber-500 rounded-full"></div>
+      <h4 id={`${slug}-defense`} class="font-bold text-amber-900 text-lg font-serif">The Standard Apology</h4>
+    </div>
+    <div class="text-amber-950 text-[16px] leading-relaxed hidden defense-content italic border-l-2 border-amber-300 pl-4 py-0.5" set:html={parseAndLinkReferences(theme.standard_apologetic_defense)} />
+    
+    <!-- Step 3 Button -->
+    <div class="mt-5 hidden reveal-reality-wrapper">
+      <button class="reveal-reality-btn w-full py-3 bg-red-700 hover:bg-red-800 text-white rounded-lg font-bold shadow transition-colors flex items-center justify-center gap-2">
+        Reveal the Reality
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 3: The Devastating Counter (Hidden initially) -->
+  <div class="counter-container bg-red-50/60 border-t border-red-200 p-5 md:p-6 hidden transition-all duration-300">
+    <div class="flex items-center gap-2 mb-3 hidden counter-title">
+      <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
+      <h4 id={`${slug}-counter`} class="font-extrabold text-red-900 text-xl font-serif">The Unfiltered Truth</h4>
+    </div>
+    <div class="text-red-950 font-medium text-[17px] leading-relaxed hidden counter-content" set:html={parseAndLinkReferences(theme.the_devastating_counter)} />
+  </div>
+
+  <!-- Interactive Controls -->
+  <div class="interactive-controls p-3 border-t border-slate-100 bg-slate-50 flex justify-center">
+    <button class="view-defense-btn w-full py-2 bg-white border border-slate-300 hover:border-amber-400 hover:bg-amber-50 text-slate-700 hover:text-amber-700 rounded-lg font-bold shadow-sm transition-all text-sm uppercase tracking-wide">
+      Examine the Defense
+    </button>
+  </div>
+</div>
+
+
+<script>
+  function openDefense(card) {
+    card.querySelector('.defense-container')?.classList.remove('hidden');
+    card.querySelector('.defense-title')?.classList.remove('hidden');
+    card.querySelector('.defense-content')?.classList.remove('hidden');
+    card.querySelector('.reveal-reality-wrapper')?.classList.remove('hidden');
+    card.querySelector('.interactive-controls')?.classList.add('hidden');
+  }
+
+  function openCounter(card) {
+    card.querySelector('.counter-container')?.classList.remove('hidden');
+    card.querySelector('.counter-title')?.classList.remove('hidden');
+    card.querySelector('.counter-content')?.classList.remove('hidden');
+    card.querySelector('.reveal-reality-wrapper')?.classList.add('hidden');
+  }
+
+  // Hook into astro:page-load for View Transitions support (L6 standard)
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.reveal-card').forEach(card => {
+      const defenseBtn = card.querySelector('.view-defense-btn');
+      const revealBtn = card.querySelector('.reveal-reality-btn');
+
+      if(defenseBtn) {
+        // Prevent duplicate bounds if navigated back/forth
+        defenseBtn.replaceWith(defenseBtn.cloneNode(true));
+        card.querySelector('.view-defense-btn').addEventListener('click', () => openDefense(card));
+      }
+
+      if(revealBtn) {
+        revealBtn.replaceWith(revealBtn.cloneNode(true));
+        card.querySelector('.reveal-reality-btn').addEventListener('click', () => openCounter(card));
+      }
+    });
+
+    if (window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      const targetEl = document.getElementById(hash);
+      
+      if (targetEl) {
+        const card = targetEl.closest('.reveal-card');
+        if (card) {
+           if (hash.endsWith('-defense') || hash.endsWith('-counter')) {
+               openDefense(card);
+           }
+           if (hash.endsWith('-counter')) {
+               openCounter(card);
+           }
+        }
+        setTimeout(() => {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+  });
+
+  // Fallback for standard multi-page load
+  window.addEventListener('DOMContentLoaded', () => {
+    document.dispatchEvent(new Event('astro:page-load'));
+  });
+</script>

@@ -1,0 +1,59 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import TailwindSetup from '../../../components/TailwindSetup.astro';
+import ProgressiveRevealCard from '../../../components/ProgressiveRevealCard.astro';
+import ThemeNavigation from '../../../components/ThemeNavigation.astro';
+
+// L6 Strict Typing & Centralized Routing
+import type { ThemeDataset } from '../../../types/Theme';
+import { CONVENIENT_REVELATIONS_ROUTES, CONVENIENT_REVELATIONS_METADATA } from '../../../config/themeRoutes';
+import datasetRaw from '../../../data/convenient-revelations.json';
+
+// Compile-time type coercion
+const typedDataset = datasetRaw as ThemeDataset;
+const pageConfig = CONVENIENT_REVELATIONS_METADATA['evading-accountability'];
+const themeKeys = CONVENIENT_REVELATIONS_ROUTES['evading-accountability'];
+
+// Extract validated themes securely
+const themes = themeKeys
+  .map(id => typedDataset.dataset.find(t => t.theme === id))
+  .filter((t): t is NonNullable<typeof t> => Boolean(t)); // Type guard for strict TS
+
+function slugify(text: string) {
+    return text.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/[\s_]+/g, '-');
+}
+---
+<Layout 
+  title={pageConfig.title} 
+  description={pageConfig.description}
+  keywords={pageConfig.keywords}
+  ogImage="/media/convenient_revelations/cover.jpg"
+>
+  <TailwindSetup />
+  <div class="relative w-full h-[50vh] min-h-[400px] mb-12 overflow-hidden shadow-2xl">
+    <div class="absolute inset-0 bg-black">
+      <img src="/media/convenient_revelations/cover.jpg" alt="Ancient scrolls" class="w-full h-full object-cover opacity-60 mix-blend-overlay filter contrast-125">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 w-full p-8 md:p-12 max-w-5xl mx-auto">
+      <span class="inline-block py-1 px-3 border border-purple-400 text-purple-300 text-xs font-bold uppercase tracking-widest rounded-sm mb-4">Historical Timeline Case</span>
+      <h1 class="text-4xl md:text-6xl font-serif font-black text-white drop-shadow-lg mb-2 leading-tight">{pageConfig.title.split(" | ")[0]}</h1>
+      <div class="h-1 w-24 bg-purple-500 rounded mt-4"></div>
+    </div>
+  </div>
+
+  <main class="max-w-5xl mx-auto px-4 md:px-8 pb-16">
+    {themes.map(t => (
+      <div class="mb-6">
+        <div class="flex items-center gap-4 mb-4 mt-12">
+          <div class="flex-grow h-px bg-slate-200"></div>
+          <h2 id={slugify(t.title)} class="text-2xl md:text-3xl font-black text-slate-800 font-serif tracking-tight text-center px-4">{t.title}</h2>
+          <div class="flex-grow h-px bg-slate-200"></div>
+        </div>
+        <ProgressiveRevealCard theme={t} />
+      </div>
+    ))}
+
+    <ThemeNavigation currentSlug="evading-accountability" />
+  </main>
+</Layout>

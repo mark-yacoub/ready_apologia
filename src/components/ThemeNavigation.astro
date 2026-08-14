@@ -1,0 +1,41 @@
+---
+const { currentSlug } = Astro.props;
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+const allThemes = [
+  { slug: 'evading-accountability', title: 'Evading Accountability', description: 'The inescapable timeline traps: overriding sworn oaths and establishing impossible legal shields.' },
+  { slug: 'spoils-and-etiquette', title: 'Spoils & Etiquette', description: 'The stark contrast between cosmic divinity and earthly desires, from awkward dinner guests to the marital rights of captives of war.' },
+  { slug: 'sexual-privileges', title: 'Sexual Privileges', description: 'How personal exemptions from foundational marital laws were codified into eternal revelation.' },
+  { slug: 'wealth-and-power', title: 'Wealth & Power', description: 'The divine centralization of the treasury and the absolute control of war booty as military power grew.' }
+];
+
+const otherThemes = allThemes.filter(theme => theme.slug !== currentSlug);
+---
+
+<div class="mt-16 pt-10 border-t border-slate-200">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="p-2 bg-slate-100 rounded-lg text-slate-500">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+    </div>
+    <h3 class="text-2xl font-bold font-serif text-slate-800">Continue Investigating</h3>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {otherThemes.map(theme => (
+      <a 
+        href={`${base}/discover/convenient-revelations/${theme.slug}`}
+        class="group bg-white rounded-xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all hover:border-purple-300 flex flex-col"
+      >
+        <h4 class="font-bold text-slate-900 group-hover:text-purple-700 transition-colors mb-2">{theme.title}</h4>
+        <p class="text-sm text-slate-600 leading-relaxed mb-4 flex-grow">{theme.description}</p>
+        <div class="flex items-center text-xs font-bold text-purple-600 uppercase tracking-widest mt-auto">
+          View Case 
+          <svg class="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+      </a>
+    ))}
+  </div>
+</div>
