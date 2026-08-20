@@ -18,8 +18,31 @@ export default function EvidenceExplorer({ evidence = [], initialEvidenceId = nu
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [evidenceSearch, setEvidenceSearch] = useState('');
   const [activeHighlightEvidence, toggleHighlight] = useActiveEvidence();
-  const [activeMainHeading, setActiveMainHeading] = useState('Christianity');
+  const [activeMainHeading, setActiveMainHeading] = useState(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hash = window.location.hash.slice(1).toLowerCase();
+      const match = EVIDENCE_TAXONOMY.find(s => s.mainHeading.toLowerCase() === hash);
+      if (match) return match.mainHeading;
+    }
+    return 'Christianity';
+  });
   const isDedicatedPage = Boolean(initialEvidenceId);
+
+  React.useEffect(() => {
+    function handleHashChange() {
+      if (typeof window !== 'undefined' && window.location.hash) {
+        const hash = window.location.hash.slice(1).toLowerCase();
+        const match = EVIDENCE_TAXONOMY.find(s => s.mainHeading.toLowerCase() === hash);
+        if (match) {
+          setActiveMainHeading(match.mainHeading);
+        }
+      }
+    }
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Fast O(1) Evidence Lookup Map
   const evidenceMap = useMemo(() => {
@@ -151,6 +174,9 @@ export default function EvidenceExplorer({ evidence = [], initialEvidenceId = nu
                   className={`category-hero-card ${isActive ? 'is-active' : ''} ${isChristianity ? 'christian-theme' : 'islam-theme'}`}
                   onClick={(e) => {
                     setActiveMainHeading(section.mainHeading);
+                    if (typeof window !== 'undefined') {
+                      window.history.replaceState(null, '', `#${section.mainHeading.toLowerCase()}`);
+                    }
                     e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                   }}
                 >

@@ -45,8 +45,8 @@ if (optimizedThumbnail && optimizedThumbnail.includes('images.unsplash.com')) {
 
 <style>
   .discover-card {
-    flex: 0 0 auto;
-    width: 154px; /* Updated compact size for multiple cards visible */
+    width: 100%;
+    height: 100%;
     min-height: 220px;
     background-color: var(--color-surface, #ffffff);
     border-radius: 14px;
@@ -54,7 +54,6 @@ if (optimizedThumbnail && optimizedThumbnail.includes('images.unsplash.com')) {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    scroll-snap-align: start;
     text-decoration: none;
     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -73,7 +72,8 @@ if (optimizedThumbnail && optimizedThumbnail.includes('images.unsplash.com')) {
 
   .card-image-wrap {
     width: 100%;
-    height: 110px;
+    aspect-ratio: 16 / 10;
+    max-height: 140px;
     background-color: var(--color-surface-container-low, #f4f4f5);
     overflow: hidden;
     border-bottom: 1px solid var(--color-outline-variant, #e4e4e7);
@@ -84,7 +84,6 @@ if (optimizedThumbnail && optimizedThumbnail.includes('images.unsplash.com')) {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    aspect-ratio: 154 / 110;
     transition: transform 0.4s ease;
   }
   
@@ -102,6 +101,7 @@ if (optimizedThumbnail && optimizedThumbnail.includes('images.unsplash.com')) {
     padding: 12px;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     gap: 4px;
   }
 
@@ -125,12 +125,9 @@ if (optimizedThumbnail && optimizedThumbnail.includes('images.unsplash.com')) {
   }
   
   @media (min-width: 768px) {
-    .discover-card {
-      width: 180px;
-      min-height: 240px;
-    }
-    .card-image-wrap {
-      height: 120px;
+    .card-content {
+      padding: 14px;
+      gap: 6px;
     }
     .card-title {
       font-size: 14.5px;

@@ -72,7 +72,7 @@ const pageKeywords = "discover, apologetics";
                 <div class="section-header">
                   <h3 class="section-title">{subGroup.name}</h3>
                 </div>
-                <div class="cards-scroller">
+                <div class="cards-grid">
                   {subGroup.articles.map((card) => (
                     <DiscoverCard card={card} base={base} />
                   ))}
@@ -95,23 +95,19 @@ const pageKeywords = "discover, apologetics";
   function setupDiscoverTabs() {
     const parentContainer = document.querySelector('.tabs-controller');
     const panels = document.querySelectorAll('.major-category-block');
-    
     if (!parentContainer || !panels.length) return;
+    const buttons = parentContainer.querySelectorAll('.category-hero-card');
 
-    // Use event delegation rather than O(N) inline listeners
-    parentContainer.addEventListener('click', (e) => {
-      // Find the closest button if they clicked an inner element (like SVG or text)
-      const btn = e.target.closest('.category-hero-card');
-      if (!btn) return;
-
-      const targetId = btn.getAttribute('data-target');
-      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    function activateTab(targetId, updateHash = true) {
+      buttons.forEach(b => {
+        if (b.getAttribute('data-target') === targetId) {
+          b.classList.add('is-active');
+          b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          b.classList.remove('is-active');
+        }
+      });
       
-      // Update active classes efficiently
-      parentContainer.querySelectorAll('.category-hero-card').forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      
-      // Panel display toggle
       panels.forEach(p => {
         if (p.id === targetId) {
           p.style.display = 'flex';
@@ -122,13 +118,44 @@ const pageKeywords = "discover, apologetics";
           p.style.display = 'none';
         }
       });
+
+      if (updateHash && typeof window !== 'undefined') {
+        const hash = targetId.replace(/^panel-/, '');
+        window.history.replaceState(null, '', `#${hash}`);
+      }
+    }
+
+    function syncFromUrlHash() {
+      if (typeof window !== 'undefined' && window.location.hash) {
+        const rawHash = window.location.hash.slice(1).toLowerCase();
+        const targetPanelId = `panel-${rawHash}`;
+        const matchingBtn = parentContainer.querySelector(`[data-target="${targetPanelId}"]`);
+        if (matchingBtn) {
+          activateTab(targetPanelId, false);
+        }
+      }
+    }
+
+    // Handle initial hash on page load
+    syncFromUrlHash();
+
+    // Prevent duplicate event bindings across lifecycle / SPA navigation
+    if (parentContainer.dataset.tabsInitialized === 'true') return;
+    parentContainer.dataset.tabsInitialized = 'true';
+
+    // React to browser Back / Forward navigation
+    window.addEventListener('hashchange', syncFromUrlHash);
+
+    // Event delegation for tab clicks
+    parentContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.category-hero-card');
+      if (!btn) return;
+      const targetId = btn.getAttribute('data-target');
+      activateTab(targetId, true);
     });
   }
 
-  // Bind aggressively but exactly once per lifecycle
   setupDiscoverTabs();
-  
-  // Astro View Transitions graceful hooking
   document.addEventListener('astro:page-load', setupDiscoverTabs);
 </script>
 
@@ -312,20 +339,19 @@ const pageKeywords = "discover, apologetics";
     margin: 8px auto 0 auto;
   }
 
-  /* Horizontal scrolling for native touch devices */
-  .cards-scroller {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 16px;
-    padding: 0 4px 24px 4px; /* Padding bottom for shadow clearance */
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
+  /* Responsive Grid Layout for cards */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 4px 16px 4px;
   }
   
-  .cards-scroller::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+  @media (min-width: 640px) {
+    .cards-grid {
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
+    }
   }
 
 

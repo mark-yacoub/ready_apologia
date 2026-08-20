@@ -1,0 +1,155 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import DemonicRevelationNav from '../../components/discover/demonic-revelation/DemonicRevelationNav.jsx';
+import ComparativeStageCard from '../../components/discover/demonic-revelation/ComparativeStageCard.jsx';
+import BiblicalMandateSection from '../../components/discover/demonic-revelation/BiblicalMandateSection.jsx';
+import articleData from '../../data/discover/islam/scripture/demonic_revelation.json';
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+const pageTitle = "Assessing the Origins of Islamic Revelation | Ready Apologia";
+const pageDesc = "An evidentiary comparison of the phenomena surrounding early Islamic revelation against biblical angelic and demonic accounts.";
+const pageKeywords = "origins of revelation, cave of hira, fatra suicide bukhari, muhammad trances, sihr black magic labid, satanic verses tabari, angelic vs demonic revelation";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  keywords={pageKeywords}
+  ogImage="/media/demonic_revelation/cover.jpg"
+>
+  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'origins-of-revelation' }} />
+
+  <div class="rev-page-wrapper">
+    {/* Breadcrumb Navigation */}
+    <nav class="breadcrumb-header" aria-label="Breadcrumb">
+      <a href={`${base}/discover`} class="back-link" aria-label="Go back to Discover tab">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        <span>Discover</span>
+      </a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current">Islamics · Scripture</span>
+    </nav>
+
+    {/* Header Hero */}
+    <header class="rev-hero">
+      <h1 class="rev-hero-title">
+        Assessing the Origins of Islamic Revelation
+      </h1>
+      <p class="rev-hero-subtitle">
+        An evidentiary examination comparing the phenomena of early Islamic revelation with the revelation of prior prophets.
+      </p>
+      <p class="rev-hero-note">
+        All citations link directly to canonical Sunni Hadith collections (Bukhari, Muslim), classical historical accounts (Ibn Ishaq, Tabari), and biblical manuscripts for direct verification.
+      </p>
+    </header>
+
+    {/* Sticky Thematic Navigation Bar */}
+    <DemonicRevelationNav client:load />
+
+    {/* Main Evidence Content */}
+    <main class="rev-content-container" aria-label="Evidentiary Topics">
+      {articleData.items.map((item) => (
+        <ComparativeStageCard item={item} base={base} client:visible />
+      ))}
+
+      {/* The Biblical Mandate: Testing the Spirits */}
+      <BiblicalMandateSection base={base} client:visible />
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .rev-page-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 16px 10px 60px;
+    font-family: var(--font-body, 'Public Sans', -apple-system, sans-serif);
+    color: var(--color-on-surface, #09090b);
+  }
+
+  @media (min-width: 640px) {
+    .rev-page-wrapper {
+      padding: 28px 20px 80px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .rev-page-wrapper {
+      padding: 36px 24px 96px;
+    }
+  }
+
+  /* Breadcrumb */
+  .breadcrumb-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-on-surface-variant, #71717a);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.15s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-primary, #09090b);
+  }
+
+  .breadcrumb-sep {
+    color: var(--color-outline-variant, #d4d4d8);
+  }
+
+  .breadcrumb-current {
+    color: var(--color-on-surface-variant, #71717a);
+    font-weight: 500;
+  }
+
+  /* Hero */
+  .rev-hero {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 32px;
+  }
+
+  .rev-hero-title {
+    font-family: var(--font-display, 'Literata', Georgia, serif);
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    color: var(--color-on-surface, #09090b);
+    margin: 0 0 14px 0;
+  }
+
+  .rev-hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.18rem);
+    font-weight: 400;
+    color: var(--color-on-surface-variant, #52525b);
+    line-height: 1.55;
+    margin: 0 0 16px 0;
+  }
+
+  .rev-hero-note {
+    font-size: 12px;
+    color: #71717a;
+    line-height: 1.5;
+    max-width: 620px;
+    margin: 0 auto;
+    font-style: italic;
+  }
+
+  /* Main Container */
+  .rev-content-container {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

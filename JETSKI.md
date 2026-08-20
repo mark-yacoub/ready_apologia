@@ -114,7 +114,9 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/pages/quran/0.astro`: Lost Verses page entry point.
 *   `src/pages/quran/-1.astro`: Abrogated Verses page entry point.
 *   `src/pages/quran/codex/[companion].astro`: Companion Codex page showing comparisons, virtues, and lost verses.
-*   `src/pages/discover/`: Discover deep-dive articles (`divinity-timeline.astro`, `extrabiblical-evidence-for-jesus.astro`, `islamic-dilemma.astro`, `quran-preservation.astro`, `trustworthiness-of-the-bible.astro`) configured with URL `#hash` linking and initial mount hash auto-scrolling so specific chapters, stages, or evidence sections can be shared.
+*   `src/pages/discover/`: Discover deep-dive articles (`divinity-timeline.astro`, `extrabiblical-evidence-for-jesus.astro`, `islamic-dilemma.astro`, `origins-of-revelation.astro`, `quran-preservation.astro`, `trustworthiness-of-the-bible.astro`) configured with URL `#hash` linking and initial mount hash auto-scrolling so specific chapters, stages, or evidence sections can be shared.
+*   `src/components/discover/demonic-revelation/`: Interactive comparative components for Assessing the Origins of Islamic Revelation (`DemonicRevelationNav.jsx`, `ComparativeStageCard.jsx`).
+*   `src/data/discover/islam/scripture/demonic_revelation.json`: Sourced data containing canonical Islamic testimony, biblical parallels/expectations, and reflections for the Origins of Revelation deep dive.
 *   `src/components/discover/trustworthiness/`: Interactive visual components for The Trustworthiness of the Bible (`Stage1TextualTransmission.jsx`, `Stage2ArchaeologyHistory.jsx`, `Stage3EyewitnessCredibility.jsx`, `Stage4CanonVerdict.jsx`).
 *   `src/components/islamicdilemma/`: Interactive visual components for the Islamic Dilemma (`DilemmaNav`, `DilemmaDecisionCard`, `AffirmationTable`, `ManuscriptTimeline`, `LogicalTrapDiagram`, `ObjectionsSection`, `PrimaryReferenceTable`).
 *   `src/data/discover/islam/scripture/islamic_dilemma.md`: Read-only markdown source of truth for the Islamic Dilemma topic.
