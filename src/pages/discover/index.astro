@@ -52,8 +52,20 @@ const schemaObj = {
 >
   <div class="discover-hub">
     <header class="hub-header">
-      <h1 class="hub-title">Discover</h1>
-      <p class="hub-subtitle">Deep dive into topics drawn from historical and scriptural sources.</p>
+      <div class="hub-header-top">
+        <div class="hub-header-text">
+          <h1 class="hub-title">Discover</h1>
+          <p class="hub-subtitle">Deep dive into topics drawn from historical and scriptural sources.</p>
+        </div>
+        <a href={`${base}/discover/statistics`} class="stats-header-btn" title="Scripture Statistics & Leaderboards">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="stats-icon">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <span>Stats</span>
+        </a>
+      </div>
     </header>
 
     <div class="hero-cards-container tabs-controller" style="padding-top: 16px; padding-bottom: 24px;">
@@ -207,6 +219,44 @@ const schemaObj = {
   
   .hub-header {
     padding: 24px 0 0 0;
+  }
+
+  .hub-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .hub-header-text {
+    flex: 1;
+  }
+
+  .stats-header-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    background-color: var(--color-surface, #ffffff);
+    color: var(--color-on-surface-variant, #64748b);
+    border: 1px solid var(--color-outline-variant, #cbd5e1);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+  .stats-header-btn:hover {
+    color: var(--color-primary, #1e293b);
+    border-color: var(--color-primary, #1e293b);
+    background-color: #f8fafc;
+    transform: translateY(-1px);
+  }
+
+  .stats-icon {
+    width: 15px;
+    height: 15px;
   }
   
   .hub-title {

@@ -1,0 +1,1190 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { loadBibleStatistics, loadQuranStatistics } from '../../utils/statisticsLoader.js';
+
+const bibleStats = loadBibleStatistics();
+const quranStats = loadQuranStatistics();
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/discover/statistics`;
+
+const pageTitle = "Scripture Statistics & Discovery Leaderboards | Ready Apologia";
+const pageDesc = "Explore the most discussed, defended, and documented verses across the Bible and Quran: top video mentions, patristics treatises, manuscript density, and classical tafsir records.";
+const pageKeywords = "bible statistics, quran statistics, most defended bible verses, top apologetics videos, oldest bible manuscripts, longest tafsir tabari, quran manuscript errors, patristics apologetics";
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Discover", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 3, "name": "Statistics & Leaderboards", "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": canonicalURL,
+      "headline": pageTitle,
+      "name": pageTitle,
+      "description": pageDesc,
+      "url": canonicalURL,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": `${siteUrl}${base}/`
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  keywords={pageKeywords}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+>
+  <div class="stats-hub-container">
+    <!-- Header -->
+    <header class="stats-header">
+      <div class="header-pretitle">
+        <a href={`${base}/discover`} class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="back-icon">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Discover
+        </a>
+      </div>
+      <h1 class="stats-title">Scripture Statistics</h1>
+      <p class="stats-subtitle">Data-driven leaderboards pointing you to the most critical, heavily attested, defended, and commented-on verses.</p>
+    </header>
+
+    <!-- Corpus Segmented Switcher -->
+    <div class="corpus-switch-container">
+      <div class="corpus-segmented-pill" role="tablist">
+        <button
+          type="button"
+          class="corpus-tab-btn is-active christian-tab"
+          data-target="corpus-bible"
+          role="tab"
+          aria-selected="true"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+            <path d="M12 3v18M7 8h10"/>
+          </svg>
+          <span>Bible Analytics</span>
+        </button>
+
+        <button
+          type="button"
+          class="corpus-tab-btn islam-tab"
+          data-target="corpus-quran"
+          role="tab"
+          aria-selected="false"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span>Quran Analytics</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- BIBLE STATISTICS PANEL                                                    -->
+    <!-- ========================================================================= -->
+    <div id="corpus-bible" class="corpus-panel bible-theme is-active">
+      <!-- Fast Filter Chips -->
+      <nav class="quick-filter-nav" aria-label="Bible leaderboards navigation">
+        <button type="button" class="filter-chip is-active" data-section="bible-videos">Top Videos</button>
+        <button type="button" class="filter-chip" data-section="bible-defended">Most Defended</button>
+        <button type="button" class="filter-chip" data-section="bible-patristics">Patristics Apologetics</button>
+        <button type="button" class="filter-chip" data-section="bible-contradictions">Contradictions</button>
+        <button type="button" class="filter-chip" data-section="bible-manuscripts">Manuscript Density</button>
+        <button type="button" class="filter-chip" data-section="bible-oldest">Oldest Manuscripts</button>
+      </nav>
+
+      <!-- 1. Top 10 Most Discussed in Videos -->
+      <section id="bible-videos" class="leaderboard-section">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">🎬</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top 10 Most Discussed Verses in Videos</h2>
+            <p class="section-caption">Bible verses featured across the highest number of apologist videos, short breakdowns, and theological debates.</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {bibleStats?.topVideos?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-video">{item.metricValue}</span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>Watch Apologetics Videos</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 2. Top 10 Most Defended Verses -->
+      <section id="bible-defended" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">🛡️</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top 10 Most Defended Bible Verses</h2>
+            <p class="section-caption">Key Christological, Trinitarian, and theological battleground verses with the most dedicated apologetic exegeses.</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {bibleStats?.topDefended?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-apologetics">{item.metricValue}</span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>Read Theological Defenses</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 3. Top 10 Verses with Patristics Apologetics -->
+      <section id="bible-patristics" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">🏛️</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top 10 Verses with Patristics Apologetics</h2>
+            <p class="section-caption">Verses most frequently defended and expounded by the Early Church Fathers (Athanasius, John Chrysostom, Cyril of Alexandria, Gregory the Theologian).</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {bibleStats?.topPatristics?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-patristics">{item.metricValue}</span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>Explore Patristic Exegesis</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 4. Top 10 Most Alleged Contradictions -->
+      <section id="bible-contradictions" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">⚖️</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top 10 Most Alleged Bible Contradictions</h2>
+            <p class="section-caption">Verses most heavily cited in alleged biblical discrepancy pairings, accompanied by harmonization exegeses.</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {bibleStats?.topContradictions?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-contradictions">{item.metricValue}</span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>View Harmonization Answers</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 5. Top 10 Individual Verses by Ancient Manuscripts -->
+      <section id="bible-manuscripts" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">📜</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top 10 Verses by Ancient Manuscript Density</h2>
+            <p class="section-caption">Individual verses with the highest number of surviving physical ancient Greek and Hebrew manuscript witnesses.</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {bibleStats?.topManuscriptVerses?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-manuscripts">{item.metricValue}</span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>View Manuscript Scans</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 6. Oldest Ancient Biblical Manuscripts -->
+      <section id="bible-oldest" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">🏺</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Oldest Ancient Biblical Manuscripts</h2>
+            <p class="section-caption">The earliest surviving physical manuscript artifacts in the Ready Apologia catalog, linked to their first attested verse.</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {bibleStats?.oldestManuscripts?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.name}</a>
+                </div>
+                <span class="metric-pill pill-date">{item.date}</span>
+              </div>
+
+              <div class="ms-meta-details">
+                <span class="ms-corpus-tag">{item.testament}</span>
+                <span class="ms-first-verse-tag">First Verse: <strong>{item.firstVerseTitle}</strong></span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>Inspect Manuscript at {item.firstVerseTitle}</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- QURAN STATISTICS PANEL                                                    -->
+    <!-- ========================================================================= -->
+    <div id="corpus-quran" class="corpus-panel quran-theme">
+      <!-- Fast Filter Chips -->
+      <nav class="quick-filter-nav" aria-label="Quran leaderboards navigation">
+        <button type="button" class="filter-chip is-active" data-section="quran-videos">Top Videos</button>
+        <button type="button" class="filter-chip" data-section="quran-tabari">Longest Tabari</button>
+        <button type="button" class="filter-chip" data-section="quran-kathir">Longest Ibn Kathir</button>
+        <button type="button" class="filter-chip" data-section="quran-footnotes">Christian Footnotes</button>
+        <button type="button" class="filter-chip" data-section="quran-labels">Most Labels</button>
+        <button type="button" class="filter-chip" data-section="quran-manuscripts">Manuscript Density</button>
+        <button type="button" class="filter-chip" data-section="quran-mistakes">Manuscript Alterations</button>
+      </nav>
+
+      <!-- 1. Top 10 Most Examined in Videos -->
+      <section id="quran-videos" class="leaderboard-section">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">🎬</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top 10 Most Examined Quran Verses in Videos</h2>
+            <p class="section-caption">Quranic verses most frequently critiqued, analyzed, and refuted across apologetic video breakdowns.</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {quranStats?.topVideos?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-video">{item.metricValue}</span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>Watch Apologetics Videos</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 2. Top 10 Longest Commentaries by Tafsir al-Tabari -->
+      <section id="quran-tabari" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">📚</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top 10 Longest Commentaries by Tafsir al-Tabari</h2>
+            <p class="section-caption">Verses where the foundational Islamic commentator Imam al-Tabari wrote monumental, multi-thousand-word treatises trying to harmonize difficult passages.</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {quranStats?.topTabari?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-tafsir">{item.metricValue}</span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>Read Full Tabari Exegesis</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 3. Top 10 Longest Commentaries by Tafsir Ibn Kathir -->
+      <section id="quran-kathir" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">📖</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top 10 Longest Commentaries by Tafsir Ibn Kathir</h2>
+            <p class="section-caption">The longest commentaries by Ibn Kathir, containing comprehensive chains of Hadith narrations on miraculous and legal claims.</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {quranStats?.topKathir?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-tafsir">{item.metricValue}</span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>Read Full Ibn Kathir Exegesis</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 4. Top 10 Longest Christian Scholarly Footnotes -->
+      <section id="quran-footnotes" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">📝</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top 10 Longest Christian Scholarly Footnotes</h2>
+            <p class="section-caption">Quranic passages with the most extensive critical annotations by Christian scholars (Dr. Gordon Nickel, Dr. Daniel A. Brubaker, David Marshall).</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {quranStats?.topFootnotes?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-footnote">{item.metricValue}</span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              {item.preview && (
+                <p class="footnote-preview-text">{item.preview.slice(0, 160)}...</p>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>Read Scholarly Footnotes</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 5. Top Verses with Most Critical Deficiency Labels -->
+      <section id="quran-labels" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">⚠️</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top Quran Verses with Most Critical Labels</h2>
+            <p class="section-caption">Verses identified with multiple theological, historical, or moral defects (Slavery & Concubinage, Devaluing Women, Theological Defects, Contradicting the Bible).</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {quranStats?.topLabels?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-critical">{item.metricValue}</span>
+              </div>
+
+              {item.labels && (
+                <div class="labels-tag-cloud">
+                  {item.labels.map((lbl) => (
+                    <span class="critical-tag-badge">{lbl}</span>
+                  ))}
+                </div>
+              )}
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>Inspect Deficiencies & Citations</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 6. Top 10 Quran Verses by Manuscript Density -->
+      <section id="quran-manuscripts" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">📜</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Top 10 Quran Verses by Manuscript Density</h2>
+            <p class="section-caption">Verses with the highest count of physical early Quranic codices and folios indexed across world libraries.</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {quranStats?.topManuscriptVerses?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                </div>
+                <span class="metric-pill pill-manuscripts">{item.metricValue}</span>
+              </div>
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>View Quran Manuscripts</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 7. Quran Manuscripts with Most Mistakes & Alterations -->
+      <section id="quran-mistakes" class="leaderboard-section" style="display: none;">
+        <div class="section-badge-header">
+          <span class="section-icon-badge">🔍</span>
+          <div class="section-text-group">
+            <h2 class="section-heading">Quran Manuscripts with Most Alterations & Scribal Mistakes</h2>
+            <p class="section-caption">Early Quranic codices featuring significant consonantal skeleton (rasm) variants, scribal typos, omissions, or case errors, linked to their first attested verse.</p>
+          </div>
+        </div>
+
+        <div class="cards-list">
+          {quranStats?.topMistakeManuscripts?.map((item) => (
+            <div class="leaderboard-card">
+              <div class="card-top-row">
+                <div class="rank-badge-wrapper">
+                  <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
+                  <a href={`${base}${item.url}`} class="verse-link-title">{item.name}</a>
+                </div>
+                <span class="metric-pill pill-date">{item.date}</span>
+              </div>
+
+              {item.summary && (
+                <p class="manuscript-variant-summary">{item.summary}</p>
+              )}
+
+              {item.text && (
+                <blockquote class="verse-quote-box">
+                  "{item.text}"
+                </blockquote>
+              )}
+
+              <div class="card-footer-action">
+                <a href={`${base}${item.url}`} class="action-btn">
+                  <span>Inspect Manuscript at {item.firstVerseTitle}</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  let isHashListenerAttached = false;
+
+  function setupStatisticsTabs() {
+    const segmentedControls = document.querySelector('.corpus-segmented-pill');
+    const panels = document.querySelectorAll('.corpus-panel');
+    if (!panels.length) return;
+
+    function activateSection(panel, sectionId, updateHash = true) {
+      if (!panel) return;
+      const chips = panel.querySelectorAll('.filter-chip');
+      const sections = panel.querySelectorAll('.leaderboard-section');
+
+      let targetSection = sectionId ? panel.querySelector(`#${sectionId}`) : null;
+      if (!targetSection && sections.length > 0) {
+        targetSection = sections[0];
+        sectionId = targetSection.id;
+      }
+
+      chips.forEach(chip => {
+        const isMatch = chip.getAttribute('data-section') === sectionId;
+        if (isMatch) {
+          chip.classList.add('is-active');
+          chip.setAttribute('aria-selected', 'true');
+        } else {
+          chip.classList.remove('is-active');
+          chip.setAttribute('aria-selected', 'false');
+        }
+      });
+
+      sections.forEach(sec => {
+        if (sec.id === sectionId) {
+          sec.style.display = 'flex';
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+
+      if (updateHash && typeof window !== 'undefined' && sectionId) {
+        window.history.replaceState(null, '', `#${sectionId}`);
+      }
+    }
+
+    function activateTab(targetId, targetSectionId = null, updateHash = true) {
+      const buttons = segmentedControls ? segmentedControls.querySelectorAll('.corpus-tab-btn') : [];
+      buttons.forEach(b => {
+        const isTarget = b.getAttribute('data-target') === targetId;
+        if (isTarget) {
+          b.classList.add('is-active');
+          b.setAttribute('aria-selected', 'true');
+        } else {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        }
+      });
+
+      panels.forEach(p => {
+        if (p.id === targetId) {
+          p.classList.add('is-active');
+          const activeChip = p.querySelector('.filter-chip.is-active');
+          const secId = targetSectionId || (activeChip ? activeChip.getAttribute('data-section') : null);
+          activateSection(p, secId, updateHash);
+        } else {
+          p.classList.remove('is-active');
+        }
+      });
+
+      if (updateHash && !targetSectionId && typeof window !== 'undefined') {
+        const hash = targetId === 'corpus-quran' ? 'quran' : 'bible';
+        window.history.replaceState(null, '', `#${hash}`);
+      }
+    }
+
+    // Attach click listeners with dataset initialization flags to prevent duplicate listeners
+    panels.forEach(panel => {
+      const filterNav = panel.querySelector('.quick-filter-nav');
+      if (filterNav && filterNav.dataset.initialized !== 'true') {
+        filterNav.dataset.initialized = 'true';
+        filterNav.addEventListener('click', (e) => {
+          const chip = e.target.closest('.filter-chip');
+          if (!chip) return;
+          const sectionId = chip.getAttribute('data-section');
+          if (sectionId) {
+            activateSection(panel, sectionId, true);
+          }
+        });
+      }
+    });
+
+    if (segmentedControls && segmentedControls.dataset.initialized !== 'true') {
+      segmentedControls.dataset.initialized = 'true';
+      segmentedControls.addEventListener('click', (e) => {
+        const btn = e.target.closest('.corpus-tab-btn');
+        if (!btn) return;
+        const targetId = btn.getAttribute('data-target');
+        activateTab(targetId, null, true);
+      });
+    }
+
+    function syncFromUrlHash() {
+      if (typeof window === 'undefined' || !window.location.hash) return;
+      const rawHash = window.location.hash.slice(1).toLowerCase();
+      if (!rawHash) return;
+
+      if (rawHash === 'quran') {
+        activateTab('corpus-quran', null, false);
+      } else if (rawHash === 'bible') {
+        activateTab('corpus-bible', null, false);
+      } else if (rawHash.startsWith('quran-')) {
+        activateTab('corpus-quran', rawHash, false);
+      } else if (rawHash.startsWith('bible-')) {
+        activateTab('corpus-bible', rawHash, false);
+      }
+    }
+
+    // Initial sync
+    syncFromUrlHash();
+
+    // Attach single persistent hashchange listener
+    if (!isHashListenerAttached && typeof window !== 'undefined') {
+      window.addEventListener('hashchange', syncFromUrlHash);
+      isHashListenerAttached = true;
+    }
+  }
+
+  setupStatisticsTabs();
+  document.addEventListener('astro:page-load', setupStatisticsTabs);
+  document.addEventListener('astro:after-swap', setupStatisticsTabs);
+</script>
+
+<style>
+  .stats-hub-container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0 48px 0;
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .stats-header {
+    padding: 8px 0 16px 0;
+  }
+
+  .header-pretitle {
+    margin-bottom: 8px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-on-surface-variant, #71717a);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .back-link:hover {
+    color: var(--color-primary, #09090b);
+  }
+  .back-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .stats-title {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--color-primary, #09090b);
+    letter-spacing: -0.03em;
+    margin: 0 0 6px 0;
+    font-family: var(--font-headings, inherit);
+  }
+  @media (min-width: 768px) {
+    .stats-title {
+      font-size: 34px;
+    }
+  }
+
+  .stats-subtitle {
+    font-size: 14px;
+    color: var(--color-on-surface-variant, #71717a);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Segmented Pill Switcher */
+  .corpus-switch-container {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 24px 0;
+  }
+
+  .corpus-segmented-pill {
+    display: inline-flex;
+    background-color: var(--color-outline-variant, #e4e4e7);
+    padding: 4px;
+    border-radius: 9999px;
+    gap: 4px;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .corpus-tab-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 9999px;
+    border: none;
+    background: transparent;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-on-surface-variant, #71717a);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .tab-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .corpus-tab-btn.is-active.christian-tab {
+    background-color: #ffffff;
+    color: #974543;
+    box-shadow: 0 2px 8px rgba(151, 69, 67, 0.15);
+  }
+
+  .corpus-tab-btn.is-active.islam-tab {
+    background-color: #ffffff;
+    color: #059669;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15);
+  }
+
+  /* Corpus Panels */
+  .corpus-panel {
+    display: none;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .corpus-panel.is-active {
+    display: flex;
+    animation: fadeIn 0.25s ease-out forwards;
+  }
+
+  /* Fast Filter Chips */
+  .quick-filter-nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .quick-filter-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-chip {
+    display: inline-flex;
+    white-space: nowrap;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 9999px;
+    background-color: var(--color-surface, #ffffff);
+    color: var(--color-on-surface-variant, #71717a);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.18s cubic-bezier(0.25, 1, 0.5, 1);
+    outline: none;
+  }
+  .filter-chip:hover {
+    border-color: var(--color-primary, #09090b);
+    color: var(--color-primary, #09090b);
+  }
+  .bible-theme .filter-chip:hover {
+    border-color: #974543;
+    color: #974543;
+  }
+  .quran-theme .filter-chip:hover {
+    border-color: #059669;
+    color: #059669;
+  }
+
+  .bible-theme .filter-chip.is-active {
+    background-color: #974543;
+    color: #ffffff;
+    border-color: #974543;
+    box-shadow: 0 2px 8px rgba(151, 69, 67, 0.25);
+  }
+  .bible-theme .filter-chip.is-active:hover {
+    background-color: #823b39;
+    color: #ffffff;
+    border-color: #823b39;
+  }
+
+  .quran-theme .filter-chip.is-active {
+    background-color: #059669;
+    color: #ffffff;
+    border-color: #059669;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
+  }
+  .quran-theme .filter-chip.is-active:hover {
+    background-color: #047857;
+    color: #ffffff;
+    border-color: #047857;
+  }
+
+  /* Leaderboard Section */
+  .leaderboard-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-badge-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .section-icon-badge {
+    font-size: 24px;
+    line-height: 1;
+    background: var(--color-surface, #ffffff);
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+  }
+
+  .section-text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .section-heading {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0;
+    color: var(--color-primary, #09090b);
+    letter-spacing: -0.01em;
+  }
+  @media (min-width: 768px) {
+    .section-heading {
+      font-size: 20px;
+    }
+  }
+
+  .section-caption {
+    font-size: 13px;
+    color: var(--color-on-surface-variant, #71717a);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Cards List */
+  .cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .leaderboard-card {
+    background-color: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .leaderboard-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  }
+
+  .card-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .rank-badge-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rank-badge {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background-color: var(--color-surface-container-low, #f4f4f5);
+    color: var(--color-on-surface-variant, #71717a);
+  }
+
+  .bible-theme .rank-badge.rank-top {
+    background-color: #fce8e8;
+    color: #974543;
+  }
+
+  .quran-theme .rank-badge.rank-top {
+    background-color: #e6f7ef;
+    color: #059669;
+  }
+
+  .verse-link-title {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--color-primary, #09090b);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .verse-link-title:hover {
+    text-decoration: underline;
+  }
+
+  /* Metric Pills */
+  .metric-pill {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    letter-spacing: 0.02em;
+  }
+
+  .pill-video { background-color: #eff6ff; color: #1d4ed8; }
+  .pill-apologetics { background-color: #fdf2f8; color: #be185d; }
+  .pill-patristics { background-color: #faf5ff; color: #7e22ce; }
+  .pill-contradictions { background-color: #fff1f2; color: #be123c; }
+  .pill-manuscripts { background-color: #fefce8; color: #a16207; }
+  .pill-date { background-color: #f3f4f6; color: #374151; }
+  .pill-tafsir { background-color: #ecfdf5; color: #047857; }
+  .pill-footnote { background-color: #f0fdfa; color: #0f766e; }
+  .pill-critical { background-color: #fef2f2; color: #b91c1c; }
+
+  /* Scripture Box */
+  .verse-quote-box {
+    margin: 0;
+    padding: 8px 12px;
+    border-left: 3px solid var(--color-outline-variant, #e4e4e7);
+    background-color: #fafafa;
+    border-radius: 0 8px 8px 0;
+    font-family: var(--font-display, 'Literata', Georgia, serif);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #334155;
+    font-style: italic;
+  }
+
+  .footnote-preview-text,
+  .manuscript-variant-summary {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--color-on-surface-variant, #64748b);
+    margin: 0;
+  }
+
+  /* MS Meta Details */
+  .ms-meta-details {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--color-on-surface-variant, #71717a);
+  }
+
+  .ms-corpus-tag {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background-color: var(--color-surface-container-low, #f4f4f5);
+  }
+
+  /* Critical Tags */
+  .labels-tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .critical-tag-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background-color: #fff1f2;
+    color: #9f1239;
+    border: 1px solid #ffe4e6;
+  }
+
+  /* Action Buttons */
+  .card-footer-action {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2px;
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--color-on-surface-variant, #71717a);
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+  .action-btn:hover {
+    color: var(--color-primary, #09090b);
+    transform: translateX(2px);
+  }
+
+  .bible-theme .action-btn:hover {
+    color: #974543;
+  }
+  .quran-theme .action-btn:hover {
+    color: #059669;
+  }
+
+  .arrow-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

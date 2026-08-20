@@ -40,10 +40,15 @@ const CODEX_MAPPINGS = {
   muhammad: { name: "Muhammad's Forgotten Verses", path: "/quran/0" }
 };
 
-/**
- * Resolves a comma-separated string of generic verses into UI DTOs
- */
 function resolveVerseString(verseStr, base, quranEnglishData) {
+  if (verseStr === 'gospels') {
+    return {
+      label: 'The Gospels',
+      link: `${base}/bible/gospels/videos`,
+      text: 'Overview and textual reliability of the four canonical Gospels (Matthew, Mark, Luke, John).'
+    };
+  }
+
   const parts = verseStr.split('_');
 
   if (parts.length === 2 && parts[1] === '0') {
