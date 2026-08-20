@@ -22,7 +22,7 @@ const fileCache = new Map();
 export function getScriptureVerseText(book, chapter, verse) {
   if (!book || !chapter || !verse) return "";
 
-  let b = book;
+  let b = book.toLowerCase();
   let c = String(chapter);
   let v = String(verse);
 

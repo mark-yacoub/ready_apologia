@@ -39,16 +39,40 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
         run: |
+          # Configure AWS CLI for high resilience with Cloudflare R2
+          aws configure set default.s3.max_concurrent_requests 20
+          aws configure set default.s3.retry_mode adaptive
+          aws configure set default.s3.max_attempts 10
+
+          sync_with_retry() {
+            local max_retries=4
+            local attempt=1
+            local exit_code=0
+            while [ $attempt -le $max_retries ]; do
+              echo "Starting sync attempt $attempt of $max_retries: $*"
+              if "$@"; then
+                echo "Sync succeeded on attempt $attempt."
+                return 0
+              fi
+              exit_code=$?
+              echo "Sync attempt $attempt failed with code $exit_code. Retrying in 10 seconds..."
+              sleep 10
+              attempt=$((attempt + 1))
+            done
+            echo "Sync failed after $max_retries attempts."
+            return $exit_code
+          }
+
           # Sync static assets (excluding sw.js and HTML files) with default long-term cache
-          aws s3 sync ./dist s3://ready-apologia-web/ \
-            --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
+          sync_with_retry aws s3 sync ./dist s3://ready-apologia-web/ \
+            --endpoint-url "https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com" \
             --delete \
             --exclude "sw.js" \
             --exclude "*.html"
 
           # Sync sw.js and HTML files with strict no-cache directive
-          aws s3 sync ./dist s3://ready-apologia-web/ \
-            --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
+          sync_with_retry aws s3 sync ./dist s3://ready-apologia-web/ \
+            --endpoint-url "https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com" \
             --exclude "*" \
             --include "sw.js" \
             --include "*.html" \
