@@ -5,24 +5,75 @@ import { loadAllEvidenceData } from '../../utils/evidenceLoader.js';
 
 const evidenceData = loadAllEvidenceData();
 
-const pageDesc = "Explore the core theology and scripture of Christianity and Islam, directly using verses from the scripture or ancient writers' quotes.";
-const pageKeywords = "apologetics directory, christian evidence, defend the faith, scriptural apologetics, early church theology";
+const pageTitle = "Christian Apologetics Evidence Directory";
+const pageDesc = "Comprehensive directory of Biblical scripture verses, Patristic testimonies, Messianic prophecies, and manuscript evidence defending Christian theology.";
+const pageKeywords = "apologetics directory, christian evidence, defend the faith, scriptural apologetics, early church theology, divinity of christ, messianic prophecies, quranic deficiencies, scientific errors in quran";
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
 
 const schemaObj = {
   "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "headline": "Christian Apologetics Evidence & Scripture Evidence",
-  "description": pageDesc,
-  "hasPart": evidenceData.map(t => ({
-    "@type": "WebPage",
-    "name": t.evidenceId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-    "url": `${Astro.url.origin}${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/evidence/${t.evidenceId}`
-  }))
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ready Apologia",
+          "item": `${site}${base}/`
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Apologetics Evidence",
+          "item": `${site}${base}/evidence`
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": `${site}${base}/evidence`,
+      "headline": pageTitle,
+      "name": pageTitle,
+      "description": pageDesc,
+      "url": `${site}${base}/evidence`,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": `${site}${base}/`
+      },
+      "hasPart": [
+        ...evidenceData.map(t => ({
+          "@type": "WebPage",
+          "name": t.evidenceId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+          "url": `${site}${base}/evidence/${t.evidenceId}`
+        })),
+        {
+          "@type": "WebPage",
+          "name": "Quranic Deficiencies",
+          "url": `${site}${base}/evidence/quranic_deficiencies`
+        },
+        {
+          "@type": "WebPage",
+          "name": "Scientific Errors in the Quran",
+          "url": `${site}${base}/evidence/scientific_errors`
+        }
+      ]
+    }
+  ]
 };
-const schemaJson = JSON.stringify(schemaObj);
 ---
 
-<Layout title="Christian Apologetics Evidence Directory" description={pageDesc} keywords={pageKeywords} schema={schemaJson}>
+<Layout 
+  title={pageTitle} 
+  description={pageDesc} 
+  keywords={pageKeywords} 
+  ogImage="/assets/logo.png"
+  ogType="website"
+  schema={schemaObj}
+>
   <div class="evidence-index-container">
     <EvidenceExplorer client:load evidence={evidenceData} />
   </div>

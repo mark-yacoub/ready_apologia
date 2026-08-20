@@ -9,11 +9,65 @@ import { loadAllEvidenceData } from '../../utils/evidenceLoader.js';
 // so users can still switch from "Quranic Deficiencies" back to "Divinity of Christ".
 const evidenceDropdownData = loadAllEvidenceData();
 const evidenceTitle = "Quranic Deficiencies & Theological Evidence";
-const evidenceDesc = "Analyze the Quran for theological defects, historical errors, borrowed mythology/plagiarism, contradictions with the Bible, and verses that incite violence, sanction slavery, or devalue women.";
+const evidenceDesc = "Analyze textual and theological deficiencies in the Quran: historical errors, borrowed mythology, biblical contradictions, and moral controversies.";
 const evidenceKeywords = "quranic deficiencies, theological defect, borrowed mythology islam, contradicts the bible, quran promotes violence, historical errors in quran";
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ready Apologia",
+          "item": `${site}${base}/`
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Apologetics Evidence",
+          "item": `${site}${base}/evidence`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Quranic Deficiencies",
+          "item": `${site}${base}/evidence/quranic_deficiencies`
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": `${site}${base}/evidence/quranic_deficiencies`,
+      "url": `${site}${base}/evidence/quranic_deficiencies`,
+      "name": "Quranic Deficiencies & Theological Evidence",
+      "headline": evidenceTitle,
+      "description": evidenceDesc,
+      "keywords": evidenceKeywords,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": `${site}${base}/`
+      }
+    }
+  ]
+};
 ---
 
-<Layout title={evidenceTitle} description={evidenceDesc} keywords={evidenceKeywords} theme="quran">
+<Layout 
+  title={evidenceTitle} 
+  description={evidenceDesc} 
+  keywords={evidenceKeywords} 
+  ogImage="/assets/logo.png"
+  ogType="article"
+  schema={schemaGraph}
+  theme="quran"
+>
   <div class="evidence-page-container">
     <QuranicEvidenceExplorer
       client:load

@@ -8,6 +8,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const pageTitle = "Convenient Revelations | Historical & Fiqh Analysis";
 const pageDesc = "An evidentiary investigation into Medinan verses that descended at critical junctions of domestic conflict, financial division, military pressure, and political accountability.";
 const pageKeywords = "convenient revelations, quranic exemptions, muhammad privileges, asbab al nuzul, zaynab marriage, aisha slander 4 witnesses, surah al ahzab, quran historical analysis";
+const ogImage = "/media/convenient_revelations/cover.jpg";
 
 const gatewayLinks = [
   {
@@ -39,13 +40,48 @@ const gatewayLinks = [
     accentClass: "cr-part-04",
   }
 ];
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/discover/convenient-revelations`;
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Discover", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 3, "name": "Islamics · The Prophet", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 4, "name": "Convenient Revelations", "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": canonicalURL,
+      "headline": pageTitle,
+      "name": pageTitle,
+      "description": pageDesc,
+      "url": canonicalURL,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": `${siteUrl}${base}/`
+      }
+    }
+  ]
+};
 ---
 
 <Layout
   title={pageTitle}
   description={pageDesc}
   keywords={pageKeywords}
-  ogImage="/media/convenient_revelations/cover.jpg"
+  ogImage={ogImage}
+  ogType="article"
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
 >
   <TailwindSetup />
   <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'convenient-revelations' }} />

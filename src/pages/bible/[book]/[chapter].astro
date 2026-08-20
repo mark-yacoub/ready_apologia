@@ -6,6 +6,7 @@ import { query } from '../../../db.js';
 import booksMeta from '../../../data/books_meta.json';
 import { mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
 import { getBibleOgImage } from '../../../utils/ogImageResolver.js';
+import { generateBibleChapterSchema } from '../../../utils/seoFactory.js';
 import { BUILD_BOOKS } from '../../../utils/build_config.js';
 import { loadAllEvidenceData } from '../../../utils/evidenceLoader.js';
 import { getEvidenceColor as getTopicColor } from '../../../utils/evidenceColors.js';
@@ -219,12 +220,25 @@ if (verseTagsCount > 0 || evidenceVerseCount > 0) {
 
   seoDescription += ` This chapter includes ${stats.join(' and ')}.`;
 }
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/bible/${book}/${chapter}`;
+const chapterSchema = generateBibleChapterSchema({
+  bookName: bookMeta.name,
+  bookId: book,
+  chapter,
+  seoDescription,
+  canonicalUrl: canonicalURL
+});
 ---
 
 <Layout
   title={seoTitle}
   description={seoDescription}
   ogImage={ogImage}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={chapterSchema}
   keywords={`${bookMeta.name} ${chapter}, apologetics, contradictions, commentaries`}
 >
   <div class="chapter-reader-container">

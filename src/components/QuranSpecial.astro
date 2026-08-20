@@ -99,9 +99,44 @@ if (validVerseIds.length > 0) {
   companionsWithData.forEach(c => c.videos = []);
 }
 
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/quran/${index}`;
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Quran", "item": `${siteUrl}${base}/quran` },
+        { "@type": "ListItem", "position": 3, "name": title, "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "ItemPage",
+      "@id": canonicalURL,
+      "headline": seoTitle,
+      "name": seoTitle,
+      "description": seoDescription,
+      "url": canonicalURL,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": `${siteUrl}${base}/`
+      }
+    }
+  ]
+};
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout
+  title={seoTitle}
+  description={seoDescription}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+>
   <RouteAnalytics
     eventName="quran_special_view"
     params={{

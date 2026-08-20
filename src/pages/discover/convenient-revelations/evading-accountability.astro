@@ -22,17 +22,51 @@ const themes = themeKeys
 function slugify(text: string) {
     return text.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/[\s_]+/g, '-');
 }
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/discover/convenient-revelations/evading-accountability`;
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Discover", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 3, "name": "Convenient Revelations", "item": `${siteUrl}${base}/discover/convenient-revelations` },
+        { "@type": "ListItem", "position": 4, "name": pageConfig.title, "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": `${canonicalURL}#article`,
+      "headline": pageConfig.title,
+      "description": pageConfig.description,
+      "image": `${siteUrl}${base}/media/convenient_revelations/cover.jpg`,
+      "url": canonicalURL,
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalURL },
+      "author": { "@type": "Organization", "name": "Ready Apologia" },
+      "publisher": { "@type": "Organization", "name": "Ready Apologia", "logo": { "@type": "ImageObject", "url": `${siteUrl}${base}/assets/logo.png` } }
+    }
+  ]
+};
 ---
 <Layout 
   title={pageConfig.title} 
   description={pageConfig.description}
   keywords={pageConfig.keywords}
   ogImage="/media/convenient_revelations/cover.jpg"
+  ogType="article"
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
 >
   <TailwindSetup />
   <div class="relative w-full h-[50vh] min-h-[400px] mb-12 overflow-hidden shadow-2xl">
     <div class="absolute inset-0 bg-black">
-      <img src="/media/convenient_revelations/cover.jpg" alt="Ancient scrolls" class="w-full h-full object-cover opacity-60 mix-blend-overlay filter contrast-125">
+      <img src="/media/convenient_revelations/cover.jpg" alt="Ancient Islamic manuscripts detailing domestic and political oaths" class="w-full h-full object-cover opacity-60 mix-blend-overlay filter contrast-125">
     </div>
     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
     <div class="absolute bottom-0 left-0 w-full p-8 md:p-12 max-w-5xl mx-auto">

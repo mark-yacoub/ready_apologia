@@ -6,32 +6,48 @@ import { ClientRouter } from 'astro:transitions';
 import '../styles/markdown-exegesis.css';
 import '../styles/evidence-badges.css';
 import OnboardingBanner from '../components/OnboardingBanner.jsx';
+import { generateArticleSchema, safeJsonStringify, SITE_NAME, DEFAULT_LOGO_URL } from '../utils/seoFactory.js';
 
 interface Props {
 	title: string;
 	description?: string;
 	ogImage?: string;
+	ogType?: string;
+	ogImageWidth?: string | number;
+	ogImageHeight?: string | number;
 	canonicalURL?: string;
 	ogUrl?: string;
-	schema?: string;
+	schema?: string | Record<string, any> | Array<Record<string, any>>;
 	keywords?: string;
 	theme?: string;
+	noindex?: boolean;
 }
 
 const {
 	title,
 	description = "Ready Apologia - Defending the Faith with Biblical Scripture and Early Church Fathers",
 	ogImage,
+	ogType = "website",
+	ogImageWidth,
+	ogImageHeight,
 	canonicalURL,
 	ogUrl: customOgUrl,
 	schema,
 	keywords = "Apologetics, Bible Verses, Early Church Fathers, Divinity of Christ, Ready Apologia, Patristics, Scripture Evidence, Christian Apologetics, Ante-Nicene Fathers",
-	theme
+	theme,
+	noindex = false
 } = Astro.props;
+const isNoIndex = noindex || title.includes('404') || title.includes('Not Found');
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
 const fallbackImage = `${site}${base}/default-og-image.png`;
 const ogImageUrl = ogImage ? (ogImage.startsWith('http') ? ogImage : `${site}${base}${ogImage}`) : fallbackImage;
+const ogImageType = ogImageUrl.toLowerCase().endsWith('.png') ? 'image/png' : (ogImageUrl.toLowerCase().endsWith('.webp') ? 'image/webp' : 'image/jpeg');
+
+// Default dimensions for logo and standard social cards (194x150 for logo)
+const resolvedImageWidth = ogImageWidth || ((ogImageUrl.includes('/assets/logo.png') || ogImageUrl.includes('default-og-image.png')) ? 194 : undefined);
+const resolvedImageHeight = ogImageHeight || ((ogImageUrl.includes('/assets/logo.png') || ogImageUrl.includes('default-og-image.png')) ? 150 : undefined);
+const twitterCardType = (resolvedImageWidth && Number(resolvedImageWidth) < 300) ? 'summary' : 'summary_large_image';
 
 /**
  * L6 Deterministic Canonical Normalization:
@@ -62,6 +78,45 @@ const ogUrl = canonicalHref;
 const formattedTitle = title.endsWith('Ready Apologia') || title.includes(' | Ready Apologia')
   ? title
   : `${title} | Ready Apologia`;
+
+// L6 Deterministic Schema Resolution:
+// Auto-generate standard Article schema if ogType is article and merge with custom schemas (e.g., FAQPage, BreadcrumbList)
+const autoArticleSchema = ogType === 'article' ? generateArticleSchema({
+  title: formattedTitle,
+  description,
+  url: canonicalHref,
+  imageUrl: ogImageUrl,
+  siteName: 'Ready Apologia',
+  logoUrl: `${site}${base}/assets/logo.png`
+}) : null;
+
+let resolvedSchema = schema;
+if (!resolvedSchema) {
+  resolvedSchema = autoArticleSchema;
+} else if (autoArticleSchema) {
+  if (Array.isArray(resolvedSchema)) {
+    const hasArticle = resolvedSchema.some(s => s?.['@type'] === 'Article');
+    if (!hasArticle) resolvedSchema = [autoArticleSchema, ...resolvedSchema];
+  } else if (typeof resolvedSchema === 'object') {
+    if (resolvedSchema['@graph'] && Array.isArray(resolvedSchema['@graph'])) {
+      const hasArticle = resolvedSchema['@graph'].some(s => s?.['@type'] === 'Article');
+      if (!hasArticle) {
+        // Strip inner @context for clean @graph encapsulation
+        const { '@context': _ctx, ...articleEntity } = autoArticleSchema;
+        resolvedSchema = {
+          ...resolvedSchema,
+          '@graph': [articleEntity, ...resolvedSchema['@graph']]
+        };
+      }
+    } else if (resolvedSchema?.['@type'] !== 'Article') {
+      resolvedSchema = [autoArticleSchema, resolvedSchema];
+    }
+  }
+}
+
+const serializedSchema = typeof resolvedSchema === 'string'
+  ? resolvedSchema
+  : (resolvedSchema ? safeJsonStringify(resolvedSchema) : null);
 ---
 
 <!doctype html>
@@ -70,24 +125,35 @@ const formattedTitle = title.endsWith('Ready Apologia') || title.includes(' | Re
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
+		<meta name="robots" content={isNoIndex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+		<meta name="theme-color" content="#ffffff" />
+		<meta name="application-name" content="Ready Apologia" />
+		<meta name="apple-mobile-web-app-title" content="Ready Apologia" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 		<link rel="icon" type="image/png" href={`${base}/assets/logo.png`} />
 		<link rel="apple-touch-icon" href={`${base}/assets/logo.png`} />
+		<link rel="manifest" href={`${base}/manifest.json`} />
 		<link rel="canonical" href={canonicalHref} />
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Open Graph / Social Media -->
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={ogType} />
 		<meta property="og:site_name" content="Ready Apologia" />
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:url" content={ogUrl} />
 		<meta property="og:title" content={formattedTitle} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:secure_url" content={ogImageUrl} />
+		<meta property="og:image:type" content={ogImageType} />
+		{resolvedImageWidth && <meta property="og:image:width" content={String(resolvedImageWidth)} />}
+		{resolvedImageHeight && <meta property="og:image:height" content={String(resolvedImageHeight)} />}
 		<meta property="og:image:alt" content={formattedTitle} />
 
 		<!-- Twitter Card -->
-		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:card" content={twitterCardType} />
 		<meta name="twitter:url" content={ogUrl} />
 		<meta name="twitter:title" content={formattedTitle} />
 		<meta name="twitter:description" content={description} />
@@ -96,7 +162,7 @@ const formattedTitle = title.endsWith('Ready Apologia') || title.includes(' | Re
 
 		<title>{formattedTitle}</title>
 
-		{schema && <script type="application/ld+json" set:html={schema} />}
+		{serializedSchema && <script type="application/ld+json" set:html={serializedSchema} />}
 		<ClientRouter />
 		<GoogleAnalytics />
 

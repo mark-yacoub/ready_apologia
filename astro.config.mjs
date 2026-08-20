@@ -15,9 +15,14 @@ function resolveSitemapMetadata(pathname) {
   const segments = cleanPath.split('/').filter(Boolean);
   const rootSection = segments[0]; // e.g., 'bible', 'quran', 'discover'
 
-  // Top-level hub pages (/bible, /quran, /discover)
+  // Top-level hub pages (/bible, /quran, /discover, /evidence)
   if (segments.length === 1) {
     return { changefreq: 'weekly', priority: 1.0 };
+  }
+
+  // Apologetics Evidence Topics (/evidence/*)
+  if (rootSection === 'evidence') {
+    return { changefreq: 'monthly', priority: 0.9 };
   }
 
   // Discover deep-dive articles & Quran Codices / Variants

@@ -4,8 +4,10 @@ import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
 import '../../styles/evidence-feed.css';
 import articleData from '../../data/extrabiblical-evidence-for-jesus.json';
 
-const pageDesc = articleData.description;
+const pageTitle = articleData.title || "Historical Extrabiblical Evidence for Jesus";
+const pageDesc = "Explore 62 verified Ante-Nicene non-Christian sources, Roman records, Jewish testimonies, and archaeological finds confirming the historical Jesus.";
 const pageKeywords = "evidence for jesus, historical jesus, extrabiblical evidence, tacitus, josephus, early christianity";
+const ogImage = "/media/extrabiblical_evidence/cover.jpg";
 
 // Top-level immutable theme pipeline mapped dynamically from JSON
 const sortedThemes = articleData.themes;
@@ -35,9 +37,49 @@ const textHighlighter = (str) => {
   if (!str) return '';
   return str.replace(/\*\*(.*?)\*\*/g, '<span class="quote-highlight">$1</span>');
 };
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/discover/extrabiblical-evidence-for-jesus`;
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Discover", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 3, "name": "Christianity · History", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 4, "name": pageTitle, "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": `${canonicalURL}#article`,
+      "headline": pageTitle,
+      "description": pageDesc,
+      "image": `${siteUrl}${base}${ogImage}`,
+      "url": canonicalURL,
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalURL },
+      "author": { "@type": "Organization", "name": "Ready Apologia" },
+      "publisher": { "@type": "Organization", "name": "Ready Apologia", "logo": { "@type": "ImageObject", "url": `${siteUrl}${base}/assets/logo.png` } }
+    }
+  ]
+};
 ---
 
-<Layout title={articleData.title} description={pageDesc} keywords={pageKeywords} theme="evidence-mode">
+<Layout 
+  title={pageTitle} 
+  description={pageDesc} 
+  keywords={pageKeywords} 
+  ogImage={ogImage}
+  ogType="article"
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+  theme="evidence-mode"
+>
   <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'extrabiblical-evidence-for-jesus' }} />
   <div class="evidence-page-wrapper">
     

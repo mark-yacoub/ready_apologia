@@ -8,11 +8,65 @@ import { loadAllEvidenceData } from '../../utils/evidenceLoader.js';
 // We load all evidence solely to populate the generic top-of-page Dropdown selector
 const evidenceDropdownData = loadAllEvidenceData();
 const evidenceTitle = "Scientific Errors in the Quran";
-const evidenceDesc = "A critical apologetics analysis of scientific errors in the Quran, detailing geocentricism, flat earth cosmology, embryological inaccuracies, mathematical errors in inheritance, and mistaken astronomy (e.g., stars as missiles).";
+const evidenceDesc = "Critical apologetics analysis of scientific errors in the Quran: geocentrism, flat earth cosmology, embryological inaccuracies, and mistaken astronomy.";
 const evidenceKeywords = "quran scientific errors, quran flat earth, embryology in the quran, geocentricism islam, quran mathematical errors";
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ready Apologia",
+          "item": `${site}${base}/`
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Apologetics Evidence",
+          "item": `${site}${base}/evidence`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Scientific Errors in the Quran",
+          "item": `${site}${base}/evidence/scientific_errors`
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": `${site}${base}/evidence/scientific_errors`,
+      "url": `${site}${base}/evidence/scientific_errors`,
+      "name": "Scientific Errors in the Quran",
+      "headline": evidenceTitle,
+      "description": evidenceDesc,
+      "keywords": evidenceKeywords,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": `${site}${base}/`
+      }
+    }
+  ]
+};
 ---
 
-<Layout title={evidenceTitle} description={evidenceDesc} keywords={evidenceKeywords} theme="quran">
+<Layout 
+  title={evidenceTitle} 
+  description={evidenceDesc} 
+  keywords={evidenceKeywords} 
+  ogImage="/assets/logo.png"
+  ogType="article"
+  schema={schemaGraph}
+  theme="quran"
+>
   <div class="evidence-page-container">
     <ScientificErrorsExplorer
       client:load

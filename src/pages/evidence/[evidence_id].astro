@@ -43,6 +43,10 @@ const seoStrategy = {
   }
 };
 
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const pageUrl = `${site}${base}/evidence/${evidence_id}`;
+
 const strat = seoStrategy[evidence_id] || {};
 const evidenceTitle = strat.title || `${rawTitle} Bible Verses & Early Church Evidence`;
 const evidenceDesc = strat.description || `Comprehensive collection of Biblical Scripture verses (Old & New Testament) and early Church Patristic testimonies defending the ${rawTitle}. Explore historical Christian apologetics proofs and quotes.`;
@@ -73,26 +77,26 @@ const articleGraph = {
           "@type": "ListItem",
           "position": 1,
           "name": "Ready Apologia",
-          "item": Astro.site ? Astro.site.toString() : Astro.url.origin
+          "item": `${site}${base}/`
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Apologetics Evidence",
-          "item": `${Astro.site ? Astro.site.toString().replace(/\/$/, '') : Astro.url.origin}/evidence`
+          "item": `${site}${base}/evidence`
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": rawTitle,
-          "item": Astro.url.href
+          "item": pageUrl
         }
       ]
     },
     {
       "@type": "CollectionPage",
-      "@id": Astro.url.href,
-      "url": Astro.url.href,
+      "@id": pageUrl,
+      "url": pageUrl,
       "name": `${rawTitle} - Scripture & Patristic Evidence`,
       "headline": evidenceTitle,
       "description": evidenceDesc,
@@ -100,7 +104,7 @@ const articleGraph = {
       "isPartOf": {
         "@type": "WebSite",
         "name": "Ready Apologia",
-        "url": Astro.site ? Astro.site.toString() : Astro.url.origin
+        "url": `${site}${base}/`
       },
       "mainEntity": {
         "@type": "ItemList",
@@ -110,10 +114,16 @@ const articleGraph = {
     }
   ]
 };
-const schemaJson = JSON.stringify(articleGraph);
 ---
 
-<Layout title={evidenceTitle} description={evidenceDesc} keywords={evidenceKeywords} schema={schemaJson}>
+<Layout 
+  title={evidenceTitle} 
+  description={evidenceDesc} 
+  keywords={evidenceKeywords} 
+  ogImage="/assets/logo.png"
+  ogType="article"
+  schema={articleGraph}
+>
   <div class="evidence-page-container">
     <EvidenceExplorer client:load evidence={evidenceData} initialEvidenceId={evidence_id} />
   </div>

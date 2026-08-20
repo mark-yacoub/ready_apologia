@@ -4,6 +4,7 @@ import path from 'node:path';
 import Layout from '../../layouts/Layout.astro';
 import QuranPageHeader from '../../components/QuranPageHeader.astro';
 import { getQuranOgImage } from '../../utils/ogImageResolver.js';
+import { generateQuranSurahSchema } from '../../utils/seoFactory.js';
 import VariantCard from '../../components/VariantCard.astro';
 import { TOTAL_SURAHS } from '../../utils/quran_config.js';
 import { BUILD_SURAHS } from '../../utils/build_config.js';
@@ -165,11 +166,29 @@ if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
   seoDescription += ` This Surah features deep analysis on ${stats.join(', ')}.`;
 }
 
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/quran/${surahNum}`;
+const surahSchema = generateQuranSurahSchema({
+  transliteration: arabicData.transliteration,
+  surahNum,
+  seoDescription,
+  canonicalUrl: canonicalURL
+});
+
 // Generate OG Image from the oldest manuscript belonging to ANY verse in this surah
 const ogImage = getQuranOgImage(surahNum, null);
 ---
 
-<Layout title={seoTitle} description={seoDescription} keywords={seoKeywords} ogImage={ogImage}>
+<Layout
+  title={seoTitle}
+  description={seoDescription}
+  keywords={seoKeywords}
+  ogImage={ogImage}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={surahSchema}
+>
   <div class="quran-reader-container theme-quran prefer-english">
     <QuranPageHeader currentTitle={`${surahNum}. ${arabicData.transliteration}`} currentIndex={surahNum} />
 

@@ -35,12 +35,52 @@ dynamicCategories.forEach((cat, index) => {
    };
 });
 
-const pageDesc = "Explore our interactive timeline of archaeological and historical evidence proving early Christian belief in the divinity of Jesus Christ long before the Council of Nicaea.";
+const pageTitle = "Archaeological Evidence of the Divine Christ";
+const pageDesc = "Interactive timeline of archaeological and documentary evidence proving early Christian belief in Jesus's divinity long before the Council of Nicaea.";
 const pageKeywords = "divinity of Christ, pre-nicene christology, archaeological evidence for Jesus as God, did early christians believe jesus was god, christian apologetics timeline, council of nicaea myth";
+const ogImage = "/media/divinity_timeline/megiddo_mosaic/image_1.jpg";
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/discover/divinity-timeline`;
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Discover", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 3, "name": "Christianity · History", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 4, "name": pageTitle, "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": `${canonicalURL}#article`,
+      "headline": pageTitle,
+      "description": pageDesc,
+      "image": `${siteUrl}${base}${ogImage}`,
+      "url": canonicalURL,
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalURL },
+      "author": { "@type": "Organization", "name": "Ready Apologia" },
+      "publisher": { "@type": "Organization", "name": "Ready Apologia", "logo": { "@type": "ImageObject", "url": `${siteUrl}${base}/assets/logo.png` } }
+    }
+  ]
+};
 ---
 
-<Layout title="Archaeological Evidence of the Divine Christ" description={pageDesc} keywords={pageKeywords} ogImage="/media/divinity_timeline/megiddo_mosaic/image_1.jpg" theme="timeline-mode">
+<Layout 
+  title={pageTitle} 
+  description={pageDesc} 
+  keywords={pageKeywords} 
+  ogImage={ogImage} 
+  ogType="article"
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+  theme="timeline-mode"
+>
   <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'divinity-timeline' }} />
 <divinity-timeline-app data-base-url={base}>
 
@@ -75,7 +115,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
   <template id="template-source-card">
     <a class="rich-source-card" target="_blank">
-      <div class="rich-source-icon"><img alt="Source Icon"></div>
+      <div class="rich-source-icon"><img alt="Historical source citation icon"></div>
       <div class="rich-source-text"></div>
     </a>
   </template>

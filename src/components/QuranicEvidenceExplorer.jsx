@@ -166,14 +166,21 @@ export default function QuranicEvidenceExplorer({ evidenceDropdownData = [], ver
 
   return (
     <div className="evidence-explorer select-none relative">
-      <div className="ios-nav-container">
-        <a href={`${base}/evidence`} className="ios-nav-back" title="All Evidence">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M15 18l-6-6 6-6"/>
-          </svg>
-          <span>All Evidence</span>
-        </a>
-      </div>
+      <nav className="breadcrumb-nav-bar" aria-label="Breadcrumb">
+        <ol className="breadcrumb-list">
+          <li className="breadcrumb-item">
+            <a href={`${base}/`} className="breadcrumb-link">Ready Apologia</a>
+          </li>
+          <li className="breadcrumb-separator" aria-hidden="true">/</li>
+          <li className="breadcrumb-item">
+            <a href={`${base}/evidence`} className="breadcrumb-link">Evidence</a>
+          </li>
+          <li className="breadcrumb-separator" aria-hidden="true">/</li>
+          <li className="breadcrumb-item breadcrumb-current" aria-current="page">
+            <span>Quranic Deficiencies</span>
+          </li>
+        </ol>
+      </nav>
 
       <div className="dedicated-evidence-wrapper" onClick={() => setDropdownOpen(false)}>
         <div

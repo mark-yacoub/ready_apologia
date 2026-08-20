@@ -77,14 +77,54 @@ processedData.forEach(stage => {
 // Prepare stages for the sticky nav bar, ignoring small children for top level items
 const topLevelStages = processedData.map((stage, i) => ({
   id: `stage-${i}`,
-  title: stage.title.replace(/^Stage\s+\d+:\s*/i, '') // Strip redundant "Stage X:" prefix
+  title: i === 0 ? "The Myth of Quranic Preservation" : stage.title.replace(/^Stage\s+\d+:\s*/i, '') // Strip redundant "Stage X:" prefix
 }));
 
+const pageTitle = "The Myth of Quranic Preservation: Historical Evidence";
 const pageDesc = "Dismantling the myth of perfect Quran preservation. Explore the historical timeline involving Uthman's compilation, the Sana'a Palimpsest, missing verses, and competing codices.";
 const pageKeywords = "quran preservation myth, has the quran been changed, uthman quran compilation, sanaa palimpsest, qiraat variants, missing quran verses, textual criticism of the quran, islamic apologetics";
+const ogImage = "/media/quran_preservation/cover.jpg";
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/discover/quran-preservation`;
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Discover", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 3, "name": "Islamics · Scripture", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 4, "name": pageTitle, "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": `${canonicalURL}#article`,
+      "headline": pageTitle,
+      "description": pageDesc,
+      "image": `${siteUrl}${base}${ogImage}`,
+      "url": canonicalURL,
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalURL },
+      "author": { "@type": "Organization", "name": "Ready Apologia" },
+      "publisher": { "@type": "Organization", "name": "Ready Apologia", "logo": { "@type": "ImageObject", "url": `${siteUrl}${base}/assets/logo.png` } }
+    }
+  ]
+};
 ---
 
-<Layout title="The Myth of Quranic Preservation: Historical Evidence" description={pageDesc} keywords={pageKeywords} ogImage="/media/quran_preservation/cover.png">
+<Layout 
+  title={pageTitle} 
+  description={pageDesc} 
+  keywords={pageKeywords} 
+  ogImage={ogImage}
+  ogType="article"
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+>
   <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'quran-preservation' }} />
   <div class="article-journey-container">
     {/* Navigation */}
@@ -103,7 +143,11 @@ const pageKeywords = "quran preservation myth, has the quran been changed, uthma
             {!isConclusion && (
               <header class="stage-header">
                 {isNumberedStage && <div class="stage-badge">STAGE {index}</div>}
-                <h2 class="stage-title">{cleanTitle}</h2>
+                {index === 0 ? (
+                  <h1 class="stage-title">The Myth of Quranic Preservation</h1>
+                ) : (
+                  <h2 class="stage-title">{cleanTitle}</h2>
+                )}
               </header>
             )}
               

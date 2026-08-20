@@ -8,12 +8,48 @@ import { clusterCatalogData } from '../../utils/discoverService';
 // Safely inject dependencies into the pure service core
 const clusteredCatalog = clusterCatalogData(discoverData as unknown[]);
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/discover`;
 
-const pageDesc = "Explore deep dives and historical timelines regarding Christianity and Islam.";
-const pageKeywords = "discover, apologetics";
+const pageTitle = "Discover Christian Apologetics & Islamic Studies";
+const pageDesc = "Explore interactive deep dives, archaeological timelines, and manuscript evidence examining Christian theology, early church history, and Quranic origins.";
+const pageKeywords = "christian apologetics, islamic studies, biblical manuscripts, quranic preservation, historical jesus, pre-nicene church fathers, comparative scripture";
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Discover", "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": canonicalURL,
+      "headline": pageTitle,
+      "name": pageTitle,
+      "description": pageDesc,
+      "url": canonicalURL,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": `${siteUrl}${base}/`
+      }
+    }
+  ]
+};
 ---
 
-<Layout title="Discover | Ready Apologia" description={pageDesc} keywords={pageKeywords}>
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  keywords={pageKeywords}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+>
   <div class="discover-hub">
     <header class="hub-header">
       <h1 class="hub-title">Discover</h1>

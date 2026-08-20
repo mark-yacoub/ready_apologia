@@ -7,15 +7,48 @@ import { enrichVideosWithVerses } from '../../../utils/video_service.js';
 const rawVideos = getRawVideosByVerseId('gospels');
 const videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/bible/gospels/videos`;
+
 const seoTitle = "The Gospels Overview - Videos & Apologetics";
 const seoDescription = "Watch apologetics videos and shorts about the history, textual reliability, and overview of the Gospels.";
-const canonicalURL = Astro.site ? `${Astro.site.toString().replace(/\/$/, '')}${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/bible/gospels/videos` : '';
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Bible", "item": `${siteUrl}${base}/bible/jn/1` },
+        { "@type": "ListItem", "position": 3, "name": "The Gospels", "item": canonicalURL },
+        { "@type": "ListItem", "position": 4, "name": "Videos & Apologetics", "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "ItemPage",
+      "@id": canonicalURL,
+      "headline": seoTitle,
+      "name": seoTitle,
+      "description": seoDescription,
+      "url": canonicalURL,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": `${siteUrl}${base}/`
+      }
+    }
+  ]
+};
 ---
 
 <Layout
   title={seoTitle}
   description={seoDescription}
   canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
 >
   <div class="verse-detail-container">
     <header class="detail-header select-none">

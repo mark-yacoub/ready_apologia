@@ -63,13 +63,50 @@ codexData.uthmanicVariants.forEach(v => {
 
 const surahsList = Object.values(variantsBySurah).sort((a, b) => parseInt(a.number) - parseInt(b.number));
 
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/quran/codex/${companion}`;
+
 const seoTitle = `The Codex of ${codexData.name} - Competing Quranic Manuscripts`;
 const seoDescription = `While Uthman burnt varying versions of the Quran to enforce standardization, the ${codexData.name} codex survived in parts through the Sahih Hadith. Discover its variant readings, lost verses, and differences from the standard text.`;
 const seoKeywords = `codex of ${codexData.name}, non-uthmanic quran, uthmanic compilation, variant quran manuscripts, burned quran manuscripts`;
 
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Quran", "item": `${siteUrl}${base}/quran` },
+        { "@type": "ListItem", "position": 3, "name": "Competing Codices", "item": `${siteUrl}${base}/quran` },
+        { "@type": "ListItem", "position": 4, "name": `Codex of ${codexData.name}`, "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": `${canonicalURL}#article`,
+      "headline": seoTitle,
+      "description": seoDescription,
+      "url": canonicalURL,
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalURL },
+      "author": { "@type": "Organization", "name": "Ready Apologia" },
+      "publisher": { "@type": "Organization", "name": "Ready Apologia", "logo": { "@type": "ImageObject", "url": `${siteUrl}${base}/assets/logo.png` } }
+    }
+  ]
+};
+
 ---
 
-<Layout title={seoTitle} description={seoDescription} keywords={seoKeywords}>
+<Layout
+  title={seoTitle}
+  description={seoDescription}
+  keywords={seoKeywords}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  ogType="article"
+  schema={schemaObj}
+>
   <RouteAnalytics
     eventName="quran_special_view"
     params={{
