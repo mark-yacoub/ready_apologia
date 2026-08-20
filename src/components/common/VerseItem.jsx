@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import booksMeta from '../../data/books_meta.json';
 import { trackEvidenceInteraction } from '../../utils/analytics.js';
-
-const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+import { getBibleUrl, getQuranUrl } from '../../utils/urlFactory.js';
 
 export const InfoIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -30,7 +29,7 @@ export const VerseItem = ({ vId, text, note, evidenceId, categoryTitle = null, i
     const surahNum = parts[0];
     const verseNum = parts[1];
     refStr = `Quran ${surahNum}:${verseNum}`;
-    linkTarget = `${base}/quran/${surahNum}#${verseNum}`;
+    linkTarget = getQuranUrl({ surah: surahNum, ayah: verseNum });
   } else {
     const parts = vId.split('_');
     const bookId = parts[0];
@@ -38,7 +37,7 @@ export const VerseItem = ({ vId, text, note, evidenceId, categoryTitle = null, i
     const verseNumStr = parts.slice(2).join('_');
     const bookName = formatBookName(bookId);
     refStr = `${bookName} ${chapterNum}:${verseNumStr}`;
-    linkTarget = `${base}/bible/${bookId}/${chapterNum}#${verseNumStr}`;
+    linkTarget = getBibleUrl({ book: bookId, chapter: chapterNum, verse: verseNumStr });
   }
 
   const handleCardClick = (e) => {

@@ -26,7 +26,7 @@ export default function BiblicalMandateSection({ base = '' }) {
               “No wonder, for even <strong>Satan disguises himself as an angel of light</strong>.”
             </p>
             <footer className="quote-footer">
-              <a href={`${base}/bible/2cor/11/14`} className="bible-link-pill" title="Read 2 Corinthians 11:14">
+              <a href={`${base}/bible/2cor/11#14`} className="bible-link-pill" title="Read 2 Corinthians 11:14">
                 <span>2 CORINTHIANS 11:14</span>
                 <svg aria-hidden="true" className="link-arrow" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
@@ -50,7 +50,7 @@ export default function BiblicalMandateSection({ base = '' }) {
               “Beloved, do not believe every spirit, but <strong>test the spirits to see whether they are from God</strong>, because many false prophets have gone out into the world.”
             </p>
             <footer className="quote-footer">
-              <a href={`${base}/bible/1jn/4/1`} className="bible-link-pill" title="Read 1 John 4:1">
+              <a href={`${base}/bible/1jn/4#1`} className="bible-link-pill" title="Read 1 John 4:1">
                 <span>1 JOHN 4:1</span>
                 <svg aria-hidden="true" className="link-arrow" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
@@ -82,7 +82,7 @@ export default function BiblicalMandateSection({ base = '' }) {
                   “By this you know the Spirit of God: every spirit that confesses that Jesus Christ has come in the flesh is from God; and <strong>every spirit that does not confess Jesus is not from God; this is the spirit of the antichrist...</strong>”
                 </p>
                 <footer className="quote-footer">
-                  <a href={`${base}/bible/1jn/4/2`} className="bible-link-pill" title="Read 1 John 4:2-3">
+                  <a href={`${base}/bible/1jn/4#2`} className="bible-link-pill" title="Read 1 John 4:2-3">
                     <span>1 JOHN 4:2-3</span>
                     <svg aria-hidden="true" className="link-arrow" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
@@ -106,7 +106,7 @@ export default function BiblicalMandateSection({ base = '' }) {
                   “But <strong>even if we, or an angel from heaven, should preach to you a gospel contrary</strong> to what we have preached to you, he is to be accursed!”
                 </p>
                 <footer className="quote-footer">
-                  <a href={`${base}/bible/gal/1/8`} className="bible-link-pill" title="Read Galatians 1:8">
+                  <a href={`${base}/bible/gal/1#8`} className="bible-link-pill" title="Read Galatians 1:8">
                     <span>GALATIANS 1:8</span>
                     <svg aria-hidden="true" className="link-arrow" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />

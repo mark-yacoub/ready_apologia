@@ -2,6 +2,7 @@ import { getScriptureVerseTextById } from './scripture_service.js';
 import { loadEnglishData } from './quran_loader.js';
 import booksMeta from '../data/books_meta.json';
 import { mapMtToLxx } from './scripture_mapper.js';
+import { getBibleUrl, getQuranUrl } from './urlFactory.js';
 
 // Pre-build O(1) dictionary for book names to avoid O(N) lookup on every parse
 const bookMetaMap = new Map();
@@ -71,7 +72,7 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
     const text = targetTextObj ? targetTextObj.text : '';
     return {
       label: `Surah ${surah}:${ayah}`,
-      link: `${base}/quran/${surah}#${ayah}`,
+      link: getQuranUrl({ surah, ayah, base }),
       text: text
     };
   } else if (parts.length === 3) {
@@ -83,14 +84,14 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
 
     // Check if OT for LXX mapping
     const isOt = booksMeta.ot.some((b) => b.id === book);
-    let linkPath = `${book}/${chap}#${verse}`;
+    let targetBook = book;
     let displayChap = chap;
     let displayVerse = verse;
 
     if (isOt) {
       const lxxMap = mapMtToLxx(book, chap, verse);
       if (lxxMap) {
-        linkPath = `${lxxMap.book}/${lxxMap.chapter}#${lxxMap.verse}`;
+        targetBook = lxxMap.book;
         displayChap = lxxMap.chapter;
         displayVerse = String(lxxMap.verse);
       }
@@ -98,7 +99,7 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
 
     return {
       label: `${formatBookIdToName(verseStr)} ${displayChap}:${displayVerse}`,
-      link: `${base}/bible/${linkPath}`,
+      link: getBibleUrl({ book: targetBook, chapter: displayChap, verse: displayVerse, base }),
       text: text
     };
   }

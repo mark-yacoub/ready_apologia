@@ -125,7 +125,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-video">{item.metricValue}</span>
               </div>
@@ -137,7 +137,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>Watch Apologetics Videos</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -163,7 +163,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-apologetics">{item.metricValue}</span>
               </div>
@@ -175,7 +175,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>Read Theological Defenses</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -201,7 +201,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-patristics">{item.metricValue}</span>
               </div>
@@ -213,7 +213,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>Explore Patristic Exegesis</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -239,7 +239,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-contradictions">{item.metricValue}</span>
               </div>
@@ -251,7 +251,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>View Harmonization Answers</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -277,7 +277,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-manuscripts">{item.metricValue}</span>
               </div>
@@ -289,7 +289,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>View Manuscript Scans</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -315,7 +315,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.name}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.name}</a>
                 </div>
                 <span class="metric-pill pill-date">{item.date}</span>
               </div>
@@ -332,7 +332,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>Inspect Manuscript at {item.firstVerseTitle}</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -374,7 +374,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-video">{item.metricValue}</span>
               </div>
@@ -386,7 +386,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>Watch Apologetics Videos</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -412,7 +412,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-tafsir">{item.metricValue}</span>
               </div>
@@ -424,7 +424,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>Read Full Tabari Exegesis</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -450,7 +450,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-tafsir">{item.metricValue}</span>
               </div>
@@ -462,7 +462,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>Read Full Ibn Kathir Exegesis</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -488,7 +488,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-footnote">{item.metricValue}</span>
               </div>
@@ -504,7 +504,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>Read Scholarly Footnotes</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -530,7 +530,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-critical">{item.metricValue}</span>
               </div>
@@ -550,7 +550,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>Inspect Deficiencies & Citations</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -576,7 +576,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.title}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.title}</a>
                 </div>
                 <span class="metric-pill pill-manuscripts">{item.metricValue}</span>
               </div>
@@ -588,7 +588,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>View Quran Manuscripts</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -614,7 +614,7 @@ const schemaObj = {
               <div class="card-top-row">
                 <div class="rank-badge-wrapper">
                   <span class={`rank-badge ${item.rank <= 3 ? 'rank-top' : ''}`}>#{item.rank}</span>
-                  <a href={`${base}${item.url}`} class="verse-link-title">{item.name}</a>
+                  <a href={`${item.url}`} class="verse-link-title">{item.name}</a>
                 </div>
                 <span class="metric-pill pill-date">{item.date}</span>
               </div>
@@ -630,7 +630,7 @@ const schemaObj = {
               )}
 
               <div class="card-footer-action">
-                <a href={`${base}${item.url}`} class="action-btn">
+                <a href={`${item.url}`} class="action-btn">
                   <span>Inspect Manuscript at {item.firstVerseTitle}</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>

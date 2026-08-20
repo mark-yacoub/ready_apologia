@@ -1,7 +1,6 @@
 import React from 'react';
 import { formatBookName } from '../../utils/evidenceHelpers.js';
-
-const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+import { getBibleUrl } from '../../utils/urlFactory.js';
 
 const ProphecyCard = ({ prophecy, verseTexts, evidenceId }) => {
   const otBookId = prophecy.ot_verses?.[0]?.split('_')[0];
@@ -25,8 +24,9 @@ const ProphecyCard = ({ prophecy, verseTexts, evidenceId }) => {
           <div className="prophecy-ot-refs">
             {(prophecy.ot_verses || []).map(vId => {
               const p = vId.split('_');
+              const url = getBibleUrl({ book: p[0], chapter: p[1], verse: p.slice(2).join('_') });
               return (
-                <a key={vId} href={`${base}/bible/${p[0]}/${p[1]}#${p.slice(2).join('_')}`} className="verse-ref-link" onClick={(e) => {
+                <a key={vId} href={url} className="verse-ref-link" onClick={(e) => {
                   e.stopPropagation();
                 }}>
                   <span className="verse-ref-pill">{formatBookName(p[0])} {p[1]}:{p.slice(2).join('_')} <span className="ref-arrow">&gt;</span></span>
@@ -48,8 +48,9 @@ const ProphecyCard = ({ prophecy, verseTexts, evidenceId }) => {
                   <div className="prophecy-nt-refs">
                     {(nt.verses || []).map(vId => {
                       const p = vId.split('_');
+                      const url = getBibleUrl({ book: p[0], chapter: p[1], verse: p.slice(2).join('_') });
                       return (
-                        <a key={vId} href={`${base}/bible/${p[0]}/${p[1]}#${p.slice(2).join('_')}`} className="verse-ref-link" onClick={(e) => {
+                        <a key={vId} href={url} className="verse-ref-link" onClick={(e) => {
                           e.stopPropagation();
                         }}>
                           <span className="verse-ref-pill">{formatBookName(p[0])} {p[1]}:{p.slice(2).join('_')} <span className="ref-arrow">&gt;</span></span>

@@ -33,7 +33,7 @@ export default function DilemmaDecisionCard() {
             <h4 className="path-title">The Gospel is False & Corrupted</h4>
           </div>
           <p className="path-reason">
-            The Quran itself commands 7th-century Christians to judge by their Scriptures (<a href="/quran/5/47" className="inline-quran-link">Surah 5:47</a>), declares them "guidance and light", and insists God's words cannot be changed.
+            The Quran itself commands 7th-century Christians to judge by their Scriptures (<a href="/quran/5#47" className="inline-quran-link">Surah 5:47</a>), declares them "guidance and light", and insists God's words cannot be changed.
           </p>
           <div className="path-result">
             <span className="collapse-badge">ISLAM IS FALSE</span>

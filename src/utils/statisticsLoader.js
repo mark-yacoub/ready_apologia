@@ -73,6 +73,7 @@
 import { DatabaseSync } from 'node:sqlite';
 import fs from 'node:fs';
 import path from 'node:path';
+import { getBibleUrl, getQuranUrl } from './urlFactory.js';
 
 const dbPath = path.join(process.cwd(), 'data.db');
 let db = null;
@@ -183,7 +184,7 @@ export function formatBibleRef(verseId) {
       chapter: parseInt(parts[1], 10),
       verse: parseInt(parts[2], 10),
       label: `${bookName} ${parts[1]}:${parts[2]}`,
-      url: `/bible/${parts[0]}/${parts[1]}/${parts[2]}`
+      url: getBibleUrl({ book: parts[0], chapter: parts[1], verse: parts[2] })
     };
   }
   return {
@@ -191,7 +192,7 @@ export function formatBibleRef(verseId) {
     chapter: 1,
     verse: 1,
     label: verseId,
-    url: `/bible/${verseId}`
+    url: getBibleUrl({ book: verseId, chapter: 1 })
   };
 }
 
@@ -210,7 +211,7 @@ export function formatQuranRef(verseId) {
     surah: surahNum,
     ayah: ayahNum,
     label: `Surah ${surahNum}:${ayahNum}${surahName}`,
-    url: `/quran/${surahNum}/${ayahNum}`
+    url: getQuranUrl({ surah: surahNum, ayah: ayahNum })
   };
 }
 
@@ -239,7 +240,7 @@ export function loadBibleStatistics() {
       verseId: row.verse_id,
       title: ref.label,
       metricValue: `${row.count} Videos`,
-      url: `${ref.url}/videos`,
+      url: getBibleUrl({ book: ref.bookId, chapter: ref.chapter, verse: ref.verse, tab: 'videos' }),
       text: text,
       badgeType: 'video'
     };
@@ -262,7 +263,7 @@ export function loadBibleStatistics() {
       verseId: row.verse,
       title: ref.label,
       metricValue: `${row.count} Defenses`,
-      url: `${ref.url}/apologetics`,
+      url: getBibleUrl({ book: ref.bookId, chapter: ref.chapter, verse: ref.verse, tab: 'apologetics' }),
       text: text,
       badgeType: 'apologetics'
     };
@@ -286,7 +287,7 @@ export function loadBibleStatistics() {
       verseId: row.verse,
       title: ref.label,
       metricValue: `${row.count} Patristic Works`,
-      url: `${ref.url}/apologetics`,
+      url: getBibleUrl({ book: ref.bookId, chapter: ref.chapter, verse: ref.verse, tab: 'apologetics' }),
       text: text,
       badgeType: 'patristics'
     };
@@ -313,7 +314,7 @@ export function loadBibleStatistics() {
       verseId: row.verse,
       title: ref.label,
       metricValue: `${row.count} Contradiction Pairings`,
-      url: `${ref.url}/contradictions`,
+      url: getBibleUrl({ book: ref.bookId, chapter: ref.chapter, verse: ref.verse, tab: 'contradictions' }),
       text: text,
       badgeType: 'contradictions'
     };
@@ -336,7 +337,7 @@ export function loadBibleStatistics() {
       verseId: row.verse_id,
       title: ref.label,
       metricValue: `${row.count} Ancient Manuscripts`,
-      url: `${ref.url}/manuscripts`,
+      url: getBibleUrl({ book: ref.bookId, chapter: ref.chapter, verse: ref.verse, tab: 'manuscripts' }),
       text: text,
       badgeType: 'manuscript'
     };
@@ -373,7 +374,7 @@ export function loadBibleStatistics() {
         date: ms.date_range_english,
         testament: 'Old Testament',
         firstVerseTitle: ref.label,
-        url: `${ref.url}/manuscripts`,
+        url: getBibleUrl({ book: ref.bookId, chapter: ref.chapter, verse: ref.verse, tab: 'manuscripts' }),
         text: text,
         metricValue: ms.date_range_english
       });
@@ -392,7 +393,7 @@ export function loadBibleStatistics() {
         date: ms.date_range_english,
         testament: 'New Testament',
         firstVerseTitle: ref.label,
-        url: `${ref.url}/manuscripts`,
+        url: getBibleUrl({ book: ref.bookId, chapter: ref.chapter, verse: ref.verse, tab: 'manuscripts' }),
         text: text,
         metricValue: ms.date_range_english
       });
@@ -437,7 +438,7 @@ export function loadQuranStatistics() {
       verseId: row.verse_id,
       title: ref.label,
       metricValue: `${row.count} Videos`,
-      url: `${ref.url}/videos`,
+      url: getQuranUrl({ surah: ref.surah, ayah: ref.ayah, tab: 'videos' }),
       text: text,
       badgeType: 'video'
     };
@@ -464,7 +465,7 @@ export function loadQuranStatistics() {
           verseId: item.verse,
           title: ref.label,
           metricValue: `${item.words.toLocaleString()} Words`,
-          url: `${ref.url}/commentaries`,
+          url: getQuranUrl({ surah: ref.surah, ayah: ref.ayah, tab: 'tafsir/tabari' }),
           text: text,
           sectionTitle: item.title,
           badgeType: 'tabari'
@@ -496,7 +497,7 @@ export function loadQuranStatistics() {
           verseId: item.verse,
           title: ref.label,
           metricValue: `${item.words.toLocaleString()} Words`,
-          url: `${ref.url}/commentaries`,
+          url: getQuranUrl({ surah: ref.surah, ayah: ref.ayah, tab: 'tafsir/ibn_kathir' }),
           text: text,
           sectionTitle: item.title,
           badgeType: 'kathir'
@@ -538,7 +539,7 @@ export function loadQuranStatistics() {
           verseId: item.verse,
           title: ref.label,
           metricValue: `${item.totalLength.toLocaleString()} Chars (${item.count} Notes)`,
-          url: `${ref.url}/footnotes`,
+          url: getQuranUrl({ surah: ref.surah, ayah: ref.ayah, tab: 'christian-footnotes' }),
           text: text,
           preview: item.contents[0],
           badgeType: 'footnote'
@@ -573,7 +574,7 @@ export function loadQuranStatistics() {
           verseId: item.verse,
           title: ref.label,
           metricValue: `${item.labelCount} Deficiency Categories`,
-          url: `${ref.url}/footnotes`,
+          url: getQuranUrl({ surah: ref.surah, ayah: ref.ayah, tab: 'christian-footnotes' }),
           text: text,
           labels: item.labels,
           badgeType: 'critical'
@@ -601,7 +602,7 @@ export function loadQuranStatistics() {
       verseId: row.verse_id,
       title: ref.label,
       metricValue: `${row.count} Manuscripts`,
-      url: `${ref.url}/manuscripts`,
+      url: getQuranUrl({ surah: ref.surah, ayah: ref.ayah, tab: 'manuscripts' }),
       text: text,
       badgeType: 'manuscript'
     };
@@ -643,7 +644,7 @@ export function loadQuranStatistics() {
       metricValue: `${ms.score} Variant Indicators`,
       summary: ms.typosSummary,
       firstVerseTitle: firstRef ? firstRef.label : 'View Manuscript',
-      url: firstRef ? `${firstRef.url}/manuscripts` : `/quran`,
+      url: firstRef ? getQuranUrl({ surah: firstRef.surah, ayah: firstRef.ayah, tab: 'manuscripts' }) : getQuranUrl(),
       text: text
     };
   });

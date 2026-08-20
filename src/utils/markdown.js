@@ -1,3 +1,5 @@
+import { getBibleUrl, getQuranUrl } from './urlFactory.js';
+
 /**
  * Safe, high-performance, zero-dependency Markdown to HTML regex parser.
  * Built specifically for high-performance speeds, parsing headers, bold text,
@@ -52,19 +54,12 @@ export function parseMarkdown(text) {
       const [book, chapter, ...rest] = rawPath.split('/').filter(Boolean);
       const verseStr = rest.join('/');
 
-      const baseUrl = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL
-        ? import.meta.env.BASE_URL
-        : '/';
-      const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
-
       if (book && chapter) {
-        const firstVerseMatch = (verseStr.match(/\d+/) || [])[0];
-        const anchor = firstVerseMatch ? `#${firstVerseMatch}` : '';
-        finalUrl = `${base}/bible/${encodeURIComponent(book)}/${encodeURIComponent(chapter)}${anchor}`;
+        finalUrl = getBibleUrl({ book, chapter, verse: verseStr });
       } else if (book) {
-        finalUrl = `${base}/bible/${encodeURIComponent(book)}`;
+        finalUrl = getBibleUrl({ book });
       } else {
-        finalUrl = `${base}/bible`;
+        finalUrl = getBibleUrl();
       }
       targetAttrs = ''; // open internal links in the same tab
     } else if (url.startsWith('quran://') || url.startsWith('quran/') || url.startsWith('/quran/')) {
@@ -72,19 +67,12 @@ export function parseMarkdown(text) {
       const [surah, ...rest] = rawPath.split('/').filter(Boolean);
       const ayahStr = rest.join('/');
 
-      const baseUrl = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL
-        ? import.meta.env.BASE_URL
-        : '/';
-      const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
-
       if (surah && ayahStr) {
-        const firstAyahMatch = (ayahStr.match(/\d+/) || [])[0];
-        const anchor = firstAyahMatch ? `#${firstAyahMatch}` : '';
-        finalUrl = `${base}/quran/${encodeURIComponent(surah)}${anchor}`;
+        finalUrl = getQuranUrl({ surah, ayah: ayahStr });
       } else if (surah) {
-        finalUrl = `${base}/quran/${encodeURIComponent(surah)}`;
+        finalUrl = getQuranUrl({ surah });
       } else {
-        finalUrl = `${base}/quran`;
+        finalUrl = getQuranUrl();
       }
       targetAttrs = ''; // open internal links in the same tab
     } else if (url.startsWith('tafseer/') || url.startsWith('/tafseer/')) {
@@ -92,20 +80,12 @@ export function parseMarkdown(text) {
       const [surah, ...rest] = rawPath.split('/').filter(Boolean);
       const ayahStr = rest.join('/');
 
-      const baseUrl = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL
-        ? import.meta.env.BASE_URL
-        : '/';
-      const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
-
       if (surah && ayahStr) {
-        const firstAyahMatch = (ayahStr.match(/\d+/) || [])[0];
-        finalUrl = firstAyahMatch
-          ? `${base}/quran/${encodeURIComponent(surah)}/${encodeURIComponent(firstAyahMatch)}/tafsir/tabari`
-          : `${base}/quran/${encodeURIComponent(surah)}`;
+        finalUrl = getQuranUrl({ surah, ayah: ayahStr, tab: 'tafsir/tabari' });
       } else if (surah) {
-        finalUrl = `${base}/quran/${encodeURIComponent(surah)}`;
+        finalUrl = getQuranUrl({ surah });
       } else {
-        finalUrl = `${base}/quran`;
+        finalUrl = getQuranUrl();
       }
       targetAttrs = ''; // open internal links in the same tab
     }

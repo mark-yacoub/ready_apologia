@@ -1,4 +1,5 @@
 import React from 'react';
+import { getBibleUrl, getQuranUrl } from '../../../utils/urlFactory.js';
 
 // Format **bold** markdown safely
 function renderFormattedQuote(text) {
@@ -37,19 +38,18 @@ function resolveSourceLink(ref, base = '') {
     const book = parts[1];
     const ch = parts[2];
     const verses = parts[3];
-    const firstVerse = verses ? verses.split('-')[0] : '1';
     const label = `${book.toUpperCase()} ${ch}:${verses}`;
-    return { href: `${base}/bible/${book}/${ch}/${firstVerse}`, isExternal: false, label };
+    return { href: getBibleUrl({ book, chapter: ch, verse: verses, base }), isExternal: false, label };
   }
 
   if (ref.startsWith('quran/')) {
     const [_, surah, ayah] = ref.split('/');
-    return { href: `${base}/quran/${surah}#${ayah}`, isExternal: false, label: `Surah ${surah}:${ayah}` };
+    return { href: getQuranUrl({ surah, ayah, base }), isExternal: false, label: `Surah ${surah}:${ayah}` };
   }
 
   if (ref.startsWith('ibnkathir/')) {
     const [_, surah, ayah] = ref.split('/');
-    return { href: `${base}/quran/${surah}/${ayah}/tafsir/ibn_kathir`, isExternal: false, label: `Tafsir Ibn Kathir (${surah}:${ayah})` };
+    return { href: getQuranUrl({ surah, ayah, tab: 'tafsir/ibn_kathir', base }), isExternal: false, label: `Tafsir Ibn Kathir (${surah}:${ayah})` };
   }
 
   return { href: ref, isExternal: false, label: ref };
