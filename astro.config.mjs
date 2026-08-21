@@ -49,6 +49,7 @@ function resolveSitemapMetadata(pathname) {
 
 export default defineConfig({
   devToolbar: { enabled: false },
+  trailingSlash: 'never',
   integrations: [
     react(),
     sitemap({
@@ -63,6 +64,9 @@ export default defineConfig({
         const metadata = resolveSitemapMetadata(url.pathname);
         item.changefreq = metadata.changefreq;
         item.priority = metadata.priority;
+        if (url.pathname !== '/' && item.url.endsWith('/')) {
+          item.url = item.url.slice(0, -1);
+        }
         return item;
       }
     })
