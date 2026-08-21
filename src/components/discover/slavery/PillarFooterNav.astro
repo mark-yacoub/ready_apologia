@@ -1,0 +1,222 @@
+---
+interface Props {
+  currentPart: 'prophets-practice' | 'quranic-witness' | 'counter-apologetics';
+  base?: string;
+}
+
+const { currentPart, base = '' } = Astro.props;
+
+const sections = [
+  {
+    id: 'prophets-practice',
+    name: "Prophet's Practice",
+    desc: 'Historical records of personal ownership, slave barter, and chattel status across Sahih hadiths.',
+    href: `${base}/discover/muhammad-and-slavery/prophets-practice`,
+    icon: 'hadith'
+  },
+  {
+    id: 'quranic-witness',
+    name: 'The Quranic Witness',
+    desc: 'Foundational Quranic passages, Droge translations, and classical Tafsir (Ibn Kathir & Tabari).',
+    href: `${base}/discover/muhammad-and-slavery/quranic-witness`,
+    icon: 'quran'
+  },
+  {
+    id: 'counter-apologetics',
+    name: 'Counter-Apologetics FAQs',
+    desc: 'Detailed deconstructions refuting gradual abolition, servant myths, and the Kaffara paradox.',
+    href: `${base}/discover/muhammad-and-slavery/counter-apologetics`,
+    icon: 'shield'
+  }
+];
+
+const currentIndex = sections.findIndex(s => s.id === currentPart);
+const prevSection = currentIndex > 0 ? sections[currentIndex - 1] : null;
+const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex + 1] : null;
+const hubUrl = `${base}/discover/muhammad-and-slavery`;
+---
+
+<nav class="pillar-footer-nav" aria-label="Investigation Navigation">
+  <div class="footer-nav-header">
+    <span class="series-tag">INVESTIGATION</span>
+    <h3 class="footer-nav-title">Explore Other Sections</h3>
+  </div>
+
+  <div class="nav-cards-grid">
+    {prevSection && (
+      <a href={prevSection.href} class="nav-card prev-card">
+        <div class="card-direction">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dir-icon">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          <span>Previous</span>
+        </div>
+        <h4 class="card-title">{prevSection.name}</h4>
+        <p class="card-desc">{prevSection.desc}</p>
+      </a>
+    )}
+
+    {nextSection && (
+      <a href={nextSection.href} class="nav-card next-card">
+        <div class="card-direction end-aligned">
+          <span>Next</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dir-icon">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+        <h4 class="card-title">{nextSection.name}</h4>
+        <p class="card-desc">{nextSection.desc}</p>
+      </a>
+    )}
+  </div>
+
+  <div class="hub-return-row">
+    <a href={hubUrl} class="hub-return-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hub-icon">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+      <span>Return to Overview Hub</span>
+    </a>
+  </div>
+</nav>
+
+<style>
+  .pillar-footer-nav {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-outline-variant, #e4e4e7);
+  }
+
+  .footer-nav-header {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  .series-tag {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #974543;
+    background: #fdf2f2;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .footer-nav-title {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-primary, #09090b);
+    margin: 0;
+  }
+
+  .nav-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .nav-cards-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+  }
+
+  .nav-card {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 12px;
+    border-radius: 14px;
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  }
+
+  @media (min-width: 640px) {
+    .nav-card {
+      padding: 18px 16px;
+    }
+  }
+
+  .nav-card:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-direction {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #64748b;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .end-aligned {
+    justify-content: flex-end;
+  }
+
+  .dir-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .card-title {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-primary, #09090b);
+    margin: 0 0 4px 0;
+  }
+
+  .card-desc {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .hub-return-row {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hub-return-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 9999px;
+    background: #f4f4f5;
+    color: #18181b;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #e4e4e7;
+    transition: all 0.15s ease;
+  }
+
+  .hub-return-btn:hover {
+    background: #e4e4e7;
+    transform: translateY(-1px);
+  }
+
+  .hub-icon {
+    width: 14px;
+    height: 14px;
+  }
+</style>
