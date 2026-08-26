@@ -62,5 +62,13 @@
     "title": "Assessing the Origins of Islamic Revelation",
     "description": "An evidentiary comparison of the phenomena surrounding early Islamic revelation against biblical angelic and demonic accounts.",
     "thumbnail": "/media/demonic_revelation/cover.jpg"
+  },
+  {
+    "category": "Islamics",
+    "subcategory": "Scripture",
+    "slug": "from-mecca-to-medina",
+    "title": "From Mecca to Medina: The Evolution of Islamic Revelation, Power, and Theology",
+    "description": "A historical, textual, and theological analysis of the transition from persecuted minority to sovereign statehood and universal conquest.",
+    "thumbnail": "/media/mecca_to_medina/cover.jpg"
   }
 ]

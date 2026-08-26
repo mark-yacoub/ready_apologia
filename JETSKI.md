@@ -94,7 +94,9 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `docs/distribution_strategy.md`: Multi-Channel Marketing, Outreach & Distribution Strategy with actionable checklists.
 *   `docs/creator_contacts.md`: Verified Creator Contacts & Outreach Directory for top apologists indexed in Ready Apologia.
 *   `docs/creator_top_verses.md`: Personalized Creator Top Bible Verses & Outreach Playbook with shareable WOW links per creator.
+*   `docs/notebooklm.md`: Architecture guide, data standards, and CLI workflow for exporting Discover deep-dive articles into self-contained PDFs for Notebook LM video generation.
 *   `docs/pillar2_seo_implementation.md`: Technical SEO Master Plan & Implementation Code for sitemaps, FAQ JSON-LD schema, Open Graph, and robots.txt.
+*   `scripts/generate_discover_pdfs.py`: Automated exporter compiling all Discover deep dives into self-contained, high-density PDFs in `~/Downloads/discover/`.
 *   `scripts/import_scripture.js`: Script to sync NASB (NT) and LXX (OT) JSON scripture databases.
 *   `scripts/copy_sample_images.js`: Script to recursively copy sample manuscript images from data collection.
 *   `scripts/find_creator_top_verse.js`: Script to find the #1 ranked Bible verse per apologist creator based on the UI multi-step sorting algorithm.
@@ -114,7 +116,10 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/pages/quran/0.astro`: Lost Verses page entry point.
 *   `src/pages/quran/-1.astro`: Abrogated Verses page entry point.
 *   `src/pages/quran/codex/[companion].astro`: Companion Codex page showing comparisons, virtues, and lost verses.
-*   `src/pages/discover/`: Discover deep-dive articles (`divinity-timeline.astro`, `extrabiblical-evidence-for-jesus.astro`, `islamic-dilemma.astro`, `origins-of-revelation.astro`, `quran-preservation.astro`, `trustworthiness-of-the-bible.astro`, `statistics.astro`, `muhammad-and-slavery/`) configured with URL `#hash` linking and initial mount hash auto-scrolling so specific chapters, stages, or evidence sections can be shared.
+*   `src/pages/discover/`: Discover deep-dive articles (`divinity-timeline.astro`, `extrabiblical-evidence-for-jesus.astro`, `islamic-dilemma.astro`, `origins-of-revelation.astro`, `quran-preservation.astro`, `trustworthiness-of-the-bible.astro`, `statistics.astro`, `from-mecca-to-medina.astro`, `muhammad-and-slavery/`) configured with URL `#hash` linking and initial mount hash auto-scrolling so specific chapters, stages, or evidence sections can be shared.
+*   `src/pages/discover/from-mecca-to-medina.astro`: Comprehensive deep-dive article examining the sociopolitical transition from Mecca to Medina, the four stages of Jihad, the deterioration of relations with Jewish tribes, Christological polemics, and the classical science of Naskh (abrogation).
+*   `src/components/discover/mecca-to-medina/`: Interactive mobile-first components for From Mecca to Medina (`MeccaToMedinaNav.jsx`, `AbstractSection.jsx`, `SociopoliticalBackdropSection.jsx`, `WarfareStagesTimeline.jsx`, `JewishRelationsSection.jsx`, `ChristologicalShiftSection.jsx`, `DoctrineOfNaskhSection.jsx`, `ComparativeSynthesisSection.jsx`, `InterpretiveFrameworksSection.jsx`, `ConclusionSection.jsx`, `MeccaToMedinaArticle.jsx`, `CollapsibleHadithBox.jsx`, `meccaMedinaUtils.jsx`).
+*   `src/data/discover/islam/scripture/from_mecca_to_medina.json`: Sourced dataset containing structured metadata, classical commentary consensus (Al-Tabari, Ibn Kathir), and canonical Hadith citations.
 *   `src/pages/discover/muhammad-and-slavery/`: 3-part Portal Hub and dedicated sub-pages (`index.astro`, `prophets-practice.astro`, `quranic-witness.astro`, `counter-apologetics.astro`) examining canonical Islamic texts on slavery.
 *   `src/components/discover/slavery/`: Interactive visual components for Muhammad & Slavery (`HadithPillarView.jsx`, `QuranPillarView.jsx`, `FaqPillarView.jsx`, `PillarFooterNav.astro`).
 *   `src/data/discover/islam/prophet/slavery.json`: Sourced dataset containing 228 verified hadiths from the Sahihayn, 17 Quranic passages with Tafsir Ibn Kathir & Al-Tabari, and 9 counter-apologetic FAQs.

@@ -1,0 +1,389 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import MeccaToMedinaArticle from '../../components/discover/mecca-to-medina/MeccaToMedinaArticle.jsx';
+import { sanitizeQuestionText, sanitizeAnswerHTML } from '../../utils/seoFactory.js';
+import articleData from '../../data/discover/islam/scripture/from_mecca_to_medina.json';
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+const pageTitle = "From Mecca to Medina: The Evolution of Islamic Revelation, Power, and Theology | Ready Apologia";
+const pageDesc = "A historical, textual, and theological analysis of the transition from persecuted Meccan minority to Medinan sovereign statehood, the four stages of Jihad, the sword verses, and the classical doctrine of Naskh.";
+const pageKeywords = "mecca to medina, evolution of islamic revelation, four stages of jihad, ayat al-sayf, sword verse, surah tawbah, naskh abrogation tabari ibn kathir, jewish tribes expulsion qurayza nadir, christology in islam, jesus vs muhammad, islamic power transition";
+const ogImage = "/media/mecca_to_medina/cover.jpg";
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/discover/from-mecca-to-medina`;
+
+// Rich FAQs for Google Rich Snippets & Search Engine Featured Snippets
+const faqs = [
+  {
+    q: "What is the difference between Meccan and Medinan Surahs in the Quran?",
+    a: "Meccan surahs (610–622 AD) were revealed when Muslims were a persecuted religious minority in Mecca under Quraysh oligarchy. They emphasize theological monotheism (*Tawhid*), moral patience (*sabr*), non-violence, and mutual religious tolerance (such as Surah 109:6). Medinan surahs (622–632 AD), revealed after the *Hijrah* when Muhammad became sovereign head of state in Medina, focus on legislative governance, civil and criminal legal codes, active warfare (*Jihad*), polemics against Jews and Christians, and societal subjugation of non-Muslims through the *Jizyah* tax (Surah 9:29)."
+  },
+  {
+    q: "What are the Four Stages of Jihad in classical Islamic theological progression?",
+    a: "Classical Islamic scholars and *mufassirun* (including Tafsir Ibn Kathir and Al-Tabari) categorize Quranic warfare injunctions into four successive chronological stages:\n1. **Stage 1 (Mecca)**: Total prohibition of fighting and command of patient endurance (*sabr*).\n2. **Stage 2 (Early Medina)**: Permission to fight defensively to repel armed persecution (Surah 22:39–40).\n3. **Stage 3 (Medina)**: Mandatory defensive fighting against immediate attacking tribes (Surah 2:190).\n4. **Stage 4 (Late Medina)**: Universal offensive warfare against polytheists and People of the Book until they convert or submit and pay the *Jizyah* tax (Surah 9:5, 9:29)."
+  },
+  {
+    q: "What is the Islamic doctrine of Naskh (abrogation)?",
+    a: "Naskh (literally meaning 'annulment' or 'effacement') is the classical Islamic hermeneutical science based on Quran 2:106 and 16:101, establishing that later chronological revelations modify, replace, or legally cancel earlier rulings. Classical authorities like Al-Tabari, Ibn Kathir, and Ibn Hazm recorded that the final Medinan martial verses (*Ayat al-Sayf*, Surah 9:5 and 9:29) legally abrogated over 120 earlier peaceful and conciliatory Meccan verses."
+  },
+  {
+    q: "Does Surah 9:5 (Ayat al-Sayf / The Sword Verse) abrogate peaceful Meccan verses like Surah 109:6?",
+    a: "Yes. According to classical consensus among traditional *mufassirun* (such as Al-Tabari, Ibn Kathir, and Ibn Hazm in *Kitab al-Nasikh wa al-Mansukh*), Surah 9:5 and Surah 9:29 represent the terminal stage of Quranic revelation regarding non-Muslims, legally superseding earlier peaceful injunctions like *'To you your religion and to me my religion'* (Surah 109:6) and *'Pardon and overlook'* (Surah 2:109)."
+  },
+  {
+    q: "How did relations between Muhammad and the Jewish tribes of Medina evolve?",
+    a: "Upon arrival in Medina in 622 AD, the Constitution of Medina established mutual defense and Muslims initially prayed facing Jerusalem. However, after Jewish leaders rejected Muhammad's prophetic claims, theological tensions escalated: the prayer direction (*Qiblah*) was redirected toward Mecca (Surah 2:144), followed by the expulsion of the Banu Qaynuqa (624 AD) and Banu Nadir (625 AD), the siege and execution of 600–900 men of the Banu Qurayza (627 AD), and the subjugation of the Jewish oasis of Khaybar (628 AD)."
+  },
+  {
+    q: "How does the Quran's depiction of Jesus (Isa) change from Mecca to Medina?",
+    a: "In the Meccan period, Jesus is portrayed with honorific titles such as a *'Word from Him'* (*Kalimatullah*) and *'Spirit from Him'* (*Ruhullah*). In the Medinan period, coinciding with sovereign political and military statehood, the Quran turns to explicit theological polemics condemning Christian doctrines of the Trinity (Surah 5:73), the Incarnation and divine Sonship (Surah 9:30), and denying the historical crucifixion (Surah 4:157)."
+  },
+  {
+    q: "What occurred during the siege and judgment of the Banu Qurayza?",
+    a: "Following the Battle of the Trench in 627 AD, Muslim forces besieged the Banu Qurayza fortress for 25 nights. After their unconditional surrender, allied arbitrator Sa'd ibn Mu'adh decreed that all adult fighting men be executed and women and children enslaved—a verdict Muhammad endorsed as *'the judgment of Allah from above the seven heavens'* (Sahih al-Bukhari 3804). Islamic historical sources document that trenches were dug in the marketplace of Medina where between 600 and 900 men were decapitated."
+  }
+];
+
+const faqSchemaItems = faqs.map(faq => ({
+  "@type": "Question",
+  "name": sanitizeQuestionText(faq.q),
+  "acceptedAnswer": {
+    "@type": "Answer",
+    "text": sanitizeAnswerHTML(faq.a)
+  }
+}));
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalURL}#breadcrumb`,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Discover", "item": `${siteUrl}${base}/discover` },
+        { "@type": "ListItem", "position": 3, "name": "Islamics · Scripture", "item": `${siteUrl}${base}/discover#panel-islamics` },
+        { "@type": "ListItem", "position": 4, "name": "From Mecca to Medina", "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": `${canonicalURL}#article`,
+      "isPartOf": { "@type": "WebPage", "@id": canonicalURL },
+      "headline": pageTitle,
+      "name": pageTitle,
+      "description": pageDesc,
+      "image": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}${base}${ogImage}`,
+        "width": 620,
+        "height": 413,
+        "caption": "From Mecca to Medina: The Evolution of Islamic Revelation, Power, and Theology"
+      },
+      "datePublished": "2026-08-26T00:00:00Z",
+      "dateModified": "2026-08-26T00:00:00Z",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalURL },
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "articleSection": "Islamics · Scripture",
+      "keywords": [
+        "Mecca to Medina",
+        "Evolution of Islamic Revelation",
+        "Four Stages of Jihad",
+        "Doctrine of Naskh",
+        "Abrogation in Islam",
+        "Ayat al-Sayf",
+        "Sword Verse",
+        "Surah Tawbah",
+        "Banu Qurayza Siege",
+        "Christology in Islam",
+        "Jesus vs Muhammad",
+        "Tafsir al-Tabari",
+        "Tafsir Ibn Kathir"
+      ],
+      "about": [
+        { "@type": "Thing", "name": "Islamic History", "sameAs": "https://en.wikipedia.org/wiki/Early_Muslim_conquests" },
+        { "@type": "Thing", "name": "Naskh (Quranic Abrogation)", "sameAs": "https://en.wikipedia.org/wiki/Naskh_(tafsir)" },
+        { "@type": "Thing", "name": "Jihad in Islam", "sameAs": "https://en.wikipedia.org/wiki/Jihad" },
+        { "@type": "Thing", "name": "Siege of Banu Qurayza", "sameAs": "https://en.wikipedia.org/wiki/Siege_of_Banu_Qurayza" },
+        { "@type": "Thing", "name": "Isa (Jesus in Islam)", "sameAs": "https://en.wikipedia.org/wiki/Jesus_in_Islam" }
+      ],
+      "author": {
+        "@type": "Organization",
+        "name": "Ready Apologia",
+        "url": `${siteUrl}${base}/`
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Ready Apologia",
+        "url": `${siteUrl}${base}/`,
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${siteUrl}${base}/assets/logo.png`,
+          "width": 194,
+          "height": 150
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${canonicalURL}#faq`,
+      "mainEntity": faqSchemaItems
+    },
+    {
+      "@type": "WebPage",
+      "@id": canonicalURL,
+      "url": canonicalURL,
+      "name": pageTitle,
+      "description": pageDesc,
+      "inLanguage": "en-US",
+      "breadcrumb": { "@id": `${canonicalURL}#breadcrumb` },
+      "hasPart": [
+        { "@type": "WebPageElement", "name": "Abstract & Macro Divergence", "url": `${canonicalURL}#abstract` },
+        { "@type": "WebPageElement", "name": "1. Two Eras, Two Realities: The Sociopolitical Backdrop", "url": `${canonicalURL}#sociopolitical-backdrop` },
+        { "@type": "WebPageElement", "name": "2. The Evolution of Warfare: The Four Stages of Jihad", "url": `${canonicalURL}#four-stages-of-warfare` },
+        { "@type": "WebPageElement", "name": "3. From Alliance to Conflict: Jewish Relations in Medina", "url": `${canonicalURL}#relations-with-jewish-tribes` },
+        { "@type": "WebPageElement", "name": "4. Christological Shift: Exalted Titles to Polemical Rebuttal", "url": `${canonicalURL}#christological-shift` },
+        { "@type": "WebPageElement", "name": "5. The Classical Doctrine of Naskh (Abrogation)", "url": `${canonicalURL}#doctrine-of-naskh` },
+        { "@type": "WebPageElement", "name": "6. Comparative Synthesis: Jesus vs. Muhammad", "url": `${canonicalURL}#comparative-synthesis` },
+        { "@type": "WebPageElement", "name": "7. Modern Hermeneutics: Interpretive Frameworks", "url": `${canonicalURL}#interpretive-frameworks` },
+        { "@type": "WebPageElement", "name": "8. Theological Conclusion", "url": `${canonicalURL}#conclusion` }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  keywords={pageKeywords}
+  ogImage={ogImage}
+  ogType="article"
+  ogImageWidth={620}
+  ogImageHeight={413}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+>
+  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'from-mecca-to-medina' }} />
+
+  <div class="mm-page-wrapper">
+    {/* Breadcrumb Navigation */}
+    <nav class="breadcrumb-header" aria-label="Breadcrumb">
+      <a href={`${base}/discover`} class="back-link" aria-label="Go back to Discover tab">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        <span>Discover</span>
+      </a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current">Islamics · Scripture</span>
+    </nav>
+
+    {/* Header Hero */}
+    <header class="mm-hero">
+      <h1 class="mm-hero-title">
+        From Mecca to Medina
+      </h1>
+      <p class="mm-hero-subtitle">
+        The Evolution of Islamic Revelation, Power, and Theology
+      </p>
+      <p class="mm-hero-desc">
+        A historical, textual, and theological analysis of the transition from persecuted minority to sovereign statehood, universal conquest, and dogmatic abrogation.
+      </p>
+    </header>
+
+    {/* Main Interactive Article Island */}
+    <main class="mm-content-container" aria-label="Article Content">
+      <MeccaToMedinaArticle client:load data={articleData} base={base} />
+    </main>
+
+    {/* Footer Link back to Discover */}
+    <footer class="mm-footer-nav">
+      <a href={`${base}/discover`} class="footer-discover-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <span>Back to Discover Overview</span>
+      </a>
+    </footer>
+  </div>
+</Layout>
+
+<style>
+  .mm-page-wrapper {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 12px 10px 60px;
+    font-family: var(--font-body, 'Public Sans', -apple-system, sans-serif);
+    color: var(--color-on-surface, #09090b);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .mm-page-wrapper {
+      padding: 24px 16px 80px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .mm-page-wrapper {
+      padding: 32px 20px 96px;
+    }
+  }
+
+  /* Breadcrumb */
+  .breadcrumb-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--color-on-surface-variant, #71717a);
+    margin-bottom: 16px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-on-surface-variant, #71717a);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-primary, #09090b);
+  }
+
+  .breadcrumb-sep {
+    color: #d4d4d8;
+  }
+
+  .breadcrumb-current {
+    font-weight: 600;
+    color: var(--color-secondary, #974543);
+  }
+
+  /* Hero */
+  .mm-hero {
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-outline-variant, #e4e4e7);
+    padding-bottom: 18px;
+  }
+
+  .mm-hero-title {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 0 4px;
+    color: var(--color-primary, #09090b);
+  }
+
+  .mm-hero-subtitle {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--color-secondary, #974543);
+    margin: 0 0 10px;
+  }
+
+  .mm-hero-desc {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--color-on-surface-variant, #71717a);
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .mm-hero-title {
+      font-size: 28px;
+    }
+    .mm-hero-subtitle {
+      font-size: 17px;
+    }
+    .mm-hero-desc {
+      font-size: 14.5px;
+    }
+  }
+
+  /* Content */
+  .mm-content-container {
+    width: 100%;
+  }
+
+  /* Footer Nav */
+  .mm-footer-nav {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid var(--color-outline-variant, #e4e4e7);
+    padding-top: 24px;
+  }
+
+  .footer-discover-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-outline-variant, #e4e4e7);
+    border-radius: 9999px;
+    color: var(--color-primary, #09090b);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s ease;
+  }
+
+  .footer-discover-btn:hover {
+    border-color: #a1a1aa;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  @media print {
+    body {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+    .breadcrumb-header,
+    .mm-sticky-nav,
+    .mm-footer-nav,
+    .reader-link-btn,
+    .external-sunnah-link,
+    .hadith-expand-btn {
+      display: none !important;
+    }
+    .mm-page-wrapper {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+    .mm-hero {
+      border-bottom: 2px solid #000000;
+      margin-bottom: 24px;
+    }
+    .mm-card,
+    .stage-card,
+    .phase-card,
+    .naskh-card,
+    .camp-event-block,
+    .theme-card,
+    .synthesis-card,
+    .framework-card {
+      border: 1px solid #cccccc !important;
+      box-shadow: none !important;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      margin-bottom: 16px !important;
+    }
+    .hadith-item-card {
+      background: #fafafa !important;
+      border: 1px solid #dddddd !important;
+    }
+  }
+</style>

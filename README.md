@@ -111,7 +111,9 @@ pkill -f astro
 *   `docs/distribution_strategy.md`: [Multi-Channel Marketing, Outreach & Distribution Strategy](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/distribution_strategy.md) actionable master plan and checklists.
 *   `docs/creator_contacts.md`: [Creator Contacts & Outreach Directory](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/creator_contacts.md) for top apologists indexed in Ready Apologia.
 *   `docs/creator_top_verses.md`: [Personalized Creator Top Bible Verses & Outreach Playbook](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/creator_top_verses.md) with shareable WOW links per creator.
+*   `docs/notebooklm.md`: [Notebook LM Video Generation & Discover PDF Export Guide](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/notebooklm.md) covering data standards, PDF structure, and export automation.
 *   `docs/pillar2_seo_implementation.md`: [Technical SEO Master Plan & Implementation Code](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/pillar2_seo_implementation.md) for sitemaps, FAQ JSON-LD schema, Open Graph, and robots.txt.
+*   `scripts/generate_discover_pdfs.py`: Script to generate high-density, self-contained PDF exports of all Discover articles into `~/Downloads/discover/`.
 
 ## 🗺️ Route Map
 | Route | Description |
@@ -126,6 +128,10 @@ pkill -f astro
 | `/discover` | Discover hub with deep dives on Christian theology and Islamic scripture |
 | `/discover/islamic-dilemma` | The Islamic Dilemma interactive deep-dive page (supports `#stage-X` URL hash sharing) |
 | `/discover/quran-preservation` | The Myth of Quranic Preservation deep-dive page (supports `#stage-X` URL hash sharing) |
+| `/discover/origins-of-revelation` | Assessing the Origins of Islamic Revelation comparative study |
+| `/discover/from-mecca-to-medina` | From Mecca to Medina: Evolution of Islamic Revelation, Power & Theology (supports section `#hash` sharing) |
+| `/discover/muhammad-and-slavery` | Muhammad & Slavery in Canonical Islamic Texts 3-part Portal Hub |
 | `/discover/divinity-timeline` | Archaeological Evidence of the Divine Christ timeline (supports `#event-id` URL hash sharing) |
 | `/discover/extrabiblical-evidence-for-jesus` | Extrabiblical & Historical Evidence for Jesus catalog (supports `#evidence-id` URL hash sharing) |
+| `/discover/trustworthiness-of-the-bible` | The Trustworthiness of the Bible 4-stage evidentiary repository |
 

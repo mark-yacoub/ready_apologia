@@ -1,0 +1,901 @@
+{
+  "meta": {
+    "title": "From Mecca to Medina: The Evolution of Islamic Revelation, Power, and Theology",
+    "shortTitle": "From Mecca to Medina",
+    "subtitle": "A historical, textual, and theological analysis of the transition from persecuted minority to sovereign statehood",
+    "slug": "from-mecca-to-medina-evolution-of-islamic-revelation",
+    "category": "Islamic Studies & Comparative Religion",
+    "estimatedReadingTimeMinutes": 18,
+    "primarySources": [
+      "The Quran",
+      "Tafsir al-Tabari (Jami' al-Bayan)",
+      "Tafsir Ibn Kathir (Tafsir al-Qur'an al-'Azim)",
+      "Sahih al-Bukhari",
+      "Sahih Muslim",
+      "Sunan an-Nasa'i",
+      "Ibn Hisham (Al-Sirah al-Nabawiyyah)",
+      "Ibn Hazm (Kitab al-Nasikh wa al-Mansukh)"
+    ],
+    "keywords": [
+      "Mecca to Medina",
+      "Naskh",
+      "Abrogation",
+      "Four Stages of Jihad",
+      "Sword Verse",
+      "Ayat al-Sayf",
+      "Jizyah",
+      "People of the Book",
+      "Banu Qurayza",
+      "Banu Nadir",
+      "Isa al-Masih",
+      "Christology in Islam",
+      "Tafsir Tabari",
+      "Tafsir Ibn Kathir"
+    ]
+  },
+  "abstract": {
+    "summary": "A central question in the study of Islamic history, comparative theology, and textual criticism is the marked transition between the **Meccan period (610–622 AD)** and the **Medinan period (622–632 AD)**. During the thirteen years in Mecca, the Quranic discourse emphasized spiritual monotheism (*Tawhid*), moral rectitude, patient endurance (*sabr*) under persecution, non-retaliation, and mutual religious tolerance. Following the *Hijrah* (migration) to Medina, where Muhammad became a political ruler, military commander, and head of state, the revelation shifted dramatically toward legal codes, penal laws, active warfare (*Jihad*), polemics against Jewish and Christian dogmas, and the political subjugation of non-Muslim communities through tribute (*Jizyah*).",
+    "coreThemes": [
+      {
+        "id": "stages-of-warfare",
+        "title": "The Four Stages of Warfare",
+        "summary": "The progression from complete prohibition of fighting in Mecca to defensive permission, mandatory defense, and finally offensive universal conquest in *Surah At-Tawbah*."
+      },
+      {
+        "id": "jewish-relations",
+        "title": "Transformation of Relations with Jewish Tribes",
+        "summary": "From initial monotheistic alliance and praying toward Jerusalem to theological rift, charges of scriptural alteration (*Tahrif*), expulsions, and sieges."
+      },
+      {
+        "id": "christological-shift",
+        "title": "Theological Rebuttal of Christian Orthodoxy",
+        "summary": "From early exalted titles (*Word of God*, *Spirit from Him*) to direct Medinan polemics rejecting the Trinity, Incarnation, and Crucifixion."
+      },
+      {
+        "id": "doctrine-of-naskh",
+        "title": "The Classical Science of Abrogation (Naskh)",
+        "summary": "How classical Quranic commentators (*Al-Tabari*, *Ibn Kathir*, *Ibn Hazm*) resolved these textual divergences by establishing that later Medinan martial commands legally superseded over 120 earlier peaceful verses."
+      }
+    ],
+    "diagram": {
+      "type": "mermaid",
+      "code": "graph TD\n    subgraph Mecca_Phase [\"Meccan Period (610–622 AD) — Weakness & Minority\"]\n        M1[\"Persecuted Religious Minority\"]\n        M2[\"Patience & Non-Violence (Sabr)\"]\n        M3[\"'To you your religion and to me my religion' (109:6)\"]\n        M4[\"Jerusalem as Initial Qiblah / Consultation of Prior Scriptures (10:94)\"]\n    end\n\n    subgraph Medina_Phase [\"Medinan Period (622–632 AD) — Sovereignty & Conquest\"]\n        MD1[\"Head of State & Military Commander\"]\n        MD2[\"Four Stages of Jihad culminating in Sword Verses (9:5, 9:29)\"]\n        MD3[\"Qiblah Changed to Mecca (2:144) / Expulsion & Conflict with Jewish Tribes\"]\n        MD4[\"Aggressive Polemics against Trinity (5:73) & Divine Sonship (9:30)\"]\n    end\n\n    Mecca_Phase -->|Hijrah 622 AD: Political Power & Statehood| Medina_Phase"
+    }
+  },
+  "sections": [
+    {
+      "id": "sociopolitical-backdrop",
+      "sectionNumber": 1,
+      "title": "Two Eras, Two Realities: The Sociopolitical Backdrop",
+      "directionToLLM": "On mobile, render the comparison table as an interactive segmented tab (Mecca vs Medina) or collapsible comparative cards with distinct visual cues (e.g., gold/warm for Mecca minority phase, slate/steel for Medina statehood phase).",
+      "intro": "The Quran is divided into two distinct corpuses: Meccan surahs (approx. 86 chapters) and Medinan surahs (approx. 28 chapters). The divergence between them directly mirrors Muhammad's changing sociopolitical position.",
+      "comparison": {
+        "meccanPeriod": {
+          "duration": "13 Years (610–622 AD)",
+          "status": "Persecuted minority",
+          "context": "Tribal pagan oligarchy (Quraysh)",
+          "revelationStyle": "Poetic, apocalyptic, monotheistic, non-retaliatory",
+          "coreEthos": "Patience under suffering (sabr), non-violence, freedom of conscience"
+        },
+        "medinanPeriod": {
+          "duration": "10 Years (622–632 AD)",
+          "status": "Head of State, General, Supreme Judge",
+          "context": "Sovereign Islamic polity and regional hegemony",
+          "revelationStyle": "Legalistic, administrative, martial, polemical",
+          "coreEthos": "State-building, enforcement of penal law, active military conquest"
+        }
+      },
+      "subsections": [
+        {
+          "id": "meccan-crucible",
+          "title": "The Meccan Crucible: The Ethos of Patience",
+          "content": "In Mecca, Muhammad and his small band of followers faced severe ostracism, economic boycotts, and physical persecution from the ruling Quraysh oligarchy. Lacking military power or political jurisdiction, the Quranic revelations commanded absolute non-violence and patience.",
+          "verses": [
+            {
+              "reference": "quran/109/6",
+              "text": "To you your religion and to me my religion.’",
+              "displayReference": "Surah Al-Kafirun (109:6)",
+              "internalReference": "quran/109/6"
+            },
+            {
+              "reference": "quran/16/125",
+              "text": "Call to the way of your Lord with wisdom and good admonition, and dispute with them by means of what is better. Surely your Lord – He knows who goes astray from His way, and He knows the ones who are (rightly) guided.",
+              "displayReference": "Surah An-Nahl (16:125)",
+              "internalReference": "quran/16/125"
+            },
+            {
+              "reference": "quran/41/34",
+              "text": "The good deed and the evil deed are not equal. Repel (evil) with that which is better, and suddenly the one with whom (there was) enmity between you and him (will behave) as if he were an ally.",
+              "displayReference": "Surah Fussilat (41:34)",
+              "internalReference": "quran/41/34"
+            }
+          ]
+        },
+        {
+          "id": "medinan-sovereign",
+          "title": "The Medinan Sovereign: Statecraft and Legal Power",
+          "content": "In 622 AD, following the Hijrah, Muhammad was invited to Yathrib (renamed Madinat al-Nabi, 'The City of the Prophet') to mediate between warring Arab tribes (Aws and Khazraj). He rapidly consolidated political, judicial, and military authority. The nature of the revelation adapted to the functional needs of an expanding empire: organizing armies, distributing war booty (Ghanimah), legislating marriage and divorce, establishing penal codes (Hudud), and dealing with neighboring tribes and rival theological communities."
+        }
+      ]
+    },
+    {
+      "id": "four-stages-of-warfare",
+      "sectionNumber": 2,
+      "title": "The Stance on Warfare: The Four Progressive Stages",
+      "directionToLLM": "Render the four stages as a progressive vertical timeline or stepped carousel with state badges (Prohibition -> Permission -> Obligation -> Universal Subjugation). Highlight primary Hadith and Tafsir quotes within dedicated styled quote cards with source badges.",
+      "intro": "Islamic jurisprudence (Fiqh), traditional biographies (Sirah), and classical Quranic commentaries identify four progressive chronological stages in the Quranic doctrine of armed conflict.",
+      "stages": [
+        {
+          "stageNumber": 1,
+          "name": "Prohibition of Arms and Command of Endurance",
+          "period": "Mecca (610–622 AD)",
+          "summary": "During the Meccan phase, Muslims who requested permission to take up arms against Quraysh persecution were explicitly forbidden. Arms were strictly prohibited, and spiritual endurance (sabr) was mandated.",
+          "primaryVerse": {
+            "reference": "quran/4/77",
+            "text": "Do you not see those to whom it was said, ‘Restrain your hands, and observe the prayer and give the alms’? Then, when fighting is prescribed for them, suddenly (there is) a group of them who fear the people as (much as) they fear God, or even more. And they say, ‘Our Lord, why have you prescribed fighting for us? Why not spare us for a time near (at hand)?’ Say: ‘The enjoyment of this world is a small thing, but the Hereafter is better for the one who guards (himself). You will not be done evil in the slightest.’",
+            "displayReference": "Surah An-Nisa (4:77)",
+            "internalReference": "quran/4/77"
+          },
+          "tafsirExcerpts": [
+            {
+              "scholar": "Ibn Kathir",
+              "source": "Tafsir al-Qur'an al-'Azim (4:77)",
+              "text": "In the beginning of Islam, Muslims in Makkah were commanded to perform the prayer and pay *Zakat*... They were also commanded to be forgiving and forbearing with the idolators and to observe patience with them for the time being. However, they were eager and burning with desire for the time when they would be ordered to fight, so that they could exact vengeance on their enemies. The situation at that time did not permit armed conflict for many reasons. For instance, the Muslims were few in number compared to the multitude of their enemies... Therefore, they were not commanded with *Jihad* except in Al-Madinah, when they acquired a town, invulnerability, and supporters.",
+              "displaySource": "Tafsir al-Qur'an al-'Azim (4:77)",
+              "internalReference": "ibnkathir/4/77",
+              "reference": "ibnkathir/4/77"
+            },
+            {
+              "scholar": "Al-Tabari",
+              "source": "Jami' al-Bayan (4:77)",
+              "text": "**Abu Ja'far said:** It was mentioned that this verse was revealed concerning a group of the companions of the Messenger of Allah, peace and blessings of Allah be upon him, who had believed in him and affirmed his truthfulness before fighting in Jihad was prescribed for them, while the prayer and the alms had been prescribed for them. They used to ask Allah to prescribe fighting for them. But when fighting was prescribed for them, that became difficult for them, and they said what Allah has informed about them in His Book.",
+              "displaySource": "Jami' al-Bayan (4:77)",
+              "internalReference": "tabari/4/77",
+              "reference": "tabari/4/77"
+            }
+          ],
+          "hadithEvidence": {
+            "collection": "Sunan an-Nasa'i 3086",
+            "reference": "Book 25, Hadith 3",
+            "url": "https://sunnah.com/nasai:3086",
+            "narrator": "Ibn Abbas",
+            "text": "Narrated It was narrated from Ibn Abbas:that Abdur-Rahman bin Awf and some of his companions came to the Prophet in Makkah and said: “O Messenger of Allah! We were respected when we were idolaters and when we believed, we were humiliated.” He said: “I have been commanded to pardon, so do not fight.” Then, when Allah caused us to move to Al-Madinah, He commanded us to fight, but they refrained. Then Allah, the Mighty and Sublime, revealed: Have you not seen those who were told to hold back their hands (from fighting) and perform As-Salah”"
+          }
+        },
+        {
+          "stageNumber": 2,
+          "name": "Defensive Warfare Permitted",
+          "period": "Early Medina (~622–624 AD)",
+          "summary": "Following the establishment of the Medinan commonwealth, revelation permitted armed resistance for the first time.",
+          "primaryVerse": {
+            "reference": "quran/22/39-40",
+            "text": "Permission is given to those who fight because they have been done evil – and surely God is indeed able to help them – those who have been expelled from their homes without any right, only because they said, ‘Our Lord is God.’ But if God had not repelled some of the people by the means of others, many monasteries, and churches, and synagogues, and mosques, in which the name of God is mentioned often, would indeed have been destroyed. God will indeed help the one who helps Him – surely God is indeed strong, mighty –",
+            "displayReference": "Surah Al-Hajj (22:39–40)",
+            "internalReference": "quran/22/39-40"
+          }
+        },
+        {
+          "stageNumber": 3,
+          "name": "Obligatory Warfare Against Aggressors",
+          "period": "Mid-Medina (~624–628 AD)",
+          "summary": "As armed clashes with Mecca escalated (the battles of Badr, Uhud, and the Trench), fighting transitioned from a permitted option to a religious commandment.",
+          "primaryVerses": [
+            {
+              "reference": "quran/2/216",
+              "text": "Fighting is prescribed for you, though it is hateful to you. You may happen to hate a thing though it is good for you, and you may happen to love a thing though it is bad for you. God knows and you do not know.",
+              "displayReference": "Surah Al-Baqarah (2:216)",
+              "internalReference": "quran/2/216"
+            },
+            {
+              "reference": "quran/2/190",
+              "text": "Fight in the way of God against those who fight against you, but do not commit aggression. Surely God does not love the aggressors.",
+              "displayReference": "Surah Al-Baqarah (2:190)",
+              "internalReference": "quran/2/190"
+            }
+          ]
+        },
+        {
+          "stageNumber": 4,
+          "name": "Offensive Conquest and the Sword Verses",
+          "period": "Late Medina (630–632 AD)",
+          "summary": "In the final phase of Muhammad's life, following the conquest of Mecca and the expedition to Tabuk, Surah At-Tawbah (Chapter 9) was revealed—historically recognized as one of the very last chapters of the Quran. It formally dissolved existing peace treaties and established open-ended mandates for combat and religious dominance.",
+          "keyMandates": [
+            {
+              "title": "The Sword Verse Against Polytheists (Ayat al-Sayf)",
+              "reference": "quran/9/5",
+              "text": "Then, when the sacred months have passed, kill the idolaters wherever you find them, and seize them, and besiege them, and sit (in wait) for them at every place of ambush. If they turn (in repentance), and observe the prayer and give the alms, let them go their way. Surely God is forgiving, compassionate.",
+              "displayReference": "Surah At-Tawbah (9:5)",
+              "internalReference": "quran/9/5"
+            },
+            {
+              "title": "The Mandate Against Jews and Christians (Ahl al-Kitab)",
+              "reference": "quran/9/29",
+              "text": "Fight those who do not believe in God or the Last Day, and do not forbid what God and His messenger have forbidden, and do not practice the religion of truth – from among those who have been given the Book – until they pay tribute out of hand, and they are disgraced.",
+              "displayReference": "Surah At-Tawbah (9:29)",
+              "internalReference": "quran/9/29"
+            }
+          ],
+          "tafsirExcerpts": [
+            {
+              "scholar": "Al-Tabari",
+              "source": "Jami' al-Bayan (9:29)",
+              "text": "**Abu Ja'far said:** He whose mention is exalted says to the believers in Him from among the companions of His Messenger, peace and blessings of God be upon him: (Fight), O believers, the people = **{who do not believe in God or the Last Day}**, He says: and they do not believe in a Paradise nor a Fire (13) = **{and do not forbid what God and His messenger have forbidden, and do not practice the religion of truth}**, He says: and they do not obey God with the obedience of truth, meaning: that they do not obey with the obedience of the people of Islam (14) = **{from among those who have been given the Book}**, and they are the Jews and the Christians. ... As for His saying: **{and they are disgraced}**, its meaning is: while they are humiliated and subdued.\n\nIt is said to the humiliated, the despised: *\"saghir\"*.",
+              "displaySource": "Jami' al-Bayan (9:29)",
+              "internalReference": "tabari/9/29",
+              "reference": "tabari/9/29"
+            },
+            {
+              "scholar": "Ibn Kathir",
+              "source": "Tafsir al-Qur'an al-'Azim (9:29)",
+              "text": "Therefore, when People of the Scriptures disbelieved in Muhammad (peace and blessings of Allah be upon him), they had no beneficial faith in any Messenger or what the Messengers brought. Rather, they followed their opinions, lusts and the ways of their forefathers in what they were upon, not because it was Allah’s Law and religion. Had they been true believers in what was in their hands, that faith would have directed them to believe in Muhammad, peace and blessings of Allah be upon him, because all previous Prophets gave the good news of his advent and commanded them to obey and follow him.",
+              "displaySource": "Tafsir al-Qur'an al-'Azim (9:29)",
+              "internalReference": "ibnkathir/9/29",
+              "reference": "ibnkathir/9/29"
+            }
+          ],
+          "hadithEvidence": [
+            {
+              "collection": "Sahih al-Bukhari 25",
+              "reference": "Book 2, Hadith 18",
+              "url": "https://sunnah.com/bukhari:25",
+              "narrator": "Ibn 'Umar",
+              "text": "Narrated Ibn 'Umar: Allah's Messenger (ﷺ) said: \"I have been ordered (by Allah) to fight against the people until they testify that none has the right to be worshipped but Allah and that Muhammad is Allah's Messenger (ﷺ), and offer the prayers perfectly and give the obligatory charity, so if they perform that, then they save their lives and property from me except for Islamic laws and then their reckoning (accounts) will be done by Allah"
+            },
+            {
+              "collection": "Sahih Muslim 22",
+              "reference": "Book 1, Hadith 36",
+              "url": "https://sunnah.com/muslim:22",
+              "narrator": "Abdullah b. 'Umar",
+              "text": "It has been narrated on the authority of Abdullah b. 'Umar that the Messenger of Allah said:I have been commanded to fight against people till they testify that there is no god but Allah, that Muhammad is the messenger of Allah, and they establish prayer, and pay Zakat and if they do it, their blood and property are guaranteed protection on my behalf except when justified by law, and their affairs rest with Allah"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "relations-with-jewish-tribes",
+      "sectionNumber": 3,
+      "title": "The Deterioration of Relations with the Jewish Tribes",
+      "directionToLLM": "Provide a clean chronological progression showing the transition from initial monotheistic concord to theological polemics and physical confrontations. Ensure all Hadith and historical references include direct links and exact citations.",
+      "intro": "The trajectory of Muhammad’s interactions with the Jewish tribes of Medina represents one of the clearest case studies in the transition from conciliation during early weakness to armed subjugation during sovereign power.",
+      "subsections": [
+        {
+          "id": "initial-concord",
+          "title": "Initial Concord and Monotheistic Solidarity",
+          "points": [
+            {
+              "topic": "The Jerusalem Qiblah",
+              "description": "For the first sixteen to seventeen months in Medina, Muslims prayed facing Jerusalem.",
+              "citation": {
+                "collection": "Sahih al-Bukhari 40",
+                "reference": "Book 2, Hadith 33",
+                "url": "https://sunnah.com/bukhari:40",
+                "text": "Narrated Al-Bara' (bin 'Azib): When the Prophet (ﷺ) came to Medina, he stayed first with his grandfathers or maternal uncles from Ansar. He offered his prayers facing Baitul-Maqdis (Jerusalem) for sixteen or seventeen months, but he wished that he could pray facing the Ka'ba (at Mecca)... Jews and the people of the scriptures used to be pleased to see the Prophet (ﷺ) facing Jerusalem in prayers but when he changed his direction towards the Ka'ba, during the prayers, they disapproved of it."
+              }
+            },
+            {
+              "topic": "The Constitution of Medina (Sahifat al-Madinah)",
+              "description": "Preserved in Ibn Hisham's Al-Sirah al-Nabawiyyah, the covenant initially stipulated that 'the Jews of Banu 'Awf are one community (Ummah) with the believers, the Jews having their religion and the Muslims their religion.'"
+            },
+            {
+              "topic": "Consulting Prior Scriptures",
+              "description": "Early revelations instructed Muhammad to seek confirmation from Jewish and Christian scholars.",
+              "verse": {
+                "reference": "quran/10/94",
+                "text": "If you are in doubt about what We have sent down to you, ask those who have been reciting the Book before you. The truth has come to you from your Lord, so do not be one of the doubters.",
+                "displayReference": "Surah Yunus (10:94)",
+                "internalReference": "quran/10/94"
+              }
+            }
+          ]
+        },
+        {
+          "id": "theological-fracture",
+          "title": "Theological Fracture and Quranic Charges of Tahrif",
+          "content": "Following the mutual rejection and breakdown of relations between Muhammad and the Jewish community in Medina, the Quranic discourse shifted from conciliation to intense polemical hostility.",
+          "categories": [
+            {
+              "category": "Reorientation of Prayer",
+              "verse": {
+                "reference": "quran/2/144",
+                "text": "We do see you turning your face about in the sky, and We shall indeed turn you in a direction which you will be pleased with. Turn your face in the direction of the Sacred Mosque, and wherever you are, turn your faces in its direction. Surely those who have been given the Book know indeed that it is the truth from their Lord. God is not oblivious of what they do.",
+                "displayReference": "Surah Al-Baqarah (2:144)",
+                "internalReference": "quran/2/144"
+              }
+            },
+            {
+              "category": "Accusations of Scriptural Alteration (Tahrif)",
+              "verses": [
+                {
+                  "reference": "quran/2/75",
+                  "text": "Are you eager that they should believe you , even though a group of them has already heard the word of God, (and) then altered it after they had understood it – and they know (they have done this)?",
+                  "displayReference": "Surah Al-Baqarah (2:75)",
+                  "internalReference": "quran/2/75"
+                },
+                {
+                  "reference": "quran/2/79",
+                  "text": "So woe to those who write the Book with their (own) hands, (and) then say, ‘This is from God,’ in order to sell it for a small price. Woe to them for what their hands have written, and woe to them for what they earn.",
+                  "displayReference": "Surah Al-Baqarah (2:79)",
+                  "internalReference": "quran/2/79"
+                },
+                {
+                  "reference": "quran/5/13",
+                  "text": "For their breaking their covenant, We cursed them and made their hearts hard. They alter words from their positions, and have forgotten part of what they were reminded of. You will continue to see treachery from them, except for a few of them. Yet pardon them and excuse (them). Surely God loves the doers of good.",
+                  "displayReference": "Surah Al-Ma'idah (5:13)",
+                  "internalReference": "quran/5/13"
+                }
+              ]
+            },
+            {
+              "category": "Accusations of Slaying Prophets",
+              "verses": [
+                {
+                  "reference": "quran/2/61",
+                  "text": "(Remember) when you said, ‘Moses! We cannot endure just one kind of food. Call on your Lord for us, that He may bring forth for us some of what the earth grows: its green herbs, its cucumbers, its corn, its lentils, and its onions.’ He said, ‘Would you exchange what is worse for what is better? Go (back) down to Egypt! Surely you will have what you ask for.’ Humiliation and poverty were stamped upon them, and they incurred the anger of God. That was because they had disbelieved in the signs of God, and killed the prophets without any right. That was because they disobeyed and went on transgressing.",
+                  "displayReference": "Surah Al-Baqarah (2:61)",
+                  "internalReference": "quran/2/61"
+                },
+                {
+                  "reference": "quran/4/155",
+                  "text": "So for their breaking their covenant, and their disbelief in the signs of God, and their killing the prophets without any right, and their saying, ‘Our hearts are covered’ – No! God set a seal on them for their disbelief, so they do not believe, except for a few –",
+                  "displayReference": "Surah An-Nisa (4:155)",
+                  "internalReference": "quran/4/155"
+                }
+              ]
+            },
+            {
+              "category": "Severe Denunciations and Metamorphosis",
+              "verses": [
+                {
+                  "reference": "quran/5/82",
+                  "text": "Certainly you will find that the most violent of people in enmity to the believers are the Jews and the idolaters. Certainly you will find that the closest of them in affection to the believers are those who say, ‘We are Christians.’ That is because (there are) priests and monks among them, and because they are not arrogant.",
+                  "displayReference": "Surah Al-Ma'idah (5:82)",
+                  "internalReference": "quran/5/82"
+                },
+                {
+                  "reference": "quran/2/65",
+                  "text": "Certainly you know those of you who transgressed in (the matter of) the sabbath, and (that) We said to them, ‘Become apes, skulking away!’",
+                  "displayReference": "Surah Al-Baqarah (2:65)",
+                  "internalReference": "quran/2/65"
+                },
+                {
+                  "reference": "quran/5/60",
+                  "text": "Say: ‘Shall I inform you of (something) worse than that? Retribution with God! Whomever God has cursed, and whomever He is angry with – some of whom He made apes, and pigs, and slaves of al-Ṭāghūt – those are in a worse situation and farther astray from the right way.’",
+                  "displayReference": "Surah Al-Ma'idah (5:60)",
+                  "internalReference": "quran/5/60"
+                },
+                {
+                  "reference": "quran/7/166",
+                  "text": "So when they disdained what they had been forbidden from, We said to them, ‘Become apes, skulking away!’",
+                  "displayReference": "Surah Al-A'raf (7:166)",
+                  "internalReference": "quran/7/166"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "physical-escalation",
+          "title": "Physical Escalation and Subjugation",
+          "campaigns": [
+            {
+              "target": "Banu Qaynuqa",
+              "year": "624 AD",
+              "outcome": "Besieged following a market confrontation; expelled from Medina, their weapons and goldsmith tools confiscated.",
+              "sources": [
+                "Ibn Hisham (Al-Sirah al-Nabawiyyah)",
+                "Al-Tabari (Ta'rikh al-Rusul wa'l-Muluk)"
+              ]
+            },
+            {
+              "target": "Banu Nadir",
+              "year": "625 AD",
+              "outcome": "Besieged on allegations of plotting assassination; their date-palms were cut down and burned to force their capitulation.",
+              "verses": [
+                {
+                  "reference": "quran/59/2",
+                  "text": "He (it is) who expelled those of the People of the Book who disbelieved from their homes for the first gathering. You did not think that they would go forth, and they thought that their strongholds would defend them against God. But God came upon them from where they were not expecting, and cast dread into their hearts. They destroyed their houses with their (own) hands and the hands of the believers. Learn a lesson, you who have sight!",
+                  "displayReference": "Surah Al-Hashr (59:2)",
+                  "internalReference": "quran/59/2"
+                },
+                {
+                  "reference": "quran/59/5",
+                  "text": "Whatever palm trees you cut down, or left standing on their roots – (it was) was by the permission of God, and (it was) so that He might disgrace the wicked.",
+                  "displayReference": "Surah Al-Hashr (59:5)",
+                  "internalReference": "quran/59/5"
+                }
+              ],
+              "hadiths": [
+                {
+                  "collection": "Sahih al-Bukhari 4031",
+                  "reference": "Book 64, Hadith 80",
+                  "url": "https://sunnah.com/bukhari:4031",
+                  "text": "Narrated Ibn `Umar:Allah's Messenger (ﷺ) had the date-palm trees of Bani Al-Nadir burnt and cut down at a place called Al- Buwaira. Allah then revealed: \"What you cut down of the date-palm trees (of the enemy) Or you left them standing on their stems. It was by Allah's Permission"
+                },
+                {
+                  "collection": "Sahih Muslim 1746a",
+                  "reference": "Book 32, Hadith 33",
+                  "url": "https://sunnah.com/muslim:1746a",
+                  "text": "It is narrated on the authority of 'Abdullah that the Messenger of Allah (ﷺ) ordered the date-palms of Banu Nadir to be burnt and cut. These palms were at Buwaira. Qutaibah and Ibn Rumh in their versions of the tradition have added:So Allah, the Glorious and Exalted, revealed the verse:\" Whatever trees you have cut down or left standing on their trunks, it was with the permission of Allah so that He may disgrace the evil-doers\" (lix)"
+                }
+              ]
+            },
+            {
+              "target": "Banu Qurayza",
+              "year": "627 AD (5 AH)",
+              "outcome": "Besieged for 25 days following the Battle of the Trench for alleged communication with the Meccan confederacy. Upon unconditional surrender, Sa'd ibn Mu'adh decreed the execution of all adult males and the enslavement of women and children, ratified by Muhammad as divine judgment. Between 600 and 900 males were decapitated in trenches in the marketplace of Medina, adolescent boys were physically inspected for pubic hair to determine execution, and women and children were enslaved and sold for horses and arms.",
+              "verse": {
+                "reference": "quran/33/26-27",
+                "displayReference": "Surah Al-Ahzab (33:26–27)",
+                "internalReference": "quran/33/26-27",
+                "text": "He brought down from their fortifications those of the People of the Book who supported them, and cast dread into their hearts. You killed a group (of them), and took captive (another) group. And He caused you to inherit their land, their homes, and their wealth, and a land you had not set foot on. God is powerful over everything."
+              },
+              "keyEvents": [
+                {
+                  "title": "The Siege and Angelic Command to Attack",
+                  "details": "Upon returning from the Battle of the Trench and putting down his weapons, the angel Gabriel appeared to Muhammad commanding him to immediately attack Banu Qurayza. Muhammad led the Muslim forces to besiege their fortifications for 25 days until they surrendered unconditionally.",
+                  "hadiths": [
+                    {
+                      "collection": "Sahih al-Bukhari 4122",
+                      "reference": "Book 64, Hadith 166",
+                      "url": "https://sunnah.com/bukhari:4122",
+                      "text": "Narrated `Aisha:Sa`d was wounded on the day of Khandaq (i.e. Trench) when a man from Quraish, called Hibban bin Al-`Araqa hit him (with an arrow). The man was Hibban bin Qais from (the tribe of) Bani Mais bin 'Amir bin Lu'ai who shot an arrow at Sa`d's medial arm vein (or main artery of the arm). The Prophet (ﷺ) pitched a tent (for Sa`d) in the Mosque so that he might be near to the Prophet (ﷺ) to visit. When the Prophet returned from the (battle) of Al-Khandaq (i.e. Trench) and laid down his arms and took a bath Gabriel came to him while he (i.e. Gabriel) was shaking the dust off his head, and said, \"You have laid down the arms?\" By Allah, I have not laid them down. Go out to them (to attack them).\" The Prophet (ﷺ) said, \"Where?\" Gabriel pointed towards Bani Quraiza. So Allah's Messenger (ﷺ) went to them (i.e. Banu Quraiza) (i.e. besieged them). They then surrendered to the Prophet's judgment but he directed them to Sa`d to give his verdict concerning them. Sa`d said, \"I give my judgment that their warriors should be killed, their women and children should be taken as captives, and their properties distributed.\" Narrated Hisham: My father informed me that `Aisha said, \"Sa`d said, \"O Allah! You know that there is nothing more beloved to me than to fight in Your Cause against those who disbelieved Your Apostle and turned him out (of Mecca). O Allah! I think you have put to an end the fight between us and them (i.e. Quraish infidels). And if there still remains any fight with the Quraish (infidels), then keep me alive till I fight against them for Your Sake. But if you have brought the war to an end, then let this wound burst and cause my death thereby.' So blood gushed from the wound. There was a tent in the Mosque belonging to Banu Ghifar who were surprised by the blood flowing towards them . They said, 'O people of the tent! What is this thing which is coming to us from your side?' Behold! Blood was flowing profusely out of Sa`d's wound. Sa`d then died because of that"
+                    }
+                  ]
+                },
+                {
+                  "title": "The Decree of Sa'd ibn Mu'adh Ratified as Divine Judgment",
+                  "details": "The surrendered tribe accepted the arbitration of their allied chieftain, Sa'd ibn Mu'adh. Sa'd decreed that all fighting men (adult males) be killed, their women and children be taken as captive slaves, and their properties distributed. Muhammad explicitly confirmed that Sa'd had judged according to Allah's decree from above the heavens.",
+                  "hadiths": [
+                    {
+                      "collection": "Sahih al-Bukhari 3043",
+                      "reference": "Book 56, Hadith 249",
+                      "url": "https://sunnah.com/bukhari:3043",
+                      "text": "Narrated Abu Sa`id Al-Khudri:When the tribe of Bani Quraiza was ready to accept Sa`d's judgment, Allah's Messenger (ﷺ) sent for Sa`d who was near to him. Sa`d came, riding a donkey and when he came near, Allah's Messenger (ﷺ) said (to the Ansar), \"Stand up for your leader.\" Then Sa`d came and sat beside Allah's Messenger (ﷺ) who said to him. \"These people are ready to accept your judgment.\" Sa`d said, \"I give the judgment that their warriors should be killed and their children and women should be taken as prisoners.\" The Prophet (ﷺ) then remarked, \"O Sa`d! You have judged amongst them with (or similar to) the judgment of the King Allah"
+                    },
+                    {
+                      "collection": "Sahih al-Bukhari 4121",
+                      "reference": "Book 64, Hadith 165",
+                      "url": "https://sunnah.com/bukhari:4121",
+                      "text": "Narrated Abu Sa`id Al-Khudri:The people of (Banu) Quraiza agreed to accept the verdict of Sa`d bin Mu`adh. So the Prophet (ﷺ) sent for Sa`d, and the latter came (riding) a donkey and when he approached the Mosque, the Prophet (ﷺ) said to the Ansar, \"Get up for your chief or for the best among you.\" Then the Prophet (ﷺ) said (to Sa`d).\" These (i.e. Banu Quraiza) have agreed to accept your verdict.\" Sa`d said, \"Kill their (men) warriors and take their offspring as captives, \"On that the Prophet (ﷺ) said, \"You have judged according to Allah's Judgment,\" or said, \"according to the King's judgment"
+                    },
+                    {
+                      "collection": "Sahih Muslim 1768a",
+                      "reference": "Book 32, Hadith 77",
+                      "url": "https://sunnah.com/muslim:1768a",
+                      "text": "It has been narrated on the authority of Abu Sa'id al-Khudri who said:The people of Quraiza surrendered accepting the decision of Sa'd b. Mu'adh about them. Accordingly, the Messenger of Allah (ﷺ) sent for Sa'd who came to him riding a donkey. When he approached the mosque, the Messenger of Allah (ﷺ) said to the Ansar: Stand up to receive your chieftain. Then he said (to Sa'd): These people have surrendered accepting your decision. He (Sa'd) said: You will kill their fighters and capture their women and children. (Hearing this), the Prophet (ﷺ) said: You have adjudged by the command of God. The narrator is reported to have said: Perhaps he said: You have adjudged by the decision of a king. Ibn Muthanna (in his version of the tradition) has not mentioned the alternative words"
+                    }
+                  ]
+                },
+                {
+                  "title": "Pubic Hair Physical Inspection of Adolescent Youths",
+                  "details": "To distinguish adult males condemned to execution from children to be enslaved, the Muslims physically inspected the pubic hair of young male captives. Youths who had developed pubic hair were counted among the men and beheaded; those who had not were spared execution and enslaved.",
+                  "hadiths": [
+                    {
+                      "collection": "Sunan Abu Dawud 4404",
+                      "reference": "Book 40, Hadith 54",
+                      "url": "https://sunnah.com/abudawud:4404",
+                      "text": "Narrated Atiyyah al-Qurazi: I was among the captives of Banu Qurayzah. They (the Companions) examined us, and those who had begun to grow hair (pubes) were killed, and those who had not were not killed. I was among those who had not grown hair."
+                    },
+                    {
+                      "collection": "Jami` at-Tirmidhi 1584",
+                      "reference": "Book 21, Hadith 46",
+                      "url": "https://sunnah.com/tirmidhi:1584",
+                      "text": "\"We were presented to the Messenger of Allah (ﷺ) on the day of (the battle of) Quraizah. Whoever had pubic hair was killed and whoever did not was left to his way. I was of those who did not have pubic hair so I was left to my way.\""
+                    },
+                    {
+                      "collection": "Sunan Ibn Majah 2541",
+                      "reference": "Book 20, Hadith 9",
+                      "url": "https://sunnah.com/ibnmajah:2541",
+                      "text": "It was narrated that 'Abdul-Malik bin 'Umair said: 'I heard 'Atiyyah Al-Quradhi say: \"We were presented to the Messenger of Allah (ﷺ) on the Day of Quraidhah. Those whose pubic hair had grown were killed, and those whose pubic hair had not yet grown were let go. I was one of those whose pubic hair had not yet grown, so I was let go.\"'"
+                    }
+                  ]
+                },
+                {
+                  "title": "The Marketplace Trench Decapitations",
+                  "details": "Trenches were dug in the marketplace (suq) of Medina. The condemned men (estimated between 600 and 900, including Banu Nadir chief Huyayy ibn Akhtab and Banu Qurayza leader Ka'b ibn Asad) were brought out in batches and beheaded by Ali ibn Abi Talib and al-Zubayr ibn al-Awwam. One woman who had thrown a millstone during the siege was also beheaded.",
+                  "hadiths": [
+                    {
+                      "collection": "Sahih al-Bukhari 4028",
+                      "reference": "Book 64, Hadith 77",
+                      "url": "https://sunnah.com/bukhari:4028",
+                      "text": "Narrated Ibn `Umar:Bani An-Nadir and Bani Quraiza fought (against the Prophet (ﷺ) violating their peace treaty), so the Prophet exiled Bani An-Nadir and allowed Bani Quraiza to remain at their places (in Medina) taking nothing from them till they fought against the Prophet (ﷺ) again) . He then killed their men and distributed their women, children and property among the Muslims, but some of them came to the Prophet (ﷺ) and he granted them safety, and they embraced Islam. He exiled all the Jews from Medina. They were the Jews of Bani Qainuqa', the tribe of `Abdullah bin Salam and the Jews of Bani Haritha and all the other Jews of Medina"
+                    },
+                    {
+                      "collection": "Sahih Muslim 1766a",
+                      "reference": "Book 32, Hadith 73",
+                      "url": "https://sunnah.com/muslim:1766a",
+                      "text": "It has been narrated on the authority of Ibn Umar that the Jews of Banu Nadir and Banu Quraiza fought against the Messenger of Allah (ﷺ) who expelled Banu Nadir, and allowed Quraiza to stay on, and granted favour to them until they too fought against him Then he killed their men, and distributed their women, children and properties among the Muslims, except that some of them had joined the Messenger of Allah (ﷺ) who granted them security. They embraced Islam. The Messenger of Allah (ﷺ) turned out all the Jews of Medina. Banu Qainuqa' (the tribe of 'Abdullah b. Salim) and the Jews of Banu Haritha and every other Jew who was in Medina"
+                    },
+                    {
+                      "collection": "Sunan Abu Dawud 2671",
+                      "reference": "Book 15, Hadith 195",
+                      "url": "https://sunnah.com/abudawud:2671",
+                      "text": "Narrated Aisha, Ummul Mu'minin: No woman of Banu Qurayzah was killed except one. She was with me, talking and laughing on her back and belly (extremely), while the Messenger of Allah (ﷺ) was killing her people with the swords. Suddenly a man called her name: Where is so-and-so? She said: I I asked: What is the matter with you? She said: I did a new act. She said: The man took her and beheaded her. She said: I will not forget that she was laughing extremely although she knew that she would be killed."
+                    }
+                  ],
+                  "historicalSources": [
+                    "Ibn Ishaq (Sirat Rasul Allah, tr. Guillaume, pp. 461–469)",
+                    "Al-Tabari (Ta'rikh al-Rusul wa'l-Muluk, Vol. 8, pp. 35–41)",
+                    "Ibn Hisham (Al-Sirah al-Nabawiyyah, Vol. 3, pp. 244–251)"
+                  ]
+                },
+                {
+                  "title": "Distribution of Captives, Slave Sales, and Acquisition of Rayhana",
+                  "details": "The women, children, and properties were divided among the Muslim warriors, with horsemen receiving three shares and foot soldiers one. Muhammad took his fifth share (khums), including Rayhana bint Zayd (whose husband was beheaded), whom he kept as a concubine/slave. Muhammad also dispatched Sa'd ibn Zayd al-Ansari with a portion of the captive women and children to the Najd and Syria to be sold into slavery in exchange for horses and weapons.",
+                  "sources": [
+                    "Ibn Ishaq (Sirat Rasul Allah, tr. Guillaume, p. 466)",
+                    "Ibn Sa'd (Kitab al-Tabaqat al-Kabir, Vol. 8, p. 92)",
+                    "Al-Tabari (Ta'rikh al-Rusul wa'l-Muluk, Vol. 8, pp. 38–40)"
+                  ]
+                }
+              ]
+            },
+            {
+              "target": "Khaybar",
+              "year": "628 AD (7 AH)",
+              "outcome": "The fortified Jewish agricultural oasis was invaded and conquered. The campaign was marked by the torture and execution of the Jewish leadership over hidden wealth, the enslavement and distribution of captive women, the marriage and consummation of Safiyya bint Huyayy en route, and the reduction of the surviving population to sharecropping until their eventual expulsion.",
+              "keyEvents": [
+                {
+                  "title": "Torture and Execution of Chief Kinana ibn al-Rabi'",
+                  "details": "Muhammad demanded the surrender of the hidden treasure of the exiled Banu Nadir from their chief, Kinana ibn al-Rabi' (the husband of Safiyya). When Kinana refused to reveal where the remaining wealth was buried, Muhammad ordered al-Zubayr ibn al-Awwam to 'torture him until you extract what he has.' Al-Zubayr kindled a fire with flint and steel on Kinana's chest until he was near death, after which Muhammad handed him over to Muhammad ibn Maslama to be beheaded in retaliation for his brother Mahmud.",
+                  "sources": [
+                    "Ibn Hisham (Al-Sirah al-Nabawiyyah, Vol. 3, p. 351)",
+                    "Al-Tabari (Ta'rikh al-Rusul wa'l-Muluk, Vol. 8, pp. 122–123)",
+                    "Al-Bayhaqi (Sunan al-Kubra, 9/137)"
+                  ]
+                },
+                {
+                  "title": "Enslavement of Women and Captives",
+                  "details": "Upon conquering the forts, the women and children of Khaybar were captured and collected as war booty (Ghanimah). Dihya al-Kalbi initially chose Safiyya bint Huyayy, but other companions objected to Muhammad that she was the chief mistress of Banu Qurayza and Banu Nadir and suitable only for him. Muhammad summoned Dihya, took Safiyya for himself in exchange for seven heads/slaves, and assigned her to Umm Sulaim.",
+                  "hadiths": [
+                    {
+                      "collection": "Sahih al-Bukhari 371",
+                      "reference": "Book 8, Hadith 23",
+                      "url": "https://sunnah.com/bukhari:371",
+                      "text": "Narrated `Abdul `Aziz:Anas said, 'When Allah's Messenger (ﷺ) invaded Khaibar, we offered the Fajr prayer there (early in the morning) when it was still dark. The Prophet (ﷺ) rode and Abu Talha rode too and I was riding behind Abu Talha. The Prophet (ﷺ) passed through the lane of Khaibar quickly and my knee was touching the thigh of the Prophet (ﷺ) . He uncovered his thigh and I saw the whiteness of the thigh of the Prophet. When he entered the town, he said, 'Allahu Akbar! Khaibar is ruined. Whenever we approach near a (hostile) nation (to fight) then evil will be the morning of those who have been warned.' He repeated this thrice. The people came out for their jobs and some of them said, 'Muhammad (has come).' (Some of our companions added, \"With his army.\") We conquered Khaibar, took the captives, and the booty was collected. Dihya came and said, 'O Allah's Prophet! Give me a slave girl from the captives.' The Prophet said, 'Go and take any slave girl.' He took Safiya bint Huyai. A man came to the Prophet (ﷺ) and said, 'O Allah's Messenger (ﷺ)! You gave Safiya bint Huyai to Dihya and she is the chief mistress of the tribes of Quraidha and An-Nadir and she befits none but you.' So the Prophet (ﷺ) said, 'Bring him along with her.' So Dihya came with her and when the Prophet (ﷺ) saw her, he said to Dihya, 'Take any slave girl other than her from the captives.' Anas added: The Prophet (ﷺ) then manumitted her and married her.\" Thabit asked Anas, \"O Abu Hamza! What did the Prophet (ﷺ) pay her (as Mahr)?\" He said, \"Her self was her Mahr for he manumitted her and then married her.\" Anas added, \"While on the way, Um Sulaim dressed her for marriage (ceremony) and at night she sent her as a bride to the Prophet (ﷺ) . So the Prophet was a bridegroom and he said, 'Whoever has anything (food) should bring it.' He spread out a leather sheet (for the food) and some brought dates and others cooking butter. (I think he (Anas) mentioned As-Sawaq). So they prepared a dish of Hais (a kind of meal). And that was Walima (the marriage banquet) of Allah's Messenger (ﷺ)"
+                    },
+                    {
+                      "collection": "Sahih al-Bukhari 4200",
+                      "reference": "Book 64, Hadith 240",
+                      "url": "https://sunnah.com/bukhari:4200",
+                      "text": "Narrated Anas:The Prophet (ﷺ) offered the Fajr Prayer near Khaibar when it was still dark and then said, \"Allahu-Akbar! Khaibar is destroyed, for whenever we approach a (hostile) nation (to fight), then evil will be the morning for those who have been warned.\" Then the inhabitants of Khaibar came out running on the roads. The Prophet (ﷺ) had their warriors killed, their offspring and women taken as captives. Safiya was amongst the captives, She first came in the share of Dihya Al-Kalbi but later on she belonged to the Prophet . The Prophet (ﷺ) made her manumission as her 'Mahr"
+                    },
+                    {
+                      "collection": "Sahih Muslim 3500",
+                      "reference": "Book 16, Hadith 102",
+                      "url": "https://sunnah.com/muslim:3500",
+                      "text": "Anas (Allah be pleased with him) reported:I was sitting behind Abu Talha on the Day of Khaibar and my feet touched the foot of Allah's Messenger (ﷺ), and we came (to the people of Khaibar) when the sun had risen and they had driven out their cattle, and had themselves come out with their axes, large baskets and hatchets, and they said: (Here come) Muhammad and the army. Allah's Messenger (ﷺ) said: Khaibar is ruined. Verily when we get down in the valley of a people, evil is the morning of the warned ones (al-Qur'an, xxxvii. 177). Allah, the Majestic and the Glorious, defeated them (the inhabitants of Khaibar), and there fell to the lot of Dihya a beautiful girl, and Allah's Messenger (ﷺ) got her in exchange of seven heads, and then entrusted her to Umm Sulaim so that she might embellish her and prepare her (for marriage) with him. He (the narrator) said: He had been under the impression that he had said that so that she might spend her period of 'Iddah in her (Umm Sulaim's) house. (The woman) was Safiyya daughter of Huyayy. Allah's Messenger (ﷺ) arranged the wedding feast consisting of dates, cheese, and refined butter, and pits were dug and tiers were set in them dining cloths, and there was brought cheese and refined butter, and these were placed there. And the people ate to their fill, and they said: We do not know whether he (the Holy Prophet) had married her (as a free woman), or as a slave woman. They said: If he (the Holy Prophet) would make her wear the veil, then she would be a (free married) woman, and if he would not make her wear the veil, then she should be a slave woman. When he intended to ride, he made her wear the veil and she sat on the hind part of the camel; so they came to know that he had married her. As they approached Medina, Allah's Messenger (ﷺ) drove (his ride) quickly and so we did. 'Adba' (the name of Allah's Apostle's camel) stumbled and Allah's Messenger (ﷺ) fell down and she (Radrat Safiyya: also fell down. He (the Holy Prophet) stood up and covered her. Women looked towards her and said: May Allah keep away the Jewess! He (the narrator) said: I said: Aba Hamza, did Allah's Messenger (ﷺ) really fall down? He said: Yes, by Allah, he in fact fell down"
+                    },
+                    {
+                      "collection": "Sahih Muslim 3501",
+                      "reference": "Book 16, Hadith 104",
+                      "url": "https://sunnah.com/muslim:3501",
+                      "text": "Anas, (Allah be pleased with him) reported:Safiyya (Allah be pleased with her) fell to the lot of Dihya in the spoils of war, and they praised her in the presence of Allah's Messenger (ﷺ) and said: We have not seen the like of her among the captives of war. He sent (a messenger) to Dihya and he gave him whatever he demanded. He then sent her to my mother and asked her to embellish her. Allah's Messenger (ﷺ) then got out of Khaibar until when he was on the other side of it, he halted, and a tent was pitched for him. When it was morning Allah's Messenger (ﷺ) said: He who has surplus of provision with him should bring that to us. Some persons would bring the surplus of dates, and the other surplus of mush of barley until there became a heap of bals. They began to eat the hais and began to drink out of the pond which had the water of rainfall in it and which was situated by their side. Anas said that that constituted the wedding feast of Allah's Messenger (ﷺ). He (further) said: We proceeded until we saw the walls of Medina, and we were delighted. We made our mounts run quickly and Allah's Messenger (ﷺ) also made his mount run quickly. And Safiyya (Allah be pleased with her) was at his back, and Allah's Messenger (ﷺ) had seated her behind him. The camel of Allah's Messenger (ﷺ) stumbled and he (the Holy Prophet) fell down and she also fell down. And none among the people was seeing him and her, until Allah's Messeuger (ﷺ) stood up and he covered her, and we came to him and he said: We have received no injury. We entered Medina and there came out the young ladies of the household. They saw her (hadrat Safiyya) and blamed her for falling down"
+                    }
+                  ]
+                },
+                {
+                  "title": "Marriage and Consummation with Safiyya bint Huyayy",
+                  "details": "Safiyya's father (Huyayy ibn Akhtab) had been executed at Banu Qurayza, her brother had been killed, and her new husband (Kinana ibn al-Rabi') had just been tortured and executed at Khaybar. Muhammad took her as his bride, making her freedom her dowry (Mahr). While halting on the return journey at Sadd al-Sahba' (before reaching Medina), a bridal tent was pitched where Muhammad consummated the marriage, celebrating with a feast of Hais. Abu Ayyub al-Ansari guarded the tent all night with a drawn sword, fearing Safiyya might attempt to kill Muhammad in retribution for the slaughter of her father, husband, and kin.",
+                  "hadiths": [
+                    {
+                      "collection": "Sahih al-Bukhari 2235",
+                      "reference": "Book 34, Hadith 181",
+                      "url": "https://sunnah.com/bukhari:2235",
+                      "text": "Narrated Anas bin Malik:The Prophet (ﷺ) came to Khaibar and when Allah made him victorious and he conquered the town by breaking the enemy's defense, the beauty of Safiya bint Huyai bin Akhtab was mentioned to him and her husband had been killed while she was a bride. Allah's Messenger (ﷺ) selected her for himself and he set out in her company till he reached Sadd-ar-Rawha' where her menses were over and he married her. Then Hais (a kind of meal) was prepared and served on a small leather sheet (used for serving meals). Allah's Messenger (ﷺ) then said to me, \"Inform those who are around you (about the wedding banquet).\" So that was the marriage banquet given by Allah's Messenger (ﷺ) for (his marriage with) Safiya. After that we proceeded to Medina and I saw that Allah's Messenger (ﷺ) was covering her with a cloak while she was behind him. Then he would sit beside his camel and let Safiya put her feet on his knees to ride (the camel)"
+                    },
+                    {
+                      "collection": "Sahih al-Bukhari 4201",
+                      "reference": "Book 64, Hadith 241",
+                      "url": "https://sunnah.com/bukhari:4201",
+                      "text": "Narrated `Abdul `Aziz bin Suhaib:Anas bin Malik said, \"The Prophet (ﷺ) took Safiya as a captive. He manumitted her and married her.\" Thabit asked Anas, \"What did he give her as Mahr (i.e. marriage gift)?\" Anas replied. \"Her Mahr was herself, for he manumitted her"
+                    },
+                    {
+                      "collection": "Sahih Muslim 3497",
+                      "reference": "Book 16, Hadith 99",
+                      "url": "https://sunnah.com/muslim:3497",
+                      "text": "Anas (Allah be pleased with him) reported that Allah's Messenger (ﷺ) set out on an expedition to Khaibar and we observed our morning prayer in early hours of the dawn. The Messenger of Allah (ﷺ) then mounted and so did Abu Talha ride, and I was seating myself behind Abu Talha. Allah's Apostle (ﷺ) moved in the narrow street of Khaibar (and we rode so close to each other in the street) that my knee touched the leg of Allah's Apostle (ﷺ). (A part of the) lower garment of Allah's Apostle (ﷺ) slipped from his leg and I could see the whiteness of the leg of Allah's Apostle (ﷺ). As he entered the habitation he called:Allahu Akbar (Allah is the Greatest). Khaibar is ruined. And when we get down in the valley of a people evil is the morning of the warned ones. He repeated it thrice. In the meanwhile the people went out for their work, and said: By Allah, Muhammad (has come). Abd al-'Aziz or some of our companions said: Muhammad and the army (have come). He said: We took it (the territory of Khaibar) by force, and there were gathered the prisoners of war. There came Dihya and he said: Messenger of Allah, bestow upon me a girl from among the prisoners. He said: Go and get any girl. He made a choice for Safiyya daughter of Huyayy (b. Akhtab). There came a person to Allah's Apostle (ﷺ) and said: Apostle of Allah, you have bestowed Safiyya bint Huyayy, the chief of Quraiza and al-Nadir, upon Dihya and she is worthy of you only. He said: Call him along with her. So he came along with her. When Allah's Apostle (ﷺ) saw her he said: Take any other woman from among the prisoners. He (the narrator) said: He (the Holy Prophet) then granted her emancipation and married her. Thabit said to him: Abu Hamza, how much dower did he (the Holy Prophet) give to her? He said: He granted her freedom and then married her. On the way Umm Sulaim embellished her and then sent her to him (the Holy Prophet) at night. Allah's Apostle (ﷺ) appeared as a bridegroom in the morning. He (the Holy Prophet) said: He who has anything (to eat) should bring that. Then the cloth was spread. A person came with cheese, another came with dates, and still another came with refined butter, and they prepared hais and that was the wedding feast of Allah's Messenger (ﷺ)"
+                    },
+                    {
+                      "collection": "Sahih Muslim 3498",
+                      "reference": "Book 16, Hadith 100",
+                      "url": "https://sunnah.com/muslim:3498",
+                      "text": "This hadith has been narrated through another chain of transmitters on the authority of Anas that Allah's Apostle (ﷺ) emancipated Safiyya, and her emancipation was treated as her wedding gift, and in the hadith transmitted by Mu'adh on the authority of his father (the words are):\" He (the Holy Prophet) married Safiyya and bestowed her emancipation as her wedding gift"
+                    }
+                  ],
+                  "historicalSources": [
+                    "Ibn Hisham (Al-Sirah al-Nabawiyyah, Vol. 3, p. 354)",
+                    "Al-Tabari (Ta'rikh al-Rusul wa'l-Muluk, Vol. 8, p. 135)",
+                    "Ibn Sa'd (Kitab al-Tabaqat al-Kabir, Vol. 8, pp. 86–87)"
+                  ]
+                },
+                {
+                  "title": "Tenant Sharecropping and Subsequent Expulsion",
+                  "details": "The surviving Jewish community was permitted to remain solely as tenant farmers, surrendering 50% of all agricultural and date harvests annually, until Caliph Umar definitively expelled all remaining Jews and Christians from the Arabian Peninsula.",
+                  "hadiths": [
+                    {
+                      "collection": "Sahih al-Bukhari 2338",
+                      "reference": "Book 41, Hadith 19",
+                      "url": "https://sunnah.com/bukhari:2338",
+                      "text": "Narrated Ibn `Umar:`Umar expelled the Jews and the Christians from Hijaz. When Allah's Messenger (ﷺ) had conquered Khaibar, he wanted to expel the Jews from it as its land became the property of Allah, His Apostle, and the Muslims. Allah's Messenger (ﷺ) intended to expel the Jews but they requested him to let them stay there on the condition that they would do the labor and get half of the fruits. Allah's Messenger (ﷺ) told them, \"We will let you stay on this condition, as long as we wish.\" So, they (i.e. Jews) kept on living there until `Umar forced them to go towards Taima' and Ariha"
+                    },
+                    {
+                      "collection": "Sahih Muslim 1551a",
+                      "reference": "Book 22, Hadith 1",
+                      "url": "https://sunnah.com/muslim:1551a",
+                      "text": "Ibn Umar (Allah be pleased with them) reported that Allah's Messenger (ﷺ) contracted with the people of Khaibar the (trees) on the condition that he would have half the produce in fruits and harvest"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "christological-shift",
+      "sectionNumber": 4,
+      "title": "The Theological Shift Regarding Christ and Christian Orthodoxy",
+      "directionToLLM": "Render the Christological comparison as a two-part comparative showcase: (1) The Exalted Meccan Titles, and (2) The Medinan Polemical Rebuttals. Use contrasting cards with red/alert styling for Medinan polemics rejecting Trinity/Crucifixion.",
+      "intro": "The Quran's treatment of Jesus (Isa al-Masih) contains a notable chronological evolution, moving from high devotional reverence and unique titles to sharp polemical refutations of Christian theology.",
+      "subsections": [
+        {
+          "id": "exalted-titles",
+          "title": "The Exalted Titles of the Meccan/Early Revelations",
+          "attributes": [
+            {
+              "attribute": "The Chosen Mother and Virgin Birth",
+              "verses": [
+                {
+                  "reference": "quran/3/42",
+                  "text": "And (remember) when the angels said, ‘Mary! Surely God has chosen you and purified you, and He has chosen you over all other women.",
+                  "displayReference": "Surah Ali 'Imran (3:42)",
+                  "internalReference": "quran/3/42"
+                },
+                {
+                  "reference": "quran/19/19-21",
+                  "text": "He said, ‘I am only a messenger of your Lord (sent) to grant you a boy (who is) pure.’ She said, ‘How can I have a boy, when no human being has touched me, nor am I a prostitute?’ He said, ‘So (it will be)! Your Lord has said: “It is easy for Me. And (it is) to make him a sign to the people and a mercy from Us. It is a thing decreed.”’",
+                  "displayReference": "Surah Maryam (19:19–21)",
+                  "internalReference": "quran/19/19-21"
+                }
+              ]
+            },
+            {
+              "attribute": "Word of God and Spirit from Him",
+              "verses": [
+                {
+                  "reference": "quran/3/45",
+                  "text": "When the angels said, ‘Mary! Surely God gives you good news of a word from Him: his name is the Messiah, Jesus, son of Mary, eminent in this world and the Hereafter, and one of those brought near.",
+                  "displayReference": "Surah Ali 'Imran (3:45)",
+                  "internalReference": "quran/3/45"
+                },
+                {
+                  "reference": "quran/4/171",
+                  "text": "People of the Book! Do not go beyond the limits in your religion, and do not say about God (anything) but the truth. The Messiah, Jesus, son of Mary, was only a messenger of God, and His word, which He cast into Mary, and a spirit from Him. So believe in God and His messengers, but do not say, ‘Three.’ Stop! (It will be) better for you. God is only one God. Glory to Him! (Far be it) that He should have a son! To Him (belongs) whatever is in the heavens and whatever is on the earth. God is sufficient as a guardian.",
+                  "displayReference": "Surah An-Nisa (4:171)",
+                  "internalReference": "quran/4/171"
+                }
+              ]
+            },
+            {
+              "attribute": "Unprecedented Miracles",
+              "verses": [
+                {
+                  "reference": "quran/3/49",
+                  "text": "And (He will make him) a messenger to the Sons of Israel. ‘Surely I have brought you a sign from your Lord: I shall create for you the form of a bird from clay. Then I will breathe into it and it will become a bird by the permission of God. And I shall heal the blind and the leper, and give the dead life by the permission of God. And I shall inform you of what you may eat, and what you may store up in your houses. Surely in that is a sign indeed for you, if you are believers.",
+                  "displayReference": "Surah Ali 'Imran (3:49)",
+                  "internalReference": "quran/3/49"
+                },
+                {
+                  "reference": "quran/5/110",
+                  "text": "(Remember) when God said, ‘Jesus, son of Mary! Remember My blessing on you and on your mother, when I supported you with the holy spirit, (and) you spoke to the people (while you were still) in the cradle, and in adulthood. And when I taught you the Book and the wisdom, and the Torah and the Gospel. And when you created the form of a bird from clay by My permission, and you breathed into it, and it became a bird by My permission, and you healed the blind and the leper by My permission. And when you brought forth the dead by My permission, and when I restrained the Sons of Israel from (violence against) you. When you brought them the clear signs, those among them who had disbelieved said, “This is nothing but clear magic.”’",
+                  "displayReference": "Surah Al-Ma'idah (5:110)",
+                  "internalReference": "quran/5/110"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "medinan-polemics",
+          "title": "The Medinan Polemical Counter-Offensive",
+          "content": "As the nascent Islamic state expanded and came into direct contact with Christian communities (such as the delegation of Najran) and the Byzantine Empire, Medinan revelations launched rigorous polemical rebuttals against foundational Christian dogmas.",
+          "polemicsTable": [
+            {
+              "doctrine": "The Crucifixion & Atonement",
+              "quranicRefutation": "and for their saying, ‘Surely we killed the Messiah, Jesus, son of Mary, the messenger of God’ – yet they did not kill him, nor did they crucify him, but it (only) seemed like (that) to them. Surely those who differ about him are indeed in doubt about him. They have no knowledge about him, only the following of conjecture. Certainly they did not kill him. No! God raised him to Himself. God is mighty, wise.",
+              "verseReference": "Surah An-Nisa (4:157–158)",
+              "displayVerseReference": "Surah An-Nisa (4:157–158)",
+              "internalReference": "quran/4/157-158",
+              "reference": "quran/4/157-158"
+            },
+            {
+              "doctrine": "The Divinity of Christ",
+              "quranicRefutation": "Certainly they have disbelieved who say, ‘Surely God – He is the Messiah, son of Mary,’ when the Messiah said, ‘Sons of Israel! Serve God, my Lord and your Lord. Surely he who associates (anything) with God, God has forbidden him (from) the Garden, and his refuge is the Fire. The evildoers have no helpers.’",
+              "verseReference": "Surah Al-Ma'idah (5:72)",
+              "displayVerseReference": "Surah Al-Ma'idah (5:72)",
+              "internalReference": "quran/5/72",
+              "reference": "quran/5/72"
+            },
+            {
+              "doctrine": "The Holy Trinity",
+              "quranicRefutation": "Certainly they have disbelieved who say, ‘Surely God is the third of three,’ when (there is) no god but one God. If they do not stop what they are saying, a painful punishment will indeed strike those of them who disbelieve.",
+              "verseReference": "Surah Al-Ma'idah (5:73)",
+              "displayVerseReference": "Surah Al-Ma'idah (5:73)",
+              "internalReference": "quran/5/73",
+              "reference": "quran/5/73"
+            },
+            {
+              "doctrine": "Divine Sonship",
+              "quranicRefutation": "The Jews say, ‘Ezra is the son of God,’ and the Christians say, ‘The Messiah is the son of God.’ That is their saying with their mouths. They imitate the saying of those who disbelieved before (them). (May) God fight them. How are they (so) deluded?",
+              "verseReference": "Surah At-Tawbah (9:30)",
+              "displayVerseReference": "Surah At-Tawbah (9:30)",
+              "internalReference": "quran/9/30",
+              "reference": "quran/9/30"
+            }
+          ],
+          "eschatology": {
+            "topic": "Eschatological Dismantling of the Cross",
+            "hadiths": [
+              {
+                "collection": "Sahih al-Bukhari 2222",
+                "reference": "Book 34, Hadith 169",
+                "url": "https://sunnah.com/bukhari:2222",
+                "narrator": "Abu Huraira",
+                "text": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"By Him in Whose Hands my soul is, son of Mary (Jesus) will shortly descend amongst you people (Muslims) as a just ruler and will break the Cross and kill the pig and abolish the Jizya (a tax taken from the non-Muslims, who are in the protection, of the Muslim government). Then there will be abundance of money and nobody will accept charitable gifts"
+              },
+              {
+                "collection": "Sahih al-Bukhari 3448",
+                "reference": "Book 60, Hadith 118",
+                "url": "https://sunnah.com/bukhari:3448",
+                "narrator": "Abu Huraira",
+                "text": "Narrated Abu Huraira:Allah's Messenger (ﷺ) said, \"By Him in Whose Hands my soul is, surely (Jesus,) the son of Mary will soon descend amongst you and will judge mankind justly (as a Just Ruler); he will break the Cross and kill the pigs and there will be no Jizya (i.e. taxation taken from non Muslims). Money will be in abundance so that nobody will accept it, and a single prostration to Allah (in prayer) will be better than the whole world and whatever is in it.\""
+              },
+              {
+                "collection": "Sahih Muslim 155a",
+                "reference": "Book 1, Hadith 294",
+                "url": "https://sunnah.com/muslim:155a",
+                "narrator": "Abu Huraira",
+                "text": "Abu Huraira reported that the Messenger of Allah (ﷺ) said:By Him in Whose hand is my life, the son of Mary (ﷺ) will soon descend among you as a just judge. He will break crosses, kill swine and abolish Jizya and the wealth will pour forth to such an extent that no one will accept it"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "doctrine-of-naskh",
+      "sectionNumber": 5,
+      "title": "Classical Islamic Jurisprudence: The Doctrine of Naskh (Abrogation)",
+      "directionToLLM": "Render this section with interactive scholarly expandable cards. Feature the exact quotes from Al-Tabari and Ibn Kathir with clear distinction between early Meccan tolerance verses and late Medinan sword verses.",
+      "intro": "Traditional Islamic scholarship does not deny these textual divergences. Rather, it resolved them systematically through the science of Nasikh wa Mansukh (The Abrogating and Abrogated).",
+      "scripturalBasis": [
+        {
+          "reference": "quran/2/106",
+          "text": "Whatever verse We cancel or cause to be forgotten, We bring a better (one) than it, or (one) similar to it. Do you not know that God is powerful over everything?",
+          "displayReference": "Surah Al-Baqarah (2:106)",
+          "internalReference": "quran/2/106"
+        },
+        {
+          "reference": "quran/16/101",
+          "text": "When We exchange a verse in place of (another) verse – and God knows what He sends down – they say, ‘You are only a forger!’ No! But most of them do not know (anything).",
+          "displayReference": "Surah An-Nahl (16:101)",
+          "internalReference": "quran/16/101"
+        }
+      ],
+      "classicalDefinitions": [
+        {
+          "scholar": "Al-Tabari",
+          "source": "Jami' al-Bayan (2:106)",
+          "quote": "He, Majestic is His Praise, means by His saying: {Whatever verse We cancel} to another, so We replace it and change it. And that is by transforming the lawful into unlawful, and the unlawful into lawful, and the permitted into prohibited, and the prohibited into permitted; and this occurs only with commands, prohibitions, interdictions, allowances, restrictions, and permissions. As for reports (stories), there is no abrogating (*Nasikh*) nor abrogated (*Mansukh*) in them.",
+          "displaySource": "Jami' al-Bayan (2:106)",
+          "internalReference": "tabari/2/106",
+          "reference": "tabari/2/106"
+        },
+        {
+          "scholar": "Ibn Kathir",
+          "source": "Tafsir al-Qur'an al-'Azim (2:106)",
+          "quote": "Ibn Abi Talhah said that Ibn 'Abbas said that:\n> **{ Whatever verse We cancel }**\n\nmeans, \"Whatever Ayah We abrogate.\"\n\nAlso, Ibn Jurayj said that Mujahid said that:\n> **{ Whatever verse We cancel }**\n\nmeans, \"Whatever Ayah We erase.\"\n\nAlso, Ibn Abi Najih said that Mujahid said that:\n> **{ Whatever verse We cancel }**\n\nmeans, \"We keep the words, but change the ruling.\" He related these words to the companions of 'Abdullah bin Mas'ud.",
+          "displaySource": "Tafsir al-Qur'an al-'Azim (2:106)",
+          "internalReference": "ibnkathir/2/106",
+          "reference": "ibnkathir/2/106"
+        }
+      ],
+      "caseStudy": {
+        "title": "The Abrogation of Pardon Verses: Surah 2:109",
+        "verse": {
+          "reference": "quran/2/109",
+          "text": "Many of the People of the Book would like (it) if you turned back into disbelievers, after your believing, (because of) jealousy on their part, after the truth has become clear to them. So pardon and excuse (them), until God brings His command. Surely God is powerful over everything.",
+          "displayReference": "Surah Al-Baqarah (2:109)",
+          "internalReference": "quran/2/109"
+        },
+        "scholarlyConsensus": [
+          {
+            "scholar": "Ibn Kathir",
+            "source": "Tafsir (2:109)",
+            "quote": "'Ali bin Abi Talhah said that Ibn 'Abbas said that Allah's statement,\n> **{So pardon and excuse (them), until God brings His command.}**\nwas abrogated by His saying,\n> **{So kill the idolaters wherever you find them}** (9:5),\nand His saying,\n> **{Fight those who do not believe in God, or in the Last Day...}**\nuntil His saying,\n> **{and they are in a state of subjection.}** (9:29).\nThus, this abrogated His pardon for the idolaters. Abu Al-'Aliyah, Ar-Rabi' bin Anas, Qatadah and As-Suddi said similarly: \"It was abrogated by the Ayah of the Sword.\"",
+            "displaySource": "Tafsir (2:109)",
+            "internalReference": "ibnkathir/2/109",
+            "reference": "ibnkathir/2/109"
+          },
+          {
+            "scholar": "Al-Tabari",
+            "source": "Jami' al-Bayan (2:109)",
+            "quote": "So He, may His mention be exalted, decreed concerning them, and brought His command, so He said to His Prophet, may God bless him and grant him peace, and to those who believed in him: {Fight against those who believe not in God, nor in the Last Day, nor forbid what God and His Messenger have forbidden, nor follow the religion of truth, from those who were given the Scripture, until they pay the Jizyah with willing submission, and feel themselves subdued} (9:29).\n\nSo God, may His praise be exalted, abrogated the pardoning and excusing of them by imposing fighting them upon the believers until their word and the word of the believers become one, or they pay the Jizyah with willing submission in a state of subjection.",
+            "displaySource": "Jami' al-Bayan (2:109)",
+            "internalReference": "tabari/2/109",
+            "reference": "tabari/2/109"
+          }
+        ],
+        "abrogationScope": "Classical scholars of Nasikh wa al-Mansukh (such as Ibn Hazm in Kitab al-Nasikh wa al-Mansukh fi al-Qur'an al-Karim and Al-Suyuti in Al-Itqan fi 'Ulum al-Qur'an) catalogued that the late Medinan martial verses of Surah At-Tawbah (9:5 and 9:29) abrogated over 120 earlier, peaceful Meccan and early Medinan verses that had commanded tolerance, forbearance, and non-violence."
+      }
+    },
+    {
+      "id": "comparative-synthesis",
+      "sectionNumber": 6,
+      "title": "Comparative Synthesis: The Nazarene Paradigm vs. The Medinan Paradigm",
+      "directionToLLM": "Render as side-by-side or stacked comparative cards optimized for mobile screens with distinctive iconography and theological summaries.",
+      "comparisonRows": [
+        {
+          "theme": "Political Authority",
+          "jesus": "Renounced political and military power: 'My kingdom is not of this world' (John 18:36).",
+          "muhammad": "Integrated supreme prophetic authority with absolute political rule and military command."
+        },
+        {
+          "theme": "Warfare and Conquest",
+          "jesus": "Rebuked Peter's sword (Matthew 26:52); preached love of enemies and non-retaliation (Matthew 5:39, 44).",
+          "muhammad": "Enjoined offensive warfare against polytheists (Surah 9:5) and subjugation of People of the Book under Jizyah (Surah 9:29)."
+        },
+        {
+          "theme": "Apostasy and Dissent",
+          "jesus": "Allowed followers to depart freely (John 6:66–67); commanded forgiveness seventy times seven (Matthew 18:22).",
+          "muhammad": "Instituted capital punishment for apostasy from Islam (Sahih al-Bukhari 6922: 'Whoever changed his Islamic religion, then kill him')."
+        },
+        {
+          "theme": "Culmination of Mission",
+          "jesus": "Died voluntarily as an earthly sacrifice on the Cross for universal human redemption; resurrected and ascended.",
+          "muhammad": "Died as an earthly sovereign having unified the Arabian Peninsula through military conquest and treaty alliances."
+        }
+      ],
+      "hadithCitation": {
+        "collection": "Sahih al-Bukhari 6922",
+        "reference": "Book 88, Hadith 5",
+        "url": "https://sunnah.com/bukhari:6922",
+        "narrator": "Ikrima",
+        "text": "Narrated `Ikrima:Some Zanadiqa (atheists) were brought to `Ali and he burnt them. The news of this event, reached Ibn `Abbas who said, \"If I had been in his place, I would not have burnt them, as Allah's Messenger (ﷺ) forbade it, saying, 'Do not punish anybody with Allah's punishment (fire).' I would have killed them according to the statement of Allah's Messenger (ﷺ), 'Whoever changed his Islamic religion, then kill him"
+      }
+    },
+    {
+      "id": "interpretive-frameworks",
+      "sectionNumber": 7,
+      "title": "Contemporary Interpretive Frameworks",
+      "directionToLLM": "Render as three selectable tabs or interactive accordion cards for the three major interpretive schools.",
+      "frameworks": [
+        {
+          "id": "traditionalist",
+          "name": "Classical / Traditionalist Fiqh",
+          "stance": "Maintains that the chronological progression reflects divine wisdom (hikmah) and gradualism (tadarruj). The late Medinan verses represent the mature, final legislation of Islam, in which earlier restrictions on warfare were lifted to establish Islamic rule globally."
+        },
+        {
+          "id": "modernist",
+          "name": "Modernist / Reformist View",
+          "stance": "Argues that the aggressive verses of Surah 9 were strictly conditioned upon specific historical treaty breaches by pagan Arab tribes and Byzantine armies. Thinkers like Mahmoud Mohamed Taha and Fazlur Rahman advocated prioritizing the universal, ethical core found in the Meccan surahs as the enduring guidance for modern times."
+        },
+        {
+          "id": "historical-critical",
+          "name": "Historical-Critical & Comparative Academic",
+          "stance": "Concludes that the Quranic text and early historical records illustrate a pragmatic shift from a weak religious minority preaching coexistence to an autocratic military commander wielding divine sanction to conquer rivals, rewrite theological boundaries, and eliminate opposition."
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "sectionNumber": 8,
+      "title": "Conclusion",
+      "directionToLLM": "Render as an impactful callout summary block highlighting the core thesis.",
+      "text": "The transition from Mecca to Medina is not an incidental backdrop; it is the central organizing axis of the Quran and early Islamic history. The progression from Meccan patience, theological conciliation, and non-violence to Medinan legislation, anti-Trinitarian polemics, tribal expulsions, and offensive warfare is substantiated by the historical chronology of the Quran, the classical consensus of Naskh recorded by authorities such as Al-Tabari and Ibn Kathir, and canonical Hadith literature. Recognizing this shift is essential for understanding both classical Islamic jurisprudence and contemporary theological debates surrounding Islam's foundational texts."
+    }
+  ]
+}
