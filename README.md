@@ -114,6 +114,7 @@ pkill -f astro
 *   `docs/notebooklm.md`: [Notebook LM Video Generation & Discover PDF Export Guide](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/notebooklm.md) covering data standards, PDF structure, and export automation.
 *   `docs/pillar2_seo_implementation.md`: [Technical SEO Master Plan & Implementation Code](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/pillar2_seo_implementation.md) for sitemaps, FAQ JSON-LD schema, Open Graph, and robots.txt.
 *   `scripts/generate_discover_pdfs.py`: Script to generate high-density, self-contained PDF exports of all Discover articles into `~/Downloads/discover/`.
+*   `promo_cards/`: Self-contained directory containing `generate_cards.mjs`, `qrcode.min.js`, `README.md`, printable 8-up double-sided vector PDF, and high-resolution PNG sheet previews.
 
 ## 🗺️ Route Map
 | Route | Description |
@@ -124,7 +125,7 @@ pkill -f astro
 | `/quran/[surah]/[ayah]/[tab]` | Quran verse evidence drawer (Debunking Miracles, Scientific Errors, Contradictions, Footnotes, Commentaries, Manuscripts) |
 | `/quran/variant/[slug]` | Dynamic page showing all verses affected by a specific Qiraat effect or category |
 | `/quran/codex/[companion]` | Deep-dive into a companion's non-Uthmanic codex (e.g., Ubayy, Ibn Masud) |
-| `/quran/0` | Special route rendering verses historically reported but lost/abrogated |
+| `/quran/0` | Lost Verses hub rendering the 8 ranked missing and omitted Quranic passages with unabridged Hadiths and Sunnah.com verification links |
 | `/discover` | Discover hub with deep dives on Christian theology and Islamic scripture |
 | `/discover/islamic-dilemma` | The Islamic Dilemma interactive deep-dive page (supports `#stage-X` URL hash sharing) |
 | `/discover/quran-preservation` | The Myth of Quranic Preservation deep-dive page (supports `#stage-X` URL hash sharing) |

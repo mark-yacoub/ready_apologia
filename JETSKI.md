@@ -97,6 +97,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `docs/notebooklm.md`: Architecture guide, data standards, and CLI workflow for exporting Discover deep-dive articles into self-contained PDFs for Notebook LM video generation.
 *   `docs/pillar2_seo_implementation.md`: Technical SEO Master Plan & Implementation Code for sitemaps, FAQ JSON-LD schema, Open Graph, and robots.txt.
 *   `scripts/generate_discover_pdfs.py`: Automated exporter compiling all Discover deep dives into self-contained, high-density PDFs in `~/Downloads/discover/`.
+*   `promo_cards/`: Self-contained directory containing `generate_cards.mjs`, `qrcode.min.js`, `README.md`, printable 8-up double-sided vector PDF, and high-resolution PNG sheet previews.
 *   `scripts/import_scripture.js`: Script to sync NASB (NT) and LXX (OT) JSON scripture databases.
 *   `scripts/copy_sample_images.js`: Script to recursively copy sample manuscript images from data collection.
 *   `scripts/find_creator_top_verse.js`: Script to find the #1 ranked Bible verse per apologist creator based on the UI multi-step sorting algorithm.
@@ -141,6 +142,8 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/components/QuranPageHeader.astro`: Header component for Quran pages with Surah selection dropdown.
 *   `src/utils/analytics.js`: L6 client-side Google Analytics 4 utility handling SPA transitions, tab views, and global event delegation.
 *   `src/utils/cdn_config.js`: Global CDN image base URL configuration (`R2_BASE_URL`).
+*   `src/components/quran/LostVersesHub.jsx`: Interactive mobile-first React component for the Lost Verses hub (`/quran/0`) featuring objective category tabs, language switchers, modern vs companion recitation comparison boxes, unabridged Hadith citations, key missing phrase highlights, and direct Sunnah.com verification links.
+*   `src/utils/lostVersesLoader.js`: Dedicated loader and data normalization pipeline for Lost and Omitted Quranic verses, containing full unabridged Arabic/English Hadiths, ranked evidentiary hierarchy, categorized claims, and SQLite apologetics video links.
 *   `src/utils/nonUthmanicLoader.js`: Loader for non-Uthmanic data (companions, variants, virtues).
 *   `src/utils/quran_debunking_loader.js`: Loader utility for Quranic scientific miracles debunking data.
 *   `src/utils/section_navigator.js`: L6 centralized URL `#hash` navigation and section scroll-spy observer utility for Discover articles.

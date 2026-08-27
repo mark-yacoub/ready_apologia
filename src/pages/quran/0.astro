@@ -1,4 +1,214 @@
 ---
-import QuranSpecial from '../../components/QuranSpecial.astro';
+import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import QuranPageHeader from '../../components/QuranPageHeader.astro';
+import LostVersesHub from '../../components/quran/LostVersesHub.jsx';
+import { loadRankedLostVerses, LOST_VERSES_CATEGORIES } from '../../utils/lostVersesLoader.js';
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/quran/0`;
+
+const seoTitle = "Lost Verses of the Quran | Sahih Hadith & Textual Evidence";
+const seoDescription = "Examine authentic lost verses, omitted passages, and forgotten surahs of the Quran documented in Sahih al-Bukhari and Sahih Muslim.";
+
+const rankedLostVerses = await loadRankedLostVerses(base);
+
+const schemaObj = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
+        { "@type": "ListItem", "position": 2, "name": "Quran", "item": `${siteUrl}${base}/quran` },
+        { "@type": "ListItem", "position": 3, "name": "Lost Verses", "item": canonicalURL }
+      ]
+    },
+    {
+      "@type": "ItemPage",
+      "@id": canonicalURL,
+      "headline": seoTitle,
+      "name": seoTitle,
+      "description": seoDescription,
+      "url": canonicalURL,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Ready Apologia",
+        "url": `${siteUrl}${base}/`
+      }
+    }
+  ]
+};
 ---
-<QuranSpecial type="lost" />
+
+<Layout
+  title={seoTitle}
+  description={seoDescription}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+>
+  <RouteAnalytics
+    eventName="quran_special_view"
+    params={{
+      page_type: 'lost_verses',
+      slug_or_id: '0'
+    }}
+  />
+
+  <div class="quran-reader-container theme-quran">
+    <QuranPageHeader currentTitle="Lost Verses" currentIndex={0} />
+
+    <!-- Executive Overview Footnote -->
+    <div class="page-intro-footnote">
+      <p class="intro-text">
+        These verses and chapters were historically recited and attested by prominent companions of Muhammad—including Aisha, Umar bin Al-Khattab, Abdullah bin Masud, and Abu Musa al-Ash'ari. While Caliph Uthman subsequently standardized a single skeletal text and ordered variant codices destroyed (<a href="https://sunnah.com/bukhari:4987" target="_blank" rel="noopener noreferrer" class="intro-link">Sahih al-Bukhari 4987</a>), these specific passages remain documented in authentic (<em>Sahih</em>) hadith literature.
+      </p>
+      <a href={`${base}/discover/quran-preservation`} class="deep-dive-pill-link">
+        <span>Read full historical context in The Historical Transmission & Preservation of the Quran</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Interactive Ranked Evidence Hub Island -->
+    <LostVersesHub
+      client:load
+      initialItems={rankedLostVerses}
+      categories={LOST_VERSES_CATEGORIES}
+      base={base}
+    />
+
+    <!-- Bottom Deep Dive Banner -->
+    <div class="bottom-cta-banner">
+      <div class="cta-content">
+        <h3 class="cta-title">Looking for the complete archaeological and textual timeline?</h3>
+        <p class="cta-desc">
+          Discover how Uthman's committee compiled the canon, what UV imaging reveals on the Sana'a Palimpsest, and how the 10 modern Qira'at recitations arose from the unpointed Arabic skeleton.
+        </p>
+      </div>
+      <a href={`${base}/discover/quran-preservation`} class="cta-action-btn">
+        Explore Historical Timeline →
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .quran-reader-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 860px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+  }
+
+  .page-intro-footnote {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    margin-bottom: 20px;
+    padding: 16px;
+    background-color: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .intro-text {
+    margin: 0;
+  }
+
+  .intro-link {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .intro-link:hover {
+    text-decoration: underline;
+  }
+
+  .deep-dive-pill-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    text-decoration: none;
+    align-self: flex-start;
+    transition: all 0.15s ease;
+  }
+
+  .deep-dive-pill-link:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .bottom-cta-banner {
+    margin-top: 48px;
+    padding: 24px;
+    border-radius: 12px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  }
+
+  @media (min-width: 680px) {
+    .bottom-cta-banner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cta-content {
+      max-width: 65%;
+    }
+  }
+
+  .cta-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: 0 0 6px 0;
+  }
+
+  .cta-desc {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-on-surface-variant);
+    margin: 0;
+  }
+
+  .cta-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background-color: var(--color-secondary);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .cta-action-btn:hover {
+    background-color: var(--color-primary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+</style>
