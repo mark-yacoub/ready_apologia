@@ -41,7 +41,6 @@ const CHRISTIAN_CARD = {
     }
   ],
   qrUrl: "https://readyapologia.com/bible/jn/14/28/videos",
-  qrLabel: "SCAN TO EXPLORE",
   qrSub: "John 14:28 & Video Exegesis",
   footerBrand: "ReadyApologia.com",
   footerSub: "Verse-by-verse Bible app focusing on apologetics by the Catena Bible creators",
@@ -72,13 +71,12 @@ const ISLAMIC_CARD = {
       desc: "Examine passages preserved in Sahih Hadith missing from modern codices, plus variant companion readings."
     }
   ],
-  qrUrl: "https://readyapologia.com/discover#islamics",
-  qrLabel: "SCAN TO EXPLORE",
-  qrSub: "Discover Primary Islamic Sources",
+  qrUrl: "https://readyapologia.com/quran/0",
+  qrSub: "Lost Verses in Sahih Hadith",
   footerBrand: "ReadyApologia.com/quran",
   footerSub: "Verse-by-verse Quran app linking to classical Tafsir & authentic Hadiths",
-  footerRightTitle: "DISCOVER THE LOST VERSES",
-  footerRightLink: "readyapologia.com/quran/0"
+  footerRightTitle: "DEEP DIVE WITH AUTHENTIC SOURCES",
+  footerRightLink: "readyapologia.com/discover#islamics"
 };
 
 // -----------------------------------------------------------------------------
@@ -176,7 +174,7 @@ function renderCard(side, qrId) {
           `).join('')}
         </div>
 
-        <!-- QR Code Box -->
+        <!-- QR Code Box (without 'Scan to Explore' banner) -->
         <div style="
           flex-shrink: 0;
           display: flex;
@@ -189,11 +187,8 @@ function renderCard(side, qrId) {
           border: 1px solid ${primary}25;
           box-shadow: 0 2px 4px rgba(0,0,0,0.06);
         ">
-          <div id="${qrId}" style="width: 54px; height: 54px;"></div>
-          <div style="font-size: 5.0pt; font-weight: 800; color: ${primary}; margin-top: 0.02in; letter-spacing: 0.04em;">
-            ${data.qrLabel}
-          </div>
-          <div style="font-size: 4.3pt; color: #6B7280; max-width: 66px; line-height: 1.1; margin-top: 1px;">
+          <div id="${qrId}" style="width: 56px; height: 56px;"></div>
+          <div style="font-size: 4.8pt; font-weight: 700; color: ${primary}; max-width: 68px; line-height: 1.15; margin-top: 0.02in;">
             ${data.qrSub}
           </div>
         </div>
@@ -214,7 +209,7 @@ function renderCard(side, qrId) {
       position: relative;
       z-index: 1;
     ">
-      <div style="max-width: 2.45in;">
+      <div style="max-width: 2.3in;">
         <div style="font-size: 7.0pt; font-weight: 800; letter-spacing: 0.04em; color: #ffffff; line-height: 1.1;">
           ${data.footerBrand}
         </div>
@@ -222,11 +217,11 @@ function renderCard(side, qrId) {
           ${data.footerSub}
         </div>
       </div>
-      <div style="text-align: right; flex-shrink: 0;">
-        <div style="font-size: 4.8pt; font-weight: 700; color: #FEF3C7; text-transform: uppercase; letter-spacing: 0.04em;">
+      <div style="text-align: right; flex-shrink: 0; max-width: 1.45in;">
+        <div style="font-size: 4.6pt; font-weight: 700; color: #FEF3C7; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1.15;">
           ${data.footerRightTitle}
         </div>
-        <div style="font-size: 5.0pt; font-weight: 600; color: #ffffff;">
+        <div style="font-size: 5.0pt; font-weight: 600; color: #ffffff; margin-top: 1px;">
           ${data.footerRightLink}
         </div>
       </div>
@@ -272,8 +267,8 @@ function generateSingleCardsHtml() {
   <script>
     new QRCode(document.getElementById("qr_single_chr"), {
       text: "${CHRISTIAN_CARD.qrUrl}",
-      width: 54,
-      height: 54,
+      width: 56,
+      height: 56,
       colorDark: "${CHRISTIAN_CARD.theme.qrDark}",
       colorLight: "#ffffff",
       correctLevel: QRCode.CorrectLevel.M
@@ -281,8 +276,8 @@ function generateSingleCardsHtml() {
 
     new QRCode(document.getElementById("qr_single_isl"), {
       text: "${ISLAMIC_CARD.qrUrl}",
-      width: 54,
-      height: 54,
+      width: 56,
+      height: 56,
       colorDark: "${ISLAMIC_CARD.theme.qrDark}",
       colorLight: "#ffffff",
       correctLevel: QRCode.CorrectLevel.M
@@ -465,8 +460,8 @@ function generate8UpPrintableHtml() {
       if (el) {
         new QRCode(el, {
           text: "${CHRISTIAN_CARD.qrUrl}",
-          width: 54,
-          height: 54,
+          width: 56,
+          height: 56,
           colorDark: "${CHRISTIAN_CARD.theme.qrDark}",
           colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel.M
@@ -479,8 +474,8 @@ function generate8UpPrintableHtml() {
       if (el) {
         new QRCode(el, {
           text: "${ISLAMIC_CARD.qrUrl}",
-          width: 54,
-          height: 54,
+          width: 56,
+          height: 56,
           colorDark: "${ISLAMIC_CARD.theme.qrDark}",
           colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel.M
@@ -527,4 +522,4 @@ if (fs.existsSync(brainDir)) {
   fs.copyFileSync(path.resolve(promoDir, 'ReadyApologia_Sheet_Page2_Back.png'), path.resolve(brainDir, 'sheet_p2.png'));
 }
 
-console.log('✅ All promo card assets generated in promo_cards/ successfully with 0.25in (6.35mm / >0.5cm) margins on all 4 sides.');
+console.log('✅ All promo card assets generated in promo_cards/ successfully.');
