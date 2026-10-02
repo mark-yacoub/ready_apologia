@@ -29,7 +29,7 @@ export const getAncientJudaismCount = getAnfCount; // Structure is the same: era
 
 export const getTestamentCount = (tData) => {
   if (!tData || !Array.isArray(tData.structure)) return 0;
-  return tData.structure.reduce((acc, cat) => acc + (cat.verses?.length || 0), 0);
+  return new Set(tData.structure.flatMap(cat => cat.verses || [])).size;
 };
 
 export const getEvidenceTotalCount = (t) => {

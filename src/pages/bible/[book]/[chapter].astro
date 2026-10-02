@@ -431,6 +431,7 @@ const chapterSchema = generateBibleChapterSchema({
 <!-- Chapter UI & Logic -->
 <script>
   import { enforceUserBadgePriority } from '../../../utils/dom_tabs.js';
+  import { getActiveEvidenceFromStorage } from '../../../hooks/useActiveEvidence.js';
   let closePopoverHandler;
 
   const initChapterPage = () => {
@@ -459,19 +460,7 @@ const chapterSchema = generateBibleChapterSchema({
     const container = document.querySelector('.verses-container');
     if (!container) return; // Exit early if not on a chapter page
 
-    let activeEvidence = [];
-    try {
-      const parsed = JSON.parse(localStorage.getItem('activeEvidence') || '[]');
-      activeEvidence = Array.isArray(parsed) ? parsed : [];
-    } catch(e) {}
-
-    // Legacy single topic support
-    const legacyEvidence = localStorage.getItem('activeTopic');
-    if (legacyEvidence && !activeEvidence.length) {
-      activeEvidence = [legacyEvidence];
-      localStorage.setItem('activeEvidence', JSON.stringify(activeEvidence));
-      localStorage.removeItem('activeTopic');
-    }
+    const activeEvidence = getActiveEvidenceFromStorage();
 
     const evidenceMeta = JSON.parse(container.getAttribute('data-evidence-meta') || '{}');
 

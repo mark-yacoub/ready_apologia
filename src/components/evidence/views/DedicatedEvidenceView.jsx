@@ -50,15 +50,28 @@ export const DedicatedEvidenceView = ({ evidenceObj, verseTexts }) => {
       })
     ];
 
+    const seenVerses = new Set();
     const feedContent = categories
       .map((cat, idx) => ({ cat, title: cat?.title || (categories.length === 1 ? 'General Evidence' : `Category ${idx + 1}`) }))
       .filter(item => activeFilter === 'All' || activeFilter === item.title)
-      .map(({ cat, title }) => (
-        <div key={title} className="feed-category-block animate-fade-in">
-          <h2 className="feed-category-title">{title} <span className="item-count">({cat?.verses?.length || 0})</span></h2>
-          <VerseGroup verses={cat?.verses || []} verseBank={verseBank} verseTexts={verseTexts} evidenceId={evidenceObj._id} testamentName={testament} />
-        </div>
-      ));
+      .map(({ cat, title }) => {
+        const rawVerses = cat?.verses || [];
+        const verses = activeFilter === 'All'
+          ? rawVerses.filter(vId => {
+              if (seenVerses.has(vId)) return false;
+              seenVerses.add(vId);
+              return true;
+            })
+          : rawVerses;
+        if (verses.length === 0) return null;
+        return (
+          <div key={title} className="feed-category-block animate-fade-in">
+            <h2 className="feed-category-title">{title} <span className="item-count">({verses.length})</span></h2>
+            <VerseGroup verses={verses} verseBank={verseBank} verseTexts={verseTexts} evidenceId={evidenceObj._id} testamentName={testament} />
+          </div>
+        );
+      })
+      .filter(Boolean);
 
     return (
       <div className="scripture-feed-container">
