@@ -119,3 +119,33 @@ export function getHadithUrl(collection, referenceNumber) {
   const cleanRef = String(referenceNumber).trim();
   return `https://sunnah.com/${cleanCol}:${cleanRef}`;
 }
+
+/**
+ * Builds an internal Sahih Hadith Explorer permalink (Sunnah.com canonical numbering).
+ * @param {string} collection - "bukhari" | "muslim"
+ * @param {string|number} sunnahNum - e.g. "5134", "1422a"
+ * @param {string} [base] - Optional base path override
+ * @returns {string} e.g. "/hadith/muslim/1422a"
+ */
+export function getHadithPermalink(collection, sunnahNum, base) {
+  const basePath = base !== undefined ? base : getBaseUrl();
+  return `${basePath}/hadith/${String(collection).toLowerCase()}/${String(sunnahNum).trim()}`;
+}
+
+/**
+ * Builds an internal Sahih Hadith Explorer section URL.
+ * @param {Object} options
+ * @param {string} [options.category] - Category slug
+ * @param {string} [options.subcategory] - Subcategory slug
+ * @param {string} [options.anchor] - Card anchor (e.g. "muslim-1422a")
+ * @param {string} [options.base] - Optional base path override
+ * @returns {string} e.g. "/hadith/muhammad/sexual-ethics#muslim-1422a"
+ */
+export function getHadithSectionUrl({ category, subcategory, anchor, base } = {}) {
+  const basePath = base !== undefined ? base : getBaseUrl();
+  let url = `${basePath}/hadith`;
+  if (category) url += `/${category}`;
+  if (category && subcategory) url += `/${subcategory}`;
+  if (anchor) url += `#${anchor}`;
+  return url;
+}

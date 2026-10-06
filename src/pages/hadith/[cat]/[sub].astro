@@ -1,0 +1,96 @@
+---
+/**
+ * Subcategory feed: every narration in ranked order (Tier 4 parallels in a collapsed drawer).
+ * Cards are addressable by hash, e.g. /hadith/muhammad/sexual-ethics#muslim-1422a
+ */
+import Layout from '../../../layouts/Layout.astro';
+import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import HadithSectionHeader from '../../../components/hadith/HadithSectionHeader.astro';
+import HadithFeed from '../../../components/hadith/HadithFeed.jsx';
+import { loadHadithModel } from '../../../utils/hadithLoader.js';
+import { HADITH_SEO, truncate } from '../../../utils/hadith_config.js';
+import { buildBreadcrumbSchema } from '../../../utils/seoFactory.js';
+import '../../../styles/hadith.css';
+
+export function getStaticPaths() {
+  return loadHadithModel().categories.flatMap(category =>
+    category.subcategories.map(sub => ({ params: { cat: category.slug, sub: sub.slug }, props: { category, sub } })),
+  );
+}
+
+const { category, sub } = Astro.props;
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${sub.href}`;
+
+const seo = HADITH_SEO.subcategory(sub.name, category.short);
+const lead = sub.items[0];
+const description = truncate(
+  `${sub.count} Sahih narrations on ${sub.short.toLowerCase()}${lead ? `, starting with ${lead.displayRef}: ${lead.ann.headline}` : ''}`,
+);
+
+const sections = [{
+  id: sub.slug,
+  href: sub.href,
+  items: sub.items,
+  tier4: sub.tier4,
+  packUrl: `${base}/hadith/data/arabic/${category.slug}--${sub.slug}.json`,
+}];
+
+const pills = [
+  { label: 'Overview', href: category.href },
+  ...category.subcategories.map(s => ({ label: s.short, href: s.href, current: s.slug === sub.slug })),
+];
+
+const listed = [...sub.items, ...sub.tier4];
+const schemaObj = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    buildBreadcrumbSchema([
+      { name: 'Ready Apologia', url: `${siteUrl}${base}/` },
+      { name: 'Sahih Hadiths', url: `${siteUrl}${base}/hadith` },
+      { name: category.name, url: `${siteUrl}${category.href}` },
+      { name: sub.name, url: canonicalURL },
+    ]),
+    {
+      '@type': 'CollectionPage',
+      '@id': canonicalURL,
+      name: seo.title,
+      description,
+      url: canonicalURL,
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: listed.length,
+        itemListElement: listed.slice(0, 50).map((it, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: `${it.displayRef}: ${it.ann.headline}`,
+          url: it.permalink ? `${siteUrl}${it.permalink}` : it.sunnahUrl,
+        })),
+      },
+    },
+  ],
+};
+---
+<Layout
+  title={seo.title}
+  description={description}
+  keywords={seo.keywords}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+  theme="hadith"
+  showOnboarding={false}
+>
+  <div class="hx">
+    <HadithSectionHeader backHref={category.href} backLabel={category.name} pills={pills} />
+    <HadithFeed
+      client:load
+      variant="feed"
+      base={base}
+      sections={sections}
+      heading={{ title: sub.name }}
+    />
+  </div>
+  <RouteAnalytics eventName="hadith_subcategory_view" params={{ category: category.slug, subcategory: sub.slug }} />
+</Layout>

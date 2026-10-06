@@ -1,0 +1,109 @@
+---
+/**
+ * Body of a translation-audit page: one page per issue type at /hadith/translation-audit/<slug>
+ * (no index page), so every type is crawlable with its own title, description and canonical.
+ * Tabs are plain links between the type pages.
+ */
+import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../common/RouteAnalytics.astro';
+import HadithSectionHeader from './HadithSectionHeader.astro';
+import TranslationAuditBrowser from './TranslationAuditBrowser.jsx';
+import { loadHadithModel } from '../../utils/hadithLoader.js';
+import { HADITH_SEO, TRANSLATION_ISSUE_TYPES, getTranslationAuditPath } from '../../utils/hadith_config.js';
+import { buildBreadcrumbSchema } from '../../utils/seoFactory.js';
+import '../../styles/hadith.css';
+
+interface Props { type: string }
+const { type } = Astro.props;
+
+const model = loadHadithModel();
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const issues = model.translationIssues;
+const types = Object.keys(TRANSLATION_ISSUE_TYPES).filter(t => issues[t]?.length);
+const rows = issues[type] || [];
+const pagePath = getTranslationAuditPath(type, base);
+const canonicalURL = `${siteUrl}${pagePath}`;
+
+// Intro counts span every type, so the lede reads the same on each tab.
+const allRows = types.flatMap(t => issues[t]);
+const hadithCount = new Set(allRows.map(r => r.slug)).size;
+const scale = allRows.length === hadithCount ? `${hadithCount} hadiths` : `${allRows.length} places in ${hadithCount} hadiths`;
+
+const tabs = types.map(t => ({
+  key: t,
+  label: TRANSLATION_ISSUE_TYPES[t].label,
+  count: issues[t].length,
+  href: getTranslationAuditPath(t, base),
+}));
+
+const seo = HADITH_SEO.auditType(type, rows.length);
+const heading = TRANSLATION_ISSUE_TYPES[type].title;
+
+// There is no audit index page, so the trail goes straight from the hub to the type.
+const crumbs = [
+  { name: 'Ready Apologia', url: `${siteUrl}${base}/` },
+  { name: 'Sahih Hadiths', url: `${siteUrl}${base}/hadith` },
+  { name: heading, url: canonicalURL },
+];
+
+const schemaObj = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    buildBreadcrumbSchema(crumbs),
+    {
+      '@type': 'CollectionPage',
+      '@id': canonicalURL,
+      name: seo.title,
+      description: seo.description,
+      url: canonicalURL,
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: rows.length,
+        itemListElement: rows.slice(0, 50).map((r, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: `${r.displayRef}: ${r.headline}`,
+          url: r.permalink ? `${siteUrl}${r.permalink}` : r.sunnahUrl,
+        })),
+      },
+    },
+  ],
+};
+---
+<Layout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+  theme="hadith"
+  showOnboarding={false}
+>
+  <div class="hx">
+    <HadithSectionHeader backHref={`${base}/hadith`} backLabel="Sahih Hadiths" />
+    <header class="hx-head">
+      <p class="hx-eyebrow">Translation audit</p>
+      <h1 class="hx-h1">{heading}</h1>
+      <p class="hx-lede">
+        {scale} where the standard English (Muhsin Khan for Bukhari, Siddiqui for Muslim) says less
+        than the Arabic. Each entry shows the published sentence with the change marked:
+        <span class="hx-red"><del>published wording</del></span> <span class="hx-red"><ins>literal wording</ins></span>.
+        The strongest examples come first.
+      </p>
+    </header>
+    <TranslationAuditBrowser type={type} rows={rows} tabs={tabs} />
+  </div>
+  <RouteAnalytics eventName="hadith_audit_view" params={{ section: 'translation-audit', type }} />
+  <script>
+    import { scrollToAnchor } from './hadithClient.js';
+    const applyHash = () => {
+      const h = decodeURIComponent(window.location.hash.slice(1));
+      if (h) scrollToAnchor(h, { smooth: false });
+    };
+    applyHash();
+    document.addEventListener('astro:page-load', applyHash);
+    window.addEventListener('hashchange', applyHash);
+  </script>
+</Layout>

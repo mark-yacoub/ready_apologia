@@ -21,6 +21,8 @@ interface Props {
 	keywords?: string;
 	theme?: string;
 	noindex?: boolean;
+	/** Render the global onboarding tips (off on sections where the verse tips don't apply, e.g. /hadith). */
+	showOnboarding?: boolean;
 }
 
 const {
@@ -35,7 +37,8 @@ const {
 	schema,
 	keywords = "Apologetics, Bible Verses, Early Church Fathers, Divinity of Christ, Ready Apologia, Patristics, Scripture Evidence, Christian Apologetics, Ante-Nicene Fathers",
 	theme,
-	noindex = false
+	noindex = false,
+	showOnboarding = true
 } = Astro.props;
 const isNoIndex = noindex || title.includes('404') || title.includes('Not Found');
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
@@ -201,7 +204,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 
 				<!-- Main scrollable content window -->
 				<main class="main-content">
-					<OnboardingBanner client:load />
+					{showOnboarding && <OnboardingBanner client:load />}
 					<slot />
 
 					<!-- Footer -->
@@ -409,6 +412,11 @@ const serializedSchema = typeof resolvedSchema === 'string'
 	.theme-quran {
 		--color-primary: #022c22;
 		--color-secondary: #059669;
+	}
+
+	.theme-hadith {
+		--color-primary: #1c1917;
+		--color-secondary: #974543;
 	}
 
 	body {

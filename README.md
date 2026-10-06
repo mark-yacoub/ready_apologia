@@ -108,6 +108,8 @@ pkill -f astro
 *   `src/utils/`: Helper utilities for loading scripture, topics, non-Uthmanic Quran data, global CDN configuration (`cdn_config.js`), client-side GA4 event tracking (`analytics.js`), Discover URL `#hash` section navigation (`section_navigator.js`), and apologetic evidence (debunking miracles, contradictions, scientific errors).
 
 *   `src/data/quran/debunking/`: Dataset for debunked Quranic scientific miracles.
+*   `scripts/import_hadith.js` (`npm run import:hadith`): Imports the Sahih Hadith dataset + full Bukhari/Muslim texts (annotated hadiths, parallels and every cited reference) into `src/data/hadith/`. Data problems are reported by the build as one `[hadithLoader]` summary.
+*   `src/components/hadith/` (feed, card, narration, outline sheet, permalink, translation audit), `src/utils/hadith*.js`, `src/styles/hadith.css`: Sahih Hadith Explorer UI, loader, config (incl. verified Sunnah.com numbering overrides) and scoped styles.
 *   `docs/distribution_strategy.md`: [Multi-Channel Marketing, Outreach & Distribution Strategy](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/distribution_strategy.md) actionable master plan and checklists.
 *   `docs/creator_contacts.md`: [Creator Contacts & Outreach Directory](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/creator_contacts.md) for top apologists indexed in Ready Apologia.
 *   `docs/creator_top_verses.md`: [Personalized Creator Top Bible Verses & Outreach Playbook](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/creator_top_verses.md) with shareable WOW links per creator.
@@ -126,6 +128,11 @@ pkill -f astro
 | `/quran/variant/[slug]` | Dynamic page showing all verses affected by a specific Qiraat effect or category |
 | `/quran/codex/[companion]` | Deep-dive into a companion's non-Uthmanic codex (e.g., Ubayy, Ibn Masud) |
 | `/quran/0` | Lost Verses hub rendering the 8 ranked missing and omitted Quranic passages with unabridged Hadiths and Sunnah.com verification links |
+| `/hadith` | Sahih Hadiths hub: intro, 7 categories, translation-audit entry |
+| `/hadith/[cat]` | Category overview: subcategory pills + top 3 narrations per subcategory |
+| `/hadith/[cat]/[sub]` | Ranked feed of narrations (supports `#bukhari-5134` / `#muslim-1422a` deep links) |
+| `/hadith/bukhari/[num]`, `/hadith/muslim/[num]` | Single-hadith permalink (Sunnah.com numbering) with full text, analysis, Muslim response |
+| `/hadith/translation-audit` | Softened / omitted / euphemized English renderings (supports `#softened`, `#omission`, `#euphemistic`, or a hadith slug) |
 | `/discover` | Discover hub with deep dives on Christian theology and Islamic scripture |
 | `/discover/islamic-dilemma` | The Islamic Dilemma interactive deep-dive page (supports `#stage-X` URL hash sharing) |
 | `/discover/quran-preservation` | The Myth of Quranic Preservation deep-dive page (supports `#stage-X` URL hash sharing) |

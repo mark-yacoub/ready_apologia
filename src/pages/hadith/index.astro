@@ -1,0 +1,87 @@
+---
+/**
+ * Sahih Hadith hub: placeholder intro, category list with subcategory "scent" lines,
+ * and an entry point to the translation audit.
+ */
+import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import { loadHadithModel } from '../../utils/hadithLoader.js';
+import { HADITH_INTRO, HADITH_SEO, TRANSLATION_ISSUE_TYPES, getTranslationAuditPath } from '../../utils/hadith_config.js';
+import { buildBreadcrumbSchema } from '../../utils/seoFactory.js';
+import '../../styles/hadith.css';
+
+const model = loadHadithModel();
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${base}/hadith`;
+
+const auditTabs = Object.entries(TRANSLATION_ISSUE_TYPES)
+  .map(([key, cfg]) => ({ key, label: cfg.label, count: model.translationIssues[key]?.length || 0 }))
+  .filter(t => t.count > 0);
+
+const schemaObj = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    buildBreadcrumbSchema([
+      { name: 'Ready Apologia', url: `${siteUrl}${base}/` },
+      { name: 'Sahih Hadiths', url: canonicalURL },
+    ]),
+    {
+      '@type': 'CollectionPage',
+      '@id': canonicalURL,
+      name: HADITH_SEO.hub.title,
+      description: HADITH_SEO.hub.description,
+      url: canonicalURL,
+      hasPart: model.categories.map(c => ({ '@type': 'CollectionPage', name: c.name, url: `${siteUrl}${c.href}` })),
+    },
+  ],
+};
+---
+<Layout
+  title={HADITH_SEO.hub.title}
+  description={HADITH_SEO.hub.description}
+  keywords={HADITH_SEO.hub.keywords}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+  theme="hadith"
+  showOnboarding={false}
+>
+  <div class="hx">
+    <header class="hx-head">
+      <p class="hx-eyebrow">Scriptures</p>
+      <h1 class="hx-h1">Sahih Hadiths</h1>
+      <div class="hx-intro">
+        {HADITH_INTRO.map(p => <p>{p}</p>)}
+      </div>
+    </header>
+
+    <ul class="hx-toc">
+      {model.categories.map(c => (
+        <li class="hx-toc-row">
+          <a class="hx-toc-name" href={c.href}>
+            <span>{c.name}</span>
+            <svg class="hx-toc-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </a>
+          <div class="hx-toc-subs">
+            <ul role="list">
+              {c.subcategories.map(s => <li><a href={s.href} data-astro-prefetch="hover">{s.short}</a></li>)}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <section class="hx-audit-teaser">
+      <p class="hx-eyebrow">Translation audit</p>
+      <h2>What the English leaves out</h2>
+      <p>Places where the standard English translations soften, euphemize or omit the Arabic — compared word for word.</p>
+      <div class="hx-chip-row">
+        {auditTabs.map(t => (
+          <a class="hx-outline-chip" href={getTranslationAuditPath(t.key, base)}>{t.label} <span class="count">{t.count}</span></a>
+        ))}
+      </div>
+    </section>
+  </div>
+  <RouteAnalytics eventName="hadith_hub_view" params={{ section: 'hadith' }} />
+</Layout>

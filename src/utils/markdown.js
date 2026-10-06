@@ -1,4 +1,4 @@
-import { getBibleUrl, getQuranUrl } from './urlFactory.js';
+import { getBaseUrl, getBibleUrl, getQuranUrl } from './urlFactory.js';
 
 /**
  * Safe, high-performance, zero-dependency Markdown to HTML regex parser.
@@ -88,6 +88,16 @@ export function parseMarkdown(text) {
         finalUrl = getQuranUrl();
       }
       targetAttrs = ''; // open internal links in the same tab
+    } else if (url.startsWith('ibnkathir://') || url.startsWith('tabari://')) {
+      const commentary = url.startsWith('ibnkathir://') ? 'ibn_kathir' : 'tabari';
+      const [surah, ayah] = url.replace(/^\w+:\/\//, '').split('/').filter(Boolean);
+      finalUrl = surah && ayah
+        ? getQuranUrl({ surah, ayah, tab: `tafsir/${commentary}` })
+        : getQuranUrl({ surah });
+      targetAttrs = ''; // open internal links in the same tab
+    } else if (url.startsWith('/hadith/')) {
+      finalUrl = `${getBaseUrl()}${url}`;
+      targetAttrs = ''; // internal hadith permalink
     }
 
     // Defensive attribute escaping against XSS injection

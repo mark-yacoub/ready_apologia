@@ -1,0 +1,964 @@
+/* =====================================================================
+   Sahih Hadith Explorer — design system
+   Calm, editorial, monochrome + one terracotta accent.
+   Scoped under .hx so nothing leaks into the rest of the app.
+   ===================================================================== */
+
+/* Design tokens. Shared with the outline sheet, which is portaled outside .hx. */
+.hx, .hx-sheet {
+  --hx-ink: #18181b;
+  --hx-ink-2: #3f3f46;
+  --hx-ink-3: #52525b;
+  --hx-muted: #71717a;
+  --hx-faint: #a1a1aa;
+  --hx-line: #e4e4e7;
+  --hx-line-soft: #f1f1f3;
+  --hx-hover: #f4f4f5;
+  --hx-surface: #ffffff;
+  --hx-soft: #fafafa;
+  --hx-accent: #974543;
+  --hx-accent-ink: #7f3836;
+  --hx-accent-soft: #f7ecea;
+  --hx-mark: #fbeee6;
+  --hx-warn-bg: #fdf4e7;
+  --hx-warn-ink: #8a4b0f;
+  --hx-serif: 'Literata', Georgia, 'Amiri', serif;
+  --hx-sans: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Amiri', sans-serif; /* Amiri covers ﷺ (U+FDFA) */
+  --hx-arabic: 'Amiri', 'Traditional Arabic', serif;
+  --hx-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Page layout. */
+.hx {
+  --hx-pad: 16px;
+  /* Sticky header geometry (single source for the full-text bar and every scroll-margin).
+     Sticky offsets resolve against the scroller's (.main-content) content box, so the header
+     uses top: -inset to sit flush with the scrollport, and --hx-head-h is the part of it that
+     overlaps the content box: back row 36 + pill rail 52 (4 + 36 + 12) + border 1.
+     Keep in sync with .hx-back / .hx-pills / .hx-sticky-pad below. */
+  --hx-sticky-inset: 16px;
+  --hx-head-h: 89px;
+  /* Where scrolled-to targets land (scroll-margin is measured from the scrollport top). */
+  --hx-scroll-offset: calc(var(--hx-sticky-inset) + var(--hx-head-h) + 16px);
+
+  color: var(--hx-ink);
+  font-family: var(--hx-sans);
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+}
+/* Pill-less header (permalinks, audit): back row 36 + pad 8 + border 1. Browsers without :has()
+   keep the taller value, which only adds a little extra room above scrolled-to targets. */
+.hx:has(.hx-sticky-pad) { --hx-head-h: 45px; }
+@media (min-width: 768px) {
+  .hx { --hx-pad: 32px; --hx-sticky-inset: 24px; }
+}
+
+/* The host app has no global border-box reset; without one, sized links (pills, pager cards,
+   .hx-btn on an <a>) grow by their padding + border. The outline sheet is portaled outside .hx. */
+.hx, .hx *, .hx *::before, .hx *::after,
+.hx-sheet, .hx-sheet *, .hx-sheet *::before, .hx-sheet *::after { box-sizing: border-box; }
+
+.hx a { color: inherit; text-decoration: none; }
+.hx button, .hx-sheet button { font-family: inherit; }
+.hx :focus-visible, .hx-sheet :focus-visible { outline: 2px solid var(--hx-accent); outline-offset: 2px; }
+
+/* ---------- Typography primitives ---------- */
+/* Contrast rule: informative text uses --hx-muted (≥ 4.5:1); --hx-faint is for separators/icons only. */
+/* Eyebrows are sometimes h2/h3, so pin what the global markdown heading rules would leak in. */
+.hx-eyebrow {
+  font-family: var(--hx-sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hx-muted);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.hx-h1 {
+  font-family: var(--hx-serif);
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--hx-ink);
+}
+@media (min-width: 768px) { .hx-h1 { font-size: 30px; } }
+.hx-lede {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--hx-muted);
+  margin: 6px 0 0;
+}
+
+/* ---------- Sticky context header (back row + pills) ---------- */
+.hx-sticky {
+  position: sticky;
+  top: calc(-1 * var(--hx-sticky-inset));
+  z-index: 20;
+  margin: calc(-1 * var(--hx-sticky-inset)) calc(-1 * var(--hx-pad)) 0;
+  padding: var(--hx-sticky-inset) var(--hx-pad) 0;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--hx-line-soft);
+}
+.hx-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 36px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--hx-muted);
+  max-width: 100%;
+}
+.hx-back span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hx-back svg { flex-shrink: 0; }
+.hx-back:hover { color: var(--hx-ink); }
+
+.hx-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px var(--hx-pad) 12px;
+  margin: 0 calc(-1 * var(--hx-pad));
+  scroll-padding: 0 var(--hx-pad);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--hx-pad), #000 calc(100% - 24px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 var(--hx-pad), #000 calc(100% - 24px), transparent 100%);
+}
+.hx-pills::-webkit-scrollbar { display: none; }
+.hx-pill {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--hx-line);
+  background: var(--hx-surface);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--hx-ink-3);
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.hx-pill:hover { border-color: var(--hx-faint); color: var(--hx-ink); }
+.hx-pill[aria-current="page"] {
+  background: var(--hx-ink);
+  border-color: var(--hx-ink);
+  color: #fff;
+}
+
+/* ---------- Page heading block ---------- */
+.hx-head { padding: 20px 0 8px; }
+
+/* ---------- Language segmented control ---------- */
+.hx-seg {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--hx-line-soft);
+  gap: 2px;
+}
+.hx-seg button {
+  border: 0;
+  background: transparent;
+  height: 30px;
+  min-width: 44px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--hx-ink-3);
+  cursor: pointer;
+}
+.hx-seg button[aria-pressed="true"] {
+  background: var(--hx-surface);
+  color: var(--hx-ink);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+.hx-seg .ar { font-family: var(--hx-arabic); font-size: 15px; font-weight: 700; }
+
+/* ---------- Hub ---------- */
+.hx-intro p { font-size: 16px; line-height: 1.65; color: var(--hx-ink-2); margin: 14px 0 0; max-width: 60ch; }
+.hx-intro p:first-child { font-family: var(--hx-serif); font-size: 17.5px; color: var(--hx-ink); }
+.hx-toc { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid var(--hx-line); }
+.hx-toc-row { padding: 14px 0 12px; border-bottom: 1px solid var(--hx-line); }
+.hx-toc-name {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  font-family: var(--hx-serif);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--hx-ink);
+}
+.hx-toc-name:hover { color: var(--hx-accent-ink); }
+.hx-toc-chev { flex-shrink: 0; margin-top: 3px; color: var(--hx-faint); transition: transform 0.15s var(--hx-ease), color 0.15s; }
+.hx-toc-name:hover .hx-toc-chev { transform: translateX(3px); color: var(--hx-accent); }
+/* Subcategory list (desktop): every item carries a leading "·"; the list is shifted left by one separator and
+   clipped, so the separator that would start each wrapped line is hidden. Padding keeps focus rings visible. */
+.hx-toc-subs { overflow: hidden; margin: 0 -4px -4px; padding: 2px 4px 4px; }
+.hx-toc-subs ul { list-style: none; display: flex; flex-wrap: wrap; margin: 0 0 0 -17px; padding: 0; font-size: 13.5px; line-height: 1.5; }
+.hx-toc-subs li { display: flex; align-items: center; }
+.hx-toc-subs li::before { content: '·'; flex: 0 0 17px; text-align: center; color: var(--hx-faint); }
+.hx-toc-subs a { display: inline-flex; align-items: center; min-height: 32px; color: var(--hx-ink-3); font-weight: 500; }
+.hx-toc-subs a:hover { color: var(--hx-accent-ink); }
+/* Phones: a dotted line wraps unevenly at this width, so the subcategories become a table of contents —
+   one full-width row each, hanging off a thin rule, with a faint chevron. */
+@media (max-width: 639px) {
+  .hx-toc-row { padding: 18px 0 12px; }
+  .hx-toc-name { font-size: 18px; }
+  .hx-toc-subs { overflow: visible; margin: 0; padding: 0; }
+  .hx-toc-subs ul { display: block; margin: 8px 0 0 1px; padding: 0 0 0 14px; border-left: 2px solid var(--hx-line); font-size: 15px; }
+  .hx-toc-subs li { display: block; }
+  .hx-toc-subs li::before { content: none; }
+  .hx-toc-subs a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    margin: 0 -6px 0 -8px; /* the press tint extends past the text; the text itself stays put */
+    padding: 0 6px 0 8px;
+    border-radius: 8px;
+    color: var(--hx-ink-2);
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .hx-toc-subs a::after {
+    content: '';
+    flex: 0 0 auto;
+    width: 6px;
+    height: 6px;
+    margin-right: 4px;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    opacity: 0.35;
+  }
+  .hx-toc-subs a:active { background: var(--hx-accent-soft); color: var(--hx-accent-ink); }
+}
+
+.hx-audit-teaser { margin: 40px 0 8px; } /* the TOC's last row border already divides the sections */
+.hx-audit-teaser h2 { font-family: var(--hx-serif); font-size: 18px; font-weight: 600; margin: 8px 0 4px; }
+.hx-audit-teaser p:not(.hx-eyebrow) { font-size: 14px; color: var(--hx-muted); margin: 0 0 14px; line-height: 1.5; }
+.hx-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.hx-outline-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--hx-line);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--hx-ink-2);
+  background: var(--hx-surface);
+  cursor: pointer;
+}
+.hx-outline-chip:hover { border-color: var(--hx-accent); color: var(--hx-accent-ink); }
+.hx-outline-chip .count { color: var(--hx-muted); font-weight: 600; }
+
+/* ---------- Category overview sections ---------- */
+.hx-section { margin-top: 28px; }
+.hx-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.hx-section-head h2 { font-family: var(--hx-serif); font-size: 19px; font-weight: 600; line-height: 1.3; margin: 0; }
+.hx-see-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--hx-accent);
+}
+.hx-see-all:hover { color: var(--hx-accent-ink); }
+
+/* ---------- Card ---------- */
+.hx-feed { display: flex; flex-direction: column; gap: 14px; padding-top: 8px; }
+.hx-card {
+  position: relative;
+  background: var(--hx-surface);
+  border: 1px solid var(--hx-line);
+  border-radius: 16px;
+  padding: 16px 16px 6px;
+  scroll-margin-top: var(--hx-scroll-offset);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+/* Hover feedback on in-page controls is limited to real hover devices: on touch, :hover sticks after a tap. */
+@media (hover: hover) { .hx-card:hover { border-color: #d4d4d8; } }
+.hx-card:focus { outline: none; }
+.hx-card:focus-visible { outline: 2px solid var(--hx-accent); outline-offset: 2px; }
+.hx-card.is-flash { animation: hx-flash 1.6s ease-out; }
+@keyframes hx-flash {
+  0%, 25% { background: var(--hx-mark); border-color: var(--hx-accent); }
+  100% { background: var(--hx-surface); border-color: var(--hx-line); }
+}
+
+.hx-src {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.hx-src-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; padding-top: 2px; }
+.hx-src-ref {
+  align-self: flex-start;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--hx-ink-2);
+}
+.hx-src-ref:hover { color: var(--hx-accent); }
+/* Full book title, wrapping instead of truncating ("The Book of Marriage", "Virtues of the Qur'an"). */
+.hx-src-book { font-size: 12.5px; line-height: 1.4; color: var(--hx-muted); }
+/* Icon-only link: 44px tap target, pulled into the card's padding so the glyph aligns with the edge. */
+.hx-icon-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: -10px -12px -10px 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--hx-muted);
+  cursor: pointer;
+}
+@media (hover: hover) { .hx-icon-btn:hover { background: var(--hx-line-soft); color: var(--hx-ink); } }
+.hx-icon-btn:active { background: var(--hx-line-soft); }
+
+.hx-note {
+  font-family: var(--hx-serif);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--hx-ink);
+  margin: 6px 0 12px;
+}
+/* On a card the note explains the hadith above it ("what this says and why it matters"),
+   so it reads quieter than the narration: smaller sans, softer ink. */
+.hx-card > .hx-note {
+  font-family: var(--hx-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--hx-ink-3);
+  margin: 14px 0 12px;
+}
+.hx-note em { font-style: italic; }
+/* Rendered markdown carries global .response-paragraph / .response-list styles (14px, justified): neutralize them. */
+.hx-note :is(p, ul, li),
+.hx-prose :is(p, ul, li),
+.hx-lex-prose :is(p, ul, li) { font-size: inherit; line-height: inherit; color: inherit; text-align: left; }
+/* Rendered markdown links carry the app-wide .exegesis-inline-link style (bold, !important colour,
+   filled on hover). Inside hadith prose they read as quiet underlined text instead; !important is
+   only here to beat the global rule's own !important. */
+.hx :is(.hx-note, .hx-prose, .hx-lex-prose) a,
+.hx :is(.hx-note, .hx-prose, .hx-lex-prose) a.exegesis-inline-link {
+  color: inherit !important;
+  font-weight: inherit;
+  background: none;
+  box-shadow: none;
+  text-decoration: underline;
+  text-decoration-color: rgba(151, 69, 67, 0.45);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.hx :is(.hx-note, .hx-prose, .hx-lex-prose) a:hover,
+.hx :is(.hx-note, .hx-prose, .hx-lex-prose) a.exegesis-inline-link:hover {
+  color: var(--hx-accent-ink) !important;
+  background: none;
+  box-shadow: none;
+  text-decoration-color: var(--hx-accent);
+}
+.hx :is(.hx-note, .hx-prose, .hx-lex-prose) .exegesis-scripture-pill,
+.hx :is(.hx-note, .hx-prose, .hx-lex-prose) a.exegesis-inline-link .exegesis-scripture-pill { all: unset; color: inherit !important; }
+/* Arabic quoted inline in prose: Amiri runs small, so it is bumped to match the Latin x-height;
+   line-height 1 keeps tall vowel marks from opening up the line spacing. */
+.hx-ar-inline { font-family: var(--hx-arabic); font-size: 1.2em; line-height: 1; font-style: normal; }
+/* ʿayn / hamza marks (see wrapTranslitMarks in hadithLoader.js): Amiri's transliteration glyphs sit
+   tight against the letter, unlike Literata's half-em ones. */
+.hx-tl { font-family: var(--hx-arabic); line-height: 1; }
+
+/* ---------- Torn-page passage ---------- */
+.hx-passage { position: relative; margin: 0 0 4px; }
+.hx-fringe {
+  position: relative;
+  font-family: var(--hx-serif); /* same face as the excerpt it surrounds */
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--hx-ink-3);
+  filter: blur(3.2px);
+  opacity: 0.5;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin: 0 4px;
+}
+.hx-fringe.top { -webkit-mask-image: linear-gradient(180deg, transparent, #000 85%); mask-image: linear-gradient(180deg, transparent, #000 85%); }
+.hx-fringe.bottom { -webkit-mask-image: linear-gradient(0deg, transparent, #000 85%); mask-image: linear-gradient(0deg, transparent, #000 85%); }
+.hx-fringe[dir="rtl"] { font-family: var(--hx-arabic); font-size: 18px; line-height: 1.9; }
+
+/* The narration is the primary read on a card: serif, full ink. (The note below it is quieter.) */
+.hx-quote {
+  position: relative;
+  margin: 2px 0;
+  padding: 2px 0 2px 14px;
+  border-left: 2px solid var(--hx-accent);
+  font-family: var(--hx-serif);
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--hx-ink);
+}
+.hx-quote[dir="rtl"] {
+  border-left: 0;
+  border-right: 2px solid var(--hx-accent);
+  padding: 2px 14px 2px 0;
+  font-family: var(--hx-arabic);
+  font-size: 20px;
+  line-height: 2;
+  color: var(--hx-ink);
+}
+/* A long excerpt is cut after a few lines and faded out, like the blurred fringe of a partial one;
+   "Read full hadith" (overlapping the fade) is the only way to see the rest. */
+.hx-quote.is-clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  overflow: hidden;
+  /* Only the last ~2 lines fade, so the flagged wording above them stays fully legible. */
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 3.3em), transparent 100%);
+  mask-image: linear-gradient(180deg, #000 calc(100% - 3.3em), transparent 100%);
+}
+.hx-quote[dir="rtl"].is-clamped { -webkit-line-clamp: 6; }
+.hx-parallel-ar { margin-top: 10px; }
+
+.hx-reveal-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: -30px;
+  padding-top: 0;
+  z-index: 1;
+}
+.hx-reveal-row.no-fringe { margin-top: 8px; }
+.hx-reveal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--hx-line);
+  background: var(--hx-surface);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--hx-ink-2);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, transform 0.15s var(--hx-ease);
+}
+@media (hover: hover) { .hx-reveal-btn:hover { border-color: var(--hx-accent); color: var(--hx-accent-ink); } }
+.hx-reveal-btn:active { transform: scale(0.97); }
+
+/* Full narration (resolved) */
+.hx-full {
+  font-family: var(--hx-serif);
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--hx-ink-2);
+  animation: hx-unblur 0.24s var(--hx-ease);
+  white-space: pre-line;
+}
+.hx-full[dir="rtl"] { font-family: var(--hx-arabic); font-size: 20px; line-height: 2; color: var(--hx-ink-2); }
+@keyframes hx-unblur {
+  from { filter: blur(3px); opacity: 0.4; }
+  to { filter: blur(0); opacity: 1; }
+}
+.hx-full mark {
+  background: var(--hx-mark);
+  color: var(--hx-ink);
+  border-radius: 3px;
+  padding: 1px 0;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.hx-full-bar {
+  position: sticky;
+  top: var(--hx-head-h); /* flush under the sticky header */
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 -8px 8px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: var(--hx-soft); /* opaque: text scrolls beneath it while stuck */
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--hx-muted);
+}
+.hx-full-bar button { border: 0; background: none; font-size: 12px; font-weight: 700; color: var(--hx-ink-2); cursor: pointer; min-height: 32px; padding: 0 6px; }
+.hx-full-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.hx-text-btn {
+  border: 0;
+  background: none;
+  padding: 0;
+  min-height: 36px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hx-accent);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+@media (hover: hover) { .hx-text-btn:hover { color: var(--hx-accent-ink); } }
+.hx-skeleton { padding: 4px 0; }
+.hx-skeleton span {
+  display: block;
+  height: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--hx-line-soft), #e9e9ec, var(--hx-line-soft));
+  background-size: 200% 100%;
+  animation: hx-shimmer 1.2s infinite linear;
+}
+@keyframes hx-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+/* ---------- Redline (published → literal) ---------- */
+.hx-red[role="button"] { cursor: pointer; } /* only where it opens the lexical card */
+.hx-red del {
+  color: var(--hx-muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(151, 69, 67, 0.55);
+  text-decoration-thickness: 1.5px;
+}
+.hx-red ins {
+  text-decoration: none;
+  color: var(--hx-accent-ink);
+  font-weight: 650;
+  background: var(--hx-accent-soft);
+  border-radius: 4px;
+  padding: 1px 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.hx-red .omit-label { font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; margin-right: 4px; color: var(--hx-accent); }
+.hx-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: 3px;
+  vertical-align: 1px;
+  border-radius: 50%;
+  border: 1px solid rgba(151, 69, 67, 0.5);
+  color: var(--hx-accent);
+  font-size: 10px;
+  font-weight: 800;
+  font-family: var(--hx-sans);
+}
+.hx-term {
+  text-decoration: underline;
+  text-decoration-color: var(--hx-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 7px;
+  color: var(--hx-accent-ink);
+}
+
+/* Badge + lexical card */
+.hx-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0 2px;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--hx-warn-bg);
+  color: var(--hx-warn-ink);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.hx-badge .sub { font-weight: 600; opacity: 0.75; }
+.hx-badge[aria-expanded="true"] { box-shadow: inset 0 0 0 1px rgba(138, 75, 15, 0.25); }
+.hx-lex {
+  margin: 8px 0 4px;
+  border: 1px solid #f1e3cf;
+  background: #fffbf5;
+  border-radius: 12px;
+  padding: 12px 14px;
+  animation: hx-drop 0.18s var(--hx-ease);
+}
+.hx-lex dl { margin: 0; display: grid; grid-template-columns: 84px 1fr; gap: 8px 12px; align-items: baseline; }
+.hx-lex dt { font-size: 10.5px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--hx-muted); }
+.hx-lex dd { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--hx-ink-2); }
+.hx-lex dd.ar { font-family: var(--hx-arabic); font-size: 19px; line-height: 1.8; color: var(--hx-ink); direction: rtl; text-align: right; }
+.hx-lex dd.pub { color: var(--hx-muted); text-decoration: line-through; text-decoration-color: rgba(151, 69, 67, 0.5); }
+.hx-lex dd.pub.is-omitted { text-decoration: none; font-style: italic; }
+.hx-lex dd.lit { color: var(--hx-accent-ink); font-weight: 650; }
+.hx-lex .hx-lex-prose { margin: 10px 0 0; font-size: 13.5px; line-height: 1.55; color: var(--hx-ink-3); }
+/* Rendered explanation markdown: .hx-lex-prose (above, and in .hx-audit-row) sets the type; children only space out. */
+.hx-lex-prose :is(p, ul) { margin: 0 0 8px; }
+.hx-lex-prose > :last-child { margin-bottom: 0; }
+@media (max-width: 380px) {
+  .hx-lex dl { grid-template-columns: 1fr; gap: 2px; }
+  .hx-lex dd { margin-bottom: 8px; }
+}
+
+/* ---------- Also filed / meta row ---------- */
+.hx-also { font-size: 12px; color: var(--hx-muted); margin: 10px 0 0; }
+.hx-also a { color: var(--hx-ink-3); font-weight: 600; text-decoration: underline; text-decoration-color: var(--hx-line); text-underline-offset: 3px; }
+.hx-also a:hover { color: var(--hx-accent); }
+
+/* ---------- Action row ---------- */
+.hx-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 10px -8px 0;
+  padding-top: 4px;
+  border-top: 1px solid var(--hx-line-soft);
+}
+.hx-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hx-ink-3);
+  cursor: pointer;
+  white-space: nowrap;
+}
+@media (hover: hover) { .hx-action:hover { background: var(--hx-line-soft); color: var(--hx-ink); } }
+.hx-action[aria-expanded="true"] { color: var(--hx-accent-ink); }
+.hx-action .count { color: var(--hx-muted); font-weight: 600; }
+.hx-action-spacer { flex: 1; }
+.hx-action svg { flex-shrink: 0; }
+
+/* ---------- Panels ---------- */
+.hx-panel { padding: 4px 0 12px; animation: hx-drop 0.18s var(--hx-ease); }
+@keyframes hx-drop { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.hx-defense {
+  background: var(--hx-soft);
+  border: 1px solid var(--hx-line-soft);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.hx-prose { text-align: left; font-size: 14.5px; line-height: 1.65; color: var(--hx-ink-2); }
+.hx-prose p { margin: 8px 0 0; }
+.hx-prose p:first-child { margin-top: 6px; }
+.hx-prose em { font-style: italic; }
+
+.hx-par-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 4px; }
+.hx-par-chip {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--hx-line);
+  background: var(--hx-surface);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--hx-ink-3);
+  cursor: pointer;
+}
+.hx-par-chip[aria-pressed="true"] { background: var(--hx-ink); border-color: var(--hx-ink); color: #fff; }
+.hx-par-view {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--hx-line-soft);
+  background: var(--hx-soft);
+}
+.hx-par-view .hx-full { font-size: 14.5px; }
+.hx-par-view .hx-full[dir="rtl"] { font-size: 19px; }
+
+/* ---------- Tier 4 drawer ---------- */
+.hx-drawer { margin-top: 18px; border-top: 1px solid var(--hx-line); }
+.hx-drawer > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--hx-muted);
+  cursor: pointer;
+}
+.hx-drawer > summary::-webkit-details-marker { display: none; }
+.hx-drawer > summary svg { transition: transform 0.18s var(--hx-ease); }
+.hx-drawer[open] > summary svg { transform: rotate(90deg); }
+.hx-drawer-note { font-size: 13px; color: var(--hx-muted); margin: -4px 0 12px; line-height: 1.5; }
+
+/* ---------- Outline (floating button + sheet) ---------- */
+.hx-fab-wrap {
+  position: sticky;
+  bottom: 16px;
+  height: 0;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+  z-index: 15;
+}
+.hx-fab {
+  pointer-events: auto;
+  transform: translateY(-100%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--hx-ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  opacity: 0;
+  translate: 0 8px;
+  transition: opacity 0.2s, translate 0.2s var(--hx-ease);
+}
+.hx-fab.is-on { opacity: 1; translate: 0 0; }
+
+.hx-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  background: rgba(9, 9, 11, 0.32);
+  animation: hx-fade 0.18s ease;
+}
+@keyframes hx-fade { from { opacity: 0; } to { opacity: 1; } }
+.hx-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 78%;
+  z-index: 61;
+  display: flex;
+  flex-direction: column;
+  background: var(--hx-surface);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18);
+  animation: hx-rise 0.24s var(--hx-ease);
+  font-family: var(--hx-sans);
+  color: var(--hx-ink);
+}
+@media (min-width: 768px) {
+  .hx-sheet { left: auto; right: 24px; bottom: 24px; width: 420px; max-height: 72%; border-radius: 18px; }
+}
+@keyframes hx-rise { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.hx-sheet-grip { width: 36px; height: 4px; border-radius: 4px; background: var(--hx-line); margin: 8px auto 0; }
+.hx-sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 16px 8px; border-bottom: 1px solid var(--hx-line-soft); }
+.hx-sheet-head h2 { flex: 1; min-width: 0; font-family: var(--hx-serif); font-size: 16px; font-weight: 600; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hx-sheet-head button { border: 0; background: var(--hx-hover); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; color: var(--hx-ink-3); display: inline-flex; align-items: center; justify-content: center; }
+.hx-sheet-list { overflow-y: auto; padding: 6px 8px 16px; overscroll-behavior: contain; }
+.hx-sheet-group { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hx-muted); padding: 14px 10px 6px; }
+.hx-sheet-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  gap: 10px;
+  align-items: start;
+  text-align: left;
+  border: 0;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--hx-ink-2);
+}
+.hx-sheet-item:hover { background: var(--hx-hover); }
+.hx-sheet-item .dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 7px; background: transparent; }
+.hx-sheet-item.is-active .dot { background: var(--hx-accent); }
+.hx-sheet-item.is-active { color: var(--hx-ink); }
+.hx-sheet-item .t { font-size: 14px; line-height: 1.4; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.hx-sheet-item .r { display: block; font-size: 11.5px; font-weight: 600; color: var(--hx-muted); margin-top: 2px; }
+
+/* ---------- Toast ---------- */
+.hx-toast {
+  position: absolute;
+  left: 50%;
+  bottom: 52px;
+  transform: translateX(-50%);
+  background: var(--hx-ink);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  animation: hx-fade 0.15s ease;
+  z-index: 5;
+}
+
+/* ---------- Permalink ---------- */
+.hx-perma-head { padding: 18px 0 6px; }
+.hx-perma-meta { font-size: 13.5px; color: var(--hx-muted); margin: 6px 0 0; }
+.hx-btn-row { display: flex; gap: 8px; margin: 16px 0 6px; flex-wrap: wrap; }
+.hx-btn {
+  flex: 1 1 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1px solid var(--hx-line);
+  background: var(--hx-surface);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--hx-ink-2);
+  cursor: pointer;
+}
+@media (hover: hover) { .hx-btn:hover { border-color: var(--hx-faint); color: var(--hx-ink); } }
+.hx-btn.primary { background: var(--hx-ink); border-color: var(--hx-ink); color: #fff; }
+@media (hover: hover) { .hx-btn.primary:hover { background: #27272a; color: #fff; } }
+.hx-perma-text { margin-top: 14px; padding: 16px; border: 1px solid var(--hx-line); border-radius: 16px; }
+.hx-perma-text .hx-full { color: var(--hx-ink-3); animation: none; }
+.hx-perma-text .hx-full + .hx-full { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--hx-line-soft); }
+.hx-why { margin-top: 26px; scroll-margin-top: var(--hx-scroll-offset); }
+.hx-why-block { padding: 16px 0 18px; border-bottom: 1px solid var(--hx-line); }
+.hx-why-block:last-child { border-bottom: 0; }
+.hx-why-block h3 { margin: 12px 0 6px; }
+.hx-crumb {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: 36px;
+  padding: 9px 0; /* symmetric, so the centred chevron lines up with a single line of text */
+  margin-top: 8px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--hx-ink-3);
+}
+.hx-crumb svg { flex-shrink: 0; align-self: center; }
+.hx-crumb:hover { color: var(--hx-accent); }
+.hx-crumb .lbl { flex-shrink: 0; white-space: nowrap; font-weight: 600; color: var(--hx-muted); }
+.hx-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 28px 0 8px; }
+.hx-pager a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--hx-line);
+  border-radius: 12px;
+  min-height: 56px;
+}
+.hx-pager a:hover { border-color: var(--hx-faint); }
+.hx-pager .dir { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hx-muted); }
+.hx-pager .ref { font-size: 14px; font-weight: 700; color: var(--hx-ink-2); }
+.hx-pager .next { text-align: right; grid-column: 2; }
+
+/* ---------- Translation audit ---------- */
+.hx-tabs { display: flex; gap: 4px; padding: 4px; background: var(--hx-line-soft); border-radius: 12px; margin: 16px 0 6px; }
+/* Tabs are links to per-type pages; .hx prefix beats the `.hx a { color: inherit }` reset. */
+.hx .hx-tab {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hx-ink-3);
+  cursor: pointer;
+}
+.hx .hx-tab[aria-current="page"] { background: var(--hx-surface); color: var(--hx-ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); }
+.hx-tab .count { color: var(--hx-muted); font-weight: 600; margin-left: 4px; }
+.hx-tab-blurb { font-size: 14px; color: var(--hx-muted); margin: 10px 2px 4px; line-height: 1.5; }
+/* Audit entries use the feed card's frame and type so the two read as one system. */
+.hx-audit-list { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.hx-audit-row {
+  background: var(--hx-surface);
+  border: 1px solid var(--hx-line);
+  border-radius: 16px;
+  padding: 16px 16px 8px;
+  scroll-margin-top: var(--hx-scroll-offset);
+}
+.hx-audit-row.is-flash { animation: hx-flash 1.6s ease-out; }
+/* What the hadith says, in one line of plain language, before the evidence. */
+.hx-audit-headline { font-size: 14.5px; line-height: 1.55; color: var(--hx-ink-2); margin: 0 0 12px; }
+/* The Arabic is supporting evidence: labelled and secondary to the sentence above it. */
+.hx-audit-ar { display: flex; align-items: baseline; gap: 12px; margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--hx-soft); }
+.hx-audit-ar .lbl { flex-shrink: 0; font-size: 10.5px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--hx-muted); }
+.hx-audit-ar .ar { flex: 1; min-width: 0; font-family: var(--hx-arabic); font-size: 18px; line-height: 1.8; text-align: right; color: var(--hx-ink); }
+.hx-audit-why { margin-top: 8px; }
+.hx-audit-why summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hx-ink-2);
+  cursor: pointer;
+  list-style: none;
+}
+.hx-audit-why summary::-webkit-details-marker { display: none; }
+.hx-audit-why summary svg { transition: transform 0.15s var(--hx-ease); }
+.hx-audit-why[open] summary svg { transform: rotate(180deg); }
+.hx-audit-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--hx-line-soft); }
+/* .hx a resets link colour, so this needs the .hx prefix to win. */
+.hx .hx-audit-topic { font-size: 12.5px; font-weight: 600; color: var(--hx-muted); min-height: 40px; display: inline-flex; align-items: center; }
+@media (hover: hover) { .hx .hx-audit-topic:hover { color: var(--hx-accent-ink); } }
+.hx-lede .hx-red ins, .hx-lede .hx-red del { font-size: 0.95em; }
+.hx-audit-diff { font-size: 15px; line-height: 1.6; margin: 4px 0; }
+.hx-audit-diff del { color: var(--hx-muted); text-decoration-color: rgba(151, 69, 67, 0.55); text-decoration-thickness: 1.5px; }
+.hx-audit-diff .omitted { color: var(--hx-muted); font-style: italic; }
+.hx-audit-diff .arrow { color: var(--hx-faint); margin: 0 6px; }
+.hx-audit-diff ins { text-decoration: none; color: var(--hx-accent-ink); font-weight: 650; }
+.hx-audit-row .hx-lex-prose { font-size: 14px; line-height: 1.6; color: var(--hx-ink-3); margin: 0 0 10px; }
+
+/* ---------- Small helpers ---------- */
+.hx-tools { display: flex; justify-content: flex-end; margin-top: 14px; }
+.hx-sticky-pad { height: 8px; }
+.hx-fab-pos { font-variant-numeric: tabular-nums; font-weight: 600; opacity: 0.7; padding-left: 8px; border-left: 1px solid rgba(255, 255, 255, 0.25); }
+.hx-sheet-tools { flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
+.hx-sheet-head .hx-sheet-top { white-space: nowrap; width: auto; padding: 0 12px; border-radius: 999px; font-size: 12px; font-weight: 700; gap: 4px; }
+.hx-par-link { display: inline-flex; align-items: center; gap: 4px; }
+.hx-par-link:hover { border-color: var(--hx-accent); color: var(--hx-accent-ink); }
+.hx-perma { position: relative; }
+.hx-perma-tools { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; }
+.hx-drawer > summary .count { font-weight: 600; color: var(--hx-muted); }
+.hx-load-error { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin: 6px 0; font-size: 13.5px; color: var(--hx-ink-3); }
+.hx-section-head h2 a:hover { color: var(--hx-accent-ink); }
+.hx-why-block .hx-defense { margin-top: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hx *, .hx-sheet, .hx-sheet-backdrop { animation: none !important; transition: none !important; }
+}

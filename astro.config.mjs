@@ -25,6 +25,13 @@ function resolveSitemapMetadata(pathname) {
     return { changefreq: 'monthly', priority: 0.9 };
   }
 
+  // Sahih Hadith Explorer: /hadith/[cat] 0.9, /hadith/[cat]/[sub] + audit 0.8, permalinks 0.7
+  if (rootSection === 'hadith') {
+    if (segments[1] === 'bukhari' || segments[1] === 'muslim') return { changefreq: 'monthly', priority: 0.7 };
+    if (segments[1] === 'translation-audit') return { changefreq: 'monthly', priority: 0.8 };
+    return { changefreq: 'monthly', priority: segments.length === 2 ? 0.9 : 0.8 };
+  }
+
   // Discover deep-dive articles & Quran Codices / Variants
   if (rootSection === 'discover' || (rootSection === 'quran' && (segments[1] === 'codex' || segments[1] === 'variant'))) {
     return { changefreq: 'monthly', priority: 0.8 };
@@ -57,7 +64,7 @@ export default defineConfig({
       filter: (page) => {
         const url = new URL(page);
         const path = url.pathname.replace(/\/$/, '');
-        return !path.includes('/404');
+        return !path.includes('/404') && !path.startsWith('/hadith/data');
       },
       serialize: (item) => {
         const url = new URL(item.url);

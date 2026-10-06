@@ -1,0 +1,14 @@
+---
+/** Permalink for a single annotated hadith in Muslim (Sunnah.com numbering). */
+import HadithPermalinkPage from '../../../components/hadith/HadithPermalinkPage.astro';
+import { loadHadithModel } from '../../../utils/hadithLoader.js';
+
+export function getStaticPaths() {
+  return [...loadHadithModel().records.values()]
+    .filter(record => record.collection === 'muslim')
+    .map(record => ({ params: { num: record.sunnahNum }, props: { record } }));
+}
+
+const { record } = Astro.props;
+---
+<HadithPermalinkPage record={record} />

@@ -2,10 +2,17 @@ import React, { useState, useEffect } from 'react';
 import booksData from '../data/books_meta.json';
 import { NT_TRANSLATION_NAME } from '../utils/bible_config.js';
 import { getQuranSections } from '../utils/quran_config.js';
+import { getHadithNavSections } from '../utils/hadith_config.js';
+import { getBaseUrl } from '../utils/urlFactory.js';
 
 const OVERVIEW_ROUTES = {
   gospels: 'nt'
 };
+
+// Static taxonomy + base path, so compute once instead of on every render / route sync.
+const HADITH_HOME_HREF = `${getBaseUrl()}/hadith`;
+const HADITH_NAV_SECTIONS = getHadithNavSections(getBaseUrl());
+const HADITH_CATEGORY_SLUGS = new Set(HADITH_NAV_SECTIONS.map(s => s.slug));
 
 export default function ScriptureNav() {
   const [expandedSection, setExpandedSection] = useState('nt'); // 'nt', 'ot', or null
@@ -15,6 +22,7 @@ export default function ScriptureNav() {
   const [currentReader, setCurrentReader] = useState(null);
   const [activeTab, setActiveTab] = useState('scripture');
   const [currentQuranIndex, setCurrentQuranIndex] = useState(null);
+  const [currentHadithSection, setCurrentHadithSection] = useState(null); // 'home' | category slug
 
   // Synchronize active scripture route context
   useEffect(() => {
@@ -58,11 +66,24 @@ export default function ScriptureNav() {
         setCurrentReader(null);
         setCurrentQuranIndex('home');
         setExpandedSection('quran');
+      } else if (parts[1] === 'hadith') {
+        setCurrentBook(null);
+        setCurrentChapter(null);
+        setCurrentReader(null);
+        setCurrentQuranIndex(null);
+        setExpandedSection('hadith');
       } else {
         setCurrentBook(null);
         setCurrentChapter(null);
         setCurrentReader(null);
         setCurrentQuranIndex(null);
+      }
+
+      if (parts[1] === 'hadith') {
+        const isCategory = HADITH_CATEGORY_SLUGS.has(parts[2]);
+        setCurrentHadithSection(isCategory ? parts[2] : (parts[2] ? null : 'home'));
+      } else {
+        setCurrentHadithSection(null);
       }
 
       if (activePath.startsWith('/evidence')) {
@@ -189,6 +210,48 @@ export default function ScriptureNav() {
 
       {/* 3. Scrollable Books Tree Navigator */}
       <div className="sidebar-scroll-content">
+        {/* Sahih Hadiths */}
+        <div className="nav-section">
+          <button
+            onClick={() => toggleSection('hadith')}
+            className={`section-header-btn ${expandedSection === 'hadith' ? 'active' : ''}`}
+          >
+            <span className="icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-2px' }}>
+                <path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z" />
+                <path d="M4 21V5" />
+                <path d="M9 8h5M9 12h5" />
+              </svg>
+            </span>
+            <span className="title-text">Sahih Hadiths</span>
+            <span className="section-arrow">{expandedSection === 'hadith' ? '▼' : '▶'}</span>
+          </button>
+          {expandedSection === 'hadith' && (
+            <div className="book-list animate-fade-in">
+              <div className="book-item">
+                <a
+                  href={HADITH_HOME_HREF}
+                  className={`book-select-btn ${currentHadithSection === 'home' ? 'active-book' : ''}`}
+                  style={{ paddingLeft: '12px' }}
+                >
+                  <span className="book-name">Overview</span>
+                </a>
+              </div>
+              {HADITH_NAV_SECTIONS.map((sec) => (
+                <div key={sec.slug} className="book-item">
+                  <a
+                    href={sec.path}
+                    className={`book-select-btn ${currentHadithSection === sec.slug ? 'active-book' : ''}`}
+                    style={{ paddingLeft: '12px' }}
+                  >
+                    <span className="book-name">{sec.short}</span>
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         {/* Quran */}
         <div className="nav-section">
           <button

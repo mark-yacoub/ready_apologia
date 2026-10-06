@@ -1,0 +1,82 @@
+---
+/**
+ * Category overview: subcategory pill rail + the top 3 narrations of each subcategory.
+ */
+import Layout from '../../../layouts/Layout.astro';
+import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import HadithSectionHeader from '../../../components/hadith/HadithSectionHeader.astro';
+import HadithFeed from '../../../components/hadith/HadithFeed.jsx';
+import { loadHadithModel } from '../../../utils/hadithLoader.js';
+import { HADITH_SEO, truncate } from '../../../utils/hadith_config.js';
+import { buildBreadcrumbSchema } from '../../../utils/seoFactory.js';
+import '../../../styles/hadith.css';
+
+export function getStaticPaths() {
+  return loadHadithModel().categories.map(category => ({ params: { cat: category.slug }, props: { category } }));
+}
+
+const { category } = Astro.props;
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${category.href}`;
+
+const seo = HADITH_SEO.category(category.name);
+const description = truncate(
+  `${category.count} narrations from Sahih al-Bukhari and Sahih Muslim on ${category.subcategories.map(s => s.short.toLowerCase()).join(', ')} — with the Arabic, full text and Sunnah.com links.`,
+);
+
+const sections = category.subcategories.map(s => ({
+  id: s.slug,
+  title: s.name,
+  href: s.href,
+  count: s.count,
+  items: s.items.slice(0, 3),
+  packUrl: `${base}/hadith/data/arabic/${category.slug}--${s.slug}.json`,
+}));
+
+const pills = [
+  { label: 'Overview', href: category.href, current: true },
+  ...category.subcategories.map(s => ({ label: s.short, href: s.href })),
+];
+
+const schemaObj = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    buildBreadcrumbSchema([
+      { name: 'Ready Apologia', url: `${siteUrl}${base}/` },
+      { name: 'Sahih Hadiths', url: `${siteUrl}${base}/hadith` },
+      { name: category.name, url: canonicalURL },
+    ]),
+    {
+      '@type': 'CollectionPage',
+      '@id': canonicalURL,
+      name: seo.title,
+      description,
+      url: canonicalURL,
+      hasPart: category.subcategories.map(s => ({ '@type': 'CollectionPage', name: s.name, url: `${siteUrl}${s.href}` })),
+    },
+  ],
+};
+---
+<Layout
+  title={seo.title}
+  description={description}
+  keywords={seo.keywords}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  schema={schemaObj}
+  theme="hadith"
+  showOnboarding={false}
+>
+  <div class="hx">
+    <HadithSectionHeader backHref={`${base}/hadith`} backLabel="Sahih Hadiths" pills={pills} />
+    <HadithFeed
+      client:load
+      variant="overview"
+      base={base}
+      sections={sections}
+      heading={{ title: category.name }}
+    />
+  </div>
+  <RouteAnalytics eventName="hadith_category_view" params={{ category: category.slug }} />
+</Layout>

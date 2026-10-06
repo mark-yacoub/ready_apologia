@@ -1,0 +1,39 @@
+---
+/**
+ * Sticky context header for /hadith pages: a back link plus an optional horizontal pill rail.
+ * Pills are plain links (no JS); the current one is marked with aria-current.
+ *
+ * Prefetch: these links usually point at feed pages (40–100 KB gzip), so they prefetch on
+ * intent (hover / focus) rather than the site-wide default of "whenever visible".
+ */
+interface Pill { label: string; href: string; current?: boolean }
+interface Props {
+  backHref: string;
+  backLabel: string;
+  pills?: Pill[];
+}
+const { backHref, backLabel, pills = [] } = Astro.props;
+---
+<div class="hx-sticky">
+  <a class="hx-back" href={backHref} data-astro-prefetch="hover">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+    <span>{backLabel}</span>
+  </a>
+  {pills.length > 0 && (
+    <nav class="hx-pills" aria-label="Sections">
+      {pills.map(p => (
+        <a class="hx-pill" href={p.href} aria-current={p.current ? 'page' : undefined} data-astro-prefetch="hover">{p.label}</a>
+      ))}
+    </nav>
+  )}
+  {pills.length === 0 && <div class="hx-sticky-pad"></div>}
+</div>
+<script>
+  // Keep the active pill visible in the horizontal rail (re-runs after ClientRouter navigations).
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.hx-pills [aria-current="page"]').forEach(el => {
+      const rail = el.parentElement;
+      if (rail) rail.scrollLeft = el.offsetLeft - rail.offsetLeft - (rail.clientWidth - el.clientWidth) / 2;
+    });
+  });
+</script>

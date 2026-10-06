@@ -1,0 +1,19 @@
+---
+/**
+ * Translation audit for one issue type: /hadith/translation-audit/{softened,omitted,euphemism}.
+ * There is deliberately no index page; the hub links straight to each type.
+ */
+import TranslationAuditPage from '../../../components/hadith/TranslationAuditPage.astro';
+import { loadHadithModel } from '../../../utils/hadithLoader.js';
+import { TRANSLATION_ISSUE_TYPES } from '../../../utils/hadith_config.js';
+
+export function getStaticPaths() {
+  const issues = loadHadithModel().translationIssues;
+  return Object.keys(TRANSLATION_ISSUE_TYPES)
+    .filter(t => issues[t]?.length)
+    .map(t => ({ params: { type: TRANSLATION_ISSUE_TYPES[t].slug }, props: { type: t } }));
+}
+
+const { type } = Astro.props;
+---
+<TranslationAuditPage type={type} />

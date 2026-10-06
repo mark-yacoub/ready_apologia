@@ -1,0 +1,91 @@
+---
+/**
+ * Shared body for /hadith/bukhari/[num] and /hadith/muslim/[num] permalink pages.
+ */
+import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../common/RouteAnalytics.astro';
+import HadithSectionHeader from './HadithSectionHeader.astro';
+import HadithPermalink from './HadithPermalink.jsx';
+import { HADITH_SEO, truncate } from '../../utils/hadith_config.js';
+import { buildBreadcrumbSchema, buildFaqEntity } from '../../utils/seoFactory.js';
+import '../../styles/hadith.css';
+
+const { record } = Astro.props;
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${siteUrl}${record.permalink}`;
+const first = record.annotations[0];
+const seo = HADITH_SEO.permalink(record.displayRef, first.noteText);
+const description = truncate(first.noteText);
+const crumb = record.primaryCrumb;
+
+// Only what the island renders (keeps hydration props lean).
+const islandRecord = {
+  slug: record.slug,
+  displayRef: record.displayRef,
+  bookTitle: record.bookTitle,
+  inBook: record.inBook,
+  sunnahUrl: record.sunnahUrl,
+  permalink: record.permalink,
+  english: record.english,
+  arabic: record.arabic,
+  prev: record.prev,
+  next: record.next,
+  annotations: record.annotations.map(a => ({
+    noteHtml: a.noteHtml,
+    noteText: a.noteText,
+    defenseHtml: a.defenseHtml,
+    issue: a.issue,
+    parallels: a.parallels,
+    catShort: a.catShort,
+    subShort: a.subShort,
+    sectionHref: a.sectionHref,
+    full: a.full,
+  })),
+};
+
+const faq = buildFaqEntity(
+  record.annotations.flatMap(a => [
+    { q: `What does ${record.displayRef} say?`, a: a.noteText },
+    { q: `How do Muslim apologists respond to ${record.displayRef}?`, a: a.defenseText },
+  ]),
+  i => i.q,
+  i => i.a,
+  canonicalURL,
+);
+
+const crumbs = [
+  { name: 'Ready Apologia', url: `${siteUrl}${base}/` },
+  { name: 'Sahih Hadiths', url: `${siteUrl}${base}/hadith` },
+];
+if (crumb) {
+  crumbs.push({ name: crumb.catName, url: `${siteUrl}${crumb.catHref}` });
+  crumbs.push({ name: crumb.subName, url: `${siteUrl}${crumb.subHref}` });
+}
+crumbs.push({ name: record.displayRef, url: canonicalURL });
+
+const schemaObj = {
+  '@context': 'https://schema.org',
+  '@graph': [buildBreadcrumbSchema(crumbs), faq].filter(Boolean),
+};
+---
+<Layout
+  title={seo.title}
+  description={description}
+  keywords={seo.keywords}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  ogType="article"
+  schema={schemaObj}
+  theme="hadith"
+  showOnboarding={false}
+>
+  <div class="hx">
+    <HadithSectionHeader
+      backHref={crumb ? `${crumb.subHref}#${record.slug}` : `${base}/hadith`}
+      backLabel={crumb ? crumb.subShort.charAt(0).toUpperCase() + crumb.subShort.slice(1) : 'Sahih Hadiths'}
+    />
+    <HadithPermalink client:load record={islandRecord} />
+  </div>
+  <RouteAnalytics eventName="hadith_permalink_view" params={{ hadith: record.slug }} />
+</Layout>

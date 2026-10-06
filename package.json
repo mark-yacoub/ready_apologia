@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "serve": "node scripts/serve.js",
     "test:seo": "node scripts/test_seo.mjs",
+    "import:hadith": "node scripts/import_hadith.js",
     "astro": "astro"
   },
   "dependencies": {
