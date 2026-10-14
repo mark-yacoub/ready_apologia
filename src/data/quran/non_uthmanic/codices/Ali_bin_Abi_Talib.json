@@ -1,0 +1,91 @@
+{
+  "id": "ali-bin-abi-talib",
+  "name": "Ali bin Abi Talib",
+  "arabic_name": "علي بن أبي طالب",
+  "title": "The Fourth Caliph & Early Kufan Authority",
+  "era": "Died 40 AH (661 CE)",
+  "region": "Medina & Kufa",
+  "tier": "Superstar",
+  "importance_rank": 8,
+  "bio_url": "https://sunnah.com/narrator/5914",
+  "biography": "Cousin and son-in-law of Prophet Muhammad, the fourth Rashidun Caliph, and one of the earliest scribes of revelation. Classical exegetical works including Tafsir al-Tabari and Tafsir Ibn Kathir preserve specific non-Uthmanic readings transmitted from Ali alongside Abdullah bin Mas'ud and Umar, such as reading 'and indeed their scheme almost (wa-in kāda makruhum) removed the mountains' with the letter dāl in Surah 14:46.",
+  "virtues": [],
+  "bio_text": "Cousin and son-in-law of Prophet Muhammad, the fourth Rashidun Caliph, and one of the earliest scribes of revelation. Classical exegetical works including Tafsir al-Tabari and Tafsir Ibn Kathir preserve specific non-Uthmanic readings transmitted from Ali alongside Abdullah bin Mas'ud and Umar, such as reading 'and indeed their scheme almost (wa-in kāda makruhum) removed the mountains' with the letter dāl in Surah 14:46.",
+  "total_variants": 1,
+  "primary_variants": 0,
+  "shared_variants": 1,
+  "bukhari_muslim_count": 0,
+  "tafsir_count": 1,
+  "variants": [
+    {
+      "id": "codex-14-46-abdullah-bin-masud",
+      "surah": 14,
+      "ayah": 46,
+      "companion": "Abdullah bin Masud",
+      "companion_id": "abdullah-bin-masud",
+      "also_attributed_to": [
+        "Ubayy bin Kab",
+        "Umar bin Al-Khattab",
+        "Ali bin Abi Talib"
+      ],
+      "variant_type": "Word Substitution",
+      "short_title": "'Almost Removed Mountains' (Kada vs Kana) in 14:46",
+      "plain_english_hook": "Whether 14:46 means their plot 'could never' move mountains or 'almost' moved mountains depends on one letter: standard 'kana' (was) vs Ibn Masud, Ubayy, Umar, and Ali's 'kada' (almost).",
+      "title": "Surah Ibrahim 14:46 — 'Wa-In Kada Makruhum' in Ibn Mas'ud and Ubayy's Codices",
+      "diff_summary": "In the Uthmanic text of 14:46, the clause وَإِنْ كَانَ مَكْرُهُمْ لِتَزُولَ مِنْهُ الْجِبَالُ (with nun in 'kana') is interpreted by the majority of reciters (who read 'litazula') as a negation: 'and their scheme was not such as to remove the mountains.' Both al-Tabari and Ibn Kathir record that Abdullah bin Mas'ud (in his Mushaf), Ubayy bin Ka'b, Umar bin al-Khattab, and Ali bin Abi Talib read وَإِنْ كَادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الْجِبَالُ (with dal in 'kada' and dammah on 'latazulu'), reversing the sense to an affirmative near-occurrence: 'and indeed their scheme almost removed the mountains by it.'",
+      "uthmanic_target_arabic": "وَإِن كَانَ مَكۡرُهُمۡ لِتَزُولَ مِنۡهُ ٱلۡجِبَالُ",
+      "uthmanic_target_english": "even though their scheme was (such as) to remove the mountains by it",
+      "variant_target_arabic": "وَإِن كَادَ مَكۡرُهُمۡ لَتَزُولُ مِنۡهُ ٱلۡجِبَالُ",
+      "variant_target_english": "and indeed their scheme almost removed the mountains by it",
+      "uthmanic_full_arabic": "وَقَدۡ مَكَرُواْ مَكۡرَهُمۡ وَعِندَ ٱللَّهِ مَكۡرُهُمۡ وَإِن كَانَ مَكۡرُهُمۡ لِتَزُولَ مِنۡهُ ٱلۡجِبَالُ",
+      "uthmanic_full_english": "They schemed their scheme, but their scheme was known to God, even though their scheme was (such as) to remove the mountains by it.’",
+      "variant_full_arabic": "وَقَدۡ مَكَرُواْ مَكۡرَهُمۡ وَعِندَ ٱللَّهِ مَكۡرُهُمۡ وَإِن كَادَ مَكۡرُهُمۡ لَتَزُولُ مِنۡهُ ٱلۡجِبَالُ",
+      "variant_full_english": "They schemed their scheme, but their scheme was known to God, and indeed their scheme almost removed the mountains by it.’",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari acknowledges that Companions and Successors recited 'wa-in kada' with a dal, but rules that it is impermissible to recite it today because the Uthmanic manuscripts are written 'wa-in kana' with a nun, and one may not alter the orthography of the Muslims' Mushafs.",
+        "primary_source_evaluation": "Al-Tabari's explicit concession—that the Companion reading 'wa-in kada' (attested for Ibn Mas'ud's Mushaf, Umar, Ali, and Ubayy) is grammatically sound and was adapted by the canonical Kufan reciter al-Kisa'i onto the Uthmanic rasm 'wa-in kana latazulu'—demonstrates how a non-Uthmanic consonantal variant directly generated a canonical Qira'at dispute."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 32,
+        "undeniability_gold_sources_30": 27,
+        "universal_scope_20": 19,
+        "classical_concession_15": 14,
+        "cuj_score": 92
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/14/47/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura14-aya47.html",
+          "arabic_excerpt": "قال ابن جريج: أخبرني عمرو بن دينار ، عن عكرمة ، عن عمر بن الخطاب ، أنه كان يقرأ \" وَإِنْ كادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الجِبالُ \". قال قتادة: وفي مصحف عبد الله بن مسعود: \" وَإِنْ كادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الجِبالُ \". وذلك أن الذين قرءوا ذلك بفتح اللام الأولى ورفع الثانية قرءوا: \" وَإِنْ كادَ مَكْرُهُمْ \" بالدال ، وهي إذا قرئت كذلك ، فالصحيح من القراءة مع \" وَإِنْ كادَ \" فتح اللام الأولى ورفع الثانية على ما قرءوا ، وغير جائز عندنا القراءة كذلك ، لأن مصاحفنا بخلاف ذلك ، وإنما خطَّ مصاحفنا وإن كان بالنون لا بالدال.",
+          "english_excerpt": "Ibn Jurayj said: 'Amr bin Dinar informed me, from 'Ikrimah, from 'Umar bin al-Khattab, that he used to recite: '{And their plot almost caused the mountains to move from it}'. Qatadah said: And in the codex (Mushaf) of 'Abdullah bin Mas'ud: '{And their plot almost caused the mountains to move from it}'. And that is because those who recited it with a fathah on the first lam and a dammah on the second recited: '{wa-in kada makruhum}' with a dal... And it is not permissible in our view to recite like that, because our manuscripts are contrary to that. The script of our manuscripts is 'wa-in kana' with a nun, not with a dal.",
+          "highlight_arabic": "وفي مصحف عبد الله بن مسعود: \" وَإِنْ كادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الجِبالُ \"",
+          "highlight_english": "in the codex (Mushaf) of 'Abdullah bin Mas'ud: '{And their plot almost caused the mountains to move from it}'"
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/14/46/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura14-aya46.html",
+          "arabic_excerpt": "قال : فهو قول الله - عز وجل - : \" وإن كاد مكرهم لتزول منه الجبال \" . قال أبو إسحاق : وكذلك هي في قراءة عبد الله : \" وإن كاد مكرهم \" . قلت : وكذا روي عن أبي بن كعب ، وعمر بن الخطاب - رضي الله عنهما - أنهما قرآ : \" وإن كاد \" كما قرأ علي .",
+          "english_excerpt": "This is the saying of Allah (the Exalted and Most Honored): 'though their plot was almost (*Wa in kad*) one to remove the mountains from their places.' Abu Ishaq said: \"And similarly it is in the recitation of 'Abdullah: '*Wa in kad makruhum*' (though their plot was almost...).\" I (Ibn Kathir) say: And similarly it was narrated from Ubayy bin Ka'b and 'Umar bin Al-Khattab (may Allah be pleased with them) that they recited \"*Wa in kad*\" as 'Ali recited.",
+          "highlight_arabic": "في قراءة عبد الله : \" وإن كاد مكرهم \"",
+          "highlight_english": "in the recitation of 'Abdullah: '*Wa in kad makruhum*'"
+        }
+      ],
+      "global_rank": 23,
+      "companion_codex": "Abdullah bin Masud",
+      "variant_arabic": "وَقَدۡ مَكَرُواْ مَكۡرَهُمۡ وَعِندَ ٱللَّهِ مَكۡرُهُمۡ وَإِن كَادَ مَكۡرُهُمۡ لَتَزُولُ مِنۡهُ ٱلۡجِبَالُ",
+      "variant_english": "They schemed their scheme, but their scheme was known to God, and indeed their scheme almost removed the mountains by it.’",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (14:46)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (14:46)",
+      "sunnah_url": "/quran/14/47/tafsir/tabari",
+      "hadith_arabic": "قال ابن جريج: أخبرني عمرو بن دينار ، عن عكرمة ، عن عمر بن الخطاب ، أنه كان يقرأ \" وَإِنْ كادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الجِبالُ \". قال قتادة: وفي مصحف عبد الله بن مسعود: \" وَإِنْ كادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الجِبالُ \". وذلك أن الذين قرءوا ذلك بفتح اللام الأولى ورفع الثانية قرءوا: \" وَإِنْ كادَ مَكْرُهُمْ \" بالدال ، وهي إذا قرئت كذلك ، فالصحيح من القراءة مع \" وَإِنْ كادَ \" فتح اللام الأولى ورفع الثانية على ما قرءوا ، وغير جائز عندنا القراءة كذلك ، لأن مصاحفنا بخلاف ذلك ، وإنما خطَّ مصاحفنا وإن كان بالنون لا بالدال.",
+      "hadith_english": "Ibn Jurayj said: 'Amr bin Dinar informed me, from 'Ikrimah, from 'Umar bin al-Khattab, that he used to recite: '{And their plot almost caused the mountains to move from it}'. Qatadah said: And in the codex (Mushaf) of 'Abdullah bin Mas'ud: '{And their plot almost caused the mountains to move from it}'. And that is because those who recited it with a fathah on the first lam and a dammah on the second recited: '{wa-in kada makruhum}' with a dal... And it is not permissible in our view to recite like that, because our manuscripts are contrary to that. The script of our manuscripts is 'wa-in kana' with a nun, not with a dal.",
+      "rank": 1,
+      "attribution_role": "shared"
+    }
+  ]
+}

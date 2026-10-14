@@ -1,83 +1,428 @@
 {
-  "person": "Aisha",
+  "id": "aisha",
+  "name": "Aisha",
+  "arabic_name": "عائشة بنت أبي بكر",
+  "title": "Mother of the Believers & Medinan Mushaf Holder",
+  "era": "Died 58 AH (678 CE)",
+  "region": "Medina",
+  "tier": "Superstar",
+  "importance_rank": 5,
+  "bio_url": "https://sunnah.com/narrator/4049",
+  "biography": "Wife of Prophet Muhammad and daughter of the first Caliph, Abu Bakr. Aisha was one of the foremost legal authorities and transmitters of prophetic tradition in Medina, and she commissioned her own personal Mushaf copied by her freedman Abu Yunus. In Sahih Muslim 629a, she explicitly dictates the addition 'and the afternoon prayer' (wa-salati l-'asr) into Surah 2:238, testifying that she heard it directly from the Prophet. She also testifies in Sahih Muslim 1452a to the ten- and five-sucklings verses having been recited as Quran until the Prophet's death, and discusses scribal grammatical forms in the Uthmanic text (Tafsir al-Tabari on 4:162).",
   "virtues": [
     {
-      "hadith_arabic": "قَالَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: كَمَلَ مِنَ الرِّجَالِ كَثِيرٌ، وَلَمْ يَكْمُلْ مِنَ النِّسَاءِ إِلَّا مَرْيَمُ بِنْتُ عِمْرَانَ، وَآسِيَةُ امْرَأَةُ فِرْعَوْنَ، وَفَضْلُ عَائِشَةَ عَلَى النِّسَاءِ كَفَضْلِ الثَّرِيدِ عَلَى سَائِرِ الطَّعَامِ.",
-      "hadith_english": "The Messenger of Allah (ﷺ) said: 'Many amongst men attained perfection but amongst women none attained perfection except Maryam, the daughter of 'Imran, and Asiya, the wife of Pharaoh. And the superiority of 'Aisha to other women is like the superiority of Tharid (an Arabic dish) to an ordinary meal.'",
-      "source_reference": "Sahih al-Bukhari 3769",
-      "sunnah_url": "https://sunnah.com/bukhari:3769"
+      "source_reference": "Sahih Muslim 1452a",
+      "sunnah_url": "https://sunnah.com/muslim:1452a",
+      "hadith_arabic": "عَنْ عَائِشَةَ أَنَّهَا قَالَتْ: كَانَ فِيمَا أُنْزِلَ مِنَ الْقُرْآنِ عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ يُحَرِّمْنَ ثُمَّ نُسِخْنَ بِخَمْسٍ مَعْلُومَاتٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَهُنَّ فِيمَا يُقْرَأُ مِنَ الْقُرْآنِ",
+      "hadith_english": "Aisha reported that it had been revealed in the Holy Qur'an that ten clear sucklings make marriage unlawful, then it was abrogated by five clear sucklings, and Allah's Messenger (ﷺ) died while they were still among what was recited of the Qur'an."
+    },
+    {
+      "source_reference": "Sahih al-Bukhari 3770",
+      "sunnah_url": "https://sunnah.com/bukhari:3770",
+      "hadith_arabic": "فَضْلُ عَائِشَةَ عَلَى النِّسَاءِ كَفَضْلِ الثَّرِيدِ عَلَى الطَّعَامِ",
+      "hadith_english": "Allah's Messenger (ﷺ) said: \"The excellence of Aisha over other women is like the excellence of Tharid (a rich meat and bread dish) over all other meals.\""
     }
   ],
+  "bio_text": "Wife of Prophet Muhammad and daughter of the first Caliph, Abu Bakr. Aisha was one of the foremost legal authorities and transmitters of prophetic tradition in Medina, and she commissioned her own personal Mushaf copied by her freedman Abu Yunus. In Sahih Muslim 629a, she explicitly dictates the addition 'and the afternoon prayer' (wa-salati l-'asr) into Surah 2:238, testifying that she heard it directly from the Prophet. She also testifies in Sahih Muslim 1452a to the ten- and five-sucklings verses having been recited as Quran until the Prophet's death, and discusses scribal grammatical forms in the Uthmanic text (Tafsir al-Tabari on 4:162).",
+  "total_variants": 5,
+  "primary_variants": 4,
+  "shared_variants": 1,
+  "bukhari_muslim_count": 4,
+  "tafsir_count": 5,
   "variants": [
     {
-      "surah": "2",
+      "id": "codex-2-184-ibn-abbas",
+      "surah": 2,
+      "ayah": 184,
+      "companion": "Ibn Abbas",
+      "companion_id": "ibn-abbas",
+      "also_attributed_to": [
+        "Aisha"
+      ],
+      "variant_type": "Morphological / Consonantal Shift",
+      "short_title": "Ibn Abbas Reads 'Those Who Can Barely Bear It' (2:184)",
+      "plain_english_hook": "The standard Quran says 'for those who can afford it' there is a ransom of feeding a poor person instead of fasting. Ibn Abbas and Aisha read 'for those who are burdened by it'—reversing who qualifies.",
+      "title": "Passive 'Yutawwaqunahu' vs. Active 'Yutiqunahu' in Q. 2:184 (Ibn Abbas & Aisha)",
+      "diff_summary": "In Sahih al-Bukhari 4505 and Tafsir al-Tabari (which also records the same reading from Aisha), Ibn 'Abbas recited Q. 2:184 with a consonantal and morphological shift as 'وَعَلَى الَّذِينَ يُطَوَّقُونَهُ' (passive *yuṭawwaqūnahu*, with a doubled *wāw*: 'for those who are heavily burdened with it / can barely bear it') rather than the Uthmanic 'وَعَلَى ٱلَّذِينَ يُطِيقُونَهُۥ' (active *yuṭīqūnahu*, with a *yā'*: 'for those who can afford it'). Under the Uthmanic wording, healthy believers could initially pay a ransom instead of fasting, forcing jurists to declare the verse abrogated by Q. 2:185; under Ibn 'Abbas's reading, the verse was never abrogated and permanently applies to the elderly who can barely endure fasting.",
+      "uthmanic_target_arabic": "وَعَلَى ٱلَّذِينَ يُطِيقُونَهُۥ",
+      "uthmanic_target_english": "And for those who can afford it,",
+      "variant_target_arabic": "وَعَلَى الَّذِينَ يُطَوَّقُونَهُ",
+      "variant_target_english": "And for those who are heavily burdened with it,",
+      "uthmanic_full_arabic": "أَيَّامٗا مَّعۡدُودَٰتٖۚ فَمَن كَانَ مِنكُم مَّرِيضًا أَوۡ عَلَىٰ سَفَرٖ فَعِدَّةٞ مِّنۡ أَيَّامٍ أُخَرَۚ وَعَلَى ٱلَّذِينَ يُطِيقُونَهُۥ فِدۡيَةٞ طَعَامُ مِسۡكِينٖۖ فَمَن تَطَوَّعَ خَيۡرٗا فَهُوَ خَيۡرٞ لَّهُۥۚ وَأَن تَصُومُواْ خَيۡرٞ لَّكُمۡ إِن كُنتُمۡ تَعۡلَمُونَ",
+      "uthmanic_full_english": "(Fast for) a number of days. Whoever of you is sick or on a journey, (let him fast) a certain number of other days. And for those who can afford it, (there is) a ransom: feeding a poor person. Whoever does good voluntarily – it is better for him. But to fast is better for you, if (only) you knew.",
+      "variant_full_arabic": "أَيَّامٗا مَّعۡدُودَٰتٖۚ فَمَن كَانَ مِنكُم مَّرِيضًا أَوۡ عَلَىٰ سَفَرٖ فَعِدَّةٞ مِّنۡ أَيَّامٍ أُخَرَۚ وَعَلَى الَّذِينَ يُطَوَّقُونَهُ فِدۡيَةٞ طَعَامُ مِسۡكِينٖۖ فَمَن تَطَوَّعَ خَيۡرٗا فَهُوَ خَيۡرٞ لَّهُۥۚ وَأَن تَصُومُواْ خَيۡرٞ لَّكُمۡ إِن كُنتُمۡ تَعۡلَمُونَ",
+      "variant_full_english": "(Fast for) a number of days. Whoever of you is sick or on a journey, (let him fast) a certain number of other days. And for those who are heavily burdened with it, (there is) a ransom: feeding a poor person. Whoever does good voluntarily – it is better for him. But to fast is better for you, if (only) you knew.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari rejects Ibn 'Abbas's reading because it alters the consonantal skeleton (rasm) of the Uthmanic Mushafs (replacing ya' with waw), arguing instead that the Uthmanic wording was revealed first and subsequently abrogated by Q. 2:185.",
+        "primary_source_evaluation": "In Sahih al-Bukhari 4505, Ibn 'Abbas explicitly denies that Q. 2:184 was ever abrogated ('laysat bi-mansukhah') and bases the permanent legal ruling for elderly men and women directly on his non-Uthmanic reading 'yutawwaqunahu,' which al-Tabari admits was also recited by Aisha."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 28,
+        "universal_scope_20": 18,
+        "classical_concession_15": 12,
+        "cuj_score": 91
+      },
+      "hadiths": [
+        {
+          "hadith_reference": "Sahih al-Bukhari 4505",
+          "sunnah_url": "https://sunnah.com/bukhari:4505",
+          "transmitted_by": "Ata' from Ibn Abbas",
+          "hadith_arabic": "حَدَّثَنِي إِسْحَاقُ، أَخْبَرَنَا رَوْحٌ، حَدَّثَنَا زَكَرِيَّاءُ بْنُ إِسْحَاقَ، حَدَّثَنَا عَمْرُو بْنُ دِينَارٍ، عَنْ عَطَاءٍ، سَمِعَ ابْنَ عَبَّاسٍ، يَقْرَأُ ‏{‏وَعَلَى الَّذِينَ يُطَوَّقُونَهُ فِدْيَةٌ طَعَامُ مِسْكِينٍ ‏}‏‏.‏ قَالَ ابْنُ عَبَّاسٍ لَيْسَتْ بِمَنْسُوخَةٍ، هُوَ الشَّيْخُ الْكَبِيرُ وَالْمَرْأَةُ الْكَبِيرَةُ لاَ يَسْتَطِيعَانِ أَنْ يَصُومَا، فَلْيُطْعِمَانِ مَكَانَ كُلِّ يَوْمٍ مِسْكِينًا‏.‏",
+          "hadith_english": "Narrated 'Ata': One heard Ibn 'Abbas reciting: 'And for those who are heavily burdened with it [yutawwaqunahu], a ransom of feeding a poor person...' (2:184). Ibn 'Abbas said, 'This Verse is not abrogated, but it is meant for a very old man and a very old woman who have no strength to fast, so they should feed a poor person for every day in place of fasting.'",
+          "highlight_arabic": "سَمِعَ ابْنَ عَبَّاسٍ، يَقْرَأُ ‏{‏وَعَلَى الَّذِينَ يُطَوَّقُونَهُ فِدْيَةٌ طَعَامُ مِسْكِينٍ ‏}‏‏.‏ قَالَ ابْنُ عَبَّاسٍ لَيْسَتْ بِمَنْسُوخَةٍ",
+          "highlight_english": "One heard Ibn 'Abbas reciting: 'And for those who are heavily burdened with it [yutawwaqunahu], a ransom of feeding a poor person...'"
+        }
+      ],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/2/184/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura2-aya184.html",
+          "arabic_excerpt": "وأما قوله : { وعلى الذين يطيقونه فدية طعام مسكين } فإن قراءة كافة المسلمين : { وعلى الذين يطيقونه } وعلى ذلك خطوط مصاحفهم ... وكان ابن عباس يقرؤها فيما روي عنه : \" وعلى الذين يطوقونه \" ... 2277 - حدثنا الحسن بن يحيى , قال : أخبرنا عبد الرزاق , قال : أخبرنا ابن جريج قال : حدثني محمد بن عباد بن جعفر , عن أبي عمرو مولى عائشة أن عائشة كانت تقرأ : { يطوقونه } ... وأما قراءة من قرأ ذلك : { وعلى الذين يطوقونه } فقراءة لمصاحف أهل الإسلام خلاف .",
+          "english_excerpt": "As for His saying: {And for those who can afford it, (there is) a ransom: feeding a poor person}, the recitation of all the Muslims is {wa-'ala alladhina yutiqunahu} and upon that is the script of their Mushafs... whereas Ibn 'Abbas used to recite it, according to what is narrated from him: \"wa-'ala alladhina yutawwaqunahu\"... 2277 - Al-Hasan bin Yahya narrated to us... from Abu 'Amr the freedman of 'A'ishah that 'A'ishah used to recite: {yutawwaqunahu}... And as for the recitation of the one who recited that as {wa-'ala alladhina yutawwaqunahu}, it is a recitation that contradicts the Mushafs of the people of Islam.",
+          "highlight_arabic": "وأما قراءة من قرأ ذلك : { وعلى الذين يطوقونه } فقراءة لمصاحف أهل الإسلام خلاف",
+          "highlight_english": "And as for the recitation of the one who recited that as {wa-'ala alladhina yutawwaqunahu}, it is a recitation that contradicts the Mushafs of the people of Islam."
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/2/184/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura2-aya184.html",
+          "arabic_excerpt": "وقال البخاري : حدثنا إسحاق ، أخبرنا روح ، حدثنا زكريا بن إسحاق ، حدثنا عمرو بن دينار ، عن عطاء ، سمع ابن عباس يقرأ : ( وعلى الذين يطوقونه فدية طعام مسكين ) قال ابن عباس : ليست بمنسوخة ، هو الشيخ الكبير والمرأة الكبيرة لا يستطيعان أن يصوما ، فليطعمان مكان كل يوم مسكينا .",
+          "english_excerpt": "Al-Bukhari recorded: Ishaq narrated to us, Rawh informed us, Zakariyya bin Ishaq narrated to us, 'Amr bin Dinar narrated to us, from 'Ata', who heard Ibn 'Abbas recite: (And for those who are burdened with it [yutawwaqunahu], a ransom of feeding a poor person). Ibn 'Abbas said: \"It is not abrogated; it refers to the old man and the old woman who are unable to fast, so they should feed one poor person for each day.\"",
+          "highlight_arabic": "سمع ابن عباس يقرأ : ( وعلى الذين يطوقونه فدية طعام مسكين )",
+          "highlight_english": "heard Ibn 'Abbas recite: (And for those who are burdened with it [yutawwaqunahu], a ransom of feeding a poor person)"
+        }
+      ],
+      "global_rank": 29,
+      "companion_codex": "Ibn Abbas",
+      "variant_arabic": "أَيَّامٗا مَّعۡدُودَٰتٖۚ فَمَن كَانَ مِنكُم مَّرِيضًا أَوۡ عَلَىٰ سَفَرٖ فَعِدَّةٞ مِّنۡ أَيَّامٍ أُخَرَۚ وَعَلَى الَّذِينَ يُطَوَّقُونَهُ فِدۡيَةٞ طَعَامُ مِسۡكِينٖۖ فَمَن تَطَوَّعَ خَيۡرٗا فَهُوَ خَيۡرٞ لَّهُۥۚ وَأَن تَصُومُواْ خَيۡرٞ لَّكُمۡ إِن كُنتُمۡ تَعۡلَمُونَ",
+      "variant_english": "(Fast for) a number of days. Whoever of you is sick or on a journey, (let him fast) a certain number of other days. And for those who are heavily burdened with it, (there is) a ransom: feeding a poor person. Whoever does good voluntarily – it is better for him. But to fast is better for you, if (only) you knew.",
+      "hadith_reference": "Sahih al-Bukhari 4505",
+      "source_reference": "Sahih al-Bukhari 4505",
+      "sunnah_url": "https://sunnah.com/bukhari:4505",
+      "hadith_arabic": "حَدَّثَنِي إِسْحَاقُ، أَخْبَرَنَا رَوْحٌ، حَدَّثَنَا زَكَرِيَّاءُ بْنُ إِسْحَاقَ، حَدَّثَنَا عَمْرُو بْنُ دِينَارٍ، عَنْ عَطَاءٍ، سَمِعَ ابْنَ عَبَّاسٍ، يَقْرَأُ ‏{‏وَعَلَى الَّذِينَ يُطَوَّقُونَهُ فِدْيَةٌ طَعَامُ مِسْكِينٍ ‏}‏‏.‏ قَالَ ابْنُ عَبَّاسٍ لَيْسَتْ بِمَنْسُوخَةٍ، هُوَ الشَّيْخُ الْكَبِيرُ وَالْمَرْأَةُ الْكَبِيرَةُ لاَ يَسْتَطِيعَانِ أَنْ يَصُومَا، فَلْيُطْعِمَانِ مَكَانَ كُلِّ يَوْمٍ مِسْكِينًا‏.‏",
+      "hadith_english": "Narrated 'Ata': One heard Ibn 'Abbas reciting: 'And for those who are heavily burdened with it [yutawwaqunahu], a ransom of feeding a poor person...' (2:184). Ibn 'Abbas said, 'This Verse is not abrogated, but it is meant for a very old man and a very old woman who have no strength to fast, so they should feed a poor person for every day in place of fasting.'",
+      "rank": 1,
+      "attribution_role": "shared"
+    },
+    {
+      "id": "codex-2-238-aisha",
+      "surah": 2,
       "ayah": 238,
-      "variant_arabic": "حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ ‏.‏ وَقُومُوا لِلَّهِ قَانِتِينَ",
-      "variant_english": "Guard the prayers and the middle prayer and the afternoon prayer, and stand up truly obedient to Allah.",
+      "companion": "Aisha",
+      "companion_id": "aisha",
+      "also_attributed_to": [
+        "Hafsa"
+      ],
+      "variant_type": "Phrase Addition",
+      "short_title": "Aisha's Codex Adds 'And the Afternoon Prayer' (2:238)",
+      "plain_english_hook": "While the standard Quran commands believers to guard 'the middle prayer,' Aisha dictated her written Quran codex with the added phrase 'and the afternoon prayer,' stating she heard it from Muhammad.",
+      "title": "Addition of 'Wa-Salati l-Asr' in the Personal Codex of Aisha (Q. 2:238)",
+      "diff_summary": "In Sahih Muslim 629a, Aisha's freedman Abu Yunus reports that Aisha ordered him to transcribe a personal Mushaf for her and explicitly instructed him to write Q. 2:238 with the additional conjunction and phrase 'وَصَلاَةِ الْعَصْرِ' ('and the afternoon prayer'), affirming that she heard it directly from the Prophet. Because the conjunctive particle 'wa-' ('and') grammatically distinguishes the Afternoon ('Asr) prayer from the 'middle prayer' (al-salat al-wusta), this reading directly impacted early legal debates over which of the five daily prayers is the middle prayer.",
+      "uthmanic_target_arabic": "وَٱلصَّلَوٰةِ ٱلۡوُسۡطَىٰ",
+      "uthmanic_target_english": "and the middle prayer.",
+      "variant_target_arabic": "وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ",
+      "variant_target_english": "and the middle prayer, and the afternoon prayer.",
+      "uthmanic_full_arabic": "حَٰفِظُواْ عَلَى ٱلصَّلَوَٰتِ وَٱلصَّلَوٰةِ ٱلۡوُسۡطَىٰ وَقُومُواْ لِلَّهِ قَٰنِتِينَ",
+      "uthmanic_full_english": "Watch over the prayers, and the middle prayer. And stand before God obedient.",
+      "variant_full_arabic": "حَٰفِظُواْ عَلَى ٱلصَّلَوَٰتِ وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ وَقُومُواْ لِلَّهِ قَٰنِتِينَ",
+      "variant_full_english": "Watch over the prayers, and the middle prayer, and the afternoon prayer. And stand before God obedient.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Classical commentators argue that the additional wording was either an explanatory gloss (qira'ah tafsiriyyah) identifying the middle prayer or an earlier recitation whose wording was later abrogated (naskh al-tilawah) as reported via al-Bara' bin 'Azib in Sahih Muslim 630.",
+        "primary_source_evaluation": "In Sahih Muslim 629a, Aisha dictates this wording into her physical Mushaf after the Prophet's death—when abrogation could no longer occur—and both al-Tabari and Ibn Kathir note that the conjunctive 'wa-' ('and the afternoon prayer') grammatically implies a second prayer rather than a simple equating gloss."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 34,
+        "undeniability_gold_sources_30": 29,
+        "universal_scope_20": 19,
+        "classical_concession_15": 14,
+        "cuj_score": 96
+      },
+      "hadiths": [
+        {
+          "hadith_reference": "Sahih Muslim 629",
+          "sunnah_url": "https://sunnah.com/muslim:629a",
+          "transmitted_by": "Abu Yunus (freedman of Aisha)",
+          "hadith_arabic": "وَحَدَّثَنَا يَحْيَى بْنُ يَحْيَى التَّمِيمِيُّ، قَالَ قَرَأْتُ عَلَى مَالِكٍ عَنْ زَيْدِ بْنِ أَسْلَمَ، عَنِ الْقَعْقَاعِ بْنِ حَكِيمٍ، عَنْ أَبِي يُونُسَ، مَوْلَى عَائِشَةَ أَنَّهُ قَالَ أَمَرَتْنِي عَائِشَةُ أَنْ أَكْتُبَ لَهَا مُصْحَفًا وَقَالَتْ إِذَا بَلَغْتَ هَذِهِ الآيَةَ فَآذِنِّي ‏{‏ حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلاَةِ الْوُسْطَى‏}‏ فَلَمَّا بَلَغْتُهَا آذَنْتُهَا فَأَمْلَتْ عَلَىَّ حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ ‏.‏ وَقُومُوا لِلَّهِ قَانِتِينَ ‏.‏ قَالَتْ عَائِشَةُ سَمِعْتُهَا مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم ‏.‏",
+          "hadith_english": "Abu Yunus, the freed slave of 'A'isha said:'A'isha ordered me to transcribe a copy of the Qur'an for her and said: When you reach this verse:\" Guard the prayers and the middle prayer\" (ii. 238), inform me; so when I reached it, I informed her and she gave me dictation (like this): Guard the prayers and the middle prayer and the afternoon prayer, and stand up truly obedient to Allah. 'A'isha said: This is how I have heard from the Messenger of Allah (ﷺ)",
+          "highlight_arabic": "فَأَمْلَتْ عَلَىَّ حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ ‏.‏ وَقُومُوا لِلَّهِ قَانِتِينَ",
+          "highlight_english": "Guard the prayers and the middle prayer and the afternoon prayer, and stand up truly obedient to Allah."
+        }
+      ],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH) — Aisha's Mushaf",
+          "app_url": "/quran/2/238/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura2-aya238.html",
+          "arabic_excerpt": "4216 - حدثنا ابن المثنى، قال: ثنا عبد الوهاب، قال: ثنا أيوب، عن أبي قلابة، عن أبي يونس مولى عائشة، أنه قال: أمرتني عائشة أن أكتب لها مصحفًا، وقالت: إذا بلغت هذه الآية فآذنِّي: \" حافظوا على الصلوات والصلاة الوسطى \"، فلما بلغتها آذنتها، فأملت عليَّ: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \"، وقالت: سمعتها من رسول الله صلى الله عليه وسلم.\n4220 - حدثني المثنى، قال: ثنا الحجاج، قال: ثنا حماد، عن هشام بن عروة، عن أبيه، قال: كان في مصحف عائشة: \" حافظوا على الصلوات والصلاة الوسطى وهي صلاة العصر \".",
+          "english_excerpt": "4216 - Ibn al-Muthanna narrated to us... from Abu Yunus, the freed slave of 'A'ishah, that he said: 'A'ishah ordered me to write a Mushaf for her, and she said: When you reach this verse, let me know: \"Watch over the prayers, and the middle prayer.\" When I reached it, I let her know, and she dictated to me: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient,\" and she said: I heard it from the Messenger of God, peace and blessings of God be upon him.\n4220 - Al-Muthanna narrated to me... from Hisham bin 'Urwah, from his father, who said: It was in the Mushaf of 'A'ishah: \"Watch over the prayers, and the middle prayer, and it is the 'Asr prayer.\"",
+          "highlight_arabic": "فأملت عليَّ: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \"",
+          "highlight_english": "she dictated to me: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient,\""
+        },
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH) — Hafsa's Mushaf",
+          "app_url": "/quran/2/238/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura2-aya238.html",
+          "arabic_excerpt": "4256 - حدثنا ابن المثنى، قال: حدثنا عبد الوهاب، قال: حدثنا عبيد الله، عن نافع: أن حفصة أمرت مولى لها يكتب لها مصحفا، وقالت: إذا بلغت هذه الآية: \" حافظوا على الصلوات والصلاة الوسطى \"، فلا تكتبها حتى أمليها عليك كما سمعت رسول الله صلى الله عليه وسلم يقرؤها! فلما بلغها أمرته فكتبها: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \". قال نافع: فقرأت ذلك المصحف، فرأيت فيه \" الواو \".\n4259 - حدثنا أبو كريب، قال: حدثنا عبدة بن سليمان، قال: حدثنا محمد بن عمرو، قال: حدثني أبو سلمة، عن عمرو بن رافع مولى عمر، قال: كان مكتوبا في مصحف حفصة: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \".",
+          "english_excerpt": "4256 - Ibn al-Muthanna narrated to us, saying: 'Abd al-Wahhab narrated to us, saying: 'Ubaydullah narrated to us, from Nafi': that Hafsah ordered a freed slave of hers to write a Mushaf for her, and she said: When you reach this verse: \"Watch over the prayers, and the middle prayer,\" do not write it until I dictate it to you as I heard the Messenger of God, peace and blessings of God be upon him, reciting it! When he reached it, she ordered him and he wrote it: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\" Nafi' said: I read that Mushaf, and I saw the \"Waw\" in it.\n4259 - Abu Kurayb narrated to us... from 'Amr bin Rafi' the freed slave of 'Umar, who said: It was written in the Mushaf of Hafsah: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\"",
+          "highlight_arabic": "كان مكتوبا في مصحف حفصة: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \"",
+          "highlight_english": "It was written in the Mushaf of Hafsah: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\""
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH) — Aisha's Mushaf",
+          "app_url": "/quran/2/238/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura2-aya238.html",
+          "arabic_excerpt": "وقال ابن جرير : حدثني المثنى ، حدثنا الحجاج ، حدثنا حماد ، عن هشام بن عروة عن أبيه قال : كان في مصحف عائشة : \" حافظوا على الصلوات والصلاة الوسطى وهي صلاة العصر \" ... وأما إن روي على أنه قرآن فإنه لم يتواتر ، فلا يثبت بمثل خبر الواحد قرآن ; ولهذا لم يثبته أمير المؤمنين عثمان بن عفان في المصحف الإمام .",
+          "english_excerpt": "Ibn Jarir said: Al-Muthanna narrated to me, Al-Hajjaj narrated to us, Hammad narrated to us, from Hisham bin 'Urwah from his father who said: \"It was in the Mushaf of 'A'ishah: 'Watch over the prayers, and the middle prayer, and it is the 'Asr prayer.'\" ... As for if it is narrated as being from the Quran, it is not Mutawatir (widely transmitted), and the Quran is not established by an isolated report (Khabar Al-Wahid). This is why the Commander of the Faithful 'Uthman bin 'Affan did not include it in the 'Imam' (master) Mushaf.",
+          "highlight_arabic": "كان في مصحف عائشة : \" حافظوا على الصلوات والصلاة الوسطى وهي صلاة العصر \"",
+          "highlight_english": "It was in the Mushaf of 'A'ishah: 'Watch over the prayers, and the middle prayer, and it is the 'Asr prayer.'"
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH) — Hafsa's Mushaf",
+          "app_url": "/quran/2/238/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura2-aya238.html",
+          "arabic_excerpt": "طريق أخرى : قال ابن جرير : حدثني ابن المثنى عبد الوهاب ، حدثنا عبيد الله ، عن نافع ، أن حفصة أمرت مولى لها أن يكتب لها مصحفا فقالت : إذا بلغت هذه الآية : \" حافظوا على الصلوات والصلاة الوسطى \" فلا تكتبها حتى أمليها عليك كما سمعت رسول الله صلى الله عليه وسلم يقرأها . فلما بلغها أمرته فكتبها : \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \" . قال نافع : فقرأت ذلك المصحف فرأيت فيه الواو .",
+          "english_excerpt": "Another route: Ibn Jarir said: Ibn Al-Muthanna 'Abdul-Wahhab narrated to me, 'Ubaydullah narrated to us, from Nafi', that Hafsah ordered a freed slave of hers to write a Mushaf for her, and she said: \"When you reach this Ayah: { Watch over the prayers, and the middle prayer }, do not write it until I dictate it to you as I heard the Messenger of Allah reciting it.\" When he reached it, she ordered him and he wrote it: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\" Nafi' said: \"I read that Mushaf and saw the 'Waw' in it.\"",
+          "highlight_arabic": "أن حفصة أمرت مولى لها أن يكتب لها مصحفا فقالت : إذا بلغت هذه الآية : \" حافظوا على الصلوات والصلاة الوسطى \" فلا تكتبها حتى أمليها عليك كما سمعت رسول الله صلى الله عليه وسلم يقرأها . فلما بلغها أمرته فكتبها : \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \" . قال نافع : فقرأت ذلك المصحف فرأيت فيه الواو",
+          "highlight_english": "that Hafsah ordered a freed slave of hers to write a Mushaf for her, and she said: \"When you reach this Ayah: { Watch over the prayers, and the middle prayer }, do not write it until I dictate it to you as I heard the Messenger of Allah reciting it.\" When he reached it, she ordered him and he wrote it: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\" Nafi' said: \"I read that Mushaf and saw the 'Waw' in it.\""
+        }
+      ],
+      "global_rank": 8,
+      "companion_codex": "Aisha",
+      "variant_arabic": "حَٰفِظُواْ عَلَى ٱلصَّلَوَٰتِ وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ وَقُومُواْ لِلَّهِ قَٰنِتِينَ",
+      "variant_english": "Watch over the prayers, and the middle prayer, and the afternoon prayer. And stand before God obedient.",
+      "hadith_reference": "Sahih Muslim 629",
       "source_reference": "Sahih Muslim 629",
+      "sunnah_url": "https://sunnah.com/muslim:629a",
       "hadith_arabic": "وَحَدَّثَنَا يَحْيَى بْنُ يَحْيَى التَّمِيمِيُّ، قَالَ قَرَأْتُ عَلَى مَالِكٍ عَنْ زَيْدِ بْنِ أَسْلَمَ، عَنِ الْقَعْقَاعِ بْنِ حَكِيمٍ، عَنْ أَبِي يُونُسَ، مَوْلَى عَائِشَةَ أَنَّهُ قَالَ أَمَرَتْنِي عَائِشَةُ أَنْ أَكْتُبَ لَهَا مُصْحَفًا وَقَالَتْ إِذَا بَلَغْتَ هَذِهِ الآيَةَ فَآذِنِّي ‏{‏ حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلاَةِ الْوُسْطَى‏}‏ فَلَمَّا بَلَغْتُهَا آذَنْتُهَا فَأَمْلَتْ عَلَىَّ حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ ‏.‏ وَقُومُوا لِلَّهِ قَانِتِينَ ‏.‏ قَالَتْ عَائِشَةُ سَمِعْتُهَا مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم ‏.‏",
       "hadith_english": "Abu Yunus, the freed slave of 'A'isha said:'A'isha ordered me to transcribe a copy of the Qur'an for her and said: When you reach this verse:\" Guard the prayers and the middle prayer\" (ii. 238), inform me; so when I reached it, I informed her and she gave me dictation (like this): Guard the prayers and the middle prayer and the afternoon prayer, and stand up truly obedient to Allah. 'A'isha said: This is how I have heard from the Messenger of Allah (ﷺ)",
-      "sunnah_url": "https://sunnah.com/muslim/5/261"
+      "rank": 1,
+      "attribution_role": "primary"
     },
     {
-      "surah": "12",
-      "ayah": 110,
-      "variant_arabic": "كُذِبُوا",
-      "variant_english": "read in such a way as to mean that the apostles thought that Allah did not help them",
-      "source_reference": "Sahih al-Bukhari 3389",
-      "hadith_arabic": "حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، حَدَّثَنَا اللَّيْثُ، عَنْ عُقَيْلٍ، عَنِ ابْنِ شِهَابٍ، قَالَ أَخْبَرَنِي عُرْوَةُ، أَنَّهُ سَأَلَ عَائِشَةَ ـ رضى الله عنها ـ زَوْجَ النَّبِيِّ صلى الله عليه وسلم أَرَأَيْتِ قَوْلَهُ ‏{‏حَتَّى إِذَا اسْتَيْأَسَ الرُّسُلُ وَظَنُّوا أَنَّهُمْ قَدْ كُذِّبُوا‏}‏ أَوْ كُذِبُوا‏.‏ قَالَتْ بَلْ كَذَّبَهُمْ قَوْمُهُمْ‏.‏ فَقُلْتُ وَاللَّهِ لَقَدِ اسْتَيْقَنُوا أَنَّ قَوْمَهُمْ كَذَّبُوهُمْ وَمَا هُوَ بِالظَّنِّ‏.‏ فَقَالَتْ يَا عُرَيَّةُ، لَقَدِ اسْتَيْقَنُوا بِذَلِكَ‏.‏ قُلْتُ فَلَعَلَّهَا أَوْ كُذِبُوا‏.‏ قَالَتْ مَعَاذَ اللَّهِ، لَمْ تَكُنِ الرُّسُلُ تَظُنُّ ذَلِكَ بِرَبِّهَا وَأَمَّا هَذِهِ الآيَةُ قَالَتْ هُمْ أَتْبَاعُ الرُّسُلِ الَّذِينَ آمَنُوا بِرَبِّهِمْ وَصَدَّقُوهُمْ، وَطَالَ عَلَيْهِمُ الْبَلاَءُ، وَاسْتَأْخَرَ عَنْهُمُ النَّصْرُ حَتَّى إِذَا اسْتَيْأَسَتْ مِمَّنْ كَذَّبَهُمْ مِنْ قَوْمِهِمْ، وَظَنُّوا أَنَّ أَتْبَاعَهُمْ كَذَّبُوهُمْ جَاءَهُمْ نَصْرُ اللَّهِ‏.‏ قَالَ أَبُو عَبْدِ اللَّهِ ‏{‏اسْتَيْأَسُوا‏}‏ افْتَعَلُوا مِنْ يَئِسْتُ‏.‏ ‏{‏مِنْهُ‏}‏ مِنْ يُوسُفَ‏.‏ ‏{‏لاَ تَيْأَسُوا مِنْ رَوْحِ اللَّهِ‏}‏ مَعْنَاهُ الرَّجَاءُ‏.‏",
-      "hadith_english": "Narrated `Urwa:I asked `Aisha the wife of the Prophet (ﷺ) about the meaning of the following Verse: -- \"(Respite will be granted) 'Until when the apostles give up hope (of their people) and thought that they were denied (by their people)...............\"(12.110) `Aisha replied, \"Really, their nations did not believe them.\" I said, \"By Allah! They were definite that their nations treated them as liars and it was not a matter of suspecting.\" `Aisha said, \"O 'Uraiya (i.e. `Urwa)! No doubt, they were quite sure about it.\" I said, \"May the Verse be read in such a way as to mean that the apostles thought that Allah did not help them?\" Aisha said, \"Allah forbid! (Impossible) The Apostles did not suspect their Lord of such a thing. But this Verse is concerned with the Apostles' followers who had faith in their Lord and believed in their apostles and their period of trials was long and Allah's Help was delayed till the apostles gave up hope for the conversion of the disbelievers amongst their nation and suspected that even their followers were shaken in their belief, Allah's Help then came to them",
-      "sunnah_url": "https://sunnah.com/bukhari/60/63"
+      "id": "codex-4-117-aisha",
+      "surah": 4,
+      "ayah": 117,
+      "companion": "Aisha",
+      "companion_id": "aisha",
+      "also_attributed_to": [
+        "Ibn Abbas"
+      ],
+      "variant_type": "Word Substitution",
+      "short_title": "Aisha's Codex: 'Idols' Instead of 'Females' (4:117)",
+      "plain_english_hook": "The standard Quran states that pagans call only upon 'females' (inathan) besides God; in Aisha's personal codex, the word was written 'idols' (awthanan).",
+      "title": "Surah An-Nisa 4:117 — 'Awthanan' (Idols) in Aisha's Mushaf vs 'Inathan'",
+      "diff_summary": "In the Uthmanic text of 4:117, polytheists are described as calling only upon 'females' (إِنَاثًا, referring to female-named deities such as al-Lat, al-'Uzza, and Manat) instead of God. Al-Tabari records with a direct chain through Hisham bin 'Urwah from his father 'Urwah bin al-Zubayr that in the Mushaf of Aisha it was written 'They only call on idols instead of Him' (إِنْ يَدْعُونَ مِنْ دُونِهِ إِلَّا أَوْثَانًا), and notes a related reading from Ibn Abbas ('uthunan', plural of wathan, idol).",
+      "uthmanic_target_arabic": "إِلَّآ إِنَٰثٗا",
+      "uthmanic_target_english": "on females",
+      "variant_target_arabic": "إِلَّآ أَوۡثَٰنٗا",
+      "variant_target_english": "on idols",
+      "uthmanic_full_arabic": "إِن يَدۡعُونَ مِن دُونِهِۦٓ إِلَّآ إِنَٰثٗا وَإِن يَدۡعُونَ إِلَّا شَيۡطَٰنٗا مَّرِيدٗا",
+      "uthmanic_full_english": "They only call on females instead of Him. They only call on a rebellious Satan.",
+      "variant_full_arabic": "إِن يَدۡعُونَ مِن دُونِهِۦٓ إِلَّآ أَوۡثَٰنٗا وَإِن يَدۡعُونَ إِلَّا شَيۡطَٰنٗا مَّرِيدٗا",
+      "variant_full_english": "They only call on idols instead of Him. They only call on a rebellious Satan.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari maintains that the Uthmanic reading 'inathan' (females) must be followed due to the consensus of the regional Mushafs, explaining that the pagan Arabs gave their idols female names and called the angels daughters of God.",
+        "primary_source_evaluation": "The transmission from 'Urwah bin al-Zubayr via his son Hisham is one of the most reliable family chains in early Islam, directly attesting a consonantal substitution ('awthanan' vs 'inathan') in Aisha's personal Mushaf."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 34,
+        "undeniability_gold_sources_30": 25,
+        "universal_scope_20": 18,
+        "classical_concession_15": 13,
+        "cuj_score": 90
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/4/117/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura4-aya117.html",
+          "arabic_excerpt": "10442- حدثنا سفيان قال، حدثنا أبو أسامة، عن هشام بن عروة، عن أبيه قال: كان في مصحف عائشة: ( إِنْ يَدْعُونَ مِنْ دُونِهِ إِلا أَوْثَانًا ). قال أبو جعفر: روي عن ابن عباس أنه كان يقرؤها: ( إِنْ يَدْعُونَ مِنْ دُونِهِ إِلا أُثُنًا ) بمعنى جمع \"وثن\".",
+          "english_excerpt": "10442 - Sufyan narrated to us, saying: Abu Usamah narrated to us, from Hisham bin 'Urwah, from his father, who said: In the Mushaf of 'A'ishah it was (written): (They only call on idols instead of Him). Abu Ja'far said: It was narrated from Ibn 'Abbas that he used to recite it: (They only call on [uthunan] instead of Him), in the meaning of the plural of 'wathan' (idol).",
+          "highlight_arabic": "كان في مصحف عائشة: ( إِنْ يَدْعُونَ مِنْ دُونِهِ إِلا أَوْثَانًا )",
+          "highlight_english": "In the Mushaf of 'A'ishah it was (written): (They only call on idols instead of Him)."
+        }
+      ],
+      "global_rank": 35,
+      "companion_codex": "Aisha",
+      "variant_arabic": "إِن يَدۡعُونَ مِن دُونِهِۦٓ إِلَّآ أَوۡثَٰنٗا وَإِن يَدۡعُونَ إِلَّا شَيۡطَٰنٗا مَّرِيدٗا",
+      "variant_english": "They only call on idols instead of Him. They only call on a rebellious Satan.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (4:117)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (4:117)",
+      "sunnah_url": "/quran/4/117/tafsir/tabari",
+      "hadith_arabic": "10442- حدثنا سفيان قال، حدثنا أبو أسامة، عن هشام بن عروة، عن أبيه قال: كان في مصحف عائشة: ( إِنْ يَدْعُونَ مِنْ دُونِهِ إِلا أَوْثَانًا ). قال أبو جعفر: روي عن ابن عباس أنه كان يقرؤها: ( إِنْ يَدْعُونَ مِنْ دُونِهِ إِلا أُثُنًا ) بمعنى جمع \"وثن\".",
+      "hadith_english": "10442 - Sufyan narrated to us, saying: Abu Usamah narrated to us, from Hisham bin 'Urwah, from his father, who said: In the Mushaf of 'A'ishah it was (written): (They only call on idols instead of Him). Abu Ja'far said: It was narrated from Ibn 'Abbas that he used to recite it: (They only call on [uthunan] instead of Him), in the meaning of the plural of 'wathan' (idol).",
+      "rank": 1,
+      "attribution_role": "primary"
     },
     {
-      "surah": "12",
-      "ayah": 110,
-      "variant_arabic": "وَظَنُّوا أَنَّهُمْ قَدْ كُذِّبُوا",
-      "variant_english": "Till they (come to) think that they were treated as liars.",
-      "source_reference": "Sahih al-Bukhari 4525",
-      "hadith_arabic": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ مُوسَى، أَخْبَرَنَا هِشَامٌ، عَنِ ابْنِ جُرَيْجٍ، قَالَ سَمِعْتُ ابْنَ أَبِي مُلَيْكَةَ، يَقُولُ قَالَ ابْنُ عَبَّاسٍ ـ رضى الله عنهما ـ ‏{‏حَتَّى إِذَا اسْتَيْأَسَ الرُّسُلُ وَظَنُّوا أَنَّهُمْ قَدْ كُذِبُوا‏}‏ خَفِيفَةً، ذَهَبَ بِهَا هُنَاكَ، وَتَلاَ ‏{‏حَتَّى يَقُولَ الرَّسُولُ وَالَّذِينَ آمَنُوا مَعَهُ مَتَى نَصْرُ اللَّهِ أَلاَ إِنَّ نَصْرَ اللَّهِ قَرِيبٌ‏}‏ فَلَقِيتُ عُرْوَةَ بْنَ الزُّبَيْرِ فَذَكَرْتُ لَهُ ذَلِكَ فَقَالَ قَالَتْ عَائِشَةُ مَعَاذَ اللَّهِ، وَاللَّهِ مَا وَعَدَ اللَّهُ رَسُولَهُ مِنْ شَىْءٍ قَطُّ إِلاَّ عَلِمَ أَنَّهُ كَائِنٌ قَبْلَ أَنْ يَمُوتَ، وَلَكِنْ لَمْ يَزَلِ الْبَلاَءُ بِالرُّسُلِ حَتَّى خَافُوا أَنْ يَكُونَ مَنْ مَعَهُمْ يُكَذِّبُونَهُمْ، فَكَانَتْ تَقْرَؤُهَا ‏{‏وَظَنُّوا أَنَّهُمْ قَدْ كُذِّبُوا‏}‏ مُثَقَّلَةً‏.‏",
-      "hadith_english": "Narrated Ibn Abu Mulaika: Ibn `Abbas recited: \"(Respite will be granted) until when the Apostles gave up hope (of their people) and thought that they were denied (by their people). There came to them Our Help ....\" (12.110) reading Kudhibu without doubling the sound 'dh', and that was what he understood of the Verse. Then he went on reciting: \"..even the Apostle and those who believed along with him said: When (will come) Allah's Help? Yes, verily, Allah's Help is near.\" (2.214) Then I met `Urwa bin Az-Zubair and I mentioned that to him. He said, \"Aisha said, 'Allah forbid! By Allah, Allah never promised His Apostle anything but he knew that it would certainly happen before he died. But trials were continuously presented before the Apostles till they were afraid that their followers would accuse them of telling lies. So I used to recite:-- \"Till they (come to) think that they were treated as liars.\" reading 'Kudh-dhibu with double 'dh",
-      "sunnah_url": "https://sunnah.com/bukhari/65/49"
-    },
-    {
-      "surah": "24",
+      "id": "codex-24-15-aisha",
+      "surah": 24,
       "ayah": 15,
-      "variant_arabic": "إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ",
-      "variant_english": "Ida taliqunahu bi-alsinatikum (As you tell lie with your tongues.)",
+      "companion": "Aisha",
+      "companion_id": "aisha",
+      "also_attributed_to": [],
+      "variant_type": "Morphological / Consonantal Shift",
+      "short_title": "Aisha Reads 'Persisting in Telling a Lie' in Q. 24:15",
+      "plain_english_hook": "In the verse revealed to exonerate Aisha from slander, the standard Quran says 'when you were receiving it with your tongues.' Aisha herself recited 'when you were telling a lie with your tongues.'",
+      "title": "Recitation of 'Idh Taliqunahu' ('Telling a Lie') in Q. 24:15 by Aisha",
+      "diff_summary": "In Sahih al-Bukhari 4144 and 4752, Tafsir al-Tabari, and Tafsir Ibn Kathir, Aisha recited Q. 24:15—the very verse revealed concerning the slander against her (hadith al-ifk)—as 'إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ' (*idh taliqūnahu bi-alsinatikum*, derived from *al-walq*, meaning 'when you were persisting in telling a lie with your tongues') instead of the Uthmanic 'إِذۡ تَلَقَّوۡنَهُۥ بِأَلۡسِنَتِكُمۡ' (*idh talaqqawnahu bi-alsinatikum*, 'when you were receiving it with your tongues'). Her student Ibn Abi Mulaykah emphasized that 'she knew this verse better than anyone else because it was revealed concerning her.'",
+      "uthmanic_target_arabic": "إِذۡ تَلَقَّوۡنَهُۥ بِأَلۡسِنَتِكُمۡ",
+      "uthmanic_target_english": "When you were receiving it with your tongues,",
+      "variant_target_arabic": "إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ",
+      "variant_target_english": "When you were telling a lie with your tongues,",
+      "uthmanic_full_arabic": "إِذۡ تَلَقَّوۡنَهُۥ بِأَلۡسِنَتِكُمۡ وَتَقُولُونَ بِأَفۡوَاهِكُم مَّا لَيۡسَ لَكُم بِهِۦ عِلۡمٞ وَتَحۡسَبُونَهُۥ هَيِّنٗا وَهُوَ عِندَ ٱللَّهِ عَظِيمٞ",
+      "uthmanic_full_english": "When you were receiving it with your tongues, and speaking with your mouths what you had no knowledge of, and thought it was a trivial (thing), when with God it was a mighty (thing) –",
+      "variant_full_arabic": "إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ وَتَقُولُونَ بِأَفۡوَاهِكُم مَّا لَيۡسَ لَكُم بِهِۦ عِلۡمٞ وَتَحۡسَبُونَهُۥ هَيِّنٗا وَهُوَ عِندَ ٱللَّهِ عَظِيمٞ",
+      "variant_full_english": "When you were telling a lie with your tongues, and speaking with your mouths what you had no knowledge of, and thought it was a trivial (thing), when with God it was a mighty (thing) –",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari and Ibn Kathir state that although Aisha's reading 'taliqūnahu' ('telling a lie') is authentically transmitted from her in Sahih al-Bukhari and compatible with the unpointed consonantal skeleton, the majority reading 'talaqqawnahu' ('receiving it') is preferred due to the consensus of the garrison cities.",
+        "primary_source_evaluation": "Aisha was the direct subject of the revelation of Q. 24:11–20, yet her personal recitation of the verse's opening verb differed in root and meaning from the reading adopted by the canonical Seven Reciters."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 32,
+        "undeniability_gold_sources_30": 28,
+        "universal_scope_20": 17,
+        "classical_concession_15": 12,
+        "cuj_score": 89
+      },
+      "hadiths": [
+        {
+          "hadith_reference": "Sahih al-Bukhari 4144",
+          "sunnah_url": "https://sunnah.com/bukhari:4144",
+          "transmitted_by": "Ibn Abi Mulaykah from Aisha",
+          "hadith_arabic": "حَدَّثَنِي يَحْيَى، حَدَّثَنَا وَكِيعٌ، عَنْ نَافِعِ بْنِ عُمَرَ، عَنِ ابْنِ أَبِي مُلَيْكَةَ، عَنْ عَائِشَةَ ـ رضى الله عنها ـ كَانَتْ تَقْرَأُ ‏{‏إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ‏}‏ وَتَقُولُ الْوَلْقُ الْكَذِبُ‏.‏ قَالَ ابْنُ أَبِي مُلَيْكَةَ وَكَانَتْ أَعْلَمَ مِنْ غَيْرِهَا بِذَلِكَ لأَنَّهُ نَزَلَ فِيهَا‏.‏",
+          "hadith_english": "Narrated Ibn Abi Mulaika: `Aisha used to recite this Verse:-- 'Ida taliqunahu bi-alsinatikum' (24.15) \"(As you tell lie with your tongues.)\" and used to say \"Al-Walaq\" means \"telling of a lie.\" She knew this Verse more than anybody else as it was revealed about her.",
+          "highlight_arabic": "عَنْ عَائِشَةَ ـ رضى الله عنها ـ كَانَتْ تَقْرَأُ ‏{‏إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ‏}‏ وَتَقُولُ الْوَلْقُ الْكَذِبُ‏.‏ قَالَ ابْنُ أَبِي مُلَيْكَةَ وَكَانَتْ أَعْلَمَ مِنْ غَيْرِهَا بِذَلِكَ لأَنَّهُ نَزَلَ فِيهَا",
+          "highlight_english": "`Aisha used to recite this Verse:-- 'Ida taliqunahu bi-alsinatikum' (24.15) \"(As you tell lie with your tongues.)\" and used to say \"Al-Walaq\" means \"telling of a lie.\" She knew this Verse more than anybody else as it was revealed about her."
+        },
+        {
+          "hadith_reference": "Sahih al-Bukhari 4752",
+          "sunnah_url": "https://sunnah.com/bukhari:4752",
+          "transmitted_by": "Ibn Abi Mulaykah from Aisha",
+          "hadith_arabic": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ مُوسَى، حَدَّثَنَا هِشَامٌ، أَنَّ ابْنَ جُرَيْجٍ، أَخْبَرَهُمْ قَالَ ابْنُ أَبِي مُلَيْكَةَ سَمِعْتُ عَائِشَةَ، تَقْرَأُ ‏{‏إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ‏}‏",
+          "hadith_english": "Narrated Ibn Abu Mulaika:I heard `Aisha reciting: \"When you invented a lie (and carry it) on your tongues",
+          "highlight_arabic": "سَمِعْتُ عَائِشَةَ، تَقْرَأُ ‏{‏إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ‏}",
+          "highlight_english": "I heard `Aisha reciting: \"When you invented a lie (and carry it) on your tongues"
+        }
+      ],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/24/15/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura24-aya15.html",
+          "arabic_excerpt": "حدثنا ابن حميد، قال: ثنا يحيى بن واضح، قال: ثنا نافع بن عمر بن عبد الله بن عبد الرحمن بن معمر الجمحِيّ، عن ابن أبي مليكة، عن عائشة، أنها كانت تقرأ: \" إذْ تَلِقُونَهُ بألْسِنَتِكم \" وهي أعلم بذلك وفيها أنـزلت، قال ابن أبي مليكة: هو من وَلْق الكذب.\nوالقراءة التي لا أستجيز غيرها: ( إِذْ تَلَقَّوْنَهُ ) على ما ذكرت من قراءة الأمصار، لإجماع الحجة من القرّاء عليها.",
+          "english_excerpt": "Ibn Humayd narrated to us... from Ibn Abi Mulaykah, from 'A'ishah, that she used to recite: \"idh taliqawnahu bi-alsinatikum\", and she is the most knowledgeable of that as it was revealed concerning her; Ibn Abi Mulaykah said: It is from walq al-kadhib (telling a lie).\nAnd the recitation besides which I do not permit any other is: {idh talaqqawnahu} according to what I mentioned of the recitation of the garrison cities, due to the consensus of the authoritative reciters upon it.",
+          "highlight_arabic": "عن عائشة، أنها كانت تقرأ: \" إذْ تَلِقُونَهُ بألْسِنَتِكم \" وهي أعلم بذلك وفيها أنـزلت",
+          "highlight_english": "from 'A'ishah, that she used to recite: \"idh taliqawnahu bi-alsinatikum\", and she is the most knowledgeable of that as it was revealed concerning her"
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/24/15/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura24-aya15.html",
+          "arabic_excerpt": "وقرأ آخرون \" إذ تلقونه بألسنتكم \" . وفي صحيح البخاري عن عائشة : أنها كانت تقرؤها كذلك وتقول : هو من ولق القول . يعني : الكذب الذي يستمر صاحبه عليه ... والقراءة الأولى أشهر ، وعليها الجمهور ، ولكن الثانية مروية عن أم المؤمنين عائشة .",
+          "english_excerpt": "Others recited the Ayah: \"When you were inventing a lie with your tongues...\" In Sahih Al-Bukhari, it is recorded that 'A'ishah recited it like that. According to her, the meaning refers to lies which a person persists in telling... The first reading is more well-known and is the reading of the majority, but the second is narrated from the Mother of the Believers 'A'ishah.",
+          "highlight_arabic": "وفي صحيح البخاري عن عائشة : أنها كانت تقرؤها كذلك وتقول : هو من ولق القول",
+          "highlight_english": "In Sahih Al-Bukhari, it is recorded that 'A'ishah recited it like that."
+        }
+      ],
+      "global_rank": 42,
+      "companion_codex": "Aisha",
+      "variant_arabic": "إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ وَتَقُولُونَ بِأَفۡوَاهِكُم مَّا لَيۡسَ لَكُم بِهِۦ عِلۡمٞ وَتَحۡسَبُونَهُۥ هَيِّنٗا وَهُوَ عِندَ ٱللَّهِ عَظِيمٞ",
+      "variant_english": "When you were telling a lie with your tongues, and speaking with your mouths what you had no knowledge of, and thought it was a trivial (thing), when with God it was a mighty (thing) –",
+      "hadith_reference": "Sahih al-Bukhari 4144",
       "source_reference": "Sahih al-Bukhari 4144",
+      "sunnah_url": "https://sunnah.com/bukhari:4144",
       "hadith_arabic": "حَدَّثَنِي يَحْيَى، حَدَّثَنَا وَكِيعٌ، عَنْ نَافِعِ بْنِ عُمَرَ، عَنِ ابْنِ أَبِي مُلَيْكَةَ، عَنْ عَائِشَةَ ـ رضى الله عنها ـ كَانَتْ تَقْرَأُ ‏{‏إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ‏}‏ وَتَقُولُ الْوَلْقُ الْكَذِبُ‏.‏ قَالَ ابْنُ أَبِي مُلَيْكَةَ وَكَانَتْ أَعْلَمَ مِنْ غَيْرِهَا بِذَلِكَ لأَنَّهُ نَزَلَ فِيهَا‏.‏",
-      "hadith_english": "Narrated Ibn Abi Mulaika:`Aisha used to recite this Verse:-- 'Ida taliqunahu bi-alsinatikum' (24.15) \"(As you tell lie with your tongues.)\" and used to say \"Al-Walaq\" means \"telling of a lie. \"She knew this Verse more than anybody else as it was revealed about her",
-      "sunnah_url": "https://sunnah.com/bukhari/64/188"
+      "hadith_english": "Narrated Ibn Abi Mulaika: `Aisha used to recite this Verse:-- 'Ida taliqunahu bi-alsinatikum' (24.15) \"(As you tell lie with your tongues.)\" and used to say \"Al-Walaq\" means \"telling of a lie.\" She knew this Verse more than anybody else as it was revealed about her.",
+      "rank": 1,
+      "attribution_role": "primary"
     },
     {
-      "surah": "24",
-      "ayah": 15,
-      "variant_arabic": "إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ",
-      "variant_english": "When you invented a lie (and carry it) on your tongues",
-      "source_reference": "Sahih al-Bukhari 4752",
-      "hadith_arabic": "حَدَّثَنَا إِبْرَاهِيمُ بْنُ مُوسَى، حَدَّثَنَا هِشَامٌ، أَنَّ ابْنَ جُرَيْجٍ، أَخْبَرَهُمْ قَالَ ابْنُ أَبِي مُلَيْكَةَ سَمِعْتُ عَائِشَةَ، تَقْرَأُ ‏{‏إِذْ تَلِقُونَهُ بِأَلْسِنَتِكُمْ‏}‏",
-      "hadith_english": "Narrated Ibn Abu Mulaika:I heard `Aisha reciting: \"When you invented a lie (and carry it) on your tongues",
-      "sunnah_url": "https://sunnah.com/bukhari/65/274"
-    },
-    {
+      "id": "codex-lost-suckling-aisha",
       "surah": "unknown",
       "ayah": 0,
-      "variant_arabic": "عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ يُحَرِّمْنَ ... خَمْسٍ مَعْلُومَاتٍ",
-      "variant_english": "ten clear sucklings make the marriage unlawful ... five sucklings",
+      "companion": "Aisha",
+      "companion_id": "aisha",
+      "also_attributed_to": [],
+      "variant_type": "Lost Verse",
+      "short_title": "Aisha's Testimony on the Lost Suckling Verses",
+      "plain_english_hook": "Aisha testified in Sahih Muslim that a Quranic verse establishing adult nursing relationships was still actively recited as part of the Quran at the moment Muhammad died, yet it is absent from the Mushaf.",
+      "title": "The Verses of Ten and Five Sucklings Recited Until the Prophet's Death",
+      "diff_summary": "In Sahih Muslim 1452a and 1452b, Aisha states that the Quran originally contained a verse stipulating that ten known sucklings establish fosterage prohibition, which was subsequently replaced by five known sucklings. Crucially, Aisha testifies that 'the Messenger of Allah died while they were still among what was recited of the Quran' (wa-hunna fīmā yuqra'u min al-Qur'ān), demonstrating that the verse remained in active recitation at the close of prophetic revelation despite its absence from the Uthmanic codex.",
+      "uthmanic_target_arabic": "",
+      "uthmanic_target_english": "",
+      "variant_target_arabic": "عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ يُحَرِّمْنَ ثُمَّ نُسِخْنَ بِخَمْسٍ مَعْلُومَاتٍ",
+      "variant_target_english": "Ten clear sucklings make marriage unlawful, then they were replaced by five clear sucklings",
+      "uthmanic_full_arabic": "",
+      "uthmanic_full_english": "",
+      "variant_full_arabic": "عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ يُحَرِّمْنَ ثُمَّ نُسِخْنَ بِخَمْسٍ مَعْلُومَاتٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَهُنَّ فِيمَا يُقْرَأُ مِنَ الْقُرْآنِ",
+      "variant_full_english": "Ten clear sucklings make marriage unlawful, then they were replaced by five clear sucklings, and the Messenger of Allah died while they were still among what was recited of the Quran.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Classical commentators such as al-Nawawi suggest that the abrogation of the five-suckling recitation occurred very close to the Prophet's death, so those who had not yet heard of its cancellation continued reciting it briefly.",
+        "primary_source_evaluation": "Because divine revelation and abrogation necessarily ceased at the moment of the Prophet's death, Aisha's explicit testimony in Sahih Muslim 1452a that the verse was still recited when he died—combined with her continued enforcement of the five-suckling legal ruling—poses a direct challenge to post-prophetic abrogation claims."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 35,
+        "undeniability_gold_sources_30": 30,
+        "universal_scope_20": 20,
+        "classical_concession_15": 14,
+        "cuj_score": 99
+      },
+      "hadiths": [
+        {
+          "hadith_reference": "Sahih Muslim 1452a",
+          "sunnah_url": "https://sunnah.com/muslim:1452a",
+          "transmitted_by": "Amrah bint Abdur-Rahman",
+          "hadith_arabic": "حَدَّثَنَا يَحْيَى بْنُ يَحْيَى، قَالَ قَرَأْتُ عَلَى مَالِكٍ عَنْ عَبْدِ اللَّهِ بْنِ أَبِي بَكْرٍ، عَنْ عَمْرَةَ، عَنْ عَائِشَةَ، أَنَّهَا قَالَتْ كَانَ فِيمَا أُنْزِلَ مِنَ الْقُرْآنِ عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ يُحَرِّمْنَ ‏.‏ ثُمَّ نُسِخْنَ بِخَمْسٍ مَعْلُومَاتٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَهُنَّ فِيمَا يُقْرَأُ مِنَ الْقُرْآنِ ‏.‏",
+          "hadith_english": "A'isha (Allah be pleased with her) reported that it had been revealed in the Holy Qur'an that ten clear sucklings make the marriage unlawful, then it was abrogated (and substituted) by five sucklings and Allah's Apostle (ﷺ) died and it was before that time (found) in the Holy Qur'an (and recited by the Muslims)",
+          "highlight_arabic": "عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ يُحَرِّمْنَ ‏.‏ ثُمَّ نُسِخْنَ بِخَمْسٍ مَعْلُومَاتٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَهُنَّ فِيمَا يُقْرَأُ مِنَ الْقُرْآنِ",
+          "highlight_english": "ten clear sucklings make the marriage unlawful, then it was abrogated (and substituted) by five sucklings and Allah's Apostle (ﷺ) died and it was before that time (found) in the Holy Qur'an"
+        },
+        {
+          "hadith_reference": "Sahih Muslim 1452b",
+          "sunnah_url": "https://sunnah.com/muslim:1452b",
+          "transmitted_by": "Amrah bint Abdur-Rahman / Yahya bin Said",
+          "hadith_arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مَسْلَمَةَ الْقَعْنَبِيُّ، حَدَّثَنَا سُلَيْمَانُ بْنُ بِلاَلٍ، عَنْ يَحْيَى، - وَهُوَ ابْنُ سَعِيدٍ - عَنْ عَمْرَةَ، أَنَّهَا سَمِعَتْ عَائِشَةَ، تَقُولُ - وَهْىَ تَذْكُرُ الَّذِي يُحَرِّمُ مِنَ الرَّضَاعَةِ - قَالَتْ عَمْرَةُ فَقَالَتْ عَائِشَةُ نَزَلَ فِي الْقُرْآنِ عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ ثُمَّ نَزَلَ أَيْضًا خَمْسٌ مَعْلُومَاتٌ ‏.‏",
+          "hadith_english": "Amra reported that she heard 'A'isha (Allah he pleased with her) discussing fosterage which (makes marriage) unlawful; and she ('A'isha) said:\nThere was revealed in the Holy Qur'an ten clear sucklings, and then five clear (sucklings)",
+          "highlight_arabic": "نَزَلَ فِي الْقُرْآنِ عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ ثُمَّ نَزَلَ أَيْضًا خَمْسٌ مَعْلُومَاتٌ",
+          "highlight_english": "There was revealed in the Holy Qur'an ten clear sucklings, and then five clear (sucklings)"
+        }
+      ],
+      "tafsir_sources": [
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/4/23/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura4-aya23.html",
+          "arabic_excerpt": "وقال آخرون : لا يحرم أقل من خمس رضعات ، لما ثبت في صحيح مسلم من طريق مالك ، عن عبد الله بن أبي بكر ، عن عمرة عن عائشة ، رضي الله عنها ، قالت : كان فيما أنزل [ الله ] من القرآن : عشر رضعات معلومات يحرمن . ثم نسخن بخمس معلومات ، فتوفي رسول الله صلى لله عليه وسلم وهن فيما يقرأ من القرآن .",
+          "english_excerpt": "Others said: Less than five sucklings do not prohibit, based on what is established in Sahih Muslim by way of Malik, from Abdullah bin Abi Bakr, from Amrah, from Aishah (may Allah be pleased with her), who said: \"Among what Allah revealed of the Quran was: 'Ten known sucklings prohibit.' Then they were abrogated by 'five known sucklings.' The Messenger of Allah (peace be upon him) died while they were still among what was recited of the Quran.\"",
+          "highlight_arabic": "فتوفي رسول الله صلى لله عليه وسلم وهن فيما يقرأ من القرآن",
+          "highlight_english": "The Messenger of Allah (peace be upon him) died while they were still among what was recited of the Quran."
+        }
+      ],
+      "global_rank": 2,
+      "companion_codex": "Aisha",
+      "variant_arabic": "عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ يُحَرِّمْنَ ثُمَّ نُسِخْنَ بِخَمْسٍ مَعْلُومَاتٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَهُنَّ فِيمَا يُقْرَأُ مِنَ الْقُرْآنِ",
+      "variant_english": "Ten clear sucklings make marriage unlawful, then they were replaced by five clear sucklings, and the Messenger of Allah died while they were still among what was recited of the Quran.",
+      "hadith_reference": "Sahih Muslim 1452a",
       "source_reference": "Sahih Muslim 1452a",
+      "sunnah_url": "https://sunnah.com/muslim:1452a",
       "hadith_arabic": "حَدَّثَنَا يَحْيَى بْنُ يَحْيَى، قَالَ قَرَأْتُ عَلَى مَالِكٍ عَنْ عَبْدِ اللَّهِ بْنِ أَبِي بَكْرٍ، عَنْ عَمْرَةَ، عَنْ عَائِشَةَ، أَنَّهَا قَالَتْ كَانَ فِيمَا أُنْزِلَ مِنَ الْقُرْآنِ عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ يُحَرِّمْنَ ‏.‏ ثُمَّ نُسِخْنَ بِخَمْسٍ مَعْلُومَاتٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَهُنَّ فِيمَا يُقْرَأُ مِنَ الْقُرْآنِ ‏.‏",
       "hadith_english": "A'isha (Allah be pleased with her) reported that it had been revealed in the Holy Qur'an that ten clear sucklings make the marriage unlawful, then it was abrogated (and substituted) by five sucklings and Allah's Apostle (ﷺ) died and it was before that time (found) in the Holy Qur'an (and recited by the Muslims)",
-      "sunnah_url": "https://sunnah.com/muslim/17/30"
-    },
-    {
-      "surah": "unknown",
-      "ayah": 0,
-      "variant_arabic": "عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ ... خَمْسٌ مَعْلُومَاتٌ",
-      "variant_english": "ten clear sucklings ... five clear (sucklings)",
-      "source_reference": "Sahih Muslim 1452b",
-      "hadith_arabic": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مَسْلَمَةَ الْقَعْنَبِيُّ، حَدَّثَنَا سُلَيْمَانُ بْنُ بِلاَلٍ، عَنْ يَحْيَى، - وَهُوَ ابْنُ سَعِيدٍ - عَنْ عَمْرَةَ، أَنَّهَا سَمِعَتْ عَائِشَةَ، تَقُولُ - وَهْىَ تَذْكُرُ الَّذِي يُحَرِّمُ مِنَ الرَّضَاعَةِ - قَالَتْ عَمْرَةُ فَقَالَتْ عَائِشَةُ نَزَلَ فِي الْقُرْآنِ عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ ثُمَّ نَزَلَ أَيْضًا خَمْسٌ مَعْلُومَاتٌ ‏.‏",
-      "hadith_english": "Amra reported that she heard 'A'isha (Allah he pleased with her) discussing fosterage which (makes marriage) unlawful; and she ('A'isha) said:\nThere was revealed in the Holy Qur'an ten clear sucklings, and then five clear (sucklings)",
-      "sunnah_url": "https://sunnah.com/muslim/17/31"
+      "rank": 1,
+      "attribution_role": "primary"
     }
   ]
 }

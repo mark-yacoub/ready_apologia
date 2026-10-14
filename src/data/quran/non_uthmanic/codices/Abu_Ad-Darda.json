@@ -1,0 +1,114 @@
+{
+  "id": "abu-ad-darda",
+  "name": "Abu Ad-Darda",
+  "arabic_name": "أبو الدرداء",
+  "title": "Chief Quran Teacher of Damascus",
+  "era": "Died 32 AH (c. 652 CE)",
+  "region": "Damascus (Syria)",
+  "tier": "Superstar",
+  "importance_rank": 9,
+  "bio_url": "https://sunnah.com/narrator/5260",
+  "biography": "One of the four Companions who memorized and collected the entire Quran in Medina during the lifetime of Prophet Muhammad (Sahih al-Bukhari 5003). Sent by Caliph Umar to Damascus as its chief judge and Quranic instructor, Abu Ad-Darda preserved pre-Uthmanic prophetic recitations alongside the disciples of Abdullah bin Mas'ud. In Sahih al-Bukhari 4944 and Sahih Muslim 824a, he swears by Allah that both he and Ibn Mas'ud heard the Prophet recite Surah 92:3 simply as 'And by the male and the female' (omitting 'what created'), declaring that he would never follow those pressuring him to adopt the Uthmanic addition.",
+  "virtues": [
+    {
+      "source_reference": "Sahih al-Bukhari 5003",
+      "sunnah_url": "https://sunnah.com/bukhari:5003",
+      "hadith_arabic": "سَأَلْتُ أَنَسَ بْنَ مَالِكٍ: مَنْ جَمَعَ الْقُرْآنَ عَلَى عَهْدِ النَّبِيِّ صلى الله عليه وسلم؟ قَالَ: أَرْبَعَةٌ كُلُّهُمْ مِنَ الأَنْصَارِ أُبَىُّ بْنُ كَعْبٍ وَمُعَاذُ بْنُ جَبَلٍ وَزَيْدُ بْنُ ثَابِتٍ وَأَبُو زَيْدٍ",
+      "hadith_english": "Qatada narrated: I asked Anas bin Malik, \"Who collected the Qur'an during the lifetime of the Prophet (ﷺ)?\" He replied, \"Four, all of whom were from the Ansar: Ubayy bin Ka'b, Mu'adh bin Jabal, Zaid bin Thabit, and Abu Ad-Darda (or Abu Zaid).\""
+    }
+  ],
+  "bio_text": "One of the four Companions who memorized and collected the entire Quran in Medina during the lifetime of Prophet Muhammad (Sahih al-Bukhari 5003). Sent by Caliph Umar to Damascus as its chief judge and Quranic instructor, Abu Ad-Darda preserved pre-Uthmanic prophetic recitations alongside the disciples of Abdullah bin Mas'ud. In Sahih al-Bukhari 4944 and Sahih Muslim 824a, he swears by Allah that both he and Ibn Mas'ud heard the Prophet recite Surah 92:3 simply as 'And by the male and the female' (omitting 'what created'), declaring that he would never follow those pressuring him to adopt the Uthmanic addition.",
+  "total_variants": 1,
+  "primary_variants": 1,
+  "shared_variants": 0,
+  "bukhari_muslim_count": 1,
+  "tafsir_count": 1,
+  "variants": [
+    {
+      "id": "codex-92-3-abu-ad-darda",
+      "surah": 92,
+      "ayah": 3,
+      "companion": "Abu Ad-Darda",
+      "companion_id": "abu-ad-darda",
+      "also_attributed_to": [
+        "Abdullah bin Masud"
+      ],
+      "variant_type": "Word Omission",
+      "short_title": "Abu Ad-Darda's Refusal of 'Ma Khalaqa' in 92:3",
+      "plain_english_hook": "Abu Ad-Darda—the chief Quran teacher in Damascus—swore by Allah that Muhammad taught him Surah 92:3 as 'By the male and the female,' refusing Syrian pressure to add 'by what created.'",
+      "title": "Abu Ad-Darda's Sworn Testimony on Surah Al-Layl 92:3 Against the Syrian Mushaf",
+      "diff_summary": "In Sahih al-Bukhari (3742, 3743, 3761, 4943, 4944, 6278) and Sahih Muslim (824a, 824c), Abu Ad-Darda—appointed by Caliph Umar as the chief Quranic teacher of Damascus—questions Kufan visitors about how Abdullah bin Mas'ud recites Surah Al-Layl (92:1–3). When Alqamah recites 'wa-dh-dhakari wa-l-unthā' ('By the male and the female!') without the Uthmanic words 'mā khalaqa' ('what created'), Abu Ad-Darda testifies under oath: 'By Allah, the Prophet taught me to recite it thus, mouth to mouth, yet these people in Syria want me to recite wa-mā khalaqa—by Allah, I will not follow them!'",
+      "uthmanic_target_arabic": "وَمَا خَلَقَ ٱلذَّكَرَ وَٱلۡأُنثَىٰٓ",
+      "uthmanic_target_english": "By what created the male and the female!",
+      "variant_target_arabic": "وَالذَّكَرِ وَالأُنْثَى",
+      "variant_target_english": "By the male and the female!",
+      "uthmanic_full_arabic": "وَمَا خَلَقَ ٱلذَّكَرَ وَٱلۡأُنثَىٰٓ",
+      "uthmanic_full_english": "By what created the male and the female!",
+      "variant_full_arabic": "وَالذَّكَرِ وَالأُنْثَى",
+      "variant_full_english": "By the male and the female!",
+      "scholarly_discussion": {
+        "classical_harmonization": "Commentators argue that Abu Ad-Darda was defending the authenticity of the earlier harf he had personally learned from the Prophet before the Uthmanic standardization unified the community on a single reading.",
+        "primary_source_evaluation": "Abu Ad-Darda's oath ('By Allah, I will not follow them!') shows that even in Damascus—one of the primary garrison cities receiving an official Uthmanic Mushaf—the resident Companion master reciter rejected the standardized wording in favor of the shorter prophetic reading he shared with Ibn Mas'ud."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 35,
+        "undeniability_gold_sources_30": 30,
+        "universal_scope_20": 20,
+        "classical_concession_15": 12,
+        "cuj_score": 97
+      },
+      "hadiths": [
+        {
+          "hadith_reference": "Sahih al-Bukhari 4943",
+          "sunnah_url": "https://sunnah.com/bukhari:4943",
+          "transmitted_by": "Alqamah / Ibrahim an-Nakha'i",
+          "hadith_arabic": "حَدَّثَنَا قَبِيصَةُ بْنُ عُقْبَةَ، حَدَّثَنَا سُفْيَانُ، عَنِ الأَعْمَشِ، عَنْ إِبْرَاهِيمَ، عَنْ عَلْقَمَةَ، قَالَ دَخَلْتُ فِي نَفَرٍ مِنْ أَصْحَابِ عَبْدِ اللَّهِ الشَّأْمَ فَسَمِعَ بِنَا أَبُو الدَّرْدَاءِ فَأَتَانَا فَقَالَ أَفِيكُمْ مَنْ يَقْرَأُ فَقُلْنَا نَعَمْ‏.‏ قَالَ فَأَيُّكُمْ أَقْرَأُ فَأَشَارُوا إِلَىَّ فَقَالَ اقْرَأْ‏.‏ فَقَرَأْتُ ‏{‏وَاللَّيْلِ إِذَا يَغْشَى * وَالنَّهَارِ إِذَا تَجَلَّى * وَالذَّكَرِ وَالأُنْثَى‏}‏‏.‏ قَالَ أَنْتَ سَمِعْتَهَا مِنْ فِي صَاحِبِكَ قُلْتُ نَعَمْ‏.‏ قَالَ وَأَنَا سَمِعْتُهَا مِنْ فِي النَّبِيِّ صلى الله عليه وسلم وَهَؤُلاَءِ يَأْبَوْنَ عَلَيْنَا‏.‏",
+          "hadith_english": "Narrated Alqama:I went to Sham with a group of the companions of `Abdullah (bin Mas`ud). Abu Ad-Darda' heard of our arrival so he came to us and said, \"Is there anybody among you who can recite (Qur'an)\" We replied in the affirmative. Then he asked, \"Who is the best reciter?\" They pointed at me. Then he told me to recite, so I recited the verse:-- 'By the night as it envelops 'By the day as it appears in brightness; And by the male and the female [wa-l-dhakari wa-l-untha, without 'wa-ma khalaqa'].' (92.1-3) Abu Ad-Darda' then said to me, \"Did you hear it (like this) from the mouth of your friend (`Abdullah bin Mas`ud)?\" I said, \"Yes.\" He said, \"I too, heard it (like this) from the mouth of the Prophet, but these people do not consider this recitation as the correct one",
+          "highlight_arabic": "وَاللَّيْلِ إِذَا يَغْشَى * وَالنَّهَارِ إِذَا تَجَلَّى * وَالذَّكَرِ وَالأُنْثَى",
+          "highlight_english": "And by the male and the female [wa-l-dhakari wa-l-untha, without 'wa-ma khalaqa']"
+        },
+        {
+          "hadith_reference": "Sahih al-Bukhari 3742",
+          "sunnah_url": "https://sunnah.com/bukhari:3742",
+          "transmitted_by": "Alqamah / Ibrahim an-Nakha'i",
+          "hadith_arabic": "حَدَّثَنَا مَالِكُ بْنُ إِسْمَاعِيلَ، حَدَّثَنَا إِسْرَائِيلُ، عَنِ الْمُغِيرَةِ، عَنْ إِبْرَاهِيمَ، عَنْ عَلْقَمَةَ،، قَالَ قَدِمْتُ الشَّأْمَ فَصَلَّيْتُ رَكْعَتَيْنِ، ثُمَّ قُلْتُ اللَّهُمَّ يَسِّرْ لِي جَلِيسًا صَالِحًا، فَأَتَيْتُ قَوْمًا فَجَلَسْتُ إِلَيْهِمْ، فَإِذَا شَيْخٌ قَدْ جَاءَ حَتَّى جَلَسَ إِلَى جَنْبِي، قُلْتُ مَنْ هَذَا قَالُوا أَبُو الدَّرْدَاءِ‏.‏ فَقُلْتُ إِنِّي دَعَوْتُ اللَّهَ أَنْ يُيَسِّرَ لِي جَلِيسًا صَالِحًا فَيَسَّرَكَ لِي، قَالَ مِمَّنْ أَنْتَ قُلْتُ مِنْ أَهْلِ الْكُوفَةِ‏.‏ قَالَ أَوَلَيْسَ عِنْدَكُمُ ابْنُ أُمِّ عَبْدٍ صَاحِبُ النَّعْلَيْنِ وَالْوِسَادِ وَالْمِطْهَرَةِ وَفِيكُمُ الَّذِي أَجَارَهُ اللَّهُ مِنَ الشَّيْطَانِ عَلَى لِسَانِ نَبِيِّهِ صلى الله عليه وسلم أَوَلَيْسَ فِيكُمْ صَاحِبُ سِرِّ النَّبِيِّ صلى الله عليه وسلم الَّذِي لاَ يَعْلَمُ أَحَدٌ غَيْرُهُ ثُمَّ قَالَ كَيْفَ يَقْرَأُ عَبْدُ اللَّهِ ‏{‏وَاللَّيْلِ إِذَا يَغْشَى‏}‏، فَقَرَأْتُ عَلَيْهِ ‏{‏وَاللَّيْلِ إِذَا يَغْشَى * وَالنَّهَارِ إِذَا تَجَلَّى * وَالذَّكَرِ وَالأُنْثَى‏}‏‏.‏ قَالَ وَاللَّهِ لَقَدْ أَقْرَأَنِيهَا رَسُولُ اللَّهِ صلى الله عليه وسلم مِنْ فِيهِ إِلَى فِيَّ‏.‏",
+          "hadith_english": "Narrated 'Alqama:I went to Sham and offered a two-rak`at prayer and then said, \"O Allah! Bless me with a good pious companion.\" So I went to some people and sat with them. An old man came and sat by my side. I asked, \"Who is he?\" They replied, \"(He is) Abu-Ad-Darda.' I said (to him), \"I prayed to Allah to bless me with a pious companion and He sent you to me.\" He asked me, \"From where are you?\" I replied, \"From the people of Al-Kufa.\" He said, \"Isn't there amongst you Ibn Um `Abd, the one who used to carry the shoes, the cushion(or pillow) and the water for ablution? Is there amongst you the one whom Allah gave Refuge from Satan through the request of His Prophet. Is there amongst you the one who keeps the secrets of the Prophet (ﷺ) which nobody knows except him?\" Abu Darda further asked, \"How does `Abdullah (bin Mas`ud) recite the Sura starting with, 'By the Night as it conceals (the light).\" (92.1) Then I recited before him: 'By the Night as it envelops: And by the Day as it appears in brightness; And by male and female.' (91.1-3) On this Abu Ad-Darda' said, \"By Allah, the Prophet (ﷺ) made me recite the Sura in this way while I was listening to him (reciting it)",
+          "highlight_arabic": "وَاللَّيْلِ إِذَا يَغْشَى‏}‏، فَقَرَأْتُ عَلَيْهِ ‏{‏وَاللَّيْلِ إِذَا يَغْشَى * وَالنَّهَارِ إِذَا تَجَلَّى * وَالذَّكَرِ وَالأُنْثَى",
+          "highlight_english": "On this Abu Ad-Darda' said, \"By Allah, the Prophet (ﷺ) made me recite the Sura in this way while I was listening to him (reciting it)"
+        },
+        {
+          "hadith_reference": "Sahih al-Bukhari 6278",
+          "sunnah_url": "https://sunnah.com/bukhari:6278",
+          "transmitted_by": "Alqamah / Ibrahim an-Nakha'i",
+          "hadith_arabic": "حَدَّثَنَا يَحْيَى بْنُ جَعْفَرٍ، حَدَّثَنَا يَزِيدُ، عَنْ شُعْبَةَ، عَنْ مُغِيرَةَ، عَنْ إِبْرَاهِيمَ، عَنْ عَلْقَمَةَ، أَنَّهُ قَدِمَ الشَّأْمَ‏.‏ وَحَدَّثَنَا أَبُو الْوَلِيدِ، حَدَّثَنَا شُعْبَةُ، عَنْ مُغِيرَةَ، عَنْ إِبْرَاهِيمَ، قَالَ ذَهَبَ عَلْقَمَةُ إِلَى الشَّأْمِ، فَأَتَى الْمَسْجِدَ فَصَلَّى رَكْعَتَيْنِ فَقَالَ اللَّهُمَّ ارْزُقْنِي جَلِيسًا‏.‏ فَقَعَدَ إِلَى أَبِي الدَّرْدَاءِ فَقَالَ مِمَّنْ أَنْتَ قَالَ مِنْ أَهْلِ الْكُوفَةِ‏.‏ قَالَ أَلَيْسَ فِيكُمْ صَاحِبُ السِّرِّ الَّذِي كَانَ لاَ يَعْلَمُهُ غَيْرُهُ ـ يَعْنِي حُذَيْفَةَ ـ أَلَيْسَ فِيكُمْ ـ أَوْ كَانَ فِيكُمُ ـ الَّذِي أَجَارَهُ اللَّهُ عَلَى لِسَانِ رَسُولِهِ صلى الله عليه وسلم مِنَ الشَّيْطَانِ ـ يَعْنِي عَمَّارًا ـ أَوَلَيْسَ فِيكُمْ صَاحِبُ السِّوَاكِ وَالْوِسَادِ ـ يَعْنِي ابْنَ مَسْعُودٍ ـ كَيْفَ كَانَ عَبْدُ اللَّهِ يَقْرَأُ ‏{‏وَاللَّيْلِ إِذَا يَغْشَى‏}‏‏.‏ قَالَ ‏{‏وَالذَّكَرِ وَالأُنْثَى‏}‏‏.‏ فَقَالَ مَا زَالَ هَؤُلاَءِ حَتَّى كَادُوا يُشَكِّكُونِي، وَقَدْ سَمِعْتُهَا مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم‏.‏",
+          "hadith_english": "Narrated Ibrahim:'Alaqama went to Sham and came to the mosque and offered a two-rak`at prayer, and invoked Allah: \"O Allah! Bless me with a (pious) good companion.\" So he sat beside Abu Ad-Darda' who asked, \"From where are you?\" He said, \"From the people of Kufa.\" Abu Darda' said, \"Wasn't there among you the person who keeps the secrets (of the Prophet (ﷺ) ) which nobody knew except him (i.e., Hudhaifa (bin Al-Yaman)). And isn't there among you the person whom Allah gave refuge from Satan through the request (tongue) of Allah's Messenger (ﷺ)? (i.e., `Ammar). Isn't there among you the one who used to carry the Siwak and the cushion (or pillows (of the Prophets)? (i.e., Ibn Mas`ud). How did Ibn Mas`ud use to recite 'By the night as it conceals (the light)?\" (Sura 92). 'Alqama said, \"Wadhdhakari Wal Untha' (And by male and female.\") Abu Ad-Darda added. 'These people continued to argue with me regarding it till they were about to cause me to have doubts although I heard it from Allah's Messenger (ﷺ)",
+          "highlight_arabic": "وَاللَّيْلِ إِذَا يَغْشَى‏}‏‏.‏ قَالَ ‏{‏وَالذَّكَرِ وَالأُنْثَى",
+          "highlight_english": "These people continued to argue with me regarding it till they were about to cause me to have doubts although I heard it from Allah's Messenger (ﷺ)"
+        }
+      ],
+      "tafsir_sources": [
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/92/3/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura92-aya3.html",
+          "arabic_excerpt": "هكذا قرأ ذلك ابن مسعود ، وأبو الدرداء - ورفعه أبو الدرداء - وأما الجمهور فقرأوا ذلك كما هو مثبت في المصحف الإمام العثماني في سائر الآفاق : ( وما خلق الذكر والأنثى )",
+          "english_excerpt": "This is how Ibn Mas'ud and Abu Ad-Darda' recited it - and Abu Ad-Darda' attributed it to the Prophet. However, the majority recited it as it is established in the 'Uthmani Mus-haf in all regions: {By what created the male and the female!}",
+          "highlight_arabic": "هكذا قرأ ذلك ابن مسعود ، وأبو الدرداء - ورفعه أبو الدرداء",
+          "highlight_english": "This is how Ibn Mas'ud and Abu Ad-Darda' recited it - and Abu Ad-Darda' attributed it to the Prophet."
+        }
+      ],
+      "global_rank": 7,
+      "companion_codex": "Abu Ad-Darda",
+      "variant_arabic": "وَالذَّكَرِ وَالأُنْثَى",
+      "variant_english": "By the male and the female!",
+      "hadith_reference": "Sahih al-Bukhari 4943",
+      "source_reference": "Sahih al-Bukhari 4943",
+      "sunnah_url": "https://sunnah.com/bukhari:4943",
+      "hadith_arabic": "حَدَّثَنَا قَبِيصَةُ بْنُ عُقْبَةَ، حَدَّثَنَا سُفْيَانُ، عَنِ الأَعْمَشِ، عَنْ إِبْرَاهِيمَ، عَنْ عَلْقَمَةَ، قَالَ دَخَلْتُ فِي نَفَرٍ مِنْ أَصْحَابِ عَبْدِ اللَّهِ الشَّأْمَ فَسَمِعَ بِنَا أَبُو الدَّرْدَاءِ فَأَتَانَا فَقَالَ أَفِيكُمْ مَنْ يَقْرَأُ فَقُلْنَا نَعَمْ‏.‏ قَالَ فَأَيُّكُمْ أَقْرَأُ فَأَشَارُوا إِلَىَّ فَقَالَ اقْرَأْ‏.‏ فَقَرَأْتُ ‏{‏وَاللَّيْلِ إِذَا يَغْشَى * وَالنَّهَارِ إِذَا تَجَلَّى * وَالذَّكَرِ وَالأُنْثَى‏}‏‏.‏ قَالَ أَنْتَ سَمِعْتَهَا مِنْ فِي صَاحِبِكَ قُلْتُ نَعَمْ‏.‏ قَالَ وَأَنَا سَمِعْتُهَا مِنْ فِي النَّبِيِّ صلى الله عليه وسلم وَهَؤُلاَءِ يَأْبَوْنَ عَلَيْنَا‏.‏",
+      "hadith_english": "Narrated Alqama:I went to Sham with a group of the companions of `Abdullah (bin Mas`ud). Abu Ad-Darda' heard of our arrival so he came to us and said, \"Is there anybody among you who can recite (Qur'an)\" We replied in the affirmative. Then he asked, \"Who is the best reciter?\" They pointed at me. Then he told me to recite, so I recited the verse:-- 'By the night as it envelops 'By the day as it appears in brightness; And by the male and the female [wa-l-dhakari wa-l-untha, without 'wa-ma khalaqa'].' (92.1-3) Abu Ad-Darda' then said to me, \"Did you hear it (like this) from the mouth of your friend (`Abdullah bin Mas`ud)?\" I said, \"Yes.\" He said, \"I too, heard it (like this) from the mouth of the Prophet, but these people do not consider this recitation as the correct one",
+      "rank": 2,
+      "attribution_role": "primary"
+    }
+  ]
+}

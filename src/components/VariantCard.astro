@@ -1,202 +1,1291 @@
 ---
+import { companionToSlug } from '../utils/nonUthmanicLoader.js';
+
 interface Props {
   variant: any;
   showCompanionHeader?: boolean;
+  showVerseLink?: boolean;
+  showRank?: boolean;
+  activeCompanionName?: string;
   titleTag?: 'h2' | 'h3';
 }
 
-const { variant, showCompanionHeader = false, titleTag = 'h2' } = Astro.props;
+const {
+  variant,
+  showCompanionHeader = true,
+  showVerseLink = false,
+  showRank = false,
+  activeCompanionName = '',
+  titleTag = 'h3'
+} = Astro.props;
+
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const TitleTag = titleTag;
+
+const primaryCompanions: string[] = Array.isArray(variant.primary_companions) && variant.primary_companions.length > 0
+  ? variant.primary_companions
+  : [variant.companion || variant.companion_codex].filter(Boolean);
+
+const allAttestedCompanions: string[] = Array.from(
+  new Set([...primaryCompanions, ...(variant.also_attributed_to || [])].filter(Boolean))
+);
+
+const alsoAttributedTo: string[] = activeCompanionName
+  ? allAttestedCompanions.filter((c: string) => c !== activeCompanionName)
+  : (variant.also_attributed_to || []).filter((c: string) => !primaryCompanions.includes(c));
+
+const companionDisplayLabel = activeCompanionName && allAttestedCompanions.includes(activeCompanionName)
+  ? activeCompanionName
+  : primaryCompanions.join(' & ');
+
+const variantType = variant.variant_type || 'Textual Variant';
+
+function getVariantTypeMeta(type: string) {
+  const t = (type || '').toLowerCase();
+  if (t.includes('addition')) {
+    return { badgeText: '+ Phrase Addition', cssClass: 'vtype-addition' };
+  }
+  if (t.includes('omission')) {
+    return { badgeText: '− Word Omission', cssClass: 'vtype-omission' };
+  }
+  if (t.includes('substitution')) {
+    return { badgeText: '⇄ Word Substitution', cssClass: 'vtype-substitution' };
+  }
+  if (t.includes('surah') || t.includes('lost')) {
+    return { badgeText: `📜 ${type}`, cssClass: 'vtype-special' };
+  }
+  return { badgeText: `⚙ ${type}`, cssClass: 'vtype-shift' };
+}
+
+const typeMeta = getVariantTypeMeta(variantType);
+
+const isNumericVerse = typeof variant.surah === 'number' && Number(variant.ayah) > 0;
+const verseHref = isNumericVerse ? `${base}/quran/${variant.surah}#${variant.ayah}` : `${base}/quran/0`;
+const verseLabel = isNumericVerse
+  ? `Surah ${variant.surah}:${variant.ayah}${variant.surah_name ? ` (${variant.surah_name})` : ''}`
+  : variant.surah === '113-114'
+    ? 'Surahs 113–114 (Al-Falaq & An-Nas)'
+    : 'Lost Quranic Passage';
+
+function splitHighlight(fullText: string, targetSpan: string) {
+  if (!fullText) return [{ text: '', highlight: false }];
+  if (!targetSpan || !fullText.includes(targetSpan)) {
+    return [{ text: fullText, highlight: false }];
+  }
+  const idx = fullText.indexOf(targetSpan);
+  const parts = [];
+  if (idx > 0) {
+    parts.push({ text: fullText.slice(0, idx), highlight: false });
+  }
+  parts.push({ text: targetSpan, highlight: true });
+  if (idx + targetSpan.length < fullText.length) {
+    parts.push({ text: fullText.slice(idx + targetSpan.length), highlight: false });
+  }
+  return parts;
+}
+
+function buildExcerptWindow(fullText: string, targetSpan: string, radius = 190) {
+  const cleanText = (fullText || '').trim();
+  const fullParts = splitHighlight(cleanText, targetSpan);
+  const wordCount = cleanText ? cleanText.split(/\s+/).length : 0;
+
+  if (!cleanText || cleanText.length <= 440 || !targetSpan || !cleanText.includes(targetSpan)) {
+    return {
+      isTruncated: false,
+      wordCount,
+      windowParts: fullParts,
+      fullParts
+    };
+  }
+
+  const idx = cleanText.indexOf(targetSpan);
+  let start = Math.max(0, idx - radius);
+  let end = Math.min(cleanText.length, idx + targetSpan.length + radius);
+
+  if (start > 0) {
+    const spaceIdx = cleanText.indexOf(' ', start);
+    if (spaceIdx !== -1 && spaceIdx < idx) {
+      start = spaceIdx + 1;
+    }
+  }
+  if (end < cleanText.length) {
+    const lastSpaceIdx = cleanText.lastIndexOf(' ', end);
+    if (lastSpaceIdx !== -1 && lastSpaceIdx > idx + targetSpan.length) {
+      end = lastSpaceIdx;
+    }
+  }
+
+  const prefix = (start > 0 ? '…' : '') + cleanText.slice(start, idx);
+  const suffix = cleanText.slice(idx + targetSpan.length, end) + (end < cleanText.length ? '…' : '');
+
+  const windowParts = [];
+  if (prefix) windowParts.push({ text: prefix, highlight: false });
+  windowParts.push({ text: targetSpan, highlight: true });
+  if (suffix) windowParts.push({ text: suffix, highlight: false });
+
+  return {
+    isTruncated: start > 0 || end < cleanText.length,
+    wordCount,
+    windowParts,
+    fullParts
+  };
+}
+
+const fullUthmanicArParts = splitHighlight(variant.uthmanic_full_arabic || variant.uthmanic_arabic || '', variant.uthmanic_target_arabic || '');
+const fullUthmanicEnParts = splitHighlight(variant.uthmanic_full_english || variant.uthmanic_english || '', variant.uthmanic_target_english || '');
+const fullVariantArParts = splitHighlight(variant.variant_full_arabic || variant.variant_arabic || '', variant.variant_target_arabic || '');
+const fullVariantEnParts = splitHighlight(variant.variant_full_english || variant.variant_english || '', variant.variant_target_english || '');
+
+const hadithsList = Array.isArray(variant.hadiths) ? variant.hadiths : [];
+const tafsirList = Array.isArray(variant.tafsir_sources) ? variant.tafsir_sources : [];
+const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || variant.variant_full_english);
 ---
 
-<div class="variant-card">
-  {showCompanionHeader && (
-    <div class="variant-header">
-      <span class="companion-name">{variant.companion_codex}</span>
-      <a href={`${base}/quran/codex/${variant.companion_codex.toLowerCase().replace(/\s+/g, '-')}`} class="read-as-btn">
-        Read as {variant.companion_codex}
-      </a>
+<article
+  class="variant-card"
+  id={variant.id || undefined}
+  data-variant-type={variantType}
+  data-has-hadith={hadithsList.length > 0 ? 'true' : 'false'}
+  data-has-tafsir={tafsirList.length > 0 ? 'true' : 'false'}
+  data-global-rank={variant.global_rank || 999}
+  data-surah={typeof variant.surah === 'number' ? variant.surah : 999}
+  data-ayah={variant.ayah || 0}
+>
+  <!-- ZONE 1: Top Metadata Bar & 5-Second Hook -->
+  <div class="vcard-top-bar">
+    <div class="vcard-badges-left">
+      {showRank && variant.global_rank && (
+        <span class="vcard-rank-badge" title={`Impact Rank #${variant.global_rank} (Score: ${variant.cuj_rubric?.cuj_score || ''}/100)`}>
+          #{variant.global_rank}
+        </span>
+      )}
+      <span class={`vcard-type-badge ${typeMeta.cssClass}`}>
+        {typeMeta.badgeText}
+      </span>
+      {showVerseLink && (
+        <a href={verseHref} class="vcard-verse-pill" title={`Open ${verseLabel} in Quran Reader`}>
+          <span>{verseLabel}</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      )}
     </div>
-  )}
 
-  <TitleTag class="variant-ref-title">
-    {variant.sunnah_url ? (
-      <a href={variant.sunnah_url} target="_blank" rel="noopener noreferrer" class="hadith-title-link">
-        {variant.source_reference}
-        <svg class="icon-inline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-          <polyline points="15 3 21 3 21 9"></polyline>
-          <line x1="10" y1="14" x2="21" y2="3"></line>
-        </svg>
-      </a>
-    ) : (
-      variant.source_reference
-    )}
-  </TitleTag>
-
-  {variant.variant_arabic && (
-    <div class="variant-text-block">
-      <p class="text-arabic variant-arabic" dir="rtl">{variant.variant_arabic}</p>
-      {variant.variant_english && <p class="text-english variant-english">{variant.variant_english}</p>}
-    </div>
-  )}
-
-  <div class="hadith-context-block">
-    <span class="label">Hadith Context:</span>
-    {variant.hadith_arabic && <p class="text-arabic" dir="rtl">{variant.hadith_arabic}</p>}
-    {variant.hadith_english && (
-      <p class="text-english hadith-english">
-        {variant.hadith_english.split('\n').map((line: string) => {
-          if (line.startsWith('[omitted from the english translation:')) {
-            return <span class="translation-patch">{line}</span>;
-          }
-          return line;
-        })}
-      </p>
+    {showCompanionHeader && (
+      <div class="vcard-companions-row">
+        {primaryCompanions.map((compName: string) => (
+          <a
+            href={`${base}/quran/codex/${companionToSlug(compName)}`}
+            class="companion-chip primary-chip"
+            title={`Explore all variants in the Codex of ${compName}`}
+          >
+            <span class="chip-label">{compName}'s Codex</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        ))}
+      </div>
     )}
   </div>
-</div>
+
+  <!-- Title & Plain-English Hook -->
+  <div class="vcard-hook-section">
+    <TitleTag class="vcard-short-title">
+      {variant.short_title || variant.title || `${companionDisplayLabel} Variant (${verseLabel})`}
+    </TitleTag>
+    {variant.plain_english_hook && (
+      <p class="vcard-plain-hook">{variant.plain_english_hook}</p>
+    )}
+    {alsoAttributedTo.length > 0 && (
+      <div class="also-attributed-bar">
+        <span class="also-label">Also attested in the codex/recitation of:</span>
+        <div class="also-chips">
+          {alsoAttributedTo.map((otherComp: string) => (
+            <a
+              href={`${base}/quran/codex/${companionToSlug(otherComp)}`}
+              class="companion-chip shared-chip"
+              title={`View ${otherComp}'s Codex`}
+            >
+              {otherComp}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+
+  <!-- ZONE 2: Side-by-Side Exact Textual Difference Box -->
+  {(variant.uthmanic_target_english || variant.variant_target_english) && (
+    <div class="vcard-diff-container">
+      <div class="diff-columns-grid">
+        <!-- Left: Standard Uthmanic Text -->
+        <div class="diff-col uthmanic-col">
+          <div class="diff-col-header">
+            <span class="diff-col-tag uthmanic-tag">Standard Uthmanic Quran (Hafs)</span>
+          </div>
+          {variant.uthmanic_target_english && (
+            <p class="text-english diff-target-english">
+              <span class="diff-del-span">{variant.uthmanic_target_english}</span>
+            </p>
+          )}
+          {variant.uthmanic_target_arabic && (
+            <p class="text-arabic diff-target-arabic" dir="rtl">
+              <span class="diff-del-span">{variant.uthmanic_target_arabic}</span>
+            </p>
+          )}
+          {!variant.uthmanic_target_english && !variant.uthmanic_target_arabic && (
+            <p class="text-english diff-target-english">
+              <span class="diff-del-span">[Entire passage omitted from the modern Uthmanic Quran]</span>
+            </p>
+          )}
+        </div>
+
+        <!-- Center Arrow Divider -->
+        <div class="diff-vs-divider" aria-hidden="true">
+          <span class="vs-circle">VS</span>
+        </div>
+
+        <!-- Right: Companion Codex Reading -->
+        <div class="diff-col companion-col">
+          <div class="diff-col-header">
+            <span class="diff-col-tag companion-tag">{companionDisplayLabel}'s Codex</span>
+          </div>
+          {variant.variant_target_english && (
+            <p class="text-english diff-target-english">
+              <span class="diff-ins-span">{variant.variant_target_english}</span>
+            </p>
+          )}
+          {variant.variant_target_arabic && (
+            <p class="text-arabic diff-target-arabic" dir="rtl">
+              <span class="diff-ins-span">{variant.variant_target_arabic}</span>
+            </p>
+          )}
+        </div>
+      </div>
+
+      <!-- Expandable Full Verse with Inline Word-Diff Highlighting -->
+      {hasFullVerseDiff && (
+        <details class="full-verse-details">
+          <summary class="full-verse-summary">
+            <span>Compare Full Verse in Context ({verseLabel})</span>
+            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </summary>
+          <div class="full-verse-grid">
+            <div class="full-verse-col">
+              <span class="full-verse-label">Full Uthmanic Verse</span>
+              {variant.uthmanic_full_english && (
+                <p class="text-english full-verse-en">
+                  {fullUthmanicEnParts.map(p => p.highlight ? <mark class="inline-del-mark">{p.text}</mark> : p.text)}
+                </p>
+              )}
+              {variant.uthmanic_full_arabic && (
+                <p class="text-arabic full-verse-ar" dir="rtl">
+                  {fullUthmanicArParts.map(p => p.highlight ? <mark class="inline-del-mark">{p.text}</mark> : p.text)}
+                </p>
+              )}
+            </div>
+            <div class="full-verse-col">
+              <span class="full-verse-label companion-label">Full Verse in {companionDisplayLabel}'s Codex</span>
+              {variant.variant_full_english && (
+                <p class="text-english full-verse-en">
+                  {fullVariantEnParts.map(p => p.highlight ? <mark class="inline-ins-mark">{p.text}</mark> : p.text)}
+                </p>
+              )}
+              {variant.variant_full_arabic && (
+                <p class="text-arabic full-verse-ar" dir="rtl">
+                  {fullVariantArParts.map(p => p.highlight ? <mark class="inline-ins-mark">{p.text}</mark> : p.text)}
+                </p>
+              )}
+            </div>
+          </div>
+        </details>
+      )}
+    </div>
+  )}
+
+  <!-- ZONE 3: Why It Matters & Classical Scholarly Discussion -->
+  {(variant.diff_summary || variant.scholarly_discussion) && (
+    <div class="vcard-analysis-section">
+      {variant.diff_summary && (
+        <div class="diff-summary-block">
+          <span class="block-eyebrow">What Changed & Why It Matters</span>
+          <p class="diff-summary-text">{variant.diff_summary}</p>
+        </div>
+      )}
+
+      {variant.scholarly_discussion && (variant.scholarly_discussion.classical_harmonization || variant.scholarly_discussion.primary_source_evaluation) && (
+        <details class="scholarly-discussion-details">
+          <summary class="scholarly-summary-trigger">
+            <span class="trigger-left">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M12 3v18M3 6l3 11 3-11M15 6l3 11 3-11M6 6h12" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Classical Defense vs. Primary-Source Evaluation</span>
+            </span>
+            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </summary>
+          <div class="scholarly-discussion-body">
+            {variant.scholarly_discussion.classical_harmonization && (
+              <div class="scholarly-point defense-point">
+                <span class="scholarly-point-label">Standard Classical Explanation</span>
+                <p class="scholarly-point-text">{variant.scholarly_discussion.classical_harmonization}</p>
+              </div>
+            )}
+            {variant.scholarly_discussion.primary_source_evaluation && (
+              <div class="scholarly-point evaluation-point">
+                <span class="scholarly-point-label evaluation-label">Primary-Source Textual Reality</span>
+                <p class="scholarly-point-text">{variant.scholarly_discussion.primary_source_evaluation}</p>
+              </div>
+            )}
+          </div>
+        </details>
+      )}
+    </div>
+  )}
+
+  <!-- ZONE 4: Primary Source Verification (Sahih Hadiths & Classical Tafsir) -->
+  {(hadithsList.length > 0 || tafsirList.length > 0) && (
+    <div class="vcard-sources-section">
+      <div class="sources-section-header">
+        <span class="block-eyebrow">Primary Islamic Sources ({hadithsList.length + tafsirList.length} Verified Citations)</span>
+      </div>
+
+      <div class="sources-stack">
+        <!-- Sahih Hadith Cards -->
+        {hadithsList.map((h: any) => {
+          const arWin = buildExcerptWindow(h.hadith_arabic || '', h.highlight_arabic || '', 190);
+          const enWin = buildExcerptWindow(h.hadith_english || '', h.highlight_english || '', 210);
+          const hasLongContext = arWin.isTruncated || enWin.isTruncated;
+          return (
+            <div class="primary-source-card hadith-source-card">
+              <div class="psource-top-row">
+                <div class="psource-meta">
+                  <span class="psource-type-pill hadith-pill">Sahih Hadith</span>
+                  <span class="psource-ref">{h.hadith_reference || h.source_reference}</span>
+                  {h.transmitted_by && (
+                    <span class="psource-chain">• {h.transmitted_by}</span>
+                  )}
+                </div>
+                {h.sunnah_url && (
+                  <a
+                    href={h.sunnah_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="verify-action-btn sunnah-btn"
+                    title={`Verify ${h.hadith_reference} on Sunnah.com`}
+                  >
+                    <span>Sunnah.com</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                )}
+              </div>
+
+              <div class="psource-excerpts">
+                {h.hadith_english && (
+                  <p class="text-english psource-english">
+                    {enWin.windowParts.map(p => p.highlight ? <mark class="source-key-highlight">{p.text}</mark> : p.text)}
+                  </p>
+                )}
+                {h.hadith_arabic && (
+                  <p class="text-arabic psource-arabic" dir="rtl">
+                    {arWin.windowParts.map(p => p.highlight ? <mark class="source-key-highlight">{p.text}</mark> : p.text)}
+                  </p>
+                )}
+              </div>
+
+              {hasLongContext && (
+                <details class="full-narrative-toggle">
+                  <summary class="full-narrative-summary">
+                    <span>Read full hadith narration ({enWin.wordCount} words)</span>
+                    <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </summary>
+                  <div class="full-narrative-body psource-excerpts">
+                    {h.hadith_english && (
+                      <p class="text-english psource-english">
+                        {enWin.fullParts.map(p => p.highlight ? <mark class="source-key-highlight">{p.text}</mark> : p.text)}
+                      </p>
+                    )}
+                    {h.hadith_arabic && (
+                      <p class="text-arabic psource-arabic" dir="rtl">
+                        {arWin.fullParts.map(p => p.highlight ? <mark class="source-key-highlight">{p.text}</mark> : p.text)}
+                      </p>
+                    )}
+                  </div>
+                </details>
+              )}
+            </div>
+          );
+        })}
+
+        <!-- Classical Tafsir Cards (Tabari & Ibn Kathir) -->
+        {tafsirList.map((t: any) => {
+          const arWin = buildExcerptWindow(t.arabic_excerpt || '', t.highlight_arabic || '', 210);
+          const enWin = buildExcerptWindow(t.english_excerpt || '', t.highlight_english || '', 230);
+          const hasLongContext = arWin.isTruncated || enWin.isTruncated;
+          const hlParams = new URLSearchParams();
+          if (t.highlight_english) hlParams.set('hl_en', String(t.highlight_english).slice(0, 160));
+          if (t.highlight_arabic) hlParams.set('hl_ar', String(t.highlight_arabic).slice(0, 160));
+          const qs = hlParams.toString();
+          const inAppHref = t.app_url ? `${base}${t.app_url}${qs ? `?${qs}` : ''}` : null;
+          return (
+            <div class="primary-source-card tafsir-source-card">
+              <div class="psource-top-row">
+                <div class="psource-meta">
+                  <span class="psource-type-pill tafsir-pill">Classical Tafsir</span>
+                  <span class="psource-ref">{t.scholar_name}</span>
+                </div>
+                <div class="psource-actions">
+                  {inAppHref && (
+                    <a
+                      href={inAppHref}
+                      class="verify-action-btn app-tafsir-btn"
+                      title={`Read full ${t.scholar_name} commentary in Ready Apologia`}
+                    >
+                      <span>Read in App</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  )}
+                  {t.external_url && (
+                    <a
+                      href={t.external_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="verify-action-btn ksu-btn"
+                      title={`Verify original Arabic text on King Saud University (quran.ksu.edu.sa)`}
+                    >
+                      <span>KSU Arabic</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div class="psource-excerpts">
+                {t.english_excerpt && (
+                  <p class="text-english psource-english">
+                    {enWin.windowParts.map(p => p.highlight ? <mark class="source-key-highlight">{p.text}</mark> : p.text)}
+                  </p>
+                )}
+                {t.arabic_excerpt && (
+                  <p class="text-arabic psource-arabic" dir="rtl">
+                    {arWin.windowParts.map(p => p.highlight ? <mark class="source-key-highlight">{p.text}</mark> : p.text)}
+                  </p>
+                )}
+              </div>
+
+              {hasLongContext && (
+                <details class="full-narrative-toggle">
+                  <summary class="full-narrative-summary">
+                    <span>Read full commentary excerpt ({enWin.wordCount} words)</span>
+                    <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </summary>
+                  <div class="full-narrative-body psource-excerpts">
+                    {t.english_excerpt && (
+                      <p class="text-english psource-english">
+                        {enWin.fullParts.map(p => p.highlight ? <mark class="source-key-highlight">{p.text}</mark> : p.text)}
+                      </p>
+                    )}
+                    {t.arabic_excerpt && (
+                      <p class="text-arabic psource-arabic" dir="rtl">
+                        {arWin.fullParts.map(p => p.highlight ? <mark class="source-key-highlight">{p.text}</mark> : p.text)}
+                      </p>
+                    )}
+                  </div>
+                </details>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  )}
+</article>
 
 <style>
   .variant-card {
     background-color: var(--color-surface);
     border: 1px solid var(--color-outline-variant);
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 22px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 18px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
 
-  .variant-header {
+  .variant-card:hover {
+    border-color: rgba(151, 69, 67, 0.35);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* ZONE 1: Top Bar & Badges */
+  .vcard-top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 4px;
-    padding-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--color-outline-variant);
   }
 
-  .companion-name {
+  .vcard-badges-left {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .vcard-rank-badge {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.3px;
+  }
+
+  .vcard-type-badge {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+  }
+
+  .vtype-addition {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border-color: #a7f3d0;
+  }
+
+  .vtype-omission {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-color: #fecaca;
+  }
+
+  .vtype-substitution {
+    background-color: #fffbeb;
+    color: #92400e;
+    border-color: #fde68a;
+  }
+
+  .vtype-shift {
+    background-color: #f0f9ff;
+    color: #075985;
+    border-color: #bae6fd;
+  }
+
+  .vtype-special {
+    background-color: #fdf2f8;
+    color: #9d174d;
+    border-color: #fbcfe8;
+  }
+
+  .vcard-verse-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary);
+    background-color: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    padding: 3px 9px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .vcard-verse-pill:hover {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border-color: var(--color-primary);
+  }
+
+  .vcard-companions-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .companion-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+
+  .primary-chip {
+    color: var(--color-secondary);
+    background-color: rgba(151, 69, 67, 0.07);
+    border: 1px solid rgba(151, 69, 67, 0.25);
+    padding: 4px 10px;
+  }
+
+  .primary-chip:hover {
+    background-color: var(--color-secondary);
+    color: #ffffff;
+    border-color: var(--color-secondary);
+  }
+
+  .shared-chip {
+    color: var(--color-on-surface-variant);
+    background-color: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    padding: 2px 8px;
+    font-size: 11px;
+  }
+
+  .shared-chip:hover {
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    background-color: var(--color-surface);
+  }
+
+  /* Hook Section */
+  .vcard-hook-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .vcard-short-title {
     font-family: var(--font-display);
     font-size: 18px;
     font-weight: 800;
     color: var(--color-primary);
+    margin: 0;
+    line-height: 1.35;
   }
 
-  .read-as-btn {
-    display: inline-block;
+  .vcard-plain-hook {
     font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--color-secondary);
-    text-decoration: none;
-    border: 1px solid var(--color-secondary);
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: all 0.15s ease;
-    background: none;
-    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--color-on-surface);
+    margin: 0;
+    font-weight: 500;
   }
 
-  .read-as-btn:hover {
-    background-color: var(--color-secondary);
-    color: var(--color-surface);
+  .also-attributed-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 2px;
   }
 
-  .variant-ref-title {
+  .also-label {
     font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--color-secondary);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--color-on-surface-variant);
+  }
+
+  .also-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  /* ZONE 2: Side-by-Side Diff Box */
+  .vcard-diff-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--color-surface-container-low);
+  }
+
+  .diff-columns-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+  }
+
+  .diff-col {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .uthmanic-col {
+    background-color: rgba(254, 242, 242, 0.35);
+  }
+
+  .companion-col {
+    background-color: rgba(236, 253, 245, 0.4);
+  }
+
+  .diff-col-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .diff-col-tag {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  .uthmanic-tag {
+    color: #991b1b;
+    background-color: rgba(254, 202, 202, 0.45);
+  }
+
+  .companion-tag {
+    color: #065f46;
+    background-color: rgba(167, 243, 208, 0.5);
+  }
+
+  .diff-vs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 1px;
+    background-color: var(--color-outline-variant);
+  }
+
+  .vs-circle {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--color-on-surface-variant);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 9999px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .diff-target-arabic {
+    font-size: 20px !important;
+    line-height: 1.85;
     margin: 0;
   }
 
-  .hadith-title-link {
-    color: inherit;
-    text-decoration: none;
-    display: inline-flex;
+  .diff-target-english {
+    font-size: 15px !important;
+    line-height: 1.5;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-on-surface) !important;
+  }
+
+  .diff-del-span {
+    background-color: rgba(254, 202, 202, 0.45);
+    color: #7f1d1d;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border-bottom: 2px solid #f87171;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .diff-ins-span {
+    background-color: rgba(167, 243, 208, 0.5);
+    color: #064e3b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border-bottom: 2px solid #34d399;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* Full Verse Context Accordion */
+  .full-verse-details {
+    border-top: 1px solid var(--color-outline-variant);
+    background-color: var(--color-surface);
+  }
+
+  .full-verse-summary {
+    padding: 10px 14px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-on-surface-variant);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    display: flex;
     align-items: center;
-    gap: 4px;
-    transition: color 0.15s ease;
+    justify-content: space-between;
+    transition: background-color 0.15s ease, color 0.15s ease;
   }
 
-  .hadith-title-link:hover {
+  .full-verse-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .full-verse-summary:hover {
+    background-color: var(--color-surface-container-low);
     color: var(--color-primary);
-    text-decoration: underline;
   }
 
-  .icon-inline {
-    opacity: 0.6;
-    display: inline-block;
-    vertical-align: middle;
+  .full-verse-details[open] .chevron-icon {
+    transform: rotate(180deg);
   }
 
-  .hadith-title-link:hover .icon-inline {
-    opacity: 1;
+  .full-verse-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    padding: 12px 14px;
+    border-top: 1px dashed var(--color-outline-variant);
+    background-color: var(--color-surface-container-lowest, #fafafa);
   }
 
-  .label {
+  .full-verse-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .full-verse-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--color-on-surface-variant);
+  }
+
+  .full-verse-label.companion-label {
+    color: #065f46;
+  }
+
+  .inline-del-mark {
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+
+  .inline-ins-mark {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+
+  /* ZONE 3: Analysis & Scholarly Discussion */
+  .vcard-analysis-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .block-eyebrow {
     display: block;
     font-family: var(--font-body);
     font-size: 11px;
     font-weight: 800;
-    color: var(--color-on-surface-variant);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
+    color: var(--color-on-surface-variant);
+    margin-bottom: 4px;
   }
 
-  .variant-text-block {
+  .diff-summary-block {
+    background-color: var(--color-surface-container-low);
+    border-left: 3px solid var(--color-secondary);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+  }
+
+  .diff-summary-text {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-on-surface);
+    margin: 0;
+  }
+
+  .scholarly-discussion-details {
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-surface);
+  }
+
+  .scholarly-summary-trigger {
+    padding: 10px 12px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-surface-container-low);
+    transition: background-color 0.15s ease;
+  }
+
+  .scholarly-summary-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .scholarly-summary-trigger:hover {
+    background-color: var(--color-outline-variant);
+  }
+
+  .trigger-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .scholarly-discussion-details[open] .chevron-icon {
+    transform: rotate(180deg);
+  }
+
+  .scholarly-discussion-body {
+    padding: 12px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding-left: 12px;
+    gap: 10px;
+    border-top: 1px solid var(--color-outline-variant);
+  }
+
+  .scholarly-point {
+    padding: 10px 12px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .defense-point {
+    background-color: var(--color-surface-container-low);
+    border-left: 3px solid #9ca3af;
+  }
+
+  .evaluation-point {
+    background-color: rgba(151, 69, 67, 0.05);
     border-left: 3px solid var(--color-secondary);
   }
 
-  .hadith-context-block {
-    margin-top: 4px;
+  .scholarly-point-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--color-on-surface-variant);
+  }
+
+  .scholarly-point-label.evaluation-label {
+    color: var(--color-secondary);
+  }
+
+  .scholarly-point-text {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-on-surface);
+    margin: 0;
+  }
+
+  /* ZONE 4: Primary Source Verification */
+  .vcard-sources-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     padding-top: 12px;
     border-top: 1px dashed var(--color-outline-variant);
+  }
+
+  .sources-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .primary-source-card {
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+    padding: 14px;
+    background-color: var(--color-surface-container-low);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .psource-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-outline-variant);
+  }
+
+  .psource-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .psource-type-pill {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .hadith-pill {
+    background-color: rgba(151, 69, 67, 0.12);
+    color: var(--color-secondary);
+  }
+
+  .tafsir-pill {
+    background-color: rgba(30, 58, 138, 0.1);
+    color: #1e3a8a;
+  }
+
+  .psource-ref {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--color-primary);
+  }
+
+  .psource-chain {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-on-surface-variant);
+  }
+
+  .psource-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  .verify-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .sunnah-btn,
+  .app-tafsir-btn {
+    background-color: var(--color-surface);
+    color: var(--color-secondary);
+    border: 1px solid rgba(151, 69, 67, 0.35);
+  }
+
+  .sunnah-btn:hover,
+  .app-tafsir-btn:hover {
+    background-color: var(--color-secondary);
+    color: #ffffff;
+    border-color: var(--color-secondary);
+  }
+
+  .ksu-btn {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface-variant);
+    border: 1px solid var(--color-outline-variant);
+  }
+
+  .ksu-btn:hover {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border-color: var(--color-primary);
+  }
+
+  .psource-excerpts {
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
-  .translation-patch {
-    display: block;
+  .psource-arabic {
+    font-size: 17.5px;
+    line-height: 1.85;
+  }
+
+  .psource-english {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--color-on-surface) !important;
+  }
+
+  .full-narrative-toggle {
+    border-top: 1px dashed var(--color-outline-variant);
+    padding-top: 8px;
+    margin-top: 2px;
+  }
+
+  .full-narrative-summary {
     font-family: var(--font-body);
-    font-size: 12px;
-    font-style: italic;
+    font-size: 11.5px;
+    font-weight: 700;
     color: var(--color-secondary);
-    background-color: rgba(151, 69, 67, 0.05);
-    padding: 6px 10px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .full-narrative-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .full-narrative-toggle[open] .chevron-icon {
+    transform: rotate(180deg);
+  }
+
+  .full-narrative-body {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
     border-radius: 6px;
-    border-left: 2px solid var(--color-secondary);
-    margin-top: 4px;
+  }
+
+  .source-key-highlight {
+    background-color: rgba(250, 204, 21, 0.28);
+    color: inherit;
+    font-weight: 700;
+    padding: 1px 4px;
+    border-radius: 3px;
+    border-bottom: 2px solid #eab308;
+  }
+
+  .chevron-icon {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
   }
 
   .text-arabic {
     font-family: 'Amiri', 'Traditional Arabic', serif;
-    line-height: 1.8;
+    line-height: 1.85;
     text-align: right;
     margin: 0;
-    color: var(--color-on-surface);
+    color: var(--color-on-surface-variant);
   }
 
   .text-english {
     font-family: var(--font-display);
-    line-height: 1.5;
-    color: var(--color-on-surface-variant);
+    line-height: 1.55;
+    color: var(--color-on-surface);
     margin: 0;
   }
 
-  @media (max-width: 500px) {
-    .variant-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
+  /* Respect global language preference toggle (.prefer-arabic vs .prefer-english) */
+  :global(.prefer-arabic) .diff-col .text-arabic,
+  :global(.prefer-arabic) .full-verse-col .text-arabic,
+  :global(.prefer-arabic) .psource-excerpts .text-arabic {
+    order: -1;
+    color: var(--color-on-surface);
+  }
+
+  :global(.prefer-arabic) .diff-col .text-english,
+  :global(.prefer-arabic) .full-verse-col .text-english,
+  :global(.prefer-arabic) .psource-excerpts .text-english {
+    color: var(--color-on-surface-variant) !important;
+  }
+
+  @media (max-width: 640px) {
+    .variant-card {
+      padding: 12px;
+      gap: 14px;
+    }
+
+    .vcard-short-title {
+      font-size: 16.5px;
+    }
+
+    .vcard-plain-hook {
+      font-size: 13.5px;
+    }
+
+    .diff-columns-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .diff-col {
+      padding: 12px;
+    }
+
+    .diff-vs-divider {
+      width: 100%;
+      height: 1px;
+      margin: 2px 0;
+    }
+
+    .full-verse-grid {
+      grid-template-columns: 1fr;
+      padding: 10px 12px;
+    }
+
+    .primary-source-card {
+      padding: 10px 12px;
     }
   }
 </style>

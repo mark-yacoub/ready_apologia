@@ -1,0 +1,116 @@
+{
+  "id": "hafsa",
+  "name": "Hafsa",
+  "arabic_name": "حفصة بنت عمر",
+  "title": "Custodian of the Original Medinan Suhuf",
+  "era": "Died 45 AH (665 CE)",
+  "region": "Medina",
+  "tier": "Superstar",
+  "importance_rank": 7,
+  "bio_url": "https://sunnah.com/narrator/4050",
+  "biography": "Wife of Prophet Muhammad and daughter of Caliph Umar bin Al-Khattab. Hafsa was entrusted with the official Medinan sheets (Suhuf) compiled under Abu Bakr and Umar, which Uthman's committee later borrowed to produce the standard Uthmanic Mushaf before Marwan bin al-Hakam eventually destroyed her sheets after her death. In addition to those sheets, Hafsa commissioned her own personal Mushaf via her scribe Amr bin Rafi' (and Nafi'), explicitly instructing her scribe in Tafsir al-Tabari (nos. 4256, 4259) and Tafsir Ibn Kathir (on 2:238) to write 'and the afternoon prayer' in Surah 2:238.",
+  "virtues": [
+    {
+      "source_reference": "Sahih al-Bukhari 4987",
+      "sunnah_url": "https://sunnah.com/bukhari:4987",
+      "hadith_arabic": "فَأَرْسَلَ عُثْمَانُ إِلَى حَفْصَةَ أَنْ أَرْسِلِي إِلَيْنَا بِالصُّحُفِ نَنْسَخُهَا فِي الْمَصَاحِفِ ثُمَّ نَرُدُّهَا إِلَيْكِ. فَأَرْسَلَتْ بِهَا حَفْصَةُ إِلَى عُثْمَانَ",
+      "hadith_english": "Uthman sent a message to Hafsa saying: \"Send us the manuscripts of the Qur'an so that we may compile the Qur'anic materials in perfect copies and return the manuscripts to you.\" Hafsa sent them to Uthman."
+    }
+  ],
+  "bio_text": "Wife of Prophet Muhammad and daughter of Caliph Umar bin Al-Khattab. Hafsa was entrusted with the official Medinan sheets (Suhuf) compiled under Abu Bakr and Umar, which Uthman's committee later borrowed to produce the standard Uthmanic Mushaf before Marwan bin al-Hakam eventually destroyed her sheets after her death. In addition to those sheets, Hafsa commissioned her own personal Mushaf via her scribe Amr bin Rafi' (and Nafi'), explicitly instructing her scribe in Tafsir al-Tabari (nos. 4256, 4259) and Tafsir Ibn Kathir (on 2:238) to write 'and the afternoon prayer' in Surah 2:238.",
+  "total_variants": 1,
+  "primary_variants": 1,
+  "shared_variants": 0,
+  "bukhari_muslim_count": 0,
+  "tafsir_count": 1,
+  "variants": [
+    {
+      "id": "codex-2-238-hafsa",
+      "surah": 2,
+      "ayah": 238,
+      "companion": "Hafsa",
+      "companion_id": "hafsa",
+      "also_attributed_to": [
+        "Aisha"
+      ],
+      "variant_type": "Phrase Addition",
+      "short_title": "Hafsa's Codex Adds 'And the Afternoon Prayer' (2:238)",
+      "plain_english_hook": "Hafsa, custodian of the first Quranic sheets, ordered her scribe to write verse 2:238 in her personal codex with the extra phrase 'and the afternoon prayer,' which Nafi' personally saw in her Mushaf.",
+      "title": "Addition of 'Wa-Salati l-Asr' in the Personal Codex of Hafsa bint Umar (Q. 2:238)",
+      "diff_summary": "Multiple authentic chains in Tafsir al-Tabari and Muwatta Malik (via 'Amr bin Rafi', Salim bin 'Abdullah, and Nafi' the freedman of Ibn 'Umar) record that Hafsa bint 'Umar—the wife of the Prophet and custodian of Abu Bakr's original Quranic sheets—instructed her scribe to pause at Q. 2:238 so she could dictate it as she heard the Prophet recite it: 'حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ' ('Watch over the prayers, and the middle prayer, and the afternoon prayer'). Nafi' explicitly testified: 'I read that Mushaf and I saw the conjunctive waw in it.'",
+      "uthmanic_target_arabic": "وَٱلصَّلَوٰةِ ٱلۡوُسۡطَىٰ",
+      "uthmanic_target_english": "and the middle prayer.",
+      "variant_target_arabic": "وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ",
+      "variant_target_english": "and the middle prayer, and the afternoon prayer.",
+      "uthmanic_full_arabic": "حَٰفِظُواْ عَلَى ٱلصَّلَوَٰتِ وَٱلصَّلَوٰةِ ٱلۡوُسۡطَىٰ وَقُومُواْ لِلَّهِ قَٰنِتِينَ",
+      "uthmanic_full_english": "Watch over the prayers, and the middle prayer. And stand before God obedient.",
+      "variant_full_arabic": "حَٰفِظُواْ عَلَى ٱلصَّلَوَٰتِ وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ وَقُومُواْ لِلَّهِ قَٰنِتِينَ",
+      "variant_full_english": "Watch over the prayers, and the middle prayer, and the afternoon prayer. And stand before God obedient.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Commentators such as Ibn Kathir argue that Hafsa's dictation represented either an abrogated recitation (mansukh al-tilawah) or an interpretive note recorded via single-strand transmission (khabar al-wahid) and therefore omitted by Uthman from the master Mushaf.",
+        "primary_source_evaluation": "Hafsa was the very custodian from whom Caliph Uthman borrowed the first written collection (suhuf) to produce the Uthmanic standard, yet she deliberately dictated this additional phrase into her own Mushaf as verbatim prophetic recitation, and Nafi' verified seeing the consonantal letter waw written in her codex."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 28,
+        "universal_scope_20": 19,
+        "classical_concession_15": 14,
+        "cuj_score": 94
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH) — Hafsa's Mushaf",
+          "app_url": "/quran/2/238/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura2-aya238.html",
+          "arabic_excerpt": "4256 - حدثنا ابن المثنى، قال: حدثنا عبد الوهاب، قال: حدثنا عبيد الله، عن نافع: أن حفصة أمرت مولى لها يكتب لها مصحفا، وقالت: إذا بلغت هذه الآية: \" حافظوا على الصلوات والصلاة الوسطى \"، فلا تكتبها حتى أمليها عليك كما سمعت رسول الله صلى الله عليه وسلم يقرؤها! فلما بلغها أمرته فكتبها: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \". قال نافع: فقرأت ذلك المصحف، فرأيت فيه \" الواو \".\n4259 - حدثنا أبو كريب، قال: حدثنا عبدة بن سليمان، قال: حدثنا محمد بن عمرو، قال: حدثني أبو سلمة، عن عمرو بن رافع مولى عمر، قال: كان مكتوبا في مصحف حفصة: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \".",
+          "english_excerpt": "4256 - Ibn al-Muthanna narrated to us, saying: 'Abd al-Wahhab narrated to us, saying: 'Ubaydullah narrated to us, from Nafi': that Hafsah ordered a freed slave of hers to write a Mushaf for her, and she said: When you reach this verse: \"Watch over the prayers, and the middle prayer,\" do not write it until I dictate it to you as I heard the Messenger of God, peace and blessings of God be upon him, reciting it! When he reached it, she ordered him and he wrote it: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\" Nafi' said: I read that Mushaf, and I saw the \"Waw\" in it.\n4259 - Abu Kurayb narrated to us... from 'Amr bin Rafi' the freed slave of 'Umar, who said: It was written in the Mushaf of Hafsah: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\"",
+          "highlight_arabic": "كان مكتوبا في مصحف حفصة: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \"",
+          "highlight_english": "It was written in the Mushaf of Hafsah: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\""
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH) — Hafsa's Mushaf",
+          "app_url": "/quran/2/238/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura2-aya238.html",
+          "arabic_excerpt": "طريق أخرى : قال ابن جرير : حدثني ابن المثنى عبد الوهاب ، حدثنا عبيد الله ، عن نافع ، أن حفصة أمرت مولى لها أن يكتب لها مصحفا فقالت : إذا بلغت هذه الآية : \" حافظوا على الصلوات والصلاة الوسطى \" فلا تكتبها حتى أمليها عليك كما سمعت رسول الله صلى الله عليه وسلم يقرأها . فلما بلغها أمرته فكتبها : \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \" . قال نافع : فقرأت ذلك المصحف فرأيت فيه الواو .",
+          "english_excerpt": "Another route: Ibn Jarir said: Ibn Al-Muthanna 'Abdul-Wahhab narrated to me, 'Ubaydullah narrated to us, from Nafi', that Hafsah ordered a freed slave of hers to write a Mushaf for her, and she said: \"When you reach this Ayah: { Watch over the prayers, and the middle prayer }, do not write it until I dictate it to you as I heard the Messenger of Allah reciting it.\" When he reached it, she ordered him and he wrote it: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\" Nafi' said: \"I read that Mushaf and saw the 'Waw' in it.\"",
+          "highlight_arabic": "أن حفصة أمرت مولى لها أن يكتب لها مصحفا فقالت : إذا بلغت هذه الآية : \" حافظوا على الصلوات والصلاة الوسطى \" فلا تكتبها حتى أمليها عليك كما سمعت رسول الله صلى الله عليه وسلم يقرأها . فلما بلغها أمرته فكتبها : \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \" . قال نافع : فقرأت ذلك المصحف فرأيت فيه الواو",
+          "highlight_english": "that Hafsah ordered a freed slave of hers to write a Mushaf for her, and she said: \"When you reach this Ayah: { Watch over the prayers, and the middle prayer }, do not write it until I dictate it to you as I heard the Messenger of Allah reciting it.\" When he reached it, she ordered him and he wrote it: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\" Nafi' said: \"I read that Mushaf and saw the 'Waw' in it.\""
+        },
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH) — Aisha's Mushaf",
+          "app_url": "/quran/2/238/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura2-aya238.html",
+          "arabic_excerpt": "4216 - حدثنا ابن المثنى، قال: ثنا عبد الوهاب، قال: ثنا أيوب، عن أبي قلابة، عن أبي يونس مولى عائشة، أنه قال: أمرتني عائشة أن أكتب لها مصحفًا، وقالت: إذا بلغت هذه الآية فآذنِّي: \" حافظوا على الصلوات والصلاة الوسطى \"، فلما بلغتها آذنتها، فأملت عليَّ: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \"، وقالت: سمعتها من رسول الله صلى الله عليه وسلم.\n4220 - حدثني المثنى، قال: ثنا الحجاج، قال: ثنا حماد، عن هشام بن عروة، عن أبيه، قال: كان في مصحف عائشة: \" حافظوا على الصلوات والصلاة الوسطى وهي صلاة العصر \".",
+          "english_excerpt": "4216 - Ibn al-Muthanna narrated to us... from Abu Yunus, the freed slave of 'A'ishah, that he said: 'A'ishah ordered me to write a Mushaf for her, and she said: When you reach this verse, let me know: \"Watch over the prayers, and the middle prayer.\" When I reached it, I let her know, and she dictated to me: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient,\" and she said: I heard it from the Messenger of God, peace and blessings of God be upon him.\n4220 - Al-Muthanna narrated to me... from Hisham bin 'Urwah, from his father, who said: It was in the Mushaf of 'A'ishah: \"Watch over the prayers, and the middle prayer, and it is the 'Asr prayer.\"",
+          "highlight_arabic": "فأملت عليَّ: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \"",
+          "highlight_english": "she dictated to me: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient,\""
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH) — Aisha's Mushaf",
+          "app_url": "/quran/2/238/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura2-aya238.html",
+          "arabic_excerpt": "وقال ابن جرير : حدثني المثنى ، حدثنا الحجاج ، حدثنا حماد ، عن هشام بن عروة عن أبيه قال : كان في مصحف عائشة : \" حافظوا على الصلوات والصلاة الوسطى وهي صلاة العصر \" ... وأما إن روي على أنه قرآن فإنه لم يتواتر ، فلا يثبت بمثل خبر الواحد قرآن ; ولهذا لم يثبته أمير المؤمنين عثمان بن عفان في المصحف الإمام .",
+          "english_excerpt": "Ibn Jarir said: Al-Muthanna narrated to me, Al-Hajjaj narrated to us, Hammad narrated to us, from Hisham bin 'Urwah from his father who said: \"It was in the Mushaf of 'A'ishah: 'Watch over the prayers, and the middle prayer, and it is the 'Asr prayer.'\" ... As for if it is narrated as being from the Quran, it is not Mutawatir (widely transmitted), and the Quran is not established by an isolated report (Khabar Al-Wahid). This is why the Commander of the Faithful 'Uthman bin 'Affan did not include it in the 'Imam' (master) Mushaf.",
+          "highlight_arabic": "كان في مصحف عائشة : \" حافظوا على الصلوات والصلاة الوسطى وهي صلاة العصر \"",
+          "highlight_english": "It was in the Mushaf of 'A'ishah: 'Watch over the prayers, and the middle prayer, and it is the 'Asr prayer.'"
+        }
+      ],
+      "global_rank": 14,
+      "companion_codex": "Hafsa",
+      "variant_arabic": "حَٰفِظُواْ عَلَى ٱلصَّلَوَٰتِ وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ وَقُومُواْ لِلَّهِ قَٰنِتِينَ",
+      "variant_english": "Watch over the prayers, and the middle prayer, and the afternoon prayer. And stand before God obedient.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) — Hafsa's Mushaf (2:238)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) — Hafsa's Mushaf (2:238)",
+      "sunnah_url": "/quran/2/238/tafsir/tabari",
+      "hadith_arabic": "4256 - حدثنا ابن المثنى، قال: حدثنا عبد الوهاب، قال: حدثنا عبيد الله، عن نافع: أن حفصة أمرت مولى لها يكتب لها مصحفا، وقالت: إذا بلغت هذه الآية: \" حافظوا على الصلوات والصلاة الوسطى \"، فلا تكتبها حتى أمليها عليك كما سمعت رسول الله صلى الله عليه وسلم يقرؤها! فلما بلغها أمرته فكتبها: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \". قال نافع: فقرأت ذلك المصحف، فرأيت فيه \" الواو \".\n4259 - حدثنا أبو كريب، قال: حدثنا عبدة بن سليمان، قال: حدثنا محمد بن عمرو، قال: حدثني أبو سلمة، عن عمرو بن رافع مولى عمر، قال: كان مكتوبا في مصحف حفصة: \" حافظوا على الصلوات والصلاة الوسطى وصلاة العصر وقوموا لله قانتين \".",
+      "hadith_english": "4256 - Ibn al-Muthanna narrated to us, saying: 'Abd al-Wahhab narrated to us, saying: 'Ubaydullah narrated to us, from Nafi': that Hafsah ordered a freed slave of hers to write a Mushaf for her, and she said: When you reach this verse: \"Watch over the prayers, and the middle prayer,\" do not write it until I dictate it to you as I heard the Messenger of God, peace and blessings of God be upon him, reciting it! When he reached it, she ordered him and he wrote it: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\" Nafi' said: I read that Mushaf, and I saw the \"Waw\" in it.\n4259 - Abu Kurayb narrated to us... from 'Amr bin Rafi' the freed slave of 'Umar, who said: It was written in the Mushaf of Hafsah: \"Watch over the prayers, and the middle prayer, and the 'Asr prayer, and stand before God obedient.\"",
+      "rank": 2,
+      "attribution_role": "primary"
+    }
+  ]
+}

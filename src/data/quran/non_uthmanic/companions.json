@@ -1,206 +1,299 @@
 [
-    {
-        "name": "Aisha",
-        "tier": "Superstar",
-        "importance_rank": 0,
-        "bio_url": "https://sunnah.com/narrator/4049",
-        "bio_text": "The beloved wife of the Prophet Muhammad, who died in her home. She was a major scholar, transmitted thousands of hadiths, and possessed her own personal codex of the Quran containing variant readings.",
-        "authoritative_hadiths": [
-            {
-                "reference": "Sahih Muslim 1452a",
-                "arabic": "عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ يُحَرِّمْنَ ثُمَّ نُسِخْنَ بِخَمْسٍ مَعْلُومَاتٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَهُنَّ فِيمَا يُقْرَأُ مِنَ الْقُرْآنِ",
-                "english": "It had been revealed in the Holy Qur'an that ten clear sucklings make the marriage unlawful, then it was abrogated by five sucklings and Allah's Apostle died and it was before that time (found) in the Holy Qur'an (and recited by the Muslims).",
-                "sunnah_url": "https://sunnah.com/muslim/17/30"
-            },
-            {
-                "reference": "Sahih al-Bukhari 3770",
-                "arabic": "فَضْلُ عَائِشَةَ عَلَى النِّسَاءِ كَفَضْلِ الثَّرِيدِ عَلَى الطَّعَامِ",
-                "english": "Allah's Messenger said, 'The superiority of Aisha over other women is like the superiority of Tharid (a meat and bread dish) to other meals.'",
-                "sunnah_url": "https://sunnah.com/bukhari/62/115"
-            }
-        ]
-    },
-    {
-        "name": "Abdullah bin Masud",
-        "tier": "Superstar",
-        "importance_rank": 1,
-        "bio_url": "https://sunnah.com/narrator/5079",
-        "bio_text": "One of the earliest converts to Islam, a close companion of the Prophet, and one of the most knowledgeable regarding the Quran. The Prophet explicitly commanded Muslims to learn the Quran from him over others.",
-        "authoritative_hadiths": [
-            {
-                "reference": "Sahih al-Bukhari 3758",
-                "arabic": "اسْتَقْرِئُوا الْقُرْآنَ مِنْ أَرْبَعَةٍ مِنْ عَبْدِ اللَّهِ بْنِ مَسْعُودٍ ـ فَبَدَأَ بِهِ ـ وَسَالِمٍ مَوْلَى أَبِي حُذَيْفَةَ، وَمُعَاذِ بْنِ جَبَلٍ، وَأُبَىِّ بْنِ كَعْبٍ",
-                "english": "Learn the recitation of the Qur'an from four persons: Abdullah bin Masud (he started with him), Salim, Mu'adh bin Jabal, and Ubayy bin Kab.",
-                "sunnah_url": "https://sunnah.com/bukhari/62/104"
-            },
-            {
-                "reference": "Sahih al-Bukhari 5002",
-                "arabic": "مَا أُنْزِلَتْ سُورَةٌ مِنْ كِتَابِ اللَّهِ إِلاَّ أَنَا أَعْلَمُ أَيْنَ أُنْزِلَتْ وَلاَ أُنْزِلَتْ آيَةٌ مِنْ كِتَابِ اللَّهِ إِلاَّ أَنَا أَعْلَمُ فِيمَ أُنْزِلَتْ، وَلَوْ أَعْلَمُ أَحَدًا أَعْلَمَ مِنِّي بِكِتَابِ اللَّهِ تُبَلِّغُهُ الإِبِلُ لَرَكِبْتُ إِلَيْهِ",
-                "english": "Narrated Abdullah (bin Masud): By Allah other than Whom none has the right to be worshipped! There is no Sura revealed in Allah's Book but I know at what place it was revealed; and there is no Verse revealed in Allah's Book but I know about whom it was revealed. And if I knew that there is somebody who knows Allah's Book better than I, and he is at a place that camels can reach, I would go to him.",
-                "sunnah_url": "https://sunnah.com/bukhari/66/24"
-            }
-        ]
-    },
-    {
-        "name": "Ubayy bin Kab",
-        "tier": "Superstar",
-        "importance_rank": 2,
-        "bio_url": "https://sunnah.com/narrator/396",
-        "bio_text": "A leading companion from the Ansar, designated as one of the four primary teachers of the Quran by the Prophet. He was historically known as the 'Chief of the Reciters' (Sayyid al-Qurra).",
-        "authoritative_hadiths": [
-            {
-                "reference": "Sahih al-Bukhari 4960",
-                "arabic": "قَالَ النَّبِيُّ صلى الله عليه وسلم لأُبَىٍّ ‏\"‏ إِنَّ اللَّهَ أَمَرَنِي أَنْ أَقْرَأَ عَلَيْكَ ‏{‏لَمْ يَكُنِ الَّذِينَ كَفَرُوا مِنْ أَهْلِ الْكِتَابِ‏}‏ ‏\"‏‏.‏ قَالَ وَسَمَّانِي قَالَ ‏\"‏ نَعَمْ ‏\"‏‏.‏ فَبَكَى‏.",
-                "english": "The Prophet said to Ubayy, 'Allah has ordered me to recite to you: Those who disbelieve (Surah 98).' Ubayy said, 'Has He mentioned my name?' The Prophet said, 'Yes.' On hearing this, Ubayy wept.",
-                "sunnah_url": "https://sunnah.com/bukhari/65/482"
-            },
-            {
-                "reference": "Sahih al-Bukhari 5005",
-                "arabic": "قَالَ عُمَرُ أُبَىٌّ أَقْرَؤُنَا وَإِنَّا لَنَدَعُ مِنْ لَحَنِ أُبَىٍّ، وَأُبَىٌّ يَقُولُ أَخَذْتُهُ مِنْ فِي رَسُولِ اللَّهِ صلى الله عليه وسلم فَلاَ أَتْرُكُهُ لِشَىْءٍ",
-                "english": "Umar said, 'Ubayy was the best of us in the recitation (of the Qur'an) yet we leave some of what he recites.' Ubayy says, 'I have taken it from the mouth of Allah's Messenger and will not leave it for anything whatever.'",
-                "sunnah_url": "https://sunnah.com/bukhari/66/27"
-            }
-        ]
-    },
-    {
-        "name": "Umar bin Al-Khattab",
-        "tier": "Superstar",
-        "importance_rank": 3,
-        "bio_url": "https://sunnah.com/narrator/5913",
-        "bio_text": "The second Caliph of Islam. He was the one who famously urged Abu Bakr to compile the Quran into a single book after the Battle of Yamama. He repeatedly asserted the existence of missing verses (like the Stoning verse) from the pulpit.",
-        "authoritative_hadiths": [
-            {
-                "reference": "Sahih al-Bukhari 4986",
-                "arabic": "إِنِّي أَخْشَى أَنْ يَسْتَحِرَّ الْقَتْلُ بِالْقُرَّاءِ بِالْمَوَاطِنِ، فَيَذْهَبَ كَثِيرٌ مِنَ الْقُرْآنِ، وَإِنِّي أَرَى أَنْ تَأْمُرَ بِجَمْعِ الْقُرْآنِ",
-                "english": "(Abu Bakr said): Umar came to me and said: 'I am afraid that more heavy casualties may take place among the Qurra (reciters) on other battlefields, whereby a large part of the Qur'an may be lost. Therefore I suggest you order that the Qur'an be collected.'",
-                "sunnah_url": "https://sunnah.com/bukhari/66/8"
-            }
-        ]
-    },
-    {
-        "name": "Abdullah bin Abbas",
-        "tier": "Superstar",
-        "importance_rank": 5,
-        "bio_url": "https://sunnah.com/narrator/4883",
-        "bio_text": "The Prophet's cousin, historically known as 'Turjuman al-Quran' (The Interpreter of the Quran). The Prophet specifically prayed for him to be granted understanding of the Book.",
-        "authoritative_hadiths": [
-            {
-                "reference": "Sahih al-Bukhari 75",
-                "arabic": "ضَمَّنِي النَّبِيُّ صلى الله عليه وسلم إِلَى صَدْرِهِ وَقَالَ ‏ اللَّهُمَّ عَلِّمْهُ الْحِكْمَةَ",
-                "english": "Once the Prophet embraced me and said, 'O Allah! Bestow on him the knowledge of the Book (Qur'an).'",
-                "sunnah_url": "https://sunnah.com/bukhari/3/17"
-            }
-        ]
-    },
-    {
-        "name": "Abu Musa al-Ashari",
-        "tier": "Superstar",
-        "importance_rank": 6,
-        "bio_url": "https://sunnah.com/narrator/5021",
-        "bio_text": "A prominent companion appointed as governor of Basra, where he taught the Quran extensively. The Prophet famously praised his beautiful recitation, comparing it to the Psalms of David.",
-        "authoritative_hadiths": [
-            {
-                "reference": "Sahih al-Bukhari 5048",
-                "arabic": "يَا أَبَا مُوسَى لَقَدْ أُوتِيتَ مِزْمَارًا مِنْ مَزَامِيرِ آلِ دَاوُدَ",
-                "english": "The Prophet said to him, 'O Abu Musa! You have been given one of the mazamir (sweet melodious voices) of the family of David.'",
-                "sunnah_url": "https://sunnah.com/bukhari/66/72"
-            }
-        ]
-    },
-    {
-        "name": "Unknown",
-        "tier": "Superstar",
-        "importance_rank": 7,
-        "bio_url": "",
-        "bio_text": "A placeholder used in the database for universally recognized lost verses (like the Stoning Verse or the martyrs of Bir Ma'una) where the original Surah placement was completely lost to history, but the variant itself is undeniably verified by Sahih hadiths.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Abdullah bin Umar",
-        "tier": "Supporting",
-        "importance_rank": 8,
-        "bio_url": "https://sunnah.com/narrator/4967",
-        "bio_text": "The son of Umar bin Al-Khattab and a prominent scholar and narrator of hadith in Medina.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Anas bin Malik",
-        "tier": "Supporting",
-        "importance_rank": 9,
-        "bio_url": "https://sunnah.com/narrator/720",
-        "bio_text": "A close companion who served the Prophet Muhammad in Medina for ten years, narrating hundreds of hadiths.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Zaid bin Arqam",
-        "tier": "Supporting",
-        "importance_rank": 10,
-        "bio_url": "https://sunnah.com/narrator/search?q=Zaid+bin+Arqam",
-        "bio_text": "A companion of the Prophet who narrated several key incidents regarding the revelation of certain verses.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Abu Huraira",
-        "tier": "Supporting",
-        "importance_rank": 11,
-        "bio_url": "https://sunnah.com/narrator/search?q=Abu+Huraira",
-        "bio_text": "The most prolific narrator of hadith in Sunni Islam. While primarily known for hadith rather than Quranic recitation, his transmission of variants remains highly authentic.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Sahl bin Sad",
-        "tier": "Supporting",
-        "importance_rank": 12,
-        "bio_url": "https://sunnah.com/narrator/search?q=Sahl+bin+Sad",
-        "bio_text": "A companion from Medina who lived a very long life, preserving narrations about early Quranic recitations.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Jabir bin Abdullah",
-        "tier": "Supporting",
-        "importance_rank": 13,
-        "bio_url": "https://sunnah.com/narrator/search?q=Jabir+bin+Abdullah",
-        "bio_text": "A prominent companion from Medina who narrated many details of the Prophet's life and certain Quranic revelations.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Said bin Jubair",
-        "tier": "Tabi'un",
-        "importance_rank": 14,
-        "bio_url": "https://sunnah.com/narrator/search?q=Said+bin+Jubair",
-        "bio_text": "A highly respected Successor (Tabi'i) and student of Ibn Abbas, known for preserving Ibn Abbas's variant readings of the Quran.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Urwa bin Az-Zubair",
-        "tier": "Tabi'un",
-        "importance_rank": 15,
-        "bio_url": "https://sunnah.com/narrator/search?q=Urwa+bin+Az-Zubair",
-        "bio_text": "A leading scholar of Medina (Successor) and the nephew of Aisha, serving as the primary transmitter of her knowledge and her Quranic codex.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Ibn Shihab",
-        "tier": "Tabi'un",
-        "importance_rank": 16,
-        "bio_url": "https://sunnah.com/narrator/search?q=Ibn+Shihab",
-        "bio_text": "Also known as Al-Zuhri, one of the foremost early collectors of hadith and a central figure in transmitting the history of the compilation of the Quran.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Al-Amash",
-        "tier": "Tabi'un",
-        "importance_rank": 17,
-        "bio_url": "https://sunnah.com/narrator/search?q=Al-Amash",
-        "bio_text": "A prominent Kufan scholar and reciter who preserved many of Ibn Mas'ud's variant readings.",
-        "authoritative_hadiths": []
-    },
-    {
-        "name": "Nahik bin Sinan",
-        "tier": "Tabi'un",
-        "importance_rank": 18,
-        "bio_url": "https://sunnah.com/narrator/search?q=Nahik+bin+Sinan",
-        "bio_text": "A Successor from Kufa known primarily for asking Ibn Mas'ud about a specific variant reading.",
-        "authoritative_hadiths": []
-    }
+  {
+    "id": "abdullah-bin-masud",
+    "name": "Abdullah bin Masud",
+    "arabic_name": "عبد الله بن مسعود",
+    "title": "Master Reciter of the Kufan Codex",
+    "era": "Died 32 AH (c. 653 CE)",
+    "region": "Kufa (Iraq)",
+    "tier": "Superstar",
+    "importance_rank": 1,
+    "bio_url": "https://sunnah.com/narrator/5079",
+    "biography": "One of the earliest converts to Islam and the foremost authority on Quranic recitation among the Companions. Prophet Muhammad explicitly instructed the Muslim community to learn the recitation of the Quran from four individuals, naming Abdullah bin Mas'ud first (Sahih al-Bukhari 4999). Appointed to Kufa by Caliph Umar bin Al-Khattab as teacher and treasurer, his personal Mushaf became the foundational text of the Kufan school. When Caliph Uthman ordered all regional codices burned to enforce a single standard text, Ibn Mas'ud famously refused to surrender his codex, reminding the community that he had learned over seventy Surahs directly from the lips of the Prophet while Zaid bin Thabit was still a youth. His codex omitted Surahs 1, 113, and 114 (treating them as protective prayers rather than Quranic chapters) and preserved dozens of distinct consonantal, lexical, and legal readings recorded across Sahih al-Bukhari, Sahih Muslim, Tafsir al-Tabari, and Tafsir Ibn Kathir.",
+    "virtues": [
+      {
+        "source_reference": "Sahih al-Bukhari 3758",
+        "sunnah_url": "https://sunnah.com/bukhari:3758",
+        "hadith_arabic": "سَمِعْتُ النَّبِيَّ صلى الله عليه وسلم يَقُولُ: اسْتَقْرِئُوا الْقُرْآنَ مِنْ أَرْبَعَةٍ مِنْ عَبْدِ اللَّهِ بْنِ مَسْعُودٍ ـ فَبَدَأَ بِهِ ـ وَسَالِمٍ مَوْلَى أَبِي حُذَيْفَةَ، وَمُعَاذِ بْنِ جَبَلٍ، وَأُبَىِّ بْنِ كَعْبٍ",
+        "hadith_english": "I heard the Prophet (ﷺ) saying: \"Learn the recitation of the Qur'an from (any of these) four persons: Abdullah bin Mas'ud — he started with him — Salim the freed slave of Abu Hudhaifa, Mu'adh bin Jabal, and Ubayy bin Ka'b.\""
+      },
+      {
+        "source_reference": "Sahih al-Bukhari 5002",
+        "sunnah_url": "https://sunnah.com/bukhari:5002",
+        "hadith_arabic": "قَالَ عَبْدُ اللَّهِ: وَاللَّهِ الَّذِي لاَ إِلَهَ غَيْرُهُ مَا أُنْزِلَتْ سُورَةٌ مِنْ كِتَابِ اللَّهِ إِلاَّ أَنَا أَعْلَمُ أَيْنَ أُنْزِلَتْ، وَلاَ أُنْزِلَتْ آيَةٌ مِنْ كِتَابِ اللَّهِ إِلاَّ أَنَا أَعْلَمُ فِيمَا أُنْزِلَتْ، وَلَوْ أَعْلَمُ أَحَدًا أَعْلَمَ مِنِّي بِكِتَابِ اللَّهِ تُبَلِّغُهُ الإِبِلُ لَرَكِبْتُ إِلَيْهِ",
+        "hadith_english": "Abdullah (bin Mas'ud) said: \"By Allah other than Whom none has the right to be worshipped! There is no Sura revealed in Allah's Book but I know at what place it was revealed; and there is no Verse revealed in Allah's Book but I know about whom it was revealed. And if I knew that there is somebody who knows Allah's Book better than I, and he is at a place that camels can reach, I would go to him.\""
+      }
+    ],
+    "bio_text": "One of the earliest converts to Islam and the foremost authority on Quranic recitation among the Companions. Prophet Muhammad explicitly instructed the Muslim community to learn the recitation of the Quran from four individuals, naming Abdullah bin Mas'ud first (Sahih al-Bukhari 4999). Appointed to Kufa by Caliph Umar bin Al-Khattab as teacher and treasurer, his personal Mushaf became the foundational text of the Kufan school. When Caliph Uthman ordered all regional codices burned to enforce a single standard text, Ibn Mas'ud famously refused to surrender his codex, reminding the community that he had learned over seventy Surahs directly from the lips of the Prophet while Zaid bin Thabit was still a youth. His codex omitted Surahs 1, 113, and 114 (treating them as protective prayers rather than Quranic chapters) and preserved dozens of distinct consonantal, lexical, and legal readings recorded across Sahih al-Bukhari, Sahih Muslim, Tafsir al-Tabari, and Tafsir Ibn Kathir.",
+    "total_variants": 63,
+    "primary_variants": 59,
+    "shared_variants": 4,
+    "bukhari_muslim_count": 9,
+    "tafsir_count": 60
+  },
+  {
+    "id": "ubayy-bin-kab",
+    "name": "Ubayy bin Kab",
+    "arabic_name": "أبي بن كعب",
+    "title": "Master of the Reciters (Sayyid al-Qurra') & Syrian Codex",
+    "era": "Died c. 30 AH (c. 650 CE)",
+    "region": "Medina & Syria (al-Sham)",
+    "tier": "Superstar",
+    "importance_rank": 3,
+    "bio_url": "https://sunnah.com/narrator/396",
+    "biography": "A senior Medinan Companion from the Ansar whom Prophet Muhammad declared the greatest reciter of the Quran in the community ('aqra'ukum Ubayy') and to whom the Prophet personally recited by divine command (Sahih al-Bukhari 4959). Ubayy served as the Prophet's chief Medinan scribe and compiled a renowned personal Mushaf that circulated widely in Syria prior to the Uthmanic standardization. Classical sources (including Sahih Muslim 1050, Tafsir al-Tabari, and Tafsir Ibn Kathir) record that Ubayy's codex included two additional short supplicatory chapters (Surat al-Khal' and Surat al-Hafd), preserved the Valley of Gold passage, and contained numerous explicit legal and exegetical clauses such as 'to an appointed time' in 4:24 and 'and he is a father to them' in 33:6.",
+    "virtues": [
+      {
+        "source_reference": "Sahih al-Bukhari 4960",
+        "sunnah_url": "https://sunnah.com/bukhari:4960",
+        "hadith_arabic": "قَالَ النَّبِيُّ صلى الله عليه وسلم لأُبَىٍّ: إِنَّ اللَّهَ أَمَرَنِي أَنْ أَقْرَأَ عَلَيْكَ ‏{‏لَمْ يَكُنِ الَّذِينَ كَفَرُوا مِنْ أَهْلِ الْكِتَابِ‏}‏‏.‏ قَالَ وَسَمَّانِي قَالَ: نَعَمْ. فَبَكَى",
+        "hadith_english": "The Prophet (ﷺ) said to Ubayy: \"Allah has ordered me to recite to you: 'Those who disbelieve from among the People of the Scripture' (Surah 98).\" Ubayy asked: \"Did He mention me by name to you?\" The Prophet answered: \"Yes.\" Whereupon Ubayy wept."
+      },
+      {
+        "source_reference": "Sahih al-Bukhari 5005",
+        "sunnah_url": "https://sunnah.com/bukhari:5005",
+        "hadith_arabic": "قَالَ عُمَرُ أُبَىٌّ أَقْرَؤُنَا وَإِنَّا لَنَدَعُ مِنْ لَحَنِ أُبَىٍّ، وَأُبَىٌّ يَقُولُ أَخَذْتُهُ مِنْ فِي رَسُولِ اللَّهِ صلى الله عليه وسلم فَلاَ أَتْرُكُهُ لِشَىْءٍ",
+        "hadith_english": "Umar said: \"Ubayy is the best of us in the recitation (of the Qur'an), yet we leave some of what Ubayy recites.\" Ubayy says: \"I have taken it directly from the mouth of Allah's Messenger (ﷺ), so I will not leave it for anything whatsoever.\""
+      }
+    ],
+    "bio_text": "A senior Medinan Companion from the Ansar whom Prophet Muhammad declared the greatest reciter of the Quran in the community ('aqra'ukum Ubayy') and to whom the Prophet personally recited by divine command (Sahih al-Bukhari 4959). Ubayy served as the Prophet's chief Medinan scribe and compiled a renowned personal Mushaf that circulated widely in Syria prior to the Uthmanic standardization. Classical sources (including Sahih Muslim 1050, Tafsir al-Tabari, and Tafsir Ibn Kathir) record that Ubayy's codex included two additional short supplicatory chapters (Surat al-Khal' and Surat al-Hafd), preserved the Valley of Gold passage, and contained numerous explicit legal and exegetical clauses such as 'to an appointed time' in 4:24 and 'and he is a father to them' in 33:6.",
+    "total_variants": 20,
+    "primary_variants": 11,
+    "shared_variants": 9,
+    "bukhari_muslim_count": 2,
+    "tafsir_count": 20
+  },
+  {
+    "id": "ibn-abbas",
+    "name": "Ibn Abbas",
+    "arabic_name": "عبد الله بن عباس",
+    "title": "Interpreter of the Quran (Turjuman al-Quran)",
+    "era": "Died 68 AH (687 CE)",
+    "region": "Mecca & Basra",
+    "tier": "Superstar",
+    "importance_rank": 2,
+    "bio_url": "https://sunnah.com/narrator/4883",
+    "biography": "The paternal cousin of Prophet Muhammad, universally revered in Sunni tradition as the 'Ink of the Community' (Hibr al-Ummah) and 'Interpreter of the Quran' (Turjuman al-Quran). Having studied recitation directly under Ubayy bin Ka'b and Zaid bin Thabit, Ibn Abbas maintained a personal codex and oral recitation tradition in Mecca that frequently diverged from the Uthmanic text. In Sahih al-Bukhari, Sahih Muslim, and Tafsir al-Tabari, he repeatedly defends non-Uthmanic readings—such as 'in front of them was a king seizing every sound ship' (18:79), 'in the seasons of Hajj' (2:198), and attributes several Uthmanic consonantal forms (such as tasta'nisu in 24:27 and qada in 17:23) to scribal slips.",
+    "virtues": [
+      {
+        "source_reference": "Sahih al-Bukhari 75",
+        "sunnah_url": "https://sunnah.com/bukhari:75",
+        "hadith_arabic": "ضَمَّنِي النَّبِيُّ صلى الله عليه وسلم إِلَى صَدْرِهِ وَقَالَ: اللَّهُمَّ عَلِّمْهُ الْحِكْمَةَ",
+        "hadith_english": "Narrated Ibn Abbas: Once the Prophet (ﷺ) embraced me and said: \"O Allah! Bestow on him the knowledge of the Book (the Qur'an) and wisdom.\""
+      }
+    ],
+    "bio_text": "The paternal cousin of Prophet Muhammad, universally revered in Sunni tradition as the 'Ink of the Community' (Hibr al-Ummah) and 'Interpreter of the Quran' (Turjuman al-Quran). Having studied recitation directly under Ubayy bin Ka'b and Zaid bin Thabit, Ibn Abbas maintained a personal codex and oral recitation tradition in Mecca that frequently diverged from the Uthmanic text. In Sahih al-Bukhari, Sahih Muslim, and Tafsir al-Tabari, he repeatedly defends non-Uthmanic readings—such as 'in front of them was a king seizing every sound ship' (18:79), 'in the seasons of Hajj' (2:198), and attributes several Uthmanic consonantal forms (such as tasta'nisu in 24:27 and qada in 17:23) to scribal slips.",
+    "total_variants": 19,
+    "primary_variants": 7,
+    "shared_variants": 12,
+    "bukhari_muslim_count": 9,
+    "tafsir_count": 19
+  },
+  {
+    "id": "umar-bin-al-khattab",
+    "name": "Umar bin Al-Khattab",
+    "arabic_name": "عمر بن الخطاب",
+    "title": "The Second Caliph & Preserver of Early Medinan Readings",
+    "era": "Died 23 AH (644 CE)",
+    "region": "Medina",
+    "tier": "Superstar",
+    "importance_rank": 4,
+    "bio_url": "https://sunnah.com/narrator/5913",
+    "biography": "The second Rashidun Caliph and one of the closest advisers to Prophet Muhammad. It was Umar who first urged Caliph Abu Bakr to collect the scattered Quranic parchments after the Battle of Yamama. Because Umar was assassinated in 23 AH—prior to Caliph Uthman's standardization of the rasm—his public sermons and liturgical recitations preserve the pre-Uthmanic Medinan text. In Sahih al-Bukhari and Sahih Muslim, Umar publicly testifies from the pulpit that the Verse of Stoning (Ayat al-Rajm) and the Verse of Not Renouncing Forefathers were revealed and recited as Quran, and classical tafsirs record his continued recitation of 'proceed to the remembrance of God' (famdu ila dhikri Allah) in 62:9 and 'al-Qayyam' in 2:255.",
+    "virtues": [
+      {
+        "source_reference": "Sahih al-Bukhari 4986",
+        "sunnah_url": "https://sunnah.com/bukhari:4986",
+        "hadith_arabic": "إِنِّي أَخْشَى أَنْ يَسْتَحِرَّ الْقَتْلُ بِالْقُرَّاءِ بِالْمَوَاطِنِ، فَيَذْهَبَ كَثِيرٌ مِنَ الْقُرْآنِ، وَإِنِّي أَرَى أَنْ تَأْمُرَ بِجَمْعِ الْقُرْآنِ",
+        "hadith_english": "(Abu Bakr said): Umar came to me and said: \"I am afraid that more heavy casualties may take place among the Qurra' (reciters) on other battlefields, whereby a large part of the Qur'an may be lost. Therefore I suggest that you order that the Qur'an be collected.\""
+      }
+    ],
+    "bio_text": "The second Rashidun Caliph and one of the closest advisers to Prophet Muhammad. It was Umar who first urged Caliph Abu Bakr to collect the scattered Quranic parchments after the Battle of Yamama. Because Umar was assassinated in 23 AH—prior to Caliph Uthman's standardization of the rasm—his public sermons and liturgical recitations preserve the pre-Uthmanic Medinan text. In Sahih al-Bukhari and Sahih Muslim, Umar publicly testifies from the pulpit that the Verse of Stoning (Ayat al-Rajm) and the Verse of Not Renouncing Forefathers were revealed and recited as Quran, and classical tafsirs record his continued recitation of 'proceed to the remembrance of God' (famdu ila dhikri Allah) in 62:9 and 'al-Qayyam' in 2:255.",
+    "total_variants": 5,
+    "primary_variants": 4,
+    "shared_variants": 1,
+    "bukhari_muslim_count": 3,
+    "tafsir_count": 5
+  },
+  {
+    "id": "aisha",
+    "name": "Aisha",
+    "arabic_name": "عائشة بنت أبي بكر",
+    "title": "Mother of the Believers & Medinan Mushaf Holder",
+    "era": "Died 58 AH (678 CE)",
+    "region": "Medina",
+    "tier": "Superstar",
+    "importance_rank": 5,
+    "bio_url": "https://sunnah.com/narrator/4049",
+    "biography": "Wife of Prophet Muhammad and daughter of the first Caliph, Abu Bakr. Aisha was one of the foremost legal authorities and transmitters of prophetic tradition in Medina, and she commissioned her own personal Mushaf copied by her freedman Abu Yunus. In Sahih Muslim 629a, she explicitly dictates the addition 'and the afternoon prayer' (wa-salati l-'asr) into Surah 2:238, testifying that she heard it directly from the Prophet. She also testifies in Sahih Muslim 1452a to the ten- and five-sucklings verses having been recited as Quran until the Prophet's death, and discusses scribal grammatical forms in the Uthmanic text (Tafsir al-Tabari on 4:162).",
+    "virtues": [
+      {
+        "source_reference": "Sahih Muslim 1452a",
+        "sunnah_url": "https://sunnah.com/muslim:1452a",
+        "hadith_arabic": "عَنْ عَائِشَةَ أَنَّهَا قَالَتْ: كَانَ فِيمَا أُنْزِلَ مِنَ الْقُرْآنِ عَشْرُ رَضَعَاتٍ مَعْلُومَاتٍ يُحَرِّمْنَ ثُمَّ نُسِخْنَ بِخَمْسٍ مَعْلُومَاتٍ فَتُوُفِّيَ رَسُولُ اللَّهِ صلى الله عليه وسلم وَهُنَّ فِيمَا يُقْرَأُ مِنَ الْقُرْآنِ",
+        "hadith_english": "Aisha reported that it had been revealed in the Holy Qur'an that ten clear sucklings make marriage unlawful, then it was abrogated by five clear sucklings, and Allah's Messenger (ﷺ) died while they were still among what was recited of the Qur'an."
+      },
+      {
+        "source_reference": "Sahih al-Bukhari 3770",
+        "sunnah_url": "https://sunnah.com/bukhari:3770",
+        "hadith_arabic": "فَضْلُ عَائِشَةَ عَلَى النِّسَاءِ كَفَضْلِ الثَّرِيدِ عَلَى الطَّعَامِ",
+        "hadith_english": "Allah's Messenger (ﷺ) said: \"The excellence of Aisha over other women is like the excellence of Tharid (a rich meat and bread dish) over all other meals.\""
+      }
+    ],
+    "bio_text": "Wife of Prophet Muhammad and daughter of the first Caliph, Abu Bakr. Aisha was one of the foremost legal authorities and transmitters of prophetic tradition in Medina, and she commissioned her own personal Mushaf copied by her freedman Abu Yunus. In Sahih Muslim 629a, she explicitly dictates the addition 'and the afternoon prayer' (wa-salati l-'asr) into Surah 2:238, testifying that she heard it directly from the Prophet. She also testifies in Sahih Muslim 1452a to the ten- and five-sucklings verses having been recited as Quran until the Prophet's death, and discusses scribal grammatical forms in the Uthmanic text (Tafsir al-Tabari on 4:162).",
+    "total_variants": 5,
+    "primary_variants": 4,
+    "shared_variants": 1,
+    "bukhari_muslim_count": 4,
+    "tafsir_count": 5
+  },
+  {
+    "id": "anas-bin-malik",
+    "name": "Anas bin Malik",
+    "arabic_name": "أنس بن مالك",
+    "title": "Personal Attendant of the Prophet & Basran Transmitter",
+    "era": "Died 93 AH (712 CE)",
+    "region": "Medina & Basra",
+    "tier": "Superstar",
+    "importance_rank": 6,
+    "bio_url": "https://sunnah.com/narrator/720",
+    "biography": "Served Prophet Muhammad in Medina for ten years from childhood until the Prophet's death, later settling in Basra as one of the longest-living Companions. Across multiple narrations in Sahih al-Bukhari (2801, 2814, 4095) and Sahih Muslim (677a), Anas testifies to the revelation and liturgical recitation of the Qur'anic verse concerning the seventy martyred reciters of Bi'r Ma'una ('Inform our people that we have met our Lord, and He is pleased with us and has made us pleased') before its recitation was lifted, as well as the Valley of Gold passage.",
+    "virtues": [
+      {
+        "source_reference": "Sahih al-Bukhari 2801",
+        "sunnah_url": "https://sunnah.com/bukhari:2801",
+        "hadith_arabic": "عَنْ أَنَسٍ قَالَ: فَكُنَّا نَقْرَأُ: ‏{‏أَنْ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا‏}‏ ثُمَّ نُسِخَ بَعْدُ",
+        "hadith_english": "Narrated Anas: \"So we used to recite: 'Inform our people that we have met our Lord, He is pleased with us and has made us pleased.' Later on, this Qur'anic verse was cancelled.\""
+      }
+    ],
+    "bio_text": "Served Prophet Muhammad in Medina for ten years from childhood until the Prophet's death, later settling in Basra as one of the longest-living Companions. Across multiple narrations in Sahih al-Bukhari (2801, 2814, 4095) and Sahih Muslim (677a), Anas testifies to the revelation and liturgical recitation of the Qur'anic verse concerning the seventy martyred reciters of Bi'r Ma'una ('Inform our people that we have met our Lord, and He is pleased with us and has made us pleased') before its recitation was lifted, as well as the Valley of Gold passage.",
+    "total_variants": 2,
+    "primary_variants": 1,
+    "shared_variants": 1,
+    "bukhari_muslim_count": 2,
+    "tafsir_count": 2
+  },
+  {
+    "id": "ibn-az-zubair",
+    "name": "Ibn Az-Zubair",
+    "arabic_name": "عبد الله بن الزبير",
+    "title": "Meccan Companion & Scribe of the Uthmanic Committee",
+    "era": "Died 73 AH (692 CE)",
+    "region": "Mecca & Medina",
+    "tier": "Superstar",
+    "importance_rank": 11,
+    "bio_url": "https://sunnah.com/narrator/4904",
+    "biography": "Son of Az-Zubair bin Al-Awwam and Asma' bint Abi Bakr, nephew of Aisha, and one of the three Qurayshi members appointed by Caliph Uthman to copy the official codices alongside Zaid bin Thabit. Despite his role on Uthman's committee, classical reports in Tafsir al-Tabari and Sahih al-Bukhari record his preservation of select Companion readings in Mecca alongside Ibn Abbas, such as 'in the seasons of Hajj' (fi mawāsimi l-hajj) in Surah 2:198.",
+    "virtues": [
+      {
+        "source_reference": "Sahih al-Bukhari 4987",
+        "sunnah_url": "https://sunnah.com/bukhari:4987",
+        "hadith_arabic": "فَأَمَرَ عُثْمَانُ زَيْدَ بْنَ ثَابِتٍ وَعَبْدَ اللَّهِ بْنَ الزُّبَيْرِ وَسَعِيدَ بْنَ الْعَاصِ وَعَبْدَ الرَّحْمَنِ بْنَ الْحَارِثِ بْنِ هِشَامٍ فَنَسَخُوهَا فِي الْمَصَاحِفِ",
+        "hadith_english": "Uthman ordered Zaid bin Thabit, Abdullah bin Az-Zubair, Sa'id bin Al-As, and Abdur-Rahman bin Harith bin Hisham, and they copied the manuscripts into the Mushafs."
+      }
+    ],
+    "bio_text": "Son of Az-Zubair bin Al-Awwam and Asma' bint Abi Bakr, nephew of Aisha, and one of the three Qurayshi members appointed by Caliph Uthman to copy the official codices alongside Zaid bin Thabit. Despite his role on Uthman's committee, classical reports in Tafsir al-Tabari and Sahih al-Bukhari record his preservation of select Companion readings in Mecca alongside Ibn Abbas, such as 'in the seasons of Hajj' (fi mawāsimi l-hajj) in Surah 2:198.",
+    "total_variants": 2,
+    "primary_variants": 0,
+    "shared_variants": 2,
+    "bukhari_muslim_count": 2,
+    "tafsir_count": 2
+  },
+  {
+    "id": "hafsa",
+    "name": "Hafsa",
+    "arabic_name": "حفصة بنت عمر",
+    "title": "Custodian of the Original Medinan Suhuf",
+    "era": "Died 45 AH (665 CE)",
+    "region": "Medina",
+    "tier": "Superstar",
+    "importance_rank": 7,
+    "bio_url": "https://sunnah.com/narrator/4050",
+    "biography": "Wife of Prophet Muhammad and daughter of Caliph Umar bin Al-Khattab. Hafsa was entrusted with the official Medinan sheets (Suhuf) compiled under Abu Bakr and Umar, which Uthman's committee later borrowed to produce the standard Uthmanic Mushaf before Marwan bin al-Hakam eventually destroyed her sheets after her death. In addition to those sheets, Hafsa commissioned her own personal Mushaf via her scribe Amr bin Rafi' (and Nafi'), explicitly instructing her scribe in Tafsir al-Tabari (nos. 4256, 4259) and Tafsir Ibn Kathir (on 2:238) to write 'and the afternoon prayer' in Surah 2:238.",
+    "virtues": [
+      {
+        "source_reference": "Sahih al-Bukhari 4987",
+        "sunnah_url": "https://sunnah.com/bukhari:4987",
+        "hadith_arabic": "فَأَرْسَلَ عُثْمَانُ إِلَى حَفْصَةَ أَنْ أَرْسِلِي إِلَيْنَا بِالصُّحُفِ نَنْسَخُهَا فِي الْمَصَاحِفِ ثُمَّ نَرُدُّهَا إِلَيْكِ. فَأَرْسَلَتْ بِهَا حَفْصَةُ إِلَى عُثْمَانَ",
+        "hadith_english": "Uthman sent a message to Hafsa saying: \"Send us the manuscripts of the Qur'an so that we may compile the Qur'anic materials in perfect copies and return the manuscripts to you.\" Hafsa sent them to Uthman."
+      }
+    ],
+    "bio_text": "Wife of Prophet Muhammad and daughter of Caliph Umar bin Al-Khattab. Hafsa was entrusted with the official Medinan sheets (Suhuf) compiled under Abu Bakr and Umar, which Uthman's committee later borrowed to produce the standard Uthmanic Mushaf before Marwan bin al-Hakam eventually destroyed her sheets after her death. In addition to those sheets, Hafsa commissioned her own personal Mushaf via her scribe Amr bin Rafi' (and Nafi'), explicitly instructing her scribe in Tafsir al-Tabari (nos. 4256, 4259) and Tafsir Ibn Kathir (on 2:238) to write 'and the afternoon prayer' in Surah 2:238.",
+    "total_variants": 1,
+    "primary_variants": 1,
+    "shared_variants": 0,
+    "bukhari_muslim_count": 0,
+    "tafsir_count": 1
+  },
+  {
+    "id": "abu-ad-darda",
+    "name": "Abu Ad-Darda",
+    "arabic_name": "أبو الدرداء",
+    "title": "Chief Quran Teacher of Damascus",
+    "era": "Died 32 AH (c. 652 CE)",
+    "region": "Damascus (Syria)",
+    "tier": "Superstar",
+    "importance_rank": 9,
+    "bio_url": "https://sunnah.com/narrator/5260",
+    "biography": "One of the four Companions who memorized and collected the entire Quran in Medina during the lifetime of Prophet Muhammad (Sahih al-Bukhari 5003). Sent by Caliph Umar to Damascus as its chief judge and Quranic instructor, Abu Ad-Darda preserved pre-Uthmanic prophetic recitations alongside the disciples of Abdullah bin Mas'ud. In Sahih al-Bukhari 4944 and Sahih Muslim 824a, he swears by Allah that both he and Ibn Mas'ud heard the Prophet recite Surah 92:3 simply as 'And by the male and the female' (omitting 'what created'), declaring that he would never follow those pressuring him to adopt the Uthmanic addition.",
+    "virtues": [
+      {
+        "source_reference": "Sahih al-Bukhari 5003",
+        "sunnah_url": "https://sunnah.com/bukhari:5003",
+        "hadith_arabic": "سَأَلْتُ أَنَسَ بْنَ مَالِكٍ: مَنْ جَمَعَ الْقُرْآنَ عَلَى عَهْدِ النَّبِيِّ صلى الله عليه وسلم؟ قَالَ: أَرْبَعَةٌ كُلُّهُمْ مِنَ الأَنْصَارِ أُبَىُّ بْنُ كَعْبٍ وَمُعَاذُ بْنُ جَبَلٍ وَزَيْدُ بْنُ ثَابِتٍ وَأَبُو زَيْدٍ",
+        "hadith_english": "Qatada narrated: I asked Anas bin Malik, \"Who collected the Qur'an during the lifetime of the Prophet (ﷺ)?\" He replied, \"Four, all of whom were from the Ansar: Ubayy bin Ka'b, Mu'adh bin Jabal, Zaid bin Thabit, and Abu Ad-Darda (or Abu Zaid).\""
+      }
+    ],
+    "bio_text": "One of the four Companions who memorized and collected the entire Quran in Medina during the lifetime of Prophet Muhammad (Sahih al-Bukhari 5003). Sent by Caliph Umar to Damascus as its chief judge and Quranic instructor, Abu Ad-Darda preserved pre-Uthmanic prophetic recitations alongside the disciples of Abdullah bin Mas'ud. In Sahih al-Bukhari 4944 and Sahih Muslim 824a, he swears by Allah that both he and Ibn Mas'ud heard the Prophet recite Surah 92:3 simply as 'And by the male and the female' (omitting 'what created'), declaring that he would never follow those pressuring him to adopt the Uthmanic addition.",
+    "total_variants": 1,
+    "primary_variants": 1,
+    "shared_variants": 0,
+    "bukhari_muslim_count": 1,
+    "tafsir_count": 1
+  },
+  {
+    "id": "abu-musa-al-ashari",
+    "name": "Abu Musa Al-Ashari",
+    "arabic_name": "أبو موسى الأشعري",
+    "title": "Master of the Basran Codex (Lubab al-Qulub)",
+    "era": "Died c. 42 AH (c. 662 CE)",
+    "region": "Basra (Iraq)",
+    "tier": "Superstar",
+    "importance_rank": 10,
+    "bio_url": "https://sunnah.com/narrator/5021",
+    "biography": "A celebrated Companion whose melodious recitation of the Quran was praised by Prophet Muhammad as having been gifted one of the 'flutes of the family of David' (Sahih al-Bukhari 5048). Serving as governor and teacher in Basra, his large personal Mushaf—affectionately titled Lubab al-Qulub ('The Quintessence of Hearts')—was the standard codex of Basra prior to Uthman's recension. In Sahih Muslim 1050, Abu Musa gathers three hundred Quran reciters of Basra and testifies that they used to recite two lengthy Surahs now absent from the Mushaf: one comparable in length and severity to Surah Bara'ah (9) containing the Valley of Gold verse, and another comparable to the Musabbihat.",
+    "virtues": [
+      {
+        "source_reference": "Sahih al-Bukhari 5048",
+        "sunnah_url": "https://sunnah.com/bukhari:5048",
+        "hadith_arabic": "يَا أَبَا مُوسَى لَقَدْ أُوتِيتَ مِزْمَارًا مِنْ مَزَامِيرِ آلِ دَاوُدَ",
+        "hadith_english": "The Prophet (ﷺ) said to him: \"O Abu Musa! You have truly been given one of the mazamir (sweet melodious flutes) of the family of David.\""
+      }
+    ],
+    "bio_text": "A celebrated Companion whose melodious recitation of the Quran was praised by Prophet Muhammad as having been gifted one of the 'flutes of the family of David' (Sahih al-Bukhari 5048). Serving as governor and teacher in Basra, his large personal Mushaf—affectionately titled Lubab al-Qulub ('The Quintessence of Hearts')—was the standard codex of Basra prior to Uthman's recension. In Sahih Muslim 1050, Abu Musa gathers three hundred Quran reciters of Basra and testifies that they used to recite two lengthy Surahs now absent from the Mushaf: one comparable in length and severity to Surah Bara'ah (9) containing the Valley of Gold verse, and another comparable to the Musabbihat.",
+    "total_variants": 1,
+    "primary_variants": 1,
+    "shared_variants": 0,
+    "bukhari_muslim_count": 1,
+    "tafsir_count": 1
+  },
+  {
+    "id": "ali-bin-abi-talib",
+    "name": "Ali bin Abi Talib",
+    "arabic_name": "علي بن أبي طالب",
+    "title": "The Fourth Caliph & Early Kufan Authority",
+    "era": "Died 40 AH (661 CE)",
+    "region": "Medina & Kufa",
+    "tier": "Superstar",
+    "importance_rank": 8,
+    "bio_url": "https://sunnah.com/narrator/5914",
+    "biography": "Cousin and son-in-law of Prophet Muhammad, the fourth Rashidun Caliph, and one of the earliest scribes of revelation. Classical exegetical works including Tafsir al-Tabari and Tafsir Ibn Kathir preserve specific non-Uthmanic readings transmitted from Ali alongside Abdullah bin Mas'ud and Umar, such as reading 'and indeed their scheme almost (wa-in kāda makruhum) removed the mountains' with the letter dāl in Surah 14:46.",
+    "virtues": [],
+    "bio_text": "Cousin and son-in-law of Prophet Muhammad, the fourth Rashidun Caliph, and one of the earliest scribes of revelation. Classical exegetical works including Tafsir al-Tabari and Tafsir Ibn Kathir preserve specific non-Uthmanic readings transmitted from Ali alongside Abdullah bin Mas'ud and Umar, such as reading 'and indeed their scheme almost (wa-in kāda makruhum) removed the mountains' with the letter dāl in Surah 14:46.",
+    "total_variants": 1,
+    "primary_variants": 0,
+    "shared_variants": 1,
+    "bukhari_muslim_count": 0,
+    "tafsir_count": 1
+  }
 ]

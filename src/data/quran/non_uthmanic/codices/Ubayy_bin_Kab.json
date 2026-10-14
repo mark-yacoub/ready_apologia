@@ -1,49 +1,1377 @@
 {
-  "person": "Ubayy bin Kab",
+  "id": "ubayy-bin-kab",
+  "name": "Ubayy bin Kab",
+  "arabic_name": "أبي بن كعب",
+  "title": "Master of the Reciters (Sayyid al-Qurra') & Syrian Codex",
+  "era": "Died c. 30 AH (c. 650 CE)",
+  "region": "Medina & Syria (al-Sham)",
+  "tier": "Superstar",
+  "importance_rank": 3,
+  "bio_url": "https://sunnah.com/narrator/396",
+  "biography": "A senior Medinan Companion from the Ansar whom Prophet Muhammad declared the greatest reciter of the Quran in the community ('aqra'ukum Ubayy') and to whom the Prophet personally recited by divine command (Sahih al-Bukhari 4959). Ubayy served as the Prophet's chief Medinan scribe and compiled a renowned personal Mushaf that circulated widely in Syria prior to the Uthmanic standardization. Classical sources (including Sahih Muslim 1050, Tafsir al-Tabari, and Tafsir Ibn Kathir) record that Ubayy's codex included two additional short supplicatory chapters (Surat al-Khal' and Surat al-Hafd), preserved the Valley of Gold passage, and contained numerous explicit legal and exegetical clauses such as 'to an appointed time' in 4:24 and 'and he is a father to them' in 33:6.",
   "virtues": [
     {
-      "hadith_arabic": "سَمِعْتُ النَّبِيَّ صلى الله عليه وسلم يَقُولُ: خُذُوا الْقُرْآنَ مِنْ أَرْبَعَةٍ مِنْ عَبْدِ اللَّهِ بْنِ مَسْعُودٍ ـ فَبَدَأَ بِهِ ـ وَسَالِمٍ مَوْلَى أَبِي حُذَيْفَةَ، وَمُعَاذِ بْنِ جَبَلٍ، وَأُبَىِّ بْنِ كَعْبٍ.",
-      "hadith_english": "I heard the Prophet (ﷺ) saying, 'Take (learn) the Qur'an from four: 'Abdullah bin Mas'ud, Salim, Mu'adh bin Jabal and Ubayy bin Ka'b.'",
-      "source_reference": "Sahih al-Bukhari 3808",
-      "sunnah_url": "https://sunnah.com/bukhari:3808"
+      "source_reference": "Sahih al-Bukhari 4960",
+      "sunnah_url": "https://sunnah.com/bukhari:4960",
+      "hadith_arabic": "قَالَ النَّبِيُّ صلى الله عليه وسلم لأُبَىٍّ: إِنَّ اللَّهَ أَمَرَنِي أَنْ أَقْرَأَ عَلَيْكَ ‏{‏لَمْ يَكُنِ الَّذِينَ كَفَرُوا مِنْ أَهْلِ الْكِتَابِ‏}‏‏.‏ قَالَ وَسَمَّانِي قَالَ: نَعَمْ. فَبَكَى",
+      "hadith_english": "The Prophet (ﷺ) said to Ubayy: \"Allah has ordered me to recite to you: 'Those who disbelieve from among the People of the Scripture' (Surah 98).\" Ubayy asked: \"Did He mention me by name to you?\" The Prophet answered: \"Yes.\" Whereupon Ubayy wept."
     },
     {
-      "hadith_arabic": "عَنْ أَنَسِ بْنِ مَالِكٍ ـ رضى الله عنه ـ قَالَ قَالَ النَّبِيُّ صلى الله عليه وسلم لأُبَىٍّ: إِنَّ اللَّهَ أَمَرَنِي أَنْ أَقْرَأَ عَلَيْكَ {لَمْ يَكُنِ الَّذِينَ كَفَرُوا}. قَالَ: وَسَمَّانِي؟ قَالَ: نَعَمْ. فَبَكَى.",
-      "hadith_english": "Narrated Anas bin Malik: The Prophet (ﷺ) said to Ubayy, 'Allah has ordered me to recite to you: Those who disbelieve (Surah 98).' Ubayy said, 'Did He mention my name?' The Prophet (ﷺ) said, 'Yes.' On hearing this, Ubayy wept.",
-      "source_reference": "Sahih al-Bukhari 3809",
-      "sunnah_url": "https://sunnah.com/bukhari:3809"
+      "source_reference": "Sahih al-Bukhari 5005",
+      "sunnah_url": "https://sunnah.com/bukhari:5005",
+      "hadith_arabic": "قَالَ عُمَرُ أُبَىٌّ أَقْرَؤُنَا وَإِنَّا لَنَدَعُ مِنْ لَحَنِ أُبَىٍّ، وَأُبَىٌّ يَقُولُ أَخَذْتُهُ مِنْ فِي رَسُولِ اللَّهِ صلى الله عليه وسلم فَلاَ أَتْرُكُهُ لِشَىْءٍ",
+      "hadith_english": "Umar said: \"Ubayy is the best of us in the recitation (of the Qur'an), yet we leave some of what Ubayy recites.\" Ubayy says: \"I have taken it directly from the mouth of Allah's Messenger (ﷺ), so I will not leave it for anything whatsoever.\""
     }
   ],
+  "bio_text": "A senior Medinan Companion from the Ansar whom Prophet Muhammad declared the greatest reciter of the Quran in the community ('aqra'ukum Ubayy') and to whom the Prophet personally recited by divine command (Sahih al-Bukhari 4959). Ubayy served as the Prophet's chief Medinan scribe and compiled a renowned personal Mushaf that circulated widely in Syria prior to the Uthmanic standardization. Classical sources (including Sahih Muslim 1050, Tafsir al-Tabari, and Tafsir Ibn Kathir) record that Ubayy's codex included two additional short supplicatory chapters (Surat al-Khal' and Surat al-Hafd), preserved the Valley of Gold passage, and contained numerous explicit legal and exegetical clauses such as 'to an appointed time' in 4:24 and 'and he is a father to them' in 33:6.",
+  "total_variants": 20,
+  "primary_variants": 11,
+  "shared_variants": 9,
+  "bukhari_muslim_count": 2,
+  "tafsir_count": 20,
   "variants": [
     {
-      "surah": "18",
+      "id": "codex-2-213-abdullah-bin-masud",
+      "surah": 2,
+      "ayah": 213,
+      "companion": "Abdullah bin Masud",
+      "companion_id": "abdullah-bin-masud",
+      "also_attributed_to": [
+        "Ubayy bin Kab",
+        "Ibn Abbas"
+      ],
+      "variant_type": "Phrase Addition",
+      "short_title": "'One Community, Then They Differed' in 2:213",
+      "plain_english_hook": "Surah 2:213 jumps directly from 'The people were one community' to 'Then God raised up the prophets'; Ibn Masud and Ubayy's codices supplied the missing link: 'then they differed'.",
+      "title": "Surah Al-Baqarah 2:213 — Addition of 'Fa-Ikhtalafu' in Ibn Mas'ud and Ubayy",
+      "diff_summary": "In the Uthmanic text of 2:213, the verse begins 'The people were (once) one community. Then God raised up the prophets as bringers of good news and warners' (كَانَ النَّاسُ أُمَّةً وَاحِدَةً فَبَعَثَ اللَّهُ النَّبِيِّينَ), leaving unstated why prophets were sent if humanity was united. Both al-Tabari and Ibn Kathir record via authentic chains from Ibn Abbas and Abu al-'Aliyah that the recitations of Abdullah bin Mas'ud and Ubayy bin Ka'b explicitly included 'then they differed' (كَانَ النَّاسُ أُمَّةً وَاحِدَةً فَاخْتَلَفُوا فَبَعَثَ اللَّهُ النَّبِيِّينَ), and also note that Ubayy read 'and so that they may be witnesses over the people on the Day of Resurrection' near the end of the verse.",
+      "uthmanic_target_arabic": "كَانَ ٱلنَّاسُ أُمَّةٗ وَٰحِدَةٗ فَبَعَثَ",
+      "uthmanic_target_english": "The people were (once) one community. Then God raised up",
+      "variant_target_arabic": "كَانَ ٱلنَّاسُ أُمَّةٗ وَٰحِدَةٗ فَٱخۡتَلَفُواْ فَبَعَثَ",
+      "variant_target_english": "The people were (once) one community, then they differed. Then God raised up",
+      "uthmanic_full_arabic": "كَانَ ٱلنَّاسُ أُمَّةٗ وَٰحِدَةٗ فَبَعَثَ ٱللَّهُ ٱلنَّبِيِّـۧنَ مُبَشِّرِينَ وَمُنذِرِينَ وَأَنزَلَ مَعَهُمُ ٱلۡكِتَٰبَ بِٱلۡحَقِّ لِيَحۡكُمَ بَيۡنَ ٱلنَّاسِ فِيمَا ٱخۡتَلَفُواْ فِيهِۚ وَمَا ٱخۡتَلَفَ فِيهِ إِلَّا ٱلَّذِينَ أُوتُوهُ مِنۢ بَعۡدِ مَا جَآءَتۡهُمُ ٱلۡبَيِّنَٰتُ بَغۡيَۢا بَيۡنَهُمۡۖ فَهَدَى ٱللَّهُ ٱلَّذِينَ ءَامَنُواْ لِمَا ٱخۡتَلَفُواْ فِيهِ مِنَ ٱلۡحَقِّ بِإِذۡنِهِۦۗ وَٱللَّهُ يَهۡدِي مَن يَشَآءُ إِلَىٰ صِرَٰطٖ مُّسۡتَقِيمٍ",
+      "uthmanic_full_english": "The people were (once) one community. Then God raised up the prophets as bringers of good news and warners, and with them He sent down the Book with the truth to judge among the people concerning their differences. Only those who had been given it differed concerning it, after the clear signs had come to them, (because of) envy among themselves. And God guided those who believed to the truth concerning which they differed, by His permission. God guides whomever He pleases to a straight path.",
+      "variant_full_arabic": "كَانَ ٱلنَّاسُ أُمَّةٗ وَٰحِدَةٗ فَٱخۡتَلَفُواْ فَبَعَثَ ٱللَّهُ ٱلنَّبِيِّـۧنَ مُبَشِّرِينَ وَمُنذِرِينَ وَأَنزَلَ مَعَهُمُ ٱلۡكِتَٰبَ بِٱلۡحَقِّ لِيَحۡكُمَ بَيۡنَ ٱلنَّاسِ فِيمَا ٱخۡتَلَفُواْ فِيهِۚ وَمَا ٱخۡتَلَفَ فِيهِ إِلَّا ٱلَّذِينَ أُوتُوهُ مِنۢ بَعۡدِ مَا جَآءَتۡهُمُ ٱلۡبَيِّنَٰتُ بَغۡيَۢا بَيۡنَهُمۡۖ فَهَدَى ٱللَّهُ ٱلَّذِينَ ءَامَنُواْ لِمَا ٱخۡتَلَفُواْ فِيهِ مِنَ ٱلۡحَقِّ بِإِذۡنِهِۦۗ وَٱللَّهُ يَهۡدِي مَن يَشَآءُ إِلَىٰ صِرَٰطٖ مُّسۡتَقِيمٍ",
+      "variant_full_english": "The people were (once) one community, then they differed. Then God raised up the prophets as bringers of good news and warners, and with them He sent down the Book with the truth to judge among the people concerning their differences. Only those who had been given it differed concerning it, after the clear signs had come to them, (because of) envy among themselves. And God guided those who believed to the truth concerning which they differed, by His permission. God guides whomever He pleases to a straight path.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Classical scholars explain that the Uthmanic text relies on rhetorical ellipsis (idmar) where 'then they differed' is understood from the later phrase 'to judge among the people concerning their differences', while treating the Companion wording as an explanatory gloss.",
+        "primary_source_evaluation": "Both al-Tabari and Ibn Kathir cite the authenticated report of Ibn Abbas (graded sahih by al-Hakim) appealing directly to the recitation of Abdullah bin Mas'ud and Ubayy bin Ka'b ('fa-ikhtalafu') to supply the verb required by the narrative logic of the verse."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 26,
+        "universal_scope_20": 18,
+        "classical_concession_15": 12,
+        "cuj_score": 89
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/2/213/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura2-aya213.html",
+          "arabic_excerpt": "4048 - حدثنا محمد بن بشار، قال: حدثنا أبو داود، قال: حدثنا همام بن منبه، عن عكرمة، عن ابن عباس، قال: كان بين نوح وآدم عشرة قرون، كلهم على شريعة من الحق، فاختلفوا، فبعث الله النبيين مبشرين ومنذرين، قال: وكذلك هي في قراءة عبد الله \" كان الناس أمة واحدة فاختلفوا \". وهي في قراءة أبي بن كعب: ( وليكونوا شهداء على الناس ) يوم القيامة ( والله يهدي من يشاء إلى صراط مستقيم ).",
+          "english_excerpt": "4048 - Muhammad bin Bashshar narrated to us... from 'Ikrimah, from Ibn 'Abbas, who said: Between Nuh and Adam were ten generations, all of them upon a law of truth, then they differed, so Allah sent the prophets as bringers of good news and warners. He said: And likewise it is in the recitation of 'Abdullah [Ibn Mas'ud]: \"The people were one community, then they differed.\" And it is in the recitation of Ubayy bin Ka'b: {(And so that they would be witnesses over the people)} on the Day of Resurrection {(And God guides whomever He pleases to a straight path)}.",
+          "highlight_arabic": "في قراءة عبد الله \" كان الناس أمة واحدة فاختلفوا \"",
+          "highlight_english": "in the recitation of 'Abdullah [Ibn Mas'ud]: \"The people were one community, then they differed.\""
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/2/213/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura2-aya213.html",
+          "arabic_excerpt": "عن عكرمة ، عن ابن عباس ، قال : كان بين نوح وآدم عشرة قرون ، كلهم على شريعة من الحق . فاختلفوا ، فبعث الله النبيين مبشرين ومنذرين . قال : وكذلك هي في قراءة عبد الله : \" كان الناس أمة واحدة فاختلفوا \" . ورواه الحاكم في مستدركه ، من حديث بندار عن محمد بن بشار . ثم قال : صحيح ولم يخرجاه . وكذا روى أبو جعفر الرازي ، عن أبي العالية ، عن أبي بن كعب : أنه كان يقرؤها : \" كان الناس أمة واحدة فاختلفوا فبعث الله النبيين مبشرين ومنذرين \" .",
+          "english_excerpt": "From 'Ikrimah, from Ibn 'Abbas, who said: \"Between Nuh and Adam were ten generations, all of them upon a law of truth. Then they differed, so Allah sent the prophets as bringers of good news and warners.\" He said: \"And likewise it is in the recitation of 'Abdullah [Ibn Mas'ud]: 'The people were one community, then they differed.'\" Al-Hakim recorded it in his Mustadrak... and said: \"It is Sahih, though they (Al-Bukhari and Muslim) did not record it.\" Similarly, Abu Ja'far Ar-Razi narrated from Abu Al-'Aliyah, from Ubayy bin Ka'b, that he used to recite it: \"The people were one community, then they differed, so Allah sent the prophets as bringers of good news and warners.\"",
+          "highlight_arabic": "في قراءة عبد الله : \" كان الناس أمة واحدة فاختلفوا \"",
+          "highlight_english": "in the recitation of 'Abdullah [Ibn Mas'ud]: 'The people were one community, then they differed.'"
+        }
+      ],
+      "global_rank": 40,
+      "companion_codex": "Abdullah bin Masud",
+      "variant_arabic": "كَانَ ٱلنَّاسُ أُمَّةٗ وَٰحِدَةٗ فَٱخۡتَلَفُواْ فَبَعَثَ ٱللَّهُ ٱلنَّبِيِّـۧنَ مُبَشِّرِينَ وَمُنذِرِينَ وَأَنزَلَ مَعَهُمُ ٱلۡكِتَٰبَ بِٱلۡحَقِّ لِيَحۡكُمَ بَيۡنَ ٱلنَّاسِ فِيمَا ٱخۡتَلَفُواْ فِيهِۚ وَمَا ٱخۡتَلَفَ فِيهِ إِلَّا ٱلَّذِينَ أُوتُوهُ مِنۢ بَعۡدِ مَا جَآءَتۡهُمُ ٱلۡبَيِّنَٰتُ بَغۡيَۢا بَيۡنَهُمۡۖ فَهَدَى ٱللَّهُ ٱلَّذِينَ ءَامَنُواْ لِمَا ٱخۡتَلَفُواْ فِيهِ مِنَ ٱلۡحَقِّ بِإِذۡنِهِۦۗ وَٱللَّهُ يَهۡدِي مَن يَشَآءُ إِلَىٰ صِرَٰطٖ مُّسۡتَقِيمٍ",
+      "variant_english": "The people were (once) one community, then they differed. Then God raised up the prophets as bringers of good news and warners, and with them He sent down the Book with the truth to judge among the people concerning their differences. Only those who had been given it differed concerning it, after the clear signs had come to them, (because of) envy among themselves. And God guided those who believed to the truth concerning which they differed, by His permission. God guides whomever He pleases to a straight path.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (2:213)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (2:213)",
+      "sunnah_url": "/quran/2/213/tafsir/tabari",
+      "hadith_arabic": "4048 - حدثنا محمد بن بشار، قال: حدثنا أبو داود، قال: حدثنا همام بن منبه، عن عكرمة، عن ابن عباس، قال: كان بين نوح وآدم عشرة قرون، كلهم على شريعة من الحق، فاختلفوا، فبعث الله النبيين مبشرين ومنذرين، قال: وكذلك هي في قراءة عبد الله \" كان الناس أمة واحدة فاختلفوا \". وهي في قراءة أبي بن كعب: ( وليكونوا شهداء على الناس ) يوم القيامة ( والله يهدي من يشاء إلى صراط مستقيم ).",
+      "hadith_english": "4048 - Muhammad bin Bashshar narrated to us... from 'Ikrimah, from Ibn 'Abbas, who said: Between Nuh and Adam were ten generations, all of them upon a law of truth, then they differed, so Allah sent the prophets as bringers of good news and warners. He said: And likewise it is in the recitation of 'Abdullah [Ibn Mas'ud]: \"The people were one community, then they differed.\" And it is in the recitation of Ubayy bin Ka'b: {(And so that they would be witnesses over the people)} on the Day of Resurrection {(And God guides whomever He pleases to a straight path)}.",
+      "rank": 1,
+      "attribution_role": "shared"
+    },
+    {
+      "id": "codex-2-229-ubayy-bin-kab",
+      "surah": 2,
+      "ayah": 229,
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [],
+      "variant_type": "Word Substitution",
+      "short_title": "2:229 — 'Unless They Think' vs. 'Unless They Fear'",
+      "plain_english_hook": "In the divorce law of 2:229, an ancient Mushaf of Ubayy bin Ka'b replaced 'unless the two of them fear... But if you fear' with 'unless the two of them think... But if the two of them think.'",
+      "title": "Substitution of 'Think' (Yaẓunnā / Ẓannā) for 'Fear' in Ubayy's Mushaf on 2:229",
+      "diff_summary": "In Surah 2:229, the Uthmanic text governs khul' divorce with the clauses 'إِلَّآ أَن يَخَافَآ أَلَّا يُقِيمَا حُدُودَ ٱللَّهِۖ فَإِنۡ خِفۡتُمۡ أَلَّا يُقِيمَا حُدُودَ ٱللَّهِ' ('unless the two of them fear that they cannot maintain the limits (set by) God. But if you fear that they cannot maintain the limits (set by) God'). Al-Tabari (3797) records that Maymun bin Mihran and Ayyub inspected an ancient Mushaf of Ubayy bin Ka'b and found it written: 'إِلَّا أَنْ يَظُنَّا أَلَّا يُقِيمَا حُدُودَ اللَّهِ فَإِنْ ظَنَّا أَلَّا يُقِيمَا حُدُودَ اللَّهِ' ('unless the two of them think... But if the two of them think'), while Ibn Mas'ud read 'إِلَّا أَنْ تَخَافُوا' ('unless you [plural] fear').",
+      "uthmanic_target_arabic": "إِلَّآ أَن يَخَافَآ أَلَّا يُقِيمَا حُدُودَ ٱللَّهِۖ فَإِنۡ خِفۡتُمۡ أَلَّا يُقِيمَا حُدُودَ ٱللَّهِ",
+      "uthmanic_target_english": "unless the two of them fear that they cannot maintain the limits (set by) God. But if you fear that they cannot maintain the limits (set by) God",
+      "variant_target_arabic": "إِلَّا أَنْ يَظُنَّا أَلَّا يُقِيمَا حُدُودَ اللَّهِ فَإِنْ ظَنَّا أَلَّا يُقِيمَا حُدُودَ اللَّهِ",
+      "variant_target_english": "unless the two of them think that they cannot maintain the limits (set by) God. But if the two of them think that they cannot maintain the limits (set by) God",
+      "uthmanic_full_arabic": "ٱلطَّلَٰقُ مَرَّتَانِۖ فَإِمۡسَاكُۢ بِمَعۡرُوفٍ أَوۡ تَسۡرِيحُۢ بِإِحۡسَٰنٖۗ وَلَا يَحِلُّ لَكُمۡ أَن تَأۡخُذُواْ مِمَّآ ءَاتَيۡتُمُوهُنَّ شَيۡـًٔا إِلَّآ أَن يَخَافَآ أَلَّا يُقِيمَا حُدُودَ ٱللَّهِۖ فَإِنۡ خِفۡتُمۡ أَلَّا يُقِيمَا حُدُودَ ٱللَّهِ فَلَا جُنَاحَ عَلَيۡهِمَا فِيمَا ٱفۡتَدَتۡ بِهِۦۗ تِلۡكَ حُدُودُ ٱللَّهِ فَلَا تَعۡتَدُوهَاۚ وَمَن يَتَعَدَّ حُدُودَ ٱللَّهِ فَأُوْلَـٰٓئِكَ هُمُ ٱلظَّـٰلِمُونَ",
+      "uthmanic_full_english": "Divorce (may take place) twice, (with the option of) retaining (them) rightfully, or sending (them) away with kindness. It is not permitted to you to take (back) anything of what you have given them, unless the two of them fear that they cannot maintain the limits (set by) God. But if you fear that they cannot maintain the limits (set by) God, (there is) no blame on either of them in what she ransoms (herself) with. Those are the limits (set by) God, so do not transgress them. Whoever transgresses the limits (set by) God, those – they are the evildoers.",
+      "variant_full_arabic": "ٱلطَّلَٰقُ مَرَّتَانِۖ فَإِمۡسَاكُۢ بِمَعۡرُوفٍ أَوۡ تَسۡرِيحُۢ بِإِحۡسَٰنٖۗ وَلَا يَحِلُّ لَكُمۡ أَن تَأۡخُذُواْ مِمَّآ ءَاتَيۡتُمُوهُنَّ شَيۡـًٔا إِلَّا أَنْ يَظُنَّا أَلَّا يُقِيمَا حُدُودَ اللَّهِ فَإِنْ ظَنَّا أَلَّا يُقِيمَا حُدُودَ اللَّهِ فَلَا جُنَاحَ عَلَيۡهِمَا فِيمَا ٱفۡتَدَتۡ بِهِۦۗ تِلۡكَ حُدُودُ ٱللَّهِ فَلَا تَعۡتَدُوهَاۚ وَمَن يَتَعَدَّ حُدُودَ ٱللَّهِ فَأُوْلَـٰٓئِكَ هُمُ ٱلظَّـٰلِمُونَ",
+      "variant_full_english": "Divorce (may take place) twice, (with the option of) retaining (them) rightfully, or sending (them) away with kindness. It is not permitted to you to take (back) anything of what you have given them, unless the two of them think that they cannot maintain the limits (set by) God. But if the two of them think that they cannot maintain the limits (set by) God, (there is) no blame on either of them in what she ransoms (herself) with. Those are the limits (set by) God, so do not transgress them. Whoever transgresses the limits (set by) God, those – they are the evildoers.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari argues that classical Arabic poetry occasionally uses 'fear' (khawf) and 'presumption/thought' (ẓann) interchangeably when referring to anticipated future outcomes.",
+        "primary_source_evaluation": "In Tabari 3797, Maymun bin Mihran and Ayyub al-Sakhtiyani report physically examining an ancient, reliably transmitted Mushaf of Ubayy bin Ka'b that both replaced the verb root (kh-w-f to ẓ-n-n) and kept the second verb in the dual ('if the two of them think') rather than switching to the second-person plural ('if you fear')."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 31,
+        "undeniability_gold_sources_30": 26,
+        "universal_scope_20": 17,
+        "classical_concession_15": 10,
+        "cuj_score": 84
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/2/229/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura2-aya229.html",
+          "arabic_excerpt": "وقد ذكر أن ذلك في قراءة أبي بن كعب : \" إلا أن يظنا ألا يقيما حدود الله \" . 3797 - حدثنا الحسن بن يحيى , قال : أخبرنا عبد الرزاق , قال : أخبرنا معمر , قال : أخبرني ثور , عن ميمون بن مهران , قال : في حرف أبي بن كعب إن الفداء تطليقة . قال : فذكرت ذلك لأيوب , فأتينا رجلا عنده مصحف قديم لأبي خرج من ثقة , فقرأناه فإذا فيه : \" إلا أن يظنا ألا يقيما حدود الله , فإن ظنا ألا يقيما حدود الله فلا جناح عليهما فيما افتدت به \" .",
+          "english_excerpt": "It has been mentioned that this is in the recitation of Ubayy bin Ka'b: \"unless they both presume that they cannot maintain the limits (set by) God\". 3797 — Al-Hasan bin Yahya narrated to us, he said: 'Abd al-Razzaq informed us, he said: Ma'mar informed us, he said: Thawr informed me, from Maymun bin Mihran, who said: In the mode of Ubayy bin Ka'b, the ransom is one pronouncement of divorce. He said: I mentioned that to Ayyub, so we came to a man who had an old Mushaf belonging to Ubayy which emerged from a trustworthy person, and we read it, and in it was: \"unless they both presume that they cannot maintain the limits (set by) God. But if they presume that they cannot maintain the limits (set by) God, there is no blame on either of them in what she ransoms herself with\".",
+          "highlight_arabic": "فأتينا رجلا عنده مصحف قديم لأبي خرج من ثقة , فقرأناه فإذا فيه : \" إلا أن يظنا ألا يقيما حدود الله , فإن ظنا ألا يقيما حدود الله فلا جناح عليهما فيما افتدت به \"",
+          "highlight_english": "so we came to a man who had an old Mushaf belonging to Ubayy which emerged from a trustworthy person, and we read it, and in it was: \"unless they both presume that they cannot maintain the limits (set by) God. But if they presume that they cannot maintain the limits (set by) God, there is no blame on either of them in what she ransoms herself with\""
+        }
+      ],
+      "global_rank": 61,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "ٱلطَّلَٰقُ مَرَّتَانِۖ فَإِمۡسَاكُۢ بِمَعۡرُوفٍ أَوۡ تَسۡرِيحُۢ بِإِحۡسَٰنٖۗ وَلَا يَحِلُّ لَكُمۡ أَن تَأۡخُذُواْ مِمَّآ ءَاتَيۡتُمُوهُنَّ شَيۡـًٔا إِلَّا أَنْ يَظُنَّا أَلَّا يُقِيمَا حُدُودَ اللَّهِ فَإِنْ ظَنَّا أَلَّا يُقِيمَا حُدُودَ اللَّهِ فَلَا جُنَاحَ عَلَيۡهِمَا فِيمَا ٱفۡتَدَتۡ بِهِۦۗ تِلۡكَ حُدُودُ ٱللَّهِ فَلَا تَعۡتَدُوهَاۚ وَمَن يَتَعَدَّ حُدُودَ ٱللَّهِ فَأُوْلَـٰٓئِكَ هُمُ ٱلظَّـٰلِمُونَ",
+      "variant_english": "Divorce (may take place) twice, (with the option of) retaining (them) rightfully, or sending (them) away with kindness. It is not permitted to you to take (back) anything of what you have given them, unless the two of them think that they cannot maintain the limits (set by) God. But if the two of them think that they cannot maintain the limits (set by) God, (there is) no blame on either of them in what she ransoms (herself) with. Those are the limits (set by) God, so do not transgress them. Whoever transgresses the limits (set by) God, those – they are the evildoers.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (2:229)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (2:229)",
+      "sunnah_url": "/quran/2/229/tafsir/tabari",
+      "hadith_arabic": "وقد ذكر أن ذلك في قراءة أبي بن كعب : \" إلا أن يظنا ألا يقيما حدود الله \" . 3797 - حدثنا الحسن بن يحيى , قال : أخبرنا عبد الرزاق , قال : أخبرنا معمر , قال : أخبرني ثور , عن ميمون بن مهران , قال : في حرف أبي بن كعب إن الفداء تطليقة . قال : فذكرت ذلك لأيوب , فأتينا رجلا عنده مصحف قديم لأبي خرج من ثقة , فقرأناه فإذا فيه : \" إلا أن يظنا ألا يقيما حدود الله , فإن ظنا ألا يقيما حدود الله فلا جناح عليهما فيما افتدت به \" .",
+      "hadith_english": "It has been mentioned that this is in the recitation of Ubayy bin Ka'b: \"unless they both presume that they cannot maintain the limits (set by) God\". 3797 — Al-Hasan bin Yahya narrated to us, he said: 'Abd al-Razzaq informed us, he said: Ma'mar informed us, he said: Thawr informed me, from Maymun bin Mihran, who said: In the mode of Ubayy bin Ka'b, the ransom is one pronouncement of divorce. He said: I mentioned that to Ayyub, so we came to a man who had an old Mushaf belonging to Ubayy which emerged from a trustworthy person, and we read it, and in it was: \"unless they both presume that they cannot maintain the limits (set by) God. But if they presume that they cannot maintain the limits (set by) God, there is no blame on either of them in what she ransoms herself with\".",
+      "rank": 1,
+      "attribution_role": "primary"
+    },
+    {
+      "id": "codex-3-7-abdullah-bin-masud",
+      "surah": 3,
+      "ayah": 7,
+      "companion": "Abdullah bin Masud",
+      "companion_id": "abdullah-bin-masud",
+      "also_attributed_to": [
+        "Ubayy bin Kab",
+        "Ibn Abbas"
+      ],
+      "variant_type": "Word Substitution",
+      "short_title": "Who Knows the Ambiguous Verses in 3:7?",
+      "plain_english_hook": "Scholars debated for centuries where the sentence breaks in 3:7; Ibn Masud and Ubayy's codices worded the clause so that only God knows the ambiguous verses' interpretation.",
+      "title": "Surah Al 'Imran 3:7 — Syntactic Separation of 'Those Firm in Knowledge'",
+      "diff_summary": "In the Uthmanic text of 3:7 (وَمَا يَعْلَمُ تَأْوِيلَهُ إِلَّا اللَّهُ وَالرَّاسِخُونَ فِي الْعِلْمِ يَقُولُونَ آمَنَّا بِهِ), exegetes and theologians were divided over whether 'and those firmly grounded in knowledge' is conjoined to 'God' (meaning scholars also know the interpretation of ambiguous verses) or begins a new sentence. Both al-Tabari and Ibn Kathir record that Abdullah bin Mas'ud's reading was 'Its interpretation is only with God, and the ones firmly grounded in knowledge say, We believe in it' (إِنْ تَأْوِيلُهُ إِلَّا عِنْدَ اللَّهِ وَالرَّاسِخُونَ فِي الْعِلْمِ يَقُولُونَ آمَنَّا بِهِ), while Ubayy bin Ka'b read 'and those firmly grounded in knowledge say' (وَيَقُولُ الرَّاسِخُونَ فِي الْعِلْمِ), both syntactically precluding conjunction with God.",
+      "uthmanic_target_arabic": "وَمَا يَعۡلَمُ تَأۡوِيلَهُۥٓ إِلَّا ٱللَّهُۗ",
+      "uthmanic_target_english": "No one knows its interpretation except God.",
+      "variant_target_arabic": "إِنْ تَأْوِيلُهُ إِلَّا عِنْدَ اللَّهِ",
+      "variant_target_english": "Its interpretation is only with God.",
+      "uthmanic_full_arabic": "هُوَ ٱلَّذِيٓ أَنزَلَ عَلَيۡكَ ٱلۡكِتَٰبَ مِنۡهُ ءَايَٰتٞ مُّحۡكَمَٰتٌ هُنَّ أُمُّ ٱلۡكِتَٰبِ وَأُخَرُ مُتَشَٰبِهَٰتٞۖ فَأَمَّا ٱلَّذِينَ فِي قُلُوبِهِمۡ زَيۡغٞ فَيَتَّبِعُونَ مَا تَشَٰبَهَ مِنۡهُ ٱبۡتِغَآءَ ٱلۡفِتۡنَةِ وَٱبۡتِغَآءَ تَأۡوِيلِهِۦۖ وَمَا يَعۡلَمُ تَأۡوِيلَهُۥٓ إِلَّا ٱللَّهُۗ وَٱلرَّـٰسِخُونَ فِي ٱلۡعِلۡمِ يَقُولُونَ ءَامَنَّا بِهِۦ كُلّٞ مِّنۡ عِندِ رَبِّنَاۗ وَمَا يَذَّكَّرُ إِلَّآ أُوْلُواْ ٱلۡأَلۡبَٰبِ",
+      "uthmanic_full_english": "He (it is) who has sent down on you the Book, of which some verses are clearly composed – they are the mother of the Book – but others are ambiguous. As for those in whose hearts (there is) a turning aside, they follow the ambiguous part of it, seeking (to cause) trouble and seeking its interpretation. No one knows its interpretation except God. And (as for) the ones firmly grounded in knowledge, they say, ‘We believe in it. All (of it) is from our Lord.’ Yet no one takes heed except those with understanding.",
+      "variant_full_arabic": "هُوَ ٱلَّذِيٓ أَنزَلَ عَلَيۡكَ ٱلۡكِتَٰبَ مِنۡهُ ءَايَٰتٞ مُّحۡكَمَٰتٌ هُنَّ أُمُّ ٱلۡكِتَٰبِ وَأُخَرُ مُتَشَٰبِهَٰتٞۖ فَأَمَّا ٱلَّذِينَ فِي قُلُوبِهِمۡ زَيۡغٞ فَيَتَّبِعُونَ مَا تَشَٰبَهَ مِنۡهُ ٱبۡتِغَآءَ ٱلۡفِتۡنَةِ وَٱبۡتِغَآءَ تَأۡوِيلِهِۦۖ إِنْ تَأْوِيلُهُ إِلَّا عِنْدَ اللَّهِ وَٱلرَّـٰسِخُونَ فِي ٱلۡعِلۡمِ يَقُولُونَ ءَامَنَّا بِهِۦ كُلّٞ مِّنۡ عِندِ رَبِّنَاۗ وَمَا يَذَّكَّرُ إِلَّآ أُوْلُواْ ٱلۡأَلۡبَٰبِ",
+      "variant_full_english": "He (it is) who has sent down on you the Book, of which some verses are clearly composed – they are the mother of the Book – but others are ambiguous. As for those in whose hearts (there is) a turning aside, they follow the ambiguous part of it, seeking (to cause) trouble and seeking its interpretation. Its interpretation is only with God. And (as for) the ones firmly grounded in knowledge, they say, ‘We believe in it. All (of it) is from our Lord.’ Yet no one takes heed except those with understanding.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Classical commentators cite the readings of Ibn Mas'ud and Ubayy bin Ka'b as explanatory recitations (qira'at tafsiriyya) proving that a mandatory pause (waqf) falls after the name of God in the Uthmanic text.",
+        "primary_source_evaluation": "Both al-Tabari and Ibn Kathir explicitly rely on the non-Uthmanic wording of Ibn Mas'ud ('in ta'wiluhu illa 'inda Allah') and Ubayy bin Ka'b ('wa yaqulu al-rasikhuna') to settle a foundational theological dispute over whether human scholars can know the ta'wil of the mutashabihat."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 26,
+        "universal_scope_20": 19,
+        "classical_concession_15": 13,
+        "cuj_score": 91
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/3/7/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura3-aya7.html",
+          "arabic_excerpt": "وهو فيما بلغني مع ذلك في قراءة أبي : \" ويقول الراسخون في العلم \" كما ذكرناه عن ابن عباس أنه كان يقرؤه ; وفي قراءة عبد الله : إن تأويله إلا عند الله \" والراسخون في العلم يقولون \" .",
+          "english_excerpt": "And that is, along with that, according to what reached me regarding the recitation of Ubayy: \"and the ones firmly grounded in knowledge say\", just as we mentioned it from Ibn 'Abbas that he used to recite it; and in the recitation of 'Abdullah: \"its interpretation is not except with God, and the ones firmly grounded in knowledge say\".",
+          "highlight_arabic": "وفي قراءة عبد الله : إن تأويله إلا عند الله \" والراسخون في العلم يقولون \"",
+          "highlight_english": "in the recitation of 'Abdullah: \"its interpretation is not except with God, and the ones firmly grounded in knowledge say\""
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/3/7/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura3-aya7.html",
+          "arabic_excerpt": "وحكى ابن جرير أن في قراءة عبد الله بن مسعود : \" إن تأويله إلا عند الله والراسخون في العلم يقولون آمنا به \" . وكذا عن أبي بن كعب . واختار ابن جرير هذا القول .",
+          "english_excerpt": "Ibn Jarir narrated that in the recitation of 'Abdullah bin Mas'ud it is: \"Its interpretation is only with Allah, and those who are firmly grounded in knowledge say: 'We believe in it.'\" And similarly it was narrated from Ubayy bin Ka'b. Ibn Jarir preferred this opinion.",
+          "highlight_arabic": "في قراءة عبد الله بن مسعود : \" إن تأويله إلا عند الله والراسخون في العلم يقولون آمنا به \"",
+          "highlight_english": "in the recitation of 'Abdullah bin Mas'ud it is: \"Its interpretation is only with Allah, and those who are firmly grounded in knowledge say: 'We believe in it.'\""
+        }
+      ],
+      "global_rank": 31,
+      "companion_codex": "Abdullah bin Masud",
+      "variant_arabic": "هُوَ ٱلَّذِيٓ أَنزَلَ عَلَيۡكَ ٱلۡكِتَٰبَ مِنۡهُ ءَايَٰتٞ مُّحۡكَمَٰتٌ هُنَّ أُمُّ ٱلۡكِتَٰبِ وَأُخَرُ مُتَشَٰبِهَٰتٞۖ فَأَمَّا ٱلَّذِينَ فِي قُلُوبِهِمۡ زَيۡغٞ فَيَتَّبِعُونَ مَا تَشَٰبَهَ مِنۡهُ ٱبۡتِغَآءَ ٱلۡفِتۡنَةِ وَٱبۡتِغَآءَ تَأۡوِيلِهِۦۖ إِنْ تَأْوِيلُهُ إِلَّا عِنْدَ اللَّهِ وَٱلرَّـٰسِخُونَ فِي ٱلۡعِلۡمِ يَقُولُونَ ءَامَنَّا بِهِۦ كُلّٞ مِّنۡ عِندِ رَبِّنَاۗ وَمَا يَذَّكَّرُ إِلَّآ أُوْلُواْ ٱلۡأَلۡبَٰبِ",
+      "variant_english": "He (it is) who has sent down on you the Book, of which some verses are clearly composed – they are the mother of the Book – but others are ambiguous. As for those in whose hearts (there is) a turning aside, they follow the ambiguous part of it, seeking (to cause) trouble and seeking its interpretation. Its interpretation is only with God. And (as for) the ones firmly grounded in knowledge, they say, ‘We believe in it. All (of it) is from our Lord.’ Yet no one takes heed except those with understanding.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (3:7)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (3:7)",
+      "sunnah_url": "/quran/3/7/tafsir/tabari",
+      "hadith_arabic": "وهو فيما بلغني مع ذلك في قراءة أبي : \" ويقول الراسخون في العلم \" كما ذكرناه عن ابن عباس أنه كان يقرؤه ; وفي قراءة عبد الله : إن تأويله إلا عند الله \" والراسخون في العلم يقولون \" .",
+      "hadith_english": "And that is, along with that, according to what reached me regarding the recitation of Ubayy: \"and the ones firmly grounded in knowledge say\", just as we mentioned it from Ibn 'Abbas that he used to recite it; and in the recitation of 'Abdullah: \"its interpretation is not except with God, and the ones firmly grounded in knowledge say\".",
+      "rank": 1,
+      "attribution_role": "shared"
+    },
+    {
+      "id": "codex-3-81-abdullah-bin-masud",
+      "surah": 3,
+      "ayah": 81,
+      "companion": "Abdullah bin Masud",
+      "companion_id": "abdullah-bin-masud",
+      "also_attributed_to": [
+        "Ubayy bin Kab"
+      ],
+      "variant_type": "Word Substitution",
+      "short_title": "3:81 — Covenant of the Book's People vs. Prophets",
+      "plain_english_hook": "Where the standard Quran says God took a covenant with 'the prophets,' Ibn Mas'ud and Ubayy bin Ka'b read 'those who were given the Book,' with Mujahid calling 'prophets' a scribal error.",
+      "title": "Substitution of 'Those Given the Book' for 'The Prophets' in 3:81",
+      "diff_summary": "In Surah 3:81, the Uthmanic text reads 'وَإِذۡ أَخَذَ ٱللَّهُ مِيثَٰقَ ٱلنَّبِيِّـۧنَ' ('when God took a covenant with the prophets'). Al-Tabari records via two authentic chains from Mujahid (7323–7324) and from al-Rabi' bin Anas (7325) that in the recitations of Abdullah bin Mas'ud and Ubayy bin Ka'b it read 'وَإِذْ أَخَذَ اللَّهُ مِيثَاقَ الَّذِينَ أُوتُوا الْكِتَابَ' ('when God took a covenant with those who were given the Book').",
+      "uthmanic_target_arabic": "مِيثَٰقَ ٱلنَّبِيِّـۧنَ",
+      "uthmanic_target_english": "a covenant with the prophets",
+      "variant_target_arabic": "مِيثَاقَ الَّذِينَ أُوتُوا الْكِتَابَ",
+      "variant_target_english": "a covenant with those who were given the Book",
+      "uthmanic_full_arabic": "وَإِذۡ أَخَذَ ٱللَّهُ مِيثَٰقَ ٱلنَّبِيِّـۧنَ لَمَآ ءَاتَيۡتُكُم مِّن كِتَٰبٖ وَحِكۡمَةٖ ثُمَّ جَآءَكُمۡ رَسُولٞ مُّصَدِّقٞ لِّمَا مَعَكُمۡ لَتُؤۡمِنُنَّ بِهِۦ وَلَتَنصُرُنَّهُۥۚ قَالَ ءَأَقۡرَرۡتُمۡ وَأَخَذۡتُمۡ عَلَىٰ ذَٰلِكُمۡ إِصۡرِيۖ قَالُوٓاْ أَقۡرَرۡنَاۚ قَالَ فَٱشۡهَدُواْ وَأَنَا۠ مَعَكُم مِّنَ ٱلشَّـٰهِدِينَ",
+      "uthmanic_full_english": "(Remember) when God took a covenant with the prophets: ‘Whatever indeed I have given you of the Book and wisdom, when a messenger comes to you confirming what is with you, you are to believe in him and you are to help him.’ He said, ‘Do you agree and accept My burden on that (condition)?’ They said, ‘We agree.’ He said, ‘Bear witness, and I shall be with you among the witnesses.’",
+      "variant_full_arabic": "وَإِذۡ أَخَذَ ٱللَّهُ مِيثَاقَ الَّذِينَ أُوتُوا الْكِتَابَ لَمَآ ءَاتَيۡتُكُم مِّن كِتَٰبٖ وَحِكۡمَةٖ ثُمَّ جَآءَكُمۡ رَسُولٞ مُّصَدِّقٞ لِّمَا مَعَكُمۡ لَتُؤۡمِنُنَّ بِهِۦ وَلَتَنصُرُنَّهُۥۚ قَالَ ءَأَقۡرَرۡتُمۡ وَأَخَذۡتُمۡ عَلَىٰ ذَٰلِكُمۡ إِصۡرِيۖ قَالُوٓاْ أَقۡرَرۡنَاۚ قَالَ فَٱشۡهَدُواْ وَأَنَا۠ مَعَكُم مِّنَ ٱلشَّـٰهِدِينَ",
+      "variant_full_english": "(Remember) when God took a covenant with those who were given the Book: ‘Whatever indeed I have given you of the Book and wisdom, when a messenger comes to you confirming what is with you, you are to believe in him and you are to help him.’ He said, ‘Do you agree and accept My burden on that (condition)?’ They said, ‘We agree.’ He said, ‘Bear witness, and I shall be with you among the witnesses.’",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari argues that single-chain reports attributing variant readings or scribal errors to Companions cannot override the consensus codex, and later editors suggest Mujahid only meant the scribe wrote an earlier recitation instead of the final review.",
+        "primary_source_evaluation": "In Tabari 7323–7324, Mujahid explicitly states regarding 'covenant with the prophets': 'It is an error from the scribe (هي خطأ من الكاتب), and in the recitation of Ibn Mas'ud it is: And when God took the covenant of those who were given the Book.'"
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 34,
+        "undeniability_gold_sources_30": 27,
+        "universal_scope_20": 19,
+        "classical_concession_15": 15,
+        "cuj_score": 95
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/3/81/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura3-aya81.html",
+          "arabic_excerpt": "7323 - حدثني محمد بن عمرو قال، حدثنا أبو عاصم، عن عيسى، عن ابن أبي نجيح، عن مجاهد في قوله: \" وإذ أخذَ الله ميثاق النبيين لما آتيتكم من كتاب وحكمة \"، قال: هي خطأ من الكاتب، وهي في قراءة ابن مسعود: \" وإذ أخذَ الله ميثاق الذين أوتوا الكتاب \". (37) 7325 - حدثني المثنى قال، حدثنا إسحاق قال، حدثنا عبد الله بن أبي جعفر، عن أبيه، عن الربيع في قوله: \" وإذ أخذ الله ميثاق النبيين \"، يقول: وإذ أخذ الله ميثاق الذين أوتوا الكتاب، وكذلك كان يقرؤها الربيع: \" وإذ أخذ الله ميثاق الذين أوتوا الكتاب \"، إنما هي أهل الكتاب. قال: وكذلك كان يقرأها أبي بن كعب.",
+          "english_excerpt": "**7323** - *Muhammad bin ‘Amr narrated to me, he said: Abu ‘Asim narrated to us, from ‘Isa, from Ibn Abi Najih, from Mujahid regarding His saying:* \"(Remember) when God took a covenant with the prophets: ‘Whatever indeed I have given you of the Book and wisdom’\", he said: It is an error from the scribe, and it is in the recitation of Ibn Mas‘ud: \"And when God took the covenant of those who were given the Book.\" 7325 — Al-Muthanna narrated to me, saying: Ishaq narrated to us, saying: 'Abdullah bin Abi Ja'far narrated to us, from his father, from Al-Rabi' regarding His saying: \"And when God took the covenant of the prophets\", he says: \"And when God took the covenant of those who were given the Book,\" and thus Al-Rabi' used to recite it. He said: And thus Ubayy bin Ka'b used to recite it as well.",
+          "highlight_arabic": "هي خطأ من الكاتب، وهي في قراءة ابن مسعود: \" وإذ أخذَ الله ميثاق الذين أوتوا الكتاب \"",
+          "highlight_english": "It is an error from the scribe, and it is in the recitation of Ibn Mas‘ud: \"And when God took the covenant of those who were given the Book.\""
+        }
+      ],
+      "global_rank": 11,
+      "companion_codex": "Abdullah bin Masud",
+      "variant_arabic": "وَإِذۡ أَخَذَ ٱللَّهُ مِيثَاقَ الَّذِينَ أُوتُوا الْكِتَابَ لَمَآ ءَاتَيۡتُكُم مِّن كِتَٰبٖ وَحِكۡمَةٖ ثُمَّ جَآءَكُمۡ رَسُولٞ مُّصَدِّقٞ لِّمَا مَعَكُمۡ لَتُؤۡمِنُنَّ بِهِۦ وَلَتَنصُرُنَّهُۥۚ قَالَ ءَأَقۡرَرۡتُمۡ وَأَخَذۡتُمۡ عَلَىٰ ذَٰلِكُمۡ إِصۡرِيۖ قَالُوٓاْ أَقۡرَرۡنَاۚ قَالَ فَٱشۡهَدُواْ وَأَنَا۠ مَعَكُم مِّنَ ٱلشَّـٰهِدِينَ",
+      "variant_english": "(Remember) when God took a covenant with those who were given the Book: ‘Whatever indeed I have given you of the Book and wisdom, when a messenger comes to you confirming what is with you, you are to believe in him and you are to help him.’ He said, ‘Do you agree and accept My burden on that (condition)?’ They said, ‘We agree.’ He said, ‘Bear witness, and I shall be with you among the witnesses.’",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (3:81)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (3:81)",
+      "sunnah_url": "/quran/3/81/tafsir/tabari",
+      "hadith_arabic": "7323 - حدثني محمد بن عمرو قال، حدثنا أبو عاصم، عن عيسى، عن ابن أبي نجيح، عن مجاهد في قوله: \" وإذ أخذَ الله ميثاق النبيين لما آتيتكم من كتاب وحكمة \"، قال: هي خطأ من الكاتب، وهي في قراءة ابن مسعود: \" وإذ أخذَ الله ميثاق الذين أوتوا الكتاب \". (37) 7325 - حدثني المثنى قال، حدثنا إسحاق قال، حدثنا عبد الله بن أبي جعفر، عن أبيه، عن الربيع في قوله: \" وإذ أخذ الله ميثاق النبيين \"، يقول: وإذ أخذ الله ميثاق الذين أوتوا الكتاب، وكذلك كان يقرؤها الربيع: \" وإذ أخذ الله ميثاق الذين أوتوا الكتاب \"، إنما هي أهل الكتاب. قال: وكذلك كان يقرأها أبي بن كعب.",
+      "hadith_english": "**7323** - *Muhammad bin ‘Amr narrated to me, he said: Abu ‘Asim narrated to us, from ‘Isa, from Ibn Abi Najih, from Mujahid regarding His saying:* \"(Remember) when God took a covenant with the prophets: ‘Whatever indeed I have given you of the Book and wisdom’\", he said: It is an error from the scribe, and it is in the recitation of Ibn Mas‘ud: \"And when God took the covenant of those who were given the Book.\" 7325 — Al-Muthanna narrated to me, saying: Ishaq narrated to us, saying: 'Abdullah bin Abi Ja'far narrated to us, from his father, from Al-Rabi' regarding His saying: \"And when God took the covenant of the prophets\", he says: \"And when God took the covenant of those who were given the Book,\" and thus Al-Rabi' used to recite it. He said: And thus Ubayy bin Ka'b used to recite it as well.",
+      "rank": 1,
+      "attribution_role": "shared"
+    },
+    {
+      "id": "codex-4-24-ubayy-bin-kab",
+      "surah": 4,
+      "ayah": 24,
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [
+        "Ibn Abbas"
+      ],
+      "variant_type": "Phrase Addition",
+      "short_title": "4:24 — 'For a Specified Term' in Marriage",
+      "plain_english_hook": "Where the standard Quran says 'what you enjoy from them, give them their marriage gifts,' Ubayy bin Ka'b and Ibn Abbas read 'what you enjoy from them for a specified term.'",
+      "title": "Addition of 'For a Specified Term' (Ilā Ajalin Musammā) in 4:24",
+      "diff_summary": "In Surah 4:24, the Uthmanic text reads 'فَمَا ٱسۡتَمۡتَعۡتُم بِهِۦ مِنۡهُنَّ' ('So (because of) what you enjoy from them in this way'). Both al-Tabari and Ibn Kathir record via multiple authentic chains that the codex of Ubayy bin Ka'b and the recitation of Ibn Abbas added the legal stipulation 'إِلَى أَجَلٍ مُسَمًّى' ('for a specified term'), with Ibn Abbas swearing three times that God revealed the verse with this phrase.",
+      "uthmanic_target_arabic": "فَمَا ٱسۡتَمۡتَعۡتُم بِهِۦ مِنۡهُنَّ",
+      "uthmanic_target_english": "So (because of) what you enjoy from them in this way",
+      "variant_target_arabic": "فَمَا اسْتَمْتَعْتُمْ بِهِ مِنْهُنَّ إِلَى أَجَلٍ مُسَمًّى",
+      "variant_target_english": "So (because of) what you enjoy from them in this way for a specified term",
+      "uthmanic_full_arabic": "۞وَٱلۡمُحۡصَنَٰتُ مِنَ ٱلنِّسَآءِ إِلَّا مَا مَلَكَتۡ أَيۡمَٰنُكُمۡۖ كِتَٰبَ ٱللَّهِ عَلَيۡكُمۡۚ وَأُحِلَّ لَكُم مَّا وَرَآءَ ذَٰلِكُمۡ أَن تَبۡتَغُواْ بِأَمۡوَٰلِكُم مُّحۡصِنِينَ غَيۡرَ مُسَٰفِحِينَۚ فَمَا ٱسۡتَمۡتَعۡتُم بِهِۦ مِنۡهُنَّ فَـَٔاتُوهُنَّ أُجُورَهُنَّ فَرِيضَةٗۚ وَلَا جُنَاحَ عَلَيۡكُمۡ فِيمَا تَرَٰضَيۡتُم بِهِۦ مِنۢ بَعۡدِ ٱلۡفَرِيضَةِۚ إِنَّ ٱللَّهَ كَانَ عَلِيمًا حَكِيمٗا",
+      "uthmanic_full_english": "And (also forbidden to you are) married women, except what your right (hands) own. (This is) a written decree of God for you. (All women) beyond that are permitted to you to seek (to obtain) by means of your wealth, taking (them) in marriage, not in immorality. So (because of) what you enjoy from them in this way, give them their marriage gifts as an obligation. (There is) no blame on you in anything you may give them by mutual agreement beyond this obligation. Surely God is knowing, wise.",
+      "variant_full_arabic": "۞وَٱلۡمُحۡصَنَٰتُ مِنَ ٱلنِّسَآءِ إِلَّا مَا مَلَكَتۡ أَيۡمَٰنُكُمۡۖ كِتَٰبَ ٱللَّهِ عَلَيۡكُمۡۚ وَأُحِلَّ لَكُم مَّا وَرَآءَ ذَٰلِكُمۡ أَن تَبۡتَغُواْ بِأَمۡوَٰلِكُم مُّحۡصِنِينَ غَيۡرَ مُسَٰفِحِينَۚ فَمَا اسْتَمْتَعْتُمْ بِهِ مِنْهُنَّ إِلَى أَجَلٍ مُسَمًّى فَـَٔاتُوهُنَّ أُجُورَهُنَّ فَرِيضَةٗۚ وَلَا جُنَاحَ عَلَيۡكُمۡ فِيمَا تَرَٰضَيۡتُم بِهِۦ مِنۢ بَعۡدِ ٱلۡفَرِيضَةِۚ إِنَّ ٱللَّهَ كَانَ عَلِيمًا حَكِيمٗا",
+      "variant_full_english": "And (also forbidden to you are) married women, except what your right (hands) own. (This is) a written decree of God for you. (All women) beyond that are permitted to you to seek (to obtain) by means of your wealth, taking (them) in marriage, not in immorality. So (because of) what you enjoy from them in this way for a specified term, give them their marriage gifts as an obligation. (There is) no blame on you in anything you may give them by mutual agreement beyond this obligation. Surely God is knowing, wise.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Sunni commentators argue that the phrase 'for a specified term' was either an explanatory gloss (qirā'a tafsīriyya) referring to early temporary marriage (mut'ah) or a wording whose recitation and legal ruling were subsequently abrogated.",
+        "primary_source_evaluation": "In Tafsir al-Tabari (7181–7182), witnesses testify to physically inspecting the written Mushaf of Ubayy bin Ka'b containing the phrase, and when Abu Nadrah objected that he did not read it that way, Ibn Abbas swore by God three times that God revealed it thus."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 35,
+        "undeniability_gold_sources_30": 29,
+        "universal_scope_20": 20,
+        "classical_concession_15": 14,
+        "cuj_score": 98
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/4/24/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura4-aya24.html",
+          "arabic_excerpt": "7181 - حدثنا أبو كريب , قال : ثنا يحيى بن عيسى , قال : ثنا نصير بن أبي الأشعث , قال : ثني حبيب بن أبي ثابت , عن أبيه , قال : أعطاني ابن عباس مصحفا , فقال : هذا على قراءة أبي . قال أبو كريب , قال يحيى : فرأيت المصحف عند نصير فيه : \" فما استمتعتم به منهن إلى أجل مسمى \" . 7184 - حدثنا ابن بشار , قال : ثنا عبد الأعلى , قال : ثنا سعيد , عن قتادة , قال : في قراءة أبي بن كعب : \" فما استمتعتم به منهن إلى أجل مسمى \" .",
+          "english_excerpt": "7181 - Abu Kurayb narrated to us, he said: Yahya bin 'Isa narrated to us, he said: Nusayr bin Abi Al-Ash'ath narrated to us, he said: Habib bin Abi Thabit narrated to me, from his father, he said: Ibn 'Abbas gave me a Mus-haf and said: This is according to the recitation of Ubayy. Abu Kurayb said, Yahya said: So I saw the Mus-haf with Nusayr, and in it was: \"So (because of) what you enjoy from them to a specified term.\" 7184 - Ibn Bashshar narrated to us, he said: 'Abd al-A'la narrated to us, he said: Sa'id narrated to us, from Qatadah, he said: In the recitation of Ubayy bin Ka'b: \"So (because of) what you enjoy from them to a specified term.\"",
+          "highlight_arabic": "فرأيت المصحف عند نصير فيه : \" فما استمتعتم به منهن إلى أجل مسمى \"",
+          "highlight_english": "So I saw the Mus-haf with Nusayr, and in it was: \"So (because of) what you enjoy from them to a specified term.\""
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/4/24/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura4-aya24.html",
+          "arabic_excerpt": "وقد روي عن ابن عباس وطائفة من الصحابة القول بإباحتها للضرورة ، وهو رواية عن الإمام أحمد بن حنبل ، رحمهم الله تعالى . وكان ابن عباس ، وأبي بن كعب ، وسعيد بن جبير ، والسدي يقرءون : \" فما استمتعتم به منهن إلى أجل مسمى فآتوهن أجورهن فريضة \" . وقال مجاهد : نزلت في نكاح المتعة ، ولكن الجمهور على خلاف ذلك ، والعمدة ما ثبت في الصحيحين ، عن أمير المؤمنين علي بن أبي طالب [ رضي الله عنه ] قال : نهى النبي صلى الله عليه وسلم عن نكاح المتعة وعن لحوم الحمر الأهلية يوم خيبر ولهذا الحديث ألفاظ مقررة هي في كتاب \" الأحكام \" .",
+          "english_excerpt": "It was narrated from Ibn 'Abbas and a group of the Companions the view that it was permitted out of necessity, and it is a narration from Imam Ahmad bin Hanbal (may Allah have mercy on them). Ibn 'Abbas, Ubayy bin Ka'b, Sa'id bin Jubayr, and As-Suddi used to recite: \"So (because of) what you enjoy from them *until a specified time*, give them their marriage gifts as an obligation.\" Mujahid stated that it was revealed about the Mut'ah marriage. But the majority are against that.",
+          "highlight_arabic": "وكان ابن عباس ، وأبي بن كعب ، وسعيد بن جبير ، والسدي يقرءون : \" فما استمتعتم به منهن إلى أجل مسمى فآتوهن أجورهن فريضة \"",
+          "highlight_english": "Ibn 'Abbas, Ubayy bin Ka'b, Sa'id bin Jubayr, and As-Suddi used to recite: \"So (because of) what you enjoy from them *until a specified time*, give them their marriage gifts as an obligation.\""
+        }
+      ],
+      "global_rank": 3,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "۞وَٱلۡمُحۡصَنَٰتُ مِنَ ٱلنِّسَآءِ إِلَّا مَا مَلَكَتۡ أَيۡمَٰنُكُمۡۖ كِتَٰبَ ٱللَّهِ عَلَيۡكُمۡۚ وَأُحِلَّ لَكُم مَّا وَرَآءَ ذَٰلِكُمۡ أَن تَبۡتَغُواْ بِأَمۡوَٰلِكُم مُّحۡصِنِينَ غَيۡرَ مُسَٰفِحِينَۚ فَمَا اسْتَمْتَعْتُمْ بِهِ مِنْهُنَّ إِلَى أَجَلٍ مُسَمًّى فَـَٔاتُوهُنَّ أُجُورَهُنَّ فَرِيضَةٗۚ وَلَا جُنَاحَ عَلَيۡكُمۡ فِيمَا تَرَٰضَيۡتُم بِهِۦ مِنۢ بَعۡدِ ٱلۡفَرِيضَةِۚ إِنَّ ٱللَّهَ كَانَ عَلِيمًا حَكِيمٗا",
+      "variant_english": "And (also forbidden to you are) married women, except what your right (hands) own. (This is) a written decree of God for you. (All women) beyond that are permitted to you to seek (to obtain) by means of your wealth, taking (them) in marriage, not in immorality. So (because of) what you enjoy from them in this way for a specified term, give them their marriage gifts as an obligation. (There is) no blame on you in anything you may give them by mutual agreement beyond this obligation. Surely God is knowing, wise.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (4:24)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (4:24)",
+      "sunnah_url": "/quran/4/24/tafsir/tabari",
+      "hadith_arabic": "7181 - حدثنا أبو كريب , قال : ثنا يحيى بن عيسى , قال : ثنا نصير بن أبي الأشعث , قال : ثني حبيب بن أبي ثابت , عن أبيه , قال : أعطاني ابن عباس مصحفا , فقال : هذا على قراءة أبي . قال أبو كريب , قال يحيى : فرأيت المصحف عند نصير فيه : \" فما استمتعتم به منهن إلى أجل مسمى \" . 7184 - حدثنا ابن بشار , قال : ثنا عبد الأعلى , قال : ثنا سعيد , عن قتادة , قال : في قراءة أبي بن كعب : \" فما استمتعتم به منهن إلى أجل مسمى \" .",
+      "hadith_english": "7181 - Abu Kurayb narrated to us, he said: Yahya bin 'Isa narrated to us, he said: Nusayr bin Abi Al-Ash'ath narrated to us, he said: Habib bin Abi Thabit narrated to me, from his father, he said: Ibn 'Abbas gave me a Mus-haf and said: This is according to the recitation of Ubayy. Abu Kurayb said, Yahya said: So I saw the Mus-haf with Nusayr, and in it was: \"So (because of) what you enjoy from them to a specified term.\" 7184 - Ibn Bashshar narrated to us, he said: 'Abd al-A'la narrated to us, he said: Sa'id narrated to us, from Qatadah, he said: In the recitation of Ubayy bin Ka'b: \"So (because of) what you enjoy from them to a specified term.\"",
+      "rank": 1,
+      "attribution_role": "primary"
+    },
+    {
+      "id": "codex-4-159-ubayy-bin-kab",
+      "surah": 4,
+      "ayah": 159,
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [],
+      "variant_type": "Morphological / Consonantal Shift",
+      "short_title": "'Before Their Death' vs 'Before His Death' in 4:159",
+      "plain_english_hook": "Does 4:159 mean every Jew and Christian will believe in Jesus before 'his' (that person's or Jesus's) death? Ubayy bin Kab's reading had the plural 'before their death'.",
+      "title": "Surah An-Nisa 4:159 — 'Qabla Mawtihim' (Before Their Death) in Ubayy's Reading",
+      "diff_summary": "In the Uthmanic text of 4:159 (وَإِنْ مِنْ أَهْلِ الْكِتَابِ إِلَّا لَيُؤْمِنَنَّ بِهِ قَبْلَ مَوْتِهِ), the singular pronoun in 'before his death' (قَبْلَ مَوْتِهِ) generated a major exegetical split over whether the pronoun refers to Jesus (after his eschatological descent) or to every individual among the People of the Book at the moment of dying. Both al-Tabari and Ibn Kathir record via multiple authentic chains (graded sahih by Ibn Kathir) that Ibn Abbas argued for the latter by citing the recitation of Ubayy bin Ka'b: 'before their death' (قَبْلَ مَوْتِهِمْ).",
+      "uthmanic_target_arabic": "قَبۡلَ مَوۡتِهِۦ",
+      "uthmanic_target_english": "before his death",
+      "variant_target_arabic": "قَبۡلَ مَوۡتِهِمۡ",
+      "variant_target_english": "before their death",
+      "uthmanic_full_arabic": "وَإِن مِّنۡ أَهۡلِ ٱلۡكِتَٰبِ إِلَّا لَيُؤۡمِنَنَّ بِهِۦ قَبۡلَ مَوۡتِهِۦۖ وَيَوۡمَ ٱلۡقِيَٰمَةِ يَكُونُ عَلَيۡهِمۡ شَهِيدٗا",
+      "uthmanic_full_english": "Yet (there is) not one of the People of the Book except that he will indeed believe in it before his death, and on the Day of Resurrection he will be a witness against them.",
+      "variant_full_arabic": "وَإِن مِّنۡ أَهۡلِ ٱلۡكِتَٰبِ إِلَّا لَيُؤۡمِنَنَّ بِهِۦ قَبۡلَ مَوۡتِهِمۡۖ وَيَوۡمَ ٱلۡقِيَٰمَةِ يَكُونُ عَلَيۡهِمۡ شَهِيدٗا",
+      "variant_full_english": "Yet (there is) not one of the People of the Book except that he will indeed believe in it before their death, and on the Day of Resurrection he will be a witness against them.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari and Ibn Kathir prefer interpreting the Uthmanic singular pronoun 'before his death' as referring to Jesus's future death after his second coming, treating Ubayy's plural 'before their death' as reflecting the alternative interpretation.",
+        "primary_source_evaluation": "Ibn Kathir explicitly certifies that the chains to Ibn Abbas citing Ubayy bin Ka'b's reading 'qabla mawtihim' (with a final mim) are authentic (asanid sahiha), demonstrating how a single consonantal pronoun difference changes the verse from an eschatological prophecy about Jesus's return to a claim about every dying scripturalist."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 32,
+        "undeniability_gold_sources_30": 26,
+        "universal_scope_20": 18,
+        "classical_concession_15": 12,
+        "cuj_score": 88
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/4/159/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura4-aya159.html",
+          "arabic_excerpt": "10814- حدثنا محمد بن بشار قال، حدثنا عبد الرحمن قال، حدثنا سفيان، عن أبي حصين، عن سعيد بن جبير، عن ابن عباس: \" وإن من أهل الكتاب إلا ليؤمنن به قبل موته \"، قال: في قراءة أبيّ: ( قَبْلَ مَوْتِهِمْ ). 10814م- حدثني إسحاق بن إبراهيم بن حبيب بن الشهيد قال، حدثنا عتاب بن بشير، عن خصيف، عن سعيد بن جبير، عن ابن عباس: \" وإن من أهل الكتاب إلا ليؤمنن به قبل موته \"، قال: هي في قراءة أبي: ( قبل موتهم ) ، ليس يهودي يموت أبدا حتى يؤمن بعيسى.",
+          "english_excerpt": "10814m - Ishaq bin Ibrahim bin Habib bin al-Shahid narrated to me... from Sa'id bin Jubayr, from Ibn 'Abbas: {Yet (there is) not one of the People of the Book except that he will indeed believe in it before his death.} He said: \"It is in the recitation of Ubayy: (before their death), no Jew ever dies until he believes in 'Isa.\"",
+          "highlight_arabic": "هي في قراءة أبي: ( قبل موتهم )",
+          "highlight_english": "It is in the recitation of Ubayy: (before their death)"
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/4/159/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura4-aya159.html",
+          "arabic_excerpt": "حدثنا عتاب بن بشير عن خصيف ، عن سعيد بن جبير ، عن ابن عباس : ( وإن من أهل الكتاب إلا ليؤمنن به قبل موته ) قال : هي في قراءة أبي : ( قبل موتهم ) ليس يهودي يموت أبدا حتى يؤمن بعيسى ... فهذه كلها أسانيد صحيحة إلى ابن عباس ، وكذا صح عن مجاهد ، وعكرمة ، ومحمد بن سيرين . وبه يقول الضحاك وجويبر ، والسدي ، وحكاه عن ابن عباس ، ونقل قراءة أبي بن كعب : \" قبل موتهم \" .",
+          "english_excerpt": "From Sa'id bin Jubayr, from Ibn 'Abbas: > **{Yet (there is) not one of the People of the Book except that he will indeed believe in him before his death}** He said, \"It is in the recitation of Ubayy: '(before their deaths).' No Jew ever dies until he believes in 'Isa.\"... All of these are authentic chains of narration to Ibn 'Abbas, and this is also authentic from Mujahid, 'Ikrimah, and Muhammad bin Sirin. This is also the view of Ad-Dahhak, Juwaybir, and As-Suddi, who also related it from Ibn 'Abbas and mentioned the recitation of Ubayy bin Ka'b: \"before their deaths.\"",
+          "highlight_arabic": "هي في قراءة أبي : ( قبل موتهم )",
+          "highlight_english": "It is in the recitation of Ubayy: '(before their deaths).'"
+        }
+      ],
+      "global_rank": 45,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "وَإِن مِّنۡ أَهۡلِ ٱلۡكِتَٰبِ إِلَّا لَيُؤۡمِنَنَّ بِهِۦ قَبۡلَ مَوۡتِهِمۡۖ وَيَوۡمَ ٱلۡقِيَٰمَةِ يَكُونُ عَلَيۡهِمۡ شَهِيدٗا",
+      "variant_english": "Yet (there is) not one of the People of the Book except that he will indeed believe in it before their death, and on the Day of Resurrection he will be a witness against them.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (4:159)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (4:159)",
+      "sunnah_url": "/quran/4/159/tafsir/tabari",
+      "hadith_arabic": "10814- حدثنا محمد بن بشار قال، حدثنا عبد الرحمن قال، حدثنا سفيان، عن أبي حصين، عن سعيد بن جبير، عن ابن عباس: \" وإن من أهل الكتاب إلا ليؤمنن به قبل موته \"، قال: في قراءة أبيّ: ( قَبْلَ مَوْتِهِمْ ). 10814م- حدثني إسحاق بن إبراهيم بن حبيب بن الشهيد قال، حدثنا عتاب بن بشير، عن خصيف، عن سعيد بن جبير، عن ابن عباس: \" وإن من أهل الكتاب إلا ليؤمنن به قبل موته \"، قال: هي في قراءة أبي: ( قبل موتهم ) ، ليس يهودي يموت أبدا حتى يؤمن بعيسى.",
+      "hadith_english": "10814m - Ishaq bin Ibrahim bin Habib bin al-Shahid narrated to me... from Sa'id bin Jubayr, from Ibn 'Abbas: {Yet (there is) not one of the People of the Book except that he will indeed believe in it before his death.} He said: \"It is in the recitation of Ubayy: (before their death), no Jew ever dies until he believes in 'Isa.\"",
+      "rank": 1,
+      "attribution_role": "primary"
+    },
+    {
+      "id": "codex-5-89-abdullah-bin-masud",
+      "surah": 5,
+      "ayah": 89,
+      "companion": "Abdullah bin Masud",
+      "companion_id": "abdullah-bin-masud",
+      "also_attributed_to": [
+        "Ubayy bin Kab"
+      ],
+      "variant_type": "Phrase Addition",
+      "short_title": "Oath Atonement: 'Three Consecutive Days'",
+      "plain_english_hook": "The standard Quran requires fasting 'three days' to break an oath, leaving jurists divided on whether they must be back-to-back; Ibn Masud and Ubayy's codices explicitly added 'consecutive'.",
+      "title": "Surah Al-Ma'idah 5:89 — Addition of 'Mutatabi'at' (Consecutive) in Oath Expiation",
+      "diff_summary": "In the Uthmanic text of 5:89, the expiation for a broken oath when unable to feed or clothe the poor is 'a fast for three days' (فَصِيَامُ ثَلَاثَةِ أَيَّامٍ). Both al-Tabari and Ibn Kathir record via multiple authentic chains that the codices and recitations of Abdullah bin Mas'ud and Ubayy bin Ka'b read 'a fast for three consecutive days' (فَصِيَامُ ثَلَاثَةِ أَيَّامٍ مُتَتَابِعَاتٍ), a variant that directly shaped Hanafi and Hanbali law requiring uninterrupted fasting.",
+      "uthmanic_target_arabic": "فَصِيَامُ ثَلَٰثَةِ أَيَّامٖ",
+      "uthmanic_target_english": "a fast for three days",
+      "variant_target_arabic": "فَصِيَامُ ثَلَٰثَةِ أَيَّامٖ مُّتَتَٰبِعَٰتٍ",
+      "variant_target_english": "a fast for three consecutive days",
+      "uthmanic_full_arabic": "لَا يُؤَاخِذُكُمُ ٱللَّهُ بِٱللَّغۡوِ فِيٓ أَيۡمَٰنِكُمۡ وَلَٰكِن يُؤَاخِذُكُم بِمَا عَقَّدتُّمُ ٱلۡأَيۡمَٰنَۖ فَكَفَّـٰرَتُهُۥٓ إِطۡعَامُ عَشَرَةِ مَسَٰكِينَ مِنۡ أَوۡسَطِ مَا تُطۡعِمُونَ أَهۡلِيكُمۡ أَوۡ كِسۡوَتُهُمۡ أَوۡ تَحۡرِيرُ رَقَبَةٖۖ فَمَن لَّمۡ يَجِدۡ فَصِيَامُ ثَلَٰثَةِ أَيَّامٖۚ ذَٰلِكَ كَفَّـٰرَةُ أَيۡمَٰنِكُمۡ إِذَا حَلَفۡتُمۡۚ وَٱحۡفَظُوٓاْ أَيۡمَٰنَكُمۡۚ كَذَٰلِكَ يُبَيِّنُ ٱللَّهُ لَكُمۡ ءَايَٰتِهِۦ لَعَلَّكُمۡ تَشۡكُرُونَ",
+      "uthmanic_full_english": "God will not take you to task for a slip in your oaths, but He will take you to task for what you have pledged by oath. Atonement for it is the feeding of ten poor persons with the average (amount of food) which you feed your households, or clothing them, or the setting free of a slave. Whoever does not find (the means to do that), (the penalty is) a fast for three days. That is the atonement for your oaths when you have sworn (them, and broken them). But guard your oaths! In this way God makes clear to you His signs, so that you may be thankful.",
+      "variant_full_arabic": "لَا يُؤَاخِذُكُمُ ٱللَّهُ بِٱللَّغۡوِ فِيٓ أَيۡمَٰنِكُمۡ وَلَٰكِن يُؤَاخِذُكُم بِمَا عَقَّدتُّمُ ٱلۡأَيۡمَٰنَۖ فَكَفَّـٰرَتُهُۥٓ إِطۡعَامُ عَشَرَةِ مَسَٰكِينَ مِنۡ أَوۡسَطِ مَا تُطۡعِمُونَ أَهۡلِيكُمۡ أَوۡ كِسۡوَتُهُمۡ أَوۡ تَحۡرِيرُ رَقَبَةٖۖ فَمَن لَّمۡ يَجِدۡ فَصِيَامُ ثَلَٰثَةِ أَيَّامٖ مُّتَتَٰبِعَٰتٍۚ ذَٰلِكَ كَفَّـٰرَةُ أَيۡمَٰنِكُمۡ إِذَا حَلَفۡتُمۡۚ وَٱحۡفَظُوٓاْ أَيۡمَٰنَكُمۡۚ كَذَٰلِكَ يُبَيِّنُ ٱللَّهُ لَكُمۡ ءَايَٰتِهِۦ لَعَلَّكُمۡ تَشۡكُرُونَ",
+      "variant_full_english": "God will not take you to task for a slip in your oaths, but He will take you to task for what you have pledged by oath. Atonement for it is the feeding of ten poor persons with the average (amount of food) which you feed your households, or clothing them, or the setting free of a slave. Whoever does not find (the means to do that), (the penalty is) a fast for three consecutive days. That is the atonement for your oaths when you have sworn (them, and broken them). But guard your oaths! In this way God makes clear to you His signs, so that you may be thankful.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Classical jurists and commentators classify the word 'mutatabi'at' (consecutive) either as an explanatory gloss (qira'a tafsiriyya) inserted by Companions or as a recitation whose wording was abrogated while its legal ruling remained debated.",
+        "primary_source_evaluation": "Al-Tabari transmits seven independent chains to Ubayy bin Ka'b, Abdullah bin Mas'ud, and his Kufan disciples (including Ibrahim al-Nakha'i and al-A'mash) affirming 'mutatabi'at' as their established recitation, while explicitly rejecting its Quranic status solely because it is absent from the Uthmanic manuscripts."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 34,
+        "undeniability_gold_sources_30": 27,
+        "universal_scope_20": 19,
+        "classical_concession_15": 14,
+        "cuj_score": 94
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/5/89/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura5-aya89.html",
+          "arabic_excerpt": "9750 - حدثنا عبد الأعلى بن واصل الأسدي، قال: ثنا عبيد الله بن موسى، عن أبي جعفر الرازي، عن الربيع بن أنس، عن أبي العالية، عن أبي بن كعب، أنه كان يقرأ: \"فصيام ثلاثة أيام متتابعات\". 9751 - حدثنا ابن وكيع، قال: ثنا يزيد بن هارون، عن قزعة بن سويد، عن سيف بن سليمان، عن مجاهد، قال: في قراءة عبد الله: \"فصيام ثلاثة أيام متتابعات\". فأما ما روي عن أبي وابن مسعود من قراءتهما \"فصيام ثلاثة أيام متتابعات\" فذلك خلاف ما في مصاحفنا، وغير جائز لنا أن نشهد بشيء ليس في مصاحفنا من الكلام أنه من كتاب الله.",
+          "english_excerpt": "9750 - 'Abd al-A'la b. Wasil al-Asadi narrated to us... from Abu al-'Aliyah, from Ubayy b. Ka'b, that he used to read: 'a fast for three consecutive days'. 9751 - Ibn Waki' narrated to us... from Mujahid, he said: In the reading of 'Abd Allah: 'a fast for three consecutive days'. As for what was narrated from Ubayy and Ibn Mas'ud regarding their reading 'a fast for three consecutive days', that is contrary to what is in our manuscripts of the Qur'an.",
+          "highlight_arabic": "في قراءة عبد الله: \"فصيام ثلاثة أيام متتابعات\"",
+          "highlight_english": "In the reading of 'Abd Allah: 'a fast for three consecutive days'"
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/5/89/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura5-aya89.html",
+          "arabic_excerpt": "قال أبو جعفر الرازي ، عن الربيع ، عن أبي العالية ، عن أبي بن كعب أنه كان يقرؤها : \" فصيام ثلاثة أيام متتابعات \" . وحكاها مجاهد والشعبي وأبو إسحاق ، عن عبد الله بن مسعود . وقال إبراهيم : في قراءة عبد الله بن مسعود : \" فصيام ثلاثة أيام متتابعات \" . وقال الأعمش : كان أصحاب ابن مسعود يقرءونها كذلك .",
+          "english_excerpt": "Abu Ja'far Ar-Razi recorded from Ar-Rabi', from Abu Al-'Aliyah, from Ubayy bin Ka'b that he used to read it as: 'Then he should fast three consecutive days.' Mujahid, Ash-Sha'bi, and Abu Ishaq narrated it from 'Abdullah bin Mas'ud. Ibrahim said: 'In the recitation of 'Abdullah bin Mas'ud: \"Then he should fast three consecutive days.\"' Al-A'mash said: 'The companions of Ibn Mas'ud used to read it like that.'",
+          "highlight_arabic": "في قراءة عبد الله بن مسعود : \" فصيام ثلاثة أيام متتابعات \"",
+          "highlight_english": "In the recitation of 'Abdullah bin Mas'ud: \"Then he should fast three consecutive days.\""
+        }
+      ],
+      "global_rank": 15,
+      "companion_codex": "Abdullah bin Masud",
+      "variant_arabic": "لَا يُؤَاخِذُكُمُ ٱللَّهُ بِٱللَّغۡوِ فِيٓ أَيۡمَٰنِكُمۡ وَلَٰكِن يُؤَاخِذُكُم بِمَا عَقَّدتُّمُ ٱلۡأَيۡمَٰنَۖ فَكَفَّـٰرَتُهُۥٓ إِطۡعَامُ عَشَرَةِ مَسَٰكِينَ مِنۡ أَوۡسَطِ مَا تُطۡعِمُونَ أَهۡلِيكُمۡ أَوۡ كِسۡوَتُهُمۡ أَوۡ تَحۡرِيرُ رَقَبَةٖۖ فَمَن لَّمۡ يَجِدۡ فَصِيَامُ ثَلَٰثَةِ أَيَّامٖ مُّتَتَٰبِعَٰتٍۚ ذَٰلِكَ كَفَّـٰرَةُ أَيۡمَٰنِكُمۡ إِذَا حَلَفۡتُمۡۚ وَٱحۡفَظُوٓاْ أَيۡمَٰنَكُمۡۚ كَذَٰلِكَ يُبَيِّنُ ٱللَّهُ لَكُمۡ ءَايَٰتِهِۦ لَعَلَّكُمۡ تَشۡكُرُونَ",
+      "variant_english": "God will not take you to task for a slip in your oaths, but He will take you to task for what you have pledged by oath. Atonement for it is the feeding of ten poor persons with the average (amount of food) which you feed your households, or clothing them, or the setting free of a slave. Whoever does not find (the means to do that), (the penalty is) a fast for three consecutive days. That is the atonement for your oaths when you have sworn (them, and broken them). But guard your oaths! In this way God makes clear to you His signs, so that you may be thankful.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (5:89)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (5:89)",
+      "sunnah_url": "/quran/5/89/tafsir/tabari",
+      "hadith_arabic": "9750 - حدثنا عبد الأعلى بن واصل الأسدي، قال: ثنا عبيد الله بن موسى، عن أبي جعفر الرازي، عن الربيع بن أنس، عن أبي العالية، عن أبي بن كعب، أنه كان يقرأ: \"فصيام ثلاثة أيام متتابعات\". 9751 - حدثنا ابن وكيع، قال: ثنا يزيد بن هارون، عن قزعة بن سويد، عن سيف بن سليمان، عن مجاهد، قال: في قراءة عبد الله: \"فصيام ثلاثة أيام متتابعات\". فأما ما روي عن أبي وابن مسعود من قراءتهما \"فصيام ثلاثة أيام متتابعات\" فذلك خلاف ما في مصاحفنا، وغير جائز لنا أن نشهد بشيء ليس في مصاحفنا من الكلام أنه من كتاب الله.",
+      "hadith_english": "9750 - 'Abd al-A'la b. Wasil al-Asadi narrated to us... from Abu al-'Aliyah, from Ubayy b. Ka'b, that he used to read: 'a fast for three consecutive days'. 9751 - Ibn Waki' narrated to us... from Mujahid, he said: In the reading of 'Abd Allah: 'a fast for three consecutive days'. As for what was narrated from Ubayy and Ibn Mas'ud regarding their reading 'a fast for three consecutive days', that is contrary to what is in our manuscripts of the Qur'an.",
+      "rank": 1,
+      "attribution_role": "shared"
+    },
+    {
+      "id": "codex-6-105-abdullah-bin-masud",
+      "surah": 6,
+      "ayah": 105,
+      "companion": "Abdullah bin Masud",
+      "companion_id": "abdullah-bin-masud",
+      "also_attributed_to": [
+        "Ubayy bin Kab"
+      ],
+      "variant_type": "Morphological / Consonantal Shift",
+      "short_title": "'He Has Studied' (Darasa) vs 'You Have Studied' (6:105)",
+      "plain_english_hook": "In 6:105, the standard Quran has 'so that they will say, You have studied' (darasta, with a final t); the codices of Ubayy and Ibn Masud read 'He has studied' (darasa).",
+      "title": "Surah Al-An'am 6:105 — 'Wa-li-Yaqulu Darasa' in Ubayy and Ibn Mas'ud's Codices",
+      "diff_summary": "In the Uthmanic text of 6:105, the consonantal rasm دَرَسْتَ (with a final ta') is read by the majority as 'You have studied' (darasta), by Ibn Kathir/Abu 'Amr as 'You have studied with others' (darasta, adding an alif), and by Ibn 'Amir as 'They have become old/erased' (darasat). Both al-Tabari and Ibn Kathir record via Abu 'Ubayd al-Qasim bin Sallam and Ma'mar from Qatadah that in the codex/harf of Ubayy bin Ka'b and Abdullah bin Mas'ud the word was written without the final ta': 'so that they will say, He has studied' (وَلِيَقُولُوا دَرَسَ).",
+      "uthmanic_target_arabic": "وَلِيَقُولُواْ دَرَسۡتَ",
+      "uthmanic_target_english": "so that they will say, ‘You have studied,’",
+      "variant_target_arabic": "وَلِيَقُولُواْ دَرَسَ",
+      "variant_target_english": "so that they will say, ‘He has studied,’",
+      "uthmanic_full_arabic": "وَكَذَٰلِكَ نُصَرِّفُ ٱلۡأٓيَٰتِ وَلِيَقُولُواْ دَرَسۡتَ وَلِنُبَيِّنَهُۥ لِقَوۡمٖ يَعۡلَمُونَ",
+      "uthmanic_full_english": "In this way We vary the signs, so that they will say, ‘You have studied,’ and that We may make it clear to a people who know.",
+      "variant_full_arabic": "وَكَذَٰلِكَ نُصَرِّفُ ٱلۡأٓيَٰتِ وَلِيَقُولُواْ دَرَسَ وَلِنُبَيِّنَهُۥ لِقَوۡمٖ يَعۡلَمُونَ",
+      "variant_full_english": "In this way We vary the signs, so that they will say, ‘He has studied,’ and that We may make it clear to a people who know.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari remarks that third-person 'darasa' and second-person 'darasta' both convey the disbelievers' allegation that the Prophet studied previous texts, while preferring 'darasta' because it conforms to the Uthmanic consonantal script.",
+        "primary_source_evaluation": "The absence of the final consonant ta' in 'darasa' is attested by both Qatadah and Abu 'Ubayd for the codices (harf) of both Ibn Mas'ud and Ubayy bin Ka'b, representing a genuine consonantal divergence from the Uthmanic rasm."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 31,
+        "undeniability_gold_sources_30": 25,
+        "universal_scope_20": 17,
+        "classical_concession_15": 12,
+        "cuj_score": 85
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/6/105/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura6-aya105.html",
+          "arabic_excerpt": "13730- حدثنا محمد بن عبد الأعلى قال، حدثنا محمد بن ثور, عن معمر قال، قال قتادة: \" درست \"، قرئت = وفي حرف ابن مسعود: \" درس\" . 13735- حدثني أحمد بن يوسف الثعلبي قال، حدثنا أبو عبيدة قال، حدثنا حجاج, عن هارون قال: هي في حرف أبي بن كعب وابن مسعود: \" وليقولوا درس\"، قال: يعني النبي صلى الله عليه وسلم، قرأ .",
+          "english_excerpt": "13730 - Muhammad bin 'Abd al-A'la narrated to us... from Qatadah: \"darasat\" means it was read = and in the reading [harf] of Ibn Mas'ud: \"darasa\" (he studied). 13735 - Ahmad bin Yusuf al-Tha'labi narrated to me... from Harun, who said: It is in the reading [harf] of Ubayy bin Ka'b and Ibn Mas'ud: \"so that they will say, darasa (he has studied),\" meaning the Prophet, peace and blessings be upon him, read.",
+          "highlight_arabic": "في حرف أبي بن كعب وابن مسعود: \" وليقولوا درس\"",
+          "highlight_english": "in the reading [harf] of Ubayy bin Ka'b and Ibn Mas'ud: \"so that they will say, darasa (he has studied),\""
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/6/105/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura6-aya105.html",
+          "arabic_excerpt": "وقال معمر ، عن قتادة : \" درست \" : قرئت . وفي حرف ابن مسعود \" درس \" وقال أبو عبيد القاسم بن سلام : حدثنا حجاج ، عن هارون قال : هي في حرف أبي بن كعب وابن مسعود : \" وليقولوا درس \" قال : يعنون النبي صلى الله عليه وسلم أنه قرأ .",
+          "english_excerpt": "Ma'mar reported that Qatadah said: \"' *darasat* ': it was read.\" And in the reading of Ibn Mas'ud it is ' *darasa* '. Abu 'Ubayd Al-Qasim bin Sallam said: Hajjaj narrated to us, from Harun, he said: \"It is in the reading of Ubayy bin Ka'b and Ibn Mas'ud: 'so that they will say, *darasa* (he has studied)'. He said: They mean the Prophet (peace and blessings of Allah be upon him), that he read.\"",
+          "highlight_arabic": "في حرف أبي بن كعب وابن مسعود : \" وليقولوا درس \"",
+          "highlight_english": "in the reading of Ubayy bin Ka'b and Ibn Mas'ud: 'so that they will say, *darasa* (he has studied)'"
+        }
+      ],
+      "global_rank": 57,
+      "companion_codex": "Abdullah bin Masud",
+      "variant_arabic": "وَكَذَٰلِكَ نُصَرِّفُ ٱلۡأٓيَٰتِ وَلِيَقُولُواْ دَرَسَ وَلِنُبَيِّنَهُۥ لِقَوۡمٖ يَعۡلَمُونَ",
+      "variant_english": "In this way We vary the signs, so that they will say, ‘He has studied,’ and that We may make it clear to a people who know.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (6:105)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (6:105)",
+      "sunnah_url": "/quran/6/105/tafsir/tabari",
+      "hadith_arabic": "13730- حدثنا محمد بن عبد الأعلى قال، حدثنا محمد بن ثور, عن معمر قال، قال قتادة: \" درست \"، قرئت = وفي حرف ابن مسعود: \" درس\" . 13735- حدثني أحمد بن يوسف الثعلبي قال، حدثنا أبو عبيدة قال، حدثنا حجاج, عن هارون قال: هي في حرف أبي بن كعب وابن مسعود: \" وليقولوا درس\"، قال: يعني النبي صلى الله عليه وسلم، قرأ .",
+      "hadith_english": "13730 - Muhammad bin 'Abd al-A'la narrated to us... from Qatadah: \"darasat\" means it was read = and in the reading [harf] of Ibn Mas'ud: \"darasa\" (he studied). 13735 - Ahmad bin Yusuf al-Tha'labi narrated to me... from Harun, who said: It is in the reading [harf] of Ubayy bin Ka'b and Ibn Mas'ud: \"so that they will say, darasa (he has studied),\" meaning the Prophet, peace and blessings be upon him, read.",
+      "rank": 1,
+      "attribution_role": "shared"
+    },
+    {
+      "id": "codex-7-127-ubayy-bin-kab",
+      "surah": 7,
+      "ayah": 127,
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [],
+      "variant_type": "Word Substitution",
+      "short_title": "7:127 — 'When They Have Forsaken You Not to Serve You'",
+      "plain_english_hook": "Where Pharaoh's chiefs ask if he will leave Moses 'to forsake you and your gods,' Ubayy bin Ka'b's codex read 'when they have forsaken you so as not to serve you and your gods.'",
+      "title": "Substitution of 'When They Have Forsaken You Not to Worship You' in 7:127",
+      "diff_summary": "In Surah 7:127, the Uthmanic text quotes Pharaoh's chiefs asking: 'أَتَذَرُ مُوسَىٰ وَقَوۡمَهُۥ لِيُفۡسِدُواْ فِي ٱلۡأَرۡضِ وَيَذَرَكَ وَءَالِهَتَكَۚ' ('Will you leave Moses and his people to foment corruption on the earth and to forsake you and your gods?'). Both al-Tabari (14961) and Ibn Kathir record via Harun bin Musa that in the reading (ḥarf) of Ubayy bin Ka'b this clause read 'وَقَدْ تَرَكُوكَ أَنْ يَعْبُدُوكَ وَآلِهَتَكَ' ('when they have forsaken you so as not to serve you and your gods').",
+      "uthmanic_target_arabic": "وَيَذَرَكَ وَءَالِهَتَكَ",
+      "uthmanic_target_english": "and to forsake you and your gods",
+      "variant_target_arabic": "وَقَدْ تَرَكُوكَ أَنْ يَعْبُدُوكَ وَآلِهَتَكَ",
+      "variant_target_english": "when they have forsaken you so as not to serve you and your gods",
+      "uthmanic_full_arabic": "وَقَالَ ٱلۡمَلَأُ مِن قَوۡمِ فِرۡعَوۡنَ أَتَذَرُ مُوسَىٰ وَقَوۡمَهُۥ لِيُفۡسِدُواْ فِي ٱلۡأَرۡضِ وَيَذَرَكَ وَءَالِهَتَكَۚ قَالَ سَنُقَتِّلُ أَبۡنَآءَهُمۡ وَنَسۡتَحۡيِۦ نِسَآءَهُمۡ وَإِنَّا فَوۡقَهُمۡ قَٰهِرُونَ",
+      "uthmanic_full_english": "The assembly of the people of Pharaoh said, ‘Will you leave Moses and his people to foment corruption on the earth and to forsake you and your gods?’ He said, ‘We shall kill their sons and keep their women alive. Surely we shall be supreme over them!’",
+      "variant_full_arabic": "وَقَالَ ٱلۡمَلَأُ مِن قَوۡمِ فِرۡعَوۡنَ أَتَذَرُ مُوسَىٰ وَقَوۡمَهُۥ لِيُفۡسِدُواْ فِي ٱلۡأَرۡضِ وَقَدْ تَرَكُوكَ أَنْ يَعْبُدُوكَ وَآلِهَتَكَۚ قَالَ سَنُقَتِّلُ أَبۡنَآءَهُمۡ وَنَسۡتَحۡيِۦ نِسَآءَهُمۡ وَإِنَّا فَوۡقَهُمۡ قَٰهِرُونَ",
+      "variant_full_english": "The assembly of the people of Pharaoh said, ‘Will you leave Moses and his people to foment corruption on the earth when they have forsaken you so as not to serve you and your gods?’ He said, ‘We shall kill their sons and keep their women alive. Surely we shall be supreme over them!’",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari cites Ubayy's reading as an explanatory confirmation that the subjunctive verb 'wa-yadharaka' in the Uthmanic text is governed by syntactic diversion (ṣarf / circumstantial state) meaning 'while he has already forsaken worshipping you.'",
+        "primary_source_evaluation": "Both al-Tabari (via Abu Ubayd al-Qasim bin Sallam from Hajjaj from Harun) and Ibn Kathir preserve this multi-word substitution as the explicit reading of Ubayy bin Ka'b."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 29,
+        "undeniability_gold_sources_30": 25,
+        "universal_scope_20": 15,
+        "classical_concession_15": 8,
+        "cuj_score": 77
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/7/127/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura7-aya127.html",
+          "arabic_excerpt": "14961 - حدثنا أحمد بن يوسف قال، حدثنا القاسم قال، حدثنا حجاج عن هارون قال، في حرف أبي بن كعب: ( وقَدْ تَرَكُوكَ أَنْ يَعْبُدُوكَ وآلِهَتَكَ ). (17)",
+          "english_excerpt": "*14961 - Ahmad bin Yusuf narrated to us, he said, al-Qasim narrated to us, he said, Hajjaj narrated to us from Harun, he said, in the reading of Ubayy bin Ka'b:* {(And they have forsaken you so as not to worship you and your gods)} (17).",
+          "highlight_arabic": "في حرف أبي بن كعب: ( وقَدْ تَرَكُوكَ أَنْ يَعْبُدُوكَ وآلِهَتَكَ )",
+          "highlight_english": "in the reading of Ubayy bin Ka'b:* {(And they have forsaken you so as not to worship you and your gods)}"
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/7/127/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura7-aya127.html",
+          "arabic_excerpt": "وقرأ ذلك أبي بن كعب : \" وقد تركوك أن يعبدوك وآلهتك \" ، حكاه ابن جرير .",
+          "english_excerpt": "Ubayy bin Ka'b recited it as: \"And they have abandoned you and worshipping you and your gods.\" This was narrated by Ibn Jarir.",
+          "highlight_arabic": "وقرأ ذلك أبي بن كعب : \" وقد تركوك أن يعبدوك وآلهتك \"",
+          "highlight_english": "Ubayy bin Ka'b recited it as: \"And they have abandoned you and worshipping you and your gods.\""
+        }
+      ],
+      "global_rank": 79,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "وَقَالَ ٱلۡمَلَأُ مِن قَوۡمِ فِرۡعَوۡنَ أَتَذَرُ مُوسَىٰ وَقَوۡمَهُۥ لِيُفۡسِدُواْ فِي ٱلۡأَرۡضِ وَقَدْ تَرَكُوكَ أَنْ يَعْبُدُوكَ وَآلِهَتَكَۚ قَالَ سَنُقَتِّلُ أَبۡنَآءَهُمۡ وَنَسۡتَحۡيِۦ نِسَآءَهُمۡ وَإِنَّا فَوۡقَهُمۡ قَٰهِرُونَ",
+      "variant_english": "The assembly of the people of Pharaoh said, ‘Will you leave Moses and his people to foment corruption on the earth when they have forsaken you so as not to serve you and your gods?’ He said, ‘We shall kill their sons and keep their women alive. Surely we shall be supreme over them!’",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (7:127)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (7:127)",
+      "sunnah_url": "/quran/7/127/tafsir/tabari",
+      "hadith_arabic": "14961 - حدثنا أحمد بن يوسف قال، حدثنا القاسم قال، حدثنا حجاج عن هارون قال، في حرف أبي بن كعب: ( وقَدْ تَرَكُوكَ أَنْ يَعْبُدُوكَ وآلِهَتَكَ ). (17)",
+      "hadith_english": "*14961 - Ahmad bin Yusuf narrated to us, he said, al-Qasim narrated to us, he said, Hajjaj narrated to us from Harun, he said, in the reading of Ubayy bin Ka'b:* {(And they have forsaken you so as not to worship you and your gods)} (17).",
+      "rank": 1,
+      "attribution_role": "primary"
+    },
+    {
+      "id": "codex-14-46-abdullah-bin-masud",
+      "surah": 14,
+      "ayah": 46,
+      "companion": "Abdullah bin Masud",
+      "companion_id": "abdullah-bin-masud",
+      "also_attributed_to": [
+        "Ubayy bin Kab",
+        "Umar bin Al-Khattab",
+        "Ali bin Abi Talib"
+      ],
+      "variant_type": "Word Substitution",
+      "short_title": "'Almost Removed Mountains' (Kada vs Kana) in 14:46",
+      "plain_english_hook": "Whether 14:46 means their plot 'could never' move mountains or 'almost' moved mountains depends on one letter: standard 'kana' (was) vs Ibn Masud, Ubayy, Umar, and Ali's 'kada' (almost).",
+      "title": "Surah Ibrahim 14:46 — 'Wa-In Kada Makruhum' in Ibn Mas'ud and Ubayy's Codices",
+      "diff_summary": "In the Uthmanic text of 14:46, the clause وَإِنْ كَانَ مَكْرُهُمْ لِتَزُولَ مِنْهُ الْجِبَالُ (with nun in 'kana') is interpreted by the majority of reciters (who read 'litazula') as a negation: 'and their scheme was not such as to remove the mountains.' Both al-Tabari and Ibn Kathir record that Abdullah bin Mas'ud (in his Mushaf), Ubayy bin Ka'b, Umar bin al-Khattab, and Ali bin Abi Talib read وَإِنْ كَادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الْجِبَالُ (with dal in 'kada' and dammah on 'latazulu'), reversing the sense to an affirmative near-occurrence: 'and indeed their scheme almost removed the mountains by it.'",
+      "uthmanic_target_arabic": "وَإِن كَانَ مَكۡرُهُمۡ لِتَزُولَ مِنۡهُ ٱلۡجِبَالُ",
+      "uthmanic_target_english": "even though their scheme was (such as) to remove the mountains by it",
+      "variant_target_arabic": "وَإِن كَادَ مَكۡرُهُمۡ لَتَزُولُ مِنۡهُ ٱلۡجِبَالُ",
+      "variant_target_english": "and indeed their scheme almost removed the mountains by it",
+      "uthmanic_full_arabic": "وَقَدۡ مَكَرُواْ مَكۡرَهُمۡ وَعِندَ ٱللَّهِ مَكۡرُهُمۡ وَإِن كَانَ مَكۡرُهُمۡ لِتَزُولَ مِنۡهُ ٱلۡجِبَالُ",
+      "uthmanic_full_english": "They schemed their scheme, but their scheme was known to God, even though their scheme was (such as) to remove the mountains by it.’",
+      "variant_full_arabic": "وَقَدۡ مَكَرُواْ مَكۡرَهُمۡ وَعِندَ ٱللَّهِ مَكۡرُهُمۡ وَإِن كَادَ مَكۡرُهُمۡ لَتَزُولُ مِنۡهُ ٱلۡجِبَالُ",
+      "variant_full_english": "They schemed their scheme, but their scheme was known to God, and indeed their scheme almost removed the mountains by it.’",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari acknowledges that Companions and Successors recited 'wa-in kada' with a dal, but rules that it is impermissible to recite it today because the Uthmanic manuscripts are written 'wa-in kana' with a nun, and one may not alter the orthography of the Muslims' Mushafs.",
+        "primary_source_evaluation": "Al-Tabari's explicit concession—that the Companion reading 'wa-in kada' (attested for Ibn Mas'ud's Mushaf, Umar, Ali, and Ubayy) is grammatically sound and was adapted by the canonical Kufan reciter al-Kisa'i onto the Uthmanic rasm 'wa-in kana latazulu'—demonstrates how a non-Uthmanic consonantal variant directly generated a canonical Qira'at dispute."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 32,
+        "undeniability_gold_sources_30": 27,
+        "universal_scope_20": 19,
+        "classical_concession_15": 14,
+        "cuj_score": 92
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/14/47/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura14-aya47.html",
+          "arabic_excerpt": "قال ابن جريج: أخبرني عمرو بن دينار ، عن عكرمة ، عن عمر بن الخطاب ، أنه كان يقرأ \" وَإِنْ كادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الجِبالُ \". قال قتادة: وفي مصحف عبد الله بن مسعود: \" وَإِنْ كادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الجِبالُ \". وذلك أن الذين قرءوا ذلك بفتح اللام الأولى ورفع الثانية قرءوا: \" وَإِنْ كادَ مَكْرُهُمْ \" بالدال ، وهي إذا قرئت كذلك ، فالصحيح من القراءة مع \" وَإِنْ كادَ \" فتح اللام الأولى ورفع الثانية على ما قرءوا ، وغير جائز عندنا القراءة كذلك ، لأن مصاحفنا بخلاف ذلك ، وإنما خطَّ مصاحفنا وإن كان بالنون لا بالدال.",
+          "english_excerpt": "Ibn Jurayj said: 'Amr bin Dinar informed me, from 'Ikrimah, from 'Umar bin al-Khattab, that he used to recite: '{And their plot almost caused the mountains to move from it}'. Qatadah said: And in the codex (Mushaf) of 'Abdullah bin Mas'ud: '{And their plot almost caused the mountains to move from it}'. And that is because those who recited it with a fathah on the first lam and a dammah on the second recited: '{wa-in kada makruhum}' with a dal... And it is not permissible in our view to recite like that, because our manuscripts are contrary to that. The script of our manuscripts is 'wa-in kana' with a nun, not with a dal.",
+          "highlight_arabic": "وفي مصحف عبد الله بن مسعود: \" وَإِنْ كادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الجِبالُ \"",
+          "highlight_english": "in the codex (Mushaf) of 'Abdullah bin Mas'ud: '{And their plot almost caused the mountains to move from it}'"
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/14/46/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura14-aya46.html",
+          "arabic_excerpt": "قال : فهو قول الله - عز وجل - : \" وإن كاد مكرهم لتزول منه الجبال \" . قال أبو إسحاق : وكذلك هي في قراءة عبد الله : \" وإن كاد مكرهم \" . قلت : وكذا روي عن أبي بن كعب ، وعمر بن الخطاب - رضي الله عنهما - أنهما قرآ : \" وإن كاد \" كما قرأ علي .",
+          "english_excerpt": "This is the saying of Allah (the Exalted and Most Honored): 'though their plot was almost (*Wa in kad*) one to remove the mountains from their places.' Abu Ishaq said: \"And similarly it is in the recitation of 'Abdullah: '*Wa in kad makruhum*' (though their plot was almost...).\" I (Ibn Kathir) say: And similarly it was narrated from Ubayy bin Ka'b and 'Umar bin Al-Khattab (may Allah be pleased with them) that they recited \"*Wa in kad*\" as 'Ali recited.",
+          "highlight_arabic": "في قراءة عبد الله : \" وإن كاد مكرهم \"",
+          "highlight_english": "in the recitation of 'Abdullah: '*Wa in kad makruhum*'"
+        }
+      ],
+      "global_rank": 23,
+      "companion_codex": "Abdullah bin Masud",
+      "variant_arabic": "وَقَدۡ مَكَرُواْ مَكۡرَهُمۡ وَعِندَ ٱللَّهِ مَكۡرُهُمۡ وَإِن كَادَ مَكۡرُهُمۡ لَتَزُولُ مِنۡهُ ٱلۡجِبَالُ",
+      "variant_english": "They schemed their scheme, but their scheme was known to God, and indeed their scheme almost removed the mountains by it.’",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (14:46)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (14:46)",
+      "sunnah_url": "/quran/14/47/tafsir/tabari",
+      "hadith_arabic": "قال ابن جريج: أخبرني عمرو بن دينار ، عن عكرمة ، عن عمر بن الخطاب ، أنه كان يقرأ \" وَإِنْ كادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الجِبالُ \". قال قتادة: وفي مصحف عبد الله بن مسعود: \" وَإِنْ كادَ مَكْرُهُمْ لَتَزُولُ مِنْهُ الجِبالُ \". وذلك أن الذين قرءوا ذلك بفتح اللام الأولى ورفع الثانية قرءوا: \" وَإِنْ كادَ مَكْرُهُمْ \" بالدال ، وهي إذا قرئت كذلك ، فالصحيح من القراءة مع \" وَإِنْ كادَ \" فتح اللام الأولى ورفع الثانية على ما قرءوا ، وغير جائز عندنا القراءة كذلك ، لأن مصاحفنا بخلاف ذلك ، وإنما خطَّ مصاحفنا وإن كان بالنون لا بالدال.",
+      "hadith_english": "Ibn Jurayj said: 'Amr bin Dinar informed me, from 'Ikrimah, from 'Umar bin al-Khattab, that he used to recite: '{And their plot almost caused the mountains to move from it}'. Qatadah said: And in the codex (Mushaf) of 'Abdullah bin Mas'ud: '{And their plot almost caused the mountains to move from it}'. And that is because those who recited it with a fathah on the first lam and a dammah on the second recited: '{wa-in kada makruhum}' with a dal... And it is not permissible in our view to recite like that, because our manuscripts are contrary to that. The script of our manuscripts is 'wa-in kana' with a nun, not with a dal.",
+      "rank": 1,
+      "attribution_role": "shared"
+    },
+    {
+      "id": "codex-17-23-abdullah-bin-masud",
+      "surah": 17,
+      "ayah": 23,
+      "companion": "Abdullah bin Masud",
+      "companion_id": "abdullah-bin-masud",
+      "also_attributed_to": [
+        "Ubayy bin Kab"
+      ],
+      "variant_type": "Word Substitution",
+      "short_title": "17:23 — 'Your Lord Enjoined' vs. 'Your Lord Decreed'",
+      "plain_english_hook": "Where the standard Quran reads 'Your Lord has decreed (wa-qaḍā) that you worship none but Him,' Ibn Mas'ud and Ubayy's codices read 'Your Lord has enjoined (wa-waṣṣā).'",
+      "title": "Substitution of 'Enjoined' (Wa-Waṣṣā) for 'Decreed' (Wa-Qaḍā) in 17:23",
+      "diff_summary": "In Surah 17:23, the Uthmanic text begins '۞وَقَضَىٰ رَبُّكَ أَلَّا تَعۡبُدُوٓاْ إِلَّآ إِيَّاهُ' ('Your Lord has decreed that you do not serve any but Him'). Both al-Tabari and Ibn Kathir record that Abdullah bin Mas'ud and the Mushaf of Ubayy bin Ka'b transmitted by Ibn Abbas read 'وَوَصَّى رَبُّكَ' ('Your Lord has enjoined'), with al-Dahhak claiming in Tabari that scribes inadvertently joined the letter wāw to the ṣād so that it turned into a qāf.",
+      "uthmanic_target_arabic": "۞وَقَضَىٰ رَبُّكَ",
+      "uthmanic_target_english": "Your Lord has decreed",
+      "variant_target_arabic": "وَوَصَّى رَبُّكَ",
+      "variant_target_english": "Your Lord has enjoined",
+      "uthmanic_full_arabic": "۞وَقَضَىٰ رَبُّكَ أَلَّا تَعۡبُدُوٓاْ إِلَّآ إِيَّاهُ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنًاۚ إِمَّا يَبۡلُغَنَّ عِندَكَ ٱلۡكِبَرَ أَحَدُهُمَآ أَوۡ كِلَاهُمَا فَلَا تَقُل لَّهُمَآ أُفّٖ وَلَا تَنۡهَرۡهُمَا وَقُل لَّهُمَا قَوۡلٗا كَرِيمٗا",
+      "uthmanic_full_english": "Your Lord has decreed that you do not serve any but Him, and (that you do) good to your parents, whether one or both of them reaches old age with you. Do not say to them, ‘Uff,’ and do not repulse them,",
+      "variant_full_arabic": "وَوَصَّى رَبُّكَ أَلَّا تَعۡبُدُوٓاْ إِلَّآ إِيَّاهُ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنًاۚ إِمَّا يَبۡلُغَنَّ عِندَكَ ٱلۡكِبَرَ أَحَدُهُمَآ أَوۡ كِلَاهُمَا فَلَا تَقُل لَّهُمَآ أُفّٖ وَلَا تَنۡهَرۡهُمَا وَقُل لَّهُمَا قَوۡلٗا كَرِيمٗا",
+      "variant_full_english": "Your Lord has enjoined that you do not serve any but Him, and (that you do) good to your parents, whether one or both of them reaches old age with you. Do not say to them, ‘Uff,’ and do not repulse them,",
+      "scholarly_discussion": {
+        "classical_harmonization": "Commentators explain that 'qaḍā' in the Uthmanic reading carries the lexical meaning of religious command (amr) rather than deterministic decree, making it synonymous in meaning with 'waṣṣā' (enjoined).",
+        "primary_source_evaluation": "Al-Tabari preserves both physical manuscript testimony of Ubayy's Mushaf reading 'wa-waṣṣā rabbuka' and al-Dahhak's explicit paleographic claim that the Uthmanic 'wa-qaḍā' arose when scribes ligatured the wāw and ṣād into a qāf."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 27,
+        "universal_scope_20": 18,
+        "classical_concession_15": 14,
+        "cuj_score": 92
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/17/23/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura17-aya23.html",
+          "arabic_excerpt": "حدثنا ابن عبد الأعلى، قال: ثنا محمد بن ثور، عن معمر، عن قتادة ( وَقَضَى رَبُّكَ أَلا تَعْبُدُوا إِلا إِيَّاهُ ) قال: أمر ألا تعبدوا إلا إياه، وفي حرف ابن مسعود: (وَصَّى رَبُّكَ ألا تَعْبُدُوا إِلا إِيَّاهُ).",
+          "english_excerpt": "(And your Lord has decreed that you do not serve any but Him), he said: Commanded that you do not serve any but Him. And in the reading (harf) of Ibn Mas'ud: (And your Lord has enjoined that you do not serve any but Him).",
+          "highlight_arabic": "وفي حرف ابن مسعود: (وَصَّى رَبُّكَ ألا تَعْبُدُوا إِلا إِيَّاهُ)",
+          "highlight_english": "And in the reading (harf) of Ibn Mas'ud: (And your Lord has enjoined that you do not serve any but Him)"
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/17/23/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura17-aya23.html",
+          "arabic_excerpt": "قال مجاهد ( وقضى ) يعني وصى وكذا قرأ أبي بن كعب وعبد الله بن مسعود والضحاك بن مزاحم ووصى ربك ألا تعبدوا إلا إياه ولهذا قرن بعبادته بر الوالدين فقال ( وبالوالدين إحسانا ) أي وأمر بالوالدين إحسانا كما قال في الآية الأخرى ( أن اشكر لي ولوالديك إلي المصير ) [ لقمان 14 .",
+          "english_excerpt": "*(And He has Qada)* means enjoined. This is also how Ubayy bin Ka'b, Ibn Mas'ud and Ad-Dahhak bin Muzahim recited the Ayah as: \"And your Lord enjoined that you worship none but Him.\"",
+          "highlight_arabic": "وكذا قرأ أبي بن كعب وعبد الله بن مسعود والضحاك بن مزاحم ووصى ربك ألا تعبدوا إلا إياه",
+          "highlight_english": "Ubayy bin Ka'b, Ibn Mas'ud and Ad-Dahhak bin Muzahim recited the Ayah as: \"And your Lord enjoined that you worship none but Him.\""
+        }
+      ],
+      "global_rank": 24,
+      "companion_codex": "Abdullah bin Masud",
+      "variant_arabic": "وَوَصَّى رَبُّكَ أَلَّا تَعۡبُدُوٓاْ إِلَّآ إِيَّاهُ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنًاۚ إِمَّا يَبۡلُغَنَّ عِندَكَ ٱلۡكِبَرَ أَحَدُهُمَآ أَوۡ كِلَاهُمَا فَلَا تَقُل لَّهُمَآ أُفّٖ وَلَا تَنۡهَرۡهُمَا وَقُل لَّهُمَا قَوۡلٗا كَرِيمٗا",
+      "variant_english": "Your Lord has enjoined that you do not serve any but Him, and (that you do) good to your parents, whether one or both of them reaches old age with you. Do not say to them, ‘Uff,’ and do not repulse them,",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (17:23)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (17:23)",
+      "sunnah_url": "/quran/17/23/tafsir/tabari",
+      "hadith_arabic": "حدثنا ابن عبد الأعلى، قال: ثنا محمد بن ثور، عن معمر، عن قتادة ( وَقَضَى رَبُّكَ أَلا تَعْبُدُوا إِلا إِيَّاهُ ) قال: أمر ألا تعبدوا إلا إياه، وفي حرف ابن مسعود: (وَصَّى رَبُّكَ ألا تَعْبُدُوا إِلا إِيَّاهُ).",
+      "hadith_english": "(And your Lord has decreed that you do not serve any but Him), he said: Commanded that you do not serve any but Him. And in the reading (harf) of Ibn Mas'ud: (And your Lord has enjoined that you do not serve any but Him).",
+      "rank": 1,
+      "attribution_role": "shared"
+    },
+    {
+      "id": "codex-18-77-ubayy-bin-kab",
+      "surah": 18,
       "ayah": 77,
-      "variant_arabic": "لَتَخِذْتَ عَلَيْهِ أَجْرًا",
-      "variant_english": "used to recite this",
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [],
+      "variant_type": "Morphological / Consonantal Shift",
+      "short_title": "Ubayy Reads Form I 'La-Takhidhta' in Q. 18:77",
+      "plain_english_hook": "In the story of Moses and Khidr repairing the wall, the Uthmanic text uses Form VIII 'la-ttakhadhta' ('you could have taken'). Ubayy bin Ka'b recited the shorter Form I verb 'la-takhidhta.'",
+      "title": "Form I 'La-Takhidhta' vs. Form VIII 'La-ttakhadhta' in Q. 18:77 (Ubayy bin Ka'b)",
+      "diff_summary": "Where the standard Hafs text reads 'la-ttakhadhta' (Form VIII, with a doubled tāʾ), Ubayy bin Ka'b and Ibn Abbas recited the unaugmented Form I triliteral stem 'la-takhidhta' (without gemination or added alif).",
+      "uthmanic_target_arabic": "لَوۡ شِئۡتَ لَتَّخَذۡتَ عَلَيۡهِ أَجۡرٗا",
+      "uthmanic_target_english": "If you had wished, you could indeed have taken a reward for that.",
+      "variant_target_arabic": "لَوْ شِئْتَ لَتَخِذْتَ عَلَيْهِ أَجْرًا",
+      "variant_target_english": "If you had wished, you could indeed have taken (la-takhidhta, Form I) a reward for that.",
+      "uthmanic_full_arabic": "فَٱنطَلَقَا حَتَّىٰٓ إِذَآ أَتَيَآ أَهۡلَ قَرۡيَةٍ ٱسۡتَطۡعَمَآ أَهۡلَهَا فَأَبَوۡاْ أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارٗا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُۥۖ قَالَ لَوۡ شِئۡتَ لَتَّخَذۡتَ عَلَيۡهِ أَجۡرٗا",
+      "uthmanic_full_english": "So they both set out (and continued on) until, when they came to the people of a town, they asked its people for food, but they refused to offer them hospitality. They both found in it a wall on the verge of collapse, and he set it up. He said, ‘If you had wished, you could indeed have taken a reward for that.’",
+      "variant_full_arabic": "فَٱنطَلَقَا حَتَّىٰٓ إِذَآ أَتَيَآ أَهۡلَ قَرۡيَةٍ ٱسۡتَطۡعَمَآ أَهۡلَهَا فَأَبَوۡاْ أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارٗا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُۥۖ قَالَ لَوْ شِئْتَ لَتَخِذْتَ عَلَيْهِ أَجْرًا",
+      "variant_full_english": "So they both set out (and continued on) until, when they came to the people of a town, they asked its people for food, but they refused to offer them hospitality. They both found in it a wall on the verge of collapse, and he set it up. He said, ‘If you had wished, you could indeed have taken (la-takhidhta, Form I) a reward for that.’",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari explains that 'takhidha' (Form I, a dialectal form of Hudhayl read by Ubayy, Ibn 'Abbas, and the Basrans Ibn Kathir and Abu 'Amr) and 'ittakhadha' (Form VIII, read by the Medinans and Kufans) are two Arabic verb forms conveying the same meaning.",
+        "primary_source_evaluation": "While compatible with early unpointed Kufan and Basran orthography ('ltkhdht'), many manuscripts and later printings wrote Form VIII with an extra alif ('lāttakhadhta'), whereas Ubayy bin Ka'b and Ibn Abbas preserved the unaugmented Form I stem."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 26,
+        "undeniability_gold_sources_30": 27,
+        "universal_scope_20": 15,
+        "classical_concession_15": 10,
+        "cuj_score": 78
+      },
+      "hadiths": [
+        {
+          "hadith_reference": "Sahih Muslim 2380e",
+          "sunnah_url": "https://sunnah.com/muslim:2380e",
+          "transmitted_by": "Sa'id bin Jubayr -> Ibn Abbas -> Ubayy bin Ka'b",
+          "hadith_arabic": "وَحَدَّثَنَا عَمْرٌو النَّاقِدُ، حَدَّثَنَا سُفْيَانُ بْنُ عُيَيْنَةَ، عَنْ عَمْرٍو، عَنْ سَعِيدِ بْنِ جُبَيْرٍ، عَنِ ابْنِ عَبَّاسٍ، عَنْ أُبَىِّ بْنِ كَعْبٍ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَرَأَ ‏{‏ لَتَخِذْتَ عَلَيْهِ أَجْرًا‏}‏ ‏.‏",
+          "hadith_english": "Ibn 'Abbas has reported this hadith on the authority of Ubayy b. Ka'b that Allah's Apostle (ﷺ) recited: \"you could have taken a wage for it\" (la-takhidhta 'alayhi ajran).",
+          "highlight_arabic": "عَنْ أُبَىِّ بْنِ كَعْبٍ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَرَأَ ‏{‏ لَتَخِذْتَ عَلَيْهِ أَجْرًا‏}",
+          "highlight_english": "on the authority of Ubayy b. Ka'b that Allah's Apostle (ﷺ) recited: \"you could have taken a wage for it\" (la-takhidhta 'alayhi ajran)."
+        }
+      ],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/18/77/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura18-aya77.html",
+          "arabic_excerpt": "واختلف القرّاء في قراءة ذلك، فقرأته عامَّة قرّاء أهل المدينة والكوفة ( لَوْ شِئْتَ لاتَّخَذْتَ عَلَيْهِ أَجْرًا ) على التوجيه منهم له إلى أنه لافتعلت من الأخذ ، وقرأ ذلك بعض أهل البصرة ( لَوْ شَئِتَ لَتَخِذْتَ ) بتخفيف التاء وكسر الخاء ... وهي لغة فيما ذكر لهُذَيل .",
+          "english_excerpt": "The reciters disagreed concerning the recitation of that. The generality of the reciters of the people of Medina and Kufah recited it: {If you had wished, la-ttakhadhta (you could indeed have taken) a reward for that}, directing it to the fact that it is 'la-ifta'alta' from 'al-akhdh' (taking). And some of the people of Basrah recited that: {law shi'ta la-takhidhta} with the lightening of the Ta' and the kasrah of the Kha'.",
+          "highlight_arabic": "وقرأ ذلك بعض أهل البصرة ( لَوْ شَئِتَ لَتَخِذْتَ ) بتخفيف التاء وكسر الخاء",
+          "highlight_english": "And some of the people of Basrah recited that: {law shi'ta la-takhidhta} with the lightening of the Ta' and the kasrah of the Kha'"
+        }
+      ],
+      "global_rank": 77,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "فَٱنطَلَقَا حَتَّىٰٓ إِذَآ أَتَيَآ أَهۡلَ قَرۡيَةٍ ٱسۡتَطۡعَمَآ أَهۡلَهَا فَأَبَوۡاْ أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارٗا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُۥۖ قَالَ لَوْ شِئْتَ لَتَخِذْتَ عَلَيْهِ أَجْرًا",
+      "variant_english": "So they both set out (and continued on) until, when they came to the people of a town, they asked its people for food, but they refused to offer them hospitality. They both found in it a wall on the verge of collapse, and he set it up. He said, ‘If you had wished, you could indeed have taken (la-takhidhta, Form I) a reward for that.’",
+      "hadith_reference": "Sahih Muslim 2380e",
       "source_reference": "Sahih Muslim 2380e",
+      "sunnah_url": "https://sunnah.com/muslim:2380e",
       "hadith_arabic": "وَحَدَّثَنَا عَمْرٌو النَّاقِدُ، حَدَّثَنَا سُفْيَانُ بْنُ عُيَيْنَةَ، عَنْ عَمْرٍو، عَنْ سَعِيدِ بْنِ جُبَيْرٍ، عَنِ ابْنِ عَبَّاسٍ، عَنْ أُبَىِّ بْنِ كَعْبٍ، أَنَّ النَّبِيَّ صلى الله عليه وسلم قَرَأَ ‏{‏ لَتَخِذْتَ عَلَيْهِ أَجْرًا‏}‏ ‏.‏",
-      "hadith_english": "Ibn 'Abbas has reported this hadith on the authority of Ubayy b. ka'b that Allah's Apostle (ﷺ) used to recite this\n\n[omitted from the english translation: {latakhidhta 'alayhi ajran} (you could have surely taken a wage for it).]",
-      "sunnah_url": "https://sunnah.com/muslim/43/225"
+      "hadith_english": "Ibn 'Abbas has reported this hadith on the authority of Ubayy b. Ka'b that Allah's Apostle (ﷺ) recited: \"you could have taken a wage for it\" (la-takhidhta 'alayhi ajran).",
+      "rank": 1,
+      "attribution_role": "primary"
     },
     {
-      "surah": 102,
-      "ayah": 1,
-      "variant_arabic": "لَوْ أَنَّ ابْنَ آدَمَ أُعْطِيَ وَادِيًا مَلأً مِنْ ذَهَبٍ أَحَبَّ إِلَيْهِ ثَانِيًا، وَلَوْ أُعْطِيَ ثَانِيًا أَحَبَّ إِلَيْهِ ثَالِثًا، وَلاَ يَسُدُّ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ",
-      "variant_english": "If the son of Adam were given a valley full of gold, he would love to have a second one; and if he were given the second one, he would love to have a third, for nothing fills the belly of Adam's son except dust. And Allah forgives he who repents to Him.",
-      "source_reference": "Sahih al-Bukhari 6438",
-      "hadith_arabic": "حَدَّثَنَا أَبُو نُعَيْمٍ، حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ سُلَيْمَانَ بْنِ الْغَسِيلِ، عَنْ عَبَّاسِ بْنِ سَهْلِ بْنِ سَعْدٍ، قَالَ سَمِعْتُ ابْنَ الزُّبَيْرِ، عَلَى الْمِنْبَرِ بِمَكَّةَ فِي خُطْبَتِهِ يَقُولُ يَا أَيُّهَا النَّاسُ إِنَّ النَّبِيَّ صلى الله عليه وسلم كَانَ يَقُولُ ‏ \"‏ لَوْ أَنَّ ابْنَ آدَمَ أُعْطِيَ وَادِيًا مَلأً مِنْ ذَهَبٍ أَحَبَّ إِلَيْهِ ثَانِيًا، وَلَوْ أُعْطِيَ ثَانِيًا أَحَبَّ إِلَيْهِ ثَالِثًا، وَلاَ يَسُدُّ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ ‏\"‏‏.‏",
-      "hadith_english": "Narrated Sahl bin Sa`d:I heard Ibn Az-Zubair who was on the pulpit at Mecca, delivering a sermon, saying, \"O men! The Prophet used to say, \"If the son of Adam were given a valley full of gold, he would love to have a second one; and if he were given the second one, he would love to have a third, for nothing fills the belly of Adam's son except dust. And Allah forgives he who repents to Him.\" Ubai said, \"We considered this as a saying from the Qur'an till the Sura (beginning with) 'The mutual rivalry for piling up of worldly things diverts you..' (102.1) was revealed\"",
-      "sunnah_url": "https://sunnah.com/bukhari/81/27"
+      "id": "codex-18-79-ubayy-bin-kab",
+      "surah": 18,
+      "ayah": 79,
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [
+        "Ibn Abbas",
+        "Abdullah bin Masud"
+      ],
+      "variant_type": "Phrase Addition",
+      "short_title": "Ubayy's Codex Adds 'Every Sound Ship' in Q. 18:79",
+      "plain_english_hook": "In Ubayy bin Ka'b's codex—as well as Ibn Mas'ud's—verse 18:79 explicitly specifies that the king seized 'every sound ship' by force, supplying the missing word that explains why Khidr damaged the vessel.",
+      "title": "Addition of 'Salihah' ('Every Sound Ship') in the Codex of Ubayy bin Ka'b (Q. 18:79)",
+      "diff_summary": "In Tafsir al-Tabari (transmitted from Ibn 'Abbas via Sa'id bin Jubayr) and in the prophetic hadith of Ubayy bin Ka'b in Sahih al-Bukhari 2728, the reading of Ubayy bin Ka'b ('في قراءة أُبيّ') and the codex of Ibn Mas'ud ('في حرف ابن مسعود') include the adjective 'صَالِحَةٍ' ('sound / undamaged') in Q. 18:79: 'وَكَانَ وَرَاءَهُمْ مَلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا' ('behind them was a king seizing every sound ship by force'). Without 'صَالِحَةٍ', the literal Uthmanic statement that the king seized 'every ship' creates a narrative tension with al-Khadir's statement that damaging the ship would prevent its seizure.",
+      "uthmanic_target_arabic": "يَأۡخُذُ كُلَّ سَفِينَةٍ غَصۡبٗا",
+      "uthmanic_target_english": "seizing every ship by force.",
+      "variant_target_arabic": "يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا",
+      "variant_target_english": "seizing every sound ship by force.",
+      "uthmanic_full_arabic": "أَمَّا ٱلسَّفِينَةُ فَكَانَتۡ لِمَسَٰكِينَ يَعۡمَلُونَ فِي ٱلۡبَحۡرِ فَأَرَدتُّ أَنۡ أَعِيبَهَا وَكَانَ وَرَآءَهُم مَّلِكٞ يَأۡخُذُ كُلَّ سَفِينَةٍ غَصۡبٗا",
+      "uthmanic_full_english": "As for the ship, it belonged to poor people working on the sea, and I wanted to damage it, (because) behind them (there) was a king seizing every ship by force.",
+      "variant_full_arabic": "أَمَّا ٱلسَّفِينَةُ فَكَانَتۡ لِمَسَٰكِينَ يَعۡمَلُونَ فِي ٱلۡبَحۡرِ فَأَرَدتُّ أَنۡ أَعِيبَهَا وَكَانَ وَرَآءَهُم مَّلِكٞ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا",
+      "variant_full_english": "As for the ship, it belonged to poor people working on the sea, and I wanted to damage it, (because) behind them (there) was a king seizing every sound ship by force.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari argues that the clause 'I wanted to damage it' in the Uthmanic text sufficiently implies that the king only seized undamaged ships, rendering the explicit word 'salihah' ('sound') in the codices of Ubayy and Ibn Mas'ud unnecessary.",
+        "primary_source_evaluation": "Both Ubayy bin Ka'b and 'Abdullah bin Mas'ud—two of the four primary Quran teachers appointed by the Prophet—independently preserved the consonantal word 'salihah' in their codices, demonstrating that it circulated as part of the recited Quranic text among senior Companions."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 28,
+        "universal_scope_20": 18,
+        "classical_concession_15": 13,
+        "cuj_score": 92
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/18/79/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura18-aya79.html",
+          "arabic_excerpt": "حدثنا ابن حميد، قال: ثنا سلمة، عن ابن إسحاق، قال: ثني الحسن بن دينار، عن الحكم بن عيينة، عن سعيد بن جبير، عن ابن عباس، قال: في قراءة أُبيّ: ( وكان وراءهم ملك يأخذ كل سفينة صالحة غَصْبًا ) وإنما عبتها لأرده عنها.\nحدثنا الحسن بن يحيى، قال: أخبرنا عبد الرزاق، قال: أخبرنا معمر، عن قتادة، قال: هي في حرف ابن مسعود: ( وكان وراءهم ملك يأخذ كل سفينة صالحة غصبا).",
+          "english_excerpt": "Ibn Humayd narrated to us, who said: Salamah narrated to us, from Ibn Ishaq, who said: Al-Hasan b. Dinar narrated to me, from Al-Hakam b. 'Uyaynah, from Sa'id b. Jubayr, from Ibn 'Abbas, who said: In the reading of Ubayy it is: \"(And behind them was a king seizing every sound ship by force.) And I only damaged it to turn him away from it.\"\nAl-Hasan b. Yahya narrated to us... from Qatadah, who said: It is in the reading (harf) of Ibn Mas'ud: \"(And behind them was a king seizing every sound ship by force).\"",
+          "highlight_arabic": "في قراءة أُبيّ: ( وكان وراءهم ملك يأخذ كل سفينة صالحة غَصْبًا )",
+          "highlight_english": "In the reading of Ubayy it is: \"(And behind them was a king seizing every sound ship by force.)"
+        }
+      ],
+      "global_rank": 25,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "أَمَّا ٱلسَّفِينَةُ فَكَانَتۡ لِمَسَٰكِينَ يَعۡمَلُونَ فِي ٱلۡبَحۡرِ فَأَرَدتُّ أَنۡ أَعِيبَهَا وَكَانَ وَرَآءَهُم مَّلِكٞ يَأْخُذُ كُلَّ سَفِينَةٍ صَالِحَةٍ غَصْبًا",
+      "variant_english": "As for the ship, it belonged to poor people working on the sea, and I wanted to damage it, (because) behind them (there) was a king seizing every sound ship by force.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (18:79)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (18:79)",
+      "sunnah_url": "/quran/18/79/tafsir/tabari",
+      "hadith_arabic": "حدثنا ابن حميد، قال: ثنا سلمة، عن ابن إسحاق، قال: ثني الحسن بن دينار، عن الحكم بن عيينة، عن سعيد بن جبير، عن ابن عباس، قال: في قراءة أُبيّ: ( وكان وراءهم ملك يأخذ كل سفينة صالحة غَصْبًا ) وإنما عبتها لأرده عنها.\nحدثنا الحسن بن يحيى، قال: أخبرنا عبد الرزاق، قال: أخبرنا معمر، عن قتادة، قال: هي في حرف ابن مسعود: ( وكان وراءهم ملك يأخذ كل سفينة صالحة غصبا).",
+      "hadith_english": "Ibn Humayd narrated to us, who said: Salamah narrated to us, from Ibn Ishaq, who said: Al-Hasan b. Dinar narrated to me, from Al-Hakam b. 'Uyaynah, from Sa'id b. Jubayr, from Ibn 'Abbas, who said: In the reading of Ubayy it is: \"(And behind them was a king seizing every sound ship by force.) And I only damaged it to turn him away from it.\"\nAl-Hasan b. Yahya narrated to us... from Qatadah, who said: It is in the reading (harf) of Ibn Mas'ud: \"(And behind them was a king seizing every sound ship by force).\"",
+      "rank": 2,
+      "attribution_role": "primary"
     },
     {
-      "surah": 102,
-      "ayah": 1,
-      "variant_arabic": "لَوْ أَنَّ لاِبْنِ آدَمَ وَادِيًا مِنْ ذَهَبٍ أَحَبَّ أَنْ يَكُونَ لَهُ وَادِيَانِ، وَلَنْ يَمْلأَ فَاهُ إِلاَّ التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ",
-      "variant_english": "If Adam's son had a valley full of gold, he would like to have two valleys, for nothing fills his mouth except dust. And Allah forgives him who repents to Him",
-      "source_reference": "Sahih al-Bukhari 6440",
-      "hadith_arabic": "وَقَالَ لَنَا أَبُو الْوَلِيدِ حَدَّثَنَا حَمَّادُ بْنُ سَلَمَةَ، عَنْ ثَابِتٍ، عَنْ أَنَسٍ، عَنْ أُبَىٍّ، قَالَ كُنَّا نَرَى هَذَا مِنَ الْقُرْآنِ حَتَّى نَزَلَتْ ‏{‏أَلْهَاكُمُ التَّكَاثُرُ‏}‏",
-      "hadith_english": "Ubayy said (referring to the hadith above), \"We considered this as a saying from the Qur'an till the Surah (beginning with):\"The mutual rivalry (for piling up of worldly things) diverts you' (102:1) was revealed\"",
-      "sunnah_url": "https://sunnah.com/bukhari/81/30"
+      "id": "codex-18-80-ubayy-bin-kab",
+      "surah": 18,
+      "ayah": 80,
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [],
+      "variant_type": "Phrase Addition",
+      "short_title": "Ubayy's Codex Adds 'He Was a Disbeliever' in Q. 18:80",
+      "plain_english_hook": "Al-Tabari records that in the codex (harf) of Ubayy bin Ka'b, verse 18:80 explicitly read 'As for the young boy, he was a disbeliever, and his parents were believers,' absent from the Uthmanic Quran.",
+      "title": "Addition of 'Fa-Kana Kafiran' in the Codex (Harf) of Ubayy bin Ka'b (Q. 18:80)",
+      "diff_summary": "In Tafsir al-Tabari (via 'Abd al-Razzaq from Ma'mar from Qatadah) and Sahih al-Bukhari 4727 (where Ibn 'Abbas transmits the account of Moses and al-Khadir from Ubayy bin Ka'b), Q. 18:80 in the reading (harf) of Ubayy bin Ka'b explicitly contained the clause 'فَكَانَ كَافِرًا وَكَانَ' ('he was a disbeliever, and [his parents] were'): 'وَأَمَّا الغُلامُ فَكَانَ كافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ'. This reading directly supplied the theological premise that the boy was already a disbeliever, which is absent from the Uthmanic consonantal skeleton.",
+      "uthmanic_target_arabic": "وَأَمَّا ٱلۡغُلَٰمُ فَكَانَ أَبَوَاهُ مُؤۡمِنَيۡنِ",
+      "uthmanic_target_english": "As for the young boy, his parents were believers,",
+      "variant_target_arabic": "وَأَمَّا الْغُلاَمُ فَكَانَ كَافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ",
+      "variant_target_english": "As for the young boy, he was a disbeliever and his parents were believers,",
+      "uthmanic_full_arabic": "وَأَمَّا ٱلۡغُلَٰمُ فَكَانَ أَبَوَاهُ مُؤۡمِنَيۡنِ فَخَشِينَآ أَن يُرۡهِقَهُمَا طُغۡيَٰنٗا وَكُفۡرٗا",
+      "uthmanic_full_english": "As for the young boy, his parents were believers, and we feared that he would burden them both (with) insolent transgression and disbelief.",
+      "variant_full_arabic": "وَأَمَّا الْغُلاَمُ فَكَانَ كَافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ فَخَشِينَآ أَن يُرۡهِقَهُمَا طُغۡيَٰنٗا وَكُفۡرٗا",
+      "variant_full_english": "As for the young boy, he was a disbeliever and his parents were believers, and we feared that he would burden them both (with) insolent transgression and disbelief.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Sunni exegetes classify Ubayy's reading as an explanatory addition reflecting the prophetic statement transmitted by Ubayy that the boy was created a disbeliever.",
+        "primary_source_evaluation": "Qatadah explicitly identifies '(wa-amma al-ghulamu fa-kana kafiran wa-kana abawahu mu'minayn)' as standing in the textual codex (fi harf Ubayy) of Ubayy bin Ka'b, from whom Ibn 'Abbas learned and recited the same wording."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 28,
+        "universal_scope_20": 18,
+        "classical_concession_15": 12,
+        "cuj_score": 91
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/18/80/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura18-aya80.html",
+          "arabic_excerpt": "حدثنا الحسن بن يحيى، قال: أخبرنا عبد الرزاق، قال: أخبرنا معمر، عن قتادة: ( وأمَّا الغُلامُ فكَانَ كافِرًا ) في حرف أُبيّ، وكان أبواه مؤمنين ( فَأَرَدْنَا أَنْ يُبْدِلَهُمَا رَبُّهُمَا خَيْرًا مِنْهُ زَكَاةً وَأَقْرَبَ رُحْمًا ).",
+          "english_excerpt": "Al-Hasan bin Yahya narrated to us, who said: 'Abd al-Razzaq informed us, who said: Ma'mar informed us, from Qatadah: \"{As for the young boy, he was a disbeliever}\" in the reading (harf) of Ubayy, and his parents were believers, \"{so we intended that their Lord should exchange him for them for one better in righteousness and nearer to mercy}\".",
+          "highlight_arabic": "( وأمَّا الغُلامُ فكَانَ كافِرًا ) في حرف أُبيّ، وكان أبواه مؤمنين",
+          "highlight_english": "\"{As for the young boy, he was a disbeliever}\" in the reading (harf) of Ubayy, and his parents were believers"
+        }
+      ],
+      "global_rank": 33,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "وَأَمَّا الْغُلاَمُ فَكَانَ كَافِرًا وَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ فَخَشِينَآ أَن يُرۡهِقَهُمَا طُغۡيَٰنٗا وَكُفۡرٗا",
+      "variant_english": "As for the young boy, he was a disbeliever and his parents were believers, and we feared that he would burden them both (with) insolent transgression and disbelief.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (18:80)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (18:80)",
+      "sunnah_url": "/quran/18/80/tafsir/tabari",
+      "hadith_arabic": "حدثنا الحسن بن يحيى، قال: أخبرنا عبد الرزاق، قال: أخبرنا معمر، عن قتادة: ( وأمَّا الغُلامُ فكَانَ كافِرًا ) في حرف أُبيّ، وكان أبواه مؤمنين ( فَأَرَدْنَا أَنْ يُبْدِلَهُمَا رَبُّهُمَا خَيْرًا مِنْهُ زَكَاةً وَأَقْرَبَ رُحْمًا ).",
+      "hadith_english": "Al-Hasan bin Yahya narrated to us, who said: 'Abd al-Razzaq informed us, who said: Ma'mar informed us, from Qatadah: \"{As for the young boy, he was a disbeliever}\" in the reading (harf) of Ubayy, and his parents were believers, \"{so we intended that their Lord should exchange him for them for one better in righteousness and nearer to mercy}\".",
+      "rank": 2,
+      "attribution_role": "primary"
+    },
+    {
+      "id": "codex-24-25-ubayy-bin-kab",
+      "surah": 24,
+      "ayah": 25,
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [],
+      "variant_type": "Morphological / Consonantal Shift",
+      "short_title": "Word-Order Shift in Ubayy's Codex at 24:25",
+      "plain_english_hook": "In the standard Quran, 24:25 reads 'God will pay them their just [al-haqqa] due'; Jarir bin Hazim saw in Ubayy bin Kab's Mushaf: 'God, the Truth [al-haqqu], will pay them their due'.",
+      "title": "Surah An-Nur 24:25 — 'Yuwaffihimu Allahu al-Haqqu Dinahum' in Ubayy bin Ka'b's Mushaf",
+      "diff_summary": "In the Uthmanic text of 24:25, the verse reads يُوَفِّيهِمُ اللَّهُ دِينَهُمُ الْحَقَّ ('God will pay them their just due in full'), where الْحَقَّ ('the just/true') follows دِينَهُمُ ('their due/reckoning') as an accusative adjective. Both al-Tabari and Ibn Kathir record an eyewitness report from Jarir bin Hazim stating: 'I read it in the Mushaf of Ubayy bin Ka'b: يُوَفِّيهِمُ اللَّهُ الْحَقُّ دِينَهُمْ (God, the Truth, will pay them their due in full),' placing الْحَقُّ directly after اللَّهُ as a divine attribute.",
+      "uthmanic_target_arabic": "يُوَفِّيهِمُ ٱللَّهُ دِينَهُمُ ٱلۡحَقَّ",
+      "uthmanic_target_english": "God will pay them their just due in full",
+      "variant_target_arabic": "يُوَفِّيهِمُ ٱللَّهُ ٱلۡحَقُّ دِينَهُمۡ",
+      "variant_target_english": "God, the Truth, will pay them their due in full",
+      "uthmanic_full_arabic": "يَوۡمَئِذٖ يُوَفِّيهِمُ ٱللَّهُ دِينَهُمُ ٱلۡحَقَّ وَيَعۡلَمُونَ أَنَّ ٱللَّهَ هُوَ ٱلۡحَقُّ ٱلۡمُبِينُ",
+      "uthmanic_full_english": "on that Day God will pay them their just due in full, and they will know that God – He is the clear Truth.",
+      "variant_full_arabic": "يَوۡمَئِذٖ يُوَفِّيهِمُ ٱللَّهُ ٱلۡحَقُّ دِينَهُمۡ وَيَعۡلَمُونَ أَنَّ ٱللَّهَ هُوَ ٱلۡحَقُّ ٱلۡمُبِينُ",
+      "variant_full_english": "on that Day God, the Truth, will pay them their due in full, and they will know that God – He is the clear Truth.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Al-Tabari notes that Mujahid read 'al-haqqu' in the nominative as an attribute of God even in the Uthmanic word order, while preferring the accusative 'al-haqqa' due to the consensus of the regional reciters.",
+        "primary_source_evaluation": "Jarir bin Hazim's direct eyewitness testimony ('I read it in the Mushaf of Ubayy bin Ka'b') provides firsthand physical attestation of a word-order transposition in Ubayy's codex."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 31,
+        "undeniability_gold_sources_30": 26,
+        "universal_scope_20": 17,
+        "classical_concession_15": 12,
+        "cuj_score": 86
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/24/25/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura24-aya25.html",
+          "arabic_excerpt": "حدثنا بذلك أحمد بن يوسف، قال: ثنا القاسم، قال: ثنا يزيد، عن جرير بن حازم، عن حميد، عن مجاهد، أنه قرأها \" الحق \" بالرفع. قال جرير: وقرأتها في مصحف أبي بن كعب \" يوفيهم الله الحق دينهم\".",
+          "english_excerpt": "*Ahmad bin Yusuf narrated that to us, saying: Al-Qasim narrated to us, saying: Yazid narrated to us, from Jarir bin Hazim, from Humayd, from Mujahid*, that he recited it 'al-haqq' in the nominative case. Jarir said: And I read it in the Mushaf (codex) of Ubayy bin Ka'b: 'God, the Truth, will pay them their due in full' (yuwaffihimu l-lahu l-haqqu dinahum).",
+          "highlight_arabic": "وقرأتها في مصحف أبي بن كعب \" يوفيهم الله الحق دينهم\"",
+          "highlight_english": "I read it in the Mushaf (codex) of Ubayy bin Ka'b: 'God, the Truth, will pay them their due in full' (yuwaffihimu l-lahu l-haqqu dinahum)"
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/24/25/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura24-aya25.html",
+          "arabic_excerpt": "ثم إن قراءة الجمهور بنصب ( الحق ) على أنه صفة لدينهم ، وقرأ مجاهد بالرفع ، على أنه نعت الجلالة . وقرأها بعض السلف في مصحف أبي بن كعب : \" يومئذ يوفيهم الله الحق دينهم \" .",
+          "english_excerpt": "The recitation of the majority has *(Al-Haqqa)* in the accusative case as an adjective for their account (*Dinahum*), while Mujahid recited it in the nominative case as an adjective for the Divine Majesty (Allah). Some of the Salaf read it in the Mushaf of Ubayy bin Ka'b as: \"On that Day Allah, the Truth, will pay them their account in full.\"",
+          "highlight_arabic": "في مصحف أبي بن كعب : \" يومئذ يوفيهم الله الحق دينهم \"",
+          "highlight_english": "in the Mushaf of Ubayy bin Ka'b as: \"On that Day Allah, the Truth, will pay them their account in full.\""
+        }
+      ],
+      "global_rank": 53,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "يَوۡمَئِذٖ يُوَفِّيهِمُ ٱللَّهُ ٱلۡحَقُّ دِينَهُمۡ وَيَعۡلَمُونَ أَنَّ ٱللَّهَ هُوَ ٱلۡحَقُّ ٱلۡمُبِينُ",
+      "variant_english": "on that Day God, the Truth, will pay them their due in full, and they will know that God – He is the clear Truth.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (24:25)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (24:25)",
+      "sunnah_url": "/quran/24/25/tafsir/tabari",
+      "hadith_arabic": "حدثنا بذلك أحمد بن يوسف، قال: ثنا القاسم، قال: ثنا يزيد، عن جرير بن حازم، عن حميد، عن مجاهد، أنه قرأها \" الحق \" بالرفع. قال جرير: وقرأتها في مصحف أبي بن كعب \" يوفيهم الله الحق دينهم\".",
+      "hadith_english": "*Ahmad bin Yusuf narrated that to us, saying: Al-Qasim narrated to us, saying: Yazid narrated to us, from Jarir bin Hazim, from Humayd, from Mujahid*, that he recited it 'al-haqq' in the nominative case. Jarir said: And I read it in the Mushaf (codex) of Ubayy bin Ka'b: 'God, the Truth, will pay them their due in full' (yuwaffihimu l-lahu l-haqqu dinahum).",
+      "rank": 1,
+      "attribution_role": "primary"
+    },
+    {
+      "id": "codex-24-27-abdullah-bin-masud",
+      "surah": 24,
+      "ayah": 27,
+      "companion": "Abdullah bin Masud",
+      "companion_id": "abdullah-bin-masud",
+      "also_attributed_to": [
+        "Ubayy bin Kab",
+        "Ibn Abbas"
+      ],
+      "variant_type": "Word Substitution",
+      "short_title": "'Ask Permission' vs 'Seek Familiarity' in 24:27",
+      "plain_english_hook": "Where the standard Quran writes tasta'nisu ('seek familiarity'), Ibn Masud's codex and Ubayy's reading had tasta'dhinu ('ask permission'), with Ibn Abbas calling the standard word a scribal error.",
+      "title": "Surah An-Nur 24:27 — 'Tasta'dhinu' (Ask Permission) vs Uthmanic 'Tasta'nisu'",
+      "diff_summary": "In the Uthmanic text of 24:27, believers are told not to enter other houses 'until you seek familiarity/ascertain [تَسْتَأْنِسُوا] and greet its inhabitants' (rendered by Droge according to the legal sense 'until you ask permission'). Both al-Tabari and Ibn Kathir record that Ibn Mas'ud's Mushaf read 'until you greet its inhabitants and ask permission' (حَتَّىٰ تُسَلِّمُوا عَلَىٰ أَهْلِهَا وَتَسْتَأْذِنُوا), while Ubayy bin Ka'b and Ibn Abbas read 'until you ask permission and greet' (حَتَّىٰ تَسْتَأْذِنُوا وَتُسَلِّمُوا), with Ibn Abbas explicitly stating that Uthmanic 'tasta'nisu' was a mistake by the scribe (أخطأ الكاتب / وهم من الكاتب).",
+      "uthmanic_target_arabic": "حَتَّىٰ تَسۡتَأۡنِسُواْ وَتُسَلِّمُواْ عَلَىٰٓ أَهۡلِهَا",
+      "uthmanic_target_english": "until you ask permission and greet its inhabitants",
+      "variant_target_arabic": "حَتَّىٰ تُسَلِّمُواْ عَلَىٰٓ أَهۡلِهَا وَتَسۡتَأۡذِنُواْ",
+      "variant_target_english": "until you ask permission (tasta'dhinu) and greet its inhabitants",
+      "uthmanic_full_arabic": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ لَا تَدۡخُلُواْ بُيُوتًا غَيۡرَ بُيُوتِكُمۡ حَتَّىٰ تَسۡتَأۡنِسُواْ وَتُسَلِّمُواْ عَلَىٰٓ أَهۡلِهَاۚ ذَٰلِكُمۡ خَيۡرٞ لَّكُمۡ لَعَلَّكُمۡ تَذَكَّرُونَ",
+      "uthmanic_full_english": "You who believe! Do not enter houses other than your (own) houses, until you ask permission and greet its inhabitants. That is better for you, so that you may take heed.",
+      "variant_full_arabic": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ لَا تَدۡخُلُواْ بُيُوتًا غَيۡرَ بُيُوتِكُمۡ حَتَّىٰ تُسَلِّمُواْ عَلَىٰٓ أَهۡلِهَا وَتَسۡتَأۡذِنُواْۚ ذَٰلِكُمۡ خَيۡرٞ لَّكُمۡ لَعَلَّكُمۡ تَذَكَّرُونَ",
+      "variant_full_english": "You who believe! Do not enter houses other than your (own) houses, until you ask permission (tasta'dhinu) and greet its inhabitants. That is better for you, so that you may take heed.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Classical scholars argue that 'al-isti'nas' in Arabic can mean ascertaining a resident's presence or seeking permission, and Ibn Kathir characterizes the attribution of the scribal-error statement to Ibn Abbas as very strange (gharib jiddan).",
+        "primary_source_evaluation": "Al-Tabari records multiple independent chains (via Sufyan al-Thawri, Shu'bah, and Hushaym from Sa'id bin Jubayr, Ibrahim al-Nakha'i, and al-A'mash) attesting that Ibn Mas'ud's codex, Ubayy bin Ka'b, and Ibn Abbas all read 'tasta'dhinu' (with dhal) rather than 'tasta'nisu' (with nun), and al-Tabari himself adopts Ibn Mas'ud's sequence ('greet and ask permission') as the intended meaning."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 27,
+        "universal_scope_20": 19,
+        "classical_concession_15": 15,
+        "cuj_score": 94
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/24/27/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura24-aya27.html",
+          "arabic_excerpt": "حدثنا ابن بشار، قال: ثنا محمد بن جعفر، قال: ثنا شعبة، عن أبي بشر، عن سعيد بن جبير، عن ابن عباس، في هذه الآية ( حَتَّى تَسْتَأْنِسُوا وَتُسَلِّمُوا عَلَى أَهْلِهَا ) قال: أخطأ الكاتب، وكان ابن عباس يقرأ \"حَتَّى تَسْتَأْذِنُوا وَتُسَلِّمُوا\" وكان يقرؤها على قراءة أُبيّ بن كعب. حدثنا القاسم، قال: ثنا الحسين، قال: ثني هشيم، قال: أخبرنا مغيرة، عن إبراهيم، قال: في مصحف ابن مسعود: \"حَتَّى تُسَلِّمُوا عَلَى أَهْلِهَا وَتَسْتَأْذِنُوا\". قال: ثنا هشيم، قال: أخبرنا جعفر بن إياس، عن سعيد، عن ابن عباس أنه كان يقرؤها: \"يَأَيُّهَا الَّذِينَ آمَنُوا لا تَدْخُلُوا بُيُوتًا غَيْرَ بُيُوتِكُمْ حَتَّى تُسَلِّمُوا عَلَى أَهْلِهَا وَتَسْتَأْذِنُوا\" قال: وإنما تستأنسوا وَهْم من الكاتب.",
+          "english_excerpt": "Ibn Bashshar narrated to us... from Sa'id bin Jubayr, from Ibn 'Abbas, regarding this verse: {until you ask permission [tasta'nisu] and greet its inhabitants}, he said: 'The scribe made a mistake. And Ibn 'Abbas used to recite, \"until you ask permission [tasta'dhinu] and greet.\" And he used to recite it according to the recitation of Ubayy bin Ka'b.' Al-Qasim narrated to us... from Ibrahim, who said: 'In the Mushaf of Ibn Mas'ud [it is]: \"until you greet its inhabitants and ask for permission.\"' He said: Hushaym narrated to us, saying: Ja'far bin Iyas informed us, from Sa'id, from Ibn 'Abbas that he used to recite it: 'O you who believe! Do not enter houses other than your own houses until you greet its inhabitants and ask for permission.' He said: 'And \"tasta'nisu\" is merely an illusion (mistake) from the scribe.'",
+          "highlight_arabic": "في مصحف ابن مسعود: \"حَتَّى تُسَلِّمُوا عَلَى أَهْلِهَا وَتَسْتَأْذِنُوا\"",
+          "highlight_english": "In the Mushaf of Ibn Mas'ud [it is]: \"until you greet its inhabitants and ask for permission.\""
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/24/27/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura24-aya27.html",
+          "arabic_excerpt": "وروى معاذ بن سليمان ، عن جعفر بن إياس ، عن سعيد ، عن ابن عباس ، بمثله ، وزاد : وكان ابن عباس يقرأ : \" حتى تستأذنوا وتسلموا \" ، وكان يقرأ على قراءة أبي بن كعب رضي الله عنه . وهذا غريب جدا عن ابن عباس . وقال هشيم أخبرنا مغيرة ، عن إبراهيم قال : في مصحف ابن مسعود : \" حتى تسلموا على أهلها وتستأذنوا \" . وهذا أيضا رواية عن ابن عباس ، وهو اختيار ابن جرير .",
+          "english_excerpt": "Mu'adh bin Sulayman narrated from Ja'far bin Iyas, from Sa'id, from Ibn 'Abbas similarly, and added: \"And Ibn 'Abbas used to recite it: 'until you ask permission (Tasta'thinu) and greet,' and he used to recite according to the recitation of Ubayy bin Ka'b, may Allah be pleased with him.\" This is very strange coming from Ibn 'Abbas. Hushaym said: Mughirah informed us, from Ibrahim, who said: \"In the Mushaf of Ibn Mas'ud, it says: 'until you greet its inhabitants and ask permission'.\" This is also a narration from Ibn 'Abbas, and it is the choice of Ibn Jarir.",
+          "highlight_arabic": "في مصحف ابن مسعود : \" حتى تسلموا على أهلها وتستأذنوا \"",
+          "highlight_english": "In the Mushaf of Ibn Mas'ud, it says: 'until you greet its inhabitants and ask permission'"
+        }
+      ],
+      "global_rank": 17,
+      "companion_codex": "Abdullah bin Masud",
+      "variant_arabic": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ لَا تَدۡخُلُواْ بُيُوتًا غَيۡرَ بُيُوتِكُمۡ حَتَّىٰ تُسَلِّمُواْ عَلَىٰٓ أَهۡلِهَا وَتَسۡتَأۡذِنُواْۚ ذَٰلِكُمۡ خَيۡرٞ لَّكُمۡ لَعَلَّكُمۡ تَذَكَّرُونَ",
+      "variant_english": "You who believe! Do not enter houses other than your (own) houses, until you ask permission (tasta'dhinu) and greet its inhabitants. That is better for you, so that you may take heed.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (24:27)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (24:27)",
+      "sunnah_url": "/quran/24/27/tafsir/tabari",
+      "hadith_arabic": "حدثنا ابن بشار، قال: ثنا محمد بن جعفر، قال: ثنا شعبة، عن أبي بشر، عن سعيد بن جبير، عن ابن عباس، في هذه الآية ( حَتَّى تَسْتَأْنِسُوا وَتُسَلِّمُوا عَلَى أَهْلِهَا ) قال: أخطأ الكاتب، وكان ابن عباس يقرأ \"حَتَّى تَسْتَأْذِنُوا وَتُسَلِّمُوا\" وكان يقرؤها على قراءة أُبيّ بن كعب. حدثنا القاسم، قال: ثنا الحسين، قال: ثني هشيم، قال: أخبرنا مغيرة، عن إبراهيم، قال: في مصحف ابن مسعود: \"حَتَّى تُسَلِّمُوا عَلَى أَهْلِهَا وَتَسْتَأْذِنُوا\". قال: ثنا هشيم، قال: أخبرنا جعفر بن إياس، عن سعيد، عن ابن عباس أنه كان يقرؤها: \"يَأَيُّهَا الَّذِينَ آمَنُوا لا تَدْخُلُوا بُيُوتًا غَيْرَ بُيُوتِكُمْ حَتَّى تُسَلِّمُوا عَلَى أَهْلِهَا وَتَسْتَأْذِنُوا\" قال: وإنما تستأنسوا وَهْم من الكاتب.",
+      "hadith_english": "Ibn Bashshar narrated to us... from Sa'id bin Jubayr, from Ibn 'Abbas, regarding this verse: {until you ask permission [tasta'nisu] and greet its inhabitants}, he said: 'The scribe made a mistake. And Ibn 'Abbas used to recite, \"until you ask permission [tasta'dhinu] and greet.\" And he used to recite it according to the recitation of Ubayy bin Ka'b.' Al-Qasim narrated to us... from Ibrahim, who said: 'In the Mushaf of Ibn Mas'ud [it is]: \"until you greet its inhabitants and ask for permission.\"' He said: Hushaym narrated to us, saying: Ja'far bin Iyas informed us, from Sa'id, from Ibn 'Abbas that he used to recite it: 'O you who believe! Do not enter houses other than your own houses until you greet its inhabitants and ask for permission.' He said: 'And \"tasta'nisu\" is merely an illusion (mistake) from the scribe.'",
+      "rank": 1,
+      "attribution_role": "shared"
+    },
+    {
+      "id": "codex-24-60-abdullah-bin-masud",
+      "surah": 24,
+      "ayah": 60,
+      "companion": "Abdullah bin Masud",
+      "companion_id": "abdullah-bin-masud",
+      "also_attributed_to": [
+        "Ubayy bin Kab"
+      ],
+      "variant_type": "Phrase Addition",
+      "short_title": "'Lay Down Some of Their Clothes' in 24:60",
+      "plain_english_hook": "Surah 24:60 literally permits elderly women to 'lay down their clothes'; Ibn Masud and Ubayy's readings added 'some of' (min), clarifying that only the outer cloak is meant.",
+      "title": "Surah An-Nur 24:60 — Addition of 'Min' ('Some of Their Clothes') in Ibn Mas'ud",
+      "diff_summary": "In the Uthmanic text of 24:60, elderly women past childbearing are told there is no blame on them 'that they lay down their clothes' (أَنْ يَضَعْنَ ثِيَابَهُنَّ). Because laying down all clothes is universally forbidden, jurists restricted 'their clothes' to the outer wrap (jilbab/rida') by appealing to the recitation of Abdullah bin Mas'ud (recorded by Ibn Kathir via Sa'id bin Jubayr) and Ubayy bin Ka'b (recorded by al-Tabari via al-Sha'bi), which read 'that they lay down some of their clothes' (أَنْ يَضَعْنَ مِنْ ثِيَابِهِنَّ).",
+      "uthmanic_target_arabic": "أَن يَضَعۡنَ ثِيَابَهُنَّ",
+      "uthmanic_target_english": "that they lay down their clothes",
+      "variant_target_arabic": "أَن يَضَعۡنَ مِن ثِيَابِهِنَّ",
+      "variant_target_english": "that they lay down some of their clothes",
+      "uthmanic_full_arabic": "وَٱلۡقَوَٰعِدُ مِنَ ٱلنِّسَآءِ ٱلَّـٰتِي لَا يَرۡجُونَ نِكَاحٗا فَلَيۡسَ عَلَيۡهِنَّ جُنَاحٌ أَن يَضَعۡنَ ثِيَابَهُنَّ غَيۡرَ مُتَبَرِّجَٰتِۭ بِزِينَةٖۖ وَأَن يَسۡتَعۡفِفۡنَ خَيۡرٞ لَّهُنَّۗ وَٱللَّهُ سَمِيعٌ عَلِيمٞ",
+      "uthmanic_full_english": "And your women who are past childbearing and have no hope of marriage, there is no blame on them that they lay down their clothes, (as long as there is) no flaunting of (their) charms. But that they abstain is better for them. God is hearing, knowing.",
+      "variant_full_arabic": "وَٱلۡقَوَٰعِدُ مِنَ ٱلنِّسَآءِ ٱلَّـٰتِي لَا يَرۡجُونَ نِكَاحٗا فَلَيۡسَ عَلَيۡهِنَّ جُنَاحٌ أَن يَضَعۡنَ مِن ثِيَابِهِنَّ غَيۡرَ مُتَبَرِّجَٰتِۭ بِزِينَةٖۖ وَأَن يَسۡتَعۡفِفۡنَ خَيۡرٞ لَّهُنَّۗ وَٱللَّهُ سَمِيعٌ عَلِيمٞ",
+      "variant_full_english": "And your women who are past childbearing and have no hope of marriage, there is no blame on them that they lay down some of their clothes, (as long as there is) no flaunting of (their) charms. But that they abstain is better for them. God is hearing, knowing.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Classical exegetes treat the partitive preposition 'min' (some of) in the readings of Ibn Mas'ud and Ubayy as an explanatory clarification of what is already implied by context in the Uthmanic text.",
+        "primary_source_evaluation": "Both al-Tabari (citing al-Sha'bi for Ubayy bin Ka'b) and Ibn Kathir (citing Sa'id bin Jubayr for Abdullah bin Mas'ud) invoke this non-Uthmanic preposition to qualify an otherwise unqualified legal permission in the Uthmanic rasm."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 25,
+        "universal_scope_20": 18,
+        "classical_concession_15": 12,
+        "cuj_score": 88
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/24/60/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura24-aya60.html",
+          "arabic_excerpt": "حدثنا ابن حميد، قال: ثنا جرير، عن مغيرة، عن الشعبي ( أَنْ يَضَعْنَ ثِيَابَهُنَّ غَيْرَ مُتَبَرِّجَاتٍ بِزِينَةٍ ) قال: تضع الجلباب المرأة التي قد عجزت ولم تزوّج. قال الشعبيّ: فإن أُبيّ بن كعب يقرأ \" أنْ يَضَعْنَ مِنْ ثِيَابِهِنَّ\".",
+          "english_excerpt": "*Ibn Humayd narrated to us, saying: Jarir narrated to us, from Mughirah, from Al-Sha'bi:* {that they lay down their clothes, (as long as there is) no flaunting of (their) charms}, he said: 'The woman who has grown old and does not marry lays down her outer cloak (jilbab).' Al-Sha'bi said: 'For indeed Ubayy bin Ka'b recites: \"that they lay down some of their clothes [min thiyabihinna].\"'",
+          "highlight_arabic": "فإن أُبيّ بن كعب يقرأ \" أنْ يَضَعْنَ مِنْ ثِيَابِهِنَّ\"",
+          "highlight_english": "Ubayy bin Ka'b recites: \"that they lay down some of their clothes [min thiyabihinna].\""
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/24/60/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura24-aya60.html",
+          "arabic_excerpt": "وقال سعيد بن جبير وغيره ، في قراءة عبد الله بن مسعود : \" أن يضعن من ثيابهن \" وهو الجلباب من فوق الخمار فلا بأس أن يضعن عند غريب أو غيره ، بعد أن يكون عليها خمار صفيق .",
+          "english_excerpt": "Sa'id bin Jubayr and others said: \"In the recitation of 'Abdullah bin Mas'ud it is: 'that they lay down some of their clothes (min thiyabihinna),' which is the outer cloak (Jilbab) over the headcover (Khimar), so there is no harm if they lay it down in the presence of a stranger or others, provided she is wearing a thick Khimar.\"",
+          "highlight_arabic": "في قراءة عبد الله بن مسعود : \" أن يضعن من ثيابهن \"",
+          "highlight_english": "In the recitation of 'Abdullah bin Mas'ud it is: 'that they lay down some of their clothes (min thiyabihinna),'"
+        }
+      ],
+      "global_rank": 47,
+      "companion_codex": "Abdullah bin Masud",
+      "variant_arabic": "وَٱلۡقَوَٰعِدُ مِنَ ٱلنِّسَآءِ ٱلَّـٰتِي لَا يَرۡجُونَ نِكَاحٗا فَلَيۡسَ عَلَيۡهِنَّ جُنَاحٌ أَن يَضَعۡنَ مِن ثِيَابِهِنَّ غَيۡرَ مُتَبَرِّجَٰتِۭ بِزِينَةٖۖ وَأَن يَسۡتَعۡفِفۡنَ خَيۡرٞ لَّهُنَّۗ وَٱللَّهُ سَمِيعٌ عَلِيمٞ",
+      "variant_english": "And your women who are past childbearing and have no hope of marriage, there is no blame on them that they lay down some of their clothes, (as long as there is) no flaunting of (their) charms. But that they abstain is better for them. God is hearing, knowing.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (24:60)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (24:60)",
+      "sunnah_url": "/quran/24/60/tafsir/tabari",
+      "hadith_arabic": "حدثنا ابن حميد، قال: ثنا جرير، عن مغيرة، عن الشعبي ( أَنْ يَضَعْنَ ثِيَابَهُنَّ غَيْرَ مُتَبَرِّجَاتٍ بِزِينَةٍ ) قال: تضع الجلباب المرأة التي قد عجزت ولم تزوّج. قال الشعبيّ: فإن أُبيّ بن كعب يقرأ \" أنْ يَضَعْنَ مِنْ ثِيَابِهِنَّ\".",
+      "hadith_english": "*Ibn Humayd narrated to us, saying: Jarir narrated to us, from Mughirah, from Al-Sha'bi:* {that they lay down their clothes, (as long as there is) no flaunting of (their) charms}, he said: 'The woman who has grown old and does not marry lays down her outer cloak (jilbab).' Al-Sha'bi said: 'For indeed Ubayy bin Ka'b recites: \"that they lay down some of their clothes [min thiyabihinna].\"'",
+      "rank": 1,
+      "attribution_role": "shared"
+    },
+    {
+      "id": "codex-33-6-ubayy-bin-kab",
+      "surah": 33,
+      "ayah": 6,
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [
+        "Ibn Abbas"
+      ],
+      "variant_type": "Phrase Addition",
+      "short_title": "33:6 — 'And He Is a Father to Them'",
+      "plain_english_hook": "After stating that the Prophet's wives are the believers' mothers, the codices of Ubayy bin Ka'b and Ibn Abbas added the clause: 'and he is a father to them.'",
+      "title": "Addition of 'And He Is a Father to Them' (Wa-Huwa Abun Lahum) in 33:6",
+      "diff_summary": "In Surah 33:6, the Uthmanic text states that the Prophet is closer to the believers than their own selves 'وَأَزۡوَٰجُهُۥٓ أُمَّهَٰتُهُمۡ' ('and his wives are their mothers'). Both al-Tabari and Ibn Kathir record that Ubayy bin Ka'b and Ibn Abbas recited this verse with the additional clause 'وَهُوَ أَبٌ لَهُمْ' ('and he is a father to them'), a reading that al-Hasan al-Basri explicitly calls 'the first recitation' (al-qirā'a al-ūlā).",
+      "uthmanic_target_arabic": "وَأَزۡوَٰجُهُۥٓ أُمَّهَٰتُهُمۡ",
+      "uthmanic_target_english": "and his wives are their mothers",
+      "variant_target_arabic": "وَأَزْوَاجُهُ أُمَّهَاتُهُمْ وَهُوَ أَبٌ لَهُمْ",
+      "variant_target_english": "and his wives are their mothers, and he is a father to them",
+      "uthmanic_full_arabic": "ٱلنَّبِيُّ أَوۡلَىٰ بِٱلۡمُؤۡمِنِينَ مِنۡ أَنفُسِهِمۡۖ وَأَزۡوَٰجُهُۥٓ أُمَّهَٰتُهُمۡۗ وَأُوْلُواْ ٱلۡأَرۡحَامِ بَعۡضُهُمۡ أَوۡلَىٰ بِبَعۡضٖ فِي كِتَٰبِ ٱللَّهِ مِنَ ٱلۡمُؤۡمِنِينَ وَٱلۡمُهَٰجِرِينَ إِلَّآ أَن تَفۡعَلُوٓاْ إِلَىٰٓ أَوۡلِيَآئِكُم مَّعۡرُوفٗاۚ كَانَ ذَٰلِكَ فِي ٱلۡكِتَٰبِ مَسۡطُورٗا",
+      "uthmanic_full_english": "The prophet is closer to the believers than they are to themselves, and his wives are their mothers, but those related by blood are closer to one another in the Book of God than the believers and the emigrants – but you should do right by your allies. That is written in the Book.",
+      "variant_full_arabic": "ٱلنَّبِيُّ أَوۡلَىٰ بِٱلۡمُؤۡمِنِينَ مِنۡ أَنفُسِهِمۡۖ وَأَزْوَاجُهُ أُمَّهَاتُهُمْ وَهُوَ أَبٌ لَهُمْۗ وَأُوْلُواْ ٱلۡأَرۡحَامِ بَعۡضُهُمۡ أَوۡلَىٰ بِبَعۡضٖ فِي كِتَٰبِ ٱللَّهِ مِنَ ٱلۡمُؤۡمِنِينَ وَٱلۡمُهَٰجِرِينَ إِلَّآ أَن تَفۡعَلُوٓاْ إِلَىٰٓ أَوۡلِيَآئِكُم مَّعۡرُوفٗاۚ كَانَ ذَٰلِكَ فِي ٱلۡكِتَٰبِ مَسۡطُورٗا",
+      "variant_full_english": "The prophet is closer to the believers than they are to themselves, and his wives are their mothers, and he is a father to them, but those related by blood are closer to one another in the Book of God than the believers and the emigrants – but you should do right by your allies. That is written in the Book.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Classical jurists and exegetes harmonize this clause as an explanatory note affirming the Prophet's spiritual paternity in respect and reverence, or as an early reading superseded by Surah 33:40 ('Muhammad is not the father of any of your men').",
+        "primary_source_evaluation": "Al-Tabari preserves al-Hasan al-Basri's designation of this wording as 'the first recitation' (في القراءة الأولى), and Ibn Kathir notes that Shafi'i jurists debated whether it remains legally valid to call the Prophet 'father of the believers' based on Ubayy and Ibn Abbas's reading."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 35,
+        "undeniability_gold_sources_30": 28,
+        "universal_scope_20": 20,
+        "classical_concession_15": 13,
+        "cuj_score": 96
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/33/6/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura33-aya6.html",
+          "arabic_excerpt": "حدثنا ابن وكيع، قال: ثنا حسن بن عليّ، عن أبي موسى إسرائيل بن موسى، قال: قرأ الحسن هذه الآية ( النَّبِيُّ أَوْلَى بِالْمُؤْمِنِينَ مِنْ أَنْفُسِهِمْ وَأَزْوَاجُهُ أُمَّهَاتُهُمْ ) قال: قال الحسن: قال النبيّ صلى الله عليه وسلم: \" أنا أوْلى بكُلّ مُؤمِنٍ مِنْ نَفْسِهِ\" قال الحسن: وفي القراءة الأولى (أوْلَى بالمُؤْمنين مِنْ أنْفُسِهِمْ وَهُوَ أبٌ لَهُمْ).",
+          "english_excerpt": "Al-Hasan recited this verse: {The prophet is closer to the believers than they are to themselves, and his wives are their mothers}. He said: Al-Hasan said: The Prophet, peace and blessings of Allah be upon him, said: \"I am closer to every believer than his own self.\" Al-Hasan said: And in the first recitation [it is]: (Closer to the believers than they are to themselves, and he is a father to them).",
+          "highlight_arabic": "وفي القراءة الأولى (أوْلَى بالمُؤْمنين مِنْ أنْفُسِهِمْ وَهُوَ أبٌ لَهُمْ)",
+          "highlight_english": "And in the first recitation [it is]: (Closer to the believers than they are to themselves, and he is a father to them)"
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/33/6/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura33-aya6.html",
+          "arabic_excerpt": "وقد روي عن أبي بن كعب ، وابن عباس أنهما قرآ : \" النبي أولى بالمؤمنين من أنفسهم وأزواجه أمهاتهم وهو أب لهم \" ، وروي نحو هذا عن معاوية ، ومجاهد ، وعكرمة ، والحسن : وهو أحد الوجهين في مذهب الشافعي . حكاه البغوي وغيره .",
+          "english_excerpt": "It has been reported from Ubayy bin Ka'b and Ibn 'Abbas that they used to recite it: \"The Prophet is closer to the believers than they are to themselves, and his wives are their mothers, and he is a father to them.\" Something similar was reported from Mu'awiyah, Mujahid, 'Ikrimah, and Al-Hasan. This is one of the two views in the Madhhab of Ash-Shafi'i, as reported by Al-Baghawi and others.",
+          "highlight_arabic": "وقد روي عن أبي بن كعب ، وابن عباس أنهما قرآ : \" النبي أولى بالمؤمنين من أنفسهم وأزواجه أمهاتهم وهو أب لهم \"",
+          "highlight_english": "It has been reported from Ubayy bin Ka'b and Ibn 'Abbas that they used to recite it: \"The Prophet is closer to the believers than they are to themselves, and his wives are their mothers, and he is a father to them.\""
+        }
+      ],
+      "global_rank": 9,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "ٱلنَّبِيُّ أَوۡلَىٰ بِٱلۡمُؤۡمِنِينَ مِنۡ أَنفُسِهِمۡۖ وَأَزْوَاجُهُ أُمَّهَاتُهُمْ وَهُوَ أَبٌ لَهُمْۗ وَأُوْلُواْ ٱلۡأَرۡحَامِ بَعۡضُهُمۡ أَوۡلَىٰ بِبَعۡضٖ فِي كِتَٰبِ ٱللَّهِ مِنَ ٱلۡمُؤۡمِنِينَ وَٱلۡمُهَٰجِرِينَ إِلَّآ أَن تَفۡعَلُوٓاْ إِلَىٰٓ أَوۡلِيَآئِكُم مَّعۡرُوفٗاۚ كَانَ ذَٰلِكَ فِي ٱلۡكِتَٰبِ مَسۡطُورٗا",
+      "variant_english": "The prophet is closer to the believers than they are to themselves, and his wives are their mothers, and he is a father to them, but those related by blood are closer to one another in the Book of God than the believers and the emigrants – but you should do right by your allies. That is written in the Book.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (33:6)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (33:6)",
+      "sunnah_url": "/quran/33/6/tafsir/tabari",
+      "hadith_arabic": "حدثنا ابن وكيع، قال: ثنا حسن بن عليّ، عن أبي موسى إسرائيل بن موسى، قال: قرأ الحسن هذه الآية ( النَّبِيُّ أَوْلَى بِالْمُؤْمِنِينَ مِنْ أَنْفُسِهِمْ وَأَزْوَاجُهُ أُمَّهَاتُهُمْ ) قال: قال الحسن: قال النبيّ صلى الله عليه وسلم: \" أنا أوْلى بكُلّ مُؤمِنٍ مِنْ نَفْسِهِ\" قال الحسن: وفي القراءة الأولى (أوْلَى بالمُؤْمنين مِنْ أنْفُسِهِمْ وَهُوَ أبٌ لَهُمْ).",
+      "hadith_english": "Al-Hasan recited this verse: {The prophet is closer to the believers than they are to themselves, and his wives are their mothers}. He said: Al-Hasan said: The Prophet, peace and blessings of Allah be upon him, said: \"I am closer to every believer than his own self.\" Al-Hasan said: And in the first recitation [it is]: (Closer to the believers than they are to themselves, and he is a father to them).",
+      "rank": 1,
+      "attribution_role": "primary"
+    },
+    {
+      "id": "codex-43-58-ubayy-bin-kab",
+      "surah": 43,
+      "ayah": 58,
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [
+        "Abdullah bin Masud"
+      ],
+      "variant_type": "Word Substitution",
+      "short_title": "43:58 — 'Are Our Gods Better, or Is This Man?'",
+      "plain_english_hook": "Instead of the polytheists asking 'Are our gods better, or is he?' (referring to Jesus), Ubayy bin Ka'b and Ibn Mas'ud read 'or is this (man)?' (referring to Muhammad).",
+      "title": "Substitution of 'Or Is This (Man)?' (Am Hādhā) for 'Or Is He?' (Am Huwa) in 43:58",
+      "diff_summary": "In Surah 43:58, following the mention of Jesus in 43:57, the Uthmanic text quotes the Meccan polytheists asking 'ءَأَٰلِهَتُنَا خَيۡرٌ أَمۡ هُوَۚ' ('‘Are our gods better, or is he?’'). Al-Tabari records from Qatadah that in the reading (ḥarf) of Ubayy bin Ka'b—and in Ibn Kathir from Qatadah as the recitation of Abdullah bin Mas'ud—this verse read 'أَآلِهَتُنَا خَيْرٌ أَمْ هَذَا' ('‘Are our gods better, or is this (man)?’'), shifting the comparison from Jesus to Muhammad.",
+      "uthmanic_target_arabic": "ءَأَٰلِهَتُنَا خَيۡرٌ أَمۡ هُوَ",
+      "uthmanic_target_english": "‘Are our gods better, or is he?’",
+      "variant_target_arabic": "أَآلِهَتُنَا خَيْرٌ أَمْ هَذَا",
+      "variant_target_english": "‘Are our gods better, or is this (man)?’",
+      "uthmanic_full_arabic": "وَقَالُوٓاْ ءَأَٰلِهَتُنَا خَيۡرٌ أَمۡ هُوَۚ مَا ضَرَبُوهُ لَكَ إِلَّا جَدَلَۢاۚ بَلۡ هُمۡ قَوۡمٌ خَصِمُونَ",
+      "uthmanic_full_english": "and they say, ‘Are our gods better, or is he?’ They only cite him to you as a (matter of) dispute. Yes! They are a contentious people.",
+      "variant_full_arabic": "وَقَالُوٓاْ أَآلِهَتُنَا خَيْرٌ أَمْ هَذَاۚ مَا ضَرَبُوهُ لَكَ إِلَّا جَدَلَۢاۚ بَلۡ هُمۡ قَوۡمٌ خَصِمُونَ",
+      "variant_full_english": "and they say, ‘Are our gods better, or is this (man)?’ They only cite him to you as a (matter of) dispute. Yes! They are a contentious people.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Commentators explain that under the Uthmanic reading 'or is he,' the Quraysh compared their idols to Jesus (since Christians worshipped him), whereas 'or is this' in Ubayy and Ibn Mas'ud's reading was viewed as an interpretive gloss referring either to Muhammad or demonstratively to Jesus.",
+        "primary_source_evaluation": "In both al-Tabari and Ibn Kathir, Qatadah explicitly cites the variant demonstrative pronoun 'أَمْ هَذَا' ('or is this?') and adds that the speakers meant Muhammad rather than Jesus."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 30,
+        "undeniability_gold_sources_30": 25,
+        "universal_scope_20": 16,
+        "classical_concession_15": 8,
+        "cuj_score": 79
+      },
+      "hadiths": [],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/43/58/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura43-aya58.html",
+          "arabic_excerpt": "* ذكر الرواية بذلك: حدثنا ابن عبد الأعلى, قال: ثنا ابن ثور عن معمر, عن قتادة أن في حرف أبي بن كعب \" وقالوا أآلهتنا خير أم هذا \" يعنون محمدا صَلَّى الله عَلَيْهِ وَسَلَّم.",
+          "english_excerpt": "It was mentioned that this is in the recitation of Ubayy bin Ka'b: \"Are our gods better or is this?\"",
+          "highlight_arabic": "في حرف أبي بن كعب \" وقالوا أآلهتنا خير أم هذا \" يعنون محمدا",
+          "highlight_english": "in the recitation of Ubayy bin Ka'b: \"Are our gods better or is this?\""
+        },
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/43/58/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura43-aya58.html",
+          "arabic_excerpt": "وقوله : ( وقالوا أآلهتنا خير أم هو ) : قال قتادة : يقولون : آلهتنا خير منه . وقال قتادة : قرأ ابن مسعود : \" وقالوا أآلهتنا خير أم هذا \" ، يعنون محمدا - صلى الله عليه وسلم - .",
+          "english_excerpt": "Qatadah said, \"They were saying, 'Our gods are better than him.'\" Qatadah said; \"Ibn Mas'ud recited it: 'Are our gods better or is this (person)?' meaning Muhammad, peace be upon him.\"",
+          "highlight_arabic": "وقال قتادة : قرأ ابن مسعود : \" وقالوا أآلهتنا خير أم هذا \"",
+          "highlight_english": "Qatadah said; \"Ibn Mas'ud recited it: 'Are our gods better or is this (person)?' meaning Muhammad, peace be upon him.\""
+        }
+      ],
+      "global_rank": 75,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "وَقَالُوٓاْ أَآلِهَتُنَا خَيْرٌ أَمْ هَذَاۚ مَا ضَرَبُوهُ لَكَ إِلَّا جَدَلَۢاۚ بَلۡ هُمۡ قَوۡمٌ خَصِمُونَ",
+      "variant_english": "and they say, ‘Are our gods better, or is this (man)?’ They only cite him to you as a (matter of) dispute. Yes! They are a contentious people.",
+      "hadith_reference": "Tafsir al-Tabari (d. 310 AH) (43:58)",
+      "source_reference": "Tafsir al-Tabari (d. 310 AH) (43:58)",
+      "sunnah_url": "/quran/43/58/tafsir/tabari",
+      "hadith_arabic": "* ذكر الرواية بذلك: حدثنا ابن عبد الأعلى, قال: ثنا ابن ثور عن معمر, عن قتادة أن في حرف أبي بن كعب \" وقالوا أآلهتنا خير أم هذا \" يعنون محمدا صَلَّى الله عَلَيْهِ وَسَلَّم.",
+      "hadith_english": "It was mentioned that this is in the recitation of Ubayy bin Ka'b: \"Are our gods better or is this?\"",
+      "rank": 1,
+      "attribution_role": "primary"
+    },
+    {
+      "id": "codex-lost-valley-of-gold-ubayy",
+      "surah": "unknown",
+      "ayah": 0,
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [
+        "Ibn Abbas",
+        "Anas bin Malik",
+        "Ibn Az-Zubair"
+      ],
+      "variant_type": "Lost Verse",
+      "short_title": "The Lost Verse of the Two Valleys of Gold",
+      "plain_english_hook": "Ubayy bin Ka'b, Ibn Abbas, and Anas bin Malik testified in Sahih al-Bukhari and Sahih Muslim that the 'Two Valleys of Gold' passage was recited as Quranic revelation before being omitted from the Mushaf.",
+      "title": "The Son of Adam and Two Valleys of Gold Passage Attested by Ubayy bin Ka'b",
+      "diff_summary": "In Sahih al-Bukhari (6437, 6438, 6440) and Sahih Muslim (1048b, 1049), Ubayy bin Ka'b, Ibn Abbas, Anas bin Malik, and Ibn Az-Zubair report the prophetic recitation: 'If the son of Adam had a valley of gold, he would desire a second, and nothing fills the belly of the son of Adam except dust, and Allah turns in mercy to whoever repents.' Ubayy bin Ka'b states that the Companions considered this passage part of the Quran until Surah At-Takathur (102:1) was revealed, while Ibn Abbas and Anas bin Malik express uncertainty over whether it was revealed as Quran or prophetic speech.",
+      "uthmanic_target_arabic": "",
+      "uthmanic_target_english": "",
+      "variant_target_arabic": "لَوْ أَنَّ لِابْنِ آدَمَ وَادِيًا مِنْ ذَهَبٍ أَحَبَّ أَنْ يَكُونَ لَهُ وَادِيَانِ، وَلَنْ يَمْلَأَ فَاهُ إِلَّا التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ",
+      "variant_target_english": "If the son of Adam had a valley full of gold, he would love to have two valleys, and nothing fills his mouth except dust, and Allah forgives whoever repents to Him.",
+      "uthmanic_full_arabic": "",
+      "uthmanic_full_english": "",
+      "variant_full_arabic": "لَوْ أَنَّ لِابْنِ آدَمَ وَادِيًا مِنْ ذَهَبٍ أَحَبَّ أَنْ يَكُونَ لَهُ وَادِيَانِ، وَلَنْ يَمْلَأَ فَاهُ إِلَّا التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ",
+      "variant_full_english": "If the son of Adam had a valley full of gold, he would love to have two valleys, and nothing fills his mouth except dust, and Allah forgives whoever repents to Him.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Commentators such as Ibn Hajar in Fath al-Bari explain that this passage was either an abrogated Quranic verse whose recitation was lifted after Surah At-Takathur (102:1) was revealed, or a Hadith Qudsi that some Companions initially mistook for Quran.",
+        "primary_source_evaluation": "In Sahih al-Bukhari 6437 and Sahih Muslim 1048b, senior authorities such as Ibn Abbas and Anas bin Malik explicitly state, 'I do not know whether it is from the Quran or not,' while Ubayy bin Ka'b and Abu Musa al-Ash'ari (Muslim 1050) affirm that it was recited as part of a Quranic surah."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 30,
+        "universal_scope_20": 19,
+        "classical_concession_15": 13,
+        "cuj_score": 95
+      },
+      "hadiths": [
+        {
+          "hadith_reference": "Sahih al-Bukhari 6437",
+          "sunnah_url": "https://sunnah.com/bukhari:6437",
+          "transmitted_by": "Ata / Ibn Abbas",
+          "hadith_arabic": "حَدَّثَنِي مُحَمَّدٌ، أَخْبَرَنَا مَخْلَدٌ، أَخْبَرَنَا ابْنُ جُرَيْجٍ، قَالَ سَمِعْتُ عَطَاءً، يَقُولُ سَمِعْتُ ابْنَ عَبَّاسٍ، يَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ لَوْ أَنَّ لاِبْنِ آدَمَ مِثْلَ وَادٍ مَالاً لأَحَبَّ أَنَّ لَهُ إِلَيْهِ مِثْلَهُ، وَلاَ يَمْلأُ عَيْنَ ابْنِ آدَمَ إِلاَّ التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ ‏\"‏‏.‏ قَالَ ابْنُ عَبَّاسٍ فَلاَ أَدْرِي مِنَ الْقُرْآنِ هُوَ أَمْ لاَ‏.‏ قَالَ وَسَمِعْتُ ابْنَ الزُّبَيْرِ يَقُولُ ذَلِكَ عَلَى الْمِنْبَرِ‏.‏",
+          "hadith_english": "Narrated Ibn `Abbas:I heard Allah's Messenger (ﷺ) saying, \"If the son of Adam had money equal to a valley, then he will wish for another similar to it, for nothing can satisfy the eye of Adam's son except dust. And Allah forgives him who repents to Him.\" Ibn `Abbas said: I do not know whether this saying was quoted from the Qur'an or not. `Ata' said, \"I heard Ibn Az-Zubair saying this narration while he was on the pulpit",
+          "highlight_arabic": "قَالَ ابْنُ عَبَّاسٍ فَلاَ أَدْرِي مِنَ الْقُرْآنِ هُوَ أَمْ لاَ",
+          "highlight_english": "Ibn `Abbas said: I do not know whether this saying was quoted from the Qur'an or not."
+        },
+        {
+          "hadith_reference": "Sahih al-Bukhari 6440",
+          "sunnah_url": "https://sunnah.com/bukhari:6440",
+          "transmitted_by": "Ibn Az-Zubair / Ubayy bin Kab",
+          "hadith_arabic": "وَقَالَ لَنَا أَبُو الْوَلِيدِ حَدَّثَنَا حَمَّادُ بْنُ سَلَمَةَ، عَنْ ثَابِتٍ، عَنْ أَنَسٍ، عَنْ أُبَىٍّ، قَالَ كُنَّا نَرَى هَذَا مِنَ الْقُرْآنِ حَتَّى نَزَلَتْ ‏{‏أَلْهَاكُمُ التَّكَاثُرُ‏}‏",
+          "hadith_english": "Ubayy said (referring to the hadith above), \"We considered this as a saying from the Qur'an till the Surah (beginning with):\"The mutual rivalry (for piling up of worldly things) diverts you' (102:1) was revealed\"",
+          "highlight_arabic": "عَنْ أُبَىٍّ، قَالَ كُنَّا نَرَى هَذَا مِنَ الْقُرْآنِ حَتَّى نَزَلَتْ ‏{‏أَلْهَاكُمُ التَّكَاثُرُ‏}",
+          "highlight_english": "We considered this as a saying from the Qur'an till the Surah (beginning with):\"The mutual rivalry (for piling up of worldly things) diverts you' (102:1) was revealed"
+        },
+        {
+          "hadith_reference": "Sahih Muslim 1048a & 1048b",
+          "sunnah_url": "https://sunnah.com/muslim:1048a",
+          "transmitted_by": "Qatadah / Anas bin Malik",
+          "hadith_arabic": "حَدَّثَنَا يَحْيَى بْنُ يَحْيَى، وَسَعِيدُ بْنُ مَنْصُورٍ، وَقُتَيْبَةُ بْنُ سَعِيدٍ، قَالَ يَحْيَى أَخْبَرَنَا وَقَالَ الآخَرَانِ، حَدَّثَنَا أَبُو عَوَانَةَ، عَنْ قَتَادَةَ، عَنْ أَنَسٍ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ لَوْ كَانَ لاِبْنِ آدَمَ وَادِيَانِ مِنْ مَالٍ لاَبْتَغَى وَادِيًا ثَالِثًا وَلاَ يَمْلأُ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ ‏\"‏ ‏.‏ وَحَدَّثَنَا ابْنُ الْمُثَنَّى، وَابْنُ، بَشَّارٍ قَالَ ابْنُ الْمُثَنَّى حَدَّثَنَا مُحَمَّدُ بْنُ جَعْفَرٍ، أَخْبَرَنَا شُعْبَةُ، قَالَ سَمِعْتُ قَتَادَةَ، يُحَدِّثُ عَنْ أَنَسِ بْنِ مَالِكٍ، قَالَ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ - فَلاَ أَدْرِي أَشَىْءٌ أُنْزِلَ أَمْ شَىْءٌ كَانَ يَقُولُهُ - بِمِثْلِ حَدِيثِ أَبِي عَوَانَةَ ‏.‏",
+          "hadith_english": "Anas reported Allah's Messenger (ﷺ) as saying: 'If the son of Adam were to possess two valleys of riches, he would long for the third one. And the stomach of the son of Adam is not filled but with dust. And Allah returns to him who repents.' And Anas b. Malik reported: I heard the Messenger of Allah (ﷺ) saying this — and I do not know whether it was something revealed or something he used to say — similar to the hadith of Abu 'Awanah.",
+          "highlight_arabic": "فَلاَ أَدْرِي أَشَىْءٌ أُنْزِلَ أَمْ شَىْءٌ كَانَ يَقُولُهُ",
+          "highlight_english": "I do not know whether it was something revealed or something he used to say"
+        },
+        {
+          "hadith_reference": "Sahih Muslim 1049",
+          "sunnah_url": "https://sunnah.com/muslim:1049",
+          "transmitted_by": "Ata / Ibn Abbas",
+          "hadith_arabic": "وَحَدَّثَنِي زُهَيْرُ بْنُ حَرْبٍ، وَهَارُونُ بْنُ عَبْدِ اللَّهِ، قَالاَ حَدَّثَنَا حَجَّاجُ بْنُ مُحَمَّدٍ، عَنِ ابْنِ جُرَيْجٍ، قَالَ سَمِعْتُ عَطَاءً، يَقُولُ سَمِعْتُ ابْنَ عَبَّاسٍ، يَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ لَوْ أَنَّ لاِبْنِ آدَمَ مِلْءَ وَادٍ مَالاً لأَحَبَّ أَنْ يَكُونَ إِلَيْهِ مِثْلُهُ وَلاَ يَمْلأُ نَفْسَ ابْنِ آدَمَ إِلاَّ التُّرَابُ وَاللَّهُ يَتُوبُ عَلَى مَنْ تَابَ ‏\"‏ ‏.‏ قَالَ ابْنُ عَبَّاسٍ فَلاَ أَدْرِي أَمِنَ الْقُرْآنِ هُوَ أَمْ لاَ ‏.‏ وَفِي رِوَايَةِ زُهَيْرٍ قَالَ فَلاَ أَدْرِي أَمِنَ الْقُرْآنِ ‏.‏ لَمْ يَذْكُرِ ابْنَ عَبَّاسٍ ‏.‏",
+          "hadith_english": "Ibn Abbas reported Allah's Messenger (ﷺ) as saying:If there were for the son of Adam a valley full of riches, he would long to possess another one like it. and Ibn Adam does not feel satiated but with dust. And Allah returns to him who returns (to Him). Ibn Abbas said: I do not know whether it is from the Qur'an or not; and in the narration transmitted by Zuhair it was said: I do not know whether it is from the Qur'an, and he made no mention of Ibn Abbas",
+          "highlight_arabic": "قَالَ ابْنُ عَبَّاسٍ فَلاَ أَدْرِي أَمِنَ الْقُرْآنِ هُوَ أَمْ لاَ",
+          "highlight_english": "Ibn Abbas said: I do not know whether it is from the Qur'an or not"
+        }
+      ],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/102/1/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura102-aya1.html",
+          "arabic_excerpt": "حدثنا محمد بن خلف العسقلاني، قال: ثنا آدم، قال: ثنا حماد بن سلمة، عن ثابت البناني، عن أنس بن مالك، عن أُبيّ بن كعب، قال: كنا نرى أن هذا الحديث من القرآن: \" لو أن لابن آدم واديين من مال، لتمنى واديا ثالثا، ولا يملأ جوف ابن آدم إلا التراب، ثم يتوب الله على من تاب \" حتى نـزلت هذه السورة: ( أَلْهَاكُمُ التَّكَاثُرُ ) إلى آخرها.",
+          "english_excerpt": "Muhammad bin Khalaf al-'Asqalani narrated to us, from Adam, from Hammad bin Salamah, from Thabit al-Bunani, from Anas bin Malik, from Ubayy bin Ka'b, who said: \"We used to think that this statement was from the Qur'an: 'If the Son of Adam had two valleys of wealth, he would desire a third valley; and nothing fills the belly of the Son of Adam except dust, then Allah turns in forgiveness to whomever repents,' until this Surah was revealed: {Rivalry diverts you,} to its end.\"",
+          "highlight_arabic": "كنا نرى أن هذا الحديث من القرآن: \" لو أن لابن آدم واديين من مال، لتمنى واديا ثالثا",
+          "highlight_english": "We used to think that this statement was from the Qur'an: 'If the Son of Adam had two valleys of wealth, he would desire a third valley"
+        }
+      ],
+      "global_rank": 13,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "لَوْ أَنَّ لِابْنِ آدَمَ وَادِيًا مِنْ ذَهَبٍ أَحَبَّ أَنْ يَكُونَ لَهُ وَادِيَانِ، وَلَنْ يَمْلَأَ فَاهُ إِلَّا التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ",
+      "variant_english": "If the son of Adam had a valley full of gold, he would love to have two valleys, and nothing fills his mouth except dust, and Allah forgives whoever repents to Him.",
+      "hadith_reference": "Sahih al-Bukhari 6437",
+      "source_reference": "Sahih al-Bukhari 6437",
+      "sunnah_url": "https://sunnah.com/bukhari:6437",
+      "hadith_arabic": "حَدَّثَنِي مُحَمَّدٌ، أَخْبَرَنَا مَخْلَدٌ، أَخْبَرَنَا ابْنُ جُرَيْجٍ، قَالَ سَمِعْتُ عَطَاءً، يَقُولُ سَمِعْتُ ابْنَ عَبَّاسٍ، يَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ لَوْ أَنَّ لاِبْنِ آدَمَ مِثْلَ وَادٍ مَالاً لأَحَبَّ أَنَّ لَهُ إِلَيْهِ مِثْلَهُ، وَلاَ يَمْلأُ عَيْنَ ابْنِ آدَمَ إِلاَّ التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ ‏\"‏‏.‏ قَالَ ابْنُ عَبَّاسٍ فَلاَ أَدْرِي مِنَ الْقُرْآنِ هُوَ أَمْ لاَ‏.‏ قَالَ وَسَمِعْتُ ابْنَ الزُّبَيْرِ يَقُولُ ذَلِكَ عَلَى الْمِنْبَرِ‏.‏",
+      "hadith_english": "Narrated Ibn `Abbas:I heard Allah's Messenger (ﷺ) saying, \"If the son of Adam had money equal to a valley, then he will wish for another similar to it, for nothing can satisfy the eye of Adam's son except dust. And Allah forgives him who repents to Him.\" Ibn `Abbas said: I do not know whether this saying was quoted from the Qur'an or not. `Ata' said, \"I heard Ibn Az-Zubair saying this narration while he was on the pulpit",
+      "rank": 4,
+      "attribution_role": "primary"
     }
   ]
 }

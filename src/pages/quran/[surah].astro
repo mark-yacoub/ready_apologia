@@ -14,8 +14,6 @@ import { getQiraatForSurah } from '../../utils/qiraatLoader.js';
 import { loadVerseLabels } from '../../utils/quran_verse_labels_loader.js';
 import QiraatCard from '../../components/QiraatCard.astro';
 import PillChevron from '../../components/PillChevron.astro';
-import { query } from '../../db.js';
-import { loadIslamicCommentaries } from '../../utils/islamic_commentaries_loader.js';
 import { getEvidenceSetsForSurahPrefix, getDefaultTafsirScholarForVerse } from '../../utils/quran_evidence_service.js';
 
 
@@ -50,7 +48,6 @@ const qiraatByAyah = await getQiraatForSurah(surahNum);
 const verseLabelsData = loadVerseLabels();
 
 // 3.5 Load Manuscript Maps
-const msPrefix = `${surahNum}:%`;
 const {
   msQuranSet,
   christianFootnotesSet,
@@ -62,6 +59,21 @@ const {
 } = getEvidenceSetsForSurahPrefix(surahNum);
 
 
+
+function replaceOutsideTags(htmlStr: string, regex: RegExp, wrapFn: (match: string) => string) {
+  return htmlStr
+    .split(/(<[^>]+>)/g)
+    .map((chunk, idx) => (idx % 2 === 0 ? chunk.replace(regex, wrapFn) : chunk))
+    .join('');
+}
+
+function getShortVariantTypeTag(vtype: string) {
+  const t = (vtype || '').toLowerCase();
+  if (t.includes('addition')) return '+ Phrase Addition';
+  if (t.includes('omission')) return '− Word Omission';
+  if (t.includes('substitution')) return '⇄ Word Substitution';
+  return '⚙ Form Shift';
+}
 
 // 4. Combine verses
 const verses = [];
@@ -79,6 +91,32 @@ for (let i = 1; i <= totalVerses; i++) {
   let arabicTextHTML = arabicText;
   let englishTextHTML = englishText;
 
+  if (verseVariants.length > 0) {
+    const codexEnSpans = [...new Set(verseVariants.map((v: any) => v.uthmanic_target_english).filter(Boolean))];
+    if (codexEnSpans.length > 0) {
+      codexEnSpans.sort((a: string, b: string) => b.length - a.length);
+      const escapedSpans = codexEnSpans.map((s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      const regex = new RegExp(`(${escapedSpans.join('|')})`, 'gi');
+      englishTextHTML = replaceOutsideTags(
+        englishTextHTML,
+        regex,
+        (match) => `<span class="codex-highlight" title="Companion Codex differs on this phrase">${match}</span>`
+      );
+    }
+
+    const codexArSpans = [...new Set(verseVariants.map((v: any) => v.uthmanic_target_arabic).filter(Boolean))];
+    if (codexArSpans.length > 0) {
+      codexArSpans.sort((a: string, b: string) => b.length - a.length);
+      const escapedAr = codexArSpans.map((s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      const regexAr = new RegExp(`(${escapedAr.join('|')})`, 'g');
+      arabicTextHTML = replaceOutsideTags(
+        arabicTextHTML,
+        regexAr,
+        (match) => `<span class="codex-highlight" title="Companion Codex differs on this phrase">${match}</span>`
+      );
+    }
+  }
+
   if (qiraatVariants.length > 0) {
     const englishWords = [...new Set(qiraatVariants.map((v: any) => v.hafs_english_word).filter(Boolean))];
     if (englishWords.length > 0) {
@@ -86,7 +124,8 @@ for (let i = 1; i <= totalVerses; i++) {
       englishWords.sort((a: string, b: string) => b.length - a.length);
       const escapedWords = englishWords.map((w: string) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
       const regex = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
-      englishTextHTML = englishTextHTML.replace(
+      englishTextHTML = replaceOutsideTags(
+        englishTextHTML,
         regex,
         (match) => `<span class="qiraat-highlight">${match}</span>`
       );
@@ -102,11 +141,26 @@ for (let i = 1; i <= totalVerses; i++) {
         return base.split('').map(c => c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('[\\u064B-\\u065F\\u0670]*') + '[\\u064B-\\u065F\\u0670]*';
       });
       const regex = new RegExp(`(${regexParts.join('|')})`, 'g');
-      arabicTextHTML = arabicTextHTML.replace(
+      arabicTextHTML = replaceOutsideTags(
+        arabicTextHTML,
         regex,
         (match) => `<span class="qiraat-highlight">${match}</span>`
       );
     }
+  }
+
+  let competingCodexPillLabel = 'Companion Codex';
+  let competingCodexHookPreview = '';
+  if (verseVariants.length > 0) {
+    const allCompNames = [...new Set(
+      verseVariants.flatMap((v: any) => v.primary_companions || [v.companion || v.companion_codex]).filter(Boolean)
+    )];
+    const compSummary = allCompNames.slice(0, 2).join(' & ') + (allCompNames.length > 2 ? ` +${allCompNames.length - 2}` : '');
+    const typeTag = getShortVariantTypeTag(verseVariants[0].variant_type);
+    competingCodexPillLabel = verseVariants.length === 1
+      ? `Companion Codex · ${compSummary} (${typeTag})`
+      : `Companion Codices (${verseVariants.length}) · ${compSummary}`;
+    competingCodexHookPreview = verseVariants[0].short_title || '';
   }
 
   const hasManuscript = msQuranSet.has(verseKey);
@@ -137,6 +191,8 @@ for (let i = 1; i <= totalVerses; i++) {
     englishHTML: englishTextHTML,
     defaultFirstTab: defaultFirstTab,
     variants: verseVariants,
+    competingCodexPillLabel,
+    competingCodexHookPreview,
     qiraatVariants: qiraatVariants,
     labels: labelsObj,
     hasManuscript: hasManuscript,
@@ -155,7 +211,7 @@ const seoTitle = `Surah ${arabicData.transliteration} (${surahNum}) - Critical A
 let seoDescription = `Read Surah ${arabicData.transliteration} with a literal accurate translation and explore each ayah's theological defects, historical errors, borrowed mythologies, and Qiraat manuscript variants.`;
 const seoKeywords = `surah ${arabicData.transliteration}, literal accurate translation, apologetics, contradictions, borrowed mythology, theological defect`;
 
-const variantCount = verses.filter(v => v.hasVariants).length;
+const variantCount = verses.filter(v => v.variants.length > 0 || v.qiraatVariants.length > 0).length;
 const contradictionCount = verses.filter(v => v.hasContradictions).length;
 const scientificErrorCount = verses.filter(v => v.hasScientificErrors).length;
 if (variantCount > 0 || contradictionCount > 0 || scientificErrorCount > 0) {
@@ -286,10 +342,15 @@ const ogImage = getQuranOgImage(surahNum, null);
               {v.variants.length > 0 && (
                 <details class="competing-codex-details">
                   <summary class="competing-codex-summary">
-                    <span class="competing-pill">
-                      <span>Competing Codex</span>
-                      <PillChevron />
-                    </span>
+                    <div class="competing-summary-row">
+                      <span class="competing-pill">
+                        <span>{v.competingCodexPillLabel}</span>
+                        <PillChevron />
+                      </span>
+                      {v.competingCodexHookPreview && (
+                        <span class="competing-preview-hook">{v.competingCodexHookPreview}</span>
+                      )}
+                    </div>
                   </summary>
                   <div class="variants-list">
                     {v.variants.map(variant => (
@@ -327,16 +388,17 @@ const ogImage = getQuranOgImage(surahNum, null);
 </Layout>
 
 <script>
-  import { DEFAULT_QURAN_TAB_ORDER, sanitizeTabOrder } from '../../utils/quran_config.js';
+  import { DEFAULT_QURAN_TAB_ORDER } from '../../utils/quran_config.js';
   import { trackQuranLabelInteraction } from '../../utils/analytics.js';
   import { enforceUserBadgePriority } from '../../utils/dom_tabs.js';
 
   const initToggle = () => {
     const btnEn = document.getElementById('toggle-en');
     const btnAr = document.getElementById('toggle-ar');
-    const container = document.querySelector('.quran-reader-container');
+    const container = document.querySelector('.quran-reader-container') as HTMLElement | null;
 
-    if (!btnEn || !btnAr || !container) return;
+    if (!btnEn || !btnAr || !container || container.dataset.initialized === 'true') return;
+    container.dataset.initialized = 'true';
 
     const setLanguage = (lang) => {
       localStorage.setItem('quranLanguage', lang);
@@ -579,18 +641,29 @@ const ogImage = getQuranOgImage(surahNum, null);
 
   /* Competing Codex Styles */
   .competing-codex-details {
-    margin-top: 16px;
-    border: 1px solid var(--color-outline-variant);
-    border-radius: 8px;
+    margin-top: 12px;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
     overflow: hidden;
-    background-color: var(--color-surface-container-low);
+    background-color: #fff1f2;
   }
 
   .competing-codex-summary {
-    padding: 12px 16px;
+    padding: 10px 14px;
     cursor: pointer;
     user-select: none;
     list-style: none; /* Hide default arrow in some browsers */
+  }
+
+  .competing-codex-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .competing-summary-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .competing-pill,
@@ -603,16 +676,22 @@ const ogImage = getQuranOgImage(surahNum, null);
 
   .competing-pill {
     background-color: #fee2e2;
-    color: #b91c1c;
+    color: #991b1b;
     border: 1px solid #f87171;
     padding: 4px 12px;
     border-radius: 9999px;
     font-family: var(--font-body);
     font-size: 12px;
     font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     transition: all 0.15s ease;
+  }
+
+  .competing-preview-hook {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: #7f1d1d;
   }
 
   .competing-codex-summary:hover .competing-pill {
@@ -621,11 +700,18 @@ const ogImage = getQuranOgImage(surahNum, null);
 
   .competing-codex-details .variants-list {
     padding: 16px;
-    border-top: 1px solid var(--color-outline-variant);
+    border-top: 1px solid #fecaca;
     background-color: var(--color-surface);
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+
+  :global(.codex-highlight) {
+    background-color: rgba(254, 202, 202, 0.38);
+    border-radius: 4px;
+    padding: 0 4px;
+    border-bottom: 2px solid #ef4444;
   }
 
   /* Qiraat Styles */
@@ -729,6 +815,22 @@ const ogImage = getQuranOgImage(surahNum, null);
 
   details[open] summary :global(.pill-chevron) {
     transform: rotate(180deg);
+  }
+
+  details.competing-codex-details[open] .competing-preview-hook {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .verse-card {
+      padding: 16px 12px;
+    }
+
+    .competing-codex-details .variants-list,
+    .qiraat-details .variants-list {
+      padding: 10px 8px;
+      gap: 14px;
+    }
   }
 </style>
 

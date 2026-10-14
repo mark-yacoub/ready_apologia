@@ -10,7 +10,7 @@ const { title, intro, className = '' } = Astro.props;
 <section class={`evidence-card ${className}`}>
   <div class="card-header">
     <h2>{title}</h2>
-    {intro && <p class="scholastic-intro">{intro}</p>}
+    {intro && <p class="scholastic-intro" set:html={intro} />}
   </div>
   <slot />
 </section>
@@ -43,8 +43,27 @@ const { title, intro, className = '' } = Astro.props;
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--color-on-surface-variant);
-    text-align: justify;
+    text-align: left;
     margin-bottom: 1.5rem;
     margin-top: 0;
+  }
+
+  .scholastic-intro :global(a) {
+    color: var(--color-secondary);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .evidence-card {
+      padding: 1.15rem 1rem;
+    }
+    .card-header h2 {
+      font-size: 1.25rem;
+    }
+    .scholastic-intro {
+      font-size: 0.9rem;
+    }
   }
 </style>

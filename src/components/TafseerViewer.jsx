@@ -1,10 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ScrollableTrack from './ScrollableTrack.jsx';
 import { trackEvent } from '../utils/analytics.js';
 import '../styles/tafseer.css';
 
+function normalizeForMatch(str) {
+  return (str || '')
+    .replace(/[\u064B-\u065F\u0670\u0640]/g, '')
+    .replace(/['’‘"“”`.,;:!?()[\]{}«»—–\-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
 export default function TafseerViewer({ activeCommentary, scholarMenu = [], surah = '', ayah = '' }) {
   const [language, setLanguage] = useState('en');
+  const [hlParams, setHlParams] = useState({ hlEn: '', hlAr: '', searchStr: '' });
+  const [hasMatchedHighlight, setHasMatchedHighlight] = useState(false);
+  const proseRef = useRef(null);
+
+  const scrollToHighlightedPassage = () => {
+    if (!proseRef.current) return;
+    const el = proseRef.current.querySelector('.tafseer-codex-highlight-block');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
 
   const handleLanguageChange = (lang) => {
     setLanguage(lang);
@@ -15,26 +35,95 @@ export default function TafseerViewer({ activeCommentary, scholarMenu = [], sura
       ayah: ayah
     });
     if (typeof window !== 'undefined') {
-      window.location.hash = lang;
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${lang}`);
     }
   };
 
   useEffect(() => {
-    const handleHashChange = () => {
-      if (typeof window !== 'undefined' && window.location.hash) {
+    const syncFromUrl = () => {
+      if (typeof window === 'undefined') return;
+      if (window.location.hash) {
         const hash = window.location.hash.substring(1);
         if (hash === 'en' || hash === 'ar') {
           setLanguage(hash);
         }
       }
+      const params = new URLSearchParams(window.location.search);
+      const hlEn = params.get('hl_en') || '';
+      const hlAr = params.get('hl_ar') || '';
+      setHlParams({ hlEn, hlAr, searchStr: window.location.search || '' });
     };
 
-    handleHashChange();
+    syncFromUrl();
     if (typeof window !== 'undefined') {
-      window.addEventListener('hashchange', handleHashChange);
-      return () => window.removeEventListener('hashchange', handleHashChange);
+      window.addEventListener('hashchange', syncFromUrl);
+      return () => window.removeEventListener('hashchange', syncFromUrl);
     }
   }, []);
+
+  useEffect(() => {
+    if (!proseRef.current) return;
+    const blocks = Array.from(proseRef.current.querySelectorAll('p, li, blockquote'));
+    blocks.forEach((b) => b.classList.remove('tafseer-codex-highlight-block'));
+
+    const rawTarget = language === 'ar' ? hlParams.hlAr : hlParams.hlEn;
+    const normTarget = normalizeForMatch(rawTarget);
+    if (!normTarget || normTarget.length < 6) {
+      setHasMatchedHighlight(false);
+      return;
+    }
+
+    const targetWords = normTarget.split(' ').filter(Boolean);
+    let bestBlocks = [];
+
+    // 1. Direct normalized substring or 6-word sliding window match
+    const windowSize = Math.min(6, targetWords.length);
+    const windows = [];
+    for (let i = 0; i <= targetWords.length - windowSize; i++) {
+      windows.push(targetWords.slice(i, i + windowSize).join(' '));
+    }
+
+    for (const block of blocks) {
+      const normBlock = normalizeForMatch(block.textContent || '');
+      if (!normBlock) continue;
+      if (normBlock.includes(normTarget) || (normBlock.length > 30 && normTarget.includes(normBlock))) {
+        bestBlocks.push(block);
+      } else if (windows.length > 0 && windows.some((w) => w.length >= 14 && normBlock.includes(w))) {
+        bestBlocks.push(block);
+      }
+    }
+
+    // 2. Fallback: highest token overlap if no exact window matched
+    if (bestBlocks.length === 0 && targetWords.length >= 3) {
+      let bestScore = 0;
+      let bestCandidate = null;
+      for (const block of blocks) {
+        const normBlock = normalizeForMatch(block.textContent || '');
+        if (!normBlock) continue;
+        let hits = 0;
+        for (const w of targetWords) {
+          if (w.length > 2 && normBlock.includes(w)) hits++;
+        }
+        const score = hits / targetWords.length;
+        if (score > bestScore && score >= 0.55) {
+          bestScore = score;
+          bestCandidate = block;
+        }
+      }
+      if (bestCandidate) bestBlocks = [bestCandidate];
+    }
+
+    if (bestBlocks.length > 0) {
+      bestBlocks.forEach((b) => b.classList.add('tafseer-codex-highlight-block'));
+      setHasMatchedHighlight(true);
+      const timerId = setTimeout(() => {
+        bestBlocks[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 120);
+      return () => clearTimeout(timerId);
+    } else {
+      setHasMatchedHighlight(false);
+    }
+  }, [language, activeCommentary?.id, hlParams.hlEn, hlParams.hlAr]);
 
   if (!activeCommentary) return null;
 
@@ -56,7 +145,7 @@ export default function TafseerViewer({ activeCommentary, scholarMenu = [], sura
               return (
                 <a 
                   key={comm.id}
-                  href={`${base}/quran/${surah}/${ayah}/tafsir/${comm.id}#${language}`}
+                  href={`${base}/quran/${surah}/${ayah}/tafsir/${comm.id}${hlParams.searchStr}#${language}`}
                   className={`tafseer-segment-btn ${isActive ? 'is-active' : ''}`}
                   role="tab"
                   aria-selected={isActive}
@@ -113,8 +202,25 @@ export default function TafseerViewer({ activeCommentary, scholarMenu = [], sura
         </div>
 
         <div className="tafseer-card-body">
+          {hasMatchedHighlight && (
+            <div className="tafseer-codex-jump-banner" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              <span className="tafseer-codex-jump-label">
+                {language === 'ar'
+                  ? 'تم تمييز الفقرة الخاصة بقراءة ومصحف الصحابي أدناه'
+                  : 'Companion Codex attestation highlighted in the commentary below'}
+              </span>
+              <button
+                type="button"
+                className="tafseer-codex-jump-btn"
+                onClick={scrollToHighlightedPassage}
+              >
+                {language === 'ar' ? 'انتقل إلى الموضع ↓' : 'Jump to Passage ↓'}
+              </button>
+            </div>
+          )}
           {hasContent ? (
             <div
+              ref={proseRef}
               className="tafseer-exegesis-prose ct-answer-body"
               dir={language === 'ar' ? 'rtl' : 'ltr'}
               dangerouslySetInnerHTML={{ __html: exegesisContent }}

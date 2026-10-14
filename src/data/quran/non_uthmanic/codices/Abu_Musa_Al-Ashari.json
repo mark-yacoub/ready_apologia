@@ -1,0 +1,94 @@
+{
+  "id": "abu-musa-al-ashari",
+  "name": "Abu Musa Al-Ashari",
+  "arabic_name": "أبو موسى الأشعري",
+  "title": "Master of the Basran Codex (Lubab al-Qulub)",
+  "era": "Died c. 42 AH (c. 662 CE)",
+  "region": "Basra (Iraq)",
+  "tier": "Superstar",
+  "importance_rank": 10,
+  "bio_url": "https://sunnah.com/narrator/5021",
+  "biography": "A celebrated Companion whose melodious recitation of the Quran was praised by Prophet Muhammad as having been gifted one of the 'flutes of the family of David' (Sahih al-Bukhari 5048). Serving as governor and teacher in Basra, his large personal Mushaf—affectionately titled Lubab al-Qulub ('The Quintessence of Hearts')—was the standard codex of Basra prior to Uthman's recension. In Sahih Muslim 1050, Abu Musa gathers three hundred Quran reciters of Basra and testifies that they used to recite two lengthy Surahs now absent from the Mushaf: one comparable in length and severity to Surah Bara'ah (9) containing the Valley of Gold verse, and another comparable to the Musabbihat.",
+  "virtues": [
+    {
+      "source_reference": "Sahih al-Bukhari 5048",
+      "sunnah_url": "https://sunnah.com/bukhari:5048",
+      "hadith_arabic": "يَا أَبَا مُوسَى لَقَدْ أُوتِيتَ مِزْمَارًا مِنْ مَزَامِيرِ آلِ دَاوُدَ",
+      "hadith_english": "The Prophet (ﷺ) said to him: \"O Abu Musa! You have truly been given one of the mazamir (sweet melodious flutes) of the family of David.\""
+    }
+  ],
+  "bio_text": "A celebrated Companion whose melodious recitation of the Quran was praised by Prophet Muhammad as having been gifted one of the 'flutes of the family of David' (Sahih al-Bukhari 5048). Serving as governor and teacher in Basra, his large personal Mushaf—affectionately titled Lubab al-Qulub ('The Quintessence of Hearts')—was the standard codex of Basra prior to Uthman's recension. In Sahih Muslim 1050, Abu Musa gathers three hundred Quran reciters of Basra and testifies that they used to recite two lengthy Surahs now absent from the Mushaf: one comparable in length and severity to Surah Bara'ah (9) containing the Valley of Gold verse, and another comparable to the Musabbihat.",
+  "total_variants": 1,
+  "primary_variants": 1,
+  "shared_variants": 0,
+  "bukhari_muslim_count": 1,
+  "tafsir_count": 1,
+  "variants": [
+    {
+      "id": "codex-lost-two-surahs-abu-musa",
+      "surah": "unknown",
+      "ayah": 0,
+      "companion": "Abu Musa Al-Ashari",
+      "companion_id": "abu-musa-al-ashari",
+      "also_attributed_to": [],
+      "variant_type": "Lost Verse",
+      "short_title": "Abu Musa's Testimony on Two Forgotten Surahs",
+      "plain_english_hook": "Abu Musa al-Ash'ari told 300 Quran reciters in Basra that the Companions used to recite two entire chapters—one as long as Surah 9—that were later forgotten except for two single verses.",
+      "title": "Two Forgotten Surahs (Resembling Bara'ah and the Musabbihat) Reported by Abu Musa",
+      "diff_summary": "In Sahih Muslim 1050, Abu Musa al-Ash'ari—governor of Basra and one of the senior Companion reciters—convened 300 Quran reciters of Basra and reminded them that the early community used to recite two complete chapters that were subsequently forgotten (unsītuhā). The first chapter was compared in length and severity to Surah Bara'ah (Surah 9, which has 129 verses), from which Abu Musa retained only the verse of the Two Valleys of Wealth; the second was compared to the Musabbihat chapters, from which he retained a verse warning believers that unfulfilled words are written as a testimony on their necks.",
+      "uthmanic_target_arabic": "",
+      "uthmanic_target_english": "",
+      "variant_target_arabic": "لَوْ كَانَ لاِبْنِ آدَمَ وَادِيَانِ مِنْ مَالٍ لاَبْتَغَى وَادِيًا ثَالِثًا وَلاَ يَمْلأُ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ ... يَا أَيُّهَا الَّذِينَ آمَنُوا لِمَ تَقُولُونَ مَا لاَ تَفْعَلُونَ فَتُكْتَبُ شَهَادَةً فِي أَعْنَاقِكُمْ فَتُسْأَلُونَ عَنْهَا يَوْمَ الْقِيَامَةِ",
+      "variant_target_english": "If the son of Adam had two valleys of wealth, he would seek a third valley, and nothing fills the belly of the son of Adam except dust ... O you who believe, why do you say that which you do not practice? It shall be written as a testimony on your necks and you will be questioned about it on the Day of Resurrection.",
+      "uthmanic_full_arabic": "",
+      "uthmanic_full_english": "",
+      "variant_full_arabic": "لَوْ كَانَ لاِبْنِ آدَمَ وَادِيَانِ مِنْ مَالٍ لاَبْتَغَى وَادِيًا ثَالِثًا وَلاَ يَمْلأُ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ ... يَا أَيُّهَا الَّذِينَ آمَنُوا لِمَ تَقُولُونَ مَا لاَ تَفْعَلُونَ فَتُكْتَبُ شَهَادَةً فِي أَعْنَاقِكُمْ فَتُسْأَلُونَ عَنْهَا يَوْمَ الْقِيَامَةِ",
+      "variant_full_english": "If the son of Adam had two valleys of wealth, he would seek a third valley, and nothing fills the belly of the son of Adam except dust ... O you who believe, why do you say that which you do not practice? It shall be written as a testimony on your necks and you will be questioned about it on the Day of Resurrection.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Classical commentators cite Surah Al-Baqarah 2:106 ('Whatever verse We abrogate or cause to be forgotten') to argue that both chapters were divinely caused to be forgotten from memory during the Prophet's lifetime.",
+        "primary_source_evaluation": "In Sahih Muslim 1050, Abu Musa addresses the 300 Basran reciters during the caliphate of Uthman and recalls that he still remembers these two specific verses word-for-word while the rest of the two chapters faded from memory, showing that the text was not simultaneously erased from human recollection."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 35,
+        "undeniability_gold_sources_30": 30,
+        "universal_scope_20": 20,
+        "classical_concession_15": 13,
+        "cuj_score": 98
+      },
+      "hadiths": [
+        {
+          "hadith_reference": "Sahih Muslim 1050",
+          "sunnah_url": "https://sunnah.com/muslim:1050",
+          "transmitted_by": "Abu al-Aswad al-Dili",
+          "hadith_arabic": "حَدَّثَنِي سُوَيْدُ بْنُ سَعِيدٍ، حَدَّثَنَا عَلِيُّ بْنُ مُسْهِرٍ، عَنْ دَاوُدَ، عَنْ أَبِي حَرْبِ بْنِ أَبِي، الأَسْوَدِ عَنْ أَبِيهِ، قَالَ بَعَثَ أَبُو مُوسَى الأَشْعَرِيُّ إِلَى قُرَّاءِ أَهْلِ الْبَصْرَةِ فَدَخَلَ عَلَيْهِ ثَلاَثُمِائَةِ رَجُلٍ قَدْ قَرَءُوا الْقُرْآنَ فَقَالَ أَنْتُمْ خِيَارُ أَهْلِ الْبَصْرَةِ وَقُرَّاؤُهُمْ فَاتْلُوهُ وَلاَ يَطُولَنَّ عَلَيْكُمُ الأَمَدُ فَتَقْسُوَ قُلُوبُكُمْ كَمَا قَسَتْ قُلُوبُ مَنْ كَانَ قَبْلَكُمْ وَإِنَّا كُنَّا نَقْرَأُ سُورَةً كُنَّا نُشَبِّهُهَا فِي الطُّولِ وَالشِّدَّةِ بِبَرَاءَةَ فَأُنْسِيتُهَا غَيْرَ أَنِّي قَدْ حَفِظْتُ مِنْهَا لَوْ كَانَ لاِبْنِ آدَمَ وَادِيَانِ مِنْ مَالٍ لاَبْتَغَى وَادِيًا ثَالِثًا وَلاَ يَمْلأُ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ ‏.‏ وَكُنَّا نَقْرَأُ سُورَةً كُنَّا نُشَبِّهُهَا بِإِحْدَى الْمُسَبِّحَاتِ فَأُنْسِيتُهَا غَيْرَ أَنِّي حَفِظْتُ مِنْهَا ‏{‏ يَا أَيُّهَا الَّذِينَ آمَنُوا لِمَ تَقُولُونَ مَا لاَ تَفْعَلُونَ‏}‏ فَتُكْتَبُ شَهَادَةً فِي أَعْنَاقِكُمْ فَتُسْأَلُونَ عَنْهَا يَوْمَ الْقِيَامَةِ ‏.‏",
+          "hadith_english": "Abu Harb b. Abu al-Aswad reported on the authority of his father that Abu Musa al-Ash'ari sent for the reciters of Basra. They came to him and they were three hundred in number. They recited the Qur'an and he said:You are the best among the inhabitants of Basra, for you are the reciters among them. So continue to recite it. (But bear in mind) that your reciting for a long time may not harden your hearts as were hardened the hearts of those before you. We used to recite a surah which resembled in length and severity to (Surah) Bara'at. I have, however, forgotten it with the exception of this which I remember out of it:\" If there were two valleys full of riches, for the son of Adam, he would long for a third valley, and nothing would fill the stomach of the son of Adam but dust.\" And we used so recite a surah which resembled one of the surahs of Musabbihat, and I have forgotten it, but remember (this much) out of it:\" Oh people who believe, why do you say that which you do not practise\" (lxi 2.) and\" that is recorded in your necks as a witness (against you) and you would be asked about it on the Day of Resurrection\" (xvii)",
+          "highlight_arabic": "وَإِنَّا كُنَّا نَقْرَأُ سُورَةً كُنَّا نُشَبِّهُهَا فِي الطُّولِ وَالشِّدَّةِ بِبَرَاءَةَ فَأُنْسِيتُهَا غَيْرَ أَنِّي قَدْ حَفِظْتُ مِنْهَا لَوْ كَانَ لاِبْنِ آدَمَ وَادِيَانِ مِنْ مَالٍ لاَبْتَغَى وَادِيًا ثَالِثًا",
+          "highlight_english": "We used to recite a surah which resembled in length and severity to (Surah) Bara'at. I have, however, forgotten it with the exception of this which I remember out of it"
+        }
+      ],
+      "tafsir_sources": [
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/61/3/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura61-aya3.html",
+          "arabic_excerpt": "وقال ابن أبي حاتم : حدثنا أبي ، حدثنا فروة بن أبي المغراء ، حدثنا علي بن مسهر ، عن داود بن أبي هند ، عن أبي حرب بن أبي الأسود الديلي ، عن أبيه قال : بعث أبو موسى إلى قراء أهل البصرة فدخل عليه منهم ثلاثمائة رجل ، كلهم قد قرأ القرآن ، فقال : أنتم قراء أهل البصرة وخيارهم . وقال : كنا نقرأ سورة كنا نشبهها بإحدى المسبحات ، فأنسيناها ، غير أني قد حفظت منها : ( يا أيها الذين آمنوا لم تقولون ما لا تفعلون ) فتكتب شهادة في أعناقكم ، فتسألون عنها يوم القيامة .",
+          "english_excerpt": "Ibn Abi Hatim said: \"My father narrated to us, Farwah bin Abi Al-Maghra' narrated to us, 'Ali bin Mushir narrated to us, from Dawud bin Abi Hind, from Abu Harb bin Abi Al-Aswad Ad-Dili, from his father, who said: Abu Musa sent for the reciters among the people of Basrah, and three hundred men entered upon him, all of whom had recited the Qur'an. He said: 'You are the reciters of the people of Basrah and their best.' And he said: 'We used to recite a Surah which we would compare to one of the Musabbihat (Surahs beginning with the glorification of Allah), but we were made to forget it, except that I have memorized from it: (O you who believe! Why do you say that which you do not do?) It will be recorded as a testimony on your necks, and you will be questioned about it on the Day of Resurrection.'\"",
+          "highlight_arabic": "كنا نقرأ سورة كنا نشبهها بإحدى المسبحات ، فأنسيناها ، غير أني قد حفظت منها",
+          "highlight_english": "We used to recite a Surah which we would compare to one of the Musabbihat (Surahs beginning with the glorification of Allah), but we were made to forget it"
+        }
+      ],
+      "global_rank": 6,
+      "companion_codex": "Abu Musa Al-Ashari",
+      "variant_arabic": "لَوْ كَانَ لاِبْنِ آدَمَ وَادِيَانِ مِنْ مَالٍ لاَبْتَغَى وَادِيًا ثَالِثًا وَلاَ يَمْلأُ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ ... يَا أَيُّهَا الَّذِينَ آمَنُوا لِمَ تَقُولُونَ مَا لاَ تَفْعَلُونَ فَتُكْتَبُ شَهَادَةً فِي أَعْنَاقِكُمْ فَتُسْأَلُونَ عَنْهَا يَوْمَ الْقِيَامَةِ",
+      "variant_english": "If the son of Adam had two valleys of wealth, he would seek a third valley, and nothing fills the belly of the son of Adam except dust ... O you who believe, why do you say that which you do not practice? It shall be written as a testimony on your necks and you will be questioned about it on the Day of Resurrection.",
+      "hadith_reference": "Sahih Muslim 1050",
+      "source_reference": "Sahih Muslim 1050",
+      "sunnah_url": "https://sunnah.com/muslim:1050",
+      "hadith_arabic": "حَدَّثَنِي سُوَيْدُ بْنُ سَعِيدٍ، حَدَّثَنَا عَلِيُّ بْنُ مُسْهِرٍ، عَنْ دَاوُدَ، عَنْ أَبِي حَرْبِ بْنِ أَبِي، الأَسْوَدِ عَنْ أَبِيهِ، قَالَ بَعَثَ أَبُو مُوسَى الأَشْعَرِيُّ إِلَى قُرَّاءِ أَهْلِ الْبَصْرَةِ فَدَخَلَ عَلَيْهِ ثَلاَثُمِائَةِ رَجُلٍ قَدْ قَرَءُوا الْقُرْآنَ فَقَالَ أَنْتُمْ خِيَارُ أَهْلِ الْبَصْرَةِ وَقُرَّاؤُهُمْ فَاتْلُوهُ وَلاَ يَطُولَنَّ عَلَيْكُمُ الأَمَدُ فَتَقْسُوَ قُلُوبُكُمْ كَمَا قَسَتْ قُلُوبُ مَنْ كَانَ قَبْلَكُمْ وَإِنَّا كُنَّا نَقْرَأُ سُورَةً كُنَّا نُشَبِّهُهَا فِي الطُّولِ وَالشِّدَّةِ بِبَرَاءَةَ فَأُنْسِيتُهَا غَيْرَ أَنِّي قَدْ حَفِظْتُ مِنْهَا لَوْ كَانَ لاِبْنِ آدَمَ وَادِيَانِ مِنْ مَالٍ لاَبْتَغَى وَادِيًا ثَالِثًا وَلاَ يَمْلأُ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ ‏.‏ وَكُنَّا نَقْرَأُ سُورَةً كُنَّا نُشَبِّهُهَا بِإِحْدَى الْمُسَبِّحَاتِ فَأُنْسِيتُهَا غَيْرَ أَنِّي حَفِظْتُ مِنْهَا ‏{‏ يَا أَيُّهَا الَّذِينَ آمَنُوا لِمَ تَقُولُونَ مَا لاَ تَفْعَلُونَ‏}‏ فَتُكْتَبُ شَهَادَةً فِي أَعْنَاقِكُمْ فَتُسْأَلُونَ عَنْهَا يَوْمَ الْقِيَامَةِ ‏.‏",
+      "hadith_english": "Abu Harb b. Abu al-Aswad reported on the authority of his father that Abu Musa al-Ash'ari sent for the reciters of Basra. They came to him and they were three hundred in number. They recited the Qur'an and he said:You are the best among the inhabitants of Basra, for you are the reciters among them. So continue to recite it. (But bear in mind) that your reciting for a long time may not harden your hearts as were hardened the hearts of those before you. We used to recite a surah which resembled in length and severity to (Surah) Bara'at. I have, however, forgotten it with the exception of this which I remember out of it:\" If there were two valleys full of riches, for the son of Adam, he would long for a third valley, and nothing would fill the stomach of the son of Adam but dust.\" And we used so recite a surah which resembled one of the surahs of Musabbihat, and I have forgotten it, but remember (this much) out of it:\" Oh people who believe, why do you say that which you do not practise\" (lxi 2.) and\" that is recorded in your necks as a witness (against you) and you would be asked about it on the Day of Resurrection\" (xvii)",
+      "rank": 3,
+      "attribution_role": "primary"
+    }
+  ]
+}

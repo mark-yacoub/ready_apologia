@@ -1,99 +1,218 @@
 {
-  "person": "Anas bin Malik",
+  "id": "anas-bin-malik",
+  "name": "Anas bin Malik",
+  "arabic_name": "أنس بن مالك",
+  "title": "Personal Attendant of the Prophet & Basran Transmitter",
+  "era": "Died 93 AH (712 CE)",
+  "region": "Medina & Basra",
+  "tier": "Superstar",
+  "importance_rank": 6,
+  "bio_url": "https://sunnah.com/narrator/720",
+  "biography": "Served Prophet Muhammad in Medina for ten years from childhood until the Prophet's death, later settling in Basra as one of the longest-living Companions. Across multiple narrations in Sahih al-Bukhari (2801, 2814, 4095) and Sahih Muslim (677a), Anas testifies to the revelation and liturgical recitation of the Qur'anic verse concerning the seventy martyred reciters of Bi'r Ma'una ('Inform our people that we have met our Lord, and He is pleased with us and has made us pleased') before its recitation was lifted, as well as the Valley of Gold passage.",
   "virtues": [
     {
-      "hadith_arabic": "لأُحَدِّثَنَّكُمْ حَدِيثًا لاَ يُحَدِّثُكُمْ أَحَدٌ بَعْدِي، سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ: مِنْ أَشْرَاطِ السَّاعَةِ أَنْ يَقِلَّ الْعِلْمُ، وَيَظْهَرَ الْجَهْلُ، وَيَظْهَرَ الزِّنَا، وَتَكْثُرَ النِّسَاءُ، وَيَقِلَّ الرِّجَالُ، حَتَّى يَكُونَ لِخَمْسِينَ امْرَأَةً الْقَيِّمُ الْوَاحِدُ",
-      "hadith_english": "Narrated Anas: I will narrate to you a Hadith I heard from Allah's Messenger (ﷺ) and none other than I will tell you of it. I heard Allah's Messenger (ﷺ) saying, 'From among the portents of the Hour are the following: 1. Religious knowledge will decrease (by the death of religious learned men). 2. Ignorance will prevail. 3. There will be prevalence of open illegal sexual intercourse. 4. Women will increase in number and men will decrease in number so much so that fifty women will be looked after by one man.'",
-      "source_reference": "Sahih al-Bukhari 81",
-      "sunnah_url": "https://sunnah.com/bukhari:81"
-    },
-    {
-      "hadith_arabic": "خَدَمْتُ النَّبِيَّ صلى الله عليه وسلم عَشْرَ سِنِينَ، فَمَا قَالَ لِي أُفٍّ، وَلاَ لِمَ صَنَعْتَ، وَلاَ أَلاَّ صَنَعْتَ",
-      "hadith_english": "Narrated Anas: I served the Prophet (ﷺ) for ten years, and he never said to me, 'Uff' (a minor harsh word) and never blamed me by saying, 'Why did you do so or why didn't you do so?'",
-      "source_reference": "Sahih al-Bukhari 6038",
-      "sunnah_url": "https://sunnah.com/bukhari:6038"
+      "source_reference": "Sahih al-Bukhari 2801",
+      "sunnah_url": "https://sunnah.com/bukhari:2801",
+      "hadith_arabic": "عَنْ أَنَسٍ قَالَ: فَكُنَّا نَقْرَأُ: ‏{‏أَنْ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا‏}‏ ثُمَّ نُسِخَ بَعْدُ",
+      "hadith_english": "Narrated Anas: \"So we used to recite: 'Inform our people that we have met our Lord, He is pleased with us and has made us pleased.' Later on, this Qur'anic verse was cancelled.\""
     }
   ],
+  "bio_text": "Served Prophet Muhammad in Medina for ten years from childhood until the Prophet's death, later settling in Basra as one of the longest-living Companions. Across multiple narrations in Sahih al-Bukhari (2801, 2814, 4095) and Sahih Muslim (677a), Anas testifies to the revelation and liturgical recitation of the Qur'anic verse concerning the seventy martyred reciters of Bi'r Ma'una ('Inform our people that we have met our Lord, and He is pleased with us and has made us pleased') before its recitation was lifted, as well as the Valley of Gold passage.",
+  "total_variants": 2,
+  "primary_variants": 1,
+  "shared_variants": 1,
+  "bukhari_muslim_count": 2,
+  "tafsir_count": 2,
   "variants": [
     {
-      "surah": 102,
-      "ayah": 1,
-      "variant_arabic": "لَوْ كَانَ لاِبْنِ آدَمَ وَادِيَانِ مِنْ مَالٍ لاَبْتَغَى وَادِيًا ثَالِثًا وَلاَ يَمْلأُ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ",
-      "variant_english": "If the son of Adam were to possess two valleys of riches, he would long for the third one. And the stomach of the son of Adam is not filled but with dust. And Allah returns to him who repents",
-      "source_reference": "Sahih Muslim 1048b",
-      "hadith_arabic": "وَحَدَّثَنَا ابْنُ الْمُثَنَّى، وَابْنُ، بَشَّارٍ قَالَ ابْنُ الْمُثَنَّى حَدَّثَنَا مُحَمَّدُ بْنُ جَعْفَرٍ، أَخْبَرَنَا شُعْبَةُ، قَالَ سَمِعْتُ قَتَادَةَ، يُحَدِّثُ عَنْ أَنَسِ بْنِ مَالِكٍ، قَالَ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ - فَلاَ أَدْرِي أَشَىْءٌ أُنْزِلَ أَمْ شَىْءٌ كَانَ يَقُولُهُ - بِمِثْلِ حَدِيثِ أَبِي عَوَانَةَ ‏.‏",
-      "hadith_english": "Anas b. Malik reported:I heard the Messenger of Allah (ﷺ) as saying this, but I do not know whether this thing was revealed to him or not, but he said to",
-      "sunnah_url": "https://sunnah.com/muslim/12/153"
-    },
-    {
+      "id": "codex-lost-valley-of-gold-ubayy",
       "surah": "unknown",
       "ayah": 0,
-      "variant_arabic": "أَنْ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ",
-      "variant_english": "convey to it our people the tidings that we have met our Lord, and He was pleased with us and we were pleased with Him",
-      "source_reference": "Sahih Muslim 677a",
-      "hadith_arabic": "وَحَدَّثَنَا يَحْيَى بْنُ يَحْيَى، قَالَ قَرَأْتُ عَلَى مَالِكٍ عَنْ إِسْحَاقَ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي طَلْحَةَ، عَنْ أَنَسِ بْنِ مَالِكٍ، قَالَ دَعَا رَسُولُ اللَّهِ صلى الله عليه وسلم عَلَى الَّذِينَ قَتَلُوا أَصْحَابَ بِئْرِ مَعُونَةَ ثَلاَثِينَ صَبَاحًا يَدْعُو عَلَى رِعْلٍ وَذَكْوَانَ وَلِحْيَانَ وَعُصَيَّةَ عَصَتِ اللَّهَ وَرَسُولَهُ ‏.‏ قَالَ أَنَسٌ أَنْزَلَ اللَّهُ عَزَّ وَجَلَّ فِي الَّذِينَ قُتِلُوا بِبِئْرِ مَعُونَةَ قُرْآنًا قَرَأْنَاهُ حَتَّى نُسِخَ بَعْدُ أَنْ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ ‏.‏",
-      "hadith_english": "Anas b. Malik reported that the Messenger of Allah (ﷺ) invoked curse in the morning (prayer) for thirty days upon those who killed the Companions (of the Holy Prophet) at Bi'r Ma'una. He cursed (the tribes) of Ri'l, Dhakwan, Lihyan, and Usayya, who had disobeyed Allah and His Messenger (ﷺ). Anas said:Allah the Exalted and Great revealed (a verse) regarding those who were killed at Bi'r Ma'una, and we recited it, till it was abrogated later on (and the verse was like this):, convey to it our people the tidings that we have met our Lord, and He was pleased with us and we were pleased with Him",
-      "sunnah_url": "https://sunnah.com/muslim/5/378"
+      "companion": "Ubayy bin Kab",
+      "companion_id": "ubayy-bin-kab",
+      "also_attributed_to": [
+        "Ibn Abbas",
+        "Anas bin Malik",
+        "Ibn Az-Zubair"
+      ],
+      "variant_type": "Lost Verse",
+      "short_title": "The Lost Verse of the Two Valleys of Gold",
+      "plain_english_hook": "Ubayy bin Ka'b, Ibn Abbas, and Anas bin Malik testified in Sahih al-Bukhari and Sahih Muslim that the 'Two Valleys of Gold' passage was recited as Quranic revelation before being omitted from the Mushaf.",
+      "title": "The Son of Adam and Two Valleys of Gold Passage Attested by Ubayy bin Ka'b",
+      "diff_summary": "In Sahih al-Bukhari (6437, 6438, 6440) and Sahih Muslim (1048b, 1049), Ubayy bin Ka'b, Ibn Abbas, Anas bin Malik, and Ibn Az-Zubair report the prophetic recitation: 'If the son of Adam had a valley of gold, he would desire a second, and nothing fills the belly of the son of Adam except dust, and Allah turns in mercy to whoever repents.' Ubayy bin Ka'b states that the Companions considered this passage part of the Quran until Surah At-Takathur (102:1) was revealed, while Ibn Abbas and Anas bin Malik express uncertainty over whether it was revealed as Quran or prophetic speech.",
+      "uthmanic_target_arabic": "",
+      "uthmanic_target_english": "",
+      "variant_target_arabic": "لَوْ أَنَّ لِابْنِ آدَمَ وَادِيًا مِنْ ذَهَبٍ أَحَبَّ أَنْ يَكُونَ لَهُ وَادِيَانِ، وَلَنْ يَمْلَأَ فَاهُ إِلَّا التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ",
+      "variant_target_english": "If the son of Adam had a valley full of gold, he would love to have two valleys, and nothing fills his mouth except dust, and Allah forgives whoever repents to Him.",
+      "uthmanic_full_arabic": "",
+      "uthmanic_full_english": "",
+      "variant_full_arabic": "لَوْ أَنَّ لِابْنِ آدَمَ وَادِيًا مِنْ ذَهَبٍ أَحَبَّ أَنْ يَكُونَ لَهُ وَادِيَانِ، وَلَنْ يَمْلَأَ فَاهُ إِلَّا التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ",
+      "variant_full_english": "If the son of Adam had a valley full of gold, he would love to have two valleys, and nothing fills his mouth except dust, and Allah forgives whoever repents to Him.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Commentators such as Ibn Hajar in Fath al-Bari explain that this passage was either an abrogated Quranic verse whose recitation was lifted after Surah At-Takathur (102:1) was revealed, or a Hadith Qudsi that some Companions initially mistook for Quran.",
+        "primary_source_evaluation": "In Sahih al-Bukhari 6437 and Sahih Muslim 1048b, senior authorities such as Ibn Abbas and Anas bin Malik explicitly state, 'I do not know whether it is from the Quran or not,' while Ubayy bin Ka'b and Abu Musa al-Ash'ari (Muslim 1050) affirm that it was recited as part of a Quranic surah."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 30,
+        "universal_scope_20": 19,
+        "classical_concession_15": 13,
+        "cuj_score": 95
+      },
+      "hadiths": [
+        {
+          "hadith_reference": "Sahih al-Bukhari 6437",
+          "sunnah_url": "https://sunnah.com/bukhari:6437",
+          "transmitted_by": "Ata / Ibn Abbas",
+          "hadith_arabic": "حَدَّثَنِي مُحَمَّدٌ، أَخْبَرَنَا مَخْلَدٌ، أَخْبَرَنَا ابْنُ جُرَيْجٍ، قَالَ سَمِعْتُ عَطَاءً، يَقُولُ سَمِعْتُ ابْنَ عَبَّاسٍ، يَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ لَوْ أَنَّ لاِبْنِ آدَمَ مِثْلَ وَادٍ مَالاً لأَحَبَّ أَنَّ لَهُ إِلَيْهِ مِثْلَهُ، وَلاَ يَمْلأُ عَيْنَ ابْنِ آدَمَ إِلاَّ التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ ‏\"‏‏.‏ قَالَ ابْنُ عَبَّاسٍ فَلاَ أَدْرِي مِنَ الْقُرْآنِ هُوَ أَمْ لاَ‏.‏ قَالَ وَسَمِعْتُ ابْنَ الزُّبَيْرِ يَقُولُ ذَلِكَ عَلَى الْمِنْبَرِ‏.‏",
+          "hadith_english": "Narrated Ibn `Abbas:I heard Allah's Messenger (ﷺ) saying, \"If the son of Adam had money equal to a valley, then he will wish for another similar to it, for nothing can satisfy the eye of Adam's son except dust. And Allah forgives him who repents to Him.\" Ibn `Abbas said: I do not know whether this saying was quoted from the Qur'an or not. `Ata' said, \"I heard Ibn Az-Zubair saying this narration while he was on the pulpit",
+          "highlight_arabic": "قَالَ ابْنُ عَبَّاسٍ فَلاَ أَدْرِي مِنَ الْقُرْآنِ هُوَ أَمْ لاَ",
+          "highlight_english": "Ibn `Abbas said: I do not know whether this saying was quoted from the Qur'an or not."
+        },
+        {
+          "hadith_reference": "Sahih al-Bukhari 6440",
+          "sunnah_url": "https://sunnah.com/bukhari:6440",
+          "transmitted_by": "Ibn Az-Zubair / Ubayy bin Kab",
+          "hadith_arabic": "وَقَالَ لَنَا أَبُو الْوَلِيدِ حَدَّثَنَا حَمَّادُ بْنُ سَلَمَةَ، عَنْ ثَابِتٍ، عَنْ أَنَسٍ، عَنْ أُبَىٍّ، قَالَ كُنَّا نَرَى هَذَا مِنَ الْقُرْآنِ حَتَّى نَزَلَتْ ‏{‏أَلْهَاكُمُ التَّكَاثُرُ‏}‏",
+          "hadith_english": "Ubayy said (referring to the hadith above), \"We considered this as a saying from the Qur'an till the Surah (beginning with):\"The mutual rivalry (for piling up of worldly things) diverts you' (102:1) was revealed\"",
+          "highlight_arabic": "عَنْ أُبَىٍّ، قَالَ كُنَّا نَرَى هَذَا مِنَ الْقُرْآنِ حَتَّى نَزَلَتْ ‏{‏أَلْهَاكُمُ التَّكَاثُرُ‏}",
+          "highlight_english": "We considered this as a saying from the Qur'an till the Surah (beginning with):\"The mutual rivalry (for piling up of worldly things) diverts you' (102:1) was revealed"
+        },
+        {
+          "hadith_reference": "Sahih Muslim 1048a & 1048b",
+          "sunnah_url": "https://sunnah.com/muslim:1048a",
+          "transmitted_by": "Qatadah / Anas bin Malik",
+          "hadith_arabic": "حَدَّثَنَا يَحْيَى بْنُ يَحْيَى، وَسَعِيدُ بْنُ مَنْصُورٍ، وَقُتَيْبَةُ بْنُ سَعِيدٍ، قَالَ يَحْيَى أَخْبَرَنَا وَقَالَ الآخَرَانِ، حَدَّثَنَا أَبُو عَوَانَةَ، عَنْ قَتَادَةَ، عَنْ أَنَسٍ، قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ \"‏ لَوْ كَانَ لاِبْنِ آدَمَ وَادِيَانِ مِنْ مَالٍ لاَبْتَغَى وَادِيًا ثَالِثًا وَلاَ يَمْلأُ جَوْفَ ابْنِ آدَمَ إِلاَّ التُّرَابُ وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ ‏\"‏ ‏.‏ وَحَدَّثَنَا ابْنُ الْمُثَنَّى، وَابْنُ، بَشَّارٍ قَالَ ابْنُ الْمُثَنَّى حَدَّثَنَا مُحَمَّدُ بْنُ جَعْفَرٍ، أَخْبَرَنَا شُعْبَةُ، قَالَ سَمِعْتُ قَتَادَةَ، يُحَدِّثُ عَنْ أَنَسِ بْنِ مَالِكٍ، قَالَ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ - فَلاَ أَدْرِي أَشَىْءٌ أُنْزِلَ أَمْ شَىْءٌ كَانَ يَقُولُهُ - بِمِثْلِ حَدِيثِ أَبِي عَوَانَةَ ‏.‏",
+          "hadith_english": "Anas reported Allah's Messenger (ﷺ) as saying: 'If the son of Adam were to possess two valleys of riches, he would long for the third one. And the stomach of the son of Adam is not filled but with dust. And Allah returns to him who repents.' And Anas b. Malik reported: I heard the Messenger of Allah (ﷺ) saying this — and I do not know whether it was something revealed or something he used to say — similar to the hadith of Abu 'Awanah.",
+          "highlight_arabic": "فَلاَ أَدْرِي أَشَىْءٌ أُنْزِلَ أَمْ شَىْءٌ كَانَ يَقُولُهُ",
+          "highlight_english": "I do not know whether it was something revealed or something he used to say"
+        },
+        {
+          "hadith_reference": "Sahih Muslim 1049",
+          "sunnah_url": "https://sunnah.com/muslim:1049",
+          "transmitted_by": "Ata / Ibn Abbas",
+          "hadith_arabic": "وَحَدَّثَنِي زُهَيْرُ بْنُ حَرْبٍ، وَهَارُونُ بْنُ عَبْدِ اللَّهِ، قَالاَ حَدَّثَنَا حَجَّاجُ بْنُ مُحَمَّدٍ، عَنِ ابْنِ جُرَيْجٍ، قَالَ سَمِعْتُ عَطَاءً، يَقُولُ سَمِعْتُ ابْنَ عَبَّاسٍ، يَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ لَوْ أَنَّ لاِبْنِ آدَمَ مِلْءَ وَادٍ مَالاً لأَحَبَّ أَنْ يَكُونَ إِلَيْهِ مِثْلُهُ وَلاَ يَمْلأُ نَفْسَ ابْنِ آدَمَ إِلاَّ التُّرَابُ وَاللَّهُ يَتُوبُ عَلَى مَنْ تَابَ ‏\"‏ ‏.‏ قَالَ ابْنُ عَبَّاسٍ فَلاَ أَدْرِي أَمِنَ الْقُرْآنِ هُوَ أَمْ لاَ ‏.‏ وَفِي رِوَايَةِ زُهَيْرٍ قَالَ فَلاَ أَدْرِي أَمِنَ الْقُرْآنِ ‏.‏ لَمْ يَذْكُرِ ابْنَ عَبَّاسٍ ‏.‏",
+          "hadith_english": "Ibn Abbas reported Allah's Messenger (ﷺ) as saying:If there were for the son of Adam a valley full of riches, he would long to possess another one like it. and Ibn Adam does not feel satiated but with dust. And Allah returns to him who returns (to Him). Ibn Abbas said: I do not know whether it is from the Qur'an or not; and in the narration transmitted by Zuhair it was said: I do not know whether it is from the Qur'an, and he made no mention of Ibn Abbas",
+          "highlight_arabic": "قَالَ ابْنُ عَبَّاسٍ فَلاَ أَدْرِي أَمِنَ الْقُرْآنِ هُوَ أَمْ لاَ",
+          "highlight_english": "Ibn Abbas said: I do not know whether it is from the Qur'an or not"
+        }
+      ],
+      "tafsir_sources": [
+        {
+          "scholar_id": "tabari",
+          "scholar_name": "Tafsir al-Tabari (d. 310 AH)",
+          "app_url": "/quran/102/1/tafsir/tabari",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/tabary/sura102-aya1.html",
+          "arabic_excerpt": "حدثنا محمد بن خلف العسقلاني، قال: ثنا آدم، قال: ثنا حماد بن سلمة، عن ثابت البناني، عن أنس بن مالك، عن أُبيّ بن كعب، قال: كنا نرى أن هذا الحديث من القرآن: \" لو أن لابن آدم واديين من مال، لتمنى واديا ثالثا، ولا يملأ جوف ابن آدم إلا التراب، ثم يتوب الله على من تاب \" حتى نـزلت هذه السورة: ( أَلْهَاكُمُ التَّكَاثُرُ ) إلى آخرها.",
+          "english_excerpt": "Muhammad bin Khalaf al-'Asqalani narrated to us, from Adam, from Hammad bin Salamah, from Thabit al-Bunani, from Anas bin Malik, from Ubayy bin Ka'b, who said: \"We used to think that this statement was from the Qur'an: 'If the Son of Adam had two valleys of wealth, he would desire a third valley; and nothing fills the belly of the Son of Adam except dust, then Allah turns in forgiveness to whomever repents,' until this Surah was revealed: {Rivalry diverts you,} to its end.\"",
+          "highlight_arabic": "كنا نرى أن هذا الحديث من القرآن: \" لو أن لابن آدم واديين من مال، لتمنى واديا ثالثا",
+          "highlight_english": "We used to think that this statement was from the Qur'an: 'If the Son of Adam had two valleys of wealth, he would desire a third valley"
+        }
+      ],
+      "global_rank": 13,
+      "companion_codex": "Ubayy bin Kab",
+      "variant_arabic": "لَوْ أَنَّ لِابْنِ آدَمَ وَادِيًا مِنْ ذَهَبٍ أَحَبَّ أَنْ يَكُونَ لَهُ وَادِيَانِ، وَلَنْ يَمْلَأَ فَاهُ إِلَّا التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ",
+      "variant_english": "If the son of Adam had a valley full of gold, he would love to have two valleys, and nothing fills his mouth except dust, and Allah forgives whoever repents to Him.",
+      "hadith_reference": "Sahih al-Bukhari 6437",
+      "source_reference": "Sahih al-Bukhari 6437",
+      "sunnah_url": "https://sunnah.com/bukhari:6437",
+      "hadith_arabic": "حَدَّثَنِي مُحَمَّدٌ، أَخْبَرَنَا مَخْلَدٌ، أَخْبَرَنَا ابْنُ جُرَيْجٍ، قَالَ سَمِعْتُ عَطَاءً، يَقُولُ سَمِعْتُ ابْنَ عَبَّاسٍ، يَقُولُ سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ \"‏ لَوْ أَنَّ لاِبْنِ آدَمَ مِثْلَ وَادٍ مَالاً لأَحَبَّ أَنَّ لَهُ إِلَيْهِ مِثْلَهُ، وَلاَ يَمْلأُ عَيْنَ ابْنِ آدَمَ إِلاَّ التُّرَابُ، وَيَتُوبُ اللَّهُ عَلَى مَنْ تَابَ ‏\"‏‏.‏ قَالَ ابْنُ عَبَّاسٍ فَلاَ أَدْرِي مِنَ الْقُرْآنِ هُوَ أَمْ لاَ‏.‏ قَالَ وَسَمِعْتُ ابْنَ الزُّبَيْرِ يَقُولُ ذَلِكَ عَلَى الْمِنْبَرِ‏.‏",
+      "hadith_english": "Narrated Ibn `Abbas:I heard Allah's Messenger (ﷺ) saying, \"If the son of Adam had money equal to a valley, then he will wish for another similar to it, for nothing can satisfy the eye of Adam's son except dust. And Allah forgives him who repents to Him.\" Ibn `Abbas said: I do not know whether this saying was quoted from the Qur'an or not. `Ata' said, \"I heard Ibn Az-Zubair saying this narration while he was on the pulpit",
+      "rank": 4,
+      "attribution_role": "shared"
     },
     {
+      "id": "codex-lost-bir-mauna-anas",
       "surah": "unknown",
       "ayah": 0,
-      "variant_arabic": "بَلِّغُوا عَنَّا قَوْمَنَا، أَنَّا لَقِينَا رَبَّنَا، فَرَضِيَ عَنَّا وَأَرْضَانَا",
-      "variant_english": "convey to our people on our behalf the information that we have met our Lord, and He is pleased with us, and has made us pleased.",
-      "source_reference": "Sahih al-Bukhari 4090",
-      "hadith_arabic": "حَدَّثَنِي عَبْدُ الأَعْلَى بْنُ حَمَّادٍ، حَدَّثَنَا يَزِيدُ بْنُ زُرَيْعٍ، حَدَّثَنَا سَعِيدٌ، عَنْ قَتَادَةَ، عَنْ أَنَسِ بْنِ مَالِكٍ ـ رضى الله عنه ـ أَنَّ رِعْلاً، وَذَكْوَانَ وَعُصَيَّةَ وَبَنِي لَحْيَانَ اسْتَمَدُّوا رَسُولَ اللَّهِ صلى الله عليه وسلم عَلَى عَدُوٍّ، فَأَمَدَّهُمْ بِسَبْعِينَ مِنَ الأَنْصَارِ، كُنَّا نُسَمِّيهِمُ الْقُرَّاءَ فِي زَمَانِهِمْ، كَانُوا يَحْتَطِبُونَ بِالنَّهَارِ وَيُصَلُّونَ بِاللَّيْلِ، حَتَّى كَانُوا بِبِئْرِ مَعُونَةَ قَتَلُوهُمْ، وَغَدَرُوا بِهِمْ، فَبَلَغَ النَّبِيَّ صلى الله عليه وسلم، فَقَنَتَ شَهْرًا يَدْعُو فِي الصُّبْحِ عَلَى أَحْيَاءٍ مِنْ أَحْيَاءِ الْعَرَبِ، عَلَى رِعْلٍ وَذَكْوَانَ وَعُصَيَّةَ وَبَنِي لَحْيَانَ‏.‏ قَالَ أَنَسٌ فَقَرَأْنَا فِيهِمْ قُرْآنًا ثُمِّ إِنَّ ذَلِكَ رُفِعَ بَلِّغُوا عَنَّا قَوْمَنَا، أَنَّا لَقِينَا رَبَّنَا، فَرَضِيَ عَنَّا وَأَرْضَانَا‏.‏ وَعَنْ قَتَادَةَ عَنْ أَنَسِ بْنِ مَالِكٍ حَدَّثَهُ أَنَّ نَبِيَّ اللَّهِ صلى الله عليه وسلم قَنَتَ شَهْرًا فِي صَلاَةِ الصُّبْحِ يَدْعُو عَلَى أَحْيَاءٍ مِنْ أَحْيَاءِ الْعَرَبِ، عَلَى رِعْلٍ وَذَكْوَانَ وَعُصَيَّةَ وَبَنِي لَحْيَانَ‏.‏ زَادَ خَلِيفَةُ حَدَّثَنَا ابْنُ زُرَيْعٍ، حَدَّثَنَا سَعِيدٌ، عَنْ قَتَادَةَ، حَدَّثَنَا أَنَسٌ، أَنَّ أُولَئِكَ السَّبْعِينَ، مِنَ الأَنْصَارِ قُتِلُوا بِبِئْرِ مَعُونَةَ، قُرْآنًا كِتَابًا‏.‏ نَحْوَهُ‏.‏",
-      "hadith_english": "Narrated Anas bin Malik:(The tribes of) Ril, Dhakwan, 'Usaiya and Bani Lihyan asked Allah's Messenger (ﷺ) to provide them with some men to support them against their enemy. He therefore provided them with seventy men from the Ansar whom we used to call Al-Qurra' in their lifetime. They used to collect wood by daytime and pray at night. When they were at the well of Ma'una, the infidels killed them by betraying them. When this news reached the Prophet (ﷺ) , he said Al-Qunut for one month In the morning prayer, invoking evil upon some of the 'Arab tribes, upon Ril, Dhakwan, 'Usaiya and Bani Lihyan. We used to read a verse of the Qur'an revealed in their connection, but later the verse was cancelled. It was: \"convey to our people on our behalf the information that we have met our Lord, and He is pleased with us, and has made us pleased.\" (Anas bin Malik added:) Allah's Prophet said Qunut for one month in the morning prayer, invoking evil upon some of the 'Arab tribes (namely), Ril, Dhakwan, Usaiya, and Bani Lihyan. (Anas added:) Those seventy Ansari men were killed at the well of Mauna",
-      "sunnah_url": "https://sunnah.com/bukhari/64/134"
-    },
-    {
-      "surah": "unknown",
-      "ayah": 0,
-      "variant_arabic": "إِنَّا قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا",
-      "variant_english": "We have met our Lord and He is pleased with us and has made us pleased.",
-      "source_reference": "Sahih al-Bukhari 4091",
-      "hadith_arabic": "حَدَّثَنَا مُوسَى بْنُ إِسْمَاعِيلَ، حَدَّثَنَا هَمَّامٌ، عَنْ إِسْحَاقَ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي طَلْحَةَ، قَالَ حَدَّثَنِي أَنَسٌ، أَنَّ النَّبِيَّ صلى الله عليه وسلم بَعَثَ خَالَهُ أَخٌ لأُمِّ سُلَيْمٍ فِي سَبْعِينَ رَاكِبًا، وَكَانَ رَئِيسَ الْمُشْرِكِينَ عَامِرُ بْنُ الطُّفَيْلِ خَيَّرَ بَيْنَ ثَلاَثِ خِصَالٍ فَقَالَ يَكُونُ لَكَ أَهْلُ السَّهْلِ، وَلِي أَهْلُ الْمَدَرِ، أَوْ أَكُونُ خَلِيفَتَكَ، أَوْ أَغْزُوكَ بِأَهْلِ غَطَفَانَ بِأَلْفٍ وَأَلْفٍ، فَطُعِنَ عَامِرٌ فِي بَيْتِ أُمِّ فُلاَنٍ فَقَالَ غُدَّةٌ كَغُدَّةِ الْبَكْرِ فِي بَيْتِ امْرَأَةٍ مِنْ آلِ فُلاَنٍ ائْتُونِي بِفَرَسِي‏.‏ فَمَاتَ عَلَى ظَهْرِ فَرَسِهِ، فَانْطَلَقَ حَرَامٌ أَخُو أُمِّ سُلَيْمٍ هُوَ ‏{‏وَ‏}‏ رَجُلٌ أَعْرَجُ وَرَجُلٌ مِنْ بَنِي فُلاَنٍ قَالَ كُونَا قَرِيبًا حَتَّى آتِيَهُمْ، فَإِنْ آمَنُونِي كُنْتُمْ، وَإِنْ قَتَلُونِي أَتَيْتُمْ أَصْحَابَكُمْ‏.‏ فَقَالَ أَتُؤْمِنُونِي أُبَلِّغْ رِسَالَةَ رَسُولِ اللَّهِ صلى الله عليه وسلم‏.‏ فَجَعَلَ يُحَدِّثُهُمْ وَأَوْمَئُوا إِلَى رَجُلٍ، فَأَتَاهُ مِنْ خَلْفِهِ فَطَعَنَهُ ـ قَالَ هَمَّامٌ أَحْسِبُهُ حَتَّى أَنْفَذَهُ ـ بِالرُّمْحِ، قَالَ اللَّهُ أَكْبَرُ فُزْتُ وَرَبِّ الْكَعْبَةِ‏.‏ فَلُحِقَ الرَّجُلُ، فَقُتِلُوا كُلُّهُمْ غَيْرَ الأَعْرَجِ كَانَ فِي رَأْسِ جَبَلٍ، فَأَنْزَلَ اللَّهُ عَلَيْنَا، ثُمَّ كَانَ مِنَ الْمَنْسُوخِ إِنَّا قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا‏.‏ فَدَعَا النَّبِيُّ صلى الله عليه وسلم عَلَيْهِمْ ثَلاَثِينَ صَبَاحًا، عَلَى رِعْلٍ وَذَكْوَانَ وَبَنِي لَحْيَانَ وَعُصَيَّةَ، الَّذِينَ عَصَوُا اللَّهَ وَرَسُولَهُ صلى الله عليه وسلم‏.‏",
-      "hadith_english": "Narrated Anas:That the Prophet (ﷺ) sent his uncle, the brother of Um Sulaim at the head of seventy riders. The chief of the pagans, 'Amir bin at-Tufail proposed three suggestions (to the Prophet (ﷺ) ) saying, \"Choose one of three alternatives: (1) that the bedouins will be under your command and the townspeople will be under my command; (2) or that I will be your successor, (3) or otherwise I will attack you with two thousand from Bani Ghatafan.\" But 'Amir was infected with plague in the House of Um so-and-so. He said, \"Shall I stay in the house of a lady from the family of so-and-so after having a (swelled) gland like that she-camel? Get me my horse.\" So he died on the back of his horse. Then Haram, the brother of Um Sulaim and a lame man along with another man from so-and-so (tribe) went towards the pagans (i.e. the tribe of 'Amir). Haram said (to his companions), \"Stay near to me, for I will go to them. If they (i.e. infidels) should give me protection, you will be near to me, and if they should kill me, then you should go back to your companions. Then Haram went to them and said, \"Will you give me protection so as to convey the message of Allah's Messenger (ﷺ) ?\" So, he started talking to them' but they signalled to a man (to kill him) and he went behind him and stabbed him (with a spear). He (i.e. Haram) said, \"Allahu Akbar! I have succeeded, by the Lord of the Ka`ba!\" The companion of Haram was pursued by the infidels, and then they (i.e. Haram's companions) were all killed except the lame man who was at the top of a mountain. Then Allah revealed to us a verse that was among the cancelled ones later on. It was: 'We have met our Lord and He is pleased with us and has made us pleased.' (After this event) the Prophet (ﷺ) invoked evil on the infidels every morning for 30 days. He invoked evil upon the (tribes of) Ril, Dhakwan, Bani Lihyan and Usaiya who disobeyed Allah and His Apostle",
-      "sunnah_url": "https://sunnah.com/bukhari/64/135"
-    },
-    {
-      "surah": "unknown",
-      "ayah": 0,
-      "variant_arabic": "بَلِّغُوا قَوْمَنَا فَقَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ",
-      "variant_english": "Inform our people that we have met our Lord, and He is pleased with us, and we are pleased with Him",
+      "companion": "Anas bin Malik",
+      "companion_id": "anas-bin-malik",
+      "also_attributed_to": [],
+      "variant_type": "Lost Verse",
+      "short_title": "The Abrogated Verse of the Bir Ma'una Martyrs",
+      "plain_english_hook": "Anas bin Malik reported across six narrations in Bukhari and Muslim that a Quranic verse about the seventy martyrs of Bir Ma'una was revealed and recited by the Muslims until it was later abrogated.",
+      "title": "The Verse of the Martyrs of Bir Ma'una Identified as Abrogated by Anas bin Malik",
+      "diff_summary": "In Sahih al-Bukhari (2801, 2814, 3064, 4090, 4091, 4095) and Sahih Muslim (677a), Anas bin Malik reports that when seventy Quran reciters (al-Qurra') were massacred at Bir Ma'una, Allah revealed a Quranic verse conveying their message: 'Inform our people that we have met our Lord, and He is pleased with us and has made us pleased.' Anas explicitly notes that the Muslims recited this verse as part of the Quran for a period of time 'until it was later abrogated/lifted' (ḥattā nusikha ba'du / ḥattā rufi'a), providing a clear primary-source benchmark of how the Companions documented genuine prophetic abrogation.",
+      "uthmanic_target_arabic": "",
+      "uthmanic_target_english": "",
+      "variant_target_arabic": "بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا",
+      "variant_target_english": "Inform our people that we have met our Lord, and He is pleased with us and has made us pleased.",
+      "uthmanic_full_arabic": "",
+      "uthmanic_full_english": "",
+      "variant_full_arabic": "بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا",
+      "variant_full_english": "Inform our people that we have met our Lord, and He is pleased with us and has made us pleased.",
+      "scholarly_discussion": {
+        "classical_harmonization": "Classical exegetes including al-Tabari and Ibn Kathir cite this report under Surah Al-Imran 3:169 and Surah Al-Baqarah 2:106 as a canonical instance of a verse whose wording was abrogated (mansūkh al-tilāwah) during the Prophet's lifetime.",
+        "primary_source_evaluation": "Anas bin Malik's explicit statement in Bukhari 2801 and 4095 ('a Quranic verse that we recited until it was later abrogated') demonstrates that when a verse was genuinely abrogated during Muhammad's lifetime, the Companions explicitly recorded its cancellation—unlike non-Uthmanic variants that Companions continued reciting after the Prophet's death."
+      },
+      "cuj_rubric": {
+        "reader_accessibility_35": 33,
+        "undeniability_gold_sources_30": 30,
+        "universal_scope_20": 18,
+        "classical_concession_15": 13,
+        "cuj_score": 94
+      },
+      "hadiths": [
+        {
+          "hadith_reference": "Sahih al-Bukhari 4095",
+          "sunnah_url": "https://sunnah.com/bukhari:4095",
+          "transmitted_by": "Anas bin Malik",
+          "hadith_arabic": "حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، حَدَّثَنَا مَالِكٌ، عَنْ إِسْحَاقَ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي طَلْحَةَ، عَنْ أَنَسِ بْنِ مَالِكٍ، قَالَ دَعَا النَّبِيُّ صلى الله عليه وسلم عَلَى الَّذِينَ قَتَلُوا ـ يَعْنِي ـ أَصْحَابَهُ بِبِئْرِ مَعُونَةَ ثَلاَثِينَ صَبَاحًا حِينَ يَدْعُو عَلَى رِعْلٍ وَلِحْيَانَ وَعُصَيَّةَ عَصَتِ اللَّهَ وَرَسُولَهُ صلى الله عليه وسلم‏.‏ قَالَ أَنَسٌ فَأَنْزَلَ اللَّهُ تَعَالَى لِنَبِيِّهِ صلى الله عليه وسلم فِي الَّذِينَ قُتِلُوا أَصْحَابِ بِئْرِ مَعُونَةَ قُرْآنًا قَرَأْنَاهُ حَتَّى نُسِخَ بَعْدُ بَلِّغُوا قَوْمَنَا فَقَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ‏.‏",
+          "hadith_english": "Narrated Anas bin Malik:The Prophet (ﷺ) invoked evil upon those (people) who killed his companions at Bir Mauna for 30 days (in the morning prayer). He invoked evil upon (tribes of) Ril, Lihyan and Usaiya who disobeyed Allah and His Apostle. Allah revealed a Qur'anic Verse to His Prophet regarding those who had been killed, i.e. the Muslims killed at Bir Ma'una, and we recited the Verse till later it was cancelled. (The Verse was:) 'Inform our people that we have met our Lord, and He is pleased with us, and we are pleased with Him",
+          "highlight_arabic": "فَأَنْزَلَ اللَّهُ تَعَالَى لِنَبِيِّهِ صلى الله عليه وسلم فِي الَّذِينَ قُتِلُوا أَصْحَابِ بِئْرِ مَعُونَةَ قُرْآنًا قَرَأْنَاهُ حَتَّى نُسِخَ بَعْدُ بَلِّغُوا قَوْمَنَا فَقَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ",
+          "highlight_english": "Allah revealed a Qur'anic Verse to His Prophet regarding those who had been killed, i.e. the Muslims killed at Bir Ma'una, and we recited the Verse till later it was cancelled. (The Verse was:) 'Inform our people that we have met our Lord, and He is pleased with us, and we are pleased with Him"
+        },
+        {
+          "hadith_reference": "Sahih al-Bukhari 2801",
+          "sunnah_url": "https://sunnah.com/bukhari:2801",
+          "transmitted_by": "Anas bin Malik",
+          "hadith_arabic": "حَدَّثَنَا حَفْصُ بْنُ عُمَرَ الْحَوْضِيُّ، حَدَّثَنَا هَمَّامٌ، عَنْ إِسْحَاقَ، عَنْ أَنَسٍ ـ رضى الله عنه ـ قَالَ بَعَثَ النَّبِيُّ صلى الله عليه وسلم أَقْوَامًا مِنْ بَنِي سُلَيْمٍ إِلَى بَنِي عَامِرٍ فِي سَبْعِينَ، فَلَمَّا قَدِمُوا، قَالَ لَهُمْ خَالِي أَتَقَدَّمُكُمْ، فَإِنْ أَمَّنُونِي حَتَّى أُبَلِّغَهُمْ عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم وَإِلاَّ كُنْتُمْ مِنِّي قَرِيبًا‏.‏ فَتَقَدَّمَ، فَأَمَّنُوهُ، فَبَيْنَمَا يُحَدِّثُهُمْ عَنِ النَّبِيِّ صلى الله عليه وسلم إِذْ أَوْمَئُوا إِلَى رَجُلٍ مِنْهُمْ، فَطَعَنَهُ فَأَنْفَذَهُ فَقَالَ اللَّهُ أَكْبَرُ، فُزْتُ وَرَبِّ الْكَعْبَةِ‏.‏ ثُمَّ مَالُوا عَلَى بَقِيَّةِ أَصْحَابِهِ فَقَتَلُوهُمْ، إِلاَّ رَجُلاً أَعْرَجَ صَعِدَ الْجَبَلَ‏.‏ قَالَ هَمَّامٌ فَأُرَاهُ آخَرَ مَعَهُ، فَأَخْبَرَ جِبْرِيلُ ـ عَلَيْهِ السَّلاَمُ ـ النَّبِيَّ صلى الله عليه وسلم أَنَّهُمْ قَدْ لَقُوا رَبَّهُمْ، فَرَضِيَ عَنْهُمْ وَأَرْضَاهُمْ، فَكُنَّا نَقْرَأُ أَنْ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا‏.‏ ثُمَّ نُسِخَ بَعْدُ، فَدَعَا عَلَيْهِمْ أَرْبَعِينَ صَبَاحًا، عَلَى رِعْلٍ وَذَكْوَانَ وَبَنِي لِحْيَانَ وَبَنِي عُصَيَّةَ الَّذِينَ عَصَوُا اللَّهَ وَرَسُولَهُ صلى الله عليه وسلم‏.‏",
+          "hadith_english": "Narrated Anas:The Prophet (ﷺ) sent seventy men from the tribe of Bani Sulaim to the tribe of Bani Amir. When they reached there, my maternal uncle said to them, \"I will go ahead of you, and if they allow me to convey the message of Allah's Messenger (ﷺ) (it will be all right); otherwise you will remain close to me.\" So he went ahead of them and the pagans granted him security But while he was reporting the message of the Prophet (ﷺ) , they beckoned to one of their men who stabbed him to death. My maternal uncle said, \"Allah is Greater! By the Lord of the Ka`ba, I am successful.\" After that they attacked the rest of the party and killed them all except a lame man who went up to the top of the mountain. (Hammam, a sub-narrator said, \"I think another man was saved along with him).\" Gabriel informed the Prophet (ﷺ) that they (i.e the martyrs) met their Lord, and He was pleased with them and made them pleased. We used to recite, \"Inform our people that we have met our Lord, He is pleased with us and He has made us pleased \" Later on this Qur'anic Verse was cancelled. The Prophet (ﷺ) invoked Allah for forty days to curse the murderers from the tribe of Ral, Dhakwan, Bani Lihyan and Bani Usaiya who disobeyed Allah and his Apostle",
+          "highlight_arabic": "فَكُنَّا نَقْرَأُ أَنْ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا‏.‏ ثُمَّ نُسِخَ بَعْدُ",
+          "highlight_english": "We used to recite, \"Inform our people that we have met our Lord, He is pleased with us and He has made us pleased \" Later on this Qur'anic Verse was cancelled."
+        },
+        {
+          "hadith_reference": "Sahih Muslim 677a",
+          "sunnah_url": "https://sunnah.com/muslim:677a",
+          "transmitted_by": "Anas bin Malik",
+          "hadith_arabic": "وَحَدَّثَنَا يَحْيَى بْنُ يَحْيَى، قَالَ قَرَأْتُ عَلَى مَالِكٍ عَنْ إِسْحَاقَ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي طَلْحَةَ، عَنْ أَنَسِ بْنِ مَالِكٍ، قَالَ دَعَا رَسُولُ اللَّهِ صلى الله عليه وسلم عَلَى الَّذِينَ قَتَلُوا أَصْحَابَ بِئْرِ مَعُونَةَ ثَلاَثِينَ صَبَاحًا يَدْعُو عَلَى رِعْلٍ وَذَكْوَانَ وَلِحْيَانَ وَعُصَيَّةَ عَصَتِ اللَّهَ وَرَسُولَهُ ‏.‏ قَالَ أَنَسٌ أَنْزَلَ اللَّهُ عَزَّ وَجَلَّ فِي الَّذِينَ قُتِلُوا بِبِئْرِ مَعُونَةَ قُرْآنًا قَرَأْنَاهُ حَتَّى نُسِخَ بَعْدُ أَنْ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ ‏.‏",
+          "hadith_english": "Anas b. Malik reported that the Messenger of Allah (ﷺ) invoked curse in the morning (prayer) for thirty days upon those who killed the Companions (of the Holy Prophet) at Bi'r Ma'una. He cursed (the tribes) of Ri'l, Dhakwan, Lihyan, and Usayya, who had disobeyed Allah and His Messenger (ﷺ). Anas said:Allah the Exalted and Great revealed (a verse) regarding those who were killed at Bi'r Ma'una, and we recited it, till it was abrogated later on (and the verse was like this):, convey to it our people the tidings that we have met our Lord, and He was pleased with us and we were pleased with Him",
+          "highlight_arabic": "أَنْزَلَ اللَّهُ عَزَّ وَجَلَّ فِي الَّذِينَ قُتِلُوا بِبِئْرِ مَعُونَةَ قُرْآنًا قَرَأْنَاهُ حَتَّى نُسِخَ بَعْدُ أَنْ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ",
+          "highlight_english": "Allah the Exalted and Great revealed (a verse) regarding those who were killed at Bi'r Ma'una, and we recited it, till it was abrogated later on (and the verse was like this):, convey to it our people the tidings that we have met our Lord, and He was pleased with us and we were pleased with Him"
+        },
+        {
+          "hadith_reference": "Sahih al-Bukhari 2814",
+          "sunnah_url": "https://sunnah.com/bukhari:2814",
+          "transmitted_by": "Anas bin Malik",
+          "hadith_arabic": "حَدَّثَنَا إِسْمَاعِيلُ بْنُ عَبْدِ اللَّهِ، قَالَ حَدَّثَنِي مَالِكٌ، عَنْ إِسْحَاقَ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي طَلْحَةَ، عَنْ أَنَسِ بْنِ مَالِكٍ ـ رضى الله عنه ـ قَالَ دَعَا رَسُولَ اللَّهِ صلى الله عليه وسلم عَلَى الَّذِينَ قَتَلُوا أَصْحَابَ بِئْرِ مَعُونَةَ ثَلاَثِينَ غَدَاةً، عَلَى رِعْلٍ وَذَكْوَانَ وَعُصَيَّةَ عَصَتِ اللَّهَ وَرَسُولَهُ، قَالَ أَنَسٌ أُنْزِلَ فِي الَّذِينَ قُتِلُوا بِبِئْرِ مَعُونَةَ قُرْآنٌ قَرَأْنَاهُ ثُمَّ نُسِخَ بَعْدُ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ‏.‏",
+          "hadith_english": "Narrated Anas bin Malik:For thirty days Allah's Messenger (ﷺ) invoked Allah to curse those who had killed the companions of Bir- Mauna; he invoked evil upon the tribes of Ral, Dhakwan, and Usaiya who disobeyed Allah and His Apostle. There was revealed about those who were killed at Bir-Mauna a Qur'anic Verse we used to recite, but it was cancelled later on. The Verse was: \"Inform our people that we have met our Lord. He is pleased with us and He has made us pleased",
+          "highlight_arabic": "أُنْزِلَ فِي الَّذِينَ قُتِلُوا بِبِئْرِ مَعُونَةَ قُرْآنٌ قَرَأْنَاهُ ثُمَّ نُسِخَ بَعْدُ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ",
+          "highlight_english": "There was revealed about those who were killed at Bir-Mauna a Qur'anic Verse we used to recite, but it was cancelled later on. The Verse was: \"Inform our people that we have met our Lord. He is pleased with us and He has made us pleased"
+        }
+      ],
+      "tafsir_sources": [
+        {
+          "scholar_id": "ibn_kathir",
+          "scholar_name": "Tafsir Ibn Kathir (d. 774 AH)",
+          "app_url": "/quran/3/169/tafsir/ibn_kathir",
+          "external_url": "https://quran.ksu.edu.sa/tafseer/katheer/sura3-aya169.html",
+          "arabic_excerpt": "وقال إسحاق : حدثني أنس بن مالك ، أن الله [ تعالى ] أنزل فيهم قرآنا : بلغوا عنا قومنا أنا قد لقينا ربنا فرضي عنا ورضينا عنه ثم نسخت فرفعت بعد ما قرأناه زمنا ، وأنزل الله : ( ولا تحسبن الذين قتلوا في سبيل الله أمواتا بل أحياء عند ربهم يرزقون ) .",
+          "english_excerpt": "Ishaq said: Anas bin Malik narrated to me that Allah the Exalted revealed a Qur'an concerning them: \"Convey to our people on our behalf that we have met our Lord, and He is pleased with us, and we are pleased with Him.\" Then it was abrogated and lifted after we had recited it for some time, and Allah revealed: {Do not think of those who have been killed in the way of Allah as dead. Rather, they are alive with their Lord, receiving provision.}",
+          "highlight_arabic": "أن الله [ تعالى ] أنزل فيهم قرآنا : بلغوا عنا قومنا أنا قد لقينا ربنا فرضي عنا ورضينا عنه ثم نسخت فرفعت بعد ما قرأناه زمنا",
+          "highlight_english": "Convey to our people on our behalf that we have met our Lord, and He is pleased with us, and we are pleased with Him."
+        }
+      ],
+      "global_rank": 19,
+      "companion_codex": "Anas bin Malik",
+      "variant_arabic": "بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا",
+      "variant_english": "Inform our people that we have met our Lord, and He is pleased with us and has made us pleased.",
+      "hadith_reference": "Sahih al-Bukhari 4095",
       "source_reference": "Sahih al-Bukhari 4095",
+      "sunnah_url": "https://sunnah.com/bukhari:4095",
       "hadith_arabic": "حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، حَدَّثَنَا مَالِكٌ، عَنْ إِسْحَاقَ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي طَلْحَةَ، عَنْ أَنَسِ بْنِ مَالِكٍ، قَالَ دَعَا النَّبِيُّ صلى الله عليه وسلم عَلَى الَّذِينَ قَتَلُوا ـ يَعْنِي ـ أَصْحَابَهُ بِبِئْرِ مَعُونَةَ ثَلاَثِينَ صَبَاحًا حِينَ يَدْعُو عَلَى رِعْلٍ وَلِحْيَانَ وَعُصَيَّةَ عَصَتِ اللَّهَ وَرَسُولَهُ صلى الله عليه وسلم‏.‏ قَالَ أَنَسٌ فَأَنْزَلَ اللَّهُ تَعَالَى لِنَبِيِّهِ صلى الله عليه وسلم فِي الَّذِينَ قُتِلُوا أَصْحَابِ بِئْرِ مَعُونَةَ قُرْآنًا قَرَأْنَاهُ حَتَّى نُسِخَ بَعْدُ بَلِّغُوا قَوْمَنَا فَقَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ‏.‏",
       "hadith_english": "Narrated Anas bin Malik:The Prophet (ﷺ) invoked evil upon those (people) who killed his companions at Bir Mauna for 30 days (in the morning prayer). He invoked evil upon (tribes of) Ril, Lihyan and Usaiya who disobeyed Allah and His Apostle. Allah revealed a Qur'anic Verse to His Prophet regarding those who had been killed, i.e. the Muslims killed at Bir Ma'una, and we recited the Verse till later it was cancelled. (The Verse was:) 'Inform our people that we have met our Lord, and He is pleased with us, and we are pleased with Him",
-      "sunnah_url": "https://sunnah.com/bukhari/64/139"
-    },
-    {
-      "surah": "unknown",
-      "ayah": 0,
-      "variant_arabic": "أَنْ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا",
-      "variant_english": "Inform our people that we have met our Lord, He is pleased with us and He has made us pleased",
-      "source_reference": "Sahih al-Bukhari 2801",
-      "hadith_arabic": "حَدَّثَنَا حَفْصُ بْنُ عُمَرَ الْحَوْضِيُّ، حَدَّثَنَا هَمَّامٌ، عَنْ إِسْحَاقَ، عَنْ أَنَسٍ ـ رضى الله عنه ـ قَالَ بَعَثَ النَّبِيُّ صلى الله عليه وسلم أَقْوَامًا مِنْ بَنِي سُلَيْمٍ إِلَى بَنِي عَامِرٍ فِي سَبْعِينَ، فَلَمَّا قَدِمُوا، قَالَ لَهُمْ خَالِي أَتَقَدَّمُكُمْ، فَإِنْ أَمَّنُونِي حَتَّى أُبَلِّغَهُمْ عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم وَإِلاَّ كُنْتُمْ مِنِّي قَرِيبًا‏.‏ فَتَقَدَّمَ، فَأَمَّنُوهُ، فَبَيْنَمَا يُحَدِّثُهُمْ عَنِ النَّبِيِّ صلى الله عليه وسلم إِذْ أَوْمَئُوا إِلَى رَجُلٍ مِنْهُمْ، فَطَعَنَهُ فَأَنْفَذَهُ فَقَالَ اللَّهُ أَكْبَرُ، فُزْتُ وَرَبِّ الْكَعْبَةِ‏.‏ ثُمَّ مَالُوا عَلَى بَقِيَّةِ أَصْحَابِهِ فَقَتَلُوهُمْ، إِلاَّ رَجُلاً أَعْرَجَ صَعِدَ الْجَبَلَ‏.‏ قَالَ هَمَّامٌ فَأُرَاهُ آخَرَ مَعَهُ، فَأَخْبَرَ جِبْرِيلُ ـ عَلَيْهِ السَّلاَمُ ـ النَّبِيَّ صلى الله عليه وسلم أَنَّهُمْ قَدْ لَقُوا رَبَّهُمْ، فَرَضِيَ عَنْهُمْ وَأَرْضَاهُمْ، فَكُنَّا نَقْرَأُ أَنْ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا‏.‏ ثُمَّ نُسِخَ بَعْدُ، فَدَعَا عَلَيْهِمْ أَرْبَعِينَ صَبَاحًا، عَلَى رِعْلٍ وَذَكْوَانَ وَبَنِي لِحْيَانَ وَبَنِي عُصَيَّةَ الَّذِينَ عَصَوُا اللَّهَ وَرَسُولَهُ صلى الله عليه وسلم‏.‏",
-      "hadith_english": "Narrated Anas:The Prophet (ﷺ) sent seventy men from the tribe of Bani Sulaim to the tribe of Bani Amir. When they reached there, my maternal uncle said to them, \"I will go ahead of you, and if they allow me to convey the message of Allah's Messenger (ﷺ) (it will be all right); otherwise you will remain close to me.\" So he went ahead of them and the pagans granted him security But while he was reporting the message of the Prophet (ﷺ) , they beckoned to one of their men who stabbed him to death. My maternal uncle said, \"Allah is Greater! By the Lord of the Ka`ba, I am successful.\" After that they attacked the rest of the party and killed them all except a lame man who went up to the top of the mountain. (Hammam, a sub-narrator said, \"I think another man was saved along with him).\" Gabriel informed the Prophet (ﷺ) that they (i.e the martyrs) met their Lord, and He was pleased with them and made them pleased. We used to recite, \"Inform our people that we have met our Lord, He is pleased with us and He has made us pleased \" Later on this Qur'anic Verse was cancelled. The Prophet (ﷺ) invoked Allah for forty days to curse the murderers from the tribe of Ral, Dhakwan, Bani Lihyan and Bani Usaiya who disobeyed Allah and his Apostle",
-      "sunnah_url": "https://sunnah.com/bukhari/56/18"
-    },
-    {
-      "surah": "unknown",
-      "ayah": 0,
-      "variant_arabic": "بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ",
-      "variant_english": "Inform our people that we have met our Lord. He is pleased with us and He has made us pleased",
-      "source_reference": "Sahih al-Bukhari 2814",
-      "hadith_arabic": "حَدَّثَنَا إِسْمَاعِيلُ بْنُ عَبْدِ اللَّهِ، قَالَ حَدَّثَنِي مَالِكٌ، عَنْ إِسْحَاقَ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي طَلْحَةَ، عَنْ أَنَسِ بْنِ مَالِكٍ ـ رضى الله عنه ـ قَالَ دَعَا رَسُولَ اللَّهِ صلى الله عليه وسلم عَلَى الَّذِينَ قَتَلُوا أَصْحَابَ بِئْرِ مَعُونَةَ ثَلاَثِينَ غَدَاةً، عَلَى رِعْلٍ وَذَكْوَانَ وَعُصَيَّةَ عَصَتِ اللَّهَ وَرَسُولَهُ، قَالَ أَنَسٌ أُنْزِلَ فِي الَّذِينَ قُتِلُوا بِبِئْرِ مَعُونَةَ قُرْآنٌ قَرَأْنَاهُ ثُمَّ نُسِخَ بَعْدُ بَلِّغُوا قَوْمَنَا أَنْ قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَرَضِينَا عَنْهُ‏.‏",
-      "hadith_english": "Narrated Anas bin Malik:For thirty days Allah's Messenger (ﷺ) invoked Allah to curse those who had killed the companions of Bir- Mauna; he invoked evil upon the tribes of Ral, Dhakwan, and Usaiya who disobeyed Allah and His Apostle. There was revealed about those who were killed at Bir-Mauna a Qur'anic Verse we used to recite, but it was cancelled later on. The Verse was: \"Inform our people that we have met our Lord. He is pleased with us and He has made us pleased\n\n[omitted from the english translation: and we are pleased with Him]",
-      "sunnah_url": "https://sunnah.com/bukhari/56/31"
-    },
-    {
-      "surah": "unknown",
-      "ayah": 0,
-      "variant_arabic": "أَلاَ بَلِّغُوا عَنَّا قَوْمَنَا بِأَنَّا قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا",
-      "variant_english": "O Allah! Let our people be informed on our behalf that we have met our Lord Who has got pleased with us and made us pleased.",
-      "source_reference": "Sahih al-Bukhari 3064",
-      "hadith_arabic": "حَدَّثَنَا مُحَمَّدُ بْنُ بَشَّارٍ، حَدَّثَنَا ابْنُ أَبِي عَدِيٍّ، وَسَهْلُ بْنُ يُوسُفَ، عَنْ سَعِيدٍ، عَنْ قَتَادَةَ، عَنْ أَنَسٍ ـ رضى الله عنه أَنَّ النَّبِيَّ صلى الله عليه وسلم أَتَاهُ رِعْلٌ وَذَكْوَانُ وَعُصَيَّةُ وَبَنُو لِحْيَانَ، فَزَعَمُوا أَنَّهُمْ قَدْ أَسْلَمُوا، وَاسْتَمَدُّوهُ عَلَى قَوْمِهِمْ، فَأَمَدَّهُمُ النَّبِيُّ صلى الله عليه وسلم بِسَبْعِينَ مِنَ الأَنْصَارِ قَالَ أَنَسٌ كُنَّا نُسَمِّيهِمُ الْقُرَّاءَ، يَحْطِبُونَ بِالنَّهَارِ وَيُصَلُّونَ بِاللَّيْلِ، فَانْطَلَقُوا بِهِمْ حَتَّى بَلَغُوا بِئْرَ مَعُونَةَ غَدَرُوا بِهِمْ وَقَتَلُوهُمْ، فَقَنَتَ شَهْرًا يَدْعُو عَلَى رِعْلٍ وَذَكْوَانَ وَبَنِي لِحْيَانَ‏.‏ قَالَ قَتَادَةُ وَحَدَّثَنَا أَنَسٌ أَنَّهُمْ قَرَءُوا بِهِمْ قُرْآنًا أَلاَ بَلِّغُوا عَنَّا قَوْمَنَا بِأَنَّا قَدْ لَقِينَا رَبَّنَا فَرَضِيَ عَنَّا وَأَرْضَانَا‏.‏ ثُمَّ رُفِعَ ذَلِكَ بَعْدُ‏.‏",
-      "hadith_english": "Narrated Anas: The people of the tribes of Ril, Dhakwan, 'Usaiya and Bani Lihyan came to the Prophet (ﷺ) and claimed that they had embraced Islam, and they requested him to support them with some men to fight their own people. The Prophet (ﷺ) supported them with seventy men from the Ansar whom we used to call Al-Qurra'(i.e. Scholars) who (out of piety) used to cut wood during the day and pray all the night. So, those people took the (seventy) men till they reached a place called Bi'r-Ma'una where they betrayed and martyred them. So, the Prophet (ﷺ) invoked evil on the tribe of Ril, Dhakwan and Bani Lihyan for one month in the prayer. Narrated Qatada: Anas told us that they (i.e. Muslims) used to recite a Quranic Verse concerning those martyrs which was:-- \"O Allah! Let our people be informed on our behalf that we have met our Lord Who has got pleased with us and made us pleased.\" Then the Verse was cancelled",
-      "sunnah_url": "https://sunnah.com/bukhari/56/269"
+      "rank": 5,
+      "attribution_role": "primary"
     }
   ]
 }

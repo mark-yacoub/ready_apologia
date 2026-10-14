@@ -93,7 +93,7 @@ export const RAW_LOST_VERSES = [
         highlight_arabic: 'حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلاَةِ الْوُسْطَى وَصَلاَةِ الْعَصْرِ'
       }
     ],
-    video_verse_id: 'aisha_0'
+    video_verse_id: '2_238'
   },
   {
     id: 'surah-layl-variant',
@@ -132,7 +132,7 @@ export const RAW_LOST_VERSES = [
         highlight_arabic: 'وَاللَّهِ هَكَذَا سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقْرَؤُهَا وَلَكِنْ هَؤُلاَءِ يُرِيدُونَ أَنْ أَقْرَأَ {وَمَا خَلَقَ} فَلاَ أُتَابِعُهُمْ'
       }
     ],
-    video_verse_id: 'ibnmasud_0'
+    video_verse_id: '92_3'
   },
   {
     id: 'ibn-abbas-18-79',
@@ -141,8 +141,8 @@ export const RAW_LOST_VERSES = [
     category_label: 'Textual Transmission & Omissions',
     title: 'Surah 18:79–80 Textual Divergences ("Serviceable Ship" & "Disbelieving Boy")',
     companion: {
-      name: 'Abdullah bin Abbas',
-      slug: 'abdullah-bin-abbas',
+      name: 'Ibn Abbas',
+      slug: 'ibn-abbas',
       title: 'Interpreter of the Quran'
     },
     comparisons: [
@@ -182,8 +182,8 @@ export const RAW_LOST_VERSES = [
     category_label: 'Textual Transmission & Omissions',
     title: 'Surah 26:214 Omitted Clause ("And Your Sincere Group")',
     companion: {
-      name: 'Abdullah bin Abbas',
-      slug: 'abdullah-bin-abbas',
+      name: 'Ibn Abbas',
+      slug: 'ibn-abbas',
       title: 'Interpreter of the Quran'
     },
     surviving_verse_ref: 'Surah 26:214',
@@ -248,7 +248,7 @@ export const RAW_LOST_VERSES = [
         highlight_arabic: 'لأَقْضِيَنَّ بَيْنَكُمَا بِكِتَابِ اللَّهِ... فَإِنِ اعْتَرَفَتْ فَارْجُمْهَا'
       }
     ],
-    video_verse_id: 'aisha_0'
+    video_verse_id: null
   },
   {
     id: 'two-lost-surahs',
@@ -284,7 +284,7 @@ export const RAW_LOST_VERSES = [
         highlight_arabic: 'كُنَّا نَرَى هَذَا مِنَ الْقُرْآنِ حَتَّى نَزَلَتْ {أَلْهَاكُمُ التَّكَاثُرُ}'
       }
     ],
-    video_verse_id: 'ubayy_0'
+    video_verse_id: 'abumusa_0'
   },
   {
     id: 'bir-mauna-martyrs',
