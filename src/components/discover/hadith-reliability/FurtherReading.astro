@@ -1,0 +1,39 @@
+---
+/**
+ * Outside the evidence, in two deliberately separate places:
+ *  - kind="reference": academic / neutral works (allowlisted hosts), right after "Check the sources".
+ *  - kind="perspective": what others are saying (blogs, videos, advocacy), collapsed at the very
+ *    bottom of the page so opinion never sits inside the reading flow.
+ */
+import Icon from './Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+import { LABELS } from '../../../utils/hadithReliability/config.js';
+const { items = [], kind = 'reference' } = Astro.props;
+const iconFor = t => (t === 'video' ? 'video' : /book|academic|paper|archive|reference/.test(t) ? 'book' : 'article');
+const typeLabel = t => (t === 'video' ? 'Video' : /book/.test(t) ? 'Book' : /academic|paper/.test(t) ? 'Academic paper' : /archive/.test(t) ? 'Archive' : 'Article');
+const list = items.map(l => ({ ...l, labelHtml: tl(l.label) }));
+---
+{list.length > 0 && (kind === 'reference' ? (
+  <>
+    <p class="hrv-further-note">{LABELS.furtherNote}</p>
+    <ul class="hrv-srclist">
+      {list.map(l => (
+        <li><a class="hrv-src" href={l.href} {...l.attrs}>
+          <span class="hrv-src__label"><span set:html={l.labelHtml} /><span class="hrv-src__meta">{typeLabel(l.type)} · {l.host}</span></span><Icon name={iconFor(l.type)} />
+        </a></li>
+      ))}
+    </ul>
+  </>
+) : (
+  <details class="hrv-others">
+    <summary class="hrv-others__sum">{LABELS.perspective} <span class="hrv-others__count">{list.length}</span></summary>
+    <p class="hrv-further-note">{LABELS.perspectiveNote}</p>
+    <ul class="hrv-srclist">
+      {list.map(l => (
+        <li><a class="hrv-src" href={l.href} {...l.attrs}>
+          <span class="hrv-src__label"><span set:html={l.labelHtml} /><span class="hrv-src__meta">{typeLabel(l.type)} · {l.host}</span></span><Icon name={iconFor(l.type)} />
+        </a></li>
+      ))}
+    </ul>
+  </details>
+))}

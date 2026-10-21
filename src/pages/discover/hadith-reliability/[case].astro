@@ -1,0 +1,144 @@
+---
+/**
+ * One case. Shared skeleton + a showcase designed for this case's kind of evidence.
+ * Every case page must stand on its own: readers often land here from a shared link.
+ */
+import Layout from '../../../layouts/Layout.astro';
+import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
+import CaseBar from '../../../components/discover/hadith-reliability/CaseBar.astro';
+import Showcase from '../../../components/discover/hadith-reliability/showcase/Showcase.astro';
+import EvidenceCard from '../../../components/discover/hadith-reliability/EvidenceCard.astro';
+import ComparisonTable from '../../../components/discover/hadith-reliability/ComparisonTable.astro';
+import SourcesList from '../../../components/discover/hadith-reliability/SourcesList.astro';
+import FurtherReading from '../../../components/discover/hadith-reliability/FurtherReading.astro';
+import CasePager from '../../../components/discover/hadith-reliability/CasePager.astro';
+import CaseFamily from '../../../components/discover/hadith-reliability/CaseFamily.astro';
+import { loadHadithReliability } from '../../../utils/hadithReliability/loader.js';
+import { BASE_PATH, LABELS, OG_IMAGE } from '../../../utils/hadithReliability/config.js';
+import { caseSchema } from '../../../utils/hadithReliability/schema.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+import '../../../styles/hadith-reliability.css';
+
+export function getStaticPaths() {
+  const model = loadHadithReliability();
+  return model.cases.map(c => ({ params: { case: c.slug }, props: { c } }));
+}
+
+const { c } = Astro.props;
+const model = loadHadithReliability();
+const total = model.cases.length;
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+// BASE_PATH-derived hrefs already include the site base.
+const canonicalURL = `${site}${c.href}`;
+const ogImage = `${site}${OG_IMAGE}`;
+const glanceHref = `${BASE_PATH}/${model.meta.seo.glance.slug}`;
+---
+<Layout
+  title={c.seo.title}
+  description={c.seo.description}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  ogImage={ogImage}
+  ogType="article"
+  schema={caseSchema({ site, c, image: ogImage })}
+  showOnboarding={false}
+>
+  <RouteAnalytics eventName="discover_article_view" params={{ article: 'hadith-reliability', page: c.slug }} />
+  <article class="hrv hrv-case" data-case={c.id} data-archetype={c.archetype}>
+    <CaseBar number={c.number} total={total} hubHref={BASE_PATH} glanceHref={glanceHref} prev={c.prev} next={c.next} />
+    <div class="hrv-wrap">
+      <header class="hrv-case-head">
+        <p class="hrv-eyebrow"><a href={c.question.href} set:html={`Question ${c.question.number} · ${tl(c.question.text)}`} /></p>
+        <h1 class="hrv-case-h1" set:html={tl(c.shortTitle)} />
+        <p class="hrv-hook" set:html={c.hookHtml} />
+        <a class="hrv-context" href={BASE_PATH}>{LABELS.coldContext.replace('{n}', total)}<Icon name="chevronRight" /></a>
+      </header>
+
+      <Showcase sc={c.showcase} id={`sc-${c.slug}`} />
+
+      <details class="hrv-disclosure">
+        <summary><span set:html={tl(c.paa || LABELS.aboutQuestion)} /><Icon name="chevronDown" /></summary>
+        <div class="hrv-disclosure__body">
+          <div set:html={c.summaryHtml} />
+        </div>
+      </details>
+
+      <section class="hrv-sec" id="sources" aria-labelledby="sources-h">
+        <h2 class="hrv-eyebrow" id="sources-h">{LABELS.sources}</h2>
+        {c.evidence.map(e => <EvidenceCard e={e} />)}
+        {c.tables.map(t => <ComparisonTable t={t} />)}
+      </section>
+
+      {(c.scholars.harmonizationHtml || c.scholars.evaluationHtml) && (
+        <section class="hrv-sec" id="scholars" aria-labelledby="scholars-h">
+          <h2 class="hrv-eyebrow" id="scholars-h">{LABELS.scholars}</h2>
+          {c.scholars.harmonizationHtml && (
+            <div class="hrv-scholar">
+              <h3 class="hrv-scholar__h"><Icon name="quote" />{LABELS.harmonization}</h3>
+              <div set:html={c.scholars.harmonizationHtml} />
+            </div>
+          )}
+          {c.scholars.evaluationHtml && (
+            <div class="hrv-eval">
+              <h3 class="hrv-eval__h"><Icon name="search" />{LABELS.evaluation}</h3>
+              <div set:html={c.scholars.evaluationHtml} />
+            </div>
+          )}
+        </section>
+      )}
+
+      <section class="hrv-sec" id="deeper" aria-labelledby="deeper-h">
+        <h2 class="hrv-eyebrow" id="deeper-h">{LABELS.deeper}</h2>
+        <details class="hrv-disclosure" style="margin-top:0">
+          <summary>{LABELS.readAnalysis}<span class="hrv-disclosure__meta">{c.deepDive.words ? `≈ ${Math.round(c.deepDive.words / 10) * 10} words` : ''}</span><Icon name="chevronDown" /></summary>
+          <div class="hrv-disclosure__body hrv-prose" set:html={c.deepDive.html} />
+        </details>
+        {c.arabic.length > 0 && (
+          <details class="hrv-disclosure">
+            <summary>{LABELS.originalArabic}<span class="hrv-disclosure__meta">{c.arabic.length} {c.arabic.length === 1 ? 'quotation' : 'quotations'}</span><Icon name="chevronDown" /></summary>
+            <div class="hrv-disclosure__body">
+              <ol class="hrv-arabic-list">
+                {c.arabic.map(q => (
+                  <li><figure class="hrv-quote" style="margin:0">
+                    <blockquote class="hrv-quote__ar" lang="ar" dir="rtl">{q.arabic}</blockquote>
+                    <figcaption><p class="hrv-quote__en" set:html={q.englishHtml} /><span class="hrv-quote__ref" set:html={q.citationHtml} /></figcaption>
+                  </figure></li>
+                ))}
+              </ol>
+            </div>
+          </details>
+        )}
+      </section>
+
+      <section class="hrv-sec" id="check" aria-labelledby="check-h">
+        <h2 class="hrv-eyebrow" id="check-h">{LABELS.check}</h2>
+        <SourcesList groups={c.sourceGroups} />
+      </section>
+
+      {c.further.reference.length > 0 && (
+        <section class="hrv-sec" id="further" aria-labelledby="further-h">
+          <h2 class="hrv-eyebrow" id="further-h">{LABELS.further}</h2>
+          <FurtherReading items={c.further.reference} kind="reference" />
+        </section>
+      )}
+
+      <div class="hrv-sec" id="next">
+        <CasePager prev={c.prev} next={c.next} hubHref={BASE_PATH} />
+      </div>
+
+      <CaseFamily questions={model.questions} current={c.id} />
+
+      <div class="hrv-case-foot">
+        <a class="hrv-glance-cta" href={glanceHref}><Icon name="grid" />{LABELS.glanceCta.replace('{n}', total)}</a>
+      </div>
+
+      {c.further.perspective.length > 0 && (
+        <section class="hrv-sec hrv-sec--others" id="others" aria-label={LABELS.perspective}>
+          <FurtherReading items={c.further.perspective} kind="perspective" />
+        </section>
+      )}
+    </div>
+  </article>
+  <script src="../../../components/discover/hadith-reliability/client.js"></script>
+</Layout>

@@ -1,0 +1,9 @@
+---
+/** A showcase source link. In compact cards (which are themselves links) it renders as text. */
+interface Props { ref: { label: string; href: string; external: boolean; attrs: Record<string, string>; title?: string } | null; compact?: boolean }
+import { tl } from '../../../../utils/hadithReliability/render.js';
+const { ref, compact = false } = Astro.props;
+---
+{ref && (compact
+  ? <span class="hrv-sc__ref" set:html={tl(ref.label)} />
+  : <a class={`hrv-sc__ref${ref.external ? '' : ' is-internal'}`} href={ref.href} {...ref.attrs} title={ref.title} set:html={tl(ref.label)} />)}

@@ -1,0 +1,26 @@
+---
+/** The same event in several wordings. Mobile: segmented tabs; desktop/no-JS: all side by side. */
+import Ref from './Ref.astro';
+const { sc, compact = false, id = 'v' } = Astro.props;
+---
+{compact ? (
+  <div class="hrv-vchips">{sc.items.map(it => <span class="hrv-vchip" set:html={it.labelHtml} />)}</div>
+) : (
+  <div data-hrv-tabs>
+    <div class="hrv-tabs" role="tablist">
+      {sc.items.map((it, i) => (
+        <button class="hrv-tab" type="button" role="tab" id={`${id}-tab-${i}`} aria-controls={`${id}-panel-${i}`} aria-selected={i === 0 ? 'true' : 'false'} set:html={it.labelHtml} />
+      ))}
+    </div>
+    <div class="hrv-versions" data-tabs>
+      {sc.items.map((it, i) => (
+        <div class="hrv-version" role="tabpanel" id={`${id}-panel-${i}`} aria-labelledby={`${id}-tab-${i}`} hidden={i !== 0}>
+          <div class="hrv-version__label" set:html={it.labelHtml} />
+          <div class="hrv-version__text" set:html={it.wordingHtml} />
+          {it.arabic && <div class="hrv-version__ar" lang="ar" dir="rtl">{it.arabic}</div>}
+          <Ref ref={it.ref} />
+        </div>
+      ))}
+    </div>
+  </div>
+)}

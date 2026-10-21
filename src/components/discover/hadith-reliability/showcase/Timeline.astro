@@ -1,0 +1,19 @@
+---
+/** Dated milestones (vertical on every screen size so long labels stay readable on phones). */
+import Ref from './Ref.astro';
+const { sc, compact = false } = Astro.props;
+const points = compact && sc.points.length > 3 ? [sc.points[0], sc.points[sc.points.length - 2], sc.points[sc.points.length - 1]] : sc.points;
+const gapIndex = points.length - 2;
+const fmtYear = y => (y == null ? '' : typeof y === 'number' ? (y < 0 ? `${-y} BCE` : `${y}`) : String(y));
+---
+<ol class="hrv-tl">
+  {points.map((p, i) => (
+    <>
+      <li class={sc.gapHtml && i === gapIndex ? 'is-gap' : ''}>
+        <div class={`hrv-tl__year${typeof p.year === 'number' ? '' : ' is-text'}`}>{fmtYear(p.year)}{typeof p.year === 'number' && <small>CE</small>}{typeof p.year === 'number' && p.yearAh != null && <small>{p.yearAh} AH</small>}</div>
+        <div class="hrv-tl__body"><span set:html={p.labelHtml} />{!compact && p.ref && <div><Ref ref={p.ref} /></div>}</div>
+      </li>
+      {sc.gapHtml && i === gapIndex && <li aria-hidden="true" style="display:block;padding:0"><div class="hrv-tl__gap" set:html={sc.gapHtml} /></li>}
+    </>
+  ))}
+</ol>

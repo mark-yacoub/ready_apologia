@@ -1,0 +1,33 @@
+---
+/** Every primary source cited in the case, grouped by repository. Long groups collapse after 6. */
+import Icon from './Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { groups } = Astro.props;
+const VISIBLE = 6;
+const row = s => s;
+---
+{groups.map(g => (
+  <div class="hrv-srcgroup">
+    <h3 class="hrv-srcgroup__h">{g.label}<span class="hrv-disclosure__meta" style="margin:0">{g.items.length}</span></h3>
+    {g.note && <p class="hrv-srcgroup__note">{g.note}</p>}
+    <ul class="hrv-srclist">
+      {g.items.slice(0, VISIBLE).map(s => (
+        <li><a class="hrv-src" href={s.href} {...s.attrs} title={s.title}>
+          <span class="hrv-src__label" set:html={tl(s.label)} /><Icon name={s.external ? 'external' : 'chevronRight'} />
+        </a></li>
+      ))}
+      {g.items.length > VISIBLE && (
+        <li><details class="hrv-more">
+          <summary>Show all {g.items.length}</summary>
+          <ul class="hrv-srclist" style="border:0;border-radius:0">
+            {g.items.slice(VISIBLE).map(s => (
+              <li><a class="hrv-src" href={s.href} {...s.attrs} title={s.title}>
+                <span class="hrv-src__label" set:html={tl(s.label)} /><Icon name={s.external ? 'external' : 'chevronRight'} />
+              </a></li>
+            ))}
+          </ul>
+        </details></li>
+      )}
+    </ul>
+  </div>
+))}

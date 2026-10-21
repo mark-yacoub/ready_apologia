@@ -1,0 +1,62 @@
+---
+/**
+ * All cases at a glance: one compact showcase card per case, grouped by question and filterable
+ * by kind of evidence. Route slug comes from the SEO spec (SEO_GLANCE.slug = "at-a-glance").
+ */
+import Layout from '../../../layouts/Layout.astro';
+import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
+import GlanceCard from '../../../components/discover/hadith-reliability/GlanceCard.astro';
+import AngleChips from '../../../components/discover/hadith-reliability/AngleChips.astro';
+import { loadHadithReliability } from '../../../utils/hadithReliability/loader.js';
+import { BASE_PATH, LABELS, OG_IMAGE } from '../../../utils/hadithReliability/config.js';
+import { glanceSchema } from '../../../utils/hadithReliability/schema.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+import '../../../styles/hadith-reliability.css';
+
+const model = loadHadithReliability();
+const { meta, questions, angles, cases } = model;
+const byId = new Map(cases.map(c => [c.id, c]));
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const path = `${BASE_PATH}/${meta.seo.glance.slug}`;
+// BASE_PATH-derived hrefs already include the site base.
+const canonicalURL = `${site}${path}`;
+const ogImage = `${site}${OG_IMAGE}`;
+const n = meta.counts.cases;
+if (Astro.url.pathname.replace(/\/$/, '') !== path) {
+  throw new Error(`[hadithReliability] at-a-glance route file name must match SEO_GLANCE.slug (${meta.seo.glance.slug})`);
+}
+---
+<Layout
+  title={meta.seo.glance.title}
+  description={meta.seo.glance.description}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  ogImage={ogImage}
+  ogType="article"
+  schema={glanceSchema({ site, model, image: ogImage, path })}
+  showOnboarding={false}
+>
+  <RouteAnalytics eventName="discover_article_view" params={{ article: 'hadith-reliability', page: 'at-a-glance' }} />
+  <div class="hrv">
+    <div class="hrv-wrap hrv-wrap--wide">
+      <header class="hrv-hero">
+        <a class="hrv-crumb" href={BASE_PATH}><Icon name="chevronLeft" />How reliable are the hadith?</a>
+        <h1 class="hrv-h1">{LABELS.glanceTitle.replace('{n}', n)}</h1>
+        <p class="hrv-intro">{LABELS.glanceIntro}</p>
+      </header>
+      <AngleChips angles={angles} total={n} />
+      <div data-hrv-filter-scope>
+        {questions.map(q => (
+          <section class="hrv-gq" data-hrv-group aria-labelledby={`g-${q.anchor}`}>
+            <h2 class="hrv-gq__h" id={`g-${q.anchor}`}><span>{String(q.number).padStart(2, '0')}</span><span set:html={tl(q.question)} style="color:inherit" /></h2>
+            <div class="hrv-glance-grid">
+              {q.cases.map(s => <GlanceCard c={byId.get(s.id)} />)}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </div>
+  <script src="../../../components/discover/hadith-reliability/client.js"></script>
+</Layout>

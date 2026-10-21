@@ -1,0 +1,49 @@
+---
+/**
+ * Bottom-of-page navigation: every case in this question (current one marked), then the other
+ * questions, each linking to its first case.
+ */
+import Icon from './Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { questions, current } = Astro.props;
+const mine = questions.find(q => q.cases.some(c => c.id === current));
+const others = questions.filter(q => q !== mine);
+---
+<section class="hrv-sec" aria-labelledby="family-h">
+  <h2 class="hrv-eyebrow" id="family-h">More in question {mine.number}</h2>
+  <p class="hrv-family__q" set:html={tl(mine.question)} />
+  <ol class="hrv-rows hrv-family">
+    {mine.cases.map(c => (
+      <li>
+        {c.id === current ? (
+          <span class="hrv-row is-current" aria-current="page">
+            <span class="hrv-row__num">{c.number}</span>
+            <span><span class="hrv-row__title" set:html={tl(c.shortTitle)} /><span class="hrv-badges"><span>You are here</span></span></span>
+            <span />
+          </span>
+        ) : (
+          <a class="hrv-row" href={c.href} data-astro-prefetch="hover">
+            <span class="hrv-row__num">{c.number}</span>
+            <span><span class="hrv-row__title" set:html={tl(c.shortTitle)} /><span class="hrv-badges">{c.badges.slice(0, 3).map(b => <span set:html={tl(b)} />)}</span></span>
+            <span class="hrv-row__chev"><Icon name="chevronRight" /></span>
+          </a>
+        )}
+      </li>
+    ))}
+  </ol>
+</section>
+
+<section class="hrv-sec" aria-labelledby="explore-h">
+  <h2 class="hrv-eyebrow" id="explore-h">Explore other questions</h2>
+  <ul class="hrv-rows hrv-explore">
+    {others.map(q => (
+      <li>
+        <a class="hrv-row" href={q.cases[0].href} data-astro-prefetch="hover">
+          <span class="hrv-row__num hrv-row__num--q">{String(q.number).padStart(2, '0')}</span>
+          <span><span class="hrv-row__title" set:html={tl(q.question)} /><span class="hrv-badges"><span>{q.cases.length} cases</span><span>Starts with: <span set:html={tl(q.cases[0].shortTitle)} /></span></span></span>
+          <span class="hrv-row__chev"><Icon name="chevronRight" /></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

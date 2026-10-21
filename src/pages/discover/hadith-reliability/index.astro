@@ -1,0 +1,81 @@
+---
+/**
+ * Hub: short intro → Start here (case 1 with its showcase) → at-a-glance link →
+ * browse-by-kind chips → the 6 reader questions (sections) with their cases → sources footer.
+ * Stateless by design: the reader is assumed to visit once, for the first time.
+ */
+import Layout from '../../../layouts/Layout.astro';
+import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
+import Showcase from '../../../components/discover/hadith-reliability/showcase/Showcase.astro';
+import CaseRow from '../../../components/discover/hadith-reliability/CaseRow.astro';
+import AngleChips from '../../../components/discover/hadith-reliability/AngleChips.astro';
+import { loadHadithReliability } from '../../../utils/hadithReliability/loader.js';
+import { BASE_PATH, LABELS, OG_IMAGE } from '../../../utils/hadithReliability/config.js';
+import { hubSchema } from '../../../utils/hadithReliability/schema.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+import '../../../styles/hadith-reliability.css';
+
+const model = loadHadithReliability();
+const { meta, questions, angles, startHere } = model;
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+// BASE_PATH-derived hrefs already include the site base.
+const canonicalURL = `${site}${BASE_PATH}`;
+const ogImage = `${site}${OG_IMAGE}`;
+const glanceHref = `${BASE_PATH}/${meta.seo.glance.slug}`;
+const n = meta.counts.cases;
+---
+<Layout
+  title={meta.seo.hub.title}
+  description={meta.seo.hub.description}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  ogImage={ogImage}
+  ogType="article"
+  schema={hubSchema({ site, model, image: ogImage })}
+  showOnboarding={false}
+>
+  <RouteAnalytics eventName="discover_article_view" params={{ article: 'hadith-reliability', page: 'hub' }} />
+  <div class="hrv">
+    <div class="hrv-wrap">
+      <header class="hrv-hero">
+        <a class="hrv-crumb" href="/discover"><Icon name="chevronLeft" />Discover</a>
+        <h1 class="hrv-h1">How reliable are the Hadith collections?</h1>
+        <p class="hrv-intro" set:html={tl(meta.introText)} />
+      </header>
+
+      <h2 class="hrv-eyebrow hrv-eyebrow--verify hrv-section-label">{LABELS.startHere}</h2>
+      <a class="hrv-start" href={startHere.href}>
+        <div class="hrv-start__title" set:html={tl(startHere.shortTitle)} />
+        {startHere.showcase.type !== 'facts'
+          ? <Showcase sc={startHere.showcase} compact caption={false} />
+          : <p class="hrv-gcard__take" set:html={tl(startHere.hook)} />}
+        <div class="hrv-start__cta">{LABELS.openCase}<Icon name="arrowRight" /></div>
+      </a>
+      <a class="hrv-glance-cta" href={glanceHref}><Icon name="grid" />{LABELS.glanceCta.replace('{n}', n)}</a>
+
+      <h2 class="hrv-eyebrow hrv-section-label">{LABELS.browseByKind}</h2>
+      <AngleChips angles={angles} total={n} />
+
+      <div data-hrv-filter-scope>
+        {questions.map(q => (
+          <section class="hrv-q" id={q.anchor} data-hrv-group aria-labelledby={`${q.anchor}-h`}>
+            <div class="hrv-q__head">
+              <span class="hrv-q__num" aria-hidden="true">{String(q.number).padStart(2, '0')}</span>
+              <h2 class="hrv-q__title" id={`${q.anchor}-h`} set:html={tl(q.question)} />
+            </div>
+            <ul class="hrv-rows">
+              {q.cases.map(c => <li data-archetype={c.archetype}><CaseRow c={c} /></li>)}
+            </ul>
+          </section>
+        ))}
+      </div>
+
+      <footer class="hrv-hub-foot">
+        {LABELS.sourcesUsed}
+        <ul>{meta.sourceStats.map(s => <li><b>{s.count}</b> {s.label}</li>)}</ul>
+      </footer>
+    </div>
+  </div>
+  <script src="../../../components/discover/hadith-reliability/client.js"></script>
+</Layout>

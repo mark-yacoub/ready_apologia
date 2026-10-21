@@ -1,0 +1,23 @@
+---
+/** Who said it: classical scholars in their own words (swipeable on phones). */
+import Ref from './Ref.astro';
+import { tl } from '../../../../utils/hadithReliability/render.js';
+const { sc, compact = false } = Astro.props;
+---
+{compact ? (
+  <div class="hrv-vchips">{[...new Set(sc.items.map(w => w.scholar))].map(name => <span class="hrv-vchip" set:html={tl(name)} />)}</div>
+) : (
+  <>
+    <div class="hrv-wit">
+      {sc.items.map(w => (
+        <figure class="hrv-wit__card" style="margin:0">
+          <figcaption><div class="hrv-wit__who"><span set:html={tl(w.scholar)} />{/^\d+$/.test(String(w.deathAh ?? "")) && <small>d. {w.deathAh} AH</small>}</div>{w.workHtml && <div class="hrv-wit__work" set:html={w.workHtml} />}</figcaption>
+          {w.arabic && <blockquote class="hrv-wit__ar" lang="ar" dir="rtl" style="margin:0">{w.arabic}</blockquote>}
+          {w.englishHtml && <p class="hrv-wit__en" set:html={w.englishHtml} />}
+          <Ref ref={w.ref} />
+        </figure>
+      ))}
+    </div>
+    {sc.items.length > 1 && <p class="hrv-wit__hint">Swipe to see all {sc.items.length}</p>}
+  </>
+)}

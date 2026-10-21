@@ -1,0 +1,9 @@
+---
+/** "Browse by kind of evidence" filter. Targets elements carrying data-archetype inside [data-hrv-filter-scope]. */
+import { LABELS } from '../../../utils/hadithReliability/config.js';
+const { angles, total } = Astro.props;
+---
+<div class="hrv-chips" role="toolbar" aria-label={LABELS.browseByKind} data-hrv-chips>
+  <button class="hrv-chip" type="button" aria-pressed="true" data-angle="all">{LABELS.allKinds} <span class="hrv-chip__count">{total}</span></button>
+  {angles.map(a => <button class="hrv-chip" type="button" aria-pressed="false" data-angle={a.id}>{a.label} <span class="hrv-chip__count">{a.count}</span></button>)}
+</div>

@@ -1,0 +1,13 @@
+---
+/** At-a-glance card: compact showcase + title + takeaway + badges; the whole card is the link. */
+import Icon from './Icon.astro';
+import Showcase from './showcase/Showcase.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { c } = Astro.props;
+---
+<a class="hrv-gcard" href={c.href} data-archetype={c.archetype} data-astro-prefetch="hover">
+  {c.showcase.type !== 'facts' && <Showcase sc={c.showcase} compact caption={false} />}
+  <span class="hrv-gcard__title" set:html={tl(c.shortTitle)} />
+  {c.takeaway && <span class="hrv-gcard__take" set:html={tl(c.takeaway)} />}
+  <span class="hrv-gcard__foot"><span class="hrv-badges">{c.badges.slice(0, 3).map(b => <span set:html={tl(b)} />)}</span><Icon name="chevronRight" /></span>
+</a>

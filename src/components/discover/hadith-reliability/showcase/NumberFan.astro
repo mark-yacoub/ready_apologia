@@ -1,0 +1,24 @@
+---
+/** One event, several incompatible numbers. Tapping a number jumps to the evidence card behind it. */
+import Ref from './Ref.astro';
+const { sc, compact = false } = Astro.props;
+// Size the whole fan by its longest value so sibling numbers always match.
+const longest = Math.max(...sc.items.map(i => i.value.length));
+const size = longest > 5 ? ' hrv-fan--long' : longest > 3 ? ' hrv-fan--mid' : '';
+---
+{sc.unitHtml && !compact && <p class="hrv-sc__unit" set:html={sc.unitHtml} />}
+<div class={`hrv-fan${size}`} role="list">
+  {sc.items.map(it => {
+    const Tag = it.anchor && !compact ? 'a' : 'div';
+    return (
+      <Tag class="hrv-fan__item" role="listitem" href={Tag === 'a' ? `#${it.anchor}` : undefined}>
+        <span class="hrv-fan__value">{it.value}</span>
+        {!compact && <span class="hrv-fan__label" set:html={it.labelHtml} />}
+      </Tag>
+    );
+  })}
+</div>
+{!compact && (
+  <div class="hrv-fan__refs">{sc.items.map(it => <span><Ref ref={it.ref} /></span>)}</div>
+)}
+{compact && sc.unitHtml && <p class="hrv-sc__unit" style="margin:8px 0 0!important" set:html={sc.unitHtml} />}

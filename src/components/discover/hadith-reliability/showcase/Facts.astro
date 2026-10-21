@@ -1,0 +1,8 @@
+---
+/** Fallback showcase until the dataset supplies one: the case's key findings, each jumping to its evidence. */
+const { sc, compact = false } = Astro.props;
+const items = compact ? sc.items.slice(0, 2) : sc.items;
+---
+<ol class="hrv-facts">
+  {items.map(it => <li>{compact ? <span set:html={it.html} /> : <a class="hrv-facts__go" href={`#${it.anchor}`} set:html={it.html} />}</li>)}
+</ol>

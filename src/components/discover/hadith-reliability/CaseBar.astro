@@ -1,0 +1,23 @@
+---
+/** Sticky slim bar on case pages: back to all cases · prev / position / next · at-a-glance · copy link. */
+import Icon from './Icon.astro';
+import { LABELS } from '../../../utils/hadithReliability/config.js';
+const { number, total, hubHref, glanceHref, prev, next } = Astro.props;
+---
+<nav class="hrv-bar" aria-label="Case navigation">
+  <a class="hrv-bar__back" href={hubHref} aria-label={LABELS.allCases}><Icon name="chevronLeft" /><span class="hrv-bar__backtext">All</span></a>
+  <div class="hrv-bar__step">
+    {prev
+      ? <a class="hrv-iconbtn" href={prev.href} rel="prev" aria-label={`Previous case: ${prev.shortTitle}`} title="Previous case"><Icon name="chevronLeft" /></a>
+      : <span class="hrv-iconbtn is-disabled" aria-hidden="true"><Icon name="chevronLeft" /></span>}
+    <span class="hrv-bar__pos">{number} <span aria-hidden="true">/</span><span class="hrv-sr"> of </span> {total}</span>
+    {next
+      ? <a class="hrv-iconbtn" href={next.href} rel="next" aria-label={`Next case: ${next.shortTitle}`} title="Next case"><Icon name="chevronRight" /></a>
+      : <span class="hrv-iconbtn is-disabled" aria-hidden="true"><Icon name="chevronRight" /></span>}
+  </div>
+  <div class="hrv-bar__actions">
+    <a class="hrv-iconbtn" href={glanceHref} aria-label="All cases at a glance" title="All cases at a glance"><Icon name="grid" /></a>
+    <button class="hrv-iconbtn" type="button" data-hrv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button>
+  </div>
+</nav>
+<div class="hrv-toast" role="status" aria-live="polite" data-hrv-toast>{LABELS.copied}</div>

@@ -1,0 +1,14 @@
+---
+/** Hub row: kind-of-evidence icon, title, source badges. */
+import Icon from './Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { c } = Astro.props;
+---
+<a class="hrv-row" href={c.href} data-astro-prefetch="hover">
+  <span class="hrv-row__icon" aria-hidden="true"><Icon name={c.archetype} /></span>
+  <span>
+    <span class="hrv-row__title" set:html={tl(c.shortTitle)} />
+    <span class="hrv-badges">{c.badges.slice(0, 3).map(b => <span set:html={tl(b)} />)}</span>
+  </span>
+  <span class="hrv-row__chev"><Icon name="chevronRight" /></span>
+</a>

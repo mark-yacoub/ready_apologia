@@ -1,0 +1,22 @@
+---
+/** An isnād drawn top to bottom; the link nobody can show is marked. */
+import Ref from './Ref.astro';
+import { tl } from '../../../../utils/hadithReliability/render.js';
+const { sc, compact = false } = Astro.props;
+---
+{compact ? (
+  <p class="hrv-chainline">{sc.narrators.map((n, i) => <>{i > 0 && <span aria-hidden="true">{sc.narrators[i - 1].gapAfter ? ' ⋯ ' : ' → '}</span>}<span class="hrv-chain" set:html={tl(n.name)} /></>)}</p>
+) : (
+  <>
+    <ol class="hrv-chainviz">
+      {sc.narrators.map(n => (
+        <li class={n.gapAfter ? 'is-gap' : ''}>
+          <div class="hrv-chainviz__name"><span set:html={tl(n.name)} />{/^\d+$/.test(String(n.deathAh ?? "")) && <small>d. {n.deathAh} AH</small>}</div>
+          {n.verdictHtml && <div class="hrv-chainviz__verdict"><span set:html={n.verdictHtml} /> {n.ref && <Ref ref={n.ref} />}</div>}
+          {n.gapAfter && <span class="hrv-chainviz__gap">No recorded meeting</span>}
+        </li>
+      ))}
+    </ol>
+    {sc.noteHtml && <p class="hrv-sc__note" set:html={sc.noteHtml} />}
+  </>
+)}

@@ -1,0 +1,25 @@
+---
+/** Step through the cases one by one, in reading order. */
+import Icon from './Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { prev, next, hubHref } = Astro.props;
+---
+<nav class="hrv-pager" aria-label="Previous and next case">
+  {prev ? (
+    <a class="hrv-pager__link hrv-pager__link--prev" href={prev.href} rel="prev" data-astro-prefetch="hover">
+      <span class="hrv-pager__dir"><Icon name="chevronLeft" />Previous · Case {prev.number}</span>
+      <span class="hrv-pager__title" set:html={tl(prev.shortTitle)} />
+    </a>
+  ) : <span class="hrv-pager__spacer" />}
+  {next ? (
+    <a class="hrv-pager__link hrv-pager__link--next" href={next.href} rel="next" data-astro-prefetch="hover">
+      <span class="hrv-pager__dir">Next · Case {next.number}<Icon name="chevronRight" /></span>
+      <span class="hrv-pager__title" set:html={tl(next.shortTitle)} />
+    </a>
+  ) : (
+    <a class="hrv-pager__link hrv-pager__link--next" href={hubHref}>
+      <span class="hrv-pager__dir">That was the last case<Icon name="chevronRight" /></span>
+      <span class="hrv-pager__title">Back to all cases</span>
+    </a>
+  )}
+</nav>

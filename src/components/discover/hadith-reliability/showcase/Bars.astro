@@ -1,0 +1,21 @@
+---
+/** Quantities that are out of proportion, drawn to scale (linear on purpose). */
+import Ref from './Ref.astro';
+const { sc, compact = false } = Astro.props;
+const max = Math.max(...sc.items.map(i => i.numeric), 1);
+const fmt = v => (/^\d+$/.test(v) ? Number(v).toLocaleString('en-US') : v);
+// When every bar cites the same page, show the source once under the chart instead of per bar.
+const hrefs = new Set(sc.items.map(i => i.ref?.href).filter(Boolean));
+const sharedRef = hrefs.size === 1 && sc.items.every(i => i.ref) ? sc.items[0].ref : null;
+---
+{sc.unitHtml && !compact && <p class="hrv-sc__unit" set:html={sc.unitHtml} />}
+<div class="hrv-bars">
+  {sc.items.map(it => (
+    <div class="hrv-bar-row">
+      <div class="hrv-bar-row__top"><span set:html={it.labelHtml} /><span class="hrv-bar-row__value">{fmt(it.value)}</span></div>
+      <div class="hrv-bar-row__track" aria-hidden="true"><span class="hrv-bar-row__fill" style={`width:${Math.max(0.6, (it.numeric / max) * 100).toFixed(2)}%`} /></div>
+      {!compact && !sharedRef && <Ref ref={it.ref} />}
+    </div>
+  ))}
+</div>
+{!compact && sharedRef && <p class="hrv-sc__note">Source: <Ref ref={sharedRef} /></p>}

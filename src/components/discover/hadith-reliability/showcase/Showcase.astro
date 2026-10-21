@@ -1,0 +1,27 @@
+---
+/**
+ * The "see it in ten seconds" panel at the top of a case, designed per kind of evidence.
+ * `compact` renders the at-a-glance / start-here variant (no links: the card itself is a link).
+ */
+import Icon from '../Icon.astro';
+import NumberFan from './NumberFan.astro';
+import Bars from './Bars.astro';
+import Versions from './Versions.astro';
+import Redline from './Redline.astro';
+import Timeline from './Timeline.astro';
+import ChainAnatomy from './ChainAnatomy.astro';
+import Witnesses from './Witnesses.astro';
+import Confrontation from './Confrontation.astro';
+import Facts from './Facts.astro';
+import { ANGLES } from '../../../../utils/hadithReliability/config.js';
+
+const { sc, compact = false, id = 'sc', caption = true } = Astro.props;
+const COMPONENTS = { number_fan: NumberFan, bars: Bars, versions: Versions, redline: Redline, timeline: Timeline, chain: ChainAnatomy, witnesses: Witnesses, confrontation: Confrontation, facts: Facts };
+const C = COMPONENTS[sc.type] || Facts;
+const angle = ANGLES.find(a => a.id === sc.type);
+const capText = sc.type === 'facts' ? 'Key findings' : (angle?.label || 'At a glance');
+---
+<section class={`hrv-sc hrv-sc--${sc.type}${compact ? ' hrv-sc--compact' : ''}`} aria-label={capText}>
+  {caption && <div class="hrv-sc__cap"><Icon name={sc.type} />{capText}</div>}
+  <C sc={sc} compact={compact} id={id} />
+</section>

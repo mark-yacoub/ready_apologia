@@ -1,0 +1,15 @@
+---
+/** Real table on desktop; each row becomes a labelled card on phones (CSS only). */
+const { t } = Astro.props;
+---
+<div class="hrv-table-wrap">
+  <h3 class="hrv-table-title" set:html={t.titleHtml} />
+  <table class="hrv-table">
+    <thead><tr>{t.headers.map(h => <th scope="col" set:html={h.html} />)}</tr></thead>
+    <tbody>
+      {t.rows.map(row => (
+        <tr>{row.map((cell, i) => <td data-label={t.headers[i]?.label || ''}><span class="hrv-td" set:html={cell} /></td>)}</tr>
+      ))}
+    </tbody>
+  </table>
+</div>

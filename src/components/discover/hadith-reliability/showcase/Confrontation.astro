@@ -1,0 +1,21 @@
+---
+/** Two principles that cannot both hold, side by side. */
+import Ref from './Ref.astro';
+import Icon from '../Icon.astro';
+const { sc, compact = false } = Astro.props;
+---
+<div class="hrv-vs">
+  {[sc.left, sc.right].map((side, i) => (
+    <>
+      {i === 1 && <div class="hrv-vs__div" aria-hidden="true"><Icon name="swap" /></div>}
+      <div class="hrv-vs__side">
+        <h3 class="hrv-vs__h" set:html={side.titleHtml} />
+        {!compact && (
+          <ul class="hrv-vs__list">{side.items.map(it => <li><span set:html={it.html} /> {it.ref && <Ref ref={it.ref} />}</li>)}</ul>
+        )}
+        {compact && side.items[0] && <p style="margin:0;font-size:.88rem" set:html={side.items[0].html} />}
+      </div>
+    </>
+  ))}
+</div>
+{sc.noteHtml && !compact && <p class="hrv-sc__note" set:html={sc.noteHtml} />}

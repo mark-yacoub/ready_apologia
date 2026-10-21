@@ -103,11 +103,13 @@ pkill -f astro
 *   `src/db.js`: Database helper utilizing built-in Node 22 `node:sqlite`.
 *   `src/data/scripture/`: Imported NASB (NT) and LXX (OT) scripture JSON files.
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.
-*   `src/pages/`: Page templates for Bible reader, Quran reader, Quran verse evidence drawers, Companion Codices, and Discover articles (`divinity-timeline.astro`, `extrabiblical-evidence-for-jesus.astro`, `islamic-dilemma.astro`, `quran-preservation.astro`, `trustworthiness-of-the-bible.astro`).
-*   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages, headers, evidence tabs, `RouteAnalytics.astro` for declarative DOM routing, `GoogleAnalytics.astro` for GA4 tracking, and `discover/trustworthiness/` for Stage 1-4 UI components).
-*   `src/utils/`: Helper utilities for loading scripture, topics, non-Uthmanic Quran data, global CDN configuration (`cdn_config.js`), client-side GA4 event tracking (`analytics.js`), Discover URL `#hash` section navigation (`section_navigator.js`), and apologetic evidence (debunking miracles, contradictions, scientific errors).
+*   `src/pages/`: Page templates for Bible reader, Quran reader, Quran verse evidence drawers, Companion Codices, and Discover articles (`divinity-timeline.astro`, `extrabiblical-evidence-for-jesus.astro`, `islamic-dilemma.astro`, `quran-preservation.astro`, `trustworthiness-of-the-bible.astro`, `hadith-reliability/` (hub, `[case].astro`, `at-a-glance.astro`)).
+*   `src/components/`: Interactive React elements and Astro components (e.g. Quran special pages, headers, evidence tabs, `RouteAnalytics.astro` for declarative DOM routing, `GoogleAnalytics.astro` for GA4 tracking, `discover/trustworthiness/` for Stage 1-4 UI components, and `discover/hadith-reliability/` for the Hadith Reliability article: case-page building blocks + 8 showcase archetypes).
+*   `src/utils/`: Helper utilities for loading scripture, topics, non-Uthmanic Quran data, Hadith Reliability renderer/loader/SEO/schema (`hadithReliability/`), global CDN configuration (`cdn_config.js`), client-side GA4 event tracking (`analytics.js`), Discover URL `#hash` section navigation (`section_navigator.js`), and apologetic evidence (debunking miracles, contradictions, scientific errors).
 
 *   `src/data/quran/debunking/`: Dataset for debunked Quranic scientific miracles.
+*   `scripts/import_hadith_reliability.js`: Syncs the Hadith Reliability dataset (`hadith_reliability_overview.json` + optional `verification_report.json`) into `src/data/discover/islam/scripture/hadith_reliability/` — the only sanctioned way to refresh it. Validates the dataset contract (`src/utils/hadithReliability/validate.js`) before copying and prints the SHA-256.
+*   `scripts/test_hadith_reliability.mjs`: Static audit of the built Hadith Reliability pages (run after `astro build`; `--allow-sliced` for local partial builds): SEO, zero markdown/data leaks, tone, link policy and verification verdicts, internal links, JSON-LD, stateless client, Discover catalog card, unsliced build config.
 *   `scripts/import_hadith.js` (`npm run import:hadith`): Imports the Sahih Hadith dataset + full Bukhari/Muslim texts (annotated hadiths, parallels and every cited reference) into `src/data/hadith/`. Data problems are reported by the build as one `[hadithLoader]` summary.
 *   `src/components/hadith/` (feed, card, narration, outline sheet, permalink, translation audit), `src/utils/hadith*.js`, `src/styles/hadith.css`: Sahih Hadith Explorer UI, loader, config (incl. verified Sunnah.com numbering overrides) and scoped styles.
 *   `docs/distribution_strategy.md`: [Multi-Channel Marketing, Outreach & Distribution Strategy](file:///usr/local/google/home/markyacoub/Documents/ready_apologia/docs/distribution_strategy.md) actionable master plan and checklists.
@@ -134,6 +136,9 @@ pkill -f astro
 | `/hadith/bukhari/[num]`, `/hadith/muslim/[num]` | Single-hadith permalink (Sunnah.com numbering) with full text, analysis, Muslim response |
 | `/hadith/translation-audit` | Softened / omitted / euphemized English renderings (supports `#softened`, `#omission`, `#euphemistic`, or a hadith slug) |
 | `/discover` | Discover hub with deep dives on Christian theology and Islamic scripture |
+| `/discover/hadith-reliability` | How Reliable Are the Hadith? Hub: 6 reader-question sections, 25 cases ordered strongest-first, browse by kind of evidence |
+| `/discover/hadith-reliability/[case]` | One case (25 short SEO slugs, e.g. `hour-before-boy-grows-old`): showcase, evidence with Sunnah.com verify chips, classical response, sources, prev/next, same-section and other-section navigation |
+| `/discover/hadith-reliability/at-a-glance` | All cases at a glance |
 | `/discover/islamic-dilemma` | The Islamic Dilemma interactive deep-dive page (supports `#stage-X` URL hash sharing) |
 | `/discover/quran-preservation` | The Myth of Quranic Preservation deep-dive page (supports `#stage-X` URL hash sharing) |
 | `/discover/origins-of-revelation` | Assessing the Origins of Islamic Revelation comparative study |

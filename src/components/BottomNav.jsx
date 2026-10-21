@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { DEFAULT_SCRIPTURE_PATH } from '../utils/routes.js';
 
 export default function BottomNav() {
   const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
   const [activeTab, setActiveTab] = useState('scripture');
-  const [scriptureUrl, setScriptureUrl] = useState(`${base}/`);
+  // Default scripture page. Never fall back to "/": index.astro restores the last *app* page, which
+  // could be a Discover/Evidence page, so the Scripture tab would bounce the user back where they were.
+  const defaultScriptureUrl = `${base}${DEFAULT_SCRIPTURE_PATH}`;
+  const [scriptureUrl, setScriptureUrl] = useState(defaultScriptureUrl);
 
   useEffect(() => {
     const syncActiveTab = () => {
@@ -22,7 +26,7 @@ export default function BottomNav() {
       if (lastVisited) {
         setScriptureUrl(lastVisited);
       } else {
-        setScriptureUrl(`${base}/`);
+        setScriptureUrl(defaultScriptureUrl);
       }
     };
 

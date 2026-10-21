@@ -1,0 +1,35 @@
+---
+/** One atomic proof: label → explanation → original wording → verify chips. */
+import Icon from './Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { e } = Astro.props;
+---
+<article class="hrv-ev" id={e.anchor}>
+  <header class="hrv-ev__head">
+    <span class="hrv-ev__n" aria-hidden="true">{e.n}</span>
+    <h3 class="hrv-ev__label" set:html={e.labelHtml} />
+  </header>
+  <div class="hrv-ev__body" set:html={e.bodyHtml} />
+  {e.quote && (e.quote.arabic ? (
+    <figure class="hrv-quote" style="margin-left:0;margin-right:0">
+      <blockquote class="hrv-quote__ar" lang="ar" dir="rtl">{e.quote.arabic}</blockquote>
+      <figcaption>
+        <p class="hrv-quote__en" set:html={e.quote.englishHtml} />
+        {e.quote.ref && (e.quote.refLink
+          ? <a class="hrv-quote__ref" href={e.quote.refLink.href} {...e.quote.refLink.attrs}>{e.quote.ref}</a>
+          : <span class="hrv-quote__ref">{e.quote.ref}</span>)}
+      </figcaption>
+    </figure>
+  ) : (
+    <div class="hrv-quote hrv-quote--raw" set:html={e.quote.rawHtml} />
+  ))}
+  {e.chips.length > 0 && (
+    <div class="hrv-verify" aria-label="Check the sources for this point">
+      {e.chips.map(ch => (
+        <a href={ch.href} {...ch.attrs} title={ch.title}>
+          <span set:html={tl(ch.label)} /><Icon name={ch.external ? 'external' : 'chevronRight'} />
+        </a>
+      ))}
+    </div>
+  )}
+</article>

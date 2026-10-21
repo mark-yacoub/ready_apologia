@@ -70,5 +70,13 @@
     "title": "From Mecca to Medina: The Evolution of Islamic Revelation, Power, and Theology",
     "description": "A historical, textual, and theological analysis of the transition from persecuted minority to sovereign statehood and universal conquest.",
     "thumbnail": "/media/mecca_to_medina/cover.jpg"
+  },
+  {
+    "category": "Islamics",
+    "subcategory": "Scripture",
+    "slug": "hadith-reliability",
+    "title": "How Reliable Are the Hadith?",
+    "description": "Source-linked cases from Sahih al-Bukhari, Sahih Muslim and the classical scholars on how hadith were passed on, compared and graded. Check every citation yourself.",
+    "thumbnail": "/media/hadith_reliability/cover.jpg"
   }
 ]

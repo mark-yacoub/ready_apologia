@@ -1,0 +1,34 @@
+---
+/** Inline SVG icons for the Hadith Reliability article (stroke icons, 24×24 grid, currentColor). */
+interface Props { name: string; label?: string; class?: string }
+const { name, label, class: cls = '' } = Astro.props;
+
+const PATHS: Record<string, string> = {
+  chevronRight: '<path d="M9 6l6 6-6 6"/>',
+  chevronLeft: '<path d="M15 6l-6 6 6 6"/>',
+  chevronDown: '<path d="M6 9l6 6 6-6"/>',
+  external: '<path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+  grid: '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+  link: '<path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/>',
+  quote: '<path d="M7 7h4v4c0 3-1.5 5-4 6"/><path d="M14 7h4v4c0 3-1.5 5-4 6"/>',
+  scale: '<path d="M12 4v16"/><path d="M7 20h10"/><path d="M5 8h14"/><path d="M5 8l-3 6a3 3 0 0 0 6 0z"/><path d="M19 8l-3 6a3 3 0 0 0 6 0z"/>',
+  search: '<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>',
+  book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M19 19v2H6"/>',
+  video: '<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/>',
+  article: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7M9 17h5"/>',
+  arrowRight: '<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>',
+  swap: '<path d="M7 7h12l-3-3"/><path d="M17 17H5l3 3"/>',
+  // archetypes
+  number_fan: '<path d="M5 19V9"/><path d="M12 19V5"/><path d="M19 19v-7"/>',
+  versions: '<rect x="3" y="5" width="7" height="14" rx="1.5"/><rect x="14" y="5" width="7" height="14" rx="1.5"/>',
+  redline: '<path d="M4 7h16"/><path d="M4 12h9"/><path d="M4 17h12"/><path d="M15 10l5 5"/>',
+  timeline: '<circle cx="6" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><path d="M8 12h2M14 12h2"/><path d="M11.5 12h1"/>',
+  bars: '<path d="M4 6h16"/><path d="M4 12h9"/><path d="M4 18h4"/>',
+  chain: '<circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/><path d="M12 7v3"/><path d="M12 14v1M12 16.5v.5"/>',
+  witnesses: '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 6"/><path d="M18 14.5c1.8.8 3 2.8 3 5.5"/>',
+  confrontation: '<path d="M12 4v16"/><path d="M5 8h4M5 12h4M15 12h4M15 16h4"/>',
+  facts: '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>',
+};
+const body = PATHS[name] || PATHS.facts;
+---
+<svg class={`hrv-icon ${cls}`} viewBox="0 0 24 24" aria-hidden={label ? undefined : 'true'} role={label ? 'img' : undefined} aria-label={label} set:html={body} />
