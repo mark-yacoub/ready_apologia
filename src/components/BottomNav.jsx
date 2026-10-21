@@ -1,78 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { DEFAULT_SCRIPTURE_PATH } from '../utils/routes.js';
+import React from 'react';
+import { NAV_TABS, useNavTabs } from './navTabs.js';
 
+/** Mobile bottom tab bar. Tabs, active state and the Scriptures destination come from navTabs.js. */
 export default function BottomNav() {
-  const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-  const [activeTab, setActiveTab] = useState('scripture');
-  // Default scripture page. Never fall back to "/": index.astro restores the last *app* page, which
-  // could be a Discover/Evidence page, so the Scripture tab would bounce the user back where they were.
-  const defaultScriptureUrl = `${base}${DEFAULT_SCRIPTURE_PATH}`;
-  const [scriptureUrl, setScriptureUrl] = useState(defaultScriptureUrl);
-
-  useEffect(() => {
-    const syncActiveTab = () => {
-      const pathname = window.location.pathname;
-      if (pathname.includes('/evidence')) {
-        setActiveTab('evidence');
-      } else if (pathname.includes('/discover')) {
-        setActiveTab('discover');
-      } else {
-        setActiveTab('scripture');
-      }
-    };
-
-    const syncLastVisited = () => {
-      const lastVisited = localStorage.getItem('lastVisitedUrl');
-      if (lastVisited) {
-        setScriptureUrl(lastVisited);
-      } else {
-        setScriptureUrl(defaultScriptureUrl);
-      }
-    };
-
-    syncActiveTab();
-    syncLastVisited();
-
-    document.addEventListener('astro:after-swap', syncActiveTab);
-    document.addEventListener('astro:after-swap', syncLastVisited);
-
-    return () => {
-      document.removeEventListener('astro:after-swap', syncActiveTab);
-      document.removeEventListener('astro:after-swap', syncLastVisited);
-    };
-  }, []);
+  const { activeTab, hrefFor } = useNavTabs();
 
   return (
     <div className="bottom-nav">
-      {/* Scripture Tab */}
-      <a href={scriptureUrl} className={`nav-item ${activeTab === 'scripture' ? 'active' : ''}`} aria-label="Scripture View">
-        <div className="nav-icon-wrapper">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-          </svg>
-        </div>
-        <span className="label">Scripture</span>
-      </a>
-
-      {/* Evidence Tab */}
-      <a href={`${base}/evidence`} className={`nav-item ${activeTab === 'evidence' ? 'active' : ''}`} aria-label="Evidence">
-        <div className="nav-icon-wrapper">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-          </svg>
-        </div>
-        <span className="label">Evidence</span>
-      </a>
-
-      {/* Discover Tab */}
-      <a href={`${base}/discover`} className={`nav-item ${activeTab === 'discover' ? 'active' : ''}`} aria-label="Discover">
-        <div className="nav-icon-wrapper">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-          </svg>
-        </div>
-        <span className="label">Discover</span>
-      </a>
+      {NAV_TABS.map(tab => (
+        <a
+          key={tab.id}
+          href={hrefFor(tab)}
+          className={`nav-item ${activeTab === tab.id ? 'active' : ''}`}
+          aria-label={tab.label}
+          aria-current={activeTab === tab.id ? 'true' : undefined}
+        >
+          <div className="nav-icon-wrapper">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={tab.icon} />
+            </svg>
+          </div>
+          <span className="label">{tab.label}</span>
+        </a>
+      ))}
     </div>
   );
 }

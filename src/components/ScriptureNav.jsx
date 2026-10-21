@@ -4,6 +4,7 @@ import { NT_TRANSLATION_NAME } from '../utils/bible_config.js';
 import { getQuranSections } from '../utils/quran_config.js';
 import { getHadithNavSections } from '../utils/hadith_config.js';
 import { getBaseUrl } from '../utils/urlFactory.js';
+import { NAV_TABS, useNavTabs } from './navTabs.js';
 
 const OVERVIEW_ROUTES = {
   gospels: 'nt'
@@ -20,9 +21,9 @@ export default function ScriptureNav() {
   const [currentBook, setCurrentBook] = useState(null);
   const [currentChapter, setCurrentChapter] = useState(null);
   const [currentReader, setCurrentReader] = useState(null);
-  const [activeTab, setActiveTab] = useState('scripture');
   const [currentQuranIndex, setCurrentQuranIndex] = useState(null);
   const [currentHadithSection, setCurrentHadithSection] = useState(null); // 'home' | category slug
+  const { activeTab, hrefFor } = useNavTabs();
 
   // Synchronize active scripture route context
   useEffect(() => {
@@ -86,13 +87,6 @@ export default function ScriptureNav() {
         setCurrentHadithSection(null);
       }
 
-      if (activePath.startsWith('/evidence')) {
-        setActiveTab('evidence');
-      } else if (activePath.startsWith('/discover')) {
-        setActiveTab('discover');
-      } else {
-        setActiveTab('scripture');
-      }
     };
 
     syncNavWithUrl();
@@ -177,145 +171,138 @@ export default function ScriptureNav() {
 
       {/* 2. Desktop Navigation Panel (Visible only on desktop, hidden on mobile) */}
       <div className="sidebar-tabs-vertical">
-        {/* Scripture Button */}
-        <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/`} className={`sidebar-nav-btn ${activeTab === 'scripture' ? 'active' : ''}`} aria-label="Scripture View">
-          <div className="btn-icon-wrapper">
-            <svg viewBox="0 0 24 24" strokeWidth="2.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-          </div>
-          <span className="btn-label">Scripture</span>
-        </a>
-
-        {/* Evidence Button */}
-        <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/evidence`} className={`sidebar-nav-btn ${activeTab === 'evidence' ? 'active' : ''}`} aria-label="Evidence">
-          <div className="btn-icon-wrapper">
-            <svg viewBox="0 0 24 24" strokeWidth="2.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-            </svg>
-          </div>
-          <span className="btn-label">Evidence</span>
-        </a>
-
-        {/* Discover Button */}
-        <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/discover`} className={`sidebar-nav-btn ${activeTab === 'discover' ? 'active' : ''}`} aria-label="Discover">
-          <div className="btn-icon-wrapper">
-            <svg viewBox="0 0 24 24" strokeWidth="2.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-          </div>
-          <span className="btn-label">Discover</span>
-        </a>
-      </div>
-
-      {/* 3. Scrollable Books Tree Navigator */}
-      <div className="sidebar-scroll-content">
-        {/* Sahih Hadiths */}
-        <div className="nav-section">
-          <button
-            onClick={() => toggleSection('hadith')}
-            className={`section-header-btn ${expandedSection === 'hadith' ? 'active' : ''}`}
+        {NAV_TABS.map(tab => (
+          <a
+            key={tab.id}
+            href={hrefFor(tab)}
+            className={`sidebar-nav-btn ${activeTab === tab.id ? 'active' : ''}`}
+            aria-label={tab.label}
+            aria-current={activeTab === tab.id ? 'true' : undefined}
           >
-            <span className="icon" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-2px' }}>
-                <path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z" />
-                <path d="M4 21V5" />
-                <path d="M9 8h5M9 12h5" />
+            <div className="btn-icon-wrapper">
+              <svg viewBox="0 0 24 24" strokeWidth="2.5" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d={tab.icon} />
               </svg>
-            </span>
-            <span className="title-text">Sahih Hadiths</span>
-            <span className="section-arrow">{expandedSection === 'hadith' ? '▼' : '▶'}</span>
-          </button>
-          {expandedSection === 'hadith' && (
-            <div className="book-list animate-fade-in">
-              <div className="book-item">
-                <a
-                  href={HADITH_HOME_HREF}
-                  className={`book-select-btn ${currentHadithSection === 'home' ? 'active-book' : ''}`}
-                  style={{ paddingLeft: '12px' }}
-                >
-                  <span className="book-name">Overview</span>
-                </a>
-              </div>
-              {HADITH_NAV_SECTIONS.map((sec) => (
-                <div key={sec.slug} className="book-item">
-                  <a
-                    href={sec.path}
-                    className={`book-select-btn ${currentHadithSection === sec.slug ? 'active-book' : ''}`}
-                    style={{ paddingLeft: '12px' }}
-                  >
-                    <span className="book-name">{sec.short}</span>
-                  </a>
-                </div>
-              ))}
             </div>
-          )}
-        </div>
-
-        {/* Quran */}
-        <div className="nav-section">
-          <button
-            onClick={() => toggleSection('quran')}
-            className={`section-header-btn ${expandedSection === 'quran' ? 'active' : ''}`}
-          >
-            <span className="icon">🌙</span>
-            <span className="title-text">Quran</span>
-            <span className="section-arrow">{expandedSection === 'quran' ? '▼' : '▶'}</span>
-          </button>
-          {expandedSection === 'quran' && (
-            <div className="book-list animate-fade-in">
-              <div className="book-item">
-                <a
-                  href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran`}
-                  className={`book-select-btn ${currentQuranIndex === 'home' ? 'active-book' : ''}`}
-                  style={{ paddingLeft: '12px' }}
-                >
-                  <span className="book-name">⚖️ Evidence & Filters</span>
-                </a>
-              </div>
-              {getQuranSections().map((sec) => (
-                <div key={sec.id} className="book-item">
-                  <a
-                    href={sec.path}
-                    className={`book-select-btn ${currentQuranIndex === sec.index ? 'active-book' : ''}`}
-                    style={{ paddingLeft: '12px' }}
-                  >
-                    <span className="book-name">{sec.name}</span>
-                  </a>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* New Testament */}
-        <div className="nav-section">
-          <button
-            onClick={() => toggleSection('nt')}
-            className={`section-header-btn ${expandedSection === 'nt' ? 'active' : ''}`}
-          >
-            <span className="icon">✝</span>
-            <span className="title-text">New Testament ({NT_TRANSLATION_NAME})</span>
-            <span className="section-arrow">{expandedSection === 'nt' ? '▼' : '▶'}</span>
-          </button>
-          {expandedSection === 'nt' && renderBookList(booksData.nt, 'nt', [
-            { id: 'gospels', name: '🎥 The Gospels Overview', path: '/bible/gospels/videos' }
-          ])}
-        </div>
-
-        {/* Old Testament */}
-        <div className="nav-section">
-          <button
-            onClick={() => toggleSection('ot')}
-            className={`section-header-btn ${expandedSection === 'ot' ? 'active' : ''}`}
-          >
-            <span className="icon">📜</span>
-            <span className="title-text">Old Testament (LXX)</span>
-            <span className="section-arrow">{expandedSection === 'ot' ? '▼' : '▶'}</span>
-          </button>
-          {expandedSection === 'ot' && renderBookList(booksData.ot, 'ot')}
-        </div>
+            <span className="btn-label">{tab.label}</span>
+          </a>
+        ))}
       </div>
+
+      {/* 3. Scrollable books tree: two libraries, labelled so the structure is obvious on open. */}
+      <nav className="sidebar-scroll-content" aria-label="Books and sources">
+        <section className="nav-group" aria-labelledby="nav-group-islamic">
+          <h4 id="nav-group-islamic" className="nav-group-label">Islamic sources</h4>
+          {/* Quran */}
+          <div className="nav-section">
+            <button
+              onClick={() => toggleSection('quran')}
+              className={`section-header-btn ${expandedSection === 'quran' ? 'active' : ''}`}
+            >
+              <span className="icon">🌙</span>
+              <span className="title-text">Quran</span>
+              <span className="section-arrow">{expandedSection === 'quran' ? '▼' : '▶'}</span>
+            </button>
+            {expandedSection === 'quran' && (
+              <div className="book-list animate-fade-in">
+                <div className="book-item">
+                  <a
+                    href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran`}
+                    className={`book-select-btn ${currentQuranIndex === 'home' ? 'active-book' : ''}`}
+                    style={{ paddingLeft: '12px' }}
+                  >
+                    <span className="book-name">⚖️ Evidence & Filters</span>
+                  </a>
+                </div>
+                {getQuranSections().map((sec) => (
+                  <div key={sec.id} className="book-item">
+                    <a
+                      href={sec.path}
+                      className={`book-select-btn ${currentQuranIndex === sec.index ? 'active-book' : ''}`}
+                      style={{ paddingLeft: '12px' }}
+                    >
+                      <span className="book-name">{sec.name}</span>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Sahih Hadiths */}
+          <div className="nav-section">
+            <button
+              onClick={() => toggleSection('hadith')}
+              className={`section-header-btn ${expandedSection === 'hadith' ? 'active' : ''}`}
+            >
+              <span className="icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-2px' }}>
+                  <path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z" />
+                  <path d="M4 21V5" />
+                  <path d="M9 8h5M9 12h5" />
+                </svg>
+              </span>
+              <span className="title-text">Sahih Hadiths</span>
+              <span className="section-arrow">{expandedSection === 'hadith' ? '▼' : '▶'}</span>
+            </button>
+            {expandedSection === 'hadith' && (
+              <div className="book-list animate-fade-in">
+                <div className="book-item">
+                  <a
+                    href={HADITH_HOME_HREF}
+                    className={`book-select-btn ${currentHadithSection === 'home' ? 'active-book' : ''}`}
+                    style={{ paddingLeft: '12px' }}
+                  >
+                    <span className="book-name">Overview</span>
+                  </a>
+                </div>
+                {HADITH_NAV_SECTIONS.map((sec) => (
+                  <div key={sec.slug} className="book-item">
+                    <a
+                      href={sec.path}
+                      className={`book-select-btn ${currentHadithSection === sec.slug ? 'active-book' : ''}`}
+                      style={{ paddingLeft: '12px' }}
+                    >
+                      <span className="book-name">{sec.short}</span>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="nav-group" aria-labelledby="nav-group-bible">
+          <h4 id="nav-group-bible" className="nav-group-label">Bible</h4>
+          {/* New Testament */}
+          <div className="nav-section">
+            <button
+              onClick={() => toggleSection('nt')}
+              className={`section-header-btn ${expandedSection === 'nt' ? 'active' : ''}`}
+            >
+              <span className="icon">✝</span>
+              <span className="title-text">New Testament ({NT_TRANSLATION_NAME})</span>
+              <span className="section-arrow">{expandedSection === 'nt' ? '▼' : '▶'}</span>
+            </button>
+            {expandedSection === 'nt' && renderBookList(booksData.nt, 'nt', [
+              { id: 'gospels', name: '🎥 The Gospels Overview', path: '/bible/gospels/videos' }
+            ])}
+          </div>
+
+          {/* Old Testament */}
+          <div className="nav-section">
+            <button
+              onClick={() => toggleSection('ot')}
+              className={`section-header-btn ${expandedSection === 'ot' ? 'active' : ''}`}
+            >
+              <span className="icon">📜</span>
+              <span className="title-text">Old Testament (LXX)</span>
+              <span className="section-arrow">{expandedSection === 'ot' ? '▼' : '▶'}</span>
+            </button>
+            {expandedSection === 'ot' && renderBookList(booksData.ot, 'ot')}
+          </div>
+        </section>
+      </nav>
 
       {/* Custom Styling */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -431,6 +418,18 @@ export default function ScriptureNav() {
           overflow-y: auto;
           overflow-x: hidden;
           padding: 10px;
+        }
+
+        .nav-group + .nav-group { margin-top: 14px; padding-top: 12px; border-top: 1px solid #f1f5f9; }
+        .nav-group-label {
+          margin: 6px 12px 4px;
+          font-size: 10.5px;
+          font-weight: 800;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+          font-family: inherit;
+          line-height: 1.3;
+          color: #71717a; /* zinc 500: 4.8:1 on white (informative text, not decoration) */
         }
 
         .nav-section {
