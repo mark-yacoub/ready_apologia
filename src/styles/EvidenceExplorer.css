@@ -1429,6 +1429,29 @@
   width: 180px;
   height: 180px;
 }
+
+/* Phones: both religion tabs always visible. The active tab takes 60% of the row and the other
+   the rest, so the Islamic tab can never be scrolled off-screen behind the Christian one. */
+@media (max-width: 767px) {
+  .hero-cards-container { overflow-x: visible; gap: 10px; }
+  .category-hero-card {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    padding: 16px 14px;
+    transition: flex-grow 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease, transform 0.3s ease;
+  }
+  .category-hero-card.is-active { flex: 0 0 calc(60% - 5px); padding: 18px; }
+  .category-hero-card .hero-card-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* Subtitles wrap to two lines rather than truncate ("Defending Core Theology" on a 360px phone). */
+  .category-hero-card .hero-card-subtitle { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.3; }
+  .category-hero-card:not(.is-active) .hero-card-title { font-size: 19px; }
+  .category-hero-card:not(.is-active) .hero-card-subtitle { font-size: 12px; }
+  .category-hero-card:not(.is-active) { opacity: 0.85; }
+}
+@media (max-width: 399px) {
+  .category-hero-card.is-active .hero-card-title { font-size: 21px; }
+}
 .christian-theme .hero-watermark {
   color: #974543;
 }
