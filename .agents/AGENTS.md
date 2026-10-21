@@ -2,6 +2,7 @@
 
 ## Mandatory Initialization
 - **Read JETSKI.md**: At the start of any new session working on this repository, you MUST read `JETSKI.md` before making architectural decisions or modifying UI components.
+- **Read the playbook before writing or designing**: Before writing or editing any article, hub, reader-facing label or SEO copy, or designing/restyling a page, you MUST read `docs/article_and_ux_playbook.md` (voice rules, strongest-first ordering, review process, UI/UX principles) and follow it.
 
 ## Terminal Sandbox & Node Execution Quirks
 - **Missing $PATH Binaries**: In non-interactive subprocesses (`run_command`), standard `node`, `npm`, and `yarn` binaries are missing from `$PATH`.
