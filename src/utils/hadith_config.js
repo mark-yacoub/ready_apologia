@@ -2,9 +2,11 @@
  * UI configuration for the Sahih Hadith Explorer (/hadith).
  *
  * Kept separate from the data files (src/data/hadith/*) which are owned by the data pipeline.
- * Category / subcategory display slugs are keyed by the EXACT dataset names; unknown names fall
- * back to an auto-slug and emit a build warning (see hadithLoader.js).
+ * Category / subcategory labels, short labels and slugs are keyed by the EXACT dataset names; an
+ * unmapped or unlabelled name fails the build (see resolveTaxonomy in hadithLoader.js).
  */
+
+import { HADITH_RELIABILITY_PATH } from './routes.js';
 
 export const HADITH_BASE_PATH = '/hadith';
 
@@ -12,68 +14,80 @@ export const HADITH_BASE_PATH = '/hadith';
 export const RESERVED_SLUGS = new Set(['bukhari', 'muslim', 'data', 'translation-audit']);
 
 /**
- * Ordered by the dataset's category rank. `short` is used where horizontal space is tight (pills, sidebar).
+ * Keyed by the EXACT dataset names (the data pipeline owns those). Ordered by the dataset's category rank.
+ *   label  what readers see: a neutral topic name, the way a hadith index would title a chapter,
+ *          written for a curious Muslim reader (never a verdict). Falls back to the dataset name.
+ *   short  where horizontal space is tight (pills, sidebar).
+ *   slug   URL segment. /hadith was renamed before first push (Oct 2026), so no redirects exist;
+ *          after it ships, a slug change needs a redirect.
  */
 export const HADITH_TAXONOMY = {
   "Muhammad's Character, Life & Conduct": {
-    slug: 'muhammad',
-    short: "Muhammad's Character",
+    label: "The Prophet's Life & Conduct",
+    slug: 'prophet',
+    short: "The Prophet's life",
     subcategories: {
-      'Sexual Ethics, Child Marriage & Bedroom Conduct': { slug: 'sexual-ethics', short: 'Sexual ethics & child marriage' },
-      'Self-Serving Revelations & Prophetic Privileges': { slug: 'self-serving-revelations', short: 'Self-serving revelations' },
-      'Occult, Bewitchment & Demonic Revelation Symptoms': { slug: 'occult-and-bewitchment', short: 'Occult & bewitchment' },
-      'Deceit, Oath-Breaking & Political Assassinations': { slug: 'deceit-and-assassinations', short: 'Deceit & assassinations' },
+      'Sexual Ethics, Child Marriage & Bedroom Conduct': { label: "Marriage, Aisha's Age & Married Life", slug: 'marriage-and-aishas-age', short: "Marriage & Aisha's age" },
+      'Self-Serving Revelations & Prophetic Privileges': { label: "Revelations Concerning the Prophet's Household", slug: 'prophetic-privileges', short: 'Revelations on his household' },
+      'Occult, Bewitchment & Demonic Revelation Symptoms': { label: 'Sorcery Against the Prophet & the Onset of Revelation', slug: 'sorcery-and-revelation', short: 'Sorcery & revelation' },
+      'Deceit, Oath-Breaking & Political Assassinations': { label: 'Oaths, Deception in War & Targeted Killings', slug: 'oaths-and-killings', short: 'Oaths, deception & killings' },
     },
   },
   'Violence, Cruelty & Intolerance': {
-    slug: 'violence',
-    short: 'Violence & Intolerance',
+    label: 'War, Punishment & Non-Muslims',
+    slug: 'war-and-punishment',
+    short: 'War & punishment',
     subcategories: {
-      'Apostasy, Stoning & Unequal Justice': { slug: 'apostasy-and-stoning', short: 'Apostasy & stoning' },
-      'Offensive Jihad & Religious Intolerance': { slug: 'offensive-jihad', short: 'Offensive jihad' },
-      'Torture, Massacres & Extrajudicial Cruelty': { slug: 'torture-and-massacres', short: 'Torture & massacres' },
+      'Apostasy, Stoning & Unequal Justice': { label: 'Apostasy, Stoning & Legal Penalties', slug: 'apostasy-and-stoning', short: 'Apostasy & stoning' },
+      'Offensive Jihad & Religious Intolerance': { label: 'Jihad & Relations With Non-Muslims', slug: 'jihad', short: 'Jihad & non-Muslims' },
+      'Torture, Massacres & Extrajudicial Cruelty': { label: 'Severe Punishments & the Fate of Prisoners', slug: 'punishments-and-prisoners', short: 'Punishments & prisoners' },
     },
   },
   'Women, Slavery & Human Exploitation': {
+    label: 'Women & Slavery',
     slug: 'women-and-slavery',
-    short: 'Women & Slavery',
+    short: 'Women & slavery',
     subcategories: {
-      'Misogyny & Subjugation of Women': { slug: 'misogyny', short: 'Misogyny' },
-      'Chattel Slavery & Captive Concubinage': { slug: 'slavery-and-concubinage', short: 'Slavery & concubinage' },
+      'Misogyny & Subjugation of Women': { label: 'The Status of Women', slug: 'status-of-women', short: 'Status of women' },
+      'Chattel Slavery & Captive Concubinage': { label: 'Slavery & Concubinage', slug: 'slavery-and-concubinage', short: 'Slavery & concubinage' },
     },
   },
   'Absurdities, Superstitions & Scientific Errors': {
-    slug: 'absurdities',
-    short: 'Absurdities & Science',
+    label: 'Science, Medicine & the Unseen',
+    slug: 'science-and-the-unseen',
+    short: 'Science & the unseen',
     subcategories: {
-      'Cosmological, Anatomical & Historical Errors': { slug: 'cosmological-errors', short: 'Scientific & historical errors' },
-      'Medical Blunders & Unhygienic Remedies': { slug: 'medical-blunders', short: 'Medical blunders' },
-      'Absurd Folklore, Bizarre Myths & Demonology': { slug: 'folklore-and-myths', short: 'Folklore & myths' },
+      'Cosmological, Anatomical & Historical Errors': { label: 'The Cosmos, the Body & History', slug: 'cosmos-body-history', short: 'Cosmos, body & history' },
+      'Medical Blunders & Unhygienic Remedies': { label: 'Prophetic Medicine & Remedies', slug: 'prophetic-medicine', short: 'Prophetic medicine' },
+      'Absurd Folklore, Bizarre Myths & Demonology': { label: 'Jinn, Devils & Wonders', slug: 'jinn-and-wonders', short: 'Jinn & wonders' },
     },
   },
   'Quranic Preservation & Textual Reliability': {
-    slug: 'quran-preservation',
-    short: 'Quran Preservation',
+    label: 'Preserving the Quran & the Hadith',
+    slug: 'preservation',
+    short: 'Preservation',
     subcategories: {
-      'Quranic Loss, Forgotten Verses & Uthmanic Burning': { slug: 'lost-verses', short: 'Lost verses & burning' },
-      'Internal Hadith Contradictions & Fabricated Prophecies': { slug: 'contradictions-and-prophecies', short: 'Contradictions & prophecies' },
+      'Quranic Loss, Forgotten Verses & Uthmanic Burning': { label: "Verses Not in Today's Mushaf & Uthman's Compilation", slug: 'missing-verses', short: 'Missing verses & Uthman' },
+      'Internal Hadith Contradictions & Fabricated Prophecies': { label: 'Differing Reports & Prophecies', slug: 'differing-reports', short: 'Differing reports' },
     },
   },
   'Theological Defects & Anti-Biblical Doctrines': {
-    slug: 'theology',
-    short: 'Theology',
+    label: 'God, Paradise & Predestination',
+    slug: 'god-and-afterlife',
+    short: 'God & the afterlife',
     subcategories: {
-      'Crude Anthropomorphism, Carnal Paradise & Pagan Vestiges': { slug: 'anthropomorphism-and-paradise', short: 'Anthropomorphism & paradise' },
-      'Capricious Deity, Fatalism & Moral Immunity': { slug: 'capricious-deity', short: 'Capricious deity & fatalism' },
+      'Crude Anthropomorphism, Carnal Paradise & Pagan Vestiges': { label: "God's Attributes, Paradise & Pre-Islamic Rites", slug: 'attributes-and-paradise', short: 'Attributes & paradise' },
+      'Capricious Deity, Fatalism & Moral Immunity': { label: 'Predestination, Divine Will & Forgiveness', slug: 'predestination', short: 'Predestination' },
     },
   },
   'Christian Doctrines Muslims Attack That Are Conceded in Hadith': {
-    slug: 'christian-doctrines-conceded',
-    short: 'Christian Doctrines Conceded',
+    label: 'Hadiths That Echo Christian Teaching',
+    slug: 'christian-parallels',
+    short: 'Echoes of Christian teaching',
     subcategories: {
-      'Divine Immanence, Entering Creation & Visible Form (Incarnation Precedents)': { slug: 'incarnation', short: 'Incarnation precedents' },
-      'Uncreated Divine Word, Original Sin & Sacramental Relics (Trinitarian & Soteriological Precedents)': { slug: 'divine-word-and-original-sin', short: 'Divine Word & original sin' },
-      'Vicarious Ransom, Sin-Transfer & Intercessory Salvation (Atonement Precedents)': { slug: 'atonement', short: 'Atonement precedents' },
+      'Divine Immanence, Entering Creation & Visible Form (Incarnation Precedents)': { label: 'God Appearing in Form & Drawing Near', slug: 'god-in-form', short: 'God appearing in form' },
+      'Uncreated Divine Word, Original Sin & Sacramental Relics (Trinitarian & Soteriological Precedents)': { label: "The Uncreated Word, Adam's Sin & Blessed Relics", slug: 'word-and-adams-sin', short: "Word, Adam's sin & relics" },
+      'Vicarious Ransom, Sin-Transfer & Intercessory Salvation (Atonement Precedents)': { label: 'Ransom, Bearing Sins & Intercession', slug: 'ransom-and-intercession', short: 'Ransom & intercession' },
     },
   },
 };
@@ -81,7 +95,7 @@ export const HADITH_TAXONOMY = {
 /** Sidebar entries (kept here so the ScriptureNav island doesn't import the dataset). */
 export function getHadithNavSections(base = '') {
   return Object.entries(HADITH_TAXONOMY).map(([name, cfg]) => ({
-    name,
+    name: cfg.label || name,
     short: cfg.short,
     slug: cfg.slug,
     path: `${base}${HADITH_BASE_PATH}/${cfg.slug}`,
@@ -179,17 +193,27 @@ export const HADITH_LABELS = {
   seeAll: (n) => `All ${n} narrations`,
 };
 
-/** Placeholder intro for the hub page. Replace with final copy. */
+/**
+ * Hub intro. Same voice as the Hadith Reliability article: objective, short, an invitation to look.
+ * The first paragraph is set in the serif face; the aside is a quiet pointer, not a claim.
+ */
 export const HADITH_INTRO = [
-  'The Sahih collections of al-Bukhari and Muslim are regarded by Sunni Muslims as the most authentic books after the Quran. They are the primary record of what Muhammad said and did, and they shape Islamic law, belief and practice to this day.',
-  'This section lets the texts speak for themselves. Each entry shows the exact passage that matters, the original Arabic, and a direct link to Sunnah.com so anyone can verify it in full.',
+  'Sunni Muslims regard Sahih al-Bukhari and Sahih Muslim as the most authentic books after the Quran: the primary record of what Muhammad said and did.',
+  'This section takes them on their own terms. Each entry shows the exact passage, the original Arabic, and a link to Sunnah.com to read it in full.',
 ];
+
+/** A separate question the explorer does not try to answer: points to /discover/hadith-reliability. */
+export const HADITH_INTRO_ASIDE = {
+  lead: 'A separate question is how faithfully these reports were passed down before they were compiled, about two centuries after the Prophet.',
+  linkLabel: 'How reliable are the hadith?',
+  path: HADITH_RELIABILITY_PATH,
+};
 
 export const HADITH_SEO = {
   hub: {
-    title: 'Sahih Hadith Explorer | Bukhari & Muslim Under Scrutiny',
-    description: 'Explore 820+ authentic hadiths from Sahih al-Bukhari and Sahih Muslim, organized by topic, with the original Arabic, full narrations, sanitized-translation audits and Sunnah.com verification.',
-    keywords: 'sahih bukhari, sahih muslim, problematic hadith, hadith analysis, islam apologetics, aisha age hadith, hadith translation errors',
+    title: 'Sahih Hadith Explorer | Bukhari & Muslim by Topic',
+    description: '820+ hadiths from Sahih al-Bukhari and Sahih Muslim, organized by topic, with the original Arabic, full narrations, translation notes and a Sunnah.com link for each.',
+    keywords: 'sahih bukhari, sahih muslim, hadith by topic, aisha age hadith, hadith arabic english, hadith translation',
   },
   category: (category) => ({
     title: `${category} | Sahih Hadith Evidence`,

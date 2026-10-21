@@ -1,12 +1,12 @@
 ---
 /**
- * Sahih Hadith hub: placeholder intro, category list with subcategory "scent" lines,
+ * Sahih Hadith hub: short intro (with a pointer to the Hadith Reliability article), category list with subcategory "scent" lines,
  * and an entry point to the translation audit.
  */
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
 import { loadHadithModel } from '../../utils/hadithLoader.js';
-import { HADITH_INTRO, HADITH_SEO, TRANSLATION_ISSUE_TYPES, getTranslationAuditPath } from '../../utils/hadith_config.js';
+import { HADITH_INTRO, HADITH_INTRO_ASIDE, HADITH_SEO, TRANSLATION_ISSUE_TYPES, getTranslationAuditPath } from '../../utils/hadith_config.js';
 import { buildBreadcrumbSchema } from '../../utils/seoFactory.js';
 import '../../styles/hadith.css';
 
@@ -53,6 +53,10 @@ const schemaObj = {
       <h1 class="hx-h1">Sahih Hadiths</h1>
       <div class="hx-intro">
         {HADITH_INTRO.map(p => <p>{p}</p>)}
+        <p class="hx-intro-aside">
+          {HADITH_INTRO_ASIDE.lead}{' '}
+          <a href={`${base}${HADITH_INTRO_ASIDE.path}`}>{HADITH_INTRO_ASIDE.linkLabel}<span aria-hidden="true"> →</span></a>
+        </p>
       </div>
     </header>
 

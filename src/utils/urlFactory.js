@@ -139,7 +139,7 @@ export function getHadithPermalink(collection, sunnahNum, base) {
  * @param {string} [options.subcategory] - Subcategory slug
  * @param {string} [options.anchor] - Card anchor (e.g. "muslim-1422a")
  * @param {string} [options.base] - Optional base path override
- * @returns {string} e.g. "/hadith/muhammad/sexual-ethics#muslim-1422a"
+ * @returns {string} e.g. "/hadith/prophet/marriage-and-aishas-age#muslim-1422a"
  */
 export function getHadithSectionUrl({ category, subcategory, anchor, base } = {}) {
   const basePath = base !== undefined ? base : getBaseUrl();

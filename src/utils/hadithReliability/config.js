@@ -4,9 +4,11 @@
  * fallbacks used until the dataset provides them, plus UI copy and the archetype → angle mapping.
  */
 
+import { HADITH_RELIABILITY_PATH } from '../routes.js';
+
 /** Site base ('' at the root). Every internal href goes through BASE so a non-root BASE_URL works. */
 export const BASE = (import.meta.env?.BASE_URL ?? '/').replace(/\/$/, '');
-export const BASE_PATH = `${BASE}/discover/hadith-reliability`;
+export const BASE_PATH = `${BASE}${HADITH_RELIABILITY_PATH}`;
 /** Shared cover image (public/), as a site-relative path including BASE. */
 export const OG_IMAGE = `${BASE}/media/hadith_reliability/cover.jpg`;
 export const CATALOG_SLUG = 'hadith-reliability';

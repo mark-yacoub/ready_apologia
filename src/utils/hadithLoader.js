@@ -40,18 +40,12 @@ function readJson(file) {
   return JSON.parse(fs.readFileSync(path.join(process.cwd(), DATA_DIR, file), 'utf8'));
 }
 
-function autoSlug(name) {
-  return String(name).toLowerCase().replace(/&/g, 'and').replace(/['’]/g, '')
-    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-}
-
 function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 function createDiagnostics() {
   return {
-    unknownTaxonomy: new Set(),
     missingFulltext: [],
     refsWithoutFulltext: new Set(),
     unanchoredEn: [],
@@ -65,16 +59,23 @@ function createDiagnostics() {
   };
 }
 
-function resolveTaxonomy(ctx, category, subcategory) {
+/**
+ * Dataset names → reader-facing taxonomy (see HADITH_TAXONOMY). Fails the build on an unmapped or
+ * unlabelled name: the dataset's own names are written for a debate, so falling back to them would
+ * put that wording in front of readers. Add the new name to hadith_config.js with a neutral label.
+ */
+function resolveTaxonomy(category, subcategory) {
   const cat = HADITH_TAXONOMY[category];
   const sub = cat?.subcategories?.[subcategory];
-  if (!cat) ctx.diagnostics.unknownTaxonomy.add(`category "${category}"`);
-  else if (!sub) ctx.diagnostics.unknownTaxonomy.add(`subcategory "${subcategory}"`);
+  const missing = !cat ? `category "${category}"`
+    : !sub ? `subcategory "${subcategory}" (in "${category}")`
+    : !cat.label ? `label for category "${category}"`
+    : !sub.label ? `label for subcategory "${subcategory}"`
+    : null;
+  if (missing) throw new Error(`${LOG} Unmapped taxonomy: ${missing}. Add it to HADITH_TAXONOMY in src/utils/hadith_config.js with a neutral label, short and slug.`);
   return {
-    catSlug: cat?.slug || autoSlug(category),
-    catShort: cat?.short || category,
-    subSlug: sub?.slug || autoSlug(subcategory),
-    subShort: sub?.short || subcategory,
+    catSlug: cat.slug, catLabel: cat.label, catShort: cat.short,
+    subSlug: sub.slug, subLabel: sub.label, subShort: sub.short,
   };
 }
 
@@ -263,7 +264,7 @@ function buildAnnotation(ctx, key, ann, annIndex) {
   const ft = ctx.fulltext[key];
   const { diagnostics } = ctx;
   const id = `${key}#${annIndex}`;
-  const tax = resolveTaxonomy(ctx, ann.category, ann.subcategory);
+  const tax = resolveTaxonomy(ann.category, ann.subcategory);
   const excerptEn = ann.problematic_excerpt?.english || '';
   const excerptAr = ann.problematic_excerpt?.arabic || '';
   const rangeEn = findRange(ft.english, excerptEn);
@@ -407,7 +408,7 @@ function resolveAnnId(ctx, id) {
 }
 
 function buildSubcategory(ctx, cat, catTax, sub, usedSubSlugs) {
-  const subTax = resolveTaxonomy(ctx, cat.category, sub.subcategory);
+  const subTax = resolveTaxonomy(cat.category, sub.subcategory);
   if (usedSubSlugs.has(subTax.subSlug)) throw new Error(`${LOG} Duplicate subcategory slug: ${subTax.subSlug}`);
   usedSubSlugs.add(subTax.subSlug);
 
@@ -423,7 +424,7 @@ function buildSubcategory(ctx, cat, catTax, sub, usedSubSlugs) {
     else ctx.diagnostics.danglingHierarchyIds.push(rawId);
   }
   return {
-    name: sub.subcategory,
+    name: subTax.subLabel, // reader-facing label from HADITH_TAXONOMY, never the dataset name
     slug: subTax.subSlug,
     short: subTax.subShort,
     href: getHadithSectionUrl({ category: catTax.catSlug, subcategory: subTax.subSlug }),
@@ -438,7 +439,7 @@ function buildCategories(ctx) {
   const usedCatSlugs = new Set();
   return ctx.hierarchy.map(cat => {
     const firstSub = cat.subcategories?.[0]?.subcategory;
-    const catTax = resolveTaxonomy(ctx, cat.category, firstSub);
+    const catTax = resolveTaxonomy(cat.category, firstSub);
     if (RESERVED_SLUGS.has(catTax.catSlug)) throw new Error(`${LOG} Reserved category slug: ${catTax.catSlug}`);
     if (usedCatSlugs.has(catTax.catSlug)) throw new Error(`${LOG} Duplicate category slug: ${catTax.catSlug}`);
     usedCatSlugs.add(catTax.catSlug);
@@ -446,7 +447,7 @@ function buildCategories(ctx) {
     const usedSubSlugs = new Set();
     const subcategories = (cat.subcategories || []).map(sub => buildSubcategory(ctx, cat, catTax, sub, usedSubSlugs));
     return {
-      name: cat.category,
+      name: catTax.catLabel, // reader-facing label from HADITH_TAXONOMY, never the dataset name
       slug: catTax.catSlug,
       short: catTax.catShort,
       href: getHadithSectionUrl({ category: catTax.catSlug }),
@@ -637,7 +638,6 @@ function reportDiagnostics(ctx, stats) {
     return `${arr.slice(0, 5).join(', ')}${arr.length > 5 ? `, … +${arr.length - 5}` : ''}`;
   };
   const problems = [
-    ['unknown taxonomy names (auto-slugged)', d.unknownTaxonomy],
     ['hadiths without full text (skipped)', d.missingFulltext],
     ['references without full text (raw numbering)', d.refsWithoutFulltext],
     ['English excerpts not found in full text', d.unanchoredEn],

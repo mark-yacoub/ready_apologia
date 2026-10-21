@@ -189,6 +189,10 @@
 /* ---------- Hub ---------- */
 .hx-intro p { font-size: 16px; line-height: 1.65; color: var(--hx-ink-2); margin: 14px 0 0; max-width: 60ch; }
 .hx-intro p:first-child { font-family: var(--hx-serif); font-size: 17.5px; color: var(--hx-ink); }
+/* Quiet pointer to the Hadith Reliability article: a side note, not part of the claim above. */
+.hx-intro .hx-intro-aside { font-size: 14.5px; line-height: 1.6; color: var(--hx-muted); margin-top: 16px; padding-left: 12px; border-left: 2px solid var(--hx-line); }
+.hx-intro-aside a { color: var(--hx-ink); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; white-space: nowrap; }
+.hx-intro-aside a:hover { text-decoration-thickness: 2px; }
 .hx-toc { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid var(--hx-line); }
 .hx-toc-row { padding: 14px 0 12px; border-bottom: 1px solid var(--hx-line); }
 .hx-toc-name {
