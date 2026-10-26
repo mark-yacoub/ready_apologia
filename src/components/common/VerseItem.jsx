@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import booksMeta from '../../data/books_meta.json';
 import { trackEvidenceInteraction } from '../../utils/analytics.js';
 import { getBibleUrl, getQuranUrl } from '../../utils/urlFactory.js';
+import { parseMarkdown } from '../../utils/markdown.js';
 
 export const InfoIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -95,9 +96,11 @@ export const VerseItem = ({ vId, text, note, evidenceId, categoryTitle = null, i
       </div>
       <p className="verse-card-text">{text}</p>
       {note && isNoteOpen && (
-        <div className="verse-note-tooltip animate-fade-in" onClick={e => e.stopPropagation()}>
-          {note}
-        </div>
+        <div
+          className="verse-note-tooltip animate-fade-in"
+          onClick={e => e.stopPropagation()}
+          dangerouslySetInnerHTML={{ __html: parseMarkdown(note) }}
+        />
       )}
     </div>
   );

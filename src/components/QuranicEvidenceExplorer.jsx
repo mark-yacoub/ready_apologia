@@ -10,13 +10,16 @@ import '../styles/EvidenceExplorer.css';// --- Module-Level Static Constants (Ze
 const STANDARD_MAP = {
   'Borrowed Mythology': 'Borrowed Mythology & Plagiarism',
   'Borrowed Mythology & Plagiarism': 'Borrowed Mythology & Plagiarism',
+  'Concedes Christian & Biblical Truths': 'Concedes Christian & Biblical Truths',
   'Contradicts the Bible': 'Contradicts the Bible',
   'Devalues Women': 'Devalues Women',
   'Failed Prophecy': 'Failed Prophecy',
-  'Historical Error': 'Historical Error',
+  'Historical Error': 'Historical, Scientific & Cosmological Errors',
+  'Historical, Scientific & Cosmological Errors': 'Historical, Scientific & Cosmological Errors',
   'Incites Violence & Intolerance': 'Incites Violence & Intolerance',
   'Promotes Division & Discrimination': 'Promotes Division & Discrimination',
   'Sanctions Slavery & Concubinage': 'Sanctions Slavery & Concubinage',
+  'Self-Serving Revelations & Prophetic Privileges': 'Self-Serving Revelations & Prophetic Privileges',
   'Theological Defect': 'Theological Defect'
 };
 
@@ -34,14 +37,16 @@ const normalizeAndSplitLabel = (rawLabel) => {
 };
 
 const CUSTOM_ORDER_KEYWORDS = [
+  ['self-serving revelations', 'prophetic privileges'],
   ['devalues women'],
-  ['historical error'],
+  ['historical, scientific', 'historical error', 'cosmological'],
   ['incites violence'],
-  ['promotes division'],
   ['slavery'],
+  ['promotes division'],
   ['borrowed myth', 'plagiarism'],
   ['theological defect'],
   ['contradicts the bible'],
+  ['concedes christian'],
   ['failed prophecy']
 ];
 

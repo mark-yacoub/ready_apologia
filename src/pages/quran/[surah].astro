@@ -12,6 +12,7 @@ import { loadEnglishData } from '../../utils/quran_loader.js';
 import { getVariantsForSurah } from '../../utils/nonUthmanicLoader.js';
 import { getQiraatForSurah } from '../../utils/qiraatLoader.js';
 import { loadVerseLabels } from '../../utils/quran_verse_labels_loader.js';
+import { parseMarkdown } from '../../utils/markdown.js';
 import QiraatCard from '../../components/QiraatCard.astro';
 import PillChevron from '../../components/PillChevron.astro';
 import { getEvidenceSetsForSurahPrefix, getDefaultTafsirScholarForVerse } from '../../utils/quran_evidence_service.js';
@@ -370,9 +371,7 @@ const ogImage = getQuranOgImage(surahNum, null);
                           <PillChevron />
                         </span>
                       </summary>
-                      <div class="label-note">
-                        {noteText}
-                      </div>
+                      <div class="label-note" set:html={parseMarkdown(noteText)} />
                     </details>
                   ))}
                 </div>
@@ -810,7 +809,19 @@ const ogImage = getQuranOgImage(surahNum, null);
     font-family: var(--font-body);
     line-height: 1.6;
     color: var(--color-on-surface);
-    white-space: pre-wrap; /* Preserve markdown/JSON newlines accurately */
+  }
+
+  .label-note :global(p.response-paragraph) {
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    text-align: left;
+  }
+
+  .label-note :global(a.exegesis-inline-link .exegesis-scripture-pill) {
+    all: unset;
+    color: inherit !important;
   }
 
   details[open] summary :global(.pill-chevron) {

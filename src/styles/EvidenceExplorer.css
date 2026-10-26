@@ -393,6 +393,19 @@
   line-height: 1.45;
 }
 
+.verse-note-tooltip p.response-paragraph {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.verse-note-tooltip a.exegesis-inline-link .exegesis-scripture-pill {
+  all: unset;
+  color: inherit !important;
+}
+
 .item-count {
   font-weight: 500;
   color: #94a3b8;
