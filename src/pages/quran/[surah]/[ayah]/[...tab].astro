@@ -128,12 +128,14 @@ if (tab === 'manuscripts') {
 let videos = [];
 if (tab === 'videos') {
   const rawVideos = query(`
-    SELECT sm.*
+    SELECT sm.*, spv.verse_id as target_verse_id, spv.ref_order, spv.total_passages,
+           spv.is_primary, spv.relevance_score, spv.composite_score
     FROM short_per_verse spv
     JOIN shorts_metadata sm ON spv.video_id = sm.video_id
     WHERE spv.verse_id = :dbVerseId
+    ORDER BY spv.composite_score DESC, sm.rigor_score DESC
   `, { dbVerseId });
-  videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
+  videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL, dbVerseId);
 }
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;

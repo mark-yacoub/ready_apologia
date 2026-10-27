@@ -353,10 +353,11 @@ export async function loadRankedLostVerses(base = '') {
     const idSet = videoIds.map(id => `'${id}'`).join(',');
     try {
       const rawVideos = query(`
-        SELECT DISTINCT sm.*, spv.verse_id
+        SELECT sm.*, spv.verse_id, spv.verse_id as target_verse_id, spv.ref_order, spv.total_passages, spv.is_primary, spv.relevance_score, spv.composite_score
         FROM short_per_verse spv
         JOIN shorts_metadata sm ON spv.video_id = sm.video_id
         WHERE spv.verse_id IN (${idSet})
+        ORDER BY spv.composite_score DESC, sm.rigor_score DESC
       `);
 
       const seenPerVerse = new Set();
@@ -374,7 +375,7 @@ export async function loadRankedLostVerses(base = '') {
 
   return RAW_LOST_VERSES.map(entry => {
     const attachedVideos = entry.video_verse_id && videosByVerseId[entry.video_verse_id]
-      ? enrichVideosWithVerses(videosByVerseId[entry.video_verse_id], base)
+      ? enrichVideosWithVerses(videosByVerseId[entry.video_verse_id], base, entry.video_verse_id)
       : [];
 
     return {

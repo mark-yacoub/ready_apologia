@@ -108,7 +108,7 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
 
 const TIER_1 = new Set(['copticorthodoxanswers', 'ancientfaithministries', 'jonathanpageauclips']);
 const TIER_2 = new Set(['inspiringphilosophy', 'capturingchristianity', 'testifyapologetics', 'weshuff']);
-const TIER_3 = new Set(['davidwood', 'cirainternational', 'crossexamined', 'redpenlogic', 'givemeananswer', 'mikewinger', 'livingwaters', 'apologeticsroadshow']);
+const TIER_3 = new Set(['davidwood', 'cirainternational', 'crossexamined', 'redpenlogic', 'givemeananswer', 'mikewinger', 'livingwaters', 'apologeticsroadshow', 'oneforisrael']);
 const TIER_4 = new Set(['shamounian', 'towardsjesus', 'godlogic', 'godlogic2.0', 'godlogicapologetics']);
 const TIER_5 = new Set(['apologiastudios', 'vocabmalone']);
 
@@ -143,29 +143,105 @@ function getTierScore(channelId, apologistName) {
   return 6;
 }
 
-export function sortVideos(videos) {
+function getPassageCount(v) {
+  if (typeof v.total_passages === 'number' && v.total_passages > 0) {
+    return v.total_passages;
+  }
+  if (v.raw_verses_display) {
+    const p = v.raw_verses_display.split(',').map(s => s.trim()).filter(Boolean);
+    if (p.length > 0) return p.length;
+  }
+  return v.resolvedVerses ? v.resolvedVerses.length : 1;
+}
+
+export function computeDynamicCompositeScore(v, targetVerseId) {
+  if (typeof v.composite_score === 'number') {
+    return v.composite_score;
+  }
+  const rigor = v.rigor_score || 0;
+  const rawV = v.raw_verses_display || '';
+  const passages = rawV.split(',').map(s => s.trim()).filter(Boolean);
+  const totalPassages = Math.max(1, passages.length);
+
+  let targetIdx = -1;
+  const tId = (targetVerseId || v.target_verse_id || v.verse_id || '').toLowerCase();
+  if (tId) {
+    for (let i = 0; i < passages.length; i++) {
+      const pLower = passages[i].toLowerCase();
+      const parts = tId.split('_');
+      if (parts.length === 3) {
+        const chapVerse = `${parts[1]}:${parts[2]}`;
+        if (pLower.includes(chapVerse)) { targetIdx = i; break; }
+      } else if (parts.length === 2 && !isNaN(parts[0])) {
+        const surahAyah = `${parts[0]}:${parts[1]}`;
+        if (pLower.includes(surahAyah)) { targetIdx = i; break; }
+      } else if (pLower.includes(tId)) {
+        targetIdx = i; break;
+      }
+    }
+  }
+
+  const isSolo = totalPassages === 1 && (targetIdx === 0 || targetIdx === -1);
+  let posWt = 0.20;
+  if (isSolo) posWt = 1.00;
+  else if (targetIdx === 0) posWt = 0.85;
+  else if (targetIdx === 1) posWt = 0.55;
+  else if (targetIdx === 2) posWt = 0.35;
+  else if (targetIdx === -1) posWt = 0.50;
+
+  const conc = 1.0 / Math.sqrt(totalPassages);
+  const titleLower = (v.title || '').toLowerCase();
+  const summaryLower = (v.summary || '').toLowerCase();
+  let inTitle = false;
+  let inSummary = false;
+  if (tId) {
+    const parts = tId.split('_');
+    if (parts.length === 3) {
+      const chapVerse = `${parts[1]}:${parts[2]}`;
+      inTitle = titleLower.includes(chapVerse);
+      inSummary = summaryLower.includes(chapVerse);
+    } else if (parts.length === 2 && !isNaN(parts[0])) {
+      const surahAyah = `${parts[0]}:${parts[1]}`;
+      inTitle = titleLower.includes(surahAyah);
+      inSummary = summaryLower.includes(surahAyah);
+    }
+  }
+
+  const titBonus = inTitle ? 0.15 : 0.0;
+  const sumBonus = inSummary ? 0.15 : 0.0;
+  const relevance = Math.min(1.0, 0.40 * posWt + 0.30 * conc + titBonus + sumBonus);
+  const tier = getTierScore(v.channel_id, v.apologist_name);
+  return (rigor / 10.0) * (0.35 + 0.65 * relevance) * 100.0 - (tier * 0.02);
+}
+
+export function sortVideos(videos, targetVerseId = null) {
   return videos.sort((a, b) => {
-    // 1. Rigor Score (higher is better)
+    // 1. Continuous Relevance x Rigor Composite Score (higher is better)
+    const scoreA = computeDynamicCompositeScore(a, targetVerseId);
+    const scoreB = computeDynamicCompositeScore(b, targetVerseId);
+    if (Math.abs(scoreB - scoreA) >= 0.05) return scoreB - scoreA;
+
+    // 2. Rigor Score (higher is better)
     const rigorA = a.rigor_score || 0;
     const rigorB = b.rigor_score || 0;
     if (rigorA !== rigorB) return rigorB - rigorA;
 
-    // 2. Number of verses mentioned (lower is better, assuming empty is 0 but shouldn't happen based on index)
-    const versesA = a.resolvedVerses ? a.resolvedVerses.length : 0;
-    const versesB = b.resolvedVerses ? b.resolvedVerses.length : 0;
-    if (versesA !== versesB) return versesA - versesB;
+    // 3. Number of distinct passages (lower is better, eliminates range expansion penalty!)
+    const passagesA = getPassageCount(a);
+    const passagesB = getPassageCount(b);
+    if (passagesA !== passagesB) return passagesA - passagesB;
 
-    // 3. Tier (lower number is better rank)
+    // 4. Tier (lower number is better rank)
     const tierA = getTierScore(a.channel_id, a.apologist_name);
     const tierB = getTierScore(b.channel_id, b.apologist_name);
     if (tierA !== tierB) return tierA - tierB;
 
-    // 4. Topic matching (Jesus=1, General=2, Islam=3)
+    // 5. Topic matching (Jesus=1, General=2, Islam=3)
     const topicA = getTopicScore(a.summary);
     const topicB = getTopicScore(b.summary);
     if (topicA !== topicB) return topicA - topicB;
 
-    // 5. Tie breaker: Title alphabetically
+    // 6. Tie breaker: Title alphabetically
     const titleA = a.title || '';
     const titleB = b.title || '';
     return titleA.localeCompare(titleB);
@@ -176,9 +252,10 @@ export function sortVideos(videos) {
  * Enhances raw video database objects with resolved verses structure
  * @param {Array} videos - Array of DB records from shorts_metadata
  * @param {String} base - The base URL scope (import.meta.env.BASE_URL)
+ * @param {String} [targetVerseId] - Optional current verse ID being viewed
  * @returns {Array} - The enriched DTO arrays ready for the UI layer
  */
-export function enrichVideosWithVerses(videos, base) {
+export function enrichVideosWithVerses(videos, base, targetVerseId = null) {
   if (!videos || !videos.length) return [];
 
   const quranEnglishData = loadEnglishData();
@@ -199,5 +276,5 @@ export function enrichVideosWithVerses(videos, base) {
     };
   });
 
-  return sortVideos(enriched);
+  return sortVideos(enriched, targetVerseId);
 }

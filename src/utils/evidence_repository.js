@@ -108,9 +108,11 @@ export function getApologeticsByVerseId(checkId) {
 
 export function getRawVideosByVerseId(checkId) {
   return query(`
-    SELECT sm.*
+    SELECT sm.*, spv.verse_id as target_verse_id, spv.ref_order, spv.total_passages,
+           spv.is_primary, spv.relevance_score, spv.composite_score
     FROM short_per_verse spv
     JOIN shorts_metadata sm ON spv.video_id = sm.video_id
     WHERE spv.verse_id = :checkId
+    ORDER BY spv.composite_score DESC, sm.rigor_score DESC
   `, { checkId });
 }
