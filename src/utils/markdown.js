@@ -19,6 +19,14 @@ export function parseMarkdown(text) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
+  // 1b. Tokenize inline code spans (`...`) so inner symbols/letters are untouched by regexes
+  const codeSpans = [];
+  html = html.replace(/`([^`\n]+)`/g, (_, codeText) => {
+    const idx = codeSpans.length;
+    codeSpans.push(codeText);
+    return `\uE000CODE_${idx}\uE001`;
+  });
+
   // 2. Parse standalone dividers (e.g. --- or *** or ###)
   html = html.replace(/^(?:-{3,}|\*{3,}|_{3,}|#+\s*$)/gm, '<hr class="exegesis-divider" />');
 
@@ -41,7 +49,7 @@ export function parseMarkdown(text) {
   html = html.replace(/\*(?!\s)(.*?)(?<!\s)\*/g, '<em>$1</em>');
 
   // 6. Parse Scripture Citations references natively into gorgeous design pills!
-  const scriptureRegex = /\b((?:[123]\s+)?[A-Z][a-z]+\.?\s+\d+:\d+(?:[-–—]\d+)?(?:(?:[;,]\s+)(?:\d+:)?\d+(?:[-–—]\d+)?)*)\b/g;
+  const scriptureRegex = /\b((?:Tafsir\s+(?:Ibn\s+|al-)?|(?:[123]\s+)?)[A-Z][a-z]+\.?\s+\d+:\d+(?:[-–—]\d+)?(?:(?:[;,]\s+)(?:\d+:)?\d+(?:[-–—]\d+)?)*)\b/g;
   html = html.replace(scriptureRegex, '<span class="exegesis-scripture-pill">$1</span>');
 
   // 7. Parse Inline Anchors: [text](url)
@@ -105,16 +113,43 @@ export function parseMarkdown(text) {
     return `<a href="${safeUrl}" ${targetAttrs} class="exegesis-inline-link">${text}</a>`;
   });
 
-  // 8. Parse Unordered Lists (bullet points starting with "* ")
+  // 8a. Parse Markdown Tables (| Header | ... |)
+  html = html.replace(/(?:^\|.*\|[ \t]*(?:\n|$)){2,}/gm, match => {
+    const lines = match.trim().split('\n').map(l => l.trim()).filter(Boolean);
+    if (lines.length < 2 || !/^\|(?:\s*:?-{2,}:?\s*\|)+$/.test(lines[1])) {
+      return match;
+    }
+    const parseRow = rowStr =>
+      rowStr
+        .replace(/^\|/, '')
+        .replace(/\|$/, '')
+        .split('|')
+        .map(cell => cell.trim());
+    const headers = parseRow(lines[0]);
+    const bodyRows = lines.slice(2).map(parseRow);
+    const thead = `<thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>`;
+    const tbody = `<tbody>${bodyRows
+      .map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`)
+      .join('')}</tbody>`;
+    return `\n\n<div class="exegesis-table-wrapper"><table class="exegesis-table">${thead}${tbody}</table></div>\n\n`;
+  });
+
+  // 8b. Parse Unordered Lists (bullet points starting with "* " or "- ")
   // Execute BEFORE paragraph splitting so lists get isolated cleanly
-  html = html.replace(/(?:^\*\s+.*(?:\n|$))+/gm, match => {
-    const items = match.trim().split('\n').map(line => `<li class="response-list-item">${line.replace(/^\*\s+/, '')}</li>`).join('');
+  html = html.replace(/(?:^[ \t]*[\*\-]\s+.*(?:\n|$))+/gm, match => {
+    const items = match.trim().split('\n').map(line => `<li class="response-list-item">${line.replace(/^[ \t]*[\*\-]\s+/, '')}</li>`).join('');
     return `\n\n<ul class="response-list">\n${items}\n</ul>\n\n`;
+  });
+
+  // 8c. Parse Ordered Lists (numbered items starting with "1. ", "2. ", etc.)
+  html = html.replace(/(?:^[ \t]*\d+\.\s+.*(?:\n|$))+/gm, match => {
+    const items = match.trim().split('\n').map(line => `<li class="response-list-item">${line.replace(/^[ \t]*\d+\.\s+/, '')}</li>`).join('');
+    return `\n\n<ol class="response-list">\n${items}\n</ol>\n\n`;
   });
 
   // 9. Parse Paragraph blocks split by double newlines
   const paragraphs = html.split(/\n\n+/);
-  return paragraphs.map(para => {
+  const assembled = paragraphs.map(para => {
     const trimmed = para.trim();
     if (!trimmed) return '';
 
@@ -126,11 +161,16 @@ export function parseMarkdown(text) {
       trimmed.startsWith('<h6') ||
       trimmed.startsWith('<hr') ||
       trimmed.startsWith('<blockquote') ||
-      trimmed.startsWith('<ul')
+      trimmed.startsWith('<ul') ||
+      trimmed.startsWith('<ol') ||
+      trimmed.startsWith('<div class="exegesis-table-wrapper"')
     ) {
       return trimmed;
     }
 
     return `<p class="response-paragraph">${trimmed.replace(/\n/g, '<br/>')}</p>`;
   }).filter(Boolean).join('\n');
+
+  // 10. Restore tokenized inline code spans
+  return assembled.replace(/\uE000CODE_(\d+)\uE001/g, (_, idx) => `<code class="exegesis-inline-code">${codeSpans[Number(idx)]}</code>`);
 }

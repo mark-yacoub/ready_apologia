@@ -274,7 +274,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                 {item.claim && (
                   <div class="debunking-claim-box">
                     <span class="debunking-claim-label">APOLOGIST CLAIM</span>
-                    <p class="debunking-claim-text">"{item.claim}"</p>
+                    <div class="debunking-claim-text" set:html={parseMarkdown(`"${item.claim}"`)} />
                   </div>
                 )}
 
@@ -284,9 +284,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: #10b981;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                       <span>Refutation & Exegesis</span>
                     </h4>
-                    <div class="ct-answer-body ct-plain-text" style="margin-top: 8px;">
-                      {item.refutation}
-                    </div>
+                    <div class="ct-answer-body debunking-markdown-body" style="margin-top: 8px;" set:html={parseMarkdown(item.refutation)} />
                   </div>
                 )}
 
@@ -301,9 +299,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                       </span>
                     </summary>
                     {item.classification_explanation && (
-                      <div class="debunking-methodology-body">
-                        <p>{item.classification_explanation}</p>
-                      </div>
+                      <div class="debunking-methodology-body" set:html={parseMarkdown(item.classification_explanation)} />
                     )}
                   </details>
                 )}
@@ -736,19 +732,36 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
   }
 
   .ct-answer-body :global(p.response-paragraph) {
-    font-size: 14px;
+    font-size: 14.5px;
     line-height: 1.65;
-    margin: 0 0 10px 0;
+    margin: 0 0 12px 0;
+    text-align: left;
   }
 
   .ct-answer-body :global(p.response-paragraph:last-child) {
     margin-bottom: 0;
   }
 
+  .ct-answer-body :global(ul.response-list),
+  .ct-answer-body :global(ol.response-list) {
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin: 0 0 14px 0;
+    padding-left: 20px;
+  }
+
+  .ct-answer-body :global(li.response-list-item) {
+    margin-bottom: 8px;
+  }
+
+  .ct-answer-body :global(li.response-list-item:last-child) {
+    margin-bottom: 0;
+  }
+
   .ct-answer-body :global(hr.exegesis-divider) {
     border: none;
     border-top: 1px solid var(--color-outline-variant);
-    margin: 12px 0;
+    margin: 16px 0;
     opacity: 0.6;
   }
 
@@ -770,13 +783,15 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     color: var(--color-secondary);
     margin-bottom: 6px;
   }
-  .debunking-claim-text {
+  .debunking-claim-text,
+  .debunking-claim-text :global(p.response-paragraph) {
     font-family: var(--font-display);
     font-size: 15px;
     font-style: italic;
     line-height: 1.5;
     color: var(--color-on-surface);
     margin: 0;
+    text-align: left;
   }
   .debunking-refutation-section {
     margin-bottom: 20px;
@@ -840,7 +855,8 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     border-color: var(--color-on-surface-variant);
     background-color: var(--color-outline-variant);
   }
-  .debunking-methodology-body {
+  .debunking-methodology-body,
+  .debunking-methodology-body :global(p.response-paragraph) {
     margin-top: 10px;
     padding: 10px 14px;
     background-color: rgba(0, 0, 0, 0.02);
@@ -848,6 +864,12 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     font-size: 12.5px;
     line-height: 1.5;
     color: var(--color-on-surface-variant);
+    text-align: left;
+  }
+  .debunking-methodology-body :global(p.response-paragraph) {
+    margin: 0;
+    padding: 0;
+    background: transparent;
   }
   .debunking-methodology-body p {
     margin: 0;

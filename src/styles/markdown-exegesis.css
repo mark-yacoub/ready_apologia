@@ -128,7 +128,7 @@ h6:first-child {
   transition: all 0.15s ease;
 }
 
-/* Interactive Clickable Links (including scripture badges inside anchors) */
+/*Interactive Clickable Links (including scripture badges inside anchors) */
 a.exegesis-inline-link {
   color: var(--exegesis-link-color) !important;
   font-weight: 700;
@@ -153,4 +153,59 @@ a.exegesis-inline-link:hover .exegesis-scripture-pill {
   border-color: var(--exegesis-link-color);
   text-decoration: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Inline Code Spans (e.g., transliterations & epigraphic sign sequences) */
+code.exegesis-inline-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: var(--color-surface-container-low, rgba(0, 0, 0, 0.05));
+  border: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.12));
+  color: var(--color-on-surface);
+}
+
+/* Responsive Markdown Tables */
+.exegesis-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 14px 0;
+  border-radius: 8px;
+  border: 1px solid var(--color-outline-variant);
+  background-color: var(--color-surface);
+}
+
+.exegesis-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.exegesis-table th,
+.exegesis-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-outline-variant);
+  vertical-align: top;
+}
+
+.exegesis-table thead th {
+  background-color: var(--color-surface-container-low);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-on-surface-variant);
+}
+
+.exegesis-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.exegesis-table tbody tr:nth-child(even) {
+  background-color: var(--color-surface-container-lowest, rgba(0, 0, 0, 0.015));
 }
