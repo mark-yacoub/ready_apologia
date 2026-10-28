@@ -28,6 +28,11 @@ export function trackEvent(eventName, params = {}) {
 
   sendGtag('event', eventName, payload);
 
+  // Forward custom event to Microsoft Clarity if active
+  if (typeof window.clarity === 'function' && eventName !== 'page_view') {
+    window.clarity('event', eventName);
+  }
+
   if (import.meta.env.DEV || window.GA_DEBUG) {
     console.log(`[GA4 Debug] Event: ${eventName}`, payload);
   }

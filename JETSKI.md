@@ -147,6 +147,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/components/ScriptureNav.jsx`: Collapsible Left Navigator featuring responsive desktop vertical app sections.
 *   `src/components/OnboardingModal.jsx`: Centered card overlay providing an initial onboarding tip.
 *   `src/components/GoogleAnalytics.astro`: Astro `<head>` component injecting GA4 tracking scripts and global SPA/route delegation.
+*   `src/components/MicrosoftClarity.astro`: Astro `<head>` component injecting Microsoft Clarity behavioral analytics, session recording, heatmap tracking, and SPA route synchronization.
 *   `src/components/common/RouteAnalytics.astro`: L6 declarative GA4 route analytics component emitting `#route-analytics-payload` DOM metadata for SPA transitions.
 *   `src/components/QuranSpecial.astro`: Component rendering Lost or Abrogated verses list.
 *   `src/components/QuranPageHeader.astro`: Header component for Quran pages with Surah selection dropdown.

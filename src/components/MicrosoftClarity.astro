@@ -1,0 +1,39 @@
+---
+// Microsoft Clarity behavioral analytics injection component with SPA transition tracking
+const clarityId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID || 'CLARITY-PLACEHOLDER';
+const isProd = import.meta.env.PROD && clarityId && clarityId !== 'CLARITY-PLACEHOLDER';
+---
+
+{isProd && (
+  <script is:inline define:vars={{ clarityId }}>
+    // Comprehensive guard: do not record sessions on localhost, loopbacks, private subnets, or dev machines
+    const isLocalhost =
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname === '0.0.0.0' ||
+      window.location.hostname === '[::1]' ||
+      window.location.hostname.endsWith('.local') ||
+      window.location.hostname.endsWith('.internal') ||
+      window.location.hostname.endsWith('.corp.google.com') ||
+      /^10\./.test(window.location.hostname) ||
+      /^192\.168\./.test(window.location.hostname) ||
+      /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(window.location.hostname);
+
+    if (!isLocalhost) {
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", clarityId);
+    }
+  </script>
+)}
+
+<script>
+  // Sync virtual SPA page transitions to Microsoft Clarity
+  document.addEventListener('astro:page-load', () => {
+    if (typeof window.clarity === 'function') {
+      window.clarity('set', 'page', window.location.pathname);
+    }
+  });
+</script>
