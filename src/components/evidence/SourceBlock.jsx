@@ -74,6 +74,11 @@ const SourceBlock = ({ sourceName, sData }) => {
                           </div>
                         )}
                         <p className="verse-card-text">"{q?.quote || ''}"</p>
+                        {q?.note && (
+                          <div className="verse-note-tooltip">
+                            {q.note}
+                          </div>
+                        )}
                       </div>
                     );
                   })}
