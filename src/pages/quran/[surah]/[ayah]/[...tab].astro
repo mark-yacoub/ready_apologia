@@ -18,7 +18,7 @@ import { loadIslamicCommentaries } from '../../../../utils/islamic_commentaries_
 import { parseMarkdown } from '../../../../utils/markdown.js';
 import { loadQuranContradictions } from '../../../../utils/quran_contradictions_loader.js';
 import { loadScientificErrors, parseExplanationString } from '../../../../utils/quran_scientific_errors_loader.js';
-import { loadDebunkingMiracles } from '../../../../utils/quran_debunking_loader.js';
+import { loadDebunkingMiracles, parseDebunkingItem } from '../../../../utils/quran_debunking_loader.js';
 import { getEvidenceSets } from '../../../../utils/quran_evidence_service.js';
 import { enrichVideosWithVerses } from '../../../../utils/video_service.js';
 import { R2_BASE_URL } from '../../../../utils/cdn_config.js';
@@ -229,14 +229,91 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
       try { localStorage.setItem('ready_apologia_has_seen_full_evidence', 'true'); } catch (e) {}
     </script>
     <script>
-      document.addEventListener('astro:page-load', () => {
+      function initDebunkingInteractions() {
         const btn = document.getElementById('open-quran-tab-settings-btn');
         if (btn) {
           btn.onclick = () => {
             window.dispatchEvent(new CustomEvent('open-quran-tab-settings'));
           };
         }
-      });
+
+        // 1-Tap Copy Quick Summary button (plain-text clipboard copy + debounce-safe timer)
+        document.querySelectorAll('[data-copy-summary]').forEach((copyBtn) => {
+          copyBtn.onclick = async () => {
+            const text = copyBtn.getAttribute('data-copy-summary') || '';
+            const labelEl = copyBtn.querySelector('.copy-summary-label');
+            try {
+              await navigator.clipboard.writeText(text);
+              if (labelEl) {
+                if (copyBtn._copyTimer) clearTimeout(copyBtn._copyTimer);
+                labelEl.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                copyBtn._copyTimer = setTimeout(() => {
+                  labelEl.textContent = 'Copy Summary';
+                  copyBtn.classList.remove('copied');
+                  copyBtn._copyTimer = null;
+                }, 1800);
+              }
+            } catch (e) {}
+          };
+        });
+
+        function syncPillarToggleBtn(cardEl, toggleBtn) {
+          if (!cardEl || !toggleBtn) return;
+          const detailsList = Array.from(cardEl.querySelectorAll('details.debunking-pillar-card'));
+          const anyOpen = detailsList.some((det) => det.hasAttribute('open'));
+          toggleBtn.setAttribute('data-expanded', String(anyOpen));
+          toggleBtn.setAttribute('aria-expanded', String(anyOpen));
+          toggleBtn.textContent = anyOpen ? 'Collapse All Pillars' : 'Expand All Pillars';
+        }
+
+        // 5-Pillar Jump Bar (auto-open target pillar & smooth scroll)
+        document.querySelectorAll('[data-pillar-target]').forEach((pill) => {
+          pill.onclick = (e) => {
+            const targetId = pill.getAttribute('data-pillar-target');
+            if (!targetId) return;
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+              e.preventDefault();
+              targetEl.setAttribute('open', '');
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              const cardEl = targetEl.closest('[data-debunking-card]');
+              const toggleBtn = cardEl?.querySelector('[data-toggle-pillars]');
+              syncPillarToggleBtn(cardEl, toggleBtn);
+            }
+          };
+        });
+
+        // Expand / Collapse All Pillars toggle + live sync with manual <details> toggles
+        document.querySelectorAll('[data-toggle-pillars]').forEach((toggleBtn) => {
+          const cardIdx = toggleBtn.getAttribute('data-toggle-pillars');
+          const cardEl = document.querySelector(`[data-debunking-card="${cardIdx}"]`);
+          if (!cardEl) return;
+
+          cardEl.querySelectorAll('details.debunking-pillar-card').forEach((det) => {
+            det.ontoggle = () => syncPillarToggleBtn(cardEl, toggleBtn);
+          });
+
+          toggleBtn.onclick = () => {
+            const detailsList = Array.from(cardEl.querySelectorAll('details.debunking-pillar-card'));
+            const anyOpen = detailsList.some((det) => det.hasAttribute('open'));
+            const nextExpanded = !anyOpen;
+            detailsList.forEach((det) => {
+              if (nextExpanded) {
+                det.setAttribute('open', '');
+              } else {
+                det.removeAttribute('open');
+              }
+            });
+            syncPillarToggleBtn(cardEl, toggleBtn);
+          };
+        });
+      }
+
+      document.addEventListener('astro:page-load', initDebunkingInteractions);
+      if (document.readyState !== 'loading') {
+        initDebunkingInteractions();
+      }
     </script>
 
     <QuranVerseTabs
@@ -257,55 +334,136 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     <div class="tab-panels-window">
       {tab === 'debunking-miracles' && (
         <div class="contradiction-panel-container">
-          {verseDebunking.map((item) => (
-            <div class="contradiction-details-card">
-              <div class="contradiction-summary-header">
-                <span class="summary-title-main">
-                  <span class="ct-scales-icon" style="color: var(--color-secondary);">
-                    <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" width="18" height="18">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l2 4 4-1-2 4 3 3-4 1 1 4-4-2-3 3-1-4-4 1 2-4-4-2 4-1-1-4 4 2 3-4z" />
-                    </svg>
+          {verseDebunking.map((item, itemIdx) => {
+            const parsed = parseDebunkingItem(item, itemIdx);
+            return (
+              <div class="contradiction-details-card" data-debunking-card={itemIdx}>
+                <div class="contradiction-summary-header debunking-card-header">
+                  <span class="summary-title-main">
+                    <span class="ct-scales-icon" style="color: var(--color-secondary);">
+                      <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" width="18" height="18">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l2 4 4-1-2 4 3 3-4 1 1 4-4-2-3 3-1-4-4 1 2-4-4-2 4-1-1-4 4 2 3-4z" />
+                      </svg>
+                    </span>
+                    <span>Claimed Miracle: {item.miracle_category || "General"}</span>
                   </span>
-                  <span>Claimed Miracle: {item.miracle_category || "General"}</span>
-                </span>
+                  {item.classification && (
+                    <span class="debunking-header-badge">{item.classification}</span>
+                  )}
+                </div>
+
+                <div class="contradiction-card-content">
+                  {item.claim && (
+                    <div class="debunking-claim-box">
+                      <span class="debunking-claim-label">CLAIMED SCIENTIFIC MIRACLE</span>
+                      <div class="debunking-claim-text" set:html={parseMarkdown(`"${item.claim}"`)} />
+                    </div>
+                  )}
+
+                  {parsed.summaryText && (
+                    <div class="debunking-quick-summary-card">
+                      <div class="debunking-quick-summary-header">
+                        <div class="debunking-quick-summary-title">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" style="color: #10b981;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                          </svg>
+                          <span>Quick Summary — At a Glance</span>
+                        </div>
+                        <button
+                          type="button"
+                          class="copy-summary-btn"
+                          data-copy-summary={parsed.summaryPlainText}
+                          aria-label="Copy quick summary to clipboard"
+                          title="Copy quick summary for conversation"
+                        >
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                          </svg>
+                          <span class="copy-summary-label">Copy Summary</span>
+                        </button>
+                      </div>
+                      <div class="ct-answer-body debunking-quick-summary-body" set:html={parseMarkdown(parsed.summaryText)} />
+                    </div>
+                  )}
+
+                  {(item.classification || item.classification_explanation) && (
+                    <details class="debunking-methodology-details debunking-methodology-top">
+                      <summary class="debunking-methodology-summary">
+                        <span class="debunking-methodology-title">
+                          <span class="methodology-tag-label">Methodological Classification:</span>
+                          <strong>{item.classification || "Scholarly Analysis"}</strong>
+                        </span>
+                        <span class="info-icon-btn" title="Click for methodological explanation" aria-label="Explanation info">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        </span>
+                      </summary>
+                      {item.classification_explanation && (
+                        <div class="debunking-methodology-body" set:html={parseMarkdown(item.classification_explanation)} />
+                      )}
+                    </details>
+                  )}
+
+                  {parsed.pillars.length > 0 && (
+                    <div class="debunking-refutation-section debunking-academic-paper-section">
+                      <div class="debunking-paper-header-row">
+                        <h4 class="debunking-refutation-heading" style="margin: 0;">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: #10b981;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                          </svg>
+                          <span>Full Scholarly & Primary-Source Analysis</span>
+                        </h4>
+                        <button
+                          type="button"
+                          class="toggle-all-pillars-btn"
+                          data-toggle-pillars={itemIdx}
+                          data-expanded="true"
+                          aria-expanded="true"
+                        >
+                          Collapse All Pillars
+                        </button>
+                      </div>
+
+                      <nav class="debunking-toc-bar" aria-label="Academic Paper Sections">
+                        {parsed.pillars.map((pillar) => (
+                          <a
+                            href={`#${pillar.id}`}
+                            class="debunking-toc-pill"
+                            data-pillar-target={pillar.id}
+                          >
+                            {pillar.shortLabel}
+                          </a>
+                        ))}
+                      </nav>
+
+                      {parsed.abstractMarkdown && (
+                        <div class="ct-answer-body debunking-paper-abstract" set:html={parseMarkdown(parsed.abstractMarkdown)} />
+                      )}
+
+                      <div class="debunking-pillars-stack">
+                        {parsed.pillars.map((pillar) => (
+                          <details class="debunking-pillar-card" id={pillar.id} open>
+                            <summary class="debunking-pillar-summary">
+                              <div class="debunking-pillar-heading-left">
+                                <span class="pillar-num-badge">{pillar.number}</span>
+                                <span class="pillar-title-text">{pillar.title}</span>
+                              </div>
+                              <span class="pillar-chevron-icon" aria-hidden="true">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                              </span>
+                            </summary>
+                            <div class="ct-answer-body debunking-pillar-body" set:html={parseMarkdown(pillar.bodyMarkdown)} />
+                          </details>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-
-              <div class="contradiction-card-content">
-                {item.claim && (
-                  <div class="debunking-claim-box">
-                    <span class="debunking-claim-label">APOLOGIST CLAIM</span>
-                    <div class="debunking-claim-text" set:html={parseMarkdown(`"${item.claim}"`)} />
-                  </div>
-                )}
-
-                {item.refutation && (
-                  <div class="debunking-refutation-section">
-                    <h4 class="debunking-refutation-heading">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: #10b981;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                      <span>Refutation & Exegesis</span>
-                    </h4>
-                    <div class="ct-answer-body debunking-markdown-body" style="margin-top: 8px;" set:html={parseMarkdown(item.refutation)} />
-                  </div>
-                )}
-
-                {(item.classification || item.classification_explanation) && (
-                  <details class="debunking-methodology-details">
-                    <summary class="debunking-methodology-summary">
-                      <span class="debunking-methodology-title">
-                        <strong>{item.classification || "Analysis"}</strong>
-                      </span>
-                      <span class="info-icon-btn" title="Click for explanation" aria-label="Explanation info">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                      </span>
-                    </summary>
-                    {item.classification_explanation && (
-                      <div class="debunking-methodology-body" set:html={parseMarkdown(item.classification_explanation)} />
-                    )}
-                  </details>
-                )}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
       {isTafsirTab && activeCommentary && (
@@ -766,9 +924,28 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
   }
 
 
+  .debunking-card-header {
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 1px solid var(--color-outline-variant);
+  }
+  .debunking-header-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--quran-primary, #10b981);
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+
   .debunking-claim-box {
     margin-top: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     padding: 14px 16px;
     background-color: var(--color-surface-container-low);
     border-left: 3px solid var(--color-secondary);
@@ -793,6 +970,230 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     margin: 0;
     text-align: left;
   }
+
+  /* Quick Summary — At a Glance Card */
+  .debunking-quick-summary-card {
+    margin-bottom: 16px;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.02) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-left: 4px solid #10b981;
+    border-radius: 6px 10px 10px 6px;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.04);
+  }
+  .debunking-quick-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .debunking-quick-summary-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #10b981;
+  }
+  .copy-summary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--color-on-surface-variant);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .copy-summary-btn:hover {
+    color: #10b981;
+    border-color: #10b981;
+    background-color: rgba(16, 185, 129, 0.06);
+  }
+  .copy-summary-btn.copied {
+    color: #ffffff;
+    background-color: #10b981;
+    border-color: #10b981;
+  }
+  .debunking-quick-summary-body,
+  .debunking-quick-summary-body :global(p.response-paragraph) {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-on-surface);
+    text-align: left;
+    margin: 0;
+  }
+
+  .debunking-methodology-top {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+    background-color: var(--color-surface);
+  }
+  .methodology-tag-label {
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+  }
+
+  /* Full 5-Pillar Scholarly & Primary-Source Analysis Section */
+  .debunking-academic-paper-section {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-outline-variant);
+  }
+  .debunking-paper-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .toggle-all-pillars-btn {
+    padding: 5px 11px;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--color-on-surface-variant);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .toggle-all-pillars-btn:hover {
+    color: var(--color-on-surface);
+    border-color: var(--color-on-surface-variant);
+    background-color: var(--color-surface-container-low);
+  }
+
+  /* 5-Pillar Jump Bar (Mini Table of Contents) */
+  .debunking-toc-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+  }
+  .debunking-toc-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-on-surface);
+    background-color: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .debunking-toc-pill:hover {
+    background-color: #10b981;
+    color: #ffffff;
+    border-color: #10b981;
+    transform: translateY(-1px);
+  }
+
+  .debunking-paper-abstract {
+    margin-bottom: 16px;
+    padding: 14px 16px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 8px;
+  }
+
+  .debunking-pillars-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .debunking-pillar-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 10px;
+    overflow: hidden;
+    scroll-margin-top: 84px;
+  }
+  .debunking-pillar-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    background-color: var(--color-surface-container-low);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background-color 0.15s ease;
+  }
+  .debunking-pillar-summary::-webkit-details-marker {
+    display: none;
+  }
+  .debunking-pillar-summary:hover {
+    background-color: var(--color-outline-variant);
+  }
+  .debunking-pillar-heading-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .pillar-num-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: #10b981;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .pillar-title-text {
+    font-family: var(--font-display, var(--font-body));
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-on-surface);
+    line-height: 1.35;
+  }
+  .pillar-chevron-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-on-surface-variant);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .debunking-pillar-card[open] .pillar-chevron-icon {
+    transform: rotate(180deg);
+  }
+  .debunking-pillar-body {
+    padding: 16px 18px;
+    border-top: 1px solid var(--color-outline-variant);
+  }
+
   .debunking-refutation-section {
     margin-bottom: 20px;
   }
@@ -809,9 +1210,6 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     letter-spacing: 0.03em;
   }
   .debunking-methodology-details {
-    margin-top: 24px;
-    border-top: 1px solid var(--color-outline-variant);
-    padding-top: 14px;
     font-family: var(--font-body);
   }
   .debunking-methodology-summary {

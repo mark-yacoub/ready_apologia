@@ -1,3 +1,5 @@
+import { mapMtToLxx } from './scripture_mapper.js';
+
 /**
  * Centralized L6 Canonical URL Factory for Ready Apologia.
  * Provides a single source of truth (SSOT) for all internal scripture routes,
@@ -37,18 +39,63 @@ export function getBaseUrl() {
  * @param {string} [options.base] - Optional base path override
  * @returns {string} Canonical URL path
  */
-export function getBibleUrl({ book, chapter = 1, verse, tab, base } = {}) {
+const BIBLE_BOOK_ALIASES = {
+  act: 'acts',
+  br: 'bar',
+  ec: 'eccl',
+  jm: 'jas',
+  jr: 'jer',
+  js: 'jo',
+  re: 'rv',
+  rm: 'rom',
+  zc: 'zec',
+  zp: 'zep',
+  '1ch': '1chr',
+  '2ch': '2chr',
+  '1co': '1cor',
+  '2co': '2cor',
+  '1th': '1thes',
+  '2th': '2thes',
+  '1jo': '1jn',
+  '2jo': '2jn',
+  '3jo': '3jn',
+  gl: 'gal',
+  ph: 'phil',
+  cl: 'col',
+  tt: 'ti',
+  plm: 'phlm',
+  jd: 'jude',
+  rt: 'ru',
+  jg: 'jgs',
+  ne: 'neh',
+  sn: 'sg',
+  lm: 'lam',
+  ho: 'hos',
+  ml: 'mal',
+  hk: 'hb',
+};
+
+export function getBibleUrl({ book, chapter = 1, verse, tab, base, isMt = false } = {}) {
   if (!book) return `${base !== undefined ? base : getBaseUrl()}/bible`;
 
   const basePath = base !== undefined ? base : getBaseUrl();
-  const cleanBook = String(book).toLowerCase().trim();
-  const cleanChapter = String(chapter).trim();
+  const rawBook = String(book).toLowerCase().trim();
+  const cleanBook = BIBLE_BOOK_ALIASES[rawBook] || rawBook;
+  let cleanChapter = String(chapter).trim();
 
   // Extract first verse if given a range (e.g. "17-18" -> "17")
   let cleanVerse = '';
   if (verse !== undefined && verse !== null && String(verse).trim() !== '') {
     const match = String(verse).trim().match(/^\d+/);
     cleanVerse = match ? match[0] : String(verse).trim();
+  }
+
+  if (isMt && cleanChapter) {
+    const mapped = mapMtToLxx(cleanBook, cleanChapter, cleanVerse || '1');
+    cleanChapter = String(mapped.chapter);
+    if (cleanVerse) {
+      cleanVerse = String(mapped.verse);
+    }
   }
 
   if (cleanVerse && tab) {

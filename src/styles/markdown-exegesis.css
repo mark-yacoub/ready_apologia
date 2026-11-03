@@ -86,10 +86,11 @@ h6:first-child {
 /* Paragraph and List Typography */
 .response-paragraph {
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--color-on-surface);
   margin: 0 0 10px 0;
-  text-align: justify;
+  text-align: left;
+  overflow-wrap: break-word;
 }
 .response-paragraph:last-child {
   margin-bottom: 0;
@@ -104,6 +105,11 @@ h6:first-child {
 }
 .response-list-item {
   margin-bottom: 6px;
+}
+.response-list-item.response-sublist-item {
+  margin-left: 18px;
+  list-style-type: circle;
+  font-size: 13.5px;
 }
 .response-list-item:last-child {
   margin-bottom: 0;

@@ -483,13 +483,13 @@ export const generateQuranTabSEO = createTabSEOResolver(
         const verseRef = `Surah ${data.surah}:${data.ayah}`;
         const hasData = Array.isArray(data.verseDebunking) && data.verseDebunking.length > 0;
         return {
-          title: `${verseRef} - Debunking Claimed Scientific Miracles`,
+          title: `${verseRef} - Claimed Scientific Miracles Analyzed`,
           description: hasData
-            ? `Review exegesis exposing linguistic and historical flaws in modern apologist claims regarding miracles in ${verseRef}, including: ${sanitizeHTML(data.verseDebunking[0].miracle_category || "Mathematical/Scientific Claims")}.`
-            : `Review exegesis exposing linguistic and historical flaws in modern apologist claims regarding miracles in ${verseRef}.`,
-          keywords: `${verseRef} debunked miracles, quran mathematical miracles debunked`,
+            ? `Scholarly linguistic, scientific, and historical analysis of claimed miracles in ${verseRef}, including: ${sanitizeHTML(data.verseDebunking[0].miracle_category || "Scientific & Historical Claims")}.`
+            : `Scholarly linguistic, scientific, and historical analysis of claimed miracles in ${verseRef}.`,
+          keywords: `${verseRef} scientific miracles analyzed, quran scientific claims historical context`,
           faqEntity: hasData
-            ? buildFaqEntity(data.verseDebunking, vd => vd.claim, vd => vd.refutation || vd.claim, data.canonicalUrl)
+            ? buildFaqEntity(data.verseDebunking, vd => vd.claim, vd => vd.summary || vd.classification_explanation || vd.refutation || vd.claim, data.canonicalUrl)
             : undefined
         };
       }

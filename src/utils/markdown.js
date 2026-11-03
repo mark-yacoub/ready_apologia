@@ -3,7 +3,8 @@ import { getBaseUrl, getBibleUrl, getQuranUrl } from './urlFactory.js';
 /**
  * Safe, high-performance, zero-dependency Markdown to HTML regex parser.
  * Built specifically for high-performance speeds, parsing headers, bold text,
- * inline links, and dual paragraph line breaks error-free.
+ * inline links, tables, blockquotes (including indented/multi-line), nested lists,
+ * and dual paragraph line breaks error-free.
  */
 export function parseMarkdown(text) {
   if (!text) return '';
@@ -28,10 +29,20 @@ export function parseMarkdown(text) {
   });
 
   // 2. Parse standalone dividers (e.g. --- or *** or ###)
-  html = html.replace(/^(?:-{3,}|\*{3,}|_{3,}|#+\s*$)/gm, '<hr class="exegesis-divider" />');
+  html = html.replace(/^[ \t]*(?:-{3,}|\*{3,}|_{3,}|#+\s*$)[ \t]*$/gm, '<hr class="exegesis-divider" />');
 
-  // 3. Parse Blockquotes: > "quote" or &gt; "quote" (resilient to leading *> or >)
-  html = html.replace(/^(?:\*\s*)?(?:&gt;|>)\s*(.+)$/gm, '<blockquote class="exegesis-blockquote">$1</blockquote>');
+  // 3. Parse Blockquotes: supports leading indentation and multi-line blockquote groups
+  html = html.replace(/(?:^[ \t]*(?:\*\s*)?(?:&gt;|>)[ \t]*.*(?:\n|$))+/gm, match => {
+    const innerLines = match
+      .trimEnd()
+      .split('\n')
+      .map(line => line.replace(/^[ \t]*(?:\*\s*)?(?:&gt;|>)[ \t]?/, '').trim());
+    const joined = innerLines
+      .map(line => (line === '' ? '<br/>' : line))
+      .join('<br/>')
+      .replace(/(?:<br\/>){2,}/g, '<br/><br/>');
+    return `\n\n<blockquote class="exegesis-blockquote">${joined}</blockquote>\n\n`;
+  });
 
   // 4. Parse Headers
   html = html.replace(/^#####\s+(.+)$/gm, '<h6>$1</h6>');
@@ -39,39 +50,34 @@ export function parseMarkdown(text) {
   html = html.replace(/^###\s+(.+)$/gm, '<h4>$1</h4>');
   html = html.replace(/^##\s+(.+)$/gm, '<h3>$1</h3>');
 
-  // Restore link tags in headers if they got escaped by XSS check
-  // Re-map [text](url) -> <a href="url" target="_blank" rel="noopener">text</a>
-  html = html.replace(/&lt;a href=&quot;(.*?)&quot;(.*?)&gt;(.*?)&lt;\/a&gt;/g, '<a href="$1"$2>$3</a>');
-
   // 5. Parse Bold and Italic typography
   html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
   html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/\*(?!\s)(.*?)(?<!\s)\*/g, '<em>$1</em>');
 
-  // 6. Parse Scripture Citations references natively into gorgeous design pills!
+  // 6. Parse Inline Anchors: [text](url) (tokenized before scriptureRegex so URLs are never mutated)
+  const anchorTokens = [];
   const scriptureRegex = /\b((?:Tafsir\s+(?:Ibn\s+|al-)?|(?:[123]\s+)?)[A-Z][a-z]+\.?\s+\d+:\d+(?:[-–—]\d+)?(?:(?:[;,]\s+)(?:\d+:)?\d+(?:[-–—]\d+)?)*)\b/g;
-  html = html.replace(scriptureRegex, '<span class="exegesis-scripture-pill">$1</span>');
 
-  // 7. Parse Inline Anchors: [text](url)
-  html = html.replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
-    let finalUrl = url;
+  html = html.replace(/\[([^\]]+)\]\(((?:[^()\s]+|\([^()\s]*\))+)\)/g, (_, labelText, url) => {
+    let finalUrl = url.trim();
     let targetAttrs = 'target="_blank" rel="noopener noreferrer"';
 
-    if (url.startsWith('bible://')) {
-      const rawPath = url.slice('bible://'.length).replace(/^\/+|\/+$/g, '');
+    if (finalUrl.startsWith('bible://')) {
+      const rawPath = finalUrl.slice('bible://'.length).replace(/^\/+|\/+$/g, '');
       const [book, chapter, ...rest] = rawPath.split('/').filter(Boolean);
       const verseStr = rest.join('/');
 
       if (book && chapter) {
-        finalUrl = getBibleUrl({ book, chapter, verse: verseStr });
+        finalUrl = getBibleUrl({ book, chapter, verse: verseStr, isMt: true });
       } else if (book) {
-        finalUrl = getBibleUrl({ book });
+        finalUrl = getBibleUrl({ book, isMt: true });
       } else {
         finalUrl = getBibleUrl();
       }
-      targetAttrs = ''; // open internal links in the same tab
-    } else if (url.startsWith('quran://') || url.startsWith('quran/') || url.startsWith('/quran/')) {
-      const rawPath = url.replace(/^(\/)?quran:\/\//, '').replace(/^(\/)?quran\//, '').replace(/^\/+|\/+$/g, '');
+      targetAttrs = '';
+    } else if (finalUrl.startsWith('quran://') || finalUrl.startsWith('quran/') || finalUrl.startsWith('/quran/')) {
+      const rawPath = finalUrl.replace(/^(\/)?quran:\/\//, '').replace(/^(\/)?quran\//, '').replace(/^\/+|\/+$/g, '');
       const [surah, ...rest] = rawPath.split('/').filter(Boolean);
       const ayahStr = rest.join('/');
 
@@ -82,9 +88,9 @@ export function parseMarkdown(text) {
       } else {
         finalUrl = getQuranUrl();
       }
-      targetAttrs = ''; // open internal links in the same tab
-    } else if (url.startsWith('tafseer/') || url.startsWith('/tafseer/')) {
-      const rawPath = url.replace(/^(\/)?tafseer\//, '').replace(/^\/+|\/+$/g, '');
+      targetAttrs = '';
+    } else if (finalUrl.startsWith('tafseer/') || finalUrl.startsWith('/tafseer/')) {
+      const rawPath = finalUrl.replace(/^(\/)?tafseer\//, '').replace(/^\/+|\/+$/g, '');
       const [surah, ...rest] = rawPath.split('/').filter(Boolean);
       const ayahStr = rest.join('/');
 
@@ -95,26 +101,37 @@ export function parseMarkdown(text) {
       } else {
         finalUrl = getQuranUrl();
       }
-      targetAttrs = ''; // open internal links in the same tab
-    } else if (url.startsWith('ibnkathir://') || url.startsWith('tabari://')) {
-      const commentary = url.startsWith('ibnkathir://') ? 'ibn_kathir' : 'tabari';
-      const [surah, ayah] = url.replace(/^\w+:\/\//, '').split('/').filter(Boolean);
+      targetAttrs = '';
+    } else if (finalUrl.startsWith('ibnkathir://') || finalUrl.startsWith('tabari://')) {
+      const commentary = finalUrl.startsWith('ibnkathir://') ? 'ibn_kathir' : 'tabari';
+      const [surah, ayah] = finalUrl.replace(/^\w+:\/\//, '').split('/').filter(Boolean);
       finalUrl = surah && ayah
         ? getQuranUrl({ surah, ayah, tab: `tafsir/${commentary}` })
         : getQuranUrl({ surah });
-      targetAttrs = ''; // open internal links in the same tab
-    } else if (url.startsWith('/hadith/')) {
-      finalUrl = `${getBaseUrl()}${url}`;
-      targetAttrs = ''; // internal hadith permalink
+      targetAttrs = '';
+    } else if (finalUrl.startsWith('/hadith/')) {
+      finalUrl = `${getBaseUrl()}${finalUrl}`;
+      targetAttrs = '';
+    } else if (!/^(?:https?:\/\/|mailto:|\/|#)/i.test(finalUrl)) {
+      // Block unsafe schemes (e.g., javascript:, data:, vbscript:)
+      return labelText;
     }
 
-    // Defensive attribute escaping against XSS injection
     const safeUrl = finalUrl.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    return `<a href="${safeUrl}" ${targetAttrs} class="exegesis-inline-link">${text}</a>`;
+    const styledLabel = labelText.replace(scriptureRegex, '<span class="exegesis-scripture-pill">$1</span>');
+    const idx = anchorTokens.length;
+    anchorTokens.push(`<a href="${safeUrl}" ${targetAttrs} class="exegesis-inline-link">${styledLabel}</a>`);
+    return `\uE000LINK_${idx}\uE001`;
   });
 
+  // 7. Parse standalone Scripture Citations in non-linked prose
+  html = html.replace(scriptureRegex, '<span class="exegesis-scripture-pill">$1</span>');
+
+  // Restore tokenized inline anchors
+  html = html.replace(/\uE000LINK_(\d+)\uE001/g, (_, idx) => anchorTokens[Number(idx)]);
+
   // 8a. Parse Markdown Tables (| Header | ... |)
-  html = html.replace(/(?:^\|.*\|[ \t]*(?:\n|$)){2,}/gm, match => {
+  html = html.replace(/(?:^[ \t]*\|.*\|[ \t]*(?:\n|$)){2,}/gm, match => {
     const lines = match.trim().split('\n').map(l => l.trim()).filter(Boolean);
     if (lines.length < 2 || !/^\|(?:\s*:?-{2,}:?\s*\|)+$/.test(lines[1])) {
       return match;
@@ -135,15 +152,34 @@ export function parseMarkdown(text) {
   });
 
   // 8b. Parse Unordered Lists (bullet points starting with "* " or "- ")
-  // Execute BEFORE paragraph splitting so lists get isolated cleanly
   html = html.replace(/(?:^[ \t]*[\*\-]\s+.*(?:\n|$))+/gm, match => {
-    const items = match.trim().split('\n').map(line => `<li class="response-list-item">${line.replace(/^[ \t]*[\*\-]\s+/, '')}</li>`).join('');
+    const items = match
+      .trimEnd()
+      .split('\n')
+      .filter(line => line.trim())
+      .map(line => {
+        const m = line.match(/^([ \t]*)[\*\-]\s+(.*)$/);
+        if (!m) return `<li class="response-list-item">${line.trim()}</li>`;
+        const isSub = m[1].length >= 2;
+        return `<li class="response-list-item${isSub ? ' response-sublist-item' : ''}">${m[2]}</li>`;
+      })
+      .join('');
     return `\n\n<ul class="response-list">\n${items}\n</ul>\n\n`;
   });
 
-  // 8c. Parse Ordered Lists (numbered items starting with "1. ", "2. ", etc.)
+  // 8c. Parse Ordered Lists (numbered items starting with "1. ", "2. ", etc., preserving explicit value="N")
   html = html.replace(/(?:^[ \t]*\d+\.\s+.*(?:\n|$))+/gm, match => {
-    const items = match.trim().split('\n').map(line => `<li class="response-list-item">${line.replace(/^[ \t]*\d+\.\s+/, '')}</li>`).join('');
+    const items = match
+      .trimEnd()
+      .split('\n')
+      .filter(line => line.trim())
+      .map(line => {
+        const m = line.match(/^([ \t]*)(\d+)\.\s+(.*)$/);
+        if (!m) return `<li class="response-list-item">${line.trim()}</li>`;
+        const isSub = m[1].length >= 2;
+        return `<li value="${m[2]}" class="response-list-item${isSub ? ' response-sublist-item' : ''}">${m[3]}</li>`;
+      })
+      .join('');
     return `\n\n<ol class="response-list">\n${items}\n</ol>\n\n`;
   });
 
