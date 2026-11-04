@@ -41,9 +41,23 @@ export const VerseItem = ({ vId, text, note, evidenceId, categoryTitle = null, i
     linkTarget = getBibleUrl({ book: bookId, chapter: chapterNum, verse: verseNumStr });
   }
 
+  // The whole card navigates to the verse, except when the interaction originates from an
+  // interactive descendant (Note toggle, links inside the expanded note, the ref pill link).
+  const isFromInteractiveChild = (e) =>
+    Boolean(e.target.closest('.evidence-note-btn, .verse-note-tooltip, a, button'));
+
   const handleCardClick = (e) => {
-    if (e.target.closest('.evidence-note-btn')) return;
+    if (isFromInteractiveChild(e)) return;
     window.location.href = linkTarget;
+  };
+
+  const handleCardKeyDown = (e) => {
+    // Only the card itself acts as a button; let focused children handle their own Enter/Space.
+    if (e.target !== e.currentTarget) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      window.location.href = linkTarget;
+    }
   };
 
   return (
@@ -52,12 +66,7 @@ export const VerseItem = ({ vId, text, note, evidenceId, categoryTitle = null, i
       onClick={handleCardClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleCardClick(e);
-        }
-      }}
+      onKeyDown={handleCardKeyDown}
     >
       <div className="verse-card-header">
         <div className="verse-header-left">

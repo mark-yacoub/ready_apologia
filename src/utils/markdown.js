@@ -1,6 +1,57 @@
 import { getBaseUrl, getBibleUrl, getQuranUrl } from './urlFactory.js';
 
 /**
+ * Markdown inline link: [label](url), where url may contain one level of
+ * balanced parentheses (e.g. Wikipedia-style URLs). Shared by the HTML parser
+ * and the plain-text stripper so both agree on what counts as a link.
+ */
+const MD_LINK_SOURCE = String.raw`\[([^\]]+)\]\(((?:[^()\s]+|\([^()\s]*\))+)\)`;
+
+/**
+ * Strips inline Markdown formatting (links, bold/italics, inline code) into
+ * clean plain text suitable for clipboard copy, SEO descriptions, and FAQ schema.
+ * @param {string} markdown
+ * @returns {string}
+ */
+export function stripMarkdownToPlainText(markdown) {
+  if (!markdown) return '';
+  return String(markdown)
+    .replace(new RegExp(MD_LINK_SOURCE, 'g'), '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*\*(.+?)\*\*\*/g, '$1')
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(?!\s)(.+?)(?<!\s)\*/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** quran.com tafsir slug fragments -> Ready Apologia tafsir tab ids (see tafseer_config.js). */
+const QURAN_COM_TAFSIR_TO_TAB = [
+  [/tabari/i, 'tafsir/tabari'],
+  [/kathir/i, 'tafsir/ibn_kathir'],
+];
+
+/**
+ * Rewrites quran.com verse and tafsir URLs to Ready Apologia's in-app reader
+ * and tafsir viewer so citations never bounce readers off-site.
+ * Supported shapes:
+ *   https://quran.com/2/22            -> /quran/2#22
+ *   https://quran.com/2/22-23         -> /quran/2#22
+ *   https://quran.com/2:22/tafsirs/en-tafisr-ibn-kathir -> /quran/2/22/tafsir/ibn_kathir
+ * Returns null for any quran.com URL we cannot map (left as an external link).
+ * @param {string} url
+ * @returns {string|null}
+ */
+export function resolveQuranComUrl(url) {
+  const m = /^https?:\/\/(?:www\.)?quran\.com\/(\d+)[/:](\d+)(?:-\d+)?(?:\/tafsirs\/([\w-]+))?\/?$/i.exec(url);
+  if (!m) return null;
+  const [, surah, ayah, tafsirSlug] = m;
+  if (!tafsirSlug) return getQuranUrl({ surah, ayah });
+  const mapped = QURAN_COM_TAFSIR_TO_TAB.find(([re]) => re.test(tafsirSlug));
+  return mapped ? getQuranUrl({ surah, ayah, tab: mapped[1] }) : null;
+}
+
+/**
  * Safe, high-performance, zero-dependency Markdown to HTML regex parser.
  * Built specifically for high-performance speeds, parsing headers, bold text,
  * inline links, tables, blockquotes (including indented/multi-line), nested lists,
@@ -57,13 +108,19 @@ export function parseMarkdown(text) {
 
   // 6. Parse Inline Anchors: [text](url) (tokenized before scriptureRegex so URLs are never mutated)
   const anchorTokens = [];
-  const scriptureRegex = /\b((?:Tafsir\s+(?:Ibn\s+|al-)?|(?:[123]\s+)?)[A-Z][a-z]+\.?\s+\d+:\d+(?:[-–—]\d+)?(?:(?:[;,]\s+)(?:\d+:)?\d+(?:[-–—]\d+)?)*)\b/g;
+  // Unicode-aware (\p{Lu}/\p{Ll}) so transliterations like "Tafsīr al-Ṭabarī 2:22" are styled too.
+  // Lookarounds replace \b, which is ASCII-only and fails next to letters such as "ī".
+  const scriptureRegex = /(?<![\p{L}\p{N}])((?:Tafs[iī]r\s+(?:Ibn\s+|al-)?|(?:[123]\s+)?)\p{Lu}[\p{Ll}\p{M}]+\.?\s+\d+:\d+(?:[-–—]\d+)?(?:(?:[;,]\s+)(?:\d+:)?\d+(?:[-–—]\d+)?)*)(?![\p{L}\p{N}])/gu;
 
-  html = html.replace(/\[([^\]]+)\]\(((?:[^()\s]+|\([^()\s]*\))+)\)/g, (_, labelText, url) => {
+  html = html.replace(new RegExp(MD_LINK_SOURCE, 'g'), (_, labelText, url) => {
     let finalUrl = url.trim();
     let targetAttrs = 'target="_blank" rel="noopener noreferrer"';
+    const inAppQuranUrl = resolveQuranComUrl(finalUrl);
 
-    if (finalUrl.startsWith('bible://')) {
+    if (inAppQuranUrl) {
+      finalUrl = inAppQuranUrl;
+      targetAttrs = '';
+    } else if (finalUrl.startsWith('bible://')) {
       const rawPath = finalUrl.slice('bible://'.length).replace(/^\/+|\/+$/g, '');
       const [book, chapter, ...rest] = rawPath.split('/').filter(Boolean);
       const verseStr = rest.join('/');

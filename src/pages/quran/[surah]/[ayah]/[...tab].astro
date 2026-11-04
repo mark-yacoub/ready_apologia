@@ -17,8 +17,9 @@ import { loadChristianFootnotes } from '../../../../utils/christian_footnotes_lo
 import { loadIslamicCommentaries } from '../../../../utils/islamic_commentaries_loader.js';
 import { parseMarkdown } from '../../../../utils/markdown.js';
 import { loadQuranContradictions } from '../../../../utils/quran_contradictions_loader.js';
-import { loadScientificErrors, parseExplanationString } from '../../../../utils/quran_scientific_errors_loader.js';
-import { loadDebunkingMiracles, parseDebunkingItem } from '../../../../utils/quran_debunking_loader.js';
+import { loadScientificErrors, parseScientificErrorItem } from '../../../../utils/quran_scientific_errors_loader.js';
+import { loadDebunkingMiracles } from '../../../../utils/quran_debunking_loader.js';
+import { buildDebunkingCard, buildScientificErrorCard } from '../../../../utils/scholarly_card_view_model.js';
 import { getEvidenceSets } from '../../../../utils/quran_evidence_service.js';
 import { enrichVideosWithVerses } from '../../../../utils/video_service.js';
 import { R2_BASE_URL } from '../../../../utils/cdn_config.js';
@@ -92,12 +93,18 @@ const contradictionsCount = verseContradictions.length;
 
 const quranScientificErrorsMap = loadScientificErrors();
 const rawVerseError = quranScientificErrorsMap[verseId];
-const parsedScientificErrors = rawVerseError ? parseExplanationString(rawVerseError.explanation) : [];
+const parsedScientificErrors = rawVerseError ? parseScientificErrorItem(rawVerseError, 0) : [];
 const scientificErrorsCount = parsedScientificErrors.length > 0 ? 1 : 0;
 
 const quranDebunkingMap = loadDebunkingMiracles();
 const verseDebunking = quranDebunkingMap[verseId] || [];
 const debunkingCount = verseDebunking.length;
+
+// Both long-form scholarly tabs share one card template; build the view models for the active tab only.
+const scholarlyCards =
+  tab === 'debunking-miracles' ? verseDebunking.map(buildDebunkingCard)
+  : tab === 'scientific-errors' ? parsedScientificErrors.map(buildScientificErrorCard)
+  : [];
 
 const dbVerseId = verseId.replace(':', '_');
 const vdCountInfo = query("SELECT COUNT(DISTINCT video_id) as count FROM short_per_verse WHERE verse_id = :dbVerseId", { dbVerseId });
@@ -264,7 +271,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
           const anyOpen = detailsList.some((det) => det.hasAttribute('open'));
           toggleBtn.setAttribute('data-expanded', String(anyOpen));
           toggleBtn.setAttribute('aria-expanded', String(anyOpen));
-          toggleBtn.textContent = anyOpen ? 'Collapse All Pillars' : 'Expand All Pillars';
+          toggleBtn.textContent = anyOpen ? 'Collapse All Sections' : 'Expand All Sections';
         }
 
         // 5-Pillar Jump Bar (auto-open target pillar & smooth scroll)
@@ -332,138 +339,139 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     />
 
     <div class="tab-panels-window">
-      {tab === 'debunking-miracles' && (
+      {scholarlyCards.length > 0 && (
         <div class="contradiction-panel-container">
-          {verseDebunking.map((item, itemIdx) => {
-            const parsed = parseDebunkingItem(item, itemIdx);
-            return (
-              <div class="contradiction-details-card" data-debunking-card={itemIdx}>
-                <div class="contradiction-summary-header debunking-card-header">
-                  <span class="summary-title-main">
-                    <span class="ct-scales-icon" style="color: var(--color-secondary);">
-                      <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" width="18" height="18">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l2 4 4-1-2 4 3 3-4 1 1 4-4-2-3 3-1-4-4 1 2-4-4-2 4-1-1-4 4 2 3-4z" />
-                      </svg>
-                    </span>
-                    <span>Claimed Miracle: {item.miracle_category || "General"}</span>
+          {scholarlyCards.map((card) => (
+            <div class="contradiction-details-card" data-debunking-card={card.cardId}>
+              <div class="contradiction-summary-header debunking-card-header">
+                <span class="summary-title-main">
+                  <span class="ct-scales-icon" style={card.iconColor ? `color: ${card.iconColor};` : undefined}>
+                    <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" width="18" height="18">
+                      <path stroke-linecap="round" stroke-linejoin="round" d={card.iconPath} />
+                    </svg>
                   </span>
-                  {item.classification && (
-                    <span class="debunking-header-badge">{item.classification}</span>
-                  )}
-                </div>
-
-                <div class="contradiction-card-content">
-                  {item.claim && (
-                    <div class="debunking-claim-box">
-                      <span class="debunking-claim-label">CLAIMED SCIENTIFIC MIRACLE</span>
-                      <div class="debunking-claim-text" set:html={parseMarkdown(`"${item.claim}"`)} />
-                    </div>
-                  )}
-
-                  {parsed.summaryText && (
-                    <div class="debunking-quick-summary-card">
-                      <div class="debunking-quick-summary-header">
-                        <div class="debunking-quick-summary-title">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" style="color: #10b981;">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                          </svg>
-                          <span>Quick Summary — At a Glance</span>
-                        </div>
-                        <button
-                          type="button"
-                          class="copy-summary-btn"
-                          data-copy-summary={parsed.summaryPlainText}
-                          aria-label="Copy quick summary to clipboard"
-                          title="Copy quick summary for conversation"
-                        >
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                          </svg>
-                          <span class="copy-summary-label">Copy Summary</span>
-                        </button>
-                      </div>
-                      <div class="ct-answer-body debunking-quick-summary-body" set:html={parseMarkdown(parsed.summaryText)} />
-                    </div>
-                  )}
-
-                  {(item.classification || item.classification_explanation) && (
-                    <details class="debunking-methodology-details debunking-methodology-top">
-                      <summary class="debunking-methodology-summary">
-                        <span class="debunking-methodology-title">
-                          <span class="methodology-tag-label">Methodological Classification:</span>
-                          <strong>{item.classification || "Scholarly Analysis"}</strong>
-                        </span>
-                        <span class="info-icon-btn" title="Click for methodological explanation" aria-label="Explanation info">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                        </span>
-                      </summary>
-                      {item.classification_explanation && (
-                        <div class="debunking-methodology-body" set:html={parseMarkdown(item.classification_explanation)} />
-                      )}
-                    </details>
-                  )}
-
-                  {parsed.pillars.length > 0 && (
-                    <div class="debunking-refutation-section debunking-academic-paper-section">
-                      <div class="debunking-paper-header-row">
-                        <h4 class="debunking-refutation-heading" style="margin: 0;">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: #10b981;">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                          </svg>
-                          <span>Full Scholarly & Primary-Source Analysis</span>
-                        </h4>
-                        <button
-                          type="button"
-                          class="toggle-all-pillars-btn"
-                          data-toggle-pillars={itemIdx}
-                          data-expanded="true"
-                          aria-expanded="true"
-                        >
-                          Collapse All Pillars
-                        </button>
-                      </div>
-
-                      <nav class="debunking-toc-bar" aria-label="Academic Paper Sections">
-                        {parsed.pillars.map((pillar) => (
-                          <a
-                            href={`#${pillar.id}`}
-                            class="debunking-toc-pill"
-                            data-pillar-target={pillar.id}
-                          >
-                            {pillar.shortLabel}
-                          </a>
-                        ))}
-                      </nav>
-
-                      {parsed.abstractMarkdown && (
-                        <div class="ct-answer-body debunking-paper-abstract" set:html={parseMarkdown(parsed.abstractMarkdown)} />
-                      )}
-
-                      <div class="debunking-pillars-stack">
-                        {parsed.pillars.map((pillar) => (
-                          <details class="debunking-pillar-card" id={pillar.id} open>
-                            <summary class="debunking-pillar-summary">
-                              <div class="debunking-pillar-heading-left">
-                                <span class="pillar-num-badge">{pillar.number}</span>
-                                <span class="pillar-title-text">{pillar.title}</span>
-                              </div>
-                              <span class="pillar-chevron-icon" aria-hidden="true">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                                </svg>
-                              </span>
-                            </summary>
-                            <div class="ct-answer-body debunking-pillar-body" set:html={parseMarkdown(pillar.bodyMarkdown)} />
-                          </details>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
+                  <span>{card.headerTitle}</span>
+                </span>
+                {card.headerBadge && (
+                  <span class="debunking-header-badge">{card.headerBadge}</span>
+                )}
               </div>
-            );
-          })}
+
+              <div class="contradiction-card-content">
+                {card.claimMarkdown && (
+                  <div class="debunking-claim-box">
+                    <span class="debunking-claim-label">CLAIMED SCIENTIFIC MIRACLE</span>
+                    <div class="debunking-claim-text" set:html={parseMarkdown(card.claimMarkdown)} />
+                  </div>
+                )}
+
+                {card.summaryText && (
+                  <div class="debunking-quick-summary-card">
+                    <div class="debunking-quick-summary-header">
+                      <div class="debunking-quick-summary-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" style="color: #10b981;">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                        </svg>
+                        <span>Quick Summary — At a Glance</span>
+                      </div>
+                      <button
+                        type="button"
+                        class="copy-summary-btn"
+                        data-copy-summary={card.summaryPlainText}
+                        aria-label="Copy quick summary to clipboard"
+                        title="Copy quick summary for conversation"
+                      >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-summary-label">Copy Summary</span>
+                      </button>
+                    </div>
+                    <div class="ct-answer-body debunking-quick-summary-body" set:html={parseMarkdown(card.summaryText)} />
+                  </div>
+                )}
+
+                {card.methodology && (
+                  <details class="debunking-methodology-details debunking-methodology-top">
+                    <summary class="debunking-methodology-summary">
+                      <span class="debunking-methodology-title">
+                        <span class="methodology-tag-label">Methodological Classification:</span>
+                        <strong>{card.methodology.classification}</strong>
+                      </span>
+                      <span class="info-icon-btn" title="Click for methodological explanation" aria-label="Explanation info">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                      </span>
+                    </summary>
+                    {card.methodology.explanationMarkdown && (
+                      <div class="debunking-methodology-body" set:html={parseMarkdown(card.methodology.explanationMarkdown)} />
+                    )}
+                  </details>
+                )}
+
+                {card.sections.length > 0 ? (
+                  <div class="debunking-refutation-section debunking-academic-paper-section">
+                    <div class="debunking-paper-header-row">
+                      <h4 class="debunking-refutation-heading" style="margin: 0;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: #10b981;">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        <span>{card.analysisHeading}</span>
+                      </h4>
+                      <button
+                        type="button"
+                        class="toggle-all-pillars-btn"
+                        data-toggle-pillars={card.cardId}
+                        data-expanded="true"
+                        aria-expanded="true"
+                      >
+                        Collapse All Sections
+                      </button>
+                    </div>
+
+                    <nav class="debunking-toc-bar" aria-label={card.tocAriaLabel}>
+                      {card.sections.map((section) => (
+                        <a
+                          href={`#${section.id}`}
+                          class="debunking-toc-pill"
+                          data-pillar-target={section.id}
+                        >
+                          {section.shortLabel}
+                        </a>
+                      ))}
+                    </nav>
+
+                    {card.introMarkdown && (
+                      <div class="ct-answer-body debunking-paper-abstract" set:html={parseMarkdown(card.introMarkdown)} />
+                    )}
+
+                    <div class="debunking-pillars-stack">
+                      {card.sections.map((section) => (
+                        <details class="debunking-pillar-card" id={section.id} open>
+                          <summary class="debunking-pillar-summary">
+                            <div class="debunking-pillar-heading-left">
+                              <span class="pillar-num-badge">{section.number}</span>
+                              <span class="pillar-title-text">{section.title}</span>
+                            </div>
+                            <span class="pillar-chevron-icon" aria-hidden="true">
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </span>
+                          </summary>
+                          <div class="ct-answer-body debunking-pillar-body" set:html={parseMarkdown(section.bodyMarkdown)} />
+                        </details>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  card.introMarkdown && (
+                    <div class="ct-answer-body" style="padding-top: 16px;" set:html={parseMarkdown(card.introMarkdown)} />
+                  )
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       )}
       {isTafsirTab && activeCommentary && (
@@ -474,31 +482,6 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
           surah={surah} 
           ayah={ayah}
         />
-      )}
-      {tab === 'scientific-errors' && (
-        <div class="contradiction-panel-container">
-          {parsedScientificErrors.map((errorObject) => (
-               <div class="contradiction-details-card">
-                   <div class="contradiction-summary-header">
-                     <span class="summary-title-main">
-                       <span class="ct-scales-icon">
-                         <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" width="18" height="18">
-                           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18h8 M3 22h18 M14 22a7 7 0 1 0 0-14h-1 M9 14h2 M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z M12 6V3 M20 4v4m0 3v.01" />
-                         </svg>
-                       </span>
-                       {errorObject.label}
-                     </span>
-                   </div>
-                   {errorObject.text && (
-                     <div class="contradiction-card-content">
-                        <div class="ct-answer-body ct-plain-text" style="padding-top: 16px;">
-                          {errorObject.text}
-                        </div>
-                     </div>
-                   )}
-               </div>
-          ))}
-        </div>
       )}
       {tab === 'manuscripts' && (
         <div>

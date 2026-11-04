@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import ScrollableTrack from './ScrollableTrack.jsx';
-import { trackEvidenceInteraction } from '../utils/analytics.js';
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
@@ -9,13 +8,6 @@ import { EvidenceDropdown } from './common/EvidenceDropdown.jsx';
 import '../styles/EvidenceExplorer.css';
 
 // --- Module-Level Static Constants & Mappers ---
-const extractSpecificError = (explanation) => {
-  let phrase = explanation.split('.')[0].trim();
-  if (phrase.startsWith('States the human embryo') || phrase.startsWith('States man becomes a clot')) return 'Embryology';
-  if (phrase.startsWith('Claims mountains') || phrase.startsWith('Reiterates the claim') || phrase.startsWith('Describes mountains')) return 'Geology';
-  return phrase;
-};
-
 const CATEGORY_MAP = {
   // Astronomy & Cosmology
   'Geocentricism': 'Astronomy & Cosmology',
@@ -114,15 +106,15 @@ export default function ScientificErrorsExplorer({ evidenceDropdownData = [], sc
 
     for (const [vId, errorObj] of Object.entries(scientificErrors)) {
       const [surahNum, verseNum] = vId.split(':').map(Number);
-      const explanation = errorObj.explanation;
-      const specificError = extractSpecificError(explanation);
+      const specificError = String(errorObj.category || 'Scientific Error').trim();
       const masterCat = getMasterCategory(specificError);
 
       const translatedText = drogeTranslation[vId]?.text || 'Translation unavailable';
-      const note = explanation;
+      const note = errorObj.summary || errorObj.explanation || '';
+      const categoryLabel = errorObj.title ? `${specificError} — ${errorObj.title}` : specificError;
 
       if (!dataMap.has(masterCat)) dataMap.set(masterCat, []);
-      dataMap.get(masterCat).push({ vId, surahNum, verseNum, text: translatedText, note, specificError });
+      dataMap.get(masterCat).push({ vId, surahNum, verseNum, text: translatedText, note, specificError: categoryLabel });
     }
 
     // Sort tabs according to hardcoded sequence
