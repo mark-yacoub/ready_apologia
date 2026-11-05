@@ -1559,4 +1559,12 @@
   align-items: center;
 }
 
-      
+/* NT Authorship */
+.authorship-book-meta {
+  margin: 4px 0 12px;
+  font-size: 0.875rem;
+  color: var(--color-on-surface-variant);
+}
+.attribution-phrase {
+  font-weight: 600;
+}

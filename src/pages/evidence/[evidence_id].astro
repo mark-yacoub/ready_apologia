@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import EvidenceExplorer from '../../components/EvidenceExplorer.jsx';
 import { loadAllEvidenceData } from '../../utils/evidenceLoader.js';
+import { buildEvidenceItemList } from '../../utils/evidenceHelpers.js';
 
 export async function getStaticPaths() {
   return loadAllEvidenceData().map(({ evidenceId }) => ({
@@ -52,20 +53,7 @@ const evidenceTitle = strat.title || `${rawTitle} Bible Verses & Early Church Ev
 const evidenceDesc = strat.description || `Comprehensive collection of Biblical Scripture verses (Old & New Testament) and early Church Patristic testimonies defending the ${rawTitle}. Explore historical Christian apologetics proofs and quotes.`;
 const evidenceKeywords = strat.keywords || `verses ${rawTitle.toLowerCase()}, bible verses ${rawTitle.toLowerCase()}, early church fathers ${rawTitle.toLowerCase()}, ${rawTitle.toLowerCase()} apologetics, scripture evidence ${rawTitle.toLowerCase()}, proof of ${rawTitle.toLowerCase()}`;
 
-// Extract top verse references for Rich ItemList Schema
-const ntCategories = targetEvidence?.evidenceData?.Scripture?.['New Testament']?.structure || [];
-const otCategories = targetEvidence?.evidenceData?.Scripture?.['Old Testament']?.structure || [];
-const allCategories = [...ntCategories, ...otCategories];
-
-const itemListElements = allCategories.slice(0, 10).map((cat, idx) => {
-  const catName = cat?.title || 'General Evidence';
-  return {
-    "@type": "ListItem",
-    "position": idx + 1,
-    "name": `${catName} - ${rawTitle}`,
-    "description": `Biblical evidence and verses regarding ${catName.toLowerCase()} demonstrating the ${rawTitle.toLowerCase()}.`
-  };
-});
+const itemListElements = buildEvidenceItemList(targetEvidence?.evidenceData, rawTitle);
 
 const articleGraph = {
   "@context": "https://schema.org",

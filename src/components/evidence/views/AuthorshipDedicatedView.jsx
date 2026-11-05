@@ -1,36 +1,46 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import ScrollableTrack from '../../ScrollableTrack.jsx';
 import { SourceBlock } from '../SourceBlock.jsx';
+import { getBookCenturies, CANON_LISTS_BOOK_ID } from '../../../utils/evidenceCounters.js';
+
+const toHash = (bookTitle) => bookTitle.replace(/\s+/g, '_');
+
+const getBookMetaLine = (meta) => {
+  if (!meta || meta.book_id === CANON_LISTS_BOOK_ID) return null;
+  const parts = [
+    meta.traditional_author && `Traditional author: ${meta.traditional_author}`,
+    meta.composition_date && `Composed ${meta.composition_date}`,
+  ].filter(Boolean);
+  return parts.length ? parts.join(' · ') : null;
+};
 
 export const AuthorshipDedicatedView = ({ tData }) => {
-  const authorship = tData.authorship_data || {};
-  const books = useMemo(() => Object.keys(authorship), [authorship]);
+  const authorship = tData?.authorship_data;
+  const books = useMemo(() => Object.keys(authorship || {}), [authorship]);
 
-  const [activeBook, setActiveBook] = useState(() => {
-    const defaultBook = books[0] || null;
-    if (typeof window !== 'undefined' && window.location.hash) {
-      const hashBook = decodeURIComponent(window.location.hash.substring(1));
-      const match = books.find(k => k.replace(/\s+/g, '_') === hashBook || k === hashBook);
-      if (match) {
-        return match;
-      }
-    }
-    return defaultBook;
-  });
-
+  // Start from the first book so the server and client render the same markup;
+  // the URL hash is applied after hydration.
+  const [activeBook, setActiveBook] = useState(books[0] || null);
   const [activeCentury, setActiveCentury] = useState('All');
+
+  useEffect(() => {
+    const hashBook = decodeURIComponent(window.location.hash.substring(1));
+    const match = hashBook && books.find(b => toHash(b) === hashBook || b === hashBook);
+    if (match) setActiveBook(match);
+  }, [books]);
+
   const handleBookChange = (b) => {
     setActiveBook(b);
     setActiveCentury('All');
-    if (typeof window !== 'undefined') {
-      window.history.replaceState(null, '', `#${encodeURIComponent(b.replace(/\s+/g, '_'))}`);
-    }
+    window.history.replaceState(null, '', `#${encodeURIComponent(toHash(b))}`);
   };
 
-  if (!activeBook || !authorship[activeBook]) return null;
+  const bookEntry = authorship?.[activeBook];
+  if (!bookEntry) return null;
 
-  const bookData = authorship[activeBook];
+  const bookData = getBookCenturies(bookEntry);
   const centuries = Object.keys(bookData);
+  const metaLine = getBookMetaLine(bookEntry.book_meta);
 
   const availableFilters = [
     { id: 'All', label: 'All Centuries' },
@@ -62,11 +72,12 @@ export const AuthorshipDedicatedView = ({ tData }) => {
             className={`master-tab ${activeBook === b ? 'active' : ''}`}
             onClick={() => handleBookChange(b)}
           >
-            {b}
+            {authorship[b].book_meta?.short_name || b}
           </button>
         ))}
       </ScrollableTrack>
       <div className="scripture-feed-container">
+        {metaLine && <p className="authorship-book-meta">{metaLine}</p>}
         <div className="feed-controls-bar">
           <div className="pills-scroll-container">
             {availableFilters.map(filter => (

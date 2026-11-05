@@ -133,6 +133,7 @@ pkill -f astro
 | Route | Description |
 | :--- | :--- |
 | `/bible/gospels/videos` | Overview video feed of apologetics shorts across all four Gospels |
+| `/evidence/[evidence_id]` | Christian Apologetics Evidence Explorer (`divinity_of_christ`, `divinity_of_the_holy_spirit`, `trinity`, `prophecies`, and `nt_authors` 27-book patristic authorship explorer with `#Book_Name` hash deep links) |
 | `/quran` | Evidence & Filters Home (Qiraat & Competing Codices access) |
 | `/quran/[surah]` | Quran reader with Uthmanic Arabic and English translation |
 | `/quran/[surah]/[ayah]/[tab]` | Quran verse evidence drawer (Debunking Miracles, Scientific Errors, Contradictions, Footnotes, Commentaries, Manuscripts) |

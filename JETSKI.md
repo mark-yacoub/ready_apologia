@@ -110,6 +110,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/pages/bible/[book]/[chapter].astro`: Compact scripture chapter reader with inline-end badges.
 *   `src/pages/bible/[book]/[chapter]/[verse].astro`: 100% SEO-indexable static verse detail page.
 *   `src/pages/bible/gospels/videos.astro`: Overview page showing apologetics videos across all four Gospels.
+*   `src/pages/evidence/[evidence_id].astro`: Christian Apologetics Evidence pages (`divinity_of_christ`, `divinity_of_the_holy_spirit`, `trinity`, `prophecies`, `nt_authors`), backed by `EvidenceExplorer.jsx` and `AuthorshipDedicatedView.jsx` (minimal academic layout for `nt_authors`: one tab per NT book + Canon Lists, a single muted traditional-author/date line, century filter, and the shared `SourceBlock` feed with the attribution phrase in bold).
 *   `src/pages/quran/index.astro`: Quran home page with filters and evidence cards.
 *   `src/pages/quran/[surah].astro`: Surah reader page showing Arabic and English translation.
 *   `src/pages/quran/[surah]/[ayah]/[tab].astro`: Quran verse evidence drawer (Debunking Miracles, Scientific Errors, Contradictions, Footnotes, Commentaries, Manuscripts).

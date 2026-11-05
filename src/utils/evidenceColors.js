@@ -16,6 +16,7 @@ const explicitEvidenceIndices = {
   'divinity_of_the_holy_spirit': 4, // Teal
   'trinity': 0,                     // Indigo
   'prophecies': 6,                  // Orange
+  'nt_authors': 5,                  // Plum
 };
 
 export function getEvidenceColor(evidenceId) {
