@@ -1,0 +1,20 @@
+---
+/**
+ * One group of quotations (the classical sources, then the Bible's angel texts, then its spirit texts):
+ * label → open cards → parallel narrations / repeated passages in a collapsed <details>.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import SourceCard from './SourceCard.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { g, labels } = Astro.props;
+---
+<div class="orv-group" data-group={g.key}>
+  {g.labelHtml && <h3 class="orv-group__h" set:html={g.labelHtml} />}
+  {g.cards.map(e => <SourceCard e={e} verifyAria={labels.verifyAria} />)}
+  {g.collapsed.length > 0 && (
+    <details class="hrv-disclosure orv-more">
+      <summary><span set:html={tl(g.collapsedSummary)} /><Icon name="chevronDown" /></summary>
+      <div class="hrv-disclosure__body">{g.collapsed.map(e => <SourceCard e={e} verifyAria={labels.verifyAria} />)}</div>
+    </details>
+  )}
+</div>

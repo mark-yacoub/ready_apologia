@@ -1,9 +1,11 @@
 ---
 /** Real table on desktop; each row becomes a labelled card on phones (CSS only). */
-const { t } = Astro.props;
+// `level` sets the title heading (default h3).
+const { t, level = 3 } = Astro.props;
+const H = `h${level}`;
 ---
 <div class="hrv-table-wrap">
-  <h3 class="hrv-table-title" set:html={t.titleHtml} />
+  <H class="hrv-table-title" set:html={t.titleHtml} />
   <table class="hrv-table">
     <thead><tr>{t.headers.map(h => <th scope="col" set:html={h.html} />)}</tr></thead>
     <tbody>

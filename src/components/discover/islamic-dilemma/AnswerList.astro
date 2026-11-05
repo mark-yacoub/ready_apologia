@@ -1,0 +1,23 @@
+---
+/**
+ * §5 common answers as native <details> (no JS). The heading states the answer in the defender's
+ * own terms; the body says what the texts show.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+const { items, textsLabel } = Astro.props;
+---
+<div class="idl-answers">
+  {items.map((a, i) => (
+    <details class="hrv-disclosure idl-answer" id={a.anchor}>
+      <summary>
+        <span class="idl-answer__n" aria-hidden="true">{i + 1}</span>
+        <span class="idl-answer__h" role="heading" aria-level="3"><q set:html={a.headingHtml} /></span>
+        <Icon name="chevronDown" />
+      </summary>
+      <div class="hrv-disclosure__body">
+        {textsLabel && <p class="idl-answer__label">{textsLabel}</p>}
+        {(a.bodyParas?.length ? a.bodyParas : [a.bodyHtml]).map(h => <p set:html={h} />)}
+      </div>
+    </details>
+  ))}
+</div>

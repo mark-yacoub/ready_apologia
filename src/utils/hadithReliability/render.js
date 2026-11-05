@@ -26,6 +26,8 @@ const ARABIC_TEST = new RegExp(`[${ARABIC_CHAR}]`);
 const ARABIC_RUN = new RegExp(`(?:«\\s*)?[${ARABIC_CHAR}]+(?:[\\s«»"'(),.:;!?،؛؟…\\-–—ـ]+[${ARABIC_CHAR}]+)*[؟!.»"']?`, 'g');
 // Link text may contain one level of editorial brackets: `[Musnad Aḥmad #18478 [ed. #18957]](url)`.
 const LINK = /\[((?:[^\[\]]|\[[^\[\]]*\])+)\]\((https?:\/\/[^)\s]+)\)/g;
+/** Opt-in (`createRenderer({ rootLinks: true })`): also site-relative targets, `[33:51](/quran/33/51/tafsir/tabari)`. */
+const LINK_OR_ROOT = /\[((?:[^\[\]]|\[[^\[\]]*\])+)\]\(((?:https?:\/\/|\/(?!\/))[^)\s]+)\)/g;
 const CODE = /`([^`]+)`/g;
 const PLACEHOLDER = /\u0000(\d+)\u0000/g;
 
@@ -51,11 +53,19 @@ function attrString(attrs) {
 /**
  * Resolves a dataset URL to where the site should actually send the reader.
  * @param {string} url
- * @param {{ nofollow?: boolean }} [opts]
+ * @param {{ nofollow?: boolean, root?: boolean }} [opts]  `root`: accept site-relative URLs (only renderers
+ *   created with `rootLinks: true` pass it; without it a `/…` URL is treated as before)
  * @returns {{ href: string, external: boolean, kind: 'quran'|'sunnah'|'classical'|'other', host: string, title?: string, attrs: object }}
  */
-export function linkFor(url, { nofollow = false } = {}) {
+export function linkFor(url, { nofollow = false, root = false } = {}) {
   const make = (link) => ({ ...link, attrs: linkAttrs({ external: link.external, nofollow }) });
+  // Site-relative targets (opt-in): internal and BASE-aware. /quran pages are heavy, so they are not prefetched.
+  if (root && /^\/(?!\/)/.test(url)) {
+    const m = url.match(/^\/quran\/(\d+)\/(\d+)(?:\/tafsir\/(tabari|ibn_kathir))?/);
+    const title = m ? (m[3] ? `Tafsīr ${m[3] === 'tabari' ? 'al-Ṭabarī' : 'Ibn Kathīr'} on ${m[1]}:${m[2]}, on this site` : `Qurʾān ${m[1]}:${m[2]} on this site`) : undefined;
+    const link = make({ href: `${BASE}${url}`, external: false, kind: m ? 'quran' : 'site', host: '', title });
+    return m ? { ...link, attrs: { ...link.attrs, 'data-astro-prefetch': 'false' } } : link;
+  }
   let u;
   try { u = new URL(url); } catch { return make({ href: url, external: true, kind: 'other', host: '' }); }
   const host = u.hostname.replace(/^www\./, '');
@@ -75,9 +85,9 @@ export function linkFor(url, { nofollow = false } = {}) {
   return make({ href: url, external: true, kind: 'other', host });
 }
 
-export function anchor(url, innerHtml, { className = '', blocked } = {}) {
+export function anchor(url, innerHtml, { className = '', blocked, root = false } = {}) {
   if (blocked) return `<span class="hrv-unlinked">${innerHtml}</span>`;
-  const link = linkFor(url);
+  const link = linkFor(url, { root });
   const cls = ['hrv-link', `hrv-link--${link.kind}`, className].filter(Boolean).join(' ');
   const title = link.title ? ` title="${escapeAttr(link.title)}"` : '';
   return `<a class="${cls}" href="${escapeAttr(link.href)}"${attrString(link.attrs)}${title}>${innerHtml}</a>`;
@@ -122,8 +132,11 @@ function wrapArabic(html) {
  * @param {object} [opts]
  * @param {(url: string) => boolean} [opts.isBlocked]  link verdict gate (blocked → plain text)
  * @param {(url: string) => void}    [opts.onBlocked]  reporting hook
+ * @param {boolean} [opts.rootLinks]  also render site-relative markdown links (`](/path)`, BASE-aware, internal);
+ *                                    off by default so the Hadith Reliability output is unchanged.
  */
-export function createRenderer({ isBlocked = () => false, onBlocked = () => {} } = {}) {
+export function createRenderer({ isBlocked = () => false, onBlocked = () => {}, rootLinks = false } = {}) {
+  const LINK_RE = rootLinks ? LINK_OR_ROOT : LINK;
   function inline(md) {
     if (md == null) return '';
     const slots = [];
@@ -131,11 +144,11 @@ export function createRenderer({ isBlocked = () => false, onBlocked = () => {} }
     let s = String(md).replace(/<br\s*\/?>/gi, () => park('<br>'));
     s = s.replace(CODE, (_, raw) => park(codeSpan(raw)));
     s = escapeHtml(s);
-    s = s.replace(LINK, (_, text, url) => {
+    s = s.replace(LINK_RE, (_, text, url) => {
       const realUrl = url.replace(/&amp;/g, '&');
       const blocked = isBlocked(realUrl);
       if (blocked) onBlocked(realUrl);
-      return park(anchor(realUrl, wrapArabic(emphasis(text)), { blocked }));
+      return park(anchor(realUrl, wrapArabic(emphasis(text)), { blocked, root: rootLinks }));
     });
     s = wrapArabic(emphasis(s));
     // Placeholders can nest (a code span inside link text), so restore until stable.

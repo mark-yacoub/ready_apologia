@@ -1,0 +1,46 @@
+---
+/**
+ * One text, quoted and linked: label (+ sūra / tafsīr / grade tags) → optional context line → Qurʾān
+ * Arabic → the visible excerpt (or the whole text) → the rest collapsed ("Read the full text"; a
+ * parallel chain is collapsed whole) → hadith Arabic from the repo corpus, collapsed → our note →
+ * verify chip (44px). Built from the view model in utils/meccaToMedina/model.js.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { LABELS } from '../../../utils/meccaToMedina/config.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+
+const { e, level = 5 } = Astro.props;
+const H = `h${level}`;
+---
+<article class={`hrv-ev mm-ev mm-ev--${e.kind}${e.parallel ? ' mm-ev--parallel' : ''}`} id={e.anchor}>
+  <header class="hrv-ev__head mm-ev__head">
+    <span class="hrv-ev__n" aria-hidden="true">{e.n}</span>
+    <div>
+      <H class="hrv-ev__label mm-ev__label" set:html={e.labelHtml} />
+      {e.tags.length > 0 && <p class="mm-tags">{e.tags.map((t, i) => <>{i > 0 && <span class="hrv-sr"> · </span>}<span class="mm-tag" set:html={tl(t)} /></>)}</p>}
+    </div>
+  </header>
+  {e.leadHtml && <p class="mm-ev__lead" set:html={e.leadHtml} />}
+  {e.quranArabic && <p class="mm-ev__ar" lang="ar" dir="rtl">{e.quranArabic}</p>}
+  {e.visibleHtml && <blockquote class="hrv-quote mm-quote" set:html={e.visibleHtml} />}
+  {e.fullHtml && (
+    <details class="mm-more">
+      <summary>{e.fullLabel}<Icon name="chevronDown" /></summary>
+      <div class="hrv-quote mm-quote mm-quote--full" set:html={e.fullHtml} />
+    </details>
+  )}
+  {e.hadithArabic && (
+    <details class="mm-more mm-more--ar">
+      <summary>{LABELS.arabicText}<Icon name="chevronDown" /></summary>
+      <p class="mm-ev__ar mm-ev__ar--hadith" lang="ar" dir="rtl">{e.hadithArabic}</p>
+    </details>
+  )}
+  {e.noteHtml && <p class="mm-ev__note" set:html={e.noteHtml} />}
+  <div class="hrv-verify mm-verify">
+    {e.chips.map(ch => (
+      <a href={ch.href} {...ch.attrs} title={ch.title}>
+        <span set:html={tl(ch.label)} /><Icon name={ch.external ? 'external' : 'chevronRight'} />
+      </a>
+    ))}
+  </div>
+</article>

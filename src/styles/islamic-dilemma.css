@@ -1,0 +1,217 @@
+/* ==========================================================================
+   /discover/islamic-dilemma: a thin layer on the hadith-reliability
+   design system. Everything is scoped to `.hrv.idl`; nothing here leaks.
+   Shared look (paper/ink, teal = verifiable, sand = primary-source quotations,
+   slate = scholars' voice, no red) comes from hadith-reliability.css, along with
+   the default spacing of every shared component (quote, scholar, eval, showcase,
+   disclosure, sources, evidence card). This file only:
+     1. sets the page's section gap on the shared spacing scale (below), and
+     2. overrides the shared defaults where this page differs, each with its reason.
+   If a value here matches the shared default, delete it. Mobile-first.
+   ========================================================================== */
+
+/* ---- spacing & scroll offset -------------------------------------------------
+   Margins, padding and gaps use the shared --hrv-s1…s8 scale (hadith-reliability.css).
+   Major sections use --hrv-s7 (48px) on phones and --hrv-s8 (64px) from 768px. */
+.hrv.idl {
+  --idl-section-gap: var(--hrv-s7);
+  --idl-scroll: calc(var(--hrv-bar-h) + var(--hrv-s3));
+}
+@media (min-width: 768px) { .hrv.idl { --idl-section-gap: var(--hrv-s8); } }
+
+/* ---- sticky section bar ------------------------------------------------------
+   Override: replaces the multi-page prev/next stepper in .hrv-bar with a single-page
+   horizontally scrollable rail of numbered section chips. */
+.hrv.idl .idl-nav {
+  position: sticky; top: calc(-1 * var(--hrv-inset)); z-index: 20;
+  margin: 0 calc(-1 * var(--hrv-inset)); padding: 0 calc(var(--hrv-inset) - var(--hrv-s2));
+  height: var(--hrv-bar-h); display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--hrv-s1);
+  background: rgba(251, 249, 245, .94); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--hrv-line);
+}
+@media (min-width: 768px) { .hrv.idl .idl-nav { margin: 0 -32px; padding: 0 var(--hrv-s5); } }
+.hrv.idl .idl-nav__track {
+  overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+}
+.hrv.idl .idl-nav.is-end .idl-nav__track { -webkit-mask-image: none; mask-image: none; }
+.hrv.idl .idl-nav__track::-webkit-scrollbar { display: none; }
+.hrv.idl .idl-nav__list { display: flex; gap: var(--hrv-s2); list-style: none; margin: 0; padding: 0 var(--hrv-s5) 0 var(--hrv-s1); width: max-content; }
+.hrv.idl .idl-nav__list > li { margin: 0; }
+.hrv.idl .idl-nav__chip {
+  display: inline-flex; align-items: center; gap: var(--hrv-s2); min-height: 44px; padding: 0 var(--hrv-s3); border-radius: 999px;
+  border: 1px solid var(--hrv-line-strong); background: var(--hrv-surface); color: var(--hrv-ink);
+  font: 600 .86rem/1 var(--hrv-sans); text-decoration: none; white-space: nowrap;
+}
+.hrv.idl .idl-nav__chip:hover { border-color: var(--hrv-ink-3); }
+.hrv.idl .idl-nav__chip[aria-current] { background: var(--hrv-ink); border-color: var(--hrv-ink); color: #fff; }
+.hrv.idl .idl-nav__n { font-size: .74rem; font-weight: 700; color: var(--hrv-verify); font-variant-numeric: tabular-nums; }
+.hrv.idl .idl-nav__chip[aria-current] .idl-nav__n { color: rgba(255, 255, 255, .8); }
+@media (min-width: 1024px) { .hrv.idl .idl-nav__track { -webkit-mask-image: none; mask-image: none; } }
+
+/* Old #stage-N aliases, glance section, passages, and answers land below the sticky bar. */
+.hrv.idl .idl-alias { display: block; height: 0; }
+.hrv.idl .idl-alias, .hrv.idl .idl-glance-sec, .hrv.idl .idl-passage, .hrv.idl .idl-answer { scroll-margin-top: var(--idl-scroll); }
+.hrv.idl#top { scroll-margin-top: 0; }
+
+/* ---- header + core showcase --------------------------------------------------
+   Header padding and hook size come from the shared .hrv-case-head / .hrv-hook.
+   Override: the long descriptive h1 starts smaller than 1.75rem on phones and grows on desktop. */
+.hrv.idl .idl-h1 { font-size: 1.5rem; line-height: 1.18; }
+@media (min-width: 400px) { .hrv.idl .idl-h1 { font-size: 1.6rem; } }
+@media (min-width: 768px) { .hrv.idl .idl-h1 { font-size: 2rem; line-height: 1.14; } }
+/* Body, hook, and intro paragraphs use a comfortable 1.68 reading line-height across the page. */
+.hrv.idl .hrv-hook, .hrv.idl .idl-intro, .hrv.idl .hrv-ev__body, .hrv.idl .idl-verse__body,
+.hrv.idl .hrv-scholar, .hrv.idl .hrv-eval, .hrv.idl .hrv-disclosure__body { line-height: 1.68; }
+/* Cold-landing context link meets the 44px tap target minimum. */
+.hrv.idl .hrv-context { min-height: 44px; }
+/* Inline quotations in confrontation showcases and reference cards use the display serif. */
+.hrv.idl .idl-q { quotes: '“' '”' '‘' '’'; font-family: var(--hrv-display); font-style: normal; }
+/* Pre-610 manuscript witness line sits directly under its New Testament excerpt. */
+.hrv.idl .idl-mss { display: block; margin-top: var(--hrv-s1); font-size: .76rem; line-height: 1.4; color: var(--hrv-ink-2); }
+/* Stacked confrontation sides on phones use a plain gap instead of the rotated swap glyph. */
+@media (max-width: 767px) {
+  .hrv.idl .hrv-vs { gap: var(--hrv-s3); }
+  .hrv.idl .hrv-vs__div { display: none; }
+}
+/* Showcase refs and card quote refs meet the 44px tap target minimum. */
+.hrv.idl .hrv-sc__ref, .hrv.idl a.hrv-quote__ref { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
+.hrv.idl .hrv-vs__list .hrv-sc__ref { display: flex; width: fit-content; }
+/* Lead note above the core showcase uses bottom margin instead of .hrv-sc__note's top margin. */
+.hrv.idl .idl-sc__lead { margin: 0 0 var(--hrv-s3); }
+
+/* ---- at a glance -------------------------------------------------------------
+   Override: 4 glance cards stay in a 2x2 grid from 560px up instead of the shared 3-column grid. */
+@media (min-width: 560px) { .hrv.idl .idl-glance { grid-template-columns: repeat(2, 1fr); } }
+.hrv.idl .idl-gcard { min-height: 44px; padding: var(--hrv-s4); }
+.hrv.idl .idl-gcard__top { display: flex; align-items: center; justify-content: space-between; }
+.hrv.idl .idl-gcard__top .hrv-icon { color: var(--hrv-ink-3); }
+.hrv.idl .idl-gcard__n { font: 700 .78rem/1 var(--hrv-sans); color: var(--hrv-verify); letter-spacing: .04em; }
+/* Compact confrontation inside glance card 03 shows the two verse-ref pills side by side. */
+.hrv.idl .idl-gcard .hrv-vs { grid-template-columns: 1fr 1fr; gap: var(--hrv-s2); }
+.hrv.idl .idl-gcard .hrv-vs__div { display: none; }
+.hrv.idl .idl-gcard .hrv-vs__side { padding: var(--hrv-s2) var(--hrv-s3); }
+.hrv.idl .idl-gcard .hrv-vs__h { font-size: .72rem; margin: 0; }
+
+/* ---- major sections & evidence cards -----------------------------------------
+   Override: one long page of six sections, so each section opens with a strong rule and
+   the page section gap (48px mobile, 64px desktop) rather than the shared 36px without a rule. */
+.hrv.idl .idl-sec { margin-top: var(--idl-section-gap); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line-strong); }
+/* Section cold-landing link ("Start from the top") appears only when the section or a child is targeted. */
+.hrv.idl .idl-context { margin: 0 0 var(--hrv-s3); display: none; }
+.hrv.idl .idl-sec:target .idl-context,
+.hrv.idl .idl-sec:has(:target) .idl-context { display: inline-flex; }
+.hrv.idl .idl-intro { color: var(--hrv-ink-2); margin: 0 0 var(--hrv-s4); }
+.hrv.idl .idl-summary { margin-top: var(--hrv-s5); }
+.hrv.idl .idl-sub { font-size: 1.08rem; line-height: 1.3; font-weight: 600; margin: var(--hrv-s6) 0 var(--hrv-s3); }
+.hrv.idl .idl-card-group { margin-bottom: var(--hrv-s5); }
+/* Cards use uniform --hrv-s4 padding; quotes follow labels with no negative margins; chips sit --hrv-s2 below. */
+.hrv.idl .hrv-ev { padding: var(--hrv-s4); margin-bottom: var(--hrv-s4); }
+.hrv.idl .hrv-quote { margin: var(--hrv-s3) 0 0; }
+.hrv.idl .idl-bq { margin: 0; }
+.hrv.idl .hrv-verify { flex-wrap: wrap; overflow: visible; gap: var(--hrv-s2); margin: var(--hrv-s2) 0 0; padding: 0; }
+.hrv.idl .hrv-verify a { min-height: 44px; padding: var(--hrv-s1) var(--hrv-s3); white-space: normal; line-height: 1.25; max-width: 100%; }
+
+/* ---- classical / comparison quotations & Go deeper ---------------------------
+   Blockquotes embedded inside .hrv-scholar, .hrv-eval, and .idl-deeper panels. */
+.hrv.idl .idl-cq { margin: var(--hrv-s2) 0 var(--hrv-s3); padding: var(--hrv-s2) var(--hrv-s3) var(--hrv-s1); border-left: 2px solid var(--hrv-slate-rule); background: rgba(255, 255, 255, .65); border-radius: 0 8px 8px 0; }
+.hrv.idl .idl-cq > p { margin: 0; font-style: italic; }
+.hrv.idl .idl-cq--eval { border-left-color: var(--hrv-verify); background: var(--hrv-verify-bg); }
+.hrv.idl .idl-cq__ar { margin: var(--hrv-s2) 0 var(--hrv-s1); font-family: var(--hrv-arabic); font-style: normal; font-size: 1.12rem; line-height: 1.9; text-align: right; }
+/* Multiple blocks inside a "Go deeper" disclosure are spaced by container gap rather than A + B. */
+.hrv.idl .idl-deeper .hrv-disclosure__body { display: grid; gap: var(--hrv-s3); }
+
+/* ---- compact verse cards -----------------------------------------------------
+   Override: unnumbered verse cards in §1 and §4 with an eyebrow reference above the heading. */
+.hrv.idl .idl-verses { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--hrv-s4); }
+.hrv.idl .idl-verse { margin-bottom: 0; min-width: 0; }
+.hrv.idl .idl-verse__head { display: grid; gap: var(--hrv-s1); }
+.hrv.idl .idl-verse__ref { font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-verify); }
+.hrv.idl .idl-verse__label { font-size: 1rem; line-height: 1.35; font-weight: 600; }
+.hrv.idl .idl-verse__body { margin: var(--hrv-s2) 0 0; }
+.hrv.idl .idl-verse__pair { margin-top: var(--hrv-s4); }
+
+/* ---- §2 timeline + passages --------------------------------------------------
+   Override: timeline year column widens from 64px to 86px (78px compact) to fit century ranges ("2nd–3rd c."). */
+.hrv.idl .hrv-tl > li { grid-template-columns: 86px 1fr; }
+.hrv.idl .hrv-tl > li::before { left: 97px; }
+.hrv.idl .hrv-tl__gap { margin-left: calc(86px + var(--hrv-s5)); }
+.hrv.idl .hrv-tl__year.is-text { font-family: var(--hrv-display); font-size: .88rem; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--hrv-ink); overflow-wrap: normal; padding-top: 0; }
+.hrv.idl .hrv-sc--compact .hrv-tl > li { grid-template-columns: 78px 1fr; }
+.hrv.idl .hrv-sc--compact .hrv-tl > li::before { left: 89px; }
+.hrv.idl .hrv-sc--compact .hrv-tl__year.is-text { font-size: .8rem; }
+.hrv.idl .idl-banner { font-weight: 600; }
+
+/* Gospel passage cards (§2) with pre-610 manuscript counts, date lists, and lazy scan carousels. */
+.hrv.idl .idl-passages { margin-top: var(--hrv-s5); }
+.hrv.idl .idl-passage {
+  background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius);
+  padding: var(--hrv-s4); margin-bottom: var(--hrv-s4); transition: box-shadow .3s, border-color .3s;
+}
+.hrv.idl .idl-passage:target { border-color: var(--hrv-verify); box-shadow: 0 0 0 3px var(--hrv-verify-bg); }
+.hrv.idl .idl-passage__head { display: grid; gap: var(--hrv-s1); }
+.hrv.idl .idl-passage__topic { font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-verify); }
+.hrv.idl .idl-passage__ref { font-size: 1.05rem; line-height: 1.3; font-weight: 600; }
+.hrv.idl .idl-badge { display: inline-block; margin: var(--hrv-s2) 0 0; padding: var(--hrv-s1) var(--hrv-s3); border-radius: 999px; background: var(--hrv-sand); font-size: .8rem; }
+.hrv.idl .idl-count { display: flex; align-items: center; gap: var(--hrv-s2); margin: var(--hrv-s3) 0 var(--hrv-s2); padding: var(--hrv-s2) var(--hrv-s3); border-radius: 10px; background: var(--hrv-verify-bg); color: var(--hrv-verify-strong); font-weight: 650; font-size: .9rem; line-height: 1.35; }
+.hrv.idl .idl-count .hrv-icon { width: 18px; height: 18px; }
+.hrv.idl .idl-prelist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; font-size: .82rem; line-height: 1.4; }
+.hrv.idl .idl-prelist > li { margin: 0; padding: var(--hrv-s1) 0; display: flex; justify-content: space-between; gap: var(--hrv-s3); border-bottom: 1px solid var(--hrv-line); color: var(--hrv-ink); }
+.hrv.idl .idl-prelist > li:last-child { border-bottom: 0; }
+.hrv.idl .idl-prelist__d { color: var(--hrv-ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (min-width: 560px) { .hrv.idl .idl-prelist { grid-template-columns: 1fr 1fr; column-gap: var(--hrv-s5); } .hrv.idl .idl-prelist > li:nth-last-child(2):nth-child(odd) { border-bottom: 0; } }
+.hrv.idl .idl-scans__body { padding: var(--hrv-s1) 0 var(--hrv-s3); }
+.hrv.idl .idl-carousel-ph { display: grid; place-items: center; min-height: 160px; border-radius: 12px; background: var(--hrv-paper); border: 1px solid var(--hrv-line); color: var(--hrv-ink-2); font-size: .85rem; }
+/* The shared carousel keeps its own look (evidence-carousel.css); only reset its outer margin here. */
+.hrv.idl .idl-scans__body .carousel-container { margin: 0; }
+
+/* ---- §3 full verses & §4 witness cards ---------------------------------------
+   Disclosed list of full Qurʾān verses in §3 and scholar witness metadata in §4. */
+.hrv.idl .idl-tag { display: inline-block; margin-right: var(--hrv-s1); padding: 0 var(--hrv-s2); border: 1px solid var(--hrv-line-strong); border-radius: 999px; background: var(--hrv-paper); font-size: .74rem; font-weight: 600; font-style: normal; color: var(--hrv-ink); }
+.hrv.idl .idl-fullverses { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--hrv-s3); }
+.hrv.idl .idl-fullverses > li { margin: 0; }
+.hrv.idl .idl-fullverses .hrv-quote { margin: 0; }
+/* Stack witness cards on phones so no scholar verdict is hidden off-screen (playbook §5.2). */
+.hrv.idl .hrv-wit { flex-direction: column; gap: var(--hrv-s3); overflow: visible; scroll-snap-type: none; margin: 0; padding: 0; }
+.hrv.idl .hrv-wit__card { flex: 0 0 auto; padding: var(--hrv-s4); }
+.hrv.idl .hrv-wit__hint { display: none; }
+@media (min-width: 640px) {
+  .hrv.idl .hrv-wit { flex-direction: row; flex-wrap: wrap; }
+  .hrv.idl .hrv-wit__card { flex: 1 1 260px; }
+}
+.hrv.idl .idl-wit__pos { display: block; margin-top: var(--hrv-s1); font-size: .78rem; font-weight: 600; letter-spacing: .02em; color: var(--hrv-ink-2); }
+.hrv.idl .idl-wit__lead { display: block; font-style: normal; font-size: .82rem; color: var(--hrv-ink-2); }
+.hrv.idl .idl-wit__support { display: block; margin-top: var(--hrv-s2); font-size: .86rem; }
+.hrv.idl .idl-wit__refs { display: flex; flex-wrap: wrap; gap: var(--hrv-s2) var(--hrv-s3); margin-top: var(--hrv-s2); }
+
+/* ---- §5 answers --------------------------------------------------------------
+   Override: numbered summary rows with a 26px badge column and quoted defender heading. */
+.hrv.idl .idl-answer > summary { display: grid; grid-template-columns: 26px 1fr 16px; align-items: center; gap: var(--hrv-s3); min-height: 56px; }
+.hrv.idl .idl-answer__n { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--hrv-verify-bg); color: var(--hrv-verify-strong); font: 700 .78rem/1 var(--hrv-sans); }
+.hrv.idl .idl-answer__h { font-family: var(--hrv-display); font-size: 1rem; line-height: 1.35; font-weight: 600; }
+.hrv.idl .idl-answer__h q { quotes: '“' '”' '‘' '’'; }
+.hrv.idl .idl-answer__label { font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-verify); margin: 0 0 var(--hrv-s1); }
+
+/* ---- §6 references + closing -------------------------------------------------
+   Stacked reference cards inside "All references on this page" and the closing aside. */
+.hrv.idl .idl-refs { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--hrv-s3); }
+.hrv.idl .idl-ref { margin: 0; background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); padding: var(--hrv-s4); }
+.hrv.idl .idl-ref__top { display: flex; flex-wrap: wrap; align-items: center; gap: var(--hrv-s1) var(--hrv-s3); margin-bottom: var(--hrv-s1); }
+.hrv.idl .idl-ref__cat { font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-ink-2); }
+.hrv.idl .idl-ref__refs { display: inline-flex; flex-wrap: wrap; gap: 0 var(--hrv-s3); font-size: .88rem; font-weight: 650; }
+.hrv.idl .idl-ref__refs .hrv-link { display: inline-flex; align-items: center; min-height: 44px; }
+.hrv.idl .idl-ref__q { margin: 0; font-size: .92rem; }
+.hrv.idl .idl-ref__q .idl-q { display: block; margin: var(--hrv-s1) 0; }
+.hrv.idl .idl-ref__lead { margin: 0 0 var(--hrv-s1); font-size: .92rem; }
+.hrv.idl .idl-src--text { cursor: default; }
+.hrv.idl .idl-closing { margin-top: var(--idl-section-gap); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line-strong); }
+.hrv.idl .idl-closing__h { font-size: 1.2rem; line-height: 1.3; font-weight: 600; margin: 0 0 var(--hrv-s3); }
+.hrv.idl .idl-closing__line { margin: var(--hrv-s3) 0 0; font-family: var(--hrv-display); font-size: 1.02rem; line-height: 1.68; }
+
+/* Hide the site-wide footer's 5:101 verse on this page (tagged by reference in client.js; see data_proposals.md §4). */
+.hrv.idl ~ .app-footer .footer-verses .footer-verse[hidden] { display: none; }
+
+@media print {
+  .hrv.idl .idl-nav { display: none; }
+}

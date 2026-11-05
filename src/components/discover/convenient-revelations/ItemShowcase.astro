@@ -1,0 +1,30 @@
+---
+/**
+ * The item's showcase: hrv's archetype component (with this article's caption) plus the extras this
+ * article needs — a "delay" strip before it, the verbatim lines behind a number fan, a note line, and
+ * a quote strip after it.
+ * `compact` = hub Start-here card (no links inside; the card itself is a link).
+ */
+import Showcase from '../hadith-reliability/showcase/Showcase.astro';
+import QuoteStrip from './QuoteStrip.astro';
+const { item, compact = false } = Astro.props;
+const s = item.showcase;
+// Render the note below any quote strip so glosses on the quote strip never precede the quote itself.
+const extraNote = Boolean(s.noteHtml);
+---
+{compact ? (
+  <div class="crv-sc-compact">
+    {s.quote && <QuoteStrip strip={s.quote} compact />}
+    <Showcase sc={s.compact} compact caption={false} />
+  </div>
+) : (
+  <div class="crv-showcase">
+    {s.delay && <QuoteStrip strip={s.delay} kind="delay" />}
+    <Showcase sc={s.sc} id={`sc-${item.id}`} label={s.caption} />
+    {s.lines.length > 0 && (
+      <ol class="crv-sc-lines">{s.lines.map(l => <li set:html={l} />)}</ol>
+    )}
+    {s.quote && <QuoteStrip strip={s.quote} />}
+    {extraNote && <p class="hrv-sc__note crv-sc-note" set:html={s.noteHtml} />}
+  </div>
+)}

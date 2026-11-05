@@ -12,23 +12,38 @@ The standard set by `/discover/hadith-reliability` (Oct 2026). Read this before 
 
 ## 2. Voice rules
 
-1. **Ask, don't tell.** Headers are neutral questions or plain descriptions of what the source says. The quoted source carries the weight, never our adjective.
+1. **A researcher laying down facts.** Write as a researcher presenting evidence, not as a guide walking the reader through it. Headers are neutral questions or plain descriptions of what the source says. Hooks and takeaways are declarative statements of what the texts record. The quoted source carries the weight, never our adjective. (Owner, Oct 2026: no "Here you'll see…".)
 2. **Attribute every judgment.** Write "al-Nawawī called it narrator error (wahm)", never "it is an error". Accurate translations of attributed verdicts are fine (Ibn Khirāsh: "a liar… who fabricates hadith").
 3. **Banned in our own voice:** really, actually, yet, only, even, admit/admitted, blunder, errors (as our verdict), wrong, failed, edited out, blanked out, waived, survive, guessing, myth, exposed, debunk, supposedly, polemic, "leap of faith", and why-questions or either/or ultimatums in hooks. In titles, headings, labels and SEO also avoid: contradiction(s), conflicting, problematic, under scrutiny, absurd, self-serving, defects, conceded, misogyny.
 4. **Be fair to the traditional view.** Name the classical reconciliation neutrally ("Commentators proposed rounding"), but **never let it have the last word**. End on the texts.
-5. **Keep quotes in context.** Keep the source's own qualifiers ("…though they do not intend to lie"). No interpolated brackets inside a quotation unless they literally gloss the Arabic.
-6. **Invite verification.** Every claim links to its primary source (Sunnah.com, Shamela, IslamWeb; Qurʾān → our Tafsir al-Ṭabarī page).
-7. **Texts, not persons.** Frame the case around the method and the text, not the man.
+5. **Test the explanation; don't just place it beside the text.** This is the "Comparing with the primary text" block (owner's standard, Oct 2026). Write it in four short moves:
+   1. **What the explanation needs:** name the premise the classical answer depends on. Example: "Al-Nawawī's reading needs a second abrogation, of the five, after the Prophet's last days."
+   2. **Whether any text supports it:** say plainly whether a report, verse or early source states that premise, and whether the scholar cites one. Example: "No report says this, and al-Nawawī cites none; he offers it to reconcile ʿĀʾishah's words with the muṣḥaf." Only write this after a search of the primary sources; record the search in the fact-check.
+   3. **Who the witness is:** give the narrator's or text's standing from the sources. Example: "The Prophet died in her house, on her day, with his head on her chest (Bukhārī 4449)."
+   4. **The fork, then the text:** set out what follows from each option, plainly and without our adjectives. Example: "Either the verse was still recited when he died, as she says, and is not in today's muṣḥaf; or the person beside him at his death did not know a verse had been removed, and the same doubt reaches the many reports that rest on her." End on the quoted text.
+   - A fork is allowed **here**, because it follows from the texts. It is still banned in hooks and titles.
+   - Never call it "made up" or "invented". "Cites no report" and "offered to reconcile" say the same and can be checked.
+6. **Keep quotes in context.** Keep the source's own qualifiers ("…though they do not intend to lie"). No interpolated brackets inside a quotation unless they literally gloss the Arabic.
+7. **Invite verification.** Every claim links to its primary source (Sunnah.com, Shamela, IslamWeb; Qurʾān → our Tafsir al-Ṭabarī page).
+8. **Texts, not persons.** Frame the case around the method and the text, not the man.
+9. **Stand on common ground: the average Muslim.** The owner's standard, Nov 2026. Write every argument for a Muslim with no theology degree, reading it for the first time. Everything an argument stands on must be something that reader already knows and trusts, or something we establish in one line from a source they trust.
+   - **Known; no introduction needed:** the Prophet, Khadījah, ʿĀʾishah, Abū Bakr, ʿUmar, ʿUthmān, ʿAlī, Fāṭimah, Gabriel, the Qurʾān, Ḥirāʾ, the Hijra, Badr, and Bukhārī and Muslim as the most authentic books after the Qurʾān.
+   - **Companions most readers don't know** (Ibn Masʿūd, Ubayy ibn Kaʿb, Zayd ibn Thābit, Abū Mūsā, Saʿd ibn Muʿādh…): **establish why this person's word matters before using it**, with the Prophet's own words from Bukhārī/Muslim where they exist. Example: "The Prophet named four men to learn the Qurʾān from, and named Ibn Masʿūd first (Bukhārī 3808)." A reader who asks "why should I care what he thought?" must already have the answer.
+   - **Scholars** (al-Nawawī, Ibn Kathīr, al-Ṭabarī, Ibn Ḥajar…): one clause on who they are, in terms the reader recognises (their best-known work, or their standing in Sunni scholarship).
+   - **Technical terms** (naskh, muṣḥaf, qirāʾāt, isnād, mursal, ḥasan, tafsīr…): say it in plain English first, then the Arabic in brackets, once.
+   - **Name the stake early.** Within its first two sentences, every item says why it bears on the page's question. Example: "If the teachers the Prophet chose disagreed about what belongs in the Qurʾān, the claim that it was kept letter for letter has to explain that."
+   - **Lead with what the reader knows.** Prefer opening items and forks that rest on well-known figures (ʿĀʾishah, ʿUmar, ʿUthmān) and on Bukhārī/Muslim over lesser-known figures and later sources.
+   - "Others disagreed with him" is not an escape when the point *is* the disagreement among people the Prophet himself vouched for. Say so explicitly.
 
 ### Copy patterns
 | Element | Pattern | Example |
 |---|---|---|
 | Title | What you're about to see: count + items + what they show | "3 Ṣaḥīḥ Reports Giving Different Ages for the Prophet at His Death" |
-| Hook / subtitle | "Here you'll see …" plus orientation, ending on **one** good-faith question a traditional scholar could also ask | "Here you'll see both wordings side by side… Which wording came first?" |
+| Hook / subtitle | **Researcher's voice: lay down the facts.** One or two declarative sentences saying what the texts record, attributed. No guiding phrases ("Here you'll see", "Let's look", "You may wonder"). Optionally end on **one** good-faith question a traditional scholar could also ask. | "Muslim 1452a records ʿĀʾishah saying a verse of five sucklings was still recited as Qurʾān when the Prophet died. Today's muṣḥaf has no such verse." |
 | Takeaway | Plain, attributed statement, no "?", tension carried by facts | "Ṣaḥīḥ chains tie the Hour to a boy's lifetime; a variant reads 'your hour.'" |
 | Section header | A question the reader would ask | "Does a Report Keep Its Wording From Book to Book?" |
 | Topic labels | How a hadith index would title a chapter; honest, never a verdict | "Prophetic Medicine & Remedies", not "Medical Blunders" |
-| Intro | Who regards the text how → what this page does → "read the full text and judge for yourself" | `/hadith` hub intro |
+| Intro | **State the claim, then the tension, plainly.** At most 3 short sentences: (1) what Muslims hold, with its proof-text; (2) that their own most-trusted sources record texts that do not fit that claim; (3) what is on the page, with "judge for yourself" optional. Straight to the point, not harsh: the reader must know within one sentence what the page argues and why it matters. No source inventories, no coyness. | "Muslims hold that the Qurʾān has been preserved letter for letter since it was revealed (15:9). Bukhārī and Muslim, the collections they trust most after the Qurʾān, record Companions describing verses that are not in today's muṣḥaf and readings that differ from it. These are those texts, each linked to its source." |
 | Cross-pointer | A quiet aside raising a factual question, not a claim | "A separate question is how faithfully these reports were passed down… How reliable are the hadith? →" |
 
 ## 3. Ordering: strongest first

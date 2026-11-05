@@ -18,6 +18,6 @@ const { sc, compact = false } = Astro.props;
         </figure>
       ))}
     </div>
-    {sc.items.length > 1 && <p class="hrv-wit__hint">Swipe to see all {sc.items.length}</p>}
+    {sc.items.length > 1 && <p class="hrv-wit__hint">Swipe to see all {sc.items.length}</p>}{sc.noteHtml && <p class="hrv-sc__note" set:html={sc.noteHtml} />}
   </>
 )}

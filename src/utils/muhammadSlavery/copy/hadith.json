@@ -1,0 +1,1489 @@
+{
+  "page": {
+    "seo": {
+      "title": "Did Prophet Muhammad Own Slaves? 34 Accounts in Bukhari and Muslim",
+      "description": "Sahih al-Bukhari and Sahih Muslim record the Prophet owning, buying, selling and freeing slaves, taking captives and ruling on slaves: 34 accounts, each linked."
+    },
+    "h1": "What Bukhārī and Muslim Record of the Prophet and Slaves: 34 Accounts",
+    "intro": "Many Muslims hold that Islam set out to end slavery, pointing to the Qurʾān's praise of freeing a slave (90:13). Bukhārī and Muslim, the collections they trust most after the Qurʾān, record the Prophet owning, buying and selling slaves, and taking and giving captives. These are 34 accounts from both books, the freeing reports Muslims cite among them, each linked to its source.",
+    "breadcrumb": "In the hadith",
+    "sections": {
+      "owned": {
+        "question": "Did the Prophet own slaves?",
+        "dek": "Bukhārī and Muslim name slaves in the Prophet's household and describe their work; one report records what he left at his death."
+      },
+      "bought-and-sold": {
+        "question": "Did the Prophet buy and sell slaves?",
+        "dek": "A slave sold for 800 dirhams, a slave bought for two, Ṣafiyya (later the Prophet's wife) taken for seven heads, a captive girl sent to Mecca as ransom, and a slave paid for drawing blood as a treatment (cupping)."
+      },
+      "freeing-stopped": {
+        "question": "Did the Prophet ever overrule a slave's freeing?",
+        "dek": "Two reports: a dying man's six slaves, of whom lots set two free and kept four in slavery; and the freeing of a slave-girl by the Prophet's wife Maymūna, which stood, with a word on where more reward lay."
+      },
+      "captive-women": {
+        "question": "What did the Companions ask him about captive women?",
+        "dek": "Reports from two campaigns: the Companions' question about withdrawal to avoid pregnancy with the women captured from Banū al-Muṣṭaliq, and the verse revealed about married women captured at Awṭās, after the Battle of Ḥunayn."
+      },
+      "married-captives": {
+        "question": "What do the reports say about the captive women he married?",
+        "dek": "Ṣafiyya and Juwayriyya, two of his wives: how each came to him from among the captives, and what the Companions asked about Ṣafiyya's status."
+      },
+      "captives": {
+        "question": "Who was taken captive, and what became of them?",
+        "dek": "Banū Qurayẓa, Fāṭima's request for a servant, ʿAlī and the fifth of the booty, a sermon on taking from the booty, and the captives of Hawāzin, the tribe defeated at Ḥunayn, who were returned."
+      },
+      "in-law": {
+        "question": "What do the reports say about slaves in law?",
+        "dek": "Rulings in which a slave is paid as compensation, sold, warned against running away, assigned a child, given a prize from the booty, offered as ransom, freed as an expiation, and owed duties; the story of Barīra, a slave-woman ʿĀʾishah bought and freed, comes last."
+      }
+    }
+  },
+  "reportNotes": {
+    "muslim:1763": "About the prisoners of Badr, ransomed for money",
+    "muslim:1074a": "About the charity given to Barīra",
+    "muslim:1075a": "About the charity given to Barīra",
+    "muslim:1075b": "About the charity given to Barīra",
+    "muslim:1812a": "Ibn ʿAbbās on women who joined a battle",
+    "bukhari:6756": "A general ruling on the freed-slave tie (walāʾ)",
+    "bukhari:6760": "A general ruling on the freed-slave tie (walāʾ)"
+  },
+  "items": {
+    "midam": {
+      "title": "3 Reports in Bukhārī and Muslim of Midʿam, a Slave Presented to the Prophet",
+      "context": "Bukhārī and Muslim, on the road from Khaybar, the Jewish town the Prophet took by force, to Wādī al-Qurā: a slave of the Prophet is killed while unloading his camel.",
+      "hook": "Bukhārī and Muslim name a slave presented to the Prophet, Midʿam, and tell of his death in three reports. A stray arrow struck him while he unloaded the Prophet's camel; the people called it martyrdom, and the Prophet answered with an oath about a sheet taken from the Khaybar booty.",
+      "takeaway": "Bukhārī 4234 and 6707 and Muslim 115 describe Midʿam as a slave presented to the Prophet, at work on the Prophet's camel when an arrow killed him.",
+      "showcase": {
+        "type": "versions",
+        "note": "Arabic: Bukhārī 4234 and Muslim 115 have ʿabd lahu, a slave of his; Bukhārī 6707 has ghulām, a word for a boy, young servant or slave. Muslim's Arabic adds that the man gifted him (wahabahu lahu).",
+        "items": [
+          {
+            "label": "Bukhārī 6707",
+            "text": "a man called Rifa`a bin Zaid, from the tribe of Bani Ad-Dubaib, presented a slave named Mid`am to Allah's Apostle",
+            "ref": "bukhari:6707"
+          },
+          {
+            "label": "Bukhārī 4234",
+            "text": "Allah's Messenger (ﷺ) had a slave called Mid`am who had been presented to him by one of Banu Ad-Dibbab",
+            "ref": "bukhari:4234"
+          },
+          {
+            "label": "Muslim 115",
+            "text": "along with the Messenger of Allah (ﷺ) there was a slave who was presented to him by one Rifa'a b. Zaid of the family of Judham",
+            "ref": "muslim:115"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "No! By Him in Whose Hand my soul is, for the sheet which he stole from the war booty before its distribution on the day of Khaibar, is now burning over him.",
+        "ref": "bukhari:6707"
+      },
+      "classical": null,
+      "comparison": "The three reports agree that Midʿam was given to the Prophet: “presented to him by one of Banu Ad-Dibbab” (Bukhārī 4234), by “one Rifa'a b. Zaid of the family of Judham” (Muslim 115). They do not say he was freed before he died; they place him at work on the Prophet's camel on the day he was killed, and Bukhārī 4234 records the Prophet's words over him: “No, by Him in Whose Hand my soul is, the sheet (of cloth) which he had taken (illegally) on the day of Khaibar from the booty before the distribution of the booty, has become a flame of Fire burning him.”"
+    },
+    "prophets-slave-woman": {
+      "title": "ʿAlī in a Sermon: ‘A Slave-Woman Belonging to Allah's Messenger’ He Was Told to Flog",
+      "context": "Muslim 1705a: ʿAlī, giving an address, cites a case from the Prophet's own household on the prescribed punishment for slaves.",
+      "hook": "In a sermon reported in Muslim 1705a, ʿAlī tells his listeners to apply to their slaves, married or not, the fixed punishment set by the Qurʾān or the Sunna (ḥadd). His example is a slave-woman of the Prophet whom the Prophet charged him to flog; he held back because she had just given birth, and the Prophet approved.",
+      "takeaway": "In Muslim 1705a ʿAlī says the Prophet charged him to flog ‘a slave-woman belonging to Allah's Messenger’, and that the Prophet said ‘You have done well’ when he waited because she had just given birth.",
+      "showcase": {
+        "type": "timeline",
+        "note": "Undated steps, all from one report.",
+        "points": [
+          {
+            "step": "ʿAlī's instruction",
+            "text": "O people, impose the prescribed punishment upon your slaves, those who are married and those not married",
+            "ref": "muslim:1705a"
+          },
+          {
+            "step": "His example",
+            "text": "for a slave-woman belonging to Allah's Messenger (ﷺ) had committed adultery, and he committed me to flog her",
+            "ref": "muslim:1705a"
+          },
+          {
+            "step": "The delay",
+            "text": "But she had recently given birth to a child and I was afraid that if I flogged her I might kill her.",
+            "ref": "muslim:1705a"
+          },
+          {
+            "step": "The Prophet's reply",
+            "text": "You have done well",
+            "ref": "muslim:1705a"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "a slave-woman belonging to Allah's Messenger (ﷺ) had committed adultery, and he committed me to flog her",
+        "ref": "muslim:1705a"
+      },
+      "classical": {
+        "text": "Al-Nawawī, author of the Forty Hadith and Riyāḍ al-Ṣāliḥīn, and of a commentary on Ṣaḥīḥ Muslim, draws two rulings from the report: flogging is due on a slave-woman who commits unlawful intercourse (zinā), and the flogging of a woman after childbirth, or of a sick woman, is put off until she recovers.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/5224/"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī reads the report for two rulings and does not discuss whose slave she was. A reader who takes her to belong to the Prophet's household rather than to him needs a wording that says so, and one exists: in [Abū Dāwūd 4473](https://sunnah.com/abudawud:4473) ʿAlī calls her a slave-girl of the Prophet's household. Abū Dāwūd is one of the Sunan collections that rank after Bukhārī and Muslim among the six books, whose reports are graded one by one. Al-Albānī, the modern hadith scholar whose gradings Sunnah.com prints beside reports outside Bukhārī and Muslim, grades this one authentic (ṣaḥīḥ); Zubair ʿAlī Zaʾī, a modern Pakistani hadith scholar whose gradings Sunnah.com also prints, grades it weak (ḍaʿīf). Muslim's Arabic reads *amatan li-rasūli llāh*, a slave-woman of the Messenger of God.\n\nThe witness is ʿAlī himself, the man the Prophet sent to flog her, speaking in a sermon.\n\nEither she was the Prophet's, as Muslim's wording says, or his household's, as Abū Dāwūd's says. On both wordings the order to flog her came from the Prophet, and ʿAlī cites her case to tell owners to punish their own slaves: “O people, impose the prescribed punishment upon your slaves, those who are married and those not married, for a slave-woman belonging to Allah's Messenger (ﷺ) had committed adultery, and he committed me to flog her” ([Muslim 1705a](https://sunnah.com/muslim:1705a))."
+    },
+    "rabah": {
+      "title": "6 Reports of ʿUmar at the Prophet's Upper Room, Where ‘a Black Slave of Allah's Messenger’ Sat at the Stairs",
+      "context": "Bukhārī and Muslim, Medina: when ʿUmar comes to the upper room where the Prophet had withdrawn from his wives, a slave in the Prophet's personal service guards the door.",
+      "hook": "Six reports across Bukhārī and Muslim name the man sitting at the Prophet's stairs when ʿUmar came to his upper room—calling him ‘a black slave of Allah's Messenger’ in Bukhārī's English and ‘Rabah, the servant of Allah's Messenger’ in Muslim's—and show side by side how Sunnah.com renders the same Arabic word (ghulām) as ‘slave’ in one book and ‘servant’ in the other.",
+      "takeaway": "In Bukhārī 4913 and 7263 ‘a black slave of Allah's Messenger’ sits at the stairs of the Prophet's upper room; Muslim 1479a names him ‘Rabah, the servant of Allah's Messenger’.",
+      "showcase": {
+        "type": "versions",
+        "note": "Arabic: ghulām in 7263, 5191, 1479a and 1479e; waṣīf, a young servant or slave, in 5843. Sunnah.com's translators render it as slave in Bukhārī and servant in Muslim. “if its stairs” is Sunnah.com's typo.",
+        "items": [
+          {
+            "label": "Bukhārī 7263",
+            "text": "a black slave of Allah's Messenger (ﷺ) was at the top if its stairs",
+            "ref": "bukhari:7263"
+          },
+          {
+            "label": "Bukhārī 4913",
+            "text": "a black slave of Allah's Messenger (ﷺ) was (sitting) on the first step",
+            "ref": "bukhari:4913"
+          },
+          {
+            "label": "Bukhārī 5191",
+            "text": "a black slave of his",
+            "ref": "bukhari:5191"
+          },
+          {
+            "label": "Bukhārī 5843",
+            "text": "At the door of the room there was a slave to whom I went and said, \"Ask the permission for me to enter.\" He admitted me",
+            "ref": "bukhari:5843"
+          },
+          {
+            "label": "Muslim 1479a",
+            "text": "I went in and found Rabah, the servant of Allah's Messenger (ﷺ), sitting on the thresholds of the window",
+            "ref": "muslim:1479a"
+          },
+          {
+            "label": "Muslim 1479e",
+            "text": "I came to a black servant and said to him: Seek permission for 'Umar.",
+            "ref": "muslim:1479e"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "he was staying in an upper room of his to which he ascended by a ladder, and a black slave of Allah's Messenger (ﷺ) was (sitting) on the first step",
+        "ref": "bukhari:4913"
+      },
+      "classical": null,
+      "comparison": "The reports agree on the scene: ʿUmar could not go in to the Prophet until the man at the stairs took his request in. Bukhārī's reports call him a slave of the Prophet and none of them names him. The name comes from Muslim 1479a, where the same Arabic word, ghulām, is translated servant, and the Arabic there reads Rabāḥ, ghulām of the Messenger of God: “I went in and found Rabah, the servant of Allah's Messenger (ﷺ), sitting on the thresholds of the window” (Muslim 1479a)."
+    },
+    "anjasha": {
+      "title": "One Saying in 10 Reports: Anjasha, Called ‘His Black Slave’, Told to Drive the Women's Camels Slowly",
+      "context": "Bukhārī and Muslim, on a journey: a second named man in the Prophet's personal service—driving the camels of the Prophet's wives—whom Bukhārī and Muslim identify as the Prophet's black slave.",
+      "hook": "Anas ibn Mālik, who served the Prophet for ten years ([Bukhārī 6038](https://sunnah.com/bukhari:6038)), tells in ten reports of Anjasha driving the women's camels on a journey: Bukhārī 6161, Bukhārī 6202, Bukhārī 6210, and Muslim 2323a call him a slave (ghulām lahu aswad / ghulām al-nabī), while others call him the camel-driver, as the Prophet tells him to slow down for the women riding.",
+      "takeaway": "Anas reports in Bukhārī 6161 that the Prophet ‘had a black slave called Anjasha’ who drove the camels on a journey, and told him to drive slowly because women were riding.",
+      "showcase": {
+        "type": "versions",
+        "note": "4 of the 10 wordings; all 10 are in the full list. Arabic: ghulām lahu aswad (6161), ghulām al-nabī (6202).",
+        "items": [
+          {
+            "label": "Bukhārī 6161",
+            "text": "he had a black slave called Anjasha, and he was driving the camels (very fast, and there were women riding on those camels)",
+            "ref": "bukhari:6161"
+          },
+          {
+            "label": "Muslim 2323a",
+            "text": "Allah's Messenger (ﷺ) had in one of his journeys his black slave who was called Anjasha along with him",
+            "ref": "muslim:2323a"
+          },
+          {
+            "label": "Bukhārī 6202",
+            "text": "Anjashah, the slave of the Prophet, was driving their camels (very fast)",
+            "ref": "bukhari:6202"
+          },
+          {
+            "label": "Bukhārī 6211",
+            "text": "The Prophet (ﷺ) had a Had (a camel driver) called Anjasha, and he had a nice voice.",
+            "ref": "bukhari:6211"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "Waihaka (May Allah be merciful to you), O Anjasha! Drive slowly (the camels) with the glass vessels (women)",
+        "ref": "bukhari:6161"
+      },
+      "classical": null,
+      "comparison": "The ten reports tell one moment, and the Prophet's words in it are a kindness to the women riding: “Drive slowly (the camels) with the glass vessels (women)”. Four of them also call Anjasha a slave: Bukhārī 6161 and Muslim 2323a call him the Prophet's black slave, Bukhārī 6202 calls him “Anjashah, the slave of the Prophet”, and Bukhārī 6210 calls him “a slave named Anjasha”."
+    },
+    "household-slaves": {
+      "title": "4 Reports Cited on Both Sides: ‘His Slave Tailor’, an Abyssinian Maid, and What He Left at His Death",
+      "context": "Bukhārī and Muslim: placed at the close of this section because they weigh on both sides of the question—household reports where the Arabic can mean a freedman, beside ʿAmr ibn al-Ḥārith's statement that the Prophet left no slave when he died ([Bukhārī 2739](https://sunnah.com/bukhari:2739)).",
+      "hook": "To give the full picture at the end of Section 1, these four reports gather the household texts that point in different directions: Anas goes with the Prophet to ‘the house of his slave tailor’ (where Bukhārī 5433 has mawlā lahu, which often means a freed slave, and 5435 has ghulām lahu); ʿĀʾishah calls over an Abyssinian maid who prepared the Prophet's date-or-raisin drink (nabīdh); and ʿAmr ibn al-Ḥārith states that when the Prophet died he left neither a male nor a female slave.",
+      "takeaway": "Sunnah.com's English calls the tailor ‘his slave tailor’ (Bukhārī 5433, 5435), while the Arabic of 5433 (mawlā lahu) can mean a freed slave, and ʿAmr ibn al-Ḥārith states that when the Prophet died he did not leave ‘a slave or a slave woman’ (Bukhārī 2739).",
+      "showcase": {
+        "type": "confrontation",
+        "note": "Arabic: mawlā lahu (5433) and ghulām lahu (5435). ʿĀʾishah's maid is not said to be the Prophet's. “it was he” is Sunnah.com's wording.",
+        "left": {
+          "title": "In his lifetime",
+          "items": [
+            {
+              "text": "Allah's Messenger (ﷺ) entered the house of his slave tailor",
+              "ref": "bukhari:5435"
+            },
+            {
+              "text": "it was he, who prepared the Nabidh for the Messenger of Allah (ﷺ)",
+              "ref": "muslim:2005a"
+            }
+          ]
+        },
+        "right": {
+          "title": "At his death",
+          "items": [
+            {
+              "text": "When Allah's Messenger (ﷺ) died, he did not leave any Dirham or Dinar (i.e. money), a slave or a slave woman or anything else except his white mule, his arms and a piece of land which he had given in charity",
+              "ref": "bukhari:2739"
+            }
+          ]
+        }
+      },
+      "keyQuote": {
+        "text": "When Allah's Messenger (ﷺ) died, he did not leave any Dirham or Dinar (i.e. money), a slave or a slave woman or anything else except his white mule, his arms and a piece of land which he had given in charity",
+        "ref": "bukhari:2739"
+      },
+      "classical": null,
+      "comparison": "These four reports point two ways, and both belong on the page. Anas's English speaks of the Prophet visiting “his slave tailor”, though the Arabic of 5433, mawlā lahu, can also mean a freed slave, and the reports do not settle whose man he was. ʿĀʾishah's maid is not said to belong to the Prophet. Of the end of his life, ʿAmr ibn al-Ḥārith, his brother-in-law, says: “he did not leave any Dirham or Dinar (i.e. money), a slave or a slave woman” (Bukhārī 2739)."
+    },
+    "right-hand-touch": {
+      "title": "ʿĀʾishah on the Women's Pledge: No Woman's Hand Touched ‘Except the Hand of That Woman His Right Hand Possessed’",
+      "context": "Bukhārī 7214: ʿĀʾishah describes how the Prophet took the pledge of allegiance from women.",
+      "hook": "ʿĀʾishah says in Bukhārī 7214 that the Prophet took women's pledge by speech, and that his hand touched no woman's hand except one: the woman his right hand possessed, in the Qurʾān's phrase for slaves. The bracket in the English, ‘(i.e. his captives or his lady slaves)’, is the translator's; the Arabic says a woman he owned.",
+      "takeaway": "In Bukhārī 7214 ʿĀʾishah says the Prophet's hand touched no woman's hand at the pledge ‘except the hand of that woman his right hand possessed’; the Arabic reads illā imraʾatan yamlikuhā, a woman he owned.",
+      "showcase": {
+        "type": "confrontation",
+        "note": "Arabic: illā imraʾatan yamlikuhā, a woman he owned. “(i.e. his captives or his lady slaves)” is the translator's gloss.",
+        "left": {
+          "title": "The pledge",
+          "items": [
+            {
+              "text": "The Prophet (ﷺ) used to take the Pledge of allegiance from the women by words only",
+              "ref": "bukhari:7214"
+            }
+          ]
+        },
+        "right": {
+          "title": "The exception",
+          "items": [
+            {
+              "text": "the hand of Allah's Messenger (ﷺ) did not touch any woman's hand except the hand of that woman his right hand possessed",
+              "ref": "bukhari:7214"
+            }
+          ]
+        }
+      },
+      "keyQuote": {
+        "text": "the hand of Allah's Messenger (ﷺ) did not touch any woman's hand except the hand of that woman his right hand possessed",
+        "ref": "bukhari:7214"
+      },
+      "classical": {
+        "text": "Ibn Ḥajar (d. 852 AH, counting years after the Hijra), author of Fatḥ al-Bārī, the best-known commentary on Ṣaḥīḥ al-Bukhārī, records other wordings of ʿĀʾishah's report, in which the Prophet never touched a woman's hand and took the pledge by speech. He quotes al-Nawawī on the wording of Mālik, the imam of Medina, founder of the Mālikī school, one of the four Sunni schools of law: *illā an yaʾkhudha ʿalayhā* (except that he took the pledge from her). The exception, al-Nawawī says, is disjoint (*munqaṭiʿ*): it takes no one out of the group named, meaning he touched no woman's hand at all and took her pledge by words. Ibn Ḥajar draws from the report that hearing the voice of a woman one is not related to is permitted, while touching her skin without need is barred.",
+        "sources": [
+          {
+            "label": "Ibn Ḥajar, Fatḥ al-Bārī (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/52/13194/"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī's disjoint reading is made for another wording, *illā an yaʾkhudha ʿalayhā*, except that he took her pledge. Bukhārī 7214 has a different exception, *illā imraʾatan yamlikuhā*, except a woman he owned. It names a woman out of the women whose hands he did not touch, so it reads as an exception taken from that group, not a disjoint one. To read the woman he owned as his wives, the verb *yamliku*, to own, would have to cover marriage; Ibn Ḥajar does not gloss it that way here or on the report of the women's pledge in Sūrat al-Mumtaḥina ([Bukhārī 4891](https://sunnah.com/bukhari:4891)).\n\nThe witness is ʿĀʾishah, his wife, who swears in Bukhārī 4891 that his hand never touched a woman's hand at the pledge.\n\nEither the exception names his wives, in a verb of ownership (*yamlikuhā*) that Ibn Ḥajar does not apply to them, or it names women he owned, as the verb says. On the second reading, ʿĀʾishah's sentence counts a woman he owned among those whose hand he touched: “the hand of Allah's Messenger (ﷺ) did not touch any woman's hand except the hand of that woman his right hand possessed” ([Bukhārī 7214](https://sunnah.com/bukhari:7214))."
+    },
+    "karkara": {
+      "title": "Karkara, ‘a Man Who Looked After the Family and the Belongings of the Prophet’ (a Contrast Case)",
+      "context": "Bukhārī 3074: included at the close of Section 1 to distinguish a baggage-attendant whom Bukhārī calls ‘a man’ (rajul) from Midʿam in Account 1, whom Bukhārī and Muslim explicitly call the Prophet's slave (ʿabd / ghulām).",
+      "hook": "Readers comparing the Khaybar accounts often meet Karkara alongside Midʿam (Account 1), since both looked after the Prophet's riding-beasts or baggage and both died with a cloak taken from the war spoils before distribution. Unlike Midʿam, however, Bukhārī 3074 calls Karkara ‘a man’ (rajul) in charge of the Prophet's family and belongings and does not call him a slave—showing that the hadith collections distinguish between a free attendant and an owned slave.",
+      "takeaway": "Unlike Midʿam in Account 1, Bukhārī 3074 calls Karkara ‘a man who looked after the family and the belongings of the Prophet’ and does not call him a slave.",
+      "showcase": {
+        "type": "facts",
+        "note": "Arabic: kāna ʿalā thaqal al-nabī, he was in charge of the Prophet's baggage.",
+        "items": [
+          {
+            "text": "There was a man who looked after the family and the belongings of the Prophet (ﷺ) and he was called Karkara.",
+            "ref": "bukhari:3074"
+          },
+          {
+            "text": "The people then went to look at him and found in his place, a cloak he had stolen from the war booty",
+            "ref": "bukhari:3074"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "There was a man who looked after the family and the belongings of the Prophet (ﷺ) and he was called Karkara.",
+        "ref": "bukhari:3074"
+      },
+      "classical": null,
+      "comparison": "Setting Karkara (Bukhārī 3074) beside Midʿam (Bukhārī 4234, Account 1) shows why the Arabic terms in the first five accounts matter: where Midʿam is called the Prophet's slave (*ʿabd* / *ghulām*) who had been gifted to him, Karkara is called simply “a man who looked after the family and the belongings of the Prophet (ﷺ)” (Bukhārī 3074), and is therefore not counted here as proof of slave ownership."
+    },
+    "mudabbar-sold": {
+      "title": "One Sale in 8 Reports: A Slave Promised Freedom at His Owner's Death Is Sold for 800 Dirhams",
+      "context": "Bukhārī and Muslim: a man of the Anṣār, the Muslims of Medina, who owns nothing else promises his slave freedom at his death.",
+      "hook": "Jābir ibn ʿAbdullāh, one of the 1,400 at Ḥudaybiya whom the Prophet called the best people on earth ([Bukhārī 4154](https://sunnah.com/bukhari:4154)), reports in eight versions that the Prophet sold a slave promised freedom at the owner's death (mudabbar). The owner had nothing else; the Prophet asked, ‘Who will buy this slave from me?’, sold him for 800 dirhams and sent the price to the owner, telling him to start with himself.",
+      "takeaway": "Jābir reports that the Prophet sold a slave whose owner had promised him freedom at death, for 800 dirhams, and sent the price to the owner, who had no other property (Bukhārī 7186, 6716).",
+      "showcase": {
+        "type": "timeline",
+        "note": "One event (Jābir) in Bukhārī 2141, 6716, 6947, 7186 and Muslim 997a–d.",
+        "points": [
+          {
+            "step": "The promise",
+            "text": "An Ansari man made his slave a Mudabbar and he had no other property than him.",
+            "ref": "bukhari:6716"
+          },
+          {
+            "step": "The Prophet asks for a buyer",
+            "text": "later on he was in need of money, so the Prophet (ﷺ) took the slave and said, \"Who will buy this slave from me?\"",
+            "ref": "bukhari:2141"
+          },
+          {
+            "step": "The sale",
+            "text": "Nu'aim bin An-Nahham bought him for eight hundred Dirhams.",
+            "ref": "bukhari:6716"
+          },
+          {
+            "step": "The price",
+            "text": "the Prophet (ﷺ) sold that slave for 800 dirhams and sent the price to him",
+            "ref": "bukhari:7186"
+          },
+          {
+            "step": "To the owner",
+            "text": "Start with your own self and spend it on yourself",
+            "ref": "muslim:997a"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "the Prophet (ﷺ) sold that slave for 800 dirhams and sent the price to him",
+        "ref": "bukhari:7186"
+      },
+      "classical": {
+        "text": "Al-Nawawī reads the report as permission to sell a mudabbar while the owner lives, the view of al-Shāfiʿī and Aḥmad ibn Ḥanbal, founders of the Shāfiʿī and Ḥanbalī schools, two of the four Sunni schools of law, and of others he names, by analogy with a slave whose freeing is bequeathed, who may be sold by consensus. Abū Ḥanīfa, founder of the Ḥanafī school, Mālik and most scholars of the Ḥijāz, Syria and Kūfa held such a sale not allowed, and said the Prophet sold him to pay a debt of the owner's, citing a version in al-Nasāʾī and in al-Dāraquṭnī, a leading hadith critic of Baghdad, in which he tells the owner to pay his debt with it. Al-Qāḍī ʿIyāḍ, the Mālikī judge of Ceuta, author of al-Shifāʾ and of a commentary on Ṣaḥīḥ Muslim, thought it likelier that the Prophet acted out of concern for a man who had left himself nothing. Al-Nawawī adds that al-Shāfiʿī, Mālik and the majority count a mudabbar's freedom against the third of the estate, and that the report shows a ruler looking to his people's welfare and undoing their dealings that harm them.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/5117/"
+          },
+          {
+            "label": "al-Nasāʾī 5418 (authentic per al-Albānī; weak per Zubair ʿAlī Zaʾī)",
+            "url": "https://sunnah.com/nasai:5418"
+          }
+        ]
+      },
+      "comparison": "Each classical reading needs something beyond Jābir's words. The reading of the Ḥanafī and Mālikī schools needs a debt, and a text gives one: in [al-Nasāʾī 5418](https://sunnah.com/nasai:5418), another of the Sunan collections, Jābir says the owner was in need and owed a debt, and the Prophet told him to pay it and spend on his family; al-Albānī grades it authentic, Zubair ʿAlī Zaʾī weak. Al-Nawawī's reading needs the promise to be revocable like a bequest; he argues this by analogy, not from a report. ʿIyāḍ's reading needs the owner's need, which Muslim 997a records.\n\nThe witness is Jābir, from whom al-Dhahabī, author of Siyar Aʿlām al-Nubalāʾ, a biographical dictionary of Muslim scholars, counts 1,540 hadith ([Siyar 3/194](https://www.islamweb.net/ar/library/content/60/315/)); Bukhārī and Muslim both carry the report.\n\nEither the slave was sold for the owner's debt, or because the promise could be withdrawn, or to provide for a man who had nothing else. On each reading the owner's need decided the case, the promised freedom ended with the sale, and the price went to the owner; none of the eight reports records a word to the slave. The Prophet's words to the owner: “Start with your own self and spend it on yourself” ([Muslim 997a](https://sunnah.com/muslim:997a))."
+    },
+    "two-slaves-for-one": {
+      "title": "A Slave Who Pledged to Emigrate, Bought From His Master ‘for Two Black Slaves’",
+      "context": "Muslim 1602, from Jābir: a man pledges emigration (hijra) to the Prophet, and his master comes to claim him.",
+      "hook": "Jābir reports in Muslim 1602 that a man pledged emigration to the Prophet, who ‘did not know that he was a slave’. When the master came for him, the Prophet said ‘Sell him to me’ and paid two black slaves for him; from then on he asked those who pledged whether they were slaves.",
+      "takeaway": "In Muslim 1602 the Prophet buys a slave who had pledged emigration to him, paying the master two black slaves, and afterwards asks those who pledge whether they are slaves.",
+      "showcase": {
+        "type": "number_fan",
+        "note": "Afterwards: “he did not afterwards take allegiance from anyone until he had asked him whether he was a slave (or a free man)” (Muslim 1602).",
+        "items": [
+          {
+            "value": "1",
+            "caption": "slave who pledged emigration, bought",
+            "text": "he (the Holy Prophet) did not know that he was a slave",
+            "ref": "muslim:1602"
+          },
+          {
+            "value": "2",
+            "caption": "black slaves paid for him",
+            "text": "And he bought him for two black slaves",
+            "ref": "muslim:1602"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "Sell him to me. And he bought him for two black slaves, and he did not afterwards take allegiance from anyone until he had asked him whether he was a slave (or a free man)",
+        "ref": "muslim:1602"
+      },
+      "classical": {
+        "text": "Al-Nawawī takes the master to have been a Muslim, since a Muslim slave may not be sold to an unbeliever, and the two slaves paid to have been Muslims as well, though he allows that either may have been an unbeliever. He sees the Prophet's generosity in the purchase: he did not want to send the man back disappointed in his wish to emigrate and stay in his company, so he bought him to complete it. He also draws from it that one slave may be sold for two; all agree on this for cash, and for deferred payment al-Shāfiʿī and the majority allow it, while Abū Ḥanīfa and the jurists of Kūfa, his city, do not.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/4892/"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī's reading of the purchase as generosity needs a motive: that the Prophet did not want to send the man away disappointed in his wish to emigrate. The report gives no motive, and al-Nawawī cites none; he infers it from the purchase. He takes the master and the two slaves paid to have been Muslims, and allows that they may not have been.\n\nThe witness is Jābir, as in the sale for 800 dirhams above.\n\nEither the purchase was a kindness, as al-Nawawī reads it, and two men went to the master so that one could stay; or it settled the master's claim. On both readings the pledge did not release the man from his master, and the Prophet's practice changed from then on: “he did not afterwards take allegiance from anyone until he had asked him whether he was a slave (or a free man)” ([Muslim 1602](https://sunnah.com/muslim:1602))."
+    },
+    "safiyya-seven-heads": {
+      "title": "Ṣafiyya ‘Fell to the Lot of Dihya’; the Prophet ‘Got Her in Exchange of Seven Heads’",
+      "context": "Muslim 1365e, from Anas, at Khaybar: a captive allotted to one of the Companions passes to the Prophet.",
+      "hook": "In Muslim 1365e Anas reports that Ṣafiyya, a Jewish woman of Khaybar, taken captive there, who became the Prophet's wife, fell to a Companion, Diḥya al-Kalbī, and that the Prophet took her for seven heads; the Arabic verb is ishtarā, to buy. At the wedding feast the people said they did not know whether he had married her or taken her as a slave woman.",
+      "takeaway": "In Muslim 1365e the Prophet ‘got her in exchange of seven heads’ (Arabic: bought her), and the people at the feast did not know whether he had married her or taken her as a slave woman until he veiled her.",
+      "showcase": {
+        "type": "confrontation",
+        "note": "Arabic: fa-shtarāhā … bi-sabʿati arʾus, he bought her for seven heads; the people's doubt reads am ittakhadhahā umma walad, or took her as an umm walad (a slave woman who bears her owner's child).",
+        "left": {
+          "title": "At Khaybar",
+          "items": [
+            {
+              "text": "there fell to the lot of Dihya a beautiful girl, and Allah's Messenger (ﷺ) got her in exchange of seven heads",
+              "ref": "muslim:1365e"
+            }
+          ]
+        },
+        "right": {
+          "title": "At the wedding feast",
+          "items": [
+            {
+              "text": "We do not know whether he (the Holy Prophet) had married her (as a free woman), or as a slave woman.",
+              "ref": "muslim:1365e"
+            },
+            {
+              "text": "When he intended to ride, he made her wear the veil and she sat on the hind part of the camel; so they came to know that he had married her.",
+              "ref": "muslim:1365e"
+            }
+          ]
+        }
+      },
+      "keyQuote": {
+        "text": "We do not know whether he (the Holy Prophet) had married her (as a free woman), or as a slave woman.",
+        "ref": "muslim:1365e"
+      },
+      "classical": {
+        "text": "Al-Nawawī gives the reason the Prophet took her from Diḥya: he had not authorised that choice, and leaving the chiefs' daughter with one soldier risked setting him above the rest of the army, slighting her rank, and discord, so taking her himself removed these harms, and he still compensated Diḥya. He reads the verb bought as giving Diḥya seven persons in her place to content him, not a contract of sale, and says the reports agree on that reading. Al-Qāḍī ʿIyāḍ, he notes, thought she was likelier property taken from the enemy without fighting (fayʾ).",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/4222/"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī's reading needs the verb *ishtarā*, bought, to mean a gift of seven people to content Diḥya, not a sale. He cites no text that gives the verb that sense; he offers the reading so that this report agrees with those in which Diḥya is told to take another girl ([Bukhārī 371](https://sunnah.com/bukhari:371)). In Muslim 1365f the Prophet gives Diḥya whatever he asked.\n\nThe witness is Anas, who rode to Khaybar behind his stepfather Abū Ṭalḥa, a veteran of Badr, and served the Prophet ([Bukhārī 5425](https://sunnah.com/bukhari:5425)).\n\nEither the seven were a price, as the verb says, or a compensation, as al-Nawawī reads it. On both, seven people went to Diḥya so that Ṣafiyya passed to the Prophet. Anas then records that the Companions at the wedding feast held both standings possible for her and waited for a sign: “We do not know whether he (the Holy Prophet) had married her (as a free woman), or as a slave woman” ([Muslim 1365e](https://sunnah.com/muslim:1365e))."
+    },
+    "captives-exchanged": {
+      "title": "A Captive Girl Given as a Prize, Then Sent to Mecca ‘as Ransom for a Number of Muslims’",
+      "context": "Muslim 1755: a raid on the tribe of Fazāra under Abū Bakr, and what became of one captive.",
+      "hook": "Salama ibn al-Akwaʿ, who pledged allegiance to the Prophet under the Tree at Ḥudaybiya ([Bukhārī 2960](https://sunnah.com/bukhari:2960)) and whom the Prophet named the best foot-soldier of one campaign ([Muslim 1807a](https://sunnah.com/muslim:1807a)), reports a raid in which women and children were captured. Abū Bakr gave him a girl as a prize; the Prophet asked him for her twice, then sent her to Mecca in exchange for Muslim prisoners. Two other reports here record captives freed without ransom, and a captive given as a servant and later sold.",
+      "takeaway": "Salama ibn al-Akwaʿ reports in Muslim 1755 that the Prophet took a captive girl from him and ‘surrendered her as ransom for a number of Muslims who had been kept as prisoners at Mecca’.",
+      "showcase": {
+        "type": "timeline",
+        "note": "Undated steps, all from Muslim 1755.",
+        "points": [
+          {
+            "step": "The prize",
+            "text": "I drove them along until I brought them to Abu Bakr who bestowed that girl upon me as a prize.",
+            "ref": "muslim:1755"
+          },
+          {
+            "step": "The request",
+            "text": "Give me that girl, O Salama.",
+            "ref": "muslim:1755"
+          },
+          {
+            "step": "The exchange",
+            "text": "The Messenger of Allah (ﷺ) sent her to the people of Mecca, and surrendered her as ransom for a number of Muslims who had been kept as prisoners at Mecca",
+            "ref": "muslim:1755"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "The Messenger of Allah (ﷺ) sent her to the people of Mecca, and surrendered her as ransom for a number of Muslims who had been kept as prisoners at Mecca",
+        "ref": "muslim:1755"
+      },
+      "classical": {
+        "text": "Al-Nawawī draws from the report that captives may be exchanged and Muslim men ransomed with unbelieving women; that a mother may be separated from her grown child; and that the ruler may ask his soldiers for part of their booty to ransom a Muslim with it or for the community's needs, as the Prophet did here and with the booty of Ḥunayn.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/5361/"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī's ruling that a mother may be separated from her grown child needs the daughter to have been grown. The report gives no age and al-Nawawī cites none. He reads Salama's words, “I had not yet disrobed her” (Muslim 1755), as a polite way of speaking of intercourse; on that reading she was given to Salama as a woman he could take.\n\nThe witness is Salama, who drove the women and children to Abū Bakr himself and received the girl as his prize.\n\nThe ransom that freed Muslim prisoners came about this way: the girl was taken with her mother, given to Salama, asked from him twice by the Prophet, and sent to Mecca. Either she was grown, as al-Nawawī's ruling requires, and the separation was lawful in his school; or she was not, and the ruling he draws does not fit her. The report says nothing of what became of her or of her mother: “sent her to the people of Mecca, and surrendered her as ransom for a number of Muslims who had been kept as prisoners at Mecca” ([Muslim 1755](https://sunnah.com/muslim:1755))."
+    },
+    "abu-tayba": {
+      "title": "2 Reports: A Slave Cupper Paid by the Prophet, Who Asked His Masters to Lower His Tax",
+      "context": "Bukhārī 2102 and Muslim 1202c: Abū Ṭayba, a slave of Banū Bayāḍa, gives the Prophet cupping (ḥijāma), drawing blood as a treatment.",
+      "hook": "Two reports tell of Abū Ṭayba, a slave who paid his owners a levy from his earnings (kharāj). The Prophet paid him for cupping and spoke to his masters, who lowered the levy.",
+      "takeaway": "The Prophet paid Abū Ṭayba ‘one Sa of dates’ and ‘ordered his masters to reduce his tax’ (Bukhārī 2102); Muslim 1202c says he ‘talked to his master and he reduced the charges’.",
+      "showcase": {
+        "type": "versions",
+        "note": "Bukhārī: ordered; Muslim: talked to. Arabic kharāj (2102) and ḍarība (1202c), both meaning a tax or levy; a Sa (ṣāʿ) is a dry measure of about four handfuls. The bracket in 2102 is the translator's.",
+        "items": [
+          {
+            "label": "Bukhārī 2102",
+            "text": "Abu Taiba cupped Allah's Messenger (ﷺ) so he ordered that he be paid one Sa of dates and ordered his masters to reduce his tax (as he was a slave and had to pay a tax to them)",
+            "ref": "bukhari:2102"
+          },
+          {
+            "label": "Muslim 1202c",
+            "text": "The slave of Banu Bayada cupped Allah's Apostle (ﷺ) and he gave him his wages, and talked to his master and he reduced the charges",
+            "ref": "muslim:1202c"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "Abu Taiba cupped Allah's Messenger (ﷺ) so he ordered that he be paid one Sa of dates and ordered his masters to reduce his tax (as he was a slave and had to pay a tax to them)",
+        "ref": "bukhari:2102"
+      },
+      "classical": null,
+      "comparison": "Ibn ʿAbbās, the Prophet's young cousin, for whom the Prophet prayed that God teach him the Book ([Bukhārī 75](https://sunnah.com/bukhari:75)), draws his own lesson from the report, that cupping earnings are lawful: “if this earning was unlawful Allah's Apostle (ﷺ) would not have given it” (Muslim 1202c). The reports also show the arrangement around those earnings: the wage went to a man who owed part of what he earned to his masters, and the Prophet asked them to take less: “ordered his masters to reduce his tax” (Bukhārī 2102)."
+    },
+    "six-slaves-lots": {
+      "title": "Six Slaves Freed at a Man's Death; the Prophet ‘Set Two Free and Kept Four in Slavery’",
+      "context": "Muslim 1668: a man with no other property frees all six of his slaves as he dies.",
+      "hook": "ʿImrān ibn Ḥuṣayn, a Companion whom ʿUmar sent to teach the people of Basra ([Siyar 2/508](https://www.islamweb.net/ar/library/content/60/239/)), reports that a man freed his six slaves at his death, though he owned nothing else. The Prophet divided them into three groups, cast lots, freed two and kept four in slavery, and spoke severely of the man.",
+      "takeaway": "In Muslim 1668a the Prophet casts lots among six slaves freed by a dying man who owned nothing else, sets two free and keeps four in slavery, and speaks severely of the man.",
+      "showcase": {
+        "type": "number_fan",
+        "note": "“and he (the Holy Prophet) spoke severely of him” (Muslim 1668a).",
+        "items": [
+          {
+            "value": "6",
+            "caption": "freed by their owner at his death",
+            "text": "emancipated six slaves of his at the time of his death",
+            "ref": "muslim:1668a"
+          },
+          {
+            "value": "2",
+            "caption": "set free after lots were cast",
+            "text": "cast lots amongst them, and set two free",
+            "ref": "muslim:1668a"
+          },
+          {
+            "value": "4",
+            "caption": "kept in slavery",
+            "text": "kept four in slavery",
+            "ref": "muslim:1668a"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "a person who had no other property emancipated six slaves of his at the time of his death. Allah's Messenger (ﷺ) called for them and divided them into three sections, cast lots amongst them, and set two free and kept four in slavery; and he (the Holy Prophet) spoke severely of him",
+        "ref": "muslim:1668a"
+      },
+      "classical": {
+        "text": "Al-Nawawī explains the ruling by the limit on gifts at death: when a man frees slaves in his final illness, or by bequest, and they exceed a third of his estate, lots are cast and a third of them go free. That is the view of the majority, including Mālik, al-Shāfiʿī and Aḥmad, as well as Dāwūd ibn ʿAlī, head of the literalist (Ẓāhirī) school, and the commentator Ibn Jarīr al-Ṭabarī. Abū Ḥanīfa held lots invalid here: part of each slave is freed and he works to buy the rest; al-Nawawī answers that the words “set two free and kept four in slavery” settle the point against him. He says the Prophet spoke severely out of dislike for what the man did, and cites another version in which the Prophet says that, had they known, they would not have prayed over him.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/5115/"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī's explanation needs the rule of the third: a dying man may give away no more than a third of what he owns. A text states that rule: the Prophet allows Saʿd ibn Abī Waqqāṣ, one of the earliest Muslims and one of the ten Companions promised Paradise, to bequeath a third and calls a third much ([Bukhārī 2742](https://sunnah.com/bukhari:2742)). Abū Ḥanīfa's school applied the third as shares, freeing part of each slave, who then worked to buy the rest; al-Nawawī answers that the words of this report settle it against them.\n\nThe witness is ʿImrān, from whom al-Dhahabī counts 180 hadith ([Siyar 4/116](https://shamela.ws/book/22669/1765)).\n\nEither the third was applied by lots, as the majority hold, and four of the six stayed slaves to make up the heirs' two-thirds; or by shares, as Abū Ḥanīfa held, and each of the six stayed part slave until he bought the rest. On both readings the heirs' share was paid in the people the dying man had freed. In a version al-Nawawī cites, the severe word was that, had they known, they would not have prayed over him. Muslim's wording: “divided them into three sections, cast lots amongst them, and set two free and kept four in slavery; and he (the Holy Prophet) spoke severely of him” ([Muslim 1668a](https://sunnah.com/muslim:1668a))."
+    },
+    "maymuna": {
+      "title": "3 Reports: Maymūna Frees Her Slave-Girl, and Hears There Was ‘More Reward’ in Giving Her to Kin",
+      "context": "Bukhārī and Muslim: Maymūna, the Prophet's wife and one of the Mothers of the Believers ([33:6](/quran/33/6/tafsir/tabari)), tells him she has freed her slave-girl.",
+      "hook": "Maymūna told the Prophet that she had freed her slave-girl without asking him. He let the freeing stand, and said she would have had more reward giving the girl to her maternal uncles.",
+      "takeaway": "In Bukhārī 2592 the Prophet tells Maymūna, who had freed her slave-girl, ‘You would have got more reward if you had given her (i.e. the slave-girl) to one of your maternal uncles’.",
+      "showcase": {
+        "type": "versions",
+        "note": "“gives” is Sunnah.com's typo in Muslim 999.",
+        "items": [
+          {
+            "label": "Bukhārī 2592",
+            "text": "He said, \"Have you really?\" She replied in the affirmative. He said, \"You would have got more reward if you had given her (i.e. the slave-girl) to one of your maternal uncles.\"",
+            "ref": "bukhari:2592"
+          },
+          {
+            "label": "Bukhārī 2594",
+            "text": "You would have got more reward if you had given the slave-girl to one of your maternal uncles",
+            "ref": "bukhari:2594"
+          },
+          {
+            "label": "Muslim 999",
+            "text": "Had you gives her to your maternal uncles, you would have a greater reward",
+            "ref": "muslim:999"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "You would have got more reward if you had given her (i.e. the slave-girl) to one of your maternal uncles",
+        "ref": "bukhari:2592"
+      },
+      "classical": {
+        "text": "Ibn Baṭṭāl (d. 449 AH), an Andalusian commentator on Bukhārī, quoted by Ibn Ḥajar, took from the report that a gift to kin is better than freeing a slave. Ibn Ḥajar does not accept that as a general rule: it depends on circumstances, and in al-Nasāʾī's version the Prophet says she could have used the girl to spare her brother's daughter from herding sheep, which shows the reason was her relatives' need for someone to serve them. He notes from al-Nasāʾī that she was a black slave-girl, and that in another version she was a servant Maymūna had asked the Prophet for and he had given her. He notes that the Prophet let the freeing stand and guided her to what was better. In Abū Dāwūd 1690 (graded authentic by al-Albānī), Maymūna reports his reply as beginning: “May Allah give reward for it”.",
+        "sources": [
+          {
+            "label": "Ibn Ḥajar, Fatḥ al-Bārī (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/52/4717/"
+          },
+          {
+            "label": "Abū Dāwūd 1690 (authentic, al-Albānī)",
+            "url": "https://sunnah.com/abudawud:1690"
+          },
+          {
+            "label": "al-Nasāʾī, al-Sunan al-Kubrā 5125 (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/406/5165/"
+          }
+        ]
+      },
+      "comparison": "Ibn Ḥajar's reading needs a reason in this case: that Maymūna's relatives needed someone to serve them. Al-Nasāʾī's version, in his larger Sunan, supplies it: the Prophet asks whether she would not use the girl to spare her niece the herding of sheep ([al-Sunan al-Kubrā 5125](https://www.islamweb.net/ar/library/content/406/5165/)). Ibn Ḥajar declines to make Ibn Baṭṭāl's preference a general rule, since the report concerns one event.\n\nThe witness is Maymūna herself, the Prophet's wife and the girl's owner; Bukhārī and Muslim both carry her report.\n\nEither a gift to kin outranks freeing, as Ibn Baṭṭāl read it, or it did here because her kin needed a servant, as Ibn Ḥajar reads it. On both readings the greater reward lay in giving the girl to her relatives, not in her freedom; the freeing stood, and Abū Dāwūd's version opens with a blessing on it. The Prophet's words: “You would have got more reward if you had given her (i.e. the slave-girl) to one of your maternal uncles” ([Bukhārī 2592](https://sunnah.com/bukhari:2592))."
+    },
+    "azl-captives": {
+      "title": "9 Reports in Bukhārī and Muslim: Men With Captive Women Ask the Prophet About Withdrawal (ʿAzl)",
+      "context": "Bukhārī and Muslim: the women captured from Banū al-Muṣṭaliq, an Arab tribe the Prophet raided.",
+      "hook": "Companions who took captive women in that raid asked the Prophet whether they might practise withdrawal before climax to avoid pregnancy (ʿazl) with them. Abū Saʿīd al-Khudrī, who fought in twelve campaigns with the Prophet ([Bukhārī 1995](https://sunnah.com/bukhari:1995)) and from whom al-Dhahabī counts 1,170 hadith ([Siyar 3/172](https://www.islamweb.net/ar/library/content/60/305/)), was one of them, and in Muslim's wording he gives two reasons: they desired the women, and they wanted ransom for them. The Prophet's answers are about ʿazl.",
+      "takeaway": "In each wording the Companions ask about ʿazl with their captives and the Prophet answers about ʿazl; Muslim 1438a gives their reason as ‘we also desired ransom for them’.",
+      "showcase": {
+        "type": "versions",
+        "note": "The answers differ by report: “It is better for you not to do so” (Bukhārī 4138); “It does not matter if you do not do it” (Muslim 1438a); “Practise 'azl, if you so like” (Muslim 1439a). 4 of the 9 reports shown.",
+        "items": [
+          {
+            "label": "Bukhārī 4138",
+            "text": "we received captives from among the Arab captives and we desired women and celibacy became hard on us and we loved to do coitus interruptus",
+            "ref": "bukhari:4138"
+          },
+          {
+            "label": "Muslim 1438a",
+            "text": "We went out with Allah's Messenger (ﷺ) … and took captive some excellent Arab women; and we desired them, for we were suffering from the absence of our wives, (but at the same time) we also desired ransom for them",
+            "ref": "muslim:1438a"
+          },
+          {
+            "label": "Bukhārī 6603",
+            "text": "We get slave girls from the war captives and we love property; what do you think about coitus interruptus?",
+            "ref": "bukhari:6603"
+          },
+          {
+            "label": "Muslim 1439a",
+            "text": "Practise 'azl, if you so like, but what is decreed for her will come to her.",
+            "ref": "muslim:1439a"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "So we decided to have sexual intercourse with them but by observing 'azl",
+        "ref": "muslim:1438a"
+      },
+      "classical": {
+        "text": "Al-Nawawī explains the ransom motive: they needed intercourse and feared pregnancy, because a captive who bore a child would become an umm walad, who could no longer be sold or ransomed; he draws from this that the sale of an umm walad was barred and well known among them. He holds ʿazl disliked in every case but not forbidden with one's own slave-woman, whether she consents or not, since her becoming an umm walad would stop her sale. He also takes the report as evidence, with the majority, that Arabs could be enslaved like non-Arabs, since the Companions enslaved Banū al-Muṣṭaliq, had relations with their captives and held their sale and ransom lawful; Abū Ḥanīfa and al-Shāfiʿī's earlier view held otherwise.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/4282/"
+          }
+        ]
+      },
+      "comparison": "The Companions' question takes something for granted: that relations with the captives were permitted, and that the open question was ʿazl. Al-Nawawī reads it the same way. From this report he draws that they had relations with their captives and held their sale and ransom lawful, and that ʿazl with one's slave-woman is not forbidden whether she consents or not.\n\nThe witness is Abū Saʿīd, who was on the campaign. Seven of the nine wordings here are his; two are Jābir's.\n\nA reader may hold that the Prophet's answer discouraged the relations themselves. That needs a wording in which he speaks of them, and none of the nine does; each answer concerns ʿazl and what God has decreed. Either the answer left the relations as the Companions understood them, permitted, as al-Nawawī and the majority read it; or it forbade them in words that none of the nine wordings records. The decision, as Abū Saʿīd tells it, came before the question: “So we decided to have sexual intercourse with them but by observing 'azl” ([Muslim 1438a](https://sunnah.com/muslim:1438a))."
+    },
+    "awtas-4-24": {
+      "title": "3 Reports in Muslim: Qurʾān 4:24 Revealed About Married Captives at Awṭās",
+      "context": "Muslim 1456, from Abū Saʿīd: at Awṭās, where the Prophet sent an army after the Battle of Ḥunayn against the tribe of Hawāzin, the army takes captives, some of them married.",
+      "hook": "Abū Saʿīd reports that the Companions held back from the women captured at Awṭās because their husbands were polytheists, and that the verse ‘And women already married, except those whom your right hands possess’ was then revealed, with the gloss that the captives became lawful when their waiting period (ʿidda) ended.",
+      "takeaway": "Abū Saʿīd reports in Muslim 1456a that 4:24 was revealed when Companions held back from married captives at Awṭās, with the gloss ‘they were lawful for them when their 'Idda period came to an end’.",
+      "showcase": {
+        "type": "versions",
+        "note": "Quotation marks as on Sunnah.com. Qurʾān 4:24 and its classical commentaries are on the Qurʾān page.",
+        "items": [
+          {
+            "label": "Muslim 1456a",
+            "text": "the Companions of Allah's Messenger … seemed to refrain from having intercourse with captive women because of their husbands being polytheists. Then Allah, Most High, sent down regarding that:\" And women already married, except those whom your right hands possess (iv. 24)\" (i. e. they were lawful for them when their 'Idda period came to an end)",
+            "ref": "muslim:1456a"
+          },
+          {
+            "label": "Muslim 1456b",
+            "text": "\"Except what your right hands possess out of them are lawful for you\"; and he did not mention \"when their 'idda period comes to an end.\"",
+            "ref": "muslim:1456b"
+          },
+          {
+            "label": "Muslim 1456d",
+            "text": "They took captives (women) on the day of Autas who had their husbands. They were afraid (to have sexual intercourse with them) when this verse was revealed",
+            "ref": "muslim:1456d"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "the Companions of Allah's Messenger … seemed to refrain from having intercourse with captive women because of their husbands being polytheists. Then Allah, Most High, sent down regarding that:\" And women already married, except those whom your right hands possess (iv. 24)\" (i. e. they were lawful for them when their 'Idda period came to an end)",
+        "ref": "muslim:1456a"
+      },
+      "classical": {
+        "text": "Al-Nawawī heads the chapter: the permissibility of intercourse with a captive woman after a waiting period of one menstrual cycle, to make sure she is not pregnant (istibrāʾ), and if she has a husband, her marriage is annulled by the captivity. He explains that the Companions feared sin because a married woman is lawful to no one but her husband; that the waiting period in the gloss means istibrāʾ: one menstrual cycle, or giving birth if she is pregnant; and that in al-Shāfiʿī's school an idol-worshipping captive is not lawful until she accepts Islam, so the report must be read as meaning these women had. Ibn Kathīr (d. 774 AH), author of one of the best-known commentaries on the Qurʾān, which Quran.com offers in English, on 4:24: “except those whom you acquire through captivity, for you are allowed to have sexual relations with them after making sure they are not pregnant, as the Ayah was revealed in that regard.”",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/4345/"
+          },
+          {
+            "label": "Ibn Kathīr on 4:24",
+            "url": "/quran/4/24/tafsir/ibn_kathir"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī's reading adds two conditions. The first, a waiting period of one menstrual cycle, is in the report's own gloss. The second is not: in al-Shāfiʿī's school an idol-worshipping captive is not lawful until she accepts Islam, these captives were Arab idol-worshippers, and al-Nawawī writes that the report must therefore be taken to mean they had converted, an interpretation he calls unavoidable. Al-Ṭabarī (d. 310 AH), whose commentary gathers the readings of the Companions and their students with their chains, and which Ibn Taymiyya, the Ḥanbalī scholar, ranked the soundest commentary in people's hands, holds the same: “the captives of Awtas were not made lawful for relations through ownership and captivity exclusive of Islam” ([al-Ṭabarī on 4:24](/quran/4/24/tafsir/tabari)). No wording of the report says they converted (Muslim 1456a, 1456b, 1456d; [Abū Dāwūd 2155](https://sunnah.com/abudawud:2155)), and neither commentator cites one.\n\nThe witness is again Abū Saʿīd.\n\nEither the captives had converted within the one menstrual cycle of the waiting period, which no wording records and the commentators supply to fit the rule; or they had not, and the verse as Abū Saʿīd reports it made them lawful after the waiting period whatever their faith. On both readings the Companions' hesitation was over the captives' husbands, captivity ended those marriages, as al-Nawawī reads the verse, and the verse answered the hesitation: “Then Allah, Most High, sent down regarding that”, followed by 4:24 and the gloss “(i. e. they were lawful for them when their 'Idda period came to an end)” ([Muslim 1456a](https://sunnah.com/muslim:1456a))."
+    },
+    "safiyya-veil": {
+      "title": "3 Reports in Bukhārī: The Companions Ask Whether Ṣafiyya Is a Wife or ‘His Lady Slave’, and Watch for the Veil",
+      "context": "Bukhārī, from Anas, on the road from Khaybar to Medina: the wedding feast for Ṣafiyya.",
+      "hook": "Bukhārī gives three versions of one moment at Ṣafiyya's wedding feast. The Muslims ask whether she will be one of the mothers of the believers or one of those his right hand possesses, and agree that the veil will tell them.",
+      "takeaway": "In Bukhārī 4213, 5085 and 5159 the Muslims at Ṣafiyya's wedding feast do not know whether she is a wife or a slave of what his right hand possesses, and read his veiling her as the answer.",
+      "showcase": {
+        "type": "confrontation",
+        "note": "“So when he departed, he made a place for her behind him (on his camel and made her observe the veil)” (Bukhārī 4213). Arabic: mimmā malakat yamīnuh, of what his right hand possesses.",
+        "left": {
+          "title": "If he veils her",
+          "items": [
+            {
+              "text": "If the Prophet (ﷺ) makes her observe the veil, then she will be one of the mothers of the believers",
+              "ref": "bukhari:4213"
+            }
+          ]
+        },
+        "right": {
+          "title": "If he does not",
+          "items": [
+            {
+              "text": "if he does not make her observe the veil, then she will be his lady slave",
+              "ref": "bukhari:4213"
+            }
+          ]
+        }
+      },
+      "keyQuote": {
+        "text": "Will she (i.e. Safiya) be one of the mothers of the believers, (i.e. one of the wives of the Prophet (ﷺ) ) or just (a lady captive) of what his right-hand possesses",
+        "ref": "bukhari:4213"
+      },
+      "classical": null,
+      "comparison": "Anas says elsewhere that the Prophet freed Ṣafiyya and married her, with her freedom as the marriage gift a husband pays (mahr): “Her self was her Mahr for he manumitted her and then married her” (Bukhārī 371). In these three reports the people at the feast did not know this. They name two places a woman could have in his household, a wife and one his right hand possesses, and wait for a sign to tell them which was hers: “If he orders her to veil herself, she will be one of the mothers of the Believers; but if he does not order her to veil herself, she will be a slave girl” (Bukhārī 5085)."
+    },
+    "safiyya": {
+      "title": "One Story in 10 Reports: Ṣafiyya Among the Captives of Khaybar, Freed and Married, ‘Her Self Was Her Mahr’",
+      "context": "Bukhārī and Muslim, from Anas: the fall of Khaybar, its captives, and the Prophet's marriage to Ṣafiyya on the way back.",
+      "hook": "Anas tells Ṣafiyya's story in ten reports: Khaybar taken, its fighters killed and its women and children made captive; Ṣafiyya given to Diḥya, then brought to the Prophet; freed, married, and her freedom counted as her mahr.",
+      "takeaway": "Anas reports that Ṣafiyya was among the captives of Khaybar, given first to Diḥya, then freed and married by the Prophet, who ‘regarded her manumission as her Mahr’ (Bukhārī 5086).",
+      "showcase": {
+        "type": "timeline",
+        "note": "One story (Anas) in Bukhārī 371, 4200, 4201, 5086, 5169, 5387, 5425 and Muslim 1365c, 1365d, 1365f.",
+        "points": [
+          {
+            "step": "Khaybar taken",
+            "text": "The Prophet (ﷺ) had their warriors killed, their offspring and women taken as captives. Safiya was amongst the captives",
+            "ref": "bukhari:4200"
+          },
+          {
+            "step": "Diḥya asks",
+            "text": "Dihya came and said, 'O Allah's Prophet! Give me a slave girl from the captives.'",
+            "ref": "bukhari:371"
+          },
+          {
+            "step": "A man objects",
+            "text": "she is the chief mistress of the tribes of Quraidha and An-Nadir and she befits none but you",
+            "ref": "bukhari:371"
+          },
+          {
+            "step": "The Prophet to Diḥya",
+            "text": "Take any slave girl other than her from the captives.",
+            "ref": "bukhari:371"
+          },
+          {
+            "step": "Freed and married",
+            "text": "Her self was her Mahr for he manumitted her and then married her.",
+            "ref": "bukhari:371"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "The Prophet (ﷺ) took Safiya as a captive. He manumitted her and married her.",
+        "ref": "bukhari:4201"
+      },
+      "classical": {
+        "text": "Al-Nawawī files these reports under the merit of a man freeing his slave-woman and then marrying her. He explains the Prophet's taking her from Diḥya as preventing harm, given her rank as the daughter of the chiefs, and notes that Diḥya was compensated. On “her self was her mahr” he prefers the reading that the Prophet freed her without condition and then married her with her consent and without a dower, a privilege particular to him; and he explains that she spent her waiting period at the house of Umm Sulaym, Anas's mother, because a captive's waiting period was required. Outside the Ṣaḥīḥ, Ibn Saʿd (Ṭabaqāt 8/97) records a report on a family chain through al-Wāqidī—whom the hadith critics including Ibn Ḥajar and al-Dhahabī left—in which the Prophet offers her a choice between Islam and marriage to him or remaining Jewish and being freed to rejoin her people.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/4222/"
+          },
+          {
+            "label": "Ibn Saʿd, al-Ṭabaqāt al-Kubrā 8/97 (via al-Wāqidī)",
+            "url": "https://shamela.ws/book/1686/2764"
+          },
+          {
+            "label": "IslamWeb fatwa 256546 (on al-Wāqidī)",
+            "url": "https://www.islamweb.net/ar/fatwa/256546/"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī's chapter title presupposes what the reports record, that Ṣafiyya was the Prophet's slave-woman before he freed her. His explanation adds her consent to the marriage. The ten Ṣaḥīḥ reports here do not record her being asked; al-Nawawī states it as part of the reading he prefers, while the one report that narrates a choice offered to her is outside Bukhārī and Muslim in Ibn Saʿd ([Ṭabaqāt 8/97](https://shamela.ws/book/1686/2764)) on a chain through al-Wāqidī that the hadith critics left ([IslamWeb fatwa 256546](https://www.islamweb.net/ar/fatwa/256546/)).\n\nThe witness in the Ṣaḥīḥ reports is Anas, who was at Khaybar and invited the guests to the wedding feast ([Bukhārī 5387](https://sunnah.com/bukhari:5387)).\n\nEither she was asked for her consent, as al-Nawawī states without a Ṣaḥīḥ text, or the marriage followed her freeing directly as the ten Ṣaḥīḥ reports from Anas narrate it. On both readings, Muslims view her freeing and marriage as an honour—and the same Ṣaḥīḥ reports record how she came into the Prophet's ownership first: her people's fighters were killed, she was allotted to Diḥya from the captives, and the Prophet took her for himself and compensated Diḥya with another captive: “Take any slave girl other than her from the captives” ([Bukhārī 371](https://sunnah.com/bukhari:371))."
+    },
+    "juwayriyya": {
+      "title": "2 Reports: Banū al-Muṣṭaliq Attacked ‘While They Were Heedless’, and Juwayriyya Taken That Day",
+      "context": "Bukhārī 2541 and Muslim 1730a: the raid on Banū al-Muṣṭaliq, in which Juwayriyya was taken captive.",
+      "hook": "Ibn ʿUmar, son of the caliph ʿUmar, was in the army that raided Banū al-Muṣṭaliq: an attack without warning, the fighting men killed, the women and children taken, and among the captives Juwayriyya, daughter of the tribe's chief, who became the Prophet's wife. His account comes through Nāfiʿ, Ibn ʿUmar's freed slave and the transmitter of his reports, who gave it when asked whether people must be called to Islam before an attack.",
+      "takeaway": "Ibn ʿUmar's account, through Nāfiʿ, records that Banū al-Muṣṭaliq were attacked ‘without warning while they were heedless’, their fighting men killed and their women and children taken captive, and that the Prophet ‘got Juwairiya on that day’ (Bukhārī 2541).",
+      "showcase": {
+        "type": "timeline",
+        "note": "Muslim 1730b is the same report through another chain.",
+        "points": [
+          {
+            "step": "The question",
+            "text": "I wrote to Nafi' inquiring from him whether it was necessary to extend (to the disbelievers) an invitation to accept (Islam) before meeting them in fight. He wrote (in reply) to me that it was necessary in the early days of Islam.",
+            "ref": "muslim:1730a"
+          },
+          {
+            "step": "The attack",
+            "text": "the Prophet (ﷺ) had suddenly attacked Bani Mustaliq without warning while they were heedless and their cattle were being watered at the places of water",
+            "ref": "bukhari:2541"
+          },
+          {
+            "step": "The captives",
+            "text": "Their fighting men were killed and their women and children were taken as captives; the Prophet (ﷺ) got Juwairiya on that day.",
+            "ref": "bukhari:2541"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "Their fighting men were killed and their women and children were taken as captives; the Prophet (ﷺ) got Juwairiya on that day.",
+        "ref": "bukhari:2541"
+      },
+      "classical": {
+        "text": "Al-Nawawī sets out three views on warning before an attack and holds the soundest to be that it is required where the call to Islam has not reached a people and recommended where it has; he names Nāfiʿ, al-Shāfiʿī, the majority, and early jurists such as al-Ḥasan al-Baṣrī, al-Thawrī and al-Layth. He also takes the report as evidence that Arabs could be enslaved. On what came after, Ibn Kathīr writes of Juwayriyya: “for whom he paid off her contract of manumission to Thabit bin Qays bin Shammas and married her”, and Abū Dāwūd 3931, graded good (ḥasan), has ʿĀʾishah say: “One hundred families of Banu al-Mustaliq were set free on account of her.”",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/5300/"
+          },
+          {
+            "label": "Ibn Kathīr on 33:50",
+            "url": "/quran/33/50/tafsir/ibn_kathir"
+          },
+          {
+            "label": "Abū Dāwūd 3931 (ḥasan)",
+            "url": "https://sunnah.com/abudawud:3931"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī's rule, that a people may be attacked without warning once the call to Islam has reached them, needs the call to have reached Banū al-Muṣṭaliq. The two Ṣaḥīḥ reports do not say it had, and al-Nawawī's commentary on them states the rule without saying it of this tribe. Ibn Ḥajar, on Bukhārī 2541, glosses the raid as taking them by surprise and notes that Nāfiʿ used it to argue that the duty to invite before fighting had lapsed ([Fatḥ al-Bārī](https://www.islamweb.net/ar/library/content/52/4623/)). In his commentary on the campaign he also cites Ibn Isḥāq (d. 150 AH), author of the early biography of the Prophet (the Sīra), on chains he calls mursal, chains that skip the eyewitness, that the tribe was gathering against the Prophet under Juwayriyya's father, al-Ḥārith ibn Abī Ḍirār, and sets it beside the Ṣaḥīḥ report of a surprise raid ([Fatḥ al-Bārī](https://www.islamweb.net/ar/library/content/52/7505/)).\n\nThe witness is Ibn ʿUmar, who was in that army, as Nāfiʿ records; al-Dhahabī counts 2,630 hadith from him, repeats included ([Siyar 3/238](https://www.islamweb.net/ar/library/content/60/328/)). Nāfiʿ, who passes the account on, is the middle link of the chain al-Bukhārī called the soundest of chains: Mālik, from Nāfiʿ, from Ibn ʿUmar.\n\nEither the call had reached them, as al-Nawawī's rule requires, and the tribe was gathering, as Ibn Isḥāq's mursal account has it; or it had not, and on al-Nawawī's own rule a warning was due. On both, the raid ended with the fighting men killed and the women and children taken captive. The freedom Muslims recall came afterwards and through her: in [Abū Dāwūd 3931](https://sunnah.com/abudawud:3931) (ḥasan), once the Prophet married Juwayriyya, the Companions released the captives they held from her people as his in-laws. Ibn ʿUmar's account of the day, through Nāfiʿ: “Their fighting men were killed and their women and children were taken as captives; the Prophet (ﷺ) got Juwairiya on that day” ([Bukhārī 2541](https://sunnah.com/bukhari:2541))."
+    },
+    "banu-qurayza": {
+      "title": "5 Reports in Bukhārī and Muslim: Saʿd's Judgment on Banū Qurayẓa, ‘Their Women and Children… Taken as Captives’",
+      "context": "Bukhārī and Muslim, Medina: Banū Qurayẓa, a Jewish tribe of Medina, agree to accept a Companion's judgment.",
+      "hook": "Banū Qurayẓa agreed to accept the judgment of Saʿd ibn Muʿādh, the chief the Prophet told the Anṣār to stand for ([Bukhārī 4121](https://sunnah.com/bukhari:4121)), at whose death, the Prophet said, the Throne of God shook ([Bukhārī 3803](https://sunnah.com/bukhari:3803)). Five reports give his ruling: their fighting men killed, their women and children taken captive, their property divided. The Prophet said the ruling matched God's judgment.",
+      "takeaway": "Saʿd ibn Muʿādh ruled that Banū Qurayẓa's warriors be killed and ‘their women and children should be taken as captives’ (Bukhārī 4122), and the Prophet told him, ‘You have judged according to Allah's Judgment’ (Bukhārī 4121).",
+      "showcase": {
+        "type": "witnesses",
+        "note": "Bukhārī 4121 adds “or said, … according to the King's judgment”; Muslim 1768a has “by the decision of a king” as the narrator's alternative.",
+        "items": [
+          {
+            "who": "Saʿd ibn Muʿādh",
+            "text": "I give my judgment that their warriors should be killed, their women and children should be taken as captives, and their properties distributed.",
+            "ref": "bukhari:4122"
+          },
+          {
+            "who": "Saʿd ibn Muʿādh, in Muslim",
+            "text": "You will kill their fighters and capture their women and children.",
+            "ref": "muslim:1768a"
+          },
+          {
+            "who": "The Prophet",
+            "text": "You have judged according to Allah's Judgment",
+            "ref": "bukhari:4121"
+          },
+          {
+            "who": "The Prophet, in Muslim",
+            "text": "You have adjudged by the command of God.",
+            "ref": "muslim:1768a"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "I give my judgment that their warriors should be killed, their women and children should be taken as captives, and their properties distributed.",
+        "ref": "bukhari:4122"
+      },
+      "classical": {
+        "text": "Al-Nawawī heads Muslim's chapter: the permissibility of fighting those who break a treaty, and of having the people of a fortress submit to the judgment of a just arbiter fit to judge. He adds that the arbiter must rule by what serves the Muslims, and that once he has ruled, neither the ruler nor the besieged may go back on it.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/5389/"
+          }
+        ]
+      },
+      "comparison": "The classical framing needs two things: that Qurayẓa had broken a treaty, and that they accepted the arbiter. A text states the first: Ibn ʿUmar says Banū al-Naḍīr, another Jewish tribe of Medina, and Qurayẓa fought the Prophet, and that when Qurayẓa fought again he killed their men and divided their women, children and property ([Bukhārī 4028](https://sunnah.com/bukhari:4028)). On the second the reports differ: Abū Saʿīd says they accepted Saʿd's judgment; ʿĀʾishah says they surrendered to the Prophet's judgment and he referred it to Saʿd (Bukhārī 4122).\n\nThe witnesses are Abū Saʿīd and ʿĀʾishah, the Prophet's wife. Two Companions whose reports Bukhārī carries differ on who first held the judgment, and agree on what it decreed.\n\nEither the judgment was Saʿd's, which the Prophet approved, or the Prophet's, which he referred to Saʿd. On both, the sentence reached the women and children as well as the fighting men, and the Prophet named it God's judgment: “You have adjudged by the command of God” ([Muslim 1768a](https://sunnah.com/muslim:1768a))."
+    },
+    "fatima-servant": {
+      "title": "3 Reports: Fāṭima Asks for a Servant When Captives Arrive; the Prophet Teaches Her a Dhikr Instead",
+      "context": "Bukhārī, from ʿAlī: Fāṭima, worn by the hand-mill, hears that captives have been brought to the Prophet.",
+      "hook": "ʿAlī reports that Fāṭima, worn by the hand-mill, went to ask her father for a servant when slave girls from the booty were brought to him. He came to them at night and taught them words of praise instead, ‘better for you than a servant’.",
+      "takeaway": "ʿAlī reports that Fāṭima asked the Prophet for a servant when ‘some slave girls of the booty had been brought’ to him, and that he gave her words of praise (dhikr) instead (Bukhārī 3113).",
+      "showcase": {
+        "type": "facts",
+        "note": "Bukhārī 3705 and 5361 tell the same visit.",
+        "items": [
+          {
+            "text": "she got the news that some slave girls of the booty had been brought to Allah's Messenger (ﷺ). She went to him to ask for a maid-servant",
+            "ref": "bukhari:3113"
+          },
+          {
+            "text": "This is better for you than what you have requested",
+            "ref": "bukhari:3113"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "she got the news that some slave girls of the booty had been brought to Allah's Messenger (ﷺ). She went to him to ask for a maid-servant",
+        "ref": "bukhari:3113"
+      },
+      "classical": null,
+      "comparison": "The report's lesson, as ʿAlī tells it, is the dhikr: words of praise that the Prophet calls better than a servant. Behind it is a fact the report takes for granted: captives from the booty had been brought to the Prophet, and his daughter thought to ask him for one to serve her. Bukhārī 3113 closes: “This is better for you than what you have requested”."
+    },
+    "ali-khums": {
+      "title": "ʿAlī Takes a Captive Girl From the Khumus, Burayda Complains, and the Prophet Answers",
+      "context": "Bukhārī 4350: sent to collect the fifth of the war spoils (khumus) from Khālid ibn al-Walīd's campaign in Yemen, ʿAlī takes a captive girl from the khumus and bathes; when Burayda complains, the Prophet answers that ʿAlī's right in the khumus is greater than that.",
+      "hook": "Burayda, a Companion who carried the banner at Khaybar and at the conquest of Mecca ([Siyar](https://www.islamweb.net/ar/library/content/60/225/)), complained to the Prophet after ʿAlī collected the fifth of the war spoils (khumus). In Bukhārī 4350's terse wording, the Arabic says that ʿAlī bathed (wa-qad ightasala) and leaves the reason in the translator's bracket—‘(after a sexual act with a slave-girl from the Khumus)’—while the fuller versions of the same report in al-Ismāʿīlī and Aḥmad's Musnad (cited by Ibn Ḥajar in Fatḥ al-Bārī) state directly that ʿAlī chose a captive girl from the khumus and slept with her, and the Prophet answered Burayda that ʿAlī deserved more than that from the khumus.",
+      "takeaway": "In Bukhārī 4350 the Prophet answers Burayda's complaint by saying ʿAlī's due from the khumus was more than that; while 4350's Arabic says that ʿAlī bathed, the fuller versions cited by Ibn Ḥajar record that he took a captive girl from the khumus.",
+      "showcase": {
+        "type": "facts",
+        "note": "Arabic: wa-qad ightasala, he had bathed (the bracket in 4350 supplies the fuller versions recorded by Ibn Ḥajar); lā tubghiḍhu fa-inna lahu fī l-khumusi akthara min dhālika, do not hate him, for he has more than that in the khumus. “Do you hate him” and “Khumlus” are Sunnah.com's English.",
+        "items": [
+          {
+            "text": "'Ali had taken a bath (after a sexual act with a slave-girl from the Khumus)",
+            "ref": "bukhari:4350"
+          },
+          {
+            "text": "O Buraida! Do you hate 'Ali?",
+            "ref": "bukhari:4350"
+          },
+          {
+            "text": "Do you hate him, for he deserves more than that from the Khumlus",
+            "ref": "bukhari:4350"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "Do you hate him, for he deserves more than that from the Khumlus",
+        "ref": "bukhari:4350"
+      },
+      "classical": {
+        "text": "Ibn Ḥajar supplies what Bukhārī 4350's abbreviated wording leaves out. In the versions of al-Ismāʿīlī and in Aḥmad ibn Ḥanbal's Musnad, ʿAlī chose a captive girl from the khumus for himself, and the Prophet answered that the share of ʿAlī's family in the khumus was greater than one slave-girl. Abū Dharr al-Harawī, a transmitter of Bukhārī's Ṣaḥīḥ, noted that Burayda thought ʿAlī had taken from the booty unlawfully and came to love him once the Prophet told him ʿAlī had taken less than his right. Classical commentators also debated how ʿAlī could sleep with her before the formal division and without waiting one menstrual cycle (istibrāʾ): Ibn Ḥajar suggests that she was either an unmarried virgin who had not reached puberty (whom ʿAlī held needed no waiting period) or that her menstrual cycle began immediately upon her capture and ended within a day and a night, while al-Khaṭṭābī added that ʿAlī may have acted on his own independent legal judgment (ijtihād). On taking from the khumus before the return to Medina, Ibn Ḥajar answers that one who is authorized to divide a share in which he has a right may allot from it, as the ruler (imam) does.",
+        "sources": [
+          {
+            "label": "Ibn Ḥajar, Fatḥ al-Bārī (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/52/7846/"
+          }
+        ]
+      },
+      "comparison": "The classical commentators had to explain how ʿAlī approached her without the waiting period. None of the texts states that the captive girl was prepubescent or that her menstrual cycle began and ended within a single day; Ibn Ḥajar and al-Khaṭṭābī propose those possibilities to reconcile ʿAlī's immediate relations with her with the legal rule of the one-cycle waiting period (istibrāʾ).\n\nThe witness is Burayda, who was with Khālid's army in Yemen, and in Aḥmad's Musnad (cited by Ibn Ḥajar) ʿAlī himself recounts that the captive girl passed into the khumus, then to the Prophet's household, and then to him.\n\nIf one restricts the text to the shortest Arabic wording of Bukhārī 4350 alone (*wa-qad ightasala*, he had bathed), the report leaves unexplained why ʿAlī's bath drew a complaint about the fifth of the war spoils. Read with the fuller versions in al-Ismāʿīlī, Aḥmad's Musnad, and Fatḥ al-Bārī, ʿAlī took a captive girl from the fifth of the spoils on the campaign and slept with her, and the Prophet answered Burayda's complaint by affirming ʿAlī's right in the spoils: “Do you hate him, for he deserves more than that from the Khumlus” ([Bukhārī 4350](https://sunnah.com/bukhari:4350))."
+    },
+    "captives-ghulul": {
+      "title": "A Sermon on War Spoils in Muslim: A Stolen Captive (‘a Person Crying Loudly’) Listed Beside Livestock and Goods",
+      "context": "Muslim 1831a, from Abū Hurayra: placed at the close of the war-captives section because the Prophet's sermon against stealing from the war spoils before distribution (ghulūl) lists ‘a Person crying loudly’ (nafsun lahā ṣiyāḥ, glossed by Ibn Ḥajar as a stolen slave) alongside a camel, a ewe, clothes, and gold.",
+      "hook": "In Muslim 1831a, the Prophet warns his soldiers against taking from the war spoils before the formal division (ghulūl) and lists each category of stolen booty mounted on the thief's neck on the Day of Judgment: a growling camel, a bleating ewe, ‘a Person crying loudly’ (nafsun lahā ṣiyāḥ, which Ibn Ḥajar glosses as a stolen slave, a woman or a boy), fluttering clothes, and gold and silver.",
+      "takeaway": "In Muslim 1831a's warning against stealing from the war booty before distribution, the Prophet lists ‘a Person crying loudly’ (nafsun lahā ṣiyāḥ) beside a camel, a ewe, clothes, and gold; Ibn Ḥajar glosses the soul as a slave (raqīq)—a woman or a boy—stolen from the spoils.",
+      "showcase": {
+        "type": "facts",
+        "note": "Arabic for the third item of war booty: nafsun lahā ṣiyāḥ, a soul that cries out.",
+        "items": [
+          {
+            "text": "a growling camel mounted on his neck",
+            "ref": "muslim:1831a"
+          },
+          {
+            "text": "a bleating ewe mounted on his neck",
+            "ref": "muslim:1831a"
+          },
+          {
+            "text": "a Person crying loudly mounted on his neck",
+            "ref": "muslim:1831a"
+          },
+          {
+            "text": "fluttering clothes wrapped round his neck",
+            "ref": "muslim:1831a"
+          },
+          {
+            "text": "a heap of gold and silver placed on his neck",
+            "ref": "muslim:1831a"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "I shouldn't find that one of you should come on the Day of Judgment with a Person crying loudly mounted on his neck",
+        "ref": "muslim:1831a"
+      },
+      "classical": {
+        "text": "Al-Nawawī places the sermon in the chapter on the grave prohibition of stealing from the war spoils before distribution (ghulūl). Commenting on the sermon in Fatḥ al-Bārī and citing Muslim 1831a's addition of ‘a Person crying loudly’ (nafsun lahā ṣiyāḥ), Ibn Ḥajar takes the soul (al-nafs) to mean a slave (raqīq)—a woman or a boy—stolen from the war spoils.",
+        "sources": [
+          {
+            "label": "Ibn Ḥajar, Fatḥ al-Bārī (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/52/5589/"
+          },
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/5564/"
+          }
+        ]
+      },
+      "comparison": "The sermon condemns stealing from the common war chest before the division of spoils, which is a grave sin in Islamic law. What places the report in this inquiry is the inventory of war booty itself: between “a bleating ewe” and “fluttering clothes,” the Prophet names “a Person crying loudly” (*nafsun lahā ṣiyāḥ*)—which Ibn Ḥajar glosses as a slave woman or boy stolen from the war spoils ([Fatḥ al-Bārī](https://www.islamweb.net/ar/library/content/52/5589/))—as one of the items of booty a soldier might unlawfully take before distribution (Muslim 1831a)."
+    },
+    "hawazin-captives": {
+      "title": "One Event in 5 Texts: The Captives of Hawāzin, Returned by Soldiers ‘Willingly as a Favor’",
+      "context": "Bukhārī: after the Battle of Ḥunayn, a delegation of Hawāzin, the tribe defeated there, now Muslims, asks for their captives and property back.",
+      "hook": "Bukhārī records how the captives of Hawāzin were returned, in five texts filed under ten numbers. The tribe's delegation came as Muslims; the Prophet offered them their captives or their property, and asked the soldiers who held the captives as their shares to give them up as a favor or be paid from later booty.",
+      "takeaway": "Bukhārī's reports say the Prophet returned Hawāzin's captives after the tribe came as Muslims, once their holders agreed ‘willingly as a favor’ or were promised compensation from later booty; Ibn Kathīr puts the captives at six thousand women and children.",
+      "showcase": {
+        "type": "timeline",
+        "note": "5 texts under 10 numbers: 2584, 2608, 3132, 4319 and 7177 are Sunnah.com combined entries.",
+        "points": [
+          {
+            "step": "The choice",
+            "text": "So choose one of two alternatives: Either the captives or the properties.",
+            "ref": "bukhari:4318"
+          },
+          {
+            "step": "The terms",
+            "text": "whoever amongst you likes to stick to his share, let him give up his prisoners and we will compensate him from the very first Fai'",
+            "ref": "bukhari:3131"
+          },
+          {
+            "step": "The soldiers",
+            "text": "We do that (to return the captives) willingly as a favor for your sake",
+            "ref": "bukhari:2583"
+          },
+          {
+            "step": "The leaders report back",
+            "text": "All the people have agreed willingly to do so and have given the permission to return the war prisoners (without Compensation)",
+            "ref": "bukhari:3131"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "Your brothers have come to you with repentance and I see (it logical) to return their captives.",
+        "ref": "bukhari:4318"
+      },
+      "classical": {
+        "text": "Ibn Kathīr, on 9:27, gives the number and the outcome: “They were six thousand prisoners of children and women, so he returned them to them, and divided their wealth between the victors.”",
+        "sources": [
+          {
+            "label": "Ibn Kathīr on 9:27",
+            "url": "/quran/9/27/tafsir/ibn_kathir"
+          }
+        ]
+      },
+      "comparison": "Reading the return as mercy to the captives needs it to have been offered for their sake. The reports tie it to other things: the delegation came as Muslims, the Prophet waited more than ten nights before dividing the booty, he made them choose between their captives and their property, and soldiers who wished to keep their share were promised payment from later booty (Bukhārī 3131, 4318).\n\nThe narrators are al-Miswar ibn Makhrama, a younger Companion, nephew of ʿAbd al-Raḥmān ibn ʿAwf ([Siyar 3/390](https://www.islamweb.net/ar/library/content/60/356/)), and Marwān ibn al-Ḥakam, a boy in the Prophet's lifetime and later the Umayyad ruler ([Siyar 3/476](https://www.islamweb.net/ar/library/content/60/398/)); Bukhārī carries the report in five places.\n\nEither the captives were returned for their own sake, and the reports' conditions are incidental; or they were returned because their people became Muslims and gave up their property for them, as the reports say. On both, some six thousand women and children (Ibn Kathīr) were held as soldiers' shares until then, and the Prophet asked for them: “Your brothers have come to you with repentance and I see (it logical) to return their captives” ([Bukhārī 4318](https://sunnah.com/bukhari:4318))."
+    },
+    "ghurra": {
+      "title": "One Case in 15 Texts: ‘A Male or Female Slave’ as the Compensation for an Unborn Child",
+      "context": "Bukhārī and Muslim: the Prophet sets a slave as the compensation for an unborn child killed when one woman of Hudhayl struck another.",
+      "hook": "Fifteen texts record the Prophet's ruling when a woman struck another, who was pregnant, and the child died: the one who struck her owed a male or female slave, paid as compensation for a lost unborn child (ghurra), ‘of best quality’ in Muslim's wording. He likened the man who objected to the soothsayers.",
+      "takeaway": "The Prophet set the compensation for an unborn child as ‘a male or female slave’ (Bukhārī 6904), ‘of best quality’ in Muslim 1681a, and ʿUmar later confirmed the ruling through two witnesses (Bukhārī 6907).",
+      "showcase": {
+        "type": "versions",
+        "note": "15 distinct texts under 19 numbers (4 Sunnah.com combined entries). Arabic: ghurratun ʿabdun aw amatun.",
+        "items": [
+          {
+            "label": "Bukhārī 6904",
+            "text": "Allah's Messenger (ﷺ) gave his verdict that the killer (of the fetus) should give a male or female slave (as a Diya)",
+            "ref": "bukhari:6904"
+          },
+          {
+            "label": "Muslim 1681a",
+            "text": "Allah's Apostle … gave judgment that a male or a female slave of best quality be given as compensation",
+            "ref": "muslim:1681a"
+          },
+          {
+            "label": "Bukhārī 7317",
+            "text": "Its Diya (blood money) is either a male or a female slave.",
+            "ref": "bukhari:7317"
+          },
+          {
+            "label": "Bukhārī 6907 · ʿUmar asks for a witness",
+            "text": "Present a witness to testify your statement.",
+            "ref": "bukhari:6907"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "he gave judgment that the diyat (indemnity) of her unborn child is a male or a female slave of the best quality",
+        "ref": "muslim:1681c"
+      },
+      "classical": null,
+      "comparison": "The ruling holds the offender liable for the unborn child, over the objection that it was “one who neither ate nor drank, neither spoke nor cried” (Bukhārī 5759). The compensation the Prophet set for it was a slave: “a male or a female slave of best quality be given as compensation” (Muslim 1681a)."
+    },
+    "slave-woman-sold": {
+      "title": "One Ruling in 5 Texts: ‘Then He Should Sell Her, Even if Only for a Rope of Hair’",
+      "context": "Bukhārī and Muslim, from Abū Hurayra and another Companion, Zayd ibn Khālid: the Prophet is asked about a slave-woman who commits unlawful intercourse.",
+      "hook": "The Prophet's ruling for a slave-woman who commits unlawful intercourse is addressed to her owner: flog her and do not reproach her, flog her again if she repeats it, and at the third or fourth time sell her for whatever she fetches.",
+      "takeaway": "In Muslim 1703a the Prophet tells owners to flog a slave-woman who commits adultery, without reproach, and at the third time ‘then he should sell her, even if only for a rope of hair’.",
+      "showcase": {
+        "type": "timeline",
+        "note": "5 texts under 8 numbers: 2556 and 6838 are Sunnah.com combined entries, and Muslim 1704b gives a chain without the text. Bukhārī 6837's “(fifty stripes)” is the translator's gloss; the Arabic says flog her with the prescribed punishment. One narrator in the chain was not sure whether the sale came at the third or the fourth time.",
+        "points": [
+          {
+            "step": "First time",
+            "text": "she should be flogged (as the prescribed) punishment, but hurl no reproach at her",
+            "ref": "muslim:1703a"
+          },
+          {
+            "step": "Second time",
+            "text": "If she commits adultery again, she should (again be punished) by flogging, but hurl no reproach upon her.",
+            "ref": "muslim:1703a"
+          },
+          {
+            "step": "Third time",
+            "text": "If she commits fornication for the third time and it becomes clear, then he should sell her, even if only for a rope of hair",
+            "ref": "muslim:1703a"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "When the slave-woman of any of you commits adultery and this (offence of hers) becomes clear, she should be flogged (as the prescribed) punishment, but hurl no reproach at her.",
+        "ref": "muslim:1703a"
+      },
+      "classical": {
+        "text": "Al-Nawawī draws from the report that an owner carries out the prescribed punishment on his own slaves, the view of al-Shāfiʿī, Mālik, Aḥmad and the majority, against Abū Ḥanīfa. He sees in the order to sell a lesson in leaving the company of sinners, and holds it recommended, not obligatory, for his school and the majority; Dāwūd and his literalist school held it obligatory. He adds that the seller must tell the buyer of her offence, since it is a defect in her, and that a valuable thing may be sold for a trifling price.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/5221/"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī explains the order to sell as a lesson in leaving the company of sinners. The report gives the order without a reason, and al-Nawawī cites no text for his; he draws it from the order itself. He also requires the seller to tell the buyer of her offence, since it is a defect in her.\n\nThe witness is Abū Hurayra, from whom al-Dhahabī counts 5,374 hadith ([Siyar 2/632](https://www.islamweb.net/ar/library/content/60/267/)); in Bukhārī, Zayd ibn Khālid narrates it with him.\n\nEither the sale is a recommendation, as al-Nawawī and the majority hold, or a duty, as Dāwūd and his literalist school held. On both, the owner punishes, and a woman who offends a third time passes to another owner, told of her offence, at whatever price: “then he should sell her, even if only for a rope of hair” ([Muslim 1703a](https://sunnah.com/muslim:1703a))."
+    },
+    "runaway-slave": {
+      "title": "3 Sayings in Muslim on the Runaway Slave, and a Bukhārī Report on Slaves Who Fled to the Muslims",
+      "context": "Muslim 68–70 and Bukhārī 5286: slaves who leave their masters.",
+      "hook": "Jarīr ibn ʿAbdullāh, a Companion whom the Prophet never turned away and always met with a smile ([Bukhārī 3822](https://sunnah.com/bukhari:3822)), reports three sayings about a slave who flees his master: his prayer is not accepted, the protection owed him lapses, and he has committed an act of unbelief (kufr) until he returns. Bukhārī 5286, from Ibn ʿAbbās, records that slaves who fled hostile pagans to the Muslims were counted free.",
+      "takeaway": "In Muslim 70 the Prophet says a runaway slave's prayer ‘is not accepted’; Muslim 68 calls the flight ‘an act of infidelity as long as he would not return to him’.",
+      "showcase": {
+        "type": "versions",
+        "note": "In Muslim 68 a later narrator in the chain adds “this hadith was narrated from the Apostle”. Muslim 69 and 70 give the words as the Prophet's.",
+        "items": [
+          {
+            "label": "Muslim 70 · the Prophet's words",
+            "text": "When the slave runs away from his master, his prayer is not accepted",
+            "ref": "muslim:70"
+          },
+          {
+            "label": "Muslim 69 · the Prophet's words",
+            "text": "The slave who fled from his master, responsibility with regard to him was absolved",
+            "ref": "muslim:69"
+          },
+          {
+            "label": "Muslim 68 · Jarīr's words",
+            "text": "The slave who fled from his master committed an act of infidelity as long as he would not return to him.",
+            "ref": "muslim:68"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "When the slave runs away from his master, his prayer is not accepted",
+        "ref": "muslim:70"
+      },
+      "classical": {
+        "text": "Al-Nawawī gives four readings of kufr in such sayings: the soundest, that it is a deed of the unbelievers and the ways of the pre-Islamic age (Jāhiliyya); or that it leads to unbelief; or ingratitude for a favour; or that it applies to one who holds running away lawful. Al-Māzarī, a Mālikī jurist who wrote a commentary on Ṣaḥīḥ Muslim, and al-Qāḍī ʿIyāḍ read the unaccepted prayer the last way, as said of a slave who holds running away lawful; Ibn al-Ṣalāḥ, author of the classic handbook of the science of hadith, rejected that and held that it applies to any runaway, whose prayer is valid but brings no reward, and al-Nawawī agrees. On the protection that lapses, he quotes Ibn al-Ṣalāḥ again: a slave was protected from his master's punishment and confinement, and that protection lapses when he runs away. He explains that Manṣūr ibn al-Muʿtamir, a narrator of Kūfa whom the critics called precise and reliable, who narrated Muslim 68 as Jarīr's words, did not want to name the Prophet as its source in Basra, where the Khārijites, an early sect that broke with ʿAlī, held to its plain sense.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/248/"
+          },
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/250/"
+          }
+        ]
+      },
+      "comparison": "Each reading of these sayings needs something their words do not state. The reading of al-Māzarī and ʿIyāḍ needs a condition, that the slave holds running away lawful, which the sayings do not mention; Ibn al-Ṣalāḥ rejected it, and al-Nawawī agreed. The figurative readings of kufr rest on how other sayings use the word, as when fighting a Muslim is called kufr ([Bukhārī 48](https://sunnah.com/bukhari:48)).\n\nThe witness is Jarīr; in Muslim 68 the narrator Manṣūr swears that it comes from the Prophet.\n\nEither the warnings concern a slave who holds flight lawful, a condition the words do not carry; or they concern every runaway, as Ibn al-Ṣalāḥ and al-Nawawī hold, and then each runaway's prayer brings no reward and his protection from his master's punishment lapses until he goes back. Bukhārī 5286 records another rule for slaves of hostile pagans who reached the Muslims: they “would be considered free persons (not slaves)”. For a slave who flees his master, the warning sets no end but his return: “The slave who fled from his master committed an act of infidelity as long as he would not return to him” ([Muslim 68](https://sunnah.com/muslim:68))."
+    },
+    "walad-lil-firash": {
+      "title": "One Case in 6 Reports: A Slave-Woman's Son Assigned to Her Owner's Line Despite His Likeness to Another Man",
+      "context": "Bukhārī and Muslim, from ʿĀʾishah, at the conquest of Mecca: two men claim the son of Zamʿa's slave-woman.",
+      "hook": "Saʿd ibn Abī Waqqāṣ claimed a boy as his brother ʿUtba's son; ʿAbd ibn Zamʿa claimed him as his own brother, born to his father's slave-woman. The Prophet saw the likeness to ʿUtba, ruled for ʿAbd, and told Sawda, the Prophet's wife and ʿAbd's sister (whom the ruling made the boy's sister), to screen herself from the boy.",
+      "takeaway": "The Prophet ruled the son of Zamʿa's slave-woman to be ʿAbd ibn Zamʿa's brother because ‘the boy is for the owner of the bed’, though he saw a resemblance to ʿUtba (Bukhārī 6765).",
+      "showcase": {
+        "type": "confrontation",
+        "note": "To his wife Sawda: “Screen yourself from this boy”; “Since then the boy did not see Sauda till he died” (Bukhārī 2745).",
+        "left": {
+          "title": "The likeness",
+          "items": [
+            {
+              "text": "Allah's Messenger (ﷺ) looked at his resemblance and found a clear resemblance with 'Utba.",
+              "ref": "muslim:1457a"
+            }
+          ]
+        },
+        "right": {
+          "title": "The ruling",
+          "items": [
+            {
+              "text": "the boy is for the owner of the bed, and the stone is for the adulterer",
+              "ref": "bukhari:6765"
+            }
+          ]
+        }
+      },
+      "keyQuote": {
+        "text": "This boy is for you as the boy belongs to the bed (where he was born), and for the adulterer is the stone (i.e. deprivation).",
+        "ref": "bukhari:2745"
+      },
+      "classical": {
+        "text": "Ibn Ḥajar explains the “bed” (firāsh), the marriage or ownership that makes a child legally the husband's or owner's: a slave-woman becomes her owner's bed through intercourse, and if the owner acknowledges it, a child she bears within the possible term is attributed to him. A wife becomes the bed by the marriage contract alone, he notes, because a slave-woman is acquired for other purposes too. On the order to Sawda to veil herself from the boy, he records three explanations: precaution against doubt (a commentator he cites, and the Shāfiʿī school, which takes the order as a recommendation); a stricter veil for the Prophet's wives; and, in the Mālikī school, a ruling between two rulings, in which the bed decides lineage and the clear likeness decides the veil.",
+        "sources": [
+          {
+            "label": "Ibn Ḥajar, Fatḥ al-Bārī (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/52/12368/"
+          }
+        ]
+      },
+      "comparison": "Each explanation of the veil needs the Prophet to have kept the likeness in view after ruling by the bed. The reports say so themselves: he gave the order when he saw the boy's resemblance to ʿUtba (Bukhārī 2745, 6765; Muslim 1457a).\n\nThe witness is ʿĀʾishah, Sawda's fellow wife, from whom al-Dhahabī counts 2,210 hadith ([Siyar 2/139](https://www.islamweb.net/ar/library/content/60/143/)); Bukhārī carries this case in five places.\n\nEither the boy was Zamʿa's son, as the ruling declared, and his sister was told to veil herself from her brother; or he was ʿUtba's, as the likeness suggested, and the ruling gave him a lineage through his mother's owner. On both, the ruling rests on what Ibn Ḥajar describes: the owner's relations with his slave-woman made her his bed. The report ends on the veil: “Since then the boy did not see Sauda till he died” ([Bukhārī 2745](https://sunnah.com/bukhari:2745))."
+    },
+    "booty-share": {
+      "title": "Women and Slaves Who Join a Battle Get ‘a Prize’, Not a Fixed Share: Ibn ʿAbbās Answers a Letter",
+      "context": "Muslim 1812: Ibn ʿAbbās's written replies to Najda, a Khārijite (Muslim calls him al-Ḥarūrī, the name the reports give the Khārijites), on shares of the booty.",
+      "hook": "Asked in a letter whether women and slaves who fight receive a share of the booty, Ibn ʿAbbās answers that they receive a prize or some reward, with no fixed share. These are his answers, not words of the Prophet, and one of the three reports concerns women and does not mention slaves.",
+      "takeaway": "Ibn ʿAbbās writes that women and slaves who join a battle have ‘no fixed share’ of the booty and ‘will be given some reward from the spoils of war’ (Muslim 1812e).",
+      "showcase": {
+        "type": "versions",
+        "note": "These are Ibn ʿAbbās's written answers; 1812a describes the Prophet's practice with women.",
+        "items": [
+          {
+            "label": "Muslim 1812c",
+            "text": "You have written asking about the woman and the slave whether they would get a share of the booty if they participated in Jihad. (You should know that) there is nothing of the sort for them except that they will be given a prize.",
+            "ref": "muslim:1812c"
+          },
+          {
+            "label": "Muslim 1812e",
+            "text": "And you have inquired whether there is a fixed share of the booty for women and slaves when they participate in a battle. (I have to tell you that) there is no fixed share for them except that they will be given some reward from the spoils of war",
+            "ref": "muslim:1812e"
+          },
+          {
+            "label": "Muslim 1812a · about women, not slaves",
+            "text": "They would treat the wounded and were given a reward from the booty, but he did not assign any regular share for them.",
+            "ref": "muslim:1812a"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "And you have inquired whether there is a fixed share of the booty for women and slaves when they participate in a battle. (I have to tell you that) there is no fixed share for them except that they will be given some reward from the spoils of war",
+        "ref": "muslim:1812e"
+      },
+      "classical": null,
+      "comparison": "These are Ibn ʿAbbās's answers, not words of the Prophet, and Muslim 1812a describes the Prophet's practice with women: “he did not assign any regular share for them”. Ibn ʿAbbās puts the slave beside the woman under the same rule: “there is nothing of the sort for them except that they will be given a prize” (Muslim 1812c)."
+    },
+    "ransom-returned": {
+      "title": "One Case in 7 Texts: ‘As for Your Sheep and Slave Girl, They Are to Be Returned to You’",
+      "context": "Bukhārī, from Abū Hurayra and Zayd ibn Khālid: a father who paid a ransom over his son's adultery asks the Prophet to judge.",
+      "hook": "A father told the Prophet that his son, a hired labourer, had committed adultery with his employer's wife, and that he had paid a ransom of a hundred sheep and a slave girl. The Prophet voided the payment, returned the sheep and the slave girl to him, and applied the prescribed punishments.",
+      "takeaway": "In Bukhārī 6633 the Prophet voids a ransom of ‘one-hundred sheep and a slave girl’ paid in an adultery case and returns both to the father.",
+      "showcase": {
+        "type": "timeline",
+        "note": "7 texts under 13 numbers (6 Sunnah.com combined entries).",
+        "points": [
+          {
+            "step": "The ransom",
+            "text": "I ransomed him with one-hundred sheep and a slave girl.",
+            "ref": "bukhari:6633"
+          },
+          {
+            "step": "The ruling",
+            "text": "I will judge between you according to Allah's Laws: As for your sheep and slave girl, they are to be returned to you.",
+            "ref": "bukhari:6633"
+          },
+          {
+            "step": "The punishment",
+            "text": "Then he scourged his son one hundred lashes and exiled him for one year.",
+            "ref": "bukhari:6633"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "As for your sheep and slave girl, they are to be returned to you.",
+        "ref": "bukhari:6633"
+      },
+      "classical": null,
+      "comparison": "The ruling's point is that a prescribed punishment cannot be bought off, and the Prophet swore to judge by God's law. The slave girl appears inside that ruling as part of the price, listed with the sheep and returned with them to the man who owned her: “As for your sheep and slave girl, they are to be returned to you” (Bukhārī 6633)."
+    },
+    "where-is-allah": {
+      "title": "‘Where Is Allah?’: The Prophet Questions a Slave Woman, Then Says ‘Grant Her Freedom, She Is a Believing Woman’",
+      "context": "Muslim 537a: a man who slapped his shepherd slave-woman asks the Prophet whether he should free her.",
+      "hook": "Muʿāwiya ibn al-Ḥakam, a Companion who prayed behind the Prophet ([Muslim 537a](https://sunnah.com/muslim:537a)), not the later caliph Muʿāwiya, slapped the slave-woman who tended his goats after a wolf took one, and came to the Prophet troubled by it. He asked whether he should free her; the Prophet asked her two questions and said, ‘Grant her freedom, she is a believing woman’.",
+      "takeaway": "In Muslim 537a the Prophet treats Muʿāwiya's slap as grave, questions his slave-woman, and tells him, ‘Grant her freedom, she is a believing woman’.",
+      "showcase": {
+        "type": "timeline",
+        "note": "Arabic: fa-ʿaẓẓama dhālika ʿalayya, he (the Prophet) made it a grave matter for me; Sunnah.com's English leaves open who felt it grievous.",
+        "points": [
+          {
+            "step": "The slap",
+            "text": "So I slapped her. I came to the Messenger of Allah (ﷺ) and felt (this act of mine) as something grievous",
+            "ref": "muslim:537a"
+          },
+          {
+            "step": "The question",
+            "text": "Messenger of Allah, should I not grant her freedom? He (the Holy Prophet) said: Bring her to me.",
+            "ref": "muslim:537a"
+          },
+          {
+            "step": "The two questions",
+            "text": "He said to her: Where is Allah? She said: He is in the heaven. He said: Who am I? She said: Thou art the Messenger of Allah.",
+            "ref": "muslim:537a"
+          },
+          {
+            "step": "The answer",
+            "text": "He said: Grant her freedom, she is a believing woman",
+            "ref": "muslim:537a"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "He said: Grant her freedom, she is a believing woman",
+        "ref": "muslim:537a"
+      },
+      "classical": {
+        "text": "Al-Nawawī reads the questions as a test of whether she was a monotheist or an idol-worshipper; when she said “in the heaven”, he knew she was a monotheist. He draws from the report that freeing a believer is better than freeing an unbeliever, and notes that scholars agree an unbeliever may be freed outside the expiations (kaffāra); for the expiations, al-Shāfiʿī, Mālik and the majority accept a believing slave and no other, while Abū Ḥanīfa accepted any.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/1456/"
+          }
+        ]
+      },
+      "comparison": "Al-Nawawī's reading needs the questions to have been a test of her faith, and the report bears it out: the Prophet asks two questions and gives her answer as his reason. From it he draws that freeing a believer is better than freeing an unbeliever, and he notes that for most expiations al-Shāfiʿī, Mālik and the majority accept a believing slave and no other.\n\nThe witness is Muʿāwiya ibn al-Ḥakam al-Sulamī, the man who struck her; the account is his own.\n\nThe freeing was Muʿāwiya's offer, made after the Prophet treated the slap as grave. Either it was a voluntary freeing, which scholars agree may be given to an unbeliever, and the Prophet still asked about her faith first; or it served as an expiation, for which the majority required a believer, and her freedom depended on her answers. On both, the reason he gave was her faith: “Grant her freedom, she is a believing woman” ([Muslim 537a](https://sunnah.com/muslim:537a))."
+    },
+    "kaffara": {
+      "title": "5 Reports: ‘Can You Find a Slave to Set Him Free?’, the First Expiation for Breaking the Ramaḍān Fast",
+      "context": "Bukhārī and Muslim, from Abū Hurayra: a man who had intercourse with his wife while fasting in Ramaḍān asks what he must do.",
+      "hook": "Five reports give the expiation for intercourse during the Ramaḍān fast: free a slave; if not, fast two months in a row; if not, feed sixty poor people. The man could do none of these, and the Prophet gave him dates to give away, then let him take them home.",
+      "takeaway": "In Bukhārī 5368 and Muslim 1111a the first expiation for breaking the Ramaḍān fast by intercourse is to free a slave, then two months of fasting, then feeding sixty poor people.",
+      "showcase": {
+        "type": "timeline",
+        "note": "All five reports concern this one expiation. The Qurʾān's expiations for manslaughter, for declaring one's wife to be like one's mother (ẓihār), and for broken oaths (4:92, 58:3, 5:89) are on the Qurʾān page.",
+        "points": [
+          {
+            "step": "First",
+            "text": "Can you find a slave to set him free?",
+            "ref": "muslim:1111a"
+          },
+          {
+            "step": "Second",
+            "text": "Can you observe fast for two consecutive months?",
+            "ref": "muslim:1111a"
+          },
+          {
+            "step": "Third",
+            "text": "Can you provide food to sixty poor people?",
+            "ref": "muslim:1111a"
+          },
+          {
+            "step": "The end",
+            "text": "Go and give it to your family to eat",
+            "ref": "muslim:1111a"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "Manumit a slave (as expiation).",
+        "ref": "bukhari:5368"
+      },
+      "classical": {
+        "text": "Al-Nawawī notes that for the expiations of ẓihār, oaths and intercourse in Ramaḍān, al-Shāfiʿī, Mālik and the majority accept a believing slave and no other, while Abū Ḥanīfa and the jurists of Kūfa accepted an unbelieving one as well.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/1456/"
+          }
+        ]
+      },
+      "comparison": "The Muslim reading of expiations as a path to freedom needs slaves to be at hand to free. The reports assume it: the first question is whether the man can find one, and the fasting and feeding come after it. Al-Nawawī adds that al-Shāfiʿī, Mālik and the majority accept a believing slave and no other for this expiation.\n\nThe witness is again Abū Hurayra.\n\nEither the expiation is read as a means of reducing slavery, and it works through a slave the man must first find and pay for; or as a penalty on the man, and a slave is its first form of payment. The man's first reply is “I cannot afford that” (Bukhārī 5368). On both readings, the ruling takes for granted that slaves were there to be bought: “Can you find a slave to set him free?” ([Muslim 1111a](https://sunnah.com/muslim:1111a))."
+    },
+    "master-duties": {
+      "title": "6 Reports on Owners and Their Slaves: Earnings, Reward, Duty and False Accusation",
+      "context": "Bukhārī: sayings about slaves and their owners, from Abū Hurayra; Abū Mūsā al-Ashʿarī, whom the Prophet sent to govern part of Yemen ([Bukhārī 4341](https://sunnah.com/bukhari:4341)); Ibn ʿUmar; and another Companion, ʿAbdallāh ibn Zamʿa.",
+      "hook": "Six sayings in Bukhārī concern the earnings of slave-women, a double reward for freeing and marrying one, a slave as guardian of his master's property, an owner who falsely accuses his slave, and a husband who lashes his wife ‘like a slave’. One line usually quoted with them is Abū Hurayra's own.",
+      "takeaway": "Bukhārī records the Prophet forbidding the earnings of slave-women (5348), warning an owner who slanders his slave of a flogging on the Day of Resurrection (6858), and comparing the lashing of a wife to that of a slave (4942); the upkeep line in 5355 is Abū Hurayra's own.",
+      "showcase": {
+        "type": "facts",
+        "note": "Bukhārī 5348: “by prostitution” is the translator's gloss; the Arabic reads the earnings of slave-women (kasb al-imāʾ).",
+        "items": [
+          {
+            "text": "The Prophet (ﷺ) forbade taking the earnings of a slave girl by prostitution",
+            "ref": "bukhari:5348"
+          },
+          {
+            "text": "any man who has a slave girl whom he educates properly, teaches good manners, manumits and marries her, will get a double reward",
+            "ref": "bukhari:5083"
+          },
+          {
+            "text": "a slave is a guardian of his master's property and is responsible (for that)",
+            "ref": "bukhari:5188"
+          },
+          {
+            "text": "If somebody slanders his slave and the slave is free from what he says, he will be flogged on the Day of Resurrection",
+            "ref": "bukhari:6858"
+          },
+          {
+            "text": "It is not wise for anyone of you to lash his wife like a slave, for he might sleep with her the same evening.",
+            "ref": "bukhari:4942"
+          },
+          {
+            "text": "Abū Hurayra, asked whether the sayings after the Prophet's words (“A slave says, 'Give me food and enjoy my service.'”) were from the Prophet: “No, it is from my own self.”",
+            "ref": "bukhari:5355"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "If somebody slanders his slave and the slave is free from what he says, he will be flogged on the Day of Resurrection unless the slave is really as he has described him",
+        "ref": "bukhari:6858"
+      },
+      "classical": null,
+      "comparison": "Several of these sayings protect slaves: an owner who slanders his slave is answerable on the Day of Resurrection, and a man who educates, frees and marries his slave-woman earns a double reward. The same sayings take for granted that a slave held his master's property in trust and could be lashed: “It is not wise for anyone of you to lash his wife like a slave” (Bukhārī 4942)."
+    },
+    "barira": {
+      "title": "One Story in 33 Reports: Barīra Is Bought, Freed, and Chooses to Leave Her Husband",
+      "context": "Bukhārī and Muslim, mostly from ʿĀʾishah: the story of Barīra, a slave woman who bought her freedom by contract with ʿĀʾishah's help and became ʿĀʾishah's freed slave.",
+      "hook": "Thirty-three reports tell how Barīra's freedom was bought. She had contracted with her owners to buy it and asked ʿĀʾishah for help; the owners would not sell unless they kept the lasting tie, with a right of inheritance, between a freed slave and the one who freed him (walāʾ); the Prophet told ʿĀʾishah to buy her and voided the condition from the pulpit. Once free, Barīra left her husband and declined the Prophet's request to go back to him.",
+      "takeaway": "ʿĀʾishah bought and freed Barīra, the Prophet ruled that ‘the wala is for the one who manumits’, and once free Barīra ‘was given the option to keep her husband or leave him’ (Bukhārī 5279).",
+      "showcase": {
+        "type": "timeline",
+        "note": "“for the manumitted” renders li-man aʿtaqa, the one who frees. 33 reports in all (30 on the contract, walāʾ, and marriage choice, plus 3 on meat given to Barīra in charity: Muslim 1074a, 1075a, 1075b), alongside two general sayings on walāʾ (Bukhārī 6756, 6760).",
+        "points": [
+          {
+            "step": "Her contract",
+            "text": "Barira came to seek her help in writing of emancipation and she had to pay five Uqiya (of gold) by five yearly installments.",
+            "ref": "bukhari:2560"
+          },
+          {
+            "step": "The owners' condition",
+            "text": "They said that they would not agree to it unless her Wala' would be for them.",
+            "ref": "bukhari:2560"
+          },
+          {
+            "step": "The Prophet to ʿĀʾishah",
+            "text": "Buy Barirah and let them stipulate that her Wala' will be for them, as the Wala' is for the manumitted.",
+            "ref": "bukhari:2729"
+          },
+          {
+            "step": "From the pulpit",
+            "text": "Any condition which is not in Allah's Laws is invalid even if there were a hundred such conditions.",
+            "ref": "bukhari:2729"
+          },
+          {
+            "step": "Her choice",
+            "text": "When she was manumitted, she was given the option to keep her husband or leave him",
+            "ref": "bukhari:5279"
+          },
+          {
+            "step": "The intercession",
+            "text": "He said: “No, I only intercede for him.” She said: “I am not in need of him.”",
+            "ref": "bukhari:5283"
+          }
+        ]
+      },
+      "keyQuote": {
+        "text": "The wala is for the one who manumits",
+        "ref": "bukhari:5279"
+      },
+      "classical": {
+        "text": "Al-Nawawī notes that the instruction to let the sellers stipulate the walāʾ troubled scholars, so much that some rejected the whole hadith, a view reported from Yaḥyā ibn Aktham, a chief judge of the ʿAbbāsid era; the majority accepted it and explained it. Ibn Ḥajar identifies the line “if he were free he would not have given her the option” as the comment of ʿUrwa ibn al-Zubayr, ʿĀʾishah's nephew, who studied under her, not part of the hadith, and the reports differ on whether her husband was slave or free.",
+        "sources": [
+          {
+            "label": "al-Nawawī, Sharḥ Ṣaḥīḥ Muslim (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/53/4532/"
+          },
+          {
+            "label": "Ibn Ḥajar, Fatḥ al-Bārī (IslamWeb)",
+            "url": "https://www.islamweb.net/ar/library/content/52/9659/"
+          }
+        ]
+      },
+      "comparison": "The scholars' difficulty is the Prophet's instruction to let the sellers stipulate the walāʾ for themselves, “let them stipulate that her Wala' will be for them” (Bukhārī 2729), a condition he then declared void. Each reading needs something the reports do not state. Reading *lahum*, for them, as *ʿalayhim*, against them, needs a sense al-Nawawī calls weak, since the Prophet objected to the condition. His preferred reading, that the permission was particular to this case and given so that voiding it would deter more strongly, needs an intention no report records; he supports it by analogy with the pilgrims told to turn their Ḥajj into ʿUmra. Yaḥyā ibn Aktham rejected the whole hadith.\n\nThe witness is ʿĀʾishah, the buyer herself.\n\nMuslims read the story as one of freedom and choice, and the reports bear that out: once free, Barīra left her husband and turned down the Prophet's intercession. Either the sellers were told they could keep a condition that was then voided, as the plain words say; or the words mean something else, by a sense al-Nawawī calls weak or an intention no report states. On every reading her freedom came by sale, her owners bargained over who would inherit from her, and the Prophet settled it for the buyer: “Buy Barira and manumit her and the Wala' will be for the liberator” ([Bukhārī 2560](https://sunnah.com/bukhari:2560))."
+    }
+  }
+}

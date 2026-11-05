@@ -1,0 +1,19 @@
+---
+/**
+ * A showcase panel with our own caption. Wraps the shared hadith-reliability showcase bodies
+ * (Confrontation / Timeline / Witnesses) without going through Showcase.astro, whose caption is
+ * tied to the hadith article's ANGLES.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import Confrontation from '../hadith-reliability/showcase/Confrontation.astro';
+import Timeline from '../hadith-reliability/showcase/Timeline.astro';
+import Witnesses from '../hadith-reliability/showcase/Witnesses.astro';
+const { sc, caption, ariaLabel = '', compact = false, id = 'sc', extraClass = '' } = Astro.props;
+const COMPONENTS = { confrontation: Confrontation, timeline: Timeline, witnesses: Witnesses };
+const C = COMPONENTS[sc.type];
+---
+<div class={`hrv-sc hrv-sc--${sc.type}${compact ? ' hrv-sc--compact' : ''}${extraClass ? ` ${extraClass}` : ''}`} role="group" aria-label={ariaLabel || caption}>
+  {caption && !compact && <div class="hrv-sc__cap"><Icon name={sc.type} />{caption}</div>}
+  {sc.leadHtml && !compact && <p class="hrv-sc__note idl-sc__lead" set:html={sc.leadHtml} />}
+  {C && <C sc={sc} compact={compact} id={id} />}
+</div>

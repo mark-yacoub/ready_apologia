@@ -1,0 +1,50 @@
+---
+/**
+ * One dataset source, verbatim: reference · Arabic (sand, RTL) · English · verify chips.
+ * Long narrations are clamped only when JS runs ("Read the full text"); without JS the full text shows.
+ * Summaries (not quotations in the dataset) render without quote styling, labelled as such.
+ * Near-duplicate reports can be folded under a lead card (`c.nested`).
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+import { LABELS } from '../../../utils/convenientRevelations/config.js';
+const { c } = Astro.props;
+const Self = Astro.self;
+---
+<article class={`hrv-ev crv-ev${c.summary ? ' crv-ev--summary' : ''}`} id={c.anchor}>
+  <header class="crv-ev__head">
+    <span class="hrv-ev__n" aria-hidden="true">{c.n}</span>
+    <div class="crv-ev__ref">{c.reference}</div>
+  </header>
+  {c.summary ? (
+    <>
+      <p class="crv-ev__summary-label">{c.summaryLabel}</p>
+      <p class="crv-ev__summary" set:html={c.summaryHtml} />
+    </>
+  ) : (
+    <figure class="hrv-quote crv-ev__quote">
+      {c.arabic && <blockquote class="hrv-quote__ar crv-ev__ar" lang="ar" dir="rtl" data-v set:html={c.arabicHtml} />}
+      <div class={`crv-ev__en${c.long ? ' is-long' : ''}`} id={c.long ? `${c.anchor}-text` : undefined} data-crv-clamp={c.long ? '' : undefined}>
+        <p class="hrv-quote__en" data-v>{c.english}</p>
+      </div>
+      {c.long && <button class="crv-clamp-btn" type="button" data-crv-clamp-btn aria-expanded="false" aria-controls={`${c.anchor}-text`} data-more={LABELS.readFull} data-less={LABELS.showLess}><span data-label>{LABELS.readFull}</span><Icon name="chevronDown" /></button>}
+    </figure>
+  )}
+  {c.chips.length > 0 ? (
+    <div class="hrv-verify" aria-label={LABELS.verifyGroup}>
+      {c.chips.map(ch => (
+        <a href={ch.href} {...ch.attrs} title={ch.title} class={ch.secondary ? 'crv-chip-secondary' : undefined}>
+          <span set:html={tl(ch.label)} /><Icon name={ch.external ? 'external' : 'chevronRight'} />
+        </a>
+      ))}
+    </div>
+  ) : (
+    <p class="crv-ev__nolink">{LABELS.noLink}</p>
+  )}
+  {c.nested.length > 0 && (
+    <details class="crv-nested">
+      <summary><span>{c.nestedLabel}</span><Icon name="chevronDown" /></summary>
+      <div class="crv-nested__body">{c.nested.map(n => <Self c={n} />)}</div>
+    </details>
+  )}
+</article>

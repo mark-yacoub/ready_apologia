@@ -1,0 +1,31 @@
+---
+/**
+ * "All references on this page": the md's reference table as stacked cards. Category and our-voice
+ * labels come from overrides.js; quotations pass through from the md verbatim.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { refs } = Astro.props;
+---
+<ul class="idl-refs">
+  {refs.map(r => (
+    <li class="idl-ref">
+      <div class="idl-ref__top">
+        <span class="idl-ref__cat" set:html={r.categoryHtml} />
+        <span class="idl-ref__refs">
+          {r.refs.map(x => (x.href
+            ? <a class="hrv-link" href={x.href} {...x.attrs} set:html={tl(x.label)} />
+            : <span set:html={tl(x.label)} />))}
+        </span>
+      </div>
+      {r.leadHtml && <p class="idl-ref__lead" set:html={r.leadHtml} />}
+      {r.quotesHtml.length > 0 && <p class="idl-ref__q">{r.quotesHtml.map(q => <q class="idl-q" set:html={q} />)}</p>}
+      {r.statementHtml && <p class="idl-ref__lead" set:html={r.statementHtml} />}
+      {r.tafsir.length > 0 && (
+        <div class="hrv-verify">
+          {r.tafsir.map(t => <a href={t.href} {...t.attrs}><span set:html={tl(t.label)} /><Icon name="chevronRight" /></a>)}
+        </div>
+      )}
+    </li>
+  ))}
+</ul>

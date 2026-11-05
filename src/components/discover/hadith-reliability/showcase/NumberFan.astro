@@ -2,6 +2,8 @@
 /** One event, several incompatible numbers. Tapping a number jumps to the evidence card behind it. */
 import Ref from './Ref.astro';
 const { sc, compact = false } = Astro.props;
+// Each source once, in order (several numbers often come from one report).
+const refs = [...new Map(sc.items.filter(it => it.ref).map(it => [it.ref.href, it.ref])).values()];
 // Size the whole fan by its longest value so sibling numbers always match.
 const longest = Math.max(...sc.items.map(i => i.value.length));
 const size = longest > 5 ? ' hrv-fan--long' : longest > 3 ? ' hrv-fan--mid' : '';
@@ -19,6 +21,6 @@ const size = longest > 5 ? ' hrv-fan--long' : longest > 3 ? ' hrv-fan--mid' : ''
   })}
 </div>
 {!compact && (
-  <div class="hrv-fan__refs">{sc.items.map(it => <span><Ref ref={it.ref} /></span>)}</div>
-)}
+  <div class="hrv-fan__refs">{refs.map(ref => <span><Ref ref={ref} /></span>)}</div>
+)}{sc.noteHtml && !compact && <p class="hrv-sc__note" set:html={sc.noteHtml} />}
 {compact && sc.unitHtml && <p class="hrv-sc__unit" style="margin:8px 0 0!important" set:html={sc.unitHtml} />}

@@ -1,5 +1,6 @@
 ---
-/** The same event in several wordings. Mobile: segmented tabs; desktop/no-JS: all side by side. */
+/** The same event in several wordings. Mobile: segmented tabs; desktop/no-JS: all side by side.
+ *  Optional `sc.headHtml`: one line above the tabs (e.g. the verse both versions lead to). */
 import Ref from './Ref.astro';
 const { sc, compact = false, id = 'v' } = Astro.props;
 ---
@@ -7,6 +8,7 @@ const { sc, compact = false, id = 'v' } = Astro.props;
   <div class="hrv-vchips">{sc.items.map(it => <span class="hrv-vchip" set:html={it.labelHtml} />)}</div>
 ) : (
   <div data-hrv-tabs>
+    {sc.headHtml && <p class="hrv-sc__unit hrv-versions__head" set:html={sc.headHtml} />}
     <div class="hrv-tabs" role="tablist">
       {sc.items.map((it, i) => (
         <button class="hrv-tab" type="button" role="tab" id={`${id}-tab-${i}`} aria-controls={`${id}-panel-${i}`} aria-selected={i === 0 ? 'true' : 'false'} set:html={it.labelHtml} />
@@ -23,4 +25,4 @@ const { sc, compact = false, id = 'v' } = Astro.props;
       ))}
     </div>
   </div>
-)}
+)}{sc.noteHtml && !compact && <p class="hrv-sc__note" set:html={sc.noteHtml} />}

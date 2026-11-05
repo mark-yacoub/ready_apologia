@@ -1,0 +1,21 @@
+---
+/** "At a glance": a compact index of the item sections. Each whole row is one in-page link (≥ 44 px). */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { rows } = Astro.props;
+---
+<ol class="orv-glance">
+  {rows.map(r => (
+    <li>
+      <a class="orv-glance__row" href={r.href}>
+        <span class="orv-glance__n" aria-hidden="true">{String(r.n).padStart(2, '0')}</span>
+        <span class="orv-glance__body">
+          <span class="orv-glance__title" set:html={r.titleHtml} />
+          {r.takeawayHtml && <span class="orv-glance__take" set:html={r.takeawayHtml} />}
+          {r.chips.length > 0 && <span class="hrv-badges orv-glance__chips">{r.chips.map(c => <span set:html={tl(c)} />)}</span>}
+        </span>
+        <Icon name="chevronDown" class="orv-glance__chev" />
+      </a>
+    </li>
+  ))}
+</ol>

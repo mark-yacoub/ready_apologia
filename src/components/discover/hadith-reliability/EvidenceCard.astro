@@ -2,12 +2,14 @@
 /** One atomic proof: label → explanation → original wording → verify chips. */
 import Icon from './Icon.astro';
 import { tl } from '../../../utils/hadithReliability/render.js';
-const { e } = Astro.props;
+// `level` sets the label heading (default h3); pages that nest cards deeper pass a higher level.
+const { e, level = 3 } = Astro.props;
+const H = `h${level}`;
 ---
 <article class="hrv-ev" id={e.anchor}>
   <header class="hrv-ev__head">
     <span class="hrv-ev__n" aria-hidden="true">{e.n}</span>
-    <h3 class="hrv-ev__label" set:html={e.labelHtml} />
+    <H class="hrv-ev__label" set:html={e.labelHtml} />
   </header>
   <div class="hrv-ev__body" set:html={e.bodyHtml} />
   {e.quote && (e.quote.arabic ? (

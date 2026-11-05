@@ -1,0 +1,42 @@
+---
+/**
+ * Page-local showcase panel: the hrv archetype components (unchanged) inside a caption, an optional
+ * lead line above (e.g. the verse being discussed) and a note below. The shared hrv Showcase.astro
+ * takes its caption from the hrv angle list and has no lead/note slots, so this wrapper replaces it.
+ * Two archetypes are rendered here instead of by hrv, with the same hrv classes:
+ *   - facts: the hrv Facts wraps each row in a link, which would nest our cite links;
+ *   - confrontation: the hrv Confrontation titles each side with an <h3>, the level of our item titles;
+ *     here the side titles are h4 (one level below the item title), so the outline stays ours.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import Ref from '../hadith-reliability/showcase/Ref.astro';
+import NumberFan from '../hadith-reliability/showcase/NumberFan.astro';
+import Bars from '../hadith-reliability/showcase/Bars.astro';
+import Versions from '../hadith-reliability/showcase/Versions.astro';
+import Timeline from '../hadith-reliability/showcase/Timeline.astro';
+import Witnesses from '../hadith-reliability/showcase/Witnesses.astro';
+
+const { sc } = Astro.props;
+const COMPONENTS = { number_fan: NumberFan, bars: Bars, versions: Versions, timeline: Timeline, witnesses: Witnesses };
+const C = COMPONENTS[sc.type];
+---
+<section class={`hrv-sc hrv-sc--${sc.type} mm-sc`} aria-label={sc.caption}>
+  {sc.caption && <div class="hrv-sc__cap"><Icon name={sc.type} />{sc.caption}</div>}
+  {sc.leadHtml && <p class="mm-sc__lead" set:html={sc.leadHtml} />}
+  {sc.type === 'facts' && <ol class="hrv-facts mm-facts">{sc.items.map(i => <li><span set:html={i.html} /></li>)}</ol>}
+  {sc.type === 'confrontation' && (
+    <div class="hrv-vs">
+      {[sc.left, sc.right].map((side, i) => (
+        <>
+          {i === 1 && <div class="hrv-vs__div" aria-hidden="true"><Icon name="swap" /></div>}
+          <div class="hrv-vs__side">
+            <h4 class="hrv-vs__h" set:html={side.titleHtml} />
+            <ul class="hrv-vs__list">{side.items.map(it => <li><span set:html={it.html} /> {it.ref && <Ref ref={it.ref} />}</li>)}</ul>
+          </div>
+        </>
+      ))}
+    </div>
+  )}
+  {C && <C sc={sc} id={sc.id} />}
+  {sc.noteHtml && <p class="hrv-sc__note mm-sc__note" set:html={sc.noteHtml} />}
+</section>

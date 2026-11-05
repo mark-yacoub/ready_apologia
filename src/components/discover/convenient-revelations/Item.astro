@@ -1,0 +1,93 @@
+---
+/**
+ * One item, self-contained (readers land on `#id` from shared links). Reading order (adv_ia #10):
+ * eyebrow · h2 · provenance · hook · showcase · takeaway · About (collapsed) · classical panel ·
+ * "Comparing with the texts" · full source texts (first cards open, the rest in a drawer) · next.
+ *
+ * Legacy anchors are empty alias spans: the old `#<slug>` lands on the item, `-claim` on the sources
+ * heading, `-defense` on the classical panel, `-counter` on the comparing panel. Nothing is hidden
+ * behind a click any more, so no JS is needed for them.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import ProvenanceStrip from './ProvenanceStrip.astro';
+import ItemShowcase from './ItemShowcase.astro';
+import SourceCard from './SourceCard.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+import { LABELS } from '../../../utils/convenientRevelations/config.js';
+const { item } = Astro.props;
+const { copy, sources } = item;
+const eyebrow = `${LABELS.itemOf.replace('{n}', item.number).replace('{total}', item.total)} · ${item.number === 1 ? LABELS.startHere : item.partLabel}`;
+/** Consecutive cards with the same stage share one stage heading. */
+const withStages = list => list.map((c, i) => ({ c, stage: i === 0 || list[i - 1].stageLabel !== c.stageLabel ? c.stageLabel : null }));
+const drawerCount = sources.drawer.reduce((n, c) => n + 1 + c.nested.length, 0);
+---
+<article class="crv-item" id={item.id} aria-labelledby={`${item.id}-h`} data-theme={item.theme}>
+  <span class="crv-alias" id={item.legacy.top} aria-hidden="true"></span>
+  <div class="crv-item__top">
+    <p class="hrv-eyebrow crv-item__eyebrow" set:html={tl(eyebrow)} />
+    <button class="hrv-iconbtn crv-copy" type="button" data-crv-copy data-crv-copy-hash={item.id} aria-label={LABELS.copyItemLink} aria-describedby={`${item.id}-h`} title={LABELS.copyItemLink}><Icon name="link" /></button>
+  </div>
+  <h2 class="crv-item__h" id={`${item.id}-h`} set:html={copy.title.html} />
+  {item.provenance && <ProvenanceStrip p={item.provenance} />}
+  <p class="hrv-hook crv-hook" set:html={copy.hook.html} />
+
+  <ItemShowcase item={item} />
+
+  <p class="crv-takeaway" set:html={copy.takeaway.html} />
+
+  <details class="hrv-disclosure crv-about" open>
+    <summary><span>{LABELS.aboutQuestion}</span><Icon name="chevronDown" /></summary>
+    <div class="hrv-disclosure__body" set:html={copy.about.html} />
+  </details>
+
+  <div class="crv-panels">
+    <section class="hrv-scholar crv-panel crv-panel--classical" id={`${item.id}-classical`} aria-labelledby={`${item.id}-classical-h`}>
+      <span class="crv-alias" id={item.legacy.defense} aria-hidden="true"></span>
+      <h3 class="hrv-scholar__h" id={`${item.id}-classical-h`}><Icon name="quote" />{LABELS.classical}</h3>
+      <div class="crv-prose" set:html={copy.classical.html} />
+    </section>
+    <section class="crv-panel crv-panel--compare" id={`${item.id}-comparing`} aria-labelledby={`${item.id}-comparing-h`}>
+      <span class="crv-alias" id={item.legacy.counter} aria-hidden="true"></span>
+      <h3 class="crv-panel__h" id={`${item.id}-comparing-h`}><Icon name="search" />{LABELS.comparing}</h3>
+      <div class="crv-prose" set:html={copy.comparing.html} />
+    </section>
+  </div>
+
+  <section class="crv-sources" id={`${item.id}-sources`} aria-labelledby={`${item.id}-sources-h`}>
+    <span class="crv-alias" id={item.legacy.claim} aria-hidden="true"></span>
+    <h3 class="hrv-eyebrow crv-sources__h" id={`${item.id}-sources-h`}>{LABELS.sources.replace('{n}', sources.count)}</h3>
+    {withStages(sources.open).map(({ c, stage }) => (
+      <>
+        {stage && <h4 class="crv-stage" set:html={tl(stage)} />}
+        <SourceCard c={c} />
+      </>
+    ))}
+    {sources.drawer.length > 0 && (
+      <details class="hrv-disclosure crv-drawer">
+        <summary><span>{LABELS.moreSources.replace('{n}', drawerCount)}</span><Icon name="chevronDown" /></summary>
+        <div class="crv-drawer__body">
+          {withStages(sources.drawer).map(({ c, stage }) => (
+            <>
+              {stage && <h4 class="crv-stage" set:html={tl(stage)} />}
+              <SourceCard c={c} />
+            </>
+          ))}
+        </div>
+      </details>
+    )}
+  </section>
+
+  {item.aside && (
+    <p class="crv-aside">{item.aside.text} <a href={item.aside.href}>{item.aside.linkLabel}<Icon name="chevronRight" /></a></p>
+  )}
+
+  <a class={`crv-next crv-next--${item.next.kind}`} href={item.next.href}>
+    <span class="crv-next__dir">{item.next.label}<Icon name={item.next.kind === 'item' ? 'chevronDown' : 'arrowRight'} /></span>
+    <span class="crv-next__title" set:html={item.next.titleHtml} />
+  </a>
+  {item.crossLinks.length > 0 && (
+    <ul class="crv-cross" aria-label={LABELS.seeAlso}>
+      {item.crossLinks.map(l => <li><a href={l.href}><span set:html={l.labelHtml} /><Icon name="chevronRight" /></a></li>)}
+    </ul>
+  )}
+</article>

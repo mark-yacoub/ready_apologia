@@ -1,0 +1,210 @@
+/* ==========================================================================
+   /discover/muhammad-and-slavery: a thin layer on the hadith-reliability
+   design system. Everything is scoped to `.hrv.ms`; nothing here leaks.
+   Shared look (paper/ink, teal = verifiable, sand = primary-source quotations,
+   slate = scholars' voice, no red) comes from hadith-reliability.css, along with
+   the default spacing of every shared component (hero, quote, scholar, eval,
+   showcase, disclosure, sources, rows). This file only:
+     1. sets the page's section gap on the shared spacing scale (below), and
+     2. overrides the shared defaults where this article differs, each with its reason.
+   If a value here matches the shared default, delete it. Mobile-first.
+   ========================================================================== */
+
+/* ---- spacing & scroll container ----------------------------------------------
+   Margins, padding and gaps use the shared --hrv-s1…s8 scale (hadith-reliability.css).
+   position: relative keeps .hrv-sr headings and the index panel inside .main-content. */
+.hrv.ms {
+  position: relative; overflow-wrap: break-word;
+  --ms-section-gap: var(--hrv-s7); --ms-scroll: calc(var(--hrv-bar-h) + var(--hrv-s3));
+  --ms-sand-ink: #7a5a1f; /* AA small-caps labels and grades on --hrv-sand and white */
+  --ms-tl-label: 96px;    /* timeline label column: step headings ("The promise") need more than 64px */
+}
+@media (min-width: 768px) { .hrv.ms { --ms-section-gap: var(--hrv-s8); } }
+
+/* ---- sticky bar + "On this page" index ---------------------------------------
+   Override: replaces the multi-page prev/next stepper in .hrv-bar with a centred
+   single-page <details> table of contents that drops down over the sub-page. */
+.ms-bar { gap: var(--hrv-s1); }
+.ms-bar .hrv-bar__backtext { white-space: nowrap; }
+@media (max-width: 380px) { .ms-bar .hrv-bar__back { font-size: .84rem; } .ms-index__sum { padding: 0 var(--hrv-s2); font-size: .84rem; } }
+.ms-index { justify-self: center; min-width: 0; }
+.ms-index__sum {
+  list-style: none; display: inline-flex; align-items: center; gap: var(--hrv-s1); min-height: 44px; padding: 0 var(--hrv-s3);
+  border-radius: 999px; cursor: pointer; font: 650 .88rem/1 var(--hrv-sans); color: var(--hrv-ink); white-space: nowrap;
+}
+.ms-index__sum::-webkit-details-marker { display: none; }
+.ms-index__sum:hover { background: rgba(27, 25, 23, .05); }
+.ms-index__sum .hrv-icon { width: 16px; height: 16px; color: var(--hrv-ink-2); transition: transform .2s; }
+.ms-index[open] .ms-index__sum .hrv-icon { transform: rotate(180deg); }
+.ms-index__panel {
+  position: absolute; top: 100%; left: 0; right: 0; z-index: 30;
+  max-height: calc(100dvh - var(--hrv-bar-h)); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--hrv-paper); border-bottom: 1px solid var(--hrv-line); box-shadow: var(--hrv-shadow);
+  padding: var(--hrv-s2) var(--hrv-inset) var(--hrv-s4);
+}
+.ms-index__groups, .ms-index__items { list-style: none; margin: 0; padding: 0; }
+.ms-index__groups { max-width: 680px; margin: 0 auto; }
+.ms-index__groups > li { margin: 0; padding: var(--hrv-s2) 0 var(--hrv-s1); }
+.ms-index__groups > li + li { border-top: 1px solid var(--hrv-line); }
+.hrv .ms-index__q { display: flex; gap: var(--hrv-s2); align-items: center; margin: 0; min-height: 44px; font: 700 .74rem/1.35 var(--hrv-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-ink-2); }
+.ms-index__q a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; }
+.ms-index__qn { color: var(--hrv-verify); font-variant-numeric: tabular-nums; }
+.ms-index__items > li { margin: 0; }
+.ms-index__items a, .ms-index__tail a {
+  display: grid; grid-template-columns: 26px 1fr; gap: var(--hrv-s2); align-items: center; min-height: 44px; padding: var(--hrv-s2) 0;
+  color: var(--hrv-ink); text-decoration: none; font-family: var(--hrv-display); font-size: .95rem; line-height: 1.3;
+}
+.ms-index__items a:hover, .ms-index__tail a:hover { color: var(--hrv-verify); }
+.ms-index__n { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font: 700 .72rem/1 var(--hrv-sans); color: var(--hrv-ink-2); border: 1px solid var(--hrv-line-strong); font-variant-numeric: tabular-nums; }
+.ms-index__tail a { display: flex; font-family: var(--hrv-sans); font-weight: 650; font-size: .9rem; color: var(--hrv-verify); }
+
+/* ---- hero + major sections ---------------------------------------------------
+   Override: breadcrumb raised from 32px to 44px (playbook §5.2), long H1s start
+   smaller than 2rem on phones, and body/intro paragraphs use 1.68 line-height. */
+.ms .hrv-crumb { min-height: 44px; min-width: 44px; }
+@media (max-width: 767px) { .hrv.ms .hrv-h1 { font-size: 1.65rem; line-height: 1.2; } }
+.hrv.ms .hrv-intro, .hrv.ms .hrv-hook, .hrv.ms .ms-dek, .hrv.ms .ms-context, .hrv.ms .ms-block { line-height: 1.68; }
+/* Zero-height anchor targets for legacy section/item URLs land below the sticky bar. */
+.ms-legacy { display: block; height: 0; overflow: hidden; scroll-margin-top: var(--ms-scroll); }
+/* Major sections open with a strong rule and the page section gap (48px mobile, 64px desktop). */
+.ms-q, .ms-hubq, .ms-other {
+  margin-top: var(--ms-section-gap); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line-strong); scroll-margin-top: var(--ms-scroll);
+}
+.hrv .ms-dek { font-size: .95rem; color: var(--hrv-ink-2); margin: 0 0 var(--hrv-s3); }
+
+/* ---- items -------------------------------------------------------------------
+   Items inside a question section use a light rule; top-level answers use the full
+   section gap and strong rule; the first item in a section drops its top rule. */
+.ms-item { margin-top: var(--hrv-s6); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line); scroll-margin-top: var(--ms-scroll); }
+.ms-item--answer { margin-top: var(--ms-section-gap); border-top-color: var(--hrv-line-strong); }
+.ms-q > .ms-item:first-of-type { margin-top: var(--hrv-s5); padding-top: 0; border-top: 0; }
+.ms-q--flat > .ms-item:first-of-type { margin-top: 0; }
+/* Cold-landing context eyebrow link keeps a full 44px tap target without negative margins. */
+.hrv .ms-ctx { margin-bottom: var(--hrv-s1); }
+.ms-ctx a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; }
+.ms-ctx a:hover { color: var(--hrv-ink); text-decoration: underline; }
+/* Item title sits beside its 44px permalink copy button. */
+.ms-item__titlerow { display: grid; grid-template-columns: 1fr 44px; gap: var(--hrv-s2); align-items: start; margin-bottom: var(--hrv-s3); }
+.hrv .ms-item__title { font-size: 1.35rem; line-height: 1.24; font-weight: 600; letter-spacing: -.005em; padding-top: var(--hrv-s2); }
+@media (min-width: 768px) { .hrv .ms-item__title { font-size: 1.55rem; } }
+.ms-copy { color: var(--hrv-ink-2); }
+.hrv .ms-context { font-size: .9rem; color: var(--hrv-ink-2); margin: 0 0 var(--hrv-s2); }
+.hrv .ms-hl { font-size: .78rem; color: var(--hrv-ink-2); margin: var(--hrv-s2) 0 0; text-align: right; }
+/* Attributed takeaway callout below the showcase or verse card. */
+.hrv .ms-takeaway {
+  margin: var(--hrv-s4) 0 0; padding: var(--hrv-s1) 0 var(--hrv-s1) var(--hrv-s4); border-left: 3px solid var(--hrv-ink);
+  font-size: .98rem; line-height: 1.65; font-weight: 500; color: var(--hrv-ink);
+}
+
+/* ---- evidence & quote cards (key text, verse, tafsir, reports, texts) --------
+   Override: cards use uniform --hrv-s4 padding, the quote follows its label/note with
+   no negative margins, and verify chips wrap --hrv-s2 below the quote at 44px height. */
+.ms-key { margin: var(--hrv-s1) 0 var(--hrv-s4); padding: var(--hrv-s4); }
+.ms-verse { margin: var(--hrv-s4) 0 0; background: var(--hrv-sand); border-left: 3px solid var(--hrv-sand-rule); border-radius: 0 var(--hrv-radius) var(--hrv-radius) 0; padding: var(--hrv-s4); }
+.hrv .ms-key__cap { font: 700 .72rem/1.3 var(--hrv-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ms-sand-ink); margin: 0 0 var(--hrv-s2); }
+.ms-key__sub { font-weight: 600; letter-spacing: .02em; text-transform: none; color: var(--hrv-ink-2); }
+.ms-key__en { margin: 0; font-family: var(--hrv-display); font-size: 1.02rem; line-height: 1.65; color: var(--hrv-ink); }
+.ms-ar { margin-top: var(--hrv-s3); }
+.hrv .ms-ar__src { font-size: .78rem; color: var(--hrv-ink-2); margin: var(--hrv-s1) 0 0; }
+.hrv .ms-verse__text { font-family: var(--hrv-display); font-size: 1.02rem; line-height: 1.65; margin: 0; }
+.hrv .ms-verse__text:not(:last-of-type) { margin-bottom: var(--hrv-s2); }
+.ms-verse__n { font: 700 .76rem/1 var(--hrv-sans); color: var(--ms-sand-ink); margin-right: var(--hrv-s1); font-variant-numeric: tabular-nums; }
+/* Disclosure summary uses verifiable teal; cards inside .ms-reports__body are spaced by grid gap. */
+.ms-reports > summary, .ms-cited > summary { color: var(--hrv-verify); }
+.ms-reports__body { padding: var(--hrv-s1) 0 var(--hrv-s4); display: grid; gap: var(--hrv-s3); }
+.ms-report, .ms-text, .ms-chainnote, .ms-relverses__list > li { margin: 0; background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); padding: var(--hrv-s4); }
+.hrv .ms-report__label, .hrv .ms-text__label { font: 700 .82rem/1.35 var(--hrv-sans); color: var(--hrv-ink); margin: 0 0 var(--hrv-s2); }
+.ms-report__label .ms-grade { margin-left: var(--hrv-s2); }
+.hrv .ms-report__note { font-size: .82rem; color: var(--hrv-ink-2); margin: 0 0 var(--hrv-s2); }
+.hrv .ms-report__text, .ms-text__q { font-family: var(--hrv-display); font-size: .96rem; line-height: 1.65; margin: 0; }
+.ms-grade { font: 600 .76rem/1.3 var(--hrv-sans); color: var(--ms-sand-ink); }
+.hrv .ms-grade--block { margin: var(--hrv-s1) 0 0; }
+.hrv .ms-related-h { font: 700 .74rem/1.3 var(--hrv-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-ink-2); margin: var(--hrv-s2) 0 0; }
+.ms-tafsir { margin: 0; background: var(--hrv-slate); border-left: 3px solid var(--hrv-slate-rule); border-radius: 0 var(--hrv-radius) var(--hrv-radius) 0; padding: var(--hrv-s4); }
+.ms-tafsir__who { font-family: var(--hrv-display); font-weight: 600; font-size: 1rem; }
+.ms-tafsir__who small { display: block; font-family: var(--hrv-sans); font-weight: 500; font-size: .76rem; color: var(--hrv-ink-2); margin-top: var(--hrv-s1); }
+.ms-tafsir__q { margin: var(--hrv-s2) 0 0; font-size: .95rem; line-height: 1.65; font-style: italic; }
+.hrv .ms-tafsir__lead { font-size: .86rem; color: var(--hrv-ink-2); margin: var(--hrv-s2) 0 0; }
+.hrv .ms-tnote { font-size: .78rem; line-height: 1.5; color: var(--hrv-ink-2); margin: var(--hrv-s2) 0 0; }
+.ms-relverses__list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--hrv-s3); }
+.hrv-srclist.ms-cited__list { margin-bottom: var(--hrv-s4); }
+/* Verify chips wrap (no horizontal scroller, playbook §5.2) and sit --hrv-s2 below the quote at 44px height. */
+.ms .hrv-verify.ms-chips { flex-wrap: wrap; overflow: visible; margin: var(--hrv-s2) 0 0; padding: 0; gap: var(--hrv-s2); }
+.ms .ms-chips a { min-height: 44px; white-space: normal; text-align: left; line-height: 1.2; }
+.ms .ms-chips a.is-secondary { background: transparent; border: 1px solid var(--hrv-line-strong); color: var(--hrv-ink); }
+
+/* ---- scholar / comparison blocks, cross-links & next-item link ---------------
+   Padding, headings and rules come from the shared .hrv-scholar and .hrv-eval. */
+.ms-block { margin-top: var(--hrv-s5); }
+.ms-srcline { list-style: none; padding: 0; margin: var(--hrv-s2) 0 0; display: flex; flex-wrap: wrap; gap: var(--hrv-s1) var(--hrv-s4); font-size: .85rem; }
+.ms-srcline li { margin: 0; }
+.ms-srcline a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--hrv-s1); }
+.ms-see { list-style: none; padding: 0; margin: var(--hrv-s4) 0 0; display: grid; gap: var(--hrv-s2); font-size: .9rem; line-height: 1.5; }
+.ms-see > li { margin: 0; }
+.ms-see__link {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--hrv-s3); min-height: 44px; padding: var(--hrv-s2) var(--hrv-s3);
+  border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); background: var(--hrv-surface);
+  color: var(--hrv-verify-strong); text-decoration: none; font-size: .9rem; font-weight: 600; line-height: 1.35;
+}
+.ms-see__link:hover { border-color: var(--hrv-verify); }
+.ms-see__link .hrv-icon { flex: none; color: var(--hrv-ink-3); }
+.ms-next {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--hrv-s3); min-height: 48px; margin-top: var(--hrv-s5); padding: var(--hrv-s3) var(--hrv-s4);
+  border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); background: var(--hrv-surface);
+  color: var(--hrv-ink); text-decoration: none; font-size: .9rem; font-weight: 650; line-height: 1.35;
+}
+.ms-next > span:last-child { color: var(--hrv-verify); font-size: 1.05rem; }
+.ms-next:hover { border-color: var(--hrv-line-strong); }
+
+/* ---- showcase overrides ------------------------------------------------------
+   Override: witnesses and confrontation cards stack on phones, version tabs wrap at 44px,
+   and timelines widen the label column (--ms-tl-label) for text step headings. */
+.ms .hrv-wit { flex-direction: column; gap: var(--hrv-s3); overflow: visible; scroll-snap-type: none; margin: 0; padding: 0; }
+.ms .hrv-wit__card { flex: 0 0 auto; }
+.ms .hrv-wit__hint { display: none; }
+.ms .hrv-vs { gap: var(--hrv-s3); }
+.ms .hrv-vs__div { display: none; }
+@media (min-width: 768px) { .ms .hrv-vs { grid-template-columns: 1fr 1fr; } }
+.ms .hrv-tabs { flex-wrap: wrap; overflow: visible; }
+.ms .hrv-tab { min-height: 44px; }
+.ms .hrv-sc__ref { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
+.ms-fan__cap { display: block; font-weight: 650; color: var(--hrv-ink); margin-bottom: var(--hrv-s1); }
+.ms-fan__q { display: block; font-style: italic; }
+.ms .hrv-tl > li { grid-template-columns: var(--ms-tl-label) 1fr; }
+.ms .hrv-tl > li::before { left: calc(var(--ms-tl-label) + var(--hrv-s3) - 1px); }
+.ms .hrv-tl__year.is-text { overflow-wrap: normal; word-break: normal; hyphens: auto; }
+.ms .hrv-tl__gap { margin-left: calc(var(--ms-tl-label) + var(--hrv-s5)); }
+
+/* ---- hub ---------------------------------------------------------------------
+   Override: Start-here card embeds a full showcase + evaluation block, 3-column browse
+   cards link to the sub-pages, and a disclosure opens remaining items in each section. */
+.hrv .ms-start__hook { font-size: .95rem; margin: 0 0 var(--hrv-s3); }
+.ms-start__cta { min-height: 44px; text-decoration: none; }
+.ms-browse { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--hrv-s3); }
+@media (min-width: 768px) { .ms-browse { grid-template-columns: repeat(3, 1fr); } }
+.ms-browse > li { margin: 0; }
+.ms-browse__card {
+  display: grid; grid-template-columns: 1fr 18px; grid-template-rows: auto; column-gap: var(--hrv-s3); align-items: center; height: 100%;
+  min-height: 72px; padding: var(--hrv-s4); border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); background: var(--hrv-surface);
+  color: var(--hrv-ink); text-decoration: none;
+}
+.ms-browse__card:hover { border-color: var(--hrv-line-strong); box-shadow: var(--hrv-shadow); }
+.ms-browse__title { font-family: var(--hrv-display); font-weight: 600; font-size: 1.05rem; line-height: 1.3; }
+.ms-browse__text { grid-column: 1; font-size: .86rem; line-height: 1.4; color: var(--hrv-ink-2); }
+.ms-browse__desc { grid-column: 1; font-size: .82rem; line-height: 1.45; color: var(--hrv-ink-2); margin-top: var(--hrv-s1); }
+.ms-browse__card .hrv-icon { grid-column: 2; grid-row: 1 / -1; color: var(--hrv-ink-3); }
+.ms-more { margin-top: var(--hrv-s2); }
+.ms-more > summary {
+  list-style: none; display: flex; align-items: center; justify-content: space-between; gap: var(--hrv-s3); min-height: 48px; padding: 0 var(--hrv-s1);
+  cursor: pointer; font: 650 .9rem/1.3 var(--hrv-sans); color: var(--hrv-verify);
+}
+.ms-more > summary::-webkit-details-marker { display: none; }
+.ms-more > summary .hrv-icon { transition: transform .2s; }
+.ms-more[open] > summary .hrv-icon { transform: rotate(180deg); }
+
+/* ﷺ: Literata and Public Sans have no glyph for U+FDFA; the Arabic face draws it. */
+.ms-saw { font-family: var(--hrv-arabic); font-style: normal; line-height: 1; }
+
+@media print {
+  .ms-index, .ms-copy, .ms-next { display: none; }
+}

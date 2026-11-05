@@ -1,0 +1,12 @@
+---
+/** One report, verbatim (Sunnah.com English, QUOTE_FIXES applied, no editorial bold), with its chips. */
+import Chips from './Chips.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { r } = Astro.props;
+---
+<div class="ms-report">
+  <p class="ms-report__label"><span set:html={tl(r.label)} />{r.grade && <span class="ms-grade" set:html={tl(r.grade)} />}</p>
+  {r.note && <p class="ms-report__note" set:html={tl(r.note)} />}
+  <p class="ms-report__text" set:html={r.html} />
+  <Chips chips={r.chips} />
+</div>

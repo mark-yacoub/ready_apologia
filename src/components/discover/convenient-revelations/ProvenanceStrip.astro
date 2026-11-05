@@ -1,0 +1,25 @@
+---
+/**
+ * Where the link between the verse and the occasion is recorded (authored per item):
+ * "Addresses the Prophet in: Qurʾān 33:51" or "Scope in the Qurʾān: general rule (4:24)",
+ * then "Occasion in: Ṣaḥīḥ al-Bukhārī · …", plus an optional quiet extra chip.
+ */
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { p } = Astro.props;
+---
+<dl class="crv-prov">
+  <div class="crv-prov__row">
+    <dt set:html={tl(p.leadLabel)} />
+    <dd><span class={`crv-chip${p.mode === 'addresses' ? ' crv-chip--verse' : ''}`} set:html={tl(p.lead)} /></dd>
+    <span class="crv-prov__sep" aria-hidden="true">·</span>
+    <dt set:html={tl(p.occasionLabel)} />
+    <dd set:html={tl(p.occasion.join(', '))} />
+    {p.extra && (
+      <>
+        <span class="crv-prov__sep" aria-hidden="true">·</span>
+        {p.extraLabel && <dt set:html={tl(p.extraLabel)} />}
+        <dd class="crv-prov__extra" set:html={tl(p.extra)} />
+      </>
+    )}
+  </div>
+</dl>

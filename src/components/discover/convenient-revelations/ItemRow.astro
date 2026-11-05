@@ -1,0 +1,13 @@
+---
+/** Hub row: kind-of-evidence icon · title · one-line takeaway → the item on its chapter page. */
+import Icon from '../hadith-reliability/Icon.astro';
+const { item } = Astro.props;
+---
+<a class="hrv-row crv-row" href={item.href}>
+  <span class="hrv-row__icon" aria-hidden="true"><Icon name={item.showcase.type} /></span>
+  <span>
+    <span class="hrv-row__title" set:html={item.copy.title.html} />
+    <span class="crv-row__take" set:html={item.copy.takeaway.html} />
+  </span>
+  <span class="hrv-row__chev"><Icon name="chevronRight" /></span>
+</a>

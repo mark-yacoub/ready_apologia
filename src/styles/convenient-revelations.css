@@ -1,0 +1,203 @@
+/* ==========================================================================
+   /discover/convenient-revelations: a thin layer on the hadith-reliability
+   design system. Everything is scoped to `.hrv.crv`; nothing here leaks.
+   Shared look (paper/ink, teal = verifiable, sand = primary-source quotations,
+   slate = scholars' voice, no red) comes from hadith-reliability.css, along with
+   the default spacing of every shared component (hero, quote, scholar, eval,
+   showcase, disclosure, sources, evidence card). This file only:
+     1. sets the page's section gap on the shared spacing scale (below), and
+     2. overrides the shared defaults where this page differs, each with its reason.
+   If a value here matches the shared default, delete it. Mobile-first.
+   ========================================================================== */
+
+/* ---- spacing & font fallback -------------------------------------------------
+   Margins, padding and gaps use the shared --hrv-s1…s8 scale (hadith-reliability.css).
+   The dataset's English carries U+FDFA (ﷺ), which Literata/Public Sans lack: fall back
+   to the Arabic face so that glyph renders instead of a tofu box. */
+.hrv.crv {
+  --crv-section-gap: var(--hrv-s7);
+  --crv-scroll: calc(var(--hrv-bar-h) + var(--hrv-s3));
+  --hrv-display: 'Literata', Georgia, 'Amiri', 'Noto Naskh Arabic', serif;
+  --hrv-sans: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Amiri', 'Noto Naskh Arabic', sans-serif;
+}
+@media (min-width: 768px) { .hrv.crv { --crv-section-gap: var(--hrv-s8); } }
+
+/* Body, intro and panel paragraphs use a comfortable 1.68 reading line-height across the article. */
+.hrv.crv .hrv-intro, .hrv.crv .hrv-hook, .hrv.crv .hrv-disclosure__body, .hrv.crv .crv-prose { line-height: 1.68; }
+
+/* ---- showcase overrides ------------------------------------------------------
+   Override: version tabs wrap and meet the 44px tap minimum so a second report never
+   hides behind a horizontal scroll (playbook §5.2). */
+.crv .hrv-tabs { flex-wrap: wrap; overflow: visible; }
+.crv .hrv-tab { min-height: 44px; }
+/* Override: timeline step labels are words ("The Prophet's discomfort"), not years: wider track, break between words. */
+.crv .hrv-tl > li { grid-template-columns: 96px 1fr; }
+.crv .hrv-tl > li::before { left: 107px; }
+.crv .hrv-tl__year.is-text { letter-spacing: .02em; overflow-wrap: normal; word-break: normal; hyphens: auto; }
+.crv .hrv-sc--compact .hrv-tl > li { grid-template-columns: 84px 1fr; }
+.crv .hrv-sc--compact .hrv-tl > li::before { left: 95px; }
+/* Override: fact rows jump to their source card; show a chevron cue and guarantee a 44px touch target. */
+.crv .hrv-facts a.hrv-facts__go { display: block; min-height: 44px; padding: var(--hrv-s1) 0; }
+.crv .hrv-facts a.hrv-facts__go::after { content: ' \203A' !important; color: var(--hrv-verify); font-weight: 700; }
+/* Override: replace the rotated swap icon (which reads as "1↓" on phones) with a clear "vs." label. */
+.crv .hrv-vs__div .hrv-icon { display: none; }
+.crv .hrv-vs__div::after { content: 'vs.'; font: 700 .74rem/1 var(--hrv-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-ink-2); }
+
+/* ---- anchors & 44px tap targets on shared pieces ----------------------------- */
+/* Zero-height legacy aliases and anchored sections land below the sticky bar. */
+.crv .crv-alias { display: block; height: 0; overflow: hidden; scroll-margin-top: var(--crv-scroll); }
+.crv .crv-item, .crv .crv-panel, .crv .crv-sources { scroll-margin-top: var(--crv-scroll); }
+/* Override: shared .hrv-crumb and .hrv-context are 32px/inline; raise stand-alone links to 44px (playbook §5.2). */
+.crv .hrv-crumb, .crv .hrv-context { min-height: 44px; }
+/* Override: verify chips wrap --hrv-s2 below the quote at 44px height so no source hides behind horizontal scroll. */
+.crv .hrv-verify { flex-wrap: wrap; overflow: visible; margin: var(--hrv-s2) 0 0; padding: 0; }
+.crv .hrv-verify a { min-height: 44px; max-width: 100%; white-space: normal; line-height: 1.3; padding: var(--hrv-s1) var(--hrv-s3); }
+/* Secondary KSU Arabic chip uses an outlined pill to distinguish it from the primary site link. */
+.crv .hrv-verify a.crv-chip-secondary { background: transparent; border: 1px solid var(--hrv-line-strong); color: var(--hrv-ink-2); }
+/* Override: showcase source links are 32px in shared .hrv; raise to 44px while keeping inline text flow so long labels wrap cleanly. */
+.crv .hrv-sc__ref { display: inline-block; min-height: 44px; padding: var(--hrv-s3) 0 0; line-height: 1.2; vertical-align: baseline; }
+
+/* Qurʾānic pause marks (U+06D6–U+06DC) draw on a dotted-circle placeholder in Google-Fonts Amiri;
+   keep them in the DOM (copy, selection, screen readers) but hide them visually. */
+.crv .crv-waqf { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---- chapter page header & sticky bar sheet ---------------------------------- */
+/* Chapter header places the cold-landing context link above the H1 rather than below the hook. */
+.crv-part-head { padding: var(--hrv-s4) 0 0; }
+.crv .crv-context { margin: 0 0 var(--hrv-s1); }
+/* Hide the word "Part" in the sticky bar stepper on very narrow phones (<400px). */
+.crv-bar__word { display: none; }
+@media (min-width: 400px) { .crv-bar__word { display: inline; } }
+/* "On this page" dropdown sheet in the sticky bar for jumping to the chapter's 3 inline items. */
+.crv-sheet { position: relative; }
+.crv-sheet > summary { list-style: none; }
+.crv-sheet > summary::-webkit-details-marker { display: none; }
+.crv-sheet[open] > summary { background: rgba(27, 25, 23, .06); }
+.crv-sheet__panel {
+  position: absolute; right: calc(-1 * var(--hrv-s1)); top: calc(100% + var(--hrv-s2)); z-index: 30; width: min(340px, calc(100vw - var(--hrv-s5)));
+  background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); box-shadow: var(--hrv-shadow); padding: var(--hrv-s3) var(--hrv-s3) var(--hrv-s2);
+}
+.crv-sheet__list { list-style: none; margin: 0; padding: 0; }
+.crv-sheet__list > li { margin: 0; }
+.crv-sheet__list a { display: grid; grid-template-columns: 28px 1fr; gap: var(--hrv-s3); align-items: center; min-height: 48px; padding: var(--hrv-s2) 0; color: var(--hrv-ink); text-decoration: none; font-size: .9rem; line-height: 1.3; border-bottom: 1px solid var(--hrv-line); }
+.crv-sheet__n { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 700 .76rem/1 var(--hrv-sans); border: 1px solid var(--hrv-line-strong); color: var(--hrv-ink-2); }
+.crv-sheet__hub { display: flex; align-items: center; justify-content: space-between; min-height: 44px; color: var(--hrv-verify); font-weight: 650; font-size: .9rem; text-decoration: none; }
+
+/* ---- major sections & inline item -------------------------------------------- */
+/* Major sections on chapter and hub pages open with a strong rule and the page section gap (48px mobile, 64px desktop). */
+.crv .crv-item, .crv .crv-q-sec, .crv .crv-chapter-nav, .crv .hrv-hub-foot {
+  margin-top: var(--crv-section-gap); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line-strong);
+}
+/* Item eyebrow sits beside its 44px permalink copy button without negative margins. */
+.crv-item__top { display: flex; align-items: center; justify-content: space-between; gap: var(--hrv-s2); }
+.crv .crv-item__eyebrow { margin: 0; }
+.crv .crv-copy { color: var(--hrv-ink-2); flex: none; }
+/* Inline item h2 scales between the page H1 and panel H3s. */
+.crv .crv-item__h { font-size: 1.42rem; line-height: 1.22; font-weight: 600; letter-spacing: -.005em; margin: var(--hrv-s1) 0 var(--hrv-s3); }
+@media (min-width: 768px) { .crv .crv-item__h { font-size: 1.6rem; } }
+
+/* ---- provenance strip, hook & takeaway --------------------------------------- */
+/* Provenance strip records where the verse and its occasion are linked before the hook. */
+.crv .crv-prov { margin: 0 0 var(--hrv-s3); font-size: .8rem; line-height: 1.45; color: var(--hrv-ink-2); }
+.crv-prov__row { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--hrv-s1) var(--hrv-s2); }
+.crv .crv-prov dt { font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--hrv-ink-2); margin: 0; }
+.crv .crv-prov dd { margin: 0; font-weight: 600; color: var(--hrv-ink); }
+.crv-prov__sep { color: var(--hrv-ink-2); opacity: .65; }
+.crv-prov__extra { font-weight: 500; color: var(--hrv-ink-2); }
+.crv-chip { display: inline-flex; align-items: center; padding: var(--hrv-s1) var(--hrv-s2); border-radius: 999px; border: 1px solid var(--hrv-line-strong); background: var(--hrv-surface); font-size: .78rem; font-weight: 600; line-height: 1.25; color: var(--hrv-ink); }
+.crv-chip--verse { background: var(--hrv-verify-bg); border-color: transparent; color: var(--hrv-verify-strong); }
+/* Item hook sits directly above the showcase, which supplies its own top margin. */
+.crv .crv-hook { margin: 0; }
+/* Attributed takeaway callout below the showcase. */
+.crv .crv-takeaway {
+  margin: var(--hrv-s5) 0 0; padding: var(--hrv-s1) 0 var(--hrv-s1) var(--hrv-s4); border-left: 3px solid var(--hrv-verify);
+  font-family: var(--hrv-display); font-size: 1.04rem; line-height: 1.55; font-weight: 600; color: var(--hrv-ink);
+}
+
+/* ---- showcase vocabulary & quote strips -------------------------------------- */
+/* Verbatim excerpts inside showcases use typographic quotes and speaker prefixes. */
+.crv q.crv-q { quotes: '“' '”' '‘' '’'; }
+.crv .crv-pre { font-weight: 650; color: var(--hrv-ink-2); }
+.crv .crv-q-ar { white-space: normal; }
+/* Override: shared .hrv-sc__unit uses a negative top margin and muted colour; versions head is a full lead sentence. */
+.crv .hrv-versions__head { color: var(--hrv-ink); font-size: .93rem; line-height: 1.55; margin: 0 0 var(--hrv-s3); }
+/* Verbatim quotation lines beneath a number fan. */
+.crv-sc-lines { list-style: none; margin: var(--hrv-s3) 0 0; padding: 0; display: grid; gap: var(--hrv-s2); font-size: .9rem; line-height: 1.5; }
+.crv-sc-lines > li { margin: 0; padding-left: var(--hrv-s3); border-left: 2px solid var(--hrv-line-strong); }
+/* Labelled sand/slate quote strip accompanying the showcase (who spoke, when, and verbatim lines). */
+.crv-quote { margin: var(--hrv-s4) 0 0; background: var(--hrv-sand); border-left: 3px solid var(--hrv-sand-rule); border-radius: 0 12px 12px 0; padding: var(--hrv-s3) var(--hrv-s4); }
+.crv-quote__who { font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #6b5427; }
+.crv .crv-quote__en { margin: var(--hrv-s2) 0 0; padding: 0; border: 0; font-family: var(--hrv-display); font-size: 1.04rem; line-height: 1.55; color: var(--hrv-ink); }
+.crv .crv-quote__en p { margin: 0; }
+.crv .crv-quote__ar { font-family: var(--hrv-arabic); font-size: 1.3rem; line-height: 1.85; direction: rtl; text-align: right; margin: var(--hrv-s2) 0 0; }
+.crv .crv-quote__src { margin: var(--hrv-s2) 0 0; font-size: .78rem; font-weight: 600; color: #6b5427; }
+.crv-quote--compact { margin: 0 0 var(--hrv-s3); }
+.crv-quote--delay { background: var(--hrv-slate); border-left-color: var(--hrv-slate-rule); }
+.crv-quote--delay .crv-quote__who { color: var(--hrv-ink-2); }
+.crv .crv-quote__arref { margin: 0; }
+/* Sub-row label inside confrontation sides when a comparison has multiple rows. */
+.crv .crv-rowlabel { display: block; margin-top: var(--hrv-s1); font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--hrv-ink-2); }
+
+/* ---- classical & comparing panels -------------------------------------------- */
+/* Stack the classical explanation (shared .hrv-scholar) and the primary-text comparison panel. */
+.crv-panels { display: grid; gap: var(--hrv-s4); margin-top: var(--hrv-s5); }
+.crv .crv-panel--compare { background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-left: 3px solid var(--hrv-verify); border-radius: 0 var(--hrv-radius) var(--hrv-radius) 0; padding: var(--hrv-s4); font-size: .97rem; }
+.crv .crv-panel__h { font-family: var(--hrv-sans); font-size: .9rem; font-weight: 700; margin-bottom: var(--hrv-s2); display: flex; align-items: center; gap: var(--hrv-s2); }
+.crv .crv-panel__h .hrv-icon { color: var(--hrv-verify); }
+
+/* ---- full source cards -------------------------------------------------------
+   Override: cards use uniform --hrv-s4 padding, the quote follows its header with
+   no negative margins, and long narrations clamp cleanly when JS runs. */
+.crv .crv-sources { margin-top: var(--hrv-s6); }
+.crv .crv-sources__h { margin-bottom: var(--hrv-s3); }
+.crv .crv-stage { font-family: var(--hrv-sans); font-size: .86rem; font-weight: 700; line-height: 1.35; color: var(--hrv-ink); margin: var(--hrv-s4) 0 var(--hrv-s2); }
+.crv .crv-ev { padding: var(--hrv-s4); margin-bottom: var(--hrv-s4); }
+.crv-ev__head { display: grid; grid-template-columns: 28px 1fr; gap: var(--hrv-s3); align-items: center; margin-bottom: var(--hrv-s2); }
+.crv-ev__ref { font-family: var(--hrv-display); font-weight: 600; font-size: .98rem; line-height: 1.3; overflow-wrap: anywhere; }
+.crv .crv-ev__quote { margin: 0; }
+.crv .crv-ev__quote .hrv-quote__en { line-height: 1.65; }
+.crv-js .crv-ev__en.is-long { max-height: 12.5em; overflow: hidden; -webkit-mask-image: linear-gradient(#000 65%, transparent); mask-image: linear-gradient(#000 65%, transparent); }
+.crv-js .crv-ev__en.is-long.is-open { max-height: none; -webkit-mask-image: none; mask-image: none; }
+.crv-clamp-btn { display: none; }
+.crv-js .crv-clamp-btn { display: inline-flex; align-items: center; gap: var(--hrv-s1); min-height: 44px; padding: 0; border: 0; background: none; color: var(--hrv-verify); font: 650 .86rem/1 var(--hrv-sans); cursor: pointer; }
+.crv-clamp-btn[aria-expanded="true"] .hrv-icon { transform: rotate(180deg); }
+/* Summary cards (non-verbatim dataset entries) use a dashed paper box instead of sand quote styling. */
+.crv .crv-ev__summary-label { margin: 0 0 var(--hrv-s1); font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--hrv-ink-2); }
+.crv .crv-ev__summary { margin: 0; padding: var(--hrv-s3); font-size: .94rem; line-height: 1.6; background: var(--hrv-paper); border: 1px dashed var(--hrv-line-strong); border-radius: 10px; }
+/* Near-duplicate parallel reports fold inside a lead card. */
+.crv-nested { margin-top: var(--hrv-s3); border-top: 1px solid var(--hrv-line); }
+.crv-nested > summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: var(--hrv-s2); min-height: 44px; cursor: pointer; font: 650 .88rem/1.3 var(--hrv-sans); color: var(--hrv-verify); }
+.crv-nested > summary::-webkit-details-marker { display: none; }
+.crv-nested[open] > summary .hrv-icon { transform: rotate(180deg); }
+.crv .crv-nested .hrv-ev { margin: var(--hrv-s2) 0 0; background: var(--hrv-paper); }
+.crv-drawer__body { padding: var(--hrv-s1) 0 var(--hrv-s2); }
+
+/* ---- item footer & chapter footer -------------------------------------------- */
+/* Quiet aside, next-item card and cross-links at the foot of each inline item. */
+.crv .crv-aside { margin: var(--hrv-s4) 0 0; font-size: .88rem; color: var(--hrv-ink-2); }
+.crv .crv-aside a { display: inline-flex; align-items: center; gap: var(--hrv-s1); min-height: 44px; }
+.crv-next { display: flex; flex-direction: column; gap: var(--hrv-s1); margin: var(--hrv-s5) 0 0; padding: var(--hrv-s4); min-height: 48px; background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); color: var(--hrv-ink); text-decoration: none; }
+.crv-next:hover { border-color: var(--hrv-line-strong); }
+.crv-next__dir { display: inline-flex; align-items: center; gap: var(--hrv-s1); font-size: .74rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--hrv-verify); }
+.crv-next__dir .hrv-icon { width: 14px; height: 14px; }
+.crv-next__title { font-family: var(--hrv-display); font-weight: 600; font-size: 1rem; line-height: 1.3; }
+.crv-cross { list-style: none; margin: var(--hrv-s2) 0 0; padding: 0; }
+.crv-cross > li { margin: 0; }
+.crv-cross a { display: flex; align-items: center; justify-content: space-between; gap: var(--hrv-s3); min-height: 44px; font-size: .88rem; color: var(--hrv-ink-2); text-decoration: none; }
+.crv-cross a:hover { color: var(--hrv-verify); }
+/* Chapter sources disclosure sits --hrv-s5 below the other-chapters list. */
+.crv .crv-chapter-sources { margin-top: var(--hrv-s5); }
+
+/* ---- hub --------------------------------------------------------------------- */
+/* Chapter meta line and one-line takeaway inside hub item rows. */
+.crv .hrv-q__head { margin-bottom: var(--hrv-s1); }
+.crv .crv-chapter-line { margin: 0 0 var(--hrv-s2); font-size: .85rem; color: var(--hrv-ink-2); }
+.crv .crv-chapter-line a { display: inline-flex; align-items: center; gap: var(--hrv-s1); min-height: 44px; color: var(--hrv-verify); font-weight: 650; text-decoration: none; }
+.crv-row__take { display: block; margin-top: var(--hrv-s1); font-size: .82rem; line-height: 1.5; color: var(--hrv-ink-2); }
+.crv-row__start { display: block; margin-bottom: var(--hrv-s1); font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--hrv-verify); }
+.crv .crv-foot-note { margin: var(--hrv-s3) 0 0; font-size: .82rem; color: var(--hrv-ink-2); }
+
+@media print {
+  .crv-bar, .crv-copy, .crv-clamp-btn { display: none; }
+  .crv .crv-ev__en.is-long { max-height: none; -webkit-mask-image: none; mask-image: none; }
+}

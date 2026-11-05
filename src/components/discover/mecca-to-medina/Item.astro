@@ -1,0 +1,89 @@
+---
+/**
+ * One self-contained item of /discover/from-mecca-to-medina. Readers land on `#item-id` from shared
+ * links, so the context line, title, hook and showcase must explain the item on their own.
+ * Skeleton: context line → title + copy link → hook → showcase → takeaway → the texts (evidence cards,
+ * group headings) → tables → collapsed parts (more texts, sīra) → classical explanation → comparing
+ * with the text → next. The item ends on our reading of the texts, after every text has been shown.
+ * Heading outline: section h2 → item title h3 → sub-heads h4 (incl. each collapsed part's summary) →
+ * evidence-card labels h5, or h6 under an h5 group heading.
+ * Context line and next link text come from the model (placeholders checked there).
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import Showcase from './Showcase.astro';
+import Evidence from './Evidence.astro';
+import Table from './Table.astro';
+import { LABELS } from '../../../utils/meccaToMedina/config.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+
+const { it } = Astro.props;
+const cards = it.evidence.filter(e => e.type === 'card').length;
+/** h6 for a card under an h5 group heading, else h5 (no skipped levels before the first group heading). */
+const cardLevel = (list, i) => (list.slice(0, i).some(e => e.type === 'heading') ? 6 : 5);
+---
+<article class={`mm-item${it.isStart ? ' mm-item--start' : ''}`} id={it.id} aria-labelledby={`${it.id}-h`} data-archetype={it.showcase?.type}>
+  {it.legacy.map(a => <span id={a} class="mm-legacy" aria-hidden="true" />)}
+  <header class="mm-item__head">
+    {it.isStart
+      ? <h2 class="hrv-eyebrow hrv-eyebrow--verify mm-ctx">{it.context}</h2>
+      : <p class="hrv-eyebrow mm-ctx"><a href={`#${it.section?.id}`}><span set:html={tl(it.context)} /></a></p>}
+    <div class="mm-item__titlerow">
+      <h3 class="mm-item__title" id={`${it.id}-h`} set:html={it.titleHtml} />
+      <button class="hrv-iconbtn mm-copy" type="button" data-mm-copy={it.id} aria-label={LABELS.copyItemLink} aria-describedby={`${it.id}-h`} title={LABELS.copyItemLink}><Icon name="link" /></button>
+    </div>
+    <p class="hrv-hook mm-hook" set:html={it.hookHtml} />
+  </header>
+
+  {it.showcase && <Showcase sc={it.showcase} />}
+
+  <p class="mm-takeaway" set:html={it.takeawayHtml} />
+
+  {(cards > 0 || it.tables.length > 0) && (
+    <div class="mm-sub">
+      {cards > 0 && <h4 class="hrv-eyebrow mm-sub__h">{LABELS.sources}</h4>}
+      {it.evidence.map((e, i) => (e.type === 'heading'
+        ? <h5 class="mm-evgroup" set:html={e.html} />
+        : <Evidence e={e} level={cardLevel(it.evidence, i)} />))}
+      {it.tables.map(t => <Table t={t} />)}
+    </div>
+  )}
+
+  {it.collapsed.length > 0 && (
+    <div class="mm-parts">
+      {it.collapsed.map(c => (
+        <details class="hrv-disclosure mm-part" id={c.id}>
+          <summary>
+            <h4 class="mm-part__sum mm-part__h"><span set:html={c.headingHtml} />{c.badge && <><span class="hrv-sr"> · </span><span class="mm-tag mm-tag--sira">{c.badge}</span></>}</h4>
+            <Icon name="chevronDown" />
+          </summary>
+          <div class="hrv-disclosure__body mm-part__body">
+            {c.showcase && <Showcase sc={c.showcase} />}
+            {c.bodyHtml && <div class="mm-prose" set:html={c.bodyHtml} />}
+            {c.evidence.map((e, i) => (e.type === 'heading' ? <h5 class="mm-evgroup" set:html={e.html} /> : <Evidence e={e} level={cardLevel(c.evidence, i)} />))}
+            {c.print.length > 0 && (
+              <div class="mm-print">
+                <p class="mm-print__h">{LABELS.printNote}</p>
+                <ul>{c.print.map(p => <li set:html={p.html} />)}</ul>
+              </div>
+            )}
+          </div>
+        </details>
+      ))}
+    </div>
+  )}
+
+  {it.classicalHtml && (
+    <div class="hrv-scholar mm-block">
+      <h4 class="hrv-scholar__h"><Icon name="quote" />{LABELS.classical}</h4>
+      <div class="mm-block__body" set:html={it.classicalHtml} />
+    </div>
+  )}
+  {it.comparisonHtml && (
+    <div class="hrv-eval mm-block">
+      <h4 class="hrv-eval__h"><Icon name="search" />{LABELS.comparison}</h4>
+      <div class="mm-block__body" set:html={it.comparisonHtml} />
+    </div>
+  )}
+
+  {it.nextHref && <a class="mm-next" href={it.nextHref}><span set:html={tl(it.nextText)} /><span aria-hidden="true">↓</span></a>}
+</article>

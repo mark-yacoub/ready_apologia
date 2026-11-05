@@ -16,4 +16,4 @@ const fmtYear = y => (y == null ? '' : typeof y === 'number' ? (y < 0 ? `${-y} B
       {sc.gapHtml && i === gapIndex && <li aria-hidden="true" style="display:block;padding:0"><div class="hrv-tl__gap" set:html={sc.gapHtml} /></li>}
     </>
   ))}
-</ol>
+</ol>{sc.noteHtml && !compact && <p class="hrv-sc__note" set:html={sc.noteHtml} />}

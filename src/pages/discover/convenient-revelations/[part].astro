@@ -1,0 +1,73 @@
+---
+/**
+ * One chapter of "12 occasions of revelation" (URL slug kept: /discover/convenient-revelations/<part>).
+ * Sticky bar → cold-landing context line → H1 → dek → 3 self-contained items → pager → other chapters →
+ * sources cited in this chapter. Every item must stand on its own: readers land on `#id` from shared links.
+ */
+import Layout from '../../../layouts/Layout.astro';
+import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
+import SourcesList from '../../../components/discover/hadith-reliability/SourcesList.astro';
+import PartBar from '../../../components/discover/convenient-revelations/PartBar.astro';
+import Item from '../../../components/discover/convenient-revelations/Item.astro';
+import ChapterNav from '../../../components/discover/convenient-revelations/ChapterNav.astro';
+import { loadConvenientRevelations } from '../../../utils/convenientRevelations/model.js';
+import { BASE_PATH, LABELS, OG_IMAGE, ARTICLE_NAME, ANALYTICS_ARTICLE } from '../../../utils/convenientRevelations/config.js';
+import { partSchema } from '../../../utils/convenientRevelations/schema.js';
+import { tl, createRenderer } from '../../../utils/hadithReliability/render.js';
+import '../../../styles/hadith-reliability.css';
+import '../../../styles/convenient-revelations.css';
+
+export function getStaticPaths() {
+  const model = loadConvenientRevelations();
+  return model.parts.map(part => ({ params: { part: part.slug }, props: { slug: part.slug } }));
+}
+
+const { slug } = Astro.props;
+const model = loadConvenientRevelations();
+const part = model.parts.find(p => p.slug === slug);
+const totalItems = model.items.length;
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${site}${part.href}`;
+const context = LABELS.coldContext.replace('{n}', part.number).replace('{total}', part.total).replace('{name}', ARTICLE_NAME);
+const md = createRenderer({ rootLinks: true });
+---
+<Layout
+  title={part.seo.title}
+  description={part.seo.description}
+  keywords={part.seo.keywords || undefined}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  ogImage={OG_IMAGE || undefined}
+  ogType="article"
+  schema={partSchema({ site, part })}
+  showOnboarding={false}
+>
+  <RouteAnalytics eventName="discover_article_view" params={{ article: ANALYTICS_ARTICLE, page: part.slug }} />
+  <div class="hrv crv crv-part" data-part={part.slug}>
+    <PartBar part={part} hubHref={BASE_PATH} totalItems={totalItems} />
+    <div class="hrv-wrap">
+      <header class="crv-part-head">
+        <a class="hrv-context crv-context" href={BASE_PATH}><span set:html={tl(context)} /><Icon name="chevronRight" /></a>
+        <h1 class="hrv-case-h1 crv-h1" set:html={tl(part.h1)} />
+        <p class="hrv-hook crv-dek" set:html={md.inline(part.dek)} />
+      </header>
+
+      {part.items.map(item => <Item item={item} />)}
+
+      <div class="hrv-sec crv-chapter-nav">
+        <ChapterNav part={part} parts={model.parts} hubHref={BASE_PATH} totalItems={totalItems} />
+      </div>
+
+      <section class="hrv-sec crv-chapter-sources" id="sources" aria-labelledby="chapter-sources-h">
+        <details class="hrv-disclosure">
+          <summary><span id="chapter-sources-h">{LABELS.chapterSources}</span><span class="hrv-disclosure__meta">{part.sourceGroups.reduce((n, g) => n + g.items.length, 0)}</span><Icon name="chevronDown" /></summary>
+          <div class="hrv-disclosure__body"><SourcesList groups={part.sourceGroups} /></div>
+        </details>
+      </section>
+    </div>
+    <div class="hrv-toast" role="status" aria-live="polite" data-crv-toast data-copied={LABELS.copied} data-failed={LABELS.copyFailed}>{LABELS.copied}</div>
+  </div>
+  <script src="../../../components/discover/hadith-reliability/client.js"></script>
+  <script src="../../../components/discover/convenient-revelations/client.js"></script>
+</Layout>

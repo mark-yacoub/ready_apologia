@@ -1,8 +1,13 @@
 ---
-/** Fallback showcase until the dataset supplies one: the case's key findings, each jumping to its evidence. */
+/**
+ * Fallback showcase until the dataset supplies one: the case's key findings, each jumping to its evidence.
+ * An item without an `anchor` is a quotation that cites its own source instead (its `ref` is shown; links
+ * never nest). Items with an anchor never show their ref: the evidence card they jump to carries it.
+ */
+import Ref from './Ref.astro';
 const { sc, compact = false } = Astro.props;
 const items = compact ? sc.items.slice(0, 2) : sc.items;
 ---
 <ol class="hrv-facts">
-  {items.map(it => <li>{compact ? <span set:html={it.html} /> : <a class="hrv-facts__go" href={`#${it.anchor}`} set:html={it.html} />}</li>)}
-</ol>
+  {items.map(it => <li>{compact ? <span set:html={it.html} /> : (it.href || it.anchor) ? <a class="hrv-facts__go" href={it.href || `#${it.anchor}`} set:html={it.html} /> : <div><span set:html={it.html} />{it.ref && <div><Ref ref={it.ref} /></div>}</div>}</li>)}
+</ol>{sc.noteHtml && !compact && <p class="hrv-sc__note" set:html={sc.noteHtml} />}

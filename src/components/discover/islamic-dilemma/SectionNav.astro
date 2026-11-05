@@ -1,0 +1,20 @@
+---
+/**
+ * Sticky section bar: back to Discover · section chips (anchor links, horizontally scrollable with a
+ * right-edge fade on phones) · copy link. The active chip is set by client.js (no URL rewriting).
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+const { sections, labels, backHref } = Astro.props;
+---
+<nav class="idl-nav" aria-label={labels.navAria} data-idl-nav>
+  <a class="hrv-iconbtn idl-nav__back" href={backHref} aria-label={labels.back} title={labels.back}><Icon name="chevronLeft" /></a>
+  <div class="idl-nav__track" data-idl-track>
+    <ol class="idl-nav__list">
+      {sections.map(s => (
+        <li><a class="idl-nav__chip" href={`#${s.id}`} data-idl-chip={s.id}><span class="idl-nav__n" aria-hidden="true">{s.n}</span>{s.nav}</a></li>
+      ))}
+    </ol>
+  </div>
+  <button class="hrv-iconbtn idl-nav__copy" type="button" data-idl-copy aria-label={labels.copyLink} title={labels.copyLink}><Icon name="link" /></button>
+</nav>
+<div class="hrv-toast" role="status" aria-live="polite" data-idl-toast>{labels.copied}</div>

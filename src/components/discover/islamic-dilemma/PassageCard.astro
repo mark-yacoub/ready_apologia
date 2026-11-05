@@ -1,0 +1,35 @@
+---
+/**
+ * One Gospel passage (§2): topic → reference → NASB text → "N of M copies before 610" → the
+ * pre-610 copies by name and date → collapsed manuscript scans (hydrated only when opened) → chips.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import LazyCarousel from './LazyCarousel.jsx';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { p, labels } = Astro.props;
+---
+<article class="idl-passage" id={p.anchor}>
+  <header class="idl-passage__head">
+    <span class="idl-passage__topic">{p.topic}</span>
+    <h3 class="idl-passage__ref">{p.refLabel}</h3>
+  </header>
+  {p.badge && <p class="idl-badge" set:html={tl(p.badge)} />}
+  <blockquote class="hrv-quote idl-passage__q"><p class="hrv-quote__en" set:html={`“${p.quoteHtml}”`} /></blockquote>
+  <p class="idl-count"><Icon name="timeline" /><span>{p.countLabel}</span></p>
+  {p.preList.length > 0 && (
+    <ul class="idl-prelist">
+      {p.preList.map(x => <li><span set:html={tl(x.name)} /> <span class="idl-prelist__d">{x.range}</span></li>)}
+    </ul>
+  )}
+  <details class="hrv-disclosure idl-scans">
+    <summary><span>{p.scansSummary}</span><Icon name="chevronDown" /></summary>
+    <div class="idl-scans__body">
+      <LazyCarousel client:visible manuscripts={p.manuscripts} verseId={p.verseId} verseLabel={p.ref} isNT={true} loadingLabel={labels.scansLoading} />
+    </div>
+  </details>
+  <div class="hrv-verify" aria-label="Check the sources for this passage">
+    {p.chips.map(ch => (
+      <a href={ch.href} {...ch.attrs}><span set:html={tl(ch.label)} /><Icon name="chevronRight" /></a>
+    ))}
+  </div>
+</article>

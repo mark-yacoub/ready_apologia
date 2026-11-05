@@ -1,0 +1,170 @@
+/* ==========================================================================
+   /discover/quran-preservation: a thin layer on the hadith-reliability
+   design system. Everything is scoped to `.hrv.qp`; nothing here leaks.
+   Shared look (paper/ink, teal = verifiable, sand = primary-source quotations,
+   slate = scholars' voice, no red) comes from hadith-reliability.css, along with
+   the default spacing of every shared component (hero, quote, scholar, eval,
+   showcase, disclosure, table, sources). This file only:
+     1. sets the page's section gap on the shared spacing scale (below), and
+     2. overrides the shared defaults where this page differs, each with its reason.
+   If a value here matches the shared default, delete it. Mobile-first.
+   ========================================================================== */
+
+/* ---- spacing & scroll container ----------------------------------------------
+   Margins, padding and gaps use the shared --hrv-s1…s8 scale (hadith-reliability.css).
+   position: relative keeps visually hidden table headers (.hrv-sr) inside .main-content
+   so #anchor jumps never scroll the outer frame (QP review P0). */
+.hrv.qp {
+  position: relative;
+  overflow-wrap: break-word;
+  --qp-section-gap: var(--hrv-s7);
+  --qp-scroll: calc(var(--hrv-bar-h) + var(--hrv-s3));
+}
+@media (min-width: 768px) { .hrv.qp { --qp-section-gap: var(--hrv-s8); } }
+
+/* ---- sticky bar + "On this page" index ---------------------------------------
+   Override: replaces the multi-page prev/next stepper in .hrv-bar with a centred
+   single-page <details> table of contents that drops down over the article. */
+.qp-bar { gap: var(--hrv-s1); }
+.qp-index { justify-self: center; min-width: 0; }
+.qp-index__sum {
+  list-style: none; display: inline-flex; align-items: center; gap: var(--hrv-s1); min-height: 44px; padding: 0 var(--hrv-s3);
+  border-radius: 999px; cursor: pointer; font: 650 .88rem/1 var(--hrv-sans); color: var(--hrv-ink); white-space: nowrap;
+}
+.qp-index__sum::-webkit-details-marker { display: none; }
+.qp-index__sum:hover { background: rgba(27, 25, 23, .05); }
+.qp-index__sum .hrv-icon { width: 16px; height: 16px; color: var(--hrv-ink-2); transition: transform .2s; }
+.qp-index[open] .qp-index__sum .hrv-icon { transform: rotate(180deg); }
+.qp-index__panel {
+  position: absolute; top: 100%; left: 0; right: 0; z-index: 30;
+  max-height: calc(100dvh - var(--hrv-bar-h)); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--hrv-paper); border-bottom: 1px solid var(--hrv-line); box-shadow: var(--hrv-shadow);
+  padding: var(--hrv-s2) var(--hrv-inset) var(--hrv-s4);
+}
+.qp-index__groups, .qp-index__items { list-style: none; margin: 0; padding: 0; }
+.qp-index__groups { max-width: 680px; margin: 0 auto; }
+.qp-index__groups > li { margin: 0; padding: var(--hrv-s2) 0 var(--hrv-s1); }
+.qp-index__groups > li + li { border-top: 1px solid var(--hrv-line); }
+.hrv .qp-index__q { display: flex; gap: var(--hrv-s2); align-items: center; margin: 0; min-height: 44px; font: 700 .74rem/1.35 var(--hrv-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-ink-2); }
+.qp-index__q a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; }
+.qp-index__qn { color: var(--hrv-verify); font-variant-numeric: tabular-nums; }
+.qp-index__items > li { margin: 0; }
+.qp-index__items a, .qp-index__tail a {
+  display: grid; grid-template-columns: 26px 1fr; gap: var(--hrv-s2); align-items: center; min-height: 44px; padding: var(--hrv-s2) 0;
+  color: var(--hrv-ink); text-decoration: none; font-family: var(--hrv-display); font-size: .95rem; line-height: 1.3;
+}
+.qp-index__items a:hover, .qp-index__tail a:hover { color: var(--hrv-verify); }
+.qp-index__n { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font: 700 .72rem/1 var(--hrv-sans); color: var(--hrv-ink-2); border: 1px solid var(--hrv-line-strong); font-variant-numeric: tabular-nums; }
+.qp-index__tail a { display: flex; font-family: var(--hrv-sans); font-weight: 650; font-size: .9rem; color: var(--hrv-verify); }
+
+/* ---- hero + major sections ---------------------------------------------------
+   Hero padding comes from the shared .hrv-hero.
+   Body and intro paragraphs use a comfortable 1.68 reading line-height across the page. */
+.hrv.qp .hrv-intro, .hrv.qp .hrv-hook, .hrv.qp .qp-dek, .hrv.qp .qp-primer__body, .hrv.qp .qp-block, .hrv.qp .qp-reflection__body { line-height: 1.68; }
+/* Zero-height anchor targets for legacy #stage-N URLs land below the sticky bar. */
+.qp-legacy { display: block; height: 0; overflow: hidden; scroll-margin-top: var(--qp-scroll); }
+/* Major sections open with a strong rule and the page section gap (48px mobile, 64px desktop). */
+.qp-item--start, .qp-q, .qp-summary, .qp-sources, .qp-closing {
+  margin-top: var(--qp-section-gap); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line-strong); scroll-margin-top: var(--qp-scroll);
+}
+.hrv .qp-dek { font-size: .95rem; color: var(--hrv-ink-2); margin: 0; }
+.qp-dek__ref { white-space: nowrap; font-size: .85rem; }
+/* Back-link in Question 1 pointing up to item 1 ("Start here") at a 44px tap target. */
+.qp-backlink {
+  display: inline-flex; align-items: center; gap: var(--hrv-s2); min-height: 44px; margin-top: var(--hrv-s1);
+  font-size: .9rem; font-weight: 600; color: var(--hrv-verify); text-decoration: none;
+}
+.qp-backlink:hover { color: var(--hrv-verify-strong); text-decoration: underline; }
+
+/* ---- items -------------------------------------------------------------------
+   Self-contained anchored items inside a question section are separated by a light rule;
+   the first item in a section sits directly under the section header without a second rule. */
+.qp-item:not(.qp-item--start) { margin-top: var(--hrv-s6); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line); scroll-margin-top: var(--qp-scroll); }
+.qp-q > .qp-item:first-of-type { margin-top: var(--hrv-s5); padding-top: 0; border-top: 0; }
+/* Cold-landing context eyebrow link keeps a full 44px tap target without negative margins. */
+.hrv .qp-ctx { margin-bottom: var(--hrv-s1); }
+.qp-ctx a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; }
+.qp-ctx a:hover { color: var(--hrv-ink); text-decoration: underline; }
+/* Item title sits beside its 44px permalink copy button. */
+.qp-item__titlerow { display: grid; grid-template-columns: 1fr 44px; gap: var(--hrv-s2); align-items: start; margin-bottom: var(--hrv-s3); }
+.hrv .qp-item__title { font-size: 1.4rem; line-height: 1.22; font-weight: 600; letter-spacing: -.005em; padding-top: var(--hrv-s2); }
+@media (min-width: 768px) { .hrv .qp-item__title { font-size: 1.55rem; } }
+.qp-copy { color: var(--hrv-ink-2); }
+/* Background primer before a showcase (e.g. what the qirāʾāt are): slate voice like .hrv-scholar. */
+.qp-primer { margin: var(--hrv-s4) 0 0; padding: var(--hrv-s4); border-left: 3px solid var(--hrv-slate-rule); border-radius: 0 var(--hrv-radius) var(--hrv-radius) 0; background: var(--hrv-slate); font-size: .95rem; }
+.hrv .qp-primer__h { margin: 0 0 var(--hrv-s2); font-family: var(--hrv-sans); font-size: .82rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-ink-2); }
+/* Attributed takeaway callout below the showcase. */
+.hrv .qp-takeaway {
+  margin: var(--hrv-s4) 0 0; padding: var(--hrv-s1) 0 var(--hrv-s1) var(--hrv-s4); border-left: 3px solid var(--hrv-ink);
+  font-size: .98rem; line-height: 1.65; font-weight: 500; color: var(--hrv-ink);
+}
+/* Evidence list, scholar/evaluation blocks, app deep links, and next-item link step down by --hrv-s5 (24px). */
+.qp-sub, .qp-block, .qp-applinks { margin-top: var(--hrv-s5); }
+.hrv .qp-sub__h { margin-bottom: var(--hrv-s3); }
+.qp-more { margin: 0 0 var(--hrv-s2); }
+.qp-more > summary { color: var(--hrv-verify); }
+.qp-more__body { padding-top: var(--hrv-s3); }
+.qp-applinks ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--hrv-s1); }
+.qp-applink { display: inline-flex; align-items: center; gap: var(--hrv-s2); min-height: 44px; font-weight: 600; }
+.qp-next {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--hrv-s3); min-height: 48px; margin-top: var(--hrv-s5); padding: var(--hrv-s3) var(--hrv-s4);
+  border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); background: var(--hrv-surface);
+  color: var(--hrv-ink); text-decoration: none; font-size: .9rem; font-weight: 600; line-height: 1.35;
+}
+.qp-next > span:last-child { color: var(--hrv-verify); font-size: 1.05rem; }
+.qp-next:hover { border-color: var(--hrv-line-strong); }
+
+/* ---- evidence cards ----------------------------------------------------------
+   Override: cards use uniform --hrv-s4 padding, the quote follows its header/note with
+   no negative margins, and verify chips wrap --hrv-s2 below the quote at 44px height. */
+.qp .hrv-ev { padding: var(--hrv-s4); margin-bottom: var(--hrv-s4); }
+.qp .hrv-ev__body:not(:empty) { margin-bottom: var(--hrv-s2); line-height: 1.6; color: var(--hrv-ink-2); }
+.qp .hrv-quote { margin: 0; }
+.qp .hrv-quote__en { line-height: 1.65; }
+.qp .hrv-verify { flex-wrap: wrap; overflow: visible; gap: var(--hrv-s2); margin: var(--hrv-s2) 0 0; padding: 0; }
+.qp .hrv-verify a { min-height: 44px; }
+
+/* ---- showcase & table vocabulary ---------------------------------------------
+   Override: 44px tap targets on showcase links/tabs/facts, container gap for multi-row
+   redlines, and stacked witness cards so no turn sits off-screen (playbook §5.2). */
+.qp .hrv-sc__ref { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
+.qp .hrv-vs__list .hrv-sc__ref { display: flex; width: fit-content; }
+.qp .hrv-tabs { flex-wrap: wrap; overflow: visible; }
+.qp .hrv-tab { min-height: 44px; }
+.qp .hrv-facts__go { display: flex; align-items: center; min-height: 44px; }
+.qp .hrv-sc--redline { display: grid; gap: var(--hrv-s3); }
+.qp .hrv-sc--redline > .hrv-sc__cap, .qp .hrv-sc--redline > .hrv-sc__note { margin: 0; }
+.qp-item .hrv-sc__note .hrv-ar-inline { display: block; text-align: right; margin-bottom: var(--hrv-s1); }
+.qp-item .hrv-vs__list .hrv-ar-inline { display: block; text-align: right; }
+.qp-item .hrv-redline__tag .hrv-sc__ref { text-transform: none; letter-spacing: 0; }
+.qp-item .hrv-wit { flex-direction: column; gap: var(--hrv-s3); overflow: visible; scroll-snap-type: none; margin: 0; padding: 0; }
+.qp-item .hrv-wit__card { flex: 0 0 auto; }
+.qp-item .hrv-wit__hint { display: none; }
+.qp-gloss { color: var(--hrv-ink-2); }
+.qp-saw { font-family: var(--hrv-arabic); font-style: normal; line-height: 1; }
+.qp-yes { font-weight: 650; color: var(--hrv-verify-strong); }
+.qp-no { color: var(--hrv-ink-2); }
+.qp-count { display: inline-block; margin-left: var(--hrv-s1); font-size: .75rem; font-weight: 700; padding: 0 var(--hrv-s2); border-radius: 999px; background: var(--hrv-paper); border: 1px solid var(--hrv-line); color: var(--hrv-ink-2); }
+
+/* ---- figures -----------------------------------------------------------------
+   Two-column manuscript comparison grid on wide screens, stacked on phones. */
+.qp-figs { display: grid; gap: var(--hrv-s3); margin-top: var(--hrv-s4); }
+@media (min-width: 768px) { .qp-figs { grid-template-columns: 1fr 1fr; } }
+.qp-fig { margin: 0; background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); overflow: hidden; }
+.qp-fig img { display: block; width: 100%; height: auto; max-height: 22.5rem; object-fit: cover; background: var(--hrv-sand); }
+.qp-fig figcaption { padding: var(--hrv-s2) var(--hrv-s3); font-size: .8rem; line-height: 1.4; color: var(--hrv-ink-2); }
+.qp-fig__credit { display: block; margin-top: var(--hrv-s1); }
+
+/* ---- closing section ---------------------------------------------------------
+   Disclosed Christian reflection and cross-pointer to /discover/hadith-reliability. */
+.hrv .qp-disclosure { font-size: .9rem; line-height: 1.6; color: var(--hrv-ink-2); margin: 0 0 var(--hrv-s2); }
+.qp-reflection__body { font-family: var(--hrv-display); font-size: 1rem; }
+.qp-cross {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--hrv-s3); min-height: 48px; margin-top: var(--hrv-s4);
+  color: var(--hrv-verify); text-decoration: none; font-weight: 600; font-size: .95rem; line-height: 1.4;
+}
+.qp-cross:hover { color: var(--hrv-verify-strong); text-decoration: underline; }
+
+@media print {
+  .qp-index, .qp-copy, .qp-next, .qp-backlink { display: none; }
+}

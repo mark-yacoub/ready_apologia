@@ -1,0 +1,17 @@
+---
+/**
+ * Section opening: old-id alias anchors (shared links from the previous page land here without JS) →
+ * number (the five accounts only; the closing method section has an icon, not a number) →
+ * reader-question heading (h2) → cold-landing context line back to the top of the page.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+const { s, context, topHref = '#top' } = Astro.props;
+---
+{s.aliases.map(a => <span id={a} class="orv-alias" aria-hidden="true"></span>)}
+<div class="hrv-q__head orv-sec__head">
+  {s.isItem
+    ? <span class="hrv-q__num" aria-hidden="true">{String(s.n).padStart(2, '0')}</span>
+    : <span class="hrv-q__num orv-sec__mark" aria-hidden="true"><Icon name="scale" /></span>}
+  <h2 class="hrv-q__title" id={`${s.id}-h`} set:html={s.h2Html} />
+</div>
+{context && <a class="hrv-context orv-context" href={topHref}><span>{context}</span><Icon name="chevronRight" /></a>}

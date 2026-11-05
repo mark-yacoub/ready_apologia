@@ -1,0 +1,47 @@
+---
+/** Bottom of a chapter page: previous / next chapter pager, then the other chapters. */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+import { LABELS } from '../../../utils/convenientRevelations/config.js';
+const { part, parts, hubHref, totalItems } = Astro.props;
+const others = parts.filter(p => p.slug !== part.slug);
+---
+<nav class="hrv-pager crv-pager" aria-label={LABELS.chapterPager}>
+  {part.prev ? (
+    <a class="hrv-pager__link hrv-pager__link--prev" href={part.prev.href} rel="prev">
+      <span class="hrv-pager__dir"><Icon name="chevronLeft" />{LABELS.partOf.replace('{n}', part.prev.number).replace('{total}', part.total)}</span>
+      <span class="hrv-pager__title" set:html={tl(part.prev.label)} />
+    </a>
+  ) : (
+    <a class="hrv-pager__link hrv-pager__link--prev" href={hubHref}>
+      <span class="hrv-pager__dir"><Icon name="chevronLeft" />{LABELS.allItems.replace('{n}', totalItems)}</span>
+      <span class="hrv-pager__title">{LABELS.allItemsLong.replace('{n}', totalItems)}</span>
+    </a>
+  )}
+  {part.next ? (
+    <a class="hrv-pager__link hrv-pager__link--next" href={part.next.href} rel="next">
+      <span class="hrv-pager__dir">{LABELS.partOf.replace('{n}', part.next.number).replace('{total}', part.total)}<Icon name="chevronRight" /></span>
+      <span class="hrv-pager__title" set:html={tl(part.next.label)} />
+    </a>
+  ) : (
+    <a class="hrv-pager__link hrv-pager__link--next" href={hubHref}>
+      <span class="hrv-pager__dir">{LABELS.lastChapter}<Icon name="chevronRight" /></span>
+      <span class="hrv-pager__title">{LABELS.backToAll.replace('{n}', totalItems)}</span>
+    </a>
+  )}
+</nav>
+
+<section class="hrv-sec" aria-labelledby="other-chapters-h">
+  <h2 class="hrv-eyebrow" id="other-chapters-h">{LABELS.otherChapters}</h2>
+  <ul class="hrv-rows hrv-explore">
+    {others.map(p => (
+      <li>
+        <a class="hrv-row" href={p.href}>
+          <span class="hrv-row__num hrv-row__num--q">{String(p.number).padStart(2, '0')}</span>
+          <span><span class="hrv-row__title" set:html={tl(p.label)} /><span class="hrv-badges"><span set:html={tl(p.question)} /><span>{LABELS.itemsCount.replace('{n}', p.items.length)}</span></span></span>
+          <span class="hrv-row__chev"><Icon name="chevronRight" /></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

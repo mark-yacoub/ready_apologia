@@ -1,0 +1,35 @@
+---
+/**
+ * One quotation (hrv evidence-card classes, lighter frame): number (open cards only) → speaker /
+ * context label (h4) → one attributed note → the quotation (sand; Arabic first when present) →
+ * verify chips → "also quoted in section n" for deliberate repeats.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { e, verifyAria } = Astro.props;
+---
+<article class="hrv-ev orv-card" id={e.anchor}>
+  <header class="hrv-ev__head">
+    {e.n != null && <span class="hrv-ev__n" aria-hidden="true">{e.n}</span>}
+    <h4 class="hrv-ev__label" set:html={e.labelHtml} />
+  </header>
+  {e.noteHtml && <p class="orv-card__note" set:html={e.noteHtml} />}
+  {e.quote.arabic ? (
+    <figure class="hrv-quote orv-card__q">
+      <blockquote class="hrv-quote__ar" lang="ar" dir="rtl">{e.quote.arabic}</blockquote>
+      <figcaption><p class="hrv-quote__en" set:html={e.quote.englishHtml} /></figcaption>
+    </figure>
+  ) : (
+    <blockquote class="hrv-quote orv-card__q">
+      {e.quote.lang === 'ar'
+        ? <p class="hrv-quote__ar orv-card__ar" lang="ar" dir="rtl" set:html={e.quote.html} />
+        : <p class="hrv-quote__en" set:html={e.quote.html} />}
+    </blockquote>
+  )}
+  <div class="hrv-verify" role="group" aria-label={verifyAria}>
+    {e.chips.map(ch => (
+      <a href={ch.href} {...ch.attrs} title={ch.title}><span set:html={tl(ch.label)} /><Icon name={ch.external ? 'external' : 'chevronRight'} /></a>
+    ))}
+  </div>
+  {e.repeatHtml && <p class="orv-card__repeat" set:html={e.repeatHtml} />}
+</article>

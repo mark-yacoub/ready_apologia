@@ -1,0 +1,55 @@
+---
+/**
+ * One Qurʾān passage on /quranic-witness. Skeleton: head → showcase → the verse (Droge, verbatim,
+ * every āya of a range) with chips to the site's tafsir pages → what the commentators say (repo
+ * verbatim excerpts) → takeaway → related verses (Q4) → classical / comparing → see also → next.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import Showcase from '../hadith-reliability/showcase/Showcase.astro';
+import ItemHead from './ItemHead.astro';
+import ItemFoot from './ItemFoot.astro';
+import Chips from './Chips.astro';
+import { LABELS } from '../../../utils/muhammadSlavery/config.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { it } = Astro.props;
+---
+<article class="ms-item ms-item--verse" id={it.id} aria-labelledby={`${it.id}-h`} data-archetype={it.showcase?.type || 'facts'}>
+  <ItemHead it={it} />
+  {it.showcase && <Showcase sc={it.showcase} id={it.showcase.id} label={it.showcase.caption} level={4} />}
+  {it.showcase?.hasMark && <p class="ms-hl">{LABELS.highlightingOurs}</p>}
+  {it.tabariNote?.inShowcase && <p class="ms-tnote" set:html={tl(it.tabariNote.text)} />}
+  <figure class="ms-verse" id={`${it.id}-verse`}>
+    <p class="ms-key__cap">{LABELS.theVerse} <span class="ms-key__sub">· {LABELS.drogeNote}</span></p>
+    {it.ayat.map(a => <p class="ms-verse__text"><span class="ms-verse__n">{a.key}</span> {a.text}</p>)}
+    <Chips chips={it.chips} />
+  </figure>
+  {it.takeawayHtml && <p class="ms-takeaway" set:html={it.takeawayHtml} />}
+  {it.commentators.length > 0 && (
+    <details class="hrv-disclosure ms-reports" id={`${it.id}-tafsir-h`}>
+      <summary><span>{LABELS.commentators} ({it.commentators.length})</span><Icon name="chevronDown" /></summary>
+      <div class="ms-reports__body">
+        {it.tabariNote && !it.tabariNote.inShowcase && <p class="ms-tnote" set:html={tl(it.tabariNote.text)} />}
+        {it.commentators.map(c => (
+          <figure class="ms-tafsir">
+            <figcaption class="ms-tafsir__who"><span set:html={c.nameHtml} /> <small set:html={c.lineHtml} /></figcaption>
+            {c.leadHtml && <p class="ms-tafsir__lead" set:html={c.leadHtml} />}
+            <blockquote class="ms-tafsir__q" set:html={c.html} />
+            <Chips chips={[c.link]} />
+          </figure>
+        ))}
+      </div>
+    </details>
+  )}
+  {it.related && (
+    <details class="hrv-disclosure ms-reports ms-relverses" id={`${it.id}-rel-h`}>
+      <summary><span set:html={it.related.titleHtml} /><Icon name="chevronDown" /></summary>
+      <div class="ms-reports__body">
+        {it.related.introHtml && <p class="ms-context" set:html={it.related.introHtml} />}
+        <ul class="ms-relverses__list">
+          {it.related.items.map(r => <li>{r.leadHtml && <p class="ms-tafsir__lead" set:html={r.leadHtml} />}<blockquote class="ms-text__q" set:html={r.html} /><Chips chips={[r.ref]} /></li>)}
+        </ul>
+      </div>
+    </details>
+  )}
+  <ItemFoot it={it} />
+</article>

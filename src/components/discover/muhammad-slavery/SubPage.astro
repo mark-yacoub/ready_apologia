@@ -1,0 +1,76 @@
+---
+/**
+ * Shared shell of the three sub-pages (hadith / Qurʾān / answers): Layout + analytics (unchanged
+ * params) → sticky bar with the "On this page" index → hero (crumb to the hub, H1, intro) →
+ * reader-question sections of self-contained anchored items (the answers page is one flat list) →
+ * other parts of the article. Static and stateless; only the two tiny client scripts.
+ */
+import Layout from '../../../layouts/Layout.astro';
+import RouteAnalytics from '../../common/RouteAnalytics.astro';
+import Icon from '../hadith-reliability/Icon.astro';
+import PageBar from './PageBar.astro';
+import OtherParts from './OtherParts.astro';
+import HadithItem from './HadithItem.astro';
+import VerseItem from './VerseItem.astro';
+import AnswerItem from './AnswerItem.astro';
+import { loadMuhammadSlavery } from '../../../utils/muhammadSlavery/loader.js';
+import { ANALYTICS, ANALYTICS_EVENT, LABELS, OG_IMAGE, PAGE_PATHS } from '../../../utils/muhammadSlavery/config.js';
+import { pageSchema } from '../../../utils/muhammadSlavery/schema.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+import '../../../styles/hadith-reliability.css';
+import '../../../styles/muhammad-slavery.css';
+
+const { pageKey } = Astro.props;
+const model = loadMuhammadSlavery();
+const page = model.pages[pageKey];
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+// PAGE_PATHS already include the site base.
+const canonicalURL = `${site}${page.path}`;
+const ogImage = `${site}${OG_IMAGE}`;
+const pad = n => String(n).padStart(2, '0');
+const Item = { hadith: HadithItem, quran: VerseItem, answers: AnswerItem }[pageKey];
+---
+<Layout
+  title={page.seo.title}
+  description={page.seo.description}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  ogImage={ogImage}
+  ogType="article"
+  keywords=""
+  schema={pageSchema({ site, model, key: pageKey, image: ogImage })}
+  showOnboarding={false}
+>
+  <RouteAnalytics eventName={ANALYTICS_EVENT} params={ANALYTICS[pageKey]} />
+  <div class={`hrv ms ms--${pageKey}`} data-ms>
+    <PageBar page={page} />
+    <div class="hrv-wrap">
+      <header class="hrv-hero ms-hero" id="intro">
+        <a class="hrv-crumb" href={PAGE_PATHS.hub}><Icon name="chevronLeft" />{model.hub.breadcrumb}</a>
+        <h1 class="hrv-h1" set:html={tl(page.h1)} />
+        {page.introHtml && <p class="hrv-intro" set:html={page.introHtml} />}
+      </header>
+
+      {page.sections ? page.sections.map(s => (
+        <section class="hrv-q ms-q" id={s.id} aria-labelledby={`${s.id}-h`}>
+          {s.legacy.map(a => <span id={a} class="ms-legacy" aria-hidden="true" />)}
+          <div class="hrv-q__head">
+            <span class="hrv-q__num" aria-hidden="true">{pad(s.number)}</span>
+            <h2 class="hrv-q__title" id={`${s.id}-h`} set:html={s.questionHtml} />
+          </div>
+          {s.dekHtml && <p class="ms-dek" set:html={s.dekHtml} />}
+          {s.items.map(it => <Item it={it} />)}
+        </section>
+      )) : (
+        <section class="ms-q ms-q--flat" id="answers" aria-labelledby="answers-h">
+          <h2 class="hrv-sr" id="answers-h">{LABELS.answersList}</h2>
+          {page.items.map(it => <Item it={it} />)}
+        </section>
+      )}
+
+      <OtherParts hub={model.hub} current={pageKey} />
+    </div>
+  </div>
+  <script src="../hadith-reliability/client.js"></script>
+  <script src="./client.js"></script>
+</Layout>

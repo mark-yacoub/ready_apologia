@@ -1,0 +1,14 @@
+---
+/**
+ * Section opening: old `#stage-N` alias anchor → number + reader-question heading (h2) →
+ * cold-landing context line (for readers who arrive on this section from a shared link).
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+const { s, context, topHref = '#top' } = Astro.props;
+---
+<span id={s.alias} class="idl-alias" aria-hidden="true"></span>
+<div class="hrv-q__head idl-sec__head">
+  <span class="hrv-q__num" aria-hidden="true">{String(s.n).padStart(2, '0')}</span>
+  <h2 class="hrv-q__title" id={`${s.id}-h`} set:html={s.headingHtml} />
+</div>
+<a class="hrv-context idl-context" href={topHref}>{context}<Icon name="chevronRight" /></a>

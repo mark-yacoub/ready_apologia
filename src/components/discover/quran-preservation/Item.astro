@@ -1,0 +1,102 @@
+---
+/**
+ * One self-contained item of /discover/quran-preservation: readers often land on `#item-id` from a
+ * shared link, so the context line, title, hook and showcase must explain the item on their own.
+ * Skeleton: context line → title + copy link → hook → showcase → takeaway → evidence (2 open, rest
+ * collapsed) → tables → classical explanation → comparing with the text → next.
+ * Heading outline: section h2 → item title h3 → sub-heads h4 (sources, tables, explanations,
+ * showcase sides) → evidence-card labels h5, so heading navigation lists items, not cards.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import Showcase from '../hadith-reliability/showcase/Showcase.astro';
+import EvidenceCard from '../hadith-reliability/EvidenceCard.astro';
+import ComparisonTable from '../hadith-reliability/ComparisonTable.astro';
+import { LABELS } from '../../../utils/quranPreservation/config.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+
+const { it } = Astro.props;
+const fill = (tpl, vars) => tpl.replace(/\{(\w+)\}/g, (m, k) => (vars[k] ?? m));
+const OPEN = 2;
+const open = it.evidence.slice(0, OPEN);
+const more = it.evidence.slice(OPEN);
+const context = it.isStart
+  ? fill(LABELS.startHereOf, { total: it.total })
+  : fill(LABELS.contextLine, { n: it.number, total: it.total, q: it.section?.number ?? '' });
+const nextHref = it.next ? `#${it.next.id}` : '#what-they-show';
+const nextText = it.next ? `${LABELS.next}: ${it.next.title}` : fill(LABELS.nextSources, { total: it.total });
+---
+<article class={`qp-item${it.isStart ? ' qp-item--start' : ''}`} id={it.id} aria-labelledby={`${it.id}-h`} data-archetype={it.showcase?.type}>
+  {it.legacy.map(a => <span id={a} class="qp-legacy" aria-hidden="true" />)}
+  <header class="qp-item__head">
+    {it.isStart
+      ? <h2 class="hrv-eyebrow hrv-eyebrow--verify qp-ctx">{context}</h2>
+      : <p class="hrv-eyebrow qp-ctx"><a href={`#${it.section?.id}`} set:html={tl(context)} /></p>}
+    <div class="qp-item__titlerow">
+      <h3 class="qp-item__title" id={`${it.id}-h`} set:html={it.titleHtml} />
+      <button class="hrv-iconbtn qp-copy" type="button" data-qp-copy={it.id} aria-label={LABELS.copyItemLink} aria-describedby={`${it.id}-h`} title={LABELS.copyItemLink}><Icon name="link" /></button>
+    </div>
+    <p class="hrv-hook" set:html={it.hookHtml} />
+  </header>
+
+  {it.primer && (
+    <aside class="qp-primer" aria-labelledby={`${it.id}-primer-h`}>
+      <h4 class="qp-primer__h" id={`${it.id}-primer-h`} set:html={it.primer.titleHtml} />
+      <div class="qp-primer__body" set:html={it.primer.html} />
+    </aside>
+  )}
+
+  {it.showcase && <Showcase sc={it.showcase} id={it.showcase.id} label={it.showcase.caption} level={4} />}
+
+  {it.images.length > 0 && (
+    <div class="qp-figs">
+      {it.images.map(im => (
+        <figure class="qp-fig">
+          <img src={im.src} alt={im.alt} width={im.width} height={im.height} loading="lazy" decoding="async" />
+          <figcaption><span set:html={im.captionHtml} />{im.creditHtml && <span class="qp-fig__credit" set:html={im.creditHtml} />}</figcaption>
+        </figure>
+      ))}
+    </div>
+  )}
+
+  <p class="qp-takeaway" set:html={it.takeawayHtml} />
+
+  {(it.evidence.length > 0 || it.tables.length > 0) && (
+    <div class="qp-sub">
+      {it.evidence.length > 0 && <h4 class="hrv-eyebrow qp-sub__h">{LABELS.sources}</h4>}
+      {open.map(e => <EvidenceCard e={e} level={5} />)}
+      {more.length > 0 && (
+        <details class="hrv-disclosure qp-more">
+          <summary>{fill(LABELS.moreSources, { n: more.length })}<Icon name="chevronDown" /></summary>
+          <div class="qp-more__body">{more.map(e => <EvidenceCard e={e} level={5} />)}</div>
+        </details>
+      )}
+      {it.tables.map(t => <ComparisonTable t={t} level={4} />)}
+    </div>
+  )}
+
+  {it.classicalHtml && (
+    <div class="hrv-scholar qp-block">
+      <h4 class="hrv-scholar__h"><Icon name="quote" />{LABELS.classical}</h4>
+      <div set:html={it.classicalHtml} />
+    </div>
+  )}
+  {it.comparisonHtml && (
+    <div class="hrv-eval qp-block">
+      <h4 class="hrv-eval__h"><Icon name="search" />{LABELS.comparison}</h4>
+      <div set:html={it.comparisonHtml} />
+    </div>
+  )}
+
+  {it.appLinks.length > 0 && (
+    <nav class="qp-applinks" aria-label={LABELS.appLinks}>
+      <h4 class="hrv-eyebrow qp-sub__h">{LABELS.appLinks}</h4>
+      <ul>
+        {it.appLinks.map(l => (
+          <li><a class="hrv-link hrv-link--internal qp-applink" href={l.href}><span set:html={l.labelHtml} /><span aria-hidden="true">›</span></a>{l.noteHtml && <span class="qp-applink__note" set:html={l.noteHtml} />}</li>
+        ))}
+      </ul>
+    </nav>
+  )}
+
+  <a class="qp-next" href={nextHref}><span set:html={tl(nextText)} /><span aria-hidden="true">↓</span></a>
+</article>

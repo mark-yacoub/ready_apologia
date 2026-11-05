@@ -1,0 +1,56 @@
+---
+/**
+ * One hadith account on /prophets-practice. Skeleton: head → showcase → the key text (+ Arabic,
+ * collapsed) → takeaway → every report, collapsed → classical explanation → comparing with the texts
+ * → see also → next. Heading outline: section h2 → item h3 → sub-heads h4.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import Showcase from '../hadith-reliability/showcase/Showcase.astro';
+import ItemHead from './ItemHead.astro';
+import ItemFoot from './ItemFoot.astro';
+import Chips from './Chips.astro';
+import ReportCard from './ReportCard.astro';
+import { LABELS } from '../../../utils/muhammadSlavery/config.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { it } = Astro.props;
+const kq = it.keyQuote;
+const kqChips = kq ? [{ label: kq.ref.label, href: kq.ref.href, external: kq.ref.external, attrs: kq.ref.attrs }] : [];
+---
+<article class="ms-item" id={it.id} aria-labelledby={`${it.id}-h`} data-archetype={it.showcase?.type || 'facts'}>
+  <ItemHead it={it} />
+  {it.showcase && <Showcase sc={it.showcase} id={it.showcase.id} label={it.showcase.caption} level={4} />}
+  {it.showcase?.hasMark && <p class="ms-hl">{LABELS.highlightingOurs}</p>}
+  {it.takeawayHtml && <p class="ms-takeaway" set:html={it.takeawayHtml} />}
+  {kq && (
+    <details class="hrv-disclosure ms-reports ms-key-exp">
+      <summary><span set:html={tl(`${LABELS.arabicText} · ${kq.ref.label}`)} /><Icon name="chevronDown" /></summary>
+      <figure class="hrv-quote ms-key">
+        <p class="ms-key__cap">{LABELS.keyText}</p>
+        <blockquote class="ms-key__en" set:html={kq.html} />
+        <Chips chips={kqChips} />
+        {kq.arabic && (
+          <div class="ms-ar">
+            <p class="hrv-quote__ar" lang="ar" dir="rtl">{kq.arabic}</p>
+            <p class="ms-ar__src">{LABELS.arabicSource}</p>
+          </div>
+        )}
+      </figure>
+    </details>
+  )}
+  <details class="hrv-disclosure ms-reports" id={`${it.id}-texts`}>
+    <summary><span set:html={tl(it.readAllLabel)} /><Icon name="chevronDown" /></summary>
+    <div class="ms-reports__body">
+      {it.mainReports.map(r => <ReportCard r={r} />)}
+      {it.chainReports.length > 0 && (
+        <div class="ms-chainnote"><p class="ms-report__label">{LABELS.sameChain}</p><Chips chips={it.chainReports.flatMap(r => r.chips)} /></div>
+      )}
+      {it.relatedReports.length > 0 && (
+        <>
+          <p class="ms-related-h" set:html={tl(it.relatedLabel)} />
+          {it.relatedReports.map(r => <ReportCard r={r} />)}
+        </>
+      )}
+    </div>
+  </details>
+  <ItemFoot it={it} />
+</article>

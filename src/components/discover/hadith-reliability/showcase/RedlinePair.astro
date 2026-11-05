@@ -1,0 +1,15 @@
+---
+/** One A/B pair of a Redline showcase (a side without a link may carry a plain `label`). */
+import Ref from './Ref.astro';
+const { p, compact = false } = Astro.props;
+---
+<div class="hrv-redline">
+  <div class="hrv-redline__side hrv-redline__side--a">
+    <div class="hrv-redline__tag">{compact || !p.a.ref ? <span>{p.a.ref?.label || p.a.label || 'Version A'}</span> : <Ref ref={p.a.ref} />}</div>
+    <div class="hrv-redline__text" set:html={p.a.html} />
+  </div>
+  <div class="hrv-redline__side hrv-redline__side--b">
+    <div class="hrv-redline__tag">{compact || !p.b.ref ? <span>{p.b.ref?.label || p.b.label || 'Version B'}</span> : <Ref ref={p.b.ref} />}</div>
+    <div class="hrv-redline__text" set:html={p.b.html} />
+  </div>
+</div>

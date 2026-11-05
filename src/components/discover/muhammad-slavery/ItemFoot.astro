@@ -1,0 +1,30 @@
+---
+/** Shared end of an item: classical explanation (if sourced) → comparing with the texts → see also → next. */
+import Icon from '../hadith-reliability/Icon.astro';
+import { LABELS } from '../../../utils/muhammadSlavery/config.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { it } = Astro.props;
+const nextHref = it.next ? `#${it.next.id}` : '#other-parts';
+const nextText = it.next ? `${LABELS.next}: ${it.next.title}` : LABELS.otherParts;
+---
+{it.classical && (
+  <div class="hrv-scholar ms-block">
+    <h4 class="hrv-scholar__h"><Icon name="quote" />{LABELS.classical}</h4>
+    <div set:html={it.classical.html} />
+    {it.classical.sources.length > 0 && (
+      <ul class="ms-srcline">{it.classical.sources.map(s => <li><a class="hrv-link" href={s.href} {...s.attrs}><span set:html={tl(s.label)} /></a></li>)}</ul>
+    )}
+  </div>
+)}
+{it.comparisonHtml && (
+  <div class="hrv-eval ms-block">
+    <h4 class="hrv-eval__h"><Icon name="search" />{it.kind === 'answer' ? LABELS.comparisonAnswers : LABELS.comparison}</h4>
+    <div set:html={it.comparisonHtml} />
+  </div>
+)}
+{it.crossLinks.length > 0 && (
+  <ul class="ms-see" aria-label={LABELS.related}>
+    {it.crossLinks.map(x => <li><a class="ms-see__link" href={x.href}><span set:html={tl(x.title)} /><Icon name="chevronRight" /></a></li>)}
+  </ul>
+)}
+<a class="ms-next" href={nextHref}><span set:html={tl(nextText)} /><span aria-hidden="true">↓</span></a>

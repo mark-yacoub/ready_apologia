@@ -1,0 +1,56 @@
+---
+/**
+ * "The classical explanation" (slate, the scholars' voice) followed by "Comparing with the primary
+ * text" (teal). The texts always come last. An optional "Go deeper" panel (collapsed) follows.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+const { classical, evaluation, deeper = null, level = 3 } = Astro.props;
+const H = `h${level}`;
+---
+{classical && (
+  <div class="hrv-scholar idl-pair">
+    <H class="hrv-scholar__h"><Icon name="quote" />{classical.label}</H>
+    {(classical.paras?.length ? classical.paras : [classical.html].filter(Boolean)).map(h => <p set:html={h} />)}
+    {classical.quoteHtml && (
+      <blockquote class="idl-cq">
+        <p set:html={`“${classical.quoteHtml}”`} />
+        {classical.arabic && <p class="idl-cq__ar" lang="ar" dir="rtl" title={classical.arabicLabel}>{classical.arabic}</p>}
+        {classical.cite && <a class="hrv-sc__ref is-internal" href={classical.cite.href} title={classical.cite.title}>{classical.cite.label}</a>}
+      </blockquote>
+    )}
+    {classical.afterHtml && <p set:html={classical.afterHtml} />}
+  </div>
+)}
+{evaluation && (
+  <div class="hrv-eval idl-pair">
+    <H class="hrv-eval__h"><Icon name="search" />{evaluation.label}</H>
+    {(evaluation.paras?.length ? evaluation.paras : [evaluation.html].filter(Boolean)).map(h => <p set:html={h} />)}
+    {evaluation.quoteHtml && (
+      <blockquote class="idl-cq idl-cq--eval">
+        <p set:html={`“${evaluation.quoteHtml}”`} />
+        {evaluation.cite && <a class="hrv-sc__ref is-internal" href={evaluation.cite.href} title={evaluation.cite.title}>{evaluation.cite.label}</a>}
+      </blockquote>
+    )}
+    {evaluation.afterHtml && <p set:html={evaluation.afterHtml} />}
+  </div>
+)}
+{deeper && (
+  <details class="hrv-disclosure idl-deeper">
+    <summary><span>{deeper.label}</span><Icon name="chevronDown" /></summary>
+    <div class="hrv-disclosure__body">
+      {deeper.blocks.map(b => (
+        <div class="idl-deeper__block">
+          {b.html && <p set:html={b.html} />}
+          {b.quoteHtml && (
+            <blockquote class="idl-cq">
+              <p set:html={`“${b.quoteHtml}”`} />
+              {b.arabic && <p class="idl-cq__ar" lang="ar" dir="rtl" title={b.arabicLabel}>{b.arabic}</p>}
+              {b.cite && <a class="hrv-sc__ref is-internal" href={b.cite.href} title={b.cite.title}>{b.cite.label}</a>}
+            </blockquote>
+          )}
+          {b.afterHtml && <p set:html={b.afterHtml} />}
+        </div>
+      ))}
+    </div>
+  </details>
+)}

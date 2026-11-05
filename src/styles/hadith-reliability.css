@@ -36,6 +36,17 @@
   /* The page breaks out of .main-content padding so the paper runs edge to edge. */
   --hrv-inset: 16px;
   --hrv-bar-h: 52px;
+  /* Spacing scale for article layouts built on .hrv (margins, padding, gaps).
+     Use these steps instead of literal px so every article shares one rhythm;
+     44px tap targets are accessibility minimums, not rhythm, and stay literal. */
+  --hrv-s1: 4px;
+  --hrv-s2: 8px;
+  --hrv-s3: 12px;
+  --hrv-s4: 16px;
+  --hrv-s5: 24px;
+  --hrv-s6: 36px;
+  --hrv-s7: 48px;
+  --hrv-s8: 64px;
 
   margin: calc(-1 * var(--hrv-inset)) calc(-1 * var(--hrv-inset)) 0;
   padding: 0 var(--hrv-inset) 40px;

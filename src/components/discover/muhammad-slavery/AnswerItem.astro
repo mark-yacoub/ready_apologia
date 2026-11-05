@@ -1,0 +1,52 @@
+---
+/**
+ * One answer on /counter-apologetics. Skeleton: head (the question) → the answer many Muslims give
+ * (slate panel, its own texts quoted) → showcase → takeaway → what the texts say → classical →
+ * comparing with the texts (last, ends on a text) → the citations of the original answer (collapsed).
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import Showcase from '../hadith-reliability/showcase/Showcase.astro';
+import ItemHead from './ItemHead.astro';
+import ItemFoot from './ItemFoot.astro';
+import TextCard from './TextCard.astro';
+import { LABELS } from '../../../utils/muhammadSlavery/config.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { it } = Astro.props;
+---
+<article class="ms-item ms-item--answer" id={it.id} aria-labelledby={`${it.id}-h`} data-archetype={it.showcase?.type || 'facts'}>
+  <ItemHead it={it} />
+  {(it.answerHtml || it.answerTexts.length > 0) && (
+    <section class="hrv-scholar ms-block ms-answer" aria-labelledby={`${it.id}-ans-h`}>
+      <h4 class="hrv-scholar__h" id={`${it.id}-ans-h`}><Icon name="quote" />{LABELS.answerPanel}</h4>
+      {it.answerHtml && <p set:html={it.answerHtml} />}
+      {it.answerTexts.length > 0 && (
+        <details class="hrv-disclosure ms-reports ms-ans-texts">
+          <summary><span>{LABELS.answerTextsLabel} ({it.answerTexts.length})</span><Icon name="chevronDown" /></summary>
+          <div class="ms-reports__body">
+            {it.answerTexts.map(t => <TextCard t={t} />)}
+          </div>
+        </details>
+      )}
+    </section>
+  )}
+  {it.showcase && <Showcase sc={it.showcase} id={it.showcase.id} label={it.showcase.caption} level={4} />}
+  {it.showcase?.hasMark && <p class="ms-hl">{LABELS.highlightingOurs}</p>}
+  {it.takeawayHtml && <p class="ms-takeaway" set:html={it.takeawayHtml} />}
+  {it.texts.length > 0 && (
+    <details class="hrv-disclosure ms-reports" id={`${it.id}-texts-h`}>
+      <summary><span>{LABELS.textsSay} ({it.texts.length})</span><Icon name="chevronDown" /></summary>
+      <div class="ms-reports__body">
+        {it.texts.map(t => <TextCard t={t} />)}
+      </div>
+    </details>
+  )}
+  {it.citations.length > 0 && (
+    <details class="hrv-disclosure ms-cited">
+      <summary><span>{it.allCitedLabel}</span><Icon name="chevronDown" /></summary>
+      <ul class="hrv-srclist ms-cited__list">
+        {it.citations.map(c => <li><a class="hrv-src" href={c.href} {...c.attrs}><span class="hrv-src__label" set:html={tl(c.label)} /><Icon name={c.external ? 'external' : 'chevronRight'} /></a></li>)}
+      </ul>
+    </details>
+  )}
+  <ItemFoot it={it} />
+</article>

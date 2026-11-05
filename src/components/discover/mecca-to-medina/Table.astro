@@ -1,0 +1,19 @@
+---
+/**
+ * A real table on desktop; each row becomes a labelled card on phones (the hrv table CSS). Same markup
+ * as hrv ComparisonTable, with the title one level below the item title (h4) and optional.
+ */
+const { t, level = 4 } = Astro.props;
+const H = `h${level}`;
+---
+<div class="hrv-table-wrap mm-table">
+  {t.titleHtml && <H class="hrv-table-title" set:html={t.titleHtml} />}
+  <table class="hrv-table">
+    <thead><tr>{t.headers.map(h => <th scope="col" set:html={h.html} />)}</tr></thead>
+    <tbody>
+      {t.rows.map(row => (
+        <tr>{row.map((cell, i) => <td data-label={t.headers[i]?.label || ''}><span class="hrv-td" set:html={cell} /></td>)}</tr>
+      ))}
+    </tbody>
+  </table>
+</div>

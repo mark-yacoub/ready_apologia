@@ -1,0 +1,24 @@
+---
+/**
+ * The cold-landing head of every item: legacy alias anchors → context line (position + section,
+ * linking to the section) → title (h3) + copy-link button → one-sentence context → hook.
+ * Readers often land on `#id` from a shared link, so this must explain the item on its own.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { LABELS } from '../../../utils/muhammadSlavery/config.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { it } = Astro.props;
+const eyebrow = it.contextLine;
+---
+{it.legacy.map(a => <span id={a} class="ms-legacy" aria-hidden="true" />)}
+<header class="ms-item__head">
+  <p class="hrv-eyebrow ms-ctx">
+    {it.section ? <a href={`#${it.section.id}`}><span set:html={tl(eyebrow)} /></a> : <span set:html={tl(eyebrow)} />}
+  </p>
+  <div class="ms-item__titlerow">
+    <h3 class="ms-item__title" id={`${it.id}-h`} set:html={tl(it.title)} />
+    <button class="hrv-iconbtn ms-copy" type="button" data-ms-copy={it.id} aria-label={LABELS.copyItemLink} aria-describedby={`${it.id}-h`} title={LABELS.copyItemLink}><Icon name="link" /></button>
+  </div>
+  {it.contextHtml && <p class="ms-context" set:html={it.contextHtml} />}
+  {it.hookHtml && <p class="hrv-hook" set:html={it.hookHtml} />}
+</header>

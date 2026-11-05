@@ -1,0 +1,17 @@
+---
+/**
+ * A labelled quote strip (sand): short verbatim lines with who said them and when (the quote), or the
+ * situation before the verse (the delay). Each line links to its own source card.
+ * `compact` is the hub's Start-here variant: no links (the whole card is a link).
+ */
+const { strip, compact = false, kind = 'quote' } = Astro.props;
+---
+<figure class={`crv-quote crv-quote--${kind}${compact ? ' crv-quote--compact' : ''}`}>
+  {strip.labelHtml && <figcaption class="crv-quote__who" set:html={strip.labelHtml} />}
+  <blockquote class="crv-quote__en"><p set:html={compact ? strip.compactHtml : strip.html} /></blockquote>
+  {strip.arabic.length > 0 && (
+    <p class="crv-quote__ar" lang="ar" dir="rtl">{strip.arabic.map((a, i) => <>{i > 0 && ' … '}<span data-v set:html={a} /></>)}</p>
+  )}
+  {!compact && strip.arabicRefHtml && <p class="crv-quote__arref" set:html={strip.arabicRefHtml} />}
+  {compact && strip.srcLabelsHtml && <p class="crv-quote__src" set:html={strip.srcLabelsHtml} />}
+</figure>

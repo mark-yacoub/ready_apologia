@@ -1,0 +1,13 @@
+---
+/**
+ * A two-sided showcase with our own caption: wraps the shared hadith-reliability Confrontation body
+ * (not Showcase.astro, whose captions are tied to the hadith article's ANGLES).
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import Confrontation from '../hadith-reliability/showcase/Confrontation.astro';
+const { showcase } = Astro.props;
+---
+<div class="hrv-sc hrv-sc--confrontation orv-sc" role="group" aria-label={showcase.ariaLabel || showcase.caption}>
+  {showcase.caption && <div class="hrv-sc__cap"><Icon name="confrontation" /><span set:html={showcase.captionHtml} /></div>}
+  <Confrontation sc={showcase.sc} />
+</div>

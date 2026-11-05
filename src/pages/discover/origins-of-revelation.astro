@@ -1,189 +1,135 @@
 ---
+/**
+ * /discover/origins-of-revelation: five things the classical Islamic sources record about how
+ * revelation came, each beside the Bible's accounts of angels and of troubling spirits, with the
+ * classical scholars' explanation and the New Testament's test of a spirit. One page, same URL.
+ *
+ * Built on the hadith-reliability design system (`.hrv`) plus a small scoped layer (`.hrv.orv`).
+ * Copy: src/utils/originsOfRevelation/content.js. Data: demonic_revelation.json (read-only, locked by
+ * dataLock.js) + quoteFixes.js (verified render-time fixes, also proposed to the data owner).
+ * Static and stateless: zero React islands, no storage, no URL rewriting on scroll. Old section ids
+ * (#initial-encounter, #suicidal-despair, …) land on their new sections via alias anchors.
+ */
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
-import DemonicRevelationNav from '../../components/discover/demonic-revelation/DemonicRevelationNav.jsx';
-import ComparativeStageCard from '../../components/discover/demonic-revelation/ComparativeStageCard.jsx';
-import BiblicalMandateSection from '../../components/discover/demonic-revelation/BiblicalMandateSection.jsx';
-import articleData from '../../data/discover/islam/scripture/demonic_revelation.json';
+import Icon from '../../components/discover/hadith-reliability/Icon.astro';
+import SectionNav from '../../components/discover/origins-of-revelation/SectionNav.astro';
+import GlanceRows from '../../components/discover/origins-of-revelation/GlanceRows.astro';
+import SectionHead from '../../components/discover/origins-of-revelation/SectionHead.astro';
+import ConfrontationFrame from '../../components/discover/origins-of-revelation/ConfrontationFrame.astro';
+import WitnessStrip from '../../components/discover/origins-of-revelation/WitnessStrip.astro';
+import CardGroup from '../../components/discover/origins-of-revelation/CardGroup.astro';
+import ClassicalPair from '../../components/discover/origins-of-revelation/ClassicalPair.astro';
+import SourcesBlock from '../../components/discover/origins-of-revelation/SourcesBlock.astro';
+import * as CONTENT from '../../utils/originsOfRevelation/content.js';
+import { loadOriginsOfRevelation } from '../../utils/originsOfRevelation/model.js';
+import { BASE, BASE_PATH, OG_IMAGE, SITE_URL, DATE_PUBLISHED, DATE_MODIFIED, GLANCE_ID, SOURCES_ID, CATALOG_SLUG, discoverHref } from '../../utils/originsOfRevelation/config.js';
+import { buildBreadcrumbSchema, SITE_NAME, DEFAULT_LOGO_URL } from '../../utils/seoFactory.js';
+import { tl } from '../../utils/hadithReliability/render.js';
+import '../../styles/hadith-reliability.css';
+import '../../styles/origins-of-revelation.css';
 
-const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const model = loadOriginsOfRevelation(CONTENT);
+const { seo, header, labels, nav, glance, sections, sources, closing } = model;
 
-const pageTitle = "Assessing the Origins of Islamic Revelation | Ready Apologia";
-const pageDesc = "An evidentiary comparison of the phenomena surrounding early Islamic revelation against biblical angelic and demonic accounts.";
-const pageKeywords = "origins of revelation, cave of hira, fatra suicide bukhari, muhammad trances, sihr black magic labid, satanic verses tabari, angelic vs demonic revelation";
-const ogImage = "/media/demonic_revelation/cover.jpg";
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : SITE_URL;
+const canonicalURL = `${site}${BASE_PATH}`;
+const ogImage = `${site}${OG_IMAGE}`;
 
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
-const canonicalURL = `${siteUrl}${base}/discover/origins-of-revelation`;
-
-const schemaObj = {
-  "@context": "https://schema.org",
-  "@graph": [
+// JSON-LD: BreadcrumbList (unique URLs) + Article (with citations). No FAQPage / ClaimReview.
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    buildBreadcrumbSchema([
+      { name: 'Ready Apologia', url: `${site}${BASE}/` },
+      { name: 'Discover', url: `${site}${BASE}/discover` },
+      { name: seo.title, url: canonicalURL },
+    ]),
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
-        { "@type": "ListItem", "position": 2, "name": "Discover", "item": `${siteUrl}${base}/discover` },
-        { "@type": "ListItem", "position": 3, "name": "Islamics · Scripture", "item": `${siteUrl}${base}/discover` },
-        { "@type": "ListItem", "position": 4, "name": "Origins of Revelation", "item": canonicalURL }
-      ]
+      '@type': 'Article',
+      '@id': `${canonicalURL}#article`,
+      headline: seo.title,
+      description: seo.description,
+      url: canonicalURL,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+      image: [ogImage],
+      inLanguage: 'en',
+      author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+      publisher: { '@type': 'Organization', name: SITE_NAME, logo: { '@type': 'ImageObject', url: DEFAULT_LOGO_URL } },
+      datePublished: DATE_PUBLISHED,
+      dateModified: DATE_MODIFIED,
+      citation: model.citations.map(c => ({ '@type': 'CreativeWork', name: c.name, url: c.url })),
     },
-    {
-      "@type": "Article",
-      "@id": `${canonicalURL}#article`,
-      "headline": pageTitle,
-      "description": pageDesc,
-      "image": `${siteUrl}${base}${ogImage}`,
-      "url": canonicalURL,
-      "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalURL },
-      "author": { "@type": "Organization", "name": "Ready Apologia" },
-      "publisher": { "@type": "Organization", "name": "Ready Apologia", "logo": { "@type": "ImageObject", "url": `${siteUrl}${base}/assets/logo.png` } }
-    }
-  ]
+  ],
 };
 ---
-
 <Layout
-  title={pageTitle}
-  description={pageDesc}
-  keywords={pageKeywords}
-  ogImage={ogImage}
-  ogType="article"
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
   canonicalURL={canonicalURL}
   ogUrl={canonicalURL}
-  schema={schemaObj}
+  ogImage={ogImage}
+  ogType="article"
+  schema={schema}
+  showOnboarding={false}
 >
-  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'origins-of-revelation' }} />
+  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: CATALOG_SLUG }} />
+  <article class="hrv orv" id="top">
+    <SectionNav nav={nav} labels={labels} backHref={discoverHref()} canonical={canonicalURL} />
+    <div class="hrv-wrap">
+      <header class="hrv-case-head orv-head">
+        <p class="hrv-eyebrow" set:html={tl(header.eyebrow)} />
+        <h1 class="hrv-case-h1 orv-h1" set:html={header.h1Html} />
+        <p class="hrv-hook orv-hook" set:html={header.hookHtml} />
+        <a class="orv-head__context" href={`#${SOURCES_ID}`} title={header.contextText}><span set:html={header.contextHtml} /><Icon name="chevronRight" /></a>
+        {header.framingHtml && <p class="orv-framing" set:html={header.framingHtml} />}
+        {header.whosWhoHtml && (
+          <details class="hrv-disclosure orv-deeper orv-whos-who">
+            <summary>
+              <span set:html={tl(header.whosWhoSummary)} />
+              <Icon name="chevronDown" />
+            </summary>
+            <div class="hrv-disclosure__body orv-pair__body"><p set:html={header.whosWhoHtml} /></div>
+          </details>
+        )}
+        {model.emphasisNote && <p class="orv-emph" set:html={tl(model.emphasisNote)} />}
+      </header>
 
-  <div class="rev-page-wrapper">
-    {/* Breadcrumb Navigation */}
-    <nav class="breadcrumb-header" aria-label="Breadcrumb">
-      <a href={`${base}/discover`} class="back-link" aria-label="Go back to Discover tab">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-        <span>Discover</span>
-      </a>
-      <span class="breadcrumb-sep" aria-hidden="true">/</span>
-      <span class="breadcrumb-current">Islamics · Scripture</span>
-    </nav>
+      <section class="orv-glance-sec" id={GLANCE_ID} aria-labelledby={`${GLANCE_ID}-h`}>
+        <h2 class="hrv-eyebrow orv-glance-sec__h" id={`${GLANCE_ID}-h`} set:html={tl(labels.glance)} />
+        <GlanceRows rows={glance} />
+      </section>
 
-    {/* Header Hero */}
-    <header class="rev-hero">
-      <h1 class="rev-hero-title">
-        Assessing the Origins of Islamic Revelation
-      </h1>
-      <p class="rev-hero-subtitle">
-        An evidentiary examination comparing the phenomena of early Islamic revelation with the revelation of prior prophets.
-      </p>
-      <p class="rev-hero-note">
-        All citations link directly to canonical Sunni Hadith collections (Bukhari, Muslim), classical historical accounts (Ibn Ishaq, Tabari), and biblical manuscripts for direct verification.
-      </p>
-    </header>
-
-    {/* Sticky Thematic Navigation Bar */}
-    <DemonicRevelationNav client:load />
-
-    {/* Main Evidence Content */}
-    <main class="rev-content-container" aria-label="Evidentiary Topics">
-      {articleData.items.map((item) => (
-        <ComparativeStageCard item={item} base={base} client:visible />
+      {sections.map(s => (
+        <section class={`hrv-sec orv-sec${s.isItem ? '' : ' orv-sec--method'}`} id={s.id} aria-labelledby={`${s.id}-h`}>
+          <SectionHead s={s} context={model.coldContext} />
+          {s.showcase && <ConfrontationFrame showcase={s.showcase} />}
+          {s.witnesses && <WitnessStrip w={s.witnesses} />}
+          {s.introHtml && <p class="orv-intro" set:html={s.introHtml} />}
+          {s.groups.length > 0 && (
+            <div class="orv-say">
+              {labels.sourcesWhat && <p class="hrv-eyebrow orv-what" set:html={tl(labels.sourcesWhat)} />}
+              <div class="orv-say__groups">{s.groups.map(g => <CardGroup g={g} labels={labels} />)}</div>
+            </div>
+          )}
+          <ClassicalPair classical={s.classical} evaluation={s.evaluation} deeper={s.deeper} />
+        </section>
       ))}
 
-      {/* The Biblical Mandate: Testing the Spirits */}
-      <BiblicalMandateSection base={base} client:visible />
-    </main>
-  </div>
+      <section class="hrv-sec orv-sec orv-sec--sources" id={SOURCES_ID} aria-labelledby={`${SOURCES_ID}-h`}>
+        <div class="hrv-q__head orv-sec__head">
+          <span class="hrv-q__num orv-sec__mark" aria-hidden="true"><Icon name="book" /></span>
+          <h2 class="hrv-q__title" id={`${SOURCES_ID}-h`} set:html={tl(labels.sources)} />
+        </div>
+        <SourcesBlock groups={sources} />
+        <div class="orv-closing">
+          <h2 class="orv-closing__h" id="closing-h" set:html={tl(closing.heading || labels.closingHeading)} />
+          <div class="orv-closing__body" set:html={closing.html} />
+        </div>
+        {labels.backToTop && <a class="orv-top" href="#top"><Icon name="chevronDown" class="orv-top__icon" /><span set:html={tl(labels.backToTop)} /></a>}
+      </section>
+    </div>
+  </article>
+  <script src="../../components/discover/origins-of-revelation/client.js"></script>
 </Layout>
-
-<style>
-  .rev-page-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 16px 10px 60px;
-    font-family: var(--font-body, 'Public Sans', -apple-system, sans-serif);
-    color: var(--color-on-surface, #09090b);
-  }
-
-  @media (min-width: 640px) {
-    .rev-page-wrapper {
-      padding: 28px 20px 80px;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .rev-page-wrapper {
-      padding: 36px 24px 96px;
-    }
-  }
-
-  /* Breadcrumb */
-  .breadcrumb-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    margin-bottom: 24px;
-  }
-
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    color: var(--color-on-surface-variant, #71717a);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.15s ease;
-  }
-
-  .back-link:hover {
-    color: var(--color-primary, #09090b);
-  }
-
-  .breadcrumb-sep {
-    color: var(--color-outline-variant, #d4d4d8);
-  }
-
-  .breadcrumb-current {
-    color: var(--color-on-surface-variant, #71717a);
-    font-weight: 500;
-  }
-
-  /* Hero */
-  .rev-hero {
-    text-align: center;
-    max-width: 760px;
-    margin: 0 auto 32px;
-  }
-
-  .rev-hero-title {
-    font-family: var(--font-display, 'Literata', Georgia, serif);
-    font-size: clamp(2rem, 5vw, 3.25rem);
-    font-weight: 800;
-    line-height: 1.12;
-    letter-spacing: -0.025em;
-    color: var(--color-on-surface, #09090b);
-    margin: 0 0 14px 0;
-  }
-
-  .rev-hero-subtitle {
-    font-size: clamp(1rem, 2vw, 1.18rem);
-    font-weight: 400;
-    color: var(--color-on-surface-variant, #52525b);
-    line-height: 1.55;
-    margin: 0 0 16px 0;
-  }
-
-  .rev-hero-note {
-    font-size: 12px;
-    color: #71717a;
-    line-height: 1.5;
-    max-width: 620px;
-    margin: 0 auto;
-    font-style: italic;
-  }
-
-  /* Main Container */
-  .rev-content-container {
-    display: flex;
-    flex-direction: column;
-  }
-</style>

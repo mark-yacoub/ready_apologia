@@ -1,0 +1,12 @@
+---
+/** A quoted text set beside an answer (or quoted inside the answer panel), with its source chips. */
+import Chips from './Chips.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { t } = Astro.props;
+---
+<div class="ms-text">
+  <p class="ms-text__label" set:html={t.labelHtml} />
+  {t.html && <blockquote class="ms-text__q" set:html={t.html} />}
+  {t.grade && <p class="ms-grade ms-grade--block" set:html={tl(t.grade)} />}
+  <Chips chips={t.chips} />
+</div>

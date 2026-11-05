@@ -1,0 +1,203 @@
+/* ==========================================================================
+   /discover/from-mecca-to-medina: a thin layer on the hadith-reliability
+   design system. Everything is scoped to `.hrv.mm`; nothing here leaks.
+   Shared look (paper/ink, teal = verifiable, sand = primary-source quotations,
+   slate = scholars' voice, no red) comes from hadith-reliability.css, along with
+   the default spacing of every shared component (hero, quote, scholar, eval,
+   showcase, disclosure, table, sources). This file only:
+     1. sets the page's section gap on the shared spacing scale (below), and
+     2. overrides the shared defaults where this page differs, each with its reason.
+   If a value here matches the shared default, delete it. Mobile-first.
+   ========================================================================== */
+
+/* ---- spacing & scroll container ----------------------------------------------
+   Margins, padding and gaps use the shared --hrv-s1…s8 scale (hadith-reliability.css).
+   position: relative keeps visually hidden table headers (.hrv-sr) inside .main-content
+   so #anchor jumps never scroll the outer frame (QP review P0). */
+.hrv.mm {
+  position: relative;
+  overflow-wrap: break-word;
+  --mm-section-gap: var(--hrv-s7);
+  --mm-scroll: calc(var(--hrv-bar-h) + var(--hrv-s3));
+}
+@media (min-width: 768px) { .hrv.mm { --mm-section-gap: var(--hrv-s8); } }
+
+/* ---- sticky bar + "On this page" index ---------------------------------------
+   Override: replaces the multi-page prev/next stepper in .hrv-bar with a centred
+   single-page <details> table of contents that drops down over the article. */
+.mm-bar { gap: var(--hrv-s1); }
+.mm-index { justify-self: center; min-width: 0; }
+.mm-index__sum {
+  list-style: none; display: inline-flex; align-items: center; gap: var(--hrv-s1); min-height: 44px; padding: 0 var(--hrv-s3);
+  border-radius: 999px; cursor: pointer; font: 650 .88rem/1 var(--hrv-sans); color: var(--hrv-ink); white-space: nowrap;
+}
+.mm-index__sum::-webkit-details-marker { display: none; }
+.mm-index__sum:hover { background: rgba(27, 25, 23, .05); }
+.mm-index__sum .hrv-icon { width: 16px; height: 16px; color: var(--hrv-ink-2); transition: transform .2s; }
+.mm-index[open] .mm-index__sum .hrv-icon { transform: rotate(180deg); }
+.mm-index__panel {
+  position: absolute; top: 100%; left: 0; right: 0; z-index: 30;
+  max-height: calc(100dvh - var(--hrv-bar-h)); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--hrv-paper); border-bottom: 1px solid var(--hrv-line); box-shadow: var(--hrv-shadow);
+  padding: var(--hrv-s2) var(--hrv-inset) var(--hrv-s4);
+}
+.mm-index__groups, .mm-index__items { list-style: none; margin: 0; padding: 0; }
+.mm-index__groups { max-width: 680px; margin: 0 auto; }
+.mm-index__groups > li { margin: 0; padding: var(--hrv-s2) 0 var(--hrv-s1); }
+.mm-index__groups > li + li { border-top: 1px solid var(--hrv-line); }
+.hrv .mm-index__q { display: flex; gap: var(--hrv-s2); align-items: center; margin: 0; min-height: 44px; font: 700 .74rem/1.35 var(--hrv-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-ink-2); }
+.mm-index__q a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; }
+.mm-index__qn { color: var(--hrv-verify); font-variant-numeric: tabular-nums; }
+.mm-index__items > li { margin: 0; }
+.mm-index__items a, .mm-show__list a {
+  display: grid; grid-template-columns: 26px 1fr; gap: var(--hrv-s2); align-items: center; min-height: 44px; padding: var(--hrv-s2) 0;
+  color: var(--hrv-ink); text-decoration: none; font-family: var(--hrv-display); font-size: .95rem; line-height: 1.3;
+}
+.mm-index__items a:hover, .mm-show__list a:hover { color: var(--hrv-verify); }
+.mm-index__n { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font: 700 .72rem/1 var(--hrv-sans); color: var(--hrv-ink-2); border: 1px solid var(--hrv-line-strong); font-variant-numeric: tabular-nums; }
+.mm-index__tail { display: flex; flex-direction: column; }
+.mm-index__tail a { display: flex; align-items: center; min-height: 44px; font: 650 .9rem/1.3 var(--hrv-sans); color: var(--hrv-verify); text-decoration: none; }
+
+/* ---- hero + major sections ---------------------------------------------------
+   Hero padding comes from the shared .hrv-hero.
+   Override: long descriptive h1 starts smaller than the shared 2rem on phones. */
+@media (max-width: 767px) { .hrv .mm-h1 { font-size: 1.65rem; line-height: 1.2; } }
+/* Body and intro paragraphs use a comfortable 1.68 reading line-height across the page. */
+.hrv.mm .hrv-intro, .hrv.mm .hrv-hook, .hrv.mm .mm-dek, .hrv.mm .mm-block__body, .hrv.mm .mm-prose { line-height: 1.68; }
+/* Mecca / Medina date-and-sūra orientation strip below the intro paragraph. */
+.mm-orient { display: flex; flex-wrap: wrap; gap: var(--hrv-s2) var(--hrv-s4); margin: var(--hrv-s4) 0 0; font-size: .9rem; }
+.mm-orient__row { display: flex; gap: var(--hrv-s2); align-items: baseline; }
+.mm-orient dt { font: 700 .74rem/1 var(--hrv-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-ink); }
+.mm-orient dd { margin: 0; color: var(--hrv-ink-2); font-variant-numeric: tabular-nums; }
+.hrv .mm-suranote { margin: var(--hrv-s2) 0 0; font-size: .8rem; color: var(--hrv-ink-2); }
+/* Zero-height anchor targets for legacy section URLs land below the sticky bar. */
+.mm-legacy { display: block; height: 0; overflow: hidden; scroll-margin-top: var(--mm-scroll); }
+/* Major sections open with a strong rule and the page section gap (48px mobile, 64px desktop). */
+.mm-item--start, .mm-q, .mm-closing, .mm-sources {
+  margin-top: var(--mm-section-gap); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line-strong); scroll-margin-top: var(--mm-scroll);
+}
+.hrv .mm-dek { font-size: .95rem; color: var(--hrv-ink-2); margin: 0; }
+
+/* ---- items -------------------------------------------------------------------
+   Self-contained anchored items inside a question section are separated by a light rule;
+   the first item in a section sits directly under the section header without a second rule. */
+.mm-item:not(.mm-item--start) { margin-top: var(--hrv-s6); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line); scroll-margin-top: var(--mm-scroll); }
+.mm-q > .mm-item:first-of-type { margin-top: var(--hrv-s5); padding-top: 0; border-top: 0; }
+/* Cold-landing context eyebrow link keeps a full 44px tap target without negative margins. */
+.hrv .mm-ctx { margin-bottom: var(--hrv-s1); }
+.mm-ctx a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; }
+.mm-ctx a:hover { color: var(--hrv-ink); text-decoration: underline; }
+/* Item title sits beside its 44px permalink copy button. */
+.mm-item__titlerow { display: grid; grid-template-columns: 1fr 44px; gap: var(--hrv-s2); align-items: start; margin-bottom: var(--hrv-s3); }
+.hrv .mm-item__title { font-size: 1.35rem; line-height: 1.24; font-weight: 600; letter-spacing: -.005em; padding-top: var(--hrv-s2); }
+@media (min-width: 768px) { .hrv .mm-item__title { font-size: 1.5rem; } }
+.mm-copy { color: var(--hrv-ink-2); }
+/* Attributed takeaway callout below the showcase. */
+.hrv .mm-takeaway {
+  margin: var(--hrv-s4) 0 0; padding: var(--hrv-s1) 0 var(--hrv-s1) var(--hrv-s4); border-left: 3px solid var(--hrv-ink);
+  font-size: .98rem; line-height: 1.65; font-weight: 500; color: var(--hrv-ink);
+}
+/* Evidence list, scholar/evaluation blocks, and next-item link step down by --hrv-s5 (24px). */
+.mm-sub, .mm-parts, .mm-block { margin-top: var(--hrv-s5); }
+.hrv .mm-sub__h { margin-bottom: var(--hrv-s3); }
+.hrv .mm-evgroup { font-family: var(--hrv-sans); font-size: .82rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--hrv-ink-2); margin: var(--hrv-s5) 0 var(--hrv-s3); }
+.mm-next {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--hrv-s3); min-height: 48px; margin-top: var(--hrv-s5); padding: var(--hrv-s3) var(--hrv-s4);
+  border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); background: var(--hrv-surface);
+  color: var(--hrv-ink); text-decoration: none; font-size: .9rem; font-weight: 650; line-height: 1.35;
+}
+.mm-next > span:last-child { color: var(--hrv-verify); font-size: 1.05rem; }
+.mm-next:hover { border-color: var(--hrv-line-strong); }
+
+/* ---- tags (sūra label, tafsīr, grade, sīra) ----------------------------------
+   Neutral metadata pills under a card label; allowed to wrap on narrow screens. */
+.hrv .mm-tags { display: flex; flex-wrap: wrap; gap: var(--hrv-s1) var(--hrv-s2); margin: var(--hrv-s1) 0 0; }
+.mm-tag {
+  display: inline-flex; align-items: center; padding: var(--hrv-s1) var(--hrv-s2); border-radius: 999px;
+  background: var(--hrv-paper); border: 1px solid var(--hrv-line-strong); color: var(--hrv-ink-2);
+  font: 650 .72rem/1.3 var(--hrv-sans); letter-spacing: .01em; max-width: 100%;
+}
+.mm-tag--sira { background: var(--hrv-sand); border-color: #e2d3b6; color: #6b4e1d; }
+.mm-saw { font-family: var(--hrv-arabic); font-style: normal; line-height: 1; }
+
+/* ---- evidence cards ----------------------------------------------------------
+   Override: cards use uniform --hrv-s4 padding, the quote follows its header/Arabic with
+   no negative margins, and verify chips wrap --hrv-s2 below the quote at 44px height. */
+.mm-ev { padding: var(--hrv-s4); margin-bottom: var(--hrv-s4); }
+.hrv .mm-ev__lead { font-size: .9rem; line-height: 1.6; color: var(--hrv-ink-2); margin: 0 0 var(--hrv-s2); }
+.hrv .mm-ev__ar { font-family: var(--hrv-arabic); font-size: 1.3rem; line-height: 1.95; direction: rtl; text-align: right; margin: 0 0 var(--hrv-s2); color: var(--hrv-ink); }
+.hrv .mm-ev__ar--hadith { font-size: 1.15rem; line-height: 1.9; margin: var(--hrv-s2) 0 0; }
+.mm-quote { margin: 0; font-size: .95rem; line-height: 1.65; font-style: italic; }
+/* Source-text markdown headings ("### Shirk is Worse Than Killing") render as bold lines, not h-tags. */
+.mm-quote .mm-quote__sub, .mm-gap { font-style: normal; }
+.mm-gap { color: var(--hrv-ink-2); }
+/* Progressive disclosure for the rest of a long quotation or corpus hadith Arabic. */
+.mm-more { margin-top: var(--hrv-s2); }
+.mm-more > summary {
+  list-style: none; display: inline-flex; align-items: center; gap: var(--hrv-s1); min-height: 44px; cursor: pointer;
+  font: 650 .85rem/1.2 var(--hrv-sans); color: var(--hrv-verify);
+}
+.mm-more > summary::-webkit-details-marker { display: none; }
+.mm-more > summary .hrv-icon { width: 14px; height: 14px; transition: transform .2s; }
+.mm-more[open] > summary .hrv-icon { transform: rotate(180deg); }
+.mm-more .mm-quote--full { margin-top: var(--hrv-s1); }
+.mm-ev--parallel .mm-more:first-of-type { margin-top: 0; }
+.hrv .mm-ev__note { font-size: .88rem; line-height: 1.6; color: var(--hrv-ink-2); margin: var(--hrv-s2) 0 0; }
+/* Verify chips wrap (no horizontal scroller, playbook §5.2) and meet the 44px tap minimum. */
+.mm .hrv-verify { flex-wrap: wrap; overflow: visible; gap: var(--hrv-s2); margin: var(--hrv-s2) 0 0; padding: 0; }
+.mm .hrv-verify a { min-height: 44px; }
+/* Showcase source links are 32px in shared .hrv; raised to 44px here (playbook §5.2). */
+.mm .hrv-sc__ref { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
+
+/* ---- showcase vocabulary -----------------------------------------------------
+   Override: optional lead verse above the archetype, wrapping version tabs, and
+   witness cards stacked on phones so no card sits off-screen (playbook §5.2). */
+.hrv .mm-sc__lead { font-family: var(--hrv-display); font-size: 1rem; line-height: 1.6; margin: 0 0 var(--hrv-s3); padding: 0 0 var(--hrv-s3); border-bottom: 1px solid var(--hrv-line); }
+.mm-cite { white-space: nowrap; font-family: var(--hrv-sans); font-size: .78rem; font-weight: 650; }
+.mm-cite .hrv-link { text-decoration: none; }
+.mm .hrv-tl__body .mm-tag { margin-right: var(--hrv-s1); }
+.mm .hrv-vs__list .hrv-ar-inline { display: block; text-align: right; }
+.mm .hrv-vs__list .hrv-sc__ref { display: flex; width: fit-content; }
+.mm-facts > li > span { min-width: 0; }
+.mm .hrv-tabs { flex-wrap: wrap; overflow: visible; }
+.mm .hrv-tab { min-height: 44px; }
+.mm .hrv-wit { flex-direction: column; gap: var(--hrv-s3); overflow: visible; scroll-snap-type: none; margin: 0; padding: 0; }
+.mm .hrv-wit__card { flex: 0 0 auto; }
+.mm .hrv-wit__hint { display: none; }
+@media (min-width: 640px) {
+  .mm .hrv-wit { flex-direction: row; flex-wrap: wrap; }
+  .mm .hrv-wit__card { flex: 1 1 260px; }
+}
+
+/* ---- collapsed parts ---------------------------------------------------------
+   Summary text is an h4 for heading outline (item h3 → part h4 → card h5);
+   children inside .mm-part__body are spaced by container gap rather than * + *. */
+.hrv .mm-part__h { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--hrv-s2); margin: 0; font-family: var(--hrv-sans); font-size: .95rem; font-weight: 650; line-height: 1.35; color: var(--hrv-ink); }
+.mm-part__body, .mm-reflection__body { display: grid; gap: var(--hrv-s3); }
+.hrv .mm-part__body > *, .hrv .mm-reflection__body > * { margin: 0; min-width: 0; }
+.hrv .mm-part__body > .mm-evgroup, .hrv .mm-reflection__body > .mm-evgroup { margin-top: var(--hrv-s3); }
+.mm-print { font-size: .85rem; color: var(--hrv-ink-2); }
+.hrv .mm-print__h { font-weight: 650; margin: 0 0 var(--hrv-s1); }
+.mm-print ul { margin: 0; }
+
+/* ---- closing sections --------------------------------------------------------
+   "How Muslims read these verses today", "What the texts show", "Check the sources",
+   and the disclosed Christian reflection. */
+.hrv .mm-closing__h { font-size: 1.25rem; line-height: 1.3; font-weight: 600; margin-bottom: var(--hrv-s3); }
+.mm-cards { display: grid; gap: var(--hrv-s3); }
+.mm-card { background: var(--hrv-slate); border-left: 3px solid var(--hrv-slate-rule); border-radius: 0 var(--hrv-radius) var(--hrv-radius) 0; padding: var(--hrv-s4); font-size: .95rem; line-height: 1.65; }
+.hrv .mm-card__who { font-family: var(--hrv-sans); font-size: .82rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--hrv-ink-2); margin-bottom: var(--hrv-s2); }
+.hrv .mm-outro { margin: var(--hrv-s4) 0 0; font-size: .95rem; line-height: 1.68; }
+.mm-show__list { list-style: none; margin: var(--hrv-s3) 0 0; padding: 0; background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); }
+.mm-show__list > li { margin: 0; padding: 0 var(--hrv-s4); }
+.mm-show__list > li + li { border-top: 1px solid var(--hrv-line); }
+.mm-show__list a { align-items: start; padding: var(--hrv-s3) 0; font-family: var(--hrv-sans); font-size: .9rem; line-height: 1.45; }
+.mm-src--print { grid-template-columns: 1fr; color: var(--hrv-ink); }
+.hrv .mm-reflection__h { margin: 0; font-family: var(--hrv-sans); font-size: .95rem; font-weight: 650; line-height: 1.35; color: var(--hrv-ink); }
+.hrv .mm-srccount { margin: 0; }
+.mm-srclist--nested { border: 0; border-radius: 0; }
+.hrv .mm-disclosure { font-size: .9rem; line-height: 1.6; color: var(--hrv-ink-2); margin: 0 0 var(--hrv-s2); }
+
+@media print {
+  .mm-index, .mm-copy, .mm-next { display: none; }
+}

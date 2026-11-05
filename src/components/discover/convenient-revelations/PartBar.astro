@@ -1,0 +1,37 @@
+---
+/**
+ * Sticky slim bar on chapter pages (CaseBar pattern): all items (hub) · prev / position / next chapter ·
+ * "On this page" sheet (the 3 items) · copy link. Every target is ≥ 44 px.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+import { LABELS } from '../../../utils/convenientRevelations/config.js';
+const { part, hubHref, totalItems } = Astro.props;
+---
+<nav class="hrv-bar crv-bar" aria-label={LABELS.chapterNav}>
+  <a class="hrv-bar__back" href={hubHref} aria-label={LABELS.allItemsLong.replace('{n}', totalItems)}><Icon name="chevronLeft" /><span class="hrv-bar__backtext">{LABELS.allItems.replace('{n}', totalItems)}</span></a>
+  <div class="hrv-bar__step">
+    {part.prev
+      ? <a class="hrv-iconbtn" href={part.prev.href} rel="prev" aria-label={`${LABELS.prevChapter}: ${part.prev.label}`} title={LABELS.prevChapter}><Icon name="chevronLeft" /></a>
+      : <span class="hrv-iconbtn is-disabled" aria-hidden="true"><Icon name="chevronLeft" /></span>}
+    <span class="hrv-bar__pos"><span class="crv-bar__word">{LABELS.partWord} </span>{part.number} <span aria-hidden="true">/</span><span class="hrv-sr"> {LABELS.ofWord} </span> {part.total}</span>
+    {part.next
+      ? <a class="hrv-iconbtn" href={part.next.href} rel="next" aria-label={`${LABELS.nextChapter}: ${part.next.label}`} title={LABELS.nextChapter}><Icon name="chevronRight" /></a>
+      : <span class="hrv-iconbtn is-disabled" aria-hidden="true"><Icon name="chevronRight" /></span>}
+  </div>
+  <div class="hrv-bar__actions">
+    <details class="crv-sheet" data-crv-sheet>
+      <summary class="hrv-iconbtn" aria-label={LABELS.onThisPage} title={LABELS.onThisPage}><Icon name="facts" /></summary>
+      <div class="crv-sheet__panel">
+        <p class="hrv-eyebrow">{LABELS.onThisPage}</p>
+        <ol class="crv-sheet__list">
+          {part.items.map(it => (
+            <li><a href={`#${it.id}`}><span class="crv-sheet__n">{it.number}</span><span set:html={it.copy.title.html} /></a></li>
+          ))}
+        </ol>
+        <a class="crv-sheet__hub" href={hubHref}>{LABELS.allItemsLong.replace('{n}', totalItems)}<Icon name="chevronRight" /></a>
+      </div>
+    </details>
+    <button class="hrv-iconbtn" type="button" data-crv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button>
+  </div>
+</nav>

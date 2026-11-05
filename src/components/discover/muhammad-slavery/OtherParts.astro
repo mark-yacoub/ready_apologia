@@ -1,0 +1,17 @@
+---
+/** Bottom of each sub-page: the other two parts of the article (replaces PillarFooterNav). */
+import Icon from '../hadith-reliability/Icon.astro';
+import { LABELS } from '../../../utils/muhammadSlavery/config.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { hub, current } = Astro.props;
+const cards = hub.browse.filter(b => b.key !== current);
+---
+<section class="hrv-sec ms-other" id="other-parts" aria-labelledby="other-parts-h">
+  <h2 class="hrv-eyebrow" id="other-parts-h">{LABELS.otherParts}</h2>
+  <ul class="hrv-next">
+    {cards.map(c => (
+      <li><a href={c.href} data-astro-prefetch="hover"><span><span class="hrv-next__why" set:html={tl(c.other.title)} /><span class="hrv-next__title" set:html={c.other.descriptionHtml} /></span><Icon name="chevronRight" /></a></li>
+    ))}
+    <li><a href={hub.path}><span><span class="hrv-next__why">{LABELS.hub}</span><span class="hrv-next__title" set:html={tl(hub.h1)} /></span><Icon name="chevronRight" /></a></li>
+  </ul>
+</section>

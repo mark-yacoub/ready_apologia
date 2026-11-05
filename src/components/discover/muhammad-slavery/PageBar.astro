@@ -1,0 +1,36 @@
+---
+/**
+ * Sticky slim bar on the three sub-pages: back to the hub · "On this page · N" index (a <details>,
+ * grouped by section, 44px rows that wrap) · copy link. Never rewrites the URL while scrolling.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { LABELS, PAGE_PATHS } from '../../../utils/muhammadSlavery/config.js';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { page } = Astro.props;
+const pad = n => String(n).padStart(2, '0');
+---
+<nav class="hrv-bar ms-bar" aria-label={LABELS.navLabel}>
+  <a class="hrv-bar__back" href={PAGE_PATHS.hub}><Icon name="chevronLeft" /><span class="hrv-bar__backtext">{LABELS.allParts}</span></a>
+  <details class="ms-index" data-ms-index>
+    <summary class="ms-index__sum">{page.onThisPageLabel}<Icon name="chevronDown" /></summary>
+    <div class="ms-index__panel">
+      <ol class="ms-index__groups">
+        {page.index.map(g => (
+          <li>
+            {g.id && (
+              <p class="ms-index__q"><span class="ms-index__qn">{pad(g.number)}</span><a href={`#${g.id}`}><span set:html={g.questionHtml} /></a></p>
+            )}
+            <ol class="ms-index__items">
+              {g.items.map(i => <li><a href={`#${i.id}`}><span class="ms-index__n">{i.number}</span><span set:html={tl(i.title)} /></a></li>)}
+            </ol>
+          </li>
+        ))}
+        <li class="ms-index__tail"><a href="#other-parts">{LABELS.otherParts}</a></li>
+      </ol>
+    </div>
+  </details>
+  <div class="hrv-bar__actions">
+    <button class="hrv-iconbtn" type="button" data-hrv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button>
+  </div>
+</nav>
+<div class="hrv-toast" role="status" aria-live="polite" data-hrv-toast>{LABELS.copied}</div>

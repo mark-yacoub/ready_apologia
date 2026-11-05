@@ -1,0 +1,17 @@
+---
+/** "At a glance": four compact cards, each an in-page link to its section (≥ 44 px targets). */
+import Icon from '../hadith-reliability/Icon.astro';
+import ShowcaseFrame from './ShowcaseFrame.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { cards } = Astro.props;
+---
+<div class="hrv-glance-grid idl-glance">
+  {cards.map(c => (
+    <a class="hrv-gcard idl-gcard" href={c.href} aria-label={`${c.aria}: ${c.title}`}>
+      <span class="idl-gcard__top" aria-hidden="true"><span class="idl-gcard__n">{String(c.n).padStart(2, '0')}</span><Icon name="chevronDown" /></span>
+      {c.sc && <ShowcaseFrame sc={c.sc} compact />}
+      <span class="hrv-gcard__title" set:html={tl(c.title)} />
+      <span class="hrv-gcard__take" set:html={tl(c.take)} />
+    </a>
+  ))}
+</div>

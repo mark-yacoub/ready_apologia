@@ -1,0 +1,16 @@
+---
+/** Verify chips: Sunnah.com (primary) first, the site's own page second. Wrap, never scroll sideways. */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+import { LABELS } from '../../../utils/muhammadSlavery/config.js';
+const { chips = [], label = LABELS.chipsLabel } = Astro.props;
+---
+{chips.length > 0 && (
+  <div class="hrv-verify ms-chips" aria-label={label}>
+    {chips.map(ch => (
+      <a href={ch.href} {...ch.attrs} title={ch.title} class={ch.secondary ? 'is-secondary' : undefined}>
+        <span set:html={tl(ch.label)} /><Icon name={ch.external ? 'external' : 'chevronRight'} />
+      </a>
+    ))}
+  </div>
+)}

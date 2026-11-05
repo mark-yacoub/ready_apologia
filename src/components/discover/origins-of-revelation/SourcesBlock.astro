@@ -1,0 +1,8 @@
+---
+/** Every source quoted on the page, grouped by repository (shared hadith-reliability SourcesList). */
+import SourcesList from '../hadith-reliability/SourcesList.astro';
+const { groups } = Astro.props;
+---
+<div class="orv-sources">
+  <SourcesList groups={groups} />
+</div>

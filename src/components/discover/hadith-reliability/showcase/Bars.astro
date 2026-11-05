@@ -18,4 +18,4 @@ const sharedRef = hrefs.size === 1 && sc.items.every(i => i.ref) ? sc.items[0].r
     </div>
   ))}
 </div>
-{!compact && sharedRef && <p class="hrv-sc__note">Source: <Ref ref={sharedRef} /></p>}
+{!compact && sharedRef && <p class="hrv-sc__note">Source: <Ref ref={sharedRef} /></p>}{!compact && sc.noteHtml && <p class="hrv-sc__note" set:html={sc.noteHtml} />}

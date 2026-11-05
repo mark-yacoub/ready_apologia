@@ -1,16 +1,11 @@
 ---
-/** Two texts of the same report; the changed or removed wording is highlighted. */
-import Ref from './Ref.astro';
+/**
+ * Two texts of the same report; the changed or removed wording is highlighted.
+ * Optional `sc.rows` stacks several A/B pairs (e.g. one per verse); each pair is a RedlinePair.
+ */
+import RedlinePair from './RedlinePair.astro';
 const { sc, compact = false } = Astro.props;
+const pairs = sc.rows ?? [sc];
 ---
-<div class="hrv-redline">
-  <div class="hrv-redline__side hrv-redline__side--a">
-    <div class="hrv-redline__tag">{compact || !sc.a.ref ? <span>{sc.a.ref?.label || 'Version A'}</span> : <Ref ref={sc.a.ref} />}</div>
-    <div class="hrv-redline__text" set:html={sc.a.html} />
-  </div>
-  <div class="hrv-redline__side hrv-redline__side--b">
-    <div class="hrv-redline__tag">{compact || !sc.b.ref ? <span>{sc.b.ref?.label || 'Version B'}</span> : <Ref ref={sc.b.ref} />}</div>
-    <div class="hrv-redline__text" set:html={sc.b.html} />
-  </div>
-</div>
+{pairs.map(p => <RedlinePair p={p} compact={compact} />)}
 {sc.noteHtml && !compact && <p class="hrv-sc__note" set:html={sc.noteHtml} />}

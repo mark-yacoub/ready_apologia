@@ -1,0 +1,211 @@
+/* ==========================================================================
+   /discover/origins-of-revelation: a thin layer on the hadith-reliability
+   design system. Everything is scoped to `.hrv.orv`; nothing here leaks.
+   Shared look (paper/ink, teal = verifiable, sand = primary-source quotations,
+   slate = scholars' voice, no red) comes from hadith-reliability.css, along with
+   the default spacing of every shared component (quote, scholar, eval, showcase,
+   disclosure, sources). This file only:
+     1. sets the page's section gap on the shared spacing scale (below), and
+     2. overrides the shared defaults where this page differs, each with its reason.
+   If a value here matches the shared default, delete it. Mobile-first.
+   ========================================================================== */
+
+/* ---- spacing -----------------------------------------------------------------
+   Margins, padding and gaps use the shared --hrv-s1…s8 scale (hadith-reliability.css).
+   The one page-specific step is the gap between the five accounts, which grows on
+   wide screens. (44px tap targets are accessibility minimums and stay literal.) */
+.hrv.orv { --orv-section-gap: var(--hrv-s7); }
+@media (min-width: 768px) { .hrv.orv { --orv-section-gap: var(--hrv-s8); } }
+
+/* ---- sticky section bar ---------------------------------------------------- */
+.hrv.orv .orv-nav {
+  position: sticky; top: calc(-1 * var(--hrv-inset)); z-index: 20;
+  margin: 0 calc(-1 * var(--hrv-inset)); padding: 0 calc(var(--hrv-inset) - 10px);
+  height: var(--hrv-bar-h); display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 2px;
+  background: rgba(251, 249, 245, .94); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--hrv-line);
+}
+@media (min-width: 768px) { .hrv.orv .orv-nav { margin: 0 -32px; padding: 0 24px; } }
+.hrv.orv .orv-nav__back { padding: 0 6px; gap: 2px; }
+.hrv.orv .orv-nav__backtext { display: none; font-size: .86rem; }
+@media (min-width: 400px) { .hrv.orv .orv-nav__backtext { display: inline; } .hrv.orv .orv-nav__back { padding-right: 10px; } }
+.hrv.orv .orv-nav__track {
+  overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+}
+.hrv.orv .orv-nav.is-end .orv-nav__track { -webkit-mask-image: none; mask-image: none; }
+.hrv.orv .orv-nav__track::-webkit-scrollbar { display: none; }
+.hrv.orv .orv-nav__list { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0 28px 0 2px; width: max-content; }
+.hrv.orv .orv-nav__list > li { margin: 0; }
+.hrv.orv .orv-nav__chip {
+  display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: 0 13px; border-radius: 999px;
+  border: 1px solid var(--hrv-line-strong); background: var(--hrv-surface); color: var(--hrv-ink);
+  font: 600 .86rem/1 var(--hrv-sans); text-decoration: none; white-space: nowrap;
+}
+.hrv.orv .orv-nav__chip:hover { border-color: var(--hrv-ink-3); }
+.hrv.orv .orv-nav__chip[aria-current] { background: var(--hrv-ink); border-color: var(--hrv-ink); color: #fff; }
+.hrv.orv .orv-nav__n { font-size: .74rem; font-weight: 700; color: var(--hrv-verify); font-variant-numeric: tabular-nums; }
+.hrv.orv .orv-nav__chip[aria-current] .orv-nav__n { color: rgba(255, 255, 255, .8); }
+
+/* Phones: a 12 px gutter instead of 16 px (more words per line; the paper still runs edge to edge). */
+@media (max-width: 479px) {
+  .hrv.orv { padding-left: 12px; padding-right: 12px; }
+  .hrv.orv .orv-nav { margin: 0 -12px; padding: 0 4px; }
+}
+
+/* Old ids, sections and cards land below the sticky bar. */
+.hrv.orv .orv-alias { display: block; height: 0; scroll-margin-top: calc(var(--hrv-bar-h) + 12px); }
+.hrv.orv .hrv-sec, .hrv.orv .orv-glance-sec, .hrv.orv .hrv-ev { scroll-margin-top: calc(var(--hrv-bar-h) + 12px); }
+
+/* ---- header -----------------------------------------------------------------
+   Padding, hook size and the eyebrow come from the shared .hrv-case-head / .hrv-hook.
+   Override: the h1 is a long descriptive title, so it starts smaller than the shared
+   1.75rem on phones and grows on wider screens. */
+.hrv.orv .orv-h1 { font-size: 1.4rem; line-height: 1.22; margin-bottom: var(--hrv-s3); }
+@media (min-width: 400px) { .hrv.orv .orv-h1 { font-size: 1.5rem; } }
+@media (min-width: 768px) { .hrv.orv .orv-h1 { font-size: 2rem; line-height: 1.16; margin-bottom: var(--hrv-s4); } }
+/* Context line: one link row that wraps rather than hiding text. */
+.hrv.orv .orv-head__context {
+  display: flex; align-items: center; gap: .4rem; min-height: 44px; margin-top: var(--hrv-s2); max-width: 100%;
+  font-size: .82rem; line-height: 1.3; color: var(--hrv-verify); font-weight: 600; text-decoration: none;
+}
+.hrv.orv .orv-head__context > span { min-width: 0; }
+.hrv.orv .orv-head__context .hrv-icon { flex: none; }
+.hrv.orv .orv-head__context:hover { color: var(--hrv-verify-strong); }
+/* Framing: a slate aside (the same voice as the scholar box). */
+.hrv.orv .orv-framing {
+  margin: var(--hrv-s3) 0 0; padding: var(--hrv-s3) var(--hrv-s4); border-left: 3px solid var(--hrv-slate-rule); border-radius: 0 10px 10px 0;
+  background: var(--hrv-slate); font-size: .92rem; line-height: 1.6; color: var(--hrv-ink-2);
+}
+.hrv.orv .orv-whos-who { margin-top: var(--hrv-s5); }
+.hrv.orv .orv-emph { margin: var(--hrv-s3) 0 0; font-size: .82rem; line-height: 1.5; color: var(--hrv-ink-2); }
+
+/* ---- at a glance: index ------------------------------------------------------- */
+.hrv.orv .orv-glance-sec { margin-top: var(--hrv-s6); }
+.hrv.orv .orv-glance-sec__h { margin-bottom: var(--hrv-s3); }
+.hrv.orv .orv-glance { list-style: none; margin: 0; padding: 0; background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); overflow: hidden; }
+.hrv.orv .orv-glance > li { margin: 0; }
+.hrv.orv .orv-glance > li + li { border-top: 1px solid var(--hrv-line); }
+.hrv.orv .orv-glance__row { display: grid; grid-template-columns: 22px 1fr 14px; gap: var(--hrv-s3); align-items: start; min-height: 48px; padding: var(--hrv-s4); color: inherit; text-decoration: none; }
+.hrv.orv .orv-glance__row:hover { background: var(--hrv-paper); }
+.hrv.orv .orv-glance__n { font: 700 .78rem/1.6 var(--hrv-sans); color: var(--hrv-verify); font-variant-numeric: tabular-nums; }
+.hrv.orv .orv-glance__body { display: flex; flex-direction: column; gap: var(--hrv-s1); min-width: 0; }
+.hrv.orv .orv-glance__title { font-family: var(--hrv-display); font-weight: 600; font-size: 1rem; line-height: 1.32; }
+.hrv.orv .orv-glance__take { font-size: .88rem; line-height: 1.55; color: var(--hrv-ink-2); }
+.hrv.orv .orv-glance__chips { margin-top: var(--hrv-s1); font-size: .76rem; }
+.hrv.orv .orv-glance__chev { color: var(--hrv-ink-3); margin-top: 3px; }
+
+/* ---- sections ------------------------------------------------------------------
+   Override: one long page of five accounts, so each section opens with a stronger
+   rule and more air than the shared .hrv-sec (36px, no rule). */
+.hrv.orv .orv-sec { margin-top: var(--orv-section-gap); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line-strong); }
+.hrv.orv .orv-sec__head { margin-bottom: 0; gap: 10px; }
+.hrv.orv .orv-sec__mark { display: inline-flex; align-self: center; color: var(--hrv-verify); }
+.hrv.orv .orv-sec__mark .hrv-icon { width: 18px; height: 18px; }
+@media (min-width: 768px) { .hrv.orv .hrv-q__title { font-size: 1.35rem; } }
+.hrv.orv .orv-context { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 0; font-size: .78rem; line-height: 1.3; gap: .3rem; }
+.hrv.orv .orv-intro { margin: var(--hrv-s5) 0 0; font-size: 1rem; line-height: 1.7; }
+
+/* "What the sources say": the eyebrow, then the groups of quotations with even gaps.
+   The gap lives on the container, so inserting or removing a group cannot break it. */
+.hrv.orv .orv-say { margin-top: var(--hrv-s6); }
+.hrv.orv .orv-what { margin: 0 0 var(--hrv-s3); }
+.hrv.orv .orv-say__groups { display: grid; gap: var(--hrv-s5); }
+
+/* showcase: 1 column under 640 px, 2 columns from 640 px. Padding, caption, note and
+   side boxes use the shared .hrv-sc / .hrv-vs defaults. */
+.hrv.orv .orv-sc { margin-top: var(--hrv-s4); box-shadow: none; }
+/* Stacked on phones: a plain gap, no divider glyph (a rotated swap icon reads as "1↓"). */
+.hrv.orv .hrv-vs { gap: var(--hrv-s3); }
+.hrv.orv .hrv-vs__div { display: none; }
+/* Source links keep a 44 px tap area; negative margins keep the visual line compact. */
+.hrv.orv .hrv-sc__ref { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; }
+.hrv.orv .hrv-vs__list .hrv-sc__ref {
+  /* Inline-link exemption: the source sits inline after its excerpt (like a citation in running
+     text); vertical padding on the inline box enlarges the tap area toward 44 px without adding line
+     height, so tap areas may overlap the neighbouring line slightly. */
+  display: inline; min-height: 0; padding: 15px 4px; font-size: .76rem; white-space: nowrap;
+}
+@media (min-width: 640px) {
+  .hrv.orv .hrv-vs { grid-template-columns: 1fr 28px 1fr; gap: 0; align-items: stretch; }
+  .hrv.orv .hrv-vs__div { display: flex; height: auto; }
+  .hrv.orv .hrv-vs__div .hrv-icon { width: 15px; height: 15px; transform: none; }
+}
+
+/* witnesses (§4): every verdict visible: stacked on phones, two columns from 640 px
+   (override: the shared strip scrolls sideways and would hide verdicts). */
+.hrv.orv .orv-wit { margin-top: var(--hrv-s4); box-shadow: none; }
+.hrv.orv .orv-wit__grid { display: grid; grid-template-columns: 1fr; gap: var(--hrv-s3); }
+@media (min-width: 640px) { .hrv.orv .orv-wit__grid { grid-template-columns: 1fr 1fr; } }
+.hrv.orv .orv-wit__card { flex: none; margin: 0; min-width: 0; padding: var(--hrv-s3) var(--hrv-s4); gap: 6px; }
+.hrv.orv .orv-wit__card .hrv-sc__ref { display: flex; align-items: center; width: fit-content; max-width: 100%; min-height: 44px; padding: 0; margin: -4px 0 -6px; line-height: 1.35; }
+.hrv.orv .orv-wit__pos { margin: 1px 0 0; font-size: .8rem; font-weight: 650; color: var(--hrv-ink); }
+.hrv.orv .orv-wit__q { margin: 0; }
+.hrv.orv .orv-wit__gloss { margin: var(--hrv-s1) 0 0; font-size: .86rem; line-height: 1.55; color: var(--hrv-ink-2); }
+
+/* ---- card groups + cards ---------------------------------------------------------
+   Override: many short quotations per section, so cards drop the shared .hrv-ev frame
+   (border, background, radius); the number sits inline with the label and a hairline
+   separates cards. */
+.hrv.orv .orv-group__h { font-family: var(--hrv-sans); font-size: .82rem; font-weight: 700; line-height: 1.35; color: var(--hrv-ink-2); margin: 0 0 6px; }
+.hrv.orv .orv-card {
+  background: none; border: 0; border-radius: 0; box-shadow: none; margin: 0; padding: var(--hrv-s4) 0;
+}
+.hrv.orv .orv-card + .orv-card { border-top: 1px solid var(--hrv-line); }
+.hrv.orv .orv-card:target { box-shadow: none; background: var(--hrv-verify-bg); }
+.hrv.orv .orv-card .hrv-ev__head { display: flex; align-items: baseline; gap: var(--hrv-s2); margin: 0 0 var(--hrv-s2); }
+.hrv.orv .orv-card .hrv-ev__n {
+  flex: none; width: auto; height: auto; margin: 0; border-radius: 0; background: none; display: inline;
+  color: var(--hrv-verify); font: 700 .8rem/1 var(--hrv-sans); font-variant-numeric: tabular-nums;
+}
+.hrv.orv .orv-card .hrv-ev__n::after { content: '.'; }
+.hrv.orv .orv-card__note { margin: 0 0 var(--hrv-s2); font-size: .88rem; line-height: 1.55; color: var(--hrv-ink-2); }
+/* The quotation follows the label/note directly, so it drops the shared top margin;
+   its padding, rule and radius are the shared .hrv-quote defaults. */
+.hrv.orv .orv-card__q { margin: 0; }
+.hrv.orv .orv-card__q .hrv-quote__en { line-height: 1.65; }
+.hrv.orv .orv-card__q .orv-card__ar { margin: 0; }
+/* Verify chips: a 30 px pill drawn inside a 44 px tap target (override: the shared chips are
+   38 px and scroll sideways; here they wrap so no source is hidden). */
+.hrv.orv .orv-card .hrv-verify { flex-wrap: wrap; overflow: visible; gap: 0 6px; margin: var(--hrv-s2) 0 0; padding: 0; }
+.hrv.orv .orv-card .hrv-verify a {
+  position: relative; isolation: isolate; min-height: 44px; padding: 0 11px; background: none; font-size: .78rem;
+  white-space: normal; line-height: 1.25; max-width: 100%;
+}
+.hrv.orv .orv-card .hrv-verify a::before {
+  content: ''; position: absolute; inset: 7px 0; z-index: -1; border-radius: 999px; background: var(--hrv-verify-bg);
+}
+.hrv.orv .orv-card .hrv-verify a:hover { background: none; }
+.hrv.orv .orv-card .hrv-verify a:hover::before { background: #d9eaec; }
+.hrv.orv .orv-card__repeat { margin: 0; font-size: .8rem; }
+.hrv.orv .orv-card__repeat .hrv-link { display: inline-flex; align-items: center; min-height: 44px; }
+/* Collapsed parallels sit right under the last card (the shared disclosure has its own rules). */
+.hrv.orv .orv-more { margin-top: 0; }
+.hrv.orv .orv-more .hrv-disclosure__body { padding: 0 0 var(--hrv-s3); }
+
+/* ---- classical explanation → comparing with the text → go deeper ------------------
+   Padding, headings and the eval rule are the shared .hrv-scholar / .hrv-eval defaults;
+   this page only adds air between the blocks and a longer reading line height. */
+.hrv.orv .orv-pair { margin-top: var(--hrv-s6); line-height: 1.65; }
+.hrv.orv .hrv-eval.orv-pair { margin-top: var(--hrv-s5); }
+.hrv.orv .orv-pair__body > p { margin: 0 0 1em; }
+.hrv.orv .orv-pair__body > p:last-child { margin-bottom: 0; }
+.hrv.orv .orv-pair__more { margin: var(--hrv-s3) 0 0; border-bottom: 0; }
+.hrv.orv .orv-pair__more > summary { min-height: 44px; padding: var(--hrv-s1) 0; font-size: .84rem; }
+.hrv.orv .orv-deeper { margin-top: var(--hrv-s5); }
+.hrv.orv .orv-deeper + .orv-deeper { margin-top: 0; }
+
+/* ---- sources + closing (source rows and groups use the shared .hrv-src defaults) --- */
+.hrv.orv .orv-sources { margin-top: var(--hrv-s4); }
+.hrv.orv .orv-sources .hrv-more > summary { min-height: 44px; }
+.hrv.orv .orv-closing { margin-top: var(--orv-section-gap); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line-strong); }
+.hrv.orv .orv-closing__h { font-family: var(--hrv-display); font-size: 1.25rem; line-height: 1.3; font-weight: 600; margin: 0 0 var(--hrv-s4); }
+.hrv.orv .orv-closing__body { font-family: var(--hrv-display); font-size: 1.04rem; line-height: 1.7; }
+.hrv.orv .orv-closing__body > p { margin: 0 0 1em; }
+.hrv.orv .orv-top { display: inline-flex; align-items: center; gap: .35rem; min-height: 44px; margin-top: var(--hrv-s4); color: var(--hrv-verify); font-weight: 600; font-size: .9rem; text-decoration: none; }
+.hrv.orv .orv-top__icon { transform: rotate(180deg); }
+
+@media print {
+  .hrv.orv .orv-nav, .hrv.orv .orv-top { display: none; }
+}

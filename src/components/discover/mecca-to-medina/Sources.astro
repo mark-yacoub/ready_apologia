@@ -1,0 +1,33 @@
+---
+/**
+ * "Check the sources", grouped by repository. Same markup as hrv SourcesList, plus rows without a link
+ * (printed sīra / taʾrīkh works), which render as plain text. Long groups collapse after 8.
+ * The group count is visual; screen readers hear "(40 sources)" instead of "Hadith collections40".
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { groups } = Astro.props;
+const VISIBLE = 8;
+---
+{groups.map(g => {
+  const row = s => (s.href
+    ? <a class="hrv-src" href={s.href} {...s.attrs} title={s.title}><span class="hrv-src__label" set:html={tl(s.label)} /><Icon name={s.external ? 'external' : 'chevronRight'} /></a>
+    : <span class="hrv-src mm-src--print"><span class="hrv-src__label" set:html={tl(s.label)} /></span>);
+  return (
+    <div class="hrv-srcgroup">
+      <h3 class="hrv-srcgroup__h">{g.label}<span class="hrv-disclosure__meta mm-srccount" aria-hidden="true">{g.items.length}</span><span class="hrv-sr">{` (${g.items.length} ${g.items.length === 1 ? 'source' : 'sources'})`}</span></h3>
+      {g.note && <p class="hrv-srcgroup__note">{g.note}</p>}
+      <ul class="hrv-srclist">
+        {g.items.slice(0, VISIBLE).map(s => <li>{row(s)}</li>)}
+        {g.items.length > VISIBLE && (
+          <li><details class="hrv-more">
+            <summary>Show all {g.items.length}</summary>
+            <ul class="hrv-srclist mm-srclist--nested">
+              {g.items.slice(VISIBLE).map(s => <li>{row(s)}</li>)}
+            </ul>
+          </details></li>
+        )}
+      </ul>
+    </div>
+  );
+})}

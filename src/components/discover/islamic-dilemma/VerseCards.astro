@@ -1,0 +1,25 @@
+---
+/** Compact verse cards: reference → neutral label → quotation (sand) → verify chips → classical pair. */
+import Icon from '../hadith-reliability/Icon.astro';
+import ClassicalPair from './ClassicalPair.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { items } = Astro.props;
+---
+<div class="idl-verses">
+  {items.map(v => (
+    <article class="hrv-ev idl-verse" id={v.anchor}>
+      <header class="idl-verse__head">
+        {v.showRef && <span class="idl-verse__ref" set:html={tl(v.refLabel)} />}
+        <h3 class="idl-verse__label" set:html={v.labelHtml || tl(v.refLabel)} />
+      </header>
+      {v.bodyHtml && <p class="idl-verse__body" set:html={v.bodyHtml} />}
+      <blockquote class="hrv-quote idl-verse__q"><p class="hrv-quote__en" set:html={`“${v.quoteHtml}”`} /></blockquote>
+      <div class="hrv-verify" aria-label="Check the sources for this verse">
+        {v.chips.map(ch => (
+          <a href={ch.href} {...ch.attrs} title={ch.title}><span set:html={tl(ch.label)} /><Icon name={ch.external ? 'external' : 'chevronRight'} /></a>
+        ))}
+      </div>
+      {(v.classical || v.evaluation || v.deeper) && <div class="idl-verse__pair"><ClassicalPair classical={v.classical} evaluation={v.evaluation} deeper={v.deeper} level={4} /></div>}
+    </article>
+  ))}
+</div>
