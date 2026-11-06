@@ -1,0 +1,5 @@
+# Generated outputs (rebuild with generate.mjs / build_slides.mjs)
+*.pdf
+*.png
+handout.html
+slides_build/
