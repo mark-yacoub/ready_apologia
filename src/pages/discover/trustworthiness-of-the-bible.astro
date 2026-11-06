@@ -217,6 +217,7 @@ const schemaGraph = {
 </Layout>
 
 <script>
+  import { replaceUrl } from '../../utils/url_history.js';
   function setupStageFilters() {
     const nav = document.getElementById('stage-filter-nav');
     if (!nav || nav.hasAttribute('data-filters-initialized')) return;
@@ -238,9 +239,7 @@ const schemaGraph = {
       });
 
       // Update location hash without jumping unless deep linking
-      if (history.replaceState) {
-        history.replaceState(null, '', stage === 'overview' ? window.location.pathname : `#${stage}`);
-      }
+      replaceUrl(stage === 'overview' ? window.location.pathname : `#${stage}`);
 
       // Scroll smoothly to top of filter nav for clean reading
       nav.scrollIntoView({ behavior: 'smooth', block: 'start' });

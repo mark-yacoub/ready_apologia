@@ -183,6 +183,7 @@ const schemaObj = {
 </Layout>
 
 <script>
+  import { replaceUrl } from '../../utils/url_history.js';
   import {
     setupInitialHashScroll,
     setupSectionObserver
@@ -190,6 +191,14 @@ const schemaObj = {
 
   let _cleanupHashScroll = null;
   let _cleanupHashObserver = null;
+
+  // Stop the hash-scroll retries and the scroll-spy (which rewrites the URL) before the page is swapped
+  // out; otherwise they keep running, and can rewrite the next page's URL.
+  document.addEventListener('astro:before-swap', () => {
+    _cleanupHashScroll?.();
+    _cleanupHashObserver?.();
+    _cleanupHashScroll = _cleanupHashObserver = null;
+  });
 
   function initEvidenceFeed() {
     // 1. Hardware Accelerated Filtering via Event Delegation
@@ -274,7 +283,7 @@ const schemaObj = {
 
     evidenceItems.forEach(item => {
       item.addEventListener('click', () => {
-        if (item.id) window.history.replaceState(null, '', `#${item.id}`);
+        if (item.id) replaceUrl(`#${item.id}`);
       });
     });
   }

@@ -8,6 +8,8 @@
  *     data-mm-open) opens it, then scrolls there, on load and on hashchange.
  * Bound on astro:page-load because the site uses Astro's ClientRouter.
  */
+import { pushHash } from '../../../utils/url_history.js';
+
 function openFor(target) {
   if (!target) return;
   const extra = target.dataset?.mmOpen ? document.getElementById(target.dataset.mmOpen) : null;
@@ -20,9 +22,8 @@ function goTo(id, { push = false } = {}) {
   const target = id && document.getElementById(id);
   if (!target) return false;
   openFor(target);
-  // A null state is safe with Astro's ClientRouter: it treats a null-state popstate as a hash-only change
-  // and leaves it to the browser, and our `hashchange` listener re-opens/scrolls on Back.
-  if (push && location.hash !== `#${id}`) history.pushState(null, '', `#${id}`);
+  // pushHash (not a raw pushState) so Back to this entry from another page still renders this page.
+  if (push && location.hash !== `#${id}`) pushHash(id);
   // Wait a frame so a just-closed index panel or just-opened <details> has its final layout.
   requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
   return true;

@@ -8,6 +8,7 @@ import {
   getCenturyCount,
   getAncientJudaismCount
 } from '../../../utils/evidenceCounters.js';
+import { replaceUrl } from '../../../utils/url_history.js';
 
 export const DedicatedEvidenceView = ({ evidenceObj, verseTexts }) => {
   const [activeTab, setActiveTab] = useState(() => {
@@ -30,7 +31,7 @@ export const DedicatedEvidenceView = ({ evidenceObj, verseTexts }) => {
     setActiveTab(tab);
     setActiveFilter('All');
     if (typeof window !== 'undefined' && hash) {
-      window.history.replaceState(null, '', `#${hash}`);
+      replaceUrl(`#${hash}`);
     }
   };
 

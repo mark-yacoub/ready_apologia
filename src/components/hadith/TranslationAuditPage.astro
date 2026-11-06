@@ -81,7 +81,7 @@ const schemaObj = {
   theme="hadith"
   showOnboarding={false}
 >
-  <div class="hx">
+  <div class="hx" data-page="translation-audit">
     <HadithSectionHeader backHref={`${base}/hadith`} backLabel="Sahih Hadiths" />
     <header class="hx-head">
       <p class="hx-eyebrow">Translation audit</p>
@@ -98,11 +98,13 @@ const schemaObj = {
   <RouteAnalytics eventName="hadith_audit_view" params={{ section: 'translation-audit', type }} />
   <script>
     import { scrollToAnchor } from './hadithClient.js';
+    // Bound once per session (bundled script), so both handlers must ignore every other page.
     const applyHash = () => {
-      const h = decodeURIComponent(window.location.hash.slice(1));
+      if (!document.querySelector('[data-page="translation-audit"]')) return;
+      let h = '';
+      try { h = decodeURIComponent(window.location.hash.slice(1)); } catch { /* malformed hash */ }
       if (h) scrollToAnchor(h, { smooth: false });
     };
-    applyHash();
     document.addEventListener('astro:page-load', applyHash);
     window.addEventListener('hashchange', applyHash);
   </script>

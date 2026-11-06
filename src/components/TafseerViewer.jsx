@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ScrollableTrack from './ScrollableTrack.jsx';
 import { trackEvent } from '../utils/analytics.js';
+import { replaceUrl } from '../utils/url_history.js';
 import '../styles/tafseer.css';
 
 function normalizeForMatch(str) {
@@ -35,7 +36,7 @@ export default function TafseerViewer({ activeCommentary, scholarMenu = [], sura
       ayah: ayah
     });
     if (typeof window !== 'undefined') {
-      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${lang}`);
+      replaceUrl(`${window.location.pathname}${window.location.search}#${lang}`);
     }
   };
 

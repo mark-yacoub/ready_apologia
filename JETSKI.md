@@ -12,6 +12,8 @@ Ready Apologia V1 is designed as a **zero-dependency, high-speed mobile-first we
 *   **Database:** SQLite (`data.db` directly queried during pre-rendering using Node 22's built-in `node:sqlite`)
 *   **CSS/Layout:** Pure, Tailwind-free semantic CSS custom properties (variables) and standard CSS Flexbox.
 *   **Icons:** 100% Bulletproof Inline Vector SVGs (all Material Web fonts deleted for instant loading speed).
+*   **URL / history rule (ClientRouter):** Never call `history.pushState`/`replaceState` or assign `location.hash` directly. Use `replaceUrl()` / `pushHash()` from `src/utils/url_history.js`. Astro's ClientRouter ignores Back/Forward to entries with a null state, so a raw call makes Back change the URL without rendering the page. `npm run test:history` enforces this.
+*   **Page-script rule (ClientRouter):** A page's bundled `<script>` runs once per session, and its `window`/`document` listeners stay attached on every later page. So an `astro:page-load`/`hashchange` handler must first check that its page is present (e.g. `[data-page="bible-chapter"]`), and must look up the current page's elements each time instead of keeping the first visit's. Stop observers and timers on `astro:before-swap`. Only `.main-content` scrolls (the window never does); Back/Forward scroll restore for it lives in `src/utils/scroll_restoration.js`.
 
 ---
 

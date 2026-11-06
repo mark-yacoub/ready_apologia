@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import booksMeta from '../../../data/books_meta.json';
 import { formatBookName } from '../../../utils/evidenceHelpers.js';
 import { ProphecyCard } from '../ProphecyCard.jsx';
+import { replaceUrl } from '../../../utils/url_history.js';
 
 export const PropheciesDedicatedView = ({ prophecies, verseTexts, evidenceId }) => {
   const getInitialHashState = () => {
@@ -25,7 +26,7 @@ export const PropheciesDedicatedView = ({ prophecies, verseTexts, evidenceId }) 
     setActiveFilter('All');
     if (typeof window !== 'undefined') {
       const hash = `${encodeURIComponent(tab)}::All`;
-      window.history.replaceState(null, '', `#${hash}`);
+      replaceUrl(`#${hash}`);
     }
   };
 
@@ -33,7 +34,7 @@ export const PropheciesDedicatedView = ({ prophecies, verseTexts, evidenceId }) 
     setActiveFilter(filter);
     if (typeof window !== 'undefined') {
       const hash = `${encodeURIComponent(activeTab)}::${encodeURIComponent(filter)}`;
-      window.history.replaceState(null, '', `#${hash}`);
+      replaceUrl(`#${hash}`);
     }
   };
 

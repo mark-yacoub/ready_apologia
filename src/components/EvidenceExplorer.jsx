@@ -13,6 +13,8 @@ import { useActiveEvidence } from '../hooks/useActiveEvidence.js';
 import { PropheciesDedicatedView } from './evidence/views/PropheciesDedicatedView.jsx';
 import { DedicatedEvidenceView } from './evidence/views/DedicatedEvidenceView.jsx';
 import { AuthorshipDedicatedView } from './evidence/views/AuthorshipDedicatedView.jsx';
+import { replaceUrl } from '../utils/url_history.js';
+import { DEFAULT_SCRIPTURE_PATH } from '../utils/routes.js';
 
 export default function EvidenceExplorer({ evidence = [], initialEvidenceId = null }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -103,7 +105,7 @@ export default function EvidenceExplorer({ evidence = [], initialEvidenceId = nu
         <nav className="breadcrumb-nav-bar" aria-label="Breadcrumb">
           <ol className="breadcrumb-list">
             <li className="breadcrumb-item">
-              <a href={`${base}/`} className="breadcrumb-link">Ready Apologia</a>
+              <a href={`${base}${DEFAULT_SCRIPTURE_PATH}`} className="breadcrumb-link">Ready Apologia</a>
             </li>
             <li className="breadcrumb-separator" aria-hidden="true">/</li>
             <li className="breadcrumb-item">
@@ -182,7 +184,7 @@ export default function EvidenceExplorer({ evidence = [], initialEvidenceId = nu
                   onClick={(e) => {
                     setActiveMainHeading(section.mainHeading);
                     if (typeof window !== 'undefined') {
-                      window.history.replaceState(null, '', `#${section.mainHeading.toLowerCase()}`);
+                      replaceUrl(`#${section.mainHeading.toLowerCase()}`);
                     }
                     e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                   }}

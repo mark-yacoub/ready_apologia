@@ -3,6 +3,7 @@ import {
   setupInitialHashScroll,
   setupSectionObserver
 } from '../../utils/section_navigator.js';
+import { replaceUrl } from '../../utils/url_history.js';
 
 class DivinityTimelineApp extends HTMLElement {
     constructor() {
@@ -76,7 +77,7 @@ class DivinityTimelineApp extends HTMLElement {
                 const color = card.dataset.color;
                 const parentEvent = card.closest('.timeline-event');
                 if (parentEvent && parentEvent.id) {
-                    window.history.replaceState(null, '', `#${parentEvent.id}`);
+                    replaceUrl(`#${parentEvent.id}`);
                 }
                 if (id) this.openModal(id, color);
             });

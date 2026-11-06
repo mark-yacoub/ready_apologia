@@ -246,7 +246,7 @@ const ogImage = getQuranOgImage(surahNum, null);
   ogUrl={canonicalURL}
   schema={surahSchema}
 >
-  <div class="quran-reader-container theme-quran prefer-english">
+  <div class="quran-reader-container theme-quran prefer-english" data-page="quran-surah">
     <QuranPageHeader currentTitle={`${surahNum}. ${arabicData.transliteration}`} currentIndex={surahNum} />
 
     <!-- Language Toggle -->
@@ -387,6 +387,8 @@ const ogImage = getQuranOgImage(surahNum, null);
 </Layout>
 
 <script>
+  import { replaceUrl } from '../../utils/url_history.js';
+  import { hasSavedScroll } from '../../utils/scroll_restoration.js';
   import { DEFAULT_QURAN_TAB_ORDER } from '../../utils/quran_config.js';
   import { trackQuranLabelInteraction } from '../../utils/analytics.js';
   import { enforceUserBadgePriority } from '../../utils/dom_tabs.js';
@@ -446,10 +448,14 @@ const ogImage = getQuranOgImage(surahNum, null);
 
     const link = e.target.closest('.verse-card a[href]');
     if (!link) return;
+    // Same-page links (e.g. a cross-reference to another verse in this chapter) are handled by the
+    // router; rewriting the URL here would replace the target #hash with this verse's id.
+    const url = new URL(link.href, window.location.href);
+    if (url.pathname === window.location.pathname && url.search === window.location.search) return;
 
     const verseCard = link.closest('.verse-card');
     if (verseCard && verseCard.id) {
-      history.replaceState(history.state, '', window.location.pathname + '#' + verseCard.id);
+      replaceUrl(window.location.pathname + '#' + verseCard.id);
     }
   };
 
@@ -460,6 +466,8 @@ const ogImage = getQuranOgImage(surahNum, null);
     // Astro's default scroll restoration crashes if IDs are purely numeric (e.g., id="15").
     // We manually intercept the hash and use getElementById which natively handles numbers.
     if (!window.location.hash) return;
+    // Back/Forward/reload: scroll_restoration puts the reader exactly where they left off instead.
+    if (hasSavedScroll()) return;
 
     const hashId = window.location.hash.substring(1);
     const element = document.getElementById(hashId);
@@ -478,7 +486,9 @@ const ogImage = getQuranOgImage(surahNum, null);
   // ------------------------------------------------------------------
   // Lifecycle Bindings
   // ------------------------------------------------------------------
+  // This bundled script runs once per session, so its page-load handler fires on EVERY later page.
   document.addEventListener('astro:page-load', () => {
+    if (!document.querySelector('[data-page="quran-surah"]')) return;
     initToggle();
     document.addEventListener('click', handleQuranVerseClick);
     restoreScrollPosition();

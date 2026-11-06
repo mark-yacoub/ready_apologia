@@ -38,8 +38,13 @@ export function activeTabFor(pathname) {
   return tab ? tab.id : 'scripture';
 }
 
-/** Last Bible/Quran page the reader opened (Layout.astro records it), else the default chapter. */
-function scriptureUrlFromStorage() {
+/**
+ * The page itself when the reader is on a Bible/Quran page; otherwise the last one they opened
+ * (Layout.astro records it), else the default chapter. The current page is checked first because
+ * Layout records it on astro:page-load, which runs after this hook syncs on mount/after-swap.
+ */
+function scriptureUrlFor(pathname) {
+  if (pathname.includes('/bible/') || pathname.includes('/quran/')) return pathname;
   const fallback = `${getBase()}${DEFAULT_SCRIPTURE_PATH}`;
   try {
     return localStorage.getItem('lastVisitedUrl') || fallback;
@@ -60,7 +65,7 @@ export function useNavTabs() {
   useEffect(() => {
     const sync = () => {
       setActiveTab(activeTabFor(window.location.pathname));
-      setScriptureUrl(scriptureUrlFromStorage());
+      setScriptureUrl(scriptureUrlFor(window.location.pathname));
     };
     sync();
     document.addEventListener('astro:after-swap', sync);

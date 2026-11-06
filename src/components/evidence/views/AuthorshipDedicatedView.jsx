@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import ScrollableTrack from '../../ScrollableTrack.jsx';
 import { SourceBlock } from '../SourceBlock.jsx';
 import { getBookCenturies, CANON_LISTS_BOOK_ID } from '../../../utils/evidenceCounters.js';
+import { replaceUrl } from '../../../utils/url_history.js';
 
 const toHash = (bookTitle) => bookTitle.replace(/\s+/g, '_');
 
@@ -32,7 +33,7 @@ export const AuthorshipDedicatedView = ({ tData }) => {
   const handleBookChange = (b) => {
     setActiveBook(b);
     setActiveCentury('All');
-    window.history.replaceState(null, '', `#${encodeURIComponent(toHash(b))}`);
+    replaceUrl(`#${encodeURIComponent(toHash(b))}`);
   };
 
   const bookEntry = authorship?.[activeBook];

@@ -37,7 +37,8 @@ function initNav(root) {
       if (c.left < t.left || c.right > t.right - 24) track.scrollBy({ left: c.left - t.left - 12, behavior: 'smooth' });
     }
   };
-  const io = new IntersectionObserver(entries => {
+  navObserver?.disconnect();
+  const io = navObserver = new IntersectionObserver(entries => {
     entries.forEach(e => seen.set(e.target.id, e.isIntersecting));
     // The band (below the bar, top 40% of the screen) can hold the previous section's tail and the
     // current section's head at once; the later one in reading order is the section being read.
@@ -49,6 +50,10 @@ function initNav(root) {
   track && track.addEventListener('scroll', updateFade, { passive: true });
   updateFade();
 }
+
+/** Disconnected when the page is swapped out, so it does not keep the old page's nodes alive. */
+let navObserver = null;
+document.addEventListener('astro:before-swap', () => { navObserver?.disconnect(); navObserver = null; });
 
 function init() {
   const root = document.querySelector('.idl');

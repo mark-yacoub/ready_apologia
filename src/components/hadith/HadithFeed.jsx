@@ -11,6 +11,7 @@ import { fetchJsonOnce, revealElement, scrollToAnchor, useHadithLanguage } from 
 import { Icon, LanguageToggle } from './HadithParts.jsx';
 import HadithCard from './HadithCard.jsx';
 import OutlineSheet from './OutlineSheet.jsx';
+import { replaceUrl } from '../../utils/url_history.js';
 
 /** Flattens sections into Outline entries; only the first occurrence of a hadith gets the DOM anchor. */
 function buildEntries(sections) {
@@ -82,7 +83,7 @@ export default function HadithFeed({ sections, variant = 'feed', base = '', head
   const closeSheet = useCallback(() => setSheetOpen(false), []);
   const pick = useCallback(e => {
     setSheetOpen(false);
-    if (e.anchor) history.replaceState(null, '', `#${e.anchor}`);
+    if (e.anchor) replaceUrl(`#${e.anchor}`);
     setTimeout(() => {
       const el = document.querySelector(`[data-item-id="${CSS.escape(e.id)}"] .hx-card`);
       if (!el) return;
@@ -92,7 +93,7 @@ export default function HadithFeed({ sections, variant = 'feed', base = '', head
   }, []);
   const toTop = useCallback(() => {
     setSheetOpen(false);
-    history.replaceState(null, '', window.location.pathname);
+    replaceUrl(window.location.pathname);
     (document.querySelector('.main-content') || window).scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 

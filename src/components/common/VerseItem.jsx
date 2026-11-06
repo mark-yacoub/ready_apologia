@@ -3,6 +3,7 @@ import booksMeta from '../../data/books_meta.json';
 import { trackEvidenceInteraction } from '../../utils/analytics.js';
 import { getBibleUrl, getQuranUrl } from '../../utils/urlFactory.js';
 import { parseMarkdown } from '../../utils/markdown.js';
+import { navigate } from 'astro:transitions/client';
 
 export const InfoIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -48,7 +49,7 @@ export const VerseItem = ({ vId, text, note, evidenceId, categoryTitle = null, i
 
   const handleCardClick = (e) => {
     if (isFromInteractiveChild(e)) return;
-    window.location.href = linkTarget;
+    navigate(linkTarget); // via the router, like the ref pill link (no full reload)
   };
 
   const handleCardKeyDown = (e) => {
@@ -56,7 +57,7 @@ export const VerseItem = ({ vId, text, note, evidenceId, categoryTitle = null, i
     if (e.target !== e.currentTarget) return;
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      window.location.href = linkTarget;
+      navigate(linkTarget); // via the router, like the ref pill link (no full reload)
     }
   };
 

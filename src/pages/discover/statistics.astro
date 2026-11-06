@@ -644,7 +644,13 @@ const schemaObj = {
 </Layout>
 
 <script>
-  let isHashListenerAttached = false;
+  import { replaceUrl } from '../../utils/url_history.js';
+
+  // This script runs once per session. One window listener delegates to the CURRENT visit's
+  // handler (each visit swaps in new DOM), and is a no-op on every other page.
+  let syncCurrentPage = null;
+  window.addEventListener('hashchange', () => syncCurrentPage?.());
+  document.addEventListener('astro:before-swap', () => { syncCurrentPage = null; });
 
   function setupStatisticsTabs() {
     const segmentedControls = document.querySelector('.corpus-segmented-pill');
@@ -682,7 +688,7 @@ const schemaObj = {
       });
 
       if (updateHash && typeof window !== 'undefined' && sectionId) {
-        window.history.replaceState(null, '', `#${sectionId}`);
+        replaceUrl(`#${sectionId}`);
       }
     }
 
@@ -712,7 +718,7 @@ const schemaObj = {
 
       if (updateHash && !targetSectionId && typeof window !== 'undefined') {
         const hash = targetId === 'corpus-quran' ? 'quran' : 'bible';
-        window.history.replaceState(null, '', `#${hash}`);
+        replaceUrl(`#${hash}`);
       }
     }
 
@@ -760,17 +766,12 @@ const schemaObj = {
 
     // Initial sync
     syncFromUrlHash();
-
-    // Attach single persistent hashchange listener
-    if (!isHashListenerAttached && typeof window !== 'undefined') {
-      window.addEventListener('hashchange', syncFromUrlHash);
-      isHashListenerAttached = true;
-    }
+    syncCurrentPage = syncFromUrlHash;
   }
 
+  // Run now (astro:page-load waits for window load on a direct visit), then on every swap. Re-running is safe.
   setupStatisticsTabs();
   document.addEventListener('astro:page-load', setupStatisticsTabs);
-  document.addEventListener('astro:after-swap', setupStatisticsTabs);
 </script>
 
 <style>

@@ -140,6 +140,14 @@ const schemaObj = {
 </Layout>
 
 <script>
+  import { replaceUrl } from '../../utils/url_history.js';
+
+  // This script runs once per session. One window listener delegates to the CURRENT visit's
+  // handler (each visit swaps in new DOM), and is a no-op on every other page.
+  let syncCurrentPage = null;
+  window.addEventListener('hashchange', () => syncCurrentPage?.());
+  document.addEventListener('astro:before-swap', () => { syncCurrentPage = null; });
+
   function setupDiscoverTabs() {
     const parentContainer = document.querySelector('.tabs-controller');
     const panels = document.querySelectorAll('.major-category-block');
@@ -150,7 +158,11 @@ const schemaObj = {
       buttons.forEach(b => {
         if (b.getAttribute('data-target') === targetId) {
           b.classList.add('is-active');
-          b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          // Centre the card in the horizontal rail only. scrollIntoView would also scroll the page
+          // vertically, fighting Back/Forward scroll restoration.
+          const rail = parentContainer.getBoundingClientRect();
+          const card = b.getBoundingClientRect();
+          parentContainer.scrollBy({ left: card.left - rail.left - (rail.width - card.width) / 2, behavior: 'smooth' });
         } else {
           b.classList.remove('is-active');
         }
@@ -169,7 +181,7 @@ const schemaObj = {
 
       if (updateHash && typeof window !== 'undefined') {
         const hash = targetId.replace(/^panel-/, '');
-        window.history.replaceState(null, '', `#${hash}`);
+        replaceUrl(`#${hash}`);
       }
     }
 
@@ -186,13 +198,11 @@ const schemaObj = {
 
     // Handle initial hash on page load
     syncFromUrlHash();
+    syncCurrentPage = syncFromUrlHash;
 
     // Prevent duplicate event bindings across lifecycle / SPA navigation
     if (parentContainer.dataset.tabsInitialized === 'true') return;
     parentContainer.dataset.tabsInitialized = 'true';
-
-    // React to browser Back / Forward navigation
-    window.addEventListener('hashchange', syncFromUrlHash);
 
     // Event delegation for tab clicks
     parentContainer.addEventListener('click', (e) => {
@@ -203,6 +213,7 @@ const schemaObj = {
     });
   }
 
+  // Run now (astro:page-load waits for window load on a direct visit), then on every swap. Re-running is safe.
   setupDiscoverTabs();
   document.addEventListener('astro:page-load', setupDiscoverTabs);
 </script>

@@ -246,12 +246,17 @@ const serializedSchema = typeof resolvedSchema === 'string'
 
 		<!-- Navigation Toggles & Dynamic Scroll Header JS Script -->
 		<script>
+			import '../utils/scroll_restoration.js';
+
 			const setupSidebarToggle = () => {
 				const toggleBtn = document.getElementById('nav-toggle-btn');
 				const sidebar = document.getElementById('scripture-nav-sidebar');
 				const overlay = document.getElementById('scripture-nav-overlay');
 
 				if (!toggleBtn || !sidebar || !overlay) return;
+				// These elements are replaced on every navigation; bind each instance once.
+				if (toggleBtn.dataset.bound) return;
+				toggleBtn.dataset.bound = 'true';
 
 				const openSidebar = () => {
 					sidebar.classList.add('open');
@@ -347,13 +352,6 @@ const serializedSchema = typeof resolvedSchema === 'string'
 
 				setupSidebarToggle();
 				setupScrollHeader();
-			});
-
-			// Global resize listener (safe to add once since this module runs once)
-			let resizeTimer;
-			window.addEventListener('resize', () => {
-				clearTimeout(resizeTimer);
-				resizeTimer = setTimeout(setupSidebarToggle, 150);
 			});
 
 			// Global Loading Indicator for SPA progress bar

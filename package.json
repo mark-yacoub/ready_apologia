@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "serve": "node scripts/serve.js",
     "test:seo": "node scripts/test_seo.mjs",
+    "test:history": "node scripts/test_history_api.mjs",
     "test:convenient-revelations": "node --test src/utils/convenientRevelations/model.test.mjs",
     "audit:convenient-revelations": "node scripts/test_convenient_revelations.mjs",
     "test:orv": "NODE_OPTIONS='--experimental-sqlite' node --test src/utils/originsOfRevelation/*.test.mjs && NODE_OPTIONS='--experimental-sqlite' node scripts/test_origins_of_revelation.mjs",

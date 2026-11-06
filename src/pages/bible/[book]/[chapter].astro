@@ -241,7 +241,7 @@ const chapterSchema = generateBibleChapterSchema({
   schema={chapterSchema}
   keywords={`${bookMeta.name} ${chapter}, apologetics, contradictions, commentaries`}
 >
-  <div class="chapter-reader-container">
+  <div class="chapter-reader-container" data-page="bible-chapter">
     <!-- Split Book & Chapter Dropdown Selector -->
     <header class="reader-header select-none" style="display: flex; flex-direction: column; gap: 12px;">
       <div class="selector-hub">
@@ -430,6 +430,8 @@ const chapterSchema = generateBibleChapterSchema({
 
 <!-- Chapter UI & Logic -->
 <script>
+  import { replaceUrl } from '../../../utils/url_history.js';
+  import { hasSavedScroll } from '../../../utils/scroll_restoration.js';
   import { enforceUserBadgePriority } from '../../../utils/dom_tabs.js';
   import { getActiveEvidenceFromStorage } from '../../../hooks/useActiveEvidence.js';
   let closePopoverHandler;
@@ -567,10 +569,14 @@ const chapterSchema = generateBibleChapterSchema({
 
     const link = e.target.closest('.verse-row a[href]');
     if (!link) return;
+    // Same-page links (e.g. a cross-reference to another verse in this chapter) are handled by the
+    // router; rewriting the URL here would replace the target #hash with this verse's id.
+    const url = new URL(link.href, window.location.href);
+    if (url.pathname === window.location.pathname && url.search === window.location.search) return;
 
     const verseRow = link.closest('.verse-row');
     if (verseRow && verseRow.id) {
-      history.replaceState(history.state, '', window.location.pathname + '#' + verseRow.id);
+      replaceUrl(window.location.pathname + '#' + verseRow.id);
     }
   };
 
@@ -581,6 +587,8 @@ const chapterSchema = generateBibleChapterSchema({
     // Astro's default scroll restoration crashes if IDs are purely numeric (e.g., id="15").
     // We manually intercept the hash and use getElementById which natively handles numbers.
     if (!window.location.hash) return;
+    // Back/Forward/reload: scroll_restoration puts the reader exactly where they left off instead.
+    if (hasSavedScroll()) return;
 
     const hashId = window.location.hash.substring(1);
     const element = document.getElementById(hashId);
@@ -599,7 +607,9 @@ const chapterSchema = generateBibleChapterSchema({
   // ------------------------------------------------------------------
   // Lifecycle Bindings
   // ------------------------------------------------------------------
+  // This bundled script runs once per session, so its page-load handler fires on EVERY later page.
   document.addEventListener('astro:page-load', () => {
+    if (!document.querySelector('[data-page="bible-chapter"]')) return;
     document.addEventListener('click', handleBibleVerseClick);
     restoreScrollPosition();
   });

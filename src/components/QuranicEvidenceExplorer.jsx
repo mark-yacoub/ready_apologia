@@ -6,6 +6,8 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
 import { VerseItem } from './common/VerseItem.jsx';
 import { EvidenceDropdown } from './common/EvidenceDropdown.jsx';
+import { replaceUrl } from '../utils/url_history.js';
+import { DEFAULT_SCRIPTURE_PATH } from '../utils/routes.js';
 import '../styles/EvidenceExplorer.css';// --- Module-Level Static Constants (Zero Allocation per Render) ---
 const STANDARD_MAP = {
   'Borrowed Mythology': 'Borrowed Mythology & Plagiarism',
@@ -142,7 +144,7 @@ export default function QuranicEvidenceExplorer({ evidenceDropdownData = [], ver
     setActiveTab(label);
     if (typeof window !== 'undefined') {
       const hash = label.replace(/\s+/g, '-');
-      window.history.replaceState(null, '', `#${hash}`);
+      replaceUrl(`#${hash}`);
     }
   };
 
@@ -174,7 +176,7 @@ export default function QuranicEvidenceExplorer({ evidenceDropdownData = [], ver
       <nav className="breadcrumb-nav-bar" aria-label="Breadcrumb">
         <ol className="breadcrumb-list">
           <li className="breadcrumb-item">
-            <a href={`${base}/`} className="breadcrumb-link">Ready Apologia</a>
+            <a href={`${base}${DEFAULT_SCRIPTURE_PATH}`} className="breadcrumb-link">Ready Apologia</a>
           </li>
           <li className="breadcrumb-separator" aria-hidden="true">/</li>
           <li className="breadcrumb-item">

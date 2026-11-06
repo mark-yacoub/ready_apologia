@@ -4,21 +4,21 @@
  * Handles responsive container scrolling (.main-content vs window), dynamic sticky header offsets,
  * initial URL hash positioning with layout stabilization, and scroll-spy IntersectionObservers.
  */
+import { replaceUrl } from './url_history.js';
 
 /**
  * Finds the active scrolling container in Ready Apologia's responsive layout.
- * On mobile (< 768px), `<main class="main-content">` scrolls.
- * On desktop (>= 768px), `window` or `.main-content` may scroll depending on docking layout.
+ * Layout.astro makes `<main class="main-content">` the only scroller on mobile AND desktop (the window
+ * never scrolls). Decided by its CSS overflow, not its current height: before late content/fonts
+ * load it may not overflow yet, and returning `window` then would make every scrollTo a no-op.
  * @returns {HTMLElement|Window}
  */
 export function getScrollContainer() {
   if (typeof document === 'undefined') return window;
   const mainContent = document.querySelector('.main-content');
   if (!mainContent) return window;
-
-  // Check if .main-content is actually scrollable (overflow-y is auto/scroll or has scrollHeight > clientHeight)
-  const hasVerticalOverflow = mainContent.scrollHeight > mainContent.clientHeight;
-  return hasVerticalOverflow ? mainContent : window;
+  const { overflowY } = getComputedStyle(mainContent);
+  return overflowY === 'auto' || overflowY === 'scroll' ? mainContent : window;
 }
 
 /**
@@ -139,7 +139,7 @@ export function setupInitialHashScroll(config = {}) {
  * @param {string} [config.rootMargin='-20% 0px -60% 0px'] - Observer rootMargin.
  * @param {() => boolean} [config.isLocked] - Function returning true if observer updates should be ignored.
  * @param {(id: string) => void} [config.onActiveIdChange] - Callback when active section changes.
- * @param {boolean} [config.updateUrl=true] - Whether to call history.replaceState automatically.
+ * @param {boolean} [config.updateUrl=true] - Whether to update the URL hash (via replaceUrl) automatically.
  * @returns {() => void} Disconnect cleanup function.
  */
 export function setupSectionObserver(config = {}) {
@@ -163,7 +163,7 @@ export function setupSectionObserver(config = {}) {
           const id = entry.target.id;
           onActiveIdChange(id);
           if (updateUrl && typeof window !== 'undefined') {
-            window.history.replaceState(null, '', `#${id}`);
+            replaceUrl(`#${id}`);
           }
         }
       });
