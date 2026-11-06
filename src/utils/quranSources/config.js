@@ -28,18 +28,19 @@ export const UI_COPY = {
   breadcrumbEvidence: 'Apologetics Evidence',
   breadcrumbShort: 'Evidence',
   pageHeading: 'Primary Sources of the Quran',
-  intro: {
-    beforeRefs:
-      'Muslims hold that the Qurʾān was revealed directly from God rather than drawn from earlier writings or surrounding customs; the text itself responds to contemporaries who called its narratives “tales of the ancients” (',
-    ref255Label: '25:5',
-    ref255Path: '/quran/25/5/tafsir/tabari',
-    betweenRefs: ') taught by a human teacher (',
-    ref16103Label: '16:103',
-    ref16103Path: '/quran/16/103/tafsir/tabari',
-    afterRefs: '). ',
-    sentence2:
-      'Below, specific Quranic narratives, multi-clause verbal parallels, and ritual ordinances are placed side by side with earlier Rabbinic, apocryphal, Syriac, Zoroastrian, and pre-Islamic Arabian primary texts, ordered strongest-first.',
-  },
+  /**
+   * Intro paragraph as ordered segments: plain strings, or `{ label, path }` links to a verse's
+   * commentary page. Rendered in order with no extra spacing, so each string carries its own spaces.
+   */
+  intro: [
+    'Muslims hold that the Qurʾān was revealed directly from God rather than drawn from earlier writings or surrounding customs; the text itself records hearers who called its narratives “tales of the ancients” (',
+    { label: '25:5', path: '/quran/25/5/tafsir/tabari' },
+    ') taught by a human teacher (',
+    { label: '16:103', path: '/quran/16/103/tafsir/tabari' },
+    '). Texts of that kind can still be read, and below, Quranic narratives, multi-clause verbal parallels and ritual ordinances are placed side by side with earlier Rabbinic, apocryphal, Syriac, Zoroastrian and pre-Islamic Arabian primary texts. ',
+    // Echoes the 25:5 "tales": the texts' own communities never held them as Scripture.
+    'Many of them were never held as Scripture by the communities that kept them: rabbinic sayings, apocryphal tales of Jesus’ childhood, a Syriac legend of Alexander.',
+  ],
   statStrip: '{totalItems} curated parallels · {totalCitations} primary-source citations · {totalVerses} verses',
   categoryNavLabel: 'Parallel categories',
   traditionFilterLabel: 'Filter by source tradition',

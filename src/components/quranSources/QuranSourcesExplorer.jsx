@@ -554,16 +554,15 @@ export default function QuranSourcesExplorer({
           <h1 className="qs-h1">{UI_COPY.pageHeading}</h1>
 
           <p className="qs-intro">
-            {UI_COPY.intro.beforeRefs}
-            <a className="qs-link" href={`${BASE}${UI_COPY.intro.ref255Path}`}>
-              {UI_COPY.intro.ref255Label}
-            </a>
-            {UI_COPY.intro.betweenRefs}
-            <a className="qs-link" href={`${BASE}${UI_COPY.intro.ref16103Path}`}>
-              {UI_COPY.intro.ref16103Label}
-            </a>
-            {UI_COPY.intro.afterRefs}
-            {UI_COPY.intro.sentence2}
+            {UI_COPY.intro.map((seg, i) =>
+              typeof seg === 'string' ? (
+                <React.Fragment key={i}>{seg}</React.Fragment>
+              ) : (
+                <a key={`${seg.path}:${i}`} className="qs-link" href={`${BASE}${seg.path}`}>
+                  {seg.label}
+                </a>
+              )
+            )}
           </p>
 
           <div className="qs-stats">

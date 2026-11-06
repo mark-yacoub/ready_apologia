@@ -17,7 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BUILD_BOOKS, BUILD_SURAHS } from '../src/utils/build_config.js';
 import { CATEGORIES } from '../src/utils/quranSources/contract.js';
-import { SEO_EVIDENCE } from '../src/utils/quranSources/config.js';
+import { SEO_EVIDENCE, UI_COPY } from '../src/utils/quranSources/config.js';
 
 const arg = (name) => {
   const i = process.argv.indexOf(name);
@@ -126,6 +126,37 @@ const evPath = path.join(DIST, 'evidence/quran_sources/index.html');
       ok(!OWN_VOICE_BANNED.test(clean), `banned voice word in connection_note: "${clean}"`);
     }
     ok(html.includes('class="qs-discussion"'), 'SSR cards missing collapsible .qs-discussion block');
+    // Intro: every segment renders in order (text verbatim, verse refs as links), in our voice.
+    {
+      const m = html.match(/<p class="qs-intro">([\s\S]*?)<\/p>/);
+      ok(!!m, 'missing intro paragraph (.qs-intro)');
+      if (m) {
+        const introText = stripTags(m[1].replace(/<\/?a\b[^>]*>/g, ''));
+        const expected = UI_COPY.intro
+          .map((seg) => (typeof seg === 'string' ? seg : seg.label))
+          .join('')
+          .replace(/\s+/g, ' ')
+          .trim();
+        ok(introText === expected, `intro text mismatch:\n      got:      ${introText}\n      expected: ${expected}`);
+        const links = [...m[1].matchAll(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].map((a) => ({
+          href: decode(a[1]),
+          label: stripTags(a[2]),
+        }));
+        const expectedLinks = UI_COPY.intro.filter((s) => typeof s !== 'string');
+        ok(
+          links.length === expectedLinks.length,
+          `intro link count ${links.length} !== expected ${expectedLinks.length}`
+        );
+        expectedLinks.forEach((seg, idx) => {
+          const actual = links[idx];
+          ok(
+            actual && actual.label === seg.label && actual.href.endsWith(seg.path),
+            `intro link #${idx + 1}: expected label="${seg.label}" path="*${seg.path}", got ${JSON.stringify(actual)}`
+          );
+        });
+        ok(!OWN_VOICE_BANNED.test(introText), `banned voice word in intro: "${introText}"`);
+      }
+    }
     for (const [, inner] of html.matchAll(/<p class="qs-discussion__text">([\s\S]*?)<\/p>/g)) {
       const clean = stripTags(inner);
       ok(!OWN_VOICE_BANNED.test(clean), `banned voice word in qs-discussion: "${clean}"`);
