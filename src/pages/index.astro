@@ -1,40 +1,192 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import RouteAnalytics from '../components/common/RouteAnalytics.astro';
+import Hero from '../components/home/Hero.astro';
+import DatasetCard from '../components/home/DatasetCard.astro';
+import DeepDiveList from '../components/home/DeepDiveList.astro';
+import EvidenceGrid from '../components/home/EvidenceGrid.astro';
 import { DEFAULT_SCRIPTURE_PATH } from '../utils/routes.js';
+import { loadHomeStats } from '../utils/homeStats.js';
+import '../styles/home.css';
+
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
 const redirectUrl = `${base}${DEFAULT_SCRIPTURE_PATH}`;
 const canonicalUrl = `${site}${base || '/'}`;
+
+const stats = await loadHomeStats();
+
+const datasetCards = [
+  {
+    variant: 'quran' as const,
+    tag: 'Qurʾān · Classical Exegesis',
+    count: `${stats.tabariCount.toLocaleString()} verses`,
+    title: 'Unabridged Tafsīr al-Ṭabarī & Ibn Kathīr',
+    href: `${base}/quran/1/1/tafsir/tabari`,
+    body: `Complete verse-by-verse English and Arabic of al-Ṭabarī (AD 883) and Ibn Kathīr (AD 1373) across all ${stats.surahsCount} sūras, linked to King Saud University's Arabic corpus.`,
+    chips: [
+      { label: 'Surah 1:1 (al-Ṭabarī) →', href: `${base}/quran/1/1/tafsir/tabari` },
+      { label: 'Surah 4:157 →', href: `${base}/quran/4/157/tafsir/tabari` },
+      { label: 'Longest Tafsīrs →', href: `${base}/discover/statistics#quran-tabari` },
+    ],
+  },
+  {
+    variant: 'bible' as const,
+    tag: 'Bible · Manuscript Scans',
+    count: `${stats.bibleMssCount} manuscripts · ${stats.bibleScansCount.toLocaleString()} scans`,
+    title: 'Ancient Biblical Manuscripts (OT & NT)',
+    href: `${base}/bible/jn/1/1/manuscripts`,
+    body: `High-resolution folio photographs from ${stats.ntMssCount} New Testament papyri and uncials (𝔓52, 𝔓66, 𝔓75, Sinaiticus, Vaticanus) and ${stats.otMssCount} Dead Sea Scrolls and Septuagint witnesses across ${stats.totalChaptersCount.toLocaleString()} chapters.`,
+    chips: [
+      { label: 'John 1:1 Manuscripts →', href: `${base}/bible/jn/1/1/manuscripts` },
+      { label: 'John 1:14 →', href: `${base}/bible/jn/1/14/manuscripts` },
+      { label: 'Oldest Manuscripts →', href: `${base}/discover/statistics#bible-oldest` },
+    ],
+  },
+  {
+    variant: 'quran' as const,
+    tag: 'Qurʾān · Textual Transmission',
+    count: `${stats.companionsCount} codices · ${stats.totalCodexVariantsCount} variants`,
+    title: 'Companion Codices, Missing Passages & Qirāʾāt',
+    href: `${base}/quran/0`,
+    body: `${stats.lostHubTotalCount} omitted passages and landmark variants attested in Ṣaḥīḥ al-Bukhārī and Ṣaḥīḥ Muslim, ${stats.totalCodexVariantsCount} diffs from the personal codices of Ibn Masʿūd and Ubayy ibn Kaʿb, and ${stats.qiraatEffectsTotal} canonical Qirāʾāt shifts.`,
+    chips: [
+      { label: `Missing Passages (${stats.lostHubTotalCount}) →`, href: `${base}/quran/0` },
+      { label: `Ibn Masʿūd (${stats.ibnMasudCount}) →`, href: `${base}/quran/codex/abdullah-bin-masud` },
+      { label: `Ubayy ibn Kaʿb (${stats.ubayyCount}) →`, href: `${base}/quran/codex/ubayy-bin-kab` },
+      { label: 'All Qirāʾāt →', href: `${base}/quran` },
+    ],
+  },
+  {
+    variant: 'hadith' as const,
+    tag: 'Ṣaḥīḥayn · Arabic vs. English',
+    count: `${stats.hadithCount} hadiths · ${stats.auditTotalCount} audits`,
+    title: 'Ṣaḥīḥ Hadith Explorer & Translation Audit',
+    href: `${base}/hadith`,
+    body: `${stats.hadithAnnotationsCount} annotated entries from Ṣaḥīḥ al-Bukhārī and Ṣaḥīḥ Muslim across ${stats.hadithCategoriesCount} topical categories, plus ${stats.auditTotalCount} word-for-word redline audits where standard English translations soften, omit, or euphemize the Arabic.`,
+    chips: [
+      { label: 'Hadith Hub →', href: `${base}/hadith` },
+      ...stats.auditTabs.map((t) => ({
+        label: `${t.label} (${t.count}) →`,
+        href: `${base}${t.path}`,
+      })),
+    ],
+  },
+  {
+    variant: 'quran' as const,
+    tag: 'Qurʾān · Folios & Annotations',
+    count: `${stats.quranMssCount.toLocaleString()} manuscripts · ${stats.quranScansCount.toLocaleString()} scans`,
+    title: 'Early Qurʾān Manuscripts & Scholarly Notes',
+    href: `${base}/quran/1/1/manuscripts`,
+    body: `${stats.quranScansCount.toLocaleString()} folio images across ${stats.quranMsVersesCount.toLocaleString()} verses documenting rasm variants and scribal corrections, paired with ${stats.nickelCount.toLocaleString()} academic Christian footnotes and ${stats.videosCount.toLocaleString()} indexed video breakdowns.`,
+    chips: [
+      { label: 'Surah 1:1 Folios →', href: `${base}/quran/1/1/manuscripts` },
+      { label: 'Surah 5:47 Notes →', href: `${base}/quran/5/47/christian-footnotes` },
+      { label: 'Surah 23:14 Analysis →', href: `${base}/quran/23/14/debunking-miracles` },
+    ],
+  },
+];
+
+// SEO Metadata (<= 60 chars title, objective researcher voice, WebSite + Organization @graph)
+const pageTitle = "Ready Apologia: Bible & Qur'an Evidence, Manuscripts, Tafsir";
+const pageDescription = `Primary-source scripture reader and evidence library: ${stats.bibleMssCount} Biblical manuscripts (${stats.bibleScansCount.toLocaleString()} scans), ${stats.quranMssCount.toLocaleString()} Qur'an manuscripts, unabridged Tafsir al-Tabari & Ibn Kathir across all ${stats.tabariCount.toLocaleString()} verses, ${stats.companionsCount} Companion Codices, ${stats.hadithCount} Sahih hadiths, and ${stats.discoverArticlesCount} source-linked deep dives.`;
+const pageKeywords = 'Ready Apologia, biblical manuscripts, unabridged tafsir al-tabari, tafsir ibn kathir, companion codices, qiraat variants, sahih hadith translation audit, pre-nicene church fathers, christian apologetics, islamic studies';
+
+const schemaObj = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${canonicalUrl}#website`,
+      name: 'Ready Apologia',
+      alternateName: ['ReadyApologia', 'readyapologia.com'],
+      url: canonicalUrl,
+      description: pageDescription,
+      publisher: {
+        '@id': `${canonicalUrl}#organization`,
+      },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${canonicalUrl}#organization`,
+      name: 'Ready Apologia',
+      url: canonicalUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${site}${base}/assets/logo.png`,
+      },
+    },
+  ],
+};
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Ready Apologia - Christian Apologetics & Scripture Evidence</title>
 
-  <!-- SEO & Open Graph Tags for Root URL Sharing -->
-  <meta name="description" content="Explore the core theology and scripture of Christianity and Islam, directly using verses from the scripture and ancient writers' quotes. Examine ancient manuscript evidence, responses to alleged contradictions, Patristic and modern apologetics." />
-  <meta name="keywords" content="christian apologetics, bible interlinear, scripture evidence, defend the faith, manuscript evidence, early church fathers, quranic analysis" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Ready Apologia - Christian Apologetics & Scripture Evidence" />
-  <meta property="og:description" content="Explore the core theology and scripture of Christianity and Islam, directly using verses from the scripture and ancient writers' quotes. Examine ancient manuscript evidence, responses to alleged contradictions, Patristic and modern apologetics." />
-  <meta property="og:url" content={canonicalUrl} />
-  <meta property="og:image" content={`${site}${base}/default-og-image.png`} />
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonicalURL={canonicalUrl}
+  ogUrl={canonicalUrl}
+  schema={schemaObj}
+  showOnboarding={false}
+>
+  <!--
+    Returning-visitor & standalone-PWA redirect (placed in <head> via slot="head" so it runs
+    before stylesheets and <body> render, preventing a header flash).
+    ClientRouter (astro:transitions) behaviour:
+      1. On initial full-page load of "/", Astro's router records this inline script's textContent
+         in `scriptsAlreadyRan` and skips scripts without `data-astro-rerun` on subsequent swaps
+         (so pressing Back to "/" after visiting an inner page does not re-run it).
+      2. If a session starts on a deep link and later navigates client-side to "/", `swapHeadElements`
+         + `runScripts()` would execute an unvisited head script after `document.body` exists; guarding
+         with `!document.body` ensures the redirect only runs during initial HTML head parsing.
+  -->
+  <script slot="head" is:inline define:vars={{ defaultRedirectUrl: redirectUrl }}>
+    try {
+      if (!document.body) {
+        const isSafeInternalPath = (u) =>
+          typeof u === 'string' && u.startsWith('/') && !u.startsWith('//') && u !== '/';
+        const lastVisitedAppUrl = localStorage.getItem('lastVisitedAppUrl');
+        const lastVisitedUrl = localStorage.getItem('lastVisitedUrl');
+        const isStandalone =
+          (typeof window.matchMedia === 'function' && window.matchMedia('(display-mode: standalone)').matches) ||
+          window.navigator.standalone === true;
 
-  <link rel="canonical" href={canonicalUrl} />
-  <meta http-equiv="refresh" content={`0;url=${redirectUrl}`} />
-  <script is:inline define:vars={{ defaultRedirectUrl: redirectUrl }}>
-    const lastVisitedAppUrl = localStorage.getItem('lastVisitedAppUrl');
-    const lastVisitedUrl = localStorage.getItem('lastVisitedUrl');
-    
-    if (lastVisitedAppUrl) {
-      window.location.replace(lastVisitedAppUrl);
-    } else if (lastVisitedUrl) {
-      window.location.replace(lastVisitedUrl);
-    } else {
-      window.location.replace(defaultRedirectUrl);
+        if (isSafeInternalPath(lastVisitedAppUrl)) {
+          window.location.replace(lastVisitedAppUrl);
+        } else if (isSafeInternalPath(lastVisitedUrl)) {
+          window.location.replace(lastVisitedUrl);
+        } else if (isStandalone && isSafeInternalPath(defaultRedirectUrl)) {
+          window.location.replace(defaultRedirectUrl);
+        }
+      }
+    } catch (e) {
+      // If storage is unavailable, render the homepage normally.
     }
   </script>
-</head>
-<body style="margin: 0; padding: 0; background-color: #f8fafc;">
-</body>
-</html>
+
+  <RouteAnalytics eventName="home_hub_view" params={{ section: 'home' }} />
+
+  <div class="ra-home" data-page="home">
+    <Hero base={base} redirectUrl={redirectUrl} stats={stats} />
+
+    <section class="ra-section" aria-labelledby="ra-sec-corpora">
+      <div class="ra-sec-head">
+        <p class="ra-eyebrow">Primary Corpora</p>
+        <h2 id="ra-sec-corpora" class="ra-h2">Unique Primary-Source Datasets</h2>
+        <p class="ra-sec-sub">
+          Every claim links directly to its manuscript folio, classical Arabic commentary, or canonical citation.
+        </p>
+      </div>
+
+      <div class="ra-cards-grid">
+        {datasetCards.map((card) => (
+          <DatasetCard {...card} />
+        ))}
+      </div>
+    </section>
+
+    <DeepDiveList base={base} stats={stats} />
+
+    <EvidenceGrid base={base} stats={stats} />
+  </div>
+</Layout>

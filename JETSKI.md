@@ -97,6 +97,8 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `docs/creator_contacts.md`: Verified Creator Contacts & Outreach Directory for top apologists indexed in Ready Apologia.
 *   `docs/creator_top_verses.md`: Personalized Creator Top Bible Verses & Outreach Playbook with shareable WOW links per creator.
 *   `docs/notebooklm.md`: Architecture guide, data standards, and CLI workflow for exporting Discover deep-dive articles into self-contained PDFs for Notebook LM video generation.
+*   `src/utils/sitemap_lastmod.js`: Sitemap `<lastmod>` resolver used by `astro.config.mjs` (`serialize`). Each URL gets the last git commit date of its content sources via ordered `LASTMOD_RULES` (+ `DISCOVER_SOURCES` per article). **Adding a route, Discover article, or data source requires a rule here**; the build warns `[sitemap-lastmod]` for unmatched URLs. CI checks out full history (`fetch-depth: 0`) so dates are real; shallow clones skip lastmod. Redirect stubs (`/bible`) are filtered out of the sitemap. Every page renders exactly one `<h1>` (selector-style headers mirror their visible title in `<h1 class="sr-only">`).
+*   `scripts/test_seo_titles.mjs`: Static build-wide SEO, title, description, `<h1>`, opening-line, playbook tone, sitemap, and JSON-LD audit (`npm run audit:seo`, supports `--dist <dir>` and `--allow-sliced`).
 *   `docs/pillar2_seo_implementation.md`: Technical SEO Master Plan & Implementation Code for sitemaps, FAQ JSON-LD schema, Open Graph, and robots.txt.
 *   `scripts/generate_discover_pdfs.py`: Automated exporter compiling all Discover deep dives into self-contained, high-density PDFs in `~/Downloads/discover/`.
 *   `promo_cards/`: Self-contained directory containing `generate_cards.mjs`, `qrcode.min.js`, `README.md`, printable 8-up double-sided vector PDF, and high-resolution PNG sheet previews.
@@ -108,7 +110,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/data/scripture/`: Contains the imported scripture files (NASB NT & LXX2012 OT) in structured JSON format.
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.
 *   `src/layouts/Layout.astro`: The main responsive layout shell in light-only mode.
-*   `src/pages/index.astro`: Homepage handling auto-redirects to John 1.
+*   `src/pages/index.astro`: Primary-source hub homepage for first-time visitors and search crawlers (with `WebSite` + `Organization` JSON-LD `@graph`, 1-tap start buttons, and build-time dataset/deep-dive counts ordered strongest-first), backed by `src/utils/homeStats.js` (memoised `loadHomeStats()` + `validateStats()`, unit-tested in `src/utils/homeStats.test.mjs`, throwing one aggregated error on any missing/NaN/zero count), modular components under `src/components/home/` (`Hero.astro`, `EntryGrid.astro`, `DatasetCard.astro`, `DeepDiveList.astro`, `EvidenceGrid.astro`), and scoped styles in `src/styles/home.css` (`.ra-home`), while preserving an instant `<head>`-slotted (`slot="head"` in `Layout.astro`) `location.replace` redirect for returning visitors (`localStorage.lastVisitedAppUrl`/`lastVisitedUrl`, validated as safe internal paths) and installed standalone PWAs.
 *   `src/pages/bible/[book]/[chapter].astro`: Compact scripture chapter reader with inline-end badges.
 *   `src/pages/bible/[book]/[chapter]/[verse].astro`: 100% SEO-indexable static verse detail page.
 *   `src/pages/bible/gospels/videos.astro`: Overview page showing apologetics videos across all four Gospels.
@@ -178,7 +180,8 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   `src/components/MicrosoftClarity.astro`: Astro `<head>` component injecting Microsoft Clarity behavioral analytics, session recording, heatmap tracking, and SPA route synchronization.
 *   `src/components/common/RouteAnalytics.astro`: L6 declarative GA4 route analytics component emitting `#route-analytics-payload` DOM metadata for SPA transitions.
 *   `src/components/QuranSpecial.astro`: Component rendering Lost or Abrogated verses list.
-*   `src/components/QuranPageHeader.astro`: Header component for Quran pages with Surah selection dropdown.
+*   `src/components/QuranPageHeader.astro`: Header component for Quran pages with Surah selection dropdown (`renderH1` boolean default `true`, `h1Text` string default `currentTitle`).
+*   `src/utils/seoFactory.js`, `src/utils/manuscriptFormat.js` (+ `manuscriptFormat.test.mjs`), `src/utils/seo/text.js` (+ `text.test.mjs`): Page/tab SEO resolvers and Schema.org JSON-LD builders in `seoFactory.js`, backed by isomorphic manuscript date/name/title helpers (`manuscriptFormat.js`, shared with `ManuscriptCarousel.jsx` and `QuranManuscriptCarousel.jsx`) and word-boundary/stop-word text fitting utilities (`seo/text.js`).
 *   `src/utils/analytics.js`: L6 client-side Google Analytics 4 utility handling SPA transitions, tab views, and global event delegation.
 *   `src/utils/cdn_config.js`: Global CDN image base URL configuration (`R2_BASE_URL`).
 *   `src/components/quran/LostVersesHub.jsx`: Interactive mobile-first React component for the Lost Verses hub (`/quran/0`) featuring objective category tabs, language switchers, modern vs companion recitation comparison boxes, unabridged Hadith citations, key missing phrase highlights, and direct Sunnah.com verification links.

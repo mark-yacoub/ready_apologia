@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Full history: sitemap <lastmod> uses the last commit per content source.
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -34,50 +37,43 @@ jobs:
           PUBLIC_GA_MEASUREMENT_ID: 'G-N4QFGNVW99'
           PUBLIC_CLARITY_PROJECT_ID: 'z4u6yumza1'
 
-      - name: Sync to Cloudflare R2
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: auto
+      - name: Install rclone (v1.75.2)
         run: |
-          # Configure AWS CLI for high resilience with Cloudflare R2
-          aws configure set default.s3.max_concurrent_requests 20
-          aws configure set default.s3.retry_mode adaptive
-          aws configure set default.s3.max_attempts 10
+          set -euo pipefail
+          RCLONE_VERSION="v1.75.2"
+          RCLONE_ARCHIVE="rclone-${RCLONE_VERSION}-linux-amd64.zip"
+          RCLONE_SHA256="349ac8fba6ff65d6247043f1750cdcb518ec5d500ef91463a10d37c0ccdf3702"
+          cd /tmp
+          curl -fsSLO "https://downloads.rclone.org/${RCLONE_VERSION}/${RCLONE_ARCHIVE}"
+          echo "${RCLONE_SHA256}  ${RCLONE_ARCHIVE}" | sha256sum -c -
+          unzip -q -o "${RCLONE_ARCHIVE}"
+          echo "/tmp/rclone-${RCLONE_VERSION}-linux-amd64" >> "$GITHUB_PATH"
 
-          sync_with_retry() {
-            local max_retries=4
-            local attempt=1
-            local exit_code=0
-            while [ $attempt -le $max_retries ]; do
-              echo "Starting sync attempt $attempt of $max_retries: $*"
-              if "$@"; then
-                echo "Sync succeeded on attempt $attempt."
-                return 0
-              fi
-              exit_code=$?
-              echo "Sync attempt $attempt failed with code $exit_code. Retrying in 10 seconds..."
-              sleep 10
-              attempt=$((attempt + 1))
-            done
-            echo "Sync failed after $max_retries attempts."
-            return $exit_code
-          }
+      # Upload ONLY files whose content changed (MD5 vs R2 ETag), instead of
+      # re-uploading all ~120K files on every build (aws s3 sync compares mtimes,
+      # which are new on every CI build, and burned ~35K Class A ops per deploy).
+      - name: Sync to Cloudflare R2 (content-changed files only)
+        env:
+          RCLONE_CONFIG_R2_TYPE: s3
+          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
+        run: |
+          COMMON="--checksum --fast-list --transfers 32 --checkers 64 --retries 5 --low-level-retries 20 --stats 30s --stats-one-line"
 
-          # Sync static assets (excluding sw.js and HTML files) with default long-term cache
-          sync_with_retry aws s3 sync ./dist s3://ready-apologia-web/ \
-            --endpoint-url "https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com" \
-            --delete \
-            --exclude "sw.js" \
-            --exclude "*.html"
+          # 1) Copy static assets (hashed bundles, images, JSON, sitemaps…) without
+          #    deleting old bundles yet, so cached HTML never references deleted assets
+          #    before new HTML is uploaded and the edge cache is purged.
+          rclone copy ./dist r2:ready-apologia-web $COMMON \
+            --exclude "*.html" --exclude "sw.js"
 
-          # Sync sw.js and HTML files with strict no-cache directive
-          sync_with_retry aws s3 sync ./dist s3://ready-apologia-web/ \
-            --endpoint-url "https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com" \
-            --exclude "*" \
-            --include "sw.js" \
-            --include "*.html" \
-            --cache-control "no-cache, no-store, must-revalidate"
+          # 2) HTML + service worker: browsers must always revalidate (the CDN edge
+          #    cache is purged in the next step). Removed pages are deleted too.
+          rclone sync ./dist r2:ready-apologia-web $COMMON \
+            --include "*.html" --include "sw.js" \
+            --header-upload "Cache-Control: no-cache, must-revalidate"
 
       - name: Purge Cloudflare Cache
         if: success()
@@ -88,8 +84,30 @@ jobs:
           if [ -z "$CLOUDFLARE_ZONE_ID" ] || [ -z "$CLOUDFLARE_API_TOKEN" ]; then
             echo "Cloudflare cache purge skipped: Secrets CLOUDFLARE_ZONE_ID and CLOUDFLARE_API_TOKEN are not set."
           else
-            curl -X POST "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/purge_cache" \
+            RESPONSE=$(curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/purge_cache" \
                  -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
                  -H "Content-Type: application/json" \
-                 --data '{"purge_everything":true}'
+                 --data '{"purge_everything":true}')
+            echo "$RESPONSE"
+            if ! echo "$RESPONSE" | grep -Eq '"success"[[:space:]]*:[[:space:]]*true'; then
+              echo "::error::Cloudflare cache purge failed"
+              exit 1
+            fi
           fi
+
+      - name: Delete stale assets from Cloudflare R2
+        if: success()
+        env:
+          RCLONE_CONFIG_R2_TYPE: s3
+          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
+        run: |
+          COMMON="--checksum --fast-list --transfers 32 --checkers 64 --retries 5 --low-level-retries 20 --stats 30s --stats-one-line"
+
+          # 4) After new HTML is live and the edge cache is purged, sync static assets
+          #    to delete stale bundles that are no longer referenced.
+          rclone sync ./dist r2:ready-apologia-web $COMMON \
+            --exclude "*.html" --exclude "sw.js"

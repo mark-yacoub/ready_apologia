@@ -5,7 +5,9 @@ import { getBaseUrl, getBibleUrl, getQuranUrl } from './urlFactory.js';
  * balanced parentheses (e.g. Wikipedia-style URLs). Shared by the HTML parser
  * and the plain-text stripper so both agree on what counts as a link.
  */
-const MD_LINK_SOURCE = String.raw`\[([^\]]+)\]\(((?:[^()\s]+|\([^()\s]*\))+)\)`;
+// One character per repetition: the old `(?:[^()\s]+|…)+` nested quantifier backtracked
+// exponentially on unclosed links and hung the build (/bible/heb/5/7/apologetics).
+const MD_LINK_SOURCE = String.raw`\[([^\]]+)\]\(((?:[^()\s]|\([^()\s]*\))+)\)`;
 
 /**
  * Strips inline Markdown formatting (links, bold/italics, inline code) into

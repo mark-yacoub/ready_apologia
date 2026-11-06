@@ -1,0 +1,25 @@
+---
+import type { HomeStats } from '../../utils/homeStats.js';
+import EntryGrid from './EntryGrid.astro';
+
+interface Props {
+  base: string;
+  redirectUrl: string;
+  stats: HomeStats;
+}
+
+const { base, redirectUrl, stats } = Astro.props;
+---
+
+<header class="ra-hero">
+  <div class="ra-hero-brand">
+    <img src={`${base}/assets/logo.png`} alt="" width="36" height="28" class="ra-hero-logo" />
+    <span class="ra-hero-eyebrow">Primary-Source Scripture &amp; Evidence Library</span>
+  </div>
+  <h1 class="ra-h1">Ready Apologia</h1>
+  <p class="ra-lead">
+    Side-by-side Christian and Islamic primary texts — pairing every verse with dated manuscript scans, pre-Nicene patristics, unabridged classical tafsīr, and source-linked Ṣaḥīḥ hadith.
+  </p>
+
+  <EntryGrid base={base} redirectUrl={redirectUrl} stats={stats} />
+</header>

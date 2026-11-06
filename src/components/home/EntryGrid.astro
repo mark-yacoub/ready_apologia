@@ -1,0 +1,61 @@
+---
+import type { HomeStats } from '../../utils/homeStats.js';
+
+interface Props {
+  base: string;
+  redirectUrl: string;
+  stats: HomeStats;
+}
+
+const { base, redirectUrl, stats } = Astro.props;
+---
+
+<nav class="ra-start-grid" aria-label="Primary entry points">
+  <a href={redirectUrl} class="ra-start-btn ra-start-btn--primary">
+    <span class="ra-start-top">
+      <span class="ra-start-title">Read the Bible</span>
+      <span class="ra-start-arrow" aria-hidden="true">→</span>
+    </span>
+    <span class="ra-start-meta">{stats.totalBooksCount} books · NASB &amp; LXX Septuagint</span>
+  </a>
+
+  <a href={`${base}/quran`} class="ra-start-btn ra-start-btn--quran">
+    <span class="ra-start-top">
+      <span class="ra-start-title">Qurʾān &amp; Codices</span>
+      <span class="ra-start-arrow" aria-hidden="true">→</span>
+    </span>
+    <span class="ra-start-meta">{stats.surahsCount} sūras · {stats.companionsCount} Companion Codices</span>
+  </a>
+
+  <a href={`${base}/hadith`} class="ra-start-btn">
+    <span class="ra-start-top">
+      <span class="ra-start-title">Ṣaḥīḥ Hadiths</span>
+      <span class="ra-start-arrow" aria-hidden="true">→</span>
+    </span>
+    <span class="ra-start-meta">{stats.hadithCount} Bukhārī &amp; Muslim texts</span>
+  </a>
+
+  <a href={`${base}/discover`} class="ra-start-btn">
+    <span class="ra-start-top">
+      <span class="ra-start-title">Discover Deep Dives</span>
+      <span class="ra-start-arrow" aria-hidden="true">→</span>
+    </span>
+    <span class="ra-start-meta">{stats.discoverArticlesCount} primary-source dossiers</span>
+  </a>
+
+  <a href={`${base}/evidence`} class="ra-start-btn">
+    <span class="ra-start-top">
+      <span class="ra-start-title">Theological Evidence</span>
+      <span class="ra-start-arrow" aria-hidden="true">→</span>
+    </span>
+    <span class="ra-start-meta">{stats.evidenceDirectoriesCount} Scripture &amp; Patristic directories</span>
+  </a>
+
+  <a href={`${base}/discover/statistics`} class="ra-start-btn">
+    <span class="ra-start-top">
+      <span class="ra-start-title">Scripture Statistics</span>
+      <span class="ra-start-arrow" aria-hidden="true">→</span>
+    </span>
+    <span class="ra-start-meta">13 build-time data leaderboards</span>
+  </a>
+</nav>

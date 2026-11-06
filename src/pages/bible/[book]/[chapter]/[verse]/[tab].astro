@@ -131,15 +131,17 @@ const canonicalURL = `${siteUrl}${base}/bible/${book}/${chapter}/${verse}/${tab}
 // Generate OG Image from the oldest manuscript
 const ogImage = getBibleOgImage(book, chapter, verse, isNT);
 
-const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO({
+const { seoTitle, seoDescription, seoKeywords, seoSchema, openingLine } = generateBibleTabSEO({
   tab,
   book,
   bookName: bookMeta.name,
   chapter,
   verse,
+  checkId,
   manuscripts,
   contradictions,
   apologetics,
+  videos,
   isNT,
   canonicalUrl: canonicalURL
 });
@@ -180,9 +182,9 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
 
       <!-- Minimalist Heading showing exactly John 1:1 with subtle Settings Ellipsis -->
       <div style="display: flex; align-items: center; gap: 8px;">
-        <h2 class="verse-drawer-title">
+        <h1 class="verse-drawer-title">
           {bookMeta.name} {chapter}:{verse}
-        </h2>
+        </h1>
         <button id="open-tab-settings-btn" class="subtle-ellipsis-btn" aria-label="Customize Verse View" title="Customize Tabs">
           <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 12a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0z" />
@@ -190,6 +192,10 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
         </button>
       </div>
     </header>
+
+    {openingLine && (
+      <p class="verse-opening-line">{openingLine}</p>
+    )}
 
     {verseText && (
       <div class="verse-text-reminder select-text">
@@ -385,6 +391,14 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
 	   ========================================== */
 
 	/* Header Apple Navigation */
+	.verse-opening-line {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		line-height: 1.5;
+		color: #52525b;
+	}
+
 	.subtle-ellipsis-btn {
 		background: transparent;
 		border: none;

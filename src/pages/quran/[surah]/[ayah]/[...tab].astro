@@ -162,16 +162,18 @@ const scholarMenu = isTafsirTab
   ? islamicCommentaries.map(c => ({ id: c.id, title: c.title || c.name || "Tafsir" })) 
   : [];
 
-const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO({
+const { seoTitle, seoDescription, seoKeywords, seoSchema, openingLine } = generateQuranTabSEO({
   tab: isTafsirTab ? 'tafsir' : tab,
   activeCommentary,
   surah,
   ayah,
   manuscripts,
+  christianFootnotes,
   verseContradictions,
   parsedScientificErrors,
   verseDebunking,
   islamicCommentaries,
+  videos,
   canonicalUrl: canonicalURL
 });
 
@@ -209,9 +211,9 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
       </a>
 
       <div style="display: flex; align-items: center; gap: 8px;">
-        <h2 class="verse-drawer-title" style="color: var(--quran-primary);">
+        <h1 class="verse-drawer-title" style="color: var(--quran-primary);">
           Surah {surah}:{ayah}
-        </h2>
+        </h1>
         <button id="open-quran-tab-settings-btn" class="subtle-ellipsis-btn" aria-label="Customize Quran Verse View" title="Customize Tabs">
           <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 12a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0z" />
@@ -219,6 +221,10 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
         </button>
       </div>
     </header>
+
+    {openingLine && (
+      <p class="verse-opening-line">{openingLine}</p>
+    )}
 
     {(verseText || arabicVerseText) && (
       <div class="verse-text-reminder header-verse-box select-text" style="border-left-color: var(--quran-primary);">
@@ -626,6 +632,14 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
 		font-weight: 800;
 		margin: 0;
 		letter-spacing: -0.01em;
+	}
+
+	.verse-opening-line {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		line-height: 1.5;
+		color: #52525b;
 	}
 
 	.verse-text-reminder {

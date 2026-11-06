@@ -1,0 +1,135 @@
+---
+import type { HomeStats } from '../../utils/homeStats.js';
+
+interface Props {
+  base: string;
+  stats: HomeStats;
+}
+
+const { base, stats } = Astro.props;
+---
+
+<section class="ra-section" aria-labelledby="ra-sec-discover">
+  <div class="ra-sec-head">
+    <div class="ra-sec-head-row">
+      <div>
+        <p class="ra-eyebrow">Discover Dossiers</p>
+        <h2 id="ra-sec-discover" class="ra-h2">Primary-Source Deep Dives</h2>
+      </div>
+      <a href={`${base}/discover`} class="ra-sec-link">All {stats.discoverArticlesCount} dossiers →</a>
+    </div>
+    <p class="ra-sec-sub">
+      Self-contained investigations ordered strongest-first — pairing classical explanations directly with the primary Arabic, Greek, and Hebrew texts.
+    </p>
+  </div>
+
+  <div class="ra-subhead-row">
+    <h3 class="ra-subhead">Islamic Studies — Scripture, Preservation &amp; History</h3>
+  </div>
+  <div class="ra-list-grid">
+    <a href={`${base}/discover/hadith-reliability`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">How Reliable Are the Hadith?</span>
+        <span class="ra-list-badge">{stats.hrvCasesCount} cases · {stats.hrvSectionsCount} questions</span>
+      </div>
+      <p class="ra-list-desc">
+        Source-linked cases from Ṣaḥīḥ al-Bukhārī, Ṣaḥīḥ Muslim, and classical rijāl critics on how reports were transmitted, compared, and graded.
+      </p>
+    </a>
+
+    <a href={`${base}/discover/quran-preservation`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">How Was the Qurʾān Preserved?</span>
+        <span class="ra-list-badge">{stats.qpItemsCount} cases · {stats.qpSectionsCount} questions</span>
+      </div>
+      <p class="ra-list-desc">
+        Companions' testimonies in Bukhārī and Muslim on omitted verses, ʿUthmān's standardization, and competing codices compared with the classical explanations.
+      </p>
+    </a>
+
+    <a href={`${base}/discover/islamic-dilemma`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">3 Qurʾān Verses on the Torah &amp; Gospel, Beside Pre-Islamic Bible Copies</span>
+        <span class="ra-list-badge">Q 5:47 · 5:68 · 5:43</span>
+      </div>
+      <p class="ra-list-desc">
+        Places Qurʾānic verses commanding Jews and Christians to judge by their scriptures alongside physical 4th–6th century Biblical manuscripts that predate Islam.
+      </p>
+    </a>
+
+    <a href={`${base}/discover/convenient-revelations`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">12 Occasions of Revelation</span>
+        <span class="ra-list-badge">{stats.crvItemsCount} cases · {stats.crvChaptersCount} chapters</span>
+      </div>
+      <p class="ra-list-desc">
+        Chronological sequence of 12 Medinan rulings traced through verbatim Qurʾān verses, Tafsīr al-Ṭabarī, Ibn Kathīr, and Ṣaḥīḥ hadith.
+      </p>
+    </a>
+
+    <a href={`${base}/discover/muhammad-and-slavery`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">Muhammad and Slavery in the Primary Sources</span>
+        <span class="ra-list-badge">{stats.msHadithItemsCount} hadith · {stats.msQuranPassagesCount} Qurʾān · {stats.msAnswersCount} responses</span>
+      </div>
+      <p class="ra-list-desc">
+        What the Qurʾān, Ṣaḥīḥ al-Bukhārī, Ṣaḥīḥ Muslim, and classical tafsīr record on ownership, capture, concubinage (Q 4:24), and manumission.
+      </p>
+    </a>
+
+    <a href={`${base}/discover/from-mecca-to-medina`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">From Mecca to Medina</span>
+        <span class="ra-list-badge">{stats.mmItemsCount} cases · {stats.mmSectionsCount} sections</span>
+      </div>
+      <p class="ra-list-desc">
+        Chronological comparison of Meccan and Medinan sūras, abrogation (naskh), and classical commentary consensus.
+      </p>
+    </a>
+
+    <a href={`${base}/discover/origins-of-revelation`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">Assessing the Origins of Islamic Revelation</span>
+        <span class="ra-list-badge">{stats.orvAccountsCount} accounts · primary texts</span>
+      </div>
+      <p class="ra-list-desc">
+        Side-by-side comparison of the Cave of Ḥirāʾ encounter, physical signs of revelation, Bukhārī 5763, and Q 22:52 with biblical criteria.
+      </p>
+    </a>
+  </div>
+
+  <div class="ra-subhead-row" style="margin-top: 20px;">
+    <h3 class="ra-subhead">Christian Apologetics — Manuscripts, History &amp; Archaeology</h3>
+  </div>
+  <div class="ra-list-grid">
+    <a href={`${base}/discover/trustworthiness-of-the-bible`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">The Trustworthiness of the Bible</span>
+        <span class="ra-list-badge">{stats.trustBibleCount} evidences · 4 stages</span>
+      </div>
+      <p class="ra-list-desc">
+        Textual transmission, manuscript density compared with classical antiquity, archaeological corroboration, eyewitness credibility, and canon formation.
+      </p>
+    </a>
+
+    <a href={`${base}/discover/extrabiblical-evidence-for-jesus`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">Extrabiblical &amp; Historical Evidence for Jesus</span>
+        <span class="ra-list-badge">{stats.extrabiblicalCount} non-Christian sources</span>
+      </div>
+      <p class="ra-list-desc">
+        Verified compilation of {stats.extrabiblicalCount} Ante-Nicene Greco-Roman, Jewish, and non-Christian historical testimonies from the first three centuries.
+      </p>
+    </a>
+
+    <a href={`${base}/discover/divinity-timeline`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">Archaeological Evidence of the Divine Christ</span>
+        <span class="ra-list-badge">{stats.divinityTimelineCount} dated milestones</span>
+      </div>
+      <p class="ra-list-desc">
+        Interactive chronological timeline of early inscriptions, papyri, church mosaics (including the AD 230 Megiddo Mosaic), and pre-Nicene worship of Jesus.
+      </p>
+    </a>
+  </div>
+</section>

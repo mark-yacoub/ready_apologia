@@ -5,13 +5,24 @@ interface Props {
   currentTitle: string;
   currentIndex: number | string;
   hideDropdown?: boolean;
+  /** Whether to render the visually hidden page <h1> (default: true). Pass false when the page renders its own <h1>. */
+  renderH1?: boolean;
+  /** Text for the visually hidden page <h1> (defaults to currentTitle). */
+  h1Text?: string;
 }
 
-const { currentTitle, currentIndex, hideDropdown = false } = Astro.props;
+const {
+  currentTitle,
+  currentIndex,
+  hideDropdown = false,
+  renderH1 = true,
+  h1Text = currentTitle,
+} = Astro.props;
 const sections = hideDropdown ? [] : getQuranSections();
 ---
 
 <header class="quran-reader-header select-none">
+  {renderH1 && <h1 class="sr-only">{h1Text || currentTitle}</h1>}
   <div class="selector-hub">
 
     <!-- Surah Selector Dropdown -->

@@ -1,0 +1,34 @@
+---
+interface Chip {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  variant: 'quran' | 'bible' | 'hadith';
+  tag: string;
+  count: string;
+  title: string;
+  href: string;
+  body: string;
+  chips: Chip[];
+}
+
+const { variant, tag, count, title, href, body, chips } = Astro.props;
+---
+
+<article class={`ra-card ra-card--${variant}`}>
+  <div class="ra-card-top">
+    <span class={`ra-tag ra-tag--${variant}`}>{tag}</span>
+    <span class="ra-count">{count}</span>
+  </div>
+  <h3 class="ra-h3">
+    <a href={href}>{title}</a>
+  </h3>
+  <p class="ra-card-body">{body}</p>
+  <div class="ra-chip-row">
+    {chips.map((c) => (
+      <a href={c.href} class="ra-chip">{c.label}</a>
+    ))}
+  </div>
+</article>

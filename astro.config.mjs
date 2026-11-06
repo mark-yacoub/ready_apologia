@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import { resolveLastmod, reportUnmatchedLastmod } from './src/utils/sitemap_lastmod.js';
 
 /**
  * L6 O(1) Path-Segment Router for 77,000+ SSG pages.
@@ -64,19 +65,31 @@ export default defineConfig({
       filter: (page) => {
         const url = new URL(page);
         const path = url.pathname.replace(/\/$/, '');
-        return !path.includes('/404') && !path.startsWith('/hadith/data');
+        // '/bible' is a 301 stub to the default chapter; redirects never belong in a sitemap.
+        return !path.includes('/404') && !path.startsWith('/hadith/data') && path !== '/bible'
+          && path !== '/quran/codex/abdullah-bin-abbas'
+          // Real routes are lowercase; mixed-case paths (e.g. /bible/PrAzar/...) are generated
+          // from a bad DB book id and only redirect to /404.
+          && !/[A-Z]/.test(path);
       },
       serialize: (item) => {
         const url = new URL(item.url);
         const metadata = resolveSitemapMetadata(url.pathname);
         item.changefreq = metadata.changefreq;
         item.priority = metadata.priority;
+        // Last git commit touching this URL's content sources (see src/utils/sitemap_lastmod.js).
+        const lastmod = resolveLastmod(url.pathname);
+        if (lastmod) item.lastmod = lastmod;
         if (url.pathname !== '/' && item.url.endsWith('/')) {
           item.url = item.url.slice(0, -1);
         }
         return item;
       }
-    })
+    }),
+    {
+      name: 'sitemap-lastmod-report',
+      hooks: { 'astro:build:done': () => reportUnmatchedLastmod() }
+    }
   ],
   site: process.env.SITE_URL || 'https://readyapologia.com',
   base: '/',

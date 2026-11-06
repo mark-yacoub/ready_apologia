@@ -2,14 +2,7 @@ import React, { useState, useRef, Suspense, lazy } from 'react';
 const ManuscriptLightbox = lazy(() => import('./ManuscriptLightbox.jsx'));
 import '../styles/evidence-carousel.css';
 import { R2_BASE_URL } from '../utils/cdn_config.js';
-
-
-function formatDate(dateVal) {
-  if (dateVal === null || dateVal === undefined || dateVal === '') return 'Unknown';
-  const n = parseInt(dateVal, 10);
-  if (isNaN(n)) return dateVal;
-  return n < 0 ? `${Math.abs(n)} BC` : `AD ${n}`;
-}
+import { formatDate } from '../utils/manuscriptFormat.js';
 
 export default function QuranManuscriptCarousel({ manuscripts, surah, ayah, verseLabel }) {
   const [activeSlide, setActiveSlide] = useState(0);

@@ -1,0 +1,205 @@
+{
+  "_note": "hand-seeded 2026-11-06; regenerate with npm run cloudflare:snapshot",
+  "dns_records": [
+    {
+      "content": "readyapologia.com",
+      "name": "www.readyapologia.com",
+      "proxied": true,
+      "ttl": 1,
+      "type": "CNAME"
+    }
+  ],
+  "phases": {
+    "http_ratelimit": [
+      {
+        "action": "block",
+        "description": "Human Rate Limit 200/10s",
+        "enabled": true,
+        "expression": "(http.host eq \"readyapologia.com\")",
+        "ratelimit": {
+          "characteristics": [
+            "cf.colo.id",
+            "ip.src"
+          ],
+          "mitigation_timeout": 10,
+          "period": 10,
+          "requests_per_period": 200
+        }
+      }
+    ],
+    "http_request_cache_settings": [
+      {
+        "action": "set_cache_settings",
+        "action_parameters": {
+          "browser_ttl": {
+            "mode": "respect_origin"
+          },
+          "cache": true,
+          "edge_ttl": {
+            "default": 14400,
+            "mode": "override_origin"
+          }
+        },
+        "description": "R2: cache everything",
+        "enabled": true,
+        "expression": "(http.host eq \"readyapologia.com\")"
+      }
+    ],
+    "http_request_dynamic_redirect": [
+      {
+        "action": "redirect",
+        "action_parameters": {
+          "from_value": {
+            "preserve_query_string": true,
+            "status_code": 301,
+            "target_url": {
+              "expression": "concat(\"https://readyapologia.com\", http.request.uri.path)"
+            }
+          }
+        },
+        "description": "Redirect from WWW to root",
+        "enabled": true,
+        "expression": "(http.host eq \"www.readyapologia.com\")"
+      },
+      {
+        "action": "redirect",
+        "action_parameters": {
+          "from_value": {
+            "preserve_query_string": true,
+            "status_code": 301,
+            "target_url": {
+              "expression": "substring(http.request.uri.path, 0, -1)"
+            }
+          }
+        },
+        "description": "Strip trailing slash",
+        "enabled": true,
+        "expression": "ends_with(http.request.uri.path, \"/\") and http.request.uri.path ne \"/\""
+      },
+      {
+        "action": "redirect",
+        "action_parameters": {
+          "from_value": {
+            "preserve_query_string": true,
+            "status_code": 301,
+            "target_url": {
+              "expression": "wildcard_replace(http.request.uri.path, \"/bible/*/*/*\", \"/bible/${1}/${2}#${3}\")"
+            }
+          }
+        },
+        "description": "Legacy Bible verse URL \u2192 chapter anchor",
+        "enabled": true,
+        "expression": "http.request.uri.path wildcard \"/bible/*/*/*\" and not http.request.uri.path wildcard \"/bible/*/*/*/*\""
+      },
+      {
+        "action": "redirect",
+        "action_parameters": {
+          "from_value": {
+            "preserve_query_string": true,
+            "status_code": 301,
+            "target_url": {
+              "expression": "wildcard_replace(http.request.uri.path, \"/quran/*/*\", \"/quran/${1}#${2}\")"
+            }
+          }
+        },
+        "description": "Legacy Quran ayah URL \u2192 surah anchor",
+        "enabled": true,
+        "expression": "http.request.uri.path wildcard \"/quran/*/*\" and not http.request.uri.path wildcard \"/quran/*/*/*\" and not starts_with(http.request.uri.path, \"/quran/codex/\") and not starts_with(http.request.uri.path, \"/quran/variant/\")"
+      },
+      {
+        "action": "redirect",
+        "action_parameters": {
+          "from_value": {
+            "preserve_query_string": true,
+            "status_code": 301,
+            "target_url": {
+              "expression": "concat(\"/evidence\", substring(http.request.uri.path, 7))"
+            }
+          }
+        },
+        "description": "Legacy /topics \u2192 /evidence",
+        "enabled": true,
+        "expression": "starts_with(http.request.uri.path, \"/topics\")"
+      }
+    ],
+    "http_request_firewall_custom": [
+      {
+        "action": "skip",
+        "action_parameters": {
+          "phases": [
+            "http_ratelimit",
+            "http_request_firewall_managed",
+            "http_request_sbfm"
+          ],
+          "ruleset": "current"
+        },
+        "description": "Allow Social Media Crawlers",
+        "enabled": true,
+        "expression": "(http.user_agent contains \"WhatsApp\") or (http.user_agent contains \"facebookexternalhit\") or (http.user_agent contains \"Twitterbot\") or (http.user_agent contains \"TelegramBot\") or (http.user_agent contains \"LinkedInBot\") or (http.user_agent contains \"Slackbot\") or (http.user_agent contains \"Discordbot\") or (http.user_agent contains \"Applebot\")"
+      },
+      {
+        "action": "block",
+        "description": "Block Aggressive AI Scrapers",
+        "enabled": true,
+        "expression": "(http.user_agent contains \"GPTBot\") or (http.user_agent contains \"ChatGPT-User\") or (http.user_agent contains \"ClaudeBot\") or (http.user_agent contains \"Claude-Web\") or (http.user_agent contains \"anthropic-ai\") or (http.user_agent contains \"Bytespider\") or (http.user_agent contains \"CCBot\") or (http.user_agent contains \"PetalBot\") or (http.user_agent contains \"Amazonbot\") or (http.user_agent contains \"Diffbot\") or (http.user_agent contains \"Cohere\") or (http.user_agent contains \"PerplexityBot\")"
+      },
+      {
+        "action": "managed_challenge",
+        "description": "Block Unknown OS & Empty User-Agents",
+        "enabled": true,
+        "expression": "(http.user_agent eq \"\")"
+      },
+      {
+        "action": "managed_challenge",
+        "description": "Data Center / ASN Challenge",
+        "enabled": true,
+        "expression": "(ip.geoip.asnum in {14061 16509 14618 24940})"
+      },
+      {
+        "action": "managed_challenge",
+        "description": "Enforce Standard Browsers & Verified Bots",
+        "enabled": true,
+        "expression": "(not http.user_agent contains \"Mozilla\" and not http.user_agent contains \"Googlebot\")"
+      }
+    ],
+    "http_request_transform": [
+      {
+        "action": "rewrite",
+        "action_parameters": {
+          "uri": {
+            "path": {
+              "value": "/index.html"
+            }
+          }
+        },
+        "description": "R2: root to index.html",
+        "enabled": true,
+        "expression": "(http.host eq \"readyapologia.com\" and http.request.uri.path eq \"/\")"
+      },
+      {
+        "action": "rewrite",
+        "action_parameters": {
+          "uri": {
+            "path": {
+              "expression": "concat(http.request.uri.path, \"/index.html\")"
+            }
+          }
+        },
+        "description": "R2: clean URLs to index.html",
+        "enabled": true,
+        "expression": "(http.host eq \"readyapologia.com\" and http.request.uri.path ne \"/\" and not http.request.uri.path contains \".\")"
+      }
+    ],
+    "http_response_headers_transform": []
+  },
+  "r2_custom_domains": [
+    {
+      "bucket": "ready-apologia-web",
+      "domain": "readyapologia.com",
+      "enabled": true
+    }
+  ],
+  "zone": {
+    "name": "readyapologia.com"
+  }
+}

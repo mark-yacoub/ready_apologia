@@ -1,0 +1,87 @@
+---
+import type { HomeStats } from '../../utils/homeStats.js';
+
+interface Props {
+  base: string;
+  stats: HomeStats;
+}
+
+const { base, stats } = Astro.props;
+---
+
+<section class="ra-section" aria-labelledby="ra-sec-evidence">
+  <div class="ra-sec-head">
+    <div class="ra-sec-head-row">
+      <div>
+        <p class="ra-eyebrow">Theological Directories</p>
+        <h2 id="ra-sec-evidence" class="ra-h2">Scripture, Patristics &amp; Prophecy</h2>
+      </div>
+      <a href={`${base}/evidence`} class="ra-sec-link">Open Evidence Explorer →</a>
+    </div>
+    <p class="ra-sec-sub">
+      Old and New Testament verse banks paired with {stats.patristicWorksCount} works by {stats.patristicFathersCount} early Church Fathers and Second Temple Jewish texts.
+    </p>
+  </div>
+
+  <div class="ra-list-grid">
+    <a href={`${base}/evidence/divinity_of_christ`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">Divinity of Christ</span>
+        <span class="ra-list-badge">{stats.divinityChristCount.toLocaleString()} citations</span>
+      </div>
+      <p class="ra-list-desc">
+        625 New Testament verses, 140 Old Testament verses, 266 Ante-Nicene Father quotes, and 36 Ancient Jewish "Two Powers in Heaven" sources.
+      </p>
+    </a>
+
+    <a href={`${base}/evidence/nt_authors`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">New Testament Authorship</span>
+        <span class="ra-list-badge">{stats.ntAuthorsCount} patristic passages</span>
+      </div>
+      <p class="ra-list-desc">
+        Book-by-book 1st–4th century patristic attributions and early canon lists across all 27 New Testament books with bolded attribution clauses.
+      </p>
+    </a>
+
+    <a href={`${base}/evidence/prophecies`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">Fulfilled Messianic Prophecies</span>
+        <span class="ra-list-badge">{stats.propheciesCount} items</span>
+      </div>
+      <p class="ra-list-desc">
+        183 Old Testament prophecies paired directly with their New Testament fulfillments and 20 Ancient Jewish messianic expectations.
+      </p>
+    </a>
+
+    <a href={`${base}/evidence/divinity_of_the_holy_spirit`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">Divinity of the Holy Spirit</span>
+        <span class="ra-list-badge">{stats.holySpiritCount} citations</span>
+      </div>
+      <p class="ra-list-desc">
+        160 Old and New Testament passages and 126 Ante-Nicene patristic testimonies on the personhood and deity of the Holy Spirit.
+      </p>
+    </a>
+
+    <a href={`${base}/evidence/trinity`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">The Holy Trinity</span>
+        <span class="ra-list-badge">{stats.trinityCount} citations</span>
+      </div>
+      <p class="ra-list-desc">
+        50 foundational triune Scripture passages alongside 110 pre-Nicene Church Father treatises written before AD 325.
+      </p>
+    </a>
+
+    <a href={`${base}/bible/jn/1/1/apologetics`} class="ra-list-card">
+      <div class="ra-list-top">
+        <span class="ra-list-title">Verse Exegesis &amp; Cross-Referenced Pairings</span>
+        <span class="ra-list-badge">{stats.apologeticsCount.toLocaleString()} defenses · {stats.pairingsCount.toLocaleString()} pairings</span>
+      </div>
+      <p class="ra-list-desc">
+        {stats.patristicEntriesCount} verse-level Patristic commentaries, {stats.scholarlyDefensesCount.toLocaleString()} scholarly defenses, and {stats.pairingsCount.toLocaleString()} bidirectional cross-referenced scripture pairings.
+      </p>
+    </a>
+  </div>
+</section>

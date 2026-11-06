@@ -1,0 +1,393 @@
+/* Homepage styles (scoped under .ra-home) */
+.ra-home {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 4px 0 24px;
+  color: var(--color-on-surface, #09090b);
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, sans-serif);
+}
+.ra-home *,
+.ra-home *::before,
+.ra-home *::after {
+  box-sizing: border-box;
+}
+
+/* Hero */
+.ra-home .ra-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px 16px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fafaf9 0%, #f4f4f5 100%);
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+}
+@media (min-width: 768px) {
+  .ra-home .ra-hero {
+    padding: 22px 24px;
+    gap: 12px;
+  }
+}
+
+.ra-home .ra-hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ra-home .ra-hero-logo {
+  width: 24px;
+  height: auto;
+  flex-shrink: 0;
+}
+.ra-home .ra-hero-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #52525b;
+}
+
+.ra-home .ra-h1 {
+  margin: 0;
+  font-family: var(--font-headings, 'Lora', Georgia, serif);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-primary, #09090b);
+}
+@media (min-width: 768px) {
+  .ra-home .ra-h1 {
+    font-size: 34px;
+  }
+}
+
+.ra-home .ra-lead {
+  margin: 0;
+  font-family: var(--font-display, 'Literata', Georgia, serif);
+  font-size: 14px;
+  line-height: 1.55;
+  color: #3f3f46;
+  max-width: 68ch;
+}
+@media (min-width: 768px) {
+  .ra-home .ra-lead {
+    font-size: 15px;
+  }
+}
+
+/* Start Buttons Grid (1-tap entry points, >=44px touch targets) */
+.ra-home .ra-start-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 4px;
+}
+@media (min-width: 640px) {
+  .ra-home .ra-start-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+
+.ra-home .ra-start-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-height: 56px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: 1px solid #d4d4d8;
+  color: var(--color-primary, #09090b);
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 1px 2px rgba(9, 9, 11, 0.04);
+}
+.ra-home .ra-start-btn:hover {
+  border-color: #18181b;
+  box-shadow: 0 4px 12px rgba(9, 9, 11, 0.08);
+  transform: translateY(-1px);
+}
+.ra-home .ra-start-btn--primary {
+  background: linear-gradient(135deg, #fdf8f7 0%, #f7eceb 100%);
+  border-color: rgba(151, 69, 67, 0.35);
+}
+.ra-home .ra-start-btn--primary .ra-start-title {
+  color: #7c2d2b;
+}
+.ra-home .ra-start-btn--quran {
+  background: linear-gradient(135deg, #f3faf7 0%, #e6f4ed 100%);
+  border-color: rgba(5, 150, 105, 0.35);
+}
+.ra-home .ra-start-btn--quran .ra-start-title {
+  color: #065f46;
+}
+
+.ra-home .ra-start-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.ra-home .ra-start-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #09090b;
+}
+.ra-home .ra-start-arrow {
+  font-size: 13px;
+  font-weight: 700;
+  color: #52525b;
+  flex-shrink: 0;
+}
+.ra-home .ra-start-meta {
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #52525b;
+}
+
+/* Sections */
+.ra-home .ra-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ra-home .ra-sec-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ra-home .ra-sec-head-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ra-home .ra-eyebrow {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #52525b;
+}
+.ra-home .ra-h2 {
+  margin: 0;
+  font-family: var(--font-headings, 'Lora', Georgia, serif);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--color-primary, #09090b);
+}
+@media (min-width: 768px) {
+  .ra-home .ra-h2 {
+    font-size: 24px;
+  }
+}
+.ra-home .ra-sec-sub {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #52525b;
+}
+.ra-home .ra-sec-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  font-size: 12px;
+  font-weight: 700;
+  color: #18181b;
+  white-space: nowrap;
+}
+.ra-home .ra-sec-link:hover {
+  border-color: #18181b;
+  background-color: #e4e4e7;
+}
+
+/* Dataset Cards Grid */
+.ra-home .ra-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 680px) {
+  .ra-home .ra-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+.ra-home .ra-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 15px;
+  border-radius: 14px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  box-shadow: 0 1px 3px rgba(9, 9, 11, 0.04);
+}
+.ra-home .ra-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ra-home .ra-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background-color: #f4f4f5;
+  color: #3f3f46;
+}
+.ra-home .ra-tag--bible {
+  background-color: #f9ebeb;
+  color: #7c2d2b;
+}
+.ra-home .ra-tag--quran {
+  background-color: #e8f5ee;
+  color: #065f46;
+}
+.ra-home .ra-tag--hadith {
+  background-color: #f3f1ed;
+  color: #44403c;
+}
+.ra-home .ra-count {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #3f3f46;
+}
+
+.ra-home .ra-h3 {
+  margin: 0;
+  font-family: var(--font-headings, 'Lora', Georgia, serif);
+  font-size: 16.5px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #09090b;
+}
+.ra-home .ra-h3 a:hover {
+  text-decoration: underline;
+}
+
+.ra-home .ra-card-body {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #3f3f46;
+  flex: 1;
+}
+
+.ra-home .ra-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+.ra-home .ra-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background-color: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  font-size: 12px;
+  font-weight: 700;
+  color: #18181b;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.ra-home .ra-chip:hover {
+  background-color: #e4e4e7;
+  border-color: #a1a1aa;
+}
+
+/* Compact List Cards for Deep Dives & Evidence Directories */
+.ra-home .ra-subhead-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+.ra-home .ra-subhead {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #52525b;
+}
+
+.ra-home .ra-list-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+@media (min-width: 680px) {
+  .ra-home .ra-list-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+
+.ra-home .ra-list-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-outline-variant, #e4e4e7);
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.ra-home .ra-list-card:hover {
+  border-color: #18181b;
+  box-shadow: 0 3px 10px rgba(9, 9, 11, 0.06);
+  transform: translateY(-1px);
+}
+.ra-home .ra-list-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ra-home .ra-list-title {
+  font-family: var(--font-headings, 'Lora', Georgia, serif);
+  font-size: 14.5px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #09090b;
+}
+.ra-home .ra-list-badge {
+  font-size: 11px;
+  font-weight: 800;
+  color: #52525b;
+  background-color: #f4f4f5;
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.ra-home .ra-list-desc {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #52525b;
+}

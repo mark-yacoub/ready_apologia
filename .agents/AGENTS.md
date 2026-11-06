@@ -34,3 +34,11 @@ Several agents work on this repo at the same time. The main checkout (`~/Documen
 
 ## Git & Version Control Constraints
 - **Explicit Commits & Pushes Only**: NEVER automatically execute `git commit` or `git push` to origin without explicit instruction from the user. Only execute these commands when the user explicitly requests to save the work or deploy.
+
+## SEO & Sitemap Maintenance
+- **Sitemap `<lastmod>`**: dates come from `src/utils/sitemap_lastmod.js` (last git commit touching each URL's content sources). When you add a **new route, Discover article, or data source**, you MUST add/extend its rule in `LASTMOD_RULES` (or `DISCOVER_SOURCES`). After a build, any `[sitemap-lastmod]` warning lists URLs that ship without `<lastmod>`; fix the mapping instead of ignoring it. Never set `lastmod` to the build time.
+- **No redirect or noindex pages in the sitemap**: redirect stubs (e.g. `/bible`) are excluded in `astro.config.mjs`'s sitemap `filter`; keep it that way for any new stub.
+- **Description/opening-line voice**: generic or aggregate pages (verse tabs such as videos/footnotes/manuscripts, hubs) use template copy in our voice and must pass the playbook tone list; single-item pages (e.g. one hadith permalink) may quote that item. Quotations go inside curly quotes “…” (the audit skips quoted text).
+- **One `<h1>` per page**: every page template must render exactly one `<h1>`. When the visible title is made of buttons/selectors, mirror it in `<h1 class="sr-only">` (the text must match what is on screen).
+- **Public URLs are permanent**: never rename/remove a route without adding a 301 (Cloudflare redirect rule, see `CLOUDFLARE.md`).
+- **Static SEO & title audit (`npm run audit:seo`)**: run `node scripts/test_seo_titles.mjs` (supports `--dist <dir>`, `--allow-sliced`, `--allow-missing-lastmod`) against built output to verify `<title>` budgets (`<= 60` chars on templated Scripture pages, no duplicates or doubled words), meta descriptions (`50-170` chars, no raw markdown), single `<h1>`, opening lines, playbook tone, sitemap `<lastmod>`/canonicals, and JSON-LD blocks.

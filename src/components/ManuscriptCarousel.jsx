@@ -2,6 +2,7 @@ import React, { useState, useRef, Suspense, lazy } from 'react';
 const ManuscriptLightbox = lazy(() => import('./ManuscriptLightbox.jsx'));
 import '../styles/evidence-carousel.css';
 import { R2_BASE_URL } from '../utils/cdn_config.js';
+import { formatDate } from '../utils/manuscriptFormat.js';
 
 function getManuscriptTag(ms, isNT) {
   if (isNT) {
@@ -14,13 +15,6 @@ function getManuscriptTag(ms, isNT) {
   if (s.includes('scroll')) return 'Scroll';
   if (s.includes('papyrus') || s.includes('pap') || (ms.name && ms.name.toLowerCase().includes('p.'))) return 'Papyrus';
   return 'Fragment';
-}
-
-function formatDate(dateVal) {
-  if (dateVal === null || dateVal === undefined || dateVal === '') return 'Unknown';
-  const n = parseInt(dateVal, 10);
-  if (isNaN(n)) return dateVal;
-  return n < 0 ? `${Math.abs(n)} BC` : `AD ${n}`;
 }
 
 export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, isNT }) {

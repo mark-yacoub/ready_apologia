@@ -6,7 +6,7 @@ import { query } from '../../../db.js';
 import booksMeta from '../../../data/books_meta.json';
 import { mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
 import { getBibleOgImage } from '../../../utils/ogImageResolver.js';
-import { generateBibleChapterSchema } from '../../../utils/seoFactory.js';
+import { generateBibleChapterSEO } from '../../../utils/seoFactory.js';
 import { BUILD_BOOKS } from '../../../utils/build_config.js';
 import { loadAllEvidenceData } from '../../../utils/evidenceLoader.js';
 import { getEvidenceColor as getTopicColor } from '../../../utils/evidenceColors.js';
@@ -207,27 +207,35 @@ const evidenceMeta = allTopics.reduce((acc, t) => {
   return acc;
 }, {});
 
-const seoTitle = `${bookMeta.name} ${chapter} - Bible Apologetics and Evidences`;
-let seoDescription = `Read ${bookMeta.name} ${chapter} with word-for-word translation and explore each verse's manuscripts, ancient and modern apologetics, and responses to alleged contradictions.`;
+const lxxGlob = `${book}_${chapter}_*`;
+const mtGlob = isNT ? lxxGlob : `${book}_${mapLxxToMt(book, chapter, '1').chapter}_*`;
+const earliestChapMsRows = isNT
+  ? query(
+      "SELECT mm.ms_id, mm.name, mm.earliest_date, mm.latest_date, mm.date_range_english FROM manuscript_per_verse m JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id WHERE m.verse_id GLOB :g ORDER BY mm.earliest_date ASC LIMIT 1",
+      { g: lxxGlob }
+    )
+  : query(
+      "SELECT mm.ms_id, mm.name, mm.earliest_date, mm.latest_date, mm.date_range_english FROM manuscript_per_verse_ot m JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id WHERE m.verse_id GLOB :lxx OR m.verse_id GLOB :mt ORDER BY mm.earliest_date ASC LIMIT 1",
+      { lxx: lxxGlob, mt: mtGlob }
+    );
+const earliestChapMs = earliestChapMsRows[0] || null;
 
-const verseTagsCount = Object.keys(verseTagsMap).length;
-const evidenceVerseCount = Object.keys(evidenceMap).length;
-
-if (verseTagsCount > 0 || evidenceVerseCount > 0) {
-  const stats = [];
-  if (verseTagsCount > 0) stats.push(`textual and critical evidence for ${verseTagsCount} verse${verseTagsCount > 1 ? 's' : ''}`);
-  if (evidenceVerseCount > 0) stats.push(`deep theological topics across ${evidenceVerseCount} verse${evidenceVerseCount > 1 ? 's' : ''}`);
-
-  seoDescription += ` This chapter includes ${stats.join(' and ')}.`;
-}
+const chapTagValues = Object.values(verseTagsMap);
+const chapMsCount = chapTagValues.filter(t => t.includes('manuscript')).length;
+const chapApCount = chapTagValues.filter(t => t.includes('apologetics')).length;
+const chapCtCount = chapTagValues.filter(t => t.includes('contradiction')).length;
 
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
 const canonicalURL = `${siteUrl}${base}/bible/${book}/${chapter}`;
-const chapterSchema = generateBibleChapterSchema({
+const { seoTitle, seoDescription, openingLine, chapterSchema } = generateBibleChapterSEO({
   bookName: bookMeta.name,
   bookId: book,
   chapter,
-  seoDescription,
+  verseCount: chapterVerses.length,
+  msVerseCount: chapMsCount,
+  apVerseCount: chapApCount,
+  ctVerseCount: chapCtCount,
+  earliestMs: earliestChapMs,
   canonicalUrl: canonicalURL
 });
 ---
@@ -239,11 +247,13 @@ const chapterSchema = generateBibleChapterSchema({
   canonicalURL={canonicalURL}
   ogUrl={canonicalURL}
   schema={chapterSchema}
-  keywords={`${bookMeta.name} ${chapter}, apologetics, contradictions, commentaries`}
+  keywords={`${bookMeta.name} ${chapter}, manuscripts, commentaries`}
 >
   <div class="chapter-reader-container" data-page="bible-chapter">
     <!-- Split Book & Chapter Dropdown Selector -->
-    <header class="reader-header select-none" style="display: flex; flex-direction: column; gap: 12px;">
+    <header class="reader-header select-none" style="display: flex; flex-direction: column; gap: 8px;">
+      <!-- The visible title is two buttons (book / chapter), so the page heading is mirrored here. -->
+      <h1 class="sr-only">{bookMeta.name} {chapter}</h1>
       <div class="selector-hub">
         <!-- 1. Book Name Selector (Clicking 'John' opens Left Navigation Menu) -->
         <button class="book-selector-btn book-title" onclick="document.getElementById('nav-toggle-btn').click()">
@@ -278,6 +288,9 @@ const chapterSchema = generateBibleChapterSchema({
           </div>
         </div>
       </div>
+      {openingLine && (
+        <p class="chapter-opening-line select-text">{openingLine}</p>
+      )}
     </header>
 
     <!-- Scripture Verses -->
@@ -700,6 +713,14 @@ const chapterSchema = generateBibleChapterSchema({
 		margin-bottom: 20px;
 		display: flex;
 		justify-content: flex-start;
+	}
+
+	.chapter-opening-line {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		line-height: 1.5;
+		color: #52525b;
 	}
 
 	/* ============================================================
