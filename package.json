@@ -25,6 +25,9 @@
     "verify:muhammad-slavery": "node --experimental-sqlite scripts/verify_muhammad_slavery_quotes.mjs",
     "gen:muhammad-slavery-arabic": "node --experimental-sqlite scripts/muhammad_slavery/gen_arabic.mjs",
     "cloudflare:snapshot": "node scripts/cloudflare/snapshot.mjs",
+    "import:quran-sources": "node scripts/import_quran_sources.js",
+    "test:quran-sources": "node --test src/utils/quranSources/contract.test.mjs",
+    "audit:quran-sources": "node scripts/test_quran_sources.mjs",
     "astro": "astro"
   },
   "dependencies": {

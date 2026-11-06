@@ -7,7 +7,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 8080;
-const PUBLIC_DIR = path.join(__dirname, '../dist');
+const PUBLIC_DIR = process.env.DIST_DIR
+  ? path.resolve(process.env.DIST_DIR)
+  : path.join(__dirname, '../dist');
 
 const MIME_TYPES = {
   '.html': 'text/html',
@@ -29,7 +31,10 @@ const server = http.createServer((req, res) => {
   try {
     const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost:8080'}`);
     pathname = decodeURIComponent(parsedUrl.pathname);
-    
+    if (pathname.includes('\0')) {
+      throw new Error('Null byte in URL');
+    }
+
     // Support Astro base URL by stripping it for local directory lookup
     if (pathname.startsWith('/ready_apologia')) {
       pathname = pathname.substring('/ready_apologia'.length) || '/';
@@ -39,7 +44,10 @@ const server = http.createServer((req, res) => {
     pathname = '/404.html'; // Route immediately to static 404 fallback
   }
 
-  let filePath = path.join(PUBLIC_DIR, pathname);
+  let filePath = path.resolve(PUBLIC_DIR, '.' + pathname);
+  if (filePath !== PUBLIC_DIR && !filePath.startsWith(PUBLIC_DIR + path.sep)) {
+    filePath = path.join(PUBLIC_DIR, '404.html');
+  }
 
   // If path is a directory, look for index.html
   if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {

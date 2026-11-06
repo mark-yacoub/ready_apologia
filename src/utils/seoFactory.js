@@ -1,5 +1,6 @@
 import booksMeta from '../data/books_meta.json';
 import { mapMtToLxx } from './scripture_mapper.js';
+import { SEO_DRAWER } from './quranSources/drawerCopy.js';
 import {
   formatDate,
   formatMsDateRange,
@@ -721,6 +722,48 @@ export const generateQuranTabSEO = createTabSEOResolver(
         };
       }
     },
+    'sources': {
+      dynamic: (data) => {
+        const view = data.sourcesView;
+        const total = view?.total || 0;
+        const items = (view?.entries || []).flatMap(e => e.sources || []);
+        const rawTitles = (view?.sampleTitles || [...new Set(items.map(i => i.title))].slice(0, 3))
+          .map(t => String(t || '').replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim())
+          .filter(Boolean);
+        const sampleTitles = rawTitles.join(', ');
+        const firstTitleClean = String(items[0]?.title || '').replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+        const firstRefClean = String(items[0]?.ref || '').replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+        const firstSource = firstTitleClean
+          ? (/^\d+[:.]\d+/.test(firstRefClean) && firstRefClean.length <= 12
+              ? `${firstTitleClean} ${firstRefClean}`
+              : firstTitleClean)
+          : firstRefClean;
+        const openingLine = total === 1
+          ? `1 earlier primary-source passage parallels Qurʾān ${data.surah}:${data.ayah}${firstSource ? ` (${firstSource})` : ''}, quoted side by side with verification links.`
+          : `${total} earlier primary-source passages parallel Qurʾān ${data.surah}:${data.ayah}${sampleTitles ? ` (including ${sampleTitles})` : ''}, quoted side by side with verification links.`;
+        const result = {
+          title: SEO_DRAWER.title(data.surah, data.ayah, firstSource),
+          description: clampDescription(SEO_DRAWER.description(data.surah, data.ayah, total, sampleTitles)),
+          keywords: SEO_DRAWER.keywords(data.surah, data.ayah),
+          openingLine
+        };
+        if (items.length > 0) {
+          const answer = items.slice(0, 5)
+            .map(i => `${i.title}${i.ref && i.ref !== i.title ? ` (${i.ref})` : ''}${i.date ? `, ${i.date}` : ''}`)
+            .join('; ');
+          result.faqEntity = {
+            "@type": "FAQPage",
+            ...(data.canonicalUrl && { "@id": `${data.canonicalUrl}#faqpage`, "mainEntityOfPage": { "@type": "WebPage", "@id": data.canonicalUrl } }),
+            "mainEntity": [{
+              "@type": "Question",
+              "name": SEO_DRAWER.faqQuestion(data.surah, data.ayah),
+              "acceptedAnswer": { "@type": "Answer", "text": sanitizeAnswerHTML(`Earlier primary texts that parallel this verse include: ${answer}.`) }
+            }]
+          };
+        }
+        return result;
+      }
+    },
     'videos': {
       dynamic: (data) => {
         const qRef = `Quran ${data.surah}:${data.ayah}`;
@@ -760,6 +803,7 @@ export const generateQuranTabSEO = createTabSEOResolver(
       'scientific-errors': 'Text & Natural World',
       'tafsir': (data.activeCommentary?.name || 'Tafsir Commentary'),
       'debunking-miracles': 'Miracle Claims',
+      'sources': 'Primary Sources',
       'videos': 'Short Videos'
     };
     return [

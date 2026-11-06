@@ -16,6 +16,7 @@ export default function QuranVerseTabs({
   surah,
   ayah,
   videosCount = 0,
+  sourcesCount = 0,
 }) {
   const tabs = [
     { id: 'debunking-miracles', label: `Debunking Miracles (${debunkingCount})`, show: debunkingCount > 0 },
@@ -24,6 +25,7 @@ export default function QuranVerseTabs({
     { id: 'christian-footnotes', label: `Christian Footnotes (${christianFootnotesCount})`, show: christianFootnotesCount > 0 },
     { id: 'tafsir', label: `Islamic Commentaries (${islamicCommentariesCount})`, show: islamicCommentariesCount > 0 },
     { id: 'videos', label: `Videos (${videosCount})`, show: videosCount > 0 },
+    { id: 'sources', label: `Primary Sources (${sourcesCount})`, show: sourcesCount > 0 },
     { id: 'manuscripts', label: `Manuscripts (${msCount})`, show: msCount > 0 },
   ].filter(t => t.show);
 

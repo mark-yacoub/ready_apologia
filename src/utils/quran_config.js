@@ -23,6 +23,7 @@ export const QURAN_TABS_CONFIG = [
   { id: 'christian-footnotes', labelPrefix: 'Christian Footnotes' },
   { id: 'tafsir', labelPrefix: 'Islamic Commentaries' },
   { id: 'videos', labelPrefix: 'Videos' },
+  { id: 'sources', labelPrefix: 'Primary Sources' },
   { id: 'manuscripts', labelPrefix: 'Manuscripts' },
 ];
 
@@ -37,11 +38,13 @@ export function sanitizeTabOrder(savedOrder, defaultOrder = DEFAULT_QURAN_TAB_OR
   if (!Array.isArray(savedOrder)) return [...defaultOrder];
   const validSet = new Set(defaultOrder);
   const result = savedOrder.filter(id => validSet.has(id));
-  defaultOrder.forEach(id => {
+  defaultOrder.forEach((id, defaultIdx) => {
     if (!result.includes(id)) {
-      // Prepend debunking-miracles if missing for backwards compatibility, otherwise append
-      if (id === 'debunking-miracles') {
-        result.unshift(id);
+      // Insert a newly added tab at its default position: just before the next default tab the
+      // user already has (e.g. 'sources' lands before 'manuscripts'); append if none follows.
+      const nextExisting = defaultOrder.slice(defaultIdx + 1).find(nextId => result.includes(nextId));
+      if (nextExisting) {
+        result.splice(result.indexOf(nextExisting), 0, id);
       } else {
         result.push(id);
       }

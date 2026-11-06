@@ -1,0 +1,467 @@
+---
+/**
+ * Verse drawer panel (v3): curated narrative, phrasal/loanword, and ritual/legal parallels
+ * anchored to this Qurʾān verse or pericope.
+ * Zero client JS: progressive disclosure uses native <details>.
+ */
+import { DRAWER_COPY } from '../../utils/quranSources/drawerCopy.js';
+import { segmentWithHighlights } from '../../utils/quranSources/contract.js';
+import '../../styles/quran-sources-highlight.css';
+
+interface Props {
+  verseId: string;
+  base: string;
+  view: {
+    entries: Array<{
+      range: string;
+      isRange: boolean;
+      title: string;
+      note: string;
+      quranEn?: string;
+      quranHighlights?: string[];
+      categoryBadge: string;
+      categorySlug: string;
+      categoryLabel: string;
+      discussion?: {
+        view: string;
+        reply: string;
+      };
+      sources: Array<{
+        traditionLabel: string;
+        title: string;
+        ref: string;
+        workSub: string;
+        date: string;
+        lang: string;
+        langCode: string;
+        dir: 'rtl' | 'ltr';
+        en: string;
+        highlights?: string[];
+        orig: string;
+        href: string;
+        external: boolean;
+        verifyLabel: string;
+      }>;
+    }>;
+    total: number;
+  };
+}
+
+const { verseId, view, base } = Astro.props;
+
+const lead = DRAWER_COPY.lead(view.entries.length, view.total);
+const primaryCat = view.entries[0] || { categorySlug: 'stories', categoryLabel: 'Stories & Narratives' };
+---
+
+<section class="qsd" aria-labelledby="qsd-title">
+  <h3 id="qsd-title" class="qsd-sr">{DRAWER_COPY.heading(verseId)}</h3>
+  <p class="qsd-lead">{lead}</p>
+
+  {view.entries.map((entry) => (
+    <article class="qsd-entry">
+      <header class="qsd-entry-head">
+        <div class="qsd-badges">
+          <a class="qsd-cat-badge" href={DRAWER_COPY.browseHref(base, entry.categorySlug)}>
+            {entry.categoryBadge}
+          </a>
+          {entry.isRange && (
+            <span class="qsd-scope-pill">{DRAWER_COPY.pericopeScope(entry.range)}</span>
+          )}
+        </div>
+        <h4 class="qsd-entry-title">{entry.title}</h4>
+        <p class="qsd-entry-note">{entry.note}</p>
+      </header>
+
+      <div class="qsd-compare">
+        {entry.quranEn && (
+          <div class="qsd-quran">
+            <div class="qsd-quran-head">
+              <span class="qsd-quran-label">Qurʾān {entry.range}</span>
+            </div>
+            <blockquote class="qsd-quote is-quran">
+              <p>
+                “{segmentWithHighlights(entry.quranEn, entry.quranHighlights).map((seg) =>
+                  seg.mark ? <mark class="qs-hl">{seg.text}</mark> : seg.text
+                )}”
+              </p>
+            </blockquote>
+          </div>
+        )}
+
+        <div class="qsd-sources">
+          {entry.sources.map((src) => {
+            const segs = segmentWithHighlights(src.en, src.highlights);
+            return (
+              <div class="qsd-source">
+                <div class="qsd-source-head">
+                  <div class="qsd-source-titles">
+                    <span class="qsd-trad-pill">{src.traditionLabel}</span>
+                    <span class="qsd-work">{src.ref || src.title}</span>
+                    {src.workSub && (
+                      <span class="qsd-work-sub">{src.workSub}</span>
+                    )}
+                  </div>
+                  <div class="qsd-meta">
+                    {src.date && <span class="qsd-date">{src.date}</span>}
+                    {src.lang && <span class="qsd-lang">{src.lang}</span>}
+                  </div>
+                </div>
+
+                <blockquote class="qsd-quote">
+                  <p>
+                    “{segs.map((seg) =>
+                      seg.mark ? <mark class="qs-hl">{seg.text}</mark> : seg.text
+                    )}”
+                  </p>
+                </blockquote>
+
+                {src.orig && src.orig !== src.en && (
+                  <details class={`qsd-orig${src.langCode === 'ar' ? ' is-arabic' : ''}`}>
+                    <summary>{DRAWER_COPY.original(src.lang)}</summary>
+                    <p lang={src.langCode || 'und'} dir={src.dir || 'auto'}>{src.orig}</p>
+                  </details>
+                )}
+
+                <a
+                  class="qsd-verify"
+                  href={src.href}
+                  {...(src.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {src.verifyLabel} <span aria-hidden="true">{src.external ? '↗' : '→'}</span>
+                </a>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {entry.discussion?.view && entry.discussion?.reply && (
+        <details class="qsd-discussion">
+          <summary>{DRAWER_COPY.discussionSummary}</summary>
+          <div class="qsd-discussion-body">
+            <div class="qsd-discussion-row">
+              <span class="qsd-discussion-label">{DRAWER_COPY.traditionalViewLabel}</span>
+              <p>{entry.discussion.view}</p>
+            </div>
+            <div class="qsd-discussion-row is-reply">
+              <span class="qsd-discussion-label is-reply">{DRAWER_COPY.primaryComparisonLabel}</span>
+              <p>{entry.discussion.reply}</p>
+            </div>
+          </div>
+        </details>
+      )}
+    </article>
+  ))}
+
+  <p class="qsd-foot">
+    <a href={DRAWER_COPY.browseHref(base, primaryCat.categorySlug)}>
+      {DRAWER_COPY.browseCategory(primaryCat.categoryLabel)}
+    </a>
+  </p>
+</section>
+
+<style>
+  .qsd {
+    --qsd-ink: #1c1917;
+    --qsd-muted: #57534e;
+    --qsd-paper: #fafaf9;
+    --qsd-rule: #e7e5e4;
+    --qsd-teal: #0f766e;
+    --qsd-sand: #f5efe3;
+    --qsd-sand-ink: #6b4f1d;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-sizing: border-box;
+  }
+  .qsd *, .qsd *::before, .qsd *::after { box-sizing: inherit; }
+  .qsd-sr {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .qsd-lead {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--qsd-muted);
+  }
+  .qsd-entry {
+    background: #ffffff;
+    border: 1px solid var(--qsd-rule);
+    border-radius: 14px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .qsd-entry-head {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .qsd-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .qsd-cat-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: rgba(15, 118, 110, 0.09);
+    color: var(--qsd-teal);
+    text-decoration: none;
+  }
+  .qsd-cat-badge:hover {
+    background: rgba(15, 118, 110, 0.16);
+  }
+  .qsd-scope-pill {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--qsd-rule);
+    background: var(--qsd-paper);
+    color: var(--qsd-muted);
+  }
+  .qsd h4.qsd-entry-title {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: var(--font-display);
+    font-size: 16.5px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--qsd-ink);
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  .qsd-entry-note {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 13.8px;
+    line-height: 1.55;
+    color: var(--qsd-muted);
+  }
+  .qsd-compare {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  @media (min-width: 820px) {
+    .qsd-compare {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 12px;
+    }
+  }
+  .qsd-quran {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-top: 3px solid #334155;
+    border-radius: 11px;
+    padding: 12px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .qsd-quran-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .qsd-quran-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #334155;
+  }
+  .qsd-quote.is-quran {
+    border-left-color: #475569;
+  }
+  .qsd-sources {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .qsd-source {
+    background: var(--qsd-paper);
+    border: 1px solid var(--qsd-rule);
+    border-radius: 11px;
+    padding: 12px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .qsd-source-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 6px 10px;
+  }
+  .qsd-source-titles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .qsd-trad-pill {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 6px;
+    background: #ffffff;
+    border: 1px solid var(--qsd-rule);
+    color: var(--qsd-muted);
+  }
+  .qsd-work {
+    font-family: var(--font-display);
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--qsd-ink);
+  }
+  .qsd-work-sub {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--qsd-muted);
+  }
+  .qsd-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .qsd-date, .qsd-lang {
+    font-family: var(--font-body);
+    font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 999px;
+    border: 1px solid var(--qsd-rule);
+    color: var(--qsd-muted); background: #fff;
+  }
+  .qsd-date { color: var(--qsd-teal); border-color: rgba(15, 118, 110, 0.3); }
+  .qsd-quote {
+    margin: 0;
+    padding: 2px 0 2px 12px;
+    border-left: 3px solid var(--qsd-teal);
+  }
+  .qsd-quote p {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--qsd-ink);
+    overflow-wrap: anywhere;
+  }
+  .qsd details > summary {
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--qsd-teal);
+    min-height: 32px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .qsd details > summary::-webkit-details-marker { display: none; }
+  .qsd details > summary::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.15s ease;
+  }
+  .qsd details[open] > summary::before { transform: rotate(45deg); }
+  .qsd-orig {
+    background: var(--qsd-sand);
+    border-radius: 8px;
+    padding: 2px 12px;
+  }
+  .qsd-orig > summary { color: var(--qsd-sand-ink) !important; }
+  .qsd-orig p {
+    margin: 0 0 10px;
+    font-family: 'SBL Hebrew', 'Ezra SIL', 'Noto Serif Hebrew', 'Noto Sans Syriac', var(--font-display);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--qsd-ink);
+    overflow-wrap: anywhere;
+  }
+  .qsd-orig.is-arabic p {
+    font-family: 'Amiri', 'Traditional Arabic', serif;
+    font-size: 18px;
+    line-height: 1.9;
+    text-align: right;
+  }
+  .qsd-verify {
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 4px;
+    min-height: 36px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(15, 118, 110, 0.3);
+    background: rgba(15, 118, 110, 0.06);
+    color: var(--qsd-teal);
+    font-family: var(--font-body);
+    font-size: 12.5px; font-weight: 700;
+    text-decoration: none;
+  }
+  .qsd-verify:hover { background: rgba(15, 118, 110, 0.12); }
+  .qsd-discussion {
+    border: 1px solid var(--qsd-rule);
+    border-radius: 9px;
+    background: var(--qsd-paper);
+    padding: 2px 12px;
+  }
+  .qsd-discussion > summary {
+    color: var(--qsd-muted) !important;
+    min-height: 38px;
+  }
+  .qsd-discussion-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 0 10px;
+    border-top: 1px solid var(--qsd-rule);
+  }
+  .qsd-discussion-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: 10px;
+    border-left: 3px solid #64748b;
+  }
+  .qsd-discussion-row.is-reply {
+    border-left-color: var(--qsd-teal);
+  }
+  .qsd-discussion-label {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #475569;
+  }
+  .qsd-discussion-label.is-reply {
+    color: var(--qsd-teal);
+  }
+  .qsd-discussion-row p {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 13.4px;
+    line-height: 1.54;
+    color: var(--qsd-ink);
+  }
+  .qsd-foot { margin: 4px 0 0; font-family: var(--font-body); font-size: 13px; }
+  .qsd-foot a { color: var(--qsd-teal); font-weight: 700; text-decoration: none; }
+  .qsd-foot a:hover { text-decoration: underline; }
+</style>

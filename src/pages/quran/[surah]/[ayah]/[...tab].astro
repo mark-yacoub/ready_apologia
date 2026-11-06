@@ -24,6 +24,8 @@ import { getEvidenceSets } from '../../../../utils/quran_evidence_service.js';
 import { enrichVideosWithVerses } from '../../../../utils/video_service.js';
 import { R2_BASE_URL } from '../../../../utils/cdn_config.js';
 import { BUILD_SURAHS } from '../../../../utils/build_config.js';
+import QuranSourcesPanel from '../../../../components/quranSources/QuranSourcesPanel.astro';
+import { getQuranSourcesForVerse, getQuranSourcesCount } from '../../../../utils/quranSources/loader.js';
 
 export async function getStaticPaths() {
   const {
@@ -33,6 +35,7 @@ export async function getStaticPaths() {
     scientificErrorsSet,
     islamicCommentariesSet,
     debunkingSet,
+    sourcesSet,
     videosSet
   } = getEvidenceSets();
 
@@ -49,6 +52,7 @@ export async function getStaticPaths() {
   addPaths(msQuranSet, 'manuscripts');
   addPaths(footnotesSet, 'christian-footnotes');
   addPaths(contradictionsSet, 'contradictions');
+  addPaths(sourcesSet, 'sources');
   addPaths(scientificErrorsSet, 'scientific-errors');
     const islamicMapPaths = loadIslamicCommentaries();
   Object.keys(islamicMapPaths).forEach(verseId => {
@@ -106,6 +110,8 @@ const scholarlyCards =
   : tab === 'scientific-errors' ? parsedScientificErrors.map(buildScientificErrorCard)
   : [];
 
+const sourcesCount = getQuranSourcesCount(verseId);
+
 const dbVerseId = verseId.replace(':', '_');
 const vdCountInfo = query("SELECT COUNT(DISTINCT video_id) as count FROM short_per_verse WHERE verse_id = :dbVerseId", { dbVerseId });
 const videosCount = vdCountInfo.length > 0 ? vdCountInfo[0].count : 0;
@@ -147,6 +153,8 @@ if (tab === 'videos') {
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
+const sourcesView = tab === 'sources' ? getQuranSourcesForVerse(verseId, base) : null;
+
 // Construct explicit self-referencing canonical URL for the active Quran ayah tab
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
 const canonicalURL = `${siteUrl}${base}/quran/${surah}/${ayah}/${tab}`;
@@ -174,6 +182,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema, openingLine } = genera
   verseDebunking,
   islamicCommentaries,
   videos,
+  sourcesView,
   canonicalUrl: canonicalURL
 });
 
@@ -338,6 +347,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema, openingLine } = genera
       scientificErrorsCount={scientificErrorsCount}
       debunkingCount={debunkingCount}
       videosCount={videosCount}
+      sourcesCount={sourcesCount}
       activeTab={isTafsirTab ? 'tafsir' : tab}
       activeTafsirScholarId={__rawIslamicCommentaries.length > 0 ? __rawIslamicCommentaries[0].id : null}
       surah={surah}
@@ -573,6 +583,9 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema, openingLine } = genera
             );
           })}
         </div>
+      )}
+      {tab === 'sources' && sourcesView && (
+        <QuranSourcesPanel verseId={verseId} view={sourcesView} base={base} />
       )}
       {tab === 'videos' && (
         <div class="videos-panel-container">

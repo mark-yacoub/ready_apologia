@@ -4,6 +4,7 @@ import { loadQuranContradictions } from './quran_contradictions_loader.js';
 import { loadScientificErrors } from './quran_scientific_errors_loader.js';
 import { loadIslamicCommentaries } from './islamic_commentaries_loader.js';
 import { loadDebunkingMiracles } from './quran_debunking_loader.js';
+import { getQuranSourcesVerseSet } from './quranSources/loader.js';
 
 // Memoized Sets of verse IDs for fast O(1) lookup during SSG build
 let memoizedSets = null;
@@ -19,6 +20,7 @@ export function getEvidenceSets() {
   const scientificErrorsSet = new Set(Object.keys(loadScientificErrors()));
   const islamicCommentariesSet = new Set(Object.keys(loadIslamicCommentaries()));
   const debunkingSet = new Set(Object.keys(loadDebunkingMiracles()));
+  const sourcesSet = getQuranSourcesVerseSet();
 
   const videosSet = new Set(
     query("SELECT DISTINCT verse_id FROM short_per_verse WHERE verse_id LIKE '%\\_%' ESCAPE '\\' AND verse_id NOT LIKE '%\\_%\\_%' ESCAPE '\\'")
@@ -31,6 +33,7 @@ export function getEvidenceSets() {
     scientificErrorsSet,
     islamicCommentariesSet,
     debunkingSet,
+    sourcesSet,
     videosSet
   };
   return memoizedSets;
@@ -45,6 +48,7 @@ export function getAllEvidenceVerseIds() {
     ...sets.scientificErrorsSet,
     ...sets.islamicCommentariesSet,
     ...sets.debunkingSet,
+    ...sets.sourcesSet,
     ...sets.videosSet
   ].filter(Boolean));
   return allIds;
@@ -60,12 +64,14 @@ export function getEvidenceFlagsForVerse(verseId) {
     hasIslamicCommentary: sets.islamicCommentariesSet.has(verseId),
     hasDebunkingMiracles: sets.debunkingSet.has(verseId),
     hasVideos: sets.videosSet.has(verseId),
+    hasSources: sets.sourcesSet.has(verseId),
     hasEvidence: sets.msQuranSet.has(verseId) ||
                  sets.footnotesSet.has(verseId) ||
                  sets.contradictionsSet.has(verseId) ||
                  sets.scientificErrorsSet.has(verseId) ||
                  sets.islamicCommentariesSet.has(verseId) ||
                  sets.debunkingSet.has(verseId) ||
+                 sets.sourcesSet.has(verseId) ||
                  sets.videosSet.has(verseId)
   };
 }
@@ -79,6 +85,7 @@ export function getAvailableTabsForVerse(verseId) {
     flags.hasChristianFootnotes ? 'christian-footnotes' : null,
     flags.hasIslamicCommentary ? 'tafsir' : null,
     flags.hasVideos ? 'videos' : null,
+    flags.hasSources ? 'sources' : null,
     flags.hasManuscript ? 'manuscripts' : null,
   ].filter(Boolean);
 }
@@ -95,6 +102,7 @@ export function getEvidenceSetsForSurahPrefix(surahNum) {
     scientificErrorsSet: filterPrefix(sets.scientificErrorsSet),
     islamicCommentariesSet: filterPrefix(sets.islamicCommentariesSet),
     debunkingMiraclesSet: filterPrefix(sets.debunkingSet),
+    sourcesSet: filterPrefix(sets.sourcesSet),
     videosSet: filterPrefix(sets.videosSet)
   };
 }

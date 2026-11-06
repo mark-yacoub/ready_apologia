@@ -110,5 +110,17 @@ export function loadAllEvidenceData() {
     totalCount: Object.keys(scientificData).length
   });
 
+  const quranSourcesIndex = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/data/quran/sources/index.json'), 'utf8'));
+
+  evidenceData.push({
+    evidenceId: 'quran_sources',
+    evidenceData: {
+      name: "Primary Sources of the Quran",
+      Scripture: { Quran: { structure: [] } }
+    },
+    verseTexts: {},
+    totalCount: quranSourcesIndex.totalItems || quranSourcesIndex.totalCitations
+  });
+
   return evidenceData;
 }

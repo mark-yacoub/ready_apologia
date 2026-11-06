@@ -25,6 +25,7 @@ export const EVIDENCE_TAXONOMY = [
       {
         title: 'Scripture',
         evidence: [
+          'quran_sources',
           'quranic_deficiencies',
           'scientific_errors'
         ]

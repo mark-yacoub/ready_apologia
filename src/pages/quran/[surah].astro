@@ -56,6 +56,7 @@ const {
   quranContradictionsSet,
   scientificErrorsSet,
   debunkingMiraclesSet,
+  sourcesSet,
   videosSet
 } = getEvidenceSetsForSurahPrefix(surahNum);
 
@@ -173,7 +174,8 @@ for (let i = 1; i <= totalVerses; i++) {
   const defaultScholar = hasIslamicCommentary ? getDefaultTafsirScholarForVerse(verseKey) : '';
   const tafsirLinkTab = hasIslamicCommentary ? `tafsir/${defaultScholar}` : '';
   const hasVideos = videosSet.has(verseKey);
-  const hasEvidence = hasManuscript || hasChristianFootnotes || hasContradictions || hasScientificErrors || hasIslamicCommentary || hasDebunkingMiracles || hasVideos;
+  const hasSources = sourcesSet.has(verseKey);
+  const hasEvidence = hasManuscript || hasChristianFootnotes || hasContradictions || hasScientificErrors || hasIslamicCommentary || hasDebunkingMiracles || hasSources || hasVideos;
 
   let defaultFirstTab = '';
   if (hasDebunkingMiracles) defaultFirstTab = 'debunking-miracles';
@@ -182,6 +184,7 @@ for (let i = 1; i <= totalVerses; i++) {
   else if (hasChristianFootnotes) defaultFirstTab = 'christian-footnotes';
   else if (hasIslamicCommentary) defaultFirstTab = tafsirLinkTab;
   else if (hasVideos) defaultFirstTab = 'videos';
+  else if (hasSources) defaultFirstTab = 'sources';
   else if (hasManuscript) defaultFirstTab = 'manuscripts';
 
   verses.push({
@@ -203,6 +206,7 @@ for (let i = 1; i <= totalVerses; i++) {
     hasIslamicCommentary: hasIslamicCommentary,
     hasDebunkingMiracles: hasDebunkingMiracles,
     hasVideos: hasVideos,
+    hasSources: hasSources,
     hasEvidence: hasEvidence,
     tafsirLinkTab: tafsirLinkTab
   });
@@ -297,6 +301,13 @@ const ogImage = getQuranOgImage(surahNum, null);
                   <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/videos`} data-tab-id="videos" class="evidence-badge vd-icon" title="Apologetics videos available" aria-label={`View apologetics videos for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                  </a>
+                )}
+                {v.hasSources && (
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/sources`} data-tab-id="sources" class="evidence-badge ps-icon" title="Primary sources available" aria-label={`View primary sources for Surah ${surahNum}, verse ${v.number}`}>
+                    <svg viewBox="0 0 24 24" stroke-width="2.2" fill="none" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V10M9.5 21V10M14.5 21V10M19 21V10M2.5 10h19L12 3 2.5 10z" />
                     </svg>
                   </a>
                 )}

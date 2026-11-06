@@ -1,0 +1,25 @@
+/*
+ * Shared parallel-phrase highlight for "Primary Sources of the Quran".
+ * Used by both the evidence explorer (QuranSourcesExplorer.jsx) and the
+ * verse drawer panel (QuranSourcesPanel.astro) so the two surfaces can never
+ * drift apart. Rendered as <mark class="qs-hl"> by segmentWithHighlights().
+ *
+ * The horizontal padding is cancelled by an equal negative margin so the tint
+ * bleeds slightly past the glyphs without opening a visible gap before
+ * adjacent punctuation ("the people ." -> "the people.").
+ */
+:root {
+  --qs-hl-bg: rgba(245, 158, 11, 0.22);
+  --qs-hl-pad-x: 0.12em;
+}
+
+mark.qs-hl {
+  background: var(--qs-hl-bg);
+  color: inherit;
+  font-weight: 600;
+  padding: 0.04em var(--qs-hl-pad-x);
+  margin: 0 calc(-1 * var(--qs-hl-pad-x));
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
