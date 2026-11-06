@@ -212,12 +212,13 @@ Always use Yarn v1 via Corepack on this repository:
 *   **Install dependencies:** `corepack yarn install`
 *   **Run Dev Server:** `corepack yarn dev`
 *   **Build Production Static Files:** `corepack yarn build`
-*   **Run Zero-Dependency Static Preview:** `node scripts/serve.js`
+*   **Run Zero-Dependency Static Preview:** `node scripts/serve.js` (`PORT=8081` for a second preview)
+*   **Isolated worktree per agent task:** `scripts/agent_worktree.sh new|list|rm <task-name>` (see Instructions for Future AI Sessions, rule 0)
 
 ### ⚠️ Terminal Sandbox & Node Execution Quirks:
 1.  **Mandatory SQLite Experimental Flag**: When running `node` or `astro build` directly with Node v22, `NODE_OPTIONS='--experimental-sqlite'` is strictly required.
 2.  **Missing Sandbox `$PATH` Binaries**: In non-interactive terminal subprocesses (`run_command`), standard `node` / `yarn` binaries are missing from `$PATH`. To execute builds autonomously, use the embedded stable Node binary located in VS Code Server:
-    `NODE_OPTIONS='--experimental-sqlite' ~/.vscode-server/cli/servers/*/server/node ./node_modules/astro/astro.js build`
+    `NODE=$(ls ~/.vscode-server/cli/servers/*/server/node | head -1); NODE_OPTIONS='--experimental-sqlite' $NODE ./node_modules/astro/bin/astro.mjs build` (`head -1`: several VS Code servers may be installed)
 3.  **Fast Iteration Builds (`src/utils/build_config.js`)**: To avoid 8-minute compilation times across 77k pages during UI dev cycles, restrict `BUILD_BOOKS` in `build_config.js` to a representative slice (`gn`, `ps`, `is`, `jl`, `dt`, `jn`, `rom`) and optionally `BUILD_SURAHS` (e.g. `new Set(['1'])`). Set both to `null` before final release. (Astro v6: the CLI entry is `./node_modules/astro/bin/astro.mjs`.)
 
 ---
@@ -245,6 +246,7 @@ Overhaul `[verse].astro` and `VerseTabs.jsx` to replace all Tailwind utility cla
 ---
 
 ## 🧠 Instructions for Future AI Sessions
+0.  **Parallel Agents: Work in Your Own Worktree.** Other agents edit this repo at the same time, and the main checkout holds their uncommitted work. Before your first edit run `scripts/agent_worktree.sh new <task-name>` and do ALL edits, builds, previews (own `PORT`) and commits inside the printed worktree (prefix commands with `cd <worktree> &&`). Never stage, stash, reset or revert changes you did not make. Full rules: `.agents/AGENTS.md` → "Parallel Agents". Remove it after landing: `scripts/agent_worktree.sh rm <task-name>`.
 1.  **Strictly Avoid Tailwind CSS:** Always write custom CSS selectors and variables inside `<style>` tags for local styling. Tailwind is not configured globally and utility classes will fail/collapse.
 2.  **Static Pre-rendering Enforcement:** Never write features requiring a live server API. Everything must be statically pre-rendered during Astro compile.
 3.  **Mandatory UI Self-Audit (Quality Assurance):** Anytime you build, edit, or polish a user interface (UI), you **MUST** run the local static server, take a screenshot using the headless browser CLI (`gbrowser`), and inspect the generated PNG yourself using the `view_file` tool **before** declaring the task complete. Critically evaluate the layout for text overflows, alignments, spacing, double-logo bugs, and color contrast. Compare it against reference designs to ensure it is an outstanding, premium-quality UI.

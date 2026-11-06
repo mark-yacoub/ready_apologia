@@ -100,6 +100,8 @@ pkill -f astro
 *   `scripts/copy_sample_images.js`: Script to recursively search and copy sample manuscript images from the big data collection.
 *   `scripts/find_creator_top_verse.js`: Script to find the #1 ranked Bible verse per apologist creator based on the UI multi-step sorting algorithm.
 *   `scripts/serve.js`: Zero-dependency HTTP server.
+*   `scripts/agent_worktree.sh`: `new|list|rm <task-name>` — one isolated git worktree + `agent/<task-name>` branch per agent task (node_modules hard-linked, `.env` copied), so parallel agents never share a working tree.
+*   `scripts/test_history_api.mjs` (`npm run test:history`): Fails if client code calls `history.pushState`/`replaceState` or assigns `location.hash` outside `src/utils/url_history.js` (Astro ClientRouter ignores Back/Forward to null-state entries).
 *   `src/db.js`: Database helper utilizing built-in Node 22 `node:sqlite`.
 *   `src/data/scripture/`: Imported NASB (NT) and LXX (OT) scripture JSON files.
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.
