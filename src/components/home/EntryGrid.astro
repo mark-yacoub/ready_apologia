@@ -16,7 +16,7 @@ const { base, redirectUrl, stats } = Astro.props;
       <span class="ra-start-title">Read the Bible</span>
       <span class="ra-start-arrow" aria-hidden="true">→</span>
     </span>
-    <span class="ra-start-meta">{stats.totalBooksCount} books · NASB &amp; LXX Septuagint</span>
+    <span class="ra-start-meta">Manuscripts, answers &amp; videos by verse</span>
   </a>
 
   <a href={`${base}/quran`} class="ra-start-btn ra-start-btn--quran">
@@ -51,11 +51,11 @@ const { base, redirectUrl, stats } = Astro.props;
     <span class="ra-start-meta">{stats.evidenceDirectoriesCount} Scripture &amp; Patristic directories</span>
   </a>
 
-  <a href={`${base}/discover/statistics`} class="ra-start-btn">
+  <a href={`${base}/discover/statistics`} class="ra-start-btn ra-start-btn--stats">
     <span class="ra-start-top">
-      <span class="ra-start-title">Scripture Statistics</span>
+      <span class="ra-start-title">Not sure where to start?</span>
       <span class="ra-start-arrow" aria-hidden="true">→</span>
     </span>
-    <span class="ra-start-meta">13 build-time data leaderboards</span>
+    <span class="ra-start-meta">Most-discussed verses, oldest manuscripts &amp; more</span>
   </a>
 </nav>

@@ -29,7 +29,6 @@ test('loadHomeStats returns positive integer counts for every required stat and 
   }
 
   // Consistency invariants across derived totals
-  assert.equal(stats.totalBooksCount, stats.ntBooksCount + stats.otBooksCount);
   assert.equal(stats.bibleMssCount, stats.ntMssCount + stats.otMssCount);
   assert.equal(stats.bibleScansCount, stats.ntScansCount + stats.otScansCount);
   assert.equal(stats.scholarlyDefensesCount, stats.apologeticsCount - stats.patristicEntriesCount);

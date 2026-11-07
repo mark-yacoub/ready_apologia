@@ -48,10 +48,6 @@ import { loadOriginsOfRevelation } from './originsOfRevelation/model.js';
 
 /**
  * @typedef {Object} HomeStats
- * @property {number} ntBooksCount
- * @property {number} otBooksCount
- * @property {number} totalBooksCount
- * @property {number} totalChaptersCount
  * @property {number} surahsCount
  * @property {number} ntMssCount
  * @property {number} otMssCount
@@ -110,10 +106,6 @@ import { loadOriginsOfRevelation } from './originsOfRevelation/model.js';
 
 /** Every numeric count property required on `HomeStats`. */
 export const STAT_KEYS = Object.freeze([
-  'ntBooksCount',
-  'otBooksCount',
-  'totalBooksCount',
-  'totalChaptersCount',
   'surahsCount',
   'ntMssCount',
   'otMssCount',
@@ -234,7 +226,6 @@ let cachedStats = null;
 export async function loadHomeStats() {
   if (cachedStats) return cachedStats;
 
-  const booksMeta = readJson('../data/books_meta.json');
   const discoverCatalog = readJson('../data/discoverCatalog.json');
   const quranMeta = readJson('../data/quran/arabic/meta.json');
   const nickelAnnotations = readJson('../data/quran/commentary/nickel_annotations.json');
@@ -243,13 +234,6 @@ export async function loadHomeStats() {
   const trustBibleData = readJson('../data/trustworthiness-of-the-bible.json');
 
   // 1. Bible & SQLite corpus counts
-  const ntBooksCount = booksMeta.nt?.length;
-  const otBooksCount = booksMeta.ot?.length;
-  const totalBooksCount = ntBooksCount + otBooksCount;
-  const totalChaptersCount =
-    (booksMeta.nt || []).reduce((sum, b) => sum + b.chapters, 0) +
-    (booksMeta.ot || []).reduce((sum, b) => sum + b.chapters, 0);
-
   const scalar = (sql) => Number(query(sql)[0]?.c);
   const ntMssCount = scalar('SELECT COUNT(*) AS c FROM manuscripts_meta');
   const otMssCount = scalar('SELECT COUNT(*) AS c FROM manuscripts_meta_ot');
@@ -360,10 +344,6 @@ export async function loadHomeStats() {
   const divinityTimelineCount = Array.isArray(divinityTimeline) ? divinityTimeline.length : undefined;
 
   const rawStats = {
-    ntBooksCount,
-    otBooksCount,
-    totalBooksCount,
-    totalChaptersCount,
     surahsCount,
     ntMssCount,
     otMssCount,

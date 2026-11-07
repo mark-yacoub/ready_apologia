@@ -126,6 +126,13 @@
 .ra-home .ra-start-btn--quran .ra-start-title {
   color: #065f46;
 }
+.ra-home .ra-start-btn--stats {
+  background: linear-gradient(135deg, #f8f7fd 0%, #eeebf8 100%);
+  border-color: rgba(91, 75, 166, 0.35);
+}
+.ra-home .ra-start-btn--stats .ra-start-title {
+  color: #3f3480;
+}
 
 .ra-home .ra-start-top {
   display: flex;
