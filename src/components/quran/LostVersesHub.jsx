@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { resolveApologistLabel } from '../../data/apologists.js';
 
 function highlightText(fullText, highlightSubstring) {
   if (!highlightSubstring || !fullText || !fullText.includes(highlightSubstring)) {
@@ -94,7 +95,11 @@ function VideoCarousel({ videos }) {
                 <div className="video-meta">
                   {video.apologist_name && !video.apologist_name.toLowerCase().includes("unknown") && (
                     <div className="apologist-name">
-                      <span className="apologist-badge">{video.apologist_name}</span>
+                      {resolveApologistLabel(video.apologist_name).length
+                        ? resolveApologistLabel(video.apologist_name).map((p) => (
+                          <a key={p.slug} className="apologist-badge" style={{ textDecoration: 'none' }} href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/apologists/${p.slug}`}>{p.name}</a>
+                        ))
+                        : <span className="apologist-badge">{video.apologist_name}</span>}
                     </div>
                   )}
 

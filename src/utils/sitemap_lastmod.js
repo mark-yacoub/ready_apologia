@@ -95,6 +95,9 @@ export const LASTMOD_RULES = [
 
   { id: 'hadith', match: (s) => s[0] === 'hadith', sources: ['src/pages/hadith', 'src/data/hadith'] },
 
+  { id: 'apologists', match: (s) => s[0] === 'apologists',
+    sources: ['src/pages/apologists', 'src/components/apologists', 'src/data/apologists.js', 'src/utils/apologistsLoader.js', 'data.db'] },
+
   { id: 'quran-tafsir', match: (s) => s[0] === 'quran' && s[3] === 'tafsir',
     sources: ['src/data/quran/commentary', 'src/utils/tafseer_config.js', 'src/pages/quran/[surah]/[ayah]'] },
   { id: 'quran-codex', match: (s) => s[0] === 'quran' && s[1] === 'codex',

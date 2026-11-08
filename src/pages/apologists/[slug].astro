@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ApologistClips from '../../components/apologists/ApologistClips.jsx';
+import FirstAnswers from '../../components/apologists/FirstAnswers.astro';
+import { loadApologists, buildPagePayload, prunePayload } from '../../utils/apologistsLoader.js';
+import { computePageView } from '../../components/apologists/apologistView.js';
+import { buildApologistSeo, generateApologistSchema, safeJsonStringify } from '../../utils/seoFactory.js';
+import '../../styles/apologists.css';
+
+export async function getStaticPaths() {
+  const data = await loadApologists();
+  return data.people.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const data = await loadApologists();
+const person = data.bySlug.get(slug);
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+
+const payload = buildPagePayload(data, person);
+const view = computePageView(payload, { s: 'all', b: [], sort: 'verse' });
+const ssrSections = view.sections.map((s) => ({ b: s.b, n: s.n }));
+const openBooks = new Set(view.total <= 24 ? view.sections.map((s) => s.b) : view.sections.slice(0, 1).map((s) => s.b));
+const ssr = prunePayload(payload, view, openBooks);
+const dataId = `apg-data-${slug}`;
+
+const seo = buildApologistSeo({ person, base });
+const schema = generateApologistSchema({ ...seo, person, base });
+const scriptureCounts = { all: person.total, bible: person.bible, quran: person.quran };
+const statParts = [
+  `${person.total} ${person.total === 1 ? 'clip' : 'clips'}`,
+  person.bible && person.quran ? `${person.bible} Bible` : null,
+  person.bible && person.quran ? `${person.quran} Qurʾān` : null,
+].filter(Boolean);
+---
+
+<Layout
+  title={seo.title}
+  description={seo.description}
+  canonicalURL={seo.canonicalUrl}
+  ogUrl={seo.canonicalUrl}
+  schema={schema}
+  showOnboarding={false}
+>
+  <div class="apg" data-page="apologist">
+    <header class="apg-head">
+      <a class="apg-back" href={`${base}/apologists`}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+        Apologists
+      </a>
+      <h1 class="apg-title">{person.name}</h1>
+      {person.alternateName && <p class="apg-alt">{person.alternateName}</p>}
+      <p class="apg-stats">{statParts.join(' · ')}</p>
+      {person.channels.length > 0 && (
+        <div class="apg-channels">
+          {person.channels.map((c) => (
+            <a class="apg-channel" href={c.url} target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 001.5.86l10.5-6.5a1 1 0 000-1.72L9.5 4.64A1 1 0 008 5.5z" /></svg>
+              <span>{c.name} on YouTube</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <FirstAnswers verses={person.firstAnswers} />
+
+    <ApologistClips client:load ssr={ssr} ssrSections={ssrSections} dataId={dataId} scriptureCounts={scriptureCounts} />
+    <script is:inline type="application/json" id={dataId} set:html={safeJsonStringify(payload)} />
+  </div>
+</Layout>

@@ -1065,3 +1065,95 @@ export function generateArticleSchema({
   };
 }
 
+
+// ─── Apologist pages (/apologists, /apologists/[slug]) ──────────────────────
+// Data-only pages: titles and descriptions are built from counts and book names, never video titles.
+
+const apologistScripture = (p, both, quran, bible) => (p.bible && p.quran ? both : p.quran ? quran : bible);
+
+/** SEO for /apologists/[slug]. `person` comes from loadApologists() (apologistsLoader.js). */
+export function buildApologistSeo({ person: p, base = '' }) {
+  const full = `${p.name}: Videos by ${apologistScripture(p, 'Bible & Qurʾān Verse', 'Qurʾān Verse', 'Bible Verse')}`;
+  const title = full.length <= 60 ? full : `${p.name}: Videos by Verse`;
+
+  const top = p.bookCounts.slice(0, 3).map((b) => (b.group === 'quran' ? `Sūrah ${b.label.replace(/^\d+\.\s*/, '')}` : b.label));
+  const more = p.bookCounts.length - top.length;
+  const list = top.length > 1 ? `${top.slice(0, -1).join(', ')}${more ? ', ' : ' and '}${top[top.length - 1]}` : top[0];
+  let description = `${p.total} video ${p.total === 1 ? 'clip' : 'clips'} by ${p.name}, sorted by ${apologistScripture(p, 'Bible and Qurʾān verse', 'Qurʾān verse', 'Bible verse')}: ${list}${more ? ` and ${more} more book${more === 1 ? '' : 's'}` : ''}.`;
+  if (description.length < 50) description += ' Each clip links to its verse.';
+
+  return { title, description, canonicalUrl: `${SITE_ORIGIN}${base}/apologists/${p.slug}` };
+}
+
+/** JSON-LD for /apologists/[slug]: ProfilePage → Person/Organization (+ sameAs own channels). No VideoObject (no uploadDate). */
+export function generateApologistSchema({ person: p, title, description, canonicalUrl, base = '' }) {
+  const entity = {
+    '@type': p.type === 'Organization' ? 'Organization' : 'Person',
+    '@id': `${canonicalUrl}#subject`,
+    name: p.name,
+    ...(p.alternateName ? { alternateName: p.alternateName } : {}),
+    ...(p.channels.length ? { sameAs: p.channels.map((c) => c.url) } : {}),
+  };
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildBreadcrumbSchema([
+        { name: SITE_NAME, url: `${base}/` },
+        { name: 'Apologists', url: `${base}/apologists` },
+        { name: p.name, url: canonicalUrl },
+      ]),
+      {
+        '@type': 'ProfilePage',
+        '@id': canonicalUrl,
+        url: canonicalUrl,
+        name: title,
+        description,
+        inLanguage: 'en-US',
+        isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: `${SITE_ORIGIN}/` },
+        mainEntity: entity,
+      },
+    ],
+  };
+}
+
+/** SEO for /apologists. */
+export function buildApologistIndexSeo({ people, totalClips, base = '' }) {
+  const names = people.slice(0, 3).map((p) => p.name);
+  return {
+    title: 'Apologists: Video Clips by Bible & Qurʾān Verse',
+    description: `${people.length} apologists, ${totalClips.toLocaleString('en-US')} video clips sorted by Bible and Qurʾān verse: ${names.join(', ')} and ${people.length - names.length} more.`,
+    canonicalUrl: `${SITE_ORIGIN}${base}/apologists`,
+  };
+}
+
+/** JSON-LD for /apologists: CollectionPage + ItemList of the apologist pages. */
+export function generateApologistIndexSchema({ title, description, canonicalUrl, people, base = '' }) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildBreadcrumbSchema([
+        { name: SITE_NAME, url: `${base}/` },
+        { name: 'Apologists', url: canonicalUrl },
+      ]),
+      {
+        '@type': 'CollectionPage',
+        '@id': canonicalUrl,
+        url: canonicalUrl,
+        name: title,
+        description,
+        inLanguage: 'en-US',
+        isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: `${SITE_ORIGIN}/` },
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: people.length,
+          itemListElement: people.map((p, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: p.name,
+            url: `${SITE_ORIGIN}${base}/apologists/${p.slug}`,
+          })),
+        },
+      },
+    ],
+  };
+}

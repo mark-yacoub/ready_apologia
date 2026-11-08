@@ -1,5 +1,7 @@
 ---
+import { resolveApologistLabel } from '../data/apologists.js';
 const { videos } = Astro.props;
+const apgBase = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
 <div class="videos-carousel-wrapper">
@@ -36,7 +38,9 @@ const { videos } = Astro.props;
                 <div class="video-meta">
                   {video.apologist_name && !video.apologist_name.toLowerCase().includes("unknown") && (
                     <div class="apologist-name">
-                      <span class="apologist-badge">{video.apologist_name}</span>
+                      {resolveApologistLabel(video.apologist_name).length
+                        ? resolveApologistLabel(video.apologist_name).map((p) => <a class="apologist-badge" style="text-decoration:none" href={`${apgBase}/apologists/${p.slug}`}>{p.name}</a>)
+                        : <span class="apologist-badge">{video.apologist_name}</span>}
                     </div>
                   )}
 

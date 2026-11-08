@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ApologistIndex from '../../components/apologists/ApologistIndex.jsx';
+import { loadApologists, buildIndexPayload } from '../../utils/apologistsLoader.js';
+import { computeIndexRows } from '../../components/apologists/apologistView.js';
+import { buildApologistIndexSeo, generateApologistIndexSchema, safeJsonStringify } from '../../utils/seoFactory.js';
+import '../../styles/apologists.css';
+
+const data = await loadApologists();
+const payload = buildIndexPayload(data);
+const ssrRows = computeIndexRows(payload, { s: 'all', b: [], sort: 'count' });
+const ssrScriptureCounts = {
+  all: data.people.length,
+  bible: data.people.filter((p) => p.bible).length,
+  quran: data.people.filter((p) => p.quran).length,
+};
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const seo = buildApologistIndexSeo({ people: data.people, totalClips: data.totalClips, base });
+const schema = generateApologistIndexSchema({ ...seo, people: data.people, base });
+---
+
+<Layout
+  title={seo.title}
+  description={seo.description}
+  canonicalURL={seo.canonicalUrl}
+  ogUrl={seo.canonicalUrl}
+  schema={schema}
+  showOnboarding={false}
+>
+  <div class="apg" data-page="apologists">
+    <header class="apg-head">
+      <h1 class="apg-title">Apologists</h1>
+      <p class="apg-stats">{data.people.length} apologists · {data.totalClips.toLocaleString('en-US')} clips</p>
+    </header>
+    <ApologistIndex client:load dataId="apg-index-data" ssrRows={ssrRows} ssrScriptureCounts={ssrScriptureCounts} />
+    <script is:inline type="application/json" id="apg-index-data" set:html={safeJsonStringify(payload)} />
+  </div>
+</Layout>
