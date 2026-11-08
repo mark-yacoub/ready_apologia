@@ -18,7 +18,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { query } from '../db.js';
 import { getBibleUrl, getQuranUrl } from './urlFactory.js';
-import { mapMtToLxx } from './scripture_mapper.js';
+import { mapLxxToMt, mapMtToLxx } from './scripture_mapper.js';
 import {
   APOLOGIST_BY_SLUG, CHANNELS, channelKey, channelUrl, resolveApologistLabel, resolveSpeakerSlugs,
 } from '../data/apologists.js';
@@ -73,6 +73,10 @@ export function resolveVerse(verseId) {
   if (entry.group === 'ot') {
     const lxx = mapMtToLxx(book, chapter, verse);
     if (lxx) { book = lxx.book; chapter = String(lxx.chapter); verse = String(lxx.verse); }
+    // The verse page maps its LXX address back to MT and queries that exact id. Ids that do not
+    // round-trip (e.g. `jl_2_32`, English numbering stored as MT) are listed on no /videos tab.
+    const back = mapLxxToMt(book, chapter, verse);
+    if (!back || `${back.book}_${back.chapter}_${back.verse}` !== String(verseId)) return null;
   }
   const bookEntry = catalog.get(book) || entry;
   return {
@@ -97,32 +101,73 @@ function hasColumn(table, column) {
   return query(`PRAGMA table_info(${table})`).some((c) => c.name === column);
 }
 
-const defaultRank = async () => (await import('./video_service.js')).sortVideos;
+/**
+ * The verse /videos tab ranking, verbatim: those pages pass `getRawVideosByVerseId()` rows
+ * (`sm.*` + `short_per_verse` columns, ORDER BY composite_score DESC, rigor_score DESC) through
+ * `enrichVideosWithVerses()`, which resolves `verses` and calls `sortVideos`. sortVideos treats scores
+ * within 0.05 as equal, so its result depends on the input order too: callers pre-order the rows the
+ * same way (see `byTabOrder`).
+ */
+const defaultRank = async () => {
+  const { enrichVideosWithVerses } = await import('./video_service.js');
+  return (rows, verseId) => enrichVideosWithVerses(rows, '', verseId);
+};
 
-let cache = null;
+/** SQL order of getRawVideosByVerseId (stable sort keeps the table order for ties, like SQLite). */
+const byTabOrder = (a, b) => (b.composite_score ?? -Infinity) - (a.composite_score ?? -Infinity)
+  || (b.rigor_score || 0) - (a.rigor_score || 0);
 
 /**
- * @param {{ rank?: (rows: object[], verseId: string) => object[] }} [opts] ranking override (tests);
- *   defaults to `sortVideos` from video_service.js. Memoised only for the default ranking.
+ * People a `shorts_metadata` row credits: the pipeline's `speaker_slugs` when set, else
+ * `apologist_name` through the registry. The single rule for pages, counts and badges.
  */
-export async function loadApologists(opts = {}) {
-  if (cache && !opts.rank) return cache;
-  const rank = opts.rank || await defaultRank();
+export function creditedPeople(row) {
+  return resolveSpeakerSlugs(row?.speaker_slugs) || resolveApologistLabel(row?.apologist_name);
+}
 
+/**
+ * Apologist badges for a video card (build time): one per credited person, linked only when that
+ * person has a page. `[]` when the row credits nobody (Unknown, uploader names, …).
+ * @param {{ bySlug: Map<string, { name: string }> }} data  from loadApologists()
+ * @returns {{ slug: string, name: string, href: string | null }[]}
+ */
+export function creditLinks(data, row, base = '') {
+  return creditedPeople(row).map((p) => {
+    const page = data.bySlug.get(p.slug);
+    return { slug: p.slug, name: page?.name || p.name, href: page ? `${base}/apologists/${p.slug}` : null };
+  });
+}
+
+let cachePromise = null;
+
+/**
+ * @param {{ rank?: (rows: object[], verseId: string) => object[] }} [opts] ranking override (tests:
+ *   plain Node cannot import video_service.js); defaults to the verse-tab ranking above.
+ *   Memoised (as a promise, so concurrent page renders share one load) for the default ranking only.
+ */
+export function loadApologists(opts = {}) {
+  if (opts.rank) return buildApologists(opts.rank);
+  cachePromise ??= defaultRank().then(buildApologists);
+  return cachePromise;
+}
+
+async function buildApologists(rank) {
   // Optional pipeline columns (plan §5): feature-detected so today's data.db still builds.
   const hasOriginal = hasColumn('shorts_metadata', 'original_url');
-  const hasSpeakerSlugs = hasColumn('shorts_metadata', 'speaker_slugs');
-  const meta = query(`
-    SELECT video_id, channel_id, title, apologist_name, summary, rigor_score, raw_verses_display
-           ${hasOriginal ? ', original_url' : ''}${hasSpeakerSlugs ? ', speaker_slugs' : ''}
-    FROM shorts_metadata`);
+  // `*` so ranking sees exactly the columns the verse tab passes to sortVideos.
+  const meta = query('SELECT * FROM shorts_metadata');
   const links = query(`
     SELECT verse_id, video_id, ref_order, total_passages, is_primary, relevance_score, composite_score
     FROM short_per_verse`);
 
   const verseInfo = new Map();
+  const unreachable = new Set();
   const infoFor = (vid) => {
-    if (!verseInfo.has(vid)) verseInfo.set(vid, resolveVerse(vid));
+    if (!verseInfo.has(vid)) {
+      const info = resolveVerse(vid);
+      if (!info) unreachable.add(vid);
+      verseInfo.set(vid, info);
+    }
     return verseInfo.get(vid);
   };
 
@@ -141,7 +186,7 @@ export async function loadApologists(opts = {}) {
   const clipById = new Map();
 
   for (const row of meta) {
-    const credited = (hasSpeakerSlugs && resolveSpeakerSlugs(row.speaker_slugs)) || resolveApologistLabel(row.apologist_name);
+    const credited = creditedPeople(row);
     if (!credited.length) {
       excludedLabels.set(row.apologist_name, (excludedLabels.get(row.apologist_name) || 0) + 1);
       continue;
@@ -187,7 +232,10 @@ export async function loadApologists(opts = {}) {
   for (const [verseId, vLinks] of linksByVerse) {
     const info = infoFor(verseId);
     if (!info) continue;
-    const rows = vLinks.map((l) => ({ ...rowById.get(l.video_id), target_verse_id: verseId, ...l })).filter((r) => r.video_id);
+    const rows = vLinks
+      .filter((l) => rowById.has(l.video_id))
+      .map((l) => ({ ...rowById.get(l.video_id), target_verse_id: verseId, ...l }))
+      .sort(byTabOrder);
     const top = rank(rows, verseId)[0];
     const clip = top && clipById.get(top.video_id);
     if (!clip) continue;
@@ -225,17 +273,19 @@ export async function loadApologists(opts = {}) {
   if (unregistered.size) {
     console.warn(`[apologists] ${unregistered.size} name(s) not in src/data/apologists.js, pages use an auto slug: ${[...unregistered].map(([n, s]) => `${n} → ${s}`).join('; ')}`);
   }
+  if (unreachable.size) {
+    console.warn(`[apologists] ${unreachable.size} short_per_verse verse id(s) have no /videos tab that lists them; left out of the apologist pages: ${[...unreachable].join(', ')}`);
+  }
 
-  const result = {
+  return {
     people: list,
     bySlug: new Map(list.map((p) => [p.slug, p])),
     unregistered,
+    unreachableVerses: unreachable,
     excludedLabels,
     hasOriginalUrl: hasOriginal,
     totalClips: new Set(list.flatMap((p) => p.clips.map((c) => c.videoId))).size,
   };
-  if (!opts.rank) cache = result;
-  return result;
 }
 
 /** Books present in `people`, in catalog order, as compact `{ k, l, g }` entries. */
@@ -304,13 +354,23 @@ export function buildPagePayload(data, person) {
   };
 }
 
-/** The verses + clips needed to server-render `view` with only `openBooks` expanded. */
+/**
+ * The slice of `payload` needed to server-render `view` with only the `openBooks` sections expanded:
+ * their clips and verses (re-indexed), so the island props do not repeat the full payload, which
+ * ships once in the page's JSON <script>. `books` keep their indices (section ids refer to them).
+ */
 export function prunePayload(payload, view, openBooks) {
   const keepClips = new Set();
   for (const sec of view.sections) {
     if (!openBooks.has(sec.b)) continue;
     for (const g of sec.verses) g.clips.forEach((ci) => keepClips.add(ci));
   }
-  if (keepClips.size === payload.clips.length) return payload;
-  return { ...payload, clips: payload.clips.filter((_, i) => keepClips.has(i)) };
+  const clips = payload.clips.filter((_, i) => keepClips.has(i));
+  const usedVerses = [...new Set(clips.flatMap((c) => c.vs))].sort((a, b) => a - b); // keeps canonical order
+  const remap = new Map(usedVerses.map((v, i) => [v, i]));
+  return {
+    ...payload,
+    verses: usedVerses.map((v) => payload.verses[v]),
+    clips: clips.map((c) => ({ ...c, vs: c.vs.map((v) => remap.get(v)) })),
+  };
 }

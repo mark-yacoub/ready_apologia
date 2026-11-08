@@ -61,6 +61,7 @@ export default function ApologistIndex({ dataId, ssrRows, ssrScriptureCounts }) 
         bookCounts={bookCounts}
         sorts={INDEX_SORTS}
         scriptureCounts={scriptureCounts}
+        countNoun="apologists"
         idPrefix="apg-index"
       />
       <p className="apg-count" aria-live="polite">

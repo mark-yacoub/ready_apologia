@@ -30,6 +30,8 @@
     "import:quran-sources": "node scripts/import_quran_sources.js",
     "test:quran-sources": "node --test src/utils/quranSources/contract.test.mjs",
     "audit:quran-sources": "node scripts/test_quran_sources.mjs",
+    "test:apologists": "node --experimental-sqlite --test src/utils/apologistsLoader.test.mjs",
+    "audit:apologists": "node scripts/test_apologist_pages.mjs",
     "astro": "astro"
   },
   "dependencies": {

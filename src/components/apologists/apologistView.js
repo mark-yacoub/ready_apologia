@@ -47,6 +47,21 @@ export function bookPasses(book, state) {
 
 export const isDefaultFilter = (state) => state.s === 'all' && !state.b.length;
 
+/** Apologist pages with at most this many clips (in the current view) open every book section. */
+export const ALL_OPEN_MAX = 24;
+
+/**
+ * Sections expanded on first render: every section for short lists, else the first one.
+ * Shared by the server render ([slug].astro) and the island so hydration matches.
+ * @template {{ n: number }} S
+ * @param {S[]} sections
+ * @returns {S[]}
+ */
+export function initialOpenSections(sections) {
+  const total = sections.reduce((a, s) => a + s.n, 0);
+  return total <= ALL_OPEN_MAX ? sections : sections.slice(0, 1);
+}
+
 function baseUrl() {
   const raw = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) || '';
   return raw === '/' ? '' : raw.replace(/\/$/, '');

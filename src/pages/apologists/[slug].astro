@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import ApologistClips from '../../components/apologists/ApologistClips.jsx';
 import FirstAnswers from '../../components/apologists/FirstAnswers.astro';
 import { loadApologists, buildPagePayload, prunePayload } from '../../utils/apologistsLoader.js';
-import { computePageView } from '../../components/apologists/apologistView.js';
+import { computePageView, initialOpenSections } from '../../components/apologists/apologistView.js';
 import { buildApologistSeo, generateApologistSchema, safeJsonStringify } from '../../utils/seoFactory.js';
 import '../../styles/apologists.css';
 
@@ -20,18 +20,24 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const payload = buildPagePayload(data, person);
 const view = computePageView(payload, { s: 'all', b: [], sort: 'verse' });
 const ssrSections = view.sections.map((s) => ({ b: s.b, n: s.n }));
-const openBooks = new Set(view.total <= 24 ? view.sections.map((s) => s.b) : view.sections.slice(0, 1).map((s) => s.b));
+const openBooks = new Set(initialOpenSections(view.sections).map((s) => s.b));
 const ssr = prunePayload(payload, view, openBooks);
 const dataId = `apg-data-${slug}`;
 
 const seo = buildApologistSeo({ person, base });
 const schema = generateApologistSchema({ ...seo, person, base });
 const scriptureCounts = { all: person.total, bible: person.bible, quran: person.quran };
-const statParts = [
-  `${person.total} ${person.total === 1 ? 'clip' : 'clips'}`,
-  person.bible && person.quran ? `${person.bible} Bible` : null,
-  person.bible && person.quran ? `${person.quran} Qurʾān` : null,
-].filter(Boolean);
+// Units spelled out: a clip citing both scriptures counts in both, so the parts can exceed the total.
+const clipWord = (n) => (n === 1 ? 'clip' : 'clips');
+const both = person.bible + person.quran - person.total;
+const statParts = person.bible && person.quran
+  ? [
+      `${person.total} ${clipWord(person.total)}`,
+      `${person.bible} on Bible verses`,
+      `${person.quran} on Qurʾān verses`,
+      both > 0 ? `${both} on both` : null,
+    ].filter(Boolean)
+  : [`${person.total} ${clipWord(person.total)} on ${person.quran ? 'Qurʾān' : 'Bible'} verses`];
 ---
 
 <Layout

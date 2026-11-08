@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import ApologistFilters from './ApologistFilters.jsx';
 import {
-  PAGE_SORTS, computePageView, isDefaultFilter, parseFilters, reelItems, serializeFilters, verseHref, verseLabel,
+  PAGE_SORTS, computePageView, initialOpenSections, isDefaultFilter, parseFilters, reelItems, serializeFilters,
+  verseHref, verseLabel,
 } from './apologistView.js';
 import { replaceUrl } from '../../utils/url_history.js';
 
@@ -13,8 +14,10 @@ const PlayAllButton = Object.values(reelButtonMods)[0]?.default || null;
 const reelController = Object.values(reelControllerMods)[0] || null;
 
 const DEFAULTS = { s: 'all', b: [], sort: 'verse' };
-const ALL_OPEN_MAX = 24; // pages with at most this many clips open every book section
 const base = import.meta.env.BASE_URL === '/' ? '' : String(import.meta.env.BASE_URL || '').replace(/\/$/, '');
+
+/** A plain left click (no modifier): the only click the reel takes over; others keep the link. */
+const isPlainClick = (e) => e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
 
 /**
  * Apologist page clip list: book sections → verse groups → thumbnail cards.
@@ -84,7 +87,9 @@ export default function ApologistClips({ ssr, ssrSections, dataId, scriptureCoun
     || document.querySelector('.apg-clips .apg-sec__toggle');
 
   const play = (e, videoId) => {
-    if (!reelController || !full || !indexOf.has(videoId)) return; // fall back to the YouTube link
+    // Fall back to the YouTube link: no reel module, payload not read yet, or a modified click
+    // (new tab / window), which must keep working as a link.
+    if (!reelController || !full || !indexOf.has(videoId) || !isPlainClick(e)) return;
     e.preventDefault();
     reelController.openReel(items, indexOf.get(videoId), { opener: e.currentTarget, findCard });
   };
@@ -116,7 +121,7 @@ export default function ApologistClips({ ssr, ssrSections, dataId, scriptureCoun
         return (
           <section key={bk.k} className="apg-sec">
             <h2 className="apg-sec__h">
-              <button type="button" className="apg-sec__toggle" aria-expanded={isOpen} aria-controls={secId} onClick={() => toggle(bk.k)}>
+              <button type="button" className="apg-sec__toggle" aria-expanded={isOpen} aria-controls={isOpen ? secId : undefined} onClick={() => toggle(bk.k)}>
                 <svg className="apg-sec__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
                 <span className="apg-sec__name">{bk.k === 'gospels' ? 'The Gospels' : bk.g === 'quran' ? `Sūrah ${bk.l.replace('. ', ' · ')}` : bk.l}</span>
                 <span className="apg-sec__n">{sec.n}</span>
@@ -152,9 +157,7 @@ export default function ApologistClips({ ssr, ssrSections, dataId, scriptureCoun
 }
 
 function initialOpen(books, sections) {
-  const total = sections.reduce((a, s) => a + s.n, 0);
-  const list = total <= ALL_OPEN_MAX ? sections : sections.slice(0, 1);
-  return new Set(list.map((s) => books[s.b].k));
+  return new Set(initialOpenSections(sections).map((s) => books[s.b].k));
 }
 
 function ClipCard({ clip, onPlay }) {

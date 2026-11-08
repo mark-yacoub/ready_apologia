@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   SCRIPTURES, SCRIPTURE_LABELS, bookOptions,
 } from './apologistView.js';
@@ -14,11 +14,18 @@ import {
  *   bookCounts: number[],            // clips citing each book (same order as books)
  *   sorts: Record<string, string>,   // value → label; first = default
  *   scriptureCounts?: Record<string, number>,
+ *   countNoun?: string,              // what scriptureCounts count, for screen readers ("clips")
  *   idPrefix: string,
  * }} props
  */
-export default function ApologistFilters({ state, onChange, books, bookCounts, sorts, scriptureCounts, idPrefix }) {
+export default function ApologistFilters({ state, onChange, books, bookCounts, sorts, scriptureCounts, countNoun = 'clips', idPrefix }) {
   const [open, setOpen] = useState(false);
+  const booksBtn = useRef(null);
+  // Closing from inside the panel unmounts the focused control: hand focus back to the toggle.
+  const closePanel = () => {
+    setOpen(false);
+    booksBtn.current?.focus();
+  };
   const groups = bookOptions(books, bookCounts, state);
   const selected = new Set(state.b);
   const keyToLabel = new Map(books.map((bk) => [bk.k, bk.l]));
@@ -51,6 +58,7 @@ export default function ApologistFilters({ state, onChange, books, bookCounts, s
               type="button"
               className="apg-seg__btn"
               aria-pressed={state.s === s}
+              aria-label={scriptureCounts ? `${SCRIPTURE_LABELS[s]}: ${scriptureCounts[s] || 0} ${countNoun}` : undefined}
               disabled={disabled}
               onClick={() => setScripture(s)}
             >
@@ -63,10 +71,11 @@ export default function ApologistFilters({ state, onChange, books, bookCounts, s
 
       <div className="apg-filters__row">
         <button
+          ref={booksBtn}
           type="button"
           className="apg-books-btn"
           aria-expanded={open}
-          aria-controls={panelId}
+          aria-controls={open ? panelId : undefined}
           onClick={() => setOpen(!open)}
         >
           <span className="apg-books-btn__k">Books</span>
@@ -82,10 +91,16 @@ export default function ApologistFilters({ state, onChange, books, bookCounts, s
       </div>
 
       {open && (
-        <div className="apg-books" id={panelId} role="group" aria-label="Books">
+        <div
+          className="apg-books"
+          id={panelId}
+          role="group"
+          aria-label="Books"
+          onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); closePanel(); } }}
+        >
           <div className="apg-books__bar">
             <button type="button" className="apg-link-btn" onClick={() => onChange({ ...state, b: [] })} disabled={!state.b.length}>All books</button>
-            <button type="button" className="apg-done-btn" onClick={() => setOpen(false)}>Done</button>
+            <button type="button" className="apg-done-btn" onClick={closePanel}>Done</button>
           </div>
           {groups.map((grp) => (
             <fieldset key={grp.g} className="apg-books__group">
