@@ -8,6 +8,8 @@ import RouteAnalytics from '../../../../components/common/RouteAnalytics.astro';
 import QuranVerseTabs from '../../../../components/QuranVerseTabs.jsx';
 import QuranManuscriptCarousel from '../../../../components/QuranManuscriptCarousel.jsx';
 import VideosGrid from '../../../../components/VideosGrid.astro';
+import PlayAllButton from '../../../../components/reel/PlayAllButton.jsx';
+import { toReelItems } from '../../../../components/reel/reelItems.js';
 import TafseerViewer from '../../../../components/TafseerViewer.jsx';
 import { getQuranOgImage } from '../../../../utils/ogImageResolver.js';
 import { query } from '../../../../db.js';
@@ -150,6 +152,14 @@ if (tab === 'videos') {
   `, { dbVerseId });
   videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL, dbVerseId);
 }
+
+// Reel queue ("Play all"): this verse's videos in the same order as the grid.
+const reelItems = tab === 'videos'
+  ? toReelItems(videos, {
+      verseLabel: `Qurʾān ${surah}:${ayah}`,
+      verseHref: `${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surah}#${ayah}`,
+    })
+  : [];
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
@@ -589,6 +599,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema, openingLine } = genera
       )}
       {tab === 'videos' && (
         <div class="videos-panel-container">
+          <PlayAllButton client:load items={reelItems} />
           <VideosGrid videos={videos} />
         </div>
       )}

@@ -1,0 +1,243 @@
+/* Reel player ("Play all"): src/components/reel/. Scoped under .reel-* */
+
+/* ---------- Play all button (on the page) ---------- */
+.reel-play-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-secondary, #974543);
+  color: var(--color-on-secondary, #fff);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.reel-play-all:hover { filter: brightness(1.08); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16); }
+.reel-play-all:active { transform: scale(0.98); }
+.reel-play-all:focus-visible { outline: 3px solid var(--color-primary, #09090b); outline-offset: 3px; }
+.reel-play-all-count { font-weight: 600; opacity: 0.9; }
+
+/* ---------- Overlay ---------- */
+html.reel-open { overflow: hidden; }
+
+.reel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'top top'
+    'stage stage'
+    'caption nav';
+  column-gap: 8px;
+  height: 100vh;
+  height: 100dvh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  background: #0b0b0c;
+  color: #fafafa;
+  font-family: inherit;
+  touch-action: pinch-zoom;
+  overscroll-behavior: contain;
+  animation: reel-fade-in 0.18s ease-out;
+}
+.reel-overlay:focus { outline: none; }
+.reel-overlay--loading { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
+
+.reel-topbar {
+  grid-area: top;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  min-height: 56px;
+}
+.reel-counter {
+  margin: 0 8px 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #e4e4e7;
+}
+
+.reel-stage {
+  grid-area: stage;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  min-width: 0;
+  padding: 0 12px;
+  container-type: size;
+}
+.reel-frame {
+  position: relative;
+  width: min(100cqw, 100cqh * 9 / 16);
+  aspect-ratio: 9 / 16;
+  max-height: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+}
+.reel-host,
+.reel-host > div,
+.reel-host iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.reel-gesture {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: transparent;
+  touch-action: none;
+}
+
+.reel-status {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #f4f4f5;
+  background: rgba(0, 0, 0, 0.82);
+}
+.reel-overlay--loading .reel-status { position: static; background: none; }
+.reel-status p { margin: 0; max-width: 28ch; }
+.reel-status-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+.reel-text-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid #fafafa;
+  background: #fafafa;
+  color: #09090b;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.reel-text-btn--ghost { background: transparent; color: #fafafa; }
+
+/* ---------- Controls ---------- */
+.reel-nav {
+  grid-area: nav;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px 10px 0;
+}
+.reel-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fafafa;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease;
+}
+.reel-icon-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.26); }
+.reel-icon-btn:disabled { opacity: 0.35; cursor: default; }
+
+.reel-overlay a:focus-visible,
+.reel-overlay button:focus-visible {
+  outline: 3px solid #fde68a;
+  outline-offset: 2px;
+}
+
+/* ---------- Caption ---------- */
+.reel-caption {
+  grid-area: caption;
+  min-width: 0;
+  padding: 8px 0 10px 16px;
+  animation: reel-caption-in 0.22s ease-out;
+}
+.reel-caption-line {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reel-caption-name { font-weight: 700; }
+.reel-caption-verse { color: #fafafa; font-weight: 600; }
+a.reel-caption-verse { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(250, 250, 250, 0.5); }
+.reel-caption-links {
+  display: flex;
+  gap: 4px 14px;
+  flex-wrap: wrap;
+  margin: 2px 0 0;
+  font-size: 0.88rem;
+}
+.reel-caption-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: #d4d4d8;
+  text-decoration: none;
+}
+.reel-caption-links a:hover { color: #fff; text-decoration: underline; }
+
+/* ---------- Wider screens: controls beside the video, caption centred under it ---------- */
+@media (min-width: 700px) {
+  .reel-overlay {
+    grid-template-columns: 76px minmax(0, 1fr) 76px;
+    grid-template-areas:
+      'top top top'
+      '. stage nav'
+      '. caption .';
+  }
+  .reel-nav {
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    padding: 0;
+  }
+  .reel-icon-btn { width: 52px; height: 52px; }
+  .reel-caption { padding: 10px 0 14px; text-align: center; }
+  .reel-caption-links { justify-content: center; }
+  .reel-topbar { padding: 8px 16px; }
+}
+
+@keyframes reel-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes reel-caption-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-overlay,
+  .reel-caption { animation: none; }
+  .reel-play-all,
+  .reel-icon-btn { transition: none; }
+}

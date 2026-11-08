@@ -5,6 +5,8 @@ import RouteAnalytics from '../../../../../components/common/RouteAnalytics.astr
 import VerseTabs from '../../../../../components/VerseTabs.jsx';
 import ManuscriptCarousel from '../../../../../components/ManuscriptCarousel.jsx';
 import VideosGrid from '../../../../../components/VideosGrid.astro';
+import PlayAllButton from '../../../../../components/reel/PlayAllButton.jsx';
+import { toReelItems } from '../../../../../components/reel/reelItems.js';
 import { R2_BASE_URL } from '../../../../../utils/cdn_config.js';
 import { getBibleOgImage } from '../../../../../utils/ogImageResolver.js';
 import booksMeta from '../../../../../data/books_meta.json';
@@ -92,6 +94,14 @@ if (tab === 'videos') {
   const rawVideos = getRawVideosByVerseId(checkId);
   videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL, checkId);
 }
+
+// Reel queue ("Play all"): this verse's videos in the same order as the grid.
+const reelItems = tab === 'videos'
+  ? toReelItems(videos, {
+      verseLabel: `${bookMeta.name} ${chapter}:${verse}`,
+      verseHref: `${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/bible/${book}/${chapter}#${verse}`,
+    })
+  : [];
 
 function formatBookIdToName(id) {
   if (!id) return '';
@@ -377,6 +387,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema, openingLine } = genera
 
       {tab === 'videos' && (
         <div class="videos-panel-container">
+          <PlayAllButton client:load items={reelItems} />
           <VideosGrid videos={videos} />
         </div>
       )}
