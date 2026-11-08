@@ -1,7 +1,8 @@
 ---
-import { resolveApologistLabel } from '../data/apologists.js';
+import { loadApologists, creditLinks } from '../utils/apologistsLoader.js';
 const { videos } = Astro.props;
 const apgBase = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const apologists = await loadApologists(); // memoised; badges link only to built apologist pages
 ---
 
 <div class="videos-carousel-wrapper">
@@ -38,9 +39,14 @@ const apgBase = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
                 <div class="video-meta">
                   {video.apologist_name && !video.apologist_name.toLowerCase().includes("unknown") && (
                     <div class="apologist-name">
-                      {resolveApologistLabel(video.apologist_name).length
-                        ? resolveApologistLabel(video.apologist_name).map((p) => <a class="apologist-badge" style="text-decoration:none" href={`${apgBase}/apologists/${p.slug}`}>{p.name}</a>)
-                        : <span class="apologist-badge">{video.apologist_name}</span>}
+                      {(() => {
+                        const credits = creditLinks(apologists, video, apgBase);
+                        return credits.length
+                          ? credits.map((c) => (c.href
+                            ? <a class="apologist-badge" style="text-decoration:none" href={c.href}>{c.name}</a>
+                            : <span class="apologist-badge">{c.name}</span>))
+                          : <span class="apologist-badge">{video.apologist_name}</span>;
+                      })()}
                     </div>
                   )}
 

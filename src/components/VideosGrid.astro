@@ -1,5 +1,9 @@
 ---
+import { loadApologists, creditLinks } from '../utils/apologistsLoader.js';
 const { videos } = Astro.props;
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+// Credit line → /apologists/[slug] (only people with a page; memoised loader, same credit rule).
+const apologists = videos && videos.length ? await loadApologists() : null;
 ---
 
 <div class="videos-grid-container">
@@ -26,7 +30,14 @@ const { videos } = Astro.props;
             </div>
 
             <div class="video-meta">
-
+              {(() => {
+                const credits = apologists ? creditLinks(apologists, video, base).filter((c) => c.href) : [];
+                return credits.length > 0 && (
+                  <p class="video-credit">
+                    {credits.map((c, i) => <>{i > 0 && <span aria-hidden="true"> · </span>}<a href={c.href}>{c.name}</a></>)}
+                  </p>
+                );
+              })()}
 
               {video.summary && (
                 <div class="video-summary">
@@ -129,6 +140,26 @@ const { videos } = Astro.props;
   }
 
 
+
+  .video-credit {
+    margin: -12px 0 -8px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    color: #52525b;
+  }
+
+  .video-credit a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: #0f766e;
+    text-decoration: none;
+  }
+
+  .video-credit a:hover {
+    text-decoration: underline;
+  }
 
   .video-summary p {
     font-family: var(--font-body);
