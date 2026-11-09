@@ -1,8 +1,8 @@
 ---
-import { loadApologists, creditLinks } from '../utils/apologistsLoader.js';
+import { creditLinks } from '../utils/apologistsLoader.js';
 const { videos } = Astro.props;
 const apgBase = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-const apologists = await loadApologists(); // memoised; badges link only to built apologist pages
+// Badges link only for featured apologists (they have a page); everyone else is plain text.
 ---
 
 <div class="videos-carousel-wrapper">
@@ -40,7 +40,7 @@ const apologists = await loadApologists(); // memoised; badges link only to buil
                   {video.apologist_name && !video.apologist_name.toLowerCase().includes("unknown") && (
                     <div class="apologist-name">
                       {(() => {
-                        const credits = creditLinks(apologists, video, apgBase);
+                        const credits = creditLinks(video, apgBase);
                         return credits.length
                           ? credits.map((c) => (c.href
                             ? <a class="apologist-badge" style="text-decoration:none" href={c.href}>{c.name}</a>

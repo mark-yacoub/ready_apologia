@@ -7,8 +7,12 @@
  *   APOLOGISTS: [{ slug, name, type?, alternateName?, aliases: [], channels: [] }]
  *   CHANNELS:   { <channel key>: { name, handle } }   key = channel_id lowercased, without '@'
  *
+ * APOLOGISTS is the full person registry: it names everyone a clip credits (credit text on the verse
+ * /videos tabs). Only the people in FEATURED_APOLOGISTS (below) get a page.
+ *
  * Rules:
- * - `slug` is a PUBLIC URL (/apologists/<slug>). Never rename one without a 301 (CLOUDFLARE.md).
+ * - `slug` is the person's key. For a featured person it is also a PUBLIC URL (/apologists/<slug>):
+ *   never rename or un-feature a live one without a 301 (CLOUDFLARE.md).
  * - `aliases` are the exact `shorts_metadata.apologist_name` strings (case-insensitive) that mean this
  *   person. Multi-speaker labels ("A & B", "A / B", "A, B", "A and B") are split and each part is
  *   resolved on its own; labels that cannot be split mechanically live in COMBINED_LABELS.
@@ -17,8 +21,8 @@
  *   Every channel URL must be one of the registry's `own_channel_urls` for that slug (never added by
  *   hand); `apologistsLoader.test.mjs` checks this, and that every registry alias resolves here, when
  *   the registry is available (APOLOGIST_REGISTRY=<path>, or ~/Documents/data_collection/common/).
- * - Labels that do not name an apologist (unknown, generic, uploader names, non-apologists) are in
- *   EXCLUDED_LABELS and get no page until the pipeline re-labels them.
+ * - Labels that do not name a speaker (unknown, generic, uploader/panel names) are in EXCLUDED_LABELS:
+ *   their clips show no credit until the pipeline re-labels them.
  */
 
 /** @type {Record<string, { name: string, handle: string }>} */
@@ -121,6 +125,45 @@ export const APOLOGISTS = [
   P('anthony-rogers', 'Anthony Rogers', ['Anthony Rogers', 'Pastor Anthony Rogers']),
   P('alisa-childers', 'Alisa Childers'),
   P('charlie-kirk', 'Charlie Kirk'),
+  P('bart-ehrman', 'Bart Ehrman', ['Bart Ehrman', 'Dr. Bart Ehrman']),
+  P('tom-holland', 'Tom Holland'),
+  P('tobias', 'Tobias', ['Tobias', 'Tobias (Towards Jesus)']),
+  P('thaddeus', 'Thaddeus', ['Thaddeus', 'Thaddeus (Towards Jesus)']),
+];
+
+/**
+ * The people who get a page (/apologists/<slug>). Order is for reading only; the index sorts itself.
+ * Pages, the /apologists index and its filters, "first answer" verses, the credit links on verse
+ * /videos tabs and the sitemap all come from this list; everyone else in APOLOGISTS is credited by
+ * name, as plain text.
+ *
+ * To feature someone later: add `{ slug }` here (the slug must be in APOLOGISTS and in the pipeline
+ * registry data_collection/common/apologists.json with the same name; the unit test checks both).
+ * `includeSlugs` folds other registry people into this page: their clips count and appear here, and
+ * their credit reads "<their name> · <this name>".
+ * @type {{ slug: string, includeSlugs?: string[] }[]}
+ */
+export const FEATURED_APOLOGISTS = [
+  { slug: 'sam-shamoun' },
+  { slug: 'godlogic' },
+  { slug: 'inspiringphilosophy' },
+  { slug: 'david-wood' },
+  { slug: 'frank-turek' },
+  { slug: 'erik-manning' },
+  { slug: 'vocab-malone' },
+  { slug: 'stuart-knechtle' },
+  { slug: 'mike-winger' },
+  { slug: 'wes-huff' },
+  { slug: 'apostate-prophet' },
+  { slug: 'al-fadi' },
+  { slug: 'cliffe-knechtle' },
+  { slug: 'one-for-israel', includeSlugs: ['seth-postell'] },
+  { slug: 'nabeel-qureshi' },
+  { slug: 'tim-barnett' },
+  { slug: 'jeannie-constantinou' },
+  { slug: 'jonathan-pageau' },
+  { slug: 'coptic-orthodox-answers' },
+  { slug: 'stephen-de-young' },
 ];
 
 /** Labels that cannot be split mechanically: exact label → slugs. */
@@ -128,7 +171,7 @@ export const COMBINED_LABELS = {
   'Sam Shamoun & David Wood': ['sam-shamoun', 'david-wood'],
   'Michael Jones & Bobby Finn': ['inspiringphilosophy'],
   'Stuart & Cliffe Knechtle': ['stuart-knechtle', 'cliffe-knechtle'],
-  'David Wood (feat. Bart Ehrman)': ['david-wood'],
+  'David Wood (feat. Bart Ehrman)': ['david-wood', 'bart-ehrman'],
   'Christian Apologists (Compilation featuring David Wood and Sam Shamoun)': ['david-wood', 'sam-shamoun'],
 };
 
@@ -143,16 +186,11 @@ export const EXCLUDED_LABELS = [
   'Towards Jesus',
   'TowardsJesus',
   'Towards Jesus Panel',
-  'Tobias (Towards Jesus)',
-  'Thaddeus (Towards Jesus)',
   'Mike',
-  // Not apologists
-  'Bart Ehrman',
-  'Tom Holland',
 ];
 
-/** Registry slugs (pipeline `speaker_slugs`) that get no page: uploaders, panels, non-apologists. */
-export const EXCLUDED_SLUGS = new Set(['unknown', 'towards-jesus', 'tobias', 'thaddeus', 'bart-ehrman', 'tom-holland']);
+/** Registry slugs (pipeline `speaker_slugs`) that name no speaker: unknown, uploader/panel names. */
+export const EXCLUDED_SLUGS = new Set(['unknown', 'towards-jesus']);
 
 const EXCLUDED_PATTERNS = [/\bunknown\b/i, /^christian apologists?\b/i];
 
@@ -161,6 +199,18 @@ const norm = (s) => String(s || '').normalize('NFC').replace(/\s+/g, ' ').trim()
 export const APOLOGIST_BY_SLUG = new Map(APOLOGISTS.map((a) => [a.slug, a]));
 const ALIAS_INDEX = new Map();
 for (const a of APOLOGISTS) for (const alias of [a.name, ...a.aliases]) ALIAS_INDEX.set(norm(alias), a.slug);
+
+/** Featured page slug → `{ slug, name, includeSlugs }`. */
+export const FEATURED_BY_SLUG = new Map(FEATURED_APOLOGISTS.map((f) => [f.slug, { includeSlugs: [], ...f, name: APOLOGIST_BY_SLUG.get(f.slug)?.name }]));
+/** Any registry slug → the featured page that shows its clips (itself, or the page that includes it). */
+const PAGE_OF = new Map();
+for (const f of FEATURED_BY_SLUG.values()) for (const s of [f.slug, ...f.includeSlugs]) PAGE_OF.set(s, f.slug);
+
+/** The featured page slug that shows this person's clips, or null (no page: credited as plain text). */
+export function pageSlugFor(slug) {
+  return PAGE_OF.get(slug) || null;
+}
+
 const COMBINED_INDEX = new Map(Object.entries(COMBINED_LABELS).map(([k, v]) => [norm(k), v]));
 const EXCLUDED_INDEX = new Set(EXCLUDED_LABELS.map(norm));
 

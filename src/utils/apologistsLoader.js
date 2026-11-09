@@ -1,8 +1,10 @@
 /**
  * Build-time data for /apologists and /apologists/[slug].
  *
- * Reads `shorts_metadata ⨝ short_per_verse` once (memoised) and groups every clip under the people
- * it credits (src/data/apologists.js). A clip with two speakers counts on both pages.
+ * Reads `shorts_metadata ⨝ short_per_verse` once (memoised) and groups every clip under the featured
+ * pages it credits (FEATURED_APOLOGISTS in src/data/apologists.js; a page also holds the clips of the
+ * people it includes). A clip with two featured speakers counts on both pages; clips that credit no
+ * featured person are on no page (the verse /videos tabs still credit them by name).
  *
  * - Per person: clips (each with its verses in passage order), per-book clip counts, Bible/Qurʾān
  *   counts, and "first answer" verses: verses where this person's clip is ranked first by the same
@@ -20,7 +22,8 @@ import { query } from '../db.js';
 import { getBibleUrl, getQuranUrl } from './urlFactory.js';
 import { mapLxxToMt, mapMtToLxx } from './scripture_mapper.js';
 import {
-  APOLOGIST_BY_SLUG, CHANNELS, channelKey, channelUrl, resolveApologistLabel, resolveSpeakerSlugs,
+  APOLOGIST_BY_SLUG, CHANNELS, FEATURED_APOLOGISTS, FEATURED_BY_SLUG, channelKey, channelUrl, pageSlugFor,
+  resolveApologistLabel, resolveSpeakerSlugs,
 } from '../data/apologists.js';
 
 const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(process.cwd(), rel), 'utf8'));
@@ -125,17 +128,32 @@ export function creditedPeople(row) {
   return resolveSpeakerSlugs(row?.speaker_slugs) || resolveApologistLabel(row?.apologist_name);
 }
 
+/** Featured page slugs a row's clip appears on (deduplicated, in credit order). */
+export function pageSlugsOf(people) {
+  return [...new Set(people.map((p) => pageSlugFor(p.slug)).filter(Boolean))];
+}
+
 /**
- * Apologist badges for a video card (build time): one per credited person, linked only when that
- * person has a page. `[]` when the row credits nobody (Unknown, uploader names, …).
- * @param {{ bySlug: Map<string, { name: string }> }} data  from loadApologists()
- * @returns {{ slug: string, name: string, href: string | null }[]}
+ * Credits for a video card (build time): one per credited person, linked to the featured page that
+ * shows their clips, plain text (`href: null`) for everyone else. A person folded into another page
+ * reads "<name> · <page name>". `[]` when the row credits nobody (Unknown, uploader names, …).
+ * @returns {{ slug: string, name: string, href: string | null }[]}  slug = the person's registry slug
  */
-export function creditLinks(data, row, base = '') {
-  return creditedPeople(row).map((p) => {
-    const page = data.bySlug.get(p.slug);
-    return { slug: p.slug, name: page?.name || p.name, href: page ? `${base}/apologists/${p.slug}` : null };
-  });
+export function creditLinks(row, base = '') {
+  const seenPages = new Set();
+  const out = [];
+  for (const p of creditedPeople(row)) {
+    const page = pageSlugFor(p.slug);
+    if (page && seenPages.has(page)) continue; // e.g. "Seth Postell" and "ONE FOR ISRAEL" on one clip
+    if (page) seenPages.add(page);
+    const pageName = page && FEATURED_BY_SLUG.get(page).name;
+    out.push({
+      slug: p.slug,
+      name: page && page !== p.slug ? `${p.name} · ${pageName}` : p.name,
+      href: page ? `${base}/apologists/${page}` : null,
+    });
+  }
+  return out;
 }
 
 let cachePromise = null;
@@ -180,17 +198,25 @@ async function buildApologists(rank) {
     linksByVerse.get(l.verse_id).push(l);
   }
 
-  const people = new Map();
-  const unregistered = new Map();
-  const excludedLabels = new Map();
+  const people = new Map(FEATURED_APOLOGISTS.map((f) => {
+    const reg = APOLOGIST_BY_SLUG.get(f.slug);
+    if (!reg) throw new Error(`[apologists] featured slug "${f.slug}" is not in APOLOGISTS (src/data/apologists.js)`);
+    return [f.slug, {
+      slug: f.slug,
+      name: reg.name,
+      type: reg.type || 'Person',
+      alternateName: reg.alternateName || null,
+      channelKeys: reg.channels || [],
+      clips: [],
+      firstAnswers: [],
+    }];
+  }));
   const clipById = new Map();
 
   for (const row of meta) {
     const credited = creditedPeople(row);
-    if (!credited.length) {
-      excludedLabels.set(row.apologist_name, (excludedLabels.get(row.apologist_name) || 0) + 1);
-      continue;
-    }
+    const pages = pageSlugsOf(credited);
+    if (!pages.length) continue;
     const verses = (linksByVideo.get(row.video_id) || [])
       .map((l) => ({ l, info: infoFor(l.verse_id) }))
       .filter((x) => x.info)
@@ -204,28 +230,16 @@ async function buildApologists(rank) {
       channel: channelKey(row.channel_id),
       originalUrl: hasOriginal && /^https:\/\//.test(row.original_url || '') ? row.original_url : null,
       verses: [...new Map(verses.map((v) => [v.id, v])).values()],
-      slugs: credited.map((p) => p.slug),
+      slugs: pages,
+      // Everyone credited, for "with …" on a page card: [page slug or null, name].
+      credits: credited.map((p) => [pageSlugFor(p.slug), p.name]),
       rigor: Number(row.rigor_score) || 0,
     };
     clipById.set(clip.videoId, clip);
-
-    for (const p of credited) {
-      if (!p.registered) unregistered.set(p.name, p.slug);
-      if (!people.has(p.slug)) {
-        const reg = APOLOGIST_BY_SLUG.get(p.slug);
-        people.set(p.slug, {
-          slug: p.slug,
-          name: reg?.name || p.name,
-          type: reg?.type || 'Person',
-          alternateName: reg?.alternateName || null,
-          channelKeys: reg?.channels || [],
-          clips: [],
-          firstAnswers: [],
-        });
-      }
-      people.get(p.slug).clips.push(clip);
-    }
+    for (const slug of pages) people.get(slug).clips.push(clip);
   }
+  const empty = [...people.values()].filter((p) => !p.clips.length).map((p) => p.slug);
+  if (empty.length) throw new Error(`[apologists] featured apologist(s) with no clips (no page to build): ${empty.join(', ')}`);
 
   // First answers: rank every verse's clips exactly like the verse /videos tab.
   const rowById = new Map(meta.map((r) => [r.video_id, r]));
@@ -270,9 +284,6 @@ async function buildApologists(rank) {
     };
   }).sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
 
-  if (unregistered.size) {
-    console.warn(`[apologists] ${unregistered.size} name(s) not in src/data/apologists.js, pages use an auto slug: ${[...unregistered].map(([n, s]) => `${n} → ${s}`).join('; ')}`);
-  }
   if (unreachable.size) {
     console.warn(`[apologists] ${unreachable.size} short_per_verse verse id(s) have no /videos tab that lists them; left out of the apologist pages: ${[...unreachable].join(', ')}`);
   }
@@ -280,9 +291,7 @@ async function buildApologists(rank) {
   return {
     people: list,
     bySlug: new Map(list.map((p) => [p.slug, p])),
-    unregistered,
     unreachableVerses: unreachable,
-    excludedLabels,
     hasOriginalUrl: hasOriginal,
     totalClips: new Set(list.flatMap((p) => p.clips.map((c) => c.videoId))).size,
   };
@@ -324,10 +333,11 @@ export function buildIndexPayload(data) {
  * Apologist page island payload (compact; rendered by src/components/apologists/apologistView.js).
  * books[i]  = { k, l, g }
  * verses[i] = [bookIdx, chapter, verse] in canonical order (LXX numbering, = the link target)
- * clips[j]  = { v: videoId, s: summary, vs: [verseIdx in passage order], via?, o?: originalUrl, w?: [[slug, name]] }
+ * clips[j]  = { v: videoId, s: summary, vs: [verseIdx in passage order], via?, o?: originalUrl,
+ *               w?: [[page slug | null, name]] (other speakers; null = no page, shown as plain text) }
  *             ordered by rigor score (highest first) inside each verse group.
  */
-export function buildPagePayload(data, person) {
+export function buildPagePayload(person) {
   const books = booksFor(person.clips);
   const bIdx = new Map(books.map((b, i) => [b.k, i]));
   const verseList = [...new Map(person.clips.flatMap((c) => c.verses).map((v) => [v.id, v])).values()]
@@ -341,7 +351,8 @@ export function buildPagePayload(data, person) {
       const via = own.has(c.channel) ? null : CHANNELS[c.channel]?.name;
       if (via) out.via = via;
       if (c.originalUrl) out.o = c.originalUrl;
-      const others = c.slugs.filter((s) => s !== person.slug).map((s) => [s, data.bySlug.get(s)?.name || s]);
+      // Other speakers; people folded into this page are not "with" it.
+      const others = c.credits.filter(([page]) => page !== person.slug);
       if (others.length) out.w = others;
       return out;
     });

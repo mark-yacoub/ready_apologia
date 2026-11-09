@@ -11,10 +11,15 @@
  *   this person's clips (the claim checked against what readers see, not against the loader).
  * - Every verse link in the page payload points at a built /videos page (skipped with --allow-sliced,
  *   for BUILD_BOOKS/BUILD_SURAHS builds).
+ * - Featured only: the built /apologists/<slug> pages are exactly FEATURED_APOLOGISTS (src/data/apologists.js).
+ *   Across the whole site, every /apologists/<slug> link points at a featured page, and every credit
+ *   link on a video card points at a page whose payload lists that clip (so a folded person's clips,
+ *   e.g. Seth Postell's on /apologists/one-for-israel, are checked from the verse tabs). People without
+ *   a page are credited as plain text (`.video-credit-name` / `span.apologist-badge`).
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { APOLOGIST_BY_SLUG, channelUrl } from '../src/data/apologists.js';
+import { APOLOGIST_BY_SLUG, FEATURED_APOLOGISTS, channelUrl } from '../src/data/apologists.js';
 import { verseHref } from '../src/components/apologists/apologistView.js';
 
 const args = process.argv.slice(2);
@@ -52,6 +57,12 @@ const slugs = fs.readdirSync(dir).filter((d) => fs.existsSync(path.join(dir, d, 
 const indexData = JSON.parse(indexHtml.match(/<script type="application\/json" id="apg-index-data">([\s\S]*?)<\/script>/)[1]);
 const indexSlugs = indexData.people.map((p) => p.s).sort();
 if (JSON.stringify(indexSlugs) !== JSON.stringify([...slugs].sort())) fail('apologists/index.html: index list != built pages');
+const featured = FEATURED_APOLOGISTS.map((f) => f.slug).sort();
+if (JSON.stringify(featured) !== JSON.stringify([...slugs].sort())) {
+  fail(`built pages != FEATURED_APOLOGISTS: extra [${slugs.filter((s) => !featured.includes(s))}], missing [${featured.filter((s) => !slugs.includes(s))}]`);
+}
+const featuredSet = new Set(featured);
+const pageClips = new Map(); // slug → Set(videoId) from the page payload
 
 let firstChecked = 0;
 let biggest = { rel: '', bytes: 0 };
@@ -70,6 +81,8 @@ for (const slug of slugs) {
   if (!m) { fail(`${rel}: no page payload`); continue; }
   const payload = JSON.parse(m[1]);
   const clips = new Set(payload.clips.map((c) => c.v));
+  pageClips.set(slug, clips);
+  for (const c of payload.clips) for (const [s] of c.w || []) if (s !== null && !featuredSet.has(s)) fail(`${rel}: "with" link to non-featured ${s}`);
 
   // First answers: the verse tab's first video is this person's clip.
   const section = html.match(/<section class="apg-first"[\s\S]*?<\/section>/);
@@ -91,10 +104,51 @@ for (const slug of slugs) {
   }
 }
 
+// Site-wide: links into /apologists/ and the credit line / badges on every video card.
+const linkRe = /href="(?:https:\/\/readyapologia\.com)?\/apologists\/([^"/?#]+)\/?"/g;
+let pagesScanned = 0;
+let creditLinksChecked = 0;
+let plainCredits = 0;
+let foldedChecked = 0;
+function walk(d) {
+  for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+    const full = path.join(d, e.name);
+    if (e.isDirectory()) walk(full);
+    else if (e.name.endsWith('.html')) scanPage(full);
+  }
+}
+function scanPage(full) {
+  const html = fs.readFileSync(full, 'utf8');
+  pagesScanned += 1;
+  const rel = path.relative(DIST, full);
+  plainCredits += (html.match(/class="video-credit-name"|<span class="apologist-badge"/g) || []).length;
+  if (!html.includes('/apologists/')) return;
+  for (const [, slug] of html.matchAll(linkRe)) {
+    if (!featuredSet.has(slug)) fail(`${rel}: links to /apologists/${slug}, which is not a featured page`);
+  }
+  // Video cards: every credit link's page must list that clip.
+  for (const card of html.split(/class="video-card"/).slice(1)) {
+    const vid = card.match(/youtube(?:-nocookie)?\.com\/embed\/([A-Za-z0-9_-]+)/)?.[1];
+    if (!vid) continue;
+    const credit = card.match(/<p class="video-credit"[^>]*>([\s\S]*?)<\/p>|<div class="apologist-name"[^>]*>([\s\S]*?)<\/div>/);
+    if (!credit) continue;
+    for (const [, slug, name] of (credit[1] || credit[2]).matchAll(/<a[^>]*href="\/apologists\/([^"/]+)\/?"[^>]*>([^<]*)<\/a>/g)) {
+      creditLinksChecked += 1;
+      if (/ · /.test(name)) foldedChecked += 1;
+      if (featuredSet.has(slug) && !pageClips.get(slug)?.has(vid)) fail(`${rel}: credit "${decode(name)}" → /apologists/${slug}, but that page does not list clip ${vid}`);
+    }
+  }
+}
+walk(DIST);
+if (!creditLinksChecked) fail('no credit links found on any video card');
+if (!plainCredits) fail('no plain-text credits found: people without a page should still be named');
+if (!foldedChecked) fail('no folded credit ("<name> · <page>") found, e.g. Seth Postell · ONE FOR ISRAEL');
+
 if (failures.length) {
   for (const f of failures.slice(0, 50)) console.error(`✗ ${f}`);
   if (failures.length > 50) console.error(`… and ${failures.length - 50} more`);
   console.error(`✗ apologist pages: ${failures.length} failure(s)`);
   process.exit(1);
 }
-console.log(`✓ apologist pages: ${slugs.length} pages + index; ${firstChecked} "first answer" links match their /videos tab; largest ${biggest.rel} (${biggest.bytes} bytes)`);
+console.log(`✓ apologist pages: ${slugs.length} pages + index (= FEATURED_APOLOGISTS); ${firstChecked} "first answer" links match their /videos tab; largest ${biggest.rel} (${biggest.bytes} bytes)`);
+console.log(`✓ site-wide: ${pagesScanned} HTML files; every /apologists/ link is featured; ${creditLinksChecked} credit links list their clip (${foldedChecked} folded); ${plainCredits} plain-text credits`);

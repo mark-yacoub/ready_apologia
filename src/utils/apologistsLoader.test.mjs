@@ -6,7 +6,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  APOLOGISTS, APOLOGIST_BY_SLUG, CHANNELS, channelUrl, resolveApologistLabel, resolveSpeakerSlugs, slugifyName,
+  APOLOGISTS, APOLOGIST_BY_SLUG, CHANNELS, FEATURED_APOLOGISTS, channelUrl, pageSlugFor, resolveApologistLabel,
+  resolveSpeakerSlugs, slugifyName,
 } from '../data/apologists.js';
 import {
   loadApologists, buildIndexPayload, buildPagePayload, creditLinks, prunePayload, resolveVerse,
@@ -51,7 +52,8 @@ test('alias map from the brief', () => {
   assert.deepEqual(slugsOf('Sam Shamoun & David Wood'), ['sam-shamoun', 'david-wood']);
   assert.deepEqual(slugsOf('Al Fadi and David Wood'), ['al-fadi', 'david-wood']);
   assert.deepEqual(slugsOf('Jay Smith / Al Fadi (CIRA International)'), ['jay-smith', 'al-fadi']);
-  assert.deepEqual(slugsOf('Michael Jones (InspiringPhilosophy) & Tom Holland'), ['inspiringphilosophy']);
+  assert.deepEqual(slugsOf('Michael Jones (InspiringPhilosophy) & Tom Holland'), ['inspiringphilosophy', 'tom-holland']);
+  assert.deepEqual(slugsOf('Seth Postell (ONE FOR ISRAEL)'), ['seth-postell']);
   for (const n of ['Unknown', 'Christian Apologist', 'Towards Jesus', 'Unknown (Towards Jesus Panel)', '', null]) assert.deepEqual(slugsOf(n), [], String(n));
   assert.equal(slugifyName("Dr. Dinesh D'Souza"), 'dinesh-dsouza');
   assert.deepEqual(slugsOf('CrossExamined'), ['frank-turek'], 'matches the pipeline registry');
@@ -67,6 +69,13 @@ const REGISTRY_PATH = [
 
 test('registry sync: channel buttons come from the pipeline registry; its aliases resolve here', { skip: !REGISTRY_PATH && 'pipeline registry not found (set APOLOGIST_REGISTRY)' }, () => {
   const registry = new Map(JSON.parse(fs.readFileSync(REGISTRY_PATH, 'utf8')).map((r) => [r.slug, r]));
+  // Every featured page (and every person folded into one) is a registry person with the same name.
+  for (const f of FEATURED_APOLOGISTS) {
+    for (const slug of [f.slug, ...(f.includeSlugs || [])]) {
+      assert.ok(registry.has(slug), `featured ${slug}: missing from the pipeline registry`);
+      assert.equal(APOLOGIST_BY_SLUG.get(slug)?.name, registry.get(slug).name, `featured ${slug}: display name differs from the registry`);
+    }
+  }
   for (const a of APOLOGISTS) {
     const r = registry.get(a.slug);
     if (!r) continue; // website-only names (pipeline backfill pending) carry no channel
@@ -95,10 +104,20 @@ test('every apologist_name in data.db is either registered or explicitly exclude
   assert.deepEqual(unregistered, [], 'add these to src/data/apologists.js (aliases) or EXCLUDED_LABELS');
 });
 
-test('loader: counts, multi-speaker credit, excluded labels, first answers', async () => {
+test('featured list: known people, unique, folded people belong to one page', () => {
+  const pages = FEATURED_APOLOGISTS.map((f) => f.slug);
+  assert.equal(pages.length, 20);
+  assert.equal(new Set(pages).size, pages.length);
+  const folded = FEATURED_APOLOGISTS.flatMap((f) => f.includeSlugs || []);
+  for (const slug of [...pages, ...folded]) assert.ok(APOLOGIST_BY_SLUG.has(slug), `${slug} not in APOLOGISTS`);
+  assert.equal(new Set([...pages, ...folded]).size, pages.length + folded.length, 'a folded person is also featured or folded twice');
+  assert.equal(pageSlugFor('seth-postell'), 'one-for-israel');
+  assert.equal(pageSlugFor('bart-ehrman'), null);
+});
+
+test('loader: featured pages only, multi-speaker credit, folding, first answers', async () => {
   const data = await loadApologists({ rank });
-  assert.ok(data.people.length >= 60, `pages: ${data.people.length}`);
-  assert.equal(data.unregistered.size, 0);
+  assert.deepEqual(data.people.map((p) => p.slug).sort(), FEATURED_APOLOGISTS.map((f) => f.slug).sort(), 'pages = FEATURED_APOLOGISTS');
   for (const p of data.people) {
     assert.ok(p.total > 0 && p.total === p.clips.length);
     assert.ok(p.bible + p.quran >= p.total, `${p.slug}: every clip cites a Bible or Qurʾān verse`);
@@ -106,7 +125,17 @@ test('loader: counts, multi-speaker credit, excluded labels, first answers', asy
     assert.ok(APOLOGIST_BY_SLUG.has(p.slug));
     for (const c of p.channels) assert.match(c.url, /^https:\/\/www\.youtube\.com\/@/);
   }
-  for (const banned of ['unknown', 'christian-apologist', 'towards-jesus', 'bart-ehrman']) assert.ok(!data.bySlug.has(banned), banned);
+  for (const banned of ['unknown', 'christian-apologist', 'towards-jesus', 'bart-ehrman', 'seth-postell', 'lee-strobel']) assert.ok(!data.bySlug.has(banned), banned);
+
+  // Seth Postell's clips are on the ONE FOR ISRAEL page.
+  const seth = query('SELECT * FROM shorts_metadata').filter((r) => resolveApologistLabel(r.apologist_name).some((p) => p.slug === 'seth-postell'));
+  assert.ok(seth.length > 0, 'data.db has Seth Postell clips');
+  const ofi = new Set(data.bySlug.get('one-for-israel').clips.map((c) => c.videoId));
+  for (const r of seth) {
+    const listed = query('SELECT verse_id FROM short_per_verse WHERE video_id = :v', { v: r.video_id }).some((l) => resolveVerse(l.verse_id));
+    if (listed) assert.ok(ofi.has(r.video_id), `Seth Postell clip ${r.video_id} not on /apologists/one-for-israel`);
+  }
+  assert.ok(seth.some((r) => ofi.has(r.video_id)));
 
   const both = query("SELECT video_id FROM shorts_metadata WHERE apologist_name = 'Sam Shamoun & David Wood' LIMIT 1")[0]?.video_id;
   if (both) {
@@ -121,21 +150,33 @@ test('loader: counts, multi-speaker credit, excluded labels, first answers', asy
   const top = rank(query('SELECT spv.*, sm.rigor_score FROM short_per_verse spv JOIN shorts_metadata sm USING (video_id) WHERE spv.verse_id = :v', { v: spot.id }))[0];
   assert.ok(data.bySlug.get('sam-shamoun').clips.some((c) => c.videoId === top.video_id), 'first answer = top-ranked clip on that verse');
 
-  // Badges (VideosGrid / VideosCarousel) use the page credit rule and link only to built pages.
+  // Credits (VideosGrid / VideosCarousel): links only to built (featured) pages, plain text otherwise.
   for (const row of query('SELECT * FROM shorts_metadata')) {
-    for (const c of creditLinks(data, row, '/base')) {
-      if (c.href) assert.equal(c.href, `/base/apologists/${c.slug}`);
-      assert.ok(!c.href || data.bySlug.has(c.slug), `badge for "${row.apologist_name}" links to missing /apologists/${c.slug}`);
+    for (const c of creditLinks(row, '/base')) {
+      const page = pageSlugFor(c.slug);
+      assert.equal(c.href, page && `/base/apologists/${page}`, `credit for "${row.apologist_name}"`);
+      assert.ok(!c.href || data.bySlug.has(page), `credit for "${row.apologist_name}" links to missing /apologists/${page}`);
     }
   }
-  assert.deepEqual(creditLinks(data, { apologist_name: 'Unknown' }), []);
-  assert.equal(creditLinks(data, { apologist_name: 'Sam Shamoun' })[0].href, '/apologists/sam-shamoun');
+  assert.deepEqual(creditLinks({ apologist_name: 'Unknown' }), []);
+  assert.deepEqual(creditLinks({ apologist_name: 'Sam Shamoun' }), [{ slug: 'sam-shamoun', name: 'Sam Shamoun', href: '/apologists/sam-shamoun' }]);
+  assert.deepEqual(creditLinks({ apologist_name: 'Bart Ehrman' }), [{ slug: 'bart-ehrman', name: 'Bart Ehrman', href: null }]);
+  assert.deepEqual(creditLinks({ apologist_name: 'Seth Postell (ONE FOR ISRAEL)' }), [{ slug: 'seth-postell', name: 'Dr. Seth Postell · ONE FOR ISRAEL', href: '/apologists/one-for-israel' }]);
+  assert.deepEqual(creditLinks({ apologist_name: 'Jay Smith / Al Fadi (CIRA International)' }).map((c) => c.href), [null, '/apologists/al-fadi']);
+  assert.deepEqual(creditLinks({ speaker_slugs: '["seth-postell","one-for-israel"]' }).map((c) => c.href), ['/apologists/one-for-israel'], 'one link per page');
+
+  // Page cards: co-speakers without a page carry no slug (rendered as plain text).
+  for (const p of data.people) {
+    for (const c of buildPagePayload(p).clips) {
+      for (const [slug] of c.w || []) assert.ok(slug === null || (slug !== p.slug && data.bySlug.has(slug)), `${p.slug}: "with" ${slug}`);
+    }
+  }
 });
 
 test('client verse labels/links match the build-time resolver', async () => {
   const data = await loadApologists({ rank });
   for (const p of data.people) {
-    const payload = buildPagePayload(data, p);
+    const payload = buildPagePayload(p);
     const byLabel = new Map(p.clips.flatMap((c) => c.verses).map((v) => [v.label, v]));
     for (const v of payload.verses) {
       const label = verseLabel(payload.books, v);
@@ -157,7 +198,7 @@ test('client verse labels/links match the build-time resolver', async () => {
 test('page view: every clip placed once; filters match the header counts', async () => {
   const data = await loadApologists({ rank });
   for (const p of data.people) {
-    const payload = buildPagePayload(data, p);
+    const payload = buildPagePayload(p);
     const all = computePageView(payload, { s: 'all', b: [], sort: 'verse' });
     assert.equal(all.total, p.total, p.slug);
     const placed = all.sections.flatMap((s) => s.verses.flatMap((g) => g.clips));

@@ -182,7 +182,7 @@ function ClipCard({ clip, onPlay }) {
         <p className="apg-card__meta">
           {clip.w && (
             <span>with {clip.w.map(([slug, name], i) => (
-              <span key={slug}>{i ? ', ' : ''}<a href={`${base}/apologists/${slug}`}>{name}</a></span>
+              <span key={name}>{i ? ', ' : ''}{slug ? <a href={`${base}/apologists/${slug}`}>{name}</a> : name}</span>
             ))}</span>
           )}
           {clip.o && <a href={clip.o} target="_blank" rel="noopener">Full video ↗</a>}
