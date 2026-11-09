@@ -8,7 +8,7 @@
  * - Back closes it: opening adds a `#play=N` entry (via url_history.js; N follows the current clip
  *   with replaceUrl), and closing with ✕/Esc goes back over that entry.
  * - On close, the last-played card is scrolled into view and focused. By default the card is
- *   `[data-video-id="<id>"]`, else the card holding `iframe[src*="/embed/<id>"]`; pass
+ *   `[data-video-id="<id>"]`, else the card holding the `/embed/<id>` iframe; pass
  *   `findCard(videoId) => Element|null` to override.
  * - ClientRouter: the reel is torn down on `astro:before-swap`, and a stale `#play=N` (Back/Forward
  *   onto that entry, or a shared URL) is stripped instead of auto-playing.
@@ -57,7 +57,10 @@ export async function openReel(items, startIndex = 0, { opener, findCard } = {})
     '<div class="reel-overlay reel-overlay--loading" role="dialog" aria-modal="true" aria-label="Video player" tabindex="-1">' +
     '<p class="reel-status" role="status">Loading video…</p></div>';
   document.body.appendChild(container);
-  /** @type {HTMLElement | null} */ (container.firstElementChild)?.focus();
+  const loadingOverlay = /** @type {HTMLElement} */ (container.firstElementChild);
+  // Esc works while the player chunk loads (React replaces this node, and its listener, once ready).
+  loadingOverlay.addEventListener('keydown', (e) => { if (e.key === 'Escape') requestCloseReel(); });
+  loadingOverlay.focus();
 
   session = {
     container,
@@ -70,6 +73,7 @@ export async function openReel(items, startIndex = 0, { opener, findCard } = {})
     inerted: [],
   };
   const current = session;
+  stopPageEmbeds(container);
   setPageInert(current, true);
 
   if (!isPlayHash()) {
@@ -88,8 +92,7 @@ export async function openReel(items, startIndex = 0, { opener, findCard } = {})
       close.className = 'reel-text-btn';
       close.textContent = 'Close';
       close.addEventListener('click', requestCloseReel);
-      container.firstElementChild.appendChild(close);
-      container.firstElementChild.addEventListener('keydown', (e) => { if (e.key === 'Escape') requestCloseReel(); });
+      loadingOverlay.appendChild(close);
       close.focus();
     }
     return;
@@ -142,6 +145,29 @@ function teardown({ reveal }) {
   }
 }
 
+/**
+ * Stops any YouTube embed already playing on the page so its audio does not
+ * overlap the reel. Embeds built with `enablejsapi=1` get a pause command;
+ * any other loaded embed is reset by reassigning its `src`.
+ * @param {Element} reelContainer
+ */
+function stopPageEmbeds(reelContainer) {
+  for (const frame of document.querySelectorAll('iframe[src*="youtube.com/embed/"], iframe[src*="youtube-nocookie.com/embed/"]')) {
+    if (reelContainer.contains(frame)) continue;
+    const src = frame.getAttribute('src') || '';
+    if (/[?&]enablejsapi=1(?:&|#|$)/.test(src)) {
+      try {
+        const origin = new URL(src, location.href).origin;
+        frame.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), origin);
+      } catch { /* frame not loaded yet: nothing is playing */ }
+    } else {
+      // No JS API: reloading is the only way to stop it. (Costs a reload per such embed; the
+      // site's own grids/carousels use enablejsapi=1, so this only hits third-party markup.)
+      frame.setAttribute('src', src);
+    }
+  }
+}
+
 function setPageInert(s, on) {
   if (on) {
     for (const el of Array.from(document.body.children)) {
@@ -161,7 +187,8 @@ function defaultFindCard(videoId) {
   const esc = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(videoId) : videoId;
   const tagged = document.querySelector(`[data-video-id="${esc}"]`);
   if (tagged) return tagged;
-  const frame = document.querySelector(`iframe[src*="/embed/${esc}"]`);
+  // Exact id match: `/embed/<id>` at the end or followed by a query (`?enablejsapi=1`), never `<id>xyz`.
+  const frame = document.querySelector(`iframe[src$="/embed/${esc}"], iframe[src*="/embed/${esc}?"]`);
   return frame ? frame.closest('.video-card, article, li') || frame : null;
 }
 

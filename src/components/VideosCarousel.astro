@@ -24,7 +24,7 @@ const { videos } = Astro.props;
               <div class="video-card">
                 <div class="iframe-container">
                   <iframe
-                    src={`https://www.youtube.com/embed/${video.video_id}`}
+                    src={`https://www.youtube.com/embed/${video.video_id}?enablejsapi=1`}
                     title={dynamicTitle}
                     frameborder="0"
                     loading="lazy"

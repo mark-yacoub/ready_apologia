@@ -1,95 +1,113 @@
 /* Reel player ("Play all"): src/components/reel/. Scoped under .reel-* */
 
-/* ---------- Play all button (on the page) ---------- */
+/* ---------- Play all button (on the page) ----------
+   A compact secondary action, right-aligned above the video grid, styled like the
+   site's other light pill controls so it doesn't compete with the active tab. */
 .reel-play-all {
-  display: inline-flex;
+  position: relative;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  align-self: flex-start;
-  min-height: 44px;
-  padding: 0 18px;
-  border: none;
+  gap: 6px;
+  width: fit-content;
+  margin: 0 0 12px auto;
+  min-height: 36px;
+  padding: 0 14px 0 11px;
+  border: 1px solid #d4d4d8;
   border-radius: 999px;
-  background: var(--color-secondary, #974543);
-  color: var(--color-on-secondary, #fff);
+  background: #fff;
+  color: var(--color-primary, #09090b);
   font: inherit;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.01em;
+  line-height: 1;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  box-shadow: 0 1px 2px rgba(9, 9, 11, 0.05);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.reel-play-all:hover { filter: brightness(1.08); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16); }
-.reel-play-all:active { transform: scale(0.98); }
-.reel-play-all:focus-visible { outline: 3px solid var(--color-primary, #09090b); outline-offset: 3px; }
-.reel-play-all-count { font-weight: 600; opacity: 0.9; }
+/* Keeps a 44px touch target while the visible pill stays 36px tall. */
+.reel-play-all::after { content: ''; position: absolute; inset: -4px 0; }
+.reel-play-all svg { color: var(--color-secondary, #974543); flex: none; }
+.reel-play-all:hover { border-color: #18181b; box-shadow: 0 2px 8px rgba(9, 9, 11, 0.08); }
+.reel-play-all:active { transform: scale(0.97); }
+.reel-play-all:focus-visible { outline: 2px solid var(--color-secondary, #974543); outline-offset: 2px; }
+.reel-play-all-count { font-weight: 600; color: #71717a; }
 
 /* ---------- Overlay ---------- */
 html.reel-open { overflow: hidden; }
 
 .reel-overlay {
+  --reel-frame-h: 100dvh;
   position: fixed;
   inset: 0;
   z-index: 20000;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  grid-template-areas:
-    'top top'
-    'stage stage'
-    'caption nav';
-  column-gap: 8px;
   height: 100vh;
   height: 100dvh;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   background: #0b0b0c;
   color: #fafafa;
   font-family: inherit;
-  touch-action: pinch-zoom;
   overscroll-behavior: contain;
   animation: reel-fade-in 0.18s ease-out;
 }
 .reel-overlay:focus { outline: none; }
 .reel-overlay--loading { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
 
-.reel-topbar {
-  grid-area: top;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 8px;
-  min-height: 56px;
+/* ---------- Feed: native vertical scroll-snap ---------- */
+.reel-feed {
+  position: absolute;
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  isolation: isolate;
+  -webkit-overflow-scrolling: touch;
 }
-.reel-counter {
-  margin: 0 8px 0 0;
-  font-size: 0.95rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  color: #e4e4e7;
-}
+.reel-feed::-webkit-scrollbar { display: none; }
 
-.reel-stage {
-  grid-area: stage;
+.reel-slide {
   position: relative;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 0;
-  min-width: 0;
-  padding: 0 12px;
-  container-type: size;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
+
 .reel-frame {
   position: relative;
-  width: min(100cqw, 100cqh * 9 / 16);
+  height: min(var(--reel-frame-h), calc(100vw * 16 / 9));
   aspect-ratio: 9 / 16;
-  max-height: 100%;
-  border-radius: 14px;
+  max-width: 100%;
+  border-radius: 12px;
   overflow: hidden;
   background: #000;
 }
+.reel-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* The one player: absolutely positioned over the active slide, inside the scroller. */
+.reel-layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.reel-frame--player { background: transparent; pointer-events: auto; }
 .reel-host,
 .reel-host > div,
 .reel-host iframe {
@@ -99,18 +117,208 @@ html.reel-open { overflow: hidden; }
   height: 100%;
   border: 0;
 }
-.reel-gesture {
+.reel-host { opacity: 0; transition: opacity 0.15s ease; pointer-events: none; }
+.reel-host.is-revealed { opacity: 1; }
+
+/* Takes taps (play/pause) and lets vertical drags scroll the feed; YouTube never sees them. */
+.reel-tap {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 1;
   background: transparent;
+  touch-action: pan-y;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Caption: above the player layer, over the bottom of the clip. */
+.reel-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: 48px 14px 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.35) 60%, transparent);
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.reel-caption a { pointer-events: auto; }
+.reel-caption-line {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reel-caption-name { font-weight: 700; }
+.reel-caption-verse { color: #fafafa; font-weight: 600; }
+a.reel-caption-verse { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(250, 250, 250, 0.5); }
+.reel-caption-links {
+  display: flex;
+  gap: 0 16px;
+  flex-wrap: wrap;
+  margin: 0;
+  font-size: 0.88rem;
+}
+.reel-caption-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: #e4e4e7;
+  text-decoration: none;
+}
+.reel-caption-links a:hover { color: #fff; text-decoration: underline; }
+
+/* ---------- Progress bar (draggable) ---------- */
+.reel-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  height: 28px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 0 10px 8px;
   touch-action: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  /* Dark scrim so the bar stands out on bright or white video frames. */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+}
+/* Enlarged hit area (≥44px) that reaches up over the caption gradient's bottom edge. */
+.reel-progress::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 44px; }
+.reel-progress:focus { outline: none; }
+.reel-progress:focus-visible .reel-progress-track { outline: 2px solid #fde68a; outline-offset: 4px; }
+.reel-progress-track {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  border-radius: 4px;
+  /* Dark track with a light edge reads on both dark and light frames. */
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+  transition: height 0.12s ease;
+}
+.reel-progress-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.55), 0 0 6px rgba(0, 0, 0, 0.45);
+  transform-origin: left center;
+}
+.reel-progress-thumb {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.6), 0 1px 4px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+.reel-progress:hover .reel-progress-track { height: 6px; }
+.reel-progress.is-scrubbing .reel-progress-track { height: 7px; }
+.reel-progress.is-scrubbing .reel-progress-thumb { opacity: 1; transform: scale(1.8); }
+/* Always-visible elapsed / total time beside the bar. */
+.reel-progress-time {
+  flex: none;
+  margin-bottom: -5px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+}
+.reel-progress-label {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ---------- Indicators ---------- */
+.reel-flash,
+.reel-paused-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  pointer-events: none;
+}
+.reel-flash { animation: reel-flash 0.65s ease-out forwards; }
+.reel-paused-icon { background: rgba(0, 0, 0, 0.35); opacity: 0.9; }
+.reel-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: reel-spin 0.8s linear infinite;
+  pointer-events: none;
+}
+.reel-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.62);
+  color: #fafafa;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.reel-chip--center { position: absolute; top: 50%; left: 50%; z-index: 2; transform: translate(-50%, -50%); white-space: nowrap; }
+/* Top-centre: on phones the frame fills the screen, and the top corners hold ✕ and the counter. */
+.reel-chip--sound {
+  position: absolute;
+  top: calc(12px + env(safe-area-inset-top));
+  left: 50%;
+  z-index: 4;
+  transform: translateX(-50%);
+  min-height: 44px;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 .reel-status {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 5;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -124,6 +332,7 @@ html.reel-open { overflow: hidden; }
   color: #f4f4f5;
   background: rgba(0, 0, 0, 0.82);
 }
+.reel-status--soft { z-index: 1; background: rgba(0, 0, 0, 0.7); }
 .reel-overlay--loading .reel-status { position: static; background: none; }
 .reel-status p { margin: 0; max-width: 28ch; }
 .reel-status-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
@@ -145,13 +354,29 @@ html.reel-open { overflow: hidden; }
 }
 .reel-text-btn--ghost { background: transparent; color: #fafafa; }
 
-/* ---------- Controls ---------- */
-.reel-nav {
-  grid-area: nav;
+/* ---------- Top bar and side buttons ---------- */
+.reel-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 10px 10px 0;
+  justify-content: space-between;
+  padding: calc(6px + env(safe-area-inset-top)) calc(8px + env(safe-area-inset-right)) 6px calc(8px + env(safe-area-inset-left));
+  pointer-events: none;
+}
+.reel-topbar > * { pointer-events: auto; }
+.reel-counter {
+  margin: 0 8px 0 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #e4e4e7;
 }
 .reel-icon-btn {
   display: inline-flex;
@@ -162,7 +387,7 @@ html.reel-open { overflow: hidden; }
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.45);
   color: #fafafa;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -171,73 +396,54 @@ html.reel-open { overflow: hidden; }
 .reel-icon-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.26); }
 .reel-icon-btn:disabled { opacity: 0.35; cursor: default; }
 
+/* ▲ / ❚❚ / ▼ beside the feed for mouse users; screen-reader-only on touch screens. */
+.reel-nav {
+  position: absolute;
+  top: 50%;
+  right: calc(16px + env(safe-area-inset-right));
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transform: translateY(-50%);
+}
+@media (pointer: coarse), (max-width: 699px) {
+  .reel-nav:not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
 .reel-overlay a:focus-visible,
 .reel-overlay button:focus-visible {
   outline: 3px solid #fde68a;
   outline-offset: 2px;
 }
 
-/* ---------- Caption ---------- */
-.reel-caption {
-  grid-area: caption;
-  min-width: 0;
-  padding: 8px 0 10px 16px;
-  animation: reel-caption-in 0.22s ease-out;
-}
-.reel-caption-line {
-  margin: 0;
-  font-size: 0.98rem;
-  line-height: 1.35;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.reel-caption-name { font-weight: 700; }
-.reel-caption-verse { color: #fafafa; font-weight: 600; }
-a.reel-caption-verse { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(250, 250, 250, 0.5); }
-.reel-caption-links {
-  display: flex;
-  gap: 4px 14px;
-  flex-wrap: wrap;
-  margin: 2px 0 0;
-  font-size: 0.88rem;
-}
-.reel-caption-links a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  color: #d4d4d8;
-  text-decoration: none;
-}
-.reel-caption-links a:hover { color: #fff; text-decoration: underline; }
-
-/* ---------- Wider screens: controls beside the video, caption centred under it ---------- */
+/* ---------- Wider screens: a centred 9:16 column ---------- */
 @media (min-width: 700px) {
-  .reel-overlay {
-    grid-template-columns: 76px minmax(0, 1fr) 76px;
-    grid-template-areas:
-      'top top top'
-      '. stage nav'
-      '. caption .';
-  }
-  .reel-nav {
-    flex-direction: column;
-    justify-content: center;
-    gap: 12px;
-    padding: 0;
-  }
-  .reel-icon-btn { width: 52px; height: 52px; }
-  .reel-caption { padding: 10px 0 14px; text-align: center; }
-  .reel-caption-links { justify-content: center; }
-  .reel-topbar { padding: 8px 16px; }
+  .reel-overlay { --reel-frame-h: 92dvh; }
+  .reel-icon-btn { width: 52px; height: 52px; background: rgba(255, 255, 255, 0.14); }
+  .reel-topbar { padding: 12px 16px; }
 }
 
 @keyframes reel-fade-in { from { opacity: 0; } to { opacity: 1; } }
-@keyframes reel-caption-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes reel-flash { 0% { opacity: 0; transform: scale(0.8); } 20% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.15); } }
+@keyframes reel-spin { to { transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce) {
   .reel-overlay,
-  .reel-caption { animation: none; }
+  .reel-flash { animation: none; }
+  .reel-flash { opacity: 0.9; }
+  .reel-spinner { animation-duration: 2s; }
+  .reel-feed { scroll-behavior: auto; }
   .reel-play-all,
-  .reel-icon-btn { transition: none; }
+  .reel-icon-btn,
+  .reel-host,
+  .reel-progress-track,
+  .reel-progress-thumb { transition: none; }
 }
