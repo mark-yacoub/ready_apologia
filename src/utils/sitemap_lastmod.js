@@ -20,6 +20,7 @@ import { execFileSync } from 'node:child_process';
 /** Discover article slug → extra content sources (page dir/file and
  *  src/components/discover/<slug> are added automatically). */
 export const DISCOVER_SOURCES = {
+  'through-christian-eyes': ['src/utils/throughChristianEyes'],
   'hadith-reliability': ['src/utils/hadithReliability', 'src/data/discover/islam/scripture/hadith_reliability'],
   'convenient-revelations': ['src/utils/convenientRevelations', 'src/data/convenient-revelations.json'],
   'quran-preservation': ['src/utils/quranPreservation', 'src/data/discover/islam/scripture/quran_preservation.json'],
@@ -45,6 +46,7 @@ export const LASTMOD_RULES = [
       'src/components/home',
       'src/styles/home.css',
       'src/utils/homeStats.js',
+      'src/utils/throughChristianEyes',
       'data.db',
       'src/data/books_meta.json',
       'src/data/discoverCatalog.json',

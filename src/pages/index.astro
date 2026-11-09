@@ -4,6 +4,7 @@ import RouteAnalytics from '../components/common/RouteAnalytics.astro';
 import Hero from '../components/home/Hero.astro';
 import DatasetCard from '../components/home/DatasetCard.astro';
 import DeepDiveList from '../components/home/DeepDiveList.astro';
+import StartHereCard from '../components/home/StartHereCard.astro';
 import EvidenceGrid from '../components/home/EvidenceGrid.astro';
 import { DEFAULT_SCRIPTURE_PATH } from '../utils/routes.js';
 import { loadHomeStats } from '../utils/homeStats.js';
@@ -188,5 +189,7 @@ const schemaObj = {
     <DeepDiveList base={base} stats={stats} />
 
     <EvidenceGrid base={base} stats={stats} />
+
+    <StartHereCard base={base} />
   </div>
 </Layout>

@@ -1,0 +1,137 @@
+---
+/**
+ * Homepage "Start here" card: the introduction to the site, linking to
+ * /discover/through-christian-eyes. Copy lives in src/utils/throughChristianEyes/content.js.
+ */
+import { HOME_CARD } from '../../utils/throughChristianEyes/content.js';
+import { loadThroughChristianEyes } from '../../utils/throughChristianEyes/model.js';
+import { tl } from '../../utils/hadithReliability/render.js';
+
+interface Props {
+  base: string;
+}
+
+const { base } = Astro.props;
+const m = loadThroughChristianEyes();
+const href = `${base}${m.path}`;
+---
+
+<section class="ra-section ra-tce" aria-labelledby="ra-sec-tce">
+  <a href={href} class="ra-tce-card">
+    <p class="ra-tce-eyebrow">{HOME_CARD.eyebrow}</p>
+    <h2 id="ra-sec-tce" class="ra-tce-title" set:html={tl(HOME_CARD.title)} />
+    <p class="ra-tce-sub" set:html={tl(HOME_CARD.subtitle)} />
+    <p class="ra-tce-body" set:html={tl(HOME_CARD.body)} />
+    <ol class="ra-tce-list">
+      {m.sections.map((s) => (
+        <li><span class="ra-tce-num" aria-hidden="true">{s.number}</span><span set:html={s.titleHtml} /></li>
+      ))}
+    </ol>
+    <span class="ra-tce-cta">{HOME_CARD.cta} <span aria-hidden="true">→</span></span>
+  </a>
+</section>
+
+<style>
+  .ra-tce-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px 18px 16px;
+    border-radius: 16px;
+    background: #fbf8f3;
+    border: 1px solid #e2d8ca;
+    border-left: 4px solid #883432;
+    color: #1c1917;
+    text-decoration: none;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .ra-tce-card:hover,
+  .ra-tce-card:focus-visible {
+    box-shadow: 0 4px 16px rgba(136, 52, 50, 0.12);
+  }
+  .ra-tce-eyebrow {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #92400e;
+  }
+  .ra-tce-title {
+    margin: 0;
+    font-family: 'Literata', Georgia, serif;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #883432;
+  }
+  .ra-tce-sub {
+    margin: 0;
+    font-family: 'Literata', Georgia, serif;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .ra-tce-body {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #57534e;
+  }
+  .ra-tce-list {
+    list-style: none;
+    margin: 2px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .ra-tce-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ra-tce-num {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #883432;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .ra-tce-cta {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 0 16px;
+    margin-top: 4px;
+    border-radius: 999px;
+    background: #883432;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .ra-tce :global(.hrv-tlm) {
+    font-family: 'Amiri', serif;
+    line-height: 1;
+  }
+  @media (min-width: 768px) {
+    .ra-tce-card {
+      padding: 22px 24px 20px;
+    }
+    .ra-tce-title {
+      font-size: 30px;
+    }
+    .ra-tce-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

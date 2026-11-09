@@ -1,0 +1,102 @@
+---
+/**
+ * Through Christian Eyes — the web edition of the printed bi-fold handout, and the site's
+ * "Start here". One static page (no React islands, no client script, stateless).
+ * Hero (kicker, H1, subtitle, intro, our sources, the five questions) → five numbered sections
+ * (claim, evidence, "Our answer", "Go deeper" links into the site) → aside → closing.
+ * All copy: src/utils/throughChristianEyes/content.js; rendering + checks: model.js.
+ */
+import Layout from '../../layouts/Layout.astro';
+import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import Deeper from '../../components/discover/through-christian-eyes/Deeper.astro';
+import { loadThroughChristianEyes, pageSchema } from '../../utils/throughChristianEyes/model.js';
+import { BASE } from '../../utils/hadithReliability/config.js';
+import '../../styles/through-christian-eyes.css';
+
+const m = loadThroughChristianEyes();
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
+const canonicalURL = `${site}${BASE}${m.path}`;
+const ogImage = `${site}${BASE}/media/through_christian_eyes/cover.jpg`;
+---
+<Layout
+  title={m.seo.title}
+  description={m.seo.description}
+  keywords={m.seo.keywords}
+  canonicalURL={canonicalURL}
+  ogUrl={canonicalURL}
+  ogImage={ogImage}
+  ogType="article"
+  schema={pageSchema({ site, model: m })}
+  showOnboarding={false}
+>
+  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: m.slug }} />
+  <div class="tce" data-page="through-christian-eyes">
+    <nav class="tce-bar" aria-label="Article navigation">
+      <a class="tce-bar__back" href={`${BASE}/discover`}><span aria-hidden="true">‹</span> {m.labels.back}</a>
+    </nav>
+
+    <header class="tce-hero" id="intro">
+      <p class="tce-eyebrow"><span class="tce-eyebrow__tag">{m.labels.eyebrow}</span><span>{m.hero.kicker}</span></p>
+      <h1 class="tce-h1" set:html={m.hero.h1Html} />
+      <div class="tce-rule" aria-hidden="true"></div>
+      <p class="tce-subtitle" set:html={m.hero.subtitleHtml} />
+      {m.hero.introHtml.map((html) => <p class="tce-intro" set:html={html} />)}
+      <div class="tce-pledge">
+        <p class="tce-pledge__h">{m.hero.sourcesLabel}</p>
+        <p class="tce-pledge__list" set:html={m.hero.sourcesHtml} />
+      </div>
+      <nav class="tce-toc" aria-label={m.labels.contents}>
+        <p class="tce-toc__h">{m.labels.contents}</p>
+        <ol>
+          {m.sections.map((s) => (
+            <li><a href={`#${s.id}`}><span class="tce-num" aria-hidden="true">{s.number}</span><span set:html={s.titleHtml} /></a></li>
+          ))}
+        </ol>
+      </nav>
+    </header>
+
+    {m.sections.map((s) => (
+      <section class="tce-sec" id={s.id} aria-labelledby={`${s.id}-h`}>
+        <div class="tce-sec__head">
+          <span class="tce-num" aria-hidden="true">{s.number}</span>
+          <h2 class="tce-h2" id={`${s.id}-h`} set:html={s.titleHtml} />
+        </div>
+        {s.claimHtml && <p class="tce-claim" set:html={s.claimHtml} />}
+        {s.leadHtml && <p class="tce-lead" set:html={s.leadHtml} />}
+        {s.pull && (
+          <blockquote class="tce-pull">
+            <p set:html={s.pull.quoteHtml} />
+            <cite set:html={s.pull.citeHtml} />
+          </blockquote>
+        )}
+        {s.blocks.map((b) => {
+          if (b.kind === 'subhead') return <h3 class="tce-subhead" set:html={b.html} />;
+          if (b.kind === 'lead') return <p class="tce-lead" set:html={b.html} />;
+          if (b.kind === 'entry') return <p class="tce-entry" set:html={b.html} />;
+          if (b.kind === 'list') return (
+            <div class="tce-entry">
+              <p set:html={b.html} />
+              <ul class="tce-witness">{b.items.map((li) => <li set:html={li} />)}</ul>
+            </div>
+          );
+          if (b.kind === 'answer') return (
+            <div class="tce-answer"><p><strong class="tce-answer__h">{m.labels.answer}</strong> <Fragment set:html={b.html} /></p></div>
+          );
+          if (b.kind === 'deeper') return <Deeper deeper={b} kicker={m.labels.goDeeper} />;
+          return null;
+        })}
+      </section>
+    ))}
+
+    <aside class="tce-aside" aria-labelledby="tce-aside-h">
+      <h2 class="tce-aside__h" id="tce-aside-h" set:html={m.aside.titleHtml} />
+      <p set:html={m.aside.html} />
+      <Deeper deeper={m.aside.deeper} kicker={m.labels.goDeeper} />
+    </aside>
+
+    <section class="tce-closing" aria-label={m.closing.label}>
+      <p class="tce-invite" set:html={m.closing.inviteHtml} />
+      <a class="tce-gospel" href={m.closing.readGospel.href}>{m.closing.readGospel.label} <span aria-hidden="true">→</span></a>
+    </section>
+  </div>
+</Layout>

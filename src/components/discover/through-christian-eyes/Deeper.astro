@@ -1,0 +1,16 @@
+---
+/** "Go deeper": the handout's QR code as a link card into the site (label, then the readable URL). */
+interface Props {
+  deeper: { href: string; path: string; labelHtml: string };
+  kicker: string;
+}
+const { deeper, kicker } = Astro.props;
+---
+<a class="tce-deeper" href={deeper.href}>
+  <span class="tce-deeper__body">
+    <span class="tce-deeper__k">{kicker}</span>
+    <span class="tce-deeper__label" set:html={deeper.labelHtml} />
+    <span class="tce-deeper__url">readyapologia.com{deeper.path}</span>
+  </span>
+  <span class="tce-deeper__arrow" aria-hidden="true">→</span>
+</a>

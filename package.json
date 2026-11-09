@@ -20,6 +20,7 @@
     "import:hadith": "node scripts/import_hadith.js",
     "test:quran-preservation": "node --test src/utils/quranPreservation/loader.test.mjs",
     "audit:quran-preservation": "node scripts/test_quran_preservation.mjs",
+    "audit:through-christian-eyes": "node --test src/utils/throughChristianEyes/model.test.mjs && node scripts/test_through_christian_eyes.mjs",
     "test:muhammad-slavery": "node --experimental-sqlite --test src/utils/muhammadSlavery/*.test.mjs",
     "audit:muhammad-slavery": "node --experimental-sqlite scripts/test_muhammad_slavery.mjs",
     "verify:muhammad-slavery": "node --experimental-sqlite scripts/verify_muhammad_slavery_quotes.mjs",
