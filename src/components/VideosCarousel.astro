@@ -37,18 +37,21 @@ const apgBase = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
                 </div>
 
                 <div class="video-meta">
-                  {video.apologist_name && !video.apologist_name.toLowerCase().includes("unknown") && (
-                    <div class="apologist-name">
-                      {(() => {
-                        const credits = creditLinks(video, apgBase);
-                        return credits.length
-                          ? credits.map((c) => (c.href
+                  {(() => {
+                    // Same credit rule as the verse grid and the apologist pages: featured people link to
+                    // their page, everyone else is plain text, labels that name nobody show nothing.
+                    const credits = creditLinks(video, apgBase);
+                    return credits.length > 0 && (
+                      <div class="apologist-name">
+                        {credits.map((c, i) => <>
+                          {i > 0 && <span class="sr-only">, </span>}
+                          {c.href
                             ? <a class="apologist-badge" style="text-decoration:none" href={c.href}>{c.name}</a>
-                            : <span class="apologist-badge">{c.name}</span>))
-                          : <span class="apologist-badge">{video.apologist_name}</span>;
-                      })()}
-                    </div>
-                  )}
+                            : <span class="apologist-badge">{c.name}</span>}
+                        </>)}
+                      </div>
+                    );
+                  })()}
 
                   {video.summary && (
                     <div class="video-summary">

@@ -10,7 +10,7 @@ import {
   resolveSpeakerSlugs, slugifyName,
 } from '../data/apologists.js';
 import {
-  loadApologists, buildIndexPayload, buildPagePayload, creditLinks, prunePayload, resolveVerse,
+  loadApologists, buildIndexPayload, buildPagePayload, clipCredits, creditLinks, creditedPeople, prunePayload, resolveVerse,
 } from './apologistsLoader.js';
 import {
   ALL_OPEN_MAX, computeIndexRows, computePageView, initialOpenSections, parseFilters, serializeFilters, verseHref,
@@ -43,12 +43,13 @@ test('registry: slugs are unique, URL-safe, and aliases map to one person', () =
 });
 
 test('alias map from the brief', () => {
-  for (const n of ['Michael Jones', 'Michael Jones (InspiringPhilosophy)', 'Michael Jones & Bobby Finn']) assert.deepEqual(slugsOf(n), ['inspiringphilosophy'], n);
+  for (const n of ['Michael Jones', 'Michael Jones (InspiringPhilosophy)']) assert.deepEqual(slugsOf(n), ['inspiringphilosophy'], n);
   for (const n of ['GodLogic', 'GodLogic (Avery Austin)', 'GodLogic (Avery)', 'Avery (GodLogic)']) assert.deepEqual(slugsOf(n), ['godlogic'], n);
   for (const n of ['Wesley Huff', 'Wes Huff']) assert.deepEqual(slugsOf(n), ['wes-huff'], n);
   for (const n of ['ONE FOR ISRAEL', 'One For Israel']) assert.deepEqual(slugsOf(n), ['one-for-israel'], n);
   for (const n of ['Erik Manning', 'Erik Manning (Testify)']) assert.deepEqual(slugsOf(n), ['erik-manning'], n);
   for (const n of ['Apostate Prophet', 'Apostate Prophet (Ridvan Aydemir)']) assert.deepEqual(slugsOf(n), ['apostate-prophet'], n);
+  assert.deepEqual(slugsOf('Michael Jones & Bobby Finn'), ['inspiringphilosophy', 'bobby-finn']);
   assert.deepEqual(slugsOf('Sam Shamoun & David Wood'), ['sam-shamoun', 'david-wood']);
   assert.deepEqual(slugsOf('Al Fadi and David Wood'), ['al-fadi', 'david-wood']);
   assert.deepEqual(slugsOf('Jay Smith / Al Fadi (CIRA International)'), ['jay-smith', 'al-fadi']);
@@ -86,6 +87,10 @@ test('registry sync: channel buttons come from the pipeline registry; its aliase
     for (const alias of r.aliases) assert.deepEqual(slugsOf(alias), [a.slug], `${a.slug}: registry alias "${alias}"`);
   }
   for (const a of APOLOGISTS.filter((x) => !registry.has(x.slug))) assert.deepEqual(a.channels, [], `${a.slug}: channel without a registry entry`);
+  // The site copy must not drift: every curated registry person is named here. People the pipeline
+  // auto-added (auto_added: true) may lag; the build names them from apologist_name meanwhile.
+  const missing = [...registry.values()].filter((r) => !r.auto_added && !APOLOGIST_BY_SLUG.has(r.slug)).map((r) => r.slug);
+  assert.deepEqual(missing, [], 'pipeline registry people missing from APOLOGISTS (src/data/apologists.js)');
 });
 
 test('pipeline speaker_slugs column: preferred when set, excluded slugs dropped, bad values ignored', () => {
@@ -94,7 +99,15 @@ test('pipeline speaker_slugs column: preferred when set, excluded slugs dropped,
   assert.equal(resolveSpeakerSlugs(''), null);
   assert.equal(resolveSpeakerSlugs('[]'), null);
   assert.equal(resolveSpeakerSlugs('not json'), null);
-  assert.equal(resolveSpeakerSlugs('["bobby-finn"]')[0].registered, false);
+  assert.equal(resolveSpeakerSlugs('["bobby-finn"]')[0].name, 'Bobby Finn');
+  // A person the pipeline auto-added after the last sync: named from apologist_name, never shown as a slug.
+  const autoAdded = { speaker_slugs: '["sam-shamoun","amy-newname"]', apologist_name: 'Sam Shamoun & Dr. Amy Newname' };
+  assert.deepEqual(creditedPeople(autoAdded).map((p) => [p.slug, p.name, p.registered]), [['sam-shamoun', 'Sam Shamoun', true], ['amy-newname', 'Dr. Amy Newname', false]]);
+  assert.deepEqual(creditLinks(autoAdded).map((c) => [c.name, c.href]), [['Sam Shamoun', '/apologists/sam-shamoun'], ['Dr. Amy Newname', null]]);
+  assert.equal(resolveSpeakerSlugs('["zed-van-lastname"]', 'Unknown')[0].name, 'Zed Van Lastname', 'label does not name them: title-cased slug');
+  // Today's data.db has no speaker_slugs column; the pipeline default '[]' also falls back to apologist_name.
+  assert.deepEqual(creditedPeople({ speaker_slugs: '[]', apologist_name: 'Wes Huff' }).map((p) => p.slug), ['wes-huff']);
+  assert.deepEqual(creditedPeople({ speaker_slugs: '[]', apologist_name: 'Unknown' }), []);
 });
 
 test('every apologist_name in data.db is either registered or explicitly excluded (no auto slugs)', () => {
@@ -106,7 +119,12 @@ test('every apologist_name in data.db is either registered or explicitly exclude
 
 test('featured list: known people, unique, folded people belong to one page', () => {
   const pages = FEATURED_APOLOGISTS.map((f) => f.slug);
-  assert.equal(pages.length, 20);
+  // Owner decision (Nov 2026). Adding someone is a one-line edit to FEATURED_APOLOGISTS; removing one
+  // needs a 301, so dropping any of these fails here.
+  const decided = ['sam-shamoun', 'godlogic', 'inspiringphilosophy', 'david-wood', 'frank-turek', 'erik-manning', 'vocab-malone',
+    'stuart-knechtle', 'mike-winger', 'wes-huff', 'apostate-prophet', 'al-fadi', 'cliffe-knechtle', 'one-for-israel', 'nabeel-qureshi',
+    'tim-barnett', 'jeannie-constantinou', 'jonathan-pageau', 'coptic-orthodox-answers', 'stephen-de-young'];
+  assert.deepEqual(decided.filter((s) => !pages.includes(s)), [], 'un-featured without a 301?');
   assert.equal(new Set(pages).size, pages.length);
   const folded = FEATURED_APOLOGISTS.flatMap((f) => f.includeSlugs || []);
   for (const slug of [...pages, ...folded]) assert.ok(APOLOGIST_BY_SLUG.has(slug), `${slug} not in APOLOGISTS`);
@@ -161,9 +179,14 @@ test('loader: featured pages only, multi-speaker credit, folding, first answers'
   assert.deepEqual(creditLinks({ apologist_name: 'Unknown' }), []);
   assert.deepEqual(creditLinks({ apologist_name: 'Sam Shamoun' }), [{ slug: 'sam-shamoun', name: 'Sam Shamoun', href: '/apologists/sam-shamoun' }]);
   assert.deepEqual(creditLinks({ apologist_name: 'Bart Ehrman' }), [{ slug: 'bart-ehrman', name: 'Bart Ehrman', href: null }]);
-  assert.deepEqual(creditLinks({ apologist_name: 'Seth Postell (ONE FOR ISRAEL)' }), [{ slug: 'seth-postell', name: 'Dr. Seth Postell · ONE FOR ISRAEL', href: '/apologists/one-for-israel' }]);
+  assert.deepEqual(creditLinks({ apologist_name: 'Seth Postell (ONE FOR ISRAEL)' }), [{ slug: 'seth-postell', name: 'Dr. Seth Postell (ONE FOR ISRAEL)', href: '/apologists/one-for-israel' }]);
   assert.deepEqual(creditLinks({ apologist_name: 'Jay Smith / Al Fadi (CIRA International)' }).map((c) => c.href), [null, '/apologists/al-fadi']);
   assert.deepEqual(creditLinks({ speaker_slugs: '["seth-postell","one-for-israel"]' }).map((c) => c.href), ['/apologists/one-for-israel'], 'one link per page');
+  assert.deepEqual(creditLinks({ apologist_name: 'David Wood (feat. Bart Ehrman)' }).map((c) => [c.name, c.href]), [['David Wood', '/apologists/david-wood'], ['Bart Ehrman', null]]);
+
+  // Page cards use the same credits: on a third page, Seth + ONE FOR ISRAEL is one entry, named like the verse tabs.
+  const sethPeople = creditedPeople({ speaker_slugs: '["sam-shamoun","seth-postell","one-for-israel","bart-ehrman"]' });
+  assert.deepEqual(clipCredits(sethPeople).map((c) => [c.page, c.name]), [['sam-shamoun', 'Sam Shamoun'], ['one-for-israel', 'Dr. Seth Postell (ONE FOR ISRAEL)'], [null, 'Bart Ehrman']]);
 
   // Page cards: co-speakers without a page carry no slug (rendered as plain text).
   for (const p of data.people) {

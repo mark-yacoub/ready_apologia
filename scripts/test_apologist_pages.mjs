@@ -19,7 +19,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { APOLOGIST_BY_SLUG, FEATURED_APOLOGISTS, channelUrl } from '../src/data/apologists.js';
+import { APOLOGIST_BY_SLUG, FEATURED_APOLOGISTS, FEATURED_BY_SLUG, channelUrl } from '../src/data/apologists.js';
 import { verseHref } from '../src/components/apologists/apologistView.js';
 
 const args = process.argv.slice(2);
@@ -62,6 +62,7 @@ if (JSON.stringify(featured) !== JSON.stringify([...slugs].sort())) {
   fail(`built pages != FEATURED_APOLOGISTS: extra [${slugs.filter((s) => !featured.includes(s))}], missing [${featured.filter((s) => !slugs.includes(s))}]`);
 }
 const featuredSet = new Set(featured);
+const FEATURED_NAMES = new Map([...FEATURED_BY_SLUG].map(([slug, f]) => [slug, f.name]));
 const pageClips = new Map(); // slug → Set(videoId) from the page payload
 
 let firstChecked = 0;
@@ -134,7 +135,7 @@ function scanPage(full) {
     if (!credit) continue;
     for (const [, slug, name] of (credit[1] || credit[2]).matchAll(/<a[^>]*href="\/apologists\/([^"/]+)\/?"[^>]*>([^<]*)<\/a>/g)) {
       creditLinksChecked += 1;
-      if (/ · /.test(name)) foldedChecked += 1;
+      if (decode(name) !== FEATURED_NAMES.get(slug)) foldedChecked += 1; // "<person> (<page name>)"
       if (featuredSet.has(slug) && !pageClips.get(slug)?.has(vid)) fail(`${rel}: credit "${decode(name)}" → /apologists/${slug}, but that page does not list clip ${vid}`);
     }
   }
@@ -142,7 +143,7 @@ function scanPage(full) {
 walk(DIST);
 if (!creditLinksChecked) fail('no credit links found on any video card');
 if (!plainCredits) fail('no plain-text credits found: people without a page should still be named');
-if (!foldedChecked) fail('no folded credit ("<name> · <page>") found, e.g. Seth Postell · ONE FOR ISRAEL');
+if (!foldedChecked) fail('no folded credit ("<name> (<page name>)") found, e.g. Dr. Seth Postell (ONE FOR ISRAEL)');
 
 if (failures.length) {
   for (const f of failures.slice(0, 50)) console.error(`✗ ${f}`);

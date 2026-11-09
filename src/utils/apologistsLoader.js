@@ -122,10 +122,10 @@ const byTabOrder = (a, b) => (b.composite_score ?? -Infinity) - (a.composite_sco
 
 /**
  * People a `shorts_metadata` row credits: the pipeline's `speaker_slugs` when set, else
- * `apologist_name` through the registry. The single rule for pages, counts and badges.
+ * `apologist_name` through the registry. The single rule for pages, counts and credits.
  */
 export function creditedPeople(row) {
-  return resolveSpeakerSlugs(row?.speaker_slugs) || resolveApologistLabel(row?.apologist_name);
+  return resolveSpeakerSlugs(row?.speaker_slugs, row?.apologist_name) || resolveApologistLabel(row?.apologist_name);
 }
 
 /** Featured page slugs a row's clip appears on (deduplicated, in credit order). */
@@ -134,26 +134,33 @@ export function pageSlugsOf(people) {
 }
 
 /**
- * Credits for a video card (build time): one per credited person, linked to the featured page that
- * shows their clips, plain text (`href: null`) for everyone else. A person folded into another page
- * reads "<name> · <page name>". `[]` when the row credits nobody (Unknown, uploader names, …).
- * @returns {{ slug: string, name: string, href: string | null }[]}  slug = the person's registry slug
+ * The credit entries for a clip, shared by the verse /videos cards and the apologist page cards:
+ * one per credited person, `page` = the featured page that shows their clips (null: no page, shown as
+ * plain text). A person folded into another page reads "<name> (<page name>)", and one page is
+ * credited once (e.g. "Seth Postell" and "ONE FOR ISRAEL" on one clip → one ONE FOR ISRAEL credit).
+ * @returns {{ slug: string, name: string, page: string | null }[]}  slug = the person's registry slug
  */
-export function creditLinks(row, base = '') {
+export function clipCredits(people) {
   const seenPages = new Set();
   const out = [];
-  for (const p of creditedPeople(row)) {
+  for (const p of people) {
     const page = pageSlugFor(p.slug);
-    if (page && seenPages.has(page)) continue; // e.g. "Seth Postell" and "ONE FOR ISRAEL" on one clip
+    if (page && seenPages.has(page)) continue;
     if (page) seenPages.add(page);
-    const pageName = page && FEATURED_BY_SLUG.get(page).name;
-    out.push({
-      slug: p.slug,
-      name: page && page !== p.slug ? `${p.name} · ${pageName}` : p.name,
-      href: page ? `${base}/apologists/${page}` : null,
-    });
+    const name = page && page !== p.slug ? `${p.name} (${FEATURED_BY_SLUG.get(page).name})` : p.name;
+    out.push({ slug: p.slug, name, page });
   }
   return out;
+}
+
+/**
+ * Credits for a video card (build time; needs no loaded data): linked to the featured page that shows
+ * the person's clips, plain text (`href: null`) for everyone else. `[]` when the row credits nobody
+ * (Unknown, uploader names, …).
+ * @returns {{ slug: string, name: string, href: string | null }[]}
+ */
+export function creditLinks(row, base = '') {
+  return clipCredits(creditedPeople(row)).map(({ slug, name, page }) => ({ slug, name, href: page ? `${base}/apologists/${page}` : null }));
 }
 
 let cachePromise = null;
@@ -199,8 +206,7 @@ async function buildApologists(rank) {
   }
 
   const people = new Map(FEATURED_APOLOGISTS.map((f) => {
-    const reg = APOLOGIST_BY_SLUG.get(f.slug);
-    if (!reg) throw new Error(`[apologists] featured slug "${f.slug}" is not in APOLOGISTS (src/data/apologists.js)`);
+    const reg = APOLOGIST_BY_SLUG.get(f.slug); // validated when src/data/apologists.js loads
     return [f.slug, {
       slug: f.slug,
       name: reg.name,
@@ -232,14 +238,21 @@ async function buildApologists(rank) {
       verses: [...new Map(verses.map((v) => [v.id, v])).values()],
       slugs: pages,
       // Everyone credited, for "with …" on a page card: [page slug or null, name].
-      credits: credited.map((p) => [pageSlugFor(p.slug), p.name]),
+      credits: clipCredits(credited).map((c) => [c.page, c.name]),
       rigor: Number(row.rigor_score) || 0,
     };
     clipById.set(clip.videoId, clip);
     for (const slug of pages) people.get(slug).clips.push(clip);
   }
+  // Deliberately fatal: verse /videos cards link to every featured page without consulting this data,
+  // and a live page that silently disappears is a 404 for readers and search engines. data.db ships in
+  // the repo, so a failed build keeps the previous deploy live until someone decides.
   const empty = [...people.values()].filter((p) => !p.clips.length).map((p) => p.slug);
-  if (empty.length) throw new Error(`[apologists] featured apologist(s) with no clips (no page to build): ${empty.join(', ')}`);
+  if (empty.length) {
+    throw new Error(`[apologists] featured apologist(s) with no clips in data.db: ${empty.join(', ')}. `
+      + 'Their clips were re-attributed or dropped: fix the attribution (pipeline registry / speaker_slugs), '
+      + 'or remove them from FEATURED_APOLOGISTS (src/data/apologists.js) AND add a 301 for /apologists/<slug> (CLOUDFLARE.md).');
+  }
 
   // First answers: rank every verse's clips exactly like the verse /videos tab.
   const rowById = new Map(meta.map((r) => [r.video_id, r]));

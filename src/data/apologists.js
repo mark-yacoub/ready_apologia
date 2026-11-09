@@ -43,6 +43,7 @@ export const CHANNELS = {
   testifyapologetics: { name: 'Testify', handle: 'TestifyApologetics' },
   copticorthodoxanswers: { name: 'Coptic Orthodox Answers', handle: 'CopticOrthodoxAnswers' },
   ancientfaithministries: { name: 'Ancient Faith Ministries', handle: 'AncientFaithMinistries' },
+  christianprince1: { name: 'Christian Prince', handle: 'ChristianPrince1' },
   jonathanpageauclips: { name: 'Jonathan Pageau Clips', handle: 'JonathanPageauClips' },
   weshuff: { name: 'Wes Huff', handle: 'WesHuff' },
   oneforisrael: { name: 'ONE FOR ISRAEL', handle: 'ONEFORISRAEL' },
@@ -129,6 +130,30 @@ export const APOLOGISTS = [
   P('tom-holland', 'Tom Holland'),
   P('tobias', 'Tobias', ['Tobias', 'Tobias (Towards Jesus)']),
   P('thaddeus', 'Thaddeus', ['Thaddeus', 'Thaddeus (Towards Jesus)']),
+  // In the pipeline registry, not (yet) credited in data.db; kept in sync so `speaker_slugs` resolves to names.
+  P('bobby-finn', 'Bobby Finn'),
+  P('christian-prince', 'Christian Prince', ['Christian Prince', 'CP'], ['christianprince1']),
+  P('ancient-faith-ministries', 'Ancient Faith Ministries', ['Ancient Faith Ministries', 'Ancient Faith'], ['ancientfaithministries'], ORG),
+  P('abdu-murray', 'Abdu Murray'),
+  P('stephen-meyer', 'Stephen C. Meyer', ['Stephen C. Meyer', 'Stephen Meyer', 'Dr. Stephen Meyer']),
+  P('hugh-ross', 'Hugh Ross', ['Hugh Ross', 'Dr. Hugh Ross']),
+  P('sean-mcdowell', 'Sean McDowell', ['Sean McDowell', 'Dr. Sean McDowell']),
+  P('gavin-ortlund', 'Gavin Ortlund', ['Gavin Ortlund', 'Dr. Gavin Ortlund', 'Truth Unites']),
+  P('trent-horn', 'Trent Horn', ['Trent Horn', 'Counsel of Trent']),
+  P('jimmy-akin', 'Jimmy Akin'),
+  P('ruslan-kd', 'Ruslan KD', ['Ruslan KD', 'Ruslan']),
+  P('golan-broshi', 'Dr. Golan Broshi', ['Dr. Golan Broshi', 'Golan Broshi']),
+  P('mottel-baleston', 'Mottel Baleston'),
+  P('yisca-harani', 'Yisca Harani'),
+  P('evan-armatas', 'Fr. Evan Armatas', ['Fr. Evan Armatas', 'Evan Armatas', 'Father Evan Armatas']),
+  P('josiah-trenham', 'Fr. Josiah Trenham', ['Fr. Josiah Trenham', 'Josiah Trenham', 'Father Josiah Trenham']),
+  P('barnabas-powell', 'Fr. Barnabas Powell', ['Fr. Barnabas Powell', 'Barnabas Powell', 'Father Barnabas Powell']),
+  P('moses-samaan', 'Fr. Moses Samaan', ['Fr. Moses Samaan', 'Moses Samaan', 'Father Moses Samaan']),
+  P('lazarus-el-anthony', 'Fr. Lazarus El Anthony', ['Fr. Lazarus El Anthony', 'Lazarus El Anthony', 'Father Lazarus El Anthony']),
+  P('zakaria-botros', 'Fr. Zakaria Botros', ['Fr. Zakaria Botros', 'Father Zakaria Botros', 'Zakaria Botros']),
+  P('brother-rachid', 'Brother Rachid', ['Brother Rachid', 'Rachid']),
+  P('rob-christian', 'Rob Christian'),
+  P('david-pallmann', 'David Pallmann', ['David Pallmann', 'Faith Because of Reason']),
 ];
 
 /**
@@ -169,7 +194,7 @@ export const FEATURED_APOLOGISTS = [
 /** Labels that cannot be split mechanically: exact label → slugs. */
 export const COMBINED_LABELS = {
   'Sam Shamoun & David Wood': ['sam-shamoun', 'david-wood'],
-  'Michael Jones & Bobby Finn': ['inspiringphilosophy'],
+  'Michael Jones & Bobby Finn': ['inspiringphilosophy', 'bobby-finn'],
   'Stuart & Cliffe Knechtle': ['stuart-knechtle', 'cliffe-knechtle'],
   'David Wood (feat. Bart Ehrman)': ['david-wood', 'bart-ehrman'],
   'Christian Apologists (Compilation featuring David Wood and Sam Shamoun)': ['david-wood', 'sam-shamoun'],
@@ -201,10 +226,19 @@ const ALIAS_INDEX = new Map();
 for (const a of APOLOGISTS) for (const alias of [a.name, ...a.aliases]) ALIAS_INDEX.set(norm(alias), a.slug);
 
 /** Featured page slug → `{ slug, name, includeSlugs }`. */
-export const FEATURED_BY_SLUG = new Map(FEATURED_APOLOGISTS.map((f) => [f.slug, { includeSlugs: [], ...f, name: APOLOGIST_BY_SLUG.get(f.slug)?.name }]));
+export const FEATURED_BY_SLUG = new Map();
 /** Any registry slug → the featured page that shows its clips (itself, or the page that includes it). */
 const PAGE_OF = new Map();
-for (const f of FEATURED_BY_SLUG.values()) for (const s of [f.slug, ...f.includeSlugs]) PAGE_OF.set(s, f.slug);
+// A typo here would render "undefined" credits on every verse page, so fail at import, not at render.
+for (const f of FEATURED_APOLOGISTS) {
+  const includeSlugs = f.includeSlugs || [];
+  for (const s of [f.slug, ...includeSlugs]) {
+    if (!APOLOGIST_BY_SLUG.has(s)) throw new Error(`[apologists] FEATURED_APOLOGISTS: "${s}" is not in APOLOGISTS (src/data/apologists.js)`);
+    if (PAGE_OF.has(s)) throw new Error(`[apologists] FEATURED_APOLOGISTS: "${s}" is listed twice (featured or included)`);
+    PAGE_OF.set(s, f.slug);
+  }
+  FEATURED_BY_SLUG.set(f.slug, { slug: f.slug, includeSlugs, name: APOLOGIST_BY_SLUG.get(f.slug).name });
+}
 
 /** The featured page slug that shows this person's clips, or null (no page: credited as plain text). */
 export function pageSlugFor(slug) {
@@ -270,19 +304,36 @@ export function resolveApologistLabel(raw) {
   return out;
 }
 
+/** "john-doe" → "John Doe": last-resort display name for a slug that is in neither registry copy nor label. */
+function nameFromSlug(slug) {
+  return slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+}
+
 /**
  * Resolve the pipeline's `speaker_slugs` column (JSON array text) when present.
+ * A slug missing from APOLOGISTS (e.g. a person the pipeline auto-added to its registry since this
+ * file was last synced) is named from `label` (the row's `apologist_name`, which the pipeline writes
+ * as the registry display names joined with " & "), else from the slug itself; never the raw slug.
+ * @param {unknown} raw  column value
+ * @param {string} [label]  the row's `apologist_name`
  * @returns {{ slug: string, name: string, registered: boolean }[] | null} null = column empty/unusable,
  *   so the caller falls back to `resolveApologistLabel(apologist_name)`.
  */
-export function resolveSpeakerSlugs(raw) {
+export function resolveSpeakerSlugs(raw, label = '') {
   if (raw === null || raw === undefined || raw === '') return null;
   let list;
   try { list = Array.isArray(raw) ? raw : JSON.parse(raw); } catch { return null; }
   if (!Array.isArray(list)) return null;
   const slugs = [...new Set(list.map((x) => String(x || '').trim().toLowerCase()).filter(Boolean))];
   if (!slugs.length) return null;
+  let labelNames = null; // slug → name from the label, computed only when needed
+  const nameOf = (slug) => {
+    const reg = APOLOGIST_BY_SLUG.get(slug);
+    if (reg) return reg.name;
+    labelNames ??= new Map(resolveApologistLabel(label).map((p) => [p.slug, p.name]));
+    return labelNames.get(slug) || nameFromSlug(slug);
+  };
   return slugs
     .filter((slug) => !EXCLUDED_SLUGS.has(slug) && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug))
-    .map((slug) => ({ slug, name: APOLOGIST_BY_SLUG.get(slug)?.name || slug, registered: APOLOGIST_BY_SLUG.has(slug) }));
+    .map((slug) => ({ slug, name: nameOf(slug), registered: APOLOGIST_BY_SLUG.has(slug) }));
 }
