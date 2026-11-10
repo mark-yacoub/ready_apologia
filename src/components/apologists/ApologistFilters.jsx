@@ -121,7 +121,7 @@ export default function ApologistFilters({ state, onChange, books, bookCounts, s
                   type="button"
                   className="apg-group-btn"
                   aria-pressed={allOn}
-                  aria-label={allOn ? `Clear ${grp.label}` : `Only ${grp.label}: select all ${grp.list.length} books`}
+                  aria-label={allOn ? `Clear all ${grp.label} books` : `Select all ${grp.list.length} ${grp.label} books`}
                   onClick={() => toggleGroup(grp)}
                 >
                   {allOn ? 'Clear' : `All ${grp.label}`}

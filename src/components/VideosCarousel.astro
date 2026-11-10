@@ -1,5 +1,6 @@
 ---
 import { creditLinks } from '../utils/apologistsLoader.js';
+import CreditChevron from './apologists/CreditChevron.astro';
 const { videos } = Astro.props;
 const apgBase = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 // Badges link only for featured apologists (they have a page); everyone else is plain text.
@@ -46,7 +47,7 @@ const apgBase = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
                         {credits.map((c, i) => <>
                           {i > 0 && <span class="sr-only">, </span>}
                           {c.href
-                            ? <a class="apologist-badge" style="text-decoration:none;display:inline-flex;align-items:center;gap:2px" href={c.href} title={`More from ${c.name}`}>{c.name}<svg class="credit-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg></a>
+                            ? <a class="apologist-badge apologist-badge--link" href={c.href} title={`More from ${c.name}`}>{c.name}<CreditChevron /></a>
                             : <span class="apologist-badge">{c.name}</span>}
                         </>)}
                       </div>
@@ -266,6 +267,11 @@ const apgBase = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
     display: flex;
     flex-direction: column;
     gap: 10px; /* Reduced slightly */
+  }
+
+  .apologist-badge--link {
+    gap: 2px;
+    text-decoration: none;
   }
 
   .apologist-badge {

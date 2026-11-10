@@ -47,6 +47,7 @@ export const LASTMOD_RULES = [
       'src/styles/home.css',
       'src/utils/homeStats.js',
       'src/utils/throughChristianEyes',
+      'src/data/apologists.js', // "Videos by Apologist" counts
       'data.db',
       'src/data/books_meta.json',
       'src/data/discoverCatalog.json',
