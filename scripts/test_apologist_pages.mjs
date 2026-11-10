@@ -7,7 +7,7 @@
  * - /apologists and every /apologists/<slug>: exactly one <h1>, no <iframe> (thumbnails only), every
  *   <img> lazy, HTML under the size budget.
  * - Channel buttons: exactly the registry channels of that person (src/data/apologists.js), never more.
- * - "First answer on N verses": every listed verse opens a /videos tab whose FIRST video is one of
+ * - "Best answers by <name> on N verses": every listed verse opens a /videos tab whose FIRST video is one of
  *   this person's clips (the claim checked against what readers see, not against the loader).
  * - Every verse link in the page payload points at a built /videos page (skipped with --allow-sliced,
  *   for BUILD_BOOKS/BUILD_SURAHS builds).

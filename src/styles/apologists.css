@@ -82,7 +82,15 @@
 .apg-books { border: 1px solid var(--apg-line); border-radius: 12px; background: var(--apg-paper); padding: 8px 12px 12px; max-height: 60vh; overflow-y: auto; }
 .apg-books__bar { display: flex; justify-content: space-between; align-items: center; position: sticky; top: -8px; background: var(--apg-paper); padding: 4px 0; z-index: 1; }
 .apg-books__group { border: 0; margin: 8px 0 0; padding: 0; min-width: 0; }
-.apg-books__group legend { padding: 0; margin-bottom: 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--apg-muted); }
+/* Group header: a clear title (not a muted caps label) + a whole-group toggle. */
+.apg-books__group + .apg-books__group { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--apg-line); }
+.apg-books__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.apg-books__title { font-size: 16px; font-weight: 800; color: var(--apg-ink); }
+.apg-group-btn {
+  min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--apg-teal); background: transparent;
+  font: inherit; font-size: 13px; font-weight: 700; color: var(--apg-teal); cursor: pointer;
+}
+.apg-group-btn[aria-pressed='true'] { border-color: var(--apg-line); color: var(--apg-muted); }
 .apg-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .apg-chip {
   min-height: 44px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--apg-line); background: var(--apg-paper);

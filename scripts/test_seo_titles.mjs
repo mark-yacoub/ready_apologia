@@ -555,7 +555,8 @@ for (const file of htmlFiles) {
   const openingMatch = html.match(RE_OPENING_LINE);
   const openingText = openingMatch ? stripTags(openingMatch[3]) : '';
 
-  if (templatedScripture && !isRedirectStub) {
+  // /videos tabs intentionally show no opening line (owner's call): the clip list is the content.
+  if (templatedScripture && !isRedirectStub && !route.endsWith('/videos')) {
     check(
       'opening',
       Boolean(openingMatch && openingText.length > 0),

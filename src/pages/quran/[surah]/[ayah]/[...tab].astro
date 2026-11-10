@@ -241,7 +241,8 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema, openingLine } = genera
       </div>
     </header>
 
-    {openingLine && (
+    {/* No visible opening line on /videos: the clip list speaks for itself (meta description still set). */}
+    {openingLine && tab !== 'videos' && (
       <p class="verse-opening-line">{openingLine}</p>
     )}
 

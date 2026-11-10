@@ -1,17 +1,17 @@
 ---
 /**
- * "First answer on N verses": verses whose /videos tab ranks this person's clip first
+ * "Best answers by <name> on N verses": verses whose /videos tab ranks this person's clip first
  * (same `sortVideos` ranking, computed in apologistsLoader.js). Data only.
  */
-interface Props { verses: { id: string, label: string, href: string }[] }
-const { verses } = Astro.props;
+interface Props { name: string, verses: { id: string, label: string, href: string }[] }
+const { name, verses } = Astro.props;
 const SHOWN = 10;
 const head = verses.slice(0, SHOWN);
 const rest = verses.slice(SHOWN);
 ---
 {verses.length > 0 && (
   <section class="apg-first" aria-labelledby="apg-first-h">
-    <h2 id="apg-first-h" class="apg-first__h">{`First answer on ${verses.length} ${verses.length === 1 ? 'verse' : 'verses'}`}</h2>
+    <h2 id="apg-first-h" class="apg-first__h">{`Best answers by ${name} on ${verses.length} ${verses.length === 1 ? 'verse' : 'verses'}`}</h2>
     <ul class="apg-first__list">
       {head.map((v) => <li><a href={v.href}>{v.label}</a></li>)}
     </ul>

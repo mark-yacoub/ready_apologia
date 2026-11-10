@@ -346,7 +346,7 @@ export function buildIndexPayload(data) {
  * Apologist page island payload (compact; rendered by src/components/apologists/apologistView.js).
  * books[i]  = { k, l, g }
  * verses[i] = [bookIdx, chapter, verse] in canonical order (LXX numbering, = the link target)
- * clips[j]  = { v: videoId, s: summary, vs: [verseIdx in passage order], via?, o?: originalUrl,
+ * clips[j]  = { v: videoId, s: summary, vs: [verseIdx in passage order], o?: originalUrl,
  *               w?: [[page slug | null, name]] (other speakers; null = no page, shown as plain text) }
  *             ordered by rigor score (highest first) inside each verse group.
  */
@@ -356,13 +356,10 @@ export function buildPagePayload(person) {
   const verseList = [...new Map(person.clips.flatMap((c) => c.verses).map((v) => [v.id, v])).values()]
     .sort((a, b) => cmpSort(a.sort, b.sort));
   const vIdx = new Map(verseList.map((v, i) => [v.id, i]));
-  const own = new Set(person.channelKeys);
   const clips = [...person.clips]
     .sort((a, b) => b.rigor - a.rigor || a.videoId.localeCompare(b.videoId))
     .map((c) => {
       const out = { v: c.videoId, s: c.summary, vs: c.verses.map((v) => vIdx.get(v.id)) };
-      const via = own.has(c.channel) ? null : CHANNELS[c.channel]?.name;
-      if (via) out.via = via;
       if (c.originalUrl) out.o = c.originalUrl;
       // Other speakers; people folded into this page are not "with" it.
       const others = c.credits.filter(([page]) => page !== person.slug);

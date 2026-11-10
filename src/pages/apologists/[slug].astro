@@ -70,7 +70,7 @@ const statParts = person.bible && person.quran
       )}
     </header>
 
-    <FirstAnswers verses={person.firstAnswers} />
+    <FirstAnswers name={person.name} verses={person.firstAnswers} />
 
     <ApologistClips client:load ssr={ssr} ssrSections={ssrSections} dataId={dataId} scriptureCounts={scriptureCounts} />
     <script is:inline type="application/json" id={dataId} set:html={safeJsonStringify(payload)} />

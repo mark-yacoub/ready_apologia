@@ -29,9 +29,13 @@ export default function ApologistFilters({ state, onChange, books, bookCounts, s
   const groups = bookOptions(books, bookCounts, state);
   const selected = new Set(state.b);
   const keyToLabel = new Map(books.map((bk) => [bk.k, bk.l]));
+  // A selection that is exactly one or more whole groups reads as the group names ("Old Testament").
+  const wholeGroups = groups.filter((grp) => grp.list.every((bk) => selected.has(bk.k)));
+  const wholeCount = wholeGroups.reduce((a, grp) => a + grp.list.length, 0);
   const bookSummary = !state.b.length
     ? 'All books'
-    : state.b.length <= 2 ? state.b.map((k) => keyToLabel.get(k)).join(', ') : `${state.b.length} books`;
+    : wholeGroups.length && wholeCount === state.b.length ? wholeGroups.map((grp) => grp.label).join(' + ')
+      : state.b.length <= 2 ? state.b.map((k) => keyToLabel.get(k)).join(', ') : `${state.b.length} books`;
 
   const setScripture = (s) => {
     const keep = state.b.filter((k) => {
@@ -40,10 +44,14 @@ export default function ApologistFilters({ state, onChange, books, bookCounts, s
     });
     onChange({ ...state, s, b: keep });
   };
-  const toggleBook = (k) => {
-    const next = selected.has(k) ? state.b.filter((x) => x !== k) : [...state.b, k];
-    const order = new Map(books.map((bk, i) => [bk.k, i]));
-    onChange({ ...state, b: next.sort((a, b) => order.get(a) - order.get(b)) });
+  const order = new Map(books.map((bk, i) => [bk.k, i]));
+  const setBooks = (next) => onChange({ ...state, b: [...new Set(next)].sort((a, b) => order.get(a) - order.get(b)) });
+  const toggleBook = (k) => setBooks(selected.has(k) ? state.b.filter((x) => x !== k) : [...state.b, k]);
+  /** Whole-group toggle: select every book in the group, or clear them when all are already on. */
+  const toggleGroup = (grp) => {
+    const keys = grp.list.map((bk) => bk.k);
+    const allOn = keys.every((k) => selected.has(k));
+    setBooks(allOn ? state.b.filter((k) => !keys.includes(k)) : [...state.b, ...keys]);
   };
   const panelId = `${idPrefix}-books`;
 
@@ -102,9 +110,23 @@ export default function ApologistFilters({ state, onChange, books, bookCounts, s
             <button type="button" className="apg-link-btn" onClick={() => onChange({ ...state, b: [] })} disabled={!state.b.length}>All books</button>
             <button type="button" className="apg-done-btn" onClick={closePanel}>Done</button>
           </div>
-          {groups.map((grp) => (
+          {groups.map((grp) => {
+            const allOn = grp.list.every((bk) => selected.has(bk.k));
+            return (
             <fieldset key={grp.g} className="apg-books__group">
-              <legend>{grp.label}</legend>
+              <legend className="sr-only">{grp.label}</legend>
+              <div className="apg-books__head">
+                <span className="apg-books__title" aria-hidden="true">{grp.label}</span>
+                <button
+                  type="button"
+                  className="apg-group-btn"
+                  aria-pressed={allOn}
+                  aria-label={allOn ? `Clear ${grp.label}` : `Only ${grp.label}: select all ${grp.list.length} books`}
+                  onClick={() => toggleGroup(grp)}
+                >
+                  {allOn ? 'Clear' : `All ${grp.label}`}
+                </button>
+              </div>
               <div className="apg-chips">
                 {grp.list.map((bk) => (
                   <button
@@ -119,7 +141,8 @@ export default function ApologistFilters({ state, onChange, books, bookCounts, s
                 ))}
               </div>
             </fieldset>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

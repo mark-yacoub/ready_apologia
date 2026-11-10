@@ -178,7 +178,7 @@ function ClipCard({ clip, onPlay }) {
         </span>
         <span className="apg-card__summary">{clip.s}</span>
       </a>
-      {(clip.w || clip.o || clip.via) && (
+      {(clip.w || clip.o) && (
         <p className="apg-card__meta">
           {clip.w && (
             <span>with {clip.w.map(([slug, name], i) => (
@@ -186,7 +186,6 @@ function ClipCard({ clip, onPlay }) {
             ))}</span>
           )}
           {clip.o && <a href={clip.o} target="_blank" rel="noopener">Full video ↗</a>}
-          {clip.via && <span className="apg-card__via">via {clip.via}</span>}
         </p>
       )}
     </li>
