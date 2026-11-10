@@ -122,7 +122,7 @@ test('featured list: known people, unique, folded people belong to one page', ()
   // Owner decision (Nov 2026). Adding someone is a one-line edit to FEATURED_APOLOGISTS; removing one
   // needs a 301, so dropping any of these fails here.
   const decided = ['sam-shamoun', 'godlogic', 'inspiringphilosophy', 'david-wood', 'frank-turek', 'erik-manning',
-    'stuart-knechtle', 'mike-winger', 'wes-huff', 'apostate-prophet', 'al-fadi', 'cliffe-knechtle', 'one-for-israel', 'nabeel-qureshi',
+    'mike-winger', 'wes-huff', 'apostate-prophet', 'al-fadi', 'cliffe-knechtle', 'one-for-israel', 'nabeel-qureshi',
     'tim-barnett', 'jeannie-constantinou', 'jonathan-pageau', 'coptic-orthodox-answers', 'stephen-de-young'];
   assert.deepEqual(decided.filter((s) => !pages.includes(s)), [], 'un-featured without a 301?');
   assert.ok(!pages.includes('vocab-malone'), 'Vocab Malone is not featured');
@@ -183,6 +183,11 @@ test('loader: featured pages only, multi-speaker credit, folding, first answers'
   assert.deepEqual(creditLinks({ apologist_name: 'Seth Postell (ONE FOR ISRAEL)' }), [{ slug: 'seth-postell', name: 'Dr. Seth Postell (ONE FOR ISRAEL)', href: '/apologists/one-for-israel' }]);
   assert.deepEqual(creditLinks({ apologist_name: 'Jay Smith / Al Fadi (CIRA International)' }).map((c) => c.href), [null, '/apologists/al-fadi']);
   assert.deepEqual(creditLinks({ speaker_slugs: '["seth-postell","one-for-israel"]' }).map((c) => c.href), ['/apologists/one-for-israel'], 'one link per page');
+  // Family page: Stuart is folded into Cliffe's page but keeps his own name; both on one clip → the page name.
+  assert.deepEqual(creditLinks({ apologist_name: 'Stuart Knechtle' }), [{ slug: 'stuart-knechtle', name: 'Stuart Knechtle', href: '/apologists/cliffe-knechtle' }]);
+  assert.deepEqual(creditLinks({ apologist_name: 'Stuart & Cliffe Knechtle' }).map((c) => [c.name, c.href]), [['Cliffe & Stuart Knechtle', '/apologists/cliffe-knechtle']]);
+  assert.equal(data.bySlug.get('cliffe-knechtle').name, 'Cliffe & Stuart Knechtle');
+  assert.ok(!data.bySlug.has('stuart-knechtle'));
   assert.deepEqual(creditLinks({ apologist_name: 'David Wood (feat. Bart Ehrman)' }).map((c) => [c.name, c.href]), [['David Wood', '/apologists/david-wood'], ['Bart Ehrman', null]]);
 
   // Page cards use the same credits: on a third page, Seth + ONE FOR ISRAEL is one entry, named like the verse tabs.

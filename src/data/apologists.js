@@ -166,8 +166,10 @@ export const APOLOGISTS = [
  * To feature someone later: add `{ slug }` here (the slug must be in APOLOGISTS and in the pipeline
  * registry data_collection/common/apologists.json with the same name; the unit test checks both).
  * `includeSlugs` folds other registry people into this page: their clips count and appear here, and
- * their credit reads "<their name> · <this name>".
- * @type {{ slug: string, includeSlugs?: string[] }[]}
+ * their credit reads "<their name> (<page name>)". `pageName` overrides the page title (default: the
+ * registry name). `keepMemberNames`: members are credited by their own name (one page per family,
+ * not an organisation); a clip crediting several members reads as the page name.
+ * @type {{ slug: string, includeSlugs?: string[], pageName?: string, keepMemberNames?: boolean }[]}
  */
 export const FEATURED_APOLOGISTS = [
   { slug: 'sam-shamoun' },
@@ -177,12 +179,12 @@ export const FEATURED_APOLOGISTS = [
   { slug: 'frank-turek' },
   { slug: 'erik-manning' },
   // Vocab Malone: not featured (owner, Nov 2026). Credited as plain text.
-  { slug: 'stuart-knechtle' },
   { slug: 'mike-winger' },
   { slug: 'wes-huff' },
   { slug: 'apostate-prophet' },
   { slug: 'al-fadi' },
-  { slug: 'cliffe-knechtle' },
+  // Father and son, one page (owner, Nov 2026): each clip still credits whoever is speaking.
+  { slug: 'cliffe-knechtle', includeSlugs: ['stuart-knechtle'], pageName: 'Cliffe & Stuart Knechtle', keepMemberNames: true },
   { slug: 'one-for-israel', includeSlugs: ['seth-postell'] },
   { slug: 'nabeel-qureshi' },
   { slug: 'tim-barnett' },
@@ -226,7 +228,7 @@ export const APOLOGIST_BY_SLUG = new Map(APOLOGISTS.map((a) => [a.slug, a]));
 const ALIAS_INDEX = new Map();
 for (const a of APOLOGISTS) for (const alias of [a.name, ...a.aliases]) ALIAS_INDEX.set(norm(alias), a.slug);
 
-/** Featured page slug → `{ slug, name, includeSlugs }`. */
+/** Featured page slug → `{ slug, name, includeSlugs, keepMemberNames }` (name = page title). */
 export const FEATURED_BY_SLUG = new Map();
 /** Any registry slug → the featured page that shows its clips (itself, or the page that includes it). */
 const PAGE_OF = new Map();
@@ -238,7 +240,9 @@ for (const f of FEATURED_APOLOGISTS) {
     if (PAGE_OF.has(s)) throw new Error(`[apologists] FEATURED_APOLOGISTS: "${s}" is listed twice (featured or included)`);
     PAGE_OF.set(s, f.slug);
   }
-  FEATURED_BY_SLUG.set(f.slug, { slug: f.slug, includeSlugs, name: APOLOGIST_BY_SLUG.get(f.slug).name });
+  FEATURED_BY_SLUG.set(f.slug, {
+    slug: f.slug, includeSlugs, name: f.pageName || APOLOGIST_BY_SLUG.get(f.slug).name, keepMemberNames: Boolean(f.keepMemberNames),
+  });
 }
 
 /** The featured page slug that shows this person's clips, or null (no page: credited as plain text). */

@@ -145,9 +145,14 @@ export function clipCredits(people) {
   const out = [];
   for (const p of people) {
     const page = pageSlugFor(p.slug);
-    if (page && seenPages.has(page)) continue;
+    const feat = page && FEATURED_BY_SLUG.get(page);
+    if (page && seenPages.has(page)) {
+      // A second member of a family page on the same clip: credit the page once, by its name.
+      if (feat.keepMemberNames) out.find((c) => c.page === page).name = feat.name;
+      continue;
+    }
     if (page) seenPages.add(page);
-    const name = page && page !== p.slug ? `${p.name} (${FEATURED_BY_SLUG.get(page).name})` : p.name;
+    const name = page && page !== p.slug && !feat.keepMemberNames ? `${p.name} (${feat.name})` : p.name;
     out.push({ slug: p.slug, name, page });
   }
   return out;
@@ -209,7 +214,7 @@ async function buildApologists(rank) {
     const reg = APOLOGIST_BY_SLUG.get(f.slug); // validated when src/data/apologists.js loads
     return [f.slug, {
       slug: f.slug,
-      name: reg.name,
+      name: FEATURED_BY_SLUG.get(f.slug).name,
       type: reg.type || 'Person',
       alternateName: reg.alternateName || null,
       channelKeys: reg.channels || [],
