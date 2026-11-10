@@ -172,7 +172,7 @@ export const FEATURED_APOLOGISTS = [
   { slug: 'sam-shamoun' },
   { slug: 'godlogic' },
   { slug: 'inspiringphilosophy' },
-  // David Wood: not featured (owner, Nov 2026: openly campaigns against Eastern Orthodoxy). Credited as plain text.
+  { slug: 'david-wood' },
   { slug: 'frank-turek' },
   { slug: 'erik-manning' },
   { slug: 'vocab-malone' },
