@@ -175,7 +175,7 @@ export const FEATURED_APOLOGISTS = [
   { slug: 'david-wood' },
   { slug: 'frank-turek' },
   { slug: 'erik-manning' },
-  { slug: 'vocab-malone' },
+  // Vocab Malone: not featured (owner, Nov 2026). Credited as plain text.
   { slug: 'stuart-knechtle' },
   { slug: 'mike-winger' },
   { slug: 'wes-huff' },

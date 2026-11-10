@@ -121,10 +121,11 @@ test('featured list: known people, unique, folded people belong to one page', ()
   const pages = FEATURED_APOLOGISTS.map((f) => f.slug);
   // Owner decision (Nov 2026). Adding someone is a one-line edit to FEATURED_APOLOGISTS; removing one
   // needs a 301, so dropping any of these fails here.
-  const decided = ['sam-shamoun', 'godlogic', 'inspiringphilosophy', 'david-wood', 'frank-turek', 'erik-manning', 'vocab-malone',
+  const decided = ['sam-shamoun', 'godlogic', 'inspiringphilosophy', 'david-wood', 'frank-turek', 'erik-manning',
     'stuart-knechtle', 'mike-winger', 'wes-huff', 'apostate-prophet', 'al-fadi', 'cliffe-knechtle', 'one-for-israel', 'nabeel-qureshi',
     'tim-barnett', 'jeannie-constantinou', 'jonathan-pageau', 'coptic-orthodox-answers', 'stephen-de-young'];
   assert.deepEqual(decided.filter((s) => !pages.includes(s)), [], 'un-featured without a 301?');
+  assert.ok(!pages.includes('vocab-malone'), 'Vocab Malone is not featured');
   assert.equal(new Set(pages).size, pages.length);
   const folded = FEATURED_APOLOGISTS.flatMap((f) => f.includeSlugs || []);
   for (const slug of [...pages, ...folded]) assert.ok(APOLOGIST_BY_SLUG.has(slug), `${slug} not in APOLOGISTS`);
