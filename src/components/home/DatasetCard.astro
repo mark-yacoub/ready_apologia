@@ -1,4 +1,6 @@
 ---
+import { tl } from '../../utils/hadithReliability/render.js';
+
 interface Chip {
   label: string;
   href: string;
@@ -19,16 +21,16 @@ const { variant, tag, count, title, href, body, chips } = Astro.props;
 
 <article class={`ra-card ra-card--${variant}`}>
   <div class="ra-card-top">
-    <span class={`ra-tag ra-tag--${variant}`}>{tag}</span>
+    <span class={`ra-tag ra-tag--${variant}`} set:html={tl(tag)} />
     <span class="ra-count">{count}</span>
   </div>
   <h3 class="ra-h3">
-    <a href={href}>{title}</a>
+    <a href={href} set:html={tl(title)} />
   </h3>
-  <p class="ra-card-body">{body}</p>
+  <p class="ra-card-body" set:html={tl(body)} />
   <div class="ra-chip-row">
     {chips.map((c) => (
-      <a href={c.href} class="ra-chip">{c.label}</a>
+      <a href={c.href} class="ra-chip" set:html={tl(c.label)} />
     ))}
   </div>
 </article>

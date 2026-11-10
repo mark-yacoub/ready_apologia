@@ -129,7 +129,7 @@
 .ra-home .ra-start-btn--apologists .ra-start-title {
   color: #0f766e;
 }
-/* Six entry buttons fill the grid evenly (3x2 / 2x3); the "Not sure where to start?" CTA spans a full row. */
+/* Six entry buttons fill the grid evenly (3x2 / 2x3); the "Most-discussed verses & stats" button spans a full row. */
 .ra-home .ra-start-btn--stats {
   grid-column: 1 / -1;
   background: linear-gradient(135deg, #f8f7fd 0%, #eeebf8 100%);
@@ -212,9 +212,10 @@
 .ra-home .ra-sec-link {
   display: inline-flex;
   align-items: center;
-  min-height: 36px;
-  padding: 4px 10px;
+  min-height: 44px;
+  padding: 6px 14px;
   border-radius: 999px;
+  line-height: 1.2;
   background-color: #f4f4f5;
   border: 1px solid #e4e4e7;
   font-size: 12px;
@@ -293,6 +294,13 @@
   line-height: 1.3;
   color: #09090b;
 }
+/* Card title link: a 44px-tall hit area that grows with the title instead of
+   overlapping the row above (no negative margins). */
+.ra-home .ra-h3 a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
 .ra-home .ra-h3 a:hover {
   text-decoration: underline;
 }
@@ -308,15 +316,16 @@
 .ra-home .ra-chip-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   margin-top: 2px;
 }
 .ra-home .ra-chip {
   display: inline-flex;
   align-items: center;
-  min-height: 34px;
-  padding: 5px 10px;
-  border-radius: 8px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  line-height: 1.25;
   background-color: #f4f4f5;
   border: 1px solid #e4e4e7;
   font-size: 12px;
@@ -336,6 +345,10 @@
   align-items: center;
   justify-content: space-between;
   margin-top: 4px;
+}
+/* Second and later group headings inside one section. */
+.ra-home .ra-subhead-row--spaced {
+  margin-top: 20px;
 }
 .ra-home .ra-subhead {
   margin: 0;
@@ -402,4 +415,11 @@
   font-size: 12.5px;
   line-height: 1.45;
   color: #52525b;
+}
+
+/* Transliteration marks (ʾ ʿ), wrapped by tl(): the body serif gives them a half-em
+   advance ("Qur ʾ ān"); the Arabic face draws them tight. */
+.ra-home .hrv-tlm {
+  font-family: 'Amiri', serif;
+  line-height: 1;
 }

@@ -26,6 +26,8 @@ import { loadHadithModel } from './hadithLoader.js';
 import { TRANSLATION_ISSUE_TYPES, getTranslationAuditPath } from './hadith_config.js';
 import { loadAllEvidenceData } from './evidenceLoader.js';
 import { getEvidenceTotalCount } from './evidenceCounters.js';
+import { EVIDENCE_DETAIL_KEYS, computeEvidenceDetailCounts } from './home/evidenceDetail.js';
+import { BIBLE_ANSWERS_KEYS, computeBibleAnswersCounts } from './home/bibleAnswers.js';
 import { loadHadithReliability } from './hadithReliability/loader.js';
 import { SECTIONS as qpSections } from './quranPreservation/config.js';
 import { loadConvenientRevelations } from './convenientRevelations/model.js';
@@ -102,6 +104,28 @@ import { loadOriginsOfRevelation } from './originsOfRevelation/model.js';
  * @property {number} trustBibleCount
  * @property {number} extrabiblicalCount
  * @property {number} divinityTimelineCount
+ * @property {number} dcNtVersesCount        Divinity of Christ: New Testament verses
+ * @property {number} dcOtVersesCount        Divinity of Christ: Old Testament verses
+ * @property {number} dcFathersQuotesCount   Divinity of Christ: Ante-Nicene Father quotations
+ * @property {number} dcJewishSourcesCount   Divinity of Christ: ancient Jewish sources
+ * @property {number} ntAuthorsBooksCount    NT Authorship: books covered (canon lists excluded)
+ * @property {number} prophecyPairsCount     Prophecies: OT prophecy / NT fulfilment pairs
+ * @property {number} prophecyJewishCount    Prophecies: ancient Jewish messianic texts
+ * @property {number} hsScriptureCount       Holy Spirit: OT + NT passages
+ * @property {number} hsFathersCount         Holy Spirit: Ante-Nicene Father quotations
+ * @property {number} hsJewishCount          Holy Spirit: ancient Jewish sources
+ * @property {number} trinityScriptureCount  Trinity: OT + NT passages
+ * @property {number} trinityFathersCount    Trinity: Ante-Nicene Father quotations
+ * @property {number} qsParallelsCount       Primary Sources of the Qurʾān: curated parallels
+ * @property {number} qsCitationsCount       Primary Sources of the Qurʾān: primary-source citations
+ * @property {number} qsVersesCount          Primary Sources of the Qurʾān: verses with a parallel
+ * @property {number} qdVersesCount          /evidence/quranic_deficiencies: verses discussed
+ * @property {number} seVersesCount          /evidence/scientific_errors: verses discussed
+ * @property {number} bibleAnswersCount         Answered alleged Bible contradictions (rows in `contradictions`).
+ * @property {number} bibleAnswersVersesCount   Distinct verses (verse1 ∪ verse2) carrying a `/contradictions` tab.
+ * @property {number} bibleVideosCount          Distinct videos tagged to at least one Bible verse (or the Gospels overview).
+ * @property {number} bibleVideoVersesCount     Distinct Bible verse ids with a `/videos` tab.
+ * @property {number} quranVideosCount          Distinct videos tagged to at least one Qurʾān verse.
  */
 
 /** Every numeric count property required on `HomeStats`. */
@@ -161,6 +185,7 @@ export const STAT_KEYS = Object.freeze([
   'divinityTimelineCount',
 ]);
 
+
 const isPositiveInt = (v) => typeof v === 'number' && Number.isInteger(v) && v > 0;
 
 /**
@@ -176,7 +201,7 @@ export function validateStats(stats) {
   }
 
   const problems = [];
-  for (const key of STAT_KEYS) {
+  for (const key of [...STAT_KEYS, ...EVIDENCE_DETAIL_KEYS, ...BIBLE_ANSWERS_KEYS]) {
     const val = stats[key];
     if (!isPositiveInt(val)) {
       problems.push(`${key}: expected positive integer, got ${String(val)}`);
@@ -315,6 +340,7 @@ export async function loadHomeStats() {
   const propheciesCount = evidenceCountMap.prophecies;
   const holySpiritCount = evidenceCountMap.divinity_of_the_holy_spirit;
   const trinityCount = evidenceCountMap.trinity;
+  const evidenceDetail = computeEvidenceDetailCounts(allEvidence, readJson('../data/quran/sources/index.json'));
 
   // 5. Discover deep-dive counts
   const discoverArticlesCount = discoverCatalog.length;
@@ -344,6 +370,8 @@ export async function loadHomeStats() {
   const divinityTimelineCount = Array.isArray(divinityTimeline) ? divinityTimeline.length : undefined;
 
   const rawStats = {
+    ...evidenceDetail,
+    ...computeBibleAnswersCounts(),
     surahsCount,
     ntMssCount,
     otMssCount,

@@ -1,4 +1,5 @@
 ---
+import { tl } from '../../utils/hadithReliability/render.js';
 import type { HomeStats } from '../../utils/homeStats.js';
 import EntryGrid from './EntryGrid.astro';
 
@@ -14,12 +15,15 @@ const { base, redirectUrl, stats } = Astro.props;
 <header class="ra-hero">
   <div class="ra-hero-brand">
     <img src={`${base}/assets/logo.png`} alt="" width="36" height="28" class="ra-hero-logo" />
-    <span class="ra-hero-eyebrow">Primary-Source Scripture &amp; Evidence Library</span>
+    <span class="ra-hero-eyebrow" set:html={tl('The Bible & Qurʾān from the Primary Sources')} />
   </div>
   <h1 class="ra-h1">Ready Apologia</h1>
-  <p class="ra-lead">
-    Side-by-side Christian and Islamic primary texts — pairing every verse with dated manuscript scans, pre-Nicene patristics, unabridged classical tafsīr, and source-linked Ṣaḥīḥ hadith.
-  </p>
+  <p
+    class="ra-lead"
+    set:html={tl(
+      'The Bible and the Qurʾān, verse by verse, beside photos of dated manuscripts, the early Church Fathers, classical Qurʾān commentaries (tafsīr) in full, and authentic (Ṣaḥīḥ) hadith. Every source is linked.'
+    )}
+  />
 
   <EntryGrid base={base} redirectUrl={redirectUrl} stats={stats} />
 </header>

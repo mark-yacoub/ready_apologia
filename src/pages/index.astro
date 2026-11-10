@@ -8,6 +8,7 @@ import StartHereCard from '../components/home/StartHereCard.astro';
 import EvidenceGrid from '../components/home/EvidenceGrid.astro';
 import { DEFAULT_SCRIPTURE_PATH } from '../utils/routes.js';
 import { loadHomeStats } from '../utils/homeStats.js';
+import { requireVerseTabs } from '../utils/home/bibleAnswers.js';
 import '../styles/home.css';
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
@@ -16,8 +17,29 @@ const redirectUrl = `${base}${DEFAULT_SCRIPTURE_PATH}`;
 const canonicalUrl = `${site}${base || '/'}`;
 
 const stats = await loadHomeStats();
+// The hand-picked verse chips below must point at tabs that exist.
+requireVerseTabs({
+  contradictions: ['mt_27_5', 'mt_1_1', 'jn_20_1'],
+  videos: ['jn_1_1', 'jn_8_58', 'gospels'],
+});
 
+// Order alternates Bible and Islamic corpora (Bible first), so on desktop's 2-column grid
+// each row pairs one of each and the Bible answers are not buried below the fold.
 const datasetCards = [
+  {
+    variant: 'bible' as const,
+    tag: 'Bible · Alleged Contradictions',
+    count: `${stats.bibleAnswersCount.toLocaleString()} answers · ${stats.bibleAnswersVersesCount.toLocaleString()} verses`,
+    title: 'Alleged Bible Contradictions, Answered',
+    href: `${base}/bible/mt/27/5/contradictions`,
+    body: `${stats.bibleAnswersCount.toLocaleString()} alleged discrepancies between Bible passages, each set beside its paired verse with a published answer from sources including Defending Inerrancy, Tektonics, Apologetics Press, and Answers in Genesis.`,
+    chips: [
+      { label: 'Matthew 27:5 (Judas) →', href: `${base}/bible/mt/27/5/contradictions` },
+      { label: 'Matthew 1:1 (Genealogies) →', href: `${base}/bible/mt/1/1/contradictions` },
+      { label: 'John 20:1 (Empty Tomb) →', href: `${base}/bible/jn/20/1/contradictions` },
+      { label: 'Most-Answered Verses →', href: `${base}/discover/statistics#bible-contradictions` },
+    ],
+  },
   {
     variant: 'quran' as const,
     tag: 'Qurʾān · Classical Exegesis',
@@ -59,6 +81,20 @@ const datasetCards = [
     ],
   },
   {
+    variant: 'bible' as const,
+    tag: 'Bible · Video Answers',
+    count: `${stats.bibleVideosCount.toLocaleString()} videos · ${stats.bibleVideoVersesCount.toLocaleString()} verses`,
+    title: 'Apologist Video Answers, Verse by Verse',
+    href: `${base}/bible/jn/1/1/videos`,
+    body: `${stats.bibleVideosCount.toLocaleString()} short video answers from Christian apologists and scholars, each tagged to the Bible verses it discusses, across ${stats.bibleVideoVersesCount.toLocaleString()} verses, with a page for each apologist.`,
+    chips: [
+      { label: 'John 1:1 Videos →', href: `${base}/bible/jn/1/1/videos` },
+      { label: 'John 8:58 →', href: `${base}/bible/jn/8/58/videos` },
+      { label: 'Gospels Overview →', href: `${base}/bible/gospels/videos` },
+      { label: 'Browse by Apologist →', href: `${base}/apologists` },
+    ],
+  },
+  {
     variant: 'hadith' as const,
     tag: 'Ṣaḥīḥayn · Arabic vs. English',
     count: `${stats.hadithCount} hadiths · ${stats.auditTotalCount} audits`,
@@ -79,7 +115,7 @@ const datasetCards = [
     count: `${stats.quranMssCount.toLocaleString()} manuscripts · ${stats.quranScansCount.toLocaleString()} scans`,
     title: 'Early Qurʾān Manuscripts & Scholarly Notes',
     href: `${base}/quran/1/1/manuscripts`,
-    body: `${stats.quranScansCount.toLocaleString()} folio images across ${stats.quranMsVersesCount.toLocaleString()} verses documenting rasm variants and scribal corrections, paired with ${stats.nickelCount.toLocaleString()} academic Christian footnotes and ${stats.videosCount.toLocaleString()} indexed video breakdowns.`,
+    body: `${stats.quranScansCount.toLocaleString()} folio images across ${stats.quranMsVersesCount.toLocaleString()} verses documenting rasm variants and scribal corrections, paired with ${stats.nickelCount.toLocaleString()} academic Christian footnotes and ${stats.quranVideosCount.toLocaleString()} video answers tagged to Qurʾān verses.`,
     chips: [
       { label: 'Surah 1:1 Folios →', href: `${base}/quran/1/1/manuscripts` },
       { label: 'Surah 5:47 Notes →', href: `${base}/quran/5/47/christian-footnotes` },
@@ -90,8 +126,8 @@ const datasetCards = [
 
 // SEO Metadata (<= 60 chars title, objective researcher voice, WebSite + Organization @graph)
 const pageTitle = "Ready Apologia: Bible & Qur'an Evidence, Manuscripts, Tafsir";
-const pageDescription = `Primary-source scripture reader and evidence library: ${stats.bibleMssCount} Biblical manuscripts (${stats.bibleScansCount.toLocaleString()} scans), ${stats.quranMssCount.toLocaleString()} Qur'an manuscripts, unabridged Tafsir al-Tabari & Ibn Kathir across all ${stats.tabariCount.toLocaleString()} verses, ${stats.companionsCount} Companion Codices, ${stats.hadithCount} Sahih hadiths, and ${stats.discoverArticlesCount} source-linked deep dives.`;
-const pageKeywords = 'Ready Apologia, biblical manuscripts, unabridged tafsir al-tabari, tafsir ibn kathir, companion codices, qiraat variants, sahih hadith translation audit, pre-nicene church fathers, christian apologetics, islamic studies';
+const pageDescription = `Primary-source scripture reader and evidence library: ${stats.bibleMssCount} Biblical manuscripts (${stats.bibleScansCount.toLocaleString()} scans), ${stats.quranMssCount.toLocaleString()} Qur'an manuscripts, unabridged Tafsir al-Tabari & Ibn Kathir across all ${stats.tabariCount.toLocaleString()} verses, ${stats.companionsCount} Companion Codices, ${stats.hadithCount} Sahih hadiths, answers to ${stats.bibleAnswersCount.toLocaleString()} hard Bible passages, and ${stats.discoverArticlesCount} source-linked deep dives.`;
+const pageKeywords = 'Ready Apologia, biblical manuscripts, unabridged tafsir al-tabari, tafsir ibn kathir, companion codices, qiraat variants, sahih hadith translation audit, pre-nicene church fathers, christian apologetics, bible contradictions answered, apologist videos, islamic studies';
 
 const schemaObj = {
   '@context': 'https://schema.org',
@@ -131,8 +167,12 @@ const schemaObj = {
   showOnboarding={false}
 >
   <!--
-    Returning-visitor & standalone-PWA redirect (placed in <head> via slot="head" so it runs
-    before stylesheets and <body> render, preventing a header flash).
+    Standalone-PWA resume redirect (placed in <head> via slot="head" so it runs before stylesheets
+    and <body> render, preventing a header flash).
+    Only an installed app (display-mode: standalone, or iOS navigator.standalone) is sent on to the
+    last page the reader had open (lastVisitedAppUrl, then lastVisitedUrl, then defaultRedirectUrl).
+    A normal browser visit to "/" always renders the homepage, even for returning visitors, so the
+    homepage stays reachable from the logo, bookmarks and search results.
     ClientRouter (astro:transitions) behaviour:
       1. On initial full-page load of "/", Astro's router records this inline script's textContent
          in `scriptsAlreadyRan` and skips scripts without `data-astro-rerun` on subsequent swaps
@@ -143,20 +183,20 @@ const schemaObj = {
   -->
   <script slot="head" is:inline define:vars={{ defaultRedirectUrl: redirectUrl }}>
     try {
-      if (!document.body) {
+      const isStandalone =
+        (typeof window.matchMedia === 'function' && window.matchMedia('(display-mode: standalone)').matches) ||
+        window.navigator.standalone === true;
+      if (!document.body && isStandalone) {
         const isSafeInternalPath = (u) =>
           typeof u === 'string' && u.startsWith('/') && !u.startsWith('//') && u !== '/';
         const lastVisitedAppUrl = localStorage.getItem('lastVisitedAppUrl');
         const lastVisitedUrl = localStorage.getItem('lastVisitedUrl');
-        const isStandalone =
-          (typeof window.matchMedia === 'function' && window.matchMedia('(display-mode: standalone)').matches) ||
-          window.navigator.standalone === true;
 
         if (isSafeInternalPath(lastVisitedAppUrl)) {
           window.location.replace(lastVisitedAppUrl);
         } else if (isSafeInternalPath(lastVisitedUrl)) {
           window.location.replace(lastVisitedUrl);
-        } else if (isStandalone && isSafeInternalPath(defaultRedirectUrl)) {
+        } else if (isSafeInternalPath(defaultRedirectUrl)) {
           window.location.replace(defaultRedirectUrl);
         }
       }
@@ -169,6 +209,8 @@ const schemaObj = {
 
   <div class="ra-home" data-page="home">
     <Hero base={base} redirectUrl={redirectUrl} stats={stats} />
+
+    <StartHereCard base={base} />
 
     <section class="ra-section" aria-labelledby="ra-sec-corpora">
       <div class="ra-sec-head">
@@ -189,7 +231,5 @@ const schemaObj = {
     <DeepDiveList base={base} stats={stats} />
 
     <EvidenceGrid base={base} stats={stats} />
-
-    <StartHereCard base={base} />
   </div>
 </Layout>

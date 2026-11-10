@@ -74,6 +74,7 @@ import { DatabaseSync } from 'node:sqlite';
 import fs from 'node:fs';
 import path from 'node:path';
 import { getBibleUrl, getQuranUrl } from './urlFactory.js';
+import { quranVerseIdSql, bibleVerseIdSql } from './verseIdSql.js';
 
 const dbPath = path.join(process.cwd(), 'data.db');
 let db = null;
@@ -226,7 +227,7 @@ export function loadBibleStatistics() {
   const topVideosRaw = db.prepare(`
     SELECT verse_id, count(*) as count 
     FROM short_per_verse 
-    WHERE verse_id NOT GLOB '[0-9]*_[0-9]*' AND verse_id != 'gospels'
+    WHERE ${bibleVerseIdSql()} AND verse_id != 'gospels'
     GROUP BY verse_id 
     ORDER BY count DESC 
     LIMIT 10
@@ -424,7 +425,7 @@ export function loadQuranStatistics() {
   const topVideosRaw = db.prepare(`
     SELECT verse_id, count(*) as count 
     FROM short_per_verse 
-    WHERE verse_id GLOB '[0-9]*_[0-9]*'
+    WHERE ${quranVerseIdSql()}
     GROUP BY verse_id 
     ORDER BY count DESC 
     LIMIT 10
