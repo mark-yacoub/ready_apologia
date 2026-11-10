@@ -57,8 +57,11 @@ Redirect Rules run **before** the Worker, so they cost zero Worker invocations. 
 | 2 | Legacy Bible verse URL → chapter anchor | `http.request.uri.path wildcard "/bible/*/*/*" and not http.request.uri.path wildcard "/bible/*/*/*/*"` | `wildcard_replace(http.request.uri.path, "/bible/*/*/*", "/bible/${1}/${2}#${3}")` |
 | 3 | Legacy Quran ayah URL → surah anchor | `http.request.uri.path wildcard "/quran/*/*" and not http.request.uri.path wildcard "/quran/*/*/*" and not starts_with(http.request.uri.path, "/quran/codex/") and not starts_with(http.request.uri.path, "/quran/variant/")` | `wildcard_replace(http.request.uri.path, "/quran/*/*", "/quran/${1}#${2}")` |
 | 4 | Legacy /topics → /evidence | `starts_with(http.request.uri.path, "/topics")` | `concat("/evidence", substring(http.request.uri.path, 7))` |
+| 5 | Legacy Quran islamic-commentaries tab → tafsir | `http.request.uri.path wildcard "/quran/*/*/islamic-commentaries"` | `wildcard_replace(http.request.uri.path, "/quran/*/*/islamic-commentaries", "/quran/${1}/${2}/tafsir/ibn_kathir")` |
 
 Why: the site is built with `trailingSlash: 'never'`, but the Worker also served `/path/`, so Google indexed both forms ("Alternate page with proper canonical", ~2.9K URLs). `/bible/<b>/<c>/<v>` and `/topics/*` pages were removed from the build (Jul 2026), and since Nov 2026 the deploy deletes stale HTML from R2 (`--delete` on the HTML sync pass); these rules keep old inbound links landing on the right page instead of a 404.
+
+Rule 5 (added Nov 2026): the Quran tafsir tab lived at `/quran/<s>/<a>/islamic-commentaries` until Aug 2026, when it split into `/tafsir/ibn_kathir` and `/tafsir/tabari`. Google had the old address indexed and was getting 404s, so it now 301s to the Ibn Kathir page.
 
 Verify after enabling: `curl -sI https://readyapologia.com/bible/jn/1/41` from a browser-like client → `301` to `/bible/jn/1#41`.
 
