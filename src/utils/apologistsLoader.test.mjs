@@ -121,7 +121,7 @@ test('featured list: known people, unique, folded people belong to one page', ()
   const pages = FEATURED_APOLOGISTS.map((f) => f.slug);
   // Owner decision (Nov 2026). Adding someone is a one-line edit to FEATURED_APOLOGISTS; removing one
   // needs a 301, so dropping any of these fails here.
-  const decided = ['sam-shamoun', 'godlogic', 'inspiringphilosophy', 'david-wood', 'frank-turek', 'erik-manning', 'vocab-malone',
+  const decided = ['sam-shamoun', 'godlogic', 'inspiringphilosophy', 'frank-turek', 'erik-manning', 'vocab-malone',
     'stuart-knechtle', 'mike-winger', 'wes-huff', 'apostate-prophet', 'al-fadi', 'cliffe-knechtle', 'one-for-israel', 'nabeel-qureshi',
     'tim-barnett', 'jeannie-constantinou', 'jonathan-pageau', 'coptic-orthodox-answers', 'stephen-de-young'];
   assert.deepEqual(decided.filter((s) => !pages.includes(s)), [], 'un-featured without a 301?');
@@ -158,7 +158,7 @@ test('loader: featured pages only, multi-speaker credit, folding, first answers'
   const both = query("SELECT video_id FROM shorts_metadata WHERE apologist_name = 'Sam Shamoun & David Wood' LIMIT 1")[0]?.video_id;
   if (both) {
     assert.ok(data.bySlug.get('sam-shamoun').clips.some((c) => c.videoId === both));
-    assert.ok(data.bySlug.get('david-wood').clips.some((c) => c.videoId === both));
+    assert.ok(!data.bySlug.has('david-wood'), 'David Wood is not featured: no page');
   }
 
   // First answers: each verse has at most one top clip, credited to its speakers.
@@ -182,7 +182,7 @@ test('loader: featured pages only, multi-speaker credit, folding, first answers'
   assert.deepEqual(creditLinks({ apologist_name: 'Seth Postell (ONE FOR ISRAEL)' }), [{ slug: 'seth-postell', name: 'Dr. Seth Postell (ONE FOR ISRAEL)', href: '/apologists/one-for-israel' }]);
   assert.deepEqual(creditLinks({ apologist_name: 'Jay Smith / Al Fadi (CIRA International)' }).map((c) => c.href), [null, '/apologists/al-fadi']);
   assert.deepEqual(creditLinks({ speaker_slugs: '["seth-postell","one-for-israel"]' }).map((c) => c.href), ['/apologists/one-for-israel'], 'one link per page');
-  assert.deepEqual(creditLinks({ apologist_name: 'David Wood (feat. Bart Ehrman)' }).map((c) => [c.name, c.href]), [['David Wood', '/apologists/david-wood'], ['Bart Ehrman', null]]);
+  assert.deepEqual(creditLinks({ apologist_name: 'David Wood (feat. Bart Ehrman)' }).map((c) => [c.name, c.href]), [['David Wood', null], ['Bart Ehrman', null]]);
 
   // Page cards use the same credits: on a third page, Seth + ONE FOR ISRAEL is one entry, named like the verse tabs.
   const sethPeople = creditedPeople({ speaker_slugs: '["sam-shamoun","seth-postell","one-for-israel","bart-ehrman"]' });
