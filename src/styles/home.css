@@ -126,7 +126,12 @@
 .ra-home .ra-start-btn--quran .ra-start-title {
   color: #065f46;
 }
+.ra-home .ra-start-btn--apologists .ra-start-title {
+  color: #0f766e;
+}
+/* Six entry buttons fill the grid evenly (3x2 / 2x3); the "Not sure where to start?" CTA spans a full row. */
 .ra-home .ra-start-btn--stats {
+  grid-column: 1 / -1;
   background: linear-gradient(135deg, #f8f7fd 0%, #eeebf8 100%);
   border-color: rgba(91, 75, 166, 0.35);
 }

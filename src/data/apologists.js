@@ -65,6 +65,7 @@ export const APOLOGISTS = [
     ['inspiringphilosophy'], { alternateName: 'Michael Jones' }),
   P('erik-manning', 'Erik Manning', ['Erik Manning', 'Erik Manning (Testify)', 'Erik Manning (Testify Apologetics)', 'Testify', 'Testify Apologetics'], ['testifyapologetics']),
   P('vocab-malone', 'Vocab Malone', ['Vocab Malone', 'Street Apologist'], ['vocabmalone']),
+  P('david-lynn', 'David Lynn', ['David Lynn'], []), // auto-registered by the pipeline (Nov 2026 backfill)
   P('stuart-knechtle', 'Stuart Knechtle', ['Stuart Knechtle', 'Pastor Stuart Knechtle', 'Stuart'], ['givemeananswer']),
   P('mike-winger', 'Mike Winger', ['Mike Winger', 'Pastor Mike Winger', 'BibleThinker'], ['mikewinger']),
   P('cliffe-knechtle', 'Cliffe Knechtle', ['Cliffe Knechtle', 'Cliff Knechtle', 'Pastor Cliffe Knechtle', 'Give Me An Answer', 'Cliffe', 'Cliff'], ['givemeananswer']),

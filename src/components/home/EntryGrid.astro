@@ -1,5 +1,6 @@
 ---
 import type { HomeStats } from '../../utils/homeStats.js';
+import { loadApologists } from '../../utils/apologistsLoader.js';
 
 interface Props {
   base: string;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const { base, redirectUrl, stats } = Astro.props;
+const apologists = await loadApologists();
 ---
 
 <nav class="ra-start-grid" aria-label="Primary entry points">
@@ -49,6 +51,14 @@ const { base, redirectUrl, stats } = Astro.props;
       <span class="ra-start-arrow" aria-hidden="true">→</span>
     </span>
     <span class="ra-start-meta">{stats.evidenceDirectoriesCount} Scripture &amp; Patristic directories</span>
+  </a>
+
+  <a href={`${base}/apologists`} class="ra-start-btn ra-start-btn--apologists">
+    <span class="ra-start-top">
+      <span class="ra-start-title">Videos by Apologist</span>
+      <span class="ra-start-arrow" aria-hidden="true">→</span>
+    </span>
+    <span class="ra-start-meta">{apologists.people.length} apologists · {apologists.totalClips.toLocaleString('en-US')} short answers</span>
   </a>
 
   <a href={`${base}/discover/statistics`} class="ra-start-btn ra-start-btn--stats">

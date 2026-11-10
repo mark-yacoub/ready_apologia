@@ -33,7 +33,7 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
                 const credits = creditLinks(video, base);
                 return credits.length > 0 && (
                   <p class="video-credit">
-                    {credits.map((c, i) => <>{i > 0 && <><span aria-hidden="true"> · </span><span class="sr-only">, </span></>}{c.href ? <a href={c.href}>{c.name}</a> : <span class="video-credit-name">{c.name}</span>}</>)}
+                    {credits.map((c, i) => <>{i > 0 && <><span aria-hidden="true"> · </span><span class="sr-only">, </span></>}{c.href ? <a href={c.href} title={`More from ${c.name}`}>{c.name}<svg class="credit-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg></a> : <span class="video-credit-name">{c.name}</span>}</>)}
                   </p>
                 );
               })()}
@@ -156,8 +156,19 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
   }
 
   .video-credit a {
+    gap: 2px;
     color: #0f766e;
     text-decoration: none;
+  }
+
+  /* Chevron: the name opens that apologist's page. */
+  .video-credit .credit-chev {
+    flex: none;
+    transition: transform 0.15s ease;
+  }
+
+  .video-credit a:hover .credit-chev {
+    transform: translateX(2px);
   }
 
   .video-credit a:hover {
