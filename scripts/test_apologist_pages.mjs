@@ -133,10 +133,11 @@ function scanPage(full) {
     if (!vid) continue;
     const credit = card.match(/<p class="video-credit"[^>]*>([\s\S]*?)<\/p>|<div class="apologist-name"[^>]*>([\s\S]*?)<\/div>/);
     if (!credit) continue;
-    for (const [, slug, name] of (credit[1] || credit[2]).matchAll(/<a[^>]*href="\/apologists\/([^"/]+)\/?"[^>]*>([^<]*)<\/a>/g)) {
+    for (const [, slug, rawName] of (credit[1] || credit[2]).matchAll(/<a[^>]*href="\/apologists\/([^"/]+)\/?"[^>]*>([\s\S]*?)<\/a>/g)) {
+      const name = decode(rawName.replace(/<[^>]+>/g, '').trim());
       creditLinksChecked += 1;
-      if (decode(name) !== FEATURED_NAMES.get(slug)) foldedChecked += 1; // "<person> (<page name>)"
-      if (featuredSet.has(slug) && !pageClips.get(slug)?.has(vid)) fail(`${rel}: credit "${decode(name)}" → /apologists/${slug}, but that page does not list clip ${vid}`);
+      if (name !== FEATURED_NAMES.get(slug)) foldedChecked += 1; // "<person> (<page name>)" or member name
+      if (featuredSet.has(slug) && !pageClips.get(slug)?.has(vid)) fail(`${rel}: credit "${name}" → /apologists/${slug}, but that page does not list clip ${vid}`);
     }
   }
 }
