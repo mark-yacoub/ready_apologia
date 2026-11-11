@@ -1,0 +1,15 @@
+---
+/** Two-column textual redline comparison (e.g., Josephus Greek MSS vs. Agapius Arabic witness). */
+import Icon from '../hadith-reliability/Icon.astro';
+import Redline from '../hadith-reliability/showcase/Redline.astro';
+const { redline } = Astro.props;
+---
+<div class="hrv-sc hrv-sc--redline ebj-redline" role="group" aria-label={redline.caption}>
+  {redline.caption && (
+    <div class="hrv-sc__cap">
+      <Icon name="redline" />
+      <span set:html={redline.captionHtml} />
+    </div>
+  )}
+  <Redline sc={redline.sc} />
+</div>

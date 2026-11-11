@@ -1,0 +1,26 @@
+---
+/** Group of witness cards within a section, with optional collapsed `<details>` overflow. */
+import Icon from '../hadith-reliability/Icon.astro';
+import SourceCard from './SourceCard.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { g, labels } = Astro.props;
+---
+<div class="ebj-group" data-group={g.key}>
+  {g.labelHtml && <h3 class="ebj-group__h" set:html={g.labelHtml} />}
+  {g.cards.map(e => (
+    <SourceCard e={e} verifyAria={labels.verifyAria} findingTag={labels.findingTag} />
+  ))}
+  {g.collapsed.length > 0 && (
+    <details class="hrv-disclosure ebj-more">
+      <summary>
+        <span set:html={tl(g.collapsedSummary)} />
+        <Icon name="chevronDown" />
+      </summary>
+      <div class="hrv-disclosure__body">
+        {g.collapsed.map(e => (
+          <SourceCard e={e} verifyAria={labels.verifyAria} findingTag={labels.findingTag} />
+        ))}
+      </div>
+    </details>
+  )}
+</div>

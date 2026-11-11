@@ -7,7 +7,8 @@ import { getBaseUrl, getBibleUrl, getQuranUrl } from './urlFactory.js';
  */
 // One character per repetition: the old `(?:[^()\s]+|…)+` nested quantifier backtracked
 // exponentially on unclosed links and hung the build (/bible/heb/5/7/apologetics).
-const MD_LINK_SOURCE = String.raw`\[([^\]]+)\]\(((?:[^()\s]|\([^()\s]*\))+)\)`;
+export const MD_LINK_URL_SOURCE = String.raw`(?:[^()\s]|\([^()\s]*\))+`;
+export const MD_LINK_SOURCE = String.raw`\[([^\]]+)\]\((${MD_LINK_URL_SOURCE})\)`;
 
 /**
  * Strips inline Markdown formatting (links, bold/italics, inline code) into

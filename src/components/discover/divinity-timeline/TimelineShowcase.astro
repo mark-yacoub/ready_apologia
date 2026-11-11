@@ -1,0 +1,27 @@
+---
+/**
+ * Chronological Milestone Showcase (`.hrv-sc.dtl-timeline`):
+ * Displays six dated documentary horizons from AD 30–62 to the Council of Nicaea
+ * (AD 325) using date badges only (avoiding competing 01–06 vs. 01–05 numbering),
+ * separating first-century Judean liturgy from second- and third-century
+ * material epigraphy and papyri.
+ */
+const { showcase } = Astro.props;
+---
+<aside class="hrv-sc dtl-timeline" aria-label={showcase.ariaLabel}>
+  <div class="hrv-sc__head">
+    <span class="hrv-eyebrow">Chronological Horizon · AD 30–325</span>
+    <p class="dtl-timeline__cap">{showcase.caption}</p>
+  </div>
+  <ol class="dtl-timeline__grid">
+    {showcase.events.map((ev) => (
+      <li class="dtl-timeline__item">
+        <a class="dtl-timeline__link" href={ev.href}>
+          <span class="dtl-timeline__date">{ev.date}</span>
+          <strong class="dtl-timeline__label">{ev.label}</strong>
+          <span class="dtl-timeline__detail" set:html={ev.detailHtml} />
+        </a>
+      </li>
+    ))}
+  </ol>
+</aside>

@@ -1,0 +1,32 @@
+---
+/**
+ * Collapsible paired historiographical discussion block per section:
+ *   1. `.hrv-scholar`: Named scholarly / historical hypotheses with works & dates
+ *   2. `.hrv-eval`: Structured primary-source & philological assessment
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+
+const { historiography } = Astro.props;
+---
+<details class="hrv-disclosure dtl-hist" data-dtl-disclosure>
+  <summary>
+    <span class="dtl-hist__sumtext">{historiography.heading}</span>
+    <span class="dtl-disc__chev" aria-hidden="true">
+      <Icon name="chevronDown" />
+    </span>
+  </summary>
+  <div class="hrv-disclosure__body dtl-hist__body">
+    <div class="hrv-scholar dtl-pair">
+      <p class="hrv-eyebrow dtl-pair__eyebrow">{historiography.hypothesisTitle}</p>
+      <p class="dtl-pair__prose" set:html={historiography.hypothesisHtml} />
+    </div>
+    <div class="hrv-eval dtl-pair dtl-pair--eval">
+      <p class="hrv-eyebrow dtl-pair__eyebrow">{historiography.assessmentTitle}</p>
+      <ol class="dtl-pair__list">
+        {historiography.assessmentItemsHtml.map((itemHtml) => (
+          <li set:html={itemHtml} />
+        ))}
+      </ol>
+    </div>
+  </div>
+</details>

@@ -1,0 +1,15 @@
+---
+/**
+ * Section opening: legacy theme alias anchors -> section number (01..05) or scale icon (Appendix) ->
+ * section heading (h2).
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+const { s } = Astro.props;
+---
+{s.aliases.map(a => <span id={a} class="ebj-alias" aria-hidden="true"></span>)}
+<div class="hrv-q__head ebj-sec__head">
+  {s.isItem
+    ? <span class="hrv-q__num" aria-hidden="true">{String(s.n).padStart(2, '0')}</span>
+    : <span class="hrv-q__num ebj-sec__mark" aria-hidden="true"><Icon name="scale" /></span>}
+  <h2 class="hrv-q__title" id={`${s.id}-h`} set:html={s.h2Html} />
+</div>

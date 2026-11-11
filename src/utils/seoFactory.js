@@ -1,4 +1,4 @@
-import booksMeta from '../data/books_meta.json';
+import booksMeta from '../data/books_meta.json' with { type: 'json' };
 import { mapMtToLxx } from './scripture_mapper.js';
 import { SEO_DRAWER } from './quranSources/drawerCopy.js';
 import {

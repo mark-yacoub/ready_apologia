@@ -1,0 +1,35 @@
+---
+/**
+ * Classical antiquity comparative manuscript table (18 works).
+ * Mobile & narrow-column tablet (< 1024 px): stacked labeled cards (zero horizontal scroll at 360/412/800 px);
+ * full 4-column semantic table at >= 1024 px. Every row carries its locked item id (#homer-iliad, etc.).
+ */
+const { rows, takeawayHtml } = Astro.props;
+---
+{takeawayHtml && <p class="twb-tbl-takeaway" set:html={takeawayHtml} />}
+<div class="twb-table-wrap">
+  <table class="twb-table twb-classical">
+    <caption class="hrv-sr">Comparative manuscript intervals and witness counts across {rows.length} works of antiquity</caption>
+    <thead>
+      <tr>
+        <th scope="col">Work &amp; Composition</th>
+        <th scope="col">Earliest Extant Fragment</th>
+        <th scope="col">Earliest Substantial / Complete Manuscript</th>
+        <th scope="col">Cataloged Witnesses &amp; Stemmatic Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map(r => (
+        <tr id={r.id} class={r.highlight ? 'twb-classical__hl' : undefined}>
+          <th scope="row" data-label="Work">
+            <span class="twb-classical__work" set:html={r.workHtml} />
+            <span class="twb-classical__comp">Composed: <span set:html={r.composedHtml} /></span>
+          </th>
+          <td data-label="Earliest fragment" set:html={r.earliestFragmentHtml} />
+          <td data-label="Substantial manuscript" set:html={r.substantialCodexHtml} />
+          <td data-label="Cataloged witnesses" set:html={r.witnessCountHtml} />
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,15 @@
+---
+/** Two-sided comparison frame wrapping the shared hadith-reliability Confrontation body. */
+import Icon from '../hadith-reliability/Icon.astro';
+import Confrontation from '../hadith-reliability/showcase/Confrontation.astro';
+const { showcase } = Astro.props;
+---
+<div class="hrv-sc hrv-sc--confrontation ebj-sc" role="group" aria-label={showcase.ariaLabel || showcase.caption}>
+  {showcase.caption && (
+    <div class="hrv-sc__cap">
+      <Icon name="confrontation" />
+      <span set:html={showcase.captionHtml} />
+    </div>
+  )}
+  <Confrontation sc={showcase.sc} />
+</div>

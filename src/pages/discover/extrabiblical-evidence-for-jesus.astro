@@ -1,299 +1,165 @@
 ---
+/**
+ * /discover/extrabiblical-evidence-for-jesus: sixteen non-Christian literary authors/compilations
+ * and ten excavated first- and second-century inscriptions, ossuaries, and structures, with a
+ * dedicated methodological appendix for corroborative early Christian texts and disputed documents.
+ *
+ * Built on the shared `.hrv` archive reading-room design system + `.hrv.ebj` scoped layer.
+ * Static and stateless: zero React islands, `showOnboarding={false}`, zero storage, zero URL
+ * rewriting on scroll, and 100% preservation of all 5 theme IDs and all 52 `#evidence-<id>` slugs.
+ */
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
-import '../../styles/evidence-feed.css';
-import articleData from '../../data/extrabiblical-evidence-for-jesus.json';
+import Icon from '../../components/discover/hadith-reliability/Icon.astro';
+import SectionNav from '../../components/discover/extrabiblical-evidence/SectionNav.astro';
+import GlanceRows from '../../components/discover/extrabiblical-evidence/GlanceRows.astro';
+import SectionHead from '../../components/discover/extrabiblical-evidence/SectionHead.astro';
+import ConfrontationFrame from '../../components/discover/extrabiblical-evidence/ConfrontationFrame.astro';
+import WitnessStrip from '../../components/discover/extrabiblical-evidence/WitnessStrip.astro';
+import CardGroup from '../../components/discover/extrabiblical-evidence/CardGroup.astro';
+import ClassicalPair from '../../components/discover/extrabiblical-evidence/ClassicalPair.astro';
+import SourcesBlock from '../../components/discover/extrabiblical-evidence/SourcesBlock.astro';
+import * as CONTENT from '../../utils/extrabiblicalEvidence/content.js';
+import { loadExtrabiblicalEvidence } from '../../utils/extrabiblicalEvidence/model.js';
+import {
+  BASE,
+  BASE_PATH,
+  OG_IMAGE,
+  SITE_URL,
+  DATE_PUBLISHED,
+  DATE_MODIFIED,
+  GLANCE_ID,
+  SOURCES_ID,
+  CATALOG_SLUG,
+  discoverHref,
+} from '../../utils/extrabiblicalEvidence/config.js';
+import { buildBreadcrumbSchema, SITE_NAME, DEFAULT_LOGO_URL } from '../../utils/seoFactory.js';
+import { tl } from '../../utils/hadithReliability/render.js';
+import '../../styles/hadith-reliability.css';
+import '../../styles/extrabiblical-evidence.css';
 
-const pageTitle = articleData.title || "Historical Extrabiblical Evidence for Jesus";
-const pageDesc = "Explore 62 verified Ante-Nicene non-Christian sources, Roman records, Jewish testimonies, and archaeological finds confirming the historical Jesus.";
-const pageKeywords = "evidence for jesus, historical jesus, extrabiblical evidence, tacitus, josephus, early christianity";
-const ogImage = "/media/extrabiblical_evidence/cover.jpg";
+const model = loadExtrabiblicalEvidence(CONTENT);
+const { seo, header, heroWitnesses, labels, nav, glance, sections, sources, closing } = model;
 
-// Top-level immutable theme pipeline mapped dynamically from JSON
-const sortedThemes = articleData.themes;
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : SITE_URL;
+const canonicalURL = `${site}${BASE_PATH}`;
+const ogImage = `${site}${OG_IMAGE}`;
 
-// Pure functional pipeline (L6 pattern) to extract, parse, and chronologically sort evidence instances
-const allEvidences = sortedThemes
-  .flatMap(theme =>
-    theme.evidences.map(ev => {
-      // Robust regex split: handles em-dash, en-dash, or standard hyphen with liberal whitespace
-      const nameParts = ev.name.split(/\s*[-–—]\s*/);
-      
-      return {
-        ...ev,
-        themeId: theme.id,
-        themeTitle: theme.title.split(':')[0],
-        mainTitle: nameParts[0],
-        subTitle: nameParts.length > 1 ? nameParts[1] : ev.sourceType,
-        // Utilize the actual historical string representation rather than forcibly hacking integers
-        displayDate: ev.dateStr || `c. ${ev.dateInt}`
-      };
-    })
-  )
-  .sort((a, b) => a.dateInt - b.dateInt);
-
-// Scholar Highlighter Logic (parses **markdown** into styled semantic tags)
-const textHighlighter = (str) => {
-  if (!str) return '';
-  return str.replace(/\*\*(.*?)\*\*/g, '<span class="quote-highlight">$1</span>');
-};
-
-const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
-const canonicalURL = `${siteUrl}${base}/discover/extrabiblical-evidence-for-jesus`;
-
-const schemaObj = {
-  "@context": "https://schema.org",
-  "@graph": [
+// JSON-LD: BreadcrumbList (unique URLs — zero duplicate /discover) + Article (with citations).
+// No FAQPage or ClaimReview.
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    buildBreadcrumbSchema([
+      { name: 'Ready Apologia', url: `${site}${BASE}/` },
+      { name: 'Discover', url: `${site}${BASE}/discover` },
+      { name: seo.title, url: canonicalURL },
+    ]),
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
-        { "@type": "ListItem", "position": 2, "name": "Discover", "item": `${siteUrl}${base}/discover` },
-        { "@type": "ListItem", "position": 3, "name": "Christianity · History", "item": `${siteUrl}${base}/discover` },
-        { "@type": "ListItem", "position": 4, "name": pageTitle, "item": canonicalURL }
-      ]
+      '@type': 'Article',
+      '@id': `${canonicalURL}#article`,
+      headline: seo.title,
+      description: seo.description,
+      url: canonicalURL,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+      image: [ogImage],
+      inLanguage: 'en',
+      author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+      publisher: {
+        '@type': 'Organization',
+        name: SITE_NAME,
+        logo: { '@type': 'ImageObject', url: DEFAULT_LOGO_URL },
+      },
+      datePublished: DATE_PUBLISHED,
+      dateModified: DATE_MODIFIED,
+      citation: model.citations.map(c => ({ '@type': 'CreativeWork', name: c.name, url: c.url })),
     },
-    {
-      "@type": "Article",
-      "@id": `${canonicalURL}#article`,
-      "headline": pageTitle,
-      "description": pageDesc,
-      "image": `${siteUrl}${base}${ogImage}`,
-      "url": canonicalURL,
-      "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalURL },
-      "author": { "@type": "Organization", "name": "Ready Apologia" },
-      "publisher": { "@type": "Organization", "name": "Ready Apologia", "logo": { "@type": "ImageObject", "url": `${siteUrl}${base}/assets/logo.png` } }
-    }
-  ]
+  ],
 };
 ---
-
-<Layout 
-  title={pageTitle} 
-  description={pageDesc} 
-  keywords={pageKeywords} 
-  ogImage={ogImage}
-  ogType="article"
+<Layout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
   canonicalURL={canonicalURL}
   ogUrl={canonicalURL}
-  schema={schemaObj}
-  theme="evidence-mode"
+  ogImage={ogImage}
+  ogType="article"
+  schema={schema}
+  showOnboarding={false}
 >
-  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'extrabiblical-evidence-for-jesus' }} />
-  <div class="evidence-page-wrapper">
-    
-    <div class="meta-header">
-      <a href="/discover" class="back-btn" aria-label="Go back to Discover tab">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-        Discover
-      </a>
-    </div>
-
-    <header class="hero-section">
-      <div class="hero-tag">
-        <div class="dot" aria-hidden="true"></div>
-        Extrabiblical Catalog
-      </div>
-      <h1 class="hero-title">Evidence for<br/>Jesus</h1>
-      <p class="hero-desc">{articleData.description}</p>
-    </header>
-
-    {/* Accessible Tablist for Filtering */}
-    <nav class="filter-pills-container" id="filter-container" aria-label="Evidence themes filter">
-      <button class="filter-pill active" data-filter="all" aria-pressed="true">All</button>
-      {sortedThemes.map(theme => (
-        <button class="filter-pill" data-filter={theme.id} aria-pressed="false">{theme.title.split(':')[0]}</button>
-      ))}
-    </nav>
-
-    {/* Live Region for Screenreaders */}
-    <main class="timeline-container" id="timeline-root" aria-live="polite">
-      <div class="timeline-line-vertical" aria-hidden="true"></div>
-      
-      {allEvidences.map((ev) => (
-        <div class="timeline-row evidence-item" data-theme={ev.themeId} id={`evidence-${ev.id}`}>
-          <div class="timeline-node-container" aria-hidden="true">
-             <div class="timeline-circle">
-               {/* Compress the long string dates precisely for the small timeline node */}
-               {ev.displayDate.replace('AD ', '').replace('c. ', 'c.')}
-             </div>
+  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: CATALOG_SLUG }} />
+  <article class="hrv ebj" id="top">
+    <SectionNav nav={nav} labels={labels} backHref={discoverHref()} canonical={canonicalURL} />
+    <div class="hrv-wrap">
+      <header class="hrv-case-head ebj-head">
+        <p class="hrv-eyebrow" set:html={tl(header.eyebrow)} />
+        <h1 class="hrv-case-h1 ebj-h1" set:html={header.h1Html} />
+        <p class="hrv-hook ebj-hook" set:html={header.hookHtml} />
+        <a class="ebj-head__context" href={`#${SOURCES_ID}`} title={header.contextText}>
+          <span set:html={header.contextHtml} />
+          <Icon name="chevronRight" />
+        </a>
+        {heroWitnesses && (
+          <div class="ebj-hero-wit">
+            <WitnessStrip w={heroWitnesses} />
           </div>
-          <div class="timeline-connector" aria-hidden="true"></div>
-          
-          <article class="timeline-card" aria-labelledby={`title-${ev.id}`}>
-             <header class="card-eyebrow">
-               <span class="card-subtitle">{ev.subTitle}</span>
-               <span class="card-theme-badge">{ev.themeTitle}</span>
-             </header>
-             
-             <div class="card-title-group">
-               <h3 class="card-title" id={`title-${ev.id}`}>{ev.mainTitle}</h3>
-               {ev.nameDesc && (
-                 <button 
-                   class="author-bio-toggle" 
-                   aria-expanded="false" 
-                   aria-controls={`bio-${ev.id}`}
-                   aria-label={`Toggle author biography for ${ev.mainTitle}`}
-                 >
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                 </button>
-               )}
-             </div>
-             
-             {/* Biographical Container decoupled from DOM click logic via ARIA controls */}
-             {ev.nameDesc && (
-               <div class="author-bio-container" id={`bio-${ev.id}`} hidden>
-                 <p class="author-bio-text">{ev.nameDesc}</p>
-               </div>
-             )}
-             
-             <div class="card-quote-wrapper">
-               <blockquote class="card-quote" set:html={`"${textHighlighter(ev.quote)}"`}></blockquote>
-             </div>
-             
-             {ev.keyFact && (
-               <div class="card-key-fact" role="note">
-                 {ev.keyFact.replace(/\*\*/g, '')}
-               </div>
-             )}
-             
-             {ev.explanation && (
-               <div class="collapsible-content">
-                 <p class="card-explanation collapsed" id={`desc-${ev.id}`}>{ev.explanation}</p>
-                 <button class="read-more-btn" aria-expanded="false" aria-controls={`desc-${ev.id}`}>Read more...</button>
-               </div>
-             )}
-             
-             {ev.urls && ev.urls.length > 0 && (
-                <div class="card-urls">
-                  {ev.urls.map(urlObj => (
-                    <a href={urlObj.url} target="_blank" rel="noopener noreferrer" class="url-link">
-                      🔗 {urlObj.title.replace(/Wikipedia/gi, 'Source')}
-                    </a>
-                  ))}
-                </div>
-             )}
-          </article>
-        </div>
+        )}
+        {header.framingHtml && <div class="ebj-framing ebj-pair__body" set:html={header.framingHtml} />}
+        {header.whosWhoHtml && (
+          <details class="hrv-disclosure ebj-deeper ebj-whos-who">
+            <summary>
+              <span set:html={tl(header.whosWhoSummary)} />
+              <Icon name="chevronDown" />
+            </summary>
+            <div class="hrv-disclosure__body ebj-pair__body" set:html={header.whosWhoHtml} />
+          </details>
+        )}
+        {model.emphasisNote && <p class="ebj-emph" set:html={tl(model.emphasisNote)} />}
+      </header>
+
+      <section class="ebj-glance-sec" id={GLANCE_ID} aria-labelledby={`${GLANCE_ID}-h`}>
+        <h2 class="hrv-eyebrow ebj-glance-sec__h" id={`${GLANCE_ID}-h`} set:html={tl(labels.glance)} />
+        <GlanceRows rows={glance} />
+      </section>
+
+      {sections.map(s => (
+        <section
+          class={`hrv-sec ebj-sec${s.isItem ? '' : ' ebj-sec--appendix'}`}
+          id={s.id}
+          aria-labelledby={`${s.id}-h`}
+        >
+          <SectionHead s={s} />
+          {s.showcase && <ConfrontationFrame showcase={s.showcase} />}
+          {s.introHtml && <p class="ebj-intro" set:html={s.introHtml} />}
+          {s.groups.length > 0 && (
+            <div class="ebj-say">
+              {labels.sourcesWhat && <p class="hrv-eyebrow ebj-what" set:html={tl(labels.sourcesWhat)} />}
+              <div class="ebj-say__groups">{s.groups.map(g => <CardGroup g={g} labels={labels} />)}</div>
+            </div>
+          )}
+          <ClassicalPair classical={s.classical} evaluation={s.evaluation} deeper={s.deeper} />
+        </section>
       ))}
-    </main>
 
-  </div>
+      <section class="hrv-sec ebj-sec ebj-sec--sources" id={SOURCES_ID} aria-labelledby={`${SOURCES_ID}-h`}>
+        <div class="hrv-q__head ebj-sec__head">
+          <span class="hrv-q__num ebj-sec__mark" aria-hidden="true"><Icon name="book" /></span>
+          <h2 class="hrv-q__title" id={`${SOURCES_ID}-h`} set:html={tl(labels.sources)} />
+        </div>
+        <SourcesBlock groups={sources} />
+        <div class="ebj-closing">
+          <h2 class="ebj-closing__h" id="closing-h" set:html={tl(closing.heading || labels.closingHeading)} />
+          <div class="ebj-closing__body" set:html={closing.html} />
+        </div>
+        {labels.backToTop && (
+          <a class="ebj-top" href="#top">
+            <Icon name="chevronDown" class="ebj-top__icon" />
+            <span set:html={tl(labels.backToTop)} />
+          </a>
+        )}
+      </section>
+    </div>
+  </article>
+  <script src="../../components/discover/extrabiblical-evidence/client.js"></script>
 </Layout>
-
-<script>
-  import { replaceUrl } from '../../utils/url_history.js';
-  import {
-    setupInitialHashScroll,
-    setupSectionObserver
-  } from '../../utils/section_navigator.js';
-
-  let _cleanupHashScroll = null;
-  let _cleanupHashObserver = null;
-
-  // Stop the hash-scroll retries and the scroll-spy (which rewrites the URL) before the page is swapped
-  // out; otherwise they keep running, and can rewrite the next page's URL.
-  document.addEventListener('astro:before-swap', () => {
-    _cleanupHashScroll?.();
-    _cleanupHashObserver?.();
-    _cleanupHashScroll = _cleanupHashObserver = null;
-  });
-
-  function initEvidenceFeed() {
-    // 1. Hardware Accelerated Filtering via Event Delegation
-    const filterContainer = document.getElementById('filter-container');
-    const filterPills = document.querySelectorAll('.filter-pill');
-    const evidenceItems = document.querySelectorAll('.evidence-item');
-    
-    // Ensure we don't bind duplicates if script runs multiple times
-    if (!filterContainer || filterContainer.hasAttribute('data-initialized')) return;
-    filterContainer.setAttribute('data-initialized', 'true');
-    
-    // Event delegation blocks thrashing by binding only 1 master listener
-    filterContainer.addEventListener('click', (e) => {
-      const pill = e.target.closest('.filter-pill');
-      if (!pill) return;
-      
-      // Update ARIA accessible states
-      filterPills.forEach(p => {
-        p.classList.remove('active');
-        p.setAttribute('aria-pressed', 'false');
-      });
-      pill.classList.add('active');
-      pill.setAttribute('aria-pressed', 'true');
-      
-      const filterValue = pill.getAttribute('data-filter');
-      
-      // Toggle declarative hidden attribute instead of raw JS element style blocks
-      evidenceItems.forEach(item => {
-        item.hidden = (filterValue !== 'all' && item.dataset.theme !== filterValue);
-      });
-      
-      // Slide the horizontally scrollable pill track to fully expose and center the selected pill
-      pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    });
-
-    // 2. Decoupled Bio Toggling (A11Y compliant & indestructible)
-    document.querySelectorAll('.author-bio-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('aria-controls');
-        const target = document.getElementById(targetId);
-        if (!target) return;
-        
-        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!isExpanded));
-        target.hidden = isExpanded;
-      });
-    });
-
-    // 3. Decoupled Read More (A11Y compliant & indestructible)
-    document.querySelectorAll('.read-more-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('aria-controls');
-        const target = document.getElementById(targetId);
-        if (!target) return;
-        
-        target.classList.remove('collapsed');
-        btn.hidden = true;
-        
-        // Announce to screenreader the element has been fully unclipped
-        btn.setAttribute('aria-expanded', 'true');
-      });
-    });
-
-    // 4. URL Hash Navigation & Section Linking
-    if (_cleanupHashScroll) _cleanupHashScroll();
-    if (_cleanupHashObserver) _cleanupHashObserver();
-
-    let initialHashLock = true;
-    _cleanupHashScroll = setupInitialHashScroll({
-      offset: 110,
-      onComplete: () => {
-        initialHashLock = false;
-      }
-    });
-
-    _cleanupHashObserver = setupSectionObserver({
-      selector: '.evidence-item',
-      rootMargin: '-20% 0px -70% 0px',
-      isLocked: () => initialHashLock,
-      updateUrl: true
-    });
-
-    evidenceItems.forEach(item => {
-      item.addEventListener('click', () => {
-        if (item.id) replaceUrl(`#${item.id}`);
-      });
-    });
-  }
-
-  // Gracefully handles standard page load and Astro View Transitions
-  document.addEventListener('astro:page-load', initEvidenceFeed);
-  // Fallback if View Transitions is bypassed
-  if (document.readyState !== 'loading') {
-    initEvidenceFeed();
-  } else {
-    document.addEventListener('DOMContentLoaded', initEvidenceFeed);
-  }
-</script>

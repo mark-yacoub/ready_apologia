@@ -1,0 +1,8 @@
+---
+/** Every primary repository and scripture link cited on the page, grouped via shared SourcesList. */
+import SourcesList from '../hadith-reliability/SourcesList.astro';
+const { groups } = Astro.props;
+---
+<div class="twb-sources">
+  <SourcesList groups={groups} />
+</div>

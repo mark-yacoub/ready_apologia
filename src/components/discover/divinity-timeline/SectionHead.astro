@@ -1,0 +1,17 @@
+---
+/**
+ * Section header for numbered evidentiary dossiers (`01`..`05`) and the
+ * unnumbered Methodology & Scope audit section.
+ */
+const { num = null, eyebrow, title, leadHtml, headingId } = Astro.props;
+---
+<header class="dtl-sec__header">
+  <div class="hrv-q__head dtl-sec__head">
+    {num && <span class="hrv-q__num" aria-hidden="true">{num}</span>}
+    <div class="dtl-sec__titles">
+      <p class="hrv-eyebrow dtl-sec__eyebrow">{eyebrow}</p>
+      <h2 class="hrv-q__title dtl-sec__title" id={headingId}>{title}</h2>
+    </div>
+  </div>
+  <p class="dtl-sec__lead" set:html={leadHtml} />
+</header>

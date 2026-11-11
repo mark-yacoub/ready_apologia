@@ -39,6 +39,11 @@ import {
 } from './muhammadSlavery/config.js';
 import * as ORV_CONTENT from './originsOfRevelation/content.js';
 import { loadOriginsOfRevelation } from './originsOfRevelation/model.js';
+import { buildDivinityTimelinePage } from './divinityTimeline/model.js';
+import * as EBJ_CONTENT from './extrabiblicalEvidence/content.js';
+import { loadExtrabiblicalEvidence } from './extrabiblicalEvidence/model.js';
+import * as TWB_CONTENT from './trustworthinessBible/content.js';
+import { loadTrustworthinessBible } from './trustworthinessBible/model.js';
 
 /**
  * @typedef {Object} HomeAuditTab
@@ -102,8 +107,11 @@ import { loadOriginsOfRevelation } from './originsOfRevelation/model.js';
  * @property {number} msAnswersCount
  * @property {number} orvAccountsCount
  * @property {number} trustBibleCount
- * @property {number} extrabiblicalCount
+ * @property {number} trustBibleSectionsCount
+ * @property {number} extrabiblicalLiteraryCount
+ * @property {number} extrabiblicalArchCount
  * @property {number} divinityTimelineCount
+ * @property {number} divinityTimelineLinesCount
  * @property {number} dcNtVersesCount        Divinity of Christ: New Testament verses
  * @property {number} dcOtVersesCount        Divinity of Christ: Old Testament verses
  * @property {number} dcFathersQuotesCount   Divinity of Christ: Ante-Nicene Father quotations
@@ -181,8 +189,11 @@ export const STAT_KEYS = Object.freeze([
   'msAnswersCount',
   'orvAccountsCount',
   'trustBibleCount',
-  'extrabiblicalCount',
+  'trustBibleSectionsCount',
+  'extrabiblicalLiteraryCount',
+  'extrabiblicalArchCount',
   'divinityTimelineCount',
+  'divinityTimelineLinesCount',
 ]);
 
 
@@ -254,9 +265,6 @@ export async function loadHomeStats() {
   const discoverCatalog = readJson('../data/discoverCatalog.json');
   const quranMeta = readJson('../data/quran/arabic/meta.json');
   const nickelAnnotations = readJson('../data/quran/commentary/nickel_annotations.json');
-  const divinityTimeline = readJson('../data/divinityTimeline.json');
-  const extrabiblicalData = readJson('../data/extrabiblical-evidence-for-jesus.json');
-  const trustBibleData = readJson('../data/trustworthiness-of-the-bible.json');
 
   // 1. Bible & SQLite corpus counts
   const scalar = (sql) => Number(query(sql)[0]?.c);
@@ -365,9 +373,17 @@ export async function loadHomeStats() {
   const orvModel = loadOriginsOfRevelation(ORV_CONTENT);
   const orvAccountsCount = orvModel.sections?.length;
 
-  const trustBibleCount = trustBibleData.totalEvidences;
-  const extrabiblicalCount = extrabiblicalData.totalEvidences;
-  const divinityTimelineCount = Array.isArray(divinityTimeline) ? divinityTimeline.length : undefined;
+  const twbModel = loadTrustworthinessBible(TWB_CONTENT);
+  const trustBibleCount = twbModel.itemCount;
+  const trustBibleSectionsCount = twbModel.sectionCount;
+
+  const ebjModel = loadExtrabiblicalEvidence(EBJ_CONTENT);
+  const extrabiblicalLiteraryCount = ebjModel.literaryAuthorCount;
+  const extrabiblicalArchCount = ebjModel.archaeologyCount;
+
+  const dtlModel = buildDivinityTimelinePage(process.cwd());
+  const divinityTimelineCount = dtlModel.sections.reduce((sum, s) => sum + s.cards.length, 0);
+  const divinityTimelineLinesCount = dtlModel.sections.length;
 
   const rawStats = {
     ...evidenceDetail,
@@ -424,8 +440,11 @@ export async function loadHomeStats() {
     msAnswersCount,
     orvAccountsCount,
     trustBibleCount,
-    extrabiblicalCount,
+    trustBibleSectionsCount,
+    extrabiblicalLiteraryCount,
+    extrabiblicalArchCount,
     divinityTimelineCount,
+    divinityTimelineLinesCount,
   };
 
   cachedStats = Object.freeze(validateStats(rawStats));

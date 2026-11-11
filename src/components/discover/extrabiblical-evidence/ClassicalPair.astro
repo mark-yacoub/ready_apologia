@@ -1,0 +1,56 @@
+---
+/**
+ * Formal 4-Move Scholarly Assessment:
+ *   1. Named scholarly counter-hypotheses (slate `.hrv-scholar`)
+ *   2. Assessment from manuscripts, philology, and stratigraphy (teal `.hrv-eval`)
+ *   3. Optional collapsed `<details>` deep-dive notes
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { classical, evaluation, deeper = [] } = Astro.props;
+---
+{classical && (
+  <div class="hrv-scholar ebj-pair">
+    <h3 class="hrv-scholar__h">
+      <Icon name="quote" />
+      <span set:html={tl(classical.label)} />
+    </h3>
+    <div class="ebj-pair__body" set:html={classical.html} />
+    {classical.deeper && (
+      <details class="hrv-disclosure ebj-pair__more">
+        <summary>
+          <span set:html={tl(classical.deeper.summary)} />
+          <Icon name="chevronDown" />
+        </summary>
+        <div class="hrv-disclosure__body ebj-pair__body" set:html={classical.deeper.html} />
+      </details>
+    )}
+  </div>
+)}
+{evaluation && (
+  <div class="hrv-eval ebj-pair">
+    <h3 class="hrv-eval__h">
+      <Icon name="search" />
+      <span set:html={tl(evaluation.label)} />
+    </h3>
+    <div class="ebj-pair__body" set:html={evaluation.html} />
+    {evaluation.deeper && (
+      <details class="hrv-disclosure ebj-pair__more">
+        <summary>
+          <span set:html={tl(evaluation.deeper.summary)} />
+          <Icon name="chevronDown" />
+        </summary>
+        <div class="hrv-disclosure__body ebj-pair__body" set:html={evaluation.deeper.html} />
+      </details>
+    )}
+  </div>
+)}
+{deeper.map(d => (
+  <details class="hrv-disclosure ebj-deeper">
+    <summary>
+      <span set:html={tl(d.summary)} />
+      <Icon name="chevronDown" />
+    </summary>
+    <div class="hrv-disclosure__body ebj-pair__body" set:html={d.html} />
+  </details>
+))}

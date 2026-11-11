@@ -1,0 +1,60 @@
+---
+/**
+ * Transposed 7-writer Geisler & Nix (1986, p. 431) ante-Nicene patristic citation breakdown:
+ * 7 church fathers as rows + 5 NT divisions and Row Total as columns (7 columns total, fitting
+ * cleanly inside the 672 px desktop column with zero horizontal scroll).
+ *
+ * Legacy #gospels, #acts, #pauline, #general, #revelation, and #other element IDs live on the
+ * always-visible division-totals takeaway strip so jump links work on both mobile and desktop.
+ */
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { table } = Astro.props;
+---
+<div class="twb-patristic-block">
+  {table.otherAliasId && <span class="twb-alias" id={table.otherAliasId} aria-hidden="true"></span>}
+  <div class="twb-tbl-takeaway twb-patristic-summary">
+    <p class="twb-patristic-summary__lead" set:html={tl(table.takeaway)} />
+    <ul class="twb-patristic-pills">
+      {table.divisions.map(d => (
+        <li class="twb-patristic-pill" id={d.id}>
+          <span class="twb-patristic-pill__k" set:html={tl(d.label)} />
+          <strong class="twb-patristic-pill__v">{d.total}</strong>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="twb-table-wrap twb-patristic-tbl">
+    <table class="twb-table twb-patristic">
+      <caption class="twb-tbl-cap" set:html={tl(table.caption)} />
+      <thead>
+        <tr>
+          <th scope="col">Ante-Nicene Writer</th>
+          {table.divisions.map(d => (
+            <th scope="col">{d.shortLabel}</th>
+          ))}
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {table.writers.map(w => (
+          <tr>
+            <th scope="row" data-label="Writer" set:html={tl(w.writer)} />
+            {table.divisions.map(d => (
+              <td data-label={d.shortLabel}>{w[d.key]}</td>
+            ))}
+            <td data-label="Total"><strong>{w.total}</strong></td>
+          </tr>
+        ))}
+        <tr class="twb-classical__hl">
+          <th scope="row" data-label="Summary">Counted Ante-Nicene Total (7 Writers)</th>
+          {table.divisions.map(d => (
+            <td data-label={d.shortLabel}><strong>{d.total}</strong></td>
+          ))}
+          <td data-label="Grand total"><strong>{table.grandTotal}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    {table.footnoteHtml && <p class="twb-tbl-foot" set:html={table.footnoteHtml} />}
+  </div>
+</div>

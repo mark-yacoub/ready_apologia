@@ -1,0 +1,25 @@
+---
+/** "At a glance": compact 5-row index of the primary numbered categories (each row >= 48px tap area). */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { rows } = Astro.props;
+---
+<ol class="ebj-glance">
+  {rows.map(r => (
+    <li>
+      <a class="ebj-glance__row" href={r.href}>
+        <span class="ebj-glance__n" aria-hidden="true">{String(r.n).padStart(2, '0')}</span>
+        <span class="ebj-glance__body">
+          <span class="ebj-glance__title" set:html={r.titleHtml} />
+          {r.takeawayHtml && <span class="ebj-glance__take" set:html={r.takeawayHtml} />}
+          {r.chips.length > 0 && (
+            <span class="hrv-badges ebj-glance__chips">
+              {r.chips.map(c => <span set:html={tl(c)} />)}
+            </span>
+          )}
+        </span>
+        <Icon name="chevronRight" class="ebj-glance__chev" />
+      </a>
+    </li>
+  ))}
+</ol>

@@ -1,0 +1,36 @@
+---
+/**
+ * Standard primary-evidence card for variant tiers, disputed passages, epigraphy, non-Christian
+ * historians, counter-cultural testimony, undesigned coincidences, onomastic analysis, patristics,
+ * canon recognition, and historical synthesis.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import PatristicTable from './PatristicTable.astro';
+const { c, verifyAria, patristicTable = null } = Astro.props;
+---
+<article class="hrv-ev twb-card" id={c.id}>
+  {c.aliasId && <span class="twb-alias" id={c.aliasId} aria-hidden="true"></span>}
+  {c.aliasIds && c.aliasIds.map(a => <span class="twb-alias" id={a} aria-hidden="true"></span>)}
+  <div class="hrv-ev__head twb-card__head">
+    <span class="hrv-ev__n" aria-hidden="true">{c.n}</span>
+    <h4 class="twb-card__title" set:html={c.titleHtml} />
+  </div>
+  {c.badgeHtml && <div class="hrv-badges twb-card__badges"><span set:html={c.badgeHtml} /></div>}
+  {c.metaHtml && <p class="twb-card__meta" set:html={c.metaHtml} />}
+  <p class="twb-card__note" set:html={c.noteHtml} />
+  {c.renderPatristicTable && patristicTable && <PatristicTable table={patristicTable} />}
+  {c.exampleHtml && <p class="twb-card__example" set:html={c.exampleHtml} />}
+  {c.quoteHtml && (
+    <blockquote class="hrv-quote twb-card__q">
+      <p class="hrv-quote__en" set:html={c.quoteHtml} />
+      <footer class="twb-card__cite" set:html={c.quoteCiteHtml} />
+    </blockquote>
+  )}
+  {c.chips.length > 0 && (
+    <div class="hrv-verify" role="group" aria-label={verifyAria}>
+      {c.chips.map(ch => (
+        <a href={ch.href} {...ch.attrs}><span set:html={ch.labelHtml} />{ch.external && <Icon name="external" />}</a>
+      ))}
+    </div>
+  )}
+</article>

@@ -1,0 +1,52 @@
+---
+/**
+ * Sticky section bar for `/discover/divinity-timeline`:
+ *   Back to Discover · horizontally scrollable section chips · Copy link button.
+ * Stateless client.js marks the active section chip (`aria-current="location"`)
+ * without mutating `window.location` or browser storage.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+
+const { chips, canonicalUrl, backHref = '/discover' } = Astro.props;
+---
+<nav class="dtl-nav" aria-label="Article sections" data-dtl-nav>
+  <a
+    class="hrv-iconbtn dtl-nav__back"
+    href={backHref}
+    aria-label="Back to Discover"
+  >
+    <Icon name="chevronLeft" />
+    <span class="dtl-nav__backtext" aria-hidden="true">Discover</span>
+  </a>
+  <div class="dtl-nav__track" data-dtl-track>
+    <ol class="dtl-nav__list">
+      {chips.map((chip) => (
+        <li>
+          <a
+            class="dtl-nav__chip"
+            href={`#${chip.id}`}
+            data-dtl-chip={chip.id}
+          >
+            {chip.num && (
+              <span class="dtl-nav__n" aria-hidden="true">{chip.num}</span>
+            )}
+            <span>{chip.label}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+  <button
+    class="hrv-iconbtn dtl-nav__copy"
+    type="button"
+    data-dtl-copy
+    data-url={canonicalUrl}
+    data-copied="Section link copied"
+    data-failed="Unable to copy link"
+    aria-label="Copy link to current section"
+    title="Copy link to current section"
+  >
+    <Icon name="link" />
+  </button>
+</nav>
+<div class="hrv-toast" role="status" aria-live="polite" data-dtl-toast></div>

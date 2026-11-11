@@ -30,6 +30,10 @@ test('editorial brackets stay literal; only `](http` makes a link', () => {
 test('bold may contain italics (dataset pattern)', () => {
   assert.equal(r.inline('**two bowings per *rakʿah* (four total)**').replace(/<span class="hrv-tlm">ʿ<\/span>/g, 'ʿ'),
     '<strong>two bowings per <em>rakʿah</em> (four total)</strong>');
+  assert.equal(r.inline('**two bowings per *rakʿah***').replace(/<span class="hrv-tlm">ʿ<\/span>/g, 'ʿ'),
+    '<strong>two bowings per <em>rakʿah</em></strong>');
+  assert.equal(r.inline('The **movable *nu*** and [*De Morte* **bold *end***](https://sunnah.com/bukhari:1)'),
+    'The <strong>movable <em>nu</em></strong> and <a class="hrv-link hrv-link--sunnah" href="https://sunnah.com/bukhari:1" target="_blank" rel="noopener noreferrer"><em>De Morte</em> <strong>bold <em>end</em></strong></a>');
   assert.match(r.inline('***Ifrād* (Ḥajj Alone): text**'), /^<strong><em>Ifrād<\/em> \(Ḥajj Alone\): text<\/strong>$/);
 });
 

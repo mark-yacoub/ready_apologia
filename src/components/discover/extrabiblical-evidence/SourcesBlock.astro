@@ -1,0 +1,8 @@
+---
+/** Grouped primary-source bibliography using the shared hadith-reliability SourcesList. */
+import SourcesList from '../hadith-reliability/SourcesList.astro';
+const { groups } = Astro.props;
+---
+<div class="ebj-sources">
+  <SourcesList groups={groups} />
+</div>

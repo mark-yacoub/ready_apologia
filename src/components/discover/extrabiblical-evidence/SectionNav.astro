@@ -1,0 +1,40 @@
+---
+/**
+ * Sticky section bar: back to Discover · scrollable section chips · copy-section-link button.
+ * Stateless client.js highlights the active section chip (aria-current) and copies canonical + #id
+ * on tap without rewriting the browser URL or touching storage.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+const { nav, labels, backHref, canonical } = Astro.props;
+---
+<nav class="ebj-nav" aria-label={labels.navAria} data-ebj-nav>
+  <a class="hrv-iconbtn ebj-nav__back" href={backHref} aria-label={labels.back}>
+    <Icon name="chevronLeft" />
+    <span class="ebj-nav__backtext" aria-hidden="true">{labels.back}</span>
+  </a>
+  <div class="ebj-nav__track" data-ebj-track>
+    <ol class="ebj-nav__list">
+      {nav.map(s => (
+        <li>
+          <a class="ebj-nav__chip" href={`#${s.id}`} data-ebj-chip={s.id}>
+            {s.n != null && <span class="ebj-nav__n" aria-hidden="true">{s.n}</span>}
+            <span set:html={s.labelHtml} />
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+  <button
+    class="hrv-iconbtn ebj-nav__copy"
+    type="button"
+    data-ebj-copy
+    data-url={canonical}
+    data-copied={labels.copied}
+    data-failed={labels.copyFailed}
+    aria-label={labels.copyLink}
+    title={labels.copyLink}
+  >
+    <Icon name="link" />
+  </button>
+</nav>
+<div class="hrv-toast" role="status" aria-live="polite" data-ebj-toast></div>

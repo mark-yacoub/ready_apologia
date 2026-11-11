@@ -1,0 +1,50 @@
+---
+/**
+ * Single deduplicated witness card:
+ *   - carries primary `id="evidence-<id>"` + `.ebj-alias` spans for merged legacy `#evidence-*` slugs
+ *   - displays author/artifact heading -> scholarly credential & transmission note ->
+ *     either verbatim `.hrv-quote.ebj-card__q` (with optional Greek/Latin/Hebrew/Aramaic script)
+ *     or material/stratigraphic `.ebj-finding.ebj-card__q` (never a fake blockquote) ->
+ *     optional 2-column `.ebj-redline` comparison -> verify chips.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import RedlineFrame from './RedlineFrame.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { e, verifyAria, findingTag } = Astro.props;
+---
+<article class="hrv-ev ebj-card" id={e.anchor}>
+  {e.aliasAnchors.map(a => <span id={a} class="ebj-alias" aria-hidden="true"></span>)}
+  <header class="hrv-ev__head">
+    {e.n != null && <span class="hrv-ev__n" aria-hidden="true">{e.n}</span>}
+    <h4 class="hrv-ev__label" set:html={e.labelHtml} />
+  </header>
+  {e.noteHtml && <p class="ebj-card__note" set:html={e.noteHtml} />}
+  {e.kind === 'finding' ? (
+    <div class="ebj-finding ebj-card__q">
+      <div class="ebj-finding__tag" set:html={tl(findingTag)} />
+      <p class="ebj-finding__body" set:html={e.quoteHtml} />
+    </div>
+  ) : e.originalScript ? (
+    <figure class="hrv-quote ebj-card__q">
+      <blockquote
+        class={e.originalScript.dir === 'rtl' ? 'hrv-quote__ar ebj-script--rtl' : 'ebj-script'}
+        lang={e.originalScript.lang}
+        dir={e.originalScript.dir}
+      >{e.originalScript.text}</blockquote>
+      <figcaption><p class="hrv-quote__en" set:html={e.quoteHtml} /></figcaption>
+    </figure>
+  ) : (
+    <blockquote class="hrv-quote ebj-card__q">
+      <p class="hrv-quote__en" set:html={e.quoteHtml} />
+    </blockquote>
+  )}
+  {e.redline && <RedlineFrame redline={e.redline} />}
+  <div class="hrv-verify" role="group" aria-label={verifyAria}>
+    {e.chips.map(ch => (
+      <a href={ch.href} {...ch.attrs} title={ch.title}>
+        <span set:html={tl(ch.label)} />
+        <Icon name={ch.external ? 'external' : 'chevronRight'} />
+      </a>
+    ))}
+  </div>
+</article>

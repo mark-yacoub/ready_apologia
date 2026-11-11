@@ -1,0 +1,33 @@
+---
+/** Visible witness strip (stacked on mobile, grid on wider viewports; zero horizontal swipe hiding). */
+import Icon from '../hadith-reliability/Icon.astro';
+import Ref from '../hadith-reliability/showcase/Ref.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { w } = Astro.props;
+---
+<div class="hrv-sc hrv-sc--witnesses ebj-wit" role="group" aria-label={w.caption}>
+  {w.caption && (
+    <div class="hrv-sc__cap">
+      <Icon name="witnesses" />
+      <span set:html={tl(w.caption)} />
+    </div>
+  )}
+  <div class="ebj-wit__grid">
+    {w.items.map(x => (
+      <figure class="hrv-wit__card ebj-wit__card">
+        <figcaption>
+          <div class="hrv-wit__who" set:html={tl(x.name)} />
+          {x.metaHtml && <div class="hrv-wit__work" set:html={x.metaHtml} />}
+        </figcaption>
+        {x.positionHtml && <p class="ebj-wit__pos" set:html={x.positionHtml} />}
+        {x.quoteHtml && (
+          <blockquote class="hrv-wit__q ebj-wit__q">
+            <p class="hrv-wit__en" set:html={x.quoteHtml} />
+          </blockquote>
+        )}
+        {x.glossHtml && <p class="ebj-wit__gloss" set:html={x.glossHtml} />}
+        <Ref ref={x.ref} />
+      </figure>
+    ))}
+  </div>
+</div>

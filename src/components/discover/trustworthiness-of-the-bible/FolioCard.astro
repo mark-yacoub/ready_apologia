@@ -1,0 +1,72 @@
+---
+/**
+ * Cornerstone biblical manuscript card with single unified date badge (zero P-04 date duplication),
+ * repository/provenance metadata, verbatim scripture block, verify chips directly beneath the quote,
+ * and lazy-hydrated Cloudflare R2 folio scan disclosure (0 bytes downloaded while closed) with
+ * full-resolution zoom/new-tab affordance when opened.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { plainText } from '../../../utils/hadithReliability/render.js';
+const { c, verifyAria } = Astro.props;
+---
+<article class="hrv-ev twb-card twb-folio" id={c.id}>
+  <div class="hrv-ev__head twb-card__head">
+    <span class="hrv-ev__n" aria-hidden="true">{c.n}</span>
+    <h4 class="twb-card__title" set:html={c.titleHtml} />
+  </div>
+  <div class="hrv-badges twb-folio__badges">
+    <span set:html={c.siglumHtml} />
+    <span set:html={c.dateHtml} />
+  </div>
+  <p class="twb-folio__meta">
+    <strong>Repository:</strong> <span set:html={c.repositoryHtml} /> · <strong>Provenance:</strong> <span set:html={c.provenanceHtml} />
+  </p>
+  <p class="twb-card__note" set:html={c.noteHtml} />
+  <blockquote class="hrv-quote twb-card__q">
+    <p class="hrv-quote__en" set:html={c.quoteHtml} />
+    <footer class="twb-card__cite" set:html={c.quoteCiteHtml} />
+  </blockquote>
+  {c.readingNoteHtml && <p class="twb-folio__reading" set:html={c.readingNoteHtml} />}
+  {c.chips.length > 0 && (
+    <div class="hrv-verify" role="group" aria-label={verifyAria}>
+      {c.chips.map(ch => (
+        <a href={ch.href} {...ch.attrs}><span set:html={ch.labelHtml} />{ch.external && <Icon name="external" />}</a>
+      ))}
+    </div>
+  )}
+  {c.scan && (
+    <details class="hrv-disclosure twb-scan" data-twb-scan>
+      <summary>
+        <span set:html={c.scan.summaryHtml} />
+        <Icon name="chevronDown" />
+      </summary>
+      <div class="hrv-disclosure__body twb-scan__body">
+        <figure class="twb-scan__fig">
+          <a
+            class="twb-scan__img-link"
+            href={c.scan.imgUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              class="twb-scan__img"
+              data-src={c.scan.imgUrl}
+              alt={plainText(c.scan.caption)}
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <figcaption class="twb-scan__cap" set:html={c.scan.captionHtml} />
+        </figure>
+        <a
+          class="twb-scan__open"
+          href={c.scan.imgUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span set:html={c.scan.openLabelHtml} /><Icon name="external" />
+        </a>
+      </div>
+    </details>
+  )}
+</article>

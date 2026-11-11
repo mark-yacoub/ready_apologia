@@ -102,12 +102,12 @@ function codeSpan(raw) {
 
 function emphasis(s) {
   // Bold may contain single-star italics (`**two bowings per *rakʿah***`, `***Ifrād* (Ḥajj Alone)**`),
-  // so bold is resolved first and allows lone `*` inside; italics are resolved afterwards.
+  // so bold is resolved first and allows lone `*` (including the 1st `*` of a closing `***`) inside;
+  // italics are resolved afterwards.
   return s
     .replace(/\*\*\*([^*]+?)\*\*\*/g, '<strong><em>$1</em></strong>')
-    .replace(/\*\*((?:[^*]|\*(?!\*))+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/(^|[^\w*])\*(?!\s)([^*]+?)(?<!\s)\*(?![\w*])/g, '$1<em>$2</em>')
-    .replace(/(^|[^\w*])\*(?!\s)([^*]+?)(?<!\s)\*(?=<\/strong>)/g, '$1<em>$2</em>');
+    .replace(/\*\*((?:[^*]|\*(?!\*)|\*(?=\*\*(?!\*)))+?)\*\*(?!\*)/g, '<strong>$1</strong>')
+    .replace(/(^|[^\w*])\*(?!\s)([^*]+?)(?<!\s)\*(?![\w*])/g, '$1<em>$2</em>');
 }
 
 /** ʿayn/hamza → `.hrv-tlm` (Literata gives them a half-em advance; the Arabic face draws them tight). Text nodes only. */

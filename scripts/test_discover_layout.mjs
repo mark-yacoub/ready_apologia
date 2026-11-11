@@ -72,6 +72,27 @@ const PAGES = {
     card: null, quote: null, chips: null,
     controls: ['.hrv-bar__back', '.hrv-iconbtn', '.ms-start__cta', '.ms-browse__card', '.hrv-row', '.hrv-disclosure > summary'],
   },
+  'divinity-timeline': {
+    path: '/discover/divinity-timeline/',
+    root: '.hrv.dtl',
+    section: '.dtl-sec',
+    card: '.dtl-card', quote: '.dtl-card__q', chips: '.hrv-verify',
+    controls: ['.dtl-nav__chip', '.dtl-nav__back', '.dtl-nav__copy', '.dtl-glance__row', '.dtl-head__context', '.dtl-timeline__link', '.hrv-verify a', '.hrv-disclosure > summary', '.hrv-src', '.dtl-top'],
+  },
+  'extrabiblical-evidence-for-jesus': {
+    path: '/discover/extrabiblical-evidence-for-jesus/',
+    root: '.hrv.ebj',
+    section: '.ebj-sec',
+    card: '.ebj-card', quote: '.ebj-card__q', chips: '.hrv-verify',
+    controls: ['.ebj-nav__chip', '.ebj-nav__back', '.ebj-nav__copy', '.ebj-glance__row', '.ebj-head__context', '.hrv-verify a', '.hrv-disclosure > summary', '.hrv-src', '.ebj-top'],
+  },
+  'trustworthiness-of-the-bible': {
+    path: '/discover/trustworthiness-of-the-bible/',
+    root: '.hrv.twb',
+    section: '.twb-sec',
+    card: '.twb-card', quote: '.twb-card__q', chips: '.hrv-verify',
+    controls: ['.twb-nav__chip', '.twb-nav__back', '.twb-nav__copy', '.twb-glance__row', '.hrv-verify a', '.hrv-disclosure > summary', '.twb-scan__open', '.hrv-src', '.twb-top', '.twb-head__context'],
+  },
 };
 
 const args = process.argv.slice(2);

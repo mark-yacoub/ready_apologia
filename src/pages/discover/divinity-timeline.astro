@@ -1,282 +1,182 @@
 ---
+/**
+ * `/discover/divinity-timeline` — Static `.hrv.dtl` scholarly reference dossier.
+ *
+ * Replaces the legacy Leaflet/KaTeX/Marked/DOMPurify interactive timeline with a
+ * zero-CDN, stateless editorial article examining pre-Nicene inscriptions,
+ * mosaics, Roman and pagan witnesses, first-century Aramaic/Greek creedal
+ * formulas, and second- and third-century papyri before AD 325.
+ *
+ * Preserves all 42 `#event-<id>` anchors uniquely in the rendered HTML.
+ */
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
-import '../../styles/timeline.css';
+import Icon from '../../components/discover/hadith-reliability/Icon.astro';
+import SectionNav from '../../components/discover/divinity-timeline/SectionNav.astro';
+import TimelineShowcase from '../../components/discover/divinity-timeline/TimelineShowcase.astro';
+import GlanceRows from '../../components/discover/divinity-timeline/GlanceRows.astro';
+import SectionHead from '../../components/discover/divinity-timeline/SectionHead.astro';
+import ArtifactCard from '../../components/discover/divinity-timeline/ArtifactCard.astro';
+import HistoriographicalPair from '../../components/discover/divinity-timeline/HistoriographicalPair.astro';
+import ExcludedItemsDisclosure from '../../components/discover/divinity-timeline/ExcludedItemsDisclosure.astro';
+import SourcesBlock from '../../components/discover/divinity-timeline/SourcesBlock.astro';
+import { BASE, discoverHref } from '../../utils/divinityTimeline/config.js';
+import { buildDivinityTimelinePage } from '../../utils/divinityTimeline/model.js';
+import {
+  buildBreadcrumbSchema,
+  DEFAULT_LOGO_URL,
+  SITE_NAME,
+} from '../../utils/seoFactory.js';
 
-import rawDivinityTimeline from '../../data/divinityTimeline.json';
-import { getTimelineViewData } from '../../utils/timelineHelpers.js';
+import '../../styles/hadith-reliability.css';
+import '../../styles/divinity-timeline.css';
 
-const mapData = getTimelineViewData(rawDivinityTimeline);
+const page = buildDivinityTimelinePage();
+const site = Astro.site
+  ? Astro.site.toString().replace(/\/$/, '')
+  : 'https://readyapologia.com';
+const canonicalURL = `${site}${page.path}`;
+const ogImage = `${site}${page.ogImage}`;
 
-const uniqueCountries = [...new Set(mapData.map(e => e.country))].filter(c => c !== "Unknown").sort();
-const uniqueCenturies = [...new Set(mapData.map(e => e.centuryLabel))].sort();
-const uniqueCategories = [...new Set(mapData.map(e => e.category))].sort();
-
-const dynamicCategories = uniqueCategories.map(name => {
-   return { id: name, name: name }
-});
-
-// Vibrant Editorial Palette for Dynamic Category Coloring
-const editorialColors = [
-  '#b91c1c', // Crimson (Archaeology)
-  '#4338ca', // Indigo (Magic)
-  '#15803d', // Emerald (Heresiology)
-  '#a21caf', // Amethyst (Patristics)
-  '#b45309', // Amber (Papyri)
-  '#0f766e', // Teal (Nomina Sacra)
-  '#334155'  // Slate (Fallback for future)
-];
-
-const categoryDict: Record<string, {name: string, color: string}> = {};
-dynamicCategories.forEach((cat, index) => {
-   categoryDict[cat.id] = {
-      name: cat.name,
-      color: editorialColors[index % editorialColors.length]
-   };
-});
-
-const pageTitle = "Archaeological Evidence of the Divine Christ";
-const pageDesc = "Interactive timeline of archaeological and documentary evidence proving early Christian belief in Jesus's divinity long before the Council of Nicaea.";
-const pageKeywords = "divinity of Christ, pre-nicene christology, archaeological evidence for Jesus as God, did early christians believe jesus was god, christian apologetics timeline, council of nicaea myth";
-const ogImage = "/media/divinity_timeline/megiddo_mosaic/image_1.jpg";
-const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
-const canonicalURL = `${siteUrl}${base}/discover/divinity-timeline`;
-
-const schemaObj = {
-  "@context": "https://schema.org",
-  "@graph": [
+const [, articleNode] = page.jsonLd;
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    buildBreadcrumbSchema([
+      { name: 'Ready Apologia', url: `${site}${BASE}/` },
+      { name: 'Discover', url: `${site}${BASE}/discover` },
+      { name: page.meta.breadcrumbLabel, url: canonicalURL },
+    ]),
     {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Ready Apologia", "item": `${siteUrl}${base}/` },
-        { "@type": "ListItem", "position": 2, "name": "Discover", "item": `${siteUrl}${base}/discover` },
-        { "@type": "ListItem", "position": 3, "name": "Christianity · History", "item": `${siteUrl}${base}/discover` },
-        { "@type": "ListItem", "position": 4, "name": pageTitle, "item": canonicalURL }
-      ]
+      ...articleNode,
+      '@context': undefined,
+      '@id': `${canonicalURL}#article`,
+      url: canonicalURL,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+      image: [ogImage],
+      author: { '@type': 'Organization', name: SITE_NAME, url: site },
+      publisher: {
+        '@type': 'Organization',
+        name: SITE_NAME,
+        logo: { '@type': 'ImageObject', url: DEFAULT_LOGO_URL },
+      },
     },
-    {
-      "@type": "Article",
-      "@id": `${canonicalURL}#article`,
-      "headline": pageTitle,
-      "description": pageDesc,
-      "image": `${siteUrl}${base}${ogImage}`,
-      "url": canonicalURL,
-      "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalURL },
-      "author": { "@type": "Organization", "name": "Ready Apologia" },
-      "publisher": { "@type": "Organization", "name": "Ready Apologia", "logo": { "@type": "ImageObject", "url": `${siteUrl}${base}/assets/logo.png` } }
-    }
-  ]
+  ],
 };
 ---
-
-<Layout 
-  title={pageTitle} 
-  description={pageDesc} 
-  keywords={pageKeywords} 
-  ogImage={ogImage} 
-  ogType="article"
+<Layout
+  title={page.meta.metaTitle}
+  description={page.meta.description}
   canonicalURL={canonicalURL}
   ogUrl={canonicalURL}
-  schema={schemaObj}
-  theme="timeline-mode"
+  ogImage={ogImage}
+  ogType="article"
+  schema={schema}
+  showOnboarding={false}
 >
-  <RouteAnalytics eventName="discover_article_view" params={{ article_slug: 'divinity-timeline' }} />
-<divinity-timeline-app data-base-url={base}>
-
-  <!-- Data Store for Astro Transitions -->
-  <div id="timeline-data-store" style="display:none;"
-       data-total-cats={dynamicCategories.length} 
-       data-total-countries={uniqueCountries.length}
-       data-total-cents={uniqueCenturies.length}>
-  </div>
-
-  
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
-
-  <!-- L6 Declarative UI Templates -->
-  <template id="template-video-card">
-    <a class="rich-video-card" target="_blank" rel="noopener noreferrer">
-      <div class="rich-video-thumb">
-        <div class="rich-video-play">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M5 3l14 9-14 9V3z"/></svg>
+  <RouteAnalytics
+    eventName="discover_article_view"
+    params={{ article_slug: page.slug }}
+  />
+  <article class="hrv dtl" id="top">
+    <SectionNav chips={page.navChips} canonicalUrl={canonicalURL} backHref={discoverHref()} />
+    <div class="hrv-wrap">
+      <header class="hrv-case-head dtl-head">
+        <p class="hrv-eyebrow">{page.meta.eyebrow}</p>
+        <h1 class="hrv-case-h1 dtl-h1">{page.meta.h1}</h1>
+        <div class="dtl-intro">
+          {page.introParagraphs.map((pHtml) => (
+            <p set:html={pHtml} />
+          ))}
         </div>
-      </div>
-      <div class="rich-video-info">Watch on YouTube</div>
-    </a>
-  </template>
+        <a
+          class="dtl-head__context"
+          href="#methodology-and-scope"
+          title="View dating methodology, composition vs. copy dates, and excluded artifacts"
+        >
+          <span>
+            Methodology: Stratigraphic sealing, paleographical hand ranges &amp; AD 325 cutoff
+          </span>
+          <Icon name="chevronRight" />
+        </a>
+      </header>
 
-  <template id="template-source-card">
-    <a class="rich-source-card" target="_blank" rel="noopener noreferrer">
-      <div class="rich-source-icon"><img alt="Historical source citation icon"></div>
-      <div class="rich-source-text"></div>
-    </a>
-  </template>
+      <aside class="dtl-framing" aria-labelledby="dtl-framing-h">
+        <p class="hrv-eyebrow dtl-framing__eyebrow">{page.framing.eyebrow}</p>
+        <h2 class="dtl-framing__h" id="dtl-framing-h">{page.framing.heading}</h2>
+        <p class="dtl-framing__p" set:html={page.framing.hypothesesHtml} />
+        <p class="hrv-eyebrow dtl-framing__subh">{page.framing.tiersHeading}</p>
+        <ul class="dtl-framing__tiers">
+          {page.framing.tiers.map((t) => (
+            <li class="dtl-framing__tier">
+              <span class={`dtl-card__tier dtl-card__tier--${t.tier}`}>
+                {t.badge}
+              </span>
+              <span class="dtl-framing__tierbody" set:html={t.bodyHtml} />
+            </li>
+          ))}
+        </ul>
+      </aside>
 
-  <div class="divinity-container">
-    
-    <div class="meta-header">
-      <a href="/discover" class="back-nav">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        Discover
-      </a>
-      <div class="spacer"></div>
-      <button class="filter-trigger-btn" onclick="document.getElementById('filter-modal').showModal()">
-         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-         Filters
-      </button>
-    </div>
+      <TimelineShowcase showcase={page.timelineShowcase} />
 
-    <!-- Vertical Timeline Feed -->
-    <div class="timeline-feed" id="timeline-feed">
-      <div class="timeline-intro">
-         <h1 class="intro-title">Archaeological Evidence of the Divine Christ</h1>
-         <p class="intro-text">
-            A common myth levied against Christianity is that the divinity of Jesus was a later invention—a theological concept fabricated centuries later at the Council of Nicaea. This baseless claim is completely divorced from historical reality. From the earliest days of our historical record, Christians worshipped Christ as God without a shadow of a doubt. The following sequence of archaeological and documentary evidence irrefutably demonstrates this unbroken, early belief. As we unearth more history every single day, the truth only shines brighter.
-         </p>
-      </div>
+      <GlanceRows rows={page.glanceRows} />
 
-      <div class="timeline-scroll-track" style="position: relative; padding-top: 24px;">
-        <div class="timeline-line"></div>
-        
-      {mapData.map((evt) => {
-        const catInfo = categoryDict[evt.category] || { name: evt.category, color: '#2563eb' };
-        return (
-        <div class="timeline-event" data-category={evt.category} data-country={evt.country} data-century={evt.centuryLabel} id={`event-${evt.id}`}>
-          
-          <div class="timeline-dot" style={`background-color: ${catInfo.color}; box-shadow: 0 0 0 4px ${catInfo.color}22;`}></div>
-          <div class="timeline-card-compact" style={`border-top-color: ${catInfo.color};`} data-id={evt.id} data-color={catInfo.color}>
-            
-            <div class="compact-card-header">
-              <div class="compact-card-text">
-                <div class="compact-meta">
-                   <span class="date-badge" style={`color: ${catInfo.color}`}>{evt.displayDate}</span>
-                   {evt.location !== "Unknown" && <span class="location-micro">📍 {evt.location}</span>}
-                </div>
-                <h3 class="compact-title">{evt.title}</h3>
-              </div>
-              
-              {evt.photos && evt.photos.length > 0 && (
-                <div class="compact-card-thumb" style={`background-image: url('${base}/media/divinity_timeline/${evt.photos[0]}')`}></div>
-              )}
-            </div>
-            {evt.shortSummary && (
-               <div class="compact-card-body">
-                  <p class="compact-summary">
-                     {evt.shortSummary.length > 110 ? evt.shortSummary.substring(0, 110) + '...' : evt.shortSummary}
-                  </p>
-               </div>
-            )}
-            {/* Visual affordance for clicking */}
-            <div class="compact-read-more" style={`border-top: 1px solid ${catInfo.color}15; color: ${catInfo.color};`}>
-               <span>Deep Dive</span>
-               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </div>
+      {page.sections.map((sec) => (
+        <section
+          class="hrv-sec dtl-sec"
+          id={sec.id}
+          aria-labelledby={`${sec.id}-h`}
+        >
+          <SectionHead
+            num={sec.num}
+            eyebrow={sec.eyebrow}
+            title={sec.title}
+            leadHtml={sec.leadHtml}
+            headingId={`${sec.id}-h`}
+          />
+
+          <div class="dtl-cards">
+            {sec.cards.map((card) => (
+              <ArtifactCard card={card} />
+            ))}
           </div>
+
+          <HistoriographicalPair historiography={sec.historiography} />
+        </section>
+      ))}
+
+      <section
+        class="hrv-sec dtl-sec dtl-sec--method"
+        id={page.methodology.id}
+        aria-labelledby={`${page.methodology.id}-h`}
+      >
+        <SectionHead
+          eyebrow={page.methodology.eyebrow}
+          title={page.methodology.title}
+          leadHtml={page.methodology.leadHtml}
+          headingId={`${page.methodology.id}-h`}
+        />
+
+        <div class="dtl-principles">
+          {page.methodology.principles.map((p) => (
+            <div class="dtl-principle">
+              <h3 class="dtl-principle__h">{p.title}</h3>
+              <p class="dtl-principle__p" set:html={p.bodyHtml} />
+            </div>
+          ))}
         </div>
-      )})}
 
-      <div id="no-results-msg" class="no-results" style="display: none;">
-         No events precisely match these filters.
-      </div>
-      </div>
+        <ExcludedItemsDisclosure
+          disclosure={page.methodology.excludedDisclosure}
+        />
+      </section>
+
+      <SourcesBlock groups={page.sourcesGroups} />
     </div>
-  </div>
+  </article>
 
-  {/* Modal / Bottom Sheet Component */}
-  <dialog id="event-modal" class="modern-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div id="modal-meta" class="modal-meta"></div>
-        <button class="modal-close-btn" id="modal-close" aria-label="Close">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      <div class="modal-scroll-area">
-        <h2 id="modal-title" class="modal-title"></h2>
-        <p id="modal-summary" class="modal-summary"></p>
-        
-        <div id="modal-gallery" class="modal-gallery"></div>
-        
-        <div id="modal-quotes" class="modal-quotes"></div>
-        
-        <div id="modal-description" class="markdown-body"></div>
-        
-        <div id="modal-videos-section"></div>
-        
-        <div id="modal-sources-section"></div>
-      </div>
-    </div>
-  </dialog>
-
-  <!-- Multi-select Filter Bottom Sheet -->
-  <dialog id="filter-modal" class="bottom-sheet">
-    <div class="bottom-sheet-header">
-      <h2>Refine Timeline</h2>
-      <button class="modal-close-btn" onclick="document.getElementById('filter-modal').close()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-    </div>
-    <div class="bottom-sheet-body">
-      
-      <div class="filter-group block-group">
-        <h3 class="filter-section-title">Theological Category</h3>
-        <div class="checkbox-grid one-column">
-           {dynamicCategories.map((cat, idx) => {
-             const cColor = categoryDict[cat.id]?.color || '#2563eb';
-             return (
-             <label class="checkbox-label cat-label">
-                <input type="checkbox" checked name="filter-category" value={cat.id} style={`accent-color: ${cColor}`} />
-                <span style={`color: ${cColor}; font-weight: 700;`}>{cat.name}</span>
-             </label>
-           )})}
-        </div>
-      </div>
-
-      <div class="filter-group">
-        <h3 class="filter-section-title">Century</h3>
-        <div class="checkbox-grid">
-           {uniqueCenturies.map(c => (
-             <label class="checkbox-label">
-                <input type="checkbox" checked name="filter-century" value={c} />
-                <span>{c}</span>
-             </label>
-           ))}
-        </div>
-      </div>
-      
-      <div class="filter-group">
-        <h3 class="filter-section-title">Geography (By Country)</h3>
-        <div class="checkbox-grid">
-           {uniqueCountries.map(loc => (
-             <label class="checkbox-label">
-                <input type="checkbox" checked name="filter-country" value={loc} />
-                <span>{loc}</span>
-             </label>
-           ))}
-        </div>
-      </div>
-
-    </div>
-  </dialog>
-
-
-
-  
-
-  
-
-
-</divinity-timeline-app>
+  <script>
+    import '../../components/discover/divinity-timeline/client.js';
+  </script>
 </Layout>
-
-<script>
-import '../../components/timeline/DivinityTimelineApp.js';
-</script>

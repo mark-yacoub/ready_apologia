@@ -1,0 +1,222 @@
+/* ==========================================================================
+   /discover/extrabiblical-evidence-for-jesus: thin layer on the .hrv design
+   system (hadith-reliability.css). Strictly scoped to `.hrv.ebj`; zero leaks,
+   zero alarm red, rhythm driven by --hrv-s1…--hrv-s8. Mobile-first.
+   ========================================================================== */
+
+.hrv.ebj { position: relative; --ebj-section-gap: var(--hrv-s7); }
+@media (min-width: 768px) { .hrv.ebj { --ebj-section-gap: var(--hrv-s8); } }
+
+/* ---- sticky section bar ---------------------------------------------------- */
+.hrv.ebj .ebj-nav {
+  position: sticky; top: calc(-1 * var(--hrv-inset)); z-index: 20;
+  margin: 0 calc(-1 * var(--hrv-inset)); padding: 0 calc(var(--hrv-inset) - 10px);
+  height: var(--hrv-bar-h); display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 2px;
+  background: rgba(251, 249, 245, .94); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--hrv-line);
+}
+@media (min-width: 768px) { .hrv.ebj .ebj-nav { margin: 0 -32px; padding: 0 24px; } }
+.hrv.ebj .ebj-nav__back { padding: 0 6px; gap: 2px; min-height: 44px; }
+.hrv.ebj .ebj-nav__copy { min-height: 44px; min-width: 44px; }
+.hrv.ebj .ebj-nav__backtext { display: none; font-size: .86rem; }
+@media (min-width: 400px) { .hrv.ebj .ebj-nav__backtext { display: inline; } .hrv.ebj .ebj-nav__back { padding-right: 10px; } }
+.hrv.ebj .ebj-nav__track {
+  overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+}
+.hrv.ebj .ebj-nav.is-end .ebj-nav__track { -webkit-mask-image: none; mask-image: none; }
+.hrv.ebj .ebj-nav__track::-webkit-scrollbar { display: none; }
+.hrv.ebj .ebj-nav__list { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0 28px 0 2px; width: max-content; }
+.hrv.ebj .ebj-nav__list > li { margin: 0; }
+.hrv.ebj .ebj-nav__chip {
+  display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: 0 13px; border-radius: 999px;
+  border: 1px solid var(--hrv-line-strong); background: var(--hrv-surface); color: var(--hrv-ink);
+  font: 600 .86rem/1 var(--hrv-sans); text-decoration: none; white-space: nowrap;
+}
+.hrv.ebj .ebj-nav__chip:hover { border-color: var(--hrv-ink-3); }
+.hrv.ebj .ebj-nav__chip[aria-current] { background: var(--hrv-ink); border-color: var(--hrv-ink); color: #fff; }
+.hrv.ebj .ebj-nav__n { font-size: .74rem; font-weight: 700; color: var(--hrv-verify); font-variant-numeric: tabular-nums; }
+.hrv.ebj .ebj-nav__chip[aria-current] .ebj-nav__n { color: rgba(255, 255, 255, .8); }
+
+@media (max-width: 479px) {
+  .hrv.ebj { padding-left: 12px; padding-right: 12px; }
+  .hrv.ebj .ebj-nav { margin: 0 -12px; padding: 0 4px; }
+}
+
+/* Legacy anchors, sections, and witness cards clear the sticky navigation bar. */
+.hrv.ebj .ebj-alias { display: block; height: 0; scroll-margin-top: calc(var(--hrv-bar-h) + 12px); }
+.hrv.ebj .hrv-sec, .hrv.ebj .ebj-glance-sec, .hrv.ebj .hrv-ev { scroll-margin-top: calc(var(--hrv-bar-h) + 12px); }
+
+/* ---- header ----------------------------------------------------------------- */
+.hrv.ebj .ebj-h1 { font-size: 1.4rem; line-height: 1.22; margin-bottom: var(--hrv-s3); }
+@media (min-width: 400px) { .hrv.ebj .ebj-h1 { font-size: 1.5rem; } }
+@media (min-width: 768px) { .hrv.ebj .ebj-h1 { font-size: 2rem; line-height: 1.16; margin-bottom: var(--hrv-s4); } }
+.hrv.ebj .ebj-head__context {
+  display: flex; align-items: center; gap: .4rem; min-height: 44px; margin-top: var(--hrv-s2); max-width: 100%;
+  font-size: .82rem; line-height: 1.3; color: var(--hrv-verify); font-weight: 600; text-decoration: none;
+}
+.hrv.ebj .ebj-head__context > span { min-width: 0; }
+.hrv.ebj .ebj-head__context .hrv-icon { flex: none; }
+.hrv.ebj .ebj-head__context:hover { color: var(--hrv-verify-strong); }
+.hrv.ebj .ebj-framing {
+  margin: var(--hrv-s3) 0 0; padding: var(--hrv-s3) var(--hrv-s4); border-left: 3px solid var(--hrv-slate-rule); border-radius: 0 10px 10px 0;
+  background: var(--hrv-slate); font-size: .9rem; line-height: 1.58; color: var(--hrv-ink-2);
+}
+.hrv.ebj .ebj-framing > p { margin: 0 0 var(--hrv-s2); }
+.hrv.ebj .ebj-framing > p:last-child, .hrv.ebj .ebj-framing > ul:last-child { margin-bottom: 0; }
+.hrv.ebj .ebj-framing > ul { margin: var(--hrv-s1) 0 var(--hrv-s2); padding-left: 1.2rem; }
+.hrv.ebj .ebj-framing > ul > li { margin-bottom: 4px; }
+.hrv.ebj .ebj-whos-who .ebj-pair__body > ul { margin: 0; padding-left: 1.2rem; }
+.hrv.ebj .ebj-whos-who .ebj-pair__body > ul > li { margin-bottom: var(--hrv-s2); }
+.hrv.ebj .ebj-whos-who .ebj-pair__body > ul > li:last-child { margin-bottom: 0; }
+.hrv.ebj .ebj-whos-who { margin-top: var(--hrv-s5); }
+.hrv.ebj .ebj-emph { margin: var(--hrv-s3) 0 0; font-size: .82rem; line-height: 1.5; color: var(--hrv-ink-2); }
+.hrv.ebj .ebj-hero-wit { margin-top: var(--hrv-s5); }
+
+/* ---- at a glance ------------------------------------------------------------ */
+.hrv.ebj .ebj-glance-sec { margin-top: var(--hrv-s6); }
+.hrv.ebj .ebj-glance-sec__h { margin-bottom: var(--hrv-s3); }
+.hrv.ebj .ebj-glance { list-style: none; margin: 0; padding: 0; background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-radius: var(--hrv-radius); overflow: hidden; }
+.hrv.ebj .ebj-glance > li { margin: 0; }
+.hrv.ebj .ebj-glance > li + li { border-top: 1px solid var(--hrv-line); }
+.hrv.ebj .ebj-glance__row { display: grid; grid-template-columns: 22px 1fr 14px; gap: var(--hrv-s3); align-items: start; min-height: 48px; padding: var(--hrv-s4); color: inherit; text-decoration: none; }
+.hrv.ebj .ebj-glance__row:hover { background: var(--hrv-paper); }
+.hrv.ebj .ebj-glance__n { font: 700 .78rem/1.6 var(--hrv-sans); color: var(--hrv-verify); font-variant-numeric: tabular-nums; }
+.hrv.ebj .ebj-glance__body { display: flex; flex-direction: column; gap: var(--hrv-s1); min-width: 0; }
+.hrv.ebj .ebj-glance__title { font-family: var(--hrv-display); font-weight: 600; font-size: 1rem; line-height: 1.32; }
+.hrv.ebj .ebj-glance__take { font-size: .88rem; line-height: 1.55; color: var(--hrv-ink-2); }
+.hrv.ebj .ebj-glance__chips { margin-top: var(--hrv-s1); font-size: .76rem; gap: 2px .45rem; }
+.hrv.ebj .ebj-glance__chips > span + span::before { content: none; margin: 0; }
+.hrv.ebj .ebj-glance__chips > span:not(:last-child)::after { content: '\00a0·'; color: var(--hrv-ink-3); }
+.hrv.ebj .ebj-glance__chev { color: var(--hrv-ink-3); margin-top: 3px; }
+
+/* ---- sections --------------------------------------------------------------- */
+.hrv.ebj .ebj-sec { margin-top: var(--ebj-section-gap); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line-strong); }
+.hrv.ebj .ebj-sec__head { margin-bottom: 0; gap: var(--hrv-s3); }
+.hrv.ebj .ebj-sec__mark { display: inline-flex; align-self: center; color: var(--hrv-verify); }
+.hrv.ebj .ebj-sec__mark .hrv-icon { width: 18px; height: 18px; }
+@media (min-width: 768px) { .hrv.ebj .hrv-q__title { font-size: 1.35rem; } }
+.hrv.ebj .ebj-intro { margin: var(--hrv-s5) 0 0; font-size: 1rem; line-height: 1.7; }
+
+.hrv.ebj .ebj-say { margin-top: var(--hrv-s6); }
+.hrv.ebj .ebj-what { margin: 0 0 var(--hrv-s3); }
+.hrv.ebj .ebj-say__groups { display: grid; gap: var(--hrv-s5); }
+
+/* ---- showcases, witnesses, and redlines ------------------------------------- */
+.hrv.ebj .ebj-sc { margin-top: var(--hrv-s4); box-shadow: none; }
+.hrv.ebj .hrv-vs { gap: var(--hrv-s3); }
+.hrv.ebj .hrv-vs__div { display: none; }
+.hrv.ebj .hrv-sc__ref { display: inline-block; min-height: 44px; padding: 12px 2px; line-height: 1.35; }
+.hrv.ebj .hrv-vs__list .hrv-sc__ref {
+  display: inline; min-height: 0; padding: 15px 4px; font-size: .76rem; white-space: nowrap;
+}
+.hrv.ebj .hrv-redline__tag .hrv-sc__ref {
+  display: inline-block; min-height: 44px; padding: 10px 0; margin: -6px 0; line-height: 1.35;
+}
+@media (min-width: 640px) {
+  .hrv.ebj .hrv-vs { grid-template-columns: 1fr 28px 1fr; gap: 0; align-items: stretch; }
+  .hrv.ebj .hrv-vs__div { display: flex; height: auto; }
+  .hrv.ebj .hrv-vs__div .hrv-icon { width: 15px; height: 15px; transform: none; }
+}
+
+.hrv.ebj .ebj-wit { margin-top: var(--hrv-s4); box-shadow: none; }
+.hrv.ebj .ebj-wit__grid { display: grid; grid-template-columns: 1fr; gap: var(--hrv-s3); }
+@media (min-width: 640px) { .hrv.ebj .ebj-wit__grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 960px) { .hrv.ebj .ebj-hero-wit .ebj-wit__grid { grid-template-columns: repeat(3, 1fr); } }
+.hrv.ebj .ebj-wit__card { flex: none; margin: 0; min-width: 0; padding: var(--hrv-s3) var(--hrv-s4); gap: var(--hrv-s1); }
+.hrv.ebj .ebj-wit__card .hrv-sc__ref { display: block; width: fit-content; max-width: 100%; min-height: 44px; padding: 12px 0; margin: auto 0 -6px; line-height: 1.35; }
+.hrv.ebj .ebj-wit__pos { margin: 2px 0 0; font-size: .8rem; font-weight: 650; color: var(--hrv-ink); }
+.hrv.ebj .hrv-wit__q, .hrv.ebj .ebj-wit__q { margin: 0; }
+.hrv.ebj .ebj-wit__gloss { margin: var(--hrv-s1) 0 0; font-size: .86rem; line-height: 1.55; color: var(--hrv-ink-2); }
+
+.hrv.ebj .ebj-redline { margin-top: var(--hrv-s3); box-shadow: none; }
+.hrv.ebj .ebj-redline mark {
+  background: var(--hrv-mark); color: var(--hrv-ink);
+  border-bottom: 2px dashed var(--hrv-sand-rule); padding: 0 2px; border-radius: 2px;
+}
+
+/* ---- card groups + cards ---------------------------------------------------- */
+.hrv.ebj .ebj-group__h { font-family: var(--hrv-sans); font-size: .82rem; font-weight: 700; line-height: 1.35; color: var(--hrv-ink-2); margin: 0 0 var(--hrv-s2); }
+.hrv.ebj .ebj-card {
+  background: none; border: 0; border-radius: 0; box-shadow: none; margin: 0; padding: var(--hrv-s4) 0;
+}
+.hrv.ebj .ebj-card + .ebj-card { border-top: 1px solid var(--hrv-line); }
+.hrv.ebj .ebj-card:target { box-shadow: none; background: var(--hrv-verify-bg); }
+.hrv.ebj .ebj-card .hrv-ev__head { display: flex; align-items: baseline; gap: var(--hrv-s2); margin: 0 0 var(--hrv-s2); }
+.hrv.ebj .ebj-card .hrv-ev__n {
+  flex: none; width: auto; height: auto; margin: 0; border-radius: 0; background: none; display: inline;
+  color: var(--hrv-verify); font: 700 .8rem/1 var(--hrv-sans); font-variant-numeric: tabular-nums;
+}
+.hrv.ebj .ebj-card .hrv-ev__n::after { content: '.'; }
+.hrv.ebj .ebj-card__note { margin: 0 0 var(--hrv-s2); font-size: .88rem; line-height: 1.6; color: var(--hrv-ink-2); }
+
+.hrv.ebj .ebj-card__q { margin: 0; }
+.hrv.ebj .ebj-card__q .hrv-quote__en { line-height: 1.65; }
+
+/* Original epigraphic / classical Greek, Latin, Hebrew, and Aramaic text blocks */
+.hrv.ebj .ebj-script {
+  margin: 0 0 var(--hrv-s2); padding: 0 0 var(--hrv-s2); border-bottom: 1px solid var(--hrv-line-strong);
+  font-family: var(--hrv-display); font-size: .88rem; line-height: 1.6; color: var(--hrv-ink-2);
+  font-style: normal; overflow-wrap: anywhere;
+}
+.hrv.ebj .ebj-script--rtl {
+  margin: 0 0 var(--hrv-s2); padding: 0 0 var(--hrv-s2); border-bottom: 1px solid var(--hrv-line-strong);
+  font-size: 1.15rem; line-height: 1.85; direction: rtl; text-align: right; overflow-wrap: anywhere;
+}
+
+/* Material / stratigraphic record card (used for uninscribed topographical excavations) */
+.hrv.ebj .ebj-finding {
+  background: var(--hrv-surface); border: 1px solid var(--hrv-line); border-left: 3px solid var(--hrv-verify);
+  border-radius: 0 10px 10px 0; padding: var(--hrv-s3) var(--hrv-s4);
+}
+.hrv.ebj .ebj-finding__tag {
+  font-family: var(--hrv-sans); font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--hrv-verify); margin: 0 0 var(--hrv-s1);
+}
+.hrv.ebj .ebj-finding__body { margin: 0; font-size: .94rem; line-height: 1.65; color: var(--hrv-ink); }
+
+/* Verify chips: wrapped pills with 44px vertical touch target */
+.hrv.ebj .ebj-card .hrv-verify { flex-wrap: wrap; overflow: visible; gap: 0 6px; margin: var(--hrv-s2) 0 0; padding: 0; }
+.hrv.ebj .ebj-card .hrv-verify a {
+  position: relative; isolation: isolate; min-height: 44px; padding: 0 11px; background: none; font-size: .78rem;
+  white-space: normal; line-height: 1.25; max-width: 100%;
+}
+.hrv.ebj .ebj-card .hrv-verify a::before {
+  content: ''; position: absolute; inset: 7px 0; z-index: -1; border-radius: 999px; background: var(--hrv-verify-bg);
+}
+.hrv.ebj .ebj-card .hrv-verify a:hover { background: none; }
+.hrv.ebj .ebj-card .hrv-verify a:hover::before { background: #d9eaec; }
+
+.hrv.ebj .ebj-more { margin-top: 0; }
+.hrv.ebj .ebj-more .hrv-disclosure__body { padding: 0 0 var(--hrv-s3); }
+
+/* ---- scholarly counter-hypotheses & philological evaluation ----------------- */
+.hrv.ebj .ebj-pair { margin-top: var(--hrv-s6); line-height: 1.65; }
+.hrv.ebj .hrv-eval.ebj-pair { margin-top: var(--hrv-s5); }
+.hrv.ebj .ebj-pair__body > p { margin: 0 0 1em; }
+.hrv.ebj .ebj-pair__body > p:last-child { margin-bottom: 0; }
+.hrv.ebj .ebj-pair__body > h4.hrv-md-h {
+  font-family: var(--hrv-sans); font-size: .88rem; font-weight: 700; line-height: 1.35; color: var(--hrv-ink);
+  margin: var(--hrv-s4) 0 var(--hrv-s2);
+}
+.hrv.ebj .ebj-pair__body > h4.hrv-md-h:first-child { margin-top: 0; }
+.hrv.ebj .ebj-pair__more { margin: var(--hrv-s3) 0 0; border-bottom: 0; }
+.hrv.ebj .ebj-pair__more > summary { min-height: 44px; padding: var(--hrv-s1) 0; font-size: .84rem; }
+.hrv.ebj .ebj-deeper { margin-top: var(--hrv-s5); }
+.hrv.ebj .ebj-deeper + .ebj-deeper { margin-top: 0; }
+
+/* ---- sources + closing synthesis -------------------------------------------- */
+.hrv.ebj .ebj-sources { margin-top: var(--hrv-s4); }
+.hrv.ebj .ebj-sources .hrv-more > summary { min-height: 44px; }
+.hrv.ebj .ebj-closing { margin-top: var(--ebj-section-gap); padding-top: var(--hrv-s5); border-top: 1px solid var(--hrv-line-strong); }
+.hrv.ebj .ebj-closing__h { font-family: var(--hrv-display); font-size: 1.25rem; line-height: 1.3; font-weight: 600; margin: 0 0 var(--hrv-s4); }
+.hrv.ebj .ebj-closing__body { font-family: var(--hrv-display); font-size: 1.02rem; line-height: 1.7; }
+.hrv.ebj .ebj-closing__body > p, .hrv.ebj .ebj-closing__body > ol { margin: 0 0 1em; }
+.hrv.ebj .ebj-closing__body li { margin-bottom: var(--hrv-s3); }
+.hrv.ebj .ebj-top { display: inline-flex; align-items: center; gap: .35rem; min-height: 44px; margin-top: var(--hrv-s4); color: var(--hrv-verify); font-weight: 600; font-size: .9rem; text-decoration: none; }
+.hrv.ebj .ebj-top__icon { transform: rotate(180deg); }
+
+@media print {
+  .hrv.ebj .ebj-nav, .hrv.ebj .ebj-top { display: none; }
+}

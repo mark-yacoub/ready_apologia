@@ -1,3 +1,5 @@
+import { DISCOVER_CATALOG_OVERRIDES } from './discoverCatalogOverrides.ts';
+
 export interface DiscoverItem {
   slug: string;
   title: string;
@@ -28,6 +30,7 @@ export function clusterCatalogData(rawData: unknown[]): CategoryGroup[] {
     const obj = item as Record<string, unknown>;
     
     if (typeof obj.title !== 'string' || obj.title.trim() === '' ||
+        typeof obj.description !== 'string' || obj.description.trim() === '' ||
         typeof obj.slug !== 'string' || obj.slug.trim() === '' ||
         typeof obj.category !== 'string' || obj.category.trim() === '' ||
         typeof obj.subcategory !== 'string' || obj.subcategory.trim() === '') {
@@ -38,14 +41,19 @@ export function clusterCatalogData(rawData: unknown[]): CategoryGroup[] {
     return true; // Item complies with required schema
   });
   
-  // 2. Cluster defensivly in a single O(N) pass 
-  const clusteredMap = validatedData.reduce<Record<string, Record<string, DiscoverItem[]>>>((acc, item) => {
+  // 2. Cluster defensivly in a single O(N) pass, applying any runtime catalog card overrides
+  const clusteredMap = validatedData.reduce<Record<string, Record<string, DiscoverItem[]>>>((acc, rawItem) => {
+    const slug = rawItem.slug.trim();
+    const override = Object.hasOwn(DISCOVER_CATALOG_OVERRIDES, slug)
+      ? DISCOVER_CATALOG_OVERRIDES[slug]
+      : undefined;
+    const item: DiscoverItem = override ? { ...rawItem, ...override } : rawItem;
     const cat = item.category.trim();
     const sub = item.subcategory.trim();
-    
+
     if (!acc[cat]) acc[cat] = {};
     if (!acc[cat][sub]) acc[cat][sub] = [];
-    
+
     acc[cat][sub].push(item);
     return acc;
   }, {});

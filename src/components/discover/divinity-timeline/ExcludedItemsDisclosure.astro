@@ -1,0 +1,36 @@
+---
+/**
+ * Collapsible exclusions table inside `#methodology-and-scope`, preserving all
+ * 14 excluded `#event-<id>` anchors silently on `<li>` elements so deep links
+ * resolve cleanly (`client.js` automatically opens `<details>` on hash navigation)
+ * without exposing developer-internal jargon to readers.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+
+const { disclosure } = Astro.props;
+---
+<details class="hrv-disclosure dtl-excluded" data-dtl-disclosure>
+  <summary>
+    <span class="dtl-excluded__sumtext">{disclosure.summaryLabel}</span>
+    <span class="dtl-disc__chev" aria-hidden="true">
+      <Icon name="chevronDown" />
+    </span>
+  </summary>
+  <div class="hrv-disclosure__body dtl-excluded__body">
+    <p class="dtl-excluded__intro" set:html={disclosure.introHtml} />
+    <ul class="dtl-excluded__list">
+      {disclosure.items.map((item) => (
+        <li class="dtl-excluded__row" id={item.anchorId}>
+          <div class="dtl-excluded__head">
+            <strong class="dtl-excluded__title">{item.legacyTitle}</strong>
+            <span class="dtl-excluded__tag">{item.exclusionCategory}</span>
+          </div>
+          <p class="dtl-excluded__meta">
+            Often cited date: <span class="dtl-cite">{item.rawDateClaim}</span>
+          </p>
+          <p class="dtl-excluded__reason" set:html={item.exclusionReasonHtml} />
+        </li>
+      ))}
+    </ul>
+  </div>
+</details>

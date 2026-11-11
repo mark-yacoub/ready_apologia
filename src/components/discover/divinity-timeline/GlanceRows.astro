@@ -1,0 +1,30 @@
+---
+/**
+ * Compact 5-row "At a Glance" navigable index matching the 5 numbered evidentiary
+ * lines in the H1 (`5 === 5 === 5`).
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+
+const { rows } = Astro.props;
+---
+<section class="dtl-glance-sec" id="at-a-glance" aria-labelledby="dtl-glance-h">
+  <h2 class="hrv-eyebrow dtl-glance-sec__h" id="dtl-glance-h">
+    At a Glance · Five Evidentiary Lines
+  </h2>
+  <ol class="dtl-glance">
+    {rows.map((row) => (
+      <li>
+        <a class="dtl-glance__row" href={row.href}>
+          <span class="dtl-glance__n" aria-hidden="true">{row.num}</span>
+          <span class="dtl-glance__body">
+            <span class="dtl-glance__title" set:html={row.titleHtml} />
+            <span class="dtl-glance__take" set:html={row.summaryHtml} />
+          </span>
+          <span class="dtl-glance__chev" aria-hidden="true">
+            <Icon name="chevronRight" />
+          </span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</section>

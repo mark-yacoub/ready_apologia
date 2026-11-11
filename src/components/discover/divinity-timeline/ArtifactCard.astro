@@ -1,0 +1,146 @@
+---
+/**
+ * Primary archaeological, epigraphic, papyrological, or first-century creedal
+ * dossier card (`.hrv-ev.dtl-card`), preserving `#event-<id>` anchors on both
+ * the main artifact and any grouped comparative witnesses.
+ *
+ * Keeps visible above the fold: date chip, dating-basis chip, evidence-tier
+ * chip (Tier A / B / C), title, museum photography, concise key quote + full
+ * translation, plain-English evidentiary takeaway ("What this shows & limits"),
+ * and primary verification chips. Collapses full diplomatic transcriptions,
+ * bibliography, extended commentary, and related regional/post-Nicene
+ * comparators into `<details>` disclosures (`client.js` auto-opens on `#event-*`).
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+
+const { card } = Astro.props;
+---
+<article class="hrv-ev dtl-card" id={card.anchorId}>
+  <header class="dtl-card__head">
+    <div class="dtl-card__badges">
+      <span class="dtl-card__date">{card.displayYear}</span>
+      <span class="dtl-card__basis">{card.datingBasisLabel}</span>
+      <span class={`dtl-card__tier dtl-card__tier--${card.evidenceTier}`}>
+        {card.evidenceTierLabel}
+      </span>
+    </div>
+    <h3 class="hrv-ev__title dtl-card__title">{card.title}</h3>
+    <p class="dtl-card__meta">
+      <span>{card.location}</span>
+      <span aria-hidden="true">·</span>
+      <span>{card.repository}</span>
+      <span aria-hidden="true">·</span>
+      <span set:html={card.languageHtml} />
+    </p>
+  </header>
+
+  {card.image && (
+    <figure class={`dtl-card__fig${card.secondaryImage ? ' dtl-card__fig--pair' : ''}`}>
+      {card.secondaryImage ? (
+        <div class="dtl-card__img-pair">
+          <div class="dtl-card__img-cell">
+            <img
+              class="dtl-card__img"
+              src={card.image.src}
+              alt={card.image.alt}
+              width={card.image.width}
+              height={card.image.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="dtl-card__img-cell dtl-card__img-cell--light">
+            <img
+              class="dtl-card__img dtl-card__img--light"
+              src={card.secondaryImage.src}
+              alt={card.secondaryImage.alt}
+              width={card.secondaryImage.width}
+              height={card.secondaryImage.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      ) : (
+        <img
+          class="dtl-card__img"
+          src={card.image.src}
+          alt={card.image.alt}
+          width={card.image.width}
+          height={card.image.height}
+          loading="lazy"
+          decoding="async"
+        />
+      )}
+      <figcaption class="dtl-card__cap" set:html={card.image.captionHtml} />
+    </figure>
+  )}
+
+  <blockquote class="hrv-quote dtl-card__q">
+    <p class="dtl-card__orig" set:html={card.keyExcerptHtml} />
+    <p class="hrv-quote__en dtl-card__trans" set:html={card.quoteTranslationHtml} />
+  </blockquote>
+
+  <p class="dtl-card__shows" set:html={card.showsHtml} />
+
+  <details class="hrv-disclosure dtl-card__details" data-dtl-disclosure>
+    <summary>
+      <span class="dtl-disc__sumtext">Text, dating &amp; scholarly commentary</span>
+      <span class="dtl-disc__chev" aria-hidden="true">
+        <Icon name="chevronDown" />
+      </span>
+    </summary>
+    <div class="hrv-disclosure__body dtl-card__details-body">
+      {card.hasExtendedOriginal && (
+        <div class="dtl-card__fullorig">
+          <p class="hrv-eyebrow dtl-card__subeyebrow">Full Diplomatic / Critical Text</p>
+          <p class="dtl-card__orig dtl-card__orig--full" set:html={card.quoteOriginalHtml} />
+        </div>
+      )}
+      <p class="dtl-card__cite" set:html={card.editionCitationHtml} />
+      <p class="dtl-card__analysis" set:html={card.analysisHtml} />
+    </div>
+  </details>
+
+  {card.verifyLinks.length > 0 && (
+    <div class="hrv-verify" role="group" aria-label="Primary source verification">
+      {card.verifyLinks.map((lnk) => (
+        <a
+          href={lnk.href}
+          target={lnk.external ? '_blank' : undefined}
+          rel={lnk.external ? 'noopener noreferrer' : undefined}
+          data-astro-prefetch={lnk.noPrefetch ? 'false' : undefined}
+        >
+          <span>{lnk.label}</span>
+          <Icon name={lnk.external ? 'external' : 'chevronRight'} />
+        </a>
+      ))}
+    </div>
+  )}
+
+  {card.groupedWitnesses.length > 0 && (
+    <details class="hrv-disclosure dtl-card__grouped" data-dtl-disclosure>
+      <summary>
+        <span class="dtl-disc__sumtext">{card.groupedHeading}</span>
+        <span class="dtl-disc__chev" aria-hidden="true">
+          <Icon name="chevronDown" />
+        </span>
+      </summary>
+      <div class="hrv-disclosure__body dtl-card__grouped-body">
+        <ul class="dtl-card__sublist">
+          {card.groupedWitnesses.map((g) => (
+            <li class="dtl-card__sub" id={g.anchorId}>
+              <div class="dtl-card__subhead">
+                <strong class="dtl-card__subtitle">{g.title}</strong>
+                <span class="dtl-card__subdate">
+                  {g.displayYear} · {g.datingBasisLabel}
+                </span>
+              </div>
+              <p class="dtl-card__subbody" set:html={g.summaryHtml} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </details>
+  )}
+</article>

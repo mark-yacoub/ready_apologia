@@ -32,6 +32,14 @@
     "audit:quran-sources": "node scripts/test_quran_sources.mjs",
     "test:apologists": "node --experimental-sqlite --test src/utils/apologistsLoader.test.mjs",
     "audit:apologists": "node scripts/test_apologist_pages.mjs",
+    "test:divinity-timeline": "node --test src/utils/divinityTimeline/*.test.mjs",
+    "audit:divinity-timeline": "node scripts/test_divinity_timeline.mjs",
+    "test:extrabiblical-evidence": "node --test src/utils/extrabiblicalEvidence/*.test.mjs",
+    "audit:extrabiblical-evidence": "node scripts/test_extrabiblical_evidence.mjs --offline",
+    "verify:extrabiblical-evidence": "node scripts/test_extrabiblical_evidence.mjs",
+    "test:trustworthiness-bible": "NODE_OPTIONS='--experimental-sqlite' node --test src/utils/trustworthinessBible/*.test.mjs",
+    "audit:trustworthiness-bible": "NODE_OPTIONS='--experimental-sqlite' node scripts/test_trustworthiness_of_the_bible.mjs",
+    "test:shared-utils": "node --test src/utils/markdown.test.mjs src/utils/discoverService.test.mjs",
     "astro": "astro"
   },
   "dependencies": {

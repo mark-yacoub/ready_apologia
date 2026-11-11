@@ -1,0 +1,50 @@
+---
+/**
+ * Academic bibliography & repository index (`#sources`), using `.hrv-src` rows
+ * with >= 44px tap targets and back-to-top link.
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+
+const { groups } = Astro.props;
+---
+<section class="dtl-sec dtl-sources" id="sources" aria-labelledby="h-sources">
+  <header class="dtl-sec__header">
+    <p class="hrv-eyebrow dtl-sec__eyebrow">Primary Editions &amp; Museum Repositories</p>
+    <h2 class="hrv-q__title dtl-sec__title" id="h-sources">
+      Sources, Critical Editions, and Digital Archives
+    </h2>
+  </header>
+
+  <div class="dtl-sources__groups">
+    {groups.map((grp) => (
+      <div class="hrv-srcgroup dtl-sources__group">
+        <h3 class="hrv-eyebrow dtl-sources__cat">{grp.category}</h3>
+        <ul class="hrv-srclist dtl-sources__list">
+          {grp.items.map((it) => (
+            <li>
+              <a
+                class="hrv-src"
+                href={it.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="hrv-src__label">
+                  <span class="dtl-sources__title" set:html={it.titleHtml} />
+                  <span class="hrv-src__meta" set:html={it.noteHtml} />
+                </span>
+                <Icon name="external" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <a class="dtl-top" href="#top">
+    <span class="dtl-top__icon" aria-hidden="true">
+      <Icon name="chevronDown" />
+    </span>
+    <span>Back to top</span>
+  </a>
+</section>

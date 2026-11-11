@@ -1,0 +1,24 @@
+---
+/**
+ * Open, non-collapsed 4-move historiographical assessment block:
+ *   1. .hrv-scholar (slate): Published named scholarly or primary-text counter-hypothesis
+ *   2. .hrv-eval (teal): 4-move primary-source & apparatus assessment
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { classical, evaluation } = Astro.props;
+---
+<div class="twb-assessment">
+  {classical && (
+    <div class="hrv-scholar twb-pair">
+      <h3 class="hrv-scholar__h"><Icon name="quote" /><span set:html={classical.labelHtml || tl(classical.label)} /></h3>
+      <div class="twb-pair__body" set:html={classical.html} />
+    </div>
+  )}
+  {evaluation && (
+    <div class="hrv-eval twb-pair">
+      <h3 class="hrv-eval__h"><Icon name="search" /><span set:html={evaluation.labelHtml || tl(evaluation.label)} /></h3>
+      <div class="twb-pair__body" set:html={evaluation.html} />
+    </div>
+  )}
+</div>

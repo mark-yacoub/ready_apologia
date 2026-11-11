@@ -1,0 +1,24 @@
+---
+/**
+ * Sticky section bar for /discover/trustworthiness-of-the-bible:
+ *   - back link to /discover
+ *   - horizontally scrollable section chips (marked aria-current="location" by client.js)
+ *   - copy-link button + empty live-region toast
+ *   - preserves legacy #stage-filter-nav alias without JavaScript
+ */
+import Icon from '../hadith-reliability/Icon.astro';
+const { nav, labels, backHref, canonical } = Astro.props;
+---
+<span class="twb-alias" id="stage-filter-nav" aria-hidden="true"></span>
+<nav class="twb-nav" aria-label={labels.navAria} data-twb-nav>
+  <a class="hrv-iconbtn twb-nav__back" href={backHref} aria-label={labels.back}><Icon name="chevronLeft" /><span class="twb-nav__backtext" aria-hidden="true">{labels.back}</span></a>
+  <div class="twb-nav__track" data-twb-track>
+    <ol class="twb-nav__list">
+      {nav.map(s => (
+        <li><a class="twb-nav__chip" href={`#${s.id}`} data-twb-chip={s.id}>{s.n != null && <span class="twb-nav__n" aria-hidden="true">{s.n}</span>}<span set:html={s.labelHtml} /></a></li>
+      ))}
+    </ol>
+  </div>
+  <button class="hrv-iconbtn twb-nav__copy" type="button" data-twb-copy data-url={canonical} data-copied={labels.copied} data-failed={labels.copyFailed} aria-label={labels.copyLink} title={labels.copyLink}><Icon name="link" /></button>
+</nav>
+<div class="hrv-toast" role="status" aria-live="polite" data-twb-toast></div>

@@ -28,9 +28,22 @@ export const DISCOVER_SOURCES = {
   'muhammad-and-slavery': ['src/utils/muhammadSlavery', 'src/data/discover/islam/prophet/slavery.json', 'src/components/discover/muhammad-slavery'],
   'origins-of-revelation': ['src/utils/originsOfRevelation', 'src/data/discover/islam/scripture/demonic_revelation.json'],
   'islamic-dilemma': ['src/utils/islamicDilemma', 'src/data/discover/islam/scripture/islamic_dilemma.md'],
-  'trustworthiness-of-the-bible': ['src/data/trustworthiness-of-the-bible.json', 'src/components/discover/trustworthiness'],
-  'divinity-timeline': ['src/data/divinityTimeline.json'],
-  'extrabiblical-evidence-for-jesus': ['src/data/extrabiblical-evidence-for-jesus.json'],
+  'trustworthiness-of-the-bible': [
+    'src/utils/trustworthinessBible',
+    'src/data/trustworthiness-of-the-bible.json',
+    'src/styles/trustworthiness-of-the-bible.css',
+  ],
+  'divinity-timeline': [
+    'src/utils/divinityTimeline',
+    'src/data/divinityTimeline.json',
+    'src/styles/divinity-timeline.css',
+  ],
+  'extrabiblical-evidence-for-jesus': [
+    'src/utils/extrabiblicalEvidence',
+    'src/data/extrabiblical-evidence-for-jesus.json',
+    'src/components/discover/extrabiblical-evidence',
+    'src/styles/extrabiblical-evidence.css',
+  ],
   'statistics': ['src/utils/statisticsLoader.js', 'data.db', 'src/data/quran', 'src/data/hadith'],
 };
 
@@ -77,10 +90,19 @@ export const LASTMOD_RULES = [
       'src/utils/muhammadSlavery/config.js',
       'src/utils/originsOfRevelation/content.js',
       'src/utils/originsOfRevelation/model.js',
+      'src/utils/discoverCatalogOverrides.ts',
+      'src/utils/divinityTimeline',
+      'src/utils/extrabiblicalEvidence',
+      'src/utils/trustworthinessBible',
     ] },
 
   { id: 'discover-hub', match: (s) => s[0] === 'discover' && s.length === 1,
-    sources: ['src/pages/discover/index.astro', 'src/data/discoverCatalog.json'] },
+    sources: [
+      'src/pages/discover/index.astro',
+      'src/data/discoverCatalog.json',
+      'src/utils/discoverCatalogOverrides.ts',
+      'src/utils/discoverService.ts',
+    ] },
   { id: 'discover-article', match: (s) => s[0] === 'discover' && s.length >= 2 && s[1] in DISCOVER_SOURCES,
     sources: (s) => [
       `src/pages/discover/${s[1]}`,

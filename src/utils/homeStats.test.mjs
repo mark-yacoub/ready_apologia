@@ -37,6 +37,14 @@ test('loadHomeStats returns positive integer counts for every required stat and 
     stats.auditTotalCount,
     stats.auditTabs.reduce((sum, t) => sum + t.count, 0)
   );
+
+  // Christian Discover article counts derive from the live view-models (never raw legacy JSON totals)
+  assert.equal(stats.trustBibleCount, 96);
+  assert.equal(stats.trustBibleSectionsCount, 4);
+  assert.equal(stats.extrabiblicalLiteraryCount, 16);
+  assert.equal(stats.extrabiblicalArchCount, 10);
+  assert.equal(stats.divinityTimelineCount, 21);
+  assert.equal(stats.divinityTimelineLinesCount, 5);
 });
 
 test('validateStats throws a single aggregated error listing every missing, NaN, or zero count', async () => {

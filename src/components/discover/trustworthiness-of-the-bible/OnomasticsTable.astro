@@ -1,0 +1,52 @@
+---
+/**
+ * Quantitative onomastic comparison tables from Tal Ilan (2002, pp. 56–57) & Richard Bauckham
+ * (Jesus and the Eyewitnesses, 2006 / 2017, ch. 4, pp. 71, 85, 89–92, Tables 6–9).
+ * Preserves legacy #simon-group and #mary-group anchors cleanly.
+ */
+import { tl } from '../../../utils/hadithReliability/render.js';
+const { tables } = Astro.props;
+---
+<div class="twb-ono">
+  <div class="twb-ono__agg">
+    {tables.aggregates.map(a => (
+      <div class="twb-ono__stat">
+        <p class="twb-ono__metric" set:html={tl(a.metric)} />
+        <p class="twb-ono__nums">
+          <span><strong>Palestine:</strong> <span set:html={tl(a.palestine)} /></span>
+          <span><strong>Gospels &amp; Acts:</strong> <span set:html={tl(a.gospelsActs)} /></span>
+        </p>
+        <p class="twb-ono__note" set:html={a.noteHtml} />
+      </div>
+    ))}
+  </div>
+
+  {[tables.male, tables.female].map(tbl => (
+    <div class="twb-table-wrap twb-ono__block" id={tbl.id}>
+      <table class="twb-table twb-ono-tbl">
+        <caption class="twb-tbl-cap" set:html={tl(tbl.caption)} />
+        <thead>
+          <tr>
+            <th scope="col">Rank &amp; Name</th>
+            {tbl.showCount !== false && <th scope="col">{tbl.countHeader || 'Palestine Occurrences'}</th>}
+            <th scope="col">{tbl.palPctHeader || 'Palestine % of Occurrences'}</th>
+            <th scope="col">{tbl.ntPctHeader || 'Gospels & Acts % (Count)'}</th>
+            <th scope="col">Gospel / Acts Attestation &amp; Qualifiers</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tbl.rows.map(r => (
+            <tr class={r.highlight ? 'twb-classical__hl' : undefined}>
+              <th scope="row" data-label="Rank & Name">{r.rankLabel ? <span set:html={tl(r.rankLabel)} /> : <>#{r.rank} · <span set:html={tl(r.name)} /></>}</th>
+              {tbl.showCount !== false && <td data-label={tbl.countHeader || 'Palestine occurrences'}>{r.count}</td>}
+              <td data-label="Palestine %"><strong>{r.palPct}</strong></td>
+              <td data-label="Gospels & Acts %"><strong>{r.ntPct}</strong></td>
+              <td data-label="Attestation" set:html={tl(r.qualifiers)} />
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {tbl.footnoteHtml && <p class="twb-tbl-foot" set:html={tbl.footnoteHtml} />}
+    </div>
+  ))}
+</div>
