@@ -156,20 +156,20 @@
 /* keep the end of the article reachable above the mini bar */
 .content-frame.rap-has-mini .main-content::after { content: ''; display: block; height: 72px; }
 
-/* ---- floating "Listen" button (pages without an AudioButton in their bar) ---- */
-.rap-fab {
-  position: absolute; right: 14px; bottom: calc(var(--rap-nav-h) + env(safe-area-inset-bottom) + 14px); z-index: 45;
-  display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px 0 14px;
-  border: 0; border-radius: 999px; background: var(--rap-accent); color: #fff; cursor: pointer;
-  font: 650 .95rem/1 var(--rap-sans); box-shadow: 0 10px 24px -10px rgba(14, 94, 111, .75);
-  -webkit-tap-highlight-color: transparent;
+/* ---- "Listen · N min" under the <h1> (AudioListen, or inserted by player.js) ---- */
+/* Lives in the article, outside .rap, so it restates the tokens it needs. */
+.rap-listen-row { margin: 12px 0 16px; }
+.rap-listen {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px 0 12px;
+  border: 1px solid #c9dfe2; border-radius: 999px; background: #e8f2f3; color: #0a4855; cursor: pointer;
+  font: 650 .92rem/1 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-tap-highlight-color: transparent; transition: background-color .15s;
 }
-.rap-fab:hover { background: var(--rap-accent-strong); }
-.rap-fab:focus-visible { outline: 2px solid var(--rap-accent); outline-offset: 3px; }
-.rap-fab .rap-i { width: 20px; height: 20px; }
-.rap-fab__dur { font-weight: 500; opacity: .85; font-variant-numeric: tabular-nums; }
-.rap-fab__dur::before { content: '·'; margin-right: 8px; }
-@media (min-width: 768px) { .rap-fab { bottom: 20px; right: 24px; } }
+.rap-listen:hover { background: #d9eaec; }
+.rap-listen:focus-visible { outline: 2px solid #0e5e6f; outline-offset: 2px; }
+.rap-listen .rap-i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rap-listen__sub { font-weight: 500; color: #2f5f69; font-variant-numeric: tabular-nums; }
+.rap-listen__sub::before { content: '·'; margin-right: 8px; }
 
 /* ---- bar icon (AudioButton): [🎧][wrapped copy button] share one grid/flex cell ---- */
 .rap-pair { display: inline-flex; align-items: center; gap: 2px; }

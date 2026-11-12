@@ -14,7 +14,7 @@
  * and saves + tears down on astro:before-swap.
  */
 import { trackEvent } from '../../utils/analytics.js';
-import { AUDIO_LABELS as L, fmtClock as clock } from '../../utils/discoverAudio.js';
+import { AUDIO_LABELS as L, fmtClock as clock, fmtMinutes } from '../../utils/discoverAudio.js';
 
 const SKIP = 10;
 const SAVE_EVERY_MS = 5000;
@@ -55,7 +55,6 @@ function mount(root) {
   const rateBtn = $('[data-rap-rate]');
   const statusEl = $('[data-rap-status]');
   const toggles = $$('[data-rap-toggle]');
-  const fab = $('[data-rap-fab]');
   const ds = root.dataset;
   const id = ds.id;
   const key = keyFor(id);
@@ -75,8 +74,12 @@ function mount(root) {
     slot.replaceChildren(...c.childNodes);
   }
 
-  // Floating "Listen" button only when the page has no AudioButton in its bar.
-  const hasPageButton = [...document.querySelectorAll('[data-ra-audio-open]')].some(b => !root.contains(b));
+  // Open buttons are server-rendered (AudioButton in the bar, AudioListen under the <h1>). A page
+  // with neither gets the listen button inserted under its <h1>, so every episode can be opened.
+  if (![...document.querySelectorAll('[data-ra-audio-open]')].some(b => !root.contains(b))) {
+    const tpl = $('template[data-rap-listen-tpl]');
+    if (tpl && h1) h1.after(tpl.content.cloneNode(true));
+  }
 
   let duration = Number(ds.duration) || 0;
   let started = false;        // has playback been started on this page view
@@ -154,6 +157,13 @@ function mount(root) {
     const t = pos();
     const isDone = done || (duration > 0 && duration - t < DONE_TAIL);
     store.set(key, { t: Math.floor(t), d: Math.floor(duration), updatedAt: now, done: isDone });
+    renderListenLabel(isDone ? 0 : t);
+  }
+  /** Under-title button: "Listen · 46 min", or "Resume · 25 min left" when there is progress. */
+  function renderListenLabel(t) {
+    const left = Math.max(1, Math.round((duration - t) / 60));
+    const text = t > MIN_RESUME ? L.resumeLeft.replace('{m}', String(left)) : fmtMinutes(duration);
+    for (const el of document.querySelectorAll('[data-rap-listen-sub]')) el.textContent = text;
   }
 
   // ---- media session -------------------------------------------------------------------------
@@ -214,10 +224,6 @@ function mount(root) {
   function setMini(on) {
     mini.hidden = !on;
     frame?.classList.toggle('rap-has-mini', on);
-    renderFab();
-  }
-  function renderFab() {
-    if (fab) fab.hidden = hasPageButton || !mini.hidden || !sheet.hidden;
   }
   function openSheet(from) {
     opener = from || document.activeElement;
@@ -347,7 +353,7 @@ function mount(root) {
   renderRate();
   render();
   renderResume();
-  renderFab();
+  renderListenLabel(resumeFrom);
 
   return {
     root,

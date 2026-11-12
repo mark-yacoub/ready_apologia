@@ -8,12 +8,12 @@ import { DISCOVER_AUDIO, AUDIO_LABELS, episodeFor, audioKeyFromPath, fmtClock, f
 import { BODY, HEADLINE } from './quranPreservation/tone.js';
 import { ROOT, readBlock, parseEntries, mediaFileFor, pageSourceFor, probe, hasFfprobe, isFaststart } from '../../scripts/lib/discover_audio.mjs';
 
-const FIX = 'run: node scripts/add_discover_audio.mjs <page-path> <input-file>';
+const FIX = 're-encode with the ffmpeg command in the header of src/utils/discoverAudio.js';
 
 test('managed block is script-shaped and matches the exported registry', () => {
   const entries = parseEntries(readBlock().lines);
   assert.deepEqual(entries.map(e => e.key), Object.keys(DISCOVER_AUDIO), 'registry object and managed block disagree');
-  assert.deepEqual(entries.map(e => e.key), [...entries.map(e => e.key)].sort(), 'entries must be sorted (the script sorts them)');
+  assert.deepEqual(entries.map(e => e.key), [...entries.map(e => e.key)].sort(), 'entries must be in alphabetical order (see the registry header)');
 });
 
 test('every entry points at a real Discover page', () => {

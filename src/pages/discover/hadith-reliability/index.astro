@@ -4,6 +4,7 @@
  * browse-by-kind chips → the 6 reader questions (sections) with their cases → sources footer.
  * Stateless by design: the reader is assumed to visit once, for the first time.
  */
+import AudioListen from '../../../components/audio/AudioListen.astro';
 import Layout from '../../../layouts/Layout.astro';
 import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
 import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
@@ -41,6 +42,7 @@ const n = meta.counts.cases;
       <header class="hrv-hero">
         <a class="hrv-crumb" href="/discover"><Icon name="chevronLeft" />Discover</a>
         <h1 class="hrv-h1">How reliable are the Hadith collections?</h1>
+        <AudioListen />
         <p class="hrv-intro" set:html={tl(meta.introText)} />
       </header>
 

@@ -3,6 +3,7 @@
  * All cases at a glance: one compact showcase card per case, grouped by question and filterable
  * by kind of evidence. Route slug comes from the SEO spec (SEO_GLANCE.slug = "at-a-glance").
  */
+import AudioListen from '../../../components/audio/AudioListen.astro';
 import Layout from '../../../layouts/Layout.astro';
 import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
 import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
@@ -43,6 +44,7 @@ if (Astro.url.pathname.replace(/\/$/, '') !== path) {
       <header class="hrv-hero">
         <a class="hrv-crumb" href={BASE_PATH}><Icon name="chevronLeft" />How reliable are the hadith?</a>
         <h1 class="hrv-h1">{LABELS.glanceTitle.replace('{n}', n)}</h1>
+        <AudioListen />
         <p class="hrv-intro">{LABELS.glanceIntro}</p>
       </header>
       <AngleChips angles={angles} total={n} />

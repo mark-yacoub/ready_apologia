@@ -4,7 +4,8 @@
  * renders nothing unless the current URL has an episode in src/utils/discoverAudio.js.
  *   - full-screen sheet, opened by any `[data-ra-audio-open]` button (see AudioButton.astro);
  *   - mini bar while the sheet is minimised and audio has started;
- *   - floating "Listen" button, shown by player.js only when the page has no AudioButton.
+ *   - open buttons live in the page: <AudioButton> (bar icon) or <AudioListen> (under the <h1>);
+ *     a page with neither gets the template below inserted under its <h1> by player.js.
  * The title is filled from the page's own <h1> by player.js (and is a <p>: one <h1> per page).
  * Behaviour: ./player.js. Styles: src/styles/audio-player.css (.rap).
  */
@@ -104,10 +105,15 @@ const svg = (k: string, cls = 'rap-i') => `<svg class="${cls}" viewBox="0 0 24 2
     <button class="rap-btn rap-btn--icon" type="button" data-rap-close aria-label={L.close} title={L.close} set:html={svg('close')} />
   </div>
 
-  <button class="rap-fab" type="button" data-ra-audio-open data-rap-fab aria-label={L.open} hidden>
-    <Fragment set:html={svg('headphones')} />
-    <span>{L.fab}</span><span class="rap-fab__dur">{fmtMinutes(ep.durationSec)}</span>
-  </button>
+  {/* Fallback for pages with neither AudioButton nor AudioListen: player.js inserts this under the page title. Not an HTML comment: those ship in the page and the audits read them. */}
+  <template data-rap-listen-tpl>
+    <p class="rap-listen-row">
+      <button class="rap-listen" type="button" data-ra-audio-open aria-label={L.open}>
+        <Fragment set:html={svg('headphones')} />
+        <span>{L.listen}</span><span class="rap-listen__sub" data-rap-listen-sub>{fmtMinutes(ep.durationSec)}</span>
+      </button>
+    </p>
+  </template>
 </div>
 )}
 <script src="./player.js"></script>

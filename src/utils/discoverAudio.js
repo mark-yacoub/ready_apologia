@@ -5,42 +5,49 @@
  *  controls, resume, sitemap lastmod, tests) is automatic for every Discover page.
  * ═══════════════════════════════════════════════════════════════════════════════════════════════
  *
- *  TO ADD OR REPLACE AN EPISODE, run exactly one command (do not encode by hand, do not edit any
- *  other file, do not hand-edit the managed block below):
+ *  ADD OR REPLACE AN EPISODE (<page-path> = the page URL after "/discover/", e.g.
+ *  quran-preservation or hadith-reliability/<case>):
  *
- *      node scripts/add_discover_audio.mjs <page-path> <input-audio-file>
+ *  1. Encode. MONO is mandatory: these are spoken-word podcasts and stereo doubles the download
+ *     for no audible gain (73 MB stereo → ~19 MB). +faststart puts the index first so playback and
+ *     seeking start before the download ends (Safari needs it). -16 LUFS = podcast loudness.
  *
- *      e.g. node scripts/add_discover_audio.mjs quran-preservation ~/Downloads/Episode.m4a
- *           node scripts/add_discover_audio.mjs hadith-reliability/<case-slug> ~/Downloads/Case.m4a
+ *       ffmpeg -i <input> -vn -ac 1 -c:a aac -b:a 64k -ar 44100 \
+ *         -af loudnorm=I=-16:TP=-1.5:LRA=11 -movflags +faststart -map_metadata -1 \
+ *         public/media/audio/<page-path>.m4a
  *
- *  <page-path> is the page URL after "/discover/" (no leading or trailing slash).
+ *  2. Get the duration:  ffprobe -v error -show_entries format=duration -of csv=p=0 <that file>
  *
- *  What the script does:
- *    1. Converts the input to AAC **MONO**, 64 kbps, 44.1 kHz, loudness -16 LUFS, `+faststart`.
- *       Mono is mandatory: these are spoken-word podcasts, stereo doubles the download for no
- *       audible gain (a 73 MB stereo file becomes ~19 MB). `+faststart` puts the index at the start
- *       of the file so playback and seeking begin before the download finishes (Safari needs it).
- *    2. Writes public/media/audio/<page-path>.m4a (the path is derived from the key; never set it).
- *    3. Upserts the entry below: `durationSec` from ffprobe; `version` 1 for a new episode, +1 when
- *       replacing one (the version is part of the listener's resume key, so a new recording does
- *       not resume at a position from the old one).
+ *  3. Add ONE line between the markers below, in this exact shape, kept in alphabetical order:
+ *       '<page-path>': { durationSec: <rounded seconds>, version: 1, cover: '/media/…' },
+ *     - cover (optional) = lock-screen artwork: use the article's OG image (its config OG_IMAGE).
+ *       Omit it to show the site logo. Never an image that depicts the Prophet
+ *       (convenient-revelations has OG_IMAGE = null for that reason: omit cover there).
+ *     - REPLACING an episode: overwrite the file and bump `version` by 1. The version is part of
+ *       the listener's resume key, so a new recording does not resume at a point from the old one.
  *
- *  Then verify:   npm run test:discover-audio          (files, mono, duration, page exists)
- *                 astro build && npm run audit:discover-audio   (rendered page has icon + player)
- *
- *  Optional per entry: `cover: '/media/…'` = lock-screen artwork (square-ish image). Without it the
- *  site logo is used. Pass `--cover /media/…` to the script to set it. Never use an image that
- *  depicts the Prophet (see convenient-revelations OG_IMAGE note in JETSKI.md).
+ *  4. Verify:  npm run test:discover-audio            (page exists, file is mono AAC ≤80 kbps,
+ *                                                       faststart, duration matches, line shape)
+ *              astro build && npm run audit:discover-audio   (page renders player + open button)
  *
  *  Player title = the page's own <h1> (read at runtime), so it always matches the article.
+ *  Open button: the page's bar <AudioButton> or the <AudioListen> under its <h1> (see JETSKI.md).
  */
 /** Site base ('' at the root; undefined under plain node, e.g. tests and scripts). */
 const SITE_BASE = (import.meta.env?.BASE_URL ?? '/').replace(/\/$/, '');
 
 export const DISCOVER_AUDIO = {
-  // @audio-entries-start (managed by scripts/add_discover_audio.mjs: one line per page, sorted)
+  // @audio-entries-start (one line per page, alphabetical, exact shape above)
+  'convenient-revelations': { durationSec: 3585, version: 1 },
   'divinity-timeline': { durationSec: 3356, version: 1, cover: '/media/divinity_timeline/megiddo_mosaic/image_1.jpg' },
+  'extrabiblical-evidence-for-jesus': { durationSec: 3508, version: 1, cover: '/media/extrabiblical_evidence/cover.jpg' },
+  'from-mecca-to-medina': { durationSec: 2515, version: 1, cover: '/media/mecca_to_medina/cover.jpg' },
+  'hadith-reliability': { durationSec: 2780, version: 1, cover: '/media/hadith_reliability/cover.jpg' },
+  'islamic-dilemma': { durationSec: 2275, version: 1, cover: '/media/islamic_dilemma/cover.jpg' },
+  'muhammad-and-slavery': { durationSec: 3061, version: 1, cover: '/media/slavery/cover.jpg' },
+  'origins-of-revelation': { durationSec: 2651, version: 1, cover: '/media/demonic_revelation/cover.jpg' },
   'quran-preservation': { durationSec: 2267, version: 1, cover: '/media/quran_preservation/cover.jpg' },
+  'trustworthiness-of-the-bible': { durationSec: 2918, version: 1, cover: '/media/trustworthiness_bible/cover.jpg' },
   // @audio-entries-end
 };
 
@@ -70,7 +77,7 @@ export const audioForPath = (pathname, base) => {
 
 export const AUDIO_LABELS = {
   open: 'Listen to this article',
-  fab: 'Listen',
+  listen: 'Listen',
   note: 'Listen to the article: a podcast-style overview made with Google NotebookLM',
   kicker: 'Audio overview',
   coverAlt: 'Cover image of the audio overview',
@@ -86,6 +93,7 @@ export const AUDIO_LABELS = {
   expand: 'Open player',
   close: 'Close player',
   resume: 'Resume from',
+  resumeLeft: 'Resume · {m} min left',
   restart: 'Start over',
   reconnecting: 'Reconnecting…',
   loadError: 'The audio could not be loaded. Check your connection and try again.',

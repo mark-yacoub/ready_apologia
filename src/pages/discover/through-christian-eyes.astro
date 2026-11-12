@@ -6,6 +6,7 @@
  * (claim, evidence, "Our answer", "Go deeper" links into the site) → aside → closing.
  * All copy: src/utils/throughChristianEyes/content.js; rendering + checks: model.js.
  */
+import AudioListen from '../../components/audio/AudioListen.astro';
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
 import Deeper from '../../components/discover/through-christian-eyes/Deeper.astro';
@@ -38,6 +39,7 @@ const ogImage = `${site}${BASE}/media/through_christian_eyes/cover.jpg`;
     <header class="tce-hero" id="intro">
       <p class="tce-eyebrow"><span class="tce-eyebrow__tag">{m.labels.eyebrow}</span><span>{m.hero.kicker}</span></p>
       <h1 class="tce-h1" set:html={m.hero.h1Html} />
+      <AudioListen />
       <div class="tce-rule" aria-hidden="true"></div>
       <p class="tce-subtitle" set:html={m.hero.subtitleHtml} />
       {m.hero.introHtml.map((html) => <p class="tce-intro" set:html={html} />)}

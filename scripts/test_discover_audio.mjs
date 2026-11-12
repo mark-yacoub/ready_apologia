@@ -32,10 +32,13 @@ for (const key of Object.keys(DISCOVER_AUDIO)) {
   ok(new RegExp(`<audio[^>]+src="[^"]*${ep.src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`).test(html), `/discover/${key}: <audio src> is not ${ep.src}`);
   ok(html.includes(`data-id="${ep.id}"`), `/discover/${key}: data-id is not ${ep.id}`);
   const barButtons = count(html, /class="hrv-iconbtn rap-open"/g);
+  const listenButtons = count(html, /class="rap-listen"(?=[^>]*data-ra-audio-open)/g) - count(html, /<template data-rap-listen-tpl>/g);
   ok(barButtons <= 1, `/discover/${key}: ${barButtons} bar icons (wrap only the page's main copy-link button)`);
-  ok(/data-rap-fab/.test(html), `/discover/${key}: floating button markup missing`);
+  ok(listenButtons <= 1, `/discover/${key}: ${listenButtons} <AudioListen> buttons (use one, under the <h1>)`);
+  ok(barButtons + listenButtons >= 1,
+    `/discover/${key}: no server-rendered open button. Wrap the bar's copy-link button in <AudioButton>, or put <AudioListen /> right under the <h1> (the JS fallback works but shifts the layout).`);
   ok(count(html, /<h1[\s>]/g) === 1, `/discover/${key}: must keep exactly one <h1>`);
-  console.log(`  ${barButtons ? 'bar icon      ' : 'floating pill '} /discover/${key}`);
+  console.log(`  ${barButtons ? 'bar icon        ' : 'under the <h1>  '} /discover/${key}`);
 }
 
 // Discover pages without an entry must not carry player markup.

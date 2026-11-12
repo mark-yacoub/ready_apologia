@@ -1,0 +1,19 @@
+---
+/**
+ * "🎧 Listen · 46 min" button placed right under a page's <h1>, for Discover pages whose sticky
+ * bar has no <AudioButton> (hubs, at-a-glance, Through Christian Eyes). Self-gating: renders
+ * nothing unless src/utils/discoverAudio.js lists this URL, so it is safe to leave in any template.
+ * player.js turns the second label into "Resume · N min left" when the listener has saved progress.
+ */
+import { audioForPath, AUDIO_LABELS as L, fmtMinutes } from '../../utils/discoverAudio.js';
+import '../../styles/audio-player.css';
+const ep = audioForPath(Astro.url.pathname);
+---
+{ep && (
+  <p class="rap-listen-row">
+    <button class="rap-listen" type="button" data-ra-audio-open aria-label={L.open}>
+      <svg class="rap-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="5" height="7" rx="2"/><rect x="16" y="14" width="5" height="7" rx="2"/></svg>
+      <span>{L.listen}</span><span class="rap-listen__sub" data-rap-listen-sub>{fmtMinutes(ep.durationSec)}</span>
+    </button>
+  </p>
+)}

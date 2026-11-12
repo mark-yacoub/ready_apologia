@@ -5,6 +5,7 @@
  * 4 chapter sections (reader question + item rows) → sources used (derived counts).
  * The hub doubles as the at-a-glance view; there are no per-item pages. Stateless by design.
  */
+import AudioListen from '../../../components/audio/AudioListen.astro';
 import Layout from '../../../layouts/Layout.astro';
 import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
 import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
@@ -40,6 +41,7 @@ const md = createRenderer({ rootLinks: true });
       <header class="hrv-hero">
         <a class="hrv-crumb" href={`${BASE}/discover`}><Icon name="chevronLeft" />{LABELS.hubCrumb}</a>
         <h1 class="hrv-h1" set:html={tl(HUB.h1)} />
+        <AudioListen />
         <p class="hrv-intro" set:html={md.inline(HUB.intro)} />
       </header>
 

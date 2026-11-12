@@ -1,4 +1,4 @@
-// Shared by scripts/add_discover_audio.mjs and src/utils/discoverAudio.test.mjs.
+// Used by src/utils/discoverAudio.test.mjs and scripts/test_discover_audio.mjs.
 // Knows the on-disk contract of the Discover audio registry (src/utils/discoverAudio.js).
 import fs from 'node:fs';
 import path from 'node:path';
@@ -9,9 +9,8 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 export const REGISTRY = path.join(ROOT, 'src/utils/discoverAudio.js');
 export const START = '// @audio-entries-start';
 export const END = '// @audio-entries-end';
-/** Exactly the line shape the script writes; the unit test fails on any other shape. */
+/** The one allowed entry-line shape (see the registry header); the unit test fails on any other. */
 export const ENTRY_RE = /^  '([a-z0-9-]+(?:\/[a-z0-9-]+)*)': \{ durationSec: (\d+), version: (\d+)(?:, cover: '(\/[^']+)')? \},$/;
-export const KEY_RE = /^[a-z0-9-]+(?:\/[a-z0-9-]+)*$/;
 
 export const mediaFileFor = key => path.join(ROOT, 'public/media/audio', `${key}.m4a`);
 
@@ -38,13 +37,11 @@ export function readBlock(src = fs.readFileSync(REGISTRY, 'utf8')) {
 export function parseEntries(lines) {
   return lines.map(l => {
     const m = ENTRY_RE.exec(l);
-    if (!m) throw new Error(`registry line has an unexpected shape (run the script instead of hand-editing): ${l}`);
+    if (!m) throw new Error(`registry line has an unexpected shape (see the registry header for the exact shape): ${l}`);
     return { key: m[1], durationSec: Number(m[2]), version: Number(m[3]), cover: m[4] || null };
   });
 }
 
-export const formatEntry = e =>
-  `  '${e.key}': { durationSec: ${e.durationSec}, version: ${e.version}${e.cover ? `, cover: '${e.cover}'` : ''} },`;
 
 export function probe(file) {
   const out = execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration,bit_rate:stream=codec_name,channels',
