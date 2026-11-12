@@ -1,5 +1,6 @@
 ---
 /** Sticky slim bar on case pages: back to all cases · prev / position / next · at-a-glance · copy link. */
+import AudioButton from '../../audio/AudioButton.astro';
 import Icon from './Icon.astro';
 import { LABELS } from '../../../utils/hadithReliability/config.js';
 const { number, total, hubHref, glanceHref, prev, next } = Astro.props;
@@ -17,7 +18,7 @@ const { number, total, hubHref, glanceHref, prev, next } = Astro.props;
   </div>
   <div class="hrv-bar__actions">
     <a class="hrv-iconbtn" href={glanceHref} aria-label="All cases at a glance" title="All cases at a glance"><Icon name="grid" /></a>
-    <button class="hrv-iconbtn" type="button" data-hrv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button>
+    <AudioButton><button class="hrv-iconbtn" type="button" data-hrv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button></AudioButton>
   </div>
 </nav>
 <div class="hrv-toast" role="status" aria-live="polite" data-hrv-toast>{LABELS.copied}</div>

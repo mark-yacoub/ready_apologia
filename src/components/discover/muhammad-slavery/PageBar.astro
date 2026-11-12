@@ -3,6 +3,7 @@
  * Sticky slim bar on the three sub-pages: back to the hub · "On this page · N" index (a <details>,
  * grouped by section, 44px rows that wrap) · copy link. Never rewrites the URL while scrolling.
  */
+import AudioButton from '../../audio/AudioButton.astro';
 import Icon from '../hadith-reliability/Icon.astro';
 import { LABELS, PAGE_PATHS } from '../../../utils/muhammadSlavery/config.js';
 import { tl } from '../../../utils/hadithReliability/render.js';
@@ -30,7 +31,7 @@ const pad = n => String(n).padStart(2, '0');
     </div>
   </details>
   <div class="hrv-bar__actions">
-    <button class="hrv-iconbtn" type="button" data-hrv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button>
+    <AudioButton><button class="hrv-iconbtn" type="button" data-hrv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button></AudioButton>
   </div>
 </nav>
 <div class="hrv-toast" role="status" aria-live="polite" data-hrv-toast>{LABELS.copied}</div>

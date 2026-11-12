@@ -110,7 +110,7 @@ Criteria, in order:
    - AA contrast: informative text is never "faint grey" (use `#71717a` or darker).
    - Amiri for ʿ/ʾ marks inside Literata.
 7. **Progressive disclosure:** the depth is there but collapsed; the first screen is the claim, the evidence and how to check it.
-8. **Stateless:** no localStorage, read marks or session state on article pages.
+8. **Personal state is allowed:** pages may keep the reader's own preferences and progress in `localStorage` (e.g. audio position and playback speed). No tracking identifiers, and nothing that changes what a cold reader sees on first visit. (Owner, Nov 2026: the earlier "no localStorage" rule is lifted.)
 
 ## 6. Engineering guardrails (keep the quality from regressing)
 - **Import:** a dataset contract is validated **at import** (`validate.js`): unique ids, contiguous ranks, `global_rank` = reading order, no duplicate cards, link targets `https://` or `/`, known showcase types. The importer prints the SHA-256.

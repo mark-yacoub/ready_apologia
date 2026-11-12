@@ -21,7 +21,33 @@ const MIME_TYPES = {
   '.gif': 'image/gif',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
+  '.webp': 'image/webp',
+  '.m4a': 'audio/mp4',
+  '.mp3': 'audio/mpeg',
 };
+
+// Media is streamed with HTTP Range support (206), like R2/Cloudflare in production;
+// browsers need it to seek, and Safari refuses to play audio without it.
+const RANGE_EXTS = new Set(['.m4a', '.mp3']);
+function serveRange(req, res, filePath, contentType) {
+  const { size } = fs.statSync(filePath);
+  const m = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '');
+  if (!m) {
+    res.writeHead(200, { 'Content-Type': contentType, 'Content-Length': size, 'Accept-Ranges': 'bytes' });
+    fs.createReadStream(filePath).pipe(res);
+    return;
+  }
+  let start = m[1] === '' ? size - Number(m[2]) : Number(m[1]);
+  let end = m[1] !== '' && m[2] !== '' ? Number(m[2]) : size - 1;
+  end = Math.min(end, size - 1);
+  if (!(start >= 0) || start > end) {
+    res.writeHead(416, { 'Content-Range': `bytes */${size}` });
+    res.end();
+    return;
+  }
+  res.writeHead(206, { 'Content-Type': contentType, 'Content-Length': end - start + 1, 'Content-Range': `bytes ${start}-${end}/${size}`, 'Accept-Ranges': 'bytes' });
+  fs.createReadStream(filePath, { start, end }).pipe(res);
+}
 
 const server = http.createServer((req, res) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
@@ -66,6 +92,12 @@ const server = http.createServer((req, res) => {
         filePath = htmlFallback;
       }
     }
+  }
+
+  const reqExt = path.extname(filePath).toLowerCase();
+  if (RANGE_EXTS.has(reqExt) && fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+    serveRange(req, res, filePath, MIME_TYPES[reqExt]);
+    return;
   }
 
   fs.readFile(filePath, (err, content) => {

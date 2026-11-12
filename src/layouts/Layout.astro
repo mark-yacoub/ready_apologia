@@ -4,6 +4,8 @@ import ScriptureNav from '../components/ScriptureNav.jsx';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import MicrosoftClarity from '../components/MicrosoftClarity.astro';
 import { ClientRouter } from 'astro:transitions';
+import AudioPlayer from '../components/audio/AudioPlayer.astro';
+import { audioForPath } from '../utils/discoverAudio.js';
 import '../styles/markdown-exegesis.css';
 import '../styles/evidence-badges.css';
 import OnboardingBanner from '../components/OnboardingBanner.jsx';
@@ -235,6 +237,9 @@ const serializedSchema = typeof resolvedSchema === 'string'
 
 				<!-- Bottom Navigation (Hidden on desktop) -->
 				<BottomNav client:load />
+
+				<!-- Discover audio overview (renders only when src/utils/discoverAudio.js lists this page) -->
+				{audioForPath(Astro.url.pathname) && <AudioPlayer />}
 			</div>
 
 			<!-- Collapsible Left Navigation Sidebar (Sitting on top of everything natively!) -->

@@ -1,0 +1,113 @@
+---
+/**
+ * Podcast-style audio player, rendered once by Layout.astro on every page and self-gating: it
+ * renders nothing unless the current URL has an episode in src/utils/discoverAudio.js.
+ *   - full-screen sheet, opened by any `[data-ra-audio-open]` button (see AudioButton.astro);
+ *   - mini bar while the sheet is minimised and audio has started;
+ *   - floating "Listen" button, shown by player.js only when the page has no AudioButton.
+ * The title is filled from the page's own <h1> by player.js (and is a <p>: one <h1> per page).
+ * Behaviour: ./player.js. Styles: src/styles/audio-player.css (.rap).
+ */
+import { audioForPath, AUDIO_LABELS as L, fmtClock, fmtMinutes } from '../../utils/discoverAudio.js';
+import '../../styles/audio-player.css';
+
+const ep = audioForPath(Astro.url.pathname);
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '');
+const src = ep ? `${base}${ep.src}` : '';
+const cover = ep ? `${base}${ep.cover}` : '';
+const dur = ep ? fmtClock(ep.durationSec) : '';
+
+const I = {
+  play: '<path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor" stroke="none"/>',
+  pause: '<rect x="6.5" y="5" width="3.8" height="14" rx="1" fill="currentColor" stroke="none"/><rect x="13.7" y="5" width="3.8" height="14" rx="1" fill="currentColor" stroke="none"/>',
+  back: '<path d="M12 5A8 8 0 1 1 5.07 9"/><path d="M14.5 2.5L12 5l2.5 2.5"/><text x="12" y="16.3" font-size="7" font-weight="700" text-anchor="middle" fill="currentColor" stroke="none" font-family="Public Sans, sans-serif">10</text>',
+  fwd: '<path d="M12 5A8 8 0 1 0 18.93 9"/><path d="M9.5 2.5L12 5l-2.5 2.5"/><text x="12" y="16.3" font-size="7" font-weight="700" text-anchor="middle" fill="currentColor" stroke="none" font-family="Public Sans, sans-serif">10</text>',
+  down: '<path d="M6 9l6 6 6-6"/>',
+  up: '<path d="M6 15l6-6 6 6"/>',
+  close: '<path d="M6 6l12 12M18 6L6 18"/>',
+  restart: '<path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/>',
+  headphones: '<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="5" height="7" rx="2"/><rect x="16" y="14" width="5" height="7" rx="2"/>',
+};
+const svg = (k: string, cls = 'rap-i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${I[k as keyof typeof I]}</svg>`;
+---
+{ep && (
+<div
+  class="rap"
+  data-ra-audio
+  data-id={ep.id}
+  data-key={ep.key}
+  data-duration={ep.durationSec}
+  data-cover={cover}
+>
+  <audio preload="none" src={src} data-rap-audio></audio>
+
+  <div class="rap-sheet" role="dialog" aria-modal="true" aria-label={L.kicker} data-rap-sheet hidden>
+    <div class="rap-sheet__top">
+      <button class="rap-btn rap-btn--icon" type="button" data-rap-minimise aria-label={L.minimise} title={L.minimise} set:html={svg('down')} />
+      <span class="rap-sheet__kicker">{L.kicker}</span>
+      <button class="rap-btn rap-btn--icon" type="button" data-rap-close aria-label={L.close} title={L.close} set:html={svg('close')} />
+    </div>
+
+    <div class="rap-sheet__body">
+      <div class="rap-cover"><img src={cover} alt={L.coverAlt} width="560" height="560" loading="lazy" decoding="async" /></div>
+
+      <div class="rap-meta">
+        <p class="rap-title" data-rap-title></p>
+        <p class="rap-note">{L.note}</p>
+      </div>
+
+      <div class="rap-resume" data-rap-resume hidden>
+        <button class="rap-chip rap-chip--primary" type="button" data-rap-resume-go>
+          <span set:html={svg('play')} /><span>{L.resume} <b data-rap-resume-at>0:00</b></span>
+        </button>
+        <button class="rap-chip" type="button" data-rap-restart><span set:html={svg('restart')} /><span>{L.restart}</span></button>
+      </div>
+
+      <div class="rap-scrub">
+        <input
+          class="rap-range" type="range" min="0" max={ep.durationSec} step="1" value="0"
+          aria-label={L.seek} aria-valuetext={`0:00 of ${dur}`} data-rap-range
+        />
+        <div class="rap-times">
+          <span data-rap-elapsed>0:00</span>
+          <button class="rap-remaining" type="button" data-rap-remaining aria-label={L.toggleRemaining}>−{dur}</button>
+        </div>
+      </div>
+
+      <div class="rap-controls">
+        <button class="rap-btn rap-btn--skip" type="button" data-rap-skip="-10" aria-label={L.back} title={L.back} set:html={svg('back')} />
+        <button class="rap-btn rap-btn--play" type="button" data-rap-toggle aria-label={L.play} aria-pressed="false">
+          <Fragment set:html={svg('play', 'rap-i rap-i--play')} />
+          <Fragment set:html={svg('pause', 'rap-i rap-i--pause')} />
+        </button>
+        <button class="rap-btn rap-btn--skip" type="button" data-rap-skip="10" aria-label={L.forward} title={L.forward} set:html={svg('fwd')} />
+      </div>
+
+      <div class="rap-extras">
+        <button class="rap-chip rap-chip--speed" type="button" data-rap-rate aria-label={`${L.speed}: 1×`}>1×</button>
+      </div>
+      <p class="rap-status" data-rap-status role="status" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="rap-mini" data-rap-mini hidden>
+    <div class="rap-mini__progress" aria-hidden="true"><span data-rap-mini-bar></span></div>
+    <button class="rap-btn rap-btn--mini-play" type="button" data-rap-toggle aria-label={L.play} aria-pressed="false">
+      <Fragment set:html={svg('play', 'rap-i rap-i--play')} />
+      <Fragment set:html={svg('pause', 'rap-i rap-i--pause')} />
+    </button>
+    <button class="rap-mini__info" type="button" data-rap-expand aria-label={L.expand}>
+      <span class="rap-mini__title" data-rap-title></span>
+      <span class="rap-mini__time" data-rap-mini-time>0:00 / {dur}</span>
+    </button>
+    <button class="rap-btn rap-btn--icon" type="button" data-rap-expand aria-label={L.expand} title={L.expand} set:html={svg('up')} />
+    <button class="rap-btn rap-btn--icon" type="button" data-rap-close aria-label={L.close} title={L.close} set:html={svg('close')} />
+  </div>
+
+  <button class="rap-fab" type="button" data-ra-audio-open data-rap-fab aria-label={L.open} hidden>
+    <Fragment set:html={svg('headphones')} />
+    <span>{L.fab}</span><span class="rap-fab__dur">{fmtMinutes(ep.durationSec)}</span>
+  </button>
+</div>
+)}
+<script src="./player.js"></script>

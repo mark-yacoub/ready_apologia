@@ -6,6 +6,7 @@
  *   - copy-link button + empty live-region toast
  *   - preserves legacy #stage-filter-nav alias without JavaScript
  */
+import AudioButton from '../../audio/AudioButton.astro';
 import Icon from '../hadith-reliability/Icon.astro';
 const { nav, labels, backHref, canonical } = Astro.props;
 ---
@@ -19,6 +20,6 @@ const { nav, labels, backHref, canonical } = Astro.props;
       ))}
     </ol>
   </div>
-  <button class="hrv-iconbtn twb-nav__copy" type="button" data-twb-copy data-url={canonical} data-copied={labels.copied} data-failed={labels.copyFailed} aria-label={labels.copyLink} title={labels.copyLink}><Icon name="link" /></button>
+  <AudioButton><button class="hrv-iconbtn twb-nav__copy" type="button" data-twb-copy data-url={canonical} data-copied={labels.copied} data-failed={labels.copyFailed} aria-label={labels.copyLink} title={labels.copyLink}><Icon name="link" /></button></AudioButton>
 </nav>
 <div class="hrv-toast" role="status" aria-live="polite" data-twb-toast></div>

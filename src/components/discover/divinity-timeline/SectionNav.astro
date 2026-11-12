@@ -5,6 +5,7 @@
  * Stateless client.js marks the active section chip (`aria-current="location"`)
  * without mutating `window.location` or browser storage.
  */
+import AudioButton from '../../audio/AudioButton.astro';
 import Icon from '../hadith-reliability/Icon.astro';
 
 const { chips, canonicalUrl, backHref = '/discover' } = Astro.props;
@@ -36,7 +37,7 @@ const { chips, canonicalUrl, backHref = '/discover' } = Astro.props;
       ))}
     </ol>
   </div>
-  <button
+  <AudioButton><button
     class="hrv-iconbtn dtl-nav__copy"
     type="button"
     data-dtl-copy
@@ -47,6 +48,6 @@ const { chips, canonicalUrl, backHref = '/discover' } = Astro.props;
     title="Copy link to current section"
   >
     <Icon name="link" />
-  </button>
+  </button></AudioButton>
 </nav>
 <div class="hrv-toast" role="status" aria-live="polite" data-dtl-toast></div>

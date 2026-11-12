@@ -109,6 +109,8 @@ export const LASTMOD_RULES = [
       `src/pages/discover/${s[1]}.astro`,
       `src/components/discover/${s[1]}`,
       ...DISCOVER_SOURCES[s[1]],
+      // The page's audio overview, if any (src/utils/discoverAudio.js derives this path from the URL).
+      `public/media/audio/${s.slice(1).join('/')}.m4a`,
     ] },
 
   { id: 'evidence-quran-sources', match: (s) => s[0] === 'evidence' && s[1] === 'quran_sources',

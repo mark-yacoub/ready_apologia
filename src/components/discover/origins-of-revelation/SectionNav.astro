@@ -5,6 +5,7 @@
  * (aria-current) and, on tap, copies the canonical URL + that section's #id. It never rewrites the URL.
  * The toast is an empty live region until a copy happens, so nothing is announced on load.
  */
+import AudioButton from '../../audio/AudioButton.astro';
 import Icon from '../hadith-reliability/Icon.astro';
 const { nav, labels, backHref, canonical } = Astro.props;
 ---
@@ -17,6 +18,6 @@ const { nav, labels, backHref, canonical } = Astro.props;
       ))}
     </ol>
   </div>
-  <button class="hrv-iconbtn orv-nav__copy" type="button" data-orv-copy data-url={canonical} data-copied={labels.copied} data-failed={labels.copyFailed} aria-label={labels.copyLink} title={labels.copyLink}><Icon name="link" /></button>
+  <AudioButton><button class="hrv-iconbtn orv-nav__copy" type="button" data-orv-copy data-url={canonical} data-copied={labels.copied} data-failed={labels.copyFailed} aria-label={labels.copyLink} title={labels.copyLink}><Icon name="link" /></button></AudioButton>
 </nav>
 <div class="hrv-toast" role="status" aria-live="polite" data-orv-toast></div>

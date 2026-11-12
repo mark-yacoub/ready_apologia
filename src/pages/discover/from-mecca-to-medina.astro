@@ -7,6 +7,7 @@
  * Everything comes from loadMeccaToMedina() (read-only dataset + config copy overrides, checked at
  * build time). Old section hashes (#four-stages-of-warfare, …) land where that content lives now.
  */
+import AudioButton from '../../components/audio/AudioButton.astro';
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
 import Icon from '../../components/discover/hadith-reliability/Icon.astro';
@@ -72,7 +73,7 @@ const { readToday, textsShow, reflection, perspective } = m.closing;
         </div>
       </details>
       <div class="hrv-bar__actions">
-        <button class="hrv-iconbtn" type="button" data-hrv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button>
+        <AudioButton><button class="hrv-iconbtn" type="button" data-hrv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button></AudioButton>
       </div>
     </nav>
     <div class="hrv-toast" role="status" aria-live="polite" data-hrv-toast>{LABELS.copied}</div>

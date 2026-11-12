@@ -3,6 +3,7 @@
  * Sticky slim bar on chapter pages (CaseBar pattern): all items (hub) · prev / position / next chapter ·
  * "On this page" sheet (the 3 items) · copy link. Every target is ≥ 44 px.
  */
+import AudioButton from '../../audio/AudioButton.astro';
 import Icon from '../hadith-reliability/Icon.astro';
 import { tl } from '../../../utils/hadithReliability/render.js';
 import { LABELS } from '../../../utils/convenientRevelations/config.js';
@@ -32,6 +33,6 @@ const { part, hubHref, totalItems } = Astro.props;
         <a class="crv-sheet__hub" href={hubHref}>{LABELS.allItemsLong.replace('{n}', totalItems)}<Icon name="chevronRight" /></a>
       </div>
     </details>
-    <button class="hrv-iconbtn" type="button" data-crv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button>
+    <AudioButton><button class="hrv-iconbtn" type="button" data-crv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button></AudioButton>
   </div>
 </nav>

@@ -16,6 +16,7 @@ import { loadQuranPreservation } from '../../utils/quranPreservation/loader.js';
 import { BASE, BASE_PATH, LABELS, OG_IMAGE } from '../../utils/quranPreservation/config.js';
 import { pageSchema } from '../../utils/quranPreservation/schema.js';
 import { tl } from '../../utils/hadithReliability/render.js';
+import AudioButton from '../../components/audio/AudioButton.astro';
 import '../../styles/hadith-reliability.css';
 import '../../styles/quran-preservation.css';
 
@@ -65,7 +66,7 @@ const pad = n => String(n).padStart(2, '0');
         </div>
       </details>
       <div class="hrv-bar__actions">
-        <button class="hrv-iconbtn" type="button" data-hrv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button>
+        <AudioButton><button class="hrv-iconbtn" type="button" data-hrv-copy aria-label={LABELS.copyLink} title={LABELS.copyLink}><Icon name="link" /></button></AudioButton>
       </div>
     </nav>
     <div class="hrv-toast" role="status" aria-live="polite" data-hrv-toast>{LABELS.copied}</div>

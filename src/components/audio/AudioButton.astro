@@ -1,0 +1,23 @@
+---
+/**
+ * Headphones icon for a Discover page's sticky bar. Wrap the bar's copy-link button with it:
+ *
+ *     <AudioButton><button class="hrv-iconbtn" data-…-copy …>…</button></AudioButton>
+ *
+ * No audio registered for this URL (src/utils/discoverAudio.js) → renders only the wrapped child,
+ * byte-identical to before. Audio registered → renders [🎧][child] as ONE inline-flex box, so it
+ * occupies the same grid/flex cell as the child did (bars with fixed grid columns don't reflow).
+ * The player itself is rendered by Layout.astro (<AudioPlayer />); pages without a wrapped button
+ * get its floating "Listen" button instead.
+ */
+import { audioForPath, AUDIO_LABELS as L } from '../../utils/discoverAudio.js';
+const ep = audioForPath(Astro.url.pathname);
+---
+{ep ? (
+  <span class="rap-pair">
+    <button class="hrv-iconbtn rap-open" type="button" data-ra-audio-open aria-label={L.open} title={L.open}>
+      <svg class="hrv-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="5" height="7" rx="2"/><rect x="16" y="14" width="5" height="7" rx="2"/></svg>
+    </button>
+    <slot />
+  </span>
+) : <slot />}

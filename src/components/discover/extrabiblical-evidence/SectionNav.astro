@@ -4,6 +4,7 @@
  * Stateless client.js highlights the active section chip (aria-current) and copies canonical + #id
  * on tap without rewriting the browser URL or touching storage.
  */
+import AudioButton from '../../audio/AudioButton.astro';
 import Icon from '../hadith-reliability/Icon.astro';
 const { nav, labels, backHref, canonical } = Astro.props;
 ---
@@ -24,7 +25,7 @@ const { nav, labels, backHref, canonical } = Astro.props;
       ))}
     </ol>
   </div>
-  <button
+  <AudioButton><button
     class="hrv-iconbtn ebj-nav__copy"
     type="button"
     data-ebj-copy
@@ -35,6 +36,6 @@ const { nav, labels, backHref, canonical } = Astro.props;
     title={labels.copyLink}
   >
     <Icon name="link" />
-  </button>
+  </button></AudioButton>
 </nav>
 <div class="hrv-toast" role="status" aria-live="polite" data-ebj-toast></div>
