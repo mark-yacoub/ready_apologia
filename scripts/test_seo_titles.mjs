@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Zero-dependency static SEO, Title, Description, H1, Opening-Line, Tone,
+ * Zero-dependency static SEO, Title, Description, H1, No-Opening-Line, Tone,
  * Sitemap & JSON-LD Audit (`scripts/test_seo_titles.mjs`).
  *
  * Scans ALL generated HTML files in a built `dist/` directory using fast
@@ -22,10 +22,11 @@
  *   - h1           : Every non-redirect HTML page has exactly 1 non-empty `<h1>`;
  *                    redirect stubs (`<meta http-equiv="refresh">` + `noindex`) are
  *                    skipped for `<h1>` and must NOT appear in any sitemap.
- *   - opening      : Every templated Bible/Qur'an chapter, surah, or verse/ayah tab
- *                    page renders a non-empty `.verse-opening-line`,
- *                    `.chapter-opening-line`, or `.surah-opening-line`.
- *   - tone         : Opening lines and meta descriptions contain none of the banned
+ *   - opening      : No page renders a visible opening line (`.verse-opening-line`,
+ *                    `.chapter-opening-line`, `.surah-opening-line`). The owner does
+ *                    not want explanatory/stats text about the app above Scripture;
+ *                    SEO copy belongs in `<title>` and the meta description only.
+ *   - tone         : Meta descriptions contain none of the banned
  *                    words from `docs/article_and_ux_playbook.md` §2.3 (shared list
  *                    imported from `src/utils/quranPreservation/tone.js`); video-tab
  *                    descriptions (`/bible/.../videos`, `/quran/.../videos`) must
@@ -194,8 +195,7 @@ const RE_TOPIC_ITEM = /^\/topics\/[^/]+$/;
 const RE_CREATOR_ITEM = /^\/creators\/[^/]+$/;
 
 /**
- * Templated Bible & Qur'an pages covered by the <= 60 char base-title budget
- * and `.verse-opening-line` / `.chapter-opening-line` / `.surah-opening-line` check:
+ * Templated Bible & Qur'an pages covered by the <= 60 char base-title budget:
  *   - `/bible/<b>/<c>`
  *   - `/bible/<b>/<c>/<v>/<tab>`
  *   - `/quran/<s>` (surahs 1-114)
@@ -551,27 +551,15 @@ for (const file of htmlFiles) {
     );
   }
 
-  // ── Group: opening & tone (opening lines) ──
+  // ── Group: opening ──
+  // Owner's call (Nov 2026): no visible explanatory/stats line between the page
+  // header and the Scripture text. SEO copy stays in <title> and the meta description.
   const openingMatch = html.match(RE_OPENING_LINE);
-  const openingText = openingMatch ? stripTags(openingMatch[3]) : '';
-
-  // /videos tabs intentionally show no opening line (owner's call): the clip list is the content.
-  if (templatedScripture && !isRedirectStub && !route.endsWith('/videos')) {
-    check(
-      'opening',
-      Boolean(openingMatch && openingText.length > 0),
-      `${route}: missing or empty .verse-opening-line / .chapter-opening-line / .surah-opening-line`
-    );
-  }
-
-  if (openingText) {
-    const openingToneHit = findToneViolation(stripQuoted(openingText));
-    check(
-      'tone',
-      !openingToneHit,
-      `${route}: opening line (.${openingMatch[2]}) contains banned playbook word "${openingToneHit}": "${openingText}"`
-    );
-  }
+  check(
+    'opening',
+    !openingMatch,
+    `${route}: renders a visible opening line (.${openingMatch?.[2]}); remove it, SEO copy belongs in the meta description only`
+  );
 
   // ── Group: jsonld ──
   const jsonLdMatches = [...html.matchAll(RE_JSONLD_ALL)];

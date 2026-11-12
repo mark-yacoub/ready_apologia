@@ -111,6 +111,7 @@ Criteria, in order:
    - Amiri for ʿ/ʾ marks inside Literata.
 7. **Progressive disclosure:** the depth is there but collapsed; the first screen is the claim, the evidence and how to check it.
 8. **Personal state is allowed:** pages may keep the reader's own preferences and progress in `localStorage` (e.g. audio position and playback speed). No tracking identifiers, and nothing that changes what a cold reader sees on first visit. (Owner, Nov 2026: the earlier "no localStorage" rule is lifted.)
+9. **No explanatory text about the app.** No visible lines that describe the app or the page (counts, "N verses with manuscripts…", "what you'll find here") between a header and its content. Scripture and evidence speak for themselves; SEO copy lives in `<title>` and the meta description only. (Owner, Nov 2026.)
 
 ## 6. Engineering guardrails (keep the quality from regressing)
 - **Import:** a dataset contract is validated **at import** (`validate.js`): unique ids, contiguous ranks, `global_rank` = reading order, no duplicate cards, link targets `https://` or `/`, known showcase types. The importer prints the SHA-256.

@@ -221,20 +221,16 @@ const earliestChapMsRows = isNT
 const earliestChapMs = earliestChapMsRows[0] || null;
 
 const chapTagValues = Object.values(verseTagsMap);
-const chapMsCount = chapTagValues.filter(t => t.includes('manuscript')).length;
 const chapApCount = chapTagValues.filter(t => t.includes('apologetics')).length;
-const chapCtCount = chapTagValues.filter(t => t.includes('contradiction')).length;
 
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
 const canonicalURL = `${siteUrl}${base}/bible/${book}/${chapter}`;
-const { seoTitle, seoDescription, openingLine, chapterSchema } = generateBibleChapterSEO({
+const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
   bookName: bookMeta.name,
   bookId: book,
   chapter,
   verseCount: chapterVerses.length,
-  msVerseCount: chapMsCount,
   apVerseCount: chapApCount,
-  ctVerseCount: chapCtCount,
   earliestMs: earliestChapMs,
   canonicalUrl: canonicalURL
 });
@@ -251,7 +247,7 @@ const { seoTitle, seoDescription, openingLine, chapterSchema } = generateBibleCh
 >
   <div class="chapter-reader-container" data-page="bible-chapter">
     <!-- Split Book & Chapter Dropdown Selector -->
-    <header class="reader-header select-none" style="display: flex; flex-direction: column; gap: 8px;">
+    <header class="reader-header select-none" style="display: flex; flex-direction: column; gap: 12px;">
       <!-- The visible title is two buttons (book / chapter), so the page heading is mirrored here. -->
       <h1 class="sr-only">{bookMeta.name} {chapter}</h1>
       <div class="selector-hub">
@@ -288,9 +284,6 @@ const { seoTitle, seoDescription, openingLine, chapterSchema } = generateBibleCh
           </div>
         </div>
       </div>
-      {openingLine && (
-        <p class="chapter-opening-line select-text">{openingLine}</p>
-      )}
     </header>
 
     <!-- Scripture Verses -->
@@ -569,7 +562,6 @@ const { seoTitle, seoDescription, openingLine, chapterSchema } = generateBibleCh
   };
 
 
-
   // Run on initial load and after every page navigation
   document.addEventListener('astro:page-load', () => {
     initChapterPage();
@@ -708,19 +700,10 @@ const { seoTitle, seoDescription, openingLine, chapterSchema } = generateBibleCh
 		color: var(--color-secondary);
 	}
 
-
 	.reader-header {
 		margin-bottom: 20px;
 		display: flex;
 		justify-content: flex-start;
-	}
-
-	.chapter-opening-line {
-		margin: 0;
-		font-family: var(--font-body);
-		font-size: 13.5px;
-		line-height: 1.5;
-		color: #52525b;
 	}
 
 	/* ============================================================

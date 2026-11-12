@@ -212,20 +212,17 @@ for (let i = 1; i <= totalVerses; i++) {
   });
 }
 
-const variantCount = verses.filter(v => v.variants.length > 0 || v.qiraatVariants.length > 0).length;
 const msVerseCount = verses.filter(v => v.hasManuscript).length;
 const seoKeywords = `surah ${arabicData.transliteration}, surah ${surahNum}, quran ${surahNum} tafsir, qiraat variants`;
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
 const canonicalURL = `${siteUrl}${base}/quran/${surahNum}`;
-const { seoTitle, seoDescription, openingLine, surahSchema } = generateQuranSurahSEO({
+const { seoTitle, seoDescription, surahSchema } = generateQuranSurahSEO({
   transliteration: arabicData.transliteration,
   surahNum,
-  revelationType: arabicData.type || '',
   totalVerses,
   msVerseCount,
-  variantCount,
   canonicalUrl: canonicalURL
 });
 
@@ -244,10 +241,6 @@ const ogImage = getQuranOgImage(surahNum, null);
 >
   <div class="quran-reader-container theme-quran prefer-english" data-page="quran-surah">
     <QuranPageHeader currentTitle={`${surahNum}. ${arabicData.transliteration}`} currentIndex={surahNum} h1Text={`Surah ${surahNum}: ${arabicData.transliteration}`} />
-
-    {openingLine && (
-      <p class="surah-opening-line">{openingLine}</p>
-    )}
 
     <!-- Language Toggle -->
     <div class="language-toggle select-none">
@@ -427,7 +420,6 @@ const ogImage = getQuranOgImage(surahNum, null);
     const savedLang = localStorage.getItem('quranLanguage') || 'english';
     setLanguage(savedLang);
 
-
     btnEn.addEventListener('click', () => setLanguage('english'));
     btnAr.addEventListener('click', () => setLanguage('arabic'));
 
@@ -522,14 +514,6 @@ const ogImage = getQuranOgImage(surahNum, null);
     flex-direction: column;
     max-width: 800px;
     margin: 0 auto;
-  }
-
-  .surah-opening-line {
-    margin: 0 0 14px 0;
-    font-family: var(--font-body);
-    font-size: 13.5px;
-    line-height: 1.5;
-    color: #52525b;
   }
 
   .language-toggle {

@@ -17,9 +17,7 @@ import {
   fitText,
   clampDescription,
   cleanItemTitle,
-  cleanVideoTitle,
-  quoteTail,
-  formatList
+  quoteTail
 } from './seo/text.js';
 
 export {
@@ -185,7 +183,6 @@ function createTabSEOResolver(defaultStrategy, tabStrategies, getBreadcrumbs) {
     let resolvedTitle = fallback.title;
     let resolvedDescription = fallback.description;
     let resolvedKeywords = fallback.keywords;
-    let resolvedOpeningLine = fallback.openingLine || '';
     let resolvedFaqEntity = null;
 
     if (tabStrategies[tab]) {
@@ -194,7 +191,6 @@ function createTabSEOResolver(defaultStrategy, tabStrategies, getBreadcrumbs) {
       resolvedTitle = dynamicResults.title || config.title || fallback.title;
       resolvedDescription = dynamicResults.description || config.description || fallback.description;
       resolvedKeywords = dynamicResults.keywords || config.keywords || fallback.keywords;
-      resolvedOpeningLine = dynamicResults.openingLine || config.openingLine || fallback.openingLine || '';
       
       if (dynamicResults.faqEntity) {
         resolvedFaqEntity = dynamicResults.faqEntity;
@@ -228,8 +224,7 @@ function createTabSEOResolver(defaultStrategy, tabStrategies, getBreadcrumbs) {
       seoTitle: resolvedTitle,
       seoDescription: resolvedDescription,
       seoKeywords: resolvedKeywords,
-      seoSchema: finalSchema,
-      openingLine: resolvedOpeningLine
+      seoSchema: finalSchema
     };
   };
 }
@@ -243,8 +238,7 @@ export const generateBibleTabSEO = createTabSEOResolver(
     return {
       title: `${verseRef}: Biblical Evidence & Commentary`,
       description: `Explore ancient manuscripts, Early Church Father commentary, and cross-reference answers for ${verseRef}.`,
-      keywords: `${verseRef} evidence, ${verseRef} meaning`,
-      openingLine: `Primary manuscript, patristic, and exegetical evidence for ${verseRef}.`
+      keywords: `${verseRef} evidence, ${verseRef} meaning`
     };
   },
   {
@@ -255,8 +249,7 @@ export const generateBibleTabSEO = createTabSEOResolver(
           return {
             title: `${verseRef} Manuscripts & Earliest Copies`,
             description: `Explore ancient biblical manuscript scans and dating metadata for ${verseRef}.`,
-            keywords: `${verseRef} manuscripts, earliest manuscript of ${verseRef.toLowerCase()}`,
-            openingLine: `Ancient manuscript catalog for ${verseRef}.`
+            keywords: `${verseRef} manuscripts, earliest manuscript of ${verseRef.toLowerCase()}`
           };
         }
         const uniqueMs = getUniqueManuscripts(data.manuscripts);
@@ -284,10 +277,6 @@ export const generateBibleTabSEO = createTabSEOResolver(
           });
         });
 
-        const openingLine = uniqueMs.length === 1
-          ? `${verseRef} is attested in 1 ancient manuscript${totalScans > 1 ? ` (${totalScans} scans)` : ''}: ${earliestName} (${dateStr})${loc ? `, held at ${loc}` : ''}.`
-          : `${verseRef} is attested in ${uniqueMs.length} ancient manuscripts${totalScans > uniqueMs.length ? ` (${totalScans} scans)` : ''}; the earliest is ${earliestName} (${dateStr})${loc ? `, held at ${loc}` : ''}.`;
-
         const descBase = uniqueMs.length === 1
           ? `Earliest manuscript of ${verseRef}: ${earliestName} (${dateStr})${loc ? `, held at ${loc}` : ''}. View high-resolution scan and dating notes.`
           : `Earliest manuscript of ${verseRef}: ${earliestName} (${dateStr})${loc ? ` at ${loc}` : ''}. Compare ${uniqueMs.length} ancient manuscripts${totalScans > uniqueMs.length ? ` (${totalScans} scans)` : ''}.`;
@@ -296,7 +285,6 @@ export const generateBibleTabSEO = createTabSEOResolver(
           title: buildManuscriptTitle(verseRef, uniqueMs, `${verseRef} Manuscripts & Earliest Copies`),
           description: clampDescription(descBase),
           keywords: `${verseRef} manuscripts, earliest manuscript of ${data.bookName.toLowerCase()}, ${earliestName}`,
-          openingLine,
           faqEntity: {
             "@type": "FAQPage",
             ...(data.canonicalUrl && { "@id": `${data.canonicalUrl}#faqpage`, "mainEntityOfPage": { "@type": "WebPage", "@id": data.canonicalUrl } }),
@@ -341,19 +329,10 @@ export const generateBibleTabSEO = createTabSEOResolver(
             )
           : `Read textual and historical answers to cross-reference questions involving ${verseRef}.`;
 
-        const openingLine = hasData
-          ? (otherLabel && items.length === 1
-              ? `Comparing ${verseRef} with ${otherLabel}${firstClean ? ` on ${quoteTail(firstClean, true)}` : '.'}`
-              : otherLabel
-                ? `${items.length} cross-reference questions comparing ${verseRef} with ${otherLabel} and related passages${firstClean ? `, starting with ${quoteTail(firstClean, true)}` : '.'}`
-                : `${items.length} cross-reference ${items.length === 1 ? 'question' : 'questions'} on ${verseRef}${firstClean ? `, starting with ${quoteTail(firstClean, true)}` : '.'}`)
-          : `Cross-reference questions and contextual answers for ${verseRef}.`;
-
         return {
           title,
           description,
           keywords: `${verseRef}${otherLabel ? `, ${otherLabel}` : ''}, bible cross-reference answers, patristic harmonization`,
-          openingLine,
           faqEntity: hasData
             ? buildFaqEntity(data.contradictions, c => c.title, c => c.summary || c.answer, data.canonicalUrl)
             : undefined
@@ -394,19 +373,10 @@ export const generateBibleTabSEO = createTabSEOResolver(
             )
           : `What does ${verseRef} mean? Read Early Church Father and modern theological commentary on ${verseRef}.`;
 
-        const openingLine = hasData
-          ? (hasPatristic && hasModern
-              ? `${count} ancient and modern commentaries on ${verseRef} (including ${fathers.slice(0, 2).join(' and ')})${firstClean ? `, starting with ${quoteTail(firstClean, true)}` : '.'}`
-              : hasPatristic
-                ? `${count} Early Church Father ${count === 1 ? 'commentary' : 'commentaries'} on ${verseRef} (${fathers.slice(0, 2).join(' and ')})${firstClean ? `, starting with ${quoteTail(firstClean, true)}` : '.'}`
-                : `${count} ${count === 1 ? 'commentary' : 'commentaries'} on ${verseRef}${firstClean ? ` examining ${quoteTail(firstClean, true)}` : '.'}`)
-          : `Early Church Father and modern commentary on ${verseRef}.`;
-
         return {
           title,
           description,
           keywords: `${verseRef} meaning, ${verseRef} commentary, patristic commentary`,
-          openingLine,
           faqEntity: hasData
             ? buildFaqEntity(data.apologetics, a => a.title, a => a.summary || a.answer, data.canonicalUrl)
             : undefined
@@ -418,7 +388,6 @@ export const generateBibleTabSEO = createTabSEOResolver(
         const verseRef = `${data.bookName} ${data.chapter}:${data.verse}`;
         const vids = Array.isArray(data.videos) ? data.videos : [];
         const count = vids.length;
-        const firstClean = cleanVideoTitle(vids[0]?.title);
 
         let title = `${verseRef} Explained: Short Videos & Transcripts`;
         if (count > 0) {
@@ -431,15 +400,10 @@ export const generateBibleTabSEO = createTabSEOResolver(
           ? clampDescription(`Watch ${count} short ${count === 1 ? 'video' : 'videos'} on ${verseRef} with full transcripts and linked cross-references.`)
           : `Watch short videos on ${verseRef} with full transcripts and linked scripture references.`;
 
-        const openingLine = count > 0
-          ? `${count} short ${count === 1 ? 'video' : 'videos'} on ${verseRef} with transcripts and linked cross-references.`
-          : `Short videos and transcripts explaining ${verseRef}.`;
-
         return {
           title,
           description,
-          keywords: `${verseRef} video, ${verseRef} explained`,
-          openingLine
+          keywords: `${verseRef} video, ${verseRef} explained`
         };
       }
     }
@@ -472,8 +436,7 @@ export const generateQuranTabSEO = createTabSEOResolver(
     return {
       title: `${verseRef}: Text, Tafsir & Manuscripts`,
       description: `Read ${verseRef} in Arabic and English with unabridged classical tafsir, early manuscripts, and primary-source analysis.`,
-      keywords: `quran ${data.surah}:${data.ayah}, surah ${data.surah}:${data.ayah}`,
-      openingLine: `Primary textual, manuscript, and classical commentary sources for ${verseRef}.`
+      keywords: `quran ${data.surah}:${data.ayah}, surah ${data.surah}:${data.ayah}`
     };
   },
   {
@@ -485,8 +448,7 @@ export const generateQuranTabSEO = createTabSEOResolver(
           return {
             title: `${qRef} Manuscripts & Earliest Folios`,
             description: `Examine early Quranic manuscripts and variant readings (Qira'at) for ${qRef}.`,
-            keywords: `${qRef} manuscripts, earliest quran manuscripts, qiraat variants`,
-            openingLine: `Early Quranic manuscript catalog for ${qRef}.`
+            keywords: `${qRef} manuscripts, earliest quran manuscripts, qiraat variants`
           };
         }
         const uniqueMs = getUniqueManuscripts(data.manuscripts);
@@ -518,10 +480,6 @@ export const generateQuranTabSEO = createTabSEOResolver(
           });
         });
 
-        const openingLine = uniqueMs.length === 1
-          ? `${qRef} is attested in 1 ancient manuscript${totalScans > 1 ? ` (${totalScans} folios)` : ''}: ${earliestName} (${dateStr})${loc ? `, held at ${loc}` : ''}.`
-          : `${qRef} is attested in ${uniqueMs.length} ancient manuscripts${totalScans > uniqueMs.length ? ` (${totalScans} folios)` : ''}; the earliest is ${earliestName} (${dateStr})${loc ? `, held at ${loc}` : ''}.`;
-
         const descBase = uniqueMs.length === 1
           ? `Earliest manuscript of ${qRef}: ${earliestName} (${dateStr})${loc ? `, held at ${loc}` : ''}. View high-resolution folio scan and dating notes.`
           : `Earliest manuscript of ${qRef}: ${earliestName} (${dateStr})${loc ? ` at ${loc}` : ''}. Compare ${uniqueMs.length} early Quranic manuscripts${totalScans > uniqueMs.length ? ` (${totalScans} folios)` : ''}.`;
@@ -530,7 +488,6 @@ export const generateQuranTabSEO = createTabSEOResolver(
           title: buildManuscriptTitle(qRef, uniqueMs, `${qRef} Manuscripts & Earliest Folios`),
           description: clampDescription(descBase),
           keywords: `${qRef} manuscripts, ${verseRef} manuscripts, carbon dated quran, qiraat variants`,
-          openingLine,
           faqEntity: {
             "@type": "FAQPage",
             ...(data.canonicalUrl && { "@id": `${data.canonicalUrl}#faqpage`, "mainEntityOfPage": { "@type": "WebPage", "@id": data.canonicalUrl } }),
@@ -547,13 +504,11 @@ export const generateQuranTabSEO = createTabSEOResolver(
         // Verse-tab page = generic template copy (owner policy: only single-item pages quote their source).
         const title = `${qRef} Meaning: Christian Commentary & Context`;
         const description = `Read ${count > 1 ? `${count} comparative commentary notes` : 'comparative commentary'} on ${qRef} beside the related Bible passages, with the verse in Arabic and English and its historical context.`;
-        const openingLine = `${count || 1} comparative commentary ${count === 1 ? 'note' : 'notes'} on ${qRef} examining its historical context and biblical parallels.`;
 
         return {
           title,
           description,
-          keywords: `${qRef} christian commentary, surah ${data.surah}:${data.ayah} meaning, bible vs quran`,
-          openingLine
+          keywords: `${qRef} christian commentary, surah ${data.surah}:${data.ayah} meaning, bible vs quran`
         };
       }
     },
@@ -575,17 +530,10 @@ export const generateQuranTabSEO = createTabSEOResolver(
           ? clampDescription(`Read ${qRef}${opp ? ` and Surah ${opp}` : ''} side by side on "${topic}" and compare the two passages in context.`)
           : `Compare ${qRef} side by side with related passages across the Quran.`;
 
-        const openingLine = hasData
-          ? (items.length === 1
-              ? `Side-by-side comparison of ${qRef}${opp ? ` and Surah ${(first.opposite_verses || [opp]).slice(0, 3).join(', ')}` : ''} on “${topic}.”`
-              : `${items.length} side-by-side passage comparisons involving ${qRef}, starting with Surah ${opp || selfId} on “${topic}.”`)
-          : `Side-by-side comparison of ${qRef} with parallel Quranic passages.`;
-
         return {
           title,
           description,
           keywords: `${qRef}${opp ? `, quran ${opp}` : ''}, ${verseRef} comparison, ${topic.toLowerCase()}`,
-          openingLine,
           faqEntity: hasData
             ? buildFaqEntity(data.verseContradictions, vc => vc.evidence, vc => vc.description || vc.evidence, data.canonicalUrl)
             : undefined
@@ -613,15 +561,10 @@ export const generateQuranTabSEO = createTabSEOResolver(
           ? clampDescription(`Read ${qRef} on “${rawLabel}” beside classical Arabic lexicons, Tafsir al-Tabari and Ibn Kathir, and modern scholarship.`)
           : `Examine ${qRef} in classical Arabic lexicons and early tafsir on the natural world.`;
 
-        const openingLine = hasData && rawLabel
-          ? `Textual, classical tafsir, and historical analysis of ${qRef}: “${rawLabel}.”`
-          : `Textual, classical tafsir, and historical analysis of ${qRef}.`;
-
         return {
           title,
           description,
           keywords: `${qRef} analysis, ${verseRef} cosmology, classical tafsir ${qRef}`,
-          openingLine,
           faqEntity: hasData
             ? buildFaqEntity(
                 data.parsedScientificErrors,
@@ -664,17 +607,10 @@ export const generateQuranTabSEO = createTabSEOResolver(
               ? `Complete, unabridged Tafsir Ibn Kathir (AD 1373) on ${qRef} in English and original Arabic, including sections omitted from abridged editions.`
               : `Read the complete, unabridged ${ac.title || cleanName} on ${qRef} in English translation beside the original Arabic text.`;
 
-          const openingLine = ac.id === 'tabari'
-            ? `Complete, unabridged Tafsir al-Tabari (AD 883) on ${qRef} — full original Arabic text from Jami' al-Bayan beside a complete generated English translation.`
-            : ac.id === 'ibn_kathir'
-              ? `Complete, unabridged Tafsir Ibn Kathir (AD 1373) on ${qRef} — full original Arabic text beside the complete English commentary.`
-              : `Complete, unabridged ${ac.title || cleanName} on ${qRef} in English translation and original Arabic.`;
-
           return {
             title,
             description: clampDescription(description),
             keywords: `${cleanName} ${qRef}, unabridged ${cleanName} english, arabic ${cleanName}, ${qRef} tafsir`,
-            openingLine,
             faqEntity: schemaItems.length > 0 
               ? buildFaqEntity(schemaItems, item => item.q, item => item.a, data.canonicalUrl)
               : undefined
@@ -685,7 +621,6 @@ export const generateQuranTabSEO = createTabSEOResolver(
           title: `${qRef}: Unabridged Classical Tafsir (English & Arabic)`,
           description: `Read complete, unabridged classical Sunni tafsir on ${qRef} in English translation beside the original Arabic.`,
           keywords: `english tafsir ${qRef}, ${qRef} explanation, islamic exegesis`,
-          openingLine: `Complete, unabridged classical Sunni commentary on ${qRef} in English and original Arabic.`,
           faqEntity: undefined
         };
       }
@@ -709,13 +644,10 @@ export const generateQuranTabSEO = createTabSEOResolver(
           ? clampDescription(summaryStr)
           : `Compare modern scientific claims about ${qRef} with classical Arabic lexicons, Tafsir al-Tabari, and Tafsir Ibn Kathir.`;
 
-        const openingLine = `Comparing the modern ${rawCat.toLowerCase()} claim on ${qRef} with classical Arabic lexicons, Tafsir al-Tabari, and Tafsir Ibn Kathir.`;
-
         return {
           title,
           description,
           keywords: `${qRef} ${shortCat.toLowerCase()} claim, ${qRef} classical tafsir, quran scientific claims context`,
-          openingLine,
           faqEntity: hasData
             ? buildFaqEntity(data.verseDebunking, vd => vd.claim, vd => vd.summary || vd.classification_explanation || vd.refutation || vd.claim, data.canonicalUrl)
             : undefined
@@ -738,14 +670,10 @@ export const generateQuranTabSEO = createTabSEOResolver(
               ? `${firstTitleClean} ${firstRefClean}`
               : firstTitleClean)
           : firstRefClean;
-        const openingLine = total === 1
-          ? `1 earlier primary-source passage parallels Qurʾān ${data.surah}:${data.ayah}${firstSource ? ` (${firstSource})` : ''}, quoted side by side with verification links.`
-          : `${total} earlier primary-source passages parallel Qurʾān ${data.surah}:${data.ayah}${sampleTitles ? ` (including ${sampleTitles})` : ''}, quoted side by side with verification links.`;
         const result = {
           title: SEO_DRAWER.title(data.surah, data.ayah, firstSource),
           description: clampDescription(SEO_DRAWER.description(data.surah, data.ayah, total, sampleTitles)),
-          keywords: SEO_DRAWER.keywords(data.surah, data.ayah),
-          openingLine
+          keywords: SEO_DRAWER.keywords(data.surah, data.ayah)
         };
         if (items.length > 0) {
           const answer = items.slice(0, 5)
@@ -769,7 +697,6 @@ export const generateQuranTabSEO = createTabSEOResolver(
         const qRef = `Quran ${data.surah}:${data.ayah}`;
         const vids = Array.isArray(data.videos) ? data.videos : [];
         const count = vids.length;
-        const firstClean = cleanVideoTitle(vids[0]?.title);
 
         let title = `${qRef} Explained: Short Videos & Transcripts`;
         if (count > 0) {
@@ -782,15 +709,10 @@ export const generateQuranTabSEO = createTabSEOResolver(
           ? clampDescription(`Watch ${count} short ${count === 1 ? 'video' : 'videos'} on ${qRef} with full transcripts and source references.`)
           : `Watch short videos on ${qRef} with full transcripts and primary-source references.`;
 
-        const openingLine = count > 0
-          ? `${count} short ${count === 1 ? 'video' : 'videos'} on ${qRef} with transcripts and linked references.`
-          : `Short videos and transcripts examining ${qRef}.`;
-
         return {
           title,
           description,
-          keywords: `${qRef} video, surah ${data.surah}:${data.ayah} explained`,
-          openingLine
+          keywords: `${qRef} video, surah ${data.surah}:${data.ayah} explained`
         };
       }
     }
@@ -817,16 +739,14 @@ export const generateQuranTabSEO = createTabSEOResolver(
 );
 
 /**
- * Generates title, description, opening line, and Schema.org graph for Bible Chapter pages
+ * Generates title, description, and Schema.org graph for Bible Chapter pages
  */
 export const generateBibleChapterSEO = ({
   bookName,
   bookId,
   chapter,
   verseCount = 0,
-  msVerseCount = 0,
   apVerseCount = 0,
-  ctVerseCount = 0,
   earliestMs = null,
   canonicalUrl
 }) => {
@@ -840,38 +760,21 @@ export const generateBibleChapterSEO = ({
     `Read ${ref} (${verseCount} verses) with ancient manuscript scans${earliestLabel ? ` from ${earliestLabel}` : ''}, Early Church Father commentary (${apVerseCount} verses), and cross-reference answers.`
   );
 
-  const parts = [];
-  if (msVerseCount > 0) {
-    parts.push(`${msVerseCount} ${msVerseCount === 1 ? 'verse' : 'verses'} with ancient manuscript scans${earliestLabel ? ` (earliest: ${earliestLabel})` : ''}`);
-  }
-  if (apVerseCount > 0) {
-    parts.push(`${apVerseCount} with patristic and modern commentary`);
-  }
-  if (ctVerseCount > 0) {
-    parts.push(`${ctVerseCount} with cross-reference questions answered`);
-  }
-  const openingLine = parts.length > 0
-    ? `${ref} (${verseCount} verses) — ${formatList(parts)}.`
-    : `${ref} (${verseCount} verses) with interlinear evidence and commentary.`;
-
   return {
     seoTitle,
     seoDescription,
-    openingLine,
     chapterSchema: generateBibleChapterSchema({ bookName, bookId, chapter, seoDescription, canonicalUrl })
   };
 };
 
 /**
- * Generates title, description, opening line, and Schema.org graph for Quran Surah pages
+ * Generates title, description, and Schema.org graph for Quran Surah pages
  */
 export const generateQuranSurahSEO = ({
   transliteration,
   surahNum,
-  revelationType = '',
   totalVerses = 0,
   msVerseCount = 0,
-  variantCount = 0,
   canonicalUrl
 }) => {
   const ref = `Surah ${transliteration} (${surahNum})`;
@@ -884,19 +787,9 @@ export const generateQuranSurahSEO = ({
     `Read ${ref} in English and Arabic (${totalVerses} ${totalVerses === 1 ? 'verse' : 'verses'}) with unabridged Tafsir al-Tabari and Ibn Kathir, early manuscripts (${msVerseCount} ${msVerseCount === 1 ? 'verse' : 'verses'}), and Qira'at variants.`
   );
 
-  const typeLabel = revelationType ? `${revelationType.charAt(0).toUpperCase() + revelationType.slice(1)} ` : '';
-  const tail = [
-    'English and Arabic text',
-    'unabridged Tafsir al-Tabari and Ibn Kathir',
-    ...(msVerseCount > 0 ? [`early manuscripts (${msVerseCount} ${msVerseCount === 1 ? 'verse' : 'verses'})`] : []),
-    ...(variantCount > 0 ? [`recorded textual variants (${variantCount} ${variantCount === 1 ? 'verse' : 'verses'})`] : [])
-  ];
-  const openingLine = `${ref} · ${totalVerses} ${typeLabel}${totalVerses === 1 ? 'verse' : 'verses'} with ${formatList(tail)}.`;
-
   return {
     seoTitle,
     seoDescription,
-    openingLine,
     surahSchema: generateQuranSurahSchema({ transliteration, surahNum, seoDescription, canonicalUrl })
   };
 };
