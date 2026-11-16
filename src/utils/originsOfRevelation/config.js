@@ -21,7 +21,7 @@ export const OG_IMAGE = `${BASE}/media/demonic_revelation/cover.jpg`;
 export const SITE_URL = 'https://readyapologia.com';
 /** First published 2026-08-20 (git history of the page); rebuilt 2026-10. */
 export const DATE_PUBLISHED = '2026-08-20';
-export const DATE_MODIFIED = '2026-10-26';
+export const DATE_MODIFIED = '2026-11-16';
 export const LAYOUT_TITLE_SUFFIX = ' | Ready Apologia';
 
 /** Repo paths of the read-only inputs (src/data is owned by the data engine; never edit it from here). */
@@ -61,7 +61,7 @@ export const SOURCE_GROUPS = ['quran', 'hadith', 'sira', 'classical', 'bible'];
  * `{n}` / `{refs}` / `{ref}` placeholders are filled by the model; an unknown placeholder fails.
  */
 export const REQUIRED_LABELS = [
-  'glance', 'navAria', 'back', 'copyLink', 'copied', 'copyFailed', 'backToTop', 'coldContext', 'emphasisNote',
+  'glance', 'navAria', 'back', 'copyLink', 'copied', 'copyFailed', 'backToTop', 'coldContext',
   'sideBySide', 'sourcesWhat', 'classical', 'evaluation', 'deeper', 'moreParallels', 'repeatNote',
   'sources', 'sourcesNav', 'closingHeading', 'verifyAria', 'internalHadith',
 ];

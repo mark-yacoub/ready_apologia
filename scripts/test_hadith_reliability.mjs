@@ -15,6 +15,7 @@ import path from 'node:path';
 import { loadHadithReliability } from '../src/utils/hadithReliability/loader.js';
 import { BASE, BASE_PATH } from '../src/utils/hadithReliability/config.js';
 import { loadIslamicCommentaries } from '../src/utils/islamic_commentaries_loader.js';
+import { PLAYBOOK_META } from '../src/utils/discover/playbookTone.js';
 import { BUILD_BOOKS, BUILD_SURAHS } from '../src/utils/build_config.js';
 
 const arg = name => { const i = process.argv.indexOf(name); return i > -1 ? (process.argv[i + 1] ?? true) : null; };
@@ -104,8 +105,11 @@ const PAGE_CHECKS = {
 
   tone(p, { body }, ok) {
     // "What others are saying" quotes other people's titles verbatim; it is outside our voice.
-    const hit = textOf(body.replace(/<section[^>]*id="others"[\s\S]*?<\/section>/, '')).match(TONE);
+    const cleanText = textOf(body.replace(/<section[^>]*id="others"[\s\S]*?<\/section>/, ''));
+    const hit = cleanText.match(TONE);
     ok(!hit, `"${hit?.[0]}"`);
+    const metaHit = cleanText.match(PLAYBOOK_META);
+    ok(!metaHit, `"${metaHit?.[0]}"`);
     // Titles, hooks and headings are always our voice.
     const heads = [...body.matchAll(/<(h[1-4])\b[^>]*>([\s\S]*?)<\/\1>/g)].map(m => textOf(m[2])).join(' | ');
     const headHit = heads.match(HEADLINE_TONE);

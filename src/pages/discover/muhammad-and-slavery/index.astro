@@ -57,7 +57,6 @@ const start = hub.startHere;
             <p class="hrv-start__title" set:html={tl(start.title)} />
             {start.hookHtml && <p class="hrv-hook ms-start__hook" set:html={start.hookHtml} />}
             {start.showcase && <Showcase sc={start.showcase} id="sc-start" label={start.showcase.caption} level={3} />}
-            {start.showcase?.quotesTabari && <p class="ms-tnote" set:html={tl(LABELS.tabariTranslationNote)} />}
             {start.testHtml && (
               <div class="hrv-eval ms-block ms-start__test">
                 <h3 class="hrv-eval__h"><Icon name="search" />{start.testLabel}</h3>

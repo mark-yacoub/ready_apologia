@@ -34,6 +34,7 @@ The standard set by `/discover/hadith-reliability` (Oct 2026). Read this before 
    - **Name the stake early.** Within its first two sentences, every item says why it bears on the page's question. Example: "If the teachers the Prophet chose disagreed about what belongs in the Qurʾān, the claim that it was kept letter for letter has to explain that."
    - **Lead with what the reader knows.** Prefer opening items and forks that rest on well-known figures (ʿĀʾishah, ʿUmar, ʿUthmān) and on Bukhārī/Muslim over lesser-known figures and later sources.
    - "Others disagreed with him" is not an escape when the point *is* the disagreement among people the Prophet himself vouched for. Say so explicitly.
+10. **No editorial housekeeping or translation-provenance tags in articles.** Never scatter inline disclaimers about AI-assisted or machine-generated translations, "the translation this site uses", "Highlighting ours", "emphasis added", or UI meta-notes explaining how site links/commentaries open ("Opens Sunnah.com", "Opens Tafsir al-Ṭabarī on this site"). Commentary translation provenance lives once beneath each commentary in `TafseerViewer.jsx` (a single standard bibliographic citation for a printed edition where needed is fine; repeating per-card translation tags across articles is not).
 
 ### Copy patterns
 | Element | Pattern | Example |
@@ -115,6 +116,7 @@ Criteria, in order:
 
 ## 6. Engineering guardrails (keep the quality from regressing)
 - **Import:** a dataset contract is validated **at import** (`validate.js`): unique ids, contiguous ranks, `global_rank` = reading order, no duplicate cards, link targets `https://` or `/`, known showcase types. The importer prints the SHA-256.
-- **Audit:** a static audit runs on the **built HTML** (`scripts/test_hadith_reliability.mjs`). It covers SEO, leaks, tone (body and headline gates), link policy, JSON-LD, structure, the catalog card, and an unsliced `build_config`.
+- **Voice & meta-tag gate:** `src/utils/discover/playbookTone.js` (+ `playbookTone.test.mjs`) centralizes Playbook §2.3 (`PLAYBOOK_BODY`, `PLAYBOOK_HEADLINE`) and §2.10 (`PLAYBOOK_META`) banned patterns across all Discover `tone.js` gates, `scripts/test_hadith_reliability.mjs`, and `scripts/test_seo_titles.mjs`.
+- **Audit:** a static audit runs on the **built HTML** (`scripts/test_hadith_reliability.mjs` and per-article `scripts/test_*.mjs` audits). It covers SEO, leaks, tone (body, headline, and meta-tag gates), link policy, JSON-LD, structure, the catalog card, and an unsliced `build_config`.
 - **Links:** one link policy (`linkAttrs`); internal hrefs are BASE-aware; shared routes live in `src/utils/routes.js`; nav tabs live in `src/components/navTabs.js`.
 - **Labels:** reader-facing labels live in config and override dataset names. A missing label **fails the build**, and a unit test bans verdict words.

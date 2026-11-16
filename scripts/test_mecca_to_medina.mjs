@@ -126,7 +126,7 @@ const CHECKS = {
 
   tone(ok, { body }) {
     const page = body.replace(/<section[^>]*id="others"[\s\S]*?<\/section>/, ''); // others' titles, verbatim
-    const cls = 'hrv-intro|mm-dek|hrv-hook|mm-takeaway|mm-disclosure|hrv-further-note|hrv-sc__note|mm-sc__note|mm-ev__note|mm-ev__lead|mm-outro|mm-suranote';
+    const cls = 'hrv-intro|mm-dek|hrv-hook|mm-takeaway|mm-disclosure|hrv-further-note|hrv-srcgroup__note|hrv-sc__note|mm-sc__note|mm-ev__note|mm-ev__lead|mm-outro|mm-suranote';
     const prose = [
       ...all(new RegExp(`<p\\b[^>]*class="[^"]*\\b(?:${cls})\\b[^"]*"[^>]*>([\\s\\S]*?)<\\/p>`, 'g'), page).map(m => m[1]),
       ...all(/<div class="mm-block__body">([\s\S]*?)<\/div>/g, page).map(m => m[1]),

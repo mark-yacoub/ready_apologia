@@ -82,7 +82,7 @@ const schema = {
         <p class="hrv-eyebrow" set:html={tl(header.eyebrow)} />
         <h1 class="hrv-case-h1 orv-h1" set:html={header.h1Html} />
         <p class="hrv-hook orv-hook" set:html={header.hookHtml} />
-        <a class="orv-head__context" href={`#${SOURCES_ID}`} title={header.contextText}><span set:html={header.contextHtml} /><Icon name="chevronRight" /></a>
+        <a class="orv-head__context" href={`#${SOURCES_ID}`}><span set:html={header.contextHtml} /><Icon name="chevronRight" /></a>
         {header.framingHtml && <p class="orv-framing" set:html={header.framingHtml} />}
         {header.whosWhoHtml && (
           <details class="hrv-disclosure orv-deeper orv-whos-who">
@@ -93,7 +93,6 @@ const schema = {
             <div class="hrv-disclosure__body orv-pair__body"><p set:html={header.whosWhoHtml} /></div>
           </details>
         )}
-        {model.emphasisNote && <p class="orv-emph" set:html={tl(model.emphasisNote)} />}
       </header>
 
       <section class="orv-glance-sec" id={GLANCE_ID} aria-labelledby={`${GLANCE_ID}-h`}>

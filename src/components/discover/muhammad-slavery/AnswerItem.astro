@@ -30,7 +30,6 @@ const { it } = Astro.props;
     </section>
   )}
   {it.showcase && <Showcase sc={it.showcase} id={it.showcase.id} label={it.showcase.caption} level={4} />}
-  {it.showcase?.hasMark && <p class="ms-hl">{LABELS.highlightingOurs}</p>}
   {it.takeawayHtml && <p class="ms-takeaway" set:html={it.takeawayHtml} />}
   {it.texts.length > 0 && (
     <details class="hrv-disclosure ms-reports" id={`${it.id}-texts-h`}>

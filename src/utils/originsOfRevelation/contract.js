@@ -8,7 +8,7 @@
  * are written without BASE):
  *   SEO { title, description, keywords?, ogAlt? }      HEADER { eyebrow, h1, hookMd, contextLine, framingMd? }
  *   CATALOG? { title, description }                    CLOSING { heading, md }
- *   LABELS { …config.REQUIRED_LABELS, sourcesGroups{…}, sourcesGroupNotes?{…}, classicalDeeper?, evaluationDeeper? }
+ *   LABELS { …config.REQUIRED_LABELS, sourcesGroups{…}, classicalDeeper?, evaluationDeeper? }
  *   SECTIONS[] { id, aliases[], dataItemId|null, nav, number?, h2, glance?, showcase?, witnesses?, introMd?,
  *                groups[] { key, label, cards[], collapsed?[], collapsedSummary? },
  *                classicalMd?, classicalDeeperMd?, evaluationMd?, evaluationDeeperMd?, deeper?[] { summary, md } }
@@ -31,7 +31,7 @@ const ALLOWED = {
   HEADER: K(['eyebrow', 'h1', 'hookMd', 'contextLine', 'framingMd', 'whosWhoSummary', 'whosWhoMd']),
   CLOSING: K(['heading', 'md']),
   CATALOG: K(['title', 'description']),
-  LABELS: K([...C.REQUIRED_LABELS, 'sourcesGroups', 'sourcesGroupNotes', 'classicalDeeper', 'evaluationDeeper', 'onThisPage', 'further']),
+  LABELS: K([...C.REQUIRED_LABELS, 'sourcesGroups', 'classicalDeeper', 'evaluationDeeper']),
   section: K(['id', 'aliases', 'dataItemId', 'nav', 'number', 'h2', 'glance', 'showcase', 'witnesses', 'introMd', 'groups', 'classicalMd', 'classicalDeeperMd', 'evaluationMd', 'evaluationDeeperMd', 'deeper']),
   glance: K(['title', 'takeawayMd', 'chips']),
   showcase: K(['caption', 'ariaLabel', 'left', 'right', 'noteMd']),

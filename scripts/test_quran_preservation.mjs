@@ -117,7 +117,7 @@ const CHECKS = {
     const page = body.replace(/<section[^>]*id="others"[\s\S]*?<\/section>/, ''); // others' titles, verbatim
     // Prose in our voice (quotes and Arabic removed).
     const prose = [
-      ...all(/<(p|figcaption)\b[^>]*class="[^"]*\b(?:hrv-intro|qp-dek|hrv-hook|qp-takeaway|qp-disclosure|hrv-further-note|hrv-sc__note)\b[^"]*"[^>]*>([\s\S]*?)<\/\1>/g, page).map(m => m[2]),
+      ...all(/<(p|figcaption)\b[^>]*class="[^"]*\b(?:hrv-intro|qp-dek|hrv-hook|qp-takeaway|qp-disclosure|hrv-further-note|hrv-srcgroup__note|hrv-sc__note)\b[^"]*"[^>]*>([\s\S]*?)<\/\1>/g, page).map(m => m[2]),
       ...all(/<figcaption>([\s\S]*?)<\/figcaption>/g, page.replace(/<figure class="hrv-quote"[\s\S]*?<\/figure>/g, '')).map(m => m[1]),
       ...all(/<div class="hrv-(?:scholar|eval) qp-block">\s*<h4[\s\S]*?<\/h4>\s*<div>([\s\S]*?)<\/div>/g, page).map(m => m[1]),
       ...all(/<div class="hrv-disclosure__body qp-reflection__body">([\s\S]*?)<\/div>/g, page).map(m => m[1]),

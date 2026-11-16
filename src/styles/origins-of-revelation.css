@@ -79,7 +79,6 @@
   background: var(--hrv-slate); font-size: .92rem; line-height: 1.6; color: var(--hrv-ink-2);
 }
 .hrv.orv .orv-whos-who { margin-top: var(--hrv-s5); }
-.hrv.orv .orv-emph { margin: var(--hrv-s3) 0 0; font-size: .82rem; line-height: 1.5; color: var(--hrv-ink-2); }
 
 /* ---- at a glance: index ------------------------------------------------------- */
 .hrv.orv .orv-glance-sec { margin-top: var(--hrv-s6); }

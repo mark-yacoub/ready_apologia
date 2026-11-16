@@ -89,7 +89,6 @@
 @media (min-width: 768px) { .hrv .ms-item__title { font-size: 1.55rem; } }
 .ms-copy { color: var(--hrv-ink-2); }
 .hrv .ms-context { font-size: .9rem; color: var(--hrv-ink-2); margin: 0 0 var(--hrv-s2); }
-.hrv .ms-hl { font-size: .78rem; color: var(--hrv-ink-2); margin: var(--hrv-s2) 0 0; text-align: right; }
 /* Attributed takeaway callout below the showcase or verse card. */
 .hrv .ms-takeaway {
   margin: var(--hrv-s4) 0 0; padding: var(--hrv-s1) 0 var(--hrv-s1) var(--hrv-s4); border-left: 3px solid var(--hrv-ink);
@@ -102,10 +101,8 @@
 .ms-key { margin: var(--hrv-s1) 0 var(--hrv-s4); padding: var(--hrv-s4); }
 .ms-verse { margin: var(--hrv-s4) 0 0; background: var(--hrv-sand); border-left: 3px solid var(--hrv-sand-rule); border-radius: 0 var(--hrv-radius) var(--hrv-radius) 0; padding: var(--hrv-s4); }
 .hrv .ms-key__cap { font: 700 .72rem/1.3 var(--hrv-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ms-sand-ink); margin: 0 0 var(--hrv-s2); }
-.ms-key__sub { font-weight: 600; letter-spacing: .02em; text-transform: none; color: var(--hrv-ink-2); }
 .ms-key__en { margin: 0; font-family: var(--hrv-display); font-size: 1.02rem; line-height: 1.65; color: var(--hrv-ink); }
 .ms-ar { margin-top: var(--hrv-s3); }
-.hrv .ms-ar__src { font-size: .78rem; color: var(--hrv-ink-2); margin: var(--hrv-s1) 0 0; }
 .hrv .ms-verse__text { font-family: var(--hrv-display); font-size: 1.02rem; line-height: 1.65; margin: 0; }
 .hrv .ms-verse__text:not(:last-of-type) { margin-bottom: var(--hrv-s2); }
 .ms-verse__n { font: 700 .76rem/1 var(--hrv-sans); color: var(--ms-sand-ink); margin-right: var(--hrv-s1); font-variant-numeric: tabular-nums; }
@@ -125,7 +122,6 @@
 .ms-tafsir__who small { display: block; font-family: var(--hrv-sans); font-weight: 500; font-size: .76rem; color: var(--hrv-ink-2); margin-top: var(--hrv-s1); }
 .ms-tafsir__q { margin: var(--hrv-s2) 0 0; font-size: .95rem; line-height: 1.65; font-style: italic; }
 .hrv .ms-tafsir__lead { font-size: .86rem; color: var(--hrv-ink-2); margin: var(--hrv-s2) 0 0; }
-.hrv .ms-tnote { font-size: .78rem; line-height: 1.5; color: var(--hrv-ink-2); margin: var(--hrv-s2) 0 0; }
 .ms-relverses__list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--hrv-s3); }
 .hrv-srclist.ms-cited__list { margin-bottom: var(--hrv-s4); }
 /* Verify chips wrap (no horizontal scroller, playbook §5.2) and sit --hrv-s2 below the quote at 44px height. */

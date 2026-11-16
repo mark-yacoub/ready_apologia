@@ -51,8 +51,7 @@ export const HEADER = {
   h1: '5 Classical Accounts of Revelation, Beside the Bible\'s Angels and Spirits',
   hookMd:
     "Muslims hold that the angel Gabriel brought the Qurʾān down from God ([2:97](/quran/2/97/tafsir/tabari)): “The satans have not brought it down” ([26:210](/quran/26/210/tafsir/tabari)). Bukhārī, Muslim and the early commentaries record five accounts of how revelation came: the angel pressing the Prophet three times at Ḥirāʾ, the physical weight and sounds the Companions witnessed, a spell that made him imagine doing things he had not done, [Qurʾān 22:52](/quran/22/52/tafsir/tabari) on Satan casting words into a prophet's recitation, and his going to the mountains after Ḥirāʾ. Each account sits beside how the Bible describes angels and spirits, with the classical scholars' explanation tested against the texts. How do the two books tell a messenger from God apart from another spirit?",
-  contextLine:
-    "Every quotation links to its source. [Check the sources](#sources)",
+  contextLine: 'Jump to all cited sources',
   framingMd:
     "Both books warn of a voice not from God: [Qurʾān 22:52](/quran/22/52/tafsir/tabari) on what “Satan cast”, and [1 John 4:1](/bible/1jn/4#1) on testing “the spirits”.",
   whosWhoSummary:
@@ -64,14 +63,12 @@ export const HEADER = {
 /** UI labels. `{n}` / `{refs}` are filled by the model. */
 export const LABELS = {
   glance: 'At a glance',
-  onThisPage: 'On this page',
   navAria: 'Sections of this page',
   back: 'Discover',
   copyLink: 'Copy link',
   copied: 'Link copied',
   backToTop: 'Back to top',
   coldContext: 'Part of {n} accounts · Back to top',
-  emphasisNote: 'Bold inside quotations is ours (emphasis added).',
   sideBySide: 'Side by side',
   sourcesWhat: 'What the sources say',
   classical: 'The classical explanation',
@@ -88,14 +85,6 @@ export const LABELS = {
     classical: 'Classical commentaries',
     bible: 'Bible text',
   },
-  sourcesGroupNotes: {
-    quran: 'Opens Tafsir al-Ṭabarī or Ibn Kathīr on this site',
-    hadith: 'Opens Sunnah.com, or the annotated page on this site',
-    sira: 'Opens the scanned translation on archive.org',
-    classical: 'Opens the commentary in an online library',
-    bible: 'Opens the Bible reader on this site (NASB; Old Testament in the Septuagint)',
-  },
-  further: 'Academic references',
   closingHeading: 'The texts in full',
   // Appended by the implementer (r3, labels only): copy-link fallback, chip-row name, internal hadith
   // chip, and distinct summaries for the two collapsed panels under the classical / comparing boxes.
@@ -483,7 +472,7 @@ export const SECTIONS = [
         key: 'islamic',
         label: 'What the Qurʾān, the commentators and the histories record',
         cards: [
-          { data: d(IR, ISL, 0), label: 'The Qurʾān, Sūrat al-Ḥajj', noteMd: 'A. J. Droge, author of the annotated academic Qurʾān translation used on this site, renders the verb (*tamannā*) literally as “began to wish”; al-Baghawī and most classical commentators read it as “when he recited” (see the next card).' },
+          { data: d(IR, ISL, 0), label: 'The Qurʾān, Sūrat al-Ḥajj', noteMd: 'A. J. Droge (*The Qurʾān: A New Annotated Translation*, 2013) renders the verb (*tamannā*) literally as “began to wish”; al-Baghawī and most classical commentators read it as “when he recited”.' },
           { data: d(IR, ISL, 1), label: 'Ibn Kathīr, on 22:52', noteMd: 'Al-Bukhārī places Ibn ʿAbbās\'s explanation as an unchained chapter-heading note (*muʿallaq*) in his Book of Commentary (*Kitāb al-Tafsīr*) on Sūrat al-Ḥajj — his own choice of how to gloss 22:52 — and Ibn Kathīr also cites the report of ʿAlī b. Abī Ṭalḥa from Ibn ʿAbbās with the same opening words.', chips: [{ label: 'Bukhārī\'s chapter note in Fatḥ al-Bārī 8:293', href: 'https://www.islamweb.net/ar/library/content/52/8577/' }, { label: 'Kitāb al-Tafsīr on Sunnah.com (Bukhārī, Book 65)', href: 'https://sunnah.com/bukhari/65' }] },
           { data: d(IR, ISL, 2), label: 'al-Ṭabarī, *History*, from Muḥammad b. Kaʿb', noteMd: 'The words he reaches are Qurʾān 53:19–20, in Sūrat al-Najm; in al-Ṭabarī\'s commentary the same report ends with the idolaters prostrating with the Muslims at the close of that sūrah. Muḥammad b. Kaʿb al-Quraẓī belonged to the generation after the Companions (a Successor), so the report names no Companion who saw the event (*mursal*; translated by Watt & McDonald, vol. 6, p. 108).', chips: [{ label: 'al-Ṭabarī on 22:52', href: '/quran/22/52/tafsir/tabari' }] },
           { data: d(IR, ISL, 3), label: 'Ibn ʿAbbās, on the prostration at Sūrat al-Najm', noteMd: 'Bukhārī records the pagans prostrating with the Prophet at the end of Sūrat al-Najm; the report does not mention the words about the goddesses or give a reason for their prostration.' },

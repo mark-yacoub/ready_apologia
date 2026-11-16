@@ -5,11 +5,13 @@
  * exempt and must be stripped before matching. Never "fix" a hit by regex: rewrite the sentence.
  */
 
+import { PLAYBOOK_BODY, PLAYBOOK_HEADLINE, PLAYBOOK_META, combinePatterns } from '../discover/playbookTone.js';
+
 /** Banned in our own voice anywhere on the page, plus this page's old verdict vocabulary. */
-export const BANNED = /\b(really|actually|yet|only|even|admit(?:s|ted|ting)?|blunder\w*|errors|wrong|failed|edited out|blanked out|waived|survive[sd]?|guessing|myths?|exposed|debunk\w*|supposedly|polemic\w*|leap of faith|refut\w*|fatal|self-destruct\w*|inescapable|islam is false)\b|100\s?%/i;
+export const BANNED = combinePatterns(PLAYBOOK_BODY, PLAYBOOK_META, /\b(refut\w*|fatal|self-destruct\w*|inescapable|islam is false)\b|100\s?%/i);
 
 /** Also banned in titles, headings, labels, nav and SEO ("dilemma" is allowed only in the eyebrow search name). */
-export const HEADLINE_BANNED = /\b(contradictions?|conflicting|problematic|under scrutiny|absurd|self-serving|defects|conceded|misogyny|dilemma)\b/i;
+export const HEADLINE_BANNED = combinePatterns(PLAYBOOK_HEADLINE, /\bdilemma\b/i);
 
 /** Removes quoted words ("…", “…”, ‘…’) and markdown link targets from a string of our copy. */
 export const unquote = s => String(s).replace(/"[^"]*"|“[^”]*”|‘[^’]*’/g, ' ').replace(/\[([^\]]*)\]\([^)]*\)/g, '$1');

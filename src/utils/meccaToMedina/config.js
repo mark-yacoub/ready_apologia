@@ -42,7 +42,7 @@ export const OG_IMAGE = `${BASE}/media/mecca_to_medina/cover.jpg`;
 export const OG_IMAGE_SIZE = { width: 620, height: 413 };
 export const DATE_PUBLISHED = '2026-08-26';
 /** Bump on every substantive copy or evidence change (JSON-LD dateModified). */
-export const DATE_MODIFIED = '2026-10-24';
+export const DATE_MODIFIED = '2026-11-16';
 /** Pending user decision: FAQPage JSON-LD stays off (and the old 7 Q/As stay off the page) while false. */
 export const EMIT_FAQ = false;
 
@@ -171,7 +171,6 @@ export const LABELS = {
   next: 'Next',
   nextAfterLast: 'Next: how Muslims read these verses today',
   sources: 'The texts',
-  moreSources: 'More texts ({n})',
   fullText: 'Read the full text',
   parallelText: 'Read this parallel report',
   arabicText: 'Original Arabic',
@@ -180,16 +179,13 @@ export const LABELS = {
   checkSources: 'Check the sources',
   checkIntro: 'Every report, verse and commentary cited on this page, grouped by library.',
   othersSaying: 'What others are saying',
-  othersNote: 'Opinions, not part of the evidence on this page.',
   meccan: 'Meccan sūra',
   medinan: 'Medinan sūra',
   tafsir: 'Tafsīr',
   sira: 'Sīra',
-  translatorNote: 'Translator\u2019s addition',
   verifyQuran: 'Ṭabarī on {key}',
   verifyTafsir: 'Read on this site',
   verifySunnah: 'Sunnah.com',
-  sunnahCount: '{n} on Sunnah.com',
   printNote: 'Printed sources',
   suraNote: 'Meccan/Medinan labels follow the standard Saudi printing of the Qurʾān (the King Fahd Complex muṣḥaf).',
   seeItem: 'See item {n}',
@@ -210,16 +206,16 @@ export const SHOWCASE_LABELS = {
 
 /** Source groups in "Check the sources" (kinds come from model.js). Order is display order. */
 export const SOURCE_GROUPS = [
-  { kind: 'sunnah', label: 'Hadith collections', note: 'Opens Sunnah.com' },
-  { kind: 'quran', label: 'Qurʾān', note: 'Opens Tafsir al-Ṭabarī on this site' },
-  { kind: 'tafsir', label: 'Tafsīr', note: 'Opens al-Ṭabarī or Ibn Kathīr on this site' },
-  { kind: 'classical', label: 'Classical works online', note: 'Opens Shamela, IslamWeb, Wikisource or archive.org' },
+  { kind: 'sunnah', label: 'Hadith collections', note: '' },
+  { kind: 'quran', label: 'Qurʾān', note: '' },
+  { kind: 'tafsir', label: 'Tafsīr', note: '' },
+  { kind: 'classical', label: 'Classical works online', note: '' },
   {
     kind: 'print',
     label: 'Sīra and taʾrīkh in print',
     note: 'Printed works, no online link. Page numbers refer to A. Guillaume’s translation of Ibn Isḥāq, The Life of Muhammad (Oxford, 1955).',
   },
-  { kind: 'bible', label: 'Bible', note: 'Opens the verse on this site' },
+  { kind: 'bible', label: 'Bible', note: '' },
   { kind: 'other', label: 'Other references', note: '' },
 ];
 
@@ -856,7 +852,7 @@ export const ITEMS = {
   'same-words-mecca-and-medina': {
     own: [`${FRACTURE}.categories[2].category`, `${FRACTURE}.categories[3].category`],
     title: 'From a Past Story (7:166, 2:65) to Addressing the People of the Book in Medina (5:59–60, 5:82)',
-    hook: 'In A. J. Droge’s translation (the English Qurʾān translation used on this site), “Become apes, skulking away!” (Arabic *khāsiʾīn*, usually rendered “despised and rejected”) appears word for word in a Meccan story about an ancient Sabbath-breaking town (7:166) and in a Medinan retelling (2:65). What changes in Medina is how that curse is used: 5:59–60 addresses the living People of the Book directly with “some of whom He made apes, and pigs”, and 5:82 calls the Jews and the idolaters “the most violent of people in enmity to the believers”.',
+    hook: 'In A. J. Droge’s translation, “Become apes, skulking away!” (Arabic *khāsiʾīn*, usually rendered “despised and rejected”) appears word for word in a Meccan story about an ancient Sabbath-breaking town (7:166) and in a Medinan retelling (2:65). What changes in Medina is how that curse is used: 5:59–60 addresses the living People of the Book directly with “some of whom He made apes, and pigs”, and 5:82 calls the Jews and the idolaters “the most violent of people in enmity to the believers”.',
     takeaway: 'While the Sabbath-breakers’ curse (“Become apes, skulking away!”) is narrated as a past story in both Mecca (7:166) and Medina (2:65), the Medinan sūras turn that past punishment into a direct rebuke of the People of the Book around the Prophet (5:59–60) and rank the Jews alongside the idolaters as the believers’ fiercest enemies (5:82).',
     classical: 'Commentators take the two Sabbath-breaking verses (7:166, 2:65) to describe one ancient town whose offenders were transformed and died out without descendants; Ibn Kathīr reports from Ibn ʿAbbās: “The transformed have no offspring” ([Ibn Kathīr on 2:65](/quran/2/65/tafsir/ibn_kathir)). On [5:59–60](/quran/5/60/tafsir/ibn_kathir), Ibn Kathīr reports that when a group of Jews asked the Prophet which messengers he believed in and rejected Jesus, the verses answered them directly by recalling the curse and transformation upon their predecessors.',
     showcase: {

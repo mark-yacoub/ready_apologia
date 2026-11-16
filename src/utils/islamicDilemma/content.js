@@ -28,7 +28,6 @@ export const LABELS = {
   back: 'Discover',
   copyLink: 'Copy link',
   copied: 'Link copied',
-  sideBySide: 'Side by side',
   glance: 'At a glance',
   glanceGo: 'Go to section {n}',
   classical: 'The classical explanation',
@@ -48,18 +47,9 @@ export const LABELS = {
   timelineCaption: 'Timeline',
   timelineAria: 'Dated New Testament copies and the years of the first revelation and of Sūrat al-Māʾida',
   witnessesCaption: 'What the scholars said',
-  checkSources: 'Check the sources',
   allReferences: 'All references on this page',
   academic: 'Academic references',
   academicNote: 'Studies and reference works on the material above, from more than one perspective.',
-  sourcesNote: {
-    quran: 'Opens Tafsir al-Ṭabarī or Ibn Kathīr on this site',
-    sunnah: 'Opens Sunnah.com',
-    classical: 'Opens Shamela and other libraries',
-    manuscripts: 'Opens the holding library, or the scans on this site',
-    bible: 'NASB on this site',
-    other: '',
-  },
   sourceGroups: {
     quran: 'Qurʾān',
     sunnah: 'Hadith collections',
@@ -76,7 +66,7 @@ export const HEADER = {
   h1: '3 Qurʾān Verses on the Torah and Gospel, Beside Bible Copies Older Than Islam',
   hookMd:
     "Many Muslims hold that the Torah and the Gospel were changed ([2:79](quran/2/79), [5:13](quran/5/13)). In the Qurʾān, God tells the People of the Gospel to judge by what He sent down in it ([5:47](quran/5/47)), and the classical Qurʾān commentators al-Ṭabarī and Ibn Kathīr explain [5:43](quran/5/43) and [5:68](quran/5/68) as speaking of the books Jews and Christians had in hand. New Testament copies made centuries before 610 (the year of the first revelation) already carry the accounts of Jesus' crucifixion and resurrection that the Qurʾān denies ([4:157](quran/4/157)). If the Gospel was changed before 610, [5:47](quran/5/47) and [5:68](quran/5/68) point Christians to a book already changed in their hands. If it was not changed before 610, those copies show what the Gospel said when the verses were recited.",
-  context: 'Every quotation links to its source.',
+  context: 'Jump to all cited sources',
 };
 
 /** Section nav labels (≤ 14 characters), headings (reader questions) and cold-landing context lines. */
@@ -322,7 +312,6 @@ export const GOSPEL_COPIES = {
       id: 'codices',
       label: 'The great bound Bibles (codices)',
       bodyMd: "The great 4th–5th-century Greek Bibles (Vaticanus, Sinaiticus, Alexandrinus), together with the Syriac Bible (Peshitta, 5th c.), contain the four Gospels: Matthew, Mark, Luke and John. Each of these Gospels narrates Jesus' crucifixion and resurrection. Those were the Gospels the churches read in the 7th century.",
-      bannerMd: 'Scans of Sinaiticus, Alexandrinus and the earlier papyri can be opened in the four passage cards below.',
       chips: [],
     },
     {
@@ -467,7 +456,7 @@ export const TEXT_HISTORY = {
       position: 'Wording changed',
       paraphrase: "Argued that the Torah and the four Gospels held by Jews and Christians had been altered in their wording, pointing to passages such as the account of Moses' death at the end of Deuteronomy (34:5) and differences between the genealogies of Jesus in Matthew 1 and Luke 3.",
       support: {
-        lead: 'A study note on 5:43 in the annotated Qurʾān translation (A. J. Droge) on this site says',
+        lead: 'A. J. Droge’s study note on 5:43 (*The Qurʾān: A New Annotated Translation*, 2013) says',
         quote: { text: 'Many scholars locate the first major development of the accusation in the writings of Ibn Ḥazm (d. 1064) of Cordoba.', source: { droge: '5:43' } },
       },
       ref: null,
@@ -521,12 +510,11 @@ export const TEXT_HISTORY = {
 /** §5 intro. Answer headings and bodies are md-derived and live in overrides.js (ANSWERS). */
 export const ANSWERS = {
   introMd: 'Three answers are common among Muslim writers: that the Injīl given to Jesus was not the four Gospels, that the Qurʾān confirms the original revelation rather than the later copies, and that Paul or the Council of Nicaea changed the Gospel before Islam. If any of them holds, the verses in section 1 do not point to the Gospel Christians had, so each is stated in its defenders\' words and tested against the texts.',
-  textsLabel: '',
 };
 
 /** §6 Sources, references, further reading and the closing. */
 export const SOURCES = {
-  introMd: 'Every quotation on this page links to its source. The Qurʾān links open Tafsir al-Ṭabarī on this site; Ibn Kathīr links open his commentary on this site.',
+  introMd: '',
   /**
    * Academic references (both sides), bibliographic entries. No links: add a `url` only once it
    * is verified (phase2_copy §5 V7).

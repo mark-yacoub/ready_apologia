@@ -105,7 +105,7 @@ function makeResolver({ positions, items, EXTRA_QUOTES, LABELS }) {
 const chip = c => ({ label: c.label, href: c.href, external: c.external, attrs: c.attrs, title: c.title });
 
 // ---- sections ------------------------------------------------------------------------------------
-/** One quotation card → { e (template view), posKey, sources, extraKey, emphasis, anchor }. */
+/** One quotation card → { e (template view), posKey, sources, extraKey, anchor }. */
 function buildCard(card, { sectionId, n, where, R, md }) {
   let text, arabic = null, lang = null, primary, cardLabel = null, pk = null, extraKey = null, anchor;
   if (card.data) {
@@ -128,7 +128,7 @@ function buildCard(card, { sectionId, n, where, R, md }) {
   const chips = [primary, ...(internal ? [internal] : []), ...extraChips];
   const label = card.label || cardLabel || primary.label;
   return {
-    posKey: pk, extraKey, anchor, emphasis: /<strong>/.test(qHtml),
+    posKey: pk, extraKey, anchor,
     chipExtras: (card.chips || []).filter(r => r.extra).map(r => r.extra),
     sources: [primary, ...extraChips],
     e: {
@@ -262,7 +262,7 @@ function buildSources(refs, LABELS) {
   return C.SOURCE_GROUPS.map(key => ({
     key,
     label: LABELS.sourcesGroups[key],
-    note: LABELS.sourcesGroupNotes?.[key] || null,
+    note: null,
     items: [...byHref.values()].filter(r => r.group === key).sort(cmp).map(chip),
   })).filter(g => g.items.length);
 }
@@ -310,7 +310,6 @@ export function buildModel(content, { data = DATA, fixes = QUOTE_FIXES, lock = D
 
   const title = String(SEO.title || fail('SEO.title missing'));
   const titleNoSuffix = title.endsWith(C.LAYOUT_TITLE_SUFFIX) ? title.slice(0, -C.LAYOUT_TITLE_SUFFIX.length) : title;
-  const hasEmphasis = built.some(b => b.cards.some(c => c.emphasis));
 
   return {
     seo: { title: titleNoSuffix, description: SEO.description, keywords: SEO.keywords || undefined, ogAlt: SEO.ogAlt || null },
@@ -327,7 +326,6 @@ export function buildModel(content, { data = DATA, fixes = QUOTE_FIXES, lock = D
     },
     labels: LABELS,
     coldContext: fill(LABELS.coldContext, { n: itemCount }, 'LABELS.coldContext'),
-    emphasisNote: hasEmphasis ? LABELS.emphasisNote : null,
     nav: [
       ...sections.map(s => ({ id: s.id, n: s.n, label: s.nav, labelHtml: tl(s.nav) })),
       { id: C.SOURCES_ID, n: null, label: LABELS.sourcesNav, labelHtml: tl(LABELS.sourcesNav) },

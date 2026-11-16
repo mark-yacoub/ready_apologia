@@ -141,7 +141,6 @@
 .hrv.idl .hrv-sc--compact .hrv-tl > li { grid-template-columns: 78px 1fr; }
 .hrv.idl .hrv-sc--compact .hrv-tl > li::before { left: 89px; }
 .hrv.idl .hrv-sc--compact .hrv-tl__year.is-text { font-size: .8rem; }
-.hrv.idl .idl-banner { font-weight: 600; }
 
 /* Gospel passage cards (§2) with pre-610 manuscript counts, date lists, and lazy scan carousels. */
 .hrv.idl .idl-passages { margin-top: var(--hrv-s5); }
@@ -191,7 +190,6 @@
 .hrv.idl .idl-answer__n { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--hrv-verify-bg); color: var(--hrv-verify-strong); font: 700 .78rem/1 var(--hrv-sans); }
 .hrv.idl .idl-answer__h { font-family: var(--hrv-display); font-size: 1rem; line-height: 1.35; font-weight: 600; }
 .hrv.idl .idl-answer__h q { quotes: '“' '”' '‘' '’'; }
-.hrv.idl .idl-answer__label { font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--hrv-verify); margin: 0 0 var(--hrv-s1); }
 
 /* ---- §6 references + closing -------------------------------------------------
    Stacked reference cards inside "All references on this page" and the closing aside. */

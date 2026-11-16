@@ -28,7 +28,7 @@ export const OG_IMAGE = `${BASE}/media/slavery/cover.jpg`;
 export const CATALOG_SLUG = 'muhammad-and-slavery';
 export const DATE_PUBLISHED = '2026-10-24';
 /** Bump with every copy or content change (JSON-LD dateModified). */
-export const DATE_MODIFIED = '2026-11-04';
+export const DATE_MODIFIED = '2026-11-16';
 
 /** RouteAnalytics: event name and params kept exactly as on the old pages (no dashboard change). */
 export const ANALYTICS_EVENT = 'discover_article_view';
@@ -208,9 +208,7 @@ const BASE_LABELS = {
   sameChain: 'Same report, another chain',
   sameText: 'Same text under a second Sunnah.com number',
   relatedReports: 'Related reports',
-  translatorNote: 'Brackets are the translator’s',
   arabicText: 'Arabic text',
-  arabicSource: 'Arabic: Sunnah.com',
   openInternal: 'On this site',
   gradeChip: '{grade}',
   quranChipTabari: '{key} with al-Ṭabarī',
@@ -224,7 +222,6 @@ const BASE_LABELS = {
   textsSay: 'The texts beside it',
   allCited: 'All texts cited in the original answer ({n})',
   theVerse: 'The verse',
-  drogeNote: 'Droge’s translation',
   commentators: 'What the commentators say',
   relatedVerses: 'Related verses on freeing and captives',
   crossVerse: 'The verse: {ref}',
@@ -242,12 +239,10 @@ const BASE_LABELS = {
   tafsirVia: '{source} (d. {deathAh} AH), {work}, on {key}',
   next: 'Next',
   otherParts: 'Other parts of this article',
-  highlightingOurs: 'Highlighting ours',
   sourcesUsed: 'Sources used in this article',
   answersList: 'The answers',
   navLabel: 'Article navigation',
   chipsLabel: 'Check the source',
-  tabariTranslationNote: 'The English of al-Ṭabarī on this site is an AI-assisted translation of the Arabic (see the note on the linked commentary page).',
   showcase: {
     versions: 'The wordings side by side',
     number_fan: 'The numbers in the report',

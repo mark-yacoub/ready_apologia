@@ -116,7 +116,7 @@
         "items": [
           {
             "who": "Qurʾān 4:24",
-            "work": "The English of A. J. Droge, The Qurʾān: A New Annotated Translation (2013), the translation this site uses",
+            "work": "A. J. Droge, The Qurʾān: A New Annotated Translation (2013)",
             "text": "And (also forbidden to you are) married women, except what your right (hands) own. (This is) a written decree of God for you.",
             "ref": "quran:4:24"
           },
@@ -128,7 +128,7 @@
           },
           {
             "who": "Ibn Kathīr (d. 774 AH, years after the Hijra)",
-            "work": "Author of one of the best-known commentaries on the Qurʾān, which Quran.com offers in English; on 4:24",
+            "work": "Author of one of the best-known commentaries on the Qurʾān; on 4:24",
             "text": "except those whom you acquire through captivity, for you are allowed to have sexual relations with them after making sure they are not pregnant, as the Ayah was revealed in that regard.",
             "ref": "ibnkathir:4:24"
           },
@@ -1251,8 +1251,6 @@
     "sameChain": "Same report, another chain",
     "sameText": "Same text under a second Sunnah.com number",
     "relatedReports": "Related reports",
-    "highlightingOurs": "Highlighting ours",
-    "translatorNote": "Brackets are the translator’s",
     "openInternal": "On this site",
     "gradeChip": "{grader}: {grade}",
     "quranChipTabari": "{key} with al-Ṭabarī",

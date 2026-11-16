@@ -5,11 +5,13 @@
  * are exempt and must be stripped before matching. Never "fix" a hit by regex: rewrite the sentence.
  */
 
-/** Banned in our own voice anywhere on the page (playbook §2.3 body list + a few gotcha words). */
-export const BANNED = /\b(really|actually|yet|only|even|admit(?:s|ted|ting)?|blunder\w*|errors|wrong|failed|edited out|blanked out|waived|survive[sd]?|guessing|myths?|exposed|debunk\w*|supposedly|polemic\w*|leap of faith|refut\w*|fatal|inescapable)\b|100\s?%/i;
+import { PLAYBOOK_BODY, PLAYBOOK_HEADLINE, PLAYBOOK_META, combinePatterns } from '../discover/playbookTone.js';
+
+/** Banned in our own voice anywhere on the page (playbook §2.3 & §2.10 + article gotcha words). */
+export const BANNED = combinePatterns(PLAYBOOK_BODY, PLAYBOOK_META, /\b(refut\w*|fatal|inescapable)\b|100\s?%/i);
 
 /** Also banned in titles, headings, labels, nav and SEO (playbook §2.3 headline list). */
-export const HEADLINE_BANNED = /\b(contradictions?|conflicting|problematic|under scrutiny|absurd|self-serving|defects|conceded|misogyny)\b/i;
+export const HEADLINE_BANNED = PLAYBOOK_HEADLINE;
 
 /**
  * This page's old verdict vocabulary (labels and headings of the previous version that judged the person): never in our voice. "Satanic

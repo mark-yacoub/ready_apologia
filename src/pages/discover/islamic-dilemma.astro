@@ -173,13 +173,13 @@ const sec = id => sections.find(s => s.id === id);
       <section class="hrv-sec idl-sec" id="answers" aria-labelledby="answers-h">
         <SectionHead s={sec('answers')} context={sectionContext} />
         <p class="idl-intro" set:html={answers.introHtml} />
-        <AnswerList items={answers.items} textsLabel={answers.textsLabel} />
+        <AnswerList items={answers.items} />
       </section>
 
       {/* §6 Sources */}
       <section class="hrv-sec idl-sec" id="sources" aria-labelledby="sources-h">
         <SectionHead s={sec('sources')} context={sectionContext} />
-        <p class="idl-intro" set:html={sources.introHtml} />
+        {sources.introHtml && <p class="idl-intro" set:html={sources.introHtml} />}
         <SourcesList groups={sources.groups} />
         <details class="hrv-disclosure idl-allrefs">
           <summary><span>{labels.allReferences}</span><span class="hrv-disclosure__meta">{sources.references.length}</span><Icon name="chevronDown" /></summary>

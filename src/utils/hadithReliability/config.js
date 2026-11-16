@@ -108,9 +108,9 @@ export const LABELS = {
 };
 
 export const SOURCE_GROUPS = [
-  { kind: 'sunnah', label: 'Hadith collections', note: 'Opens Sunnah.com' },
-  { kind: 'quran', label: 'Qurʾān', note: 'Opens Tafsir al-Ṭabarī on this site' },
-  { kind: 'classical', label: 'Classical works', note: 'Opens IslamWeb, Shamela and other libraries' },
+  { kind: 'sunnah', label: 'Hadith collections', note: '' },
+  { kind: 'quran', label: 'Qurʾān', note: '' },
+  { kind: 'classical', label: 'Classical works', note: '' },
   { kind: 'other', label: 'Other references', note: '' },
 ];
 

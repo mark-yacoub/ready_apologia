@@ -10,8 +10,10 @@
  *             not a source, so it is still checked. Quotations: “curly double”, "straight double",
  *             ‘curly single’ (an apostrophe, ’ followed by a letter, never closes one).
  */
-export const BODY = /\b(really|actually|yet|only|even|admit(?:s|ted|ting)?|blunders?|errors|wrong|failed|edited out|blanked out|waived|surviv\w*|guessing|myths?|exposed?|debunk\w*|supposedly|polemic\w*|leap of faith)\b/i;
-export const HEADLINE = /\b(contradictions?|conflicting|problematic|under scrutiny|absurd\w*|self-serving|defects?|conceded|misogyn\w*)\b/i;
+import { PLAYBOOK_BODY, PLAYBOOK_HEADLINE, PLAYBOOK_META, combinePatterns } from '../discover/playbookTone.js';
+
+export const BODY = combinePatterns(PLAYBOOK_BODY, PLAYBOOK_META, /\bsurviv\w*\b/i);
+export const HEADLINE = PLAYBOOK_HEADLINE;
 export const ARTICLE = /\b(chattel|traffick\w*|exploit\w*|extort\w*|sex[- ]slaves?|rap(?:e|ed|ing)|schemes?|criminali[sz]\w*|refut\w*|deconstruct\w*|unsoftened|verdicts?)\b/i;
 
 /** Quotations long enough to be a source (shorter ones stay in our voice). */

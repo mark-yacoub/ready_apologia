@@ -477,7 +477,7 @@ export function loadIslamicDilemma({ getManuscripts }) {
       anchor: `copies-${c.id}`,
       n: i + 1,
       labelHtml: tl(c.label),
-      bodyHtml: `<p>${md.inline(c.bodyMd)}</p>${c.bannerMd ? `<p class="idl-banner">${md.inline(c.bannerMd)}</p>` : ''}`,
+      bodyHtml: `<p>${md.inline(c.bodyMd)}</p>`,
       chips: (c.chips || []).map(ch => {
         if (/^https?:\/\//.test(ch.target)) return externalRef(ch.target, ch.label, ch.kind);
         const t = resolveTarget(ch.target);
@@ -545,7 +545,6 @@ export function loadIslamicDilemma({ getManuscripts }) {
   const answers = {
     section: sectionById.answers,
     introHtml: md.inline(T.ANSWERS.introMd),
-    textsLabel: T.ANSWERS.textsLabel,
     items: parsed.section6.objectionsList.map((o, i) => {
       const ov = ANSWERS[o.id];
       return {
@@ -629,7 +628,7 @@ export function loadIslamicDilemma({ getManuscripts }) {
   const groups = order.map(kind => ({
     kind,
     label: T.LABELS.sourceGroups[kind],
-    note: T.LABELS.sourcesNote[kind] || '',
+    note: '',
     items: [...sources.values()].filter(s => s.kind === kind).sort((a, b) => a.sort - b.sort),
   })).filter(g => g.items.length);
 
@@ -647,7 +646,7 @@ export function loadIslamicDilemma({ getManuscripts }) {
     onJesus,
     textHistory,
     answers,
-    sources: { section: sectionById.sources, introHtml: md.inline(T.SOURCES.introMd), groups, references, academic, closing },
+    sources: { section: sectionById.sources, introHtml: T.SOURCES.introMd ? md.inline(T.SOURCES.introMd) : '', groups, references, academic, closing },
     labels: T.LABELS,
     sectionContext: T.SECTION_CONTEXT,
     warnings,

@@ -141,9 +141,9 @@ const DEFAULT_SHOWCASE_LABELS = {
 
 /** "Sources cited in this chapter" groups (by repository), in display order. */
 export const SOURCE_GROUPS = [
-  { kind: 'site', label: 'Qurʾān and tafsīr on this site', note: 'Opens the verse with Tafsīr al-Ṭabarī or Ibn Kathīr' },
-  { kind: 'sunnah', label: 'Ḥadīth collections', note: 'Opens Sunnah.com' },
-  { kind: 'classical', label: 'Tafsīr al-Ṭabarī in Arabic', note: 'Opens quran.ksu.edu.sa' },
+  { kind: 'site', label: 'Qurʾān and tafsīr on this site', note: '' },
+  { kind: 'sunnah', label: 'Ḥadīth collections', note: '' },
+  { kind: 'classical', label: 'Tafsīr al-Ṭabarī in Arabic', note: '' },
   { kind: 'other', label: 'Other collections', note: '' },
 ];
 

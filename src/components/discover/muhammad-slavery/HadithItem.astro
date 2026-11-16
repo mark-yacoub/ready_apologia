@@ -19,7 +19,6 @@ const kqChips = kq ? [{ label: kq.ref.label, href: kq.ref.href, external: kq.ref
 <article class="ms-item" id={it.id} aria-labelledby={`${it.id}-h`} data-archetype={it.showcase?.type || 'facts'}>
   <ItemHead it={it} />
   {it.showcase && <Showcase sc={it.showcase} id={it.showcase.id} label={it.showcase.caption} level={4} />}
-  {it.showcase?.hasMark && <p class="ms-hl">{LABELS.highlightingOurs}</p>}
   {it.takeawayHtml && <p class="ms-takeaway" set:html={it.takeawayHtml} />}
   {kq && (
     <details class="hrv-disclosure ms-reports ms-key-exp">
@@ -31,7 +30,6 @@ const kqChips = kq ? [{ label: kq.ref.label, href: kq.ref.href, external: kq.ref
         {kq.arabic && (
           <div class="ms-ar">
             <p class="hrv-quote__ar" lang="ar" dir="rtl">{kq.arabic}</p>
-            <p class="ms-ar__src">{LABELS.arabicSource}</p>
           </div>
         )}
       </figure>

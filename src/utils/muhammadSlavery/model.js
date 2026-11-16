@@ -96,9 +96,6 @@ export function buildModel(data, config, ctx = {}) {
   number(hadith.items, L.accountOf);
   number(quran.items, L.passageOf);
   number(answers.items, L.answerOf);
-  // The repo's English al-Ṭabarī is AI-assisted: say so once, at the first al-Ṭabarī quotation on the page.
-  const firstTb = quran.items.find(it => it.showcase?.quotesTabari || it.commentators.some(c => c.source === C.TAFSIR_SOURCES.tb.label));
-  if (firstTb) firstTb.tabariNote = { inShowcase: !!firstTb.showcase?.quotesTabari, text: L.tabariTranslationNote };
 
   // Cross-links: the copy's (by item id) replace the CROSS_LINKS defaults.
   const crossLabel = x => fill(x.kind === 'verse' ? L.crossVerse : x.kind === 'answer' ? L.crossAnswer : L.crossAccount, { ref: `Qurʾān ${x.verseKey || ''}`, title: x.title, question: x.title });

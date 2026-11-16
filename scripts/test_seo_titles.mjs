@@ -27,8 +27,8 @@
  *                    not want explanatory/stats text about the app above Scripture;
  *                    SEO copy belongs in `<title>` and the meta description only.
  *   - tone         : Meta descriptions contain none of the banned
- *                    words from `docs/article_and_ux_playbook.md` §2.3 (shared list
- *                    imported from `src/utils/quranPreservation/tone.js`); video-tab
+ *                    words from `docs/article_and_ux_playbook.md` §2.3 & §2.10 (shared
+ *                    list imported from `src/utils/discover/playbookTone.js`); video-tab
  *                    descriptions (`/bible/.../videos`, `/quran/.../videos`) must
  *                    not include individual video titles.
  *   - sitemap      : Every sitemap `<loc>` resolves to a built HTML page that is
@@ -46,7 +46,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BODY as TONE_BODY, HEADLINE as TONE_HEADLINE } from '../src/utils/quranPreservation/tone.js';
+import {
+  PLAYBOOK_BODY,
+  PLAYBOOK_HEADLINE,
+  PLAYBOOK_META,
+} from '../src/utils/discover/playbookTone.js';
 
 /** Single-item permalink pages whose description may quote their one source text. */
 const isSingleItemRoute = (route) => /^\/hadith\/(bukhari|muslim)\/[^/]+$/.test(route);
@@ -284,7 +288,7 @@ function stripQuotedSpans(text) {
     .replace(/\u2018[^\u2019]{12,}\u2019/g, ' ');
 }
 
-const TONE_PATTERNS = [TONE_BODY, TONE_HEADLINE].flat();
+const TONE_PATTERNS = [PLAYBOOK_BODY, PLAYBOOK_HEADLINE, PLAYBOOK_META];
 
 function findToneViolation(text) {
   const cleaned = stripQuotedSpans(text);

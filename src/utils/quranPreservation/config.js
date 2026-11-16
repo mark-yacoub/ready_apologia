@@ -39,7 +39,7 @@ export const BASE_PATH = `${BASE}${QURAN_PRESERVATION_PATH}`;
 export const OG_IMAGE = `${BASE}/media/quran_preservation/cover.jpg`;
 export const DATE_PUBLISHED = '2026-10-22';
 /** Bump on every substantive copy or evidence change (JSON-LD dateModified). */
-export const DATE_MODIFIED = '2026-11-05';
+export const DATE_MODIFIED = '2026-11-16';
 
 /** Hadith nodes by name, so the item specs below read as sources rather than paths. */
 const H = {
@@ -123,9 +123,9 @@ export const SHOWCASE_LABELS = {
 
 /** Source groups in "Check the sources" (kinds come from hadithReliability/render.js `linkFor`). */
 export const SOURCE_GROUPS = [
-  { kind: 'sunnah', label: 'Hadith collections', note: 'Opens Sunnah.com' },
-  { kind: 'quran', label: 'Qurʾān', note: 'Opens Tafsir al-Ṭabarī on this site' },
-  { kind: 'classical', label: 'Classical commentaries', note: 'Opens IslamWeb and other libraries' },
+  { kind: 'sunnah', label: 'Hadith collections', note: '' },
+  { kind: 'quran', label: 'Qurʾān', note: '' },
+  { kind: 'classical', label: 'Classical commentaries', note: '' },
   { kind: 'other', label: 'Other references', note: '' },
 ];
 

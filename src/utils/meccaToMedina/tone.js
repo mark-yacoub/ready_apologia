@@ -5,8 +5,10 @@
  *   HEADLINE  — additionally never in titles, headings, labels or SEO.
  * Quoted sources (inside curly double quotes) and Arabic are exempt: they are verbatim.
  */
-export const BODY = /\b(really|actually|yet|only|even|admit(?:s|ted|ting)?|blunders?|errors|wrong|failed|edited out|blanked out|waived|surviv\w*|guessing|myths?|exposed?|debunk\w*|supposedly|polemic\w*|leap of faith|dogmatic|universal conquest|consensus)\b/i;
-export const HEADLINE = /\b(contradictions?|conflicting|problematic|under scrutiny|absurd\w*|self-serving|defects?|conceded|misogyn\w*|verdict of history|aggressive|decapitat\w*|torture)\b/i;
+import { PLAYBOOK_BODY, PLAYBOOK_HEADLINE, PLAYBOOK_META, combinePatterns } from '../discover/playbookTone.js';
+
+export const BODY = combinePatterns(PLAYBOOK_BODY, PLAYBOOK_META, /\b(surviv\w*|dogmatic|universal conquest|consensus)\b/i);
+export const HEADLINE = combinePatterns(PLAYBOOK_HEADLINE, /\b(verdict of history|aggressive|decapitat\w*|torture)\b/i);
 
 /** Our voice only: drop Arabic spans, «…» Arabic quotes and anything in curly double quotes. */
 export function ourVoice(text) {
