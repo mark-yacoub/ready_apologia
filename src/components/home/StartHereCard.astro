@@ -1,11 +1,10 @@
 ---
 /**
  * Homepage "Start here" card: the introduction to the site, linking to
- * /discover/through-christian-eyes. Copy lives in src/utils/throughChristianEyes/content.js.
+ * /discover/through-christian-eyes. Reads strictly from `model.js` so all copy
+ * passes the same inline rendering and editorial guardrails as the article.
  */
-import { HOME_CARD } from '../../utils/throughChristianEyes/content.js';
 import { loadThroughChristianEyes } from '../../utils/throughChristianEyes/model.js';
-import { tl } from '../../utils/hadithReliability/render.js';
 
 interface Props {
   base: string;
@@ -19,11 +18,11 @@ const href = `${base}${m.path}`;
 <section class="ra-section ra-tce" aria-labelledby="ra-sec-tce">
   <a href={href} class="ra-tce-card">
     <div class="ra-tce-main">
-      <p class="ra-tce-eyebrow">{HOME_CARD.eyebrow}</p>
-      <h2 id="ra-sec-tce" class="ra-tce-title" set:html={tl(HOME_CARD.title)} />
-      <p class="ra-tce-sub" set:html={tl(HOME_CARD.subtitle)} />
-      <p class="ra-tce-body" set:html={tl(HOME_CARD.body)} />
-      <span class="ra-tce-cta">{HOME_CARD.cta} <span aria-hidden="true">→</span></span>
+      <p class="ra-tce-eyebrow">{m.homeCard.eyebrow}</p>
+      <h2 id="ra-sec-tce" class="ra-tce-title" set:html={m.homeCard.titleHtml} />
+      <p class="ra-tce-sub" set:html={m.homeCard.subtitleHtml} />
+      <p class="ra-tce-body" set:html={m.homeCard.bodyHtml} />
+      <span class="ra-tce-cta">{m.homeCard.cta} <span aria-hidden="true">→</span></span>
     </div>
     <ol class="ra-tce-list">
       {m.sections.map((s) => (
@@ -35,15 +34,29 @@ const href = `${base}${m.path}`;
 
 <style>
   /* Kept compact: on phones the five questions are left to the article itself; from 768px they sit beside the copy. */
+  .ra-tce {
+    --tce-ink: #1c1917;
+    --tce-muted: #57534e;
+    --tce-accent: #883432;
+    --tce-gold: #92400e;
+    --tce-paper: #fbf8f3;
+    --tce-line: #e2d8ca;
+  }
+  .ra-tce :global(.hrv-tlm),
+  .ra-tce :global(.hrv-ar-inline) {
+    font-family: 'Amiri', serif;
+    font-style: normal;
+    line-height: 1;
+  }
   .ra-tce-card {
     display: grid;
     gap: 12px;
     padding: 14px 16px;
     border-radius: 16px;
-    background: #fbf8f3;
-    border: 1px solid #e2d8ca;
-    border-left: 4px solid #883432;
-    color: #1c1917;
+    background: var(--tce-paper);
+    border: 1px solid var(--tce-line);
+    border-left: 4px solid var(--tce-accent);
+    color: var(--tce-ink);
     text-decoration: none;
     transition: box-shadow 0.15s ease, border-color 0.15s ease;
   }
@@ -63,19 +76,19 @@ const href = `${base}${m.path}`;
     font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #92400e;
+    color: var(--tce-gold);
   }
   .ra-tce-title {
     margin: 0;
-    font-family: 'Literata', Georgia, serif;
+    font-family: var(--font-display, 'Literata', Georgia, serif);
     font-size: 22px;
     font-weight: 800;
     line-height: 1.15;
-    color: #883432;
+    color: var(--tce-accent);
   }
   .ra-tce-sub {
     margin: 0;
-    font-family: 'Literata', Georgia, serif;
+    font-family: var(--font-display, 'Literata', Georgia, serif);
     font-size: 15px;
     font-weight: 600;
     line-height: 1.3;
@@ -84,7 +97,7 @@ const href = `${base}${m.path}`;
     margin: 0;
     font-size: 13.5px;
     line-height: 1.45;
-    color: #57534e;
+    color: var(--tce-muted);
   }
   .ra-tce-list {
     display: none;
@@ -103,16 +116,19 @@ const href = `${base}${m.path}`;
   }
   .ra-tce-num {
     flex-shrink: 0;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
+    padding-top: 1px;
     border-radius: 50%;
-    background: #883432;
+    background: var(--tce-accent);
     color: #fff;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
+    font-family: 'Cinzel', serif;
+    font-size: 11.5px;
     font-weight: 700;
+    line-height: 1;
   }
   .ra-tce-cta {
     align-self: flex-start;
@@ -123,7 +139,7 @@ const href = `${base}${m.path}`;
     padding: 0 16px;
     margin-top: 4px;
     border-radius: 999px;
-    background: #883432;
+    background: var(--tce-accent);
     color: #fff;
     font-weight: 700;
     font-size: 15px;
@@ -144,7 +160,7 @@ const href = `${base}${m.path}`;
     .ra-tce-list {
       display: grid;
       padding-left: 24px;
-      border-left: 1px solid #e2d8ca;
+      border-left: 1px solid var(--tce-line);
     }
   }
 </style>

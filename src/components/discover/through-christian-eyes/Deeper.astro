@@ -3,14 +3,15 @@
 interface Props {
   deeper: { href: string; path: string; labelHtml: string };
   kicker: string;
+  host: string;
 }
-const { deeper, kicker } = Astro.props;
+const { deeper, kicker, host } = Astro.props;
 ---
 <a class="tce-deeper" href={deeper.href}>
   <span class="tce-deeper__body">
     <span class="tce-deeper__k">{kicker}</span>
     <span class="tce-deeper__label" set:html={deeper.labelHtml} />
-    <span class="tce-deeper__url">readyapologia.com{deeper.path}</span>
+    <span class="tce-deeper__url">{host}{deeper.path}</span>
   </span>
   <span class="tce-deeper__arrow" aria-hidden="true">→</span>
 </a>

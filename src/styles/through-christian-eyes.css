@@ -20,7 +20,7 @@
   line-height: 1.6;
 }
 .tce *, .tce *::before, .tce *::after { box-sizing: border-box; }
-.tce p { margin: 0; }
+:where(.tce) p { margin: 0; }
 .tce .hrv-tlm { font-family: 'Amiri', serif; line-height: 1; }
 .tce .hrv-ar-inline { font-family: 'Amiri', serif; font-style: normal; }
 
@@ -57,7 +57,7 @@
 .tce-intro em { color: var(--tce-accent); }
 .tce-intro em .tce-q { color: inherit; font-size: inherit; }
 .tce-pledge { border-left: 3px solid var(--tce-accent); padding: 2px 0 2px 12px; }
-.tce-pledge__h, .tce-toc__h { font-size: 12px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--tce-accent); margin-bottom: 4px !important; }
+.tce-pledge__h, .tce-toc__h { font-size: 12px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--tce-accent); margin-bottom: 4px; }
 .tce-pledge__list { font-weight: 600; font-size: 15px; line-height: 1.45; }
 .tce-toc ol { list-style: none; margin: 0; padding: 0; }
 .tce-toc li { border-bottom: 1px solid var(--tce-line); }
@@ -66,7 +66,7 @@
 .tce-toc a:hover span:last-child { text-decoration: underline; }
 .tce-num {
   flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
-  width: 26px; height: 26px; border-radius: 50%;
+  width: 26px; height: 26px; padding-top: 1.5px; border-radius: 50%;
   background: var(--tce-accent); color: #fff;
   font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; line-height: 1;
 }
@@ -98,6 +98,7 @@
 
 /* our answer */
 .tce-answer { background: var(--tce-sand); border-left: 3px solid var(--tce-accent); border-radius: 4px; padding: 12px 14px; }
+.tce-answer p + p { margin-top: 8px; }
 .tce-answer__h { color: var(--tce-accent); font-weight: 800; }
 
 /* go deeper (the handout's QR codes) */
