@@ -20,7 +20,8 @@ const SVG_NS = 'http://www.w3.org/2000/svg';
 const FLASH_MS = 1200;
 const FILTER_MIN_POINTS = 13; // show filter when > 12 points
 const CHIPS_MIN_GROUPS = 3;   // show wrapping chips when >= 3 categories
-const INITIAL_VISIBLE_CHIPS = 4;
+const CHIPS_MIN_POINTS = 26;  // hide chip bar when <= 25 points (avoids 1-per-line chip stacks on compact articles)
+const INITIAL_VISIBLE_CHIPS = 8;
 
 const ICON_PATHS = {
   bolt: { fill: true, d: ['M13 2L4.5 13.5h6.5L10 22l9.5-12h-6.5L13 2z'] },
@@ -322,7 +323,7 @@ function ensureSheetBuilt(ctx) {
   const chipButtons = [];
   let moreChipsBtn = null;
 
-  if (data.groups.length >= CHIPS_MIN_GROUPS) {
+  if (data.groups.length >= CHIPS_MIN_GROUPS && data.total >= CHIPS_MIN_POINTS) {
     chipsNav = el('nav', 'qk-chips');
     chipsNav.setAttribute('aria-label', 'Jump to category');
 
