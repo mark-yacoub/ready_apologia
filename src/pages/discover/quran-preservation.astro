@@ -8,6 +8,7 @@
  */
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import QuickPoints from '../../components/discover/quick-points/QuickPoints.astro';
 import Icon from '../../components/discover/hadith-reliability/Icon.astro';
 import SourcesList from '../../components/discover/hadith-reliability/SourcesList.astro';
 import FurtherReading from '../../components/discover/hadith-reliability/FurtherReading.astro';
@@ -72,6 +73,7 @@ const pad = n => String(n).padStart(2, '0');
     <div class="hrv-toast" role="status" aria-live="polite" data-hrv-toast>{LABELS.copied}</div>
 
     <div class="hrv-wrap">
+      <QuickPoints slug="quran-preservation" />
       <header class="hrv-hero qp-hero" id="intro">
         {m.intro.legacy.map(a => <span id={a} class="qp-legacy" aria-hidden="true" />)}
         <h1 class="hrv-h1" set:html={m.intro.h1Html} />

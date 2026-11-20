@@ -6,6 +6,7 @@
  */
 import Layout from '../../../layouts/Layout.astro';
 import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import QuickPoints from '../../../components/discover/quick-points/QuickPoints.astro';
 import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
 import SourcesList from '../../../components/discover/hadith-reliability/SourcesList.astro';
 import PartBar from '../../../components/discover/convenient-revelations/PartBar.astro';
@@ -47,6 +48,7 @@ const md = createRenderer({ rootLinks: true });
   <div class="hrv crv crv-part" data-part={part.slug}>
     <PartBar part={part} hubHref={BASE_PATH} totalItems={totalItems} />
     <div class="hrv-wrap">
+      <QuickPoints slug="convenient-revelations" />
       <header class="crv-part-head">
         <a class="hrv-context crv-context" href={BASE_PATH}><span set:html={tl(context)} /><Icon name="chevronRight" /></a>
         <h1 class="hrv-case-h1 crv-h1" set:html={tl(part.h1)} />

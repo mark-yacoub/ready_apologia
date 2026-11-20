@@ -6,6 +6,7 @@
 import AudioListen from '../../../components/audio/AudioListen.astro';
 import Layout from '../../../layouts/Layout.astro';
 import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import QuickPoints from '../../../components/discover/quick-points/QuickPoints.astro';
 import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
 import GlanceCard from '../../../components/discover/hadith-reliability/GlanceCard.astro';
 import AngleChips from '../../../components/discover/hadith-reliability/AngleChips.astro';
@@ -43,6 +44,7 @@ if (Astro.url.pathname.replace(/\/$/, '') !== path) {
     <div class="hrv-wrap hrv-wrap--wide">
       <header class="hrv-hero">
         <a class="hrv-crumb" href={BASE_PATH}><Icon name="chevronLeft" />How reliable are the hadith?</a>
+        <QuickPoints slug="hadith-reliability" />
         <h1 class="hrv-h1">{LABELS.glanceTitle.replace('{n}', n)}</h1>
         <AudioListen />
         <p class="hrv-intro">{LABELS.glanceIntro}</p>

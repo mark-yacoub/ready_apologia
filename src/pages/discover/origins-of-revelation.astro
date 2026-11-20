@@ -12,6 +12,7 @@
  */
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import QuickPoints from '../../components/discover/quick-points/QuickPoints.astro';
 import Icon from '../../components/discover/hadith-reliability/Icon.astro';
 import SectionNav from '../../components/discover/origins-of-revelation/SectionNav.astro';
 import GlanceRows from '../../components/discover/origins-of-revelation/GlanceRows.astro';
@@ -78,6 +79,7 @@ const schema = {
   <article class="hrv orv" id="top">
     <SectionNav nav={nav} labels={labels} backHref={discoverHref()} canonical={canonicalURL} />
     <div class="hrv-wrap">
+      <QuickPoints slug="origins-of-revelation" />
       <header class="hrv-case-head orv-head">
         <p class="hrv-eyebrow" set:html={tl(header.eyebrow)} />
         <h1 class="hrv-case-h1 orv-h1" set:html={header.h1Html} />

@@ -10,6 +10,7 @@
  */
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import QuickPoints from '../../components/discover/quick-points/QuickPoints.astro';
 import Icon from '../../components/discover/hadith-reliability/Icon.astro';
 import SectionNav from '../../components/discover/extrabiblical-evidence/SectionNav.astro';
 import GlanceRows from '../../components/discover/extrabiblical-evidence/GlanceRows.astro';
@@ -92,6 +93,7 @@ const schema = {
   <article class="hrv ebj" id="top">
     <SectionNav nav={nav} labels={labels} backHref={discoverHref()} canonical={canonicalURL} />
     <div class="hrv-wrap">
+      <QuickPoints slug="extrabiblical-evidence-for-jesus" />
       <header class="hrv-case-head ebj-head">
         <p class="hrv-eyebrow" set:html={tl(header.eyebrow)} />
         <h1 class="hrv-case-h1 ebj-h1" set:html={header.h1Html} />

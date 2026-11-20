@@ -102,6 +102,7 @@ pkill -f astro
 *   `scripts/serve.js`: Zero-dependency HTTP server.
 *   `scripts/agent_worktree.sh`: `new|list|rm <task-name>` — one isolated git worktree + `agent/<task-name>` branch per agent task (node_modules hard-linked, `.env` copied), so parallel agents never share a working tree.
 *   `scripts/test_history_api.mjs` (`npm run test:history`): Fails if client code calls `history.pushState`/`replaceState` or assigns `location.hash` outside `src/utils/url_history.js` (Astro ClientRouter ignores Back/Forward to null-state entries).
+*   `scripts/test_quick_points.mjs` (`npm run audit:quick-points`, unit tests `npm run test:quick-points` in `src/utils/quickPoints/loader.test.mjs`): Audits the Quick Points street-evangelism mode (`src/components/discover/quick-points/QuickPoints.astro` + `client.js`, `src/utils/quickPoints/loader.js`, `src/styles/quick-points.css`) across all 11 Discover articles (44 built pages): verifies one top-of-page `[ Article | ⚡ Quick points · N ]` toggle before `<h1>`, parsable inline JSON with zero visible-text leaks, and `dist/` page + `#anchor` resolution for every point.
 *   `src/db.js`: Database helper utilizing built-in Node 22 `node:sqlite`.
 *   `src/data/scripture/`: Imported NASB (NT) and LXX (OT) scripture JSON files.
 *   `public/images/manuscripts/`: Local mock folder containing a few sample manuscript scans for development.

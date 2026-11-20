@@ -11,6 +11,7 @@
  */
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import QuickPoints from '../../components/discover/quick-points/QuickPoints.astro';
 import Icon from '../../components/discover/hadith-reliability/Icon.astro';
 import EvidenceCard from '../../components/discover/hadith-reliability/EvidenceCard.astro';
 import SourcesList from '../../components/discover/hadith-reliability/SourcesList.astro';
@@ -84,6 +85,7 @@ const sec = id => sections.find(s => s.id === id);
     <span id={model.topAlias} class="idl-alias" aria-hidden="true"></span>
     <SectionNav sections={sections} labels={labels} backHref={discoverHref()} />
     <div class="hrv-wrap">
+      <QuickPoints slug="islamic-dilemma" />
       <header class="hrv-case-head idl-head">
         <p class="hrv-eyebrow">{header.eyebrow}</p>
         <h1 class="hrv-case-h1 idl-h1" set:html={header.h1Html} />

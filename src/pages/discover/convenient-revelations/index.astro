@@ -8,6 +8,7 @@
 import AudioListen from '../../../components/audio/AudioListen.astro';
 import Layout from '../../../layouts/Layout.astro';
 import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import QuickPoints from '../../../components/discover/quick-points/QuickPoints.astro';
 import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
 import ItemShowcase from '../../../components/discover/convenient-revelations/ItemShowcase.astro';
 import ItemRow from '../../../components/discover/convenient-revelations/ItemRow.astro';
@@ -40,6 +41,7 @@ const md = createRenderer({ rootLinks: true });
     <div class="hrv-wrap">
       <header class="hrv-hero">
         <a class="hrv-crumb" href={`${BASE}/discover`}><Icon name="chevronLeft" />{LABELS.hubCrumb}</a>
+        <QuickPoints slug="convenient-revelations" />
         <h1 class="hrv-h1" set:html={tl(HUB.h1)} />
         <AudioListen />
         <p class="hrv-intro" set:html={md.inline(HUB.intro)} />

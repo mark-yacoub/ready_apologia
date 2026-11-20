@@ -5,6 +5,7 @@
  */
 import Layout from '../../../layouts/Layout.astro';
 import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import QuickPoints from '../../../components/discover/quick-points/QuickPoints.astro';
 import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
 import CaseBar from '../../../components/discover/hadith-reliability/CaseBar.astro';
 import Showcase from '../../../components/discover/hadith-reliability/showcase/Showcase.astro';
@@ -48,6 +49,7 @@ const glanceHref = `${BASE_PATH}/${model.meta.seo.glance.slug}`;
   <article class="hrv hrv-case" data-case={c.id} data-archetype={c.archetype}>
     <CaseBar number={c.number} total={total} hubHref={BASE_PATH} glanceHref={glanceHref} prev={c.prev} next={c.next} />
     <div class="hrv-wrap">
+      <QuickPoints slug="hadith-reliability" />
       <header class="hrv-case-head">
         <p class="hrv-eyebrow"><a href={c.question.href} set:html={`Question ${c.question.number} · ${tl(c.question.text)}`} /></p>
         <h1 class="hrv-case-h1" set:html={tl(c.shortTitle)} />

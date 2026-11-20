@@ -7,6 +7,7 @@
 import AudioListen from '../../../components/audio/AudioListen.astro';
 import Layout from '../../../layouts/Layout.astro';
 import RouteAnalytics from '../../../components/common/RouteAnalytics.astro';
+import QuickPoints from '../../../components/discover/quick-points/QuickPoints.astro';
 import Icon from '../../../components/discover/hadith-reliability/Icon.astro';
 import Showcase from '../../../components/discover/hadith-reliability/showcase/Showcase.astro';
 import CaseRow from '../../../components/discover/hadith-reliability/CaseRow.astro';
@@ -41,6 +42,7 @@ const n = meta.counts.cases;
     <div class="hrv-wrap">
       <header class="hrv-hero">
         <a class="hrv-crumb" href="/discover"><Icon name="chevronLeft" />Discover</a>
+        <QuickPoints slug="hadith-reliability" />
         <h1 class="hrv-h1">How reliable are the Hadith collections?</h1>
         <AudioListen />
         <p class="hrv-intro" set:html={tl(meta.introText)} />

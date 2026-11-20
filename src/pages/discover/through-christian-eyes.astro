@@ -9,6 +9,7 @@
 import AudioListen from '../../components/audio/AudioListen.astro';
 import Layout from '../../layouts/Layout.astro';
 import RouteAnalytics from '../../components/common/RouteAnalytics.astro';
+import QuickPoints from '../../components/discover/quick-points/QuickPoints.astro';
 import Deeper from '../../components/discover/through-christian-eyes/Deeper.astro';
 import { loadThroughChristianEyes, pageSchema } from '../../utils/throughChristianEyes/model.js';
 import { BASE } from '../../utils/hadithReliability/config.js';
@@ -36,6 +37,7 @@ const ogImage = `${site}${BASE}/media/through_christian_eyes/cover.jpg`;
     <nav class="tce-bar" aria-label="Article navigation">
       <a class="tce-bar__back" href={`${BASE}/discover`}><span aria-hidden="true">‹</span> {m.labels.back}</a>
     </nav>
+    <QuickPoints slug="through-christian-eyes" />
 
     <header class="tce-hero" id="intro">
       <p class="tce-eyebrow"><span class="tce-eyebrow__tag">{m.labels.eyebrow}</span><span>{m.hero.kicker}</span></p>

@@ -1,0 +1,55 @@
+---
+/**
+ * Top-of-article Quick Points segmented toggle + native <dialog> sheet shell + inline JSON payload.
+ *
+ * Renders nothing when no `src/utils/quickPoints/<slug>.json` exists for `slug`.
+ * The dialog contents are built lazily on first open in `./client.js` using DOM nodes + textContent,
+ * keeping all point statements out of rendered article text for crawlers and prose/tone audits.
+ */
+import { loadQuickPoints } from '../../../utils/quickPoints/loader.js';
+import '../../../styles/quick-points.css';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const data = loadQuickPoints(slug);
+
+const safeJson = data
+  ? JSON.stringify(data)
+      .replace(/</g, '\\u003c')
+      .replace(/>/g, '\\u003e')
+      .replace(/&/g, '\\u0026')
+      .replace(/\u2028/g, '\\u2028')
+      .replace(/\u2029/g, '\\u2029')
+  : '';
+---
+
+{data && (
+  <div class="qk-entry" data-qk-root>
+    <div class="qk-seg" role="group" aria-label="Reading mode">
+      <button type="button" class="qk-seg__btn is-active" aria-pressed="true">
+        Article
+      </button>
+      <button
+        type="button"
+        class="qk-seg__btn qk-seg__btn--open"
+        data-qk-open
+        aria-pressed="false"
+        aria-haspopup="dialog"
+      >
+        <svg class="qk-bolt" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M13 2L4.5 13.5h6.5L10 22l9.5-12h-6.5L13 2z" />
+        </svg>
+        <span>Quick points</span>
+        <span class="qk-seg__sep" aria-hidden="true">·</span>
+        <span class="qk-seg__count">{data.total}</span>
+      </button>
+    </div>
+    <dialog class="qk-sheet" data-qk-dialog aria-label="Quick points"></dialog>
+    <script type="application/json" data-qk-data set:html={safeJson} />
+  </div>
+)}
+
+<script src="./client.js"></script>

@@ -7,6 +7,7 @@
  */
 import Layout from '../../../layouts/Layout.astro';
 import RouteAnalytics from '../../common/RouteAnalytics.astro';
+import QuickPoints from '../quick-points/QuickPoints.astro';
 import Icon from '../hadith-reliability/Icon.astro';
 import PageBar from './PageBar.astro';
 import OtherParts from './OtherParts.astro';
@@ -47,6 +48,7 @@ const Item = { hadith: HadithItem, quran: VerseItem, answers: AnswerItem }[pageK
     <div class="hrv-wrap">
       <header class="hrv-hero ms-hero" id="intro">
         <a class="hrv-crumb" href={PAGE_PATHS.hub}><Icon name="chevronLeft" />{model.hub.breadcrumb}</a>
+        <QuickPoints slug="muhammad-and-slavery" />
         <h1 class="hrv-h1" set:html={tl(page.h1)} />
         {page.introHtml && <p class="hrv-intro" set:html={page.introHtml} />}
       </header>
