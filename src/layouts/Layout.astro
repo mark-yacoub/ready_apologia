@@ -14,7 +14,8 @@ import { generateArticleSchema, safeJsonStringify, SITE_NAME, DEFAULT_LOGO_URL }
 interface Props {
 	title: string;
 	description?: string;
-	ogImage?: string;
+	/** Image URL, or `{ url, width, height, type }` (e.g. from ogImageResolver.js) so the dimensions and MIME type are declared exactly. */
+	ogImage?: string | { url: string; width?: number; height?: number; type?: string };
 	ogType?: string;
 	ogImageWidth?: string | number;
 	ogImageHeight?: string | number;
@@ -47,12 +48,15 @@ const isNoIndex = noindex || /\b404\b/.test(title) || title.includes('Not Found'
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://readyapologia.com';
 const fallbackImage = `${site}${base}/default-og-image.png`;
-const ogImageUrl = ogImage ? (ogImage.startsWith('http') ? ogImage : `${site}${base}${ogImage}`) : fallbackImage;
-const ogImageType = ogImageUrl.toLowerCase().endsWith('.png') ? 'image/png' : (ogImageUrl.toLowerCase().endsWith('.webp') ? 'image/webp' : 'image/jpeg');
+const ogImageInfo = typeof ogImage === 'string' ? { url: ogImage } : (ogImage ?? {});
+const ogImageUrl = ogImageInfo.url ? (ogImageInfo.url.startsWith('http') ? ogImageInfo.url : `${site}${base}${ogImageInfo.url}`) : fallbackImage;
+// An explicit type wins: transformed URLs keep the source's extension (.png) but serve JPEG.
+const ogImageType = ogImageInfo.type || (ogImageUrl.toLowerCase().endsWith('.png') ? 'image/png' : (ogImageUrl.toLowerCase().endsWith('.webp') ? 'image/webp' : 'image/jpeg'));
 
 // Default dimensions for logo and standard social cards (194x150 for logo)
-const resolvedImageWidth = ogImageWidth || ((ogImageUrl.includes('/assets/logo.png') || ogImageUrl.includes('default-og-image.png')) ? 194 : undefined);
-const resolvedImageHeight = ogImageHeight || ((ogImageUrl.includes('/assets/logo.png') || ogImageUrl.includes('default-og-image.png')) ? 150 : undefined);
+const isLogoImage = ogImageUrl.includes('/assets/logo.png') || ogImageUrl.includes('default-og-image.png');
+const resolvedImageWidth = ogImageWidth || ogImageInfo.width || (isLogoImage ? 194 : undefined);
+const resolvedImageHeight = ogImageHeight || ogImageInfo.height || (isLogoImage ? 150 : undefined);
 const twitterCardType = (resolvedImageWidth && Number(resolvedImageWidth) < 300) ? 'summary' : 'summary_large_image';
 
 /**

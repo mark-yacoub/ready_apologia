@@ -1,7 +1,7 @@
 import React, { useState, useRef, Suspense, lazy } from 'react';
 const ManuscriptLightbox = lazy(() => import('./ManuscriptLightbox.jsx'));
 import '../styles/evidence-carousel.css';
-import { R2_BASE_URL } from '../utils/cdn_config.js';
+import { SCAN_DIRS, scanUrl } from '../utils/cdn_config.js';
 import { formatDate } from '../utils/manuscriptFormat.js';
 
 function getManuscriptTag(ms, isNT) {
@@ -130,8 +130,7 @@ export default function ManuscriptCarousel({ manuscripts, verseId, verseLabel, i
         ref={trackRef}
       >
         {manuscripts.map((ms, index) => {
-          const rootDir = isNT ? 'images' : 'ot_images';
-          const imgSrc = `${R2_BASE_URL}/${rootDir}/${ms.ms_id}/${ms.image_name}`;
+          const imgSrc = scanUrl(isNT ? SCAN_DIRS.nt : SCAN_DIRS.ot, ms.ms_id, ms.image_name);
           const isLoaded = loadedImages[ms.image_name];
 
           let formStr = '';

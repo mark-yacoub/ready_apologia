@@ -7,7 +7,7 @@
  */
 
 import { BASE } from '../hadithReliability/config.js';
-import { R2_BASE_URL } from '../cdn_config.js';
+import { R2_BASE_URL, SCAN_DIRS, scanUrl } from '../cdn_config.js';
 
 export { BASE, R2_BASE_URL };
 
@@ -137,9 +137,7 @@ export const VALID_BOOKS = new Set([
  * NT manuscripts live under /images/<msId>/<folio>; OT manuscripts (B, 1QIsa-a, 11Q5) under /ot_images/.
  */
 export function r2ScanUrl(corpus, msId, folio) {
-  const dir = corpus === 'ot' ? 'ot_images' : 'images';
-  const enc = s => encodeURIComponent(s).replace(/\(/g, '%28').replace(/\)/g, '%29');
-  return `${R2_BASE_URL}/${dir}/${enc(msId)}/${enc(folio)}`;
+  return scanUrl(corpus === 'ot' ? SCAN_DIRS.ot : SCAN_DIRS.nt, msId, folio);
 }
 
 // ---- routes (every internal href includes BASE) -------------------------------------------------

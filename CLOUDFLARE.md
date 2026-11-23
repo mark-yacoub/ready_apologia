@@ -86,4 +86,18 @@ Once requests are not capped, relax the bot rules: let verified search bots and 
   CLOUDFLARE_API_TOKEN=... CLOUDFLARE_ZONE_ID=... npm run cloudflare:snapshot -- --check
   ```
 
+## 9. Image Transformations (social-preview images)
+Raw manuscript scans on `mss.readyapologia.com` are often 5-10 MB; WhatsApp drops preview images over ~600 KB and shows the site icon instead. Scripture pages therefore point `og:image` at a resized variant (`OG_PREVIEW` in `src/utils/cdn_config.js`, built by `src/utils/ogImageResolver.js`):
+`https://mss.readyapologia.com/cdn-cgi/image/width=1200,height=630,fit=pad,background=white,quality=70,format=jpeg,onerror=redirect/<dir>/<ms_id>/<image>` (1200x630, ~30-60 KB, whole scan visible).
+
+* **Zone setting (2026-11-23):** Images → Transformations → enabled for `readyapologia.com`; Sources: **This zone only**; Preserve Content Credentials: **off**.
+* **Cost:** Free plan, 5,000 unique transformations/month (one per scan with a single preset; ~3,800 scans are ever used as previews). Exceeding it is never billed: new transformations fail with error 9422, and `onerror=redirect` then sends the original scan.
+* **No WAF lock on other sizes (accepted risk, 2026-11-23):** the free plan's 5 custom rules are all in use, so `/cdn-cgi/image/` requests with other option strings are not blocked. Someone could use up the 5,000 monthly transformations with other sizes; that is never billed, and previews then fall back to the original scan via `onerror=redirect` (WhatsApp shows the icon again until the month resets). If a rule slot frees up, add a **Block** rule placed **first** (above "Allow Social Media Crawlers", which skips every later rule):
+  ```text
+  (starts_with(http.request.uri.path, "/cdn-cgi/image/") and not starts_with(http.request.uri.path, "/cdn-cgi/image/width=1200,height=630,fit=pad,background=white,quality=70,format=jpeg,onerror=redirect/"))
+  ```
+  and keep it in sync with `OG_PREVIEW.options` (`OG_PREVIEW_PATH_PREFIX`). Usage: dashboard → Images → Transformations shows the monthly count.
+* **Checks:** `npm run test:og-image` (unit) and the `og-image` group of `npm run audit:seo` (every Scripture page's scan `og:image` is the preset with declared width/height/type).
+* WhatsApp caches previews per URL; test a fix with a fresh URL (e.g. `?v=2`).
+
 *Note for future modifications: If you deploy immediate layout/content changes, you may need to purge the Cloudflare cache for the changes to become visible to users immediately due to the aggressive caching rule.*

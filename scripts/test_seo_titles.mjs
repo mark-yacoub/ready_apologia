@@ -38,6 +38,10 @@
  *                    matches its sitemap `<loc>`.
  *   - jsonld       : Every `<script type="application/ld+json">` block parses as
  *                    valid JSON.
+ *   - og-image     : Every page has an `og:image`; a manuscript scan (R2 host) must be
+ *                    the `OG_PREVIEW` variant from `src/utils/cdn_config.js` (never the
+ *                    multi-MB original, which WhatsApp drops) and declare its exact
+ *                    `og:image:width`/`height`/`type`.
  *
  * Usage:
  *   node scripts/test_seo_titles.mjs [--dist <dir>] [--allow-sliced] [--allow-missing-lastmod[=p1,p2]] [--max-offenders <N>]
@@ -51,6 +55,7 @@ import {
   PLAYBOOK_HEADLINE,
   PLAYBOOK_META,
 } from '../src/utils/discover/playbookTone.js';
+import { OG_PREVIEW, OG_PREVIEW_PATH_PREFIX, R2_BASE_URL } from '../src/utils/cdn_config.js';
 
 /** Single-item permalink pages whose description may quote their one source text. */
 const isSingleItemRoute = (route) => /^\/hadith\/(bukhari|muslim)\/[^/]+$/.test(route);
@@ -140,6 +145,7 @@ const GROUP_ORDER = [
   'tone',
   'sitemap',
   'jsonld',
+  'og-image',
 ];
 
 const groups = new Map(
@@ -455,6 +461,31 @@ for (const file of htmlFiles) {
       const list = templatedTitleMap.get(rawTitle);
       if (list) list.push(route);
       else templatedTitleMap.set(rawTitle, [route]);
+    }
+  }
+
+  // ── Group: og-image ──
+  if (!isRedirectStub) {
+    const ogMeta = (suffix) => {
+      const tag = head.match(new RegExp(`<meta\\b[^>]*\\bproperty=["']og:image${suffix}["'][^>]*>`, 'i'))?.[0];
+      const m = tag?.match(RE_CONTENT_ATTR);
+      return m ? decodeEntities(m[1] ?? m[2] ?? '') : null;
+    };
+    const ogImage = ogMeta('');
+    check('og-image', Boolean(ogImage), `${route}: missing <meta property="og:image">`);
+    if (ogImage?.startsWith(`${R2_BASE_URL}/`)) {
+      const isPreview = ogImage.startsWith(`${R2_BASE_URL}${OG_PREVIEW_PATH_PREFIX}`);
+      check('og-image', isPreview, `${route}: og:image is a full-size scan, not the OG_PREVIEW variant (${ogImage})`);
+      if (isPreview) {
+        const declared = [ogMeta(':width'), ogMeta(':height'), ogMeta(':type')];
+        const expected = [String(OG_PREVIEW.width), String(OG_PREVIEW.height), OG_PREVIEW.type];
+        check(
+          'og-image',
+          declared.every((v, i) => v === expected[i]),
+          `${route}: og:image width/height/type are ${JSON.stringify(declared)}, expected ${JSON.stringify(expected)}`
+        );
+        check('og-image', !/[\s"'<>]/.test(ogImage), `${route}: og:image URL is not fully encoded (${ogImage})`);
+      }
     }
   }
 
