@@ -1,10 +1,11 @@
 // Build-time loader for the per-verse spoken apologetic response synthesized
 // from the verse's primary videos (table verse_video_responses in data.db).
 import booksMeta from '../../data/books_meta.json';
+import quranMeta from '../../data/quran/arabic/meta.json';
 import { query, queryRow } from '../../db.js';
-import { buildBookIndex, buildVerseResponseView } from './labels.js';
+import { buildRefIndex, buildVerseResponseView } from './labels.js';
 
-const bookIndex = buildBookIndex(booksMeta);
+const refIndex = buildRefIndex(booksMeta, quranMeta);
 let tableExists = null;
 
 function hasTable() {
@@ -19,7 +20,7 @@ function hasTable() {
 /**
  * @param {string} verseId DB verse id (Bible MT `jn_14_28`, Quran `4_157`).
  * @param {string} base Site base path ('' at root).
- * @returns {{ paragraphs: string[], supporting: {label:string,id:string|null,href:string|null}[], copyText: string } | null}
+ * @returns {{ paragraphs: string[], supporting: {label:string,id:string|null,href:string|null}[] } | null}
  */
 export function getVerseVideoResponse(verseId, base = '') {
   if (!verseId || !hasTable()) return null;
@@ -29,5 +30,5 @@ export function getVerseVideoResponse(verseId, base = '') {
       WHERE verse_id = :verseId AND status = 'ready'`,
     { verseId }
   );
-  return buildVerseResponseView(row, { verseId, bookIndex, base });
+  return buildVerseResponseView(row, { verseId, refIndex, base });
 }

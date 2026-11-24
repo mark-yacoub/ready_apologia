@@ -23,7 +23,7 @@ const preview = response?.paragraphs?.[0] || '';
     </summary>
 
     <div class="vvr-body">
-      {response.paragraphs.map((p) => <p>{p}</p>)}
+      {response.paragraphs.map((p) => <p class="vvr-para">{p}</p>)}
 
       {response.supporting.length > 0 && (
         <div class="vvr-refs">
@@ -41,7 +41,7 @@ const preview = response?.paragraphs?.[0] || '';
       )}
 
       <div class="vvr-actions">
-        <button type="button" class="vvr-copy" data-copy={response.copyText} aria-live="polite">
+        <button type="button" class="vvr-copy" aria-live="polite">
           <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
             <rect x="9" y="9" width="11" height="11" rx="2" />
             <path d="M5 15V6a2 2 0 0 1 2-2h9" stroke-linecap="round" />
@@ -62,7 +62,11 @@ const preview = response?.paragraphs?.[0] || '';
     const label = btn.querySelector('.vvr-copy-label');
     const setLabel = (text) => { if (label) label.textContent = text; };
     try {
-      await navigator.clipboard.writeText(btn.dataset.copy || '');
+      // Read the rendered paragraphs so the answer is not duplicated in the HTML.
+      const paragraphs = btn.closest('.vvr')?.querySelectorAll('.vvr-para') || [];
+      const text = Array.from(paragraphs, (p) => p.textContent?.trim() || '').filter(Boolean).join('\n\n');
+      if (!text) throw new Error('nothing to copy');
+      await navigator.clipboard.writeText(text);
       setLabel('Copied');
     } catch {
       setLabel('Copy failed');
@@ -143,7 +147,7 @@ const preview = response?.paragraphs?.[0] || '';
     color: var(--color-on-surface);
     line-height: 1.7;
   }
-  .vvr-body p { margin: 0 0 12px; }
+  .vvr-para { margin: 0 0 12px; }
 
   .vvr-refs {
     display: flex;

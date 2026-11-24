@@ -1,18 +1,29 @@
 // Resolves the human-readable supporting-verse labels stored in
-// verse_video_responses.supporting_verses ("John 14:28", "Psalm 110:1",
-// "1 Corinthians 15:3-8", "Surah 4:157", "Quran 2:91") into links.
+// verse_video_responses.supporting_verses into links, and shapes a DB row for the UI.
+//
+// Supported label formats (tried in order, first match wins):
+//   Quran verse     "Surah 4:157", "Quran 53:19-20"
+//   Quran chapter   "Surah 33"
+//   Bible verse     "John 14:28", "Psalm 110:1", "1 Corinthians 15:3-8", "Isaiah 52:13-53:12"
+//   Bible chapter   "John 14", "Ezekiel 40-48"
+// Anything else (hadith citations, apocrypha, out-of-range numbers) stays a plain label:
+// hadith collections use mixed numbering schemes, so a guessed link could point at the wrong report.
+//
 // Pure module (no DB / JSON imports) so it can be unit-tested with plain node.
 import { getBibleUrl, getQuranUrl } from '../urlFactory.js';
 import { mapMtToLxx } from '../scripture_mapper.js';
 
-const QURAN_PREFIX = /^(?:quran|qur'an|qurʾan|qurʾān|qur’an|surah|sura)\s+(\d{1,3}):(\d{1,3})(?:\s*[-–]\s*(\d{1,3}))?$/i;
-const BIBLE_REF = /^(.+?)\s+(\d{1,3}):(\d{1,3})(?:\s*[-–]\s*(?:\d{1,3}:)?(\d{1,3}))?$/;
-// Chapter-only references ("John 14", "Ezekiel 40-48", "Surah 33") link to the chapter reader.
-const QURAN_CHAPTER = /^(?:quran|qur'an|qurʾan|qurʾān|qur’an|surah|sura)\s+(\d{1,3})(?:\s*[-–]\s*\d{1,3})?$/i;
-const BIBLE_CHAPTER = /^(.+?)\s+(\d{1,3})(?:\s*[-–]\s*\d{1,3})?$/;
+const QURAN_NAME = String.raw`(?:quran|qur'an|qur’an|qurʾan|qurʾān|surah|sura)`;
+const NUM = String.raw`(\d{1,3})`;
+const RANGE_TAIL = String.raw`(?:\s*[-–]\s*(?:\d{1,3}:)?\d{1,3})?`;
+
+const QURAN_VERSE = new RegExp(String.raw`^${QURAN_NAME}\s+${NUM}:${NUM}${RANGE_TAIL}$`, 'i');
+const QURAN_CHAPTER = new RegExp(String.raw`^${QURAN_NAME}\s+${NUM}${RANGE_TAIL}$`, 'i');
+const BIBLE_VERSE = new RegExp(String.raw`^(.+?)\s+${NUM}:${NUM}${RANGE_TAIL}$`);
+const BIBLE_CHAPTER = new RegExp(String.raw`^(.+?)\s+${NUM}${RANGE_TAIL}$`);
 
 // Common English spellings that differ from books_meta display names.
-const EXTRA_ALIASES = {
+const EXTRA_BOOK_ALIASES = {
   psalm: 'ps',
   'song of songs': 'sg',
   'song of solomon': 'sg',
@@ -20,7 +31,7 @@ const EXTRA_ALIASES = {
   revelations: 'rv',
   'revelation of john': 'rv',
   qoheleth: 'eccl',
-  'wisdom': 'ws',
+  wisdom: 'ws',
   ecclesiasticus: 'sir',
 };
 
@@ -33,90 +44,127 @@ export function normalizeBookName(name) {
     .trim();
 }
 
-/** Builds a normalized-name -> { id, isOt } index from books_meta.json. */
-export function buildBookIndex(booksMeta) {
-  const index = new Map();
-  for (const b of booksMeta?.ot || []) index.set(normalizeBookName(b.name), { id: b.id, isOt: true });
-  for (const b of booksMeta?.nt || []) index.set(normalizeBookName(b.name), { id: b.id, isOt: false });
-  const otIds = new Set((booksMeta?.ot || []).map((b) => b.id));
-  for (const [alias, id] of Object.entries(EXTRA_ALIASES)) {
-    if (!index.has(alias)) index.set(alias, { id, isOt: otIds.has(id) });
+/**
+ * Builds the lookup tables the resolver needs.
+ * @param {object} booksMeta  src/data/books_meta.json ({ ot: [...], nt: [...] }; `chapters` is the reader's count)
+ * @param {Array}  quranMeta  src/data/quran/arabic/meta.json ([{ id, total_verses }])
+ */
+export function buildRefIndex(booksMeta, quranMeta = []) {
+  const books = new Map();
+  const byId = new Map();
+  const add = (b, isOt) => {
+    const entry = { id: b.id, isOt, chapters: Number(b.chapters) || 0 };
+    books.set(normalizeBookName(b.name), entry);
+    byId.set(b.id, entry);
+  };
+  (booksMeta?.ot || []).forEach((b) => add(b, true));
+  (booksMeta?.nt || []).forEach((b) => add(b, false));
+  for (const [alias, id] of Object.entries(EXTRA_BOOK_ALIASES)) {
+    if (!books.has(alias) && byId.has(id)) books.set(alias, byId.get(id));
   }
-  return index;
+
+  const ayahCounts = new Map((quranMeta || []).map((s) => [Number(s.id), Number(s.total_verses)]));
+  return { books, ayahCounts };
 }
+
+const plain = (label) => ({ label, id: null, href: null });
+
+function parseQuranVerse(label, { ayahCounts }, base) {
+  const m = label.match(QURAN_VERSE);
+  if (!m) return null;
+  const surah = Number(m[1]);
+  const ayah = Number(m[2]);
+  if (!(ayah >= 1 && ayah <= (ayahCounts.get(surah) || 0))) return plain(label);
+  return { label, id: `${surah}_${ayah}`, href: getQuranUrl({ surah, ayah, base }) };
+}
+
+function parseQuranChapter(label, { ayahCounts }, base) {
+  const m = label.match(QURAN_CHAPTER);
+  if (!m) return null;
+  const surah = Number(m[1]);
+  if (!ayahCounts.has(surah)) return plain(label);
+  return { label, id: null, href: getQuranUrl({ surah, base }) };
+}
+
+// Labels use standard English (MT) numbering; the OT reader is LXX-numbered.
+function toReaderNumbering(book, chapter, verse) {
+  if (!book.isOt) return { chapter, verse };
+  const mapped = mapMtToLxx(book.id, chapter, verse);
+  return { chapter: Number(mapped.chapter), verse: Number(mapped.verse) };
+}
+
+const chapterInRange = (book, chapter) => chapter >= 1 && chapter <= book.chapters;
+
+function parseBibleVerse(label, { books }, base) {
+  const m = label.match(BIBLE_VERSE);
+  if (!m) return null;
+  const book = books.get(normalizeBookName(m[1]));
+  if (!book) return plain(label);
+  const chapter = Number(m[2]);
+  const verse = Number(m[3]);
+  const reader = toReaderNumbering(book, chapter, verse);
+  if (verse < 1 || !chapterInRange(book, reader.chapter)) return plain(label);
+  return {
+    label,
+    id: `${book.id}_${chapter}_${verse}`, // DB verse ids use MT numbering
+    href: getBibleUrl({ book: book.id, chapter: reader.chapter, verse: reader.verse, base }),
+  };
+}
+
+function parseBibleChapter(label, { books }, base) {
+  const m = label.match(BIBLE_CHAPTER);
+  if (!m) return null;
+  const book = books.get(normalizeBookName(m[1]));
+  if (!book) return plain(label);
+  const { chapter } = toReaderNumbering(book, Number(m[2]), 1);
+  if (!chapterInRange(book, chapter)) return plain(label);
+  return { label, id: null, href: getBibleUrl({ book: book.id, chapter, base }) };
+}
+
+const PARSERS = [parseQuranVerse, parseQuranChapter, parseBibleVerse, parseBibleChapter];
 
 /**
  * @returns {{ label: string, id: string|null, href: string|null }}
- *   id is the DB verse id of the first verse (MT numbering for the OT), or null when unresolved.
+ *   id: DB verse id of the first verse cited (null for chapters / unresolved); href: null when unresolved.
  */
-export function resolveSupportingLabel(rawLabel, bookIndex, base = '') {
+export function resolveSupportingLabel(rawLabel, refIndex, base = '') {
   const label = String(rawLabel || '').replace(/\s+/g, ' ').trim();
-  const unresolved = { label, id: null, href: null };
-  if (!label) return unresolved;
-
-  const q = label.match(QURAN_PREFIX);
-  if (q) {
-    const [, surah, ayah] = q;
-    const s = Number(surah);
-    if (s < 1 || s > 114) return unresolved;
-    return { label, id: `${s}_${Number(ayah)}`, href: getQuranUrl({ surah: s, ayah: Number(ayah), base }) };
+  if (!label) return plain(label);
+  for (const parse of PARSERS) {
+    const ref = parse(label, refIndex, base);
+    if (ref) return ref;
   }
+  return plain(label);
+}
 
-  const qc = label.match(QURAN_CHAPTER);
-  if (qc) {
-    const s = Number(qc[1]);
-    if (s < 1 || s > 114) return unresolved;
-    return { label, id: null, href: getQuranUrl({ surah: s, base }) };
+function parseLabelList(json) {
+  try {
+    const parsed = JSON.parse(json || '[]');
+    return Array.isArray(parsed) ? parsed.filter((x) => typeof x === 'string') : [];
+  } catch {
+    return [];
   }
-
-  const m = label.match(BIBLE_REF);
-  if (!m) {
-    // Hadith citations etc. stay plain text: collections use mixed numbering schemes.
-    const c = label.match(BIBLE_CHAPTER);
-    const chapterBook = c && bookIndex.get(normalizeBookName(c[1]));
-    if (!chapterBook) return unresolved;
-    let chapter = Number(c[2]);
-    if (chapterBook.isOt) chapter = Number(mapMtToLxx(chapterBook.id, chapter, 1).chapter);
-    return { label, id: null, href: getBibleUrl({ book: chapterBook.id, chapter, base }) };
-  }
-  const [, bookName, chapter, verse] = m;
-  const book = bookIndex.get(normalizeBookName(bookName));
-  if (!book) return unresolved;
-  return {
-    label,
-    id: `${book.id}_${Number(chapter)}_${Number(verse)}`,
-    // Labels use standard English (MT) numbering; the OT reader is LXX-numbered.
-    href: getBibleUrl({ book: book.id, chapter: Number(chapter), verse: Number(verse), base, isMt: book.isOt }),
-  };
 }
 
 /**
  * Shapes a verse_video_responses row for the UI.
  * Returns null unless the row is `ready` and has prose.
+ * @returns {{ paragraphs: string[], supporting: {label:string,id:string|null,href:string|null}[] } | null}
  */
-export function buildVerseResponseView(row, { verseId, bookIndex, base = '' }) {
+export function buildVerseResponseView(row, { verseId, refIndex, base = '' }) {
   if (!row || row.status !== 'ready' || typeof row.response !== 'string') return null;
   const paragraphs = row.response.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
   if (paragraphs.length === 0) return null;
 
-  let labels = [];
-  try {
-    const parsed = JSON.parse(row.supporting_verses || '[]');
-    if (Array.isArray(parsed)) labels = parsed.filter((x) => typeof x === 'string');
-  } catch {
-    labels = [];
-  }
-
   const seen = new Set();
   const supporting = [];
-  for (const raw of labels) {
-    const ref = resolveSupportingLabel(raw, bookIndex, base);
+  for (const raw of parseLabelList(row.supporting_verses)) {
+    const ref = resolveSupportingLabel(raw, refIndex, base);
     if (!ref.label || ref.id === verseId) continue; // skip the verse being viewed
     const key = ref.label.toLowerCase();
     if (seen.has(key)) continue;
     seen.add(key);
     supporting.push(ref);
   }
-
-  return { paragraphs, supporting, copyText: paragraphs.join('\n\n') };
+  return { paragraphs, supporting };
 }
