@@ -1,0 +1,212 @@
+---
+// Collapsible spoken-apologetic answer synthesized from this verse's primary videos.
+// Static HTML (<details>), so it works without JS and stays indexable while collapsed.
+// The only script is the Copy button.
+const { response } = Astro.props;
+const preview = response?.paragraphs?.[0] || '';
+---
+
+{response && (
+  <details class="vvr">
+    <summary class="vvr-summary">
+      <span class="vvr-head">
+        <span class="vvr-icon" aria-hidden="true">🎬</span>
+        <span class="vvr-title">From the videos below</span>
+        <span class="vvr-chevron" aria-hidden="true">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </span>
+      </span>
+      <span class="vvr-preview" aria-hidden="true">{preview}</span>
+      <span class="vvr-toggle">Read full answer</span>
+    </summary>
+
+    <div class="vvr-body">
+      {response.paragraphs.map((p) => <p>{p}</p>)}
+
+      {response.supporting.length > 0 && (
+        <div class="vvr-refs">
+          <span class="vvr-refs-label">Supporting verses</span>
+          <ul class="vvr-refs-list">
+            {response.supporting.map((ref) => (
+              <li>
+                {ref.href
+                  ? <a class="vvr-ref" href={ref.href}>{ref.label}</a>
+                  : <span class="vvr-ref vvr-ref-plain">{ref.label}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div class="vvr-actions">
+        <button type="button" class="vvr-copy" data-copy={response.copyText} aria-live="polite">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2" />
+            <path d="M5 15V6a2 2 0 0 1 2-2h9" stroke-linecap="round" />
+          </svg>
+          <span class="vvr-copy-label">Copy</span>
+        </button>
+      </div>
+    </div>
+  </details>
+)}
+
+<script>
+  // One delegated listener: survives client-side navigation and serves every card on the page.
+  document.addEventListener('click', async (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    const btn = target?.closest('.vvr-copy');
+    if (!(btn instanceof HTMLButtonElement)) return;
+    const label = btn.querySelector('.vvr-copy-label');
+    const setLabel = (text) => { if (label) label.textContent = text; };
+    try {
+      await navigator.clipboard.writeText(btn.dataset.copy || '');
+      setLabel('Copied');
+    } catch {
+      setLabel('Copy failed');
+    }
+    window.clearTimeout(Number(btn.dataset.timer || 0));
+    btn.dataset.timer = String(window.setTimeout(() => setLabel('Copy'), 2000));
+  });
+</script>
+
+<style>
+  .vvr {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .vvr-summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 44px;
+    padding: 14px 16px;
+  }
+  .vvr-summary::-webkit-details-marker { display: none; }
+  .vvr-summary:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+    border-radius: 12px;
+  }
+
+  .vvr-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .vvr-icon { font-size: 1.1rem; line-height: 1; }
+  .vvr-title {
+    flex: 1;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-on-surface-variant);
+  }
+  .vvr-chevron {
+    display: inline-flex;
+    color: var(--color-on-surface-variant);
+    transition: transform 0.2s ease;
+  }
+  .vvr[open] .vvr-chevron { transform: rotate(180deg); }
+
+  .vvr-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: var(--color-on-surface);
+    line-height: 1.6;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  }
+  .vvr-toggle {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  .vvr[open] .vvr-preview,
+  .vvr[open] .vvr-toggle { display: none; }
+  .vvr[open] .vvr-summary { padding-bottom: 4px; }
+
+  .vvr-body {
+    padding: 0 16px 14px;
+    color: var(--color-on-surface);
+    line-height: 1.7;
+  }
+  .vvr-body p { margin: 0 0 12px; }
+
+  .vvr-refs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .vvr-refs-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-on-surface-variant);
+  }
+  .vvr-refs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .vvr-ref {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 4px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--color-outline-variant);
+    background-color: var(--color-surface-container-low);
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  a.vvr-ref:hover { border-color: var(--color-primary); }
+  .vvr-ref-plain { color: var(--color-on-surface-variant); }
+
+  .vvr-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+  }
+  .vvr-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--color-outline-variant);
+    background: transparent;
+    color: var(--color-on-surface-variant);
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .vvr-copy:hover { color: var(--color-primary); border-color: var(--color-primary); }
+  .vvr-copy:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vvr-chevron { transition: none; }
+  }
+</style>

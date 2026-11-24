@@ -8,6 +8,7 @@ import RouteAnalytics from '../../../../components/common/RouteAnalytics.astro';
 import QuranVerseTabs from '../../../../components/QuranVerseTabs.jsx';
 import QuranManuscriptCarousel from '../../../../components/QuranManuscriptCarousel.jsx';
 import VideosGrid from '../../../../components/VideosGrid.astro';
+import VerseVideoResponse from '../../../../components/VerseVideoResponse.astro';
 import PlayAllButton from '../../../../components/reel/PlayAllButton.jsx';
 import { toReelItems } from '../../../../components/reel/reelItems.js';
 import TafseerViewer from '../../../../components/TafseerViewer.jsx';
@@ -24,6 +25,7 @@ import { loadDebunkingMiracles } from '../../../../utils/quran_debunking_loader.
 import { buildDebunkingCard, buildScientificErrorCard } from '../../../../utils/scholarly_card_view_model.js';
 import { getEvidenceSets } from '../../../../utils/quran_evidence_service.js';
 import { enrichVideosWithVerses } from '../../../../utils/video_service.js';
+import { getVerseVideoResponse } from '../../../../utils/verseResponse/service.js';
 import { R2_BASE_URL } from '../../../../utils/cdn_config.js';
 import { BUILD_SURAHS } from '../../../../utils/build_config.js';
 import QuranSourcesPanel from '../../../../components/quranSources/QuranSourcesPanel.astro';
@@ -141,6 +143,7 @@ if (tab === 'manuscripts') {
 }
 
 let videos = [];
+let verseResponse = null;
 if (tab === 'videos') {
   const rawVideos = query(`
     SELECT sm.*, spv.verse_id as target_verse_id, spv.ref_order, spv.total_passages,
@@ -151,6 +154,7 @@ if (tab === 'videos') {
     ORDER BY spv.composite_score DESC, sm.rigor_score DESC
   `, { dbVerseId });
   videos = enrichVideosWithVerses(rawVideos, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL, dbVerseId);
+  verseResponse = getVerseVideoResponse(dbVerseId, import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 }
 
 // Reel queue ("Play all"): this verse's videos in the same order as the grid.
@@ -595,6 +599,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
       )}
       {tab === 'videos' && (
         <div class="videos-panel-container">
+          <VerseVideoResponse response={verseResponse} />
           <PlayAllButton client:load items={reelItems} />
           <VideosGrid videos={videos} />
         </div>
