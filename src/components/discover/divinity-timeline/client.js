@@ -10,13 +10,14 @@
  */
 
 import { hasSavedScroll } from '../../../utils/scroll_restoration.js';
+import { isQuickHash, isQuickHashTransition } from '../../../utils/reveal_target.js';
 
 const reduceMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function revealHashTarget(root, { allowScroll = true } = {}) {
   const rawHash = window.location.hash;
-  if (!rawHash || rawHash.length < 2) return;
+  if (!rawHash || rawHash.length < 2 || isQuickHash(rawHash)) return;
   let targetId;
   try {
     targetId = decodeURIComponent(rawHash.slice(1));
@@ -154,7 +155,10 @@ function init() {
   initCopy(root, state);
   revealHashTarget(root, { allowScroll: !hasSavedScroll() });
 
-  const onHashChange = () => revealHashTarget(root, { allowScroll: true });
+  const onHashChange = (ev) => {
+    if (isQuickHashTransition(ev) || ev?.oldURL === ev?.newURL) return;
+    revealHashTarget(root, { allowScroll: true });
+  };
   const onAnchorClick = (ev) => {
     const link = ev.target && ev.target.closest && ev.target.closest('a[href^="#"]');
     if (!link || !root.contains(link)) return;

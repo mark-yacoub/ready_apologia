@@ -1,67 +1,22 @@
 /**
- * Build-time loader and schema validator for Quick Points (`src/utils/quickPoints/<slug>.json`).
+ * Isomorphic / Vite build-time loader & validator for Quick Points (`src/utils/quickPoints/<slug>.json`).
  *
- * Works both inside Astro/Vite builds (via eager `import.meta.glob`) and under plain Node ESM
- * (`node --test`, via `node:fs` fallback relative to this module).
+ * Contains ZERO `node:*` imports so it can never pull `node:fs` into a client bundle.
+ * Plain Node callers (`node --test`, audit scripts) import `./loader.node.js` instead.
  *
  * Rules:
  *   - Missing file for `slug` -> returns `null` (no toggle rendered on the page).
  *   - Present file -> validates full shape and throws a single aggregated Error if invalid.
  *   - Renders ONLY `groups` (never `needsReview`).
- *   - Optional point `role`: `"lead" | "support" | "caveat"` (absent = `"support"`).
- *     Within each category, `lead` and `support` rows stay in data order first, followed by
- *     `caveat` rows in data order at the end of that category, with continuous numbering `n = 1..N`.
- *   - `href` and `path` include `BASE` (`import.meta.env.BASE_URL` without trailing slash).
+ *   - Optional `role`: `"lead" | "support" | "caveat"` (absent = `"support"`), caveats ordered last per category.
+ *   - Optional `ref`: non-empty trimmed string (no `[` or `]`) or `null` / absent (`null`).
+ *   - Emits canonical `pageKey` alongside `BASE`-prefixed `path` and `href`, with continuous `n = 1..N`.
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { BASE, normalizeBase, toPageKey } from './paths.js';
 
-export const BASE = (import.meta.env?.BASE_URL ?? '/').replace(/\/$/, '');
+export { BASE, toPageKey };
 export const ALLOWED_ROLES = new Set(['lead', 'support', 'caveat']);
-
-let globModules = null;
-try {
-  globModules = import.meta.glob('./*.json', { eager: true });
-} catch {
-  // Plain Node ESM (no Vite transform): fall back to fs below.
-}
-
-let rawBySlugCache = null;
-
-function getRawBySlug() {
-  if (rawBySlugCache) return rawBySlugCache;
-  const map = new Map();
-  if (globModules !== null) {
-    for (const [relPath, mod] of Object.entries(globModules)) {
-      const m = relPath.match(/^\.\/([^/]+)\.json$/);
-      if (m) map.set(m[1], mod?.default ?? mod);
-    }
-  } else {
-    const dir = path.dirname(fileURLToPath(import.meta.url));
-    if (fs.existsSync(dir)) {
-      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-        if (!entry.isFile() || !entry.name.endsWith('.json')) continue;
-        const fileSlug = entry.name.slice(0, -5);
-        const fullPath = path.join(dir, entry.name);
-        map.set(fileSlug, JSON.parse(fs.readFileSync(fullPath, 'utf8')));
-      }
-    }
-  }
-  rawBySlugCache = map;
-  return map;
-}
-
-function normalizeBase(base) {
-  if (!base || base === '/') return '';
-  return String(base).replace(/\/$/, '');
-}
-
-function normalizePath(p) {
-  if (!p || p === '/') return '/';
-  return p.replace(/\/$/, '');
-}
 
 /**
  * Pure validator + transformer for a single article's Quick Points JSON payload.
@@ -145,6 +100,24 @@ export function validateQuickPoints(raw, slug, options = {}) {
           problems.push(`${pLoc} (${id || 'unnamed'}): statement must be a non-empty string`);
         }
 
+        let ref = null;
+        if (pt.ref !== undefined && pt.ref !== null) {
+          if (typeof pt.ref !== 'string') {
+            problems.push(`${pLoc} (${id || 'unnamed'}): ref must be a string or null`);
+          } else {
+            const trimmedRef = pt.ref.trim();
+            if (!trimmedRef) {
+              problems.push(`${pLoc} (${id || 'unnamed'}): ref must be a non-empty string or null`);
+            } else if (/[\[\]]/.test(trimmedRef)) {
+              problems.push(
+                `${pLoc} (${id || 'unnamed'}): ref "${trimmedRef}" must not contain "[" or "]"`,
+              );
+            } else {
+              ref = trimmedRef;
+            }
+          }
+        }
+
         let role = 'support';
         if (pt.role !== undefined) {
           if (typeof pt.role !== 'string' || !ALLOWED_ROLES.has(pt.role)) {
@@ -179,17 +152,19 @@ export function validateQuickPoints(raw, slug, options = {}) {
           return;
         }
 
-        const rawPath = normalizePath(hashParts[0]);
+        const pageKey = toPageKey(hashParts[0], '');
         const hash = hashParts[1] ?? '';
-        const resolvedPath = `${base}${rawPath}`;
+        const resolvedPath = `${base}${pageKey}`;
         const href = hash ? `${resolvedPath}#${hash}` : resolvedPath;
 
         const prepared = {
           id,
           statement,
+          ref,
           role,
           href,
           path: resolvedPath,
+          pageKey,
           hash,
         };
 
@@ -223,32 +198,55 @@ export function validateQuickPoints(raw, slug, options = {}) {
   };
 }
 
-const resolvedCache = new Map();
-
 /**
- * Memoised Quick Points view-model loader. Returns `null` when no `<slug>.json` exists.
- *
- * @param {string} slug
- * @param {{ base?: string }} [options]
+ * Factory creating a memoised `loadQuickPoints` + `clearQuickPointsCache` pair over a raw map provider.
+ * @param {() => Map<string, unknown>} readRawMap
  */
-export function loadQuickPoints(slug, options = {}) {
-  if (!slug || typeof slug !== 'string') return null;
-  const base = normalizeBase(options.base ?? BASE);
-  const cacheKey = `${base}::${slug}`;
-  if (resolvedCache.has(cacheKey)) return resolvedCache.get(cacheKey);
+export function createQuickPointsLoader(readRawMap) {
+  let rawMapCache = null;
+  const resolvedCache = new Map();
 
-  const rawMap = getRawBySlug();
-  if (!rawMap.has(slug)) {
-    resolvedCache.set(cacheKey, null);
-    return null;
+  function loadQuickPoints(slug, options = {}) {
+    if (!slug || typeof slug !== 'string') return null;
+    const base = normalizeBase(options.base ?? BASE);
+    const cacheKey = `${base}::${slug}`;
+    if (resolvedCache.has(cacheKey)) return resolvedCache.get(cacheKey);
+
+    if (!rawMapCache) rawMapCache = readRawMap();
+    if (!rawMapCache.has(slug)) {
+      resolvedCache.set(cacheKey, null);
+      return null;
+    }
+
+    const parsed = validateQuickPoints(rawMapCache.get(slug), slug, { base });
+    resolvedCache.set(cacheKey, parsed);
+    return parsed;
   }
 
-  const parsed = validateQuickPoints(rawMap.get(slug), slug, { base });
-  resolvedCache.set(cacheKey, parsed);
-  return parsed;
+  function clearQuickPointsCache() {
+    resolvedCache.clear();
+    rawMapCache = null;
+  }
+
+  return { loadQuickPoints, clearQuickPointsCache };
 }
 
-export function clearQuickPointsCache() {
-  resolvedCache.clear();
-  rawBySlugCache = null;
+let viteGlobModules = null;
+try {
+  viteGlobModules = import.meta.glob('./*.json', { eager: true });
+} catch {
+  // Plain Node without Vite transform: use `./loader.node.js` when reading from disk under Node.
 }
+
+const { loadQuickPoints, clearQuickPointsCache } = createQuickPointsLoader(() => {
+  const map = new Map();
+  if (viteGlobModules) {
+    for (const [relPath, mod] of Object.entries(viteGlobModules)) {
+      const m = relPath.match(/^\.\/([^/]+)\.json$/);
+      if (m) map.set(m[1], mod?.default ?? mod);
+    }
+  }
+  return map;
+});
+
+export { loadQuickPoints, clearQuickPointsCache };

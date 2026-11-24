@@ -2,8 +2,24 @@
    Quick Points (.qk-*) — Street-Evangelism Mode
    Scoped design layer reusing the .hrv "archive reading room" palette:
      paper / ink, verifiable teal (#0e5e6f), zero alarm red, WCAG AA contrast,
-     >= 44px touch targets, Literata 16px/1.35 statements, tabular numerals.
+     >= 44px touch targets, Literata 15.5px/1.32 statements, tabular numerals.
    ========================================================================== */
+
+/* Zero-specificity scroll-margin-top fallback so every [id] inside the 11 Discover
+   articles clears sticky bars without JS offset measurement. Explicit per-article
+   scroll-margin-top rules always win over :where(). */
+.hrv {
+  --qk-scroll-offset: 16px;
+}
+
+.hrv:has(.hrv-bar, [class*="-nav"]) {
+  --qk-scroll-offset: calc(var(--hrv-bar-h, 52px) + 16px);
+}
+
+:where(.hrv) :where([id]:not(#top):not(.qk-sheet *)),
+:where(.tce) :where([id]:not(.qk-sheet *)) {
+  scroll-margin-top: var(--qk-scroll-offset, 16px);
+}
 
 .qk-entry,
 .qk-sheet {
@@ -108,6 +124,8 @@
   color: var(--qk-ink);
   box-shadow: 0 1px 3px rgba(27, 25, 23, 0.1), 0 1px 1px rgba(27, 25, 23, 0.06);
   cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .qk-seg__btn--open {
@@ -363,7 +381,7 @@
   padding-bottom: 28px;
 }
 
-/* ---- Wrapping Category Jump Chips (>= 3 categories, zero horiz scroll) --- */
+/* ---- Wrapping Category Jump Chips (>= 3 categories & > 25 points) -------- */
 .qk-chips {
   display: flex;
   flex-wrap: wrap;
@@ -496,6 +514,7 @@
 }
 
 .qk-row__stmt {
+  min-width: 0;
   font-family: var(--qk-display);
   font-size: 15.5px;
   line-height: 1.32;
@@ -506,6 +525,24 @@
 
 .qk-row--lead .qk-row__stmt {
   font-weight: 550;
+}
+
+.qk-row__ref {
+  font-family: var(--qk-sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--qk-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.qk-row__ref-part {
+  white-space: nowrap;
+}
+
+.qk-row__ref-part--long {
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .qk-row__chev {

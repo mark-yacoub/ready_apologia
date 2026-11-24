@@ -45,6 +45,7 @@
     "audit:trustworthiness-bible": "NODE_OPTIONS='--experimental-sqlite' node scripts/test_trustworthiness_of_the_bible.mjs",
     "test:shared-utils": "node --test src/utils/markdown.test.mjs src/utils/discoverService.test.mjs",
     "test:quick-points": "node --test src/utils/quickPoints/loader.test.mjs",
+    "test:quick-points-flows": "node scripts/test_quick_points_flows.mjs",
     "audit:quick-points": "node scripts/test_quick_points.mjs",
     "astro": "astro"
   },

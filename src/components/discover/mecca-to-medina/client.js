@@ -4,15 +4,18 @@
  *   - per-item copy link (URL + #item-id), share sheet on touch devices;
  *   - "On this page" index: a link tap closes the panel first, then scrolls; Escape (focus returns to
  *     the summary), a tap outside, or tabbing out also close it;
- *   - a #hash that targets something inside a closed <details> (or a legacy anchor marked
- *     data-mm-open) opens it, then scrolls there, on load and on hashchange.
+ *   - a #hash that targets something inside a closed <details> (or a companion disclosure marked
+ *     data-reveal-with) opens it, then scrolls there, on load and on hashchange (ignoring #quick/#quick:*).
  * Bound on astro:page-load because the site uses Astro's ClientRouter.
  */
 import { pushHash } from '../../../utils/url_history.js';
+import { hasSavedScroll } from '../../../utils/scroll_restoration.js';
+import { isQuickHash, isQuickHashTransition } from '../../../utils/reveal_target.js';
 
 function openFor(target) {
   if (!target) return;
-  const extra = target.dataset?.mmOpen ? document.getElementById(target.dataset.mmOpen) : null;
+  const companionId = target.dataset?.revealWith || target.closest('[data-reveal-with]')?.dataset?.revealWith;
+  const extra = companionId ? document.getElementById(companionId) : null;
   if (extra && extra.tagName === 'DETAILS') extra.open = true;
   for (let el = target.parentElement; el; el = el.parentElement) if (el.tagName === 'DETAILS') el.open = true;
   if (target.tagName === 'DETAILS') target.open = true;
@@ -69,11 +72,14 @@ function init() {
     const a = e.target.closest('a[href^="#"]');
     if (a) {
       const t = document.getElementById(a.getAttribute('href').slice(1));
-      if (t && (t.closest('details:not([open])') || t.dataset.mmOpen)) { e.preventDefault(); goTo(t.id, { push: true }); }
+      if (t && (t.closest('details:not([open])') || t.dataset.revealWith || t.closest('[data-reveal-with]'))) {
+        e.preventDefault();
+        goTo(t.id, { push: true });
+      }
     }
   });
 
-  if (location.hash) goTo(hashId());
+  if (location.hash && !isQuickHash(location.hash) && !hasSavedScroll()) goTo(hashId());
 }
 
 /** Document-level listeners are bound once (the ClientRouter swaps the page, not the document). */
@@ -92,7 +98,10 @@ function bindDocument() {
     const i = openIndex();
     if (i && i.contains(e.target) && e.relatedTarget && !i.contains(e.relatedTarget)) i.open = false;
   });
-  window.addEventListener('hashchange', () => { if (document.querySelector('[data-mm]')) goTo(hashId()); });
+  window.addEventListener('hashchange', ev => {
+    if (isQuickHashTransition(ev) || ev?.oldURL === ev?.newURL) return;
+    if (document.querySelector('[data-mm]')) goTo(hashId());
+  });
 }
 
 document.addEventListener('astro:page-load', init);

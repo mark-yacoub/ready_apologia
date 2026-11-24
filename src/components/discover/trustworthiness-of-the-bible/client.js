@@ -7,6 +7,7 @@
  *   - deep-link helper: expands any closed <details> ancestor if a #hash target sits inside one
  */
 import { hasSavedScroll } from '../../../utils/scroll_restoration.js';
+import { isQuickHash, isQuickHashTransition } from '../../../utils/reveal_target.js';
 
 const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -27,6 +28,7 @@ function initScans(root) {
 }
 
 function revealHashTarget(root, { allowScroll = true } = {}) {
+  if (isQuickHash(location.hash)) return;
   let raw = '';
   try {
     raw = decodeURIComponent(location.hash.replace(/^#/, ''));
@@ -117,7 +119,10 @@ function init() {
   const state = { current: null };
   initScans(root);
   revealHashTarget(root, { allowScroll: !hasSavedScroll() });
-  const onHashChange = () => revealHashTarget(root, { allowScroll: true });
+  const onHashChange = ev => {
+    if (isQuickHashTransition(ev) || ev?.oldURL === ev?.newURL) return;
+    revealHashTarget(root, { allowScroll: true });
+  };
   const onAnchorClick = ev => {
     const link = ev.target && ev.target.closest && ev.target.closest('a[href^="#"]');
     if (!link || !root.contains(link)) return;

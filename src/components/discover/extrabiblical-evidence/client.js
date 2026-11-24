@@ -6,10 +6,12 @@
  * Zero storage, zero cookies, zero URL mutation.
  */
 import { hasSavedScroll } from '../../../utils/scroll_restoration.js';
+import { isQuickHash, isQuickHashTransition } from '../../../utils/reveal_target.js';
 
 const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function revealHashTarget(root, { allowScroll = true } = {}) {
+  if (isQuickHash(window.location.hash)) return;
   let raw = '';
   try {
     raw = decodeURIComponent(window.location.hash.replace(/^#/, ''));
@@ -121,7 +123,10 @@ function init() {
   if (!root || root.dataset.ebjReady) return;
   root.dataset.ebjReady = '1';
   revealHashTarget(root, { allowScroll: !hasSavedScroll() });
-  const onHash = () => revealHashTarget(root, { allowScroll: true });
+  const onHash = ev => {
+    if (isQuickHashTransition(ev) || ev?.oldURL === ev?.newURL) return;
+    revealHashTarget(root, { allowScroll: true });
+  };
   const onAnchorClick = ev => {
     const link = ev.target && ev.target.closest && ev.target.closest('a[href^="#"]');
     if (!link || !root.contains(link)) return;

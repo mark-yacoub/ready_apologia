@@ -3,9 +3,27 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadQuickPoints, validateQuickPoints, clearQuickPointsCache } from './loader.js';
+import {
+  loadQuickPoints,
+  validateQuickPoints,
+  clearQuickPointsCache,
+  toPageKey,
+} from './loader.node.js';
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));
+
+test('loader.js contains zero node:* imports so client bundles can never pull node:fs', () => {
+  const browserSrc = fs.readFileSync(path.join(DIR, 'loader.js'), 'utf8');
+  const pathsSrc = fs.readFileSync(path.join(DIR, 'paths.js'), 'utf8');
+  assert.doesNotMatch(browserSrc, /from\s+['"]node:/);
+  assert.doesNotMatch(pathsSrc, /from\s+['"]node:/);
+});
+
+test('toPageKey normalises trailing slashes and strips BASE without ambiguity', () => {
+  assert.equal(toPageKey('/discover/quran-preservation/', ''), '/discover/quran-preservation');
+  assert.equal(toPageKey('/sub/discover/quran-preservation/', '/sub/'), '/discover/quran-preservation');
+  assert.equal(toPageKey('/sub-other/discover/foo', '/sub'), '/sub-other/discover/foo');
+});
 
 test('loadQuickPoints returns null when the article JSON file is missing', () => {
   clearQuickPointsCache();
@@ -14,7 +32,41 @@ test('loadQuickPoints returns null when the article JSON file is missing', () =>
   assert.equal(loadQuickPoints(null), null);
 });
 
-test('validateQuickPoints numbers points continuously, orders caveats at end of category, prefixes BASE, and excludes needsReview', () => {
+test('validateQuickPoints ref contract: trims string, maps null/absent to null, and rejects "[" or "]"', () => {
+  const makeDoc = (refValue, includeKey = true) => ({
+    article: 'ref-topic',
+    title: 'Ref Topic',
+    groups: [
+      {
+        category: 'Citations',
+        points: [
+          {
+            id: 'p1',
+            statement: 'Statement one',
+            target: '/discover/ref-topic#a',
+            ...(includeKey ? { ref: refValue } : {}),
+          },
+        ],
+      },
+    ],
+  });
+
+  assert.equal(
+    validateQuickPoints(makeDoc('  Muslim 1452a  '), 'ref-topic').groups[0].points[0].ref,
+    'Muslim 1452a',
+  );
+  assert.equal(validateQuickPoints(makeDoc(null), 'ref-topic').groups[0].points[0].ref, null);
+  assert.equal(validateQuickPoints(makeDoc(undefined, false), 'ref-topic').groups[0].points[0].ref, null);
+
+  for (const badRef of ['[Muslim 1452a]', '[Muslim 1452a', 'Muslim 1452a]']) {
+    assert.throws(
+      () => validateQuickPoints(makeDoc(badRef), 'ref-topic'),
+      /must not contain "\[" or "\]"/,
+    );
+  }
+});
+
+test('validateQuickPoints passes ref & pageKey through, handles null/absent ref, orders caveats last, and excludes needsReview', () => {
   const fixture = {
     article: 'sample-topic',
     title: 'Sample Topic Title',
@@ -27,6 +79,7 @@ test('validateQuickPoints numbers points continuously, orders caveats at end of 
           {
             id: 'pt-lead',
             statement: 'First lead statement',
+            ref: '  Bukhari 3547; Muslim 2347a  ',
             target: '/discover/sample-topic#sec-1',
             role: 'lead',
             impactScore: 9,
@@ -34,13 +87,14 @@ test('validateQuickPoints numbers points continuously, orders caveats at end of 
           {
             id: 'pt-caveat',
             statement: 'Disputed context note placed before support in JSON',
+            ref: null,
             target: '/discover/sample-topic#caveat-1',
             role: 'caveat',
             impactScore: 4,
           },
           {
             id: 'pt-default',
-            statement: 'Second support statement (absent role defaults to support)',
+            statement: 'Second support statement (absent role & absent ref)',
             target: '/discover/sample-topic/sub-page/',
             impactScore: 8,
           },
@@ -52,6 +106,7 @@ test('validateQuickPoints numbers points continuously, orders caveats at end of 
           {
             id: 'pt-four',
             statement: 'Fourth statement pointing to subpage anchor',
+            ref: 'Quran 9:29',
             target: '/discover/sample-topic/sub-page#card-4',
             role: 'support',
             impactScore: 7,
@@ -84,54 +139,53 @@ test('validateQuickPoints numbers points continuously, orders caveats at end of 
     flat.map((p) => p.n),
     [1, 2, 3, 4],
   );
-  // Within First Category: lead -> support -> caveat
-  assert.deepEqual(
-    out.groups[0].points.map((p) => [p.n, p.id, p.role]),
-    [
-      [1, 'pt-lead', 'lead'],
-      [2, 'pt-default', 'support'],
-      [3, 'pt-caveat', 'caveat'],
-    ],
-  );
   assert.deepEqual(flat[0], {
     n: 1,
     id: 'pt-lead',
     statement: 'First lead statement',
+    ref: 'Bukhari 3547; Muslim 2347a',
     role: 'lead',
     href: '/preview/discover/sample-topic#sec-1',
     path: '/preview/discover/sample-topic',
+    pageKey: '/discover/sample-topic',
     hash: 'sec-1',
   });
   assert.deepEqual(flat[1], {
     n: 2,
     id: 'pt-default',
-    statement: 'Second support statement (absent role defaults to support)',
+    statement: 'Second support statement (absent role & absent ref)',
+    ref: null,
     role: 'support',
     href: '/preview/discover/sample-topic/sub-page',
     path: '/preview/discover/sample-topic/sub-page',
+    pageKey: '/discover/sample-topic/sub-page',
     hash: '',
   });
   assert.deepEqual(flat[2], {
     n: 3,
     id: 'pt-caveat',
     statement: 'Disputed context note placed before support in JSON',
+    ref: null,
     role: 'caveat',
     href: '/preview/discover/sample-topic#caveat-1',
     path: '/preview/discover/sample-topic',
+    pageKey: '/discover/sample-topic',
     hash: 'caveat-1',
   });
   assert.deepEqual(flat[3], {
     n: 4,
     id: 'pt-four',
     statement: 'Fourth statement pointing to subpage anchor',
+    ref: 'Quran 9:29',
     role: 'support',
     href: '/preview/discover/sample-topic/sub-page#card-4',
     path: '/preview/discover/sample-topic/sub-page',
+    pageKey: '/discover/sample-topic/sub-page',
     hash: 'card-4',
   });
 });
 
-test('validateQuickPoints aggregates all shape, uniqueness, statement, role, and target prefix errors at once', () => {
+test('validateQuickPoints aggregates all shape, uniqueness, statement, role, ref-bracket, and target errors at once', () => {
   const broken = {
     article: 'wrong-slug',
     title: '   ',
@@ -142,17 +196,20 @@ test('validateQuickPoints aggregates all shape, uniqueness, statement, role, and
           {
             id: 'dup-id',
             statement: 'Valid statement',
+            ref: '[Muslim 1452a]',
             role: 'invalid-role',
             target: '/discover/right-slug#ok',
           },
           {
             id: 'dup-id',
             statement: '   ',
+            ref: '   ',
             target: '/discover/right-slug-other#bad-boundary',
           },
           {
             id: 'empty-hash',
             statement: 'Trailing hash is invalid',
+            ref: 123,
             target: '/discover/right-slug#',
           },
         ],
@@ -167,6 +224,9 @@ test('validateQuickPoints aggregates all shape, uniqueness, statement, role, and
       assert.match(err.message, /title must be a non-empty string/);
       assert.match(err.message, /groups\[0\]\.category must be a non-empty string/);
       assert.match(err.message, /"dup-id" is duplicated/);
+      assert.match(err.message, /ref "\[Muslim 1452a\]" must not contain "\[" or "\]"/);
+      assert.match(err.message, /ref must be a non-empty string or null/);
+      assert.match(err.message, /ref must be a string or null/);
       assert.match(err.message, /role "invalid-role" must be "lead", "support", or "caveat"/);
       assert.match(err.message, /statement must be a non-empty string/);
       assert.match(err.message, /must start with "\/discover\/right-slug"/);
@@ -201,10 +261,11 @@ test('loadQuickPoints memoises results and validates every JSON file present in 
       assert.equal(ids.has(pt.id), false);
       ids.add(pt.id);
       assert.ok(pt.statement.length > 0);
+      assert.ok(pt.ref === null || (typeof pt.ref === 'string' && pt.ref.length > 0 && !/[\[\]]/.test(pt.ref)));
       assert.ok(['lead', 'support', 'caveat'].includes(pt.role));
       assert.ok(
-        pt.path === `/discover/${slug}` || pt.path.startsWith(`/discover/${slug}/`),
-        `Unexpected path ${pt.path} for ${slug}`,
+        pt.pageKey === `/discover/${slug}` || pt.pageKey.startsWith(`/discover/${slug}/`),
+        `Unexpected pageKey ${pt.pageKey} for ${slug}`,
       );
     });
   }

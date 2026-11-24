@@ -143,8 +143,8 @@ const { readToday, textsShow, reflection, perspective } = m.closing;
       </section>
 
       {reflection && (
-        <section class="hrv-sec mm-closing mm-reflection" id={reflection.id} aria-labelledby={`${reflection.id}-h`} data-mm-open={`${reflection.id}-body`}>
-          {reflection.legacy.map(a => <span id={a} class="mm-legacy" aria-hidden="true" data-mm-open={`${reflection.id}-body`} />)}
+        <section class="hrv-sec mm-closing mm-reflection" id={reflection.id} aria-labelledby={`${reflection.id}-h`} data-reveal-with={`${reflection.id}-body`}>
+          {reflection.legacy.map(a => <span id={a} class="mm-legacy" aria-hidden="true" data-reveal-with={`${reflection.id}-body`} />)}
           <p class="mm-disclosure" set:html={reflection.disclosureHtml} />
           <details class="hrv-disclosure mm-reflection__d" id={`${reflection.id}-body`}>
             <summary><h2 class="mm-reflection__h" id={`${reflection.id}-h`} set:html={reflection.titleHtml} /><Icon name="chevronDown" /></summary>

@@ -11,6 +11,8 @@
  * root), while window/document listeners are registered once at module scope and do nothing unless the
  * current page is one of ours.
  */
+import { isQuickHash, isQuickHashTransition } from '../../../utils/reveal_target.js';
+
 const root = () => document.querySelector('.crv');
 
 function toast(r, ok) {
@@ -55,7 +57,7 @@ function closeSheet(r, { focus = false } = {}) {
 }
 
 function initPage(r) {
-  openFor(location.hash.slice(1));
+  if (!isQuickHash(location.hash)) openFor(location.hash.slice(1));
   r.addEventListener('click', e => {
     const a = e.target.closest('a[href^="#"]');
     if (a) openFor(a.getAttribute('href').slice(1));
@@ -90,7 +92,10 @@ function init() {
 // Registered once per document, whatever the number of client-side navigations.
 if (!window.__crvClient) {
   window.__crvClient = true;
-  window.addEventListener('hashchange', () => openFor(location.hash.slice(1)));
+  window.addEventListener('hashchange', ev => {
+    if (isQuickHashTransition(ev) || ev?.oldURL === ev?.newURL) return;
+    openFor(location.hash.slice(1));
+  });
   document.addEventListener('keydown', e => { const r = root(); if (r && e.key === 'Escape') closeSheet(r, { focus: true }); });
   document.addEventListener('click', e => { const r = root(); const sheet = r?.querySelector('[data-crv-sheet][open]'); if (sheet && !sheet.contains(e.target)) closeSheet(r); });
   document.addEventListener('astro:page-load', init);

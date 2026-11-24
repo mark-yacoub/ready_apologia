@@ -20,7 +20,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadQuickPoints, BASE } from '../src/utils/quickPoints/loader.js';
+import { loadQuickPoints, BASE } from '../src/utils/quickPoints/loader.node.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -85,17 +85,46 @@ function stripScriptsAndStyles(html) {
     .replace(/<style\b[\s\S]*?<\/style>/gi, ' ');
 }
 
-const idSetCache = new Map();
-function getIdsInFile(filePath) {
-  if (idSetCache.has(filePath)) return idSetCache.get(filePath);
+const pageIdsCache = new Map();
+function getPageTargetInfo(filePath) {
+  if (pageIdsCache.has(filePath)) return pageIdsCache.get(filePath);
   const html = fs.readFileSync(filePath, 'utf8');
   const clean = stripScriptsAndStyles(html);
   const ids = new Set();
-  for (const m of clean.matchAll(/\bid=(?:"([^"]+)"|'([^']+)')/g)) {
-    ids.add(m[1] ?? m[2]);
+  const idsInsideIndexDetails = new Set();
+
+  // Track open <details> stack so we assert no target id sits inside details[data-*-index] / details[data-*-sheet].
+  const detailsStack = [];
+  const tokenRe = /<(\/?)details\b([^>]*)>|\bid=(?:"([^"]+)"|'([^']+)')/gi;
+  for (const m of clean.matchAll(tokenRe)) {
+    if (m[3] !== undefined || m[4] !== undefined) {
+      const idVal = m[3] ?? m[4];
+      ids.add(idVal);
+      if (detailsStack.some(Boolean)) {
+        idsInsideIndexDetails.add(idVal);
+      }
+      continue;
+    }
+    const closing = m[1] === '/';
+    const attrs = m[2] || '';
+    if (closing) {
+      detailsStack.pop();
+    } else {
+      const isIndexOrSheet = /\bdata-[a-z0-9-]+-(?:index|sheet)\b/i.test(attrs);
+      detailsStack.push(isIndexOrSheet);
+      for (const idMatch of attrs.matchAll(/\bid=(?:"([^"]+)"|'([^']+)')/gi)) {
+        const idVal = idMatch[1] ?? idMatch[2];
+        ids.add(idVal);
+        if (detailsStack.some(Boolean)) {
+          idsInsideIndexDetails.add(idVal);
+        }
+      }
+    }
   }
-  idSetCache.set(filePath, ids);
-  return ids;
+
+  const info = { ids, idsInsideIndexDetails };
+  pageIdsCache.set(filePath, info);
+  return info;
 }
 
 if (!fs.existsSync(DIST)) {
@@ -221,10 +250,16 @@ for (const slug of QUICK_POINTS_ARTICLES) {
         continue;
       }
       if (pt.hash) {
-        const ids = getIdsInFile(targetFile);
+        const { ids, idsInsideIndexDetails } = getPageTargetInfo(targetFile);
         if (!ids.has(pt.hash)) {
           failures.push(
             `${slug} #${pt.n} (${pt.id}): missing anchor id="${pt.hash}" in ${path.relative(DIST, targetFile)} (href="${pt.href}")`,
+          );
+          continue;
+        }
+        if (idsInsideIndexDetails.has(pt.hash)) {
+          failures.push(
+            `${slug} #${pt.n} (${pt.id}): target id="${pt.hash}" sits inside a navigation details[data-*-index/sheet] in ${path.relative(DIST, targetFile)}`,
           );
           continue;
         }
