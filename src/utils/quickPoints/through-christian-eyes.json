@@ -1,0 +1,67 @@
+{
+  "article": "through-christian-eyes",
+  "title": "Through Christian Eyes",
+  "basePath": "/discover/through-christian-eyes",
+  "status": "complete",
+  "progress": {
+    "approved": 5,
+    "total": 5,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 5,
+    "refsAdded": true,
+    "refsCount": 3
+  },
+  "groups": [
+    {
+      "category": "Jesus & the Gospel",
+      "points": [
+        {
+          "id": "which-gospel",
+          "statement": "The Quran tells Christians to judge by the Gospel, which already had Jesus' crucifixion and resurrection",
+          "target": "/discover/through-christian-eyes#which-gospel",
+          "role": "lead",
+          "impactScore": 10,
+          "ref": "Quran 5:47"
+        },
+        {
+          "id": "why-we-worship-jesus",
+          "statement": "Witnesses who saw Jesus risen went to their deaths proclaiming him Lord and God",
+          "target": "/discover/through-christian-eyes#why-we-worship-jesus",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": null
+        }
+      ]
+    },
+    {
+      "category": "Muhammad & the Quran",
+      "points": [
+        {
+          "id": "kept-letter-for-letter",
+          "statement": "Muhammad's closest companions differed on which words and chapters belonged in the Quran",
+          "target": "/discover/through-christian-eyes#kept-letter-for-letter",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Bukhari 4977; Bukhari 4695"
+        },
+        {
+          "id": "way-of-the-prophets",
+          "statement": "Muhammad kept nine wives under special Quranic exemptions for him alone",
+          "target": "/discover/through-christian-eyes#way-of-the-prophets",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": null
+        },
+        {
+          "id": "how-revelation-came",
+          "statement": "Muhammad said the angel pressed him past bearing, whereas Gabriel in the Gospel calms fear",
+          "target": "/discover/through-christian-eyes#how-revelation-came",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari 3; Luke 1:13, 30"
+        }
+      ]
+    }
+  ]
+}

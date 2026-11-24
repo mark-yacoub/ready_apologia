@@ -1,0 +1,152 @@
+{
+  "article": "islamic-dilemma",
+  "title": "3 Qurʾān Verses on the Torah and Gospel, Beside Bible Copies Older Than Islam",
+  "basePath": "/discover/islamic-dilemma",
+  "status": "complete",
+  "progress": {
+    "approved": 15,
+    "total": 15,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 15,
+    "refsAdded": true,
+    "refsCount": 12
+  },
+  "groups": [
+    {
+      "category": "Quran on the Bible",
+      "points": [
+        {
+          "id": "q-5-47",
+          "statement": "The Quran tells the People of the Gospel to judge by what God sent down in it",
+          "target": "/discover/islamic-dilemma#q-5-47",
+          "role": "lead",
+          "impactScore": 10,
+          "ref": "Quran 5:47"
+        },
+        {
+          "id": "q-5-68",
+          "statement": "The Quran says People of the Book stand on nothing until they observe the Torah and Gospel",
+          "target": "/discover/islamic-dilemma#q-5-68",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Quran 5:68"
+        },
+        {
+          "id": "q-5-43",
+          "statement": "The Quran asks why Jews with the Torah, containing God's judgment, make the Prophet their judge",
+          "target": "/discover/islamic-dilemma#q-5-43",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Quran 5:43"
+        },
+        {
+          "id": "torah-cushion",
+          "statement": "The Jews of Medina brought the Torah to Muhammad in an adultery case",
+          "target": "/discover/islamic-dilemma#torah-cushion",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 3635"
+        }
+      ]
+    },
+    {
+      "category": "New Testament before Islam",
+      "points": [
+        {
+          "id": "gospel-copies-timeline",
+          "statement": "New Testament copies older than Islam call Jesus God and say he died and was raised",
+          "target": "/discover/islamic-dilemma#gospel-copies",
+          "role": "lead",
+          "impactScore": 10,
+          "ref": "Codex Sinaiticus, c. 330–360"
+        },
+        {
+          "id": "jesus-0",
+          "statement": "New Testament copies older than Islam say Jesus died, while the Quran denies he was killed",
+          "target": "/discover/islamic-dilemma#jesus-0",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "1 Corinthians 15:3-4; Quran 4:157"
+        },
+        {
+          "id": "jesus-1",
+          "statement": "Gospel copies older than Islam call Jesus God and Son of God, which the Quran rejects",
+          "target": "/discover/islamic-dilemma#jesus-1",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "John 1:1; Quran 5:72"
+        },
+        {
+          "id": "p-1cor-15-3",
+          "statement": "Paul's 50s AD letter repeats an older message: Christ died, was buried, and was raised",
+          "target": "/discover/islamic-dilemma#p-1cor-15-3",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "1 Corinthians 15:3-4"
+        },
+        {
+          "id": "p-jn-1-1",
+          "statement": "John's Gospel says the Word was God, but this site lists no copy before 610",
+          "target": "/discover/islamic-dilemma#p-jn-1-1",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "John 1:1"
+        },
+        {
+          "id": "p-mk-15-39",
+          "statement": "At Jesus' death, the centurion calls him Son of God, but no copy here predates 610",
+          "target": "/discover/islamic-dilemma#p-mk-15-39",
+          "role": "caveat",
+          "impactScore": 1,
+          "ref": "Mark 15:39"
+        },
+        {
+          "id": "p-mt-28-19",
+          "statement": "Matthew's Father, Son, and Holy Spirit baptism verse has zero copies before 610 on this site",
+          "target": "/discover/islamic-dilemma#p-mt-28-19",
+          "role": "caveat",
+          "impactScore": 1,
+          "ref": "Matthew 28:19"
+        }
+      ]
+    },
+    {
+      "category": "Answering corruption claims",
+      "points": [
+        {
+          "id": "answer-1",
+          "statement": "The Quran never says Jesus' Gospel was lost or replaced by later biographies",
+          "target": "/discover/islamic-dilemma#answer-1",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": null
+        },
+        {
+          "id": "text-history-tahrif",
+          "statement": "Ibn Abbas said no one can remove God's words from His books, only distort their meaning",
+          "target": "/discover/islamic-dilemma#text-history",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Bukhari, Book of Tawhid, ch. 55"
+        },
+        {
+          "id": "answer-2",
+          "statement": "The Quran's verses don't separate original revelation from the Torah and Gospel copies people held",
+          "target": "/discover/islamic-dilemma#answer-2",
+          "role": "support",
+          "impactScore": 8,
+          "ref": null
+        },
+        {
+          "id": "answer-3",
+          "statement": "Paul and the Council of Nicaea came centuries before the Quran said to observe the Gospel",
+          "target": "/discover/islamic-dilemma#answer-3",
+          "role": "support",
+          "impactScore": 8,
+          "ref": null
+        }
+      ]
+    }
+  ]
+}

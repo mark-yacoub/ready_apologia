@@ -1,0 +1,311 @@
+{
+  "article": "divinity-timeline",
+  "title": "Worship of Jesus Before Nicaea: Five Lines of Archaeological, Epigraphic, and Papyrological Evidence",
+  "basePath": "/discover/divinity-timeline",
+  "status": "complete",
+  "progress": {
+    "approved": 33,
+    "total": 33,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 33,
+    "refsAdded": true,
+    "refsCount": 33
+  },
+  "groups": [
+    {
+      "category": "Outside witnesses",
+      "points": [
+        {
+          "id": "witness-pliny_epistles_10_96",
+          "statement": "Roman governor Pliny reported Christians singing hymns to Christ as to a god around AD 112",
+          "target": "/discover/divinity-timeline#witness-pliny_epistles_10_96",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Pliny, Ep. 10.96"
+        },
+        {
+          "id": "event-alexamenos_graffito",
+          "statement": "Roman graffiti from around AD 200 mocked a Christian for worshipping a crucified man as divine",
+          "target": "/discover/divinity-timeline#event-alexamenos_graffito",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Alexamenos Graffito, c. AD 200"
+        },
+        {
+          "id": "event-paris_magical_papyrus",
+          "statement": "A magical papyrus exorcism copied around AD 300–350 calls Jesus the God of the Hebrews",
+          "target": "/discover/divinity-timeline#event-paris_magical_papyrus",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "PGM IV.3019-3020"
+        }
+      ]
+    },
+    {
+      "category": "Churches & amulets",
+      "points": [
+        {
+          "id": "event-megiddo_mosaic",
+          "statement": "A Galilean prayer hall mosaic sealed around AD 305 dedicates a table to “God Jesus Christ”",
+          "target": "/discover/divinity-timeline#event-megiddo_mosaic",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Megiddo Mosaic, sealed c. AD 305"
+        },
+        {
+          "id": "event-frankfurt_silver_scroll",
+          "statement": "A third-century Frankfurt silver scroll says all will bend their knees to Jesus Christ",
+          "target": "/discover/divinity-timeline#event-frankfurt_silver_scroll",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Frankfurt Silver Inscription, c. AD 230–270"
+        },
+        {
+          "id": "event-dura_europos_church",
+          "statement": "A Syrian house church buried before AD 256 has carved prayers invoking Christ Jesus",
+          "target": "/discover/divinity-timeline#event-dura_europos_church",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Dura-Europos House Church, c. AD 232–256"
+        },
+        {
+          "id": "event-magic_crucifixion_gem",
+          "statement": "A crucifixion amulet from the late 2nd–3rd century prays to Jesus amid ritual power-words",
+          "target": "/discover/divinity-timeline#event-magic_crucifixion_gem",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "BM 1986,0501.1"
+        },
+        {
+          "id": "event-marcionite_inscription",
+          "statement": "A rival Christian sect’s stone doorway from before Nicaea calls Jesus “Lord and Savior,” not “God”",
+          "target": "/discover/divinity-timeline#event-marcionite_inscription",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "OGIS 608, AD 318/319"
+        },
+        {
+          "id": "event-costanza_gem",
+          "statement": "A British Museum gem showing Christ crucified with twelve apostles dates to the mid-300s, after Nicaea",
+          "target": "/discover/divinity-timeline#event-costanza_gem",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "Constanza Carnelian Gem, 4th c. AD"
+        },
+        {
+          "id": "event-house_of_peter",
+          "statement": "Capernaum's house-church graffiti are disputed: both their pre-Nicaea date and many claimed prayers to Christ",
+          "target": "/discover/divinity-timeline#event-house_of_peter",
+          "role": "caveat",
+          "impactScore": 1,
+          "ref": "Capernaum Insula Sacra Room 1, 4th c. AD"
+        }
+      ]
+    },
+    {
+      "category": "Bishops & martyrs",
+      "points": [
+        {
+          "id": "witness-ignatius_epistles",
+          "statement": "Ignatius of Antioch called Jesus God fourteen times across five letters, roughly two centuries before Nicaea",
+          "target": "/discover/divinity-timeline#witness-ignatius_epistles",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Ignatius, Eph. 7.2"
+        },
+        {
+          "id": "event-papyrus_bodmer_xiii",
+          "statement": "Bishop Melito's second-century sermon, preserved on papyrus, calls Christ \"by nature both God and man\"",
+          "target": "/discover/divinity-timeline#event-papyrus_bodmer_xiii",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Melito, On Pascha 8"
+        },
+        {
+          "id": "event-papyrus_bodmer_xx",
+          "statement": "Bishop Phileas, on trial in Roman Egypt, answered yes when asked if Jesus was God",
+          "target": "/discover/divinity-timeline#event-papyrus_bodmer_xx",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "P.Bodmer XX, cols. V–VI"
+        },
+        {
+          "id": "event-papyrus_oxyrhynchus_405",
+          "statement": "An Egyptian papyrus of Irenaeus from around AD 200 preserves only \"beloved Son,\" not \"truly God\"",
+          "target": "/discover/divinity-timeline#event-papyrus_oxyrhynchus_405",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "P.Oxy. III 405, c. AD 200"
+        }
+      ]
+    },
+    {
+      "category": "Early Bible manuscripts",
+      "points": [
+        {
+          "id": "event-papyrus_46_philippians_2_6",
+          "statement": "Papyrus 46, dated around AD 200–225, preserves Hebrews saying of the Son, “Your throne, O God”",
+          "target": "/discover/divinity-timeline#event-papyrus_46_philippians_2_6",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "P46, Heb 1:8a"
+        },
+        {
+          "id": "event-papyrus_66_john_1_1",
+          "statement": "Egyptian papyrus copies of John, often dated AD 200–250, read “the Word was God”",
+          "target": "/discover/divinity-timeline#event-papyrus_66_john_1_1",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "P66 & P75, John 1:1"
+        },
+        {
+          "id": "event-papyrus_oxyrhynchus_2",
+          "statement": "A Romans 1 papyrus, tied with AD 316 merchant contracts, abbreviates Jesus, God, Father, and Lord",
+          "target": "/discover/divinity-timeline#event-papyrus_oxyrhynchus_2",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "P.Oxy. II 209"
+        },
+        {
+          "id": "event-papyrus_98_revelation_1_13",
+          "statement": "A third-century Revelation papyrus portrays Christ with the snow-white hair of the Ancient of Days",
+          "target": "/discover/divinity-timeline#event-papyrus_98_revelation_1_13",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "P.IFAO inv. 237b, c. AD 200-250"
+        },
+        {
+          "id": "event-papyrus_77",
+          "statement": "Matthew, copied around AD 200: Jesus longs to gather Israel under his wings, like God in Psalms",
+          "target": "/discover/divinity-timeline#event-papyrus_77",
+          "role": "support",
+          "impactScore": 3,
+          "ref": "P77, Matt 23:30-39"
+        },
+        {
+          "id": "event-papyrus_104",
+          "statement": "Early Christian scribes wrote Jesus and Christ with the same sacred-name markings as God and Lord",
+          "target": "/discover/divinity-timeline#event-papyrus_104",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "P10, c. AD 316"
+        },
+        {
+          "id": "event-papyrus_98",
+          "statement": "An AD 200–250 Revelation fragment has Jesus's 'First and Last' passage, though that title didn't survive",
+          "target": "/discover/divinity-timeline#event-papyrus_98",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "P98, c. AD 200–250"
+        }
+      ]
+    },
+    {
+      "category": "Creeds, hymns & prayers",
+      "points": [
+        {
+          "id": "creed-carmen_christi_phil_2",
+          "statement": "Paul gave Jesus Isaiah's words for God—every knee bows—within 30 years of the crucifixion",
+          "target": "/discover/divinity-timeline#creed-carmen_christi_phil_2",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Philippians 2:6-11; Isaiah 45:23"
+        },
+        {
+          "id": "creed-maranatha_and_kerygma",
+          "statement": "Paul, writing in Greek, kept an Aramaic prayer to Jesus meaning 'Our Lord, come'",
+          "target": "/discover/divinity-timeline#creed-maranatha_and_kerygma",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "1 Corinthians 16:22"
+        },
+        {
+          "id": "event-oxyrhynchus_hymn",
+          "statement": "The oldest surviving Christian musical score, from third-century Egypt, praises Father, Son, and Holy Spirit together",
+          "target": "/discover/divinity-timeline#event-oxyrhynchus_hymn",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "P.Oxy. XV 1786, c. AD 275–300"
+        },
+        {
+          "id": "creed-shema_1cor_8_6",
+          "statement": "Around AD 55, Paul expanded Israel's 'Lord is one' confession to include Jesus as 'one Lord'",
+          "target": "/discover/divinity-timeline#creed-shema_1cor_8_6",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "1 Corinthians 8:6"
+        },
+        {
+          "id": "event-papyrus_oxyrhynchus_407",
+          "statement": "A private prayer sheet from around AD 300 praises God through Jesus as Lord and Savior",
+          "target": "/discover/divinity-timeline#event-papyrus_oxyrhynchus_407",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "P.Oxy. III 407"
+        }
+      ]
+    },
+    {
+      "category": "Tombs & catacombs",
+      "points": [
+        {
+          "id": "event-stele_of_licinia_amias",
+          "statement": "An early-200s Roman tombstone spells 'fish' in Greek as initials for 'Jesus Christ, God's Son, Savior'",
+          "target": "/discover/divinity-timeline#event-stele_of_licinia_amias",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Stele of Licinia Amias, c. AD 200-240"
+        },
+        {
+          "id": "event-abercius_inscription",
+          "statement": "Bishop Abercius's gravestone, before AD 216, honors Jesus in symbolic verse as an all-seeing Shepherd",
+          "target": "/discover/divinity-timeline#event-abercius_inscription",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "Inscription of Abercius, c. AD 190–200"
+        },
+        {
+          "id": "event-catacomb_of_priscilla",
+          "statement": "Third-century Catacomb of Priscilla burial plaques pair anchor-and-fish symbols with prayers for peace in Christ",
+          "target": "/discover/divinity-timeline#event-catacomb_of_priscilla",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "ICUR n.s. VIII-IX"
+        },
+        {
+          "id": "event-epitaph_of_pectorius",
+          "statement": "Pectorius's gravestone copies an older hymn, but its 'Master and Savior' lines were written after Nicaea",
+          "target": "/discover/divinity-timeline#event-epitaph_of_pectorius",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Epitaph of Pectorius, 4th c. AD"
+        },
+        {
+          "id": "event-phrygian_montanist_tombstones",
+          "statement": "Tombstones before Constantine were openly inscribed 'Christians for Christians,' without divine titles",
+          "target": "/discover/divinity-timeline#event-phrygian_montanist_tombstones",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Upper Tembris Valley Steles, c. AD 240-305"
+        },
+        {
+          "id": "event-san_sebastiano_graffiti",
+          "statement": "Pilgrim graffiti before Constantine mostly called on Peter and Paul, only occasionally referencing Christ",
+          "target": "/discover/divinity-timeline#event-san_sebastiano_graffiti",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "San Sebastiano Graffiti, c. AD 258-300"
+        },
+        {
+          "id": "event-eumeneian_formula_inscriptions",
+          "statement": "Tombstone warnings that violators will reckon with God were used by both Jews and Christians",
+          "target": "/discover/divinity-timeline#event-eumeneian_formula_inscriptions",
+          "role": "caveat",
+          "impactScore": 1,
+          "ref": "Eumeneian Formula, c. AD 240–305"
+        }
+      ]
+    }
+  ]
+}

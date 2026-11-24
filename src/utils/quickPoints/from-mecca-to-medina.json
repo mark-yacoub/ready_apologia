@@ -1,0 +1,157 @@
+{
+  "article": "from-mecca-to-medina",
+  "title": "From Mecca to Medina: 15 Sets of Texts on the Command to Pardon, Then to Fight",
+  "basePath": "/discover/from-mecca-to-medina",
+  "status": "complete",
+  "progress": {
+    "approved": 15,
+    "total": 15,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 15,
+    "refsAdded": true,
+    "refsCount": 14
+  },
+  "groups": [
+    {
+      "category": "From pardon to fighting",
+      "points": [
+        {
+          "id": "commanded-to-pardon-then-to-fight",
+          "statement": "Muhammad said Allah commanded pardon in Mecca, then in Medina ordered fighting until people profess Islam",
+          "target": "/discover/from-mecca-to-medina#commanded-to-pardon-then-to-fight",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Nasai 3086; Bukhari 25"
+        },
+        {
+          "id": "pardon-2-109",
+          "statement": "Ibn Abbas and al-Tabari say the command to fight replaced pardoning the People of the Book",
+          "target": "/discover/from-mecca-to-medina#pardon-2-109",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Ibn Kathir on Quran 2:109; Tabari on Quran 2:109"
+        },
+        {
+          "id": "four-stages",
+          "statement": "Ibn al-Qayyim traces four Quranic steps on fighting, from forbidden to commanded against all polytheists",
+          "target": "/discover/from-mecca-to-medina#four-stages",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Ibn al-Qayyim, Zad al-Ma'ad, vol. 3"
+        },
+        {
+          "id": "meccan-verses",
+          "statement": "The Quran commanded pardon when Muhammad lacked power in Mecca, then moved to fighting in Medina",
+          "target": "/discover/from-mecca-to-medina#meccan-verses",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": null
+        },
+        {
+          "id": "what-naskh-meant",
+          "statement": "Cancelled Quran verses are disputed: two classical books count over 100, one scholar counts about twenty",
+          "target": "/discover/from-mecca-to-medina#what-naskh-meant",
+          "role": "caveat",
+          "impactScore": 5,
+          "ref": "Hibat Allah, al-Nasikh wa-l-mansukh, p. 98; al-Suyuti, al-Itqan 3/77"
+        }
+      ]
+    },
+    {
+      "category": "Fighting Christians & Jews",
+      "points": [
+        {
+          "id": "who-9-29-names",
+          "statement": "Al-Tabari and Ibn Kathir say Quran 9:29 commands fighting Jews and Christians because of their disbelief",
+          "target": "/discover/from-mecca-to-medina#who-9-29-names",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Tabari on 9:29; Ibn Kathir on 9:29"
+        },
+        {
+          "id": "jesus-verses-by-sura",
+          "statement": "The Quran rejects Jesus as God's Son, then late in Medina commands fighting Christians for tribute",
+          "target": "/discover/from-mecca-to-medina#jesus-verses-by-sura",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Quran 9:29-30"
+        },
+        {
+          "id": "jesus-return-and-jizya",
+          "statement": "When Jesus returns and abolishes the jizya tax, al-Nawawi says only Islam or killing remains",
+          "target": "/discover/from-mecca-to-medina#jesus-return-and-jizya",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Muslim 155a; Sharh Sahih Muslim"
+        }
+      ]
+    },
+    {
+      "category": "Medina's Jewish tribes",
+      "points": [
+        {
+          "id": "qurayza-judgment",
+          "statement": "Muhammad said killing Banu Qurayza's warriors and taking their women and children prisoner was Allah's judgment",
+          "target": "/discover/from-mecca-to-medina#qurayza-judgment",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari 3043"
+        },
+        {
+          "id": "jews-of-medina-exiled",
+          "statement": "Muhammad expelled all the Jews of Medina, including those with no recorded treaty breach",
+          "target": "/discover/from-mecca-to-medina#jews-of-medina-exiled",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari 4028"
+        },
+        {
+          "id": "khaybar-terms",
+          "statement": "The Jews of Khaybar surrendered on temporary terms before Umar expelled them under Muhammad's command",
+          "target": "/discover/from-mecca-to-medina#khaybar-terms",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 2338; Muslim 1767a"
+        },
+        {
+          "id": "banu-nadir-palms",
+          "statement": "Muhammad had Banu Nadir's date palms burned despite his earlier ban, and a Quran verse approved it",
+          "target": "/discover/from-mecca-to-medina#banu-nadir-palms",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Bukhari 4031"
+        }
+      ]
+    },
+    {
+      "category": "Scripture, prayer & rebuke",
+      "points": [
+        {
+          "id": "ask-the-readers-then-altered",
+          "statement": "Earlier scripture readers: the Quran tells Muhammad to ask them, before saying some altered God's word",
+          "target": "/discover/from-mecca-to-medina#ask-the-readers-then-altered",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Quran 10:94; 2:75"
+        },
+        {
+          "id": "qibla-jerusalem-to-kaaba",
+          "statement": "Muhammad first prayed facing Jerusalem, pleasing Medina's Jews, before turning to the Kaaba in Mecca",
+          "target": "/discover/from-mecca-to-medina#qibla-jerusalem-to-kaaba",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Bukhari 40"
+        },
+        {
+          "id": "same-words-mecca-and-medina",
+          "statement": "The past \"apes\" curse becomes a direct rebuke of living People of the Book in Medina",
+          "target": "/discover/from-mecca-to-medina#same-words-mecca-and-medina",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Quran 5:60"
+        }
+      ]
+    }
+  ]
+}

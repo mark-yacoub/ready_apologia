@@ -1,0 +1,133 @@
+{
+  "article": "convenient-revelations",
+  "title": "12 Occasions of Revelation",
+  "basePath": "/discover/convenient-revelations",
+  "status": "complete",
+  "progress": {
+    "approved": 12,
+    "total": 12,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 12,
+    "refsAdded": true,
+    "refsCount": 12
+  },
+  "groups": [
+    {
+      "category": "Marriage exemptions",
+      "points": [
+        {
+          "id": "wives-turns-33-51",
+          "statement": "Aisha told Muhammad his Lord hastens to fulfill his desires after a verse made his wives' turns optional",
+          "target": "/discover/convenient-revelations/sexual-privileges#wives-turns-33-51",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Bukhari 4788"
+        },
+        {
+          "id": "zaynab-marriage-33-37",
+          "statement": "After Muhammad's adopted son divorced Zaynab, a Quranic verse married her to Muhammad",
+          "target": "/discover/convenient-revelations/sexual-privileges#zaynab-marriage-33-37",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Quran 33:37"
+        },
+        {
+          "id": "four-wife-limit-33-50",
+          "statement": "The Quran's four-wife limit applies to Muslim men, while Muhammad had nine or eleven",
+          "target": "/discover/convenient-revelations/sexual-privileges#four-wife-limit-33-50",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Quran 4:3; Bukhari 268"
+        }
+      ]
+    },
+    {
+      "category": "Household rules",
+      "points": [
+        {
+          "id": "wedding-guests-33-53",
+          "statement": "Quran 33:53 dismissed Muhammad's lingering wedding guests and barred anyone from ever marrying his widows",
+          "target": "/discover/convenient-revelations/spoils-and-etiquette#wedding-guests-33-53",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Bukhari 4793"
+        },
+        {
+          "id": "forbidding-the-lawful-66-1",
+          "statement": "Surah 66 releases Muhammad's oath after he forbade himself honey or his concubine",
+          "target": "/discover/convenient-revelations/evading-accountability#forbidding-the-lawful-66-1",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Quran 66:1-2"
+        },
+        {
+          "id": "wives-choice-33-28",
+          "statement": "Muhammad's wives faced a Quran command to choose between divorce and staying after a month apart",
+          "target": "/discover/convenient-revelations/wealth-and-power#wives-choice-33-28",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "Quran 33:28-29; Muslim 1478"
+        }
+      ]
+    },
+    {
+      "category": "Community & timing",
+      "points": [
+        {
+          "id": "umar-and-the-hijab-33-53",
+          "statement": "Umar says three revelations came down matching what he proposed, including veiling Muhammad's wives",
+          "target": "/discover/convenient-revelations/spoils-and-etiquette#umar-and-the-hijab-33-53",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari 4483"
+        },
+        {
+          "id": "accusation-and-witnesses-24",
+          "statement": "Aisha was cleared after a month, yet a husband protesting the four-witness rule got verses immediately",
+          "target": "/discover/convenient-revelations/evading-accountability#accusation-and-witnesses-24",
+          "role": "caveat",
+          "impactScore": 5,
+          "ref": "Bukhari 4750; Bukhari 4747"
+        },
+        {
+          "id": "ramadan-nights-2-187",
+          "statement": "Quran 2:187 eased Ramadan night rules for everyone after a fasting worker fainted",
+          "target": "/discover/convenient-revelations/evading-accountability#ramadan-nights-2-187",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Bukhari 1915"
+        }
+      ]
+    },
+    {
+      "category": "War captives & spoils",
+      "points": [
+        {
+          "id": "captives-of-awtas-4-24",
+          "statement": "Muslim soldiers hesitated over captive women with living husbands until Quran 4:24 permitted relations",
+          "target": "/discover/convenient-revelations/spoils-and-etiquette#captives-of-awtas-4-24",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Muslim 1456a"
+        },
+        {
+          "id": "captives-and-slaves-33-50",
+          "statement": "War-captive concubines are allowed for Muhammad in Quran 33:50, commentators say, with no separate backstory",
+          "target": "/discover/convenient-revelations/wealth-and-power#captives-and-slaves-33-50",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Tabari on Quran 33:50"
+        },
+        {
+          "id": "spoils-and-fay-8-1",
+          "statement": "War spoils went to Muhammad to manage, though Islamic reports say he divided them among Muslims",
+          "target": "/discover/convenient-revelations/wealth-and-power#spoils-and-fay-8-1",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Quran 8:1"
+        }
+      ]
+    }
+  ]
+}

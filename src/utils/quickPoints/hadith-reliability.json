@@ -1,0 +1,247 @@
+{
+  "article": "hadith-reliability",
+  "title": "How reliable are the Hadith collections?",
+  "basePath": "/discover/hadith-reliability",
+  "status": "complete",
+  "progress": {
+    "approved": 25,
+    "total": 25,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 25,
+    "refsAdded": true,
+    "refsCount": 24
+  },
+  "groups": [
+    {
+      "category": "Conflicting authentic reports",
+      "points": [
+        {
+          "id": "farewell_sermon_bequest_three_versions",
+          "statement": "Muhammad's Farewell Sermon splits three ways: God's Book alone, Book and household, or Book and Sunnah",
+          "target": "/discover/hadith-reliability/farewell-sermon-versions",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Muslim 1218a; Muslim 2408a"
+        },
+        {
+          "id": "meccan_stay_three_timelines",
+          "statement": "Bukhari and Muslim give Muhammad's age at death as 60, 63, or 65",
+          "target": "/discover/hadith-reliability/prophet-muhammad-age-at-death",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 5900, 3902; Muslim 2353a"
+        },
+        {
+          "id": "first_and_last_quranic_revelations",
+          "statement": "For the Quran's first and last revelations, Bukhari and Muslim name different passages",
+          "target": "/discover/hadith-reliability/first-quran-revelation-hadith",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 4922; Muslim 3024a"
+        },
+        {
+          "id": "temporary_marriage_mutah_four_way_contradiction",
+          "statement": "Temporary marriage has four different ban dates inside a single chapter of Sahih Muslim",
+          "target": "/discover/hadith-reliability/when-was-mutah-banned",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Muslim 1405c–1407a"
+        },
+        {
+          "id": "farewell_pilgrimage_modes_and_kabah_chamber",
+          "statement": "For Muhammad's one Farewell Pilgrimage, eyewitnesses in Bukhari and Muslim report three different types of Hajj",
+          "target": "/discover/hadith-reliability/farewell-pilgrimage-hajj-mode",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 1561, 1691; Muslim 1232a"
+        },
+        {
+          "id": "solar_eclipse_prayer_ibrahim_death",
+          "statement": "For the eclipse prayer when Muhammad's son died, Sahih Muslim reports four, six, and eight bowings",
+          "target": "/discover/hadith-reliability/eclipse-prayer-hadith-rukus",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Muslim 901a, 904c, 908"
+        },
+        {
+          "id": "sahifat_ali_divergent_scrolls_and_mount_thawr",
+          "statement": "Ali's one short scroll from Muhammad has five hadith versions giving different contents",
+          "target": "/discover/hadith-reliability/mount-thawr-in-medina",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 111; Muslim 1370a"
+        }
+      ]
+    },
+    {
+      "category": "Writing ban & drift",
+      "points": [
+        {
+          "id": "early_prohibitions_burning_umayyad_coercion",
+          "statement": "Muhammad told his companions not to write anything from him except the Quran",
+          "target": "/discover/hadith-reliability/bans-on-writing-hadith",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Muslim 3004"
+        },
+        {
+          "id": "empirical_proof_of_retrojection_raf_across_compilations",
+          "statement": "Bukhari attributes some sayings to Muhammad that appear earlier as the words of companions or scholars",
+          "target": "/discover/hadith-reliability/scholar-quotes-become-hadith",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Bukhari 7118"
+        },
+        {
+          "id": "pious_falsehood_and_late_isnad_emergence",
+          "statement": "Sahih Muslim's introduction says unintentional falsehood came most often from pious narrators",
+          "target": "/discover/hadith-reliability/muslim-introduction-pious-narrators",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Muslim, Muqaddimah 40"
+        },
+        {
+          "id": "editorial_redaction_cave_hira_and_ten_promised_paradise",
+          "statement": "Bukhari's longer Cave Hira story adds a mountain-peaks passage marked only 'according to what reached us'",
+          "target": "/discover/hadith-reliability/cave-hira-story-hadith",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Bukhari 6982"
+        },
+        {
+          "id": "bukhari_corpus_metrics_and_exclusion_ratio",
+          "statement": "Bukhari's 600,000 figure counted chains, yet he said two-thirds of what he knew wasn't authentic",
+          "target": "/discover/hadith-reliability/bukhari-600000-hadith",
+          "role": "caveat",
+          "impactScore": 5,
+          "ref": "Ibn Hajar, Hady al-Sari pp. 487, 489"
+        }
+      ]
+    },
+    {
+      "category": "Key narrator problems",
+      "points": [
+        {
+          "id": "asymmetric_companion_distribution_abu_hurayrah_ibn_abbas",
+          "statement": "Abu Hurayrah, a late convert, is credited with far more hadiths than all four caliphs combined",
+          "target": "/discover/hadith-reliability/abu-hurayrah-number-of-hadith",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": null
+        },
+        {
+          "id": "abu_hurayrah_internal_sahih_transmission_errors",
+          "statement": "Bukhari traced Abu Hurayrah's seven-day creation report in Sahih Muslim to Ka'b al-Ahbar",
+          "target": "/discover/hadith-reliability/seven-day-creation-hadith",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Muslim 2789; Bukhari, al-Tarikh al-Kabir 1/413"
+        },
+        {
+          "id": "hisham_ibn_urwah_ikhtilat_and_kufan_muammarun",
+          "statement": "Sahih Bukhari includes chains through Hisham ibn Urwah, whose memory diminished in old age",
+          "target": "/discover/hadith-reliability/hisham-ibn-urwah-memory",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Bukhari 5765; al-Dhahabi, Siyar 6/35-36"
+        }
+      ]
+    },
+    {
+      "category": "Discredited Quran reciters",
+      "points": [
+        {
+          "id": "hafs_ibn_sulayman_rijal_condemnation",
+          "statement": "Most printed Qurans follow Hafs, yet early hadith critics condemned him for fabricating hadiths",
+          "target": "/discover/hadith-reliability/hafs-ibn-sulayman",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Ibn Hajar, Tahdhib al-Tahdhib 2/401"
+        },
+        {
+          "id": "systemic_defects_canonical_qurra_and_tabari",
+          "statement": "Several accepted Quran reciters were rated weak narrators by hadith critics",
+          "target": "/discover/hadith-reliability/hadith-critics-quran-reciters",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Al-Mizzi, Tahdhib al-Kamal 13/476-478; 30/248-250"
+        }
+      ]
+    },
+    {
+      "category": "Limits of chains",
+      "points": [
+        {
+          "id": "muslim_rejection_of_liqa_and_broken_chains",
+          "statement": "Imam Muslim wrote that hadith chains need no proof a narrator physically met his teacher",
+          "target": "/discover/hadith-reliability/imam-muslim-narrators-meeting",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Muslim Intro 1/30"
+        },
+        {
+          "id": "quranic_epistemology_vs_ilm_al_rijal_and_zann",
+          "statement": "The Quran rejects conjecture, yet al-Shafi'i and al-Ghazali say single-chain hadiths give probable belief, not certainty",
+          "target": "/discover/hadith-reliability/ilm-al-rijal-vs-quran",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Quran 10:36; Al-Ghazali, al-Mustasfa 1/107"
+        },
+        {
+          "id": "pragmatic_retention_and_solitary_reports",
+          "statement": "Hadith compilers kept disputed narrators and single-witness reports to preserve Islamic law, Sunni scholars say",
+          "target": "/discover/hadith-reliability/disputed-hadith-narrators",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Al-Dhahabi, Mizan al-I'tidal 1/5-6; Sahih Ibn Hibban 1/145-146"
+        },
+        {
+          "id": "tadlis_common_links_and_circular_exemption",
+          "statement": "Bukhari and Muslim include reports from narrators known to omit middlemen, with no recorded firsthand hearing",
+          "target": "/discover/hadith-reliability/tadlis-in-bukhari-and-muslim",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Ibn Hajar, al-Nukat 2/635"
+        }
+      ]
+    },
+    {
+      "category": "Disputed prophecies",
+      "points": [
+        {
+          "id": "unfulfilled_eschatological_horizon_800ce_cutoff",
+          "statement": "'The Hour' comes before a boy grows old, or 'your hour'? Bukhari and Muslim report both",
+          "target": "/discover/hadith-reliability/hour-before-boy-grows-old",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Bukhari 6167; Muslim 2952"
+        },
+        {
+          "id": "green_arabia_hadith_classical_raf_doubt_and_translation_shift",
+          "statement": "Arabia's \"meadows and rivers\" hadith drew early doubt over whether it came from Muhammad",
+          "target": "/discover/hadith-reliability/green-arabia-hadith",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Al-Hakim, al-Mustadrak 8472"
+        },
+        {
+          "id": "second_fitnah_eschatology_ibn_al_zubayr",
+          "statement": "In Sahih Muslim, Companions expected the desert to swallow the Syrian army, which crossed unharmed",
+          "target": "/discover/hadith-reliability/army-swallowed-by-desert",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Muslim 2882-2883"
+        },
+        {
+          "id": "constantinople_and_basra_banu_qantura_traditions",
+          "statement": "The Constantinople hadith linked to 1453 says it was used to mobilize a 717 AD siege",
+          "target": "/discover/hadith-reliability/basra-constantinople-prophecies",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Ahmad 18957"
+        }
+      ]
+    }
+  ]
+}

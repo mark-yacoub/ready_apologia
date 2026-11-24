@@ -1,0 +1,181 @@
+{
+  "article": "quran-preservation",
+  "title": "How was the Qurʾān preserved?",
+  "basePath": "/discover/quran-preservation",
+  "status": "complete",
+  "progress": {
+    "approved": 18,
+    "total": 18,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 18,
+    "refsAdded": true,
+    "refsCount": 18
+  },
+  "groups": [
+    {
+      "category": "Burned copies & variants",
+      "points": [
+        {
+          "id": "uthman-copies",
+          "statement": "Uthman ordered all other Quran copies burned when Muslims differed over recitation",
+          "target": "/discover/quran-preservation#uthman-copies",
+          "role": "lead",
+          "impactScore": 10,
+          "ref": "Bukhari 4987"
+        },
+        {
+          "id": "hafs-warsh-readings",
+          "statement": "Hafs and Warsh, today's most printed Quran readings, differ in wording, like 'fought' versus 'was killed'",
+          "target": "/discover/quran-preservation#hafs-warsh-readings",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Quran 3:146"
+        },
+        {
+          "id": "sanaa-lower-text",
+          "statement": "In the early Sanaa manuscript, erased text differs from today's Quran in wording and chapter order",
+          "target": "/discover/quran-preservation#sanaa-lower-text",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Sanaa Palimpsest, 1st-century AH"
+        },
+        {
+          "id": "umar-hisham-furqan",
+          "statement": "Umar and Hisham recited one Quran chapter differently, and Muhammad said both readings were revealed",
+          "target": "/discover/quran-preservation#umar-hisham-furqan",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari 7550"
+        }
+      ]
+    },
+    {
+      "category": "Missing verses & chapters",
+      "points": [
+        {
+          "id": "umar-stoning-verse",
+          "statement": "Umar says a stoning verse was revealed and recited, but it's not in today's written Quran",
+          "target": "/discover/quran-preservation#umar-stoning-verse",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Bukhari 6830"
+        },
+        {
+          "id": "abu-musa-two-surahs",
+          "statement": "Abu Musa told 300 reciters about two chapters they used to recite, neither in today's Quran",
+          "target": "/discover/quran-preservation#abu-musa-two-surahs",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Muslim 1050"
+        },
+        {
+          "id": "naskh-recitation-removed",
+          "statement": "Stoning and five-suckling verses aren't in today's Qur'an, yet classical scholar al-Nawawi says both rules remain",
+          "target": "/discover/quran-preservation#naskh-recitation-removed",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 6829; Muslim 1452a"
+        },
+        {
+          "id": "ubayy-valley-of-gold",
+          "statement": "Ubayy ibn Ka'b says Muhammad's companions once considered a valley-of-gold saying part of the Quran",
+          "target": "/discover/quran-preservation#ubayy-valley-of-gold",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Bukhari 6440"
+        },
+        {
+          "id": "aisha-suckling-verse",
+          "statement": "Aisha reports a nursing verse recited as Quran at Muhammad's death, absent from today's Quran",
+          "target": "/discover/quran-preservation#aisha-suckling-verse",
+          "role": "caveat",
+          "impactScore": 5,
+          "ref": "Muslim 1452a"
+        }
+      ]
+    },
+    {
+      "category": "Companion Quran differences",
+      "points": [
+        {
+          "id": "ibn-masud-muawwidhatayn",
+          "statement": "Ibn Mas'ud, a Quran teacher Muhammad chose, erased the last two chapters",
+          "target": "/discover/quran-preservation#ibn-masud-muawwidhatayn",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Bukhari 4977; Musnad Ahmad"
+        },
+        {
+          "id": "abu-darda-92-3",
+          "statement": "Quran collector Abu al-Darda swears Muhammad recited 92:3 without today's \"and by Him Who created\"",
+          "target": "/discover/quran-preservation#abu-darda-92-3",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Muslim 824a"
+        },
+        {
+          "id": "ubayy-left-out",
+          "statement": "Umar called Ubayy ibn Ka'b the best reciter, yet set aside some of his recitation",
+          "target": "/discover/quran-preservation#ubayy-left-out",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 5005"
+        },
+        {
+          "id": "aisha-afternoon-prayer",
+          "statement": "Aisha dictated a verse for her Quran copy with afternoon-prayer words not in today's text",
+          "target": "/discover/quran-preservation#aisha-afternoon-prayer",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Muslim 629"
+        },
+        {
+          "id": "muslim-26-214",
+          "statement": "Ibn Abbas, Muhammad's cousin, quotes Surah 26:214 as revealed with a phrase not in today's Quran",
+          "target": "/discover/quran-preservation#muslim-26-214",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Muslim 208a"
+        },
+        {
+          "id": "ibn-abbas-18-79",
+          "statement": "Ibn Abbas recited \"every serviceable boat,\" wording today's Qur'an lacks — possibly an explanation, a scholar suggests",
+          "target": "/discover/quran-preservation#ibn-abbas-18-79",
+          "role": "caveat",
+          "impactScore": 6,
+          "ref": "Bukhari 4727"
+        }
+      ]
+    },
+    {
+      "category": "Early collection & memory",
+      "points": [
+        {
+          "id": "abu-khuzaima-last-verses",
+          "statement": "Zayd, who collected the Quran, says he found Surah al-Tawbah's last verse with only one man",
+          "target": "/discover/quran-preservation#abu-khuzaima-last-verses",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 4986"
+        },
+        {
+          "id": "prophet-reminded-of-verses",
+          "statement": "A man's recitation reminded Muhammad of Quranic verses he missed or was caused to forget",
+          "target": "/discover/quran-preservation#prophet-reminded-of-verses",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 5038; Muslim 788a"
+        },
+        {
+          "id": "readers-lists",
+          "statement": "Muhammad's list of Quran teachers in Bukhari leaves out Zayd, who later compiled the Quran",
+          "target": "/discover/quran-preservation#readers-lists",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Bukhari 3808"
+        }
+      ]
+    }
+  ]
+}

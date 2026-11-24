@@ -1,0 +1,684 @@
+{
+  "article": "trustworthiness-of-the-bible",
+  "title": "Textual Transmission and Historical Corroboration of the Bible",
+  "basePath": "/discover/trustworthiness-of-the-bible",
+  "status": "complete",
+  "progress": {
+    "approved": 79,
+    "total": 79,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 79,
+    "refsAdded": true,
+    "refsCount": 68
+  },
+  "groups": [
+    {
+      "category": "Early manuscripts",
+      "points": [
+        {
+          "id": "p66-bodmer-papyrus-ii",
+          "statement": "A 150-page papyrus of John, dated before the Council of Nicaea, reads 'the Word was God'",
+          "target": "/discover/trustworthiness-of-the-bible#p66-bodmer-papyrus-ii",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "P66, c. AD 175–250"
+        },
+        {
+          "id": "great-isaiah-scroll-1qisaa",
+          "statement": "The Great Isaiah Scroll, copied before Jesus, preserves all 66 chapters, including Isaiah 53",
+          "target": "/discover/trustworthiness-of-the-bible#great-isaiah-scroll-1qisaa",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "1QIsaᵃ, c. 125 BC"
+        },
+        {
+          "id": "stage1-classical-comparison",
+          "statement": "Over 5,800 Greek New Testament manuscripts survive, far outnumbering copies of major ancient histories",
+          "target": "/discover/trustworthiness-of-the-bible#stage1-classical-comparison",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": null
+        },
+        {
+          "id": "p46-chester-beatty-ii",
+          "statement": "A manuscript of Paul's letters from around AD 200 says Christ existed in the form of God",
+          "target": "/discover/trustworthiness-of-the-bible#p46-chester-beatty-ii",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "P46, Philippians 2:6"
+        },
+        {
+          "id": "codex-sinaiticus-01",
+          "statement": "Codex Sinaiticus, a fourth-century manuscript, preserves the oldest surviving complete copy of the 27-book New Testament",
+          "target": "/discover/trustworthiness-of-the-bible#codex-sinaiticus-01",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Codex Sinaiticus, c. AD 330-360"
+        },
+        {
+          "id": "codex-vaticanus-b",
+          "statement": "Codex Vaticanus, a fourth-century manuscript, preserves the Greek Old Testament and most of the New Testament",
+          "target": "/discover/trustworthiness-of-the-bible#codex-vaticanus-b",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Vat. gr. 1209, c. AD 300–350"
+        },
+        {
+          "id": "p72-bodmer-vii-ix",
+          "statement": "2 Peter's earliest surviving manuscript, from around AD 250–325, calls Jesus 'our God and Savior'",
+          "target": "/discover/trustworthiness-of-the-bible#p72-bodmer-vii-ix",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "P72, 2 Peter 1:1"
+        },
+        {
+          "id": "p75-bodmer-papyrus-xiv-xv",
+          "statement": "Luke and John papyrus dated AD 175–225 closely matches a 300s copy, challenging 300s rewrite claims",
+          "target": "/discover/trustworthiness-of-the-bible#p75-bodmer-papyrus-xiv-xv",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "P75, c. AD 175–225"
+        },
+        {
+          "id": "p52-rylands-papyrus",
+          "statement": "Lines from John's Gospel survive on a Greek papyrus from the second or early third century",
+          "target": "/discover/trustworthiness-of-the-bible#p52-rylands-papyrus",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "P52, Rylands Gr. P. 457"
+        },
+        {
+          "id": "ketef-hinnom-silver-scrolls",
+          "statement": "Two silver amulets preserve Hebrew Bible wording from about four centuries before the Dead Sea Scrolls",
+          "target": "/discover/trustworthiness-of-the-bible#ketef-hinnom-silver-scrolls",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Ketef Hinnom Silver Scrolls, c. 600-586 BC"
+        },
+        {
+          "id": "11q5-great-psalms-scroll",
+          "statement": "Forty-one biblical Psalms survive on a first-century leather scroll with largely stable wording",
+          "target": "/discover/trustworthiness-of-the-bible#11q5-great-psalms-scroll",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "11Q5, c. AD 30–50"
+        },
+        {
+          "id": "codex-alexandrinus-02",
+          "statement": "Codex Alexandrinus, a fifth-century manuscript, preserves nearly the whole Greek Old and New Testaments",
+          "target": "/discover/trustworthiness-of-the-bible#codex-alexandrinus-02",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Codex Alexandrinus, c. AD 400-440"
+        },
+        {
+          "id": "p47-chester-beatty-iii",
+          "statement": "Chapters of Revelation, including 666, survive on a papyrus from around AD 250–300",
+          "target": "/discover/trustworthiness-of-the-bible#p47-chester-beatty-iii",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "P47, c. AD 250–300"
+        },
+        {
+          "id": "codex-ephraemi-rescriptus-04",
+          "statement": "Overwritten fifth-century manuscript: close inspection separates 1 Timothy 3:16's original \"He who\" from a corrector's \"God\"",
+          "target": "/discover/trustworthiness-of-the-bible#codex-ephraemi-rescriptus-04",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "Codex Ephraemi Rescriptus, c. AD 425-450"
+        },
+        {
+          "id": "p115-papyrus-115-revelation",
+          "statement": "A third-century Revelation papyrus reads 616 instead of 666, a variant Bishop Irenaeus rejected around AD 180",
+          "target": "/discover/trustworthiness-of-the-bible#p115-papyrus-115-revelation",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "P115, c. AD 225–275"
+        },
+        {
+          "id": "codex-bezae-05",
+          "statement": "Codex Bezae, a fifth-century manuscript, expands Acts about 8–10% with paraphrase yet preserves the core story",
+          "target": "/discover/trustworthiness-of-the-bible#codex-bezae-05",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "Codex Bezae (D / 05), c. AD 400-450"
+        }
+      ]
+    },
+    {
+      "category": "Non-Christian witnesses",
+      "points": [
+        {
+          "id": "pliny-the-younger-christians",
+          "statement": "Roman governor Pliny, around AD 112, reported Christians singing hymns to Christ 'as to a god'",
+          "target": "/discover/trustworthiness-of-the-bible#pliny-the-younger-christians",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Pliny, Ep. 10.96"
+        },
+        {
+          "id": "tacitus-annals-christus",
+          "statement": "Tacitus, a Roman senator, wrote that Christ was executed under Pontius Pilate in Judea",
+          "target": "/discover/trustworthiness-of-the-bible#tacitus-annals-christus",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Tacitus, Annals 15.44"
+        },
+        {
+          "id": "celsus-contra-celsum-resurrection",
+          "statement": "Celsus, a 2nd-century pagan critic, treated the Gospels as accounts written by Jesus's disciples",
+          "target": "/discover/trustworthiness-of-the-bible#celsus-contra-celsum-resurrection",
+          "role": "support",
+          "impactScore": 7,
+          "ref": null
+        },
+        {
+          "id": "lucian-of-samosata-peregrinus",
+          "statement": "Lucian, a Greek satirist, mocked Christians for worshipping the man crucified in Palestine",
+          "target": "/discover/trustworthiness-of-the-bible#lucian-of-samosata-peregrinus",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Lucian, Peregrinus 11-13"
+        },
+        {
+          "id": "josephus-testimonium-flavianum",
+          "statement": "Josephus, a first-century Jewish historian, identifies James as the brother of Jesus, who was called Christ",
+          "target": "/discover/trustworthiness-of-the-bible#josephus-testimonium-flavianum",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Josephus, Ant. 20.9.1"
+        },
+        {
+          "id": "mara-bar-serapion-letter",
+          "statement": "Mara bar Serapion, a non-Christian prisoner, wrote about the execution of the Jews' wise king",
+          "target": "/discover/trustworthiness-of-the-bible#mara-bar-serapion-letter",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Mara bar Serapion, Syriac Letter to His Son"
+        },
+        {
+          "id": "babylonian-talmud-sanhedrin-43a",
+          "statement": "The Talmud, a later rabbinic text, says Jesus practiced sorcery and was hanged on Passover eve",
+          "target": "/discover/trustworthiness-of-the-bible#babylonian-talmud-sanhedrin-43a",
+          "role": "caveat",
+          "impactScore": 5,
+          "ref": "Babylonian Talmud, Sanhedrin 43a"
+        },
+        {
+          "id": "thallus-histories",
+          "statement": "Thallus, a Greek chronicler, reportedly called the darkness at Jesus's crucifixion a solar eclipse",
+          "target": "/discover/trustworthiness-of-the-bible#thallus-histories",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Julius Africanus, Chronographiae F93"
+        },
+        {
+          "id": "suetonius-claudius-chrestus",
+          "statement": "Roman biographer Suetonius says Claudius expelled Rome's Jews over 'Chrestus,' which most historians take as Christ",
+          "target": "/discover/trustworthiness-of-the-bible#suetonius-claudius-chrestus",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "Suetonius, Claudius 25.4"
+        }
+      ]
+    },
+    {
+      "category": "Early church & canon",
+      "points": [
+        {
+          "id": "canon-refuting-constantine-myth",
+          "statement": "The Council of Nicaea's twenty rules contain no decision on the books of the Bible",
+          "target": "/discover/trustworthiness-of-the-bible#canon-refuting-constantine-myth",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Canons of Nicaea, AD 325"
+        },
+        {
+          "id": "patristic-irenaeus-lyons",
+          "statement": "Irenaeus, a second-century bishop, named Matthew, Mark, Luke, and John as the four Gospel writers",
+          "target": "/discover/trustworthiness-of-the-bible#patristic-irenaeus-lyons",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Irenaeus, Against Heresies 3.1.1"
+        },
+        {
+          "id": "patristic-total-quotations",
+          "statement": "Seven early Christian writers cited the New Testament over 36,000 times before AD 325",
+          "target": "/discover/trustworthiness-of-the-bible#patristic-total-quotations",
+          "role": "support",
+          "impactScore": 8,
+          "ref": null
+        },
+        {
+          "id": "patristic-justin-martyr",
+          "statement": "Justin Martyr wrote around AD 155 that the Gospels were read in Sunday worship",
+          "target": "/discover/trustworthiness-of-the-bible#patristic-justin-martyr",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Justin Martyr, First Apology 66-67"
+        },
+        {
+          "id": "canon-muratorian-fragment",
+          "statement": "A Christian book list, usually dated around AD 170–200, already accepts most New Testament books",
+          "target": "/discover/trustworthiness-of-the-bible#canon-muratorian-fragment",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Muratorian Fragment, c. AD 170-200"
+        },
+        {
+          "id": "patristic-tertullian-carthage",
+          "statement": "Tertullian, around AD 200, named churches like Corinth and Rome still reading the apostles' \"authentic writings\"",
+          "target": "/discover/trustworthiness-of-the-bible#patristic-tertullian-carthage",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Tertullian, De Praescriptione 36"
+        },
+        {
+          "id": "patristic-origen-alexandria",
+          "statement": "Origen of Alexandria cited nearly 18,000 New Testament passages decades before the Council of Nicaea",
+          "target": "/discover/trustworthiness-of-the-bible#patristic-origen-alexandria",
+          "role": "support",
+          "impactScore": 7,
+          "ref": null
+        },
+        {
+          "id": "patristic-clement-alexandria",
+          "statement": "Clement of Alexandria, writing around AD 200, cited New Testament writings 2,406 times.",
+          "target": "/discover/trustworthiness-of-the-bible#patristic-clement-alexandria",
+          "role": "support",
+          "impactScore": 6,
+          "ref": null
+        },
+        {
+          "id": "canon-1tim-2pet-scripture",
+          "statement": "1 Timothy and 2 Peter, despite disputed dates, call a Gospel saying and Paul's letters Scripture",
+          "target": "/discover/trustworthiness-of-the-bible#canon-1tim-2pet-scripture",
+          "role": "caveat",
+          "impactScore": 6,
+          "ref": "1 Timothy 5:18; 2 Peter 3:15–16"
+        }
+      ]
+    },
+    {
+      "category": "Copying errors & variants",
+      "points": [
+        {
+          "id": "variant-cat4-meaningful-and-viable",
+          "statement": "Under 1% of New Testament manuscript differences affect meaning and are early enough to consider",
+          "target": "/discover/trustworthiness-of-the-bible#variant-cat4-meaningful-and-viable",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": null
+        },
+        {
+          "id": "variant-cat1-spelling",
+          "statement": "Most New Testament manuscript variants are Greek spelling differences or obvious slips that leave translations unchanged",
+          "target": "/discover/trustworthiness-of-the-bible#variant-cat1-spelling",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": null
+        },
+        {
+          "id": "variant-cat2-synonyms",
+          "statement": "Greek word-order swaps and writing \"the Jesus\" swell the second-largest variant group without changing the translation",
+          "target": "/discover/trustworthiness-of-the-bible#variant-cat2-synonyms",
+          "role": "support",
+          "impactScore": 7,
+          "ref": null
+        },
+        {
+          "id": "variant-cat3-meaningful-not-viable",
+          "statement": "1 Thess 2:9: every early copy reads “gospel of God,” versus one late “gospel of Christ.”",
+          "target": "/discover/trustworthiness-of-the-bible#variant-cat3-meaningful-not-viable",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "1 Thessalonians 2:9"
+        },
+        {
+          "id": "bracketed-comma-johanneum",
+          "statement": "1 John 5:7's Trinity addition isn't in early Greek manuscripts, so major modern Bibles exclude it",
+          "target": "/discover/trustworthiness-of-the-bible#bracketed-comma-johanneum",
+          "role": "caveat",
+          "impactScore": 6,
+          "ref": "1 John 5:7-8"
+        },
+        {
+          "id": "bracketed-longer-ending-mark",
+          "statement": "Mark's disputed longer ending is set off with brackets or explanatory notes in modern Bibles",
+          "target": "/discover/trustworthiness-of-the-bible#bracketed-longer-ending-mark",
+          "role": "caveat",
+          "impactScore": 6,
+          "ref": "Mark 16:9–20"
+        },
+        {
+          "id": "bracketed-pericope-adulterae",
+          "statement": "The woman caught in adultery story, which early Greek manuscripts omit, is bracketed in modern Bibles",
+          "target": "/discover/trustworthiness-of-the-bible#bracketed-pericope-adulterae",
+          "role": "caveat",
+          "impactScore": 6,
+          "ref": "John 7:53–8:11"
+        }
+      ]
+    },
+    {
+      "category": "Gospel honesty & claims",
+      "points": [
+        {
+          "id": "embarrass-women-first-witnesses",
+          "statement": "Mary Magdalene witnesses the empty tomb first in all four Gospels, though courts discounted women's testimony",
+          "target": "/discover/trustworthiness-of-the-bible#embarrass-women-first-witnesses",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Luke 24:10-11; Josephus, Antiquities 4.219"
+        },
+        {
+          "id": "embarrass-peters-denials",
+          "statement": "All four Gospels record Peter, a leading apostle, denying Jesus three times",
+          "target": "/discover/trustworthiness-of-the-bible#embarrass-peters-denials",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Mark 14:66–72"
+        },
+        {
+          "id": "embarrass-disciples-fleeing",
+          "statement": "Jesus's eleven apostles all abandoned him and fled at his arrest, Mark reports",
+          "target": "/discover/trustworthiness-of-the-bible#embarrass-disciples-fleeing",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Mark 14:50"
+        },
+        {
+          "id": "embarrass-jesus-family-insane",
+          "statement": "Mark's Gospel records Jesus's relatives saying he had lost his senses",
+          "target": "/discover/trustworthiness-of-the-bible#embarrass-jesus-family-insane",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Mark 3:21"
+        },
+        {
+          "id": "embarrass-cry-of-dereliction",
+          "statement": "Jesus's cry of abandonment was kept by Mark and Matthew, though ancient execution stories prized calm",
+          "target": "/discover/trustworthiness-of-the-bible#embarrass-cry-of-dereliction",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Mark 15:34; Matthew 27:46"
+        },
+        {
+          "id": "verdict-who-do-you-say-that-i-am",
+          "statement": "Jesus asks, “Who do you say that I am?” and Peter answers, “You are the Christ”",
+          "target": "/discover/trustworthiness-of-the-bible#verdict-who-do-you-say-that-i-am",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "Mark 8:29"
+        },
+        {
+          "id": "verdict-cs-lewis-trilemma",
+          "statement": "If Jesus claimed to forgive sins, he was lying, deluded, or truthful—not just a moral teacher",
+          "target": "/discover/trustworthiness-of-the-bible#verdict-cs-lewis-trilemma",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Mark 2:5–10"
+        }
+      ]
+    },
+    {
+      "category": "Archaeology & inscriptions",
+      "points": [
+        {
+          "id": "sennacherib-taylor-prism-jerusalem",
+          "statement": "Assyrian King Sennacherib recorded shutting Hezekiah in Jerusalem like a caged bird, never claiming Jerusalem fell",
+          "target": "/discover/trustworthiness-of-the-bible#sennacherib-taylor-prism-jerusalem",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Taylor Prism, 691 BC"
+        },
+        {
+          "id": "mesha-stele-moabite-stone",
+          "statement": "The Moabite Stone from biblical King Mesha mentions Israel's King Omri and God's name, Yahweh",
+          "target": "/discover/trustworthiness-of-the-bible#mesha-stele-moabite-stone",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Mesha Stele, c. 840 BC"
+        },
+        {
+          "id": "pilate-stone-caesarea",
+          "statement": "Pontius Pilate is named as Prefect of Judea on a limestone block from Caesarea",
+          "target": "/discover/trustworthiness-of-the-bible#pilate-stone-caesarea",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "AE 1963, no. 104"
+        },
+        {
+          "id": "caiaphas-ossuary-jerusalem",
+          "statement": "High priest Caiaphas's name appears on a first-century Jerusalem bone box inscribed 'Joseph, son of Caiaphas'",
+          "target": "/discover/trustworthiness-of-the-bible#caiaphas-ossuary-jerusalem",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Caiaphas Ossuary, IAA 1991-468"
+        },
+        {
+          "id": "tel-dan-stele-david",
+          "statement": "The 'House of David' is carved on a Damascus king's victory stone from around 840 BC",
+          "target": "/discover/trustworthiness-of-the-bible#tel-dan-stele-david",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Tel Dan Stele, c. 840 BC"
+        },
+        {
+          "id": "gallio-inscription-delphi",
+          "statement": "Emperor Claudius's inscription names Gallio, dating Paul's appearance before him in Acts to AD 51–52",
+          "target": "/discover/trustworthiness-of-the-bible#gallio-inscription-delphi",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "SIG³ 801D"
+        },
+        {
+          "id": "pool-of-bethesda-jerusalem",
+          "statement": "Jerusalem's Pool of Bethesda was uncovered with a twin-basin layout fitting John's five covered walkways",
+          "target": "/discover/trustworthiness-of-the-bible#pool-of-bethesda-jerusalem",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "John 5:2"
+        },
+        {
+          "id": "temple-warning-inscription-soreg",
+          "statement": "Stones from Herod's Temple warn non-Jews of death for crossing inside, explaining the riot against Paul",
+          "target": "/discover/trustworthiness-of-the-bible#temple-warning-inscription-soreg",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "OGIS 598, pre-AD 70"
+        },
+        {
+          "id": "merneptah-stele-israel",
+          "statement": "Pharaoh Merneptah's granite monument records Israel as a people in Canaan",
+          "target": "/discover/trustworthiness-of-the-bible#merneptah-stele-israel",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Merneptah Stele, line 27"
+        },
+        {
+          "id": "hezekiah-bulla-jerusalem",
+          "statement": "Hezekiah, king of Judah, is named on a royal clay seal impression found in Jerusalem",
+          "target": "/discover/trustworthiness-of-the-bible#hezekiah-bulla-jerusalem",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Ophel Royal Bulla of Hezekiah, c. 727-698 BC"
+        },
+        {
+          "id": "nabonidus-chronicle-belshazzar",
+          "statement": "Daniel's Belshazzar is confirmed in British Museum records as the crown prince governing Babylon",
+          "target": "/discover/trustworthiness-of-the-bible#nabonidus-chronicle-belshazzar",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Nabonidus Cylinder, BM 91128; Nabonidus Chronicle, BM 35382"
+        },
+        {
+          "id": "pool-of-siloam-jerusalem",
+          "statement": "The Pool of Siloam in John's Gospel is identified with a first-century pool uncovered in Jerusalem",
+          "target": "/discover/trustworthiness-of-the-bible#pool-of-siloam-jerusalem",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "John 9:7; Reich & Shukron, 2004"
+        },
+        {
+          "id": "politarch-inscriptions-thessalonica",
+          "statement": "Thessalonica's Roman arch and dozens of Macedonian inscriptions confirm Luke's unusual title 'politarchs' for city officials",
+          "target": "/discover/trustworthiness-of-the-bible#politarch-inscriptions-thessalonica",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Vardar Gate Inscription, CIG 1967"
+        },
+        {
+          "id": "black-obelisk-shalmaneser-jehu",
+          "statement": "The Assyrian Black Obelisk shows Israelite King Jehu bowing and paying tribute",
+          "target": "/discover/trustworthiness-of-the-bible#black-obelisk-shalmaneser-jehu",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Black Obelisk, 841 BC"
+        },
+        {
+          "id": "kurkh-monolith-ahab",
+          "statement": "Israel's King Ahab is named on an 853 BC Assyrian monument listing his chariots and soldiers",
+          "target": "/discover/trustworthiness-of-the-bible#kurkh-monolith-ahab",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Kurkh Monolith, BM 118884"
+        },
+        {
+          "id": "coinage-tribute-penny-tiberius",
+          "statement": "Roman silver coins of Tiberius Caesar bear the portrait and inscription Jesus asked about",
+          "target": "/discover/trustworthiness-of-the-bible#coinage-tribute-penny-tiberius",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "RIC I² Tiberius 26–30"
+        },
+        {
+          "id": "synagogue-of-magdala",
+          "statement": "A first-century synagogue uncovered at Magdala confirms the Gospels' account of synagogues in Galilee",
+          "target": "/discover/trustworthiness-of-the-bible#synagogue-of-magdala",
+          "role": "support",
+          "impactScore": 3,
+          "ref": "Matthew 4:23"
+        },
+        {
+          "id": "erastus-inscription-corinth",
+          "statement": "A stone pavement in Corinth names Erastus, possibly the city treasurer Paul mentions in Romans",
+          "target": "/discover/trustworthiness-of-the-bible#erastus-inscription-corinth",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Corinth VIII.3, no. 232"
+        },
+        {
+          "id": "cyrus-cylinder-babylon",
+          "statement": "Cyrus's clay cylinder records returning Mesopotamian exiles, though historians debate parallels to the Jerusalem decree",
+          "target": "/discover/trustworthiness-of-the-bible#cyrus-cylinder-babylon",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Cyrus Cylinder, line 32; Ezra 1:1–4"
+        }
+      ]
+    },
+    {
+      "category": "Names & eyewitness clues",
+      "points": [
+        {
+          "id": "onomastics-gnostic-apocryphal-failure",
+          "statement": "Later non-biblical Christian stories introduce mostly Greek, Roman, or eastern names, not Palestinian Jewish ones",
+          "target": "/discover/trustworthiness-of-the-bible#onomastics-gnostic-apocryphal-failure",
+          "role": "support",
+          "impactScore": 7,
+          "ref": null
+        },
+        {
+          "id": "undesigned-destroy-this-temple-trial",
+          "statement": "Only John records Jesus saying 'Destroy this temple,' which witnesses misquote at His trial in Mark",
+          "target": "/discover/trustworthiness-of-the-bible#undesigned-destroy-this-temple-trial",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "John 2:19; Mark 14:58"
+        },
+        {
+          "id": "undesigned-herods-servants-joanna",
+          "statement": "Matthew quotes Herod addressing his servants, and Luke says Joanna, wife of Herod's steward, supported Jesus",
+          "target": "/discover/trustworthiness-of-the-bible#undesigned-herods-servants-joanna",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Matthew 14:1-2; Luke 8:3"
+        },
+        {
+          "id": "onomastics-male-names-simon-joseph",
+          "statement": "Simon and Joseph were about 18% of ancient Palestinian Jewish men's names, matching the Gospels and Acts",
+          "target": "/discover/trustworthiness-of-the-bible#onomastics-male-names-simon-joseph",
+          "role": "support",
+          "impactScore": 6,
+          "ref": null
+        },
+        {
+          "id": "undesigned-philip-bethsaida-bread",
+          "statement": "In John, Jesus asks Philip where to buy bread, fitting Luke's setting at Philip's hometown Bethsaida",
+          "target": "/discover/trustworthiness-of-the-bible#undesigned-philip-bethsaida-bread",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "John 6:5; Luke 9:10"
+        },
+        {
+          "id": "undesigned-green-grass-passover",
+          "statement": "In Mark, Jesus seats 5,000 on green grass, matching John's Passover timing after Galilee's winter rains",
+          "target": "/discover/trustworthiness-of-the-bible#undesigned-green-grass-passover",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Mark 6:39; John 6:4"
+        },
+        {
+          "id": "onomastics-female-names-mary-salome",
+          "statement": "Mary and Salome topped women's names in Judea and Galilee, matching multiple Marys in the Gospels",
+          "target": "/discover/trustworthiness-of-the-bible#onomastics-female-names-mary-salome",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Ilan 2002, p. 57; John 19:25"
+        },
+        {
+          "id": "onomastics-disambiguation-principle",
+          "statement": "Common Gospel names like Simon usually carry nicknames, though scholars debate whether name patterns prove history",
+          "target": "/discover/trustworthiness-of-the-bible#onomastics-disambiguation-principle",
+          "role": "caveat",
+          "impactScore": 5,
+          "ref": null
+        },
+        {
+          "id": "undesigned-evening-sabbath-healings",
+          "statement": "Mark and Luke's Sabbath setting explains why townspeople in Matthew waited until evening with the sick",
+          "target": "/discover/trustworthiness-of-the-bible#undesigned-evening-sabbath-healings",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "Matthew 8:16; Mark 1:21, 32"
+        },
+        {
+          "id": "undesigned-james-john-first-cousins",
+          "statement": "Women near the cross: linking Salome to Jesus's aunt across three different Gospel lists is debated",
+          "target": "/discover/trustworthiness-of-the-bible#undesigned-james-john-first-cousins",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Mark 15:40; John 19:25"
+        },
+        {
+          "id": "undesigned-blindfolded-prophesy",
+          "statement": "Jesus's blindfold in Mark and Luke explains Matthew's 'who hit you?' question, though Greek wording overlaps",
+          "target": "/discover/trustworthiness-of-the-bible#undesigned-blindfolded-prophesy",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Matthew 26:68; Luke 22:64"
+        },
+        {
+          "id": "undesigned-mending-nets-miraculous-catch",
+          "statement": "A net-breaking catch in Luke may explain James and John mending nets in Matthew and Mark",
+          "target": "/discover/trustworthiness-of-the-bible#undesigned-mending-nets-miraculous-catch",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Matthew 4:21; Luke 5:6"
+        }
+      ]
+    }
+  ]
+}

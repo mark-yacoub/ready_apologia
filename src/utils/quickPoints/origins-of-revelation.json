@@ -1,0 +1,75 @@
+{
+  "article": "origins-of-revelation",
+  "title": "5 Classical Accounts of Revelation, Beside the Bible's Angels and Spirits",
+  "basePath": "/discover/origins-of-revelation",
+  "status": "complete",
+  "progress": {
+    "approved": 6,
+    "total": 6,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 6,
+    "refsAdded": true,
+    "refsCount": 6
+  },
+  "groups": [
+    {
+      "category": "Fear & physical toll",
+      "points": [
+        {
+          "id": "hira",
+          "statement": "Muhammad's first revelation left him afraid after an unnamed visitor forcefully pressed him three times",
+          "target": "/discover/origins-of-revelation#hira",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Bukhari 3"
+        },
+        {
+          "id": "what-they-saw",
+          "statement": "Muhammad's companions describe him sweating in the cold and snorting like a young camel during revelation",
+          "target": "/discover/origins-of-revelation#what-they-saw",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 2; Muslim 1180a"
+        },
+        {
+          "id": "after-hira",
+          "statement": "Muhammad intended to throw himself from high mountains when revelation paused, one Bukhari report says",
+          "target": "/discover/origins-of-revelation#after-hira",
+          "role": "caveat",
+          "impactScore": 6,
+          "ref": "Bukhari 6982"
+        }
+      ]
+    },
+    {
+      "category": "Satan, spells & testing",
+      "points": [
+        {
+          "id": "quran-22-52",
+          "statement": "Ibn Abbas, Muhammad's cousin, explains Quran 22:52 as Satan throwing falsehood into a prophet's speech",
+          "target": "/discover/origins-of-revelation#quran-22-52",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari, Book 65"
+        },
+        {
+          "id": "sihr",
+          "statement": "Aisha says a magic spell made Muhammad imagine doing things he had not done",
+          "target": "/discover/origins-of-revelation#sihr",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari 5765"
+        },
+        {
+          "id": "testing-spirits",
+          "statement": "The New Testament tests every spirit, even an angel, by what it says about Jesus",
+          "target": "/discover/origins-of-revelation#testing-spirits",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "1 John 4:1-3; Galatians 1:8"
+        }
+      ]
+    }
+  ]
+}

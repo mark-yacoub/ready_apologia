@@ -1,0 +1,367 @@
+{
+  "article": "extrabiblical-evidence-for-jesus",
+  "title": "16 Non-Christian Literary Sources and 10 Archaeological Finds Relating to Jesus and the Early Christians",
+  "basePath": "/discover/extrabiblical-evidence-for-jesus",
+  "status": "complete",
+  "progress": {
+    "approved": 40,
+    "total": 40,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 40,
+    "refsAdded": true,
+    "refsCount": 40
+  },
+  "groups": [
+    {
+      "category": "Roman witnesses",
+      "points": [
+        {
+          "id": "evidence-tacitus-annals-15-44",
+          "statement": "Tacitus, a Roman senator, wrote that Christ suffered the extreme penalty under Pontius Pilate",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-tacitus-annals-15-44",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Tacitus, Annals 15.44"
+        },
+        {
+          "id": "evidence-pliny-letters-10-96",
+          "statement": "Pliny, a Roman governor, wrote that Christians sang hymns to Christ as to a god",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-pliny-letters-10-96",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Pliny, Ep. 10.96"
+        },
+        {
+          "id": "evidence-suetonius-lives-of-the-twelve-caesars",
+          "statement": "Suetonius, a Roman biographer, wrote that Claudius expelled Jews from Rome over \"Chrestus,\" likely Christ",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-suetonius-lives-of-the-twelve-caesars",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "Suetonius, Claudius 25.4"
+        },
+        {
+          "id": "evidence-phlegon-of-tralles-olympiads",
+          "statement": "Greek chronicler Phlegon named Jesus and said his predictions came true, according to Christian writer Origen",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-phlegon-of-tralles-olympiads",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "Origen, Contra Celsum 2.14"
+        },
+        {
+          "id": "evidence-marcus-aurelius-meditations-11-3",
+          "statement": "Roman Emperor Marcus Aurelius's writings contain a disputed phrase criticizing Christians' stubborn readiness to die",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-marcus-aurelius-meditations-11-3",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Marcus Aurelius, Meditations 11.3"
+        },
+        {
+          "id": "evidence-thallus-histories",
+          "statement": "Thallus's Greek history recorded a solar eclipse that a Christian writer linked to the crucifixion darkness",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-thallus-histories",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Julius Africanus, Frag. 18"
+        },
+        {
+          "id": "evidence-claudius-letter-to-alexandrians",
+          "statement": "Emperor Claudius's letter addresses conflict between Greeks and Jews in Alexandria rather than Jesus or Christians",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-claudius-letter-to-alexandrians",
+          "role": "caveat",
+          "impactScore": 1,
+          "ref": "P.Lond. VI 1912, AD 41"
+        },
+        {
+          "id": "evidence-acts-of-pilate-forgery",
+          "statement": "The lost 'Acts of Pilate' was a fourth-century Roman forgery attacking Jesus, says church historian Eusebius",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-acts-of-pilate-forgery",
+          "role": "caveat",
+          "impactScore": 1,
+          "ref": "Eusebius, Church History 9.5.1"
+        }
+      ]
+    },
+    {
+      "category": "Crucifixion finds",
+      "points": [
+        {
+          "id": "evidence-alexamenos-graffito",
+          "statement": "Pagan graffiti in Rome mocks a Christian worshipping a crucified figure as his god",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-alexamenos-graffito",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Alexamenos Graffito, late 2nd to early 3rd c. AD"
+        },
+        {
+          "id": "evidence-pilate-stone",
+          "statement": "Pontius Pilate is named as Roman governor of Judea on a first-century carved stone",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-pilate-stone",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "AE 1963, no. 104"
+        },
+        {
+          "id": "evidence-yehohanan-heel-bone",
+          "statement": "A nail-pierced heel bone from first-century Jerusalem shows crucified victims could be buried in tombs",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-yehohanan-heel-bone",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Yehohanan Ossuary, Rahmani no. 218"
+        },
+        {
+          "id": "evidence-caiaphas-ossuary",
+          "statement": "High Priest Caiaphas may be named in Aramaic on a first-century Jerusalem bone box",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-caiaphas-ossuary",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "IAA 91-468"
+        },
+        {
+          "id": "evidence-nazareth-inscription",
+          "statement": "The Nazareth Inscription against removing bodies from tombs never mentions Jesus or Christians",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-nazareth-inscription",
+          "role": "caveat",
+          "impactScore": 1,
+          "ref": "SEG 8:13"
+        }
+      ]
+    },
+    {
+      "category": "Pagan critics",
+      "points": [
+        {
+          "id": "evidence-celsus-contra-celsum",
+          "statement": "Celsus, a second-century pagan critic, objected that Christians worshiped Christ alongside God",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-celsus-contra-celsum",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Origen, Contra Celsum Book 8"
+        },
+        {
+          "id": "evidence-lucian-peregrinus",
+          "statement": "Lucian, a Greek satirist, mocked Christians for worshipping the man crucified in Palestine",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-lucian-peregrinus",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Lucian, Peregrinus 11–13"
+        },
+        {
+          "id": "evidence-porphyry-against-christians",
+          "statement": "Porphyry, a third-century pagan philosopher, criticized Christians for worshipping Jesus as God",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-porphyry-against-christians",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Augustine, City of God 19.23"
+        },
+        {
+          "id": "evidence-sossianus-hierocles-against-hierocles-2",
+          "statement": "Roman governor Hierocles objected that Christians proclaimed Jesus a god because of a few miracles",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-sossianus-hierocles-against-hierocles-2",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Eusebius, Against Hierocles 2"
+        },
+        {
+          "id": "evidence-galen-de-pulsuum",
+          "statement": "Galen, court doctor to Roman emperors, noted that Christians showed self-restraint and courage facing death",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-galen-de-pulsuum",
+          "role": "support",
+          "impactScore": 3,
+          "ref": "Galen, Summary of Plato's Republic"
+        },
+        {
+          "id": "evidence-mara-bar-serapion",
+          "statement": "Captive Stoic Mara bar Serapion wrote of the Jews executing “their wise King” without naming Jesus",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-mara-bar-serapion",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Mara bar Serapion, Letter to His Son Serapion"
+        },
+        {
+          "id": "evidence-numenius-on-the-good",
+          "statement": "2nd-century philosopher Numenius reportedly told a story about Jesus without naming him, preserved only secondhand",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-numenius-on-the-good",
+          "role": "caveat",
+          "impactScore": 1,
+          "ref": "Origen, Contra Celsum 4.51"
+        }
+      ]
+    },
+    {
+      "category": "Jewish sources",
+      "points": [
+        {
+          "id": "evidence-josephus-antiquities-20-9-1",
+          "statement": "Josephus, a Jewish priest, records the stoning of James, brother of “Jesus, who was called Christ”",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-josephus-antiquities-20-9-1",
+          "role": "lead",
+          "impactScore": 5,
+          "ref": "Josephus, Ant. 20.9.1"
+        },
+        {
+          "id": "evidence-tosefta-hullin-talmud-abodah-zarah-27b",
+          "statement": "Early Jewish writings say a rabbi forbade accepting a snakebite healing in Jesus's name",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-tosefta-hullin-talmud-abodah-zarah-27b",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "Tosefta Hullin 2:22-23"
+        },
+        {
+          "id": "evidence-josephus-antiquities-18-3-3",
+          "statement": "Josephus's passage has later Christian additions, yet most historians say he recorded Jesus's crucifixion under Pilate",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-josephus-antiquities-18-3-3",
+          "role": "caveat",
+          "impactScore": 7,
+          "ref": "Josephus, Ant. 18.3.3"
+        },
+        {
+          "id": "evidence-babylonian-talmud-sanhedrin-43a",
+          "statement": "The Babylonian Talmud, a late rabbinic text, says Jesus was executed on Passover eve for sorcery",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-babylonian-talmud-sanhedrin-43a",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Babylonian Talmud, Sanhedrin 43a"
+        },
+        {
+          "id": "evidence-jewish-polemic-toledot-trypho",
+          "statement": "Justin Martyr, a Christian writer, reports secondhand that Jewish leaders claimed disciples stole Jesus's body",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-jewish-polemic-toledot-trypho",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Justin Martyr, Dialogue with Trypho 108"
+        },
+        {
+          "id": "evidence-babylonian-talmud-gittin-57a",
+          "statement": "A late Babylonian Talmud passage depicts Jesus, called Yeshu, judged after death for mocking Jewish sages",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-babylonian-talmud-gittin-57a",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "Babylonian Talmud, Gittin 57a"
+        },
+        {
+          "id": "evidence-tosefta-talmud-sanhedrin-107b",
+          "statement": "A late Jewish Talmud story says Yeshu the Nazarene practiced sorcery and led Israel astray",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-tosefta-talmud-sanhedrin-107b",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Babylonian Talmud, Sanhedrin 107b"
+        }
+      ]
+    },
+    {
+      "category": "Christians before Nicaea",
+      "points": [
+        {
+          "id": "evidence-ignatius-seven-epistles",
+          "statement": "Bishop Ignatius called Jesus God in flesh over two centuries before the Council of Nicaea",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-ignatius-seven-epistles",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Ignatius, Ephesians 7:2"
+        },
+        {
+          "id": "evidence-second-clement-1-1",
+          "statement": "A mid-second-century Christian sermon urges listeners to think of Jesus as God and Judge",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-second-clement-1-1",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "2 Clement 1:1"
+        },
+        {
+          "id": "evidence-carmen-christi-philippians-2-6-11",
+          "statement": "Philippians is inside the Bible, yet preserves an earlier hymn saying Jesus existed in God's form",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-carmen-christi-philippians-2-6-11",
+          "role": "caveat",
+          "impactScore": 5,
+          "ref": "Philippians 2:6-11"
+        },
+        {
+          "id": "evidence-melito-on-the-passover",
+          "statement": "Christian bishop Melito isn’t an outsider, but his second-century sermon says, “God has been murdered”",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-melito-on-the-passover",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Melito, Peri Pascha 96"
+        },
+        {
+          "id": "evidence-polycarp-philippians-12-2",
+          "statement": "Second-century bishop Polycarp calls Jesus 'our Lord and God,' though a shorter Latin text lacks 'God'",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-polycarp-philippians-12-2",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Polycarp, Philippians 12:2"
+        },
+        {
+          "id": "evidence-phos-hilaron",
+          "statement": "A Christian sunset hymn, already ancient by AD 375, praises Father, Son, and Holy Spirit",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-phos-hilaron",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "Basil, On the Holy Spirit 29.73"
+        },
+        {
+          "id": "evidence-hegesippus-eusebius-hist-eccl-3-20",
+          "statement": "Hegesippus, a second-century Christian, wrote that Emperor Domitian questioned the grandchildren of Jesus's brother Jude",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-hegesippus-eusebius-hist-eccl-3-20",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Eusebius, Church History 3.20"
+        }
+      ]
+    },
+    {
+      "category": "New Testament archaeology",
+      "points": [
+        {
+          "id": "evidence-pool-of-bethesda",
+          "statement": "Excavating Jerusalem's Pool of Bethesda uncovered a two-basin layout fitting the five porticoes in John's Gospel",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-pool-of-bethesda",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Pool of Bethesda, pre-AD 70"
+        },
+        {
+          "id": "evidence-gallio-inscription",
+          "statement": "An inscription from Emperor Claudius names Gallio as proconsul, matching his title in Acts",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-gallio-inscription",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Delphi Inscription SIG³ 801D"
+        },
+        {
+          "id": "evidence-pool-of-siloam",
+          "statement": "Jerusalem's first-century Pool of Siloam, mentioned in John's Gospel, was uncovered by archaeologists",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-pool-of-siloam",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "Pool of Siloam, pre-AD 70"
+        },
+        {
+          "id": "evidence-capernaum-synagogue",
+          "statement": "In Capernaum, where Mark places Jesus, excavations uncovered a first-century home converted into a Christian house-church",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-capernaum-synagogue",
+          "role": "support",
+          "impactScore": 3,
+          "ref": "Insula I Courtyard House, 1st-6th c. AD"
+        },
+        {
+          "id": "evidence-sergius-paulus-inscription",
+          "statement": "Acts' governor Sergius Paulus may appear on Cyprus and Rome inscriptions, though neither match is proven",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-sergius-paulus-inscription",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "IGR III 930; CIL VI 31545"
+        },
+        {
+          "id": "evidence-erastus-inscription",
+          "statement": "Corinth's Erastus pavement names an official, though scholars dispute whether he's the city treasurer Paul mentions",
+          "target": "/discover/extrabiblical-evidence-for-jesus#evidence-erastus-inscription",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Corinth VIII.3, no. 232"
+        }
+      ]
+    }
+  ]
+}

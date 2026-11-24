@@ -1,0 +1,519 @@
+{
+  "article": "muhammad-and-slavery",
+  "title": "What do the Qurʾān and the Ṣaḥīḥ hadith say about slavery?",
+  "basePath": "/discover/muhammad-and-slavery",
+  "status": "complete",
+  "progress": {
+    "approved": 59,
+    "total": 59,
+    "orderedByImpact": true,
+    "polished": true,
+    "polishedCount": 59,
+    "refsAdded": true,
+    "refsCount": 58
+  },
+  "groups": [
+    {
+      "category": "Concubines & female slaves",
+      "points": [
+        {
+          "id": "verse-4-24",
+          "statement": "Sahih Muslim ties Quran 4:24 to captured married women becoming lawful to the Companions",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-4-24",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Muslim 1456a"
+        },
+        {
+          "id": "awtas-4-24",
+          "statement": "Quran 4:24 was revealed when Muhammad's companions held back from married captives, making them lawful",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#awtas-4-24",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Muslim 1456a"
+        },
+        {
+          "id": "verse-23-5-6",
+          "statement": "The Quran allows female slaves, including captives, alongside wives under its chastity rule, Muslim commentators say",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-23-5-6",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Quran 23:5-6"
+        },
+        {
+          "id": "verse-33-50",
+          "statement": "The Quran makes enslaved women lawful to Muhammad, identified by commentators as war captives and concubines",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-33-50",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Quran 33:50"
+        },
+        {
+          "id": "azl-captives",
+          "statement": "Muhammad answered about withdrawal to avoid pregnancy with captive women his men wanted to ransom",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#azl-captives",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Muslim 1438a"
+        },
+        {
+          "id": "captives-without-marriage",
+          "statement": "Ibn Kathir and al-Tabari say the Quran makes married captives lawful to their captors",
+          "target": "/discover/muhammad-and-slavery/counter-apologetics#captives-without-marriage",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Quran 4:24"
+        },
+        {
+          "id": "verse-33-52",
+          "statement": "The Quran barred Muhammad from more wives, exempting female slaves with no restriction",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-33-52",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Quran 33:52"
+        },
+        {
+          "id": "verse-4-3",
+          "statement": "Quran commentator al-Tabari says concubines aren't owed the rights of free women because they are property",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-4-3",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Tabari on Quran 4:3"
+        },
+        {
+          "id": "ali-khums",
+          "statement": "When Ali slept with a captive girl from the war spoils, Muhammad said he deserved more",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#ali-khums",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 4350"
+        },
+        {
+          "id": "captive-wives",
+          "statement": "Muhammad freed and married captives, yet Ibn Kathir counts captive Rayhana and Mariya as concubines.",
+          "target": "/discover/muhammad-and-slavery/counter-apologetics#captive-wives",
+          "role": "support",
+          "impactScore": 7,
+          "ref": null
+        },
+        {
+          "id": "verse-70-29-30",
+          "statement": "Female slaves are again the exception in Quran 70:30, say Ibn Kathir and al-Tabari",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-70-29-30",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Quran 70:30"
+        }
+      ]
+    },
+    {
+      "category": "Muhammad owned slaves",
+      "points": [
+        {
+          "id": "prophet-owned-slaves",
+          "statement": "Muhammad owned, bought, and sold slaves in his lifetime, according to Bukhari and Muslim",
+          "target": "/discover/muhammad-and-slavery/counter-apologetics#prophet-owned-slaves",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Bukhari 7186; Muslim 1602"
+        },
+        {
+          "id": "two-slaves-for-one",
+          "statement": "Muhammad bought one slave by paying his master two black slaves",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#two-slaves-for-one",
+          "role": "lead",
+          "impactScore": 9,
+          "ref": "Muslim 1602"
+        },
+        {
+          "id": "safiyya-seven-heads",
+          "statement": "Muhammad bought his future wife Safiyya, a Jewish captive, from one of his companions",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#safiyya-seven-heads",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Muslim 1365e"
+        },
+        {
+          "id": "prophets-slave-woman",
+          "statement": "Ali says Muhammad ordered him to flog a slave woman Muhammad owned",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#prophets-slave-woman",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Muslim 1705a"
+        },
+        {
+          "id": "anjasha",
+          "statement": "Muhammad's black slave Anjasha drove the women's camels on a journey",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#anjasha",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Bukhari 6161"
+        },
+        {
+          "id": "rabah",
+          "statement": "Rabah sat at Muhammad's stairs, called 'a black slave' in Bukhari's English and 'servant' in Muslim's",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#rabah",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Bukhari 4913; Muslim 1479a"
+        },
+        {
+          "id": "right-hand-touch",
+          "statement": "Aisha says Muhammad touched no woman's hand when taking pledges except a woman he owned",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#right-hand-touch",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Bukhari 7214"
+        },
+        {
+          "id": "midam",
+          "statement": "Mid'am, a slave presented to Muhammad, was unloading his camel when an arrow killed him",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#midam",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Bukhari 4234"
+        },
+        {
+          "id": "karkara",
+          "statement": "Karkara isn't called a slave, just 'a man' tending Muhammad's belongings, distinguishing free attendants from slaves",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#karkara",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Bukhari 3074"
+        },
+        {
+          "id": "household-slaves",
+          "statement": "Muhammad died leaving no slaves in one report, while another mentions his slave or freed tailor",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#household-slaves",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "Bukhari 2739; Bukhari 5433"
+        }
+      ]
+    },
+    {
+      "category": "Freeing & abolition",
+      "points": [
+        {
+          "id": "gradual-abolition",
+          "statement": "Bukhari and Muslim record Muhammad selling a slave whose owner had promised to free him",
+          "target": "/discover/muhammad-and-slavery/counter-apologetics#gradual-abolition",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari 7186"
+        },
+        {
+          "id": "mudabbar-sold",
+          "statement": "Muhammad sold a slave who had been promised freedom at his owner's death",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#mudabbar-sold",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari 7186"
+        },
+        {
+          "id": "six-slaves-lots",
+          "statement": "Muhammad cast lots among six slaves freed by a dying man, keeping four in slavery",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#six-slaves-lots",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Muslim 1668a"
+        },
+        {
+          "id": "maymuna",
+          "statement": "Muhammad told Maymuna giving her slave girl to her uncles brought more reward than freeing her",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#maymuna",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 2592"
+        },
+        {
+          "id": "barira",
+          "statement": "Freed slaves kept an inheritance tie to whoever freed them, Muhammad ruled in Barira's case",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#barira",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "Bukhari 6717"
+        },
+        {
+          "id": "kaffara",
+          "statement": "Breaking the Ramadan fast by intercourse is atoned for first by freeing a slave",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#kaffara",
+          "role": "support",
+          "impactScore": 3,
+          "ref": "Bukhari 5368"
+        },
+        {
+          "id": "freeing-slaves",
+          "statement": "Freeing a slave is rewarded, yet no cited Quran or Bukhari text ends owning slaves",
+          "target": "/discover/muhammad-and-slavery/counter-apologetics#freeing-slaves",
+          "role": "caveat",
+          "impactScore": 5,
+          "ref": "Quran 90:13; Bukhari 2517"
+        },
+        {
+          "id": "verse-24-33",
+          "statement": "Letting slaves buy freedom is in the Quran, though scholars split on whether masters must agree",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-24-33",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Quran 24:33"
+        },
+        {
+          "id": "where-is-allah",
+          "statement": "After a slave was slapped, Muhammad said, 'Grant her freedom, she is a believing woman'",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#where-is-allah",
+          "role": "caveat",
+          "impactScore": 3,
+          "ref": "Muslim 537a"
+        }
+      ]
+    },
+    {
+      "category": "War captives",
+      "points": [
+        {
+          "id": "banu-qurayza",
+          "statement": "Muhammad said killing Banu Qurayza's warriors and taking their women and children captive matched God's judgment",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#banu-qurayza",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari 4121; Bukhari 4122"
+        },
+        {
+          "id": "who-was-enslaved",
+          "statement": "Women and children were taken captive and their fighting men killed, according to Bukhari and Muslim",
+          "target": "/discover/muhammad-and-slavery/counter-apologetics#who-was-enslaved",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Bukhari 2541; Muslim 1768a"
+        },
+        {
+          "id": "captives-ghulul",
+          "statement": "Muhammad lists 'a person crying loudly' among stolen war spoils alongside livestock, clothes, and gold",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#captives-ghulul",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Muslim 1831a"
+        },
+        {
+          "id": "captives-exchanged",
+          "statement": "Muhammad exchanged a captive girl from a raid for Muslim prisoners held in Mecca",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#captives-exchanged",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Muslim 1755"
+        },
+        {
+          "id": "juwayriyya",
+          "statement": "Muhammad got his future wife Juwayriyya as a captive when her tribe was attacked without warning",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#juwayriyya",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 2541"
+        },
+        {
+          "id": "safiyya",
+          "statement": "Muhammad married Safiyya, a captive from Khaybar, and counted freeing her as her bridal gift",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#safiyya",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 371"
+        },
+        {
+          "id": "safiyya-veil",
+          "statement": "Until Muhammad veiled Safiyya, the Muslims did not know if she was a wife or slave",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#safiyya-veil",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Bukhari 4213"
+        },
+        {
+          "id": "hawazin-captives",
+          "statement": "Muhammad returned captives after a tribe converted, with soldiers releasing them freely or for later spoils",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#hawazin-captives",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Bukhari 2583"
+        },
+        {
+          "id": "fatima-servant",
+          "statement": "Muhammad gave Fatima words of praise instead of a servant when war-booty slave girls arrived",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#fatima-servant",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Bukhari 3113"
+        }
+      ]
+    },
+    {
+      "category": "Slaves in Islamic law",
+      "points": [
+        {
+          "id": "runaway-slave",
+          "statement": "Muhammad said a runaway slave's prayer is not accepted",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#runaway-slave",
+          "role": "lead",
+          "impactScore": 8,
+          "ref": "Muslim 70"
+        },
+        {
+          "id": "servants-or-slaves",
+          "statement": "Bukhari and Muslim record slaves being sold, exchanged, and owed as compensation",
+          "target": "/discover/muhammad-and-slavery/counter-apologetics#servants-or-slaves",
+          "role": "support",
+          "impactScore": 8,
+          "ref": "Bukhari 7186; Muslim 1602"
+        },
+        {
+          "id": "equal-rights",
+          "statement": "Hadiths call slaves “your brothers,” but the Quran and hadith set different penalties, rights, and duties",
+          "target": "/discover/muhammad-and-slavery/counter-apologetics#equal-rights",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 30; Quran 4:25"
+        },
+        {
+          "id": "classical-law",
+          "statement": "Ibn Kathir reports the majority view: a free man isn't executed for killing a slave",
+          "target": "/discover/muhammad-and-slavery/counter-apologetics#classical-law",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Ibn Kathir on Quran 2:178"
+        },
+        {
+          "id": "ghurra",
+          "statement": "For a lost unborn child, Muhammad set a male or female slave as compensation",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#ghurra",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Bukhari 6904"
+        },
+        {
+          "id": "verse-4-25",
+          "statement": "Ibn Kathir says marrying a believing slave woman means the children become her master's slaves",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-4-25",
+          "role": "support",
+          "impactScore": 7,
+          "ref": "Ibn Kathir on Quran 4:25"
+        },
+        {
+          "id": "slave-woman-sold",
+          "statement": "Muhammad said to sell a slave woman after repeated adultery, even for a rope of hair",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#slave-woman-sold",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Bukhari 2555"
+        },
+        {
+          "id": "walad-lil-firash",
+          "statement": "Muhammad assigned a slave-woman's son to her owner's family despite seeing the boy resembled another man",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#walad-lil-firash",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Bukhari 6765"
+        },
+        {
+          "id": "verse-16-75",
+          "statement": "A Quranic parable says an owned slave has no power over anything",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-16-75",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Quran 16:75"
+        },
+        {
+          "id": "verse-30-28",
+          "statement": "Quran commentator Al-Tabari says an owned slave has no right to divide his master's wealth",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-30-28",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Tabari on Quran 30:28"
+        },
+        {
+          "id": "ransom-returned",
+          "statement": "Muhammad voided a father's ransom in an adultery case, returning his hundred sheep and slave girl",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#ransom-returned",
+          "role": "support",
+          "impactScore": 5,
+          "ref": "Bukhari 6633"
+        },
+        {
+          "id": "verse-16-71",
+          "statement": "Early scholars read the Quran's verse on masters not sharing with slaves as opposing idolatry",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-16-71",
+          "role": "caveat",
+          "impactScore": 6,
+          "ref": "Quran 16:71"
+        },
+        {
+          "id": "booty-share",
+          "statement": "Ibn Abbas writes that slaves in battle get some reward, not a fixed share of spoils",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#booty-share",
+          "role": "caveat",
+          "impactScore": 2,
+          "ref": "Muslim 1812e"
+        }
+      ]
+    },
+    {
+      "category": "Household & treatment",
+      "points": [
+        {
+          "id": "master-duties",
+          "statement": "In Bukhari, Muhammad compares lashing a wife to lashing a slave",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#master-duties",
+          "role": "support",
+          "impactScore": 6,
+          "ref": "Bukhari 4942"
+        },
+        {
+          "id": "verse-33-55",
+          "statement": "The Quran exempts Muhammad's wives from observing hijab in front of slaves they owned",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-33-55",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "Quran 33:55"
+        },
+        {
+          "id": "verse-24-32",
+          "statement": "The Quran commands believers to marry off their righteous male and female slaves",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-24-32",
+          "role": "support",
+          "impactScore": 4,
+          "ref": "Quran 24:32"
+        },
+        {
+          "id": "verse-24-58",
+          "statement": "Slaves and children, says the Qur'an, must ask permission to enter at three times of day",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-24-58",
+          "role": "support",
+          "impactScore": 3,
+          "ref": "Quran 24:58"
+        },
+        {
+          "id": "abu-tayba",
+          "statement": "Muhammad paid the slave Abu Tayba for cupping and got his masters to lower his tax",
+          "target": "/discover/muhammad-and-slavery/prophets-practice#abu-tayba",
+          "role": "support",
+          "impactScore": 2,
+          "ref": "Bukhari 2102"
+        },
+        {
+          "id": "verse-24-31",
+          "statement": "The Qurʾān lets women show their charms to their slaves, including male slaves, most scholars say",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-24-31",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Quran 24:31"
+        },
+        {
+          "id": "verse-4-36",
+          "statement": "The Quran commands kindness to slaves alongside parents, orphans, and neighbors",
+          "target": "/discover/muhammad-and-slavery/quranic-witness#verse-4-36",
+          "role": "caveat",
+          "impactScore": 4,
+          "ref": "Quran 4:36"
+        }
+      ]
+    }
+  ]
+}
