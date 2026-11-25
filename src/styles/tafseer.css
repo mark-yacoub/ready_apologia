@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Islamic Commentaries (Tafseer) Apple-Grade Component Stylesheet
+   Islamic Commentaries (Tafseer) — Archive Reading Room Stylesheet
    ========================================================================== */
 
 .tafseer-apple-container {
@@ -9,7 +9,7 @@
   margin-top: 4px;
 }
 
-/* 1. Segmented Control / Pill Bar & Header Controls */
+/* 1. Segmented Control & Header Controls */
 .tafseer-header-controls {
   display: flex;
   justify-content: space-between;
@@ -20,57 +20,63 @@
 }
 
 .tafseer-single-title {
-  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-weight: 700;
   font-size: 14px;
-  color: var(--color-on-surface, #0f172a);
+  color: var(--ra-ink, #1b1917);
   padding: 4px;
 }
 
 .tafseer-lang-toggle {
   display: inline-flex;
-  background: var(--color-surface-container-low, #f1f5f9);
+  background: var(--ra-well, #f3efe8);
   padding: 4px;
-  border-radius: 12px;
+  border-radius: 10px;
   gap: 4px;
-  border: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.08));
+  border: 1px solid var(--ra-line, #e8e2d9);
 }
 
 .tafseer-lang-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 12px;
+  min-height: 32px;
+  padding: 5px 12px;
   background: transparent;
-  border: none;
-  border-radius: 9px;
-  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
-  font-size: 12px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font-family: var(--ra-sans, 'Public Sans', sans-serif);
+  font-size: 12.5px;
   font-weight: 600;
-  color: var(--color-on-surface-variant, #64748b);
+  color: var(--ra-ink-3, #6b6560);
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   user-select: none;
 }
 
 .tafseer-lang-btn:hover {
-  color: var(--color-on-surface, #0f172a);
-  background: rgba(0, 0, 0, 0.03);
+  color: var(--ra-ink, #1b1917);
 }
 
 .tafseer-lang-btn.is-active {
-  background: var(--color-surface, #ffffff);
-  color: var(--color-on-surface, #0f172a);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.04);
+  background: var(--ra-surface, #ffffff);
+  border-color: var(--ra-line, #e8e2d9);
+  color: var(--ra-islamic, #33593a);
+  font-weight: 700;
+  box-shadow: 0 1px 2px rgba(27, 25, 23, 0.06);
+}
+
+.tafseer-header-controls .scrollable-track-wrapper {
+  --ra-track-fade: var(--ra-well, #f3efe8);
 }
 
 .tafseer-segmented-track {
   display: inline-flex;
-  background: var(--color-surface-container-low, #f1f5f9);
+  background: var(--ra-well, #f3efe8);
   padding: 4px;
-  border-radius: 12px;
+  border-radius: 11px;
   gap: 4px;
-  border: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.08));
+  border: 1px solid var(--ra-line, #e8e2d9);
   max-width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
@@ -83,63 +89,62 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 14px;
+  min-height: 36px;
+  padding: 6px 14px;
   background: transparent;
-  border: none;
-  border-radius: 9px;
-  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-size: 13px;
-  font-weight: 500;
-  color: var(--color-on-surface-variant, #64748b);
+  font-weight: 600;
+  color: var(--ra-ink-3, #6b6560);
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   white-space: nowrap;
   user-select: none;
 }
 
 .tafseer-segment-btn:hover {
-  color: var(--color-on-surface, #0f172a);
-  background: rgba(0, 0, 0, 0.03);
+  color: var(--ra-ink, #1b1917);
 }
 
 .tafseer-segment-btn.is-active {
-  background: var(--color-surface, #ffffff);
-  color: var(--color-on-surface, #0f172a);
+  background: var(--ra-surface, #ffffff);
+  border-color: var(--ra-line, #e8e2d9);
+  color: var(--ra-islamic, #33593a);
   font-weight: 700;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(27, 25, 23, 0.06);
 }
 
-/* 2. Modern Apple-grade Commentary Card */
+/* 2. Commentary Card */
 .tafseer-card {
-  background: var(--color-surface, #ffffff);
-  border: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.08));
-  border-radius: 16px;
+  background: var(--ra-surface, #ffffff);
+  border: 1px solid var(--ra-line, #e8e2d9);
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04);
-  transition: border-color 0.2s ease;
+  box-shadow: var(--ra-shadow-sm, 0 1px 2px rgba(27, 25, 23, 0.04));
 }
 
-/* Card Meta Bar & Source Button (Pattern A) */
 .tafseer-card-meta-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 18px;
-  background: var(--color-surface, #ffffff);
-  border-bottom: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.06));
+  padding: 10px 16px;
+  background: var(--ra-paper, #fbf9f5);
+  border-bottom: 1px solid var(--ra-line, #e8e2d9);
   gap: 12px;
 }
 
 .tafseer-meta-era {
-  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-size: 12px;
-  font-weight: 500;
-  color: var(--color-on-surface-variant, #64748b);
+  font-weight: 600;
+  color: var(--ra-ink-3, #6b6560);
   letter-spacing: 0.01em;
 }
 
 .tafseer-card-meta-bar[dir="rtl"] .tafseer-meta-era {
-  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-family: var(--ra-arabic, 'Amiri', 'Traditional Arabic', serif);
   font-size: 13.5px;
 }
 
@@ -147,32 +152,30 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 4px 10px;
+  padding: 5px 11px;
   border-radius: 8px;
-  background: var(--color-surface-container-low, #f1f5f9);
-  border: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.08));
-  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  background: var(--ra-verify-bg, #e8f2f3);
+  border: 1px solid var(--ra-verify-rule, #bdd8dc);
+  font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-size: 11.5px;
-  font-weight: 600;
-  color: var(--color-on-surface, #0f172a);
+  font-weight: 700;
+  color: var(--ra-verify, #0e5e6f);
   text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   white-space: nowrap;
   user-select: none;
 }
 
 .tafseer-card-meta-bar[dir="rtl"] .tafseer-source-link-btn {
-  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-family: var(--ra-arabic, 'Amiri', 'Traditional Arabic', serif);
   font-size: 13px;
   flex-direction: row-reverse;
 }
 
 .tafseer-source-link-btn:hover {
-  background: var(--color-surface, #ffffff);
-  border-color: var(--color-secondary, #974543);
-  color: var(--color-secondary, #974543);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  transform: translateY(-0.5px);
+  background: var(--ra-surface, #ffffff);
+  border-color: var(--ra-verify, #0e5e6f);
+  color: var(--ra-verify-strong, #0a4855);
 }
 
 .tafseer-source-link-btn svg {
@@ -181,8 +184,8 @@
 }
 
 .tafseer-card-body {
-  padding: 20px 22px;
-  background: var(--color-surface-container-lowest, #fafafa);
+  padding: 20px;
+  background: var(--ra-surface, #ffffff);
 }
 
 .tafseer-codex-jump-banner {
@@ -194,10 +197,10 @@
   padding: 10px 14px;
   margin-bottom: 16px;
   border-radius: 10px;
-  background: #fef3c7;
-  border: 1px solid #f59e0b;
-  color: #78350f;
-  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  background: var(--ra-sand, #f6efe3);
+  border: 1px solid #e3d3b6;
+  color: #6b4917;
+  font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-size: 13px;
   font-weight: 600;
 }
@@ -208,46 +211,45 @@
   gap: 4px;
   padding: 5px 11px;
   border-radius: 7px;
-  border: 1px solid #d97706;
-  background: #ffffff;
-  color: #92400e;
-  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  border: 1px solid var(--ra-sand-rule, #b8893a);
+  background: var(--ra-surface, #ffffff);
+  color: #6b4917;
+  font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease;
 }
 
 .tafseer-codex-jump-btn:hover {
-  background: #fde68a;
+  background: var(--ra-mark, #f3dfae);
 }
 
 .tafseer-exegesis-prose .tafseer-codex-highlight-block {
-  background: linear-gradient(90deg, rgba(254, 240, 138, 0.55) 0%, rgba(254, 249, 195, 0.4) 100%);
-  border-left: 4px solid #f59e0b;
+  background: var(--ra-sand, #f6efe3);
+  border-left: 3.5px solid var(--ra-sand-rule, #b8893a);
   border-radius: 8px;
   padding: 12px 14px;
   margin: 12px 0;
-  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.12);
   scroll-margin-top: 110px;
 }
 
 .tafseer-exegesis-prose[dir="rtl"] .tafseer-codex-highlight-block {
   border-left: none;
-  border-right: 4px solid #f59e0b;
+  border-right: 3.5px solid var(--ra-sand-rule, #b8893a);
 }
 
 .tafseer-exegesis-prose {
-  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-size: 15px;
-  line-height: 1.68;
-  color: var(--color-on-surface, #1e293b);
+  line-height: 1.7;
+  color: var(--ra-ink, #1b1917);
 }
 
 .tafseer-exegesis-prose[dir="rtl"] {
-  font-family: 'Amiri', 'Traditional Arabic', serif;
-  font-size: 18px;
-  line-height: 1.8;
+  font-family: var(--ra-arabic, 'Amiri', 'Traditional Arabic', serif);
+  font-size: 19px;
+  line-height: 1.85;
   text-align: right;
 }
 
@@ -259,9 +261,9 @@
   cursor: pointer;
   list-style: none;
   font-size: 12.5px;
-  font-weight: 600;
-  color: #0d9488;
-  background: rgba(13, 148, 136, 0.04);
+  font-weight: 700;
+  color: var(--ra-islamic, #33593a);
+  background: var(--ra-islamic-bg, #edf3ee);
   transition: background-color 0.15s ease;
   user-select: none;
 }
@@ -269,7 +271,7 @@
   display: none;
 }
 .tafseer-context-summary:hover {
-  background: rgba(13, 148, 136, 0.08);
+  background: #e2ece4;
 }
 
 .tafseer-summary-label {
@@ -279,7 +281,7 @@
 }
 
 .tafseer-chevron {
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.2s var(--ra-ease, ease);
 }
 details[open] .tafseer-chevron {
   transform: rotate(180deg);
@@ -290,7 +292,7 @@ details[open] .tafseer-chevron {
   flex-direction: column;
   gap: 12px;
   padding: 14px 16px;
-  border-top: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.06));
+  border-top: 1px solid var(--ra-line, #e8e2d9);
 }
 
 .tafseer-context-row {
@@ -301,24 +303,25 @@ details[open] .tafseer-chevron {
 
 .tafseer-verse-num {
   font-size: 11px;
-  font-weight: 700;
-  color: #0d9488;
+  font-weight: 750;
+  color: var(--ra-islamic, #33593a);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .tafseer-context-arabic {
+  font-family: var(--ra-arabic, 'Amiri', 'Traditional Arabic', serif);
   font-size: 18px;
-  line-height: 1.6;
+  line-height: 1.65;
   margin: 0;
   direction: rtl;
 }
 
 .tafseer-context-english {
   font-size: 13.5px;
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0;
-  color: var(--color-on-surface-variant, #64748b);
+  color: var(--ra-ink-2, #57514a);
 }
 
 .tafseer-ai-translation-note {
@@ -326,21 +329,23 @@ details[open] .tafseer-chevron {
   align-items: center;
   gap: 6px;
   margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ra-line, #e8e2d9);
   font-size: 12px;
-  color: var(--color-on-surface-variant, #64748b);
-  opacity: 0.85;
+  color: var(--ra-ink-3, #6b6560);
 }
 
 .tafseer-ai-translation-note svg {
-  color: #a855f7; /* Subtle purple spark accent */
+  color: var(--ra-ink-3, #6b6560);
+  flex-shrink: 0;
 }
 
-/* 4. Always-Expanded Scholarly Authority Section */
+/* 4. Scholarly Authority Section (Calm Slate Callout) */
 .tafseer-authority-callout {
   margin: 0;
-  padding: 18px 22px;
-  background: rgba(13, 148, 136, 0.05);
-  border-top: 1px solid rgba(13, 148, 136, 0.15);
+  padding: 16px 20px;
+  background: var(--ra-slate, #eef1f4);
+  border-top: 1px solid #d5dde5;
 }
 
 .tafseer-authority-header {
@@ -355,8 +360,8 @@ details[open] .tafseer-chevron {
   gap: 6px;
   font-size: 11px;
   font-weight: 800;
-  color: #0d9488;
-  letter-spacing: 0.04em;
+  color: var(--ra-ink-2, #57514a);
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -368,15 +373,15 @@ details[open] .tafseer-chevron {
 
 .tafseer-authority-lead,
 .tafseer-authority-detail {
-  font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+  font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-size: 13px;
-  line-height: 1.55;
-  color: var(--color-on-surface-variant, #475569);
+  line-height: 1.58;
+  color: var(--ra-ink-2, #57514a);
   margin: 0;
 }
 
 .tafseer-authority-lead strong,
 .tafseer-authority-detail strong {
-  color: var(--color-on-surface, #0f172a);
-  font-weight: 600;
+  color: var(--ra-ink, #1b1917);
+  font-weight: 650;
 }

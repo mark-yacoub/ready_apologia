@@ -1,12 +1,12 @@
 .variants-highlight {
-  background-color: #fee2e2;
-  border: 1px solid #f87171;
+  background-color: var(--ra-christian-bg, #f6eeec);
+  border: 1px solid var(--ra-christian-rule, #dfc5c2);
   padding: 8px 12px;
   border-radius: 8px;
   margin-bottom: 4px;
 }
-.variants-highlight .spec-label { color: #b91c1c; }
-.variants-highlight .spec-value { color: #7f1d1d; }
+.variants-highlight .spec-label { color: var(--ra-christian, #7a3530); }
+.variants-highlight .spec-value { color: var(--ra-ink, #1b1917); }
 .carousel-container {
   display: flex;
   flex-direction: column;
@@ -367,11 +367,11 @@
 }
 
 .context-text {
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.55;
-  color: var(--color-on-surface-variant);
+  color: var(--ra-ink-2, #57514a);
   margin: 0;
-  text-align: justify;
+  text-align: left;
 }
 
 /* Indicator Dots */

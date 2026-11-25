@@ -27,11 +27,11 @@
 }
 /* Keeps a 44px touch target while the visible pill stays 36px tall. */
 .reel-play-all::after { content: ''; position: absolute; inset: -4px 0; }
-.reel-play-all svg { color: var(--color-secondary, #974543); flex: none; }
-.reel-play-all:hover { border-color: #18181b; box-shadow: 0 2px 8px rgba(9, 9, 11, 0.08); }
+.reel-play-all svg { color: var(--ra-accent, #7a3530); flex: none; }
+.reel-play-all:hover { border-color: var(--ra-ink, #1b1917); box-shadow: 0 2px 8px rgba(27, 25, 23, 0.08); }
 .reel-play-all:active { transform: scale(0.97); }
-.reel-play-all:focus-visible { outline: 2px solid var(--color-secondary, #974543); outline-offset: 2px; }
-.reel-play-all-count { font-weight: 600; color: #71717a; }
+.reel-play-all:focus-visible { outline: 2px solid var(--ra-verify, #0e5e6f); outline-offset: 2px; }
+.reel-play-all-count { font-weight: 600; color: var(--ra-ink-3, #6b6560); }
 
 /* ---------- Overlay ---------- */
 html.reel-open { overflow: hidden; }
