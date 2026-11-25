@@ -53,8 +53,8 @@
   box-sizing: border-box;
 }
 
-.qk-sheet [hidden],
-.qk-entry [hidden] {
+/* Author display rules (.qk-chip, .qk-chips, .qk-filter__clear) override UA `[hidden]` without !important */
+.qk-sheet [hidden] {
   display: none !important;
 }
 

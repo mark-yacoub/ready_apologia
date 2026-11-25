@@ -18,6 +18,104 @@ import { BASE, normalizeBase, toPageKey } from './paths.js';
 export { BASE, toPageKey };
 export const ALLOWED_ROLES = new Set(['lead', 'support', 'caveat']);
 
+const SLUG_RE = /^[a-z0-9-]+$/;
+const INVALID_ID_CHARS_RE = /[\s#]/;
+const BRACKETS_RE = /[\[\]]/;
+
+function parsePointRef(rawRef, pLoc, idLabel, problems) {
+  if (rawRef === undefined || rawRef === null) return null;
+  if (typeof rawRef !== 'string') {
+    problems.push(`${pLoc} (${idLabel}): ref must be a string or null`);
+    return null;
+  }
+  const trimmed = rawRef.trim();
+  if (!trimmed) {
+    problems.push(`${pLoc} (${idLabel}): ref must be a non-empty string or null`);
+    return null;
+  }
+  if (BRACKETS_RE.test(trimmed)) {
+    problems.push(`${pLoc} (${idLabel}): ref "${trimmed}" must not contain "[" or "]"`);
+    return null;
+  }
+  return trimmed;
+}
+
+function validatePoint(pt, pLoc, { expectedPrefix, base, seenIds, problems }) {
+  if (!pt || typeof pt !== 'object' || Array.isArray(pt)) {
+    problems.push(`${pLoc} must be an object`);
+    return null;
+  }
+
+  const id = typeof pt.id === 'string' ? pt.id.trim() : '';
+  const idLabel = id || 'unnamed';
+  if (!id) {
+    problems.push(`${pLoc}.id must be a non-empty string`);
+  } else if (INVALID_ID_CHARS_RE.test(id)) {
+    problems.push(`${pLoc}.id "${id}" must not contain whitespace or "#"`);
+  } else if (seenIds.has(id)) {
+    problems.push(`${pLoc}.id "${id}" is duplicated`);
+  } else {
+    seenIds.add(id);
+  }
+
+  const statement = typeof pt.statement === 'string' ? pt.statement.trim() : '';
+  if (!statement) {
+    problems.push(`${pLoc} (${idLabel}): statement must be a non-empty string`);
+  }
+
+  const ref = parsePointRef(pt.ref, pLoc, idLabel, problems);
+
+  let role = 'support';
+  if (pt.role !== undefined) {
+    if (typeof pt.role !== 'string' || !ALLOWED_ROLES.has(pt.role)) {
+      problems.push(
+        `${pLoc} (${idLabel}): role ${JSON.stringify(pt.role)} must be "lead", "support", or "caveat"`,
+      );
+    } else {
+      role = pt.role;
+    }
+  }
+
+  const target = typeof pt.target === 'string' ? pt.target.trim() : '';
+  const hasValidPrefix =
+    target === expectedPrefix ||
+    target.startsWith(`${expectedPrefix}/`) ||
+    target.startsWith(`${expectedPrefix}#`);
+
+  if (!target || !hasValidPrefix) {
+    problems.push(
+      `${pLoc} (${idLabel}): target ${JSON.stringify(pt.target)} must start with "${expectedPrefix}"`,
+    );
+    return null;
+  }
+
+  const hashParts = target.split('#');
+  if (hashParts.length > 2) {
+    problems.push(`${pLoc} (${idLabel}): target "${target}" contains multiple "#" characters`);
+    return null;
+  }
+  if (hashParts.length === 2 && !hashParts[1]) {
+    problems.push(`${pLoc} (${idLabel}): target "${target}" has an empty "#hash"`);
+    return null;
+  }
+
+  const pageKey = toPageKey(hashParts[0], '');
+  const hash = hashParts[1] ?? '';
+  const resolvedPath = `${base}${pageKey}`;
+  const href = hash ? `${resolvedPath}#${hash}` : resolvedPath;
+
+  return {
+    id,
+    statement,
+    ref,
+    role,
+    href,
+    path: resolvedPath,
+    pageKey,
+    hash,
+  };
+}
+
 /**
  * Pure validator + transformer for a single article's Quick Points JSON payload.
  * Collects every validation problem and throws once listing them all.
@@ -30,7 +128,7 @@ export function validateQuickPoints(raw, slug, options = {}) {
   const base = normalizeBase(options.base ?? BASE);
   const problems = [];
 
-  if (!slug || typeof slug !== 'string' || !/^[a-z0-9-]+$/.test(slug)) {
+  if (!slug || typeof slug !== 'string' || !SLUG_RE.test(slug)) {
     throw new Error(`[quickPoints] invalid article slug: ${JSON.stringify(slug)}`);
   }
 
@@ -78,101 +176,15 @@ export function validateQuickPoints(raw, slug, options = {}) {
       const caveatPoints = [];
 
       group.points.forEach((pt, pi) => {
-        const pLoc = `${gLoc}.points[${pi}]`;
-        if (!pt || typeof pt !== 'object' || Array.isArray(pt)) {
-          problems.push(`${pLoc} must be an object`);
-          return;
-        }
-
-        const id = typeof pt.id === 'string' ? pt.id.trim() : '';
-        if (!id) {
-          problems.push(`${pLoc}.id must be a non-empty string`);
-        } else if (/[\s#]/.test(id)) {
-          problems.push(`${pLoc}.id "${id}" must not contain whitespace or "#"`);
-        } else if (seenIds.has(id)) {
-          problems.push(`${pLoc}.id "${id}" is duplicated`);
-        } else {
-          seenIds.add(id);
-        }
-
-        const statement = typeof pt.statement === 'string' ? pt.statement.trim() : '';
-        if (!statement) {
-          problems.push(`${pLoc} (${id || 'unnamed'}): statement must be a non-empty string`);
-        }
-
-        let ref = null;
-        if (pt.ref !== undefined && pt.ref !== null) {
-          if (typeof pt.ref !== 'string') {
-            problems.push(`${pLoc} (${id || 'unnamed'}): ref must be a string or null`);
-          } else {
-            const trimmedRef = pt.ref.trim();
-            if (!trimmedRef) {
-              problems.push(`${pLoc} (${id || 'unnamed'}): ref must be a non-empty string or null`);
-            } else if (/[\[\]]/.test(trimmedRef)) {
-              problems.push(
-                `${pLoc} (${id || 'unnamed'}): ref "${trimmedRef}" must not contain "[" or "]"`,
-              );
-            } else {
-              ref = trimmedRef;
-            }
-          }
-        }
-
-        let role = 'support';
-        if (pt.role !== undefined) {
-          if (typeof pt.role !== 'string' || !ALLOWED_ROLES.has(pt.role)) {
-            problems.push(
-              `${pLoc} (${id || 'unnamed'}): role ${JSON.stringify(pt.role)} must be "lead", "support", or "caveat"`,
-            );
-          } else {
-            role = pt.role;
-          }
-        }
-
-        const target = typeof pt.target === 'string' ? pt.target.trim() : '';
-        const hasValidPrefix =
-          target === expectedPrefix ||
-          target.startsWith(`${expectedPrefix}/`) ||
-          target.startsWith(`${expectedPrefix}#`);
-
-        if (!target || !hasValidPrefix) {
-          problems.push(
-            `${pLoc} (${id || 'unnamed'}): target ${JSON.stringify(pt.target)} must start with "${expectedPrefix}"`,
-          );
-          return;
-        }
-
-        const hashParts = target.split('#');
-        if (hashParts.length > 2) {
-          problems.push(`${pLoc} (${id || 'unnamed'}): target "${target}" contains multiple "#" characters`);
-          return;
-        }
-        if (hashParts.length === 2 && !hashParts[1]) {
-          problems.push(`${pLoc} (${id || 'unnamed'}): target "${target}" has an empty "#hash"`);
-          return;
-        }
-
-        const pageKey = toPageKey(hashParts[0], '');
-        const hash = hashParts[1] ?? '';
-        const resolvedPath = `${base}${pageKey}`;
-        const href = hash ? `${resolvedPath}#${hash}` : resolvedPath;
-
-        const prepared = {
-          id,
-          statement,
-          ref,
-          role,
-          href,
-          path: resolvedPath,
-          pageKey,
-          hash,
-        };
-
-        if (role === 'caveat') {
-          caveatPoints.push(prepared);
-        } else {
-          mainPoints.push(prepared);
-        }
+        const prepared = validatePoint(pt, `${gLoc}.points[${pi}]`, {
+          expectedPrefix,
+          base,
+          seenIds,
+          problems,
+        });
+        if (!prepared) return;
+        if (prepared.role === 'caveat') caveatPoints.push(prepared);
+        else mainPoints.push(prepared);
       });
 
       const outPoints = [...mainPoints, ...caveatPoints].map((pt) => {
@@ -231,6 +243,8 @@ export function createQuickPointsLoader(readRawMap) {
   return { loadQuickPoints, clearQuickPointsCache };
 }
 
+const MATCHING_JSON_FILENAME_RE = /^\.\/([^/]+)\.json$/;
+
 let viteGlobModules = null;
 try {
   viteGlobModules = import.meta.glob('./*.json', { eager: true });
@@ -242,7 +256,7 @@ const { loadQuickPoints, clearQuickPointsCache } = createQuickPointsLoader(() =>
   const map = new Map();
   if (viteGlobModules) {
     for (const [relPath, mod] of Object.entries(viteGlobModules)) {
-      const m = relPath.match(/^\.\/([^/]+)\.json$/);
+      const m = relPath.match(MATCHING_JSON_FILENAME_RE);
       if (m) map.set(m[1], mod?.default ?? mod);
     }
   }

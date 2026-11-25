@@ -6,9 +6,11 @@
  * Zero storage, zero cookies, zero URL mutation.
  */
 import { hasSavedScroll } from '../../../utils/scroll_restoration.js';
-import { isQuickHash, isQuickHashTransition } from '../../../utils/reveal_target.js';
-
-const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+import {
+  isQuickHash,
+  isQuickHashTransition,
+  prefersReducedMotion,
+} from '../../../utils/reveal_target.js';
 
 function revealHashTarget(root, { allowScroll = true } = {}) {
   if (isQuickHash(window.location.hash)) return;
@@ -30,7 +32,7 @@ function revealHashTarget(root, { allowScroll = true } = {}) {
   }
   if (opened && allowScroll) {
     requestAnimationFrame(() => {
-      target.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
     });
   }
 }
@@ -57,7 +59,7 @@ function initNav(root, state) {
       if (c.left < t.left || c.right > t.right - 24) {
         track.scrollBy({
           left: c.left - t.left - 12,
-          behavior: reduceMotion() ? 'auto' : 'smooth',
+          behavior: prefersReducedMotion() ? 'auto' : 'smooth',
         });
       }
     }
@@ -124,7 +126,7 @@ function init() {
   root.dataset.ebjReady = '1';
   revealHashTarget(root, { allowScroll: !hasSavedScroll() });
   const onHash = ev => {
-    if (isQuickHashTransition(ev) || ev?.oldURL === ev?.newURL) return;
+    if (isQuickHashTransition(ev)) return;
     revealHashTarget(root, { allowScroll: true });
   };
   const onAnchorClick = ev => {
@@ -149,7 +151,7 @@ function init() {
     }
     if (opened) {
       requestAnimationFrame(() => {
-        target.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+        target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
       });
     }
   };

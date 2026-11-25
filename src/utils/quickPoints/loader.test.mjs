@@ -8,6 +8,9 @@ import {
   validateQuickPoints,
   clearQuickPointsCache,
   toPageKey,
+  parseQuickHash,
+  isQuickHash,
+  isQuickHashTransition,
 } from './loader.node.js';
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -23,6 +26,29 @@ test('toPageKey normalises trailing slashes and strips BASE without ambiguity', 
   assert.equal(toPageKey('/discover/quran-preservation/', ''), '/discover/quran-preservation');
   assert.equal(toPageKey('/sub/discover/quran-preservation/', '/sub/'), '/discover/quran-preservation');
   assert.equal(toPageKey('/sub-other/discover/foo', '/sub'), '/sub-other/discover/foo');
+});
+
+test('parseQuickHash, isQuickHash, and isQuickHashTransition share one canonical parser', () => {
+  assert.deepEqual(parseQuickHash('#quick'), { pointId: null });
+  assert.deepEqual(parseQuickHash('#quick:umar-stoning-verse'), { pointId: 'umar-stoning-verse' });
+  assert.deepEqual(parseQuickHash('https://example.com/discover/qp#quick:pt%201'), { pointId: 'pt 1' });
+  assert.deepEqual(parseQuickHash('#quick:   '), { pointId: null });
+  assert.equal(parseQuickHash('#quick-other'), null);
+  assert.equal(parseQuickHash('#section-1'), null);
+  assert.equal(parseQuickHash(''), null);
+
+  assert.equal(isQuickHash('#quick'), true);
+  assert.equal(isQuickHash('#quick:id-1'), true);
+  assert.equal(isQuickHash('#other'), false);
+
+  assert.equal(
+    isQuickHashTransition({ oldURL: 'https://x.test/p#quick', newURL: 'https://x.test/p#sec' }),
+    true,
+  );
+  assert.equal(
+    isQuickHashTransition({ oldURL: 'https://x.test/p#sec1', newURL: 'https://x.test/p#sec2' }),
+    false,
+  );
 });
 
 test('loadQuickPoints returns null when the article JSON file is missing', () => {

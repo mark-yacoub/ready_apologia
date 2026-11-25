@@ -10,10 +10,11 @@
  */
 
 import { hasSavedScroll } from '../../../utils/scroll_restoration.js';
-import { isQuickHash, isQuickHashTransition } from '../../../utils/reveal_target.js';
-
-const reduceMotion = () =>
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+import {
+  isQuickHash,
+  isQuickHashTransition,
+  prefersReducedMotion,
+} from '../../../utils/reveal_target.js';
 
 function revealHashTarget(root, { allowScroll = true } = {}) {
   const rawHash = window.location.hash;
@@ -39,7 +40,7 @@ function revealHashTarget(root, { allowScroll = true } = {}) {
   if (openedAny && allowScroll) {
     requestAnimationFrame(() => {
       target.scrollIntoView({
-        behavior: reduceMotion() ? 'auto' : 'smooth',
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
         block: 'start',
       });
     });
@@ -72,7 +73,7 @@ function initNav(root, state) {
       if (cRect.left < tRect.left || cRect.right > tRect.right - 24) {
         track.scrollBy({
           left: cRect.left - tRect.left - 12,
-          behavior: reduceMotion() ? 'auto' : 'smooth',
+          behavior: prefersReducedMotion() ? 'auto' : 'smooth',
         });
       }
     }
@@ -156,7 +157,7 @@ function init() {
   revealHashTarget(root, { allowScroll: !hasSavedScroll() });
 
   const onHashChange = (ev) => {
-    if (isQuickHashTransition(ev) || ev?.oldURL === ev?.newURL) return;
+    if (isQuickHashTransition(ev)) return;
     revealHashTarget(root, { allowScroll: true });
   };
   const onAnchorClick = (ev) => {
@@ -184,7 +185,7 @@ function init() {
     if (opened) {
       requestAnimationFrame(() => {
         target.scrollIntoView({
-          behavior: reduceMotion() ? 'auto' : 'smooth',
+          behavior: prefersReducedMotion() ? 'auto' : 'smooth',
           block: 'start',
         });
       });

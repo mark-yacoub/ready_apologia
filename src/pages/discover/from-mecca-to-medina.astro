@@ -80,7 +80,7 @@ const { readToday, textsShow, reflection, perspective } = m.closing;
     <div class="hrv-toast" role="status" aria-live="polite" data-hrv-toast>{LABELS.copied}</div>
 
     <div class="hrv-wrap">
-      <QuickPoints slug="from-mecca-to-medina" />
+      <QuickPoints slug="from-mecca-to-medina" revealOwn />
       <header class="hrv-hero mm-hero" id="intro">
         {m.intro.legacy.map(a => <span id={a} class="mm-legacy" aria-hidden="true" />)}
         <h1 class="hrv-h1 mm-h1" set:html={m.intro.h1Html} />

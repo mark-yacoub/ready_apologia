@@ -1,20 +1,27 @@
 /**
- * Quick Points navigation, URL hash & History controller (`sheet-nav.js`).
+ * Quick Points navigation, URL-hash & History controller (`sheet-nav.js`).
  *
- * Lifecycle & URL rules:
- *   - Uses ONLY `pushHash`, `replaceUrl`, and `mergeHistoryState` from `src/utils/url_history.js`.
- *   - Listens to `hashchange` (same-page Back/Forward) and `astro:page-load` (cross-page entry),
- *     and cleans up on `astro:before-swap`. Deliberately does NOT listen to `popstate`, avoiding
- *     spurious opens on outgoing pages during cross-page Back transitions and duplicate triggers
- *     on same-page Back.
- *   - Delegates all in-page target opening, scrolling, and flashing to `revealTarget`
- *     (`src/utils/reveal_target.js`), relying on CSS `scroll-margin-top` to clear sticky bars.
+ * Responsibilities:
+ *   1. Quick Points `<dialog>` lifecycle:
+ *      - Uses ONLY `pushHash`, `replaceUrl`, and `mergeHistoryState` from `src/utils/url_history.js`.
+ *      - Listens to `hashchange` (same-page Back/Forward, guarded by `renderedPageKey`) and
+ *        `astro:page-load` (cross-page entry), cleaning up on `astro:before-swap`. Deliberately
+ *        omits `popstate` so outgoing pages never open their dialog during cross-page Back.
+ *      - Delegates in-page target opening, scrolling (`scroll-margin-top`), and flashing to
+ *        `revealTarget` (`src/utils/reveal_target.js`).
+ *   2. Site-wide cold `#anchor` arrival helper for Discover articles:
+ *      - On initial load / `astro:page-load` (when there is no `#quick` hash and no saved Back/Forward
+ *        scroll position), calls `revealTarget(hash, { flash: false, behavior: 'auto', onlyIfClosedDetails: true })`
+ *        so links into collapsed `<details>` disclosures open automatically on articles without a dedicated
+ *        reveal script.
+ *      - Skipped whenever `[data-reveal-own]` is present on the page (the 5 Discover articles whose own
+ *        `client.js` handles initial `#anchor` reveal), avoiding duplicate scroll calls.
  */
 
 import { pushHash, replaceUrl, mergeHistoryState } from '../../../utils/url_history.js';
 import { hasSavedScroll } from '../../../utils/scroll_restoration.js';
 import { trackEvent } from '../../../utils/analytics.js';
-import { toPageKey } from '../../../utils/quickPoints/paths.js';
+import { parseQuickHash, toPageKey } from '../../../utils/quickPoints/paths.js';
 import { revealTarget, clearRevealTimers, prefersReducedMotion } from '../../../utils/reveal_target.js';
 import { createSheetView } from './sheet-view.js';
 
@@ -22,20 +29,8 @@ function currentPageKey() {
   return toPageKey(window.location.pathname);
 }
 
-function parseQuickHash(hashStr = window.location.hash) {
-  if (!hashStr) return null;
-  let raw = hashStr.slice(1);
-  try {
-    raw = decodeURIComponent(raw);
-  } catch {
-    // ignore malformed encoding
-  }
-  if (raw === 'quick') return { pointId: null };
-  if (raw.startsWith('quick:')) {
-    const pointId = raw.slice(6).trim();
-    return { pointId: pointId || null };
-  }
-  return null;
+function getCurrentQuickHash() {
+  return parseQuickHash(window.location.hash);
 }
 
 function getCurrentRoot() {
@@ -67,6 +62,22 @@ function closeDialogSilently(dialog) {
   } finally {
     internalClose = false;
   }
+}
+
+/**
+ * Exit a `#quick` / `#quick:*` URL state: pops the entry via `history.back()` when we pushed `#quick`
+ * (`history.state.qkPushed`), otherwise strips the hash in place with `replaceUrl`.
+ *
+ * @returns {boolean} True when `history.back()` was triggered (caller should wait for `hashchange`).
+ */
+function leaveQuickHash() {
+  if (!getCurrentQuickHash()) return false;
+  if (history.state?.qkPushed) {
+    history.back();
+    return true;
+  }
+  replaceUrl(window.location.pathname + window.location.search);
+  return false;
 }
 
 function ensureView(ctx) {
@@ -110,7 +121,6 @@ function handleSelectPoint(ctx, data, pt, ev) {
   closeDialogSilently(ctx.dialog);
 
   if (pt.hash) {
-    // Single reveal path: push hash entry, then open closed <details>, scroll via scroll-margin-top, and flash.
     pushHash(pt.hash);
     revealTarget(pt.hash, { flash: true });
   } else {
@@ -136,7 +146,7 @@ function openSheet(ctx, { pointId = null, fromToggle = false } = {}) {
     });
   }
 
-  if (fromToggle && !parseQuickHash()) {
+  if (fromToggle && !getCurrentQuickHash()) {
     pushHash('quick');
     mergeHistoryState({ qkPushed: true });
   }
@@ -153,25 +163,10 @@ function closeSheetDom(ctx, { restoreFocus = true } = {}) {
   }
 }
 
-function cleanupQuickHashOrPop() {
-  if (!parseQuickHash()) return;
-  if (history.state?.qkPushed) {
-    history.back();
-  } else {
-    replaceUrl(window.location.pathname + window.location.search);
-  }
-}
-
 function requestCloseSheet(ctx) {
   if (!ctx.dialog.open) return;
-  if (parseQuickHash() && history.state?.qkPushed) {
-    history.back();
-    return;
-  }
+  if (leaveQuickHash()) return;
   closeSheetDom(ctx);
-  if (parseQuickHash()) {
-    replaceUrl(window.location.pathname + window.location.search);
-  }
 }
 
 function handleExternalDialogClosed(ctx) {
@@ -180,7 +175,7 @@ function handleExternalDialogClosed(ctx) {
     ctx.openBtn.focus({ preventScroll: true });
   }
   if (currentPageKey() === renderedPageKey) {
-    cleanupQuickHashOrPop();
+    leaveQuickHash();
   }
 }
 
@@ -189,7 +184,7 @@ function onHashChange() {
   const ctx = getCurrentRoot();
   if (!ctx) return;
 
-  const qk = parseQuickHash();
+  const qk = getCurrentQuickHash();
   if (qk) {
     openSheet(ctx, { pointId: qk.pointId, fromToggle: false });
   } else if (ctx.dialog.open) {
@@ -209,11 +204,14 @@ function initPage() {
     });
   }
 
-  const qk = parseQuickHash();
+  const qk = getCurrentQuickHash();
   if (qk) {
     openSheet(ctx, { pointId: qk.pointId, fromToggle: false });
-  } else if (window.location.hash.length > 1 && !hasSavedScroll()) {
-    // Ensure cold cross-page `#anchor` arrivals into collapsed `<details>` open cleanly.
+  } else if (
+    window.location.hash.length > 1 &&
+    !hasSavedScroll() &&
+    !ctx.root.hasAttribute('data-reveal-own')
+  ) {
     revealTarget(window.location.hash.slice(1), {
       flash: false,
       behavior: 'auto',

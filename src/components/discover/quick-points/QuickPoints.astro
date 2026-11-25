@@ -11,9 +11,11 @@ import '../../../styles/quick-points.css';
 
 interface Props {
   slug: string;
+  /** Set on articles whose own `client.js` handles initial `#anchor` reveal into closed `<details>`. */
+  revealOwn?: boolean;
 }
 
-const { slug } = Astro.props;
+const { slug, revealOwn = false } = Astro.props;
 const data = loadQuickPoints(slug);
 
 const safeJson = data
@@ -27,7 +29,7 @@ const safeJson = data
 ---
 
 {data && (
-  <div class="qk-entry" data-qk-root>
+  <div class="qk-entry" data-qk-root data-reveal-own={revealOwn ? '' : undefined}>
     <div class="qk-seg" role="group" aria-label="Reading mode">
       <span class="qk-seg__btn is-active" aria-current="true">Article</span>
       <button

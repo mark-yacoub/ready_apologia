@@ -1,9 +1,16 @@
 /**
- * Isomorphic Quick Points path & hash helpers (zero Node imports; shared by build loader and client).
+ * Isomorphic Quick Points path & URL-hash helpers (zero Node imports; shared by build loader and client).
  */
 
 export const BASE = (import.meta.env?.BASE_URL ?? '/').replace(/\/$/, '');
 
+const QUICK_HASH_PREFIX = 'quick:';
+
+/**
+ * Strip any trailing slash from an Astro `BASE_URL` (`"/"` -> `""`, `"/sub/"` -> `"/sub"`).
+ * @param {string} [base]
+ * @returns {string}
+ */
 export function normalizeBase(base = BASE) {
   if (!base || base === '/') return '';
   return String(base).replace(/\/$/, '');
@@ -16,6 +23,7 @@ export function normalizeBase(base = BASE) {
  *
  * @param {string} pathname
  * @param {string} [base]
+ * @returns {string}
  */
 export function toPageKey(pathname, base = BASE) {
   if (!pathname) return '/';
@@ -30,22 +38,39 @@ export function toPageKey(pathname, base = BASE) {
 }
 
 /**
- * True when a hash or full URL (`"#quick"`, `"#quick:id"`, `"https://...#quick:id"`) belongs to Quick Points.
+ * Parse a Quick Points hash or URL (`"#quick"`, `"#quick:id"`, `"https://...#quick:id"`).
+ * Returns `{ pointId: string | null }` when it belongs to Quick Points, or `null` otherwise.
+ *
  * @param {string | undefined | null} hashOrUrl
+ * @returns {{ pointId: string | null } | null}
  */
-export function isQuickHash(hashOrUrl) {
-  if (!hashOrUrl) return false;
+export function parseQuickHash(hashOrUrl) {
+  if (!hashOrUrl) return null;
   const s = String(hashOrUrl);
   const hashIdx = s.indexOf('#');
   const raw = hashIdx >= 0 ? s.slice(hashIdx + 1) : s.startsWith('quick') ? s : '';
-  if (!raw) return false;
+  if (!raw) return null;
   let decoded = raw;
   try {
     decoded = decodeURIComponent(raw);
   } catch {
-    // ignore malformed encoding
+    // Keep raw fragment when percent-encoding is malformed.
   }
-  return decoded === 'quick' || decoded.startsWith('quick:');
+  if (decoded === 'quick') return { pointId: null };
+  if (decoded.startsWith(QUICK_HASH_PREFIX)) {
+    const pointId = decoded.slice(QUICK_HASH_PREFIX.length).trim();
+    return { pointId: pointId || null };
+  }
+  return null;
+}
+
+/**
+ * True when a hash or full URL (`"#quick"`, `"#quick:id"`, `"https://...#quick:id"`) belongs to Quick Points.
+ * @param {string | undefined | null} hashOrUrl
+ * @returns {boolean}
+ */
+export function isQuickHash(hashOrUrl) {
+  return parseQuickHash(hashOrUrl) !== null;
 }
 
 /**
@@ -54,6 +79,7 @@ export function isQuickHash(hashOrUrl) {
  * closes via Back, or navigates to an in-page target (which `sheet-nav.js` already reveals once).
  *
  * @param {HashChangeEvent | undefined} ev
+ * @returns {boolean}
  */
 export function isQuickHashTransition(ev) {
   if (!ev) return isQuickHash(typeof location !== 'undefined' ? location.hash : '');

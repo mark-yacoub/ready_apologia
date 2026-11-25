@@ -20,7 +20,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadQuickPoints, BASE } from '../src/utils/quickPoints/loader.node.js';
+import { loadQuickPoints, toPageKey, BASE } from '../src/utils/quickPoints/loader.node.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -45,15 +45,8 @@ export const QUICK_POINTS_ARTICLES = [
   'trustworthiness-of-the-bible',
 ];
 
-function stripBasePrefix(routePath) {
-  if (BASE && routePath.startsWith(BASE)) {
-    return routePath.slice(BASE.length) || '/';
-  }
-  return routePath;
-}
-
 function resolveDistHtmlFile(routePath) {
-  const rel = stripBasePrefix(routePath).replace(/^\/+/, '').replace(/\/+$/, '');
+  const rel = toPageKey(routePath, BASE).replace(/^\/+/, '');
   const indexCandidate = path.join(DIST, rel, 'index.html');
   if (fs.existsSync(indexCandidate)) return indexCandidate;
   const htmlCandidate = path.join(DIST, `${rel}.html`);

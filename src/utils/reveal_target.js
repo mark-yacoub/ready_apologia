@@ -7,6 +7,9 @@
  *   2. Scrolls with a single `target.scrollIntoView({ block: 'start', behavior })`, relying on CSS
  *      `scroll-margin-top` to clear sticky bars and respecting `prefers-reduced-motion`.
  *   3. Optionally applies `.qk-flash` for 1.2s (cleaned up automatically on `astro:before-swap`).
+ *
+ * Discover articles that run their own cold-anchor `<details>` reveal handler mark their root with
+ * `data-reveal-own` so `sheet-nav.js`'s site-wide cold-arrival fallback stays a no-op there.
  */
 
 import { isQuickHash, isQuickHashTransition } from './quickPoints/paths.js';
@@ -14,6 +17,7 @@ import { isQuickHash, isQuickHashTransition } from './quickPoints/paths.js';
 export { isQuickHash, isQuickHashTransition };
 
 const FLASH_MS = 1200;
+const MIN_VISIBLE_FLASH_HEIGHT_PX = 4;
 
 /** Active flash timeout handles, cleared on `astro:before-swap`. */
 const timers = new Set();
@@ -23,8 +27,28 @@ export function clearRevealTimers() {
   timers.clear();
 }
 
+/**
+ * True when the user prefers reduced motion.
+ * @returns {boolean}
+ */
 export function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * Open every closed `<details>` ancestor of `node` (including `node` itself if it is `<details>`).
+ * @param {Element} node
+ * @returns {boolean} True when at least one closed `<details>` was opened.
+ */
+function openAncestorDetails(node) {
+  let opened = false;
+  for (let d = node.closest('details'); d; d = d.parentElement?.closest('details')) {
+    if (!d.open) {
+      d.open = true;
+      opened = true;
+    }
+  }
+  return opened;
 }
 
 /**
@@ -32,12 +56,12 @@ export function prefersReducedMotion() {
  * @param {Element | null | undefined} node
  */
 export function flashNode(node) {
-  if (!node || !(node instanceof HTMLElement)) return;
+  if (!(node instanceof HTMLElement)) return;
   let visual = node;
-  if (visual.getBoundingClientRect().height < 4) {
+  if (visual.getBoundingClientRect().height < MIN_VISIBLE_FLASH_HEIGHT_PX) {
     const sib = visual.nextElementSibling;
     visual =
-      sib instanceof HTMLElement && sib.getBoundingClientRect().height >= 4
+      sib instanceof HTMLElement && sib.getBoundingClientRect().height >= MIN_VISIBLE_FLASH_HEIGHT_PX
         ? sib
         : visual.parentElement || visual;
   }
@@ -54,8 +78,8 @@ export function flashNode(node) {
 }
 
 /**
- * Open closed `<details>` ancestors (and any `data-reveal-with` target), scroll `target` to `block: 'start'`,
- * and optionally flash `.qk-flash`.
+ * Open closed `<details>` ancestors (and any `data-reveal-with` companion), scroll `target` to
+ * `block: 'start'`, and optionally flash `.qk-flash`.
  *
  * @param {string} id - Element id (with or without leading `#`).
  * @param {{ flash?: boolean, behavior?: ScrollBehavior, onlyIfClosedDetails?: boolean, root?: Element | null }} [options]
@@ -75,26 +99,13 @@ export function revealTarget(id, options = {}) {
   if (!target) return false;
   if (options.root && !options.root.contains(target)) return false;
 
-  let openedAny = false;
-  for (let d = target.closest('details'); d; d = d.parentElement?.closest('details')) {
-    if (!d.open) {
-      d.open = true;
-      openedAny = true;
-    }
-  }
+  let openedAny = openAncestorDetails(target);
 
-  const withHost = target.closest('[data-reveal-with]');
-  const companionId = target.dataset?.revealWith || withHost?.dataset?.revealWith;
-  if (companionId) {
-    const companion = document.getElementById(companionId);
-    if (companion) {
-      for (let d = companion.closest('details'); d; d = d.parentElement?.closest('details')) {
-        if (!d.open) {
-          d.open = true;
-          openedAny = true;
-        }
-      }
-    }
+  const companionId =
+    target.dataset?.revealWith || target.closest('[data-reveal-with]')?.dataset?.revealWith;
+  const companion = companionId ? document.getElementById(companionId) : null;
+  if (companion && openAncestorDetails(companion)) {
+    openedAny = true;
   }
 
   if (options.onlyIfClosedDetails && !openedAny) {

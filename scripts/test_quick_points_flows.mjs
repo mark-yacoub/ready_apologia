@@ -7,7 +7,7 @@
  *
  * If `--base` is omitted, starts `scripts/serve.js` automatically on an ephemeral local port against `dist/`.
  *
- * Verifies all 5 required user flows (URL, `dialog.open`, flashed/focused row or target, `.main-content` scrollTop):
+ * Verifies all 6 required user flows (URL, `dialog.open`, flashed/focused row or target, `.main-content` scrollTop):
  *   (a) toggle -> open + `#quick` -> Back -> closed, URL restored, no scroll jump
  *   (b) same-page tap (`quran-preservation` + closed-`<details>` target on `divinity-timeline`)
  *       -> dialog closed, target below sticky bar, enclosing `<details>` open -> Back -> sheet open on
@@ -17,20 +17,29 @@
  *   (d) cold arrival on `quran-preservation#<item>` (and `from-mecca-to-medina#<item>` + manual scroll)
  *       -> open -> close via Article -> `.main-content` `scrollTop` unchanged within ±4px
  *   (e) Escape closes the sheet cleanly, restores URL, and subsequent Back does NOT reopen the sheet
+ *   (f) cold `#anchor` arrival into closed `<details>` on `divinity-timeline` (`[data-reveal-own]`)
+ *       and on `islamic-dilemma` (`sheet-nav.js` site-wide fallback): exactly one `scrollIntoView` call,
+ *       enclosing `<details>` opened, and target visible in viewport below sticky nav
  */
 
 import assert from 'node:assert/strict';
 import { spawn, spawnSync } from 'node:child_process';
-import fs from 'node:fs';
+import fs, { mkdtempSync, rmSync } from 'node:fs';
 import net from 'node:net';
-import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { setTimeout as sleep } from 'node:timers/promises';
+import { setTimeout as pollDelay } from 'node:timers/promises';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
+
+const VIEWPORT_WIDTH = 412;
+const VIEWPORT_HEIGHT = 900;
+const SCROLL_TOLERANCE_PX = 4;
+const POLL_INTERVAL_MS = 40;
+const DEFAULT_WAIT_TIMEOUT_MS = 5000;
+const SERVER_STARTUP_ATTEMPTS = 50;
 
 const args = process.argv.slice(2);
 const baseIdx = args.indexOf('--base');
@@ -80,12 +89,12 @@ async function startLocalServerIfNeeded() {
     } catch {}
   };
   process.on('exit', stop);
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < SERVER_STARTUP_ATTEMPTS; i++) {
     try {
       const r = await fetch(`${baseUrl}/discover/quran-preservation/`);
       if (r.ok) return { baseUrl, stop };
     } catch {}
-    await sleep(100);
+    await pollDelay(POLL_INTERVAL_MS);
   }
   stop();
   throw new Error(`Timed out waiting for local static server at ${baseUrl}`);
@@ -112,13 +121,15 @@ async function openBrowser() {
     try {
       proc.kill('SIGKILL');
     } catch {}
-    rmSync(profile, { recursive: true, force: true });
+    try {
+      rmSync(profile, { recursive: true, force: true });
+    } catch {}
   };
   process.on('exit', cleanup);
 
   let wsUrl = null;
-  for (let i = 0; i < 50 && !wsUrl; i++) {
-    await sleep(150);
+  for (let i = 0; i < SERVER_STARTUP_ATTEMPTS && !wsUrl; i++) {
+    await pollDelay(POLL_INTERVAL_MS);
     try {
       const targets = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
       wsUrl = targets.find((t) => t.type === 'page')?.webSocketDebuggerUrl ?? null;
@@ -167,16 +178,32 @@ async function openBrowser() {
     return r.result.value;
   };
 
+  /** Wait for `count` browser `requestAnimationFrame` ticks so queued rAF callbacks & layout settle. */
+  const nextFrames = async (count = 2) => {
+    await evaluate(`new Promise((resolve) => {
+      let n = ${Number(count)};
+      const step = () => (--n <= 0 ? resolve(true) : requestAnimationFrame(step));
+      requestAnimationFrame(step);
+    })`);
+  };
+
+  const waitUntil = async (predicateExpr, timeoutMs = DEFAULT_WAIT_TIMEOUT_MS) => {
+    const deadline = Date.now() + timeoutMs;
+    let last = null;
+    while (Date.now() < deadline) {
+      last = await evaluate(predicateExpr);
+      if (last) return last;
+      await pollDelay(POLL_INTERVAL_MS);
+    }
+    throw new Error(`Timed out waiting for condition: ${predicateExpr} (last=${JSON.stringify(last)})`);
+  };
+
   const navigateAndSettle = async (url) => {
     await send('Page.navigate', { url });
-    for (let i = 0; i < 60; i++) {
-      const ready = await evaluate(
-        `document.readyState === 'complete' && !!document.querySelector('[data-qk-open], .main-content')`,
-      );
-      if (ready) break;
-      await sleep(100);
-    }
-    await sleep(250);
+    await waitUntil(
+      `document.readyState === 'complete' && !!document.querySelector('.main-content') && !document.documentElement.hasAttribute('data-astro-transition') && (!document.querySelector('[data-qk-open]') || document.querySelector('[data-qk-open]').dataset.qkBound === '1')`,
+    );
+    await nextFrames(2);
   };
 
   /** Perform a real trusted mouse click at the center of `selector` (grants user activation). */
@@ -222,20 +249,10 @@ async function openBrowser() {
     });
   };
 
-  const waitUntil = async (predicateExpr, timeoutMs = 4000) => {
-    const deadline = Date.now() + timeoutMs;
-    let last = null;
-    while (Date.now() < deadline) {
-      last = await evaluate(predicateExpr);
-      if (last) return last;
-      await sleep(60);
-    }
-    throw new Error(`Timed out waiting for condition: ${predicateExpr} (last=${JSON.stringify(last)})`);
-  };
-
   return {
     send,
     evaluate,
+    nextFrames,
     navigateAndSettle,
     trustedClick,
     pressEscape,
@@ -268,8 +285,8 @@ async function runFlow(name, fn) {
 try {
   await browser.send('Page.enable');
   await browser.send('Emulation.setDeviceMetricsOverride', {
-    width: 412,
-    height: 900,
+    width: VIEWPORT_WIDTH,
+    height: VIEWPORT_HEIGHT,
     deviceScaleFactor: 1,
     mobile: true,
   });
@@ -282,8 +299,6 @@ try {
   // ---------------------------------------------------------------------------
   await runFlow('(a) toggle -> open + #quick -> Back -> closed, URL restored, no jump', async () => {
     await browser.navigateAndSettle(`${baseUrl}/discover/hadith-reliability/`);
-    // Scroll slightly while keeping toggle button on screen, then click toggle; or click toggle from top,
-    // and also test scrolled mid-page open via JS click to verify zero jump on Back.
     const initial = await browser.evaluate(`(() => {
       const m = document.querySelector('.main-content');
       return { href: location.href, scrollTop: m.scrollTop };
@@ -297,13 +312,15 @@ try {
       hash: location.hash,
       rows: document.querySelectorAll('a.qk-row').length,
     })`);
-    assert.equal(openState.open, true);
-    assert.equal(openState.hash, '#quick');
-    assert.equal(openState.rows, 25);
+    assert.equal(openState.open, true, 'Expected Quick Points dialog to be open');
+    assert.equal(openState.hash, '#quick', 'Expected #quick URL hash when opened from toggle');
+    assert.equal(openState.rows, 25, 'Expected 25 rows on hadith-reliability sheet');
 
     await browser.evaluate(`history.back()`);
-    await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === false`);
-    await sleep(150);
+    await browser.waitUntil(
+      `document.querySelector('[data-qk-dialog]')?.open === false && location.hash === ''`,
+    );
+    await browser.nextFrames(2);
 
     const closedState = await browser.evaluate(`({
       open: document.querySelector('[data-qk-dialog]').open,
@@ -311,13 +328,13 @@ try {
       scrollTop: document.querySelector('.main-content').scrollTop,
       activeIsToggle: document.activeElement === document.querySelector('[data-qk-open]'),
     })`);
-    assert.equal(closedState.open, false);
-    assert.equal(closedState.href, initial.href);
+    assert.equal(closedState.open, false, 'Expected dialog to close on Back');
+    assert.equal(closedState.href, initial.href, 'Expected URL restored to initial article URL');
     assert.ok(
-      Math.abs(closedState.scrollTop - initial.scrollTop) <= 4,
-      `Expected scrollTop unchanged (±4px): got ${closedState.scrollTop}, expected ${initial.scrollTop}`,
+      Math.abs(closedState.scrollTop - initial.scrollTop) <= SCROLL_TOLERANCE_PX,
+      `Expected scrollTop unchanged (±${SCROLL_TOLERANCE_PX}px): got ${closedState.scrollTop}, expected ${initial.scrollTop}`,
     );
-    assert.equal(closedState.activeIsToggle, true);
+    assert.equal(closedState.activeIsToggle, true, 'Expected focus restored to [data-qk-open]');
   });
 
   // ---------------------------------------------------------------------------
@@ -333,10 +350,11 @@ try {
       await browser.trustedClick('[data-qk-open]');
       await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === true`);
 
-      // Pick a point lower down the page (`umar-stoning-verse`)
       await browser.trustedClick('a.qk-row[data-qk-id="umar-stoning-verse"]');
-      await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === false`);
-      await sleep(150);
+      await browser.waitUntil(
+        `document.querySelector('[data-qk-dialog]')?.open === false && location.hash === '#umar-stoning-verse'`,
+      );
+      await browser.nextFrames(2);
 
       const tapState = await browser.evaluate(`(() => {
         const dialog = document.querySelector('[data-qk-dialog]');
@@ -353,14 +371,14 @@ try {
         };
       })()`);
 
-      assert.equal(tapState.dialogOpen, false);
-      assert.equal(tapState.hash, '#umar-stoning-verse');
+      assert.equal(tapState.dialogOpen, false, 'Expected dialog closed after same-page point tap');
+      assert.equal(tapState.hash, '#umar-stoning-verse', 'Expected target #hash in URL');
       assert.ok(tapState.scrollTop > 200, `Expected main-content to scroll down, got ${tapState.scrollTop}`);
       assert.ok(
         tapState.targetTop >= tapState.barBottom - 1,
         `Target top (${tapState.targetTop}) must clear sticky bar bottom (${tapState.barBottom})`,
       );
-      assert.equal(tapState.targetFlashed, true);
+      assert.equal(tapState.targetFlashed, true, 'Expected .qk-flash class on revealed target');
 
       // Back -> sheet reopens on `#quick:umar-stoning-verse` with row in view, focused, and flashed
       await browser.evaluate(`history.back()`);
@@ -383,11 +401,11 @@ try {
         };
       })()`);
 
-      assert.equal(backState.dialogOpen, true);
-      assert.equal(backState.hash, '#quick:umar-stoning-verse');
-      assert.equal(backState.focusedId, 'umar-stoning-verse');
-      assert.equal(backState.flashed, true);
-      assert.equal(backState.inView, true);
+      assert.equal(backState.dialogOpen, true, 'Expected sheet reopened on Back');
+      assert.equal(backState.hash, '#quick:umar-stoning-verse', 'Expected #quick:<id> hash on Back');
+      assert.equal(backState.focusedId, 'umar-stoning-verse', 'Expected tapped row focused on Back');
+      assert.equal(backState.flashed, true, 'Expected tapped row flashed on Back');
+      assert.equal(backState.inView, true, 'Expected tapped row visible inside .qk-body');
 
       // Part 2: closed-<details> target on divinity-timeline (`event-paris_magical_papyrus`)
       await browser.navigateAndSettle(`${baseUrl}/discover/divinity-timeline/`);
@@ -401,8 +419,10 @@ try {
       await browser.evaluate(
         `document.querySelector('a.qk-row[data-qk-id="event-paris_magical_papyrus"]').click()`,
       );
-      await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === false`);
-      await sleep(150);
+      await browser.waitUntil(
+        `document.querySelector('[data-qk-dialog]')?.open === false && location.hash === '#event-paris_magical_papyrus'`,
+      );
+      await browser.nextFrames(2);
 
       const dtlState = await browser.evaluate(`(() => {
         const target = document.getElementById('event-paris_magical_papyrus');
@@ -415,12 +435,12 @@ try {
           flashed: target.classList.contains('qk-flash'),
         };
       })()`);
-      assert.equal(dtlState.detailsOpen, true);
+      assert.equal(dtlState.detailsOpen, true, 'Expected ancestor <details> opened by revealTarget');
       assert.ok(
         dtlState.targetTop >= dtlState.barBottom - 1,
         `Closed-details target (${dtlState.targetTop}) must clear sticky nav (${dtlState.barBottom})`,
       );
-      assert.equal(dtlState.flashed, true);
+      assert.equal(dtlState.flashed, true, 'Expected .qk-flash on closed-details target');
     },
   );
 
@@ -435,7 +455,6 @@ try {
       await browser.trustedClick('[data-qk-open]');
       await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === true`);
 
-      // Scroll hub sheet down slightly and pick a cross-page row (e.g. row #8)
       const picked = await browser.evaluate(`(() => {
         const rows = [...document.querySelectorAll('a.qk-row')];
         const row = rows[7] || rows[0];
@@ -444,12 +463,10 @@ try {
 
       await browser.trustedClick(`a.qk-row[data-qk-id="${picked.id}"]`);
       await browser.waitUntil(
-        `location.pathname !== '/discover/hadith-reliability/' && location.pathname !== '/discover/hadith-reliability' && document.querySelector('[data-qk-dialog]')?.open === false`,
+        `location.pathname !== '/discover/hadith-reliability/' && location.pathname !== '/discover/hadith-reliability' && !document.documentElement.hasAttribute('data-astro-transition') && document.querySelector('[data-qk-open]')?.dataset?.qkBound === '1' && document.querySelector('[data-qk-dialog]')?.open === false`,
       );
-      await sleep(200);
 
-      // Instrument the outgoing case page BEFORE calling history.back():
-      // watch both the case page's <dialog> element and analytics events (`window.gtag` / `window.dataLayer`).
+      // Instrument the outgoing case page BEFORE calling history.back().
       await browser.evaluate(`(() => {
         const caseDialog = document.querySelector('[data-qk-dialog]');
         window.__caseDialogOpened = caseDialog?.open === true;
@@ -477,9 +494,8 @@ try {
 
       await browser.evaluate(`history.back()`);
       await browser.waitUntil(
-        `(location.pathname === '/discover/hadith-reliability/' || location.pathname === '/discover/hadith-reliability') && document.querySelector('[data-qk-dialog]')?.open === true`,
+        `(location.pathname === '/discover/hadith-reliability/' || location.pathname === '/discover/hadith-reliability') && !document.documentElement.hasAttribute('data-astro-transition') && document.querySelector('[data-qk-dialog]')?.open === true && document.querySelector(${JSON.stringify(`a.qk-row[data-qk-id="${picked.id}"]`)})?.classList.contains('qk-flash')`,
       );
-      await sleep(150);
 
       const hubReturn = await browser.evaluate(`(() => {
         const dialog = document.querySelector('[data-qk-dialog]');
@@ -499,11 +515,11 @@ try {
         };
       })()`);
 
-      assert.equal(hubReturn.dialogOpen, true);
-      assert.equal(hubReturn.hash, `#quick:${picked.id}`);
-      assert.equal(hubReturn.focusedId, picked.id);
-      assert.equal(hubReturn.flashed, true);
-      assert.equal(hubReturn.inView, true);
+      assert.equal(hubReturn.dialogOpen, true, 'Expected hub Quick Points dialog open after Back');
+      assert.equal(hubReturn.hash, `#quick:${picked.id}`, 'Expected hub URL hash restored to #quick:<id>');
+      assert.equal(hubReturn.focusedId, picked.id, 'Expected selected row focused on hub return');
+      assert.equal(hubReturn.flashed, true, 'Expected selected row flashed on hub return');
+      assert.equal(hubReturn.inView, true, 'Expected selected row visible inside .qk-body');
       assert.equal(
         hubReturn.caseDialogOpened,
         false,
@@ -541,41 +557,45 @@ try {
       await browser.evaluate(`document.querySelector('[data-qk-open]').click()`);
       await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === true`);
       await browser.trustedClick('.qk-sheet .qk-seg button.qk-seg__btn');
-      await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === false`);
-      await sleep(200);
+      await browser.waitUntil(
+        `document.querySelector('[data-qk-dialog]')?.open === false && location.hash === '#umar-stoning-verse'`,
+      );
+      await browser.nextFrames(2);
 
       const qpAfter = await browser.evaluate(`({
         scrollTop: document.querySelector('.main-content').scrollTop,
         hash: location.hash,
       })`);
-      assert.equal(qpAfter.hash, '#umar-stoning-verse');
+      assert.equal(qpAfter.hash, '#umar-stoning-verse', 'Expected #umar-stoning-verse hash preserved');
       assert.ok(
-        Math.abs(qpAfter.scrollTop - qpBefore.scrollTop) <= 4,
+        Math.abs(qpAfter.scrollTop - qpBefore.scrollTop) <= SCROLL_TOLERANCE_PX,
         `quran-preservation scrollTop shifted by ${qpAfter.scrollTop - qpBefore.scrollTop}px (${qpBefore.scrollTop} -> ${qpAfter.scrollTop})`,
       );
 
-      // 2. from-mecca-to-medina anchored landing + 300px extra reading scroll (regression check for Item 2)
+      // 2. from-mecca-to-medina anchored landing + 300px extra reading scroll
       await browser.navigateAndSettle(`${baseUrl}/discover/from-mecca-to-medina/#who-9-29-names`);
       const mmBefore = await browser.evaluate(`(() => {
         const m = document.querySelector('.main-content');
         m.scrollTop += 300;
         return { scrollTop: m.scrollTop };
       })()`);
-      await sleep(100);
+      await browser.nextFrames(2);
 
       await browser.evaluate(`document.querySelector('[data-qk-open]').click()`);
       await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === true`);
       await browser.trustedClick('.qk-sheet .qk-seg button.qk-seg__btn');
-      await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === false`);
-      await sleep(200);
+      await browser.waitUntil(
+        `document.querySelector('[data-qk-dialog]')?.open === false && location.hash === '#who-9-29-names'`,
+      );
+      await browser.nextFrames(2);
 
       const mmAfter = await browser.evaluate(`({
         scrollTop: document.querySelector('.main-content').scrollTop,
         hash: location.hash,
       })`);
-      assert.equal(mmAfter.hash, '#who-9-29-names');
+      assert.equal(mmAfter.hash, '#who-9-29-names', 'Expected #who-9-29-names hash preserved');
       assert.ok(
-        Math.abs(mmAfter.scrollTop - mmBefore.scrollTop) <= 4,
+        Math.abs(mmAfter.scrollTop - mmBefore.scrollTop) <= SCROLL_TOLERANCE_PX,
         `from-mecca-to-medina scrollTop jumped by ${mmAfter.scrollTop - mmBefore.scrollTop}px (${mmBefore.scrollTop} -> ${mmAfter.scrollTop})`,
       );
     },
@@ -585,8 +605,6 @@ try {
   // Flow (e): Escape closes, and Back does not unexpectedly reopen
   // ---------------------------------------------------------------------------
   await runFlow('(e) Escape closes sheet, restores URL, and Back does not reopen', async () => {
-    // Establish a prior page in history (`/discover/`), navigate to an article, open Quick Points,
-    // press Escape, then press Back -> should return to `/discover/` without reopening Quick Points!
     await browser.navigateAndSettle(`${baseUrl}/discover/`);
     await browser.evaluate(`(() => {
       const a = document.querySelector('a[href*="/discover/quran-preservation"]');
@@ -598,37 +616,134 @@ try {
 
     await browser.trustedClick('[data-qk-open]');
     await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === true`);
-    assert.equal(await browser.evaluate(`location.hash`), '#quick');
+    assert.equal(await browser.evaluate(`location.hash`), '#quick', 'Expected #quick hash on open');
 
     await browser.pressEscape();
-    await browser.waitUntil(`document.querySelector('[data-qk-dialog]')?.open === false`);
-    await sleep(150);
+    await browser.waitUntil(
+      `document.querySelector('[data-qk-dialog]')?.open === false && location.hash === ''`,
+    );
+    await browser.nextFrames(2);
 
     const afterEsc = await browser.evaluate(`({
       open: document.querySelector('[data-qk-dialog]').open,
       hash: location.hash,
       pathname: location.pathname,
     })`);
-    assert.equal(afterEsc.open, false);
-    assert.equal(afterEsc.hash, '');
-    assert.match(afterEsc.pathname, /^\/discover\/quran-preservation\/?$/);
+    assert.equal(afterEsc.open, false, 'Expected dialog closed after Escape');
+    assert.equal(afterEsc.hash, '', 'Expected empty hash after Escape');
+    assert.match(
+      afterEsc.pathname,
+      /^\/discover\/quran-preservation\/?$/,
+      'Expected pathname to remain on quran-preservation after Escape',
+    );
 
-    // Pressing Back now must go back to `/discover/` — NEVER reopen `#quick`!
     await browser.evaluate(`history.back()`);
     await browser.waitUntil(
-      `location.pathname === '/discover/' || location.pathname === '/discover'`,
+      `(location.pathname === '/discover/' || location.pathname === '/discover') && !document.documentElement.hasAttribute('data-astro-transition')`,
     );
-    await sleep(150);
+    await browser.nextFrames(2);
 
     const afterBack = await browser.evaluate(`({
       pathname: location.pathname,
       hash: location.hash,
       anyOpenDialog: Boolean(document.querySelector('dialog[open]')),
     })`);
-    assert.match(afterBack.pathname, /^\/discover\/?$/);
-    assert.equal(afterBack.hash, '');
-    assert.equal(afterBack.anyOpenDialog, false);
+    assert.match(afterBack.pathname, /^\/discover\/?$/, 'Expected Back after Escape to reach /discover/');
+    assert.equal(afterBack.hash, '', 'Expected empty hash on /discover/');
+    assert.equal(afterBack.anyOpenDialog, false, 'Expected no open dialog after Back');
   });
+
+  // ---------------------------------------------------------------------------
+  // Flow (f): cold #anchor arrival into closed <details>:
+  //   1. `divinity-timeline` (`[data-reveal-own]`): exactly ONE `scrollIntoView` call,
+  //      enclosing `<details>` open, target visible below sticky `.dtl-nav`.
+  //   2. `islamic-dilemma` (no `[data-reveal-own]`, relies on `sheet-nav.js` fallback):
+  //      `<details class="idl-answer">` opened and scrolled into view once.
+  // ---------------------------------------------------------------------------
+  await runFlow(
+    '(f) cold #anchor arrival into closed <details> on divinity-timeline (1 scroll, in view) and islamic-dilemma fallback',
+    async () => {
+      const { identifier } = await browser.send('Page.addScriptToEvaluateOnNewDocument', {
+        source: `(() => {
+          window.__coldScrollCalls = [];
+          const orig = Element.prototype.scrollIntoView;
+          Element.prototype.scrollIntoView = function(arg) {
+            window.__coldScrollCalls.push({ id: this.id, tag: this.tagName, arg });
+            return orig.apply(this, arguments);
+          };
+        })()`,
+      });
+
+      try {
+        // 1. divinity-timeline (`data-reveal-own` prevents `sheet-nav.js` duplicate scroll)
+        await browser.navigateAndSettle(
+          `${baseUrl}/discover/divinity-timeline/#event-paris_magical_papyrus`,
+        );
+
+        const dtlCold = await browser.evaluate(`(() => {
+          const target = document.getElementById('event-paris_magical_papyrus');
+          const bar = document.querySelector('.dtl-nav');
+          const rect = target.getBoundingClientRect();
+          return {
+            calls: window.__coldScrollCalls || [],
+            detailsOpen: target.closest('details')?.open ?? false,
+            targetTop: rect.top,
+            targetBottom: rect.bottom,
+            barBottom: bar.getBoundingClientRect().bottom,
+            viewportHeight: window.innerHeight,
+          };
+        })()`);
+
+        assert.equal(
+          dtlCold.calls.length,
+          1,
+          `Expected exactly 1 scrollIntoView call on divinity-timeline cold arrival, got ${JSON.stringify(dtlCold.calls)}`,
+        );
+        assert.equal(dtlCold.calls[0].id, 'event-paris_magical_papyrus');
+        assert.equal(dtlCold.detailsOpen, true, 'Expected closed <details> opened on cold arrival');
+        assert.ok(
+          dtlCold.targetTop >= dtlCold.barBottom - 1 && dtlCold.targetTop < dtlCold.viewportHeight,
+          `Expected target in view below sticky nav (${dtlCold.barBottom}px <= ${dtlCold.targetTop}px < ${dtlCold.viewportHeight}px)`,
+        );
+
+        // 2. islamic-dilemma (no own reveal handler -> `sheet-nav.js` opens closed <details class="idl-answer">)
+        const firstClosedAnswerId = await browser.evaluate(`(async () => {
+          const res = await fetch('/discover/islamic-dilemma/');
+          const html = await res.text();
+          const m = html.match(/<details[^>]*class="[^"]*idl-answer[^"]*"[^>]*id="([^"]+)"/);
+          return m ? m[1] : null;
+        })()`);
+        assert.ok(firstClosedAnswerId, 'Expected a <details class="idl-answer" id="..."> on islamic-dilemma');
+
+        await browser.navigateAndSettle(`${baseUrl}/discover/islamic-dilemma/#${firstClosedAnswerId}`);
+        const idlCold = await browser.evaluate(`((id) => {
+          const target = document.getElementById(id);
+          const bar = document.querySelector('.idl-nav');
+          const rect = target.getBoundingClientRect();
+          return {
+            calls: window.__coldScrollCalls || [],
+            detailsOpen: target instanceof HTMLDetailsElement ? target.open : Boolean(target?.closest('details')?.open),
+            targetTop: rect.top,
+            barBottom: bar.getBoundingClientRect().bottom,
+            viewportHeight: window.innerHeight,
+          };
+        })(${JSON.stringify(firstClosedAnswerId)})`);
+
+        assert.equal(
+          idlCold.calls.length,
+          1,
+          `Expected exactly 1 scrollIntoView call via sheet-nav.js fallback on islamic-dilemma, got ${JSON.stringify(idlCold.calls)}`,
+        );
+        assert.equal(idlCold.detailsOpen, true, 'Expected islamic-dilemma <details> opened by sheet-nav.js fallback');
+        assert.ok(
+          idlCold.targetTop >= idlCold.barBottom - 1 && idlCold.targetTop < idlCold.viewportHeight,
+          `Expected islamic-dilemma target in view below sticky nav (${idlCold.barBottom}px <= ${idlCold.targetTop}px < ${idlCold.viewportHeight}px)`,
+        );
+      } finally {
+        await browser.send('Page.removeScriptToEvaluateOnNewDocument', { identifier });
+      }
+    },
+  );
 } finally {
   browser.close();
   stopServer();

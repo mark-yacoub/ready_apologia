@@ -99,7 +99,7 @@ function bindDocument() {
     if (i && i.contains(e.target) && e.relatedTarget && !i.contains(e.relatedTarget)) i.open = false;
   });
   window.addEventListener('hashchange', ev => {
-    if (isQuickHashTransition(ev) || ev?.oldURL === ev?.newURL) return;
+    if (isQuickHashTransition(ev)) return;
     if (document.querySelector('[data-mm]')) goTo(hashId());
   });
 }

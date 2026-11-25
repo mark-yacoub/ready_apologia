@@ -93,7 +93,7 @@ function init() {
 if (!window.__crvClient) {
   window.__crvClient = true;
   window.addEventListener('hashchange', ev => {
-    if (isQuickHashTransition(ev) || ev?.oldURL === ev?.newURL) return;
+    if (isQuickHashTransition(ev)) return;
     openFor(location.hash.slice(1));
   });
   document.addEventListener('keydown', e => { const r = root(); if (r && e.key === 'Escape') closeSheet(r, { focus: true }); });

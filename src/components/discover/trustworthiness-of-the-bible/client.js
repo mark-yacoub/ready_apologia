@@ -7,9 +7,11 @@
  *   - deep-link helper: expands any closed <details> ancestor if a #hash target sits inside one
  */
 import { hasSavedScroll } from '../../../utils/scroll_restoration.js';
-import { isQuickHash, isQuickHashTransition } from '../../../utils/reveal_target.js';
-
-const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+import {
+  isQuickHash,
+  isQuickHashTransition,
+  prefersReducedMotion,
+} from '../../../utils/reveal_target.js';
 
 function hydrateScan(detailsEl) {
   if (!detailsEl || !detailsEl.open) return;
@@ -48,7 +50,7 @@ function revealHashTarget(root, { allowScroll = true } = {}) {
   }
   if (opened && allowScroll) {
     requestAnimationFrame(() => {
-      target.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
     });
   }
 }
@@ -69,7 +71,7 @@ function initNav(root, state) {
       const t = track.getBoundingClientRect();
       const c = a.getBoundingClientRect();
       const targetLeft = Math.max(0, track.scrollLeft + (c.left - t.left) - (t.width - c.width) / 2);
-      track.scrollTo({ left: targetLeft, behavior: reduceMotion() ? 'auto' : 'smooth' });
+      track.scrollTo({ left: targetLeft, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
     }
   };
   const bar = parseFloat(getComputedStyle(root).getPropertyValue('--hrv-bar-h')) || 52;
@@ -120,7 +122,7 @@ function init() {
   initScans(root);
   revealHashTarget(root, { allowScroll: !hasSavedScroll() });
   const onHashChange = ev => {
-    if (isQuickHashTransition(ev) || ev?.oldURL === ev?.newURL) return;
+    if (isQuickHashTransition(ev)) return;
     revealHashTarget(root, { allowScroll: true });
   };
   const onAnchorClick = ev => {
@@ -146,7 +148,7 @@ function init() {
     }
     if (opened) {
       requestAnimationFrame(() => {
-        target.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+        target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
       });
     }
   };
