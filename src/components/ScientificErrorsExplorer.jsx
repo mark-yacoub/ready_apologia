@@ -99,7 +99,7 @@ export default function ScientificErrorsExplorer({ evidenceDropdownData = [], sc
   };
 
   const evidenceId = 'scientific_errors';
-  const evidenceColor = { hex: '#059669', bgHex: '#d1fae5' }; // .theme-quran derived
+  const evidenceColor = { hex: '#33593a', bgHex: '#edf3ee' }; // .sec-islamic derived
   const tTitle = "Scientific Errors";
 
   // Parse & Categorize Data Purely (No Render Side-Effects)
