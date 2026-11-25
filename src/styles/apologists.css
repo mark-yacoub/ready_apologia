@@ -3,13 +3,13 @@
    select) is >= 44px tall (playbook §5.2). */
 
 .apg {
-  --apg-ink: var(--color-on-surface, #09090b);
-  --apg-muted: #52525b;
-  --apg-line: var(--color-outline-variant, #e4e4e7);
-  --apg-paper: var(--color-surface, #ffffff);
-  --apg-wash: #f4f4f5;
-  --apg-teal: #0f766e;
-  --apg-teal-wash: #f0fdfa;
+  --apg-ink: var(--ra-ink, #1b1917);
+  --apg-muted: var(--ra-ink-2, #57514a);
+  --apg-line: var(--ra-line, #e8e2d9);
+  --apg-paper: var(--ra-surface, #ffffff);
+  --apg-wash: var(--ra-well, #f3efe8);
+  --apg-teal: var(--ra-verify, #0e5e6f);
+  --apg-teal-wash: var(--ra-verify-bg, #e8f2f3);
   max-width: 760px;
   margin: 0 auto;
   padding: 16px 16px 48px;

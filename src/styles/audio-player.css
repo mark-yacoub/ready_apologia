@@ -7,18 +7,18 @@
    Palette: the hrv "archive reading room" (paper / ink / teal), no red.
    ========================================================================== */
 .rap {
-  --rap-paper: #fbf9f5;
-  --rap-surface: #ffffff;
-  --rap-ink: #1b1917;
-  --rap-ink-2: #57514a;
-  --rap-line: #e8e2d9;
+  --rap-paper: var(--ra-paper, #fbf9f5);
+  --rap-surface: var(--ra-surface, #ffffff);
+  --rap-ink: var(--ra-ink, #1b1917);
+  --rap-ink-2: var(--ra-ink-2, #57514a);
+  --rap-line: var(--ra-line, #e8e2d9);
   --rap-track: #e4ddd2;
   --rap-buffer: #cfc6b8;
-  --rap-accent: #0e5e6f;
-  --rap-accent-strong: #0a4855;
-  --rap-accent-bg: #e8f2f3;
-  --rap-sans: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --rap-display: 'Literata', Georgia, serif;
+  --rap-accent: var(--ra-verify, #0e5e6f);
+  --rap-accent-strong: var(--ra-verify-strong, #0a4855);
+  --rap-accent-bg: var(--ra-verify-bg, #e8f2f3);
+  --rap-sans: var(--ra-sans, 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  --rap-display: var(--ra-display, 'Literata', Georgia, serif);
   --rap-nav-h: 72px;
   font-family: var(--rap-sans);
   color: var(--rap-ink);

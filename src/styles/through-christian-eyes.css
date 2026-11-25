@@ -1,15 +1,15 @@
 /* Through Christian Eyes (/discover/through-christian-eyes). Scoped to .tce.
    Paper and ink like the printed handout; teal = a link you can check; sand = "Our answer". */
 .tce {
-  --tce-ink: #1c1917;
-  --tce-muted: #57534e;
-  --tce-accent: #883432;
-  --tce-gold: #92400e;
-  --tce-paper: #fbf8f3;
-  --tce-line: #e2d8ca;
+  --tce-ink: var(--ra-ink, #1b1917);
+  --tce-muted: var(--ra-ink-2, #57514a);
+  --tce-accent: var(--ra-christian, #7a3530);
+  --tce-gold: #855b26;
+  --tce-paper: var(--ra-paper, #fbf9f5);
+  --tce-line: var(--ra-line, #e8e2d9);
   --tce-quote: #3b1f14;
-  --tce-sand: #f3ebe0;
-  --tce-link: #0f766e;
+  --tce-sand: var(--ra-sand, #f6efe3);
+  --tce-link: var(--ra-verify, #0e5e6f);
   box-sizing: border-box;
   max-width: 720px;
   margin: 0 auto;
@@ -68,7 +68,7 @@
   flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
   width: 26px; height: 26px; padding-top: 1.5px; border-radius: 50%;
   background: var(--tce-accent); color: #fff;
-  font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; line-height: 1;
+  font-family: var(--ra-display, 'Literata', Georgia, serif); font-weight: 700; font-size: 14px; line-height: 1;
 }
 
 /* sections */

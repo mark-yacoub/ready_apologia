@@ -6,26 +6,26 @@
 
 /* Design tokens. Shared with the outline sheet, which is portaled outside .hx. */
 .hx, .hx-sheet {
-  --hx-ink: #18181b;
-  --hx-ink-2: #3f3f46;
-  --hx-ink-3: #52525b;
-  --hx-muted: #71717a;
-  --hx-faint: #a1a1aa;
-  --hx-line: #e4e4e7;
-  --hx-line-soft: #f1f1f3;
-  --hx-hover: #f4f4f5;
-  --hx-surface: #ffffff;
-  --hx-soft: #fafafa;
-  --hx-accent: #974543;
-  --hx-accent-ink: #7f3836;
-  --hx-accent-soft: #f7ecea;
-  --hx-mark: #fbeee6;
-  --hx-warn-bg: #fdf4e7;
-  --hx-warn-ink: #8a4b0f;
-  --hx-serif: 'Literata', Georgia, 'Amiri', serif;
-  --hx-sans: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Amiri', sans-serif; /* Amiri covers ﷺ (U+FDFA) */
-  --hx-arabic: 'Amiri', 'Traditional Arabic', serif;
-  --hx-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --hx-ink: var(--ra-ink, #1b1917);
+  --hx-ink-2: #3b3733;
+  --hx-ink-3: var(--ra-ink-2, #57514a);
+  --hx-muted: var(--ra-ink-3, #6b6560);
+  --hx-faint: #9a938b;
+  --hx-line: var(--ra-line, #e8e2d9);
+  --hx-line-soft: #f2ede5;
+  --hx-hover: var(--ra-well, #f3efe8);
+  --hx-surface: var(--ra-surface, #ffffff);
+  --hx-soft: var(--ra-paper, #fbf9f5);
+  --hx-accent: var(--ra-islamic, #33593a);
+  --hx-accent-ink: var(--ra-islamic-strong, #234029);
+  --hx-accent-soft: var(--ra-islamic-bg, #edf3ee);
+  --hx-mark: var(--ra-mark, #f3dfae);
+  --hx-warn-bg: var(--ra-sand, #f6efe3);
+  --hx-warn-ink: #7a551d;
+  --hx-serif: var(--ra-display, 'Literata', Georgia, 'Amiri', serif);
+  --hx-sans: var(--ra-sans, 'Public Sans', -apple-system, BlinkMacSystemFont, 'Amiri', sans-serif); /* Amiri covers ﷺ (U+FDFA) */
+  --hx-arabic: var(--ra-arabic, 'Amiri', 'Traditional Arabic', serif);
+  --hx-ease: var(--ra-ease, cubic-bezier(0.2, 0.8, 0.2, 1));
 }
 
 /* Page layout. */
@@ -103,7 +103,7 @@
   z-index: 20;
   margin: calc(-1 * var(--hx-sticky-inset)) calc(-1 * var(--hx-pad)) 0;
   padding: var(--hx-sticky-inset) var(--hx-pad) 0;
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(251, 249, 245, 0.96);
   backdrop-filter: saturate(1.4) blur(10px);
   -webkit-backdrop-filter: saturate(1.4) blur(10px);
   border-bottom: 1px solid var(--hx-line-soft);

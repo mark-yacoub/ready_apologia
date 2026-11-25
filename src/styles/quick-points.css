@@ -23,20 +23,20 @@
 
 .qk-entry,
 .qk-sheet {
-  --qk-paper: #fbf9f5;
-  --qk-surface: #ffffff;
+  --qk-paper: var(--ra-paper, #fbf9f5);
+  --qk-surface: var(--ra-surface, #ffffff);
   --qk-track: #efeae1;
-  --qk-ink: #1b1917;
-  --qk-ink-2: #57514a;
-  --qk-muted: #71717a;
-  --qk-line: #e8e2d9;
-  --qk-line-strong: #d8d0c4;
-  --qk-teal: #0e5e6f;
-  --qk-teal-strong: #0a4855;
-  --qk-teal-bg: #e8f2f3;
-  --qk-sans: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --qk-display: 'Literata', Georgia, serif;
-  --qk-arabic: 'Amiri', 'Noto Naskh Arabic', 'Traditional Arabic', serif;
+  --qk-ink: var(--ra-ink, #1b1917);
+  --qk-ink-2: var(--ra-ink-2, #57514a);
+  --qk-muted: var(--ra-ink-3, #6b6560);
+  --qk-line: var(--ra-line, #e8e2d9);
+  --qk-line-strong: var(--ra-line-strong, #d8d0c4);
+  --qk-teal: var(--ra-verify, #0e5e6f);
+  --qk-teal-strong: var(--ra-verify-strong, #0a4855);
+  --qk-teal-bg: var(--ra-verify-bg, #e8f2f3);
+  --qk-sans: var(--ra-sans, 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  --qk-display: var(--ra-display, 'Literata', Georgia, serif);
+  --qk-arabic: var(--ra-arabic, 'Amiri', 'Noto Naskh Arabic', 'Traditional Arabic', serif);
   font-family: var(--qk-sans);
   color: var(--qk-ink);
   -webkit-font-smoothing: antialiased;

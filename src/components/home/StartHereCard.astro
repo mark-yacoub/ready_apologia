@@ -35,12 +35,12 @@ const href = `${base}${m.path}`;
 <style>
   /* Kept compact: on phones the five questions are left to the article itself; from 768px they sit beside the copy. */
   .ra-tce {
-    --tce-ink: #1c1917;
-    --tce-muted: #57534e;
-    --tce-accent: #883432;
-    --tce-gold: #92400e;
-    --tce-paper: #fbf8f3;
-    --tce-line: #e2d8ca;
+    --tce-ink: var(--ra-ink, #1b1917);
+    --tce-muted: var(--ra-ink-2, #57514a);
+    --tce-accent: var(--ra-christian, #7a3530);
+    --tce-gold: #855b26;
+    --tce-paper: var(--ra-surface, #ffffff);
+    --tce-line: var(--ra-line, #e8e2d9);
   }
   .ra-tce :global(.hrv-tlm),
   .ra-tce :global(.hrv-ar-inline) {
@@ -125,7 +125,7 @@ const href = `${base}${m.path}`;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Cinzel', serif;
+    font-family: var(--ra-display, 'Literata', Georgia, serif);
     font-size: 11.5px;
     font-weight: 700;
     line-height: 1;

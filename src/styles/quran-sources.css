@@ -9,25 +9,25 @@
    ========================================================================== */
 
 .qs {
-  --qs-paper: #fbf9f5;
-  --qs-surface: #ffffff;
-  --qs-ink: #1b1917;
-  --qs-ink-2: #524c46;
-  --qs-ink-3: #6b645c;
-  --qs-line: #e6dfd5;
-  --qs-line-strong: #d4cbbd;
-  --qs-verify: #0e5e6f;
-  --qs-verify-strong: #094350;
-  --qs-verify-bg: #e7f2f4;
-  --qs-sand: #f7f0e4;
-  --qs-sand-rule: #b58536;
-  --qs-slate: #f4f6f8;
-  --qs-slate-rule: #64748b;
-  --qs-radius: 14px;
-  --qs-radius-lg: 18px;
-  --qs-shadow: 0 1px 2px rgba(27, 25, 23, 0.04), 0 6px 20px -8px rgba(27, 25, 23, 0.08);
-  --qs-display: 'Literata', Georgia, serif;
-  --qs-sans: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --qs-paper: var(--ra-paper, #fbf9f5);
+  --qs-surface: var(--ra-surface, #ffffff);
+  --qs-ink: var(--ra-ink, #1b1917);
+  --qs-ink-2: var(--ra-ink-2, #57514a);
+  --qs-ink-3: var(--ra-ink-3, #6b6560);
+  --qs-line: var(--ra-line, #e8e2d9);
+  --qs-line-strong: var(--ra-line-strong, #d8d0c4);
+  --qs-verify: var(--ra-verify, #0e5e6f);
+  --qs-verify-strong: var(--ra-verify-strong, #0a4855);
+  --qs-verify-bg: var(--ra-verify-bg, #e8f2f3);
+  --qs-sand: var(--ra-sand, #f6efe3);
+  --qs-sand-rule: var(--ra-sand-rule, #b8893a);
+  --qs-slate: var(--ra-slate, #eef1f4);
+  --qs-slate-rule: var(--ra-slate-rule, #8d99a6);
+  --qs-radius: var(--ra-radius, 14px);
+  --qs-radius-lg: var(--ra-radius-lg, 18px);
+  --qs-shadow: var(--ra-shadow, 0 1px 2px rgba(27, 25, 23, 0.04), 0 6px 20px -8px rgba(27, 25, 23, 0.08));
+  --qs-display: var(--ra-display, 'Literata', Georgia, serif);
+  --qs-sans: var(--ra-sans, 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
   --qs-orig-font: 'Amiri', 'Noto Naskh Arabic', 'SBL Hebrew', 'SBL Greek', 'Literata', Georgia, serif;
   --qs-inset: 16px;
 
