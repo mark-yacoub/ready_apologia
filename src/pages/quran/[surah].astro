@@ -311,6 +311,17 @@ const ogImage = getQuranOgImage(surahNum, null);
                     </svg>
                   </a>
                 )}
+                {v.hasEvidence && (
+                  <a
+                    href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/${v.defaultFirstTab}`}
+                    class="verse-open-cue"
+                    aria-label={`Open commentary and sources for Surah ${surahNum}, verse ${v.number}`}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="m9 18 6-6-6-6" />
+                    </svg>
+                  </a>
+                )}
               </div>
               {v.hasEvidence ? (
                 <>
@@ -424,7 +435,7 @@ const ogImage = getQuranOgImage(surahNum, null);
     btnAr.addEventListener('click', () => setLanguage('arabic'));
 
     // Enforce dynamic user layout preferences immediately on hydration
-    enforceUserBadgePriority('ready_apologia_quran_tab_order', DEFAULT_QURAN_TAB_ORDER, '.verse-card', '.verse-badge-tray', '.verse-text-link');
+    enforceUserBadgePriority('ready_apologia_quran_tab_order', DEFAULT_QURAN_TAB_ORDER, '.verse-card', '.verse-badge-tray', '.verse-text-link, .verse-open-cue');
 
     // Analytics: Track Verse Label Expansions (O(1) Global Delegation)
     container.addEventListener('toggle', (e) => {
@@ -517,90 +528,136 @@ const ogImage = getQuranOgImage(surahNum, null);
   }
 
   .language-toggle {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
-    gap: 8px;
-    margin: 0 auto 24px auto;
-    background-color: var(--color-surface-container-low);
+    gap: 4px;
+    margin: 0 auto 20px auto;
+    background-color: var(--ra-well, #f3efe8);
     padding: 4px;
-    border-radius: 8px;
-    border: 1px solid var(--color-outline-variant);
+    border-radius: 10px;
+    border: 1px solid var(--ra-line, #e8e2d9);
   }
 
   .toggle-btn {
-    padding: 6px 16px;
-    border: none;
+    min-height: 36px;
+    padding: 6px 18px;
+    border: 1px solid transparent;
     background: none;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
     font-size: 13px;
-    font-weight: 700;
-    color: var(--color-on-surface-variant);
+    font-weight: 650;
+    color: var(--ra-ink-3, #6b6560);
     cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.15s ease;
+    border-radius: 7px;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
   }
 
   .toggle-btn:hover {
-    color: var(--color-primary);
+    color: var(--ra-ink, #1b1917);
   }
 
   .toggle-btn.active {
-    background-color: var(--color-surface);
-    color: var(--color-secondary);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: var(--ra-surface, #ffffff);
+    border-color: var(--ra-line, #e8e2d9);
+    color: var(--ra-islamic, #33593a);
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(27, 25, 23, 0.06);
   }
 
   .quran-content {
-    margin-top: 8px;
+    margin-top: 4px;
   }
 
+  /* Continuous Warm Paper Ayah Stream (distinct weight + clickability per verse) */
   .verses-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    border-top: 1px solid var(--ra-line, #e8e2d9);
   }
 
   .verse-card {
-    padding: 24px;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-outline-variant);
-    border-radius: 12px;
+    padding: 20px 10px;
+    margin: 0 -10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--ra-line, #e8e2d9);
+    border-radius: 0;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    transition: box-shadow 0.2s ease;
+    gap: 14px;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
   }
-  .verse-card:hover {
-    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  @media (hover: hover) {
+    .verse-card:hover {
+      background-color: var(--ra-surface, #ffffff);
+      border-radius: 12px;
+      box-shadow: var(--ra-shadow-sm, 0 1px 2px rgba(27, 25, 23, 0.04));
+    }
+  }
+  .verse-card:active {
+    background-color: var(--ra-well, #f3efe8);
   }
 
   .verse-badge-tray {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
 
   .verse-num {
-    font-family: var(--font-body);
-    font-size: 11px;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
+    font-size: 11.5px;
     font-weight: 800;
-    color: var(--color-on-surface-variant);
-    opacity: 0.5;
-    letter-spacing: 0.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--ra-islamic, #33593a);
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    border: 1px solid var(--ra-islamic-rule, #c2d6c6);
+    min-width: 26px;
+    height: 26px;
+    padding: 0 7px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  .verse-open-cue {
+    order: 999;
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    color: var(--ra-ink-3, #6b6560);
+    opacity: 0.7;
+    transition: color 0.15s ease, background-color 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+  }
+  .verse-card:hover .verse-open-cue,
+  .verse-open-cue:hover {
+    color: var(--ra-islamic, #33593a);
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    opacity: 1;
+    transform: translateX(1px);
   }
 
   .text-arabic {
-    font-family: 'Amiri', 'Traditional Arabic', serif;
+    font-family: var(--ra-arabic, 'Amiri', 'Traditional Arabic', serif);
     direction: rtl;
     text-align: right;
-    line-height: 2;
+    line-height: 2.05;
     margin: 0;
   }
 
   .text-english {
-    font-family: var(--font-display);
-    line-height: 1.6;
+    font-family: var(--ra-display, 'Literata', Georgia, serif);
+    line-height: 1.65;
     margin: 0;
   }
 
@@ -608,59 +665,57 @@ const ogImage = getQuranOgImage(surahNum, null);
     transition: color 0.15s ease;
   }
   .verse-text-link-wrapper:hover {
-    color: var(--color-primary) !important;
+    color: var(--ra-ink, #1b1917) !important;
   }
 
   /* Prominence Overrides */
-
-  /* English Prominent */
   .quran-reader-container.prefer-english .text-english {
     font-size: 17px;
-    color: var(--color-on-surface);
-    font-weight: 500;
+    color: var(--ra-ink, #1b1917);
+    font-weight: 450;
   }
 
   .quran-reader-container.prefer-english .text-arabic {
-    font-size: 20px;
-    color: var(--color-on-surface-variant);
-    opacity: 0.6;
+    font-size: 21px;
+    color: var(--ra-ink-2, #57514a);
+    opacity: 0.78;
   }
 
-  /* Arabic Prominent */
   .quran-reader-container.prefer-arabic .text-arabic {
     font-size: 26px;
-    color: var(--color-on-surface);
+    color: var(--ra-ink, #1b1917);
   }
 
   .quran-reader-container.prefer-arabic .text-english {
-    font-size: 14px;
-    color: var(--color-on-surface-variant);
-    opacity: 0.7;
+    font-size: 14.5px;
+    color: var(--ra-ink-2, #57514a);
+    opacity: 0.85;
     font-weight: 400;
   }
 
   .empty-message {
-    font-family: var(--font-body);
-    color: var(--color-on-surface-variant);
-    font-size: 16px;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
+    color: var(--ra-ink-3, #6b6560);
+    font-size: 15px;
     text-align: center;
     margin: 40px 0;
   }
 
-  /* Competing Codex Styles */
+  /* Competing Codex Disclosure (Refined Oxblood-Parchment) */
   .competing-codex-details {
-    margin-top: 12px;
-    border: 1px solid #fecaca;
+    margin-top: 6px;
+    border: 1px solid var(--ra-christian-rule, #dfc5c2);
     border-radius: 10px;
     overflow: hidden;
-    background-color: #fff1f2;
+    background-color: var(--ra-surface, #ffffff);
   }
 
   .competing-codex-summary {
     padding: 10px 14px;
     cursor: pointer;
     user-select: none;
-    list-style: none; /* Hide default arrow in some browsers */
+    list-style: none;
+    background-color: var(--ra-christian-bg, #f6eeec);
   }
 
   .competing-codex-summary::-webkit-details-marker {
@@ -671,7 +726,7 @@ const ogImage = getQuranOgImage(surahNum, null);
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px 10px;
   }
 
   .competing-pill,
@@ -683,141 +738,142 @@ const ogImage = getQuranOgImage(surahNum, null);
   }
 
   .competing-pill {
-    background-color: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #f87171;
-    padding: 4px 12px;
+    background-color: var(--ra-surface, #ffffff);
+    color: var(--ra-christian, #7a3530);
+    border: 1px solid var(--ra-christian-rule, #dfc5c2);
+    padding: 4px 11px;
     border-radius: 9999px;
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.3px;
-    transition: all 0.15s ease;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
+    font-size: 11.5px;
+    font-weight: 750;
+    letter-spacing: 0.02em;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
   }
 
   .competing-preview-hook {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
     font-size: 13px;
     font-weight: 600;
-    color: #7f1d1d;
+    color: var(--ra-ink-2, #57514a);
   }
 
   .competing-codex-summary:hover .competing-pill {
-    background-color: #fca5a5;
+    border-color: var(--ra-christian, #7a3530);
   }
 
   .competing-codex-details .variants-list {
     padding: 16px;
-    border-top: 1px solid #fecaca;
-    background-color: var(--color-surface);
+    border-top: 1px solid var(--ra-christian-rule, #dfc5c2);
+    background-color: var(--ra-surface, #ffffff);
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
 
   :global(.codex-highlight) {
-    background-color: rgba(254, 202, 202, 0.38);
+    background-color: var(--ra-christian-bg, #f6eeec);
     border-radius: 4px;
     padding: 0 4px;
-    border-bottom: 2px solid #ef4444;
+    border-bottom: 1.5px solid var(--ra-christian, #7a3530);
   }
 
-  /* Qiraat Styles */
+  /* Qiraat Disclosure (Warm Sand & Antique Bronze) */
   .qiraat-details {
-    margin-top: 8px;
-    border: 1px solid #fef08a; /* yellow-200 */
-    border-radius: 8px;
+    margin-top: 6px;
+    border: 1px solid #e3d3b6;
+    border-radius: 10px;
     overflow: hidden;
-    background-color: #fefce8; /* yellow-50 */
+    background-color: var(--ra-surface, #ffffff);
   }
 
   .qiraat-summary {
-    padding: 12px 16px;
+    padding: 10px 14px;
     cursor: pointer;
     user-select: none;
     list-style: none;
+    background-color: var(--ra-sand, #f6efe3);
   }
 
   .qiraat-pill {
-    background-color: #fef08a; /* yellow-200 */
-    color: #a16207; /* yellow-800 */
-    border: 1px solid #fde047; /* yellow-300 */
-    padding: 4px 12px;
+    background-color: var(--ra-surface, #ffffff);
+    color: #7a551d;
+    border: 1px solid #dfc89f;
+    padding: 4px 11px;
     border-radius: 9999px;
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    transition: all 0.15s ease;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
+    font-size: 11.5px;
+    font-weight: 750;
+    letter-spacing: 0.02em;
+    transition: border-color 0.15s ease;
   }
 
   .qiraat-summary:hover .qiraat-pill {
-    background-color: #fde047; /* yellow-300 */
+    border-color: var(--ra-sand-rule, #b8893a);
   }
 
   .qiraat-details .variants-list {
     padding: 16px;
-    border-top: 1px solid #fef08a;
-    background-color: var(--color-surface);
+    border-top: 1px solid #e3d3b6;
+    background-color: var(--ra-surface, #ffffff);
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
 
-  /* Global scope needed for elements created via set:html */
   :global(.qiraat-highlight) {
-    background-color: rgba(254, 240, 138, 0.4); /* yellow-200 with opacity */
+    background-color: var(--ra-mark, #f3dfae);
     border-radius: 4px;
     padding: 0 4px;
-    border-bottom: 2px solid #facc15; /* yellow-400 */
+    border-bottom: 1.5px solid var(--ra-sand-rule, #b8893a);
   }
 
-  /* Verse Labels Styles */
+  /* Verse Labels Disclosure (Scholarly Slate) */
   .verse-labels-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-top: 16px;
+    margin-top: 6px;
   }
 
   .label-details {
-    border: 1px solid #d8b4fe; /* purple-300 */
-    border-radius: 8px;
+    border: 1px solid #d1dbe4;
+    border-radius: 10px;
     overflow: hidden;
-    background-color: #faf5ff; /* purple-50 */
+    background-color: var(--ra-surface, #ffffff);
   }
 
   .label-summary {
-    padding: 12px 16px;
+    padding: 10px 14px;
     cursor: pointer;
     user-select: none;
-    list-style: none; /* Hide default arrow in some browsers */
+    list-style: none;
+    background-color: var(--ra-slate, #eef1f4);
   }
 
   .label-pill {
-    background-color: #e9d5ff; /* purple-200 */
-    color: #6b21a8; /* purple-800 */
-    border: 1px solid #c084fc; /* purple-400 */
-    padding: 4px 12px;
+    background-color: var(--ra-surface, #ffffff);
+    color: #36495c;
+    border: 1px solid #c5d1dc;
+    padding: 4px 11px;
     border-radius: 9999px;
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    transition: all 0.15s ease;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
+    font-size: 11.5px;
+    font-weight: 750;
+    letter-spacing: 0.02em;
+    transition: border-color 0.15s ease;
   }
 
   .label-summary:hover .label-pill {
-    background-color: #d8b4fe; /* purple-300 */
+    border-color: var(--ra-slate-rule, #8d99a6);
   }
 
   .label-note {
-    padding: 16px;
-    border-top: 1px solid #f3e8ff; /* purple-100 */
-    background-color: var(--color-surface);
-    font-family: var(--font-body);
+    padding: 14px 16px;
+    border-top: 1px solid #d1dbe4;
+    background-color: var(--ra-surface, #ffffff);
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
     line-height: 1.6;
-    color: var(--color-on-surface);
+    color: var(--ra-ink, #1b1917);
   }
 
   .label-note :global(p.response-paragraph) {
@@ -843,12 +899,13 @@ const ogImage = getQuranOgImage(surahNum, null);
 
   @media (max-width: 640px) {
     .verse-card {
-      padding: 16px 12px;
+      padding: 16px 8px;
+      margin: 0 -8px;
     }
 
     .competing-codex-details .variants-list,
     .qiraat-details .variants-list {
-      padding: 10px 8px;
+      padding: 12px 10px;
       gap: 14px;
     }
   }

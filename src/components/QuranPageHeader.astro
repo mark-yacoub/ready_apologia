@@ -117,30 +117,32 @@ const sections = hideDropdown ? [] : getQuranSections();
   .surah-selector-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     background: none;
     border: none;
     padding: 6px 10px;
     border-radius: 8px;
     cursor: pointer;
-    color: var(--color-secondary);
-    font-family: var(--font-display);
+    color: var(--ra-ink, #1b1917);
+    font-family: var(--ra-display, 'Literata', Georgia, serif);
     font-size: 28px;
     font-weight: 800;
-    transition: background-color 0.15s;
+    letter-spacing: -0.015em;
+    transition: background-color 0.15s ease, color 0.15s ease;
   }
   .surah-selector-btn:hover {
-    background-color: var(--color-surface-container-low);
+    background-color: var(--ra-well, #f3efe8);
+    color: var(--ra-islamic, #33593a);
   }
 
   .chevron-down {
     font-size: 12px;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-islamic, #33593a);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 6px;
-    opacity: 0.7;
+    margin-top: 4px;
+    opacity: 0.85;
   }
   .chevron-down svg {
     width: 8px;
