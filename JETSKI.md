@@ -61,21 +61,29 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   The Left Navigator (`ScriptureNav.jsx`) is **permanently docked as a sidebar** on the left side of the screen.
 *   The burger menu button and the Bottom Navigation bar are **automatically hidden** on desktop viewports.
 
-### CSS Color Tokens (Zinc/Slate Apple Theme):
+### CSS Color Tokens (Archive Reading Room — Canonical `--ra-*` + Option B Section Themes):
+Defined once in `src/layouts/Layout.astro`, scoped per route via `src/utils/sectionTheme.js` (`.sec-christian`, `.sec-islamic`, `.sec-neutral`), with shared `:where()` primitives in `src/styles/ui.css` and enforced by `npm run audit:palette` (`scripts/test_palette.mjs`). Legacy `--color-*` and `.hrv`/`.hx`/`.qs`/`.rap`/`.apg`/`.tce` tokens alias onto `--ra-*`.
 ```css
 :root {
-  --color-primary: #09090b; /* Zinc 950 */
-  --color-secondary: #974543; /* Terracotta Red */
-  --color-background: #f4f4f5; /* Zinc 100 */
-  --color-surface: #ffffff;
-  --color-on-surface: #09090b;
-  --color-on-surface-variant: #71717a; /* Zinc 500 */
-  --color-outline-variant: #e4e4e7; /* Zinc 200 */
-  --color-surface-container-low: #f4f4f5;
-  --color-surface-container-lowest: #ffffff;
-  
-  --font-display: 'Literata', Georgia, serif;
-  --font-body: 'Public Sans', -apple-system, sans-serif;
+  --ra-paper: #fbf9f5;       /* Warm archival reading surface */
+  --ra-surface: #ffffff;     /* Elevated cards & sheets */
+  --ra-well: #f3efe8;        /* Controls, tracks, inactive wells */
+  --ra-line: #e8e2d9;        /* Hairline dividers */
+  --ra-line-strong: #d8d0c4; /* Interactive control borders */
+  --ra-ink: #1b1917;         /* Primary text */
+  --ra-ink-2: #57514a;       /* Secondary text (7.4:1 on paper) */
+  --ra-ink-3: #6b6560;       /* Muted metadata (5.5:1 on paper) */
+
+  /* Section themes (Option B) */
+  --ra-christian: #7a3530;   /* Oxblood (Bible, Christian Discover/Evidence) */
+  --ra-islamic: #33593a;     /* Deep manuscript cypress (Quran, Hadith, Islamic Discover/Evidence) */
+  --ra-verify: #0e5e6f;      /* Verifiable primary-source links & check chips */
+  --ra-sand: #f6efe3;        /* Original Arabic & scholarly highlights */
+
+  /* 3-Font Stack (retired Cinzel, Newsreader, Playfair Display, Inter) */
+  --ra-display: 'Literata', Georgia, serif;
+  --ra-sans: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ra-arabic: 'Amiri', 'Traditional Arabic', serif;
 }
 ```
 

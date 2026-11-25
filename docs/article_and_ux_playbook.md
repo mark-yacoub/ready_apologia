@@ -105,11 +105,17 @@ Criteria, in order:
    - same-section list
    - other sections
    - "What others are saying" (collapsed, at the very bottom, `nofollow`)
-6. **Visual language:**
-   - "Archive reading room": paper and ink; teal = verifiable; sand = original Arabic; slate = scholars' voice; no alarm red.
-   - Scoped CSS (`.hrv`, `.hx`), no Tailwind.
-   - AA contrast: informative text is never "faint grey" (use `#71717a` or darker).
-   - Amiri for ʿ/ʾ marks inside Literata.
+6. **Visual language ("Archive Reading Room"):**
+   - Warm archival paper (`--ra-paper: #fbf9f5`), elevated white sheets (`--ra-surface: #ffffff`), deep warm ink (`--ra-ink: #1b1917`), and calm hairline borders (`--ra-line: #e8e2d9`).
+   - **Option B section theming** via `src/utils/sectionTheme.js` (applied on `Layout.astro` root as `.sec-christian`, `.sec-islamic`, or `.sec-neutral`):
+     - **Christianity (`.sec-christian`):** oxblood `--ra-christian: #7a3530` (bg `#f6eeec`, rule `#dfc5c2`).
+     - **Islam (`.sec-islamic`):** deep manuscript cypress `--ra-islamic: #33593a` (bg `#edf3ee`, rule `#c2d6c6`).
+     - **Verifiable links & check chips (both sections):** `--ra-verify: #0e5e6f` (bg `#e8f2f3`, rule `#bdd8dc`), never clashing with section accents.
+     - **Original Arabic / textual highlight:** warm sand (`--ra-sand: #f6efe3`, `--ra-sand-rule: #b8893a`, `--ra-mark: #f3dfae`). No alarm red, no saturated Tailwind/iOS neons.
+   - **Shared primitives & scoped CSS:** `src/styles/ui.css` (`:where()`-scoped) + feature-scoped CSS (`.hrv`, `.hx`, `.ra-home`, etc.), no Tailwind.
+   - **3-font stack:** `Literata` (display/scripture serif), `Public Sans` (UI sans), `Amiri` (Arabic + ʿ/ʾ marks inside Literata). No `Cinzel`, `Newsreader`, `Playfair Display`, or `Inter`.
+   - **AA contrast:** informative text is never "faint grey" (use `--ra-ink-3: #6b6560` or darker; `>= 4.5:1` on paper/white).
+   - **Guardrail:** `npm run audit:palette` (`scripts/test_palette.mjs`) fails on forbidden Tailwind/iOS neon hexes, decorative emojis in UI chrome, retired fonts, or missing `--ra-*` tokens.
 7. **Progressive disclosure:** the depth is there but collapsed; the first screen is the claim, the evidence and how to check it.
 8. **Personal state is allowed:** pages may keep the reader's own preferences and progress in `localStorage` (e.g. audio position and playback speed). No tracking identifiers, and nothing that changes what a cold reader sees on first visit. (Owner, Nov 2026: the earlier "no localStorage" rule is lifted.)
 9. **No explanatory text about the app.** No visible lines that describe the app or the page (counts, "N verses with manuscripts…", "what you'll find here") between a header and its content. Scripture and evidence speak for themselves; SEO copy lives in `<title>` and the meta description only. (Owner, Nov 2026.)
@@ -119,4 +125,5 @@ Criteria, in order:
 - **Voice & meta-tag gate:** `src/utils/discover/playbookTone.js` (+ `playbookTone.test.mjs`) centralizes Playbook §2.3 (`PLAYBOOK_BODY`, `PLAYBOOK_HEADLINE`) and §2.10 (`PLAYBOOK_META`) banned patterns across all Discover `tone.js` gates, `scripts/test_hadith_reliability.mjs`, and `scripts/test_seo_titles.mjs`.
 - **Audit:** a static audit runs on the **built HTML** (`scripts/test_hadith_reliability.mjs` and per-article `scripts/test_*.mjs` audits). It covers SEO, leaks, tone (body, headline, and meta-tag gates), link policy, JSON-LD, structure, the catalog card, and an unsliced `build_config`.
 - **Links:** one link policy (`linkAttrs`); internal hrefs are BASE-aware; shared routes live in `src/utils/routes.js`; nav tabs live in `src/components/navTabs.js`.
+- **Palette & chrome gate:** `scripts/test_palette.mjs` (`npm run audit:palette`) enforces the Archive Reading Room palette, 3-font stack, canonical `--ra-*` tokens, and SVG-only global chrome.
 - **Labels:** reader-facing labels live in config and override dataset names. A missing label **fails the build**, and a unit test bans verdict words.
