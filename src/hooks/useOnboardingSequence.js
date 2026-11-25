@@ -3,23 +3,48 @@ import { useState, useEffect } from 'react';
 const ONBOARDING_TIPS = [
   {
     id: 'verse',
+    icon: 'verse',
     storageKey: 'ready_apologia_tip_verse',
-    text: "💡 Tip: Tap on any verse below to explore its videos, apologetics, and manuscript evidence.",
+    text: "Tip: Tap on any verse below to explore its videos, apologetics, and manuscript evidence.",
+    isRelevant: (path) =>
+      path.includes('/bible/') ||
+      path.includes('/quran/') ||
+      (typeof document !== 'undefined' && Boolean(document.querySelector('[data-onboarding-trigger="verse"]'))),
     isCompletedTrigger: () => false // Handled exclusively by DOM clicks
   },
   {
     id: 'quran',
+    icon: 'quran',
     storageKey: 'ready_apologia_tip_quran',
-    text: "🌙 Tip: Check out the Quran section in the navigation menu on the left.",
+    text: "Tip: Check out the Quran section in the navigation menu on the left.",
+    isRelevant: () => true,
     isCompletedTrigger: (path) => path.includes('/quran')
   },
   {
     id: 'evidence',
+    icon: 'evidence',
     storageKey: 'ready_apologia_tip_evidence',
-    text: "🔍 Tip: Explore the Evidence and Discover tabs to dive deeper into our catalog.",
+    text: "Tip: Explore the Evidence and Discover tabs to dive deeper into our catalog.",
+    isRelevant: () => true,
     isCompletedTrigger: (path) => path.includes('/evidence') || path.includes('/discover')
   }
 ];
+
+function safeGetItem(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return 'true';
+  }
+}
+
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // Ignore storage quota / private-browsing errors
+  }
+}
 
 export function useOnboardingSequence() {
   const [activeTipIndex, setActiveTipIndex] = useState(-1);
@@ -27,56 +52,48 @@ export function useOnboardingSequence() {
   const evaluateSequence = () => {
     if (typeof window === 'undefined') return;
 
-    // 1. Process URL match rules to instantly autocomplete relevant tips
     const path = window.location.pathname;
     ONBOARDING_TIPS.forEach(tip => {
       if (tip.isCompletedTrigger(path)) {
-        localStorage.setItem(tip.storageKey, 'true');
+        safeSetItem(tip.storageKey, 'true');
       }
     });
 
-    // 2. Find the first tip that isn't functionally completed
     const nextIndex = ONBOARDING_TIPS.findIndex(
-      tip => localStorage.getItem(tip.storageKey) !== 'true'
+      tip => safeGetItem(tip.storageKey) !== 'true' && tip.isRelevant(path)
     );
-    
-    // 3. Sync clean React state
+
     setActiveTipIndex(nextIndex);
   };
 
-  // Mount effects
   useEffect(() => {
     evaluateSequence();
 
-    // 1. Astro SPA Router hook
     const handleNavigation = () => evaluateSequence();
-    document.addEventListener('astro:after-swap', handleNavigation);
+    document.addEventListener('astro:page-load', handleNavigation);
 
     return () => {
-      document.removeEventListener('astro:after-swap', handleNavigation);
+      document.removeEventListener('astro:page-load', handleNavigation);
     };
   }, []);
 
-  // Global interactions that depend on current sequence index
   useEffect(() => {
     const handleGlobalClick = (e) => {
-      const target = e.target.closest('[data-onboarding-trigger]');
+      const target = e.target instanceof Element ? e.target.closest('[data-onboarding-trigger]') : null;
       if (!target) return;
-      
+
       const triggerId = target.getAttribute('data-onboarding-trigger');
-      
-      // If we are currently showing the verse tip and they interacted with a verse...
+
       if (
-        triggerId === 'verse' && 
-        activeTipIndex >= 0 && 
+        triggerId === 'verse' &&
+        activeTipIndex >= 0 &&
         ONBOARDING_TIPS[activeTipIndex].id === 'verse'
       ) {
-        localStorage.setItem(ONBOARDING_TIPS[activeTipIndex].storageKey, 'true');
+        safeSetItem(ONBOARDING_TIPS[activeTipIndex].storageKey, 'true');
         evaluateSequence();
       }
     };
 
-    // Attach to capture phase for priority
     document.addEventListener('click', handleGlobalClick, true);
 
     return () => {
@@ -87,7 +104,7 @@ export function useOnboardingSequence() {
   const dismissCurrent = (e) => {
     if (e) e.stopPropagation();
     if (activeTipIndex >= 0) {
-      localStorage.setItem(ONBOARDING_TIPS[activeTipIndex].storageKey, 'true');
+      safeSetItem(ONBOARDING_TIPS[activeTipIndex].storageKey, 'true');
       evaluateSequence();
     }
   };

@@ -16,7 +16,10 @@ const {
 
 <aside aria-label="Coming soon announcement" class="discovery-coming-soon">
   <div class="coming-soon-icon" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+      <path d="M12 7v6M9 10h6" />
+    </svg>
   </div>
   <div class="coming-soon-content">
     <h3 class="coming-soon-title">{title}</h3>
@@ -29,32 +32,34 @@ const {
 
 <style>
   .discovery-coming-soon {
-    margin: 32px 20px 24px 20px;
-    background-color: var(--color-surface-container-low, #f4f4f5);
-    border: 1px solid var(--color-outline-variant, #e4e4e7);
-    border-radius: 16px;
-    padding: 24px;
+    margin: 28px 0 24px;
+    background-color: var(--ra-surface, #ffffff);
+    border: 1px solid var(--ra-line, #e8e2d9);
+    border-radius: var(--ra-radius, 14px);
+    padding: 24px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 16px;
+    gap: 14px;
+    box-shadow: var(--ra-shadow-sm, 0 1px 2px rgba(27, 25, 23, 0.04));
   }
 
   .coming-soon-icon {
-    width: 48px;
-    height: 48px;
-    background-color: var(--color-primary-container, #e0e7ff);
-    color: var(--color-on-primary-container, #3730a3);
-    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    background-color: var(--ra-well, #f3efe8);
+    color: var(--ra-ink-2, #57514a);
+    border: 1px solid var(--ra-line, #e8e2d9);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .coming-soon-icon svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
 
   .coming-soon-content {
@@ -65,41 +70,47 @@ const {
   }
 
   .coming-soon-title {
-    font-family: var(--font-headings, inherit);
+    font-family: var(--ra-display, 'Literata', Georgia, serif);
     font-size: 18px;
-    font-weight: 800;
-    color: var(--color-primary, #09090b);
+    font-weight: 700;
+    color: var(--ra-ink, #1b1917);
     margin: 0;
   }
 
   .coming-soon-text {
     font-size: 13.5px;
-    line-height: 1.5;
-    color: var(--color-on-surface-variant, #71717a);
-    margin: 0 0 8px 0;
-    max-width: 300px;
+    line-height: 1.55;
+    color: var(--ra-ink-2, #57514a);
+    margin: 0 0 6px 0;
+    max-width: 340px;
   }
 
   .coming-soon-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 20px;
-    background-color: var(--color-secondary, #974543);
+    min-height: 44px;
+    padding: 0 20px;
+    background-color: var(--ra-ink, #1b1917);
     color: #ffffff;
     font-size: 13.5px;
     font-weight: 700;
-    border-radius: 99px;
+    border-radius: var(--ra-radius-sm, 8px);
     text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: background-color 0.15s ease, transform 0.15s ease;
   }
 
   .coming-soon-btn:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
+    background-color: var(--ra-ink-2, #3b3733);
+    transform: translateY(-1px);
   }
 
   .coming-soon-btn:active {
     transform: translateY(0);
+  }
+
+  .coming-soon-btn:focus-visible {
+    outline: 2px solid var(--ra-verify, #0e5e6f);
+    outline-offset: 2px;
   }
 </style>

@@ -15,22 +15,96 @@ const HADITH_HOME_HREF = `${getBaseUrl()}/hadith`;
 const HADITH_NAV_SECTIONS = getHadithNavSections(getBaseUrl());
 const HADITH_CATEGORY_SLUGS = new Set(HADITH_NAV_SECTIONS.map(s => s.slug));
 
+function NavIcon({ kind }) {
+  const props = {
+    width: 16,
+    height: 16,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '1.85',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    'aria-hidden': 'true',
+  };
+  switch (kind) {
+    case 'quran':
+      return (
+        <svg {...props}>
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      );
+    case 'hadith':
+      return (
+        <svg {...props}>
+          <path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z" />
+          <path d="M4 21V5" />
+          <path d="M9 8h5M9 12h5" />
+        </svg>
+      );
+    case 'nt':
+      return (
+        <svg {...props}>
+          <path d="M12 3v18M7 8h10" />
+        </svg>
+      );
+    case 'ot':
+      return (
+        <svg {...props}>
+          <path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4" />
+          <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+        </svg>
+      );
+    case 'scale':
+      return (
+        <svg {...props} width={14} height={14}>
+          <path d="M12 3v18M5 7h14M6 7l-3 7h6l-3-7zm12 0-3 7h6l-3-7z" />
+        </svg>
+      );
+    case 'video':
+      return (
+        <svg {...props} width={14} height={14}>
+          <rect x="2" y="5" width="14" height="14" rx="2" />
+          <path d="m16 10 6-3v10l-6-3z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
+function Chevron({ open }) {
+  return (
+    <svg
+      className={`nav-chevron ${open ? 'open' : ''}`}
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m9 18 6-6-6-6" />
+    </svg>
+  );
+}
+
 export default function ScriptureNav() {
-  const [expandedSection, setExpandedSection] = useState('nt'); // 'nt', 'ot', or null
-  const [expandedBook, setExpandedBook] = useState(null); // book id (e.g. 'jn')
+  const [expandedSection, setExpandedSection] = useState('nt');
+  const [expandedBook, setExpandedBook] = useState(null);
   const [currentBook, setCurrentBook] = useState(null);
   const [currentChapter, setCurrentChapter] = useState(null);
-  const [currentReader, setCurrentReader] = useState(null);
   const [currentQuranIndex, setCurrentQuranIndex] = useState(null);
-  const [currentHadithSection, setCurrentHadithSection] = useState(null); // 'home' | category slug
+  const [currentHadithSection, setCurrentHadithSection] = useState(null);
   const { activeTab, hrefFor } = useNavTabs();
 
-  // Synchronize active scripture route context
   useEffect(() => {
     const syncNavWithUrl = () => {
       const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
       const pathname = window.location.pathname;
-      // Strip base URL if present to ensure reliable splitting
       const activePath = pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
       const parts = activePath.split('/');
 
@@ -40,7 +114,6 @@ export default function ScriptureNav() {
 
         setCurrentBook(bookId);
         setCurrentChapter(chapNum);
-        setCurrentReader(null);
         setCurrentQuranIndex(null);
 
         if (OVERVIEW_ROUTES[bookId]) {
@@ -54,29 +127,25 @@ export default function ScriptureNav() {
       } else if (parts[1] === 'quran' && parts[2]) {
         setCurrentBook(null);
         setCurrentChapter(null);
-        setCurrentReader(null);
         if (parts[2] === 'codex' || parts[2] === 'variant') {
           setCurrentQuranIndex('home');
         } else {
-          setCurrentQuranIndex(parseInt(parts[2]));
+          setCurrentQuranIndex(parseInt(parts[2], 10));
         }
         setExpandedSection('quran');
       } else if (parts[1] === 'quran') {
         setCurrentBook(null);
         setCurrentChapter(null);
-        setCurrentReader(null);
         setCurrentQuranIndex('home');
         setExpandedSection('quran');
       } else if (parts[1] === 'hadith') {
         setCurrentBook(null);
         setCurrentChapter(null);
-        setCurrentReader(null);
         setCurrentQuranIndex(null);
         setExpandedSection('hadith');
       } else {
         setCurrentBook(null);
         setCurrentChapter(null);
-        setCurrentReader(null);
         setCurrentQuranIndex(null);
       }
 
@@ -86,7 +155,6 @@ export default function ScriptureNav() {
       } else {
         setCurrentHadithSection(null);
       }
-
     };
 
     syncNavWithUrl();
@@ -98,20 +166,12 @@ export default function ScriptureNav() {
   }, []);
 
   const toggleSection = (section) => {
-    if (expandedSection === section) {
-      setExpandedSection(null);
-    } else {
-      setExpandedSection(section);
-    }
+    setExpandedSection(prev => (prev === section ? null : section));
     setExpandedBook(null);
   };
 
   const toggleBook = (bookId) => {
-    if (expandedBook === bookId) {
-      setExpandedBook(null);
-    } else {
-      setExpandedBook(bookId);
-    }
+    setExpandedBook(prev => (prev === bookId ? null : bookId));
   };
 
   const renderBookList = (books, type, preamble = []) => {
@@ -123,20 +183,25 @@ export default function ScriptureNav() {
           <div key={item.id} className="book-item">
             <a
               href={`${base}${item.path}`}
-              className={`book-select-btn ${currentBook === item.id ? 'active-book' : ''}`}
+              className={`book-select-btn book-select-btn--featured ${currentBook === item.id ? 'active-book' : ''}`}
             >
-              <span className="book-name">{item.name}</span>
+              <span className="book-name-with-icon">
+                {item.icon && <NavIcon kind={item.icon} />}
+                <span>{item.name}</span>
+              </span>
             </a>
           </div>
         ))}
         {books.map((book) => (
           <div key={book.id} className={`book-item ${expandedBook === book.id ? 'expanded' : ''}`}>
             <button
+              type="button"
               onClick={() => toggleBook(book.id)}
               className="book-select-btn"
+              aria-expanded={expandedBook === book.id}
             >
               <span className="book-name">{book.name}</span>
-              <span className="arrow">{expandedBook === book.id ? '▼' : '▶'}</span>
+              <Chevron open={expandedBook === book.id} />
             </button>
 
             {expandedBook === book.id && (
@@ -180,7 +245,7 @@ export default function ScriptureNav() {
             aria-current={activeTab === tab.id ? 'true' : undefined}
           >
             <div className="btn-icon-wrapper">
-              <svg viewBox="0 0 24 24" strokeWidth="2.5" aria-hidden="true">
+              <svg viewBox="0 0 24 24" strokeWidth="2.1" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d={tab.icon} />
               </svg>
             </div>
@@ -189,29 +254,33 @@ export default function ScriptureNav() {
         ))}
       </div>
 
-      {/* 3. Scrollable books tree: two libraries, labelled so the structure is obvious on open. */}
+      {/* 3. Scrollable books tree: two libraries, clearly distinguished */}
       <nav className="sidebar-scroll-content" aria-label="Books and sources">
-        <section className="nav-group" aria-labelledby="nav-group-islamic">
+        <section className="nav-group nav-group--islamic" aria-labelledby="nav-group-islamic">
           <h4 id="nav-group-islamic" className="nav-group-label">Islamic sources</h4>
           {/* Quran */}
           <div className="nav-section">
             <button
+              type="button"
               onClick={() => toggleSection('quran')}
               className={`section-header-btn ${expandedSection === 'quran' ? 'active' : ''}`}
+              aria-expanded={expandedSection === 'quran'}
             >
-              <span className="icon">🌙</span>
+              <span className="icon"><NavIcon kind="quran" /></span>
               <span className="title-text">Quran</span>
-              <span className="section-arrow">{expandedSection === 'quran' ? '▼' : '▶'}</span>
+              <Chevron open={expandedSection === 'quran'} />
             </button>
             {expandedSection === 'quran' && (
               <div className="book-list animate-fade-in">
                 <div className="book-item">
                   <a
                     href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran`}
-                    className={`book-select-btn ${currentQuranIndex === 'home' ? 'active-book' : ''}`}
-                    style={{ paddingLeft: '12px' }}
+                    className={`book-select-btn book-select-btn--featured ${currentQuranIndex === 'home' ? 'active-book' : ''}`}
                   >
-                    <span className="book-name">⚖️ Evidence & Filters</span>
+                    <span className="book-name-with-icon">
+                      <NavIcon kind="scale" />
+                      <span>Evidence &amp; Filters</span>
+                    </span>
                   </a>
                 </div>
                 {getQuranSections().map((sec) => (
@@ -219,7 +288,6 @@ export default function ScriptureNav() {
                     <a
                       href={sec.path}
                       className={`book-select-btn ${currentQuranIndex === sec.index ? 'active-book' : ''}`}
-                      style={{ paddingLeft: '12px' }}
                     >
                       <span className="book-name">{sec.name}</span>
                     </a>
@@ -232,18 +300,14 @@ export default function ScriptureNav() {
           {/* Sahih Hadiths */}
           <div className="nav-section">
             <button
+              type="button"
               onClick={() => toggleSection('hadith')}
               className={`section-header-btn ${expandedSection === 'hadith' ? 'active' : ''}`}
+              aria-expanded={expandedSection === 'hadith'}
             >
-              <span className="icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-2px' }}>
-                  <path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z" />
-                  <path d="M4 21V5" />
-                  <path d="M9 8h5M9 12h5" />
-                </svg>
-              </span>
+              <span className="icon"><NavIcon kind="hadith" /></span>
               <span className="title-text">Sahih Hadiths</span>
-              <span className="section-arrow">{expandedSection === 'hadith' ? '▼' : '▶'}</span>
+              <Chevron open={expandedSection === 'hadith'} />
             </button>
             {expandedSection === 'hadith' && (
               <div className="book-list animate-fade-in">
@@ -251,7 +315,6 @@ export default function ScriptureNav() {
                   <a
                     href={HADITH_HOME_HREF}
                     className={`book-select-btn ${currentHadithSection === 'home' ? 'active-book' : ''}`}
-                    style={{ paddingLeft: '12px' }}
                   >
                     <span className="book-name">Overview</span>
                   </a>
@@ -261,7 +324,6 @@ export default function ScriptureNav() {
                     <a
                       href={sec.path}
                       className={`book-select-btn ${currentHadithSection === sec.slug ? 'active-book' : ''}`}
-                      style={{ paddingLeft: '12px' }}
                     >
                       <span className="book-name">{sec.short}</span>
                     </a>
@@ -272,62 +334,70 @@ export default function ScriptureNav() {
           </div>
         </section>
 
-        <section className="nav-group" aria-labelledby="nav-group-bible">
+        <section className="nav-group nav-group--christian" aria-labelledby="nav-group-bible">
           <h4 id="nav-group-bible" className="nav-group-label">Bible</h4>
           {/* New Testament */}
           <div className="nav-section">
             <button
+              type="button"
               onClick={() => toggleSection('nt')}
               className={`section-header-btn ${expandedSection === 'nt' ? 'active' : ''}`}
+              aria-expanded={expandedSection === 'nt'}
             >
-              <span className="icon">✝</span>
+              <span className="icon"><NavIcon kind="nt" /></span>
               <span className="title-text">New Testament ({NT_TRANSLATION_NAME})</span>
-              <span className="section-arrow">{expandedSection === 'nt' ? '▼' : '▶'}</span>
+              <Chevron open={expandedSection === 'nt'} />
             </button>
             {expandedSection === 'nt' && renderBookList(booksData.nt, 'nt', [
-              { id: 'gospels', name: '🎥 The Gospels Overview', path: '/bible/gospels/videos' }
+              { id: 'gospels', name: 'The Gospels Overview', icon: 'video', path: '/bible/gospels/videos' }
             ])}
           </div>
 
           {/* Old Testament */}
           <div className="nav-section">
             <button
+              type="button"
               onClick={() => toggleSection('ot')}
               className={`section-header-btn ${expandedSection === 'ot' ? 'active' : ''}`}
+              aria-expanded={expandedSection === 'ot'}
             >
-              <span className="icon">📜</span>
+              <span className="icon"><NavIcon kind="ot" /></span>
               <span className="title-text">Old Testament (LXX)</span>
-              <span className="section-arrow">{expandedSection === 'ot' ? '▼' : '▶'}</span>
+              <Chevron open={expandedSection === 'ot'} />
             </button>
             {expandedSection === 'ot' && renderBookList(booksData.ot, 'ot')}
           </div>
         </section>
       </nav>
 
-      {/* Custom Styling */}
       <style dangerouslySetInnerHTML={{ __html: `
         .nav-sidebar-inner {
           display: flex;
           flex-direction: column;
           height: 100%;
-          color: #475569;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          color: var(--ra-ink-2, #57514a);
+          background-color: var(--ra-surface, #ffffff);
+          font-family: var(--ra-sans, 'Public Sans', -apple-system, sans-serif);
           overflow-x: hidden;
         }
 
         .sidebar-header {
-          padding: 18px 20px;
-          border-bottom: 1px solid #f1f5f9;
+          padding: 16px 20px;
+          border-bottom: 1px solid var(--ra-line, #e8e2d9);
+          background-color: var(--ra-paper, #fbf9f5);
+        }
+        .sidebar-header h3 {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          font-family: var(--ra-display, 'Literata', Georgia, serif);
           font-weight: 700;
-          font-size: 15px;
-          color: #0f172a;
+          font-size: 16px;
+          color: var(--ra-ink, #1b1917);
         }
 
-        /* ============================================================
-           Desktop Vertical Nav Panel (Hidden on Mobile, Docked on Desktop)
-           ============================================================ */
         .sidebar-tabs-vertical {
-          display: none; /* Hidden on mobile by default */
+          display: none;
         }
 
         @media (min-width: 768px) {
@@ -335,9 +405,9 @@ export default function ScriptureNav() {
             display: flex;
             flex-direction: column;
             gap: 4px;
-            padding: 12px;
-            border-bottom: 1px solid #f1f5f9;
-            background-color: #fafafa;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--ra-line, #e8e2d9);
+            background-color: var(--ra-paper, #fbf9f5);
           }
         }
 
@@ -345,29 +415,30 @@ export default function ScriptureNav() {
           width: 100%;
           display: flex;
           align-items: center;
-          gap: 12px;
-          padding: 8px 12px;
-          border: none;
+          gap: 10px;
+          padding: 8px 10px;
+          border: 1px solid transparent;
           background: none;
-          color: #64748b; /* Slate 500 */
-          font-size: 13px;
-          font-weight: 700;
-          border-radius: 8px;
+          color: var(--ra-ink-2, #57514a);
+          font-size: 13.5px;
+          font-weight: 600;
+          border-radius: 9px;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
           position: relative;
+          box-sizing: border-box;
         }
         .sidebar-nav-btn:hover {
-          background-color: #f1f5f9;
-          color: #0f172a;
+          background-color: var(--ra-well, #f3efe8);
+          color: var(--ra-ink, #1b1917);
         }
 
         .btn-icon-wrapper {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 28px;
-          height: 28px;
+          width: 26px;
+          height: 26px;
           border-radius: 6px;
           color: inherit;
         }
@@ -378,112 +449,121 @@ export default function ScriptureNav() {
           fill: none;
         }
 
-        /* Active Scripture Tab in Sidebar vertical panel */
         .sidebar-nav-btn.active {
-          background-color: #e4e4e7; /* Zinc 200 */
-          color: #18181b; /* Zinc 900 */
+          background-color: var(--ra-accent-bg, #f0ece4);
+          border-color: var(--ra-accent-rule, #d8d0c4);
+          color: var(--ra-accent, #1b1917);
+          font-weight: 700;
         }
         .sidebar-nav-btn.active .btn-icon-wrapper {
-          color: #18181b;
+          color: var(--ra-accent, #1b1917);
         }
 
-        .sidebar-nav-btn.disabled {
-          opacity: 0.45;
-          cursor: not-allowed;
-        }
-        .sidebar-nav-btn.disabled:hover {
-          background-color: transparent;
-          color: #64748b;
-        }
-
-        .soon-badge {
-          position: absolute;
-          right: 12px;
-          background-color: #f1f5f9;
-          color: #475569;
-          font-size: 7px;
-          font-weight: 800;
-          padding: 1px 5px;
-          border-radius: 99px;
-          border: 1px solid #e2e8f0;
-          letter-spacing: 0.5px;
-          text-transform: uppercase;
-        }
-
-        /* ==========================================
-           Scrollable book navigator
-           ========================================== */
         .sidebar-scroll-content {
           flex: 1;
           overflow-y: auto;
           overflow-x: hidden;
-          padding: 10px;
+          padding: 10px 10px 24px;
         }
 
-        .nav-group + .nav-group { margin-top: 14px; padding-top: 12px; border-top: 1px solid #f1f5f9; }
+        .nav-group {
+          --nav-grp-accent: var(--ra-ink, #1b1917);
+          --nav-grp-bg: var(--ra-well, #f3efe8);
+          --nav-grp-rule: var(--ra-line-strong, #d8d0c4);
+        }
+        .nav-group--islamic {
+          --nav-grp-accent: var(--ra-islamic, #33593a);
+          --nav-grp-bg: var(--ra-islamic-bg, #edf3ee);
+          --nav-grp-rule: var(--ra-islamic-rule, #c2d6c6);
+        }
+        .nav-group--christian {
+          --nav-grp-accent: var(--ra-christian, #7a3530);
+          --nav-grp-bg: var(--ra-christian-bg, #f6eeec);
+          --nav-grp-rule: var(--ra-christian-rule, #dfc5c2);
+        }
+
+        .nav-group + .nav-group {
+          margin-top: 14px;
+          padding-top: 14px;
+          border-top: 1px solid var(--ra-line, #e8e2d9);
+        }
         .nav-group-label {
-          margin: 6px 12px 4px;
+          margin: 4px 10px 6px;
+          padding: 0;
+          border: 0;
           font-size: 10.5px;
           font-weight: 800;
-          letter-spacing: .08em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
-          font-family: inherit;
+          font-family: var(--ra-sans, 'Public Sans', sans-serif);
           line-height: 1.3;
-          color: #71717a; /* zinc 500: 4.8:1 on white (informative text, not decoration) */
+          color: var(--nav-grp-accent);
         }
 
         .nav-section {
-          margin-bottom: 8px;
-        }
-        .nav-section.disabled {
-          opacity: 0.4;
+          margin-bottom: 4px;
         }
 
         .section-header-btn {
           width: 100%;
           display: flex;
           align-items: center;
-          padding: 10px 12px;
+          min-height: 44px;
+          padding: 9px 10px;
           background: none;
-          border: none;
-          color: inherit;
+          border: 1px solid transparent;
+          color: var(--ra-ink, #1b1917);
           font-size: 13.5px;
-          font-weight: 700;
+          font-weight: 650;
           text-align: left;
           cursor: pointer;
-          border-radius: 8px;
-          transition: all 0.15s ease;
+          border-radius: 9px;
+          transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
         }
         .section-header-btn:hover {
-          background-color: #f8fafc;
+          background-color: var(--ra-well, #f3efe8);
         }
-
         .section-header-btn.active {
-          background-color: #f4f4f5;
-          color: #18181b;
+          background-color: var(--nav-grp-bg);
+          border-color: var(--nav-grp-rule);
+          color: var(--nav-grp-accent);
+          font-weight: 700;
+        }
+        .section-header-btn:focus-visible,
+        .book-select-btn:focus-visible,
+        .chapter-link:focus-visible,
+        .sidebar-nav-btn:focus-visible {
+          outline: 2px solid var(--ra-verify, #0e5e6f);
+          outline-offset: 2px;
         }
 
         .section-header-btn .icon {
-          font-size: 14px;
           margin-right: 10px;
           display: flex;
           align-items: center;
           justify-content: center;
+          color: var(--nav-grp-accent);
+          flex-shrink: 0;
         }
         .section-header-btn .title-text {
           flex: 1;
         }
 
-        .section-arrow {
-          font-size: 9px;
-          opacity: 0.7;
+        .nav-chevron {
+          color: var(--ra-ink-3, #6b6560);
+          flex-shrink: 0;
+          transition: transform 0.18s ease;
+        }
+        .nav-chevron.open {
+          transform: rotate(90deg);
+          color: var(--nav-grp-accent);
         }
 
         .book-list {
           padding-left: 10px;
           margin-top: 4px;
-          border-left: 1px dashed #cbd5e1;
-          margin-left: 16px;
+          border-left: 1.5px solid var(--nav-grp-rule);
+          margin-left: 17px;
         }
 
         .book-item {
@@ -495,33 +575,44 @@ export default function ScriptureNav() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 6px 8px;
+          padding: 7px 10px;
           background: none;
           border: none;
-          color: inherit;
-          font-size: 12.5px;
+          color: var(--ra-ink-2, #57514a);
+          font-size: 13px;
+          font-weight: 500;
           text-align: left;
           cursor: pointer;
-          border-radius: 6px;
-          transition: all 0.15s ease;
+          border-radius: 7px;
+          transition: background-color 0.15s ease, color 0.15s ease;
+          box-sizing: border-box;
         }
         .book-select-btn:hover {
-          background-color: #f1f5f9;
+          background-color: var(--ra-well, #f3efe8);
+          color: var(--ra-ink, #1b1917);
+        }
+        .book-select-btn--featured {
+          font-weight: 600;
+          color: var(--ra-ink, #1b1917);
+        }
+        .book-name-with-icon {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+        }
+        .book-name-with-icon svg {
+          color: var(--nav-grp-accent);
+          flex-shrink: 0;
         }
         .book-select-btn.active-book {
           font-weight: 700;
-          color: var(--color-primary);
-          background-color: #e2e8f0;
+          color: var(--nav-grp-accent);
+          background-color: var(--nav-grp-bg);
         }
 
         .book-item.expanded .book-select-btn {
           font-weight: 700;
-          color: #18181b;
-        }
-
-        .arrow {
-          font-size: 8px;
-          opacity: 0.5;
+          color: var(--ra-ink, #1b1917);
         }
 
         .chapter-grid {
@@ -529,50 +620,40 @@ export default function ScriptureNav() {
           grid-template-columns: repeat(5, 1fr);
           gap: 4px;
           padding: 6px;
-          background-color: #f8fafc;
-          border-radius: 6px;
+          background-color: var(--ra-paper, #fbf9f5);
+          border-radius: 8px;
           margin-top: 4px;
-          margin-bottom: 4px;
-          border: 1px solid #f1f5f9;
+          margin-bottom: 6px;
+          border: 1px solid var(--ra-line, #e8e2d9);
           max-width: 100%;
+          box-sizing: border-box;
         }
 
         .chapter-link {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 28px;
-          background-color: #ffffff;
-          border: 1px solid #e2e8f0;
-          color: #475569;
+          height: 36px;
+          background-color: var(--ra-surface, #ffffff);
+          border: 1px solid var(--ra-line, #e8e2d9);
+          color: var(--ra-ink-2, #57514a);
           text-decoration: none;
-          font-size: 11.5px;
-          border-radius: 5px;
+          font-size: 12px;
+          font-variant-numeric: tabular-nums;
+          border-radius: 6px;
           font-weight: 600;
-          transition: all 0.15s ease;
+          transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
         }
         .chapter-link:hover {
-          border-color: var(--color-secondary);
-          color: var(--color-secondary);
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+          border-color: var(--nav-grp-accent);
+          color: var(--nav-grp-accent);
+          background-color: var(--nav-grp-bg);
         }
 
         .chapter-link.active {
-          background-color: var(--color-secondary);
+          background-color: var(--nav-grp-accent);
           color: #ffffff;
-          border-color: var(--color-secondary);
-        }
-
-        .badge {
-          background-color: #f1f5f9;
-          color: #475569;
-          font-size: 7px;
-          font-weight: 800;
-          padding: 1px 5px;
-          border-radius: 99px;
-          border: 1px solid #e2e8f0;
-          letter-spacing: 0.5px;
-          text-transform: uppercase;
+          border-color: var(--nav-grp-accent);
         }
 
         @keyframes fadeIn {
@@ -580,7 +661,11 @@ export default function ScriptureNav() {
           to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in {
-          animation: fadeIn 0.2s ease-out forwards;
+          animation: fadeIn 0.18s ease-out forwards;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-fade-in { animation: none; }
+          .nav-chevron { transition: none; }
         }
       ` }} />
     </div>

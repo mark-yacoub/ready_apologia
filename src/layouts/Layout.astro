@@ -321,7 +321,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 					const titleRect = pageTitle.getBoundingClientRect();
 					if (titleRect.bottom < 52) {
 						const docTitle = document.title.split('|')[0].trim();
-						const cleanTitle = docTitle.replace('Evidence:', '🔍').trim();
+						const cleanTitle = docTitle.replace(/^Evidence:\s*/i, '').trim();
 
 						headerBrand.innerText = cleanTitle;
 						headerBrand.classList.add('chapter-active');
