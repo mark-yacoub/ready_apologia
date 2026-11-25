@@ -672,13 +672,23 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
 		margin-bottom: 4px;
 	}
 	.header-verse-box {
-		padding: 14px 18px;
+		position: relative;
+		overflow: hidden;
+		padding: 14px 18px 14px 20px;
 		margin-bottom: 12px;
-		background-color: var(--color-surface);
-		border: 1px solid var(--color-outline-variant);
-		border-left-width: 4px;
-		box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-		border-radius: 4px 8px 8px 4px;
+		background-color: var(--ra-surface, #ffffff);
+		border: 1px solid var(--ra-line, #e8e2d9);
+		box-shadow: var(--ra-shadow-sm, 0 1px 2px rgba(27, 25, 23, 0.04));
+		border-radius: 10px;
+	}
+	.header-verse-box::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 3.5px;
+		background-color: var(--ra-islamic, #33593a);
 	}
 	.header-verse-box .arabic-reminder-text {
 		font-family: 'Amiri', 'Traditional Arabic', serif;

@@ -17,6 +17,8 @@ const { title, intro, className = '' } = Astro.props;
 
 <style>
   .evidence-card {
+    position: relative;
+    overflow: hidden;
     background-color: var(--ra-surface, #ffffff);
     border: 1px solid var(--ra-line, #e8e2d9);
     border-radius: 14px;
@@ -28,7 +30,15 @@ const { title, intro, className = '' } = Astro.props;
   .evidence-card.warm-tint {
     background: var(--ra-surface, #ffffff);
     border-color: var(--ra-line, #e8e2d9);
-    border-top: 2.5px solid var(--ra-islamic-rule, #c2d6c6);
+  }
+  .evidence-card.warm-tint::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--ra-islamic-rule, #c2d6c6);
   }
 
   .card-header h2 {

@@ -303,9 +303,12 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
                     {/* Optional AI Summary */}
                     {ct.summary && (
                       <div class="ai-summary-box select-none">
-                        <span class="ai-icon" title="AI Generated Summary">
-                          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        <span class="ai-icon" title="Summary">
+                          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
                           </svg>
                         </span>
                         <div class="ai-summary-text" set:html={parseMarkdown(ct.summary)} />
@@ -357,9 +360,12 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
                     {/* Optional AI Summary */}
                     {ap.summary && (
                       <div class="ai-summary-box select-none">
-                        <span class="ai-icon" title="AI Generated Summary">
-                          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        <span class="ai-icon" title="Summary">
+                          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
                           </svg>
                         </span>
                         <div class="ai-summary-text" set:html={parseMarkdown(ap.summary)} />
@@ -435,9 +441,9 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
 
 	/* Semantic Details/Summary Accordion Cards */
 	.contradiction-details-card {
+		position: relative;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-outline-variant);
-		border-left: 3px solid transparent; /* Keep left border consistent for alignment */
 		border-radius: 14px;
 		overflow: hidden;
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
@@ -453,7 +459,15 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
 	.contradiction-details-card[open] {
 		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
 		border-color: var(--ra-christian-rule, #dfc5c2);
-		border-left: 3px solid var(--color-secondary); /* 3px terracotta edge accent indicators! */
+	}
+	.contradiction-details-card[open]::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 3px;
+		background-color: var(--ra-christian, #7a3530);
 	}
 
 	.contradiction-summary-header {
@@ -504,12 +518,12 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
 	}
 
 	/* ==========================================
-	   Apologetics Accordion Specific Rules (Blue Theme)
+	   Apologetics Accordion Specific Rules (Slate Navy)
 	   ========================================== */
 	.apologetics-details-card {
+		position: relative;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-outline-variant);
-		border-left: 3px solid transparent;
 		border-radius: 14px;
 		overflow: hidden;
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
@@ -525,7 +539,15 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
 	.apologetics-details-card[open] {
 		box-shadow: var(--ra-shadow, 0 1px 2px rgba(27, 25, 23, 0.04), 0 6px 20px -8px rgba(27, 25, 23, 0.09));
 		border-color: #cbd7e4;
-		border-left: 3px solid #2c4a6b;
+	}
+	.apologetics-details-card[open]::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 3px;
+		background-color: #2c4a6b;
 	}
 
 	.apologetics-summary-header {

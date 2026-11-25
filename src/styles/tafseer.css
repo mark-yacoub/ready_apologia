@@ -69,6 +69,20 @@
 .tafseer-header-controls .scrollable-track-wrapper {
   --ra-track-fade: var(--ra-well, #f3efe8);
 }
+.tafseer-header-controls .scrollable-track-wrapper.has-left-fade::before,
+.tafseer-header-controls .scrollable-track-wrapper.has-right-fade::after {
+  top: 2px;
+  bottom: 2px;
+  width: 24px;
+}
+.tafseer-header-controls .scrollable-track-wrapper.has-left-fade::before {
+  left: 2px;
+  border-radius: 9px 0 0 9px;
+}
+.tafseer-header-controls .scrollable-track-wrapper.has-right-fade::after {
+  right: 2px;
+  border-radius: 0 9px 9px 0;
+}
 
 .tafseer-segmented-track {
   display: inline-flex;

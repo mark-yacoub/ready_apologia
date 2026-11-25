@@ -65,17 +65,27 @@ export default function OnboardingBanner() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .onboarding-smart-banner {
+          position: relative;
+          overflow: hidden;
           display: flex;
           align-items: flex-start;
           gap: 12px;
           background-color: var(--ra-surface, #ffffff);
           color: var(--ra-ink, #1b1917);
-          padding: 12px 10px 12px 14px;
+          padding: 12px 10px 12px 16px;
           border-radius: 12px;
           margin-bottom: 18px;
           border: 1px solid var(--ra-verify-rule, #bdd8dc);
-          border-left: 3.5px solid var(--ra-verify, #0e5e6f);
           box-shadow: 0 4px 16px -4px rgba(14, 94, 111, 0.12), 0 1px 2px rgba(27, 25, 23, 0.04);
+        }
+        .onboarding-smart-banner::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 3.5px;
+          background-color: var(--ra-verify, #0e5e6f);
         }
         .banner-icon-badge {
           width: 32px;

@@ -31,16 +31,17 @@ export default function ScrollableTrack({ children, containerClass, activeTrigge
 
   useEffect(() => {
     if (containerRef.current) {
-      const activeEl = containerRef.current.querySelector('.active');
+      const activeEl = containerRef.current.querySelector('.active, .is-active');
       if (activeEl) {
         const containerRect = containerRef.current.getBoundingClientRect();
         const elRect = activeEl.getBoundingClientRect();
-        const scrollPos =
-          containerRef.current.scrollLeft +
-          (elRect.left - containerRect.left) -
-          containerRect.width / 2 +
-          elRect.width / 2;
-        containerRef.current.scrollTo({ left: scrollPos, behavior: 'smooth' });
+        const rawPos = elRect.width >= containerRect.width
+          ? containerRef.current.scrollLeft + (elRect.left - containerRect.left)
+          : containerRef.current.scrollLeft +
+            (elRect.left - containerRect.left) -
+            containerRect.width / 2 +
+            elRect.width / 2;
+        containerRef.current.scrollTo({ left: Math.max(0, rawPos), behavior: 'smooth' });
       }
     }
     const t = setTimeout(checkScroll, 300);

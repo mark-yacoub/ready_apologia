@@ -111,8 +111,8 @@
 .apg-rows li + li { border-top: 1px solid var(--apg-line); }
 .apg-row { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 8px 12px 8px 14px; text-decoration: none; }
 .apg-row:hover { background: var(--apg-wash); }
-.apg-row__name { flex: 1 1 auto; min-width: 0; font-weight: 700; font-size: 15px; overflow-wrap: anywhere; }
-.apg-row__meta { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: 0 1 50%; min-width: 0; text-align: right; }
+.apg-row__name { flex: 1 1 auto; min-width: 0; font-weight: 700; font-size: 15px; overflow-wrap: break-word; }
+.apg-row__meta { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: 0 1 42%; min-width: 0; text-align: right; }
 .apg-row__n { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .apg-row__books { max-width: 100%; font-size: 12px; color: var(--apg-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .apg-row__chev { flex: none; color: var(--apg-muted); }

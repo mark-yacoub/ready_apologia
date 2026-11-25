@@ -7,8 +7,8 @@ const ONBOARDING_TIPS = [
     storageKey: 'ready_apologia_tip_verse',
     text: "Tip: Tap on any verse below to explore its videos, apologetics, and manuscript evidence.",
     isRelevant: (path) =>
-      path.includes('/bible/') ||
-      path.includes('/quran/') ||
+      /(?:^|\/)bible\/[^/]+\/\d+\/?$/i.test(path) ||
+      /(?:^|\/)quran\/[1-9]\d*\/?$/i.test(path) ||
       (typeof document !== 'undefined' && Boolean(document.querySelector('[data-onboarding-trigger="verse"]'))),
     isCompletedTrigger: () => false // Handled exclusively by DOM clicks
   },

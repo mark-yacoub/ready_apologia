@@ -256,56 +256,56 @@ const ogImage = getQuranOgImage(surahNum, null);
               <div class="verse-badge-tray">
                 <span class="verse-num">{v.number}</span>
                 {v.hasDebunkingMiracles && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/debunking-miracles`} data-tab-id="debunking-miracles" class="evidence-badge dm-icon" title="Debunked Miracle available" aria-label={`View debunked miracles for Surah ${surahNum}, verse ${v.number}`}>
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/debunking-miracles`} data-tab-id="debunking-miracles" data-onboarding-trigger="verse" class="evidence-badge dm-icon" title="Debunked Miracle available" aria-label={`View debunked miracles for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l2 4 4-1-2 4 3 3-4 1 1 4-4-2-3 3-1-4-4 1 2-4-4-2 4-1-1-4 4 2 3-4z" />
                     </svg>
                   </a>
                 )}
                 {v.hasContradictions && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/contradictions`} data-tab-id="contradictions" class="evidence-badge ct-icon" title="Contradictions available" aria-label={`View contradictions for Surah ${surahNum}, verse ${v.number}`}>
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/contradictions`} data-tab-id="contradictions" data-onboarding-trigger="verse" class="evidence-badge ct-icon" title="Contradictions available" aria-label={`View contradictions for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 11 3-11M15 6l3 11 3-11M12 3v18M6 6h12M12 3C8.5 3 5 4 5 4M12 3c3.5 0 7 1 7 1" />
                     </svg>
                   </a>
                 )}
                 {v.hasScientificErrors && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/scientific-errors`} data-tab-id="scientific-errors" class="evidence-badge se-icon" title="Scientific Error available" aria-label={`View scientific errors for Surah ${surahNum}, verse ${v.number}`}>
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/scientific-errors`} data-tab-id="scientific-errors" data-onboarding-trigger="verse" class="evidence-badge se-icon" title="Scientific Error available" aria-label={`View scientific errors for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18h8 M3 22h18 M14 22a7 7 0 1 0 0-14h-1 M9 14h2 M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z M12 6V3 M20 4v4m0 3v.01" />
                     </svg>
                   </a>
                 )}
                 {v.hasChristianFootnotes && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/christian-footnotes`} data-tab-id="christian-footnotes" class="evidence-badge christian-footnote-icon" title="Christian Commentary" aria-label={`View Christian commentary for Surah ${surahNum}, verse ${v.number}`}>
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/christian-footnotes`} data-tab-id="christian-footnotes" data-onboarding-trigger="verse" class="evidence-badge christian-footnote-icon" title="Christian Commentary" aria-label={`View Christian commentary for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m-4-10h8" />
                     </svg>
                   </a>
                 )}
                 {v.hasIslamicCommentary && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/${v.tafsirLinkTab}`} data-tab-id="tafsir" class="evidence-badge ic-icon" title="Islamic Commentary" aria-label={`View Islamic commentary for Surah ${surahNum}, verse ${v.number}`}>
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/${v.tafsirLinkTab}`} data-tab-id="tafsir" data-onboarding-trigger="verse" class="evidence-badge ic-icon" title="Islamic Commentary" aria-label={`View Islamic commentary for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2.2" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                     </svg>
                   </a>
                 )}
                 {v.hasVideos && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/videos`} data-tab-id="videos" class="evidence-badge vd-icon" title="Apologetics videos available" aria-label={`View apologetics videos for Surah ${surahNum}, verse ${v.number}`}>
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/videos`} data-tab-id="videos" data-onboarding-trigger="verse" class="evidence-badge vd-icon" title="Apologetics videos available" aria-label={`View apologetics videos for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
                   </a>
                 )}
                 {v.hasSources && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/sources`} data-tab-id="sources" class="evidence-badge ps-icon" title="Primary sources available" aria-label={`View primary sources for Surah ${surahNum}, verse ${v.number}`}>
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/sources`} data-tab-id="sources" data-onboarding-trigger="verse" class="evidence-badge ps-icon" title="Primary sources available" aria-label={`View primary sources for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2.2" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V10M9.5 21V10M14.5 21V10M19 21V10M2.5 10h19L12 3 2.5 10z" />
                     </svg>
                   </a>
                 )}
                 {v.hasManuscript && (
-                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/manuscripts`} data-tab-id="manuscripts" class="evidence-badge ms-icon" title="Manuscripts available" aria-label={`View manuscript evidence for Surah ${surahNum}, verse ${v.number}`}>
+                  <a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/manuscripts`} data-tab-id="manuscripts" data-onboarding-trigger="verse" class="evidence-badge ms-icon" title="Manuscripts available" aria-label={`View manuscript evidence for Surah ${surahNum}, verse ${v.number}`}>
                     <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
@@ -315,6 +315,7 @@ const ogImage = getQuranOgImage(surahNum, null);
                   <a
                     href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/${v.defaultFirstTab}`}
                     class="verse-open-cue"
+                    data-onboarding-trigger="verse"
                     aria-label={`Open commentary and sources for Surah ${surahNum}, verse ${v.number}`}
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -325,8 +326,8 @@ const ogImage = getQuranOgImage(surahNum, null);
               </div>
               {v.hasEvidence ? (
                 <>
-                  <p class="text-arabic"><a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/${v.defaultFirstTab}`} class="verse-text-link" set:html={v.arabicHTML} /></p>
-                  <p class="text-english"><a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/${v.defaultFirstTab}`} class="verse-text-link" set:html={v.englishHTML} /></p>
+                  <p class="text-arabic"><a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/${v.defaultFirstTab}`} class="verse-text-link" data-onboarding-trigger="verse" set:html={v.arabicHTML} /></p>
+                  <p class="text-english"><a href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surahNum}/${v.number}/${v.defaultFirstTab}`} class="verse-text-link" data-onboarding-trigger="verse" set:html={v.englishHTML} /></p>
                 </>
               ) : (
                 <>
