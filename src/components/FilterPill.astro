@@ -16,51 +16,55 @@ const { href, title, count, variant = 'primary-soft' } = Astro.props;
   .filter-pill {
     display: inline-flex;
     align-items: center;
-    background-color: var(--color-background);
-    color: var(--color-on-surface);
-    border: 1px solid var(--color-outline-variant);
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 500;
+    min-height: 40px;
+    background-color: var(--ra-surface, #ffffff);
+    color: var(--ra-ink, #1b1917);
+    border: 1px solid var(--ra-line-strong, #d8d0c4);
+    border-radius: 999px;
+    padding: 0.45rem 0.95rem;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
+    font-size: 0.875rem;
+    font-weight: 600;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   }
 
   .filter-pill.primary-soft {
-    background-color: rgba(11, 102, 59, 0.05);
-    border-color: rgba(11, 102, 59, 0.2);
-    color: #0b663b;
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    border-color: var(--ra-islamic-rule, #c2d6c6);
+    color: var(--ra-islamic, #33593a);
   }
 
   .filter-pill.primary-soft:hover {
-    background-color: rgba(11, 102, 59, 0.1);
-    border-color: rgba(11, 102, 59, 0.3);
+    background-color: #e1ece3;
+    border-color: var(--ra-islamic, #33593a);
+    color: var(--ra-islamic-strong, #234029);
   }
 
   .filter-pill.primary {
-    background-color: #0b663b;
-    color: white;
-    border-color: #0b663b;
+    background-color: var(--ra-islamic, #33593a);
+    color: #ffffff;
+    border-color: var(--ra-islamic, #33593a);
   }
 
   .filter-pill.primary:hover {
-    background-color: #084c2c;
+    background-color: var(--ra-islamic-strong, #234029);
+    border-color: var(--ra-islamic-strong, #234029);
   }
 
   .count-badge {
-    background-color: rgba(11, 102, 59, 0.15);
-    color: #0b663b;
+    background-color: rgba(51, 89, 58, 0.12);
+    color: var(--ra-islamic-strong, #234029);
     font-size: 0.75rem;
-    padding: 2px 6px;
-    border-radius: 10px;
+    font-variant-numeric: tabular-nums;
+    padding: 2px 7px;
+    border-radius: 999px;
     margin-left: 8px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .count-badge.light {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
+    background-color: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
   }
 </style>

@@ -477,7 +477,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           background-color: var(--color-secondary);
           color: #ffffff;
           border-color: var(--color-secondary);
-          box-shadow: 0 1px 3px rgba(151, 69, 67, 0.25);
+          box-shadow: 0 1px 3px rgba(51, 89, 58, 0.22);
         }
 
         .pill-count {
@@ -548,7 +548,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .lost-verse-card:hover {
-          border-color: rgba(151, 69, 67, 0.35);
+          border-color: var(--ra-islamic-rule, #c2d6c6);
         }
 
         /* Top Meta Badges */
@@ -606,10 +606,10 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           font-size: 12px;
           font-weight: 700;
           color: var(--color-secondary);
-          background-color: rgba(151, 69, 67, 0.06);
+          background-color: var(--ra-islamic-bg, #edf3ee);
           padding: 4px 10px;
           border-radius: 6px;
-          border: 1px solid rgba(151, 69, 67, 0.2);
+          border: 1px solid var(--ra-islamic-rule, #c2d6c6);
           transition: all 0.15s ease;
         }
 
@@ -749,7 +749,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
 
         /* Lost Verse Quote Callout Box */
         .lost-verse-quote-box {
-          background-color: rgba(151, 69, 67, 0.03);
+          background-color: var(--ra-islamic-bg, #edf3ee);
           border-left: 4px solid var(--color-secondary);
           border-radius: 0 10px 10px 0;
           padding: 16px 20px;
@@ -979,7 +979,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
 
         .hadith-highlight-phrase {
           color: var(--color-secondary);
-          background-color: rgba(151, 69, 67, 0.08);
+          background-color: var(--ra-islamic-bg, #edf3ee);
           padding: 1px 4px;
           border-radius: 4px;
           font-weight: 700;
@@ -1258,20 +1258,21 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           display: inline-flex;
           align-items: center;
           gap: 5px;
-          padding: 3px 8px;
-          border-radius: 5px;
-          background-color: var(--color-surface-container-low);
-          border: 1px solid var(--color-outline-variant);
-          color: #ef4444;
-          font-size: 11px;
-          font-weight: 800;
+          padding: 4px 10px;
+          border-radius: 6px;
+          background-color: var(--ra-verify-bg, #e8f2f3);
+          border: 1px solid var(--ra-verify-rule, #bdd8dc);
+          color: var(--ra-verify, #0e5e6f);
+          font-size: 11.5px;
+          font-weight: 700;
           text-decoration: none;
-          transition: all 0.15s ease;
+          transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
         }
 
         .source-visit-pill-btn:hover {
-          background-color: #fef2f2;
-          border-color: #fca5a5;
+          background-color: var(--ra-surface, #ffffff);
+          border-color: var(--ra-verify, #0e5e6f);
+          color: var(--ra-verify-strong, #0a4855);
         }
 
         @media (max-width: 600px) {

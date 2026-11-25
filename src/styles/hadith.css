@@ -377,7 +377,7 @@
   background: none;
   box-shadow: none;
   text-decoration: underline;
-  text-decoration-color: rgba(151, 69, 67, 0.45);
+  text-decoration-color: rgba(51, 89, 58, 0.45);
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
@@ -552,7 +552,7 @@
 .hx-red del {
   color: var(--hx-muted);
   text-decoration: line-through;
-  text-decoration-color: rgba(151, 69, 67, 0.55);
+  text-decoration-color: rgba(51, 89, 58, 0.55);
   text-decoration-thickness: 1.5px;
 }
 .hx-red ins {
@@ -575,7 +575,7 @@
   margin-left: 3px;
   vertical-align: 1px;
   border-radius: 50%;
-  border: 1px solid rgba(151, 69, 67, 0.5);
+  border: 1px solid var(--ra-islamic-rule, #c2d6c6);
   color: var(--hx-accent);
   font-size: 10px;
   font-weight: 800;
@@ -619,7 +619,7 @@
 .hx-lex dt { font-size: 10.5px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--hx-muted); }
 .hx-lex dd { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--hx-ink-2); }
 .hx-lex dd.ar { font-family: var(--hx-arabic); font-size: 19px; line-height: 1.8; color: var(--hx-ink); direction: rtl; text-align: right; }
-.hx-lex dd.pub { color: var(--hx-muted); text-decoration: line-through; text-decoration-color: rgba(151, 69, 67, 0.5); }
+.hx-lex dd.pub { color: var(--hx-muted); text-decoration: line-through; text-decoration-color: rgba(122, 53, 48, 0.5); }
 .hx-lex dd.pub.is-omitted { text-decoration: none; font-style: italic; }
 .hx-lex dd.lit { color: var(--hx-accent-ink); font-weight: 650; }
 .hx-lex .hx-lex-prose { margin: 10px 0 0; font-size: 13.5px; line-height: 1.55; color: var(--hx-ink-3); }
@@ -942,7 +942,7 @@
 @media (hover: hover) { .hx .hx-audit-topic:hover { color: var(--hx-accent-ink); } }
 .hx-lede .hx-red ins, .hx-lede .hx-red del { font-size: 0.95em; }
 .hx-audit-diff { font-size: 15px; line-height: 1.6; margin: 4px 0; }
-.hx-audit-diff del { color: var(--hx-muted); text-decoration-color: rgba(151, 69, 67, 0.55); text-decoration-thickness: 1.5px; }
+.hx-audit-diff del { color: var(--hx-muted); text-decoration-color: rgba(122, 53, 48, 0.55); text-decoration-thickness: 1.5px; }
 .hx-audit-diff .omitted { color: var(--hx-muted); font-style: italic; }
 .hx-audit-diff .arrow { color: var(--hx-faint); margin: 0 6px; }
 .hx-audit-diff ins { text-decoration: none; color: var(--hx-accent-ink); font-weight: 650; }

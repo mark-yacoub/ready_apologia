@@ -568,9 +568,9 @@ const schemaObj = {
   .abrogation-benchmark-callout {
     padding: 16px 18px;
     border-radius: 12px;
-    background-color: #fffbeb;
-    border: 1px solid #f59e0b;
-    border-left: 5px solid #d97706;
+    background-color: var(--ra-sand, #f6efe3);
+    border: 1px solid #e3d3b6;
+    border-left: 4px solid var(--ra-sand-rule, #b8893a);
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -578,31 +578,31 @@ const schemaObj = {
 
   .benchmark-pill {
     display: inline-block;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
     font-size: 10.5px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.06em;
     padding: 2px 8px;
     border-radius: 5px;
-    background-color: #fef3c7;
-    color: #92400e;
-    border: 1px solid #fcd34d;
+    background-color: var(--ra-surface, #ffffff);
+    color: #7a551d;
+    border: 1px solid #e3d3b6;
   }
 
   .benchmark-title {
-    font-family: var(--font-display);
+    font-family: var(--ra-display, 'Literata', Georgia, serif);
     font-size: 16px;
-    font-weight: 800;
-    color: #78350f;
+    font-weight: 750;
+    color: var(--ra-ink, #1b1917);
     margin: 0;
   }
 
   .benchmark-desc {
-    font-family: var(--font-body);
-    font-size: 13px;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
+    font-size: 13.5px;
     line-height: 1.6;
-    color: #78350f;
+    color: var(--ra-ink-2, #57514a);
     margin: 0;
   }
 

@@ -395,7 +395,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                   <div class="debunking-quick-summary-card">
                     <div class="debunking-quick-summary-header">
                       <div class="debunking-quick-summary-title">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" style="color: #10b981;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--ra-islamic, #33593a);">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                         </svg>
                         <span>Quick Summary — At a Glance</span>
@@ -439,7 +439,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                   <div class="debunking-refutation-section debunking-academic-paper-section">
                     <div class="debunking-paper-header-row">
                       <h4 class="debunking-refutation-heading" style="margin: 0;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: #10b981;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--ra-islamic, #33593a);">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
                         <span>{card.analysisHeading}</span>
@@ -548,7 +548,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                     <div class="ct-flex-boxes">
                       {ct.supporting_verses && ct.supporting_verses.length > 0 && (
                         <div class="ct-box">
-                          <h4 class="ct-box-header" style="color: #10b981;">Supporting Verses</h4>
+                          <h4 class="ct-box-header ct-box-header--supp">Supporting Verses</h4>
                           <div class="ct-verses-list">
                             {ct.supporting_verses.map(v => {
                               const [vs, va] = v.split(':');
@@ -567,7 +567,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
 
                       {ct.opposite_verses && ct.opposite_verses.length > 0 && (
                         <div class="ct-box">
-                          <h4 class="ct-box-header" style="color: #ef4444;">Opposing Verses</h4>
+                          <h4 class="ct-box-header ct-box-header--opp">Opposing Verses</h4>
                           <div class="ct-verses-list">
                             {ct.opposite_verses.map(v => {
                               const [vs, va] = v.split(':');
@@ -638,8 +638,8 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
 		transition: all 0.15s ease;
 	}
 	.back-btn:hover {
-		background-color: var(--color-outline-variant);
-		color: var(--quran-primary, #10b981);
+		background-color: var(--ra-well, #f3efe8);
+		color: var(--ra-islamic, #33593a);
 	}
 	.back-arrow {
 		display: flex;
@@ -666,8 +666,8 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
 		color: var(--color-on-surface-variant);
 		font-style: italic;
 		padding: 10px 14px;
-		background-color: var(--color-surface-container-lowest);
-		border-left: 3px solid var(--quran-primary, #10b981);
+		background-color: var(--ra-surface, #ffffff);
+		border-left: 3px solid var(--ra-islamic, #33593a);
 		border-radius: 0 8px 8px 0;
 		margin-bottom: 4px;
 	}
@@ -774,7 +774,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
   }
   .ct-scales-icon svg {
     display: block;
-    color: #ef4444;
+    color: var(--ra-islamic, #33593a);
   }
   .contradiction-card-content {
     background-color: var(--color-surface-container-lowest);
@@ -840,13 +840,21 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     border-left-width: 3px;
     line-height: 1.5;
   }
+  .ct-box-header--supp {
+    color: var(--ra-islamic, #33593a);
+    opacity: 1;
+  }
+  .ct-box-header--opp {
+    color: var(--ra-christian, #7a3530);
+    opacity: 1;
+  }
   .snippet-supp {
-    background-color: rgba(16, 185, 129, 0.05);
-    border-left-color: rgba(16, 185, 129, 0.6) !important;
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    border-left-color: var(--ra-islamic, #33593a) !important;
   }
   .snippet-opp {
-    background-color: rgba(239, 68, 68, 0.05);
-    border-left-color: rgba(239, 68, 68, 0.6) !important;
+    background-color: var(--ra-christian-bg, #f6eeec);
+    border-left-color: var(--ra-christian, #7a3530) !important;
   }
   .ct-answer-body {
     font-family: var(--font-body);
@@ -878,7 +886,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
 
   .ct-answer-body :global(h4) {
     font-size: 15px;
-    color: var(--quran-primary, #0d9488);
+    color: var(--ra-islamic, #33593a);
     margin-top: 14px;
   }
 
@@ -947,13 +955,13 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     align-items: center;
     padding: 4px 10px;
     border-radius: 999px;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
     font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 0.02em;
-    color: var(--quran-primary, #10b981);
-    background-color: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: var(--ra-islamic, #33593a);
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    border: 1px solid var(--ra-islamic-rule, #c2d6c6);
   }
 
   .debunking-claim-box {
@@ -988,11 +996,10 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
   .debunking-quick-summary-card {
     margin-bottom: 16px;
     padding: 16px 18px;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.02) 100%);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    border-left: 4px solid #10b981;
-    border-radius: 6px 10px 10px 6px;
-    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.04);
+    background: var(--ra-islamic-bg, #edf3ee);
+    border: 1px solid var(--ra-islamic-rule, #c2d6c6);
+    border-left: 3.5px solid var(--ra-islamic, #33593a);
+    border-radius: 6px 12px 12px 6px;
   }
   .debunking-quick-summary-header {
     display: flex;
@@ -1006,37 +1013,37 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    font-family: var(--font-body);
-    font-size: 12px;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
+    font-size: 11.5px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #10b981;
+    letter-spacing: 0.06em;
+    color: var(--ra-islamic, #33593a);
   }
   .copy-summary-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-family: var(--font-body);
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
     font-size: 11.5px;
     font-weight: 700;
-    color: var(--color-on-surface-variant);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-outline-variant);
+    color: var(--ra-ink-2, #57514a);
+    background-color: var(--ra-surface, #ffffff);
+    border: 1px solid var(--ra-line-strong, #d8d0c4);
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
   .copy-summary-btn:hover {
-    color: #10b981;
-    border-color: #10b981;
-    background-color: rgba(16, 185, 129, 0.06);
+    color: var(--ra-islamic, #33593a);
+    border-color: var(--ra-islamic, #33593a);
+    background-color: var(--ra-surface, #ffffff);
   }
   .copy-summary-btn.copied {
     color: #ffffff;
-    background-color: #10b981;
-    border-color: #10b981;
+    background-color: var(--ra-islamic, #33593a);
+    border-color: var(--ra-islamic, #33593a);
   }
   .debunking-quick-summary-body,
   .debunking-quick-summary-body :global(p.response-paragraph) {
@@ -1120,9 +1127,9 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     transition: all 0.15s ease;
   }
   .debunking-toc-pill:hover {
-    background-color: #10b981;
+    background-color: var(--ra-islamic, #33593a);
     color: #ffffff;
-    border-color: #10b981;
+    border-color: var(--ra-islamic, #33593a);
     transform: translateY(-1px);
   }
 
@@ -1178,7 +1185,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
     height: 24px;
     flex-shrink: 0;
     border-radius: 50%;
-    background-color: #10b981;
+    background-color: var(--ra-islamic, #33593a);
     color: #ffffff;
     font-family: var(--font-body);
     font-size: 12px;

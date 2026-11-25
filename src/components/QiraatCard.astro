@@ -77,20 +77,20 @@ const { variant } = Astro.props;
 
 <style>
   .qiraat-card {
-    background-color: var(--color-surface);
-    border: 1px solid #fef08a; /* yellow-200 */
-    border-radius: 8px;
-    padding: 20px;
+    background-color: var(--ra-surface, #ffffff);
+    border: 1px solid #e3d3b6;
+    border-radius: 10px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
   }
 
   .qiraat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--color-outline-variant);
+    border-bottom: 1px solid var(--ra-line, #e8e2d9);
     padding-bottom: 12px;
   }
 
@@ -101,36 +101,37 @@ const { variant } = Astro.props;
   }
 
   .qiraat-category {
-    font-family: var(--font-body);
-    font-size: 13px;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
+    font-size: 12.5px;
     font-weight: 800;
-    color: #ca8a04; /* yellow-600 */
+    color: #7a551d;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
   }
 
   .qiraat-effect {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
     font-size: 14px;
     font-weight: 600;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-2, #57514a);
   }
 
   .qiraat-source-btn {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
     font-size: 11px;
     font-weight: 700;
-    color: #ca8a04; /* yellow-600 */
+    color: var(--ra-verify, #0e5e6f);
     text-transform: uppercase;
     text-decoration: none;
     transition: color 0.15s ease;
   }
 
   .qiraat-source-btn:hover {
-    color: #a16207; /* yellow-800 */
+    color: var(--ra-verify-strong, #0a4855);
+    text-decoration: underline;
   }
 
   .qiraat-diff {
@@ -187,15 +188,15 @@ const { variant } = Astro.props;
   }
 
   .qiraat-description {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
     font-size: 14px;
     line-height: 1.6;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-2, #57514a);
     margin: 0;
-    padding: 12px;
-    background-color: rgba(253, 224, 71, 0.1); /* light yellow tint */
-    border-left: 3px solid #facc15; /* yellow-400 */
-    border-radius: 0 6px 6px 0;
+    padding: 12px 14px;
+    background-color: var(--ra-sand, #f6efe3);
+    border-left: 3px solid var(--ra-sand-rule, #b8893a);
+    border-radius: 0 8px 8px 0;
   }
 
   .qiraat-readers {

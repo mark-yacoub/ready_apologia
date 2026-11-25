@@ -17,39 +17,40 @@ const { title, intro, className = '' } = Astro.props;
 
 <style>
   .evidence-card {
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-outline-variant);
-    border-radius: 12px;
+    background-color: var(--ra-surface, #ffffff);
+    border: 1px solid var(--ra-line, #e8e2d9);
+    border-radius: 14px;
     padding: 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 12px rgba(11, 102, 59, 0.05);
+    margin-bottom: 1.75rem;
+    box-shadow: var(--ra-shadow-sm, 0 1px 2px rgba(27, 25, 23, 0.04));
   }
 
   .evidence-card.warm-tint {
-    background: linear-gradient(to bottom right, #ffffff, #f7fdf9);
-    border-color: rgba(11, 102, 59, 0.15);
+    background: var(--ra-surface, #ffffff);
+    border-color: var(--ra-line, #e8e2d9);
+    border-top: 2.5px solid var(--ra-islamic-rule, #c2d6c6);
   }
 
   .card-header h2 {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    color: var(--color-primary);
+    font-family: var(--ra-display, 'Literata', Georgia, serif);
+    font-size: 1.45rem;
+    color: var(--ra-ink, #1b1917);
     margin-top: 0;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.7rem;
   }
 
   .scholastic-intro {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
+    font-size: 0.94rem;
     line-height: 1.6;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-2, #57514a);
     text-align: left;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.4rem;
     margin-top: 0;
   }
 
   .scholastic-intro :global(a) {
-    color: var(--color-secondary);
+    color: var(--ra-verify, #0e5e6f);
     font-weight: 700;
     text-decoration: underline;
     text-underline-offset: 2px;

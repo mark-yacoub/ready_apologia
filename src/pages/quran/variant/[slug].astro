@@ -211,10 +211,11 @@ const schemaObj = {
   }
 
   :global(.qiraat-highlight) {
-    background-color: rgba(11, 102, 59, 0.15); /* Green with opacity */
-    color: #0b663b;
-    padding: 2px 4px;
+    background-color: var(--ra-mark, #f3dfae);
+    color: var(--ra-ink, #1b1917);
+    padding: 2px 5px;
     border-radius: 4px;
+    border-bottom: 1.5px solid var(--ra-sand-rule, #b8893a);
     font-weight: 600;
   }
 </style>

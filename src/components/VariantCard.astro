@@ -531,7 +531,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .variant-card:hover {
-    border-color: rgba(151, 69, 67, 0.35);
+    border-color: var(--ra-islamic-rule, #c2d6c6);
     box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
   }
 
@@ -576,33 +576,33 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .vtype-addition {
-    background-color: #ecfdf5;
-    color: #065f46;
-    border-color: #a7f3d0;
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    color: var(--ra-islamic, #33593a);
+    border-color: var(--ra-islamic-rule, #c2d6c6);
   }
 
   .vtype-omission {
-    background-color: #fef2f2;
-    color: #991b1b;
-    border-color: #fecaca;
+    background-color: var(--ra-christian-bg, #f6eeec);
+    color: var(--ra-christian, #7a3530);
+    border-color: var(--ra-christian-rule, #dfc5c2);
   }
 
   .vtype-substitution {
-    background-color: #fffbeb;
-    color: #92400e;
-    border-color: #fde68a;
+    background-color: var(--ra-sand, #f6efe3);
+    color: #7a551d;
+    border-color: #e3d3b6;
   }
 
   .vtype-shift {
-    background-color: #f0f9ff;
-    color: #075985;
-    border-color: #bae6fd;
+    background-color: #edf2f7;
+    color: #2c4a6b;
+    border-color: #cbd7e4;
   }
 
   .vtype-special {
-    background-color: #fdf2f8;
-    color: #9d174d;
-    border-color: #fbcfe8;
+    background-color: #f4eef2;
+    color: #643f5c;
+    border-color: #dbcad7;
   }
 
   .vcard-verse-pill {
@@ -647,16 +647,16 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .primary-chip {
-    color: var(--color-secondary);
-    background-color: rgba(151, 69, 67, 0.07);
-    border: 1px solid rgba(151, 69, 67, 0.25);
+    color: var(--ra-islamic, #33593a);
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    border: 1px solid var(--ra-islamic-rule, #c2d6c6);
     padding: 4px 10px;
   }
 
   .primary-chip:hover {
-    background-color: var(--color-secondary);
+    background-color: var(--ra-islamic, #33593a);
     color: #ffffff;
-    border-color: var(--color-secondary);
+    border-color: var(--ra-islamic, #33593a);
   }
 
   .shared-chip {
@@ -743,11 +743,11 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .uthmanic-col {
-    background-color: rgba(254, 242, 242, 0.35);
+    background-color: rgba(246, 238, 236, 0.42);
   }
 
   .companion-col {
-    background-color: rgba(236, 253, 245, 0.4);
+    background-color: rgba(237, 243, 238, 0.48);
   }
 
   .diff-col-header {
@@ -757,23 +757,25 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .diff-col-tag {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans, 'Public Sans', sans-serif);
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
     padding: 2px 7px;
-    border-radius: 4px;
+    border-radius: 5px;
   }
 
   .uthmanic-tag {
-    color: #991b1b;
-    background-color: rgba(254, 202, 202, 0.45);
+    color: var(--ra-christian, #7a3530);
+    background-color: var(--ra-christian-bg, #f6eeec);
+    border: 1px solid var(--ra-christian-rule, #dfc5c2);
   }
 
   .companion-tag {
-    color: #065f46;
-    background-color: rgba(167, 243, 208, 0.5);
+    color: var(--ra-islamic, #33593a);
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    border: 1px solid var(--ra-islamic-rule, #c2d6c6);
   }
 
   .diff-vs-divider {
@@ -816,21 +818,21 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .diff-del-span {
-    background-color: rgba(254, 202, 202, 0.45);
-    color: #7f1d1d;
+    background-color: var(--ra-christian-bg, #f6eeec);
+    color: var(--ra-christian, #7a3530);
     padding: 2px 6px;
     border-radius: 4px;
-    border-bottom: 2px solid #f87171;
+    border-bottom: 1.5px solid var(--ra-christian, #7a3530);
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
   }
 
   .diff-ins-span {
-    background-color: rgba(167, 243, 208, 0.5);
-    color: #064e3b;
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    color: var(--ra-islamic-strong, #234029);
     padding: 2px 6px;
     border-radius: 4px;
-    border-bottom: 2px solid #34d399;
+    border-bottom: 1.5px solid var(--ra-islamic, #33593a);
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
   }
@@ -894,20 +896,20 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .full-verse-label.companion-label {
-    color: #065f46;
+    color: var(--ra-islamic, #33593a);
   }
 
   .inline-del-mark {
-    background-color: #fee2e2;
-    color: #991b1b;
+    background-color: var(--ra-christian-bg, #f6eeec);
+    color: var(--ra-christian, #7a3530);
     padding: 1px 4px;
     border-radius: 3px;
     font-weight: 700;
   }
 
   .inline-ins-mark {
-    background-color: #d1fae5;
-    color: #065f46;
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    color: var(--ra-islamic-strong, #234029);
     padding: 1px 4px;
     border-radius: 3px;
     font-weight: 700;
@@ -1004,13 +1006,13 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .defense-point {
-    background-color: var(--color-surface-container-low);
-    border-left: 3px solid #9ca3af;
+    background-color: var(--ra-slate, #eef1f4);
+    border-left: 3px solid var(--ra-slate-rule, #8d99a6);
   }
 
   .evaluation-point {
-    background-color: rgba(151, 69, 67, 0.05);
-    border-left: 3px solid var(--color-secondary);
+    background-color: var(--ra-islamic-bg, #edf3ee);
+    border-left: 3px solid var(--ra-islamic, #33593a);
   }
 
   .scholarly-point-label {
@@ -1087,7 +1089,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .hadith-pill {
-    background-color: rgba(151, 69, 67, 0.12);
+    background-color: var(--ra-islamic-bg, #edf3ee);
     color: var(--color-secondary);
   }
 
@@ -1134,7 +1136,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   .app-tafsir-btn {
     background-color: var(--color-surface);
     color: var(--color-secondary);
-    border: 1px solid rgba(151, 69, 67, 0.35);
+    border: 1px solid var(--ra-islamic-rule, #c2d6c6);
   }
 
   .sunnah-btn:hover,
@@ -1209,12 +1211,12 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .source-key-highlight {
-    background-color: rgba(250, 204, 21, 0.28);
+    background-color: var(--ra-mark, #f3dfae);
     color: inherit;
     font-weight: 700;
     padding: 1px 4px;
     border-radius: 3px;
-    border-bottom: 2px solid #eab308;
+    border-bottom: 1.5px solid var(--ra-sand-rule, #b8893a);
   }
 
   .chevron-icon {
