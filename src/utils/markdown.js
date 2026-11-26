@@ -1,4 +1,4 @@
-import { getBaseUrl, getBibleUrl, getQuranUrl } from './urlFactory.js';
+import { getBaseUrl, getBibleUrl, getQuranUrl, getHadithUrl } from './urlFactory.js';
 
 /**
  * Markdown inline link: [label](url), where url may contain one level of
@@ -9,6 +9,17 @@ import { getBaseUrl, getBibleUrl, getQuranUrl } from './urlFactory.js';
 // exponentially on unclosed links and hung the build (/bible/heb/5/7/apologetics).
 export const MD_LINK_URL_SOURCE = String.raw`(?:[^()\s]|\([^()\s]*\))+`;
 export const MD_LINK_SOURCE = String.raw`\[([^\]]+)\]\((${MD_LINK_URL_SOURCE})\)`;
+
+/** `https://host` for an http(s) URL, else null (bad, empty or non-web URLs resolve nothing). */
+function originOf(url) {
+  if (!url) return null;
+  try {
+    const u = new URL(url);
+    return /^https?:$/.test(u.protocol) ? u.origin : null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Strips inline Markdown formatting (links, bold/italics, inline code) into
@@ -59,9 +70,20 @@ export function resolveQuranComUrl(url) {
  * Built specifically for high-performance speeds, parsing headers, bold text,
  * inline links, tables, blockquotes (including indented/multi-line), nested lists,
  * and dual paragraph line breaks error-free.
+ *
+ * @param {string} text
+ * @param {object} [options]
+ * @param {string} [options.sourceUrl] URL of the site the text was published on (e.g. the
+ *   answer's `work_url` / `meta_url`). Site-relative links such as `/articles/3268` that were
+ *   copied from that site are resolved against its origin, so they open the source site
+ *   instead of a missing page on ours. In-app routes (`/quran/…`, `/hadith/…`) are kept.
+ * @param {Set<string>} [options.hadithPages] `collection/number` keys of the built `/hadith/…`
+ *   permalinks. When given, a `/hadith/<collection>/<number>` link with no page opens the
+ *   hadith on Sunnah.com instead.
  */
-export function parseMarkdown(text) {
+export function parseMarkdown(text, { sourceUrl, hadithPages } = {}) {
   if (!text) return '';
+  const sourceOrigin = originOf(sourceUrl);
 
   // Clean up visual horizontal divider noise at the absolute start and end of data
   let cleaned = text.trim();
@@ -170,8 +192,16 @@ export function parseMarkdown(text) {
         : getQuranUrl({ surah });
       targetAttrs = '';
     } else if (finalUrl.startsWith('/hadith/')) {
-      finalUrl = `${getBaseUrl()}${finalUrl}`;
-      targetAttrs = '';
+      const [, collection, num] = finalUrl.split(/[/?#]/).filter(Boolean);
+      if (hadithPages && collection && num && !hadithPages.has(`${collection}/${num}`)) {
+        finalUrl = getHadithUrl(collection, num);
+      } else {
+        finalUrl = `${getBaseUrl()}${finalUrl}`;
+        targetAttrs = '';
+      }
+    } else if (sourceOrigin && /^\/(?!\/)/.test(finalUrl)) {
+      // Site-relative link copied from the source site: open it there (new tab, as external).
+      finalUrl = new URL(finalUrl, sourceOrigin).href;
     } else if (!/^(?:https?:\/\/|mailto:|\/|#)/i.test(finalUrl)) {
       // Block unsafe schemes (e.g., javascript:, data:, vbscript:)
       return labelText;

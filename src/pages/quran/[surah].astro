@@ -13,6 +13,7 @@ import { getVariantsForSurah } from '../../utils/nonUthmanicLoader.js';
 import { getQiraatForSurah } from '../../utils/qiraatLoader.js';
 import { loadVerseLabels } from '../../utils/quran_verse_labels_loader.js';
 import { parseMarkdown } from '../../utils/markdown.js';
+import { loadHadithModel } from '../../utils/hadithLoader.js';
 import QiraatCard from '../../components/QiraatCard.astro';
 import PillChevron from '../../components/PillChevron.astro';
 import { getEvidenceSetsForSurahPrefix, getDefaultTafsirScholarForVerse } from '../../utils/quran_evidence_service.js';
@@ -228,6 +229,8 @@ const { seoTitle, seoDescription, surahSchema } = generateQuranSurahSEO({
 
 // Generate OG Image from the oldest manuscript belonging to ANY verse in this surah
 const ogImage = getQuranOgImage(surahNum, null);
+// Built /hadith/<collection>/<number> permalinks; label notes that cite another hadith link to Sunnah.com.
+const hadithPages = new Set([...loadHadithModel().records.values()].map(r => `${r.collection}/${r.sunnahNum}`));
 ---
 
 <Layout
@@ -385,7 +388,7 @@ const ogImage = getQuranOgImage(surahNum, null);
                           <PillChevron />
                         </span>
                       </summary>
-                      <div class="label-note" set:html={parseMarkdown(noteText)} />
+                      <div class="label-note" set:html={parseMarkdown(noteText, { hadithPages })} />
                     </details>
                   ))}
                 </div>

@@ -75,6 +75,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { getBibleUrl, getQuranUrl } from './urlFactory.js';
 import { quranVerseIdSql, bibleVerseIdSql } from './verseIdSql.js';
+import { loadChristianFootnotes } from './christian_footnotes_loader.js';
+
+/**
+ * Christian-footnotes tab URL when that tab is built for the verse (keys of
+ * loadChristianFootnotes(), the same set the tab route uses), else the verse in the surah reader.
+ */
+function quranFootnotesOrReaderUrl(ref) {
+  const hasTab = Object.hasOwn(loadChristianFootnotes(), `${ref.surah}:${ref.ayah}`);
+  return getQuranUrl({ surah: ref.surah, ayah: ref.ayah, tab: hasTab ? 'christian-footnotes' : undefined });
+}
 
 const dbPath = path.join(process.cwd(), 'data.db');
 let db = null;
@@ -540,7 +550,7 @@ export function loadQuranStatistics() {
           verseId: item.verse,
           title: ref.label,
           metricValue: `${item.totalLength.toLocaleString()} Chars (${item.count} Notes)`,
-          url: getQuranUrl({ surah: ref.surah, ayah: ref.ayah, tab: 'christian-footnotes' }),
+          url: quranFootnotesOrReaderUrl(ref),
           text: text,
           preview: item.contents[0],
           badgeType: 'footnote'
@@ -575,7 +585,7 @@ export function loadQuranStatistics() {
           verseId: item.verse,
           title: ref.label,
           metricValue: `${item.labelCount} Deficiency Categories`,
-          url: getQuranUrl({ surah: ref.surah, ayah: ref.ayah, tab: 'christian-footnotes' }),
+          url: getQuranUrl({ surah: ref.surah, ayah: ref.ayah }), // labels render in the surah reader
           text: text,
           labels: item.labels,
           badgeType: 'critical'

@@ -10,13 +10,13 @@ import PlayAllButton from '../../../../../components/reel/PlayAllButton.jsx';
 import { toReelItems } from '../../../../../components/reel/reelItems.js';
 import { R2_BASE_URL } from '../../../../../utils/cdn_config.js';
 import { getBibleOgImage } from '../../../../../utils/ogImageResolver.js';
-import booksMeta from '../../../../../data/books_meta.json';
+import booksMeta from '../../../../../data/books_meta.json' with { type: 'json' };
 import { parseMarkdown } from '../../../../../utils/markdown.js';
 import { mapLxxToMt, mapMtToLxx } from '../../../../../utils/scripture_mapper.js';
 import SourceFooter from '../../../../../components/SourceFooter.astro';
 import { getEvidenceCounts, getFormattedManuscriptsByVerseId, getContradictionsByVerseId, getApologeticsByVerseId, getRawVideosByVerseId } from '../../../../../utils/evidence_repository.js';
 import { BUILD_BOOKS } from '../../../../../utils/build_config.js';
-import { getScriptureVerseText, getScriptureVerseTextById } from '../../../../../utils/scripture_service.js';
+import { getScriptureVerseText, getScriptureVerseTextById, readerHasVerse } from '../../../../../utils/scripture_service.js';
 import { enrichVideosWithVerses } from '../../../../../utils/video_service.js';
 import { getVerseVideoResponse } from '../../../../../utils/verseResponse/service.js';
 import { getAllEvidenceVerseSets, parseVerseId } from '../../../../../utils/path_generator.js';
@@ -69,7 +69,19 @@ const mtId = `${mtObj.book}_${mtObj.chapter}_${mtObj.verse}`;
 const checkId = isNT ? verseId : mtId;
 
 // 3. Query active evidence counts
-const { msCount, ctCount, apCount, vdCount } = getEvidenceCounts(verseId, mtId, checkId, isNT);
+const rawCounts = getEvidenceCounts(verseId, mtId, checkId, isNT);
+// Only offer tabs whose page is built for this verse (getStaticPaths uses the same sets). The
+// LXX→MT lookup above can land on evidence that is routed to a different LXX verse
+// (e.g. Jeremiah 25:27 vs 32:27), which would link to a page that doesn't exist.
+const routeSets = getAllEvidenceVerseSets();
+const msCount = routeSets.msSet.has(verseId) ? rawCounts.msCount : 0;
+const ctCount = routeSets.ctSet.has(verseId) ? rawCounts.ctCount : 0;
+const apCount = routeSets.apSet.has(verseId) ? rawCounts.apCount : 0;
+const vdCount = routeSets.vdSet.has(verseId) ? rawCounts.vdCount : 0;
+
+// Chapter reader link: jump to the verse only when the reader has it (some verses with
+// manuscripts, e.g. Jonah 1:17 = LXX 2:1, aren't in the LXX reader's chapter).
+const chapterHref = `${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/bible/${book}/${chapter}${readerHasVerse(book, chapter, verse) ? `#${verse}` : ''}`;
 
 // 3.5 Load Verse Text
 const verseText = getScriptureVerseText(book, chapter, verse);
@@ -103,7 +115,7 @@ if (tab === 'videos') {
 const reelItems = tab === 'videos'
   ? toReelItems(videos, {
       verseLabel: `${bookMeta.name} ${chapter}:${verse}`,
-      verseHref: `${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/bible/${book}/${chapter}#${verse}`,
+      verseHref: chapterHref,
     })
   : [];
 
@@ -130,11 +142,11 @@ function formatVerseIdToLink(id, targetTab = 'contradictions') {
   if (!id) return '';
   const p = id.split('_');
   const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-  if (booksMeta.ot.some(b => b.id === p[0])) {
-    const m = mapMtToLxx(p[0], p[1], p[2]);
-    return `${base}/bible/${m.book}/${m.chapter}/${m.verse}/${targetTab}`;
-  }
-  return `${base}/bible/${p[0]}/${p[1]}/${p[2]}/${targetTab}`;
+  const ref = booksMeta.ot.some(b => b.id === p[0]) ? mapMtToLxx(p[0], p[1], p[2]) : { book: p[0], chapter: p[1], verse: p[2] };
+  // No link when that verse has no page for the tab (e.g. a mis-keyed `1jn_8_44` row).
+  const routeSet = { contradictions: routeSets.ctSet, apologetics: routeSets.apSet, manuscripts: routeSets.msSet, videos: routeSets.vdSet }[targetTab];
+  if (routeSet && !routeSet.has(`${ref.book}_${ref.chapter}_${ref.verse}`)) return '';
+  return `${base}/bible/${ref.book}/${ref.chapter}/${ref.verse}/${targetTab}`;
 }
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
@@ -185,7 +197,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
 
     <!-- Top Header Back Navigation -->
     <header class="detail-header select-none">
-      <a href={`${base}/bible/${book}/${chapter}#${verse}`} class="back-btn" aria-label="Go back to chapter reader">
+      <a href={chapterHref} class="back-btn" aria-label="Go back to chapter reader">
         <span class="back-arrow">
           <svg width="6" height="10" fill="none" stroke="currentColor" viewBox="0 0 6 10" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 9L1 5l4-4" />
@@ -287,10 +299,16 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
                       <div class="contrasting-verse-section">
                         <div class="contrasting-badge-box select-none">
                           <span class="badge-box-label">Contrasting Link:</span>
-                          <a href={otherVerseLink} class="contrasting-link-pill">
-                            <span>{otherVerseLabel}</span>
-                            <span class="link-arrow">&rarr;</span>
-                          </a>
+                          {otherVerseLink ? (
+                            <a href={otherVerseLink} class="contrasting-link-pill">
+                              <span>{otherVerseLabel}</span>
+                              <span class="link-arrow">&rarr;</span>
+                            </a>
+                          ) : (
+                            <span class="contrasting-link-pill">
+                              <span>{otherVerseLabel || otherVerseId}</span>
+                            </span>
+                          )}
                         </div>
                         {otherVerseText && (
                           <div class="verse-text-reminder select-text contradicting-text-box">
@@ -317,7 +335,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
 
                     {/* Rich Markdown body parser */}
                     <div class="card-response-body select-text">
-                      <div set:html={parseMarkdown(ct.answer)} />
+                      <div set:html={parseMarkdown(ct.answer, { sourceUrl: ct.work_url || ct.meta_url })} />
                     </div>
 
                     {/* Subtle Source Meta Credit Footer */}
@@ -374,7 +392,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateBibleTabSEO
 
                     {/* Rich Markdown body parser */}
                     <div class="card-response-body select-text">
-                      <div set:html={parseMarkdown(ap.answer)} />
+                      <div set:html={parseMarkdown(ap.answer, { sourceUrl: ap.work_url || ap.meta_url })} />
                     </div>
 
                     {/* Subtle Source Meta Credit Footer */}

@@ -118,7 +118,8 @@ export function getBibleUrl({ book, chapter = 1, verse, tab, base, isMt = false 
  * Builds a canonical Quran URL.
  * Invariant Rules:
  * - If tab is provided with ayah: /quran/<surah>/<ayah>/<tab>
- * - If ayah is provided without tab: /quran/<surah>#<ayah> (in-context reader)
+ * - If ayah is provided without tab: /quran/<surah>#<ayah> (in-context reader; ranges use the
+ *   first ayah, and an ayah that isn't a verse number (0, "intro") links to the surah)
  * - If surah is provided: /quran/<surah>
  * - Default: /quran
  *
@@ -148,7 +149,8 @@ export function getQuranUrl({ surah, ayah, tab, base } = {}) {
     return `${basePath}/quran/${cleanSurah}/${cleanAyah}/${tab}`;
   }
 
-  if (cleanAyah) {
+  // Reader anchors are verse numbers only: no anchor for "0" (sūra header notes) or "intro".
+  if (cleanAyah && /^[1-9]\d*$/.test(cleanAyah)) {
     return `${basePath}/quran/${cleanSurah}#${cleanAyah}`;
   }
 

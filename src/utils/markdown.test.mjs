@@ -50,3 +50,34 @@ test('MD_LINK_SOURCE handles repeated paren groups, leading parens, empty URLs, 
   assert.doesNotMatch(invalidHtml, /<a\b/);
   assert.equal(stripMarkdownToPlainText(invalid), invalid);
 });
+
+test('parseMarkdown resolves site-relative links against the source site (sourceUrl)', () => {
+  const src = 'https://apologeticspress.org/category/alleged-discrepancies/';
+  const html = parseMarkdown('see [Lyons](/articles/3268), and [old](/apcontent.aspx?category=11&article=1349)', { sourceUrl: src });
+  assert.match(html, /href="https:\/\/apologeticspress\.org\/articles\/3268" target="_blank"/);
+  assert.match(html, /href="https:\/\/apologeticspress\.org\/apcontent\.aspx\?category=11&amp;article=1349"/);
+  assert.doesNotMatch(html, /href="\/articles/);
+});
+
+test('parseMarkdown keeps in-app and absolute links when sourceUrl is set', () => {
+  const html = parseMarkdown('[a](/quran/2/255) [b](/hadith/bukhari/1) [c](https://example.org/x) [d](//cdn.example.org/y)', { sourceUrl: 'https://defendinginerrancy.com/bible-difficulties/' });
+  assert.doesNotMatch(html, /defendinginerrancy\.com\/quran/);
+  assert.doesNotMatch(html, /defendinginerrancy\.com\/hadith/);
+  assert.match(html, /href="https:\/\/example\.org\/x"/);
+  assert.match(html, /href="\/\/cdn\.example\.org\/y"/);
+});
+
+test('parseMarkdown leaves site-relative links unchanged without a usable sourceUrl', () => {
+  for (const sourceUrl of [undefined, '', 'not a url', 'javascript:alert(1)']) {
+    assert.match(parseMarkdown('[x](/articles/1)', { sourceUrl }), /href="\/articles\/1"/);
+  }
+  assert.match(parseMarkdown('[x](/articles/1)'), /href="\/articles\/1"/);
+});
+
+test('parseMarkdown sends /hadith/ links without a built page to Sunnah.com (hadithPages)', () => {
+  const hadithPages = new Set(['bukhari/1']);
+  const html = parseMarkdown('[a](/hadith/bukhari/1) [b](/hadith/bukhari/6860)', { hadithPages });
+  assert.match(html, /href="[^"]*\/hadith\/bukhari\/1"/);
+  assert.match(html, /href="https:\/\/sunnah\.com\/bukhari:6860" target="_blank"/);
+  assert.match(parseMarkdown('[b](/hadith/bukhari/6860)'), /href="[^"]*\/hadith\/bukhari\/6860"/);
+});

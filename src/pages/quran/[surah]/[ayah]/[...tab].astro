@@ -19,6 +19,7 @@ import { assignManuscriptScanNames } from '../../../../utils/manuscript_utils.js
 import { loadChristianFootnotes } from '../../../../utils/christian_footnotes_loader.js';
 import { loadIslamicCommentaries } from '../../../../utils/islamic_commentaries_loader.js';
 import { parseMarkdown } from '../../../../utils/markdown.js';
+import { getQuranUrl } from '../../../../utils/urlFactory.js';
 import { loadQuranContradictions } from '../../../../utils/quran_contradictions_loader.js';
 import { loadScientificErrors, parseScientificErrorItem } from '../../../../utils/quran_scientific_errors_loader.js';
 import { loadDebunkingMiracles } from '../../../../utils/quran_debunking_loader.js';
@@ -161,7 +162,7 @@ if (tab === 'videos') {
 const reelItems = tab === 'videos'
   ? toReelItems(videos, {
       verseLabel: `Qurʾān ${surah}:${ayah}`,
-      verseHref: `${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/quran/${surah}#${ayah}`,
+      verseHref: getQuranUrl({ surah, ayah }),
     })
   : [];
 
@@ -224,7 +225,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
   <div class="verse-detail-container theme-quran">
 
     <header class="detail-header select-none">
-      <a href={`${base}/quran/${surah}#${ayah}`} class="back-btn" aria-label="Go back to surah reader">
+      <a href={getQuranUrl({ surah, ayah })} class="back-btn" aria-label="Go back to surah reader">
         <span class="back-arrow">
           <svg width="6" height="10" fill="none" stroke="currentColor" viewBox="0 0 6 10" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 9L1 5l4-4" />
@@ -556,7 +557,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                               const targetText = targetTextObj ? targetTextObj.text : '';
                               return (
                                 <div class="verse-text-reminder snippet-reminder snippet-supp">
-                                  <a href={`${base}/quran/${vs}#${va}`} class="ct-verse-link" title="Tap to read this supporting verse">{`Surah ${v}`} &rarr;</a>
+                                  <a href={getQuranUrl({ surah: vs, ayah: va })} class="ct-verse-link" title="Tap to read this supporting verse">{`Surah ${v}`} &rarr;</a>
                                   {targetText && <span> "{targetText}"</span>}
                                 </div>
                               );
@@ -575,7 +576,7 @@ const { seoTitle, seoDescription, seoKeywords, seoSchema } = generateQuranTabSEO
                               const targetText = targetTextObj ? targetTextObj.text : '';
                               return (
                                 <div class="verse-text-reminder snippet-reminder snippet-opp">
-                                  <a href={`${base}/quran/${vs}#${va}`} class="ct-verse-link" title="Tap to read this contrasting verse">{`Surah ${v}`} &rarr;</a>
+                                  <a href={getQuranUrl({ surah: vs, ayah: va })} class="ct-verse-link" title="Tap to read this contrasting verse">{`Surah ${v}`} &rarr;</a>
                                   {targetText && <span> "{targetText}"</span>}
                                 </div>
                               );

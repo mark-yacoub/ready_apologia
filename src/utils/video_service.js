@@ -1,6 +1,6 @@
-import { getScriptureVerseTextById } from './scripture_service.js';
+import { getScriptureVerseTextById, readerHasVerse } from './scripture_service.js';
 import { loadEnglishData } from './quran_loader.js';
-import booksMeta from '../data/books_meta.json';
+import booksMeta from '../data/books_meta.json' with { type: 'json' };
 import { mapMtToLxx } from './scripture_mapper.js';
 import { getBibleUrl, getQuranUrl } from './urlFactory.js';
 
@@ -99,7 +99,8 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
 
     return {
       label: `${formatBookIdToName(verseStr)} ${displayChap}:${displayVerse}`,
-      link: getBibleUrl({ book: targetBook, chapter: displayChap, verse: displayVerse, base }),
+      // Anchor the verse only when the chapter reader has it (versification gaps, e.g. Jonah 1:17).
+      link: getBibleUrl({ book: targetBook, chapter: displayChap, verse: readerHasVerse(targetBook, displayChap, displayVerse) ? displayVerse : undefined, base }),
       text: text
     };
   }
