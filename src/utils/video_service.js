@@ -106,7 +106,12 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
   return null;
 }
 
-const TIER_1 = new Set(['copticorthodoxanswers', 'ancientfaithministries', 'jonathanpageauclips']);
+const TIER_1 = new Set([
+  'copticorthodoxanswers', 'ancientfaithministries', 'jonathanpageauclips',
+  'theoria', 'frandrewstephendamick', 'frpaul', 'stsachurch', 'cycnow',
+  'stpaulhouston', 'rootsoforthodoxy', 'bibleillustrated',
+  'patristicnectarfilms', 'anandaapologetics', 'orthodoxshahada',
+]);
 const TIER_2 = new Set(['inspiringphilosophy', 'capturingchristianity', 'testifyapologetics', 'weshuff']);
 const TIER_3 = new Set(['davidwood', 'cirainternational', 'crossexamined', 'redpenlogic', 'givemeananswer', 'mikewinger', 'livingwaters', 'apologeticsroadshow', 'oneforisrael']);
 const TIER_4 = new Set(['shamounian', 'towardsjesus', 'godlogic', 'godlogic2.0', 'godlogicapologetics']);

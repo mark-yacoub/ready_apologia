@@ -48,6 +48,17 @@ export const CHANNELS = {
   weshuff: { name: 'Wes Huff', handle: 'WesHuff' },
   oneforisrael: { name: 'ONE FOR ISRAEL', handle: 'ONEFORISRAEL' },
   apostateprophet: { name: 'Apostate Prophet', handle: 'ApostateProphet' },
+  theoria: { name: 'Theoria', handle: 'Theoria' },
+  frandrewstephendamick: { name: 'Fr. Andrew Stephen Damick', handle: 'FrAndrewStephenDamick' },
+  frpaul: { name: 'Fr. Paul Truebenbach', handle: 'frpaul' },
+  stsachurch: { name: 'STSA Church', handle: 'stsachurch' },
+  cycnow: { name: 'Christian Youth Channel', handle: 'CYCNow' },
+  stpaulhouston: { name: 'St. Paul American Coptic Orthodox Church of Houston', handle: 'StPaulHouston' },
+  rootsoforthodoxy: { name: 'Roots of Orthodoxy', handle: 'RootsofOrthodoxy' },
+  bibleillustrated: { name: 'Bible Illustrated', handle: 'BibleIllustrated' },
+  patristicnectarfilms: { name: 'Patristic Nectar', handle: 'PatristicNectarFilms' },
+  anandaapologetics: { name: 'Anandaapologetics', handle: 'Anandaapologetics' },
+  orthodoxshahada: { name: 'Orthodox Shahada', handle: 'OrthodoxShahada' },
 };
 
 const P = (slug, name, aliases = [name], channels = [], extra = {}) => ({ slug, name, aliases, channels, ...extra });
@@ -119,7 +130,7 @@ export const APOLOGISTS = [
   P('joel-kramer', 'Joel Kramer'),
   P('allen-parr', 'Allen Parr'),
   P('harry-linsinbigler', 'Fr. Harry Linsinbigler', ['Fr. Harry Linsinbigler', 'Harry Linsinbigler', 'Father Harry Linsinbigler']),
-  P('andrew-stephen-damick', 'Fr. Andrew Stephen Damick', ['Fr. Andrew Stephen Damick', 'Andrew Stephen Damick', 'Father Andrew Stephen Damick']),
+  P('andrew-stephen-damick', 'Fr. Andrew Stephen Damick', ['Fr. Andrew Stephen Damick', 'Andrew Stephen Damick', 'Father Andrew Stephen Damick'], ['frandrewstephendamick']),
   P('erez-soref', 'Dr. Erez Soref', ['Dr. Erez Soref', 'Erez Soref']),
   P('chip-bennett', 'Dr. Chip Bennett', ['Dr. Chip Bennett', 'Chip Bennett']),
   P('carmen-imes', 'Dr. Carmen Imes', ['Dr. Carmen Imes', 'Carmen Imes', 'Carmen Joy Imes']),
@@ -155,6 +166,13 @@ export const APOLOGISTS = [
   P('brother-rachid', 'Brother Rachid', ['Brother Rachid', 'Rachid']),
   P('rob-christian', 'Rob Christian'),
   P('david-pallmann', 'David Pallmann', ['David Pallmann', 'Faith Because of Reason']),
+  P('paul-truebenbach', 'Fr. Paul Truebenbach', ['Fr. Paul Truebenbach', 'Fr Paul Truebenbach', 'Father Paul Truebenbach', 'Paul Truebenbach'], ['frpaul']),
+  P('anthony-messeh', 'Fr. Anthony Messeh', ['Fr. Anthony Messeh', 'Fr Anthony Messeh', 'Father Anthony Messeh', 'Anthony Messeh']),
+  P('metropolitan-youssef', 'Metropolitan Youssef', ['Metropolitan Youssef', 'Bishop Youssef', 'H.E. Metropolitan Youssef']),
+  P('theoria', 'Theoria', ['Theoria'], ['theoria'], ORG),
+  P('bible-illustrated', 'Bible Illustrated', ['Bible Illustrated'], ['bibleillustrated'], ORG),
+  P('anandaapologetics', 'Anandaapologetics', ['Anandaapologetics', 'Ananda Apologetics', 'Nectarios'], ['anandaapologetics']),
+  P('orthodox-shahada', 'Orthodox Shahada', ['Orthodox Shahada'], ['orthodoxshahada'], ORG),
 ];
 
 /**
