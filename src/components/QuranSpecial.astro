@@ -248,7 +248,7 @@ const schemaObj = {
           <!-- Videos Carousel -->
           {companion.videos && companion.videos.length > 0 && (
             <div class="companion-videos-section" style="margin-top: 24px;">
-              <h3 class="variant-ref-title" style="margin-bottom: 12px; color: var(--color-primary);">Apologetics Shorts on {companion.name}</h3>
+              <h3 class="variant-ref-title" style="margin-bottom: 12px; color: var(--ra-ink);">Apologetics Shorts on {companion.name}</h3>
               <VideosCarousel videos={companion.videos} />
             </div>
           )}
@@ -258,7 +258,7 @@ const schemaObj = {
 
     <!-- Misc Variants Section (Bottom) -->
     {isLost && generalLostVideos.length > 0 && (
-      <section class="companion-section" style="margin-top: 40px; border-top: 1px dashed var(--color-outline-variant); padding-top: 40px;">
+      <section class="companion-section" style="margin-top: 40px; border-top: 1px dashed var(--ra-line); padding-top: 40px;">
         <div class="companion-header">
            <h2 class="companion-name" style="font-size: 20px;">Miscellaneous Variant Codex Discussions</h2>
         </div>
@@ -311,18 +311,18 @@ const schemaObj = {
   }
 
   .page-intro-footnote {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 13px;
     line-height: 1.6;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     opacity: 0.85;
     margin-bottom: 24px;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--color-outline-variant);
+    border-bottom: 1px solid var(--ra-line);
   }
 
   .intro-link {
-    color: var(--color-secondary);
+    color: var(--ra-accent);
     text-decoration: none;
     font-weight: 600;
   }
@@ -336,32 +336,32 @@ const schemaObj = {
     justify-content: center;
     gap: 8px;
     margin: 0 auto 24px auto;
-    background-color: var(--color-surface-container-low);
+    background-color: var(--ra-well);
     padding: 4px;
     border-radius: 8px;
-    border: 1px solid var(--color-outline-variant);
+    border: 1px solid var(--ra-line);
   }
 
   .toggle-btn {
     padding: 6px 16px;
     border: none;
     background: none;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 13px;
     font-weight: 700;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     cursor: pointer;
     border-radius: 6px;
     transition: all 0.15s ease;
   }
 
   .toggle-btn:hover {
-    color: var(--color-primary);
+    color: var(--ra-ink);
   }
 
   .toggle-btn.active {
-    background-color: var(--color-surface);
-    color: var(--color-secondary);
+    background-color: var(--ra-surface);
+    color: var(--ra-accent);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
@@ -374,11 +374,11 @@ const schemaObj = {
 
   .filter-pill {
     padding: 6px 14px;
-    background-color: var(--color-surface-container-low);
-    border: 1px solid var(--color-outline-variant);
-    color: var(--color-on-surface-variant);
+    background-color: var(--ra-well);
+    border: 1px solid var(--ra-line);
+    color: var(--ra-ink-3);
     border-radius: 20px;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
@@ -386,9 +386,9 @@ const schemaObj = {
   }
 
   .filter-pill:hover {
-    border-color: var(--color-secondary);
-    color: var(--color-secondary);
-    background-color: var(--color-surface);
+    border-color: var(--ra-accent);
+    color: var(--ra-accent);
+    background-color: var(--ra-surface);
   }
 
   .quran-content {
@@ -398,7 +398,7 @@ const schemaObj = {
   }
 
   .companion-section {
-    border-bottom: 1px solid var(--color-outline-variant);
+    border-bottom: 1px solid var(--ra-line);
     padding-bottom: 40px;
   }
 
@@ -421,10 +421,10 @@ const schemaObj = {
   }
 
   .companion-name {
-    font-family: var(--font-display);
+    font-family: var(--ra-display);
     font-size: 24px;
     font-weight: 800;
-    color: var(--color-primary);
+    color: var(--ra-ink);
     margin: 0;
     display: inline-flex;
     align-items: center;
@@ -433,13 +433,13 @@ const schemaObj = {
   }
 
   .companion-name-link:hover .companion-name {
-    color: var(--color-secondary);
+    color: var(--ra-accent);
   }
 
   .ext-link-icon {
     opacity: 0.5;
     transition: opacity 0.15s ease;
-    color: var(--color-secondary);
+    color: var(--ra-accent);
     display: inline-flex;
     align-items: center;
   }
@@ -450,12 +450,12 @@ const schemaObj = {
 
   .read-as-btn {
     display: inline-block;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 13px;
     font-weight: 700;
-    color: var(--color-secondary);
+    color: var(--ra-accent);
     text-decoration: none;
-    border: 1px solid var(--color-secondary);
+    border: 1px solid var(--ra-accent);
     padding: 6px 12px;
     border-radius: 6px;
     transition: all 0.15s ease;
@@ -468,13 +468,13 @@ const schemaObj = {
   }
 
   .read-as-btn:hover {
-    background-color: var(--color-secondary);
-    color: var(--color-surface);
+    background-color: var(--ra-accent);
+    color: var(--ra-surface);
   }
 
   .why-matter-details {
-    background-color: var(--color-surface-container-low);
-    border: 1px solid var(--color-outline-variant);
+    background-color: var(--ra-well);
+    border: 1px solid var(--ra-line);
     border-radius: 8px;
     margin-bottom: 24px;
     overflow: hidden;
@@ -482,29 +482,29 @@ const schemaObj = {
 
   .details-summary {
     padding: 12px 16px;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 14px;
     font-weight: 700;
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
     cursor: pointer;
     user-select: none;
   }
 
   .details-summary:hover {
-    background-color: var(--color-outline-variant);
+    background-color: var(--ra-line);
   }
 
   .details-content {
     padding: 16px;
-    border-top: 1px solid var(--color-outline-variant);
-    background-color: var(--color-surface);
+    border-top: 1px solid var(--ra-line);
+    background-color: var(--ra-surface);
   }
 
   .bio-text {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 14px;
     line-height: 1.6;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     margin: 0 0 16px 0;
   }
 
@@ -516,13 +516,13 @@ const schemaObj = {
 
   .bio-hadith-card {
     padding: 12px;
-    background-color: var(--color-surface-container-low);
+    background-color: var(--ra-well);
     border-radius: 6px;
-    border: 1px solid var(--color-outline-variant);
+    border: 1px solid var(--ra-line);
   }
 
   .hadith-ref {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 12px;
     font-weight: 700;
     margin: 0 0 8px 0;
@@ -533,13 +533,13 @@ const schemaObj = {
     line-height: 1.8;
     text-align: right;
     margin: 0 0 8px 0;
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
   }
 
   .text-english {
-    font-family: var(--font-display);
+    font-family: var(--ra-display);
     line-height: 1.5;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     margin: 0;
   }
 
@@ -550,21 +550,21 @@ const schemaObj = {
   }
 
   .variant-card {
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-outline-variant);
+    background-color: var(--ra-surface);
+    border: 1px solid var(--ra-line);
     border-radius: 8px;
     padding: 20px;
   }
 
   .variant-ref-title {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 16px;
     font-weight: 700;
     margin: 0 0 16px 0;
   }
 
   .hadith-title-link {
-    color: var(--color-secondary);
+    color: var(--ra-accent);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -573,7 +573,7 @@ const schemaObj = {
   }
 
   .hadith-title-link:hover {
-    color: var(--color-primary);
+    color: var(--ra-ink);
     text-decoration: underline;
   }
 
@@ -587,10 +587,10 @@ const schemaObj = {
 
   .label {
     display: block;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11px;
     font-weight: 800;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 8px;
@@ -599,7 +599,7 @@ const schemaObj = {
   .variant-text-block {
     margin-bottom: 16px;
     padding-bottom: 16px;
-    border-bottom: 1px dashed var(--color-outline-variant);
+    border-bottom: 1px dashed var(--ra-line);
   }
 
   .translation-patch {
@@ -615,9 +615,9 @@ const schemaObj = {
   }
 
   .no-variants-message {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 14px;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     font-style: italic;
     margin: 0;
     line-height: 1.5;
@@ -643,25 +643,25 @@ const schemaObj = {
   /* English Prominent */
   .quran-reader-container.prefer-english .text-english {
     font-size: 16px;
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
     font-weight: 500;
   }
 
   .quran-reader-container.prefer-english .text-arabic {
     font-size: 20px;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     opacity: 0.6;
   }
 
   /* Arabic Prominent */
   .quran-reader-container.prefer-arabic .text-arabic {
     font-size: 26px;
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
   }
 
   .quran-reader-container.prefer-arabic .text-english {
     font-size: 14px;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     opacity: 0.7;
     font-weight: 400;
   }

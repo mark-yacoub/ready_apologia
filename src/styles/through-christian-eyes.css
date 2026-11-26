@@ -15,7 +15,7 @@
   margin: 0 auto;
   padding: 0 0 32px;
   color: var(--tce-ink);
-  font-family: var(--font-body, 'Public Sans', sans-serif);
+  font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-size: 16px;
   line-height: 1.6;
 }
@@ -79,7 +79,7 @@
 .tce-h2 { margin: 0; font-family: 'Literata', Georgia, serif; font-size: 24px; line-height: 1.2; font-weight: 800; color: var(--tce-accent); }
 .tce-subhead {
   margin: 10px 0 0; padding-bottom: 4px; border-bottom: 1px solid var(--tce-line);
-  font-family: var(--font-body, 'Public Sans', sans-serif); font-size: 13px; font-weight: 800;
+  font-family: var(--ra-sans, 'Public Sans', sans-serif); font-size: 13px; font-weight: 800;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--tce-gold);
 }
 .tce-subhead .tce-q { font-family: inherit; font-style: normal; color: inherit; font-size: inherit; }

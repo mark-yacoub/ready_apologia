@@ -2,7 +2,7 @@
 // Editorial manuscript pigment palette — every ink color passes WCAG AA (>= 5.6:1)
 // on warm paper (#fbf9f5) and white (#ffffff), with soft cotton-paper tints.
 
-export const appleColors = [
+export const TOPIC_PIGMENTS = [
   { name: 'Slate Indigo', hex: '#3b4b75', bgHex: '#eef0f6', borderHex: '#cfd5e6' },
   { name: 'Deep Cypress', hex: '#33593a', bgHex: '#edf3ee', borderHex: '#c2d6c6' },
   { name: 'Oxblood',      hex: '#7a3530', bgHex: '#f6eeec', borderHex: '#dfc5c2' },
@@ -22,9 +22,9 @@ const explicitEvidenceIndices = {
 };
 
 export function getEvidenceColor(evidenceId) {
-  if (!evidenceId) return appleColors[3]; // default Slate Navy
+  if (!evidenceId) return TOPIC_PIGMENTS[3]; // default Slate Navy
   if (explicitEvidenceIndices[evidenceId] !== undefined) {
-    return appleColors[explicitEvidenceIndices[evidenceId]];
+    return TOPIC_PIGMENTS[explicitEvidenceIndices[evidenceId]];
   }
   // deterministic hash fallback
   let hash = 2166136261;
@@ -32,6 +32,6 @@ export function getEvidenceColor(evidenceId) {
     hash ^= evidenceId.charCodeAt(i);
     hash = Math.imul(hash, 16777619);
   }
-  const index = Math.abs(hash) % appleColors.length;
-  return appleColors[index];
+  const index = Math.abs(hash) % TOPIC_PIGMENTS.length;
+  return TOPIC_PIGMENTS[index];
 }

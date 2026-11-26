@@ -299,7 +299,7 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
             const firstTabHref = `${base}/bible/${book}/${chapter}/${verseNum}/${{ 'manuscript': 'manuscripts', 'contradiction': 'contradictions', 'apologetics': 'apologetics', 'video': 'videos' }[evidenceTypes[0]] || 'manuscripts'}`;
             return (
               <div class="verse-row active-verse" id={verseNum} data-evidence-id={evidenceMap[verseNum] ? evidenceMap[verseNum].join(',') : ''} data-evidence-notes={evidenceNotesMap[verseNum] ? JSON.stringify(evidenceNotesMap[verseNum]) : ''}>
-                <div class="verse-row-content">
+                <div class="verse-row-content ra-accent-bar">
                   <span class="verse-num">{verseNum}</span>
                   <div class="verse-body-wrapper">
                     <p class="verse-text">
@@ -369,11 +369,13 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
                       </span>
                     </p>
                   </div>
+                  {/* Visual cue only: the verse text is the accessible link, so the chevron is skipped by keyboards and screen readers. */}
                   <a
                     href={firstTabHref}
                     class="verse-open-cue"
                     data-onboarding-trigger="verse"
-                    aria-label={`Open commentary and sources for ${bookMeta.name} ${chapter}:${verseNum}`}
+                    tabindex="-1"
+                    aria-hidden="true"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <path d="m9 18 6-6-6-6" />
@@ -385,7 +387,7 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
           } else if (hasTopics) {
             return (
               <div class="verse-row active-verse type-topic" id={verseNum} data-evidence-id={evidenceMap[verseNum] ? evidenceMap[verseNum].join(',') : ''} data-evidence-notes={evidenceNotesMap[verseNum] ? JSON.stringify(evidenceNotesMap[verseNum]) : ''}>
-                <div class="verse-row-content">
+                <div class="verse-row-content ra-accent-bar">
                   <span class="verse-num">{verseNum}</span>
                   <div class="verse-body-wrapper">
                     <p class="verse-text">
@@ -400,7 +402,7 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
           } else {
             return (
               <div class="verse-row" id={verseNum} data-evidence-id={evidenceMap[verseNum] ? evidenceMap[verseNum].join(',') : ''} data-evidence-notes={evidenceNotesMap[verseNum] ? JSON.stringify(evidenceNotesMap[verseNum]) : ''}>
-                <div class="verse-row-content">
+                <div class="verse-row-content ra-accent-bar">
                   <span class="verse-num muted">{verseNum}</span>
                   <div class="verse-body-wrapper">
                     <p class="verse-text muted-text">{verseText}</p>
@@ -742,8 +744,8 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
 		padding: 6px 10px;
 		border-radius: 8px;
 		cursor: pointer;
-		color: var(--color-primary);
-		font-family: var(--font-display);
+		color: var(--ra-ink);
+		font-family: var(--ra-display);
 		font-size: 28px;
 		font-weight: 800;
 		transition: background-color 0.15s, transform 0.1s;
@@ -754,7 +756,7 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
 		text-align: left;
 	}
 	.book-selector-btn:hover {
-		background-color: var(--color-surface-container-low);
+		background-color: var(--ra-well);
 	}
 	.book-selector-btn:active {
 		transform: scale(0.97);
@@ -775,14 +777,14 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
 		padding: 6px 10px;
 		border-radius: 8px;
 		cursor: pointer;
-		color: var(--color-secondary); /* Accent color for chapter */
-		font-family: var(--font-display);
+		color: var(--ra-accent); /* Accent color for chapter */
+		font-family: var(--ra-display);
 		font-size: 28px;
 		font-weight: 800;
 		transition: background-color 0.15s, transform 0.1s;
 	}
 	.chapter-selector-btn:hover {
-		background-color: var(--color-surface-container-low);
+		background-color: var(--ra-well);
 	}
 	.chapter-selector-btn:active {
 		transform: scale(0.97);
@@ -790,7 +792,7 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
 
 	.chevron-down {
 		font-size: 12px;
-		color: var(--color-on-surface-variant);
+		color: var(--ra-ink-3);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -810,8 +812,8 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
 		left: 0;
 		z-index: 50;
 		width: 220px;
-		background-color: var(--color-surface);
-		border: 1px solid var(--color-outline-variant);
+		background-color: var(--ra-surface);
+		border: 1px solid var(--ra-line);
 		border-radius: 12px;
 		box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 		margin-top: 8px;
@@ -843,23 +845,23 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
 		align-items: center;
 		justify-content: center;
 		height: 36px;
-		background-color: var(--color-surface-container-low);
-		border: 1px solid var(--color-outline-variant);
-		color: var(--color-on-surface);
+		background-color: var(--ra-well);
+		border: 1px solid var(--ra-line);
+		color: var(--ra-ink);
 		font-size: 13px;
 		font-weight: 700;
 		border-radius: 6px;
 		transition: all 0.15s ease;
 	}
 	.popover-chap-link:hover {
-		border-color: var(--color-secondary);
-		color: var(--color-secondary);
-		background-color: var(--color-surface-container-lowest);
+		border-color: var(--ra-accent);
+		color: var(--ra-accent);
+		background-color: var(--ra-surface);
 	}
 	.popover-chap-link.active {
-		background-color: var(--color-secondary);
+		background-color: var(--ra-accent);
 		color: #ffffff;
-		border-color: var(--color-secondary);
+		border-color: var(--ra-accent);
 	}
 
 	/* ==========================================
@@ -878,9 +880,9 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
 		border-bottom: 1px solid var(--ra-line, #e8e2d9);
 	}
 
+	/* Rows carry a ra-accent-bar (src/styles/ui.css), hidden until highlighted. */
 	.verse-row-content {
-		position: relative;
-		overflow: hidden;
+		--ra-bar-color: transparent;
 		display: flex;
 		align-items: flex-start;
 		gap: 10px;
@@ -888,16 +890,6 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
 		border-radius: 10px;
 		margin: 2px -10px;
 		transition: background-color 0.15s ease, box-shadow 0.15s ease;
-	}
-	.verse-row-content::before {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 0;
-		bottom: 0;
-		width: 3px;
-		background-color: transparent;
-		transition: background-color 0.15s ease;
 	}
 
 	.verse-open-cue {
@@ -982,17 +974,13 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
 
 	/* Topic Highlight (Global toggle — refined, calm, no heavy red block) */
 	.verse-row.evidence-highlight .verse-row-content {
+		--ra-bar-color: var(--ra-christian-rule, #dfc5c2);
 		background-color: rgba(122, 53, 48, 0.032);
-	}
-	.verse-row.evidence-highlight .verse-row-content::before {
-		background-color: var(--ra-christian-rule, #dfc5c2);
 	}
 	@media (hover: hover) {
 		.verse-row.evidence-highlight.active-verse:hover .verse-row-content {
+			--ra-bar-color: var(--ra-christian, #7a3530);
 			background-color: var(--ra-surface, #ffffff);
-		}
-		.verse-row.evidence-highlight.active-verse:hover .verse-row-content::before {
-			background-color: var(--ra-christian, #7a3530);
 		}
 	}
 
@@ -1070,7 +1058,7 @@ const { seoTitle, seoDescription, chapterSchema } = generateBibleChapterSEO({
 	.empty-state {
 		text-align: center;
 		padding: 32px 16px;
-		color: var(--color-on-surface-variant);
+		color: var(--ra-ink-3);
 		font-size: 13px;
 	}
 </style>

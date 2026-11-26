@@ -35,7 +35,7 @@ export function buildDebunkingCard(item, itemIdx) {
   return {
     cardId: String(itemIdx),
     iconPath: ICON_PATHS.miracle,
-    iconColor: 'var(--color-secondary)',
+    iconColor: 'var(--ra-accent)',
     headerTitle: `Claimed Miracle: ${item.miracle_category || 'General'}`,
     headerBadge: item.classification || null,
     claimMarkdown: item.claim ? `"${item.claim}"` : null,

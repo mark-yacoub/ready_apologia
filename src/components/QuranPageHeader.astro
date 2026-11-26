@@ -156,8 +156,8 @@ const sections = hideDropdown ? [] : getQuranSections();
     left: 0;
     z-index: 50;
     width: 250px;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-outline-variant);
+    background-color: var(--ra-surface);
+    border: 1px solid var(--ra-line);
     border-radius: 12px;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
     margin-top: 8px;
@@ -188,9 +188,9 @@ const sections = hideDropdown ? [] : getQuranSections();
     display: flex;
     align-items: center;
     padding: 8px 12px;
-    background-color: var(--color-surface-container-low);
-    border: 1px solid var(--color-outline-variant);
-    color: var(--color-on-surface);
+    background-color: var(--ra-well);
+    border: 1px solid var(--ra-line);
+    color: var(--ra-ink);
     font-size: 14px;
     font-weight: 600;
     border-radius: 6px;
@@ -198,13 +198,13 @@ const sections = hideDropdown ? [] : getQuranSections();
     text-decoration: none;
   }
   .popover-link:hover {
-    border-color: var(--color-secondary);
-    color: var(--color-secondary);
-    background-color: var(--color-surface-container-lowest);
+    border-color: var(--ra-accent);
+    color: var(--ra-accent);
+    background-color: var(--ra-surface);
   }
   .popover-link.active {
-    background-color: var(--color-secondary);
+    background-color: var(--ra-accent);
     color: #ffffff;
-    border-color: var(--color-secondary);
+    border-color: var(--ra-accent);
   }
 </style>

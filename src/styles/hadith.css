@@ -21,7 +21,7 @@
   --hx-accent-soft: var(--ra-islamic-bg, #edf3ee);
   --hx-mark: var(--ra-mark, #f3dfae);
   --hx-warn-bg: var(--ra-sand, #f6efe3);
-  --hx-warn-ink: #7a551d;
+  --hx-warn-ink: var(--ra-sand-ink);
   --hx-serif: var(--ra-display, 'Literata', Georgia, 'Amiri', serif);
   --hx-sans: var(--ra-sans, 'Public Sans', -apple-system, BlinkMacSystemFont, 'Amiri', sans-serif); /* Amiri covers ﷺ (U+FDFA) */
   --hx-arabic: var(--ra-arabic, 'Amiri', 'Traditional Arabic', serif);

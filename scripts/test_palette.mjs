@@ -6,8 +6,9 @@
  *   node scripts/test_palette.mjs
  *
  * Enforces Playbook §5.6 visual-language discipline across UI source files:
- *   1. No forbidden saturated Tailwind / iOS neon hex colors in src/{styles,components,layouts,pages}
- *      or src/utils/evidenceColors.js.
+ *   1. No forbidden saturated Tailwind / iOS neon colors (any hex length or rgb()/rgba()) and no
+ *      retired --color-* / --font-* custom properties in src/{styles,components,layouts,pages,hooks}
+ *      or src/utils/{evidenceColors,diffUtils,scholarly_card_view_model}.js.
  *   2. No decorative UI emojis in global chrome & statistics UI files (primary-source text and
  *      deliberate typographic marks † / ☾ are unaffected).
  *   3. Canonical --ra-* tokens, .sec-christian / .sec-islamic / .sec-neutral classes, and the
@@ -20,8 +21,8 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
-const SCAN_DIRS = ['src/styles', 'src/components', 'src/layouts', 'src/pages'];
-const EXTRA_FILES = ['src/utils/evidenceColors.js'];
+const SCAN_DIRS = ['src/styles', 'src/components', 'src/layouts', 'src/pages', 'src/hooks'];
+const EXTRA_FILES = ['src/utils/evidenceColors.js', 'src/utils/diffUtils.js', 'src/utils/scholarly_card_view_model.js'];
 const SCAN_EXTS = new Set(['.css', '.astro', '.jsx', '.js', '.ts', '.tsx']);
 
 // Saturated Tailwind / iOS neon hex codes eliminated during the Archive Reading Room overhaul.
@@ -119,19 +120,42 @@ const files = [
 const failures = [];
 let checkedHexLines = 0;
 
-// 1. Forbidden neon / Tailwind / iOS hex audit
-const hexRegex = /(?<![0-9a-fA-F])#([0-9a-fA-F]{6})(?![0-9a-fA-F])/g;
+// 1. Forbidden neon / Tailwind / iOS colors, in any notation (#rgb, #rgba, #rrggbb, #rrggbbaa, rgb()/rgba()),
+//    plus the retired legacy custom properties (--color-*, --font-*) that predate the --ra-* system.
+const HEX_RE = /(?<![0-9a-zA-Z_-])#([0-9a-fA-F]{3,8})(?![0-9a-zA-Z_-])/g;
+const RGB_RE = /rgba?\(\s*(\d{1,3})\s*[, ]\s*(\d{1,3})\s*[, ]\s*(\d{1,3})/gi;
+const LEGACY_TOKEN_RE = /--(?:color|font)-[a-z][a-z-]*/g;
+
+/** Normalises a hex body of length 3/4/6/8 to `#rrggbb` (alpha ignored); other lengths are not colors. */
+export function normalizeHex(body) {
+  const h = body.toLowerCase();
+  if (h.length === 3 || h.length === 4) return `#${h[0]}${h[0]}${h[1]}${h[1]}${h[2]}${h[2]}`;
+  if (h.length === 6 || h.length === 8) return `#${h.slice(0, 6)}`;
+  return null;
+}
+
+function rgbToHex(r, g, b) {
+  const parts = [r, g, b].map(Number);
+  if (parts.some(n => n > 255)) return null;
+  return `#${parts.map(n => n.toString(16).padStart(2, '0')).join('')}`;
+}
+
 for (const file of files) {
   const rel = relative(ROOT, file);
   const lines = readFileSync(file, 'utf8').split('\n');
   lines.forEach((line, idx) => {
-    let m;
-    while ((m = hexRegex.exec(line)) !== null) {
+    const found = [];
+    for (const m of line.matchAll(HEX_RE)) found.push([m[0], normalizeHex(m[1])]);
+    for (const m of line.matchAll(RGB_RE)) found.push([m[0], rgbToHex(m[1], m[2], m[3])]);
+    for (const [raw, hex] of found) {
+      if (!hex) continue;
       checkedHexLines++;
-      const hex = `#${m[1].toLowerCase()}`;
       if (FORBIDDEN_HEX.has(hex)) {
-        failures.push(`[forbidden-hex] ${rel}:${idx + 1}: ${hex} — ${FORBIDDEN_HEX.get(hex)}`);
+        failures.push(`[forbidden-color] ${rel}:${idx + 1}: ${raw} (${hex}) — ${FORBIDDEN_HEX.get(hex)}`);
       }
+    }
+    for (const m of line.matchAll(LEGACY_TOKEN_RE)) {
+      failures.push(`[legacy-token] ${rel}:${idx + 1}: ${m[0]} — use the canonical --ra-* token (see Layout.astro)`);
     }
   });
 }
@@ -151,7 +175,8 @@ for (const rel of CHROME_EMOJI_FILES) {
 
 // 3. Canonical tokens, section themes, font stack, and removed Tailwind stub
 const layoutPath = join(ROOT, 'src/layouts/Layout.astro');
-const layoutSrc = readFileSync(layoutPath, 'utf8');
+// Comments are stripped so a token mentioned only in a comment does not count as defined.
+const layoutSrc = readFileSync(layoutPath, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/<!--[\s\S]*?-->/g, '');
 const requiredLayoutMarkers = [
   '--ra-paper:',
   '--ra-surface:',
@@ -190,5 +215,5 @@ if (failures.length) {
 }
 
 console.log(
-  `Palette audit passed: ${files.length} source files (${checkedHexLines} hex literals checked), ${CHROME_EMOJI_FILES.length} chrome files, canonical --ra-* tokens & 3-font stack verified.`
+  `Palette audit passed: ${files.length} source files (${checkedHexLines} color literals checked, 0 legacy tokens), ${CHROME_EMOJI_FILES.length} chrome files, canonical --ra-* tokens & 3-font stack verified.`
 );

@@ -428,9 +428,17 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		--ra-verify-rule: #bdd8dc;
 		--ra-sand: #f6efe3;          /* original language & primary quotes */
 		--ra-sand-rule: #b8893a;
+		--ra-sand-line: #e3d3b6;     /* hairline border on sand surfaces */
+		--ra-sand-hover: #f1e6d3;    /* pressed/hovered sand surface */
+		--ra-sand-ink: #7a551d;      /* text on sand (5.7:1) */
 		--ra-slate: #eef1f4;         /* classical scholars' voice */
 		--ra-slate-rule: #8d99a6;
+		--ra-navy: #2c4a6b;          /* scholarly slate-navy ink (apologetics, theology pills) */
+		--ra-navy-bg: #edf2f7;
+		--ra-navy-line: #cbd7e4;
 		--ra-mark: #f3dfae;          /* passage highlight */
+		--ra-on-accent: #ffffff;     /* text on any solid accent/ink fill */
+		--ra-paper-frost: rgba(251, 249, 245, 0.93); /* translucent paper for sticky chrome */
 
 		/* Named tradition ramps (for shared hubs & switches) */
 		--ra-christian: #7a3530;        /* Oxblood ink (8.39:1 on paper) */
@@ -461,33 +469,6 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		--ra-display: 'Literata', Georgia, 'Amiri', 'Traditional Arabic', serif;
 		--ra-sans: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Amiri', 'Traditional Arabic', sans-serif;
 		--ra-arabic: 'Amiri', 'Noto Naskh Arabic', 'Traditional Arabic', serif;
-
-		/* Legacy token aliases (keeps existing pages cohesive during migration) */
-		--color-primary: var(--ra-ink);
-		--color-on-primary: #ffffff;
-		--color-secondary: var(--ra-accent);
-		--color-on-secondary: #ffffff;
-		--color-background: var(--ra-paper);
-		--color-surface: var(--ra-surface);
-		--color-on-surface: var(--ra-ink);
-		--color-on-surface-variant: var(--ra-ink-3);
-		--color-outline-variant: var(--ra-line);
-		--color-surface-container-low: var(--ra-well);
-		--color-surface-container-lowest: var(--ra-surface);
-
-		--color-primary-container: var(--ra-verify-bg);
-		--color-on-primary-container: var(--ra-verify-strong);
-		--color-secondary-container: var(--ra-accent-bg);
-		--color-on-secondary-container: var(--ra-accent-strong);
-		--color-tertiary-container: var(--ra-sand);
-		--color-on-tertiary-container: #7a551d;
-		--color-error-container: var(--ra-christian-bg);
-		--color-on-error-container: var(--ra-christian);
-
-		--font-display: var(--ra-display);
-		--font-body: var(--ra-sans);
-		--font-cinzel: var(--ra-display);
-		--font-headings: var(--ra-display);
 	}
 
 	.sec-christian {
@@ -495,7 +476,6 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		--ra-accent-strong: var(--ra-christian-strong);
 		--ra-accent-bg: var(--ra-christian-bg);
 		--ra-accent-rule: var(--ra-christian-rule);
-		--color-secondary: var(--ra-christian);
 	}
 
 	.sec-islamic,
@@ -505,8 +485,6 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		--ra-accent-strong: var(--ra-islamic-strong);
 		--ra-accent-bg: var(--ra-islamic-bg);
 		--ra-accent-rule: var(--ra-islamic-rule);
-		--color-primary: var(--ra-ink);
-		--color-secondary: var(--ra-islamic);
 	}
 
 	.sec-neutral {
@@ -514,7 +492,6 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		--ra-accent-strong: #0c0a09;
 		--ra-accent-bg: #f0ece4;
 		--ra-accent-rule: var(--ra-line-strong);
-		--color-secondary: var(--ra-ink);
 	}
 
 	body {
@@ -608,7 +585,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		position: sticky;
 		top: 0;
 		z-index: 40;
-		background-color: rgba(251, 249, 245, 0.92);
+		background-color: var(--ra-paper-frost);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 		border-bottom: 1px solid var(--ra-line);
@@ -638,7 +615,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		border-radius: 8px;
 		border: none;
 		background: none;
-		color: var(--color-on-surface-variant);
+		color: var(--ra-ink-3);
 		cursor: pointer;
 		display: flex;
 		align-items: center;
@@ -646,7 +623,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		transition: background-color 0.15s;
 	}
 	.nav-burger-btn:hover {
-		background-color: var(--color-surface-container-low);
+		background-color: var(--ra-well);
 	}
 	.nav-burger-btn svg {
 		width: 20px;
@@ -675,11 +652,11 @@ const serializedSchema = typeof resolvedSchema === 'string'
 	}
 
 	.brand-text {
-		font-family: var(--font-body);
+		font-family: var(--ra-sans);
 		font-weight: 800;
 		font-size: 15px;
 		letter-spacing: 0.3px;
-		color: var(--color-primary);
+		color: var(--ra-ink);
 		transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 		cursor: default;
 		white-space: nowrap;
@@ -689,9 +666,9 @@ const serializedSchema = typeof resolvedSchema === 'string'
 
 	/* Morphing Active State */
 	.brand-text.chapter-active {
-		color: var(--color-secondary) !important; /* Indigo highlighted scroll target */
+		color: var(--ra-accent) !important; /* Indigo highlighted scroll target */
 		cursor: pointer;
-		font-family: var(--font-display); /* Fades into script font! */
+		font-family: var(--ra-display); /* Fades into script font! */
 		font-weight: 700;
 		font-size: 16px;
 	}
@@ -767,7 +744,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		left: 0;
 		right: 0;
 		height: 72px;
-		background-color: rgba(251, 249, 245, 0.94);
+		background-color: var(--ra-paper-frost);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 		border-top: 1px solid var(--ra-line);
@@ -792,7 +769,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		height: 100%;
 		border: none;
 		background: none;
-		color: var(--color-on-surface-variant);
+		color: var(--ra-ink-3);
 		cursor: pointer;
 		font-size: 11px;
 		font-weight: 700;
@@ -818,7 +795,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 	}
 
 	.nav-item:hover .nav-icon-wrapper {
-		background-color: var(--color-surface-container-low);
+		background-color: var(--ra-well);
 	}
 
 	.nav-item.active {
@@ -839,13 +816,13 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		position: absolute;
 		top: 6px;
 		right: 12%;
-		background-color: var(--color-surface-container-low);
-		color: var(--color-on-surface-variant);
+		background-color: var(--ra-well);
+		color: var(--ra-ink-3);
 		font-size: 7px;
 		font-weight: 800;
 		padding: 1px 5px;
 		border-radius: 99px;
-		border: 1px solid var(--color-outline-variant);
+		border: 1px solid var(--ra-line);
 		letter-spacing: 0.5px;
 		text-transform: uppercase;
 	}
@@ -858,7 +835,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		background: transparent;
 	}
 	::-webkit-scrollbar-thumb {
-		background: var(--color-outline-variant);
+		background: var(--ra-line);
 		border-radius: 10px;
 	}
 
@@ -868,15 +845,15 @@ const serializedSchema = typeof resolvedSchema === 'string'
 	.app-footer {
 		margin-top: 48px;
 		padding-top: 24px;
-		border-top: 1px solid var(--color-outline-variant);
+		border-top: 1px solid var(--ra-line);
 		text-align: center;
 		padding-bottom: 24px;
 	}
 
 	.footer-disclaimer {
-		font-family: var(--font-body);
+		font-family: var(--ra-sans);
 		font-size: 10px;
-		color: var(--color-on-surface-variant);
+		color: var(--ra-ink-3);
 		opacity: 0.5;
 		max-width: 500px;
 		margin: 0 auto 20px auto;
@@ -886,10 +863,10 @@ const serializedSchema = typeof resolvedSchema === 'string'
 
 	.footer-links {
 		margin-bottom: 32px;
-		font-family: var(--font-body);
+		font-family: var(--ra-sans);
 		font-size: 11px;
 		font-weight: 700;
-		color: var(--color-on-surface-variant);
+		color: var(--ra-ink-3);
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
@@ -897,15 +874,15 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		gap: 12px;
 	}
 	.footer-links a {
-		color: var(--color-on-surface-variant);
+		color: var(--ra-ink-3);
 		transition: color 0.15s;
 		text-decoration: underline;
 		text-underline-offset: 3px;
 		text-decoration-color: rgba(113, 113, 122, 0.3);
 	}
 	.footer-links a:hover {
-		color: var(--color-primary);
-		text-decoration-color: var(--color-primary);
+		color: var(--ra-ink);
+		text-decoration-color: var(--ra-ink);
 	}
 	.link-divider {
 		opacity: 0.5;
@@ -921,17 +898,17 @@ const serializedSchema = typeof resolvedSchema === 'string'
 	}
 
 	.footer-verse {
-		font-family: var(--font-display);
+		font-family: var(--ra-display);
 		font-style: italic;
 		font-size: 13px;
-		color: var(--color-on-surface-variant);
+		color: var(--ra-ink-3);
 		line-height: 1.6;
 		margin: 0;
 		opacity: 0.8;
 	}
 
 	.footer-ref {
-		font-family: var(--font-body);
+		font-family: var(--ra-sans);
 		font-style: normal;
 		font-size: 11px;
 		font-weight: 600;
@@ -954,7 +931,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		border-bottom: 1px solid var(--color-outline-variant);
+		border-bottom: 1px solid var(--ra-line);
 		padding-bottom: 14px;
 	}
 	.back-btn {
@@ -962,9 +939,9 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		align-items: center;
 		gap: 6px;
 		padding: 6px 12px;
-		background-color: var(--color-surface-container-low);
-		color: var(--color-on-surface-variant);
-		border: 1px solid var(--color-outline-variant);
+		background-color: var(--ra-well);
+		color: var(--ra-ink-3);
+		border: 1px solid var(--ra-line);
 		border-radius: 8px;
 		font-size: 11px;
 		font-weight: 700;
@@ -972,8 +949,8 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		transition: all 0.15s ease;
 	}
 	.back-btn:hover {
-		background-color: var(--color-outline-variant);
-		color: var(--color-primary);
+		background-color: var(--ra-line);
+		color: var(--ra-ink);
 	}
 	.back-btn:active {
 		transform: scale(0.97);
@@ -988,22 +965,22 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		fill: none;
 	}
 	.verse-drawer-title {
-		font-family: var(--font-display);
+		font-family: var(--ra-display);
 		font-size: 22px;
 		font-weight: 800;
-		color: var(--color-primary);
+		color: var(--ra-ink);
 		margin: 0;
 		letter-spacing: -0.01em;
 	}
 	.verse-text-reminder {
-		font-family: var(--font-display);
+		font-family: var(--ra-display);
 		font-size: 13px;
 		line-height: 1.4;
-		color: var(--color-on-surface-variant);
+		color: var(--ra-ink-3);
 		font-style: italic;
 		padding: 10px 14px;
-		background-color: var(--color-surface-container-lowest);
-		border-left: 3px solid var(--color-outline-variant);
+		background-color: var(--ra-surface);
+		border-left: 3px solid var(--ra-line);
 		border-radius: 0 8px 8px 0;
 		margin-bottom: 4px;
 	}
@@ -1014,7 +991,7 @@ const serializedSchema = typeof resolvedSchema === 'string'
 		top: 0;
 		left: 0;
 		height: 3px;
-		background-color: var(--color-secondary);
+		background-color: var(--ra-accent);
 		z-index: 100;
 		width: 0;
 		opacity: 0;

@@ -1,7 +1,8 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import discoverCatalog from '../data/discoverCatalog.json' with { type: 'json' };
-import { resolveSectionTheme } from './sectionTheme.js';
+import { EVIDENCE_TAXONOMY } from '../data/evidenceTaxonomy.js';
+import { resolveSectionTheme, TRADITION_BY_GROUP } from './sectionTheme.js';
 
 describe('resolveSectionTheme', () => {
   it('resolves explicit theme prop overrides', () => {
@@ -16,8 +17,6 @@ describe('resolveSectionTheme', () => {
   it('resolves Christian section routes from pathname', () => {
     assert.equal(resolveSectionTheme('/bible/jn/1'), 'christian');
     assert.equal(resolveSectionTheme('/bible/jn/1/1/manuscripts'), 'christian');
-    assert.equal(resolveSectionTheme('/apologists'), 'christian');
-    assert.equal(resolveSectionTheme('/apologists/wes-huff'), 'christian');
     assert.equal(resolveSectionTheme('/evidence/trinity'), 'christian');
     assert.equal(resolveSectionTheme('/evidence/prophecies'), 'christian');
     assert.equal(resolveSectionTheme('/discover/trustworthiness-of-the-bible'), 'christian');
@@ -40,6 +39,8 @@ describe('resolveSectionTheme', () => {
     assert.equal(resolveSectionTheme('/discover'), 'neutral');
     assert.equal(resolveSectionTheme('/discover/statistics'), 'neutral');
     assert.equal(resolveSectionTheme('/evidence'), 'neutral');
+    assert.equal(resolveSectionTheme('/apologists'), 'neutral');
+    assert.equal(resolveSectionTheme('/apologists/wes-huff'), 'neutral');
     assert.equal(resolveSectionTheme('/404'), 'neutral');
     assert.equal(resolveSectionTheme('/bible-studies'), 'neutral');
     assert.equal(resolveSectionTheme('/quranic-art'), 'neutral');
@@ -52,12 +53,23 @@ describe('resolveSectionTheme', () => {
 
   it('covers every Discover catalog entry without falling back to neutral', () => {
     for (const item of discoverCatalog) {
-      const expected = item.category === 'Christianity' ? 'christian' : 'islamic';
+      const expected = TRADITION_BY_GROUP[item.category];
+      assert.ok(expected, `unknown Discover category "${item.category}" for ${item.slug}; add it to TRADITION_BY_GROUP`);
       assert.equal(
         resolveSectionTheme(`/discover/${item.slug}`),
         expected,
         `expected /discover/${item.slug} to resolve to ${expected}`
       );
+    }
+  });
+
+  it('covers every evidence directory in EVIDENCE_TAXONOMY without falling back to neutral', () => {
+    for (const group of EVIDENCE_TAXONOMY) {
+      const expected = TRADITION_BY_GROUP[group.mainHeading];
+      assert.ok(expected, `unknown evidence group "${group.mainHeading}"; add it to TRADITION_BY_GROUP`);
+      for (const id of group.subHeadings.flatMap((sub) => sub.evidence)) {
+        assert.equal(resolveSectionTheme(`/evidence/${id}`), expected, `expected /evidence/${id} to resolve to ${expected}`);
+      }
     }
   });
 });

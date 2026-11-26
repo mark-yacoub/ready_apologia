@@ -441,7 +441,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           align-items: center;
           gap: 12px;
           padding: 8px 0;
-          border-bottom: 1px solid var(--color-outline-variant);
+          border-bottom: 1px solid var(--ra-line);
         }
 
         .category-pills-scroll {
@@ -457,10 +457,10 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           gap: 6px;
           padding: 6px 14px;
           border-radius: 9999px;
-          border: 1px solid var(--color-outline-variant);
-          background-color: var(--color-surface);
-          color: var(--color-on-surface-variant);
-          font-family: var(--font-body);
+          border: 1px solid var(--ra-line);
+          background-color: var(--ra-surface);
+          color: var(--ra-ink-3);
+          font-family: var(--ra-sans);
           font-size: 13px;
           font-weight: 600;
           cursor: pointer;
@@ -469,14 +469,14 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .category-pill:hover {
-          border-color: var(--color-secondary);
-          color: var(--color-secondary);
+          border-color: var(--ra-accent);
+          color: var(--ra-accent);
         }
 
         .category-pill.active {
-          background-color: var(--color-secondary);
+          background-color: var(--ra-accent);
           color: #ffffff;
-          border-color: var(--color-secondary);
+          border-color: var(--ra-accent);
           box-shadow: 0 1px 3px rgba(51, 89, 58, 0.22);
         }
 
@@ -499,10 +499,10 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
 
         .language-mode-selector {
           display: inline-flex;
-          background-color: var(--color-surface-container-low);
+          background-color: var(--ra-well);
           padding: 3px;
           border-radius: 8px;
-          border: 1px solid var(--color-outline-variant);
+          border: 1px solid var(--ra-line);
         }
 
         .lang-btn {
@@ -510,21 +510,21 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           background: transparent;
           padding: 5px 12px;
           border-radius: 6px;
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 12px;
           font-weight: 700;
-          color: var(--color-on-surface-variant);
+          color: var(--ra-ink-3);
           cursor: pointer;
           transition: all 0.15s ease;
         }
 
         .lang-btn:hover {
-          color: var(--color-primary);
+          color: var(--ra-ink);
         }
 
         .lang-btn.active {
-          background-color: var(--color-surface);
-          color: var(--color-secondary);
+          background-color: var(--ra-surface);
+          color: var(--ra-accent);
           box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
         }
 
@@ -536,8 +536,8 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .lost-verse-card {
-          background-color: var(--color-surface);
-          border: 1px solid var(--color-outline-variant);
+          background-color: var(--ra-surface);
+          border: 1px solid var(--ra-line);
           border-radius: 14px;
           padding: 24px;
           display: flex;
@@ -569,10 +569,10 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 12px;
           font-weight: 800;
-          background-color: var(--color-primary);
+          background-color: var(--ra-ink);
           color: #ffffff;
           padding: 3px 8px;
           border-radius: 6px;
@@ -581,20 +581,20 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
 
         .lost-verse-card:nth-child(1) .rank-badge,
         .lost-verse-card:nth-child(2) .rank-badge {
-          background-color: var(--color-secondary);
+          background-color: var(--ra-accent);
         }
 
         .category-tag {
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 11px;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.6px;
-          color: var(--color-on-surface-variant);
-          background-color: var(--color-surface-container-low);
+          color: var(--ra-ink-3);
+          background-color: var(--ra-well);
           padding: 4px 9px;
           border-radius: 6px;
-          border: 1px solid var(--color-outline-variant);
+          border: 1px solid var(--ra-line);
         }
 
         .companion-codex-link {
@@ -602,10 +602,10 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           align-items: center;
           gap: 4px;
           text-decoration: none;
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 12px;
           font-weight: 700;
-          color: var(--color-secondary);
+          color: var(--ra-accent);
           background-color: var(--ra-islamic-bg, #edf3ee);
           padding: 4px 10px;
           border-radius: 6px;
@@ -614,7 +614,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .companion-codex-link:hover {
-          background-color: var(--color-secondary);
+          background-color: var(--ra-accent);
           color: #ffffff;
         }
 
@@ -629,10 +629,10 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .card-title {
-          font-family: var(--font-display);
+          font-family: var(--ra-display);
           font-size: 20px;
           font-weight: 800;
-          color: var(--color-primary);
+          color: var(--ra-ink);
           margin: 0;
           line-height: 1.35;
         }
@@ -648,8 +648,8 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           display: flex;
           flex-direction: column;
           gap: 12px;
-          background-color: var(--color-surface-container-low);
-          border: 1px solid var(--color-outline-variant);
+          background-color: var(--ra-well);
+          border: 1px solid var(--ra-line);
           border-radius: 10px;
           padding: 16px;
         }
@@ -664,7 +664,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           }
           .comparison-divider {
             width: 1px;
-            background-color: var(--color-outline-variant);
+            background-color: var(--ra-line);
           }
         }
 
@@ -683,24 +683,24 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .comparison-label {
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 11px;
           font-weight: 800;
           text-transform: uppercase;
           letter-spacing: 0.5px;
-          color: var(--color-on-surface-variant);
+          color: var(--ra-ink-3);
         }
 
         .verse-reader-link {
           display: inline-flex;
           align-items: center;
           gap: 4px;
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 11px;
           font-weight: 700;
-          color: var(--color-primary);
-          background-color: var(--color-surface-container);
-          border: 1px solid var(--color-outline-variant);
+          color: var(--ra-ink);
+          background-color: var(--ra-well);
+          border: 1px solid var(--ra-line);
           padding: 2px 7px;
           border-radius: 4px;
           text-decoration: none;
@@ -708,9 +708,9 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .verse-reader-link:hover {
-          background-color: var(--color-primary);
-          color: var(--color-on-primary);
-          border-color: var(--color-primary);
+          background-color: var(--ra-ink);
+          color: var(--ra-on-accent);
+          border-color: var(--ra-ink);
         }
 
         .verse-reader-link .link-icon {
@@ -723,34 +723,34 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .comparison-label.lost-label {
-          color: var(--color-secondary);
+          color: var(--ra-accent);
         }
 
         .verse-text-arabic {
           font-family: 'Amiri', 'Traditional Arabic', serif;
           font-size: 18px;
           line-height: 1.8;
-          color: var(--color-on-surface);
+          color: var(--ra-ink);
           margin: 0;
         }
 
         .verse-text-english {
-          font-family: var(--font-display);
+          font-family: var(--ra-display);
           font-size: 14px;
           line-height: 1.5;
-          color: var(--color-on-surface-variant);
+          color: var(--ra-ink-3);
           margin: 0;
         }
 
         .lost-highlight {
-          color: var(--color-secondary) !important;
+          color: var(--ra-accent) !important;
           font-weight: 600;
         }
 
         /* Lost Verse Quote Callout Box */
         .lost-verse-quote-box {
           background-color: var(--ra-islamic-bg, #edf3ee);
-          border-left: 4px solid var(--color-secondary);
+          border-left: 4px solid var(--ra-accent);
           border-radius: 0 10px 10px 0;
           padding: 16px 20px;
           display: flex;
@@ -765,52 +765,52 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .quote-label {
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 11px;
           font-weight: 800;
           text-transform: uppercase;
           letter-spacing: 0.6px;
-          color: var(--color-secondary);
+          color: var(--ra-accent);
         }
 
         .lost-verse-arabic {
           font-family: 'Amiri', 'Traditional Arabic', serif;
           font-size: 21px;
           line-height: 1.8;
-          color: var(--color-primary);
+          color: var(--ra-ink);
           margin: 0;
           font-weight: 700;
         }
 
         .lost-verse-english {
-          font-family: var(--font-display);
+          font-family: var(--ra-display);
           font-size: 15px;
           font-style: italic;
           line-height: 1.55;
-          color: var(--color-on-surface);
+          color: var(--ra-ink);
           margin: 0;
         }
 
         /* Objective Textual Summary */
         .textual-summary-box {
-          background-color: var(--color-surface-container-low);
+          background-color: var(--ra-well);
           border-radius: 8px;
           padding: 12px 16px;
-          border: 1px solid var(--color-outline-variant);
+          border: 1px solid var(--ra-line);
         }
 
         .summary-text {
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 13px;
           line-height: 1.6;
-          color: var(--color-on-surface);
+          color: var(--ra-ink);
           margin: 0;
         }
 
         /* Abrogation Benchmark Box */
         .abrogation-benchmark-box {
-          background-color: color-mix(in srgb, var(--color-tertiary-container, #ffdcc2) 18%, var(--color-surface-container-low));
-          border-left: 4px solid var(--color-tertiary, #b35924);
+          background-color: color-mix(in srgb, var(--ra-sand, #ffdcc2) 18%, var(--ra-well));
+          border-left: 4px solid var(--ra-sand-ink, #b35924);
           border-radius: 0 10px 10px 0;
           padding: 16px;
           display: flex;
@@ -826,30 +826,30 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .benchmark-tag {
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 10px;
           font-weight: 800;
           text-transform: uppercase;
           letter-spacing: 0.6px;
-          background-color: var(--color-tertiary, #b35924);
-          color: var(--color-on-tertiary, #ffffff);
+          background-color: var(--ra-sand-ink, #b35924);
+          color: var(--ra-on-accent, #ffffff);
           padding: 3px 8px;
           border-radius: 4px;
         }
 
         .benchmark-title {
-          font-family: var(--font-display);
+          font-family: var(--ra-display);
           font-size: 14px;
           font-weight: 700;
-          color: var(--color-primary);
+          color: var(--ra-ink);
           margin: 0;
         }
 
         .benchmark-text-english {
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 13.5px;
           line-height: 1.6;
-          color: var(--color-on-surface);
+          color: var(--ra-ink);
           margin: 0;
         }
 
@@ -857,9 +857,9 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           font-family: 'Amiri', 'Traditional Arabic', serif;
           font-size: 16px;
           line-height: 1.8;
-          color: var(--color-on-surface-variant);
+          color: var(--ra-ink-3);
           margin: 0;
-          border-top: 1px dashed var(--color-outline-variant);
+          border-top: 1px dashed var(--ra-line);
           padding-top: 8px;
         }
 
@@ -878,12 +878,12 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .hadiths-section-title {
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 11px;
           font-weight: 800;
           text-transform: uppercase;
           letter-spacing: 0.6px;
-          color: var(--color-on-surface-variant);
+          color: var(--ra-ink-3);
         }
 
         .hadiths-list {
@@ -893,8 +893,8 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .hadith-entry-box {
-          background-color: var(--color-surface-container-lowest);
-          border: 1px solid var(--color-outline-variant);
+          background-color: var(--ra-surface);
+          border: 1px solid var(--ra-line);
           border-radius: 10px;
           padding: 16px;
           display: flex;
@@ -909,7 +909,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           flex-wrap: wrap;
           gap: 8px;
           padding-bottom: 8px;
-          border-bottom: 1px dashed var(--color-outline-variant);
+          border-bottom: 1px dashed var(--ra-line);
         }
 
         .source-info {
@@ -920,38 +920,38 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .source-title {
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 13px;
           font-weight: 700;
-          color: var(--color-secondary);
+          color: var(--ra-accent);
         }
 
         .in-book-ref {
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 11px;
-          color: var(--color-on-surface-variant);
+          color: var(--ra-ink-3);
         }
 
         .sunnah-verify-btn {
           display: inline-flex;
           align-items: center;
           gap: 4px;
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 11px;
           font-weight: 700;
-          color: var(--color-on-surface-variant);
+          color: var(--ra-ink-3);
           text-decoration: none;
           padding: 3px 8px;
           border-radius: 4px;
-          background-color: var(--color-surface-container-low);
-          border: 1px solid var(--color-outline-variant);
+          background-color: var(--ra-well);
+          border: 1px solid var(--ra-line);
           transition: all 0.15s ease;
         }
 
         .sunnah-verify-btn:hover {
-          color: var(--color-secondary);
-          border-color: var(--color-secondary);
-          background-color: var(--color-surface);
+          color: var(--ra-accent);
+          border-color: var(--ra-accent);
+          background-color: var(--ra-surface);
         }
 
         .hadith-body {
@@ -965,20 +965,20 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           font-size: 17px;
           line-height: 1.85;
           text-align: right;
-          color: var(--color-on-surface);
+          color: var(--ra-ink);
           margin: 0;
         }
 
         .hadith-english-text {
-          font-family: var(--font-display);
+          font-family: var(--ra-display);
           font-size: 14px;
           line-height: 1.6;
-          color: var(--color-on-surface-variant);
+          color: var(--ra-ink-3);
           margin: 0;
         }
 
         .hadith-highlight-phrase {
-          color: var(--color-secondary);
+          color: var(--ra-accent);
           background-color: var(--ra-islamic-bg, #edf3ee);
           padding: 1px 4px;
           border-radius: 4px;
@@ -990,7 +990,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         .lang-mode-arabic .verse-text-arabic,
         .lang-mode-arabic .lost-verse-arabic {
           font-size: 22px;
-          color: var(--color-primary);
+          color: var(--ra-ink);
         }
 
         .lang-mode-arabic .hadith-english-text,
@@ -1004,7 +1004,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         .lang-mode-english .verse-text-english,
         .lang-mode-english .lost-verse-english {
           font-size: 15px;
-          color: var(--color-primary);
+          color: var(--ra-ink);
         }
 
         .lang-mode-english .hadith-arabic-text,
@@ -1031,8 +1031,8 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
 
         /* Expandable Apologetics Shorts Details & Carousel */
         .card-videos-details {
-          background-color: var(--color-surface-container-low);
-          border: 1px solid var(--color-outline-variant);
+          background-color: var(--ra-well);
+          border: 1px solid var(--ra-line);
           border-radius: 10px;
           overflow: hidden;
           margin-top: 6px;
@@ -1040,10 +1040,10 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
 
         .videos-details-summary {
           padding: 10px 14px;
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 12px;
           font-weight: 700;
-          color: var(--color-on-surface);
+          color: var(--ra-ink);
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -1058,7 +1058,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .videos-details-summary:hover {
-          background-color: var(--color-outline-variant);
+          background-color: var(--ra-line);
         }
 
         .summary-left {
@@ -1068,7 +1068,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .video-icon {
-          color: var(--color-secondary);
+          color: var(--ra-accent);
         }
 
         .summary-title {
@@ -1078,7 +1078,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .summary-chevron {
-          color: var(--color-on-surface-variant);
+          color: var(--ra-ink-3);
           transition: transform 0.2s ease;
         }
 
@@ -1088,8 +1088,8 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
 
         .videos-details-content {
           padding: 14px 10px 10px 10px;
-          border-top: 1px solid var(--color-outline-variant);
-          background-color: var(--color-surface);
+          border-top: 1px solid var(--ra-line);
+          background-color: var(--ra-surface);
         }
 
         /* Videos Carousel Track */
@@ -1107,22 +1107,22 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          background-color: var(--color-surface);
-          border: 1px solid var(--color-outline-variant);
+          background-color: var(--ra-surface);
+          border: 1px solid var(--ra-line);
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           z-index: 10;
-          color: var(--color-on-surface);
+          color: var(--ra-ink);
           transition: all 0.2s ease;
           opacity: 0;
           pointer-events: none;
         }
 
         .carousel-btn:hover {
-          background-color: var(--color-surface-container-high);
+          background-color: var(--ra-well);
           transform: translateY(-50%) scale(1.05);
         }
 
@@ -1153,7 +1153,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           padding-bottom: 8px;
           -webkit-overflow-scrolling: touch;
           scrollbar-width: thin;
-          scrollbar-color: var(--color-outline-variant) transparent;
+          scrollbar-color: var(--ra-line) transparent;
         }
 
         .videos-carousel-container::-webkit-scrollbar {
@@ -1165,7 +1165,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .videos-carousel-container::-webkit-scrollbar-thumb {
-          background-color: var(--color-outline-variant);
+          background-color: var(--ra-line);
           border-radius: 20px;
         }
 
@@ -1180,8 +1180,8 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
           scroll-snap-align: start;
           width: 220px;
           flex-shrink: 0;
-          background-color: var(--color-surface);
-          border: 1px solid var(--color-outline-variant);
+          background-color: var(--ra-surface);
+          border: 1px solid var(--ra-line);
           border-radius: 10px;
           overflow: hidden;
           display: flex;
@@ -1223,9 +1223,9 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         .apologist-badge {
           display: inline-flex;
           align-items: center;
-          background-color: var(--color-surface-container-low);
-          color: var(--color-on-surface);
-          border: 1px solid var(--color-outline-variant);
+          background-color: var(--ra-well);
+          color: var(--ra-ink);
+          border: 1px solid var(--ra-line);
           border-radius: 999px;
           padding: 3px 8px;
           font-size: 10px;
@@ -1235,10 +1235,10 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         }
 
         .video-summary p {
-          font-family: var(--font-body);
+          font-family: var(--ra-sans);
           font-size: 12px;
           line-height: 1.45;
-          color: var(--color-on-surface);
+          color: var(--ra-ink);
           margin: 0;
           display: -webkit-box;
           -webkit-line-clamp: 3;
@@ -1249,7 +1249,7 @@ export default function LostVersesHub({ initialItems, categories, base = '' }) {
         .video-footer {
           display: flex;
           justify-content: flex-end;
-          border-top: 1px dashed var(--color-outline-variant);
+          border-top: 1px dashed var(--ra-line);
           padding-top: 6px;
           margin-top: 2px;
         }

@@ -78,7 +78,7 @@ const { variant } = Astro.props;
 <style>
   .qiraat-card {
     background-color: var(--ra-surface, #ffffff);
-    border: 1px solid #e3d3b6;
+    border: 1px solid var(--ra-sand-line);
     border-radius: 10px;
     padding: 18px;
     display: flex;
@@ -104,7 +104,7 @@ const { variant } = Astro.props;
     font-family: var(--ra-sans, 'Public Sans', sans-serif);
     font-size: 12.5px;
     font-weight: 800;
-    color: #7a551d;
+    color: var(--ra-sand-ink);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -137,11 +137,11 @@ const { variant } = Astro.props;
   .qiraat-diff {
     display: flex;
     align-items: stretch;
-    background-color: var(--color-surface-container-low);
+    background-color: var(--ra-well);
     border-radius: 8px;
     padding: 16px;
     gap: 16px;
-    border: 1px solid var(--color-outline-variant);
+    border: 1px solid var(--ra-line);
   }
 
   .diff-side {
@@ -152,7 +152,7 @@ const { variant } = Astro.props;
   }
 
   .hafs-side {
-    border-right: 1px dashed var(--color-outline-variant);
+    border-right: 1px dashed var(--ra-line);
     padding-right: 16px;
   }
 
@@ -161,17 +161,17 @@ const { variant } = Astro.props;
   }
 
   .diff-label {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11px;
     font-weight: 800;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   .diff-arabic {
     font-size: 24px !important; /* Force larger size for isolation */
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
   }
 
   .diff-english {
@@ -183,7 +183,7 @@ const { variant } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     opacity: 0.5;
   }
 
@@ -207,18 +207,18 @@ const { variant } = Astro.props;
   }
 
   .readers-label {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11px;
     font-weight: 800;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     text-transform: uppercase;
   }
 
   .readers-list {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 13px;
     line-height: 1.5;
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
     margin: 0;
   }
 
@@ -232,7 +232,7 @@ const { variant } = Astro.props;
 
     .hafs-side {
       border-right: none;
-      border-bottom: 1px dashed var(--color-outline-variant);
+      border-bottom: 1px dashed var(--ra-line);
       padding-right: 0;
       padding-bottom: 16px;
       width: 100%;

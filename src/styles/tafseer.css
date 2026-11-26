@@ -212,8 +212,8 @@
   margin-bottom: 16px;
   border-radius: 10px;
   background: var(--ra-sand, #f6efe3);
-  border: 1px solid #e3d3b6;
-  color: #6b4917;
+  border: 1px solid var(--ra-sand-line);
+  color: var(--ra-sand-ink);
   font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-size: 13px;
   font-weight: 600;
@@ -227,7 +227,7 @@
   border-radius: 7px;
   border: 1px solid var(--ra-sand-rule, #b8893a);
   background: var(--ra-surface, #ffffff);
-  color: #6b4917;
+  color: var(--ra-sand-ink);
   font-family: var(--ra-sans, 'Public Sans', sans-serif);
   font-size: 12px;
   font-weight: 700;

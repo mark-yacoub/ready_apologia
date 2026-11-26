@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { getEvidenceColor } from '../utils/evidenceColors.js';
 import { EVIDENCE_TAXONOMY } from '../data/evidenceTaxonomy.js';
 import '../styles/EvidenceExplorer.css';
+import '../styles/religion-switcher.css';
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 
@@ -180,7 +181,7 @@ export default function EvidenceExplorer({ evidence = [], initialEvidenceId = nu
                 <button
                   type="button"
                   key={section.mainHeading}
-                  className={`category-hero-card ${isActive ? 'is-active' : ''} ${isChristianity ? 'christian-theme' : 'islam-theme'}`}
+                  className={`category-hero-card ra-accent-bar ra-accent-bar--top ${isActive ? 'is-active' : ''} ${isChristianity ? 'christian-theme' : 'islam-theme'}`}
                   onClick={(e) => {
                     setActiveMainHeading(section.mainHeading);
                     if (typeof window !== 'undefined') {

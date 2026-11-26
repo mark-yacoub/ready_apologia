@@ -9,7 +9,7 @@
  * adjacent punctuation ("the people ." -> "the people.").
  */
 :root {
-  --qs-hl-bg: rgba(245, 158, 11, 0.22);
+  --qs-hl-bg: var(--ra-mark, #f3dfae); /* archival passage highlight */
   --qs-hl-pad-x: 0.12em;
 }
 

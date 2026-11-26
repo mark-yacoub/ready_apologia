@@ -62,7 +62,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   The burger menu button and the Bottom Navigation bar are **automatically hidden** on desktop viewports.
 
 ### CSS Color Tokens (Archive Reading Room — Canonical `--ra-*` + Option B Section Themes):
-Defined once in `src/layouts/Layout.astro`, scoped per route via `src/utils/sectionTheme.js` (`.sec-christian`, `.sec-islamic`, `.sec-neutral`), with shared `:where()` primitives in `src/styles/ui.css` and enforced by `npm run audit:palette` (`scripts/test_palette.mjs`). Legacy `--color-*` and `.hrv`/`.hx`/`.qs`/`.rap`/`.apg`/`.tce` tokens alias onto `--ra-*`.
+Defined once in `src/layouts/Layout.astro`, scoped per route via `src/utils/sectionTheme.js` (`.sec-christian`, `.sec-islamic`, `.sec-neutral`), tradition routes derived from `discoverCatalog.json` + `evidenceTaxonomy.js` (shared pages incl. `/apologists` stay neutral). Shared CSS helpers: `src/styles/ui.css` (`ra-accent-bar` edge stripe, themed via `--ra-bar-color`) and `src/styles/religion-switcher.css` (Evidence + Discover hub switcher). Feature dialects (`.hrv`/`.hx`/`.qs`/`.rap`/`.apg`/`.tce`) alias onto `--ra-*`; the old `--color-*`/`--font-*` names are retired and rejected by `npm run audit:palette` (`scripts/test_palette.mjs`).
 ```css
 :root {
   --ra-paper: #fbf9f5;       /* Warm archival reading surface */
@@ -79,6 +79,9 @@ Defined once in `src/layouts/Layout.astro`, scoped per route via `src/utils/sect
   --ra-islamic: #33593a;     /* Deep manuscript cypress (Quran, Hadith, Islamic Discover/Evidence) */
   --ra-verify: #0e5e6f;      /* Verifiable primary-source links & check chips */
   --ra-sand: #f6efe3;        /* Original Arabic & scholarly highlights */
+  --ra-sand-ink: #7a551d;    /* Text on sand */
+  --ra-navy: #2c4a6b;        /* Scholarly slate-navy (apologetics accordions, theology pills) */
+  --ra-on-accent: #ffffff;   /* Text on solid accent/ink fills */
 
   /* 3-Font Stack (retired Cinzel, Newsreader, Playfair Display, Inter) */
   --ra-display: 'Literata', Georgia, serif;

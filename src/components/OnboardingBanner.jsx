@@ -49,7 +49,7 @@ export default function OnboardingBanner() {
   if (!activeTip) return null;
 
   return (
-    <aside className="onboarding-smart-banner animate-fade-in-up" key={activeTip.id} aria-label="Quick guide">
+    <aside className="onboarding-smart-banner ra-accent-bar animate-fade-in-up" key={activeTip.id} aria-label="Quick guide">
       <div className="banner-icon-badge" aria-hidden="true">
         <TipIcon kind={activeTip.icon} />
       </div>
@@ -65,8 +65,8 @@ export default function OnboardingBanner() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .onboarding-smart-banner {
-          position: relative;
-          overflow: hidden;
+          --ra-bar-color: var(--ra-verify, #0e5e6f);
+          --ra-bar-size: 3.5px;
           display: flex;
           align-items: flex-start;
           gap: 12px;
@@ -77,15 +77,6 @@ export default function OnboardingBanner() {
           margin-bottom: 18px;
           border: 1px solid var(--ra-verify-rule, #bdd8dc);
           box-shadow: 0 4px 16px -4px rgba(14, 94, 111, 0.12), 0 1px 2px rgba(27, 25, 23, 0.04);
-        }
-        .onboarding-smart-banner::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 0;
-          bottom: 0;
-          width: 3.5px;
-          background-color: var(--ra-verify, #0e5e6f);
         }
         .banner-icon-badge {
           width: 32px;

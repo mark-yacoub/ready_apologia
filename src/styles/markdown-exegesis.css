@@ -90,7 +90,7 @@
 .response-paragraph {
   font-size: 14px;
   line-height: 1.65;
-  color: var(--color-on-surface);
+  color: var(--ra-ink);
   margin: 0 0 10px 0;
   text-align: left;
   overflow-wrap: break-word;
@@ -102,7 +102,7 @@
 .response-list {
   font-size: 14px;
   line-height: 1.6;
-  color: var(--color-on-surface);
+  color: var(--ra-ink);
   margin: 0 0 12px 0;
   padding-left: 18px;
 }
@@ -122,9 +122,9 @@
 .exegesis-scripture-pill {
   display: inline-block;
   background-color: var(--exegesis-pill-bg);
-  border: 1px solid var(--color-outline-variant);
+  border: 1px solid var(--ra-line);
   color: var(--exegesis-pill-color);
-  font-family: var(--font-body);
+  font-family: var(--ra-sans);
   font-size: 11px;
   font-weight: 800;
   padding: 2px 6px;
@@ -171,9 +171,9 @@ code.exegesis-inline-code {
   font-weight: 600;
   padding: 2px 6px;
   border-radius: 4px;
-  background-color: var(--color-surface-container-low, rgba(0, 0, 0, 0.05));
-  border: 1px solid var(--color-outline-variant, rgba(0, 0, 0, 0.12));
-  color: var(--color-on-surface);
+  background-color: var(--ra-well, rgba(0, 0, 0, 0.05));
+  border: 1px solid var(--ra-line, rgba(0, 0, 0, 0.12));
+  color: var(--ra-ink);
 }
 
 /* Responsive Markdown Tables */
@@ -182,14 +182,14 @@ code.exegesis-inline-code {
   overflow-x: auto;
   margin: 14px 0;
   border-radius: 8px;
-  border: 1px solid var(--color-outline-variant);
-  background-color: var(--color-surface);
+  border: 1px solid var(--ra-line);
+  background-color: var(--ra-surface);
 }
 
 .exegesis-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: var(--font-body);
+  font-family: var(--ra-sans);
   font-size: 13.5px;
   line-height: 1.55;
   text-align: left;
@@ -198,17 +198,17 @@ code.exegesis-inline-code {
 .exegesis-table th,
 .exegesis-table td {
   padding: 10px 14px;
-  border-bottom: 1px solid var(--color-outline-variant);
+  border-bottom: 1px solid var(--ra-line);
   vertical-align: top;
 }
 
 .exegesis-table thead th {
-  background-color: var(--color-surface-container-low);
+  background-color: var(--ra-well);
   font-weight: 700;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--color-on-surface-variant);
+  color: var(--ra-ink-3);
 }
 
 .exegesis-table tbody tr:last-child td {
@@ -216,5 +216,5 @@ code.exegesis-inline-code {
 }
 
 .exegesis-table tbody tr:nth-child(even) {
-  background-color: var(--color-surface-container-lowest, rgba(0, 0, 0, 0.015));
+  background-color: var(--ra-surface, rgba(0, 0, 0, 0.015));
 }

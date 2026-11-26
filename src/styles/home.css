@@ -94,8 +94,6 @@
 }
 
 .ra-home .ra-start-btn {
-  position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -115,27 +113,16 @@
   box-shadow: 0 4px 12px -4px rgba(27, 25, 23, 0.1);
   transform: translateY(-1px);
 }
+/* Tradition tiles carry a ra-accent-bar (src/styles/ui.css) in EntryGrid.astro. */
 .ra-home .ra-start-btn--primary,
 .ra-home .ra-start-btn--quran,
 .ra-home .ra-start-btn--apologists {
   background-color: var(--ra-surface, #ffffff);
   padding-left: 15px;
 }
-.ra-home .ra-start-btn--primary::before,
-.ra-home .ra-start-btn--quran::before,
-.ra-home .ra-start-btn--apologists::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-}
 .ra-home .ra-start-btn--primary {
+  --ra-bar-color: var(--ra-christian, #7a3530);
   border-color: var(--ra-christian-rule, #dfc5c2);
-}
-.ra-home .ra-start-btn--primary::before {
-  background-color: var(--ra-christian, #7a3530);
 }
 .ra-home .ra-start-btn--primary:hover {
   background-color: var(--ra-christian-bg, #f6eeec);
@@ -145,10 +132,8 @@
   color: var(--ra-christian, #7a3530);
 }
 .ra-home .ra-start-btn--quran {
+  --ra-bar-color: var(--ra-islamic, #33593a);
   border-color: var(--ra-islamic-rule, #c2d6c6);
-}
-.ra-home .ra-start-btn--quran::before {
-  background-color: var(--ra-islamic, #33593a);
 }
 .ra-home .ra-start-btn--quran:hover {
   background-color: var(--ra-islamic-bg, #edf3ee);
@@ -157,8 +142,8 @@
 .ra-home .ra-start-btn--quran .ra-start-title {
   color: var(--ra-islamic, #33593a);
 }
-.ra-home .ra-start-btn--apologists::before {
-  background-color: var(--ra-verify, #0e5e6f);
+.ra-home .ra-start-btn--apologists {
+  --ra-bar-color: var(--ra-verify, #0e5e6f);
 }
 .ra-home .ra-start-btn--apologists .ra-start-title {
   color: var(--ra-verify, #0e5e6f);
@@ -166,10 +151,10 @@
 .ra-home .ra-start-btn--stats {
   grid-column: 1 / -1;
   background: var(--ra-sand, #f6efe3);
-  border-color: #e3d3b6;
+  border-color: var(--ra-sand-line);
 }
 .ra-home .ra-start-btn--stats:hover {
-  background: #f2e8d7;
+  background: var(--ra-sand-hover);
   border-color: var(--ra-sand-rule, #b8893a);
 }
 .ra-home .ra-start-btn--stats .ra-start-title {
@@ -319,8 +304,8 @@
 }
 .ra-home .ra-tag--hadith {
   background-color: var(--ra-sand, #f6efe3);
-  border-color: #e3d3b6;
-  color: #7a551d;
+  border-color: var(--ra-sand-line);
+  color: var(--ra-sand-ink);
 }
 .ra-home .ra-count {
   font-size: 11.5px;

@@ -112,10 +112,12 @@ Criteria, in order:
      - **Islam (`.sec-islamic`):** deep manuscript cypress `--ra-islamic: #33593a` (bg `#edf3ee`, rule `#c2d6c6`).
      - **Verifiable links & check chips (both sections):** `--ra-verify: #0e5e6f` (bg `#e8f2f3`, rule `#bdd8dc`), never clashing with section accents.
      - **Original Arabic / textual highlight:** warm sand (`--ra-sand: #f6efe3`, `--ra-sand-rule: #b8893a`, `--ra-mark: #f3dfae`). No alarm red, no saturated Tailwind/iOS neons.
-   - **Shared primitives & scoped CSS:** `src/styles/ui.css` (`:where()`-scoped) + feature-scoped CSS (`.hrv`, `.hx`, `.ra-home`, etc.), no Tailwind.
+   - **Section mapping:** `sectionTheme.js` derives tradition routes from `discoverCatalog.json` (`category`) and `evidenceTaxonomy.js` (`mainHeading`); shared pages (Home, hubs, Statistics, Apologists) stay neutral.
+   - **Shared helpers & scoped CSS:** `src/styles/ui.css` holds the `:where()`-scoped `ra-accent-bar` (straight edge stripe on rounded cards; set `--ra-bar-color`, add `ra-accent-bar--top` for a top stripe). `src/styles/religion-switcher.css` is the one Christianity/Islamics card switcher for the Evidence and Discover hubs. Everything else is feature-scoped CSS (`.hrv`, `.hx`, `.ra-home`, etc.), no Tailwind.
+   - **Tokens only:** use `--ra-*` custom properties; the old `--color-*` / `--font-*` names are retired.
    - **3-font stack:** `Literata` (display/scripture serif), `Public Sans` (UI sans), `Amiri` (Arabic + ʿ/ʾ marks inside Literata). No `Cinzel`, `Newsreader`, `Playfair Display`, or `Inter`.
    - **AA contrast:** informative text is never "faint grey" (use `--ra-ink-3: #6b6560` or darker; `>= 4.5:1` on paper/white).
-   - **Guardrail:** `npm run audit:palette` (`scripts/test_palette.mjs`) fails on forbidden Tailwind/iOS neon hexes, decorative emojis in UI chrome, retired fonts, or missing `--ra-*` tokens.
+   - **Guardrail:** `npm run audit:palette` (`scripts/test_palette.mjs`) fails on forbidden Tailwind/iOS neon colors (any hex length or `rgb()`), retired `--color-*`/`--font-*` tokens, decorative emojis in UI chrome, retired fonts, or missing `--ra-*` tokens.
 7. **Progressive disclosure:** the depth is there but collapsed; the first screen is the claim, the evidence and how to check it.
 8. **Personal state is allowed:** pages may keep the reader's own preferences and progress in `localStorage` (e.g. audio position and playback speed). No tracking identifiers, and nothing that changes what a cold reader sees on first visit. (Owner, Nov 2026: the earlier "no localStorage" rule is lifted.)
 9. **No explanatory text about the app.** No visible lines that describe the app or the page (counts, "N verses with manuscripts…", "what you'll find here") between a header and its content. Scripture and evidence speak for themselves; SEO copy lives in `<title>` and the meta description only. (Owner, Nov 2026.)

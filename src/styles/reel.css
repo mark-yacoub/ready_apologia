@@ -15,7 +15,7 @@
   border: 1px solid #d4d4d8;
   border-radius: 999px;
   background: #fff;
-  color: var(--color-primary, #09090b);
+  color: var(--ra-ink, #09090b);
   font: inherit;
   font-size: 0.85rem;
   font-weight: 700;

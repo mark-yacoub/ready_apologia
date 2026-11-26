@@ -134,7 +134,7 @@ function renderDiffHTML(diffArray, highlightType) {
       return item.text;
     } else {
       const bgColor = highlightType === 'removed' ? 'rgba(230, 100, 100, 0.2)' : 'rgba(100, 230, 100, 0.2)';
-      const color = highlightType === 'removed' ? 'var(--color-secondary)' : 'var(--color-primary)';
+      const color = highlightType === 'removed' ? 'var(--ra-accent)' : 'var(--ra-ink)';
       return `<span style="background-color: ${bgColor}; color: ${color}; border-radius: 4px; padding: 0 4px; margin: 0 2px;">${item.text}</span>`;
     }
   }).join(' ');

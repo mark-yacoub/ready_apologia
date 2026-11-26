@@ -519,8 +519,8 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
 
 <style>
   .variant-card {
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-outline-variant);
+    background-color: var(--ra-surface);
+    border: 1px solid var(--ra-line);
     border-radius: 12px;
     padding: 22px;
     display: flex;
@@ -543,7 +543,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     flex-wrap: wrap;
     gap: 8px;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--color-outline-variant);
+    border-bottom: 1px solid var(--ra-line);
   }
 
   .vcard-badges-left {
@@ -554,10 +554,10 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .vcard-rank-badge {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11px;
     font-weight: 800;
-    background-color: var(--color-primary);
+    background-color: var(--ra-ink);
     color: #ffffff;
     padding: 3px 8px;
     border-radius: 6px;
@@ -565,7 +565,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .vcard-type-badge {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
@@ -589,14 +589,14 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
 
   .vtype-substitution {
     background-color: var(--ra-sand, #f6efe3);
-    color: #7a551d;
-    border-color: #e3d3b6;
+    color: var(--ra-sand-ink);
+    border-color: var(--ra-sand-line);
   }
 
   .vtype-shift {
-    background-color: #edf2f7;
-    color: #2c4a6b;
-    border-color: #cbd7e4;
+    background-color: var(--ra-navy-bg);
+    color: var(--ra-navy);
+    border-color: var(--ra-navy-line);
   }
 
   .vtype-special {
@@ -609,12 +609,12 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 12px;
     font-weight: 700;
-    color: var(--color-primary);
-    background-color: var(--color-surface-container-low);
-    border: 1px solid var(--color-outline-variant);
+    color: var(--ra-ink);
+    background-color: var(--ra-well);
+    border: 1px solid var(--ra-line);
     padding: 3px 9px;
     border-radius: 6px;
     text-decoration: none;
@@ -622,9 +622,9 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .vcard-verse-pill:hover {
-    background-color: var(--color-primary);
+    background-color: var(--ra-ink);
     color: #ffffff;
-    border-color: var(--color-primary);
+    border-color: var(--ra-ink);
   }
 
   .vcard-companions-row {
@@ -638,7 +638,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 12px;
     font-weight: 700;
     text-decoration: none;
@@ -660,17 +660,17 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .shared-chip {
-    color: var(--color-on-surface-variant);
-    background-color: var(--color-surface-container-low);
-    border: 1px solid var(--color-outline-variant);
+    color: var(--ra-ink-3);
+    background-color: var(--ra-well);
+    border: 1px solid var(--ra-line);
     padding: 2px 8px;
     font-size: 11px;
   }
 
   .shared-chip:hover {
-    color: var(--color-secondary);
-    border-color: var(--color-secondary);
-    background-color: var(--color-surface);
+    color: var(--ra-accent);
+    border-color: var(--ra-accent);
+    background-color: var(--ra-surface);
   }
 
   /* Hook Section */
@@ -681,19 +681,19 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .vcard-short-title {
-    font-family: var(--font-display);
+    font-family: var(--ra-display);
     font-size: 18px;
     font-weight: 800;
-    color: var(--color-primary);
+    color: var(--ra-ink);
     margin: 0;
     line-height: 1.35;
   }
 
   .vcard-plain-hook {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 14px;
     line-height: 1.55;
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
     margin: 0;
     font-weight: 500;
   }
@@ -707,10 +707,10 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .also-label {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11.5px;
     font-weight: 600;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
   }
 
   .also-chips {
@@ -723,10 +723,10 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   .vcard-diff-container {
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--color-outline-variant);
+    border: 1px solid var(--ra-line);
     border-radius: 10px;
     overflow: hidden;
-    background-color: var(--color-surface-container-low);
+    background-color: var(--ra-well);
   }
 
   .diff-columns-grid {
@@ -784,16 +784,16 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     justify-content: center;
     position: relative;
     width: 1px;
-    background-color: var(--color-outline-variant);
+    background-color: var(--ra-line);
   }
 
   .vs-circle {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 10px;
     font-weight: 800;
-    color: var(--color-on-surface-variant);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-outline-variant);
+    color: var(--ra-ink-3);
+    background-color: var(--ra-surface);
+    border: 1px solid var(--ra-line);
     border-radius: 9999px;
     width: 26px;
     height: 26px;
@@ -814,7 +814,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     line-height: 1.5;
     font-weight: 600;
     margin: 0;
-    color: var(--color-on-surface) !important;
+    color: var(--ra-ink) !important;
   }
 
   .diff-del-span {
@@ -839,16 +839,16 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
 
   /* Full Verse Context Accordion */
   .full-verse-details {
-    border-top: 1px solid var(--color-outline-variant);
-    background-color: var(--color-surface);
+    border-top: 1px solid var(--ra-line);
+    background-color: var(--ra-surface);
   }
 
   .full-verse-summary {
     padding: 10px 14px;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 12px;
     font-weight: 700;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     cursor: pointer;
     user-select: none;
     list-style: none;
@@ -863,8 +863,8 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .full-verse-summary:hover {
-    background-color: var(--color-surface-container-low);
-    color: var(--color-primary);
+    background-color: var(--ra-well);
+    color: var(--ra-ink);
   }
 
   .full-verse-details[open] .chevron-icon {
@@ -876,8 +876,8 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     grid-template-columns: 1fr 1fr;
     gap: 14px;
     padding: 12px 14px;
-    border-top: 1px dashed var(--color-outline-variant);
-    background-color: var(--color-surface-container-lowest, #fafafa);
+    border-top: 1px dashed var(--ra-line);
+    background-color: var(--ra-surface, #fafafa);
   }
 
   .full-verse-col {
@@ -887,12 +887,12 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .full-verse-label {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.4px;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
   }
 
   .full-verse-label.companion-label {
@@ -924,50 +924,50 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
 
   .block-eyebrow {
     display: block;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.6px;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
     margin-bottom: 4px;
   }
 
   .diff-summary-block {
-    background-color: var(--color-surface-container-low);
-    border-left: 3px solid var(--color-secondary);
+    background-color: var(--ra-well);
+    border-left: 3px solid var(--ra-accent);
     border-radius: 0 8px 8px 0;
     padding: 12px 14px;
   }
 
   .diff-summary-text {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 13.5px;
     line-height: 1.6;
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
     margin: 0;
   }
 
   .scholarly-discussion-details {
-    border: 1px solid var(--color-outline-variant);
+    border: 1px solid var(--ra-line);
     border-radius: 8px;
     overflow: hidden;
-    background-color: var(--color-surface);
+    background-color: var(--ra-surface);
   }
 
   .scholarly-summary-trigger {
     padding: 10px 12px;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 12px;
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--ra-ink);
     cursor: pointer;
     user-select: none;
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--color-surface-container-low);
+    background-color: var(--ra-well);
     transition: background-color 0.15s ease;
   }
 
@@ -976,7 +976,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .scholarly-summary-trigger:hover {
-    background-color: var(--color-outline-variant);
+    background-color: var(--ra-line);
   }
 
   .trigger-left {
@@ -994,7 +994,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border-top: 1px solid var(--color-outline-variant);
+    border-top: 1px solid var(--ra-line);
   }
 
   .scholarly-point {
@@ -1016,23 +1016,23 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .scholarly-point-label {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.4px;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
   }
 
   .scholarly-point-label.evaluation-label {
-    color: var(--color-secondary);
+    color: var(--ra-accent);
   }
 
   .scholarly-point-text {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 13px;
     line-height: 1.55;
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
     margin: 0;
   }
 
@@ -1042,7 +1042,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     flex-direction: column;
     gap: 10px;
     padding-top: 12px;
-    border-top: 1px dashed var(--color-outline-variant);
+    border-top: 1px dashed var(--ra-line);
   }
 
   .sources-stack {
@@ -1052,10 +1052,10 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .primary-source-card {
-    border: 1px solid var(--color-outline-variant);
+    border: 1px solid var(--ra-line);
     border-radius: 8px;
     padding: 14px;
-    background-color: var(--color-surface-container-low);
+    background-color: var(--ra-well);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -1068,7 +1068,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     flex-wrap: wrap;
     gap: 6px;
     padding-bottom: 8px;
-    border-bottom: 1px solid var(--color-outline-variant);
+    border-bottom: 1px solid var(--ra-line);
   }
 
   .psource-meta {
@@ -1079,7 +1079,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .psource-type-pill {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
@@ -1090,7 +1090,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
 
   .hadith-pill {
     background-color: var(--ra-islamic-bg, #edf3ee);
-    color: var(--color-secondary);
+    color: var(--ra-accent);
   }
 
   .tafsir-pill {
@@ -1099,16 +1099,16 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   }
 
   .psource-ref {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 12.5px;
     font-weight: 800;
-    color: var(--color-primary);
+    color: var(--ra-ink);
   }
 
   .psource-chain {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11px;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
   }
 
   .psource-actions {
@@ -1122,7 +1122,7 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11px;
     font-weight: 700;
     padding: 4px 8px;
@@ -1134,28 +1134,28 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
 
   .sunnah-btn,
   .app-tafsir-btn {
-    background-color: var(--color-surface);
-    color: var(--color-secondary);
+    background-color: var(--ra-surface);
+    color: var(--ra-accent);
     border: 1px solid var(--ra-islamic-rule, #c2d6c6);
   }
 
   .sunnah-btn:hover,
   .app-tafsir-btn:hover {
-    background-color: var(--color-secondary);
+    background-color: var(--ra-accent);
     color: #ffffff;
-    border-color: var(--color-secondary);
+    border-color: var(--ra-accent);
   }
 
   .ksu-btn {
-    background-color: var(--color-surface);
-    color: var(--color-on-surface-variant);
-    border: 1px solid var(--color-outline-variant);
+    background-color: var(--ra-surface);
+    color: var(--ra-ink-3);
+    border: 1px solid var(--ra-line);
   }
 
   .ksu-btn:hover {
-    background-color: var(--color-primary);
+    background-color: var(--ra-ink);
     color: #ffffff;
-    border-color: var(--color-primary);
+    border-color: var(--ra-ink);
   }
 
   .psource-excerpts {
@@ -1172,20 +1172,20 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   .psource-english {
     font-size: 13.5px;
     line-height: 1.55;
-    color: var(--color-on-surface) !important;
+    color: var(--ra-ink) !important;
   }
 
   .full-narrative-toggle {
-    border-top: 1px dashed var(--color-outline-variant);
+    border-top: 1px dashed var(--ra-line);
     padding-top: 8px;
     margin-top: 2px;
   }
 
   .full-narrative-summary {
-    font-family: var(--font-body);
+    font-family: var(--ra-sans);
     font-size: 11.5px;
     font-weight: 700;
-    color: var(--color-secondary);
+    color: var(--ra-accent);
     cursor: pointer;
     user-select: none;
     list-style: none;
@@ -1205,8 +1205,8 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   .full-narrative-body {
     margin-top: 10px;
     padding: 10px;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-outline-variant);
+    background-color: var(--ra-surface);
+    border: 1px solid var(--ra-line);
     border-radius: 6px;
   }
 
@@ -1229,13 +1229,13 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
     line-height: 1.85;
     text-align: right;
     margin: 0;
-    color: var(--color-on-surface-variant);
+    color: var(--ra-ink-3);
   }
 
   .text-english {
-    font-family: var(--font-display);
+    font-family: var(--ra-display);
     line-height: 1.55;
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
     margin: 0;
   }
 
@@ -1244,13 +1244,13 @@ const hasFullVerseDiff = isNumericVerse && (variant.uthmanic_full_english || var
   :global(.prefer-arabic) .full-verse-col .text-arabic,
   :global(.prefer-arabic) .psource-excerpts .text-arabic {
     order: -1;
-    color: var(--color-on-surface);
+    color: var(--ra-ink);
   }
 
   :global(.prefer-arabic) .diff-col .text-english,
   :global(.prefer-arabic) .full-verse-col .text-english,
   :global(.prefer-arabic) .psource-excerpts .text-english {
-    color: var(--color-on-surface-variant) !important;
+    color: var(--ra-ink-3) !important;
   }
 
   @media (max-width: 640px) {
