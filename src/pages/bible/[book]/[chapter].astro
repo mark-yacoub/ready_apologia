@@ -4,7 +4,7 @@ import path from 'node:path';
 import Layout from '../../../layouts/Layout.astro';
 import { query } from '../../../db.js';
 import booksMeta from '../../../data/books_meta.json' with { type: 'json' };
-import { mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
+import { hasLxxEquivalent, mapLxxChapterToMt, mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
 import { getBibleOgImage } from '../../../utils/ogImageResolver.js';
 import { generateBibleChapterSEO } from '../../../utils/seoFactory.js';
 import { BUILD_BOOKS } from '../../../utils/build_config.js';
@@ -70,44 +70,48 @@ const msSet = new Set(
     : query("SELECT verse_id, v11n_type FROM manuscript_per_verse_ot WHERE verse_id LIKE :lxx OR verse_id LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
         if (r.v11n_type === 'MT') {
           const p = r.verse_id.split('_');
+          if (!hasLxxEquivalent(p[0], p[1], p[2])) return null;
           const m = mapMtToLxx(p[0], p[1], p[2]);
           return `${m.book}_${m.chapter}_${m.verse}`;
         }
         return r.verse_id;
-      })
+      }).filter(Boolean)
 );
 
 const ctSet = new Set(
   query("SELECT verse1 as v FROM contradictions WHERE verse1 LIKE :lxx OR verse1 LIKE :mt UNION SELECT verse2 as v FROM contradictions WHERE verse2 LIKE :lxx OR verse2 LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
     const p = r.v.split('_');
     if (!isNT) {
+      if (!hasLxxEquivalent(p[0], p[1], p[2])) return null;
       const m = mapMtToLxx(p[0], p[1], p[2]);
       return `${m.book}_${m.chapter}_${m.verse}`;
     }
     return r.v;
-  })
+  }).filter(Boolean)
 );
 
 const apSet = new Set(
   query("SELECT verse FROM apologetics WHERE verse LIKE :lxx OR verse LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
     const p = r.verse.split('_');
     if (!isNT) {
+      if (!hasLxxEquivalent(p[0], p[1], p[2])) return null;
       const m = mapMtToLxx(p[0], p[1], p[2]);
       return `${m.book}_${m.chapter}_${m.verse}`;
     }
     return r.verse;
-  })
+  }).filter(Boolean)
 );
 
 const vdSet = new Set(
   query("SELECT verse_id FROM short_per_verse WHERE verse_id LIKE :lxx OR verse_id LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
     const p = r.verse_id.split('_');
     if (!isNT) {
+      if (!hasLxxEquivalent(p[0], p[1], p[2])) return null;
       const m = mapMtToLxx(p[0], p[1], p[2]);
       return `${m.book}_${m.chapter}_${m.verse}`;
     }
     return r.verse_id;
-  })
+  }).filter(Boolean)
 );
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
@@ -208,7 +212,7 @@ const evidenceMeta = allTopics.reduce((acc, t) => {
 }, {});
 
 const lxxGlob = `${book}_${chapter}_*`;
-const mtGlob = isNT ? lxxGlob : `${book}_${mapLxxToMt(book, chapter, '1').chapter}_*`;
+const mtGlob = isNT ? lxxGlob : `${book}_${mapLxxChapterToMt(book, chapter)}_*`;
 const earliestChapMsRows = isNT
   ? query(
       "SELECT mm.ms_id, mm.name, mm.earliest_date, mm.latest_date, mm.date_range_english FROM manuscript_per_verse m JOIN manuscripts_meta mm ON m.ms_id = mm.ms_id WHERE m.verse_id GLOB :g ORDER BY mm.earliest_date ASC LIMIT 1",

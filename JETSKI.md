@@ -47,6 +47,7 @@ Verse IDs in the database are formatted as: `[book_id]_[chapter]_[verse]` (all l
 *   *Examples:* `jn_1_1` (John 1:1), `gn_1_26` (Genesis 1:26), `heb_9_12` (Hebrews 9:12).
 *   **LXX vs MT Versification Resolution**: All web reader routes (`/bible/[book]/[chapter]/[verse]`) are strictly anchored to Greek Septuagint (`LXX`) numbering. For Old Testament books, database query gates must resolve Masoretic Text (`MT`) numbering equivalents via `mapLxxToMt` / `mapMtToLxx` (`src/utils/scripture_mapper.js`) combining matching rows:
     `WHERE (verse_id = :lxxId AND v11n_type = 'LXX') OR (verse_id = :mtId AND v11n_type = 'MT')`.
+    *   **The mapping table is generated, not hand-written:** `scripts/gen_versification_map.mjs` aligns the LXX2012 reader with the ESV OT (MT/English numbering, from `data_collection/bible/esv/output`) and writes `src/utils/versification/lxx2012_mt.json` (one-to-one pairs, `mtOnly`, `lxxOnly`); `--check` verifies it's current. `scripture_mapper.js` reads it: `hasLxxEquivalent` / `hasMtEquivalent` tell whether a verse has a counterpart (unmapped verses map to the identity). Verses the LXX lacks (e.g. Prov 22:6, Jer 10:10) keep their evidence page under the MT number unless the reader uses that number for another verse (`mtRouteId` in `path_generator.js`). Tests: `src/utils/scripture_mapper.test.mjs` (round trip, injectivity, every target exists in the reader). Verse pages read their text with `getReaderVerseText` (route params are already LXX); `getScriptureVerseText` takes MT numbers.
 
 ---
 

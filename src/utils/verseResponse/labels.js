@@ -11,7 +11,7 @@
 //
 // Pure module (no DB / JSON imports) so it can be unit-tested with plain node.
 import { getBibleUrl, getQuranUrl } from '../urlFactory.js';
-import { mapMtToLxx } from '../scripture_mapper.js';
+import { hasLxxEquivalent, mapMtChapterToLxx, mapMtToLxx } from '../scripture_mapper.js';
 
 const QURAN_NAME = String.raw`(?:quran|qur'an|qur’an|qurʾan|qurʾān|surah|sura)`;
 const NUM = String.raw`(\d{1,3})`;
@@ -88,9 +88,12 @@ function parseQuranChapter(label, { ayahCounts }, base) {
 
 // Labels use standard English (MT) numbering; the OT reader is LXX-numbered.
 function toReaderNumbering(book, chapter, verse) {
-  if (!book.isOt) return { chapter, verse };
-  const mapped = mapMtToLxx(book.id, chapter, verse);
-  return { chapter: Number(mapped.chapter), verse: Number(mapped.verse) };
+  if (!book.isOt) return { chapter, verse, hasVerse: true };
+  if (hasLxxEquivalent(book.id, chapter, verse)) {
+    const mapped = mapMtToLxx(book.id, chapter, verse);
+    return { chapter: Number(mapped.chapter), verse: Number(mapped.verse), hasVerse: true };
+  }
+  return { chapter: Number(mapMtChapterToLxx(book.id, chapter)), verse: undefined, hasVerse: false };
 }
 
 const chapterInRange = (book, chapter) => chapter >= 1 && chapter <= book.chapters;
@@ -107,7 +110,7 @@ function parseBibleVerse(label, { books }, base) {
   return {
     label,
     id: `${book.id}_${chapter}_${verse}`, // DB verse ids use MT numbering
-    href: getBibleUrl({ book: book.id, chapter: reader.chapter, verse: reader.verse, base }),
+    href: getBibleUrl({ book: book.id, chapter: reader.chapter, verse: reader.hasVerse ? reader.verse : undefined, base }),
   };
 }
 
@@ -116,7 +119,7 @@ function parseBibleChapter(label, { books }, base) {
   if (!m) return null;
   const book = books.get(normalizeBookName(m[1]));
   if (!book) return plain(label);
-  const { chapter } = toReaderNumbering(book, Number(m[2]), 1);
+  const chapter = book.isOt ? Number(mapMtChapterToLxx(book.id, Number(m[2]))) : Number(m[2]);
   if (!chapterInRange(book, chapter)) return plain(label);
   return { label, id: null, href: getBibleUrl({ book: book.id, chapter, base }) };
 }

@@ -20,7 +20,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { query } from '../db.js';
 import { getBibleUrl, getQuranUrl } from './urlFactory.js';
-import { mapLxxToMt, mapMtToLxx } from './scripture_mapper.js';
+import { hasLxxEquivalent, mapLxxToMt, mapMtToLxx } from './scripture_mapper.js';
 import {
   APOLOGIST_BY_SLUG, CHANNELS, FEATURED_APOLOGISTS, FEATURED_BY_SLUG, channelKey, channelUrl, pageSlugFor,
   resolveApologistLabel, resolveSpeakerSlugs,
@@ -74,10 +74,11 @@ export function resolveVerse(verseId) {
   const entry = catalog.get(book);
   if (!entry) return null;
   if (entry.group === 'ot') {
+    if (!hasLxxEquivalent(book, chapter, verse)) return null;
     const lxx = mapMtToLxx(book, chapter, verse);
     if (lxx) { book = lxx.book; chapter = String(lxx.chapter); verse = String(lxx.verse); }
     // The verse page maps its LXX address back to MT and queries that exact id. Ids that do not
-    // round-trip (e.g. `jl_2_32`, English numbering stored as MT) are listed on no /videos tab.
+    // round-trip (or have no LXX equivalent, e.g. LXX omissions) are listed on no /videos tab.
     const back = mapLxxToMt(book, chapter, verse);
     if (!back || `${back.book}_${back.chapter}_${back.verse}` !== String(verseId)) return null;
   }

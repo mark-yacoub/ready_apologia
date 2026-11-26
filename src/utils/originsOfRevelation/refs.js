@@ -12,7 +12,7 @@
 
 import * as C from './config.js';
 import { linkAttrs } from '../hadithReliability/render.js';
-import { mapLxxToMt } from '../scripture_mapper.js';
+import { hasMtEquivalent, mapLxxToMt } from '../scripture_mapper.js';
 import BOOKS_META from '../../data/books_meta.json' with { type: 'json' };
 
 export class OrvModelError extends Error {
@@ -44,6 +44,7 @@ export function bibleLabel(book, ch, v1, v2 = null) {
   const name = bookName(meta.name, true);
   const lxx = `${ch}:${v1}${v2 ? `–${v2}` : ''}`;
   if (meta.testament !== 'ot') return `${name} ${lxx}`;
+  if (!hasMtEquivalent(book, ch, v1) || (v2 && !hasMtEquivalent(book, ch, v2))) return `${name} ${lxx}`;
   const a = mapLxxToMt(book, ch, v1);
   const b = v2 ? mapLxxToMt(book, ch, v2) : null;
   const same = String(a.chapter) === String(ch) && String(a.verse) === String(v1) && (!b || (String(b.chapter) === String(ch) && String(b.verse) === String(v2)));

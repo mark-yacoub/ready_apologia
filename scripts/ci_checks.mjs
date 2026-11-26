@@ -20,7 +20,7 @@ const SQLITE = { NODE_OPTIONS: '--experimental-sqlite' };
 /** @type {Record<string, Array<{ name: string, cmd: string, env?: object }>>} */
 const STAGES = {
   unit: [
-    { name: 'test:shared-utils', cmd: 'node --test src/utils/markdown.test.mjs src/utils/urlFactory.test.mjs src/utils/discoverService.test.mjs src/utils/sectionTheme.test.mjs src/utils/onboardingRoutes.test.mjs' },
+    { name: 'test:shared-utils', cmd: 'node --test src/utils/markdown.test.mjs src/utils/urlFactory.test.mjs src/utils/scripture_mapper.test.mjs src/utils/discoverService.test.mjs src/utils/sectionTheme.test.mjs src/utils/onboardingRoutes.test.mjs' },
     { name: 'test:path-generator', cmd: 'node --test src/utils/path_generator.test.mjs', env: SQLITE },
     { name: 'test:history', cmd: 'node scripts/test_history_api.mjs' },
     { name: 'test:reel', cmd: 'node --test src/components/reel/reelItems.test.mjs' },

@@ -20,3 +20,12 @@ test('every verse tab route has a chapter reader page', () => {
   const bad = [...allVerseIds].filter(id => !hasReaderChapter(id));
   assert.deepEqual(bad, []);
 });
+
+test('verses the LXX lacks keep their evidence page under the MT number', () => {
+  const { apSet, ctSet, vdSet, allVerseIds } = getAllEvidenceVerseSets();
+  // Prov 22:6 has no LXX equivalent but has apologetics/videos in MT numbering.
+  assert.ok(apSet.has('prv_22_6') || vdSet.has('prv_22_6'), 'prv_22_6 page kept');
+  // Jonah 1:17 (MT) is LXX 2:1: routed there, not to a jon_1_17 page.
+  assert.ok(!allVerseIds.has('jon_1_17'));
+  assert.ok(ctSet.has('jon_2_1') || vdSet.has('jon_2_1'));
+});

@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { mapMtToLxx } from './scripture_mapper.js';
+import { hasLxxEquivalent, mapMtToLxx } from './scripture_mapper.js';
 import booksMeta from '../data/books_meta.json' with { type: 'json' };
 import { NT_TRANSLATION_ID } from './bible_config.js';
 
@@ -42,10 +42,26 @@ export function readerHasVerse(book, chapter, verse) {
 }
 
 /**
+ * Retrieves scripture text directly in reader numbering (LXX2012 for OT, NASB for NT).
+ * No MT->LXX mapping is applied; use when coordinates already come from a reader route.
+ */
+export function getReaderVerseText(book, chapter, verse) {
+  if (!book || !chapter || !verse) return "";
+  const b = String(book).toLowerCase();
+  const c = String(chapter);
+  const v = String(verse);
+  const isNt = booksMeta.nt.some(bk => bk.id === b);
+  if (!isNt && !booksMeta.ot.some(bk => bk.id === b)) return "";
+  const chapterVerses = readerChapter(b, c, isNt);
+  const verseObj = chapterVerses.find(x => Object.keys(x)[0] === v);
+  return verseObj ? verseObj[v] : "";
+}
+
+/**
  * Retrieves the localized scripture text for a specific biblical verse.
  * Transparently manages bidirectional translations mappings (e.g., retrieving LXX text when presented with MT standard IDs).
  *
- * @param {string} book - Standard book ID (e.g., 'mt', 'jn', 'gen')
+ * @param {string} book - Standard book ID (e.g., 'mt', 'jn', 'gn')
  * @param {string|number} chapter - Chapter number
  * @param {string|number} verse - Verse number
  * @returns {string} The raw scripture text
@@ -61,6 +77,7 @@ export function getScriptureVerseText(book, chapter, verse) {
 
   // Intercept OT requests and map from standard Masoretic Text numbering to LXX
   if (!isNt && booksMeta.ot.some(bk => bk.id === b)) {
+    if (!hasLxxEquivalent(b, c, v)) return "";
     const m = mapMtToLxx(b, c, v);
     b = m.book;
     c = m.chapter;

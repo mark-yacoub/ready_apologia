@@ -12,11 +12,11 @@ import { R2_BASE_URL } from '../../../../../utils/cdn_config.js';
 import { getBibleOgImage } from '../../../../../utils/ogImageResolver.js';
 import booksMeta from '../../../../../data/books_meta.json' with { type: 'json' };
 import { parseMarkdown } from '../../../../../utils/markdown.js';
-import { mapLxxToMt, mapMtToLxx } from '../../../../../utils/scripture_mapper.js';
+import { hasLxxEquivalent, hasMtEquivalent, isDeuterocanonical, mapLxxToMt, mapMtToLxx } from '../../../../../utils/scripture_mapper.js';
 import SourceFooter from '../../../../../components/SourceFooter.astro';
 import { getEvidenceCounts, getFormattedManuscriptsByVerseId, getContradictionsByVerseId, getApologeticsByVerseId, getRawVideosByVerseId } from '../../../../../utils/evidence_repository.js';
 import { BUILD_BOOKS } from '../../../../../utils/build_config.js';
-import { getScriptureVerseText, getScriptureVerseTextById, readerHasVerse } from '../../../../../utils/scripture_service.js';
+import { getReaderVerseText, getScriptureVerseTextById, readerHasVerse } from '../../../../../utils/scripture_service.js';
 import { enrichVideosWithVerses } from '../../../../../utils/video_service.js';
 import { getVerseVideoResponse } from '../../../../../utils/verseResponse/service.js';
 import { getAllEvidenceVerseSets, parseVerseId } from '../../../../../utils/path_generator.js';
@@ -64,8 +64,11 @@ if (!bookMeta) {
 
 const isNT = booksMeta.nt.some(b => b.id === book);
 
-const mtObj = mapLxxToMt(book, chapter, verse);
-const mtId = `${mtObj.book}_${mtObj.chapter}_${mtObj.verse}`;
+const hasDbMtRow = isNT || isDeuterocanonical(book) || hasMtEquivalent(book, chapter, verse);
+const mtObj = hasDbMtRow ? mapLxxToMt(book, chapter, verse) : null;
+// A verse the LXX lacks (e.g. Prov 22:6) keeps its page under its MT number (path_generator
+// mtRouteId), so when the reader has no such verse the route id is the MT id.
+const mtId = mtObj ? `${mtObj.book}_${mtObj.chapter}_${mtObj.verse}` : (readerHasVerse(book, chapter, verse) ? '' : verseId);
 const checkId = isNT ? verseId : mtId;
 
 // 3. Query active evidence counts
@@ -80,11 +83,11 @@ const apCount = routeSets.apSet.has(verseId) ? rawCounts.apCount : 0;
 const vdCount = routeSets.vdSet.has(verseId) ? rawCounts.vdCount : 0;
 
 // Chapter reader link: jump to the verse only when the reader has it (some verses with
-// manuscripts, e.g. Jonah 1:17 = LXX 2:1, aren't in the LXX reader's chapter).
+// manuscripts, e.g. LXX additions or gaps, aren't in the LXX reader's chapter).
 const chapterHref = `${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/bible/${book}/${chapter}${readerHasVerse(book, chapter, verse) ? `#${verse}` : ''}`;
 
-// 3.5 Load Verse Text
-const verseText = getScriptureVerseText(book, chapter, verse);
+// 3.5 Load Verse Text (route params are already in reader numbering)
+const verseText = getReaderVerseText(book, chapter, verse);
 
 // 4. Query active evidence data
 let manuscripts = [];
@@ -131,7 +134,7 @@ function formatVerseIdToLabel(id) {
   const p = id.split('_');
   if (!booksMetaMap[p[0]]) return '';
 
-  if (booksMeta.ot.some(b => b.id === p[0])) {
+  if (booksMeta.ot.some(b => b.id === p[0]) && hasLxxEquivalent(p[0], p[1], p[2])) {
     const m = mapMtToLxx(p[0], p[1], p[2]);
     return `${formatBookIdToName(id)} ${m.chapter}:${m.verse}`;
   }
@@ -142,7 +145,9 @@ function formatVerseIdToLink(id, targetTab = 'contradictions') {
   if (!id) return '';
   const p = id.split('_');
   const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
-  const ref = booksMeta.ot.some(b => b.id === p[0]) ? mapMtToLxx(p[0], p[1], p[2]) : { book: p[0], chapter: p[1], verse: p[2] };
+  const isOtBook = booksMeta.ot.some(b => b.id === p[0]);
+  if (isOtBook && !hasLxxEquivalent(p[0], p[1], p[2])) return '';
+  const ref = isOtBook ? mapMtToLxx(p[0], p[1], p[2]) : { book: p[0], chapter: p[1], verse: p[2] };
   // No link when that verse has no page for the tab (e.g. a mis-keyed `1jn_8_44` row).
   const routeSet = { contradictions: routeSets.ctSet, apologetics: routeSets.apSet, manuscripts: routeSets.msSet, videos: routeSets.vdSet }[targetTab];
   if (routeSet && !routeSet.has(`${ref.book}_${ref.chapter}_${ref.verse}`)) return '';

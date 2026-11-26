@@ -1,4 +1,4 @@
-import { mapMtToLxx } from './scripture_mapper.js';
+import { hasLxxEquivalent, mapMtChapterToLxx, mapMtToLxx } from './scripture_mapper.js';
 
 /**
  * Centralized L6 Canonical URL Factory for Ready Apologia.
@@ -91,10 +91,17 @@ export function getBibleUrl({ book, chapter = 1, verse, tab, base, isMt = false 
   }
 
   if (isMt && cleanChapter) {
-    const mapped = mapMtToLxx(cleanBook, cleanChapter, cleanVerse || '1');
-    cleanChapter = String(mapped.chapter);
     if (cleanVerse) {
-      cleanVerse = String(mapped.verse);
+      if (hasLxxEquivalent(cleanBook, cleanChapter, cleanVerse)) {
+        const mapped = mapMtToLxx(cleanBook, cleanChapter, cleanVerse);
+        cleanChapter = String(mapped.chapter);
+        cleanVerse = String(mapped.verse);
+      } else {
+        cleanChapter = String(mapMtChapterToLxx(cleanBook, cleanChapter));
+        cleanVerse = '';
+      }
+    } else {
+      cleanChapter = String(mapMtChapterToLxx(cleanBook, cleanChapter));
     }
   }
 

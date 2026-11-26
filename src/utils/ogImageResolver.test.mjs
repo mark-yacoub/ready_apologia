@@ -69,7 +69,9 @@ test('a .png source still declares image/jpeg (the preset re-encodes)', () => {
 });
 
 test('chapter fallback never leaves the chapter (LIKE `_` is not a wildcard)', () => {
-  // NT chapters that have scans, but none for verse 1.
+  // Every NT chapter with scans: the chapter-level image must be a scan of that chapter (not of
+  // e.g. jn_10 for jn_1). Chapters without a verse-1 scan exercise the fallback path; since the
+  // Nov 2026 data cleanup every chapter has one, so this checks all of them.
   const rows = query('SELECT DISTINCT verse_id FROM manuscript_per_verse').map((r) => r.verse_id);
   const byChapter = new Map();
   for (const id of rows) {
@@ -80,7 +82,6 @@ test('chapter fallback never leaves the chapter (LIKE `_` is not a wildcard)', (
   }
   let checked = 0;
   for (const [k, verses] of byChapter) {
-    if (verses.has('1')) continue;
     const [b, c] = k.split('_');
     const og = getBibleOgImage(b, c, null, true);
     const images = new Set(
@@ -90,7 +91,7 @@ test('chapter fallback never leaves the chapter (LIKE `_` is not a wildcard)', (
     assert.ok(images.has(og?.url), `${k}: ${og?.url} is not a scan of this chapter`);
     checked++;
   }
-  assert.ok(checked > 0, 'fixture: at least one NT chapter lacks a verse-1 scan');
+  assert.ok(checked > 0, 'fixture: the NT table has scans');
 });
 
 test('pages without a scan return undefined and repeated lookups are memoised', () => {

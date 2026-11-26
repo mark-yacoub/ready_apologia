@@ -1,5 +1,5 @@
 import booksMeta from '../data/books_meta.json' with { type: 'json' };
-import { mapMtToLxx } from './scripture_mapper.js';
+import { hasLxxEquivalent, mapMtToLxx } from './scripture_mapper.js';
 import { SEO_DRAWER } from './quranSources/drawerCopy.js';
 import {
   formatDate,
@@ -52,7 +52,7 @@ export const formatBibleVerseIdToLabel = (id) => {
   const p = String(id).split('_');
   const bMeta = BOOKS_META_MAP[p[0]];
   if (!bMeta) return '';
-  if (OT_BOOK_SET.has(p[0])) {
+  if (OT_BOOK_SET.has(p[0]) && hasLxxEquivalent(p[0], p[1], p[2])) {
     const m = mapMtToLxx(p[0], p[1], p[2]);
     return `${bMeta.name} ${m.chapter}:${m.verse}`;
   }

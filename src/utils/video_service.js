@@ -1,7 +1,7 @@
 import { getScriptureVerseTextById, readerHasVerse } from './scripture_service.js';
 import { loadEnglishData } from './quran_loader.js';
 import booksMeta from '../data/books_meta.json' with { type: 'json' };
-import { mapMtToLxx } from './scripture_mapper.js';
+import { hasLxxEquivalent, mapMtChapterToLxx, mapMtToLxx } from './scripture_mapper.js';
 import { getBibleUrl, getQuranUrl } from './urlFactory.js';
 
 // Pre-build O(1) dictionary for book names to avoid O(N) lookup on every parse
@@ -88,19 +88,27 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
     let displayChap = chap;
     let displayVerse = verse;
 
+    let hasLxx = true;
     if (isOt) {
-      const lxxMap = mapMtToLxx(book, chap, verse);
-      if (lxxMap) {
-        targetBook = lxxMap.book;
-        displayChap = lxxMap.chapter;
-        displayVerse = String(lxxMap.verse);
+      hasLxx = hasLxxEquivalent(book, chap, verse);
+      if (hasLxx) {
+        const lxxMap = mapMtToLxx(book, chap, verse);
+        if (lxxMap) {
+          targetBook = lxxMap.book;
+          displayChap = lxxMap.chapter;
+          displayVerse = String(lxxMap.verse);
+        }
+      } else {
+        displayChap = mapMtChapterToLxx(book, chap);
       }
     }
 
     return {
-      label: `${formatBookIdToName(verseStr)} ${displayChap}:${displayVerse}`,
-      // Anchor the verse only when the chapter reader has it (versification gaps, e.g. Jonah 1:17).
-      link: getBibleUrl({ book: targetBook, chapter: displayChap, verse: readerHasVerse(targetBook, displayChap, displayVerse) ? displayVerse : undefined, base }),
+      label: hasLxx
+        ? `${formatBookIdToName(verseStr)} ${displayChap}:${displayVerse}`
+        : `${formatBookIdToName(verseStr)} ${chap}:${verse}`,
+      // Anchor the verse only when it has an LXX equivalent in the chapter reader.
+      link: getBibleUrl({ book: targetBook, chapter: displayChap, verse: (hasLxx && readerHasVerse(targetBook, displayChap, displayVerse)) ? displayVerse : undefined, base }),
       text: text
     };
   }

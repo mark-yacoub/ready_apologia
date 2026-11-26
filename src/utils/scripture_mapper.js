@@ -1,303 +1,233 @@
 /**
- * Scripture Translation Mapping Engine.
- * Handles spotless, bi-directional mappings between:
- *   - Hebrew/English Masoretic Text (MT) - Used by SQLite databases & standard references
- *   - Greek Septuagint (LXX) - Used by our Old Testament public reader assets
+ * Scripture Versification Mapping Engine (LXX2012 <-> MT / English).
  *
- * Resolves textual and numbering variations natively at compile-time with O(1) speed.
+ * Backed by the empirically derived, bijection-verified lookup table in
+ * src/utils/versification/lxx2012_mt.json (regenerated via
+ * `node scripts/gen_versification_map.mjs`).
+ *
+ * Semantics:
+ * - Paired verses (1-to-1 bijection between ESV/MT and Brenton LXX2012):
+ *   - `hasLxxEquivalent(b, c, v)` === true, `hasMtEquivalent(b, lc, lv)` === true
+ *   - `mapMtToLxx(b, c, v)` returns `{ book, chapter, verse }` (strings) existing in LXX2012
+ *   - `mapLxxToMt(b, lc, lv)` returns `{ book, chapter, verse }` (strings) and round-trips exactly
+ * - Unmapped MT verses (genuine LXX omissions, merged verses, or out-of-range refs):
+ *   - `hasLxxEquivalent(b, c, v)` === false
+ *   - `mapMtToLxx(b, c, v)` returns the identity `{ book, chapter, verse }` so callers never receive null
+ * - Unmapped LXX verses (LXX-only additions like Ps 151 / Dan 13-14, split tails, or non-existent refs):
+ *   - `hasMtEquivalent(b, c, v)` === false
+ *   - `mapLxxToMt(b, c, v)` returns the identity `{ book, chapter, verse }`
+ * - Deuterocanonical books (Tobit, Judith, Baruch, 1-4 Maccabees, Wisdom, Sirach, etc.):
+ *   - `isDeuterocanonical(b)` === true, `hasMtEquivalent(...)` === false
+ *   - `hasLxxEquivalent(b, c, v)` === true iff the verse exists in LXX2012 (identity numbering)
+ * - New Testament books:
+ *   - Always identity; both `hasLxxEquivalent` and `hasMtEquivalent` return true.
  */
 
-// ============================================================================
-// 1. EXODUS (Decalogue Variant)
-// ============================================================================
-const EX_MT_TO_LXX = {
-  '20': {
-    '13': '15', // MT 20:13 (Murder) -> LXX 20:15 (Kill)
-    '14': '13', // MT 20:14 (Adultery) -> LXX 20:13 (Adultery)
-    '15': '14'  // MT 20:15 (Steal) -> LXX 20:14 (Steal)
-  }
-};
+import table from './versification/lxx2012_mt.json' with { type: 'json' };
+import booksMeta from '../data/books_meta.json' with { type: 'json' };
 
-const EX_LXX_TO_MT = {
-  '20': {
-    '13': '14', // LXX 20:13 (Adultery) -> MT 20:14
-    '14': '15', // LXX 20:14 (Steal) -> MT 20:15
-    '15': '13'  // LXX 20:15 (Kill) -> MT 20:13
-  }
-};
+const POSITIVE_INT = /^[1-9]\d*$/;
 
-// ============================================================================
-// 2. PSALMS (Asset-aligned Hybrid LXX vs MT Shifts)
-// ============================================================================
-function mapPsalmsMtToLxx(c, v) {
-  const mtPs = parseInt(c, 10);
-  const mtV = parseInt(v, 10);
-  if (isNaN(mtPs) || isNaN(mtV)) return { chapter: c, verse: v };
+const NT_BOOKS = new Set((booksMeta.nt || []).map(b => b.id));
+const CANONICAL_OT_BOOKS = new Set(table.canonicalOtBooks || []);
+const DEUTEROCANON_BOOKS = new Set(table.deuterocanonBooks || []);
 
-  if (mtPs >= 1 && mtPs <= 8) return { chapter: c, verse: v };
-  if (mtPs === 9) return { chapter: '9', verse: v };
-  if (mtPs === 10) return { chapter: '9', verse: String(mtV + 20) };
-  if (mtPs >= 11 && mtPs <= 146) return { chapter: String(mtPs - 1), verse: v };
-  if (mtPs === 147) {
-    if (mtV >= 1 && mtV <= 11) return { chapter: '146', verse: v };
-    return { chapter: '147', verse: String(mtV - 11) };
-  }
-  if (mtPs >= 148 && mtPs <= 150) return { chapter: c, verse: v };
-  return { chapter: c, verse: v };
+function parseRanges(rangeList) {
+  return (rangeList || []).map(r => {
+    const parts = r.split('..');
+    const lo = Number(parts[0]);
+    const hi = parts.length > 1 ? Number(parts[1]) : lo;
+    return [lo, hi];
+  });
 }
 
-function mapPsalmsLxxToMt(c, v) {
-  const lxxPs = parseInt(c, 10);
-  const lxxV = parseInt(v, 10);
-  if (isNaN(lxxPs) || isNaN(lxxV)) return { chapter: c, verse: v };
-
-  if (lxxPs >= 1 && lxxPs <= 8) return { chapter: c, verse: v };
-  if (lxxPs === 9) {
-    if (lxxV <= 20) return { chapter: '9', verse: v };
-    return { chapter: '10', verse: String(lxxV - 20) };
+function buildVerseIndex(chaptersObj) {
+  const byBook = new Map();
+  for (const [book, chMap] of Object.entries(chaptersObj || {})) {
+    const byCh = new Map();
+    for (const [ch, ranges] of Object.entries(chMap)) {
+      byCh.set(ch, parseRanges(ranges));
+    }
+    byBook.set(book, byCh);
   }
-  if (lxxPs >= 10 && lxxPs <= 145) return { chapter: String(lxxPs + 1), verse: v };
-  if (lxxPs === 146) return { chapter: '147', verse: v };
-  if (lxxPs === 147) return { chapter: '147', verse: String(lxxV + 11) };
-  if (lxxPs >= 148 && lxxPs <= 150) return { chapter: c, verse: v };
-  return { chapter: c, verse: v };
+  return byBook;
 }
 
-// ============================================================================
-// 3. JOEL (MT Ch 3-4 <-> LXX Ch 2-3)
-// ============================================================================
-function mapJoelMtToLxx(c, v) {
-  const ch = parseInt(c, 10);
-  const vs = parseInt(v, 10);
-  if (isNaN(ch) || isNaN(vs)) return { chapter: c, verse: v };
-
-  if (ch === 3) return { chapter: '2', verse: String(vs + 27) };
-  if (ch === 4) return { chapter: '3', verse: v };
-  return { chapter: c, verse: v };
+function indexHasVerse(index, book, chapter, verse) {
+  if (!POSITIVE_INT.test(chapter) || !POSITIVE_INT.test(verse)) return false;
+  const ranges = index.get(book)?.get(chapter);
+  if (!ranges) return false;
+  const vNum = Number(verse);
+  for (const [lo, hi] of ranges) {
+    if (vNum >= lo && vNum <= hi) return true;
+  }
+  return false;
 }
 
-function mapJoelLxxToMt(c, v) {
-  const ch = parseInt(c, 10);
-  const vs = parseInt(v, 10);
-  if (isNaN(ch) || isNaN(vs)) return { chapter: c, verse: v };
+const LXX_INDEX = buildVerseIndex(table.lxxVerses);
+const MT_INDEX = buildVerseIndex(table.mtVerses);
 
-  if (ch === 2) {
-    if (vs >= 28) return { chapter: '3', verse: String(vs - 27) };
-    return { chapter: '2', verse: v };
+const MT_TO_LXX = new Map();
+const LXX_TO_MT = new Map();
+for (const [book, mapping] of Object.entries(table.mtToLxx || {})) {
+  const fwd = new Map();
+  const rev = new Map();
+  for (const [mtKey, lxxKey] of Object.entries(mapping)) {
+    fwd.set(mtKey, lxxKey);
+    rev.set(lxxKey, mtKey);
   }
-  if (ch === 3) return { chapter: '4', verse: v };
-  return { chapter: c, verse: v };
+  MT_TO_LXX.set(book, fwd);
+  LXX_TO_MT.set(book, rev);
 }
 
-// ============================================================================
-// 4. MALACHI (MT Ch 3:19-24 <-> LXX Ch 4)
-// ============================================================================
-function mapMalachiMtToLxx(c, v) {
-  const ch = parseInt(c, 10);
-  const vs = parseInt(v, 10);
-  if (isNaN(ch) || isNaN(vs)) return { chapter: c, verse: v };
-
-  if (ch === 3) {
-    if (vs >= 19 && vs <= 21) return { chapter: '4', verse: String(vs - 18) };
-    if (vs === 22) return { chapter: '4', verse: '6' };
-    if (vs === 23) return { chapter: '4', verse: '4' };
-    if (vs === 24) return { chapter: '4', verse: '5' };
-  }
-  return { chapter: c, verse: v };
+const MT_ONLY = new Map();
+for (const [book, list] of Object.entries(table.mtOnly || {})) {
+  MT_ONLY.set(book, new Set(list));
 }
 
-function mapMalachiLxxToMt(c, v) {
-  const ch = parseInt(c, 10);
-  const vs = parseInt(v, 10);
-  if (isNaN(ch) || isNaN(vs)) return { chapter: c, verse: v };
-
-  if (ch === 4) {
-    if (vs >= 1 && vs <= 3) return { chapter: '3', verse: String(vs + 18) };
-    if (vs === 4) return { chapter: '3', verse: '23' };
-    if (vs === 5) return { chapter: '3', verse: '24' };
-    if (vs === 6) return { chapter: '3', verse: '22' };
-  }
-  return { chapter: c, verse: v };
+const LXX_ONLY = new Map();
+for (const [book, list] of Object.entries(table.lxxOnly || {})) {
+  LXX_ONLY.set(book, new Set(list));
 }
 
-// ============================================================================
-// 5. DANIEL (Doxology Shift)
-// ============================================================================
-function mapDanielMtToLxx(c, v) {
-  const ch = parseInt(c, 10);
-  const vs = parseInt(v, 10);
-  if (isNaN(ch) || isNaN(vs)) return { chapter: c, verse: v };
-
-  if (ch === 4) {
-    if (vs >= 1 && vs <= 3) return { chapter: '3', verse: String(vs + 30) };
-    return { chapter: '4', verse: String(vs - 3) };
-  }
-  return { chapter: c, verse: v };
+function normBook(book) {
+  return String(book || '').toLowerCase();
 }
 
-function mapDanielLxxToMt(c, v) {
-  const ch = parseInt(c, 10);
-  const vs = parseInt(v, 10);
-  if (isNaN(ch) || isNaN(vs)) return { chapter: c, verse: v };
-
-  if (ch === 3) {
-    if (vs >= 31 && vs <= 33) return { chapter: '4', verse: String(vs - 30) };
-  } else if (ch === 4) {
-    return { chapter: '4', verse: String(vs + 3) };
-  }
-  return { chapter: c, verse: v };
+function normNum(n) {
+  return String(n ?? '');
 }
-
-// ============================================================================
-// 6. JEREMIAH (Complex Reordering - Verse Preserved)
-// ============================================================================
-const JER_CH_MT_TO_LXX = {
-  '26': '33', '27': '34', '28': '35', '29': '36', '30': '37',
-  '31': '38', '32': '39', '33': '40', '34': '41', '35': '42',
-  '36': '43', '37': '44', '38': '45', '40': '47', '41': '48',
-  '42': '49', '43': '50', '46': '26', '48': '31', '50': '27',
-  '51': '28', '52': '52'
-};
-
-const JER_CH_LXX_TO_MT = {
-  '33': '26', '34': '27', '35': '28', '36': '29', '37': '30',
-  '38': '31', '39': '32', '40': '33', '41': '34', '42': '35',
-  '43': '36', '44': '37', '45': '38', '47': '40', '48': '41',
-  '49': '42', '50': '43', '26': '46', '31': '48', '27': '50',
-  '28': '51', '52': '52'
-};
-
-function mapJeremiahMtToLxx(c, v) {
-  const ch = parseInt(c, 10);
-  const vs = parseInt(v, 10);
-  if (isNaN(ch) || isNaN(vs)) return { chapter: c, verse: v };
-
-  const chStr = String(ch);
-
-  if (ch === 25) {
-    if (vs <= 13) return { chapter: '25', verse: v };
-    if (vs >= 15) return { chapter: '32', verse: v }; // Verse preserved!
-  }
-  if (ch === 39) {
-    if (vs <= 3) return { chapter: '46', verse: v };
-    if (vs >= 14 && vs <= 18) return { chapter: '46', verse: v };
-  }
-  if (ch === 44) {
-    if (vs <= 30) return { chapter: '51', verse: v };
-  }
-  if (ch === 45) {
-    return { chapter: '51', verse: String(vs + 30) }; // Shift preserved
-  }
-  if (ch === 47) {
-    if (vs <= 7) return { chapter: '29', verse: v };
-  }
-  if (ch === 49) {
-    if (vs <= 5) return { chapter: '30', verse: v };
-    if (vs >= 7 && vs <= 22) return { chapter: '29', verse: v };
-    if (vs >= 23 && vs <= 27) return { chapter: '30', verse: v };
-    if (vs >= 28 && vs <= 33) return { chapter: '30', verse: v };
-    if (vs >= 34 && vs <= 39) return { chapter: '25', verse: v };
-  }
-
-  if (JER_CH_MT_TO_LXX[chStr]) {
-    return { chapter: JER_CH_MT_TO_LXX[chStr], verse: v };
-  }
-
-  return { chapter: c, verse: v };
-}
-
-function mapJeremiahLxxToMt(c, v) {
-  const ch = parseInt(c, 10);
-  const vs = parseInt(v, 10);
-  if (isNaN(ch) || isNaN(vs)) return { chapter: c, verse: v };
-
-  const chStr = String(ch);
-
-  if (ch === 25) {
-    if (vs <= 13) return { chapter: '25', verse: v };
-    if (vs >= 34 && vs <= 39) return { chapter: '49', verse: v };
-  }
-  if (ch === 32) {
-    return { chapter: '25', verse: v }; // Verse preserved!
-  }
-  if (ch === 46) {
-    if (vs <= 3) return { chapter: '39', verse: v };
-    if (vs >= 14 && vs <= 18) return { chapter: '39', verse: v };
-  }
-  if (ch === 51) {
-    if (vs <= 30) return { chapter: '44', verse: v };
-    return { chapter: '45', verse: String(vs - 30) };
-  }
-  if (ch === 29) {
-    if (vs <= 6) return { chapter: '47', verse: v };
-    if (vs === 7) return { chapter: '47', verse: '7' }; // Shared, 47:7 primary
-    if (vs >= 8 && vs <= 22) return { chapter: '49', verse: v };
-  }
-  if (ch === 30) {
-    if (vs <= 5) return { chapter: '49', verse: v };
-    if (vs >= 23 && vs <= 33) return { chapter: '49', verse: v };
-  }
-
-  if (JER_CH_LXX_TO_MT[chStr]) {
-    return { chapter: JER_CH_LXX_TO_MT[chStr], verse: v };
-  }
-
-  return { chapter: c, verse: v };
-}
-
-// ============================================================================
-// 7. ENGINE DISPATCHER
-// ============================================================================
-const SCRIPTURE_MAPPINGS = {
-  ps: { mtToLxx: mapPsalmsMtToLxx, lxxToMt: mapPsalmsLxxToMt },
-  jl: { mtToLxx: mapJoelMtToLxx, lxxToMt: mapJoelLxxToMt }, // Fixed Joel book ID to 'jl'
-  mal: { mtToLxx: mapMalachiMtToLxx, lxxToMt: mapMalachiLxxToMt },
-  dn: { mtToLxx: mapDanielMtToLxx, lxxToMt: mapDanielLxxToMt },
-  jer: { mtToLxx: mapJeremiahMtToLxx, lxxToMt: mapJeremiahLxxToMt }
-};
 
 /**
- * Converts standard Hebrew/English (MT) chapter-verse numbers to Greek (LXX) numbers.
+ * True when `book` is one of the LXX deuterocanonical books (present in the LXX2012
+ * reader with no separate Hebrew MT / ESV versification).
+ */
+export function isDeuterocanonical(book) {
+  return DEUTEROCANON_BOOKS.has(normBook(book));
+}
+
+/**
+ * True when MT/English verse `(book, chapter, verse)` has a 1-to-1 equivalent verse
+ * in the site's LXX2012 reader (or is an NT / valid deuterocanonical verse).
+ */
+export function hasLxxEquivalent(book, chapter, verse) {
+  const b = normBook(book);
+  const c = normNum(chapter);
+  const v = normNum(verse);
+
+  if (NT_BOOKS.has(b)) return POSITIVE_INT.test(c) && POSITIVE_INT.test(v);
+  if (DEUTEROCANON_BOOKS.has(b)) return indexHasVerse(LXX_INDEX, b, c, v);
+  if (!CANONICAL_OT_BOOKS.has(b)) return false;
+
+  if (!indexHasVerse(MT_INDEX, b, c, v)) return false;
+  return !MT_ONLY.get(b)?.has(`${c}:${v}`);
+}
+
+/**
+ * True when LXX2012 reader verse `(book, chapter, verse)` has a 1-to-1 equivalent
+ * verse in standard MT/English (ESV) numbering (or is an NT verse).
+ * Returns false for deuterocanonical books, LXX-only additions (Ps 151, Dan 13-14),
+ * split verse tails, and verse coordinates not present in LXX2012.
+ */
+export function hasMtEquivalent(book, chapter, verse) {
+  const b = normBook(book);
+  const c = normNum(chapter);
+  const v = normNum(verse);
+
+  if (NT_BOOKS.has(b)) return POSITIVE_INT.test(c) && POSITIVE_INT.test(v);
+  if (!CANONICAL_OT_BOOKS.has(b)) return false;
+
+  if (!indexHasVerse(LXX_INDEX, b, c, v)) return false;
+  return !LXX_ONLY.get(b)?.has(`${c}:${v}`);
+}
+
+/**
+ * Converts standard Hebrew/English (MT) chapter-verse numbers to Greek (LXX2012) numbers.
+ * Returns `{ book, chapter, verse }` with lowercase book and string chapter/verse.
+ * When `hasLxxEquivalent(book, chapter, verse)` is false, returns the identity.
  */
 export function mapMtToLxx(book, chapter, verse) {
-  const b = book.toLowerCase();
-  const c = String(chapter);
-  const v = String(verse);
+  const b = normBook(book);
+  const c = normNum(chapter);
+  const v = normNum(verse);
 
-  // 1. Exodus Decalogue Static Check
-  if (b === 'ex' && EX_MT_TO_LXX[c] && EX_MT_TO_LXX[c][v]) {
-    return { book: b, chapter: c, verse: EX_MT_TO_LXX[c][v] };
+  if (CANONICAL_OT_BOOKS.has(b)) {
+    const mapped = MT_TO_LXX.get(b)?.get(`${c}:${v}`);
+    if (mapped) {
+      const idx = mapped.indexOf(':');
+      return { book: b, chapter: mapped.slice(0, idx), verse: mapped.slice(idx + 1) };
+    }
   }
 
-  // 2. Dispatch to Book Mappings
-  if (SCRIPTURE_MAPPINGS[b] && SCRIPTURE_MAPPINGS[b].mtToLxx) {
-    const mapped = SCRIPTURE_MAPPINGS[b].mtToLxx(c, v);
-    return { book: b, chapter: mapped.chapter, verse: mapped.verse };
-  }
-
-  // Fallback
   return { book: b, chapter: c, verse: v };
 }
 
 /**
- * Converts Greek (LXX) chapter-verse numbers to standard Hebrew/English (MT) numbers.
+ * Converts Greek (LXX2012) chapter-verse numbers to standard Hebrew/English (MT) numbers.
+ * Returns `{ book, chapter, verse }` with lowercase book and string chapter/verse.
+ * When `hasMtEquivalent(book, chapter, verse)` is false, returns the identity.
  */
 export function mapLxxToMt(book, chapter, verse) {
-  const b = book.toLowerCase();
-  const c = String(chapter);
-  const v = String(verse);
+  const b = normBook(book);
+  const c = normNum(chapter);
+  const v = normNum(verse);
 
-  // 1. Exodus Decalogue Static Check
-  if (b === 'ex' && EX_LXX_TO_MT[c] && EX_LXX_TO_MT[c][v]) {
-    return { book: b, chapter: c, verse: EX_LXX_TO_MT[c][v] };
+  if (CANONICAL_OT_BOOKS.has(b)) {
+    const mapped = LXX_TO_MT.get(b)?.get(`${c}:${v}`);
+    if (mapped) {
+      const idx = mapped.indexOf(':');
+      return { book: b, chapter: mapped.slice(0, idx), verse: mapped.slice(idx + 1) };
+    }
   }
 
-  // 2. Dispatch to Book Mappings
-  if (SCRIPTURE_MAPPINGS[b] && SCRIPTURE_MAPPINGS[b].lxxToMt) {
-    const mapped = SCRIPTURE_MAPPINGS[b].lxxToMt(c, v);
-    return { book: b, chapter: mapped.chapter, verse: mapped.verse };
-  }
-
-  // Fallback
   return { book: b, chapter: c, verse: v };
+}
+
+function majorityMappedChapter(index, book, chapter, hasEq, mapFn) {
+  const b = normBook(book);
+  const c = normNum(chapter);
+  if (!CANONICAL_OT_BOOKS.has(b)) return c;
+  const ranges = index.get(b)?.get(c);
+  if (!ranges) return c;
+
+  const counts = new Map();
+  let first = null;
+  for (const [lo, hi] of ranges) {
+    for (let vn = lo; vn <= hi; vn++) {
+      const v = String(vn);
+      if (!hasEq(b, c, v)) continue;
+      const targetCh = mapFn(b, c, v).chapter;
+      if (first === null) first = targetCh;
+      counts.set(targetCh, (counts.get(targetCh) || 0) + 1);
+    }
+  }
+  if (counts.size === 0) return c;
+
+  let bestCh = first;
+  let bestCount = -1;
+  for (const [ch, cnt] of counts) {
+    if (cnt > bestCount) {
+      bestCount = cnt;
+      bestCh = ch;
+    }
+  }
+  return bestCh;
+}
+
+/**
+ * Resolves the primary LXX2012 chapter corresponding to an MT/English chapter
+ * (handles chapters whose verse 1 is omitted or shifted across a chapter boundary,
+ * such as MT Jeremiah 27 -> LXX 34, MT Genesis 37 -> LXX 37, MT 1 Kings 20 -> LXX 21).
+ */
+export function mapMtChapterToLxx(book, chapter) {
+  return majorityMappedChapter(MT_INDEX, book, chapter, hasLxxEquivalent, mapMtToLxx);
+}
+
+/**
+ * Resolves the primary MT/English chapter corresponding to an LXX2012 chapter
+ * (handles chapters whose verse 1 is absent, such as LXX Jeremiah 32 -> MT 25,
+ * LXX Haggai 2 -> MT 2, LXX 1 Kings 20 -> MT 21).
+ */
+export function mapLxxChapterToMt(book, chapter) {
+  return majorityMappedChapter(LXX_INDEX, book, chapter, hasMtEquivalent, mapLxxToMt);
 }

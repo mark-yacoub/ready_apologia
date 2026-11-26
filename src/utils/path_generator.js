@@ -1,6 +1,7 @@
 import { query } from '../db.js';
 import booksMeta from '../data/books_meta.json' with { type: 'json' };
-import { mapMtToLxx } from './scripture_mapper.js';
+import { hasLxxEquivalent, mapMtToLxx } from './scripture_mapper.js';
+import { readerHasVerse } from './scripture_service.js';
 
 /**
  * Parses a string ID into a scripture reference object.
@@ -48,6 +49,16 @@ export function hasReaderChapter(id) {
   return chapters !== undefined && Number(p.chapter) <= chapters;
 }
 
+/**
+ * Reader (LXX) route id for an MT-numbered OT reference. Verses the LXX lacks (e.g. Prov 22:6,
+ * Jer 10:10, 1 Kgs 14:1-20) keep a page under their MT number so their evidence stays on the
+ * site, unless the reader uses that number for a different verse (then there's no page).
+ */
+function mtRouteId(p) {
+  if (hasLxxEquivalent(p.book, p.chapter, p.verse)) return stringifyVerseId(mapMtToLxx(p.book, p.chapter, p.verse));
+  return readerHasVerse(p.book, p.chapter, p.verse) ? null : stringifyVerseId(p);
+}
+
 let evidenceSetsCache = null;
 
 /**
@@ -61,10 +72,7 @@ export function getAllEvidenceVerseSets() {
   const msOt = msOtRows.map(r => {
     if (r.v11n_type === 'MT') {
       const p = parseVerseId(r.verse_id);
-      if (p) {
-        const mapped = mapMtToLxx(p.book, p.chapter, p.verse);
-        return stringifyVerseId(mapped);
-      }
+      return p ? mtRouteId(p) : null;
     }
     return r.verse_id;
   });
@@ -77,8 +85,7 @@ export function getAllEvidenceVerseSets() {
     const p = parseVerseId(id);
     if (!p) return null;
     if (booksMeta.ot.some(b => b.id === p.book)) {
-      const m = mapMtToLxx(p.book, p.chapter, p.verse);
-      return stringifyVerseId(m);
+      return mtRouteId(p);
     }
     return id;
   };

@@ -1,6 +1,6 @@
 import { query } from '../db.js';
 import { SCAN_DIRS, scanOgImage } from './cdn_config.js';
-import { mapLxxToMt } from './scripture_mapper.js';
+import { hasMtEquivalent, mapLxxChapterToMt, mapLxxToMt } from './scripture_mapper.js';
 
 /**
  * Open Graph image for Scripture pages: the earliest manuscript scan of the page's
@@ -81,12 +81,16 @@ const bibleSteps = (book, chapter, verse, isNT) => {
       ? [verseIs(`${book}_${chapter}_${verse}`)]
       : [verseIs(`${book}_${chapter}_1`), verseStartsWith(`${book}_${chapter}_`)];
   }
-  const mt = mapLxxToMt(book, chapter, verse || '1');
-  const lxxId = `${book}_${chapter}_${verse || '1'}`;
-  const mtId = `${mt.book}_${mt.chapter}_${mt.verse}`;
-  return verse
-    ? [otVerseIs(lxxId, mtId)]
-    : [otVerseIs(lxxId, mtId), otVerseStartsWith(`${book}_${chapter}_`, `${mt.book}_${mt.chapter}_`)];
+  const v = verse || '1';
+  const lxxId = `${book}_${chapter}_${v}`;
+  const hasMt = hasMtEquivalent(book, chapter, v);
+  const mt = hasMt ? mapLxxToMt(book, chapter, v) : null;
+  const mtId = mt ? `${mt.book}_${mt.chapter}_${mt.verse}` : '';
+  const lxxOnlyIs = (id) => ({ where: "m.verse_id = :lxxId AND m.v11n_type = 'LXX'", params: { lxxId: id } });
+  const verseStep = hasMt ? otVerseIs(lxxId, mtId) : lxxOnlyIs(lxxId);
+  if (verse) return [verseStep];
+  const mtChap = mapLxxChapterToMt(book, chapter);
+  return [verseStep, otVerseStartsWith(`${book}_${chapter}_`, `${book}_${mtChap}_`)];
 };
 
 const bibleOgImage = memoise((book, chapter, verse, isNT) => {
