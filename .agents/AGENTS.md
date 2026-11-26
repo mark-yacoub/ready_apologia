@@ -5,17 +5,19 @@
 - **Read the playbook before writing or designing**: Before writing or editing any article, hub, reader-facing label or SEO copy, or designing/restyling a page, you MUST read `docs/article_and_ux_playbook.md` (voice rules, strongest-first ordering, review process, UI/UX principles) and follow it.
 
 ## Parallel Agents: One Task = One Worktree (MANDATORY)
-Several agents work on this repo at the same time. The main checkout (`~/Documents/ready_apologia`) is shared and holds other agents' and the user's uncommitted work, so editing, building, staging or committing there mixes everyone's changes.
+Several agents work on this repo at the same time. The main checkout (`~/Documents/ready_apologia`) MUST stay clean and synced to `origin/master` so every session and worktree starts cleanly; dumping edits, builds, or data syncs there pollutes the workspace and stalls pulls.
 - **Before your first edit, create your own worktree** (skip only for read-only questions):
   ```bash
   scripts/agent_worktree.sh new <task-name>   # e.g. fix-discover-back; branch agent/<task-name> from origin/master
   ```
   It prints the path (`~/Documents/ready_apologia-worktrees/<task-name>`) with `node_modules` hard-linked and `.env` copied, ready to build.
-- **Work only inside it.** Each `run_command` starts in the main checkout, so prefix every command with `cd <worktree> &&`, and give file tools absolute paths under the worktree. Never edit, build, `git add`, `git stash`, `git checkout` or `git reset` in the main checkout or in another agent's worktree.
+- **Work only inside it (including cross-repo data imports).** Each `run_command` starts in the main checkout, so prefix every command with `cd <worktree> &&`, and give file tools absolute paths under the worktree. Never edit, build, copy `data.db` / JSON datasets into, `git add`, `git stash`, `git checkout` or `git reset` in the main checkout or in another agent's worktree. Agents syncing from `~/Documents/data_collection` must pass `--ready-apologia-dir ~/Documents/ready_apologia-worktrees/<task-name>` (never `~/Documents/ready_apologia`).
 - **Your own `dist/` and port**: build inside your worktree, and serve previews on a free port (`PORT=8081`, `8082`, …), not the default 8080.
 - **Commit on your branch** (`agent/<task-name>`) as you go; that is local and safe. The commit/push rule below still applies to `origin`.
-- **Landing (only when the user asks to push)**: `cd <worktree> && git fetch origin && git rebase origin/master`, re-run the build and checks, set `BUILD_BOOKS` back to `null`, then `git push origin HEAD:master`. If the push is rejected, fetch, rebase and retry; never force-push `master`.
-- **Clean up** after it lands: `scripts/agent_worktree.sh rm <task-name>` (refuses if there is uncommitted work).
+- **Landing & syncing main checkout (only when the user asks to push)**:
+  1. Ensure `BUILD_BOOKS` and `BUILD_SURAHS` in `src/utils/build_config.js` are `null`, re-run the build and checks, and commit in your worktree.
+  2. Run `scripts/agent_worktree.sh land <task-name>` (from `~/Documents/ready_apologia`). It rebases onto `origin/master` (stopping so you can re-verify if upstream moved), pushes `HEAD:master`, removes the worktree, deletes the merged branch, and fast-forwards the main checkout `master` to `origin/master`.
+  3. If you ever push manually (`git push origin HEAD:master`), always finish with `scripts/agent_worktree.sh rm <task-name>` (which runs `sync-main` too), or `scripts/agent_worktree.sh sync-main` so `~/Documents/ready_apologia` stays on latest `origin/master`. Never force-push `master`.
 - **If you are ever in a shared tree anyway** and see changes you did not make, they belong to someone else: never revert, stash or stage them. Stage only your own files/hunks.
 
 ## Terminal Sandbox & Node Execution Quirks
@@ -30,7 +32,7 @@ Several agents work on this repo at the same time. The main checkout (`~/Documen
   PORT=8081 $NODE scripts/serve.js
   ```
 - **Fast Development Builds**: When running the Astro build command to verify changes during active development, temporarily modify `BUILD_BOOKS` in `src/utils/build_config.js` to a small `Set` of books (e.g., `export const BUILD_BOOKS = new Set(['jn', 'mt']);`) so the build completes quickly.
-- **Production Build Reset**: Before executing any `git commit` or `git push` command, you MUST ensure `BUILD_BOOKS` in `src/utils/build_config.js` is reverted to `null` so that the entire Bible builds in the CI/CD pipeline.
+- **Production Build Reset**: Before executing any `git commit`, `git push`, or `scripts/agent_worktree.sh land` command, you MUST ensure both `BUILD_BOOKS` and `BUILD_SURAHS` in `src/utils/build_config.js` are reverted to `null` so that the entire site builds in the CI/CD pipeline.
 
 ## Git & Version Control Constraints
 - **Explicit Commits & Pushes Only**: NEVER automatically execute `git commit` or `git push` to origin without explicit instruction from the user. Only execute these commands when the user explicitly requests to save the work or deploy.
