@@ -29,6 +29,11 @@ jobs:
       - name: Install dependencies
         run: corepack yarn install
 
+      # Quality gate (scripts/ci_checks.mjs): a failing check stops the deploy, so the live
+      # site keeps the last good build. Unit tests run first so they fail fast.
+      - name: Unit tests and source audits
+        run: node scripts/ci_checks.mjs unit
+
       - name: Build Astro site
         run: corepack yarn build
         env:
@@ -36,6 +41,9 @@ jobs:
           SITE_URL: 'https://readyapologia.com'
           PUBLIC_GA_MEASUREMENT_ID: 'G-N4QFGNVW99'
           PUBLIC_CLARITY_PROJECT_ID: 'z4u6yumza1'
+
+      - name: Audit built site
+        run: node scripts/ci_checks.mjs dist
 
       - name: Install rclone (v1.75.2)
         run: |
