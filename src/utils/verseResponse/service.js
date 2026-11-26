@@ -1,6 +1,6 @@
 // Build-time loader for the per-verse spoken apologetic response synthesized
 // from the verse's primary videos (table verse_video_responses in data.db).
-import booksMeta from '../../data/books_meta.json';
+import booksMeta from '../../data/books_meta.json' with { type: 'json' };
 import quranMeta from '../../data/quran/arabic/meta.json';
 import { query, queryRow } from '../../db.js';
 import { buildRefIndex, buildVerseResponseView } from './labels.js';

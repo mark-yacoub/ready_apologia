@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import booksMeta from '../../data/books_meta.json';
+import booksMeta from '../../data/books_meta.json' with { type: 'json' };
 import { trackEvidenceInteraction } from '../../utils/analytics.js';
 import { getBibleUrl, getQuranUrl } from '../../utils/urlFactory.js';
 import { parseMarkdown } from '../../utils/markdown.js';

@@ -12,7 +12,6 @@ export const getQuranSections = () => {
       path: `${base}/quran/${s.id}`,
       index: s.id
     })),
-    { id: 'abrogated', name: 'Abrogated Verses', path: `${base}/quran/-1`, index: -1 }
   ];
 };
 

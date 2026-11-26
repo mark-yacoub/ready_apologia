@@ -5,9 +5,20 @@ import { loadAllEvidenceData } from '../../utils/evidenceLoader.js';
 import { buildEvidenceItemList } from '../../utils/evidenceHelpers.js';
 
 export async function getStaticPaths() {
-  return loadAllEvidenceData().map(({ evidenceId }) => ({
-    params: { evidence_id: evidenceId }
-  }));
+  // Evidence ids that have their own static page in this folder (e.g. quran_sources.astro).
+  // Astro always prefers the static route, so building them here only produces a
+  // "conflicts with higher priority route" warning. Derived from the folder so a new
+  // dedicated page is excluded automatically.
+  const dedicated = new Set(
+    Object.keys(import.meta.glob('./*.astro'))
+      .map(p => p.replace(/^\.\/(.*)\.astro$/, '$1'))
+      .filter(name => !name.startsWith('[') && name !== 'index')
+  );
+  return loadAllEvidenceData()
+    .filter(({ evidenceId }) => !dedicated.has(evidenceId))
+    .map(({ evidenceId }) => ({
+      params: { evidence_id: evidenceId }
+    }));
 }
 
 const { evidence_id } = Astro.params;

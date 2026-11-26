@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Layout from '../../../layouts/Layout.astro';
 import { query } from '../../../db.js';
-import booksMeta from '../../../data/books_meta.json';
+import booksMeta from '../../../data/books_meta.json' with { type: 'json' };
 import { mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
 import { getBibleOgImage } from '../../../utils/ogImageResolver.js';
 import { generateBibleChapterSEO } from '../../../utils/seoFactory.js';

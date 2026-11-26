@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import booksMeta from '../../../data/books_meta.json';
+import booksMeta from '../../../data/books_meta.json' with { type: 'json' };
 import { formatBookName } from '../../../utils/evidenceHelpers.js';
 import { ProphecyCard } from '../ProphecyCard.jsx';
 import { replaceUrl } from '../../../utils/url_history.js';

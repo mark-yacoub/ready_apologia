@@ -1,4 +1,4 @@
-import booksMeta from '../data/books_meta.json';
+import booksMeta from '../data/books_meta.json' with { type: 'json' };
 import { CANON_LISTS_BOOK_ID } from './evidenceCounters.js';
 
 export const formatBookName = (bookId) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import booksData from '../data/books_meta.json';
+import booksData from '../data/books_meta.json' with { type: 'json' };
 import { NT_TRANSLATION_NAME } from '../utils/bible_config.js';
 import { getQuranSections } from '../utils/quran_config.js';
 import { getHadithNavSections } from '../utils/hadith_config.js';
