@@ -1,7 +1,6 @@
 import { query } from '../db.js';
 import booksMeta from '../data/books_meta.json' with { type: 'json' };
-import { hasLxxEquivalent, mapMtToLxx } from './scripture_mapper.js';
-import { readerHasVerse } from './scripture_service.js';
+import { readerRouteForMt } from './verseRouting.js';
 
 /**
  * Parses a string ID into a scripture reference object.
@@ -49,16 +48,6 @@ export function hasReaderChapter(id) {
   return chapters !== undefined && Number(p.chapter) <= chapters;
 }
 
-/**
- * Reader (LXX) route id for an MT-numbered OT reference. Verses the LXX lacks (e.g. Prov 22:6,
- * Jer 10:10, 1 Kgs 14:1-20) keep a page under their MT number so their evidence stays on the
- * site, unless the reader uses that number for a different verse (then there's no page).
- */
-function mtRouteId(p) {
-  if (hasLxxEquivalent(p.book, p.chapter, p.verse)) return stringifyVerseId(mapMtToLxx(p.book, p.chapter, p.verse));
-  return readerHasVerse(p.book, p.chapter, p.verse) ? null : stringifyVerseId(p);
-}
-
 let evidenceSetsCache = null;
 
 /**
@@ -71,8 +60,7 @@ export function getAllEvidenceVerseSets() {
   const msOtRows = query("SELECT DISTINCT verse_id, v11n_type FROM manuscript_per_verse_ot");
   const msOt = msOtRows.map(r => {
     if (r.v11n_type === 'MT') {
-      const p = parseVerseId(r.verse_id);
-      return p ? mtRouteId(p) : null;
+      return readerRouteForMt(r.verse_id);
     }
     return r.verse_id;
   });
@@ -81,18 +69,10 @@ export function getAllEvidenceVerseSets() {
   const apRaw = query("SELECT DISTINCT verse FROM apologetics").map(r => r.verse);
   const vdRaw = query("SELECT DISTINCT verse_id FROM short_per_verse").map(r => r.verse_id);
 
-  const mapToLxxIfOt = (id) => {
-    const p = parseVerseId(id);
-    if (!p) return null;
-    if (booksMeta.ot.some(b => b.id === p.book)) {
-      return mtRouteId(p);
-    }
-    return id;
-  };
-
-  const ct = ctRaw.map(mapToLxxIfOt);
-  const ap = apRaw.map(mapToLxxIfOt);
-  const vd = vdRaw.map(mapToLxxIfOt);
+  // Evidence ids are MT/English numbered; verseRouting decides which reader page each lands on.
+  const ct = ctRaw.map(readerRouteForMt);
+  const ap = apRaw.map(readerRouteForMt);
+  const vd = vdRaw.map(readerRouteForMt);
 
   const keep = id => id && hasReaderChapter(id);
   const msSet = new Set([...msNt, ...msOt].filter(keep));

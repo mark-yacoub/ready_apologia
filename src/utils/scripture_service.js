@@ -45,7 +45,7 @@ export function readerHasVerse(book, chapter, verse) {
  * Retrieves scripture text directly in reader numbering (LXX2012 for OT, NASB for NT).
  * No MT->LXX mapping is applied; use when coordinates already come from a reader route.
  */
-export function getReaderVerseText(book, chapter, verse) {
+export function getVerseTextByReader(book, chapter, verse) {
   if (!book || !chapter || !verse) return "";
   const b = String(book).toLowerCase();
   const c = String(chapter);
@@ -66,7 +66,7 @@ export function getReaderVerseText(book, chapter, verse) {
  * @param {string|number} verse - Verse number
  * @returns {string} The raw scripture text
  */
-export function getScriptureVerseText(book, chapter, verse) {
+export function getVerseTextByMt(book, chapter, verse) {
   if (!book || !chapter || !verse) return "";
 
   let b = book.toLowerCase();
@@ -96,9 +96,9 @@ export function getScriptureVerseText(book, chapter, verse) {
  * Helper to fetch a verse immediately when provided an assembled ID.
  * @param {string} id - Formatted like "book_chapter_verse" (e.g. 'mr_16_9')
  */
-export function getScriptureVerseTextById(id) {
+export function getVerseTextByMtId(id) {
   if (!id) return "";
   const parts = id.split('_');
   if (parts.length !== 3) return "";
-  return getScriptureVerseText(parts[0], parts[1], parts[2]);
+  return getVerseTextByMt(parts[0], parts[1], parts[2]);
 }

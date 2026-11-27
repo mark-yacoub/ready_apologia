@@ -48,8 +48,10 @@ export function normalizeBookName(name) {
  * Builds the lookup tables the resolver needs.
  * @param {object} booksMeta  src/data/books_meta.json ({ ot: [...], nt: [...] }; `chapters` is the reader's count)
  * @param {Array}  quranMeta  src/data/quran/arabic/meta.json ([{ id, total_verses }])
+ * @param {{ anchorForMt?: (id: string) => ({ book, chapter, verse? } | null) }} [opts] where an
+ *   MT-numbered verse lives in the reader (verseRouting.readerAnchorForMt on the site)
  */
-export function buildRefIndex(booksMeta, quranMeta = []) {
+export function buildRefIndex(booksMeta, quranMeta = [], { anchorForMt = null } = {}) {
   const books = new Map();
   const byId = new Map();
   const add = (b, isOt) => {
@@ -64,7 +66,7 @@ export function buildRefIndex(booksMeta, quranMeta = []) {
   }
 
   const ayahCounts = new Map((quranMeta || []).map((s) => [Number(s.id), Number(s.total_verses)]));
-  return { books, ayahCounts };
+  return { books, ayahCounts, anchorForMt };
 }
 
 const plain = (label) => ({ label, id: null, href: null });
@@ -98,7 +100,7 @@ function toReaderNumbering(book, chapter, verse) {
 
 const chapterInRange = (book, chapter) => chapter >= 1 && chapter <= book.chapters;
 
-function parseBibleVerse(label, { books }, base) {
+function parseBibleVerse(label, { books, anchorForMt }, base) {
   const m = label.match(BIBLE_VERSE);
   if (!m) return null;
   const book = books.get(normalizeBookName(m[1]));
@@ -107,11 +109,14 @@ function parseBibleVerse(label, { books }, base) {
   const verse = Number(m[3]);
   const reader = toReaderNumbering(book, chapter, verse);
   if (verse < 1 || !chapterInRange(book, reader.chapter)) return plain(label);
-  return {
-    label,
-    id: `${book.id}_${chapter}_${verse}`, // DB verse ids use MT numbering
-    href: getBibleUrl({ book: book.id, chapter: reader.chapter, verse: reader.hasVerse ? reader.verse : undefined, base }),
-  };
+  const id = `${book.id}_${chapter}_${verse}`; // DB verse ids use MT numbering
+  // The site passes verseRouting.readerAnchorForMt (server-only) so links land where the verse
+  // pages put the verse; without it (unit tests) fall back to the mapper.
+  const anchor = anchorForMt?.(id);
+  const href = anchor
+    ? getBibleUrl({ book: anchor.book, chapter: anchor.chapter, verse: anchor.verse, base })
+    : getBibleUrl({ book: book.id, chapter: reader.chapter, verse: reader.hasVerse ? reader.verse : undefined, base });
+  return { label, id, href };
 }
 
 function parseBibleChapter(label, { books }, base) {

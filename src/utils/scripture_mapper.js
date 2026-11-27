@@ -183,10 +183,14 @@ export function mapLxxToMt(book, chapter, verse) {
   return { book: b, chapter: c, verse: v };
 }
 
+const chapterMemo = new Map();
+
 function majorityMappedChapter(index, book, chapter, hasEq, mapFn) {
   const b = normBook(book);
   const c = normNum(chapter);
   if (!CANONICAL_OT_BOOKS.has(b)) return c;
+  const memoKey = `${index === MT_INDEX ? 'mt' : 'lxx'}:${b}:${c}`;
+  if (chapterMemo.has(memoKey)) return chapterMemo.get(memoKey);
   const ranges = index.get(b)?.get(c);
   if (!ranges) return c;
 
@@ -201,16 +205,18 @@ function majorityMappedChapter(index, book, chapter, hasEq, mapFn) {
       counts.set(targetCh, (counts.get(targetCh) || 0) + 1);
     }
   }
-  if (counts.size === 0) return c;
-
-  let bestCh = first;
-  let bestCount = -1;
-  for (const [ch, cnt] of counts) {
-    if (cnt > bestCount) {
-      bestCount = cnt;
-      bestCh = ch;
+  let bestCh = c;
+  if (counts.size) {
+    bestCh = first;
+    let bestCount = -1;
+    for (const [ch, cnt] of counts) {
+      if (cnt > bestCount) {
+        bestCount = cnt;
+        bestCh = ch;
+      }
     }
   }
+  chapterMemo.set(memoKey, bestCh);
   return bestCh;
 }
 
@@ -218,6 +224,7 @@ function majorityMappedChapter(index, book, chapter, hasEq, mapFn) {
  * Resolves the primary LXX2012 chapter corresponding to an MT/English chapter
  * (handles chapters whose verse 1 is omitted or shifted across a chapter boundary,
  * such as MT Jeremiah 27 -> LXX 34, MT Genesis 37 -> LXX 37, MT 1 Kings 20 -> LXX 21).
+ * Memoised per book/chapter (it is called for every page).
  */
 export function mapMtChapterToLxx(book, chapter) {
   return majorityMappedChapter(MT_INDEX, book, chapter, hasLxxEquivalent, mapMtToLxx);
@@ -226,8 +233,42 @@ export function mapMtChapterToLxx(book, chapter) {
 /**
  * Resolves the primary MT/English chapter corresponding to an LXX2012 chapter
  * (handles chapters whose verse 1 is absent, such as LXX Jeremiah 32 -> MT 25,
- * LXX Haggai 2 -> MT 2, LXX 1 Kings 20 -> MT 21).
+ * LXX Haggai 2 -> MT 2, LXX 1 Kings 20 -> MT 21). Memoised per book/chapter.
  */
 export function mapLxxChapterToMt(book, chapter) {
   return majorityMappedChapter(LXX_INDEX, book, chapter, hasMtEquivalent, mapLxxToMt);
+}
+
+/** Every MT verse the LXX2012 reader lacks, as `{ book, chapter, verse }` (strings). */
+export function listMtOnlyVerses() {
+  const out = [];
+  for (const [book, set] of MT_ONLY) {
+    for (const key of set) {
+      const [chapter, verse] = key.split(':');
+      out.push({ book, chapter, verse });
+    }
+  }
+  return out;
+}
+
+/**
+ * For an MT verse the LXX lacks, the nearest MT verse in the same chapter that has an LXX
+ * equivalent: the preceding one (the LXX usually folds an omitted verse into the verse before,
+ * e.g. Gen 37:33 into 37:32), else the following one (e.g. 1 Sam 13:1 -> 13:2). Returns
+ * `{ book, chapter, verse }` (MT numbering) or null when the chapter has no paired verse.
+ */
+export function mtOnlyHostVerse(book, chapter, verse) {
+  const b = normBook(book);
+  const c = normNum(chapter);
+  const v = Number(verse);
+  const ranges = MT_INDEX.get(b)?.get(c);
+  if (!ranges || !Number.isInteger(v)) return null;
+  const max = Math.max(...ranges.map(([, hi]) => hi));
+  for (let vn = v - 1; vn >= 1; vn--) {
+    if (hasLxxEquivalent(b, c, String(vn))) return { book: b, chapter: c, verse: String(vn) };
+  }
+  for (let vn = v + 1; vn <= max; vn++) {
+    if (hasLxxEquivalent(b, c, String(vn))) return { book: b, chapter: c, verse: String(vn) };
+  }
+  return null;
 }

@@ -218,11 +218,10 @@ test('client verse labels/links match the build-time resolver', async () => {
   assert.equal(resolveVerse('4_157').label, 'Qurʾān 4:157');
   assert.equal(resolveVerse('gospels').href, '/bible/gospels/videos');
   assert.equal(resolveVerse('nope'), null);
-  // OT ids are Masoretic/English; links use LXX2012 numbering and must have an LXX equivalent that round-trips.
+  // OT ids are Masoretic/English; links go where verseRouting.js puts the /videos tab.
   assert.equal(resolveVerse('ps_23_1').href, '/bible/ps/22/1/videos');
   assert.equal(resolveVerse('jon_1_17').href, '/bible/jon/2/1/videos');
-  assert.equal(resolveVerse('prv_22_6'), null, 'omitted in LXX2012: no /videos tab is built for it');
-  assert.equal(resolveVerse('jer_10_10'), null, 'omitted in LXX2012: no /videos tab is built for it');
+  assert.equal(resolveVerse('prv_22_6').href, '/bible/prv/22/6/videos', 'omitted in LXX2012: page under the MT number');
 });
 
 test('page view: every clip placed once; filters match the header counts', async () => {

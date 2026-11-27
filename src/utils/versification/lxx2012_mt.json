@@ -1,5 +1,9 @@
 {
   "version": 1,
+  "inputs": {
+    "lxx2012Sha256": "39de2eba69df3d0d7167609cfaf9bd44ae651f02958fa7e34a2eb88bfae14bdc",
+    "esvSha256": "d1182e3613762a02cc532e2d40f57adb1912b988f889667272c3f54e7a518f0b"
+  },
   "source": "Derived empirically by scripts/gen_versification_map.mjs aligning src/data/scripture/lxx2012/*.json (Brenton LXX2012) against data_collection/bible/esv/output/*.json (English/MT versification).",
   "canonicalOtBooks": [
     "gn",

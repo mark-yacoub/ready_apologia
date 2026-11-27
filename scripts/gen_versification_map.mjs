@@ -22,6 +22,7 @@
  *   4. Verifies strict bijection invariants (injectivity in both directions, existence in both
  *      corpora, complete partition of every ESV and LXX2012 verse) before writing the table.
  */
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -671,8 +672,21 @@ for (const b of booksMeta.ot) {
   totalLxxOnly += lo.length;
 }
 
+/** SHA-256 over a directory's *.json files (name + bytes, sorted): detects stale inputs. */
+function dirSha256(dir) {
+  const h = crypto.createHash('sha256');
+  for (const f of fs.readdirSync(dir).filter(n => n.endsWith('.json')).sort()) {
+    h.update(f).update('\0').update(fs.readFileSync(path.join(dir, f))).update('\0');
+  }
+  return h.digest('hex');
+}
+
 const payload = {
   version: 1,
+  // The ESV input lives in data_collection (outside this repo), so this script runs only where it
+  // is checked out. src/utils/scripture_mapper.test.mjs fails in CI when the reader text changes
+  // without regenerating (lxx2012 hash mismatch).
+  inputs: { lxx2012Sha256: dirSha256(LXX_DIR), esvSha256: dirSha256(esvDir) },
   source: 'Derived empirically by scripts/gen_versification_map.mjs aligning src/data/scripture/lxx2012/*.json (Brenton LXX2012) against data_collection/bible/esv/output/*.json (English/MT versification).',
   canonicalOtBooks,
   deuterocanonBooks,

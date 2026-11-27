@@ -4,7 +4,8 @@ import path from 'node:path';
 import Layout from '../../../layouts/Layout.astro';
 import { query } from '../../../db.js';
 import booksMeta from '../../../data/books_meta.json' with { type: 'json' };
-import { hasLxxEquivalent, mapLxxChapterToMt, mapLxxToMt, mapMtToLxx } from '../../../utils/scripture_mapper.js';
+import { mapLxxChapterToMt } from '../../../utils/scripture_mapper.js';
+import { getAllEvidenceVerseSets } from '../../../utils/path_generator.js';
 import { getBibleOgImage } from '../../../utils/ogImageResolver.js';
 import { generateBibleChapterSEO } from '../../../utils/seoFactory.js';
 import { BUILD_BOOKS } from '../../../utils/build_config.js';
@@ -61,58 +62,9 @@ try {
 // 4. Populate active evidence per verse
 const verseTagsMap = {};
 
-const lxxPrefix = `${book}_${chapter}_%`;
-const mtPrefix = isNT ? '' : `${mapLxxToMt(book, chapter, '1').book}_%`;
-
-const msSet = new Set(
-  isNT
-    ? query("SELECT verse_id FROM manuscript_per_verse WHERE verse_id LIKE :p", { p: lxxPrefix }).map(r => r.verse_id)
-    : query("SELECT verse_id, v11n_type FROM manuscript_per_verse_ot WHERE verse_id LIKE :lxx OR verse_id LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
-        if (r.v11n_type === 'MT') {
-          const p = r.verse_id.split('_');
-          if (!hasLxxEquivalent(p[0], p[1], p[2])) return null;
-          const m = mapMtToLxx(p[0], p[1], p[2]);
-          return `${m.book}_${m.chapter}_${m.verse}`;
-        }
-        return r.verse_id;
-      }).filter(Boolean)
-);
-
-const ctSet = new Set(
-  query("SELECT verse1 as v FROM contradictions WHERE verse1 LIKE :lxx OR verse1 LIKE :mt UNION SELECT verse2 as v FROM contradictions WHERE verse2 LIKE :lxx OR verse2 LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
-    const p = r.v.split('_');
-    if (!isNT) {
-      if (!hasLxxEquivalent(p[0], p[1], p[2])) return null;
-      const m = mapMtToLxx(p[0], p[1], p[2]);
-      return `${m.book}_${m.chapter}_${m.verse}`;
-    }
-    return r.v;
-  }).filter(Boolean)
-);
-
-const apSet = new Set(
-  query("SELECT verse FROM apologetics WHERE verse LIKE :lxx OR verse LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
-    const p = r.verse.split('_');
-    if (!isNT) {
-      if (!hasLxxEquivalent(p[0], p[1], p[2])) return null;
-      const m = mapMtToLxx(p[0], p[1], p[2]);
-      return `${m.book}_${m.chapter}_${m.verse}`;
-    }
-    return r.verse;
-  }).filter(Boolean)
-);
-
-const vdSet = new Set(
-  query("SELECT verse_id FROM short_per_verse WHERE verse_id LIKE :lxx OR verse_id LIKE :mt", { lxx: lxxPrefix, mt: mtPrefix }).map(r => {
-    const p = r.verse_id.split('_');
-    if (!isNT) {
-      if (!hasLxxEquivalent(p[0], p[1], p[2])) return null;
-      const m = mapMtToLxx(p[0], p[1], p[2]);
-      return `${m.book}_${m.chapter}_${m.verse}`;
-    }
-    return r.verse_id;
-  }).filter(Boolean)
-);
+// Badges = the verse tab pages that are built (path_generator route sets, which place every
+// evidence reference via verseRouting.js), so a badge never links to a missing page.
+const { msSet, ctSet, apSet, vdSet } = getAllEvidenceVerseSets();
 
 const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 

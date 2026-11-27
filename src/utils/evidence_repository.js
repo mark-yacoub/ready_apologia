@@ -1,5 +1,16 @@
 import { query } from "../db.js";
 
+/**
+ * `col IN (:p0, :p1, ...)` for one id or a list of ids (a verse page can collect evidence for
+ * several MT ids; see verseRouting.mtIdsForReaderRoute). Empty list -> a clause matching nothing.
+ */
+function idsIn(col, ids, prefix) {
+  const list = (Array.isArray(ids) ? ids : [ids]).filter(Boolean);
+  if (!list.length) return { sql: '0', params: {} };
+  const params = Object.fromEntries(list.map((v, i) => [`${prefix}${i}`, v]));
+  return { sql: `${col} IN (${Object.keys(params).map(k => `:${k}`).join(', ')})`, params };
+}
+
 function buildSortBySource(tableAlias) {
   return `
     CASE
@@ -18,20 +29,29 @@ function buildSortBySource(tableAlias) {
 }
 
 // --- Counts Fetching ---
-export function getEvidenceCounts(verseId, mtId, checkId, isNT) {
+/**
+ * @param {string} verseId reader verse id (LXX numbering for the OT)
+ * @param {string|string[]} mtIds MT id(s) whose 'MT' manuscript rows belong on this page (OT)
+ * @param {string|string[]} checkIds evidence id(s) for contradictions/apologetics/videos
+ */
+export function getEvidenceCounts(verseId, mtIds, checkIds, isNT) {
+  const mt = idsIn('verse_id', mtIds, 'mt');
   const msCount = isNT
     ? query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse WHERE verse_id = :verseId", { verseId })[0].count
-    : query("SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse_ot WHERE (verse_id = :lxxId AND v11n_type = 'LXX') OR (verse_id = :mtId AND v11n_type = 'MT')", { lxxId: verseId, mtId })[0].count;
+    : query(`SELECT COUNT(DISTINCT image_name) as count FROM manuscript_per_verse_ot WHERE (verse_id = :lxxId AND v11n_type = 'LXX') OR (${mt.sql} AND v11n_type = 'MT')`, { lxxId: verseId, ...mt.params })[0].count;
 
-  const ctCount = query("SELECT COUNT(DISTINCT title) as count FROM contradictions WHERE verse1 = :checkId OR verse2 = :checkId", { checkId })[0].count;
-  const apCount = query("SELECT COUNT(DISTINCT title) as count FROM apologetics WHERE verse = :checkId", { checkId })[0].count;
-  const vdCount = query("SELECT COUNT(DISTINCT video_id) as count FROM short_per_verse WHERE verse_id = :checkId", { checkId })[0].count;
+  const c1 = idsIn('verse1', checkIds, 'a'), c2 = idsIn('verse2', checkIds, 'a');
+  const ctCount = query(`SELECT COUNT(DISTINCT title) as count FROM contradictions WHERE ${c1.sql} OR ${c2.sql}`, c1.params)[0].count;
+  const ap = idsIn('verse', checkIds, 'a');
+  const apCount = query(`SELECT COUNT(DISTINCT title) as count FROM apologetics WHERE ${ap.sql}`, ap.params)[0].count;
+  const vd = idsIn('verse_id', checkIds, 'a');
+  const vdCount = query(`SELECT COUNT(DISTINCT video_id) as count FROM short_per_verse WHERE ${vd.sql}`, vd.params)[0].count;
 
   return { msCount, ctCount, apCount, vdCount };
 }
 
-// --- Data Fetching ---
-export function getFormattedManuscriptsByVerseId(verseId, mtId, isNT) {
+export function getFormattedManuscriptsByVerseId(verseId, mtIds, isNT) {
+  const mt = idsIn('m.verse_id', mtIds, 'mt');
   const rawManuscripts = isNT ? query(`
     SELECT m.image_name, mm.*
     FROM manuscript_per_verse m
@@ -43,9 +63,9 @@ export function getFormattedManuscriptsByVerseId(verseId, mtId, isNT) {
     FROM manuscript_per_verse_ot m
     LEFT JOIN manuscripts_meta_ot mm ON m.ms_id = mm.ms_id
     WHERE (m.verse_id = :lxxId AND m.v11n_type = 'LXX')
-       OR (m.verse_id = :mtId AND m.v11n_type = 'MT')
+       OR (${mt.sql} AND m.v11n_type = 'MT')
     ORDER BY mm.earliest_date ASC
-  `, { lxxId: verseId, mtId });
+  `, { lxxId: verseId, ...mt.params });
 
   // Automatic Page/Scan Indexing (Prevents duplicates confusion for P66, etc.)
   const msCounts = {};
@@ -72,7 +92,8 @@ export function getFormattedManuscriptsByVerseId(verseId, mtId, isNT) {
   });
 }
 
-export function getContradictionsByVerseId(checkId) {
+export function getContradictionsByVerseId(checkIds) {
+  const c1 = idsIn('c.verse1', checkIds, 'a'), c2 = idsIn('c.verse2', checkIds, 'a');
   const sql = `
     SELECT c.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright,
            pw.name as work_name, pw.url as work_url,
@@ -82,14 +103,15 @@ export function getContradictionsByVerseId(checkId) {
     LEFT JOIN apologetics_meta m ON c.src = m.id
     LEFT JOIN patristics_works pw ON c.src = pw.id
     LEFT JOIN patristics_fathers pf ON pw.father_id = pf.id
-    WHERE c.verse1 = :checkId OR c.verse2 = :checkId
+    WHERE ${c1.sql} OR ${c2.sql}
     GROUP BY c.title
     ORDER BY sort_order ASC, pf.year ASC
   `;
-  return query(sql, { checkId });
+  return query(sql, c1.params);
 }
 
-export function getApologeticsByVerseId(checkId) {
+export function getApologeticsByVerseId(checkIds) {
+  const ap = idsIn('a.verse', checkIds, 'a');
   const sql = `
     SELECT a.*, m.name as meta_name, m.url as meta_url, m.copyright as meta_copyright,
            pw.name as work_name, pw.url as work_url,
@@ -99,20 +121,21 @@ export function getApologeticsByVerseId(checkId) {
     LEFT JOIN apologetics_meta m ON a.src = m.id
     LEFT JOIN patristics_works pw ON a.src = pw.id
     LEFT JOIN patristics_fathers pf ON pw.father_id = pf.id
-    WHERE a.verse = :checkId
+    WHERE ${ap.sql}
     GROUP BY a.title
     ORDER BY sort_order ASC, pf.year ASC
   `;
-  return query(sql, { checkId });
+  return query(sql, ap.params);
 }
 
-export function getRawVideosByVerseId(checkId) {
+export function getRawVideosByVerseId(checkIds) {
+  const vd = idsIn('spv.verse_id', checkIds, 'a');
   return query(`
     SELECT sm.*, spv.verse_id as target_verse_id, spv.ref_order, spv.total_passages,
            spv.is_primary, spv.relevance_score, spv.composite_score
     FROM short_per_verse spv
     JOIN shorts_metadata sm ON spv.video_id = sm.video_id
-    WHERE spv.verse_id = :checkId
+    WHERE ${vd.sql}
     ORDER BY spv.composite_score DESC, sm.rigor_score DESC
-  `, { checkId });
+  `, vd.params);
 }

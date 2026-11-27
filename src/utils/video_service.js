@@ -1,7 +1,8 @@
-import { getScriptureVerseTextById, readerHasVerse } from './scripture_service.js';
+import { getVerseTextByMtId } from './scripture_service.js';
+import { readerAnchorForMt } from './verseRouting.js';
 import { loadEnglishData } from './quran_loader.js';
 import booksMeta from '../data/books_meta.json' with { type: 'json' };
-import { hasLxxEquivalent, mapMtChapterToLxx, mapMtToLxx } from './scripture_mapper.js';
+import { hasLxxEquivalent, mapMtToLxx } from './scripture_mapper.js';
 import { getBibleUrl, getQuranUrl } from './urlFactory.js';
 
 // Pre-build O(1) dictionary for book names to avoid O(N) lookup on every parse
@@ -77,38 +78,20 @@ function resolveVerseString(verseStr, base, quranEnglishData) {
     };
   } else if (parts.length === 3) {
     // Bible format (e.g. mk_9_31)
-    let text = getScriptureVerseTextById(verseStr);
+    let text = getVerseTextByMtId(verseStr);
     let book = parts[0];
     let chap = parts[1];
     let verse = parts[2];
 
-    // Check if OT for LXX mapping
+    // Label in reader numbering when the verse has an LXX equivalent, else its MT number; the link
+    // goes where verseRouting.js places it (anchored only when the reader has that verse).
     const isOt = booksMeta.ot.some((b) => b.id === book);
-    let targetBook = book;
-    let displayChap = chap;
-    let displayVerse = verse;
-
-    let hasLxx = true;
-    if (isOt) {
-      hasLxx = hasLxxEquivalent(book, chap, verse);
-      if (hasLxx) {
-        const lxxMap = mapMtToLxx(book, chap, verse);
-        if (lxxMap) {
-          targetBook = lxxMap.book;
-          displayChap = lxxMap.chapter;
-          displayVerse = String(lxxMap.verse);
-        }
-      } else {
-        displayChap = mapMtChapterToLxx(book, chap);
-      }
-    }
+    const lxx = isOt && hasLxxEquivalent(book, chap, verse) ? mapMtToLxx(book, chap, verse) : null;
+    const anchor = readerAnchorForMt(verseStr);
 
     return {
-      label: hasLxx
-        ? `${formatBookIdToName(verseStr)} ${displayChap}:${displayVerse}`
-        : `${formatBookIdToName(verseStr)} ${chap}:${verse}`,
-      // Anchor the verse only when it has an LXX equivalent in the chapter reader.
-      link: getBibleUrl({ book: targetBook, chapter: displayChap, verse: (hasLxx && readerHasVerse(targetBook, displayChap, displayVerse)) ? displayVerse : undefined, base }),
+      label: `${formatBookIdToName(verseStr)} ${lxx ? `${lxx.chapter}:${lxx.verse}` : `${chap}:${verse}`}`,
+      link: anchor ? getBibleUrl({ book: anchor.book, chapter: anchor.chapter, verse: anchor.verse, base }) : getBibleUrl({ book, chapter: chap, base }),
       text: text
     };
   }

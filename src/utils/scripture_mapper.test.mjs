@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -283,4 +284,14 @@ test('EXHAUSTIVE: every MT verse with an LXX equivalent is strictly injective an
     }
   }
   assert.ok(checkedMt > 22000, `Expected >22,000 paired MT verses, checked ${checkedMt}`);
+});
+
+test('versification table was generated from the current LXX2012 reader text', () => {
+  const dir = path.join(path.dirname(fileURLToPath(import.meta.url)), '../data/scripture/lxx2012');
+  const h = createHash('sha256');
+  for (const f of fs.readdirSync(dir).filter(n => n.endsWith('.json')).sort()) {
+    h.update(f).update('\0').update(fs.readFileSync(path.join(dir, f))).update('\0');
+  }
+  assert.equal(table.inputs?.lxx2012Sha256, h.digest('hex'),
+    'src/data/scripture/lxx2012 changed: re-run `node scripts/gen_versification_map.mjs` (needs ~/Documents/data_collection for the ESV input)');
 });

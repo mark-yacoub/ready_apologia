@@ -4,8 +4,9 @@ import booksMeta from '../../data/books_meta.json' with { type: 'json' };
 import quranMeta from '../../data/quran/arabic/meta.json';
 import { query, queryRow } from '../../db.js';
 import { buildRefIndex, buildVerseResponseView } from './labels.js';
+import { readerAnchorForMt } from '../verseRouting.js';
 
-const refIndex = buildRefIndex(booksMeta, quranMeta);
+const refIndex = buildRefIndex(booksMeta, quranMeta, { anchorForMt: readerAnchorForMt });
 let tableExists = null;
 
 function hasTable() {

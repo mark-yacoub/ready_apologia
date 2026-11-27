@@ -21,7 +21,7 @@ const SQLITE = { NODE_OPTIONS: '--experimental-sqlite' };
 const STAGES = {
   unit: [
     { name: 'test:shared-utils', cmd: 'node --test src/utils/markdown.test.mjs src/utils/urlFactory.test.mjs src/utils/scripture_mapper.test.mjs src/utils/discoverService.test.mjs src/utils/sectionTheme.test.mjs src/utils/onboardingRoutes.test.mjs' },
-    { name: 'test:path-generator', cmd: 'node --test src/utils/path_generator.test.mjs', env: SQLITE },
+    { name: 'test:path-generator', cmd: 'node --test src/utils/path_generator.test.mjs src/utils/verseRouting.test.mjs', env: SQLITE },
     { name: 'test:history', cmd: 'node scripts/test_history_api.mjs' },
     { name: 'test:reel', cmd: 'node --test src/components/reel/reelItems.test.mjs' },
     { name: 'test:og-image', cmd: 'node --test src/utils/ogImageResolver.test.mjs', env: SQLITE },
@@ -43,7 +43,7 @@ const STAGES = {
   ],
   dist: [
     { name: 'audit:seo', cmd: 'node scripts/test_seo_titles.mjs' },
-    { name: 'audit:internal-links', cmd: 'node scripts/test_internal_links.mjs' },
+    { name: 'audit:internal-links', cmd: 'node scripts/test_internal_links.mjs --strict-anchors' },
     { name: 'audit:convenient-revelations', cmd: 'node scripts/test_convenient_revelations.mjs' },
     { name: 'audit:mecca-to-medina', cmd: 'node scripts/test_mecca_to_medina.mjs' },
     { name: 'audit:discover-audio', cmd: 'node scripts/test_discover_audio.mjs' },
